@@ -1,0 +1,41 @@
+// Color tokens
+$color-primary: #2563eb !default;
+$color-secondary: #7c3aed !default;
+$color-background: #f8fafc !default;
+$color-surface: #ffffff !default;
+$color-text: #0f172a !default;
+
+// Spacing tokens
+$spacing-xs: 0.25rem !default;
+$spacing-sm: 0.5rem !default;
+$spacing-md: 1rem !default;
+$spacing-lg: 1.5rem !default;
+$spacing-xl: 2rem !default;
+
+// Typography tokens
+$typography-fontFamilyBase: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif !default;
+$typography-fontSizeBase: 1rem !default;
+$typography-fontWeightRegular: 400 !default;
+$typography-fontWeightBold: 700 !default;
+$typography-lineHeightBase: 1.5 !default;
+
+// Radius tokens
+$radius-none: 0 !default;
+$radius-sm: 0.125rem !default;
+$radius-md: 0.375rem !default;
+$radius-lg: 0.5rem !default;
+$radius-full: 9999px !default;
+
+// USX overrides (can be overridden by users)
+$usx-input-border-radius: $radius-lg !default;
+$usx-textarea-border-radius: $radius-lg !default;
+
+// Optional USX variables (set to null to not override)
+$usx-button-primary-background-color: #2563eb !default;
+$usx-button-primary-color: null !default;
+$usx-button-primary-border-color: null !default;
+$usx-button-secondary-background-color: null !default;
+$usx-button-secondary-color: null !default;
+$usx-button-secondary-border-color: null !default;
+$usx-button-border-radius: null !default;
+$usx-button-box-shadow: null !default;

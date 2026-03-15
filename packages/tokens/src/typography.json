@@ -1,0 +1,7 @@
+{
+  "fontFamilyBase": "Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+  "fontSizeBase": "1rem",
+  "fontWeightRegular": "400",
+  "fontWeightBold": "700",
+  "lineHeightBase": "1.5"
+}

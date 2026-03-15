@@ -1,0 +1,13 @@
+{
+  "name": "@agency-ui-platform/core",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "echo \"Core package build placeholder\""
+  }
+}

@@ -1,0 +1,18 @@
+# Node / monorepo
+node_modules/
+dist/
+build/
+coverage/
+
+# Environment files
+.env
+
+# Editor
+.vscode/
+
+# Python / Django
+__pycache__/
+*.pyc
+
+# Storybook
+.storybook-static/

@@ -1,0 +1,14 @@
+{
+  "name": "@agency-ui-platform/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/tokens.js",
+  "files": [
+    "dist",
+    "src",
+    "build.js"
+  ],
+  "scripts": {
+    "build": "node build.js"
+  }
+}

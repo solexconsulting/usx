@@ -1,0 +1,100 @@
+
+@import '../../../../tokens/src/tokens.scss';
+
+$usx-input-background-color: initial !default;
+$usx-input-text-color: initial !default;
+$usx-input-border-color: initial !default;
+$usx-input-border-radius: $usx-input-border-radius !default;
+$usx-input-padding: initial !default;
+$usx-textarea-background-color: initial !default;
+$usx-textarea-text-color: initial !default;
+$usx-textarea-border-color: initial !default;
+$usx-textarea-border-radius: $usx-textarea-border-radius !default;
+$usx-textarea-padding: initial !default;
+$usx-input-error-border-width: .25rem !default;
+$usx-input-error-border-color: #b50909 !default;
+$usx-input-error-border-style: solid !default;
+$usx-input-error-padding-top: .25rem !default;
+$usx-input-error-padding-bottom: .25rem !default;
+$usx-input-success-border-width: .25rem !default;
+$usx-input-success-border-color: #00a91c !default;
+$usx-input-success-border-style: solid !default;
+$usx-input-success-padding-top: .25rem !default;
+$usx-input-success-padding-bottom: .25rem !default;
+$usx-textarea-error-border-width: .25rem !default;
+$usx-textarea-error-border-color: #b50909 !default;
+$usx-textarea-error-border-style: solid !default;
+$usx-textarea-error-padding-top: .25rem !default;
+$usx-textarea-error-padding-bottom: .25rem !default;
+$usx-textarea-success-border-width: .25rem !default;
+$usx-textarea-success-border-color: #00a91c !default;
+$usx-textarea-success-border-style: solid !default;
+$usx-textarea-success-padding-top: .25rem !default;
+$usx-textarea-success-padding-bottom: .25rem !default;
+$usx-input-focus-outline: initial !default;
+$usx-input-focus-outline-offset: initial !default;
+
+
+.usx-input:not(.usa-input--error):not(.usa-input--success) {
+
+	&:not(:disabled) {
+		background-color: $usx-input-background-color;
+		color: $usx-input-text-color;
+		border-color: $usx-input-border-color;
+	}
+	border-radius: $usx-input-border-radius;
+	padding: $usx-input-padding;
+}
+
+.usx-textarea:not(.usa-textarea--error):not(.usa-textarea--success) {
+
+	&:not(:disabled) {
+		background-color: $usx-textarea-background-color;
+		color: $usx-textarea-text-color;
+		border-color: $usx-textarea-border-color;
+	}
+	border-radius: $usx-textarea-border-radius;
+	padding: $usx-textarea-padding;
+}
+
+.usx-input--error {
+	border-width: $usx-input-error-border-width;
+	border-color: $usx-input-error-border-color;
+	border-style: $usx-input-error-border-style;
+	padding-top: $usx-input-error-padding-top;
+	padding-bottom: $usx-input-error-padding-bottom;
+	border-radius: $usx-input-border-radius;
+}
+
+.usx-input--success {
+	border-width: $usx-input-success-border-width;
+	border-color: $usx-input-success-border-color;
+	border-style: $usx-input-success-border-style;
+	padding-top: $usx-input-success-padding-top;
+	padding-bottom: $usx-input-success-padding-bottom;
+	border-radius: $usx-input-border-radius;
+}
+
+.usx-textarea--error {
+	border-width: $usx-textarea-error-border-width;
+	border-color: $usx-textarea-error-border-color;
+	border-style: $usx-textarea-error-border-style;
+	padding-top: $usx-textarea-error-padding-top;
+	padding-bottom: $usx-textarea-error-padding-bottom;
+	border-radius: $usx-textarea-border-radius;
+}
+
+.usx-textarea--success {
+	border-width: $usx-textarea-success-border-width;
+	border-color: $usx-textarea-success-border-color;
+	border-style: $usx-textarea-success-border-style;
+	padding-top: $usx-textarea-success-padding-top;
+	padding-bottom: $usx-textarea-success-padding-bottom;
+	border-radius: $usx-textarea-border-radius;
+}
+
+
+.usx-input:focus-visible {
+	outline: $usx-input-focus-outline;
+	outline-offset: $usx-input-focus-outline-offset;
+}

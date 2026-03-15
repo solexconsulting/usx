@@ -1,0 +1,61 @@
+.usx-alert {
+	background-color: var(--usx-alert-background-color, initial);
+	color: var(--usx-alert-text-color, initial);
+	border-color: var(--usx-alert-border-color, initial);
+	border-radius: var(--usx-alert-border-radius, initial);
+	box-shadow: var(--usx-alert-box-shadow, initial);
+}
+
+.usx-alert--info {
+	background-color: var(--usx-alert-info-background-color, initial);
+	color: var(--usx-alert-info-text-color, initial);
+	border-color: var(--usx-alert-info-border-color, initial);
+}
+
+.usx-alert--warning {
+	background-color: var(--usx-alert-warning-background-color, initial);
+	color: var(--usx-alert-warning-text-color, initial);
+	border-color: var(--usx-alert-warning-border-color, initial);
+}
+
+.usx-alert--success {
+	background-color: var(--usx-alert-success-background-color, initial);
+	color: var(--usx-alert-success-text-color, initial);
+	border-color: var(--usx-alert-success-border-color, initial);
+}
+
+.usx-alert--error {
+	background-color: var(--usx-alert-error-background-color, initial);
+	color: var(--usx-alert-error-text-color, initial);
+	border-color: var(--usx-alert-error-border-color, initial);
+}
+
+.usx-alert--emergency {
+	background-color: var(--usx-alert-emergency-background-color, initial);
+	color: var(--usx-alert-emergency-text-color, initial);
+	border-color: var(--usx-alert-emergency-border-color, initial);
+}
+
+.usx-alert--slim {
+	padding-block: var(--usx-alert-slim-padding-block, initial);
+	padding-inline: var(--usx-alert-slim-padding-inline, initial);
+}
+
+.usx-alert--no-icon {
+	padding-inline-start: var(--usx-alert-no-icon-padding-inline-start, initial);
+}
+
+.usx-alert__body {
+	gap: var(--usx-alert-body-gap, initial);
+}
+
+.usx-alert__heading {
+	font-size: var(--usx-alert-heading-font-size, initial);
+	font-weight: var(--usx-alert-heading-font-weight, initial);
+	margin-block-end: var(--usx-alert-heading-margin-block-end, initial);
+}
+
+.usx-alert__text {
+	font-size: var(--usx-alert-text-font-size, initial);
+	line-height: var(--usx-alert-text-line-height, initial);
+}

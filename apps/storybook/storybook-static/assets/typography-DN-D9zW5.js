@@ -1,0 +1,1 @@
+const t="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif",e="1rem";const o={fontFamilyBase:t,fontSizeBase:e,fontWeightRegular:"400",fontWeightBold:"700",lineHeightBase:"1.5"};export{o as t};

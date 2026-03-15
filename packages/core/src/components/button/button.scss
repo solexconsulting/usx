@@ -1,0 +1,34 @@
+@import '../../../../tokens/src/tokens.scss';
+
+.usx-button {
+  @if $usx-button-border-radius {
+    border-radius: $usx-button-border-radius;
+  }
+  @if $usx-button-box-shadow {
+    box-shadow: $usx-button-box-shadow;
+  }
+}
+
+.usx-button--primary {
+  @if $usx-button-primary-background-color {
+    background-color: $usx-button-primary-background-color;
+  }
+  @if $usx-button-primary-color {
+	color: $usx-button-primary-color;
+  }
+  @if $usx-button-primary-border-color {
+    border-color: $usx-button-primary-border-color;
+  }
+}
+
+.usx-button--secondary {
+  @if $usx-button-secondary-background-color {
+    background-color: $usx-button-secondary-background-color;
+  }
+  @if $usx-button-secondary-color {
+    color: $usx-button-secondary-color;
+  }
+  @if $usx-button-secondary-border-color {
+    border-color: $usx-button-secondary-border-color;
+  }
+}
