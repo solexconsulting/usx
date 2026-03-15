@@ -9,12 +9,8 @@
   ],
   "scripts": {
     "build": "pnpm -r build",
-    "build:storybook:all": "pnpm --filter @agency-ui-platform/storybook --filter @agency-ui-platform/storybook-react --filter @agency-ui-platform/storybook-html --filter @agency-ui-platform/storybook-django run build",
+    "storybook": "pnpm --filter @agency-ui-platform/storybook run dev",
     "dev": "pnpm -r --parallel dev",
-    "dev:storybook:all": "pnpm dev:storybook:remotes & sleep 4 && pnpm dev:storybook:host",
-    "dev:storybook:host": "pnpm --filter @agency-ui-platform/storybook run dev",
-    "dev:storybook:remotes": "pnpm --parallel --filter @agency-ui-platform/storybook-react --filter @agency-ui-platform/storybook-html --filter @agency-ui-platform/storybook-django run dev",
-    "dev:storybook:start": "pnpm dev:storybook:remotes && sleep 4 && pnpm dev:storybook:host",
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",
     "tokens:build": "pnpm --filter @agency-ui-platform/tokens run build"

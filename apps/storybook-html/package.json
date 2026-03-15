@@ -1,9 +1,0 @@
-{
-  "name": "@agency-ui-platform/storybook-html",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "storybook dev -p 7008 -h 0.0.0.0",
-    "build": "storybook build"
-  }
-}
