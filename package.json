@@ -10,6 +10,7 @@
   "scripts": {
     "build": "pnpm -r build",
     "storybook": "pnpm --filter @agency-ui-platform/storybook run dev",
+    "storybook:build": "pnpm --filter @agency-ui-platform/storybook run build",
     "dev": "pnpm -r --parallel dev",
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",

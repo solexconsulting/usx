@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../../../../packages/core/src/index.js';
+import { Button } from '../index.js';
 import { render } from 'sass';
 
 export default {

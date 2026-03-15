@@ -1,5 +1,5 @@
 import React from 'react';
-import spacing from '../../../../packages/tokens/src/spacing.json';
+import spacing from '../../../tokens/src/spacing.json';
 
 export default {
   title: 'Spacing',

@@ -1,5 +1,5 @@
 import React from 'react';
-import colors from '../../../../packages/tokens/src/color.json';
+import colors from '../../../tokens/src/color.json';
 
 export default {
   title: 'Colors',
