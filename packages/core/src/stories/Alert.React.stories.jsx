@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert } from '../../../../packages/core/src/index.js';
+import { Alert } from '../index.js';
 
 export default {
   title: 'React/Alert',

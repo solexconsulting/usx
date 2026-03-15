@@ -1,5 +1,5 @@
 import React from 'react';
-import inputHtml from '../../../../packages/core/src/components/input/input.html?raw';
+import inputHtml from '../components/input/input.html?raw';
 
 export default {
   title: 'HTML/Input',
