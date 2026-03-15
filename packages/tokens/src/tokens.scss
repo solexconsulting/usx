@@ -1,9 +1,34 @@
 // Color tokens
 $color-primary: #2563eb !default;
+$color-primary-hover: #5f85ec !default;
+$color-primary-active: #1c3996 !default;
 $color-secondary: #7c3aed !default;
+$color-secondary-hover: #955df0 !default;
+$color-secondary-active: #5b21b6 !default;
+$color-accent-cool: #66b5ee !default;
+$color-accent-cool-hover: #2695df !default;
+$color-accent-cool-active: #1175b3 !default;
+$color-accent-warm: #dfb734 !default;
+$color-accent-warm-hover: #e9aa22 !default;
+$color-accent-warm-active: #c7a01f !default;
+$color-base: #71767a !default;
+$color-base-hover: #565c65 !default;
+$color-base-active: #3d4551 !default;
+$color-info: #0d7bbf !default;
+$color-warning: #f8c41b !default;
+$color-success: #2e8540 !default;
+$color-error: #d83933 !default;
+$color-emergency: #b51d09 !default;
 $color-background: #f8fafc !default;
 $color-surface: #ffffff !default;
 $color-text: #0f172a !default;
+
+// Text color tokens
+$color-info-text: null !default;
+$color-warning-text: null !default;
+$color-success-text: null !default;
+$color-error-text: null !default;
+$color-emergency-text: null !default;
 
 // Spacing tokens
 $spacing-xs: 0.25rem !default;
@@ -20,22 +45,116 @@ $typography-fontWeightBold: 700 !default;
 $typography-lineHeightBase: 1.5 !default;
 
 // Radius tokens
-$radius-none: 0 !default;
-$radius-sm: 0.125rem !default;
-$radius-md: 0.375rem !default;
-$radius-lg: 0.5rem !default;
-$radius-full: 9999px !default;
+$r-none: 0 !default;
+$r-sm: 0.25rem !default;
+$r-md: 0.5rem !default;
+$r-lg: 1.0rem !default;
+$r-xl: 2.0rem !default;
+$r-full: 9999px !default;
+
+// Border tokens
+$border-width-thin: 1px !default;
+$border-width-thick: 4px !default;
 
 // USX overrides (can be overridden by users)
-$usx-input-border-radius: $radius-lg !default;
-$usx-textarea-border-radius: $radius-lg !default;
+$usx-input-border-radius: $r-sm !default;
+$usx-textarea-border-radius: $r-sm !default;
 
-// Optional USX variables (set to null to not override)
-$usx-button-primary-background-color: #2563eb !default;
+// Form group tokens
+$usx-form-group-error-color: $color-error !default;
+$usx-form-group-error-border-thickness: $border-width-thick !default;
+
+// Button tokens
+$usx-button-border-radius: $r-md !default;
+$usx-button-box-shadow: null !default;
+$usx-button-primary-background-color: $color-primary !default;
+$usx-button-primary-hover-background-color: $color-primary-hover !default;
+$usx-button-primary-active-background-color: $color-primary-active !default;
 $usx-button-primary-color: null !default;
 $usx-button-primary-border-color: null !default;
-$usx-button-secondary-background-color: null !default;
+$usx-button-secondary-background-color: $color-secondary !default;
+$usx-button-secondary-hover-background-color: $color-secondary-hover !default;
+$usx-button-secondary-active-background-color: $color-secondary-active !default;
 $usx-button-secondary-color: null !default;
 $usx-button-secondary-border-color: null !default;
-$usx-button-border-radius: null !default;
-$usx-button-box-shadow: null !default;
+$usx-button-accent-cool-background-color: $color-accent-cool !default;
+$usx-button-accent-cool-hover-background-color: $color-accent-cool-hover !default;
+$usx-button-accent-cool-active-background-color: $color-accent-cool-active !default;
+$usx-button-accent-cool-color: null !default;
+$usx-button-accent-cool-border-color: null !default;
+$usx-button-accent-warm-background-color: $color-accent-warm !default;
+$usx-button-accent-warm-hover-background-color: $color-accent-warm-hover !default;
+$usx-button-accent-warm-active-background-color: $color-accent-warm-active !default;
+$usx-button-accent-warm-color: null !default;
+$usx-button-accent-warm-border-color: null !default;
+$usx-button-base-background-color: $color-base !default;
+$usx-button-base-hover-background-color: $color-base-hover !default;
+$usx-button-base-active-background-color: $color-base-active !default;
+$usx-button-base-color: null !default;
+$usx-button-base-border-color: null !default;
+$usx-button-outline-background-color: null !default;
+$usx-button-outline-color: null !default;
+$usx-button-outline-border-color: null !default;
+
+// Alert tokens
+$usx-alert-background-color: null !default;
+$usx-alert-text-color: null !default;
+$usx-alert-border-color: null !default;
+$usx-alert-border-radius: $r-xl !default;
+$usx-alert-box-shadow: null !default;
+$usx-alert-info-background-color: $color-info !default;
+$usx-alert-info-text-color: null !default;
+$usx-alert-info-border-color: null !default;
+$usx-alert-warning-background-color: $color-warning !default;
+$usx-alert-warning-text-color: null !default;
+$usx-alert-warning-border-color: null !default;
+$usx-alert-success-background-color: $color-success !default;
+$usx-alert-success-text-color: null !default;
+$usx-alert-success-border-color: null !default;
+$usx-alert-error-background-color: $color-error !default;
+$usx-alert-error-text-color: null !default;
+$usx-alert-error-border-color: null !default;
+$usx-alert-emergency-background-color: $color-emergency !default;
+$usx-alert-emergency-text-color: null !default;
+$usx-alert-emergency-border-color: null !default;
+$usx-alert-slim-padding-block: null !default;
+$usx-alert-slim-padding-inline: null !default;
+$usx-alert-no-icon-padding-inline-start: null !default;
+$usx-alert-body-gap: null !default;
+$usx-alert-heading-font-size: null !default;
+$usx-alert-heading-font-weight: null !default;
+$usx-alert-heading-margin-block-end: null !default;
+$usx-alert-text-font-size: null !default;
+$usx-alert-text-line-height: null !default;
+
+// USX input variables
+$usx-input-background-color: null !default;
+$usx-input-text-color: null !default;
+$usx-input-border-color: null !default;
+$usx-input-padding: null !default;
+$usx-textarea-background-color: null !default;
+$usx-textarea-text-color: null !default;
+$usx-textarea-border-color: null !default;
+$usx-textarea-padding: null !default;
+$usx-input-error-border-width: $border-width-thick !default;
+$usx-input-error-border-color: $color-error !default;
+$usx-input-error-border-style: null !default;
+$usx-input-error-padding-top: null !default;
+$usx-input-error-padding-bottom: null !default;
+$usx-input-success-border-width: $border-width-thick !default;
+$usx-input-success-border-color: $color-success !default;
+$usx-input-success-border-style: null !default;
+$usx-input-success-padding-top: null !default;
+$usx-input-success-padding-bottom: null !default;
+$usx-textarea-error-border-width: $border-width-thick !default;
+$usx-textarea-error-border-color: $color-error !default;
+$usx-textarea-error-border-style: null !default;
+$usx-textarea-error-padding-top: null !default;
+$usx-textarea-error-padding-bottom: null !default;
+$usx-textarea-success-border-width: $border-width-thick !default;
+$usx-textarea-success-border-color: $color-success !default;
+$usx-textarea-success-border-style: null !default;
+$usx-textarea-success-padding-top: null !default;
+$usx-textarea-success-padding-bottom: null !default;
+$usx-input-focus-outline: null !default;
+$usx-input-focus-outline-offset: null !default;

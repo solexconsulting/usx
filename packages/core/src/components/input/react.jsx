@@ -107,9 +107,7 @@ export default function Input({
         {getFormGroupWrapper(content)}
       </div>
     )
-  } else if (hasError || hasSuccess) {
-    return getFormGroupWrapper(content);
   }
 
-  return content;
+  return getFormGroupWrapper(content);
 }

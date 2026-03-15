@@ -1,4 +1,4 @@
-@import '../../../../tokens/src/tokens.scss';
+@use '../../../../tokens/src/tokens.scss' as *;
 
 .usx-button {
   @if $usx-button-border-radius {
@@ -19,6 +19,16 @@
   @if $usx-button-primary-border-color {
     border-color: $usx-button-primary-border-color;
   }
+  &.usx-button--hover, &:hover {
+	@if $usx-button-primary-hover-background-color {
+	  background-color: $usx-button-primary-hover-background-color;
+	}
+  }
+  &.usx-button--active, &:active {
+	@if $usx-button-primary-active-background-color {
+	  background-color: $usx-button-primary-active-background-color;
+	}
+  }
 }
 
 .usx-button--secondary {
@@ -30,5 +40,59 @@
   }
   @if $usx-button-secondary-border-color {
     border-color: $usx-button-secondary-border-color;
+  }
+  &.usx-button--hover, &:hover {
+	@if $usx-button-secondary-hover-background-color {
+	  background-color: $usx-button-secondary-hover-background-color;
+	}
+  }
+  &.usx-button--active, &:active {
+	@if $usx-button-secondary-active-background-color {
+	  background-color: $usx-button-secondary-active-background-color;
+	}
+  }
+}
+
+.usx-button--accent-cool {
+  @if $usx-button-accent-cool-background-color {
+    background-color: $usx-button-accent-cool-background-color;
+  }
+  @if $usx-button-accent-cool-color {
+	color: $usx-button-accent-cool-color;
+  }
+  @if $usx-button-accent-cool-border-color {
+    border-color: $usx-button-accent-cool-border-color;
+  }
+  &.usx-button--hover, &:hover {
+	@if $usx-button-accent-cool-hover-background-color {
+	  background-color: $usx-button-accent-cool-hover-background-color;
+	}
+  }
+  &.usx-button--active, &:active {
+	@if $usx-button-accent-cool-active-background-color {
+	  background-color: $usx-button-accent-cool-active-background-color;
+	}
+  }
+}
+
+.usx-button--accent-warm {
+  @if $usx-button-accent-warm-background-color {
+    background-color: $usx-button-accent-warm-background-color;
+  }
+  @if $usx-button-accent-warm-color {
+	color: $usx-button-accent-warm-color;
+  }
+  @if $usx-button-accent-warm-border-color {
+    border-color: $usx-button-accent-warm-border-color;
+  }
+  &.usx-button--hover, &:hover {
+	@if $usx-button-accent-warm-hover-background-color {
+	  background-color: $usx-button-accent-warm-hover-background-color;
+	}
+  }
+  &.usx-button--active, &:active {
+	@if $usx-button-accent-warm-active-background-color {
+	  background-color: $usx-button-accent-warm-active-background-color;
+	}
   }
 }

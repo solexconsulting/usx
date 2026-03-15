@@ -14,10 +14,6 @@ export default {
       title: 'HTML',
       url: process.env.STORYBOOK_HTML_URL || 'http://192.168.86.60:7008'
     },
-    javascript: {
-      title: 'JavaScript',
-      url: process.env.STORYBOOK_JS_URL || 'http://192.168.86.60:7009'
-    },
     django: {
       title: 'Django',
       url: process.env.STORYBOOK_DJANGO_URL || 'http://192.168.86.60:7010'

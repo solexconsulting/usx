@@ -2,3 +2,16 @@
 @use '../components/button/button';
 @use '../components/input/input';
 @use '../components/alert/alert';
+@use '../../../tokens/src/tokens.scss' as *;
+
+
+
+.usx-form-group--error {
+	@if $usx-form-group-error-color {
+		border-color: $usx-form-group-error-color;
+	}
+
+	@if $usx-form-group-error-border-thickness {
+		border-width: $usx-form-group-error-border-thickness;
+	}
+}
