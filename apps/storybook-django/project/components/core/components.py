@@ -37,10 +37,9 @@ class Button(Component):
             'type': 'boolean',
             'default': False
         },
-        'size': {
-            'type': 'select',
-            'options': ['small', 'large'],
-            'default': 'small'
+        'big': {
+            'type': 'boolean',
+            'default': False
         },
         'inverse': {
             'type': 'boolean',
@@ -103,13 +102,49 @@ class Input(Component):
     name = 'input'
     template = 'input/input.django.html'
     props = {
-        'label': {
-            'type': 'string',
-            'default': 'Label'
+        "label": {
+            "type": "string",
+            "default": "Label"
         },
-        'placeholder': {
-            'type': 'string',
-            'default': 'Placeholder text'
+        "id": {
+            "type": "string",
+            "default": None
+        },
+        "placeholder": {
+            "type": "string",
+            "default": "Placeholder text"
+        },
+        "error": {
+            "type": "string",
+            "default": None
+        },
+        "success": {
+            "type": "string",
+            "default": None
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": False
+        },
+        "characterCount": {
+            "type": "object",
+            "default": None
+        },
+        "hint": {
+            "type": "string",
+            "default": None
+        },
+        "textArea": {
+            "type": "boolean",
+            "default": False
+        },
+        "className": {
+            "type": "string",
+            "default": ""
+        },
+        "style": {
+            "type": "string",
+            "default": ""
         }
     }
 

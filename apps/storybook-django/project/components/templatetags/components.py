@@ -26,5 +26,6 @@ def component(component_name, **props):
     Returns:
         str: The rendered HTML, marked as safe.
     """
+    # render component and mark safe for inclusion in templates
     html = render_component(component_name, props)
     return mark_safe(html)

@@ -1,0 +1,80 @@
+{# normalize ids/names #}
+{% with name|default:"input" as field_name %}
+{% with id|default:field_name as field_id %}
+
+
+{% if characterCount %}
+<div class="usa-character-count usx-character-count">
+{% endif %}
+  <div
+    class="
+      usa-form-group usx-form-group
+      {% if success and not error %} usa-form-group--success usx-form-group--success{% endif %}
+      {% if error %} usa-form-group--error usx-form-group--error{% endif %}
+    "
+  >
+    {% if label %}
+      <label class="usa-label usx-label" for="{{ field_id }}">{{ label }}</label>
+    {% endif %}
+    {% if hint %}
+      <span id="{{ field_id }}-hint" class="usa-hint">{{ hint }}</span>
+    {% endif %}
+
+    {% if textArea %}
+      <textarea
+        class="
+          usa-textarea usx-textarea
+          {% if success and not error %} usa-textarea--success usx-textarea--success{% endif %}
+          {% if error %} usa-textarea--error usx-textarea--error{% endif %}
+          {% if className %}
+            {{ className }}
+          {% endif %}
+        "
+        id="{{ field_id }}"
+        name="{{ field_name }}"
+        placeholder="{{ placeholder|default:'' }}"
+        {% if characterCount %} maxlength="{{ characterCount.max }}" aria-describedby="{{ field_id }}-hint {{ field_id }}-info"{% endif %}
+        {% if disabled %} disabled="disabled"{% endif %}
+        defaultValue="{{ value|default:'' }}"
+      ></textarea>
+    {% else %}
+      <input
+        class="
+          usa-input usx-input
+          {% if success and not error %} usa-input--success usx-input--success{% endif %}
+          {% if error %} usa-input--error usx-input--error{% endif %}
+          {% if className %}
+            {{ className }}
+          {% endif %}
+        "
+        id="{{ field_id }}"
+        name="{{ field_name }}"
+        placeholder="{{ placeholder|default:'' }}"
+        {% if characterCount %} maxlength="{{ characterCount.max }}" aria-describedby="{{ field_id }}-hint {{ field_id }}-info"{% endif %}
+        {% if disabled %} disabled="disabled"{% endif %}
+        defaultValue="{{ value|default:'' }}"
+      />
+    {% endif %}
+
+    <span id="{{ field_id }}-info" class="usa-character-count__message">
+      {% if characterCount %}
+        {% if value and value|length > characterCount.max %}
+          <span class="usa-error-message usx-error-message">Character count exceeded</span>
+        {% else %}
+          You can enter up to {{ characterCount.max }} characters
+        {% endif %}
+      {% endif %}
+    </span>
+
+    {% if error %}
+      <span class="usa-error-message usx-error-message">{{ error }}</span>
+    {% elif success and not error %}
+      <span class="usa-success-message usx-success-message display-block">{{ success }}</span>
+    {% endif %}
+  </div>
+{% if characterCount %}
+</div>
+{% endif %}
+
+{% endwith %}
+{% endwith %}

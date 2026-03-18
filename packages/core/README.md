@@ -16,8 +16,6 @@ USWDS is treated as an external foundation. This package does not bundle USWDS a
 - `src/styles/`
 	- `_variables.scss`: token variable import layer
 	- `core.scss`: global import bundle for core component styles
-- `src/scripts/`
-	- `global.js`: global interactive helpers/factory
 - `src/index.js`: exports all React wrappers from component folders
 - `dist/`: build output target
 

@@ -34,9 +34,9 @@ export default {
       control: 'boolean',
       description: 'If true and href is provided, the link will open in a new tab'
     },
-    size: {
-      control: 'select',
-      options: ['small', 'large']
+    big: {
+      control: 'boolean',
+      description: 'If true, applies big styling to the button'
     },
     inverse: {
       control: 'boolean',

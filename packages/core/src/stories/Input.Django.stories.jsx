@@ -8,12 +8,48 @@ export default {
   tags: ['autodocs'],
   argTypes: {
     label: {
-      control: 'text',
-      description: 'The label for the input field'
+      "type": "string",
+      "default": "Label"
+    },
+    id: {
+      "type": "string",
+      "default": null
     },
     placeholder: {
-      control: 'text',
-      description: 'The placeholder text for the input field'
+      "type": "string",
+      "default": "Placeholder text"
+    },
+    error: {
+      "type": "string",
+      "default": null
+    },
+    success: {
+      "type": "string",
+      "default": null
+    },
+    disabled: {
+      "type": "boolean",
+      "default": false
+    },
+    characterCount: {
+      "type": "object",
+      "default": null
+    },
+    hint: {
+      "type": "string",
+      "default": null
+    },
+    textArea: {
+      "type": "boolean",
+      "default": false
+    },
+    className: {
+      "type": "string",
+      "default": ""
+    },
+    style: {
+      "type": "string",
+      "default": ""
     }
   }
 };

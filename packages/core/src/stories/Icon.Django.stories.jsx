@@ -1,6 +1,6 @@
 import React from 'react';
 import { djangoComponent } from '../../../../apps/storybook/.storybook/djangoComponent.js';
-import componentTag from './helper.jsx';
+import { componentTag } from './helper.jsx';
 
 export default {
   title: 'Django/Icon',

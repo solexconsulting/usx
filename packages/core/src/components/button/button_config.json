@@ -32,10 +32,9 @@
             "type": "boolean",
             "default": false
         },
-        "size": {
-            "type": "select",
-            "options": ["small", "large"],
-            "default": "small"
+        "big": {
+            "type": "boolean",
+            "default": false
         },
         "inverse": {
             "type": "boolean",

@@ -7,21 +7,52 @@ export default {
   tags: ['autodocs'],
   layout: 'fullwidth',
   argTypes: {
+    label: {
+      control: 'text',
+      description: 'The text to display inside the button'
+    },
     variant: {
       control: 'select',
       options: [undefined, 'secondary', 'accent-cool', 'accent-warm', 'base', 'outline']
     },
-    big: {
-      control: 'boolean'
-    },
-    inverse: {
-      control: 'boolean'
-    },
-    unstyled: {
-      control: 'boolean'
+    type: {
+      control: 'select',
+      options: ['button', 'submit', 'reset']
     },
     disabled: {
       control: 'boolean'
+    },
+    onClick: {
+      action: 'clicked',
+      description: 'Function to call when the button is clicked'
+    },
+    href: {
+      control: 'text',
+      description: 'If provided, renders the button as a link with this URL'
+    },
+    isExternal: {
+      control: 'boolean',
+      description: 'If true and href is provided, the link will open in a new tab'
+    },
+    big: {
+      control: 'boolean',
+      description: 'If true, applies big styling to the button'
+    },
+    inverse: {
+      control: 'boolean',
+      description: 'If true, applies inverse styling to the button'
+    },
+    unstyled: {
+      control: 'boolean',
+      description: 'If true, removes all styling from the button'
+    },
+    leftIcon: {
+      control: 'object',
+      description: 'Icon to display on the left side of the button. Should be an object with name, size, and color properties.'
+    },
+    rightIcon: {
+      control: 'object',
+      description: 'Icon to display on the right side of the button. Should be an object with name, size, and color properties.'
     }
   }
 };

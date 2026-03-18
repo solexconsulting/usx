@@ -9,9 +9,15 @@
     role="alert"
 >
   <div class="usa-alert__body usx-alert__body">
-    <h4 class="usa-alert__heading usx-alert__heading">{{ heading }}</h4>
+    {% if heading %}
+        <h4 class="usa-alert__heading usx-alert__heading">{{ heading }}</h4>
+    {% endif %}
     <p class="usa-alert__text usx-alert__text">
-      {{ children || text }}
+        {% if children %}
+            {{ children|safe }}
+        {% else %}
+            {{ text }}
+        {% endif %}
     </p>
   </div>
 </div>

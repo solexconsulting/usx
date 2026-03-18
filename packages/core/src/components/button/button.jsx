@@ -10,7 +10,7 @@ export default function Button({
   onClick,
   href,
   isExternal = false,
-  size = 'small',
+  big = false,
   inverse = false,
   leftIcon,
   rightIcon,
@@ -29,7 +29,7 @@ export default function Button({
 
   const variantClass = variantClasses[variant] || variantClasses['primary'];
   const modifierClasses = [
-    size === 'large' && 'usa-button--big usx-button--big',
+    big && 'usa-button--big usx-button--big',
     inverse && 'usa-button--inverse usx-button--inverse',
   ].filter(Boolean).join(' ');
 

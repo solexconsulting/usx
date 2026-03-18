@@ -1,16 +1,48 @@
 {% load components %}
-<button
-  type="button"
-  class="usa-button usx-button{% if variant %} usa-button--{{ variant }} usx-button--{{ variant }}{% endif %}{% if disabled %} usa-button--disabled{% endif %}"
-  {% if disabled %} disabled="disabled" {% endif %}
->
-  {% if leftIcon %}
-    {% component "icon" name=leftIcon.name size=leftIcon.size %}
-  {% endif %}
 
-  {{ label }}
+{# build classes inline to avoid {% with %} scoping issues #}
 
-  {% if rightIcon %}
-    {% component "icon" name=rightIcon.name size=rightIcon.size %}
-  {% endif %}
-</button>
+{% if href %}
+    <a
+        href="{{ href }}"
+        class="
+            usa-button usx-button
+            {% if variant %} usa-button--{{ variant }} usx-button--{{ variant }}{% endif %}
+            {% if big %} usa-button--big usx-button--big{% endif %}
+            {% if disabled %} usa-button--disabled{% endif %}
+            {% if inverse %} usa-button--inverse usx-button--inverse{% endif %}
+            {% if className %} {{ className }}{% endif %}
+        "
+        {% if disabled %} disabled="disabled" aria-disabled="true" {% endif %}
+        {% if isExternal %} target="_blank" rel="noopener noreferrer" {% endif %}
+    >
+{% else %}
+
+    <button
+        type="{{ type }}"
+        class="
+            usa-button usx-button
+            {% if variant %} usa-button--{{ variant }} usx-button--{{ variant }}{% endif %}
+            {% if big %} usa-button--big usx-button--big{% endif %}
+            {% if disabled %} usa-button--disabled{% endif %}
+            {% if inverse %} usa-button--inverse usx-button--inverse{% endif %}
+            {% if className %} {{ className }}{% endif %}
+        "
+        {% if disabled %} disabled="disabled" aria-disabled="true" {% endif %}
+    >
+{% endif %}
+    {% if leftIcon %}
+        {% component "icon" name=leftIcon.name size=leftIcon.size %}
+    {% endif %}
+
+    {{ label }}
+
+    {% if rightIcon %}
+        {% component "icon" name=rightIcon.name size=rightIcon.size %}
+    {% endif %}
+
+{% if href %}
+    </a>
+{% else %}
+    </button>
+{% endif %}
