@@ -1,0 +1,16 @@
+{% load components %}
+<button
+  type="button"
+  class="usa-button usx-button{% if variant %} usa-button--{{ variant }} usx-button--{{ variant }}{% endif %}{% if disabled %} usa-button--disabled{% endif %}"
+  {% if disabled %} disabled="disabled" {% endif %}
+>
+  {% if leftIcon %}
+    {% component "icon" name=leftIcon.name size=leftIcon.size %}
+  {% endif %}
+
+  {{ label }}
+
+  {% if rightIcon %}
+    {% component "icon" name=rightIcon.name size=rightIcon.size %}
+  {% endif %}
+</button>

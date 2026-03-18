@@ -1,0 +1,27 @@
+{
+    "name": "alert",
+    "template": "alert/alert.django.html",
+    "props": {
+        "heading": {
+            "type": "string",
+            "default": "Informative status"
+        },
+        "text": {
+            "type": "string",
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+        },
+        "variant": {
+            "type": "select",
+            "options": ["info", "success", "warning", "error"],
+            "default": "info"
+        },
+        "slim": {
+            "type": "boolean",
+            "default": false
+        },
+        "noIcon": {
+            "type": "boolean",
+            "default": false
+        }
+    }
+}

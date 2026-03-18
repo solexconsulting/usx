@@ -1,0 +1,61 @@
+{
+    "name": "button",
+    "template": "button/button.django.html",
+    "props": {
+        "label": {
+            "type": "string",
+            "default": "Button"
+        },
+        "variant": {
+            "type": "select",
+            "options": ["primary", "secondary", "accent-cool", "accent-warm", "base", "outline"],
+            "default": "primary"
+        },
+        "type": {
+            "type": "select",
+            "options": ["button", "submit", "reset"],
+            "default": "button"
+        },
+        "disabled": {
+            "type": "boolean",
+            "default": false
+        },
+        "onClick": {
+            "type": "function",
+            "default": null
+        },
+        "href": {
+            "type": "string",
+            "default": null
+        },
+        "isExternal": {
+            "type": "boolean",
+            "default": false
+        },
+        "size": {
+            "type": "select",
+            "options": ["small", "large"],
+            "default": "small"
+        },
+        "inverse": {
+            "type": "boolean",
+            "default": false
+        },
+        "leftIcon": {
+            "type": "object",
+            "default": null
+        },
+        "rightIcon": {
+            "type": "object",
+            "default": null
+        },
+        "className": {
+            "type": "string",
+            "default": ""
+        },
+        "style": {
+            "type": "string",
+            "default": ""
+        }
+    }
+}

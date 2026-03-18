@@ -1,4 +1,5 @@
 import React from 'react';
+import { djangoComponent } from '../../../../apps/storybook/.storybook/djangoComponent.js';
 
 function CodeSample({ code }) {
   return (
@@ -10,11 +11,6 @@ function CodeSample({ code }) {
 
 function Markup({ html }) {
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
-}
-
-function buttonTag({ label, variant }) {
-  const variantArg = variant ? ` variant=\"${variant}\"` : '';
-  return `{% load agency_ui %}\n{% agency_button label=\"${label}\"${variantArg} %}`;
 }
 
 function inputTag({ label, placeholder }) {
@@ -54,36 +50,6 @@ function renderedAlert({ heading, text, variant, slim, noIcon }) {
 export default {
   title: 'Django/Components',
   tags: ['autodocs']
-};
-
-export const ButtonTemplateTag = {
-  name: 'ButtonTemplateTag',
-  args: {
-    label: 'Continue',
-    variant: undefined
-  },
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: [undefined, 'secondary']
-    }
-  },
-  render: (args) => <CodeSample code={buttonTag(args)} />
-};
-
-export const ButtonRenderedEquivalent = {
-  name: 'ButtonRenderedEquivalent',
-  args: {
-    label: 'Continue',
-    variant: undefined
-  },
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: [undefined, 'secondary']
-    }
-  },
-  render: (args) => <Markup html={renderedButton(args)} />
 };
 
 export const InputTemplateTag = {

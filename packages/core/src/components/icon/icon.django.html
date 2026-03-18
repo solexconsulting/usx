@@ -1,0 +1,14 @@
+<svg
+    class="
+        usa-icon
+        {% if size %}usa-icon--size-{{ size }}{% endif %}
+        {% if className %}{{ className }}{% endif %}
+        {% if color %}text-{{ color }}{% endif %}
+    "
+    {% if style %}style="{{ style }}"{% endif %}
+    aria-hidden="true"
+    focusable="false"
+    role="img"
+>
+    <use href="{{ staticUrlPrefix }}{{ name }}"></use>
+</svg>

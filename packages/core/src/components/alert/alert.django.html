@@ -1,0 +1,17 @@
+<div
+    class="
+        usa-alert
+        usa-alert--{{ variant }}
+        usx-alert usx-alert--{{ variant }}
+        {% if slim %} usa-alert--slim usx-alert--slim{% endif %}
+        {% if noIcon %} usa-alert--no-icon usx-alert--no-icon{% endif %}
+    "
+    role="alert"
+>
+  <div class="usa-alert__body usx-alert__body">
+    <h4 class="usa-alert__heading usx-alert__heading">{{ heading }}</h4>
+    <p class="usa-alert__text usx-alert__text">
+      {{ children || text }}
+    </p>
+  </div>
+</div>

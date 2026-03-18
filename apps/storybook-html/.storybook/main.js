@@ -1,5 +1,5 @@
 export default {
-  stories: ['../../../packages/core/src/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../src/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: ['@storybook/addon-essentials'],
   framework: {
     name: '@storybook/react-vite',
@@ -7,6 +7,5 @@ export default {
   },
   docs: {
     autodocs: 'tag'
-  },
-  staticDirs: ['../../../node_modules/@uswds/uswds/dist'],
+  }
 };

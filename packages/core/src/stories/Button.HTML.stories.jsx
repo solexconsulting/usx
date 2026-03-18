@@ -6,4 +6,15 @@ export default {
   tags: ['autodocs']
 };
 
-export const Overview = () => <div dangerouslySetInnerHTML={{ __html: buttonHtml }} />;
+export const AllVariants = {
+  parameters: {
+    docs: {
+      source: {
+        code: buttonHtml
+      }
+    }
+  },
+  render: () => {
+    return <div dangerouslySetInnerHTML={{ __html: buttonHtml }} />;
+  }
+}

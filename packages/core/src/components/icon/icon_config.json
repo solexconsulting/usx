@@ -1,0 +1,31 @@
+{
+    "name": "icon",
+    "template": "icon/icon.django.html",
+    "props": {
+        "name": {
+            "type": "string",
+            "default": "accessibility_new"
+        },
+        "size": {
+            "type": "select",
+            "options": [null, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            "default": 2
+        },
+        "color": {
+            "type": "string",
+            "default": null
+        },
+        "staticUrlPrefix": {
+            "type": "string",
+            "default": "/assets/img/sprite.svg#"
+        },
+        "className": {
+            "type": "string",
+            "default": ""
+        },
+        "style": {
+            "type": "string",
+            "default": ""
+        }
+    }
+}

@@ -1,8 +1,8 @@
 import React from 'react';
-import alertHtml from '../components/alert/alert.html?raw';
+import iconHtml from '../components/icon/icon.html?raw';
 
 export default {
-  title: 'HTML/Alert',
+  title: 'HTML/Icon',
   tags: ['autodocs']
 };
 
@@ -10,11 +10,11 @@ export const AllVariants = {
   parameters: {
     docs: {
       source: {
-        code: alertHtml
+        code: iconHtml
       }
     }
   },
   render: () => {
-    return <div dangerouslySetInnerHTML={{ __html: alertHtml }} />;
+    return <div dangerouslySetInnerHTML={{ __html: iconHtml }} />;
   }
 }
