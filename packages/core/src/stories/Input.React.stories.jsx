@@ -1,13 +1,15 @@
 import React from 'react';
 import { Input } from '../index.js';
+import inputConfig from '../components/input/input_config.json';
+import { buildArgTypes } from './helper';
+
+const generatedArgTypes = buildArgTypes(inputConfig.props || {});
 
 export default {
   title: 'React/Input',
   component: Input,
   tags: ['autodocs'],
-  parameters: {
-    layout: 'padded'
-  },
+  argTypes: generatedArgTypes,
 };
 
 export const Default = {

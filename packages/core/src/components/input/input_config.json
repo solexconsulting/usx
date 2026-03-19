@@ -4,31 +4,38 @@
     "props": {
         "label": {
             "type": "string",
-            "default": "Label"
+            "default": "Label",
+            "description": "The label for the input field, which provides a clear and concise description of the expected input."
         },
         "id": {
             "type": "string",
-            "default": null
+            "default": null,
+            "description": "A unique identifier for the input field, which can be used to associate the label with the input element and for accessibility purposes."
         },
         "placeholder": {
             "type": "string",
-            "default": "Placeholder text"
+            "default": "Placeholder text",
+            "description": "Text displayed inside the input field when it is empty, providing a hint to the user about the expected input."
         },
         "error": {
             "type": "string",
-            "default": null
+            "default": null,
+            "description": "An error message that is displayed when the input value is invalid, providing feedback to the user about what went wrong and how to correct it."
         },
         "success": {
             "type": "string",
-            "default": null
+            "default": null,
+            "description": "A success message that is displayed when the input value is valid, providing positive feedback to the user and confirming that their input has been accepted."
         },
         "disabled": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "A boolean that determines whether the input field is disabled, preventing user interaction and indicating that the field is not currently available for input."
         },
         "characterCount": {
             "type": "object",
-            "default": null
+            "default": null,
+            "description": "An object that defines the character count settings for the input field, including the maximum number of characters allowed and the message to display explaining the requirement."
         },
         "hint": {
             "type": "string",
@@ -36,14 +43,18 @@
         },
         "textArea": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "A boolean that determines whether the input field is a text area, allowing for multi-line input."
         },
         "className": {
             "type": "string",
-            "default": ""
+            "default": "",
+            "description": "Additional CSS classes to apply to the input field."
         },
         "style": {
             "type": "string",
-            "default": ""
+            "default": "",
+            "description": "Inline styles to apply to the input field."
         }
+    }
 }

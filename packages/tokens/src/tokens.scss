@@ -21,9 +21,11 @@ $color-error: #d83933 !default;
 $color-emergency: #b51d09 !default;
 $color-background: #f8fafc !default;
 $color-surface: #ffffff !default;
-$color-text: #0f172a !default;
+$color-dark-bg: darken($color-primary, 50%) !default;
 
 // Text color tokens
+$color-text: #0f172a !default;
+$color-light-text: #ffffff !default;
 $color-info-text: null !default;
 $color-warning-text: null !default;
 $color-success-text: null !default;
@@ -100,7 +102,7 @@ $usx-button-outline-border-color: null !default;
 $usx-alert-background-color: null !default;
 $usx-alert-text-color: null !default;
 $usx-alert-border-color: null !default;
-$usx-alert-border-radius: $r-xl !default;
+$usx-alert-border-radius: $r-lg !default;
 $usx-alert-box-shadow: null !default;
 $usx-alert-info-background-color: $color-info !default;
 $usx-alert-info-text-color: null !default;

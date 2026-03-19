@@ -1,60 +1,16 @@
 import React from 'react';
 import { Button } from '../index.js';
+import buttonConfig from '../components/button/button_config.json';
+import { buildArgTypes } from './helper';
+
+const generatedArgTypes = buildArgTypes(buttonConfig.props || {});
 
 export default {
   title: 'React/Button',
   component: Button,
   tags: ['autodocs'],
   layout: 'fullwidth',
-  argTypes: {
-    label: {
-      control: 'text',
-      description: 'The text to display inside the button'
-    },
-    variant: {
-      control: 'select',
-      options: [undefined, 'secondary', 'accent-cool', 'accent-warm', 'base', 'outline']
-    },
-    type: {
-      control: 'select',
-      options: ['button', 'submit', 'reset']
-    },
-    disabled: {
-      control: 'boolean'
-    },
-    onClick: {
-      action: 'clicked',
-      description: 'Function to call when the button is clicked'
-    },
-    href: {
-      control: 'text',
-      description: 'If provided, renders the button as a link with this URL'
-    },
-    isExternal: {
-      control: 'boolean',
-      description: 'If true and href is provided, the link will open in a new tab'
-    },
-    big: {
-      control: 'boolean',
-      description: 'If true, applies big styling to the button'
-    },
-    inverse: {
-      control: 'boolean',
-      description: 'If true, applies inverse styling to the button'
-    },
-    unstyled: {
-      control: 'boolean',
-      description: 'If true, removes all styling from the button'
-    },
-    leftIcon: {
-      control: 'object',
-      description: 'Icon to display on the left side of the button. Should be an object with name, size, and color properties.'
-    },
-    rightIcon: {
-      control: 'object',
-      description: 'Icon to display on the right side of the button. Should be an object with name, size, and color properties.'
-    }
-  }
+  argTypes: generatedArgTypes,
 };
 
 // Default variant
@@ -128,9 +84,7 @@ export const AllVariants = {
       </div>
       <h3>Big</h3>
       <Button label="Default" big />{" "}
-      <Button label="Hover" big className="usa-button--hover usx-button--hover" />{" "}
       <Button label="Active" big className="usa-button--active usx-button--active" />{" "}
-      <Button label="Focus" big className="usa-focus" />{" "}
       <Button label="Disabled" big disabled />{" "}
       <Button label="aria-disabled" big aria-disabled="true" />{" "}
       <Button label="Unstyled button" big variant="unstyled" />

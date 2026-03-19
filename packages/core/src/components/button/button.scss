@@ -1,98 +1,110 @@
 @use '../../../../tokens/src/tokens.scss' as *;
 
+/* Base: compile-time conditional properties only when tokens are set */
 .usx-button {
-  @if $usx-button-border-radius {
+  @if $usx-button-border-radius != null {
     border-radius: $usx-button-border-radius;
   }
-  @if $usx-button-box-shadow {
+  @if $usx-button-box-shadow != null {
     box-shadow: $usx-button-box-shadow;
   }
 }
 
-.usx-button--primary {
-  @if $usx-button-primary-background-color {
-    background-color: $usx-button-primary-background-color;
+/* DRY mixin for variants — emits properties only when tokens are non-null */
+@mixin usx-button-variant($name, $bg, $color, $border, $hover, $active) {
+  $class-name: unquote("usx-button--#{$name}");
+
+  .#{$class-name} {
+    @if $bg != null {
+      background-color: $bg;
+    }
+    @if $color != null {
+      color: $color;
+    }
+    @if $border != null {
+      border-color: $border;
+    }
+
+    /* hover state */
+    &.usx-button--hover, &:hover {
+      @if $hover != null {
+        background-color: $hover;
+      }
+    }
+
+    /* active state */
+    &.usx-button--active, &:active {
+      @if $active != null {
+        background-color: $active;
+      }
+    }
   }
-  @if $usx-button-primary-color {
-	color: $usx-button-primary-color;
-  }
-  @if $usx-button-primary-border-color {
-    border-color: $usx-button-primary-border-color;
-  }
-  &.usx-button--hover, &:hover {
-	@if $usx-button-primary-hover-background-color {
-	  background-color: $usx-button-primary-hover-background-color;
-	}
-  }
-  &.usx-button--active, &:active {
-	@if $usx-button-primary-active-background-color {
-	  background-color: $usx-button-primary-active-background-color;
+
+  .theme-dark {
+
+	.#{$class-name}:not(:disabled):not([aria-disabled="true"]) {
+		@if $bg != null {
+			background-color: darken($bg, 30%);
+		}
+		@if $color-light-text != null {
+			color: $color-light-text;
+		}
+		@if $border != null {
+			border-color: darken($border, 30%);
+		}
+
+		/* hover state */
+		&.usx-button--hover, &:hover {
+			@if $hover != null {
+				background-color: darken($hover, 20%);
+			}
+		}
+
+		/* active state */
+		&.usx-button--active, &:active {
+			@if $active != null {
+				background-color: darken($active, 20%);
+			}
+		}
 	}
   }
 }
 
-.usx-button--secondary {
-  @if $usx-button-secondary-background-color {
-    background-color: $usx-button-secondary-background-color;
-  }
-  @if $usx-button-secondary-color {
-    color: $usx-button-secondary-color;
-  }
-  @if $usx-button-secondary-border-color {
-    border-color: $usx-button-secondary-border-color;
-  }
-  &.usx-button--hover, &:hover {
-	@if $usx-button-secondary-hover-background-color {
-	  background-color: $usx-button-secondary-hover-background-color;
-	}
-  }
-  &.usx-button--active, &:active {
-	@if $usx-button-secondary-active-background-color {
-	  background-color: $usx-button-secondary-active-background-color;
-	}
-  }
-}
+/* Primary variant */
+@include usx-button-variant(
+  'primary',
+  $usx-button-primary-background-color,
+  $usx-button-primary-color,
+  $usx-button-primary-border-color,
+  $usx-button-primary-hover-background-color,
+  $usx-button-primary-active-background-color
+);
 
-.usx-button--accent-cool {
-  @if $usx-button-accent-cool-background-color {
-    background-color: $usx-button-accent-cool-background-color;
-  }
-  @if $usx-button-accent-cool-color {
-	color: $usx-button-accent-cool-color;
-  }
-  @if $usx-button-accent-cool-border-color {
-    border-color: $usx-button-accent-cool-border-color;
-  }
-  &.usx-button--hover, &:hover {
-	@if $usx-button-accent-cool-hover-background-color {
-	  background-color: $usx-button-accent-cool-hover-background-color;
-	}
-  }
-  &.usx-button--active, &:active {
-	@if $usx-button-accent-cool-active-background-color {
-	  background-color: $usx-button-accent-cool-active-background-color;
-	}
-  }
-}
+/* Secondary variant */
+@include usx-button-variant(
+  'secondary',
+  $usx-button-secondary-background-color,
+  $usx-button-secondary-color,
+  $usx-button-secondary-border-color,
+  $usx-button-secondary-hover-background-color,
+  $usx-button-secondary-active-background-color
+);
 
-.usx-button--accent-warm {
-  @if $usx-button-accent-warm-background-color {
-    background-color: $usx-button-accent-warm-background-color;
-  }
-  @if $usx-button-accent-warm-color {
-	color: $usx-button-accent-warm-color;
-  }
-  @if $usx-button-accent-warm-border-color {
-    border-color: $usx-button-accent-warm-border-color;
-  }
-  &.usx-button--hover, &:hover {
-	@if $usx-button-accent-warm-hover-background-color {
-	  background-color: $usx-button-accent-warm-hover-background-color;
-	}
-  }
-  &.usx-button--active, &:active {
-	@if $usx-button-accent-warm-active-background-color {
-	  background-color: $usx-button-accent-warm-active-background-color;
-	}
-  }
-}
+/* Accent variants */
+@include usx-button-variant(
+  'accent-cool',
+  $usx-button-accent-cool-background-color,
+  $usx-button-accent-cool-color,
+  $usx-button-accent-cool-border-color,
+  $usx-button-accent-cool-hover-background-color,
+  $usx-button-accent-cool-active-background-color
+);
+@include usx-button-variant(
+  'accent-warm',
+  $usx-button-accent-warm-background-color,
+  $usx-button-accent-warm-color,
+  $usx-button-accent-warm-border-color,
+  $usx-button-accent-warm-hover-background-color,
+  $usx-button-accent-warm-active-background-color
+);
+

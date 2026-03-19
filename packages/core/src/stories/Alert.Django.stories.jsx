@@ -1,34 +1,15 @@
 import React from 'react';
 import { djangoComponent } from '../../../../apps/storybook/.storybook/djangoComponent.js';
-import { componentTag } from './helper.jsx';
+import alertConfig from '../components/alert/alert_config.json';
+import { buildArgTypes, componentTag } from './helper';
+
+const generatedArgTypes = buildArgTypes(alertConfig.props || {});
 
 
 export default {
   title: 'Django/Alert',
   tags: ['autodocs'],
-  argTypes: {
-    heading: {
-      control: 'text',
-      description: 'The heading text of the alert'
-    },
-    text: {
-      control: 'text',
-      description: 'The body text of the alert'
-    },
-    variant: {
-      control: 'select',
-      options: ['info', 'warning', 'success', 'error', 'emergency'],
-      description: 'The visual style of the alert'
-    },
-    slim: {
-      control: 'boolean',
-      description: 'If true, applies slim styling to the alert'
-    },
-    noIcon: {
-      control: 'boolean',
-      description: 'If true, hides the icon from the alert'
-    }
-  }
+  argTypes: generatedArgTypes,
 };
 
 export const Alert = {

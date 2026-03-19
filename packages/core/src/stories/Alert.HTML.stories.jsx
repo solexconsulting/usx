@@ -18,3 +18,17 @@ export const AllVariants = {
     return <div dangerouslySetInnerHTML={{ __html: alertHtml }} />;
   }
 }
+
+export const AllVariantsDarkTheme = {
+  parameters: {
+    docs: {
+      source: {
+        code: alertHtml
+      }
+    }
+  },
+  render: () => {
+    return <div className="theme-dark" dangerouslySetInnerHTML={{ __html: alertHtml }} />;
+  }
+}
+

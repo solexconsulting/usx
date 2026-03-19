@@ -32,13 +32,13 @@
     >
 {% endif %}
     {% if leftIcon %}
-        {% component "icon" name=leftIcon.name size=leftIcon.size %}
+        {% component "icon" name=leftIcon.name color=leftIcon.color size=leftIcon.size %}
     {% endif %}
 
     {{ label }}
 
     {% if rightIcon %}
-        {% component "icon" name=rightIcon.name size=rightIcon.size %}
+        {% component "icon" name=rightIcon.name color=rightIcon.color size=rightIcon.size %}
     {% endif %}
 
 {% if href %}

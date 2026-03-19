@@ -1,27 +1,19 @@
 import React from 'react';
 import { Alert } from '../index.js';
+import alertConfig from '../components/alert/alert_config.json';
+import { buildArgTypes } from './helper';
+
+const generatedArgTypes = buildArgTypes(alertConfig.props || {});
 
 export default {
   title: 'React/Alert',
   component: Alert,
   tags: ['autodocs'],
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['info', 'warning', 'success', 'error', 'emergency']
-    },
-    slim: {
-      control: 'boolean'
-    },
-    noIcon: {
-      control: 'boolean'
-    }
-  }
+  argTypes: generatedArgTypes,
 };
 
 export const Info = {
   args: {
-    variant: 'info',
     heading: 'Informative status',
     text: 'System status and notification updates appear here.',
     slim: false,

@@ -4,28 +4,34 @@
     "props": {
         "name": {
             "type": "string",
-            "default": "accessibility_new"
+            "default": "accessibility_new",
+            "description": "The name of the icon to be displayed, which corresponds to the icon's identifier in the sprite sheet or icon library being used."
         },
         "size": {
             "type": "select",
-            "options": [null, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-            "default": 2
+            "options": [null, 3, 4, 5, 6, 7, 8, 9],
+            "default": null,
+            "description": "The size of the icon, which can be specified as a predefined value corresponding to specific dimensions or as a custom value to allow for more flexible sizing."
         },
         "color": {
             "type": "string",
-            "default": null
+            "default": null,
+            "description": "The color of the icon, which can be specified using a color name, hex code, RGB value, or any other valid CSS color format to customize the appearance of the icon."
         },
         "staticUrlPrefix": {
             "type": "string",
-            "default": "/assets/img/sprite.svg#"
+            "default": "/img/sprite.svg#",
+            "description": "The URL prefix for the static assets, which is used to construct the full URL for the icon sprite sheet or icon library being used."
         },
         "className": {
             "type": "string",
-            "default": ""
+            "default": "",
+            "description": "Additional CSS classes to apply to the icon component."
         },
         "style": {
             "type": "string",
-            "default": ""
+            "default": "",
+            "description": "Inline styles to apply to the icon component."
         }
     }
 }

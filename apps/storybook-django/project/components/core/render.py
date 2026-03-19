@@ -31,6 +31,7 @@ def render_component(name, props):
         ValueError: If an invalid prop is provided.
     """
     component = get_component(name)
+    component.load_props()
 
     # Merge default props (but only if not provided)
     merged_props = {}
@@ -47,8 +48,5 @@ def render_component(name, props):
     if invalid_props:
         raise ValueError(f"Invalid props for component '{name}': {invalid_props}")
 
-    # Get context
-    context = component.get_context(**merged_props)
-
     # Render template
-    return render_to_string(component.template, context)
+    return render_to_string(component.template, merged_props)

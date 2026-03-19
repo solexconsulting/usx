@@ -4,24 +4,39 @@
     "props": {
         "heading": {
             "type": "string",
-            "default": "Informative status"
+            "default": "Informative status",
+            "description": "The heading of the alert, which provides a brief summary of the alert's content."
         },
         "text": {
             "type": "string",
-            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+            "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+            "description": "The main content of the alert, providing detailed information about the alert."
         },
         "variant": {
             "type": "select",
             "options": ["info", "success", "warning", "error"],
-            "default": "info"
+            "default": "info",
+            "description": "The visual style of the alert, indicating the type of message being conveyed."
         },
         "slim": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "A boolean that determines whether the alert should be displayed in a more compact, slim style."
         },
         "noIcon": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "A boolean that determines whether the alert should be displayed without an icon."
+        },
+        "className": {
+            "type": "string",
+            "default": "",
+            "description": "Additional CSS classes to apply to the alert component."
+        },
+        "style": {
+            "type": "string",
+            "default": "",
+            "description": "Inline styles to apply to the alert component."
         }
     }
 }

@@ -1,57 +1,14 @@
 import React from 'react';
 import { djangoComponent } from '../../../../apps/storybook/.storybook/djangoComponent.js';
-import { componentTag } from './helper.jsx';
+import inputConfig from '../components/input/input_config.json';
+import { buildArgTypes, componentTag } from './helper';
 
+const generatedArgTypes = buildArgTypes(inputConfig.props || {});
 
 export default {
   title: 'Django/Input',
   tags: ['autodocs'],
-  argTypes: {
-    label: {
-      "type": "string",
-      "default": "Label"
-    },
-    id: {
-      "type": "string",
-      "default": null
-    },
-    placeholder: {
-      "type": "string",
-      "default": "Placeholder text"
-    },
-    error: {
-      "type": "string",
-      "default": null
-    },
-    success: {
-      "type": "string",
-      "default": null
-    },
-    disabled: {
-      "type": "boolean",
-      "default": false
-    },
-    characterCount: {
-      "type": "object",
-      "default": null
-    },
-    hint: {
-      "type": "string",
-      "default": null
-    },
-    textArea: {
-      "type": "boolean",
-      "default": false
-    },
-    className: {
-      "type": "string",
-      "default": ""
-    },
-    style: {
-      "type": "string",
-      "default": ""
-    }
-  }
+  argTypes: generatedArgTypes,
 };
 
 export const Input = {

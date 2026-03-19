@@ -3,13 +3,13 @@ import React from 'react';
 export default function Input({
   label = 'Label',
   id,
-  type = 'input',
   placeholder = 'Type here',
   error,
   success,
   disabled,
   characterCount,
   hint,
+  textArea=false,
   className = '',
   ...props
 }) {
@@ -20,7 +20,6 @@ export default function Input({
 
   const hasError = !!error;
   const hasSuccess = !!success;
-  const isTextarea = type === 'textarea';
 
   const characterCountClasses = 'usa-character-count usx-character-count';
   const formGroupClasses = 'usa-form-group usx-form-group';
@@ -35,9 +34,9 @@ export default function Input({
   const labelClasses = 'usa-label usx-label';
 
   const combinedInputClasses = [
-    isTextarea ? textareaClasses : inputClasses,
-    hasError && (isTextarea ? textareaErrorClasses : inputErrorClasses),
-    hasSuccess && (isTextarea ? textareaSuccessClasses : inputSuccessClasses),
+    textArea ? textareaClasses : inputClasses,
+    hasError && (textArea ? textareaErrorClasses : inputErrorClasses),
+    hasSuccess && (textArea ? textareaSuccessClasses : inputSuccessClasses),
     className,
   ].filter(Boolean).join(' ');
 
@@ -46,7 +45,7 @@ export default function Input({
     (hasError) && formGroupErrorClasses,
   ].filter(Boolean).join(' ');
 
-  const InputElement = isTextarea ? 'textarea' : 'input';
+  const InputElement = textArea ? 'textarea' : 'input';
 
   const inputProps = {
     id: inputId,
@@ -57,7 +56,7 @@ export default function Input({
     ...props,
   };
 
-  if (!isTextarea) {
+  if (!textArea) {
     inputProps.type = 'text';
   }
 
