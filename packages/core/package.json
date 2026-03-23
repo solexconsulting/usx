@@ -9,5 +9,8 @@
   ],
   "scripts": {
     "build": "echo \"Core package build placeholder\""
+  },
+  "dependencies": {
+    "classnames": "^2.5.1"
   }
 }

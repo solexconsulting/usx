@@ -1,6 +1,6 @@
 import React from 'react';
 import { djangoComponent } from '../../../../apps/storybook/.storybook/djangoComponent.js';
-import buttonConfig from '../components/button/button_config.json';
+import buttonConfig from '../components/button/config.json';
 import { buildArgTypes, componentTag } from './helper';
 
 const generatedArgTypes = buildArgTypes(buttonConfig.props || {});

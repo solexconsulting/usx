@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../index.js';
-import buttonConfig from '../components/button/button_config.json';
+import buttonConfig from '../components/button/config.json';
 import { buildArgTypes } from './helper';
 
 const generatedArgTypes = buildArgTypes(buttonConfig.props || {});

@@ -1,0 +1,11 @@
+/* styles.scss */
+/*
+@use "uswds-core" with (
+    $theme-image-path: "../uswds/img",
+    $theme-color-primary-family: red
+);
+@forward 'uswds';
+*/
+
+//@forward "./node_modules/@uswds/uswds/packages/uswds/_index.scss";
+@forward "../../../packages/core/src/styles/core.scss";

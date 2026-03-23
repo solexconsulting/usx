@@ -23,7 +23,7 @@ class Component:
     name = None
     template = None
     props = {}
-    # Example: 'button/button_config.json'
+    # Example: 'button/config.json'
     props_file = None
 
     def load_props(self):

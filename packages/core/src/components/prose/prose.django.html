@@ -1,0 +1,35 @@
+{% if containerElement == "article" %}
+    <article class="usa-prose usx-prose {{ className }}">
+        {% if content %}
+            {{ content|safe }}
+        {% else %}
+            {{ children }}
+        {% endif %}
+    </article>
+
+{% elif containerElement == "section" %}
+    <section class="usa-prose usx-prose {{ className }}">
+        {% if content %}
+            {{ content|safe }}
+        {% else %}
+            {{ children }}
+        {% endif %}
+    </section>
+
+{% elif containerElement == "main" %}
+    <main class="usa-prose usx-prose {{ className }}">
+        {% if content %}
+            {{ content|safe }}
+        {% else %}
+            {{ children }}
+        {% endif %}
+    </main>
+{% else %}
+    <div class="usa-prose usx-prose {{ className }}">
+        {% if content %}
+            {{ content|safe }}
+        {% else %}
+            {{ children }}
+        {% endif %}
+    </div>
+{% endif %}

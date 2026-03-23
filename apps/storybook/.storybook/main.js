@@ -8,5 +8,5 @@ export default {
   docs: {
     autodocs: 'tag'
   },
-  staticDirs: ['../../../node_modules/@uswds/uswds/dist'],
+  staticDirs: ['../../../node_modules/@uswds/uswds/dist',],
 };

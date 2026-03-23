@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from '../components/icon/icon.jsx';
-import iconConfig from '../components/icon/icon_config.json';
+import iconConfig from '../components/icon/config.json';
 import { buildArgTypes } from './helper';
 
 const generatedArgTypes = buildArgTypes(iconConfig.props || {});

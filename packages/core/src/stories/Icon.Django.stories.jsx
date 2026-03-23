@@ -1,6 +1,6 @@
 import React from 'react';
 import { djangoComponent } from '../../../../apps/storybook/.storybook/djangoComponent.js';
-import iconConfig from '../components/icon/icon_config.json';
+import iconConfig from '../components/icon/config.json';
 import { buildArgTypes, componentTag } from './helper';
 
 const generatedArgTypes = buildArgTypes(iconConfig.props || {});

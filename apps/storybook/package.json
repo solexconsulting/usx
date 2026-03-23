@@ -5,5 +5,9 @@
   "scripts": {
     "dev": "storybook dev -p 6006 -h 0.0.0.0",
     "build": "storybook build"
+  },
+  "devDependencies": {
+    "@uswds/uswds": "^3.13.0",
+    "sass": "^1.98.0"
   }
 }

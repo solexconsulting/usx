@@ -1,0 +1,26 @@
+{
+    "name": "accordion",
+    "template": "accordion/accordion.django.html",
+    "props": {
+        "bordered": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether the accordion has borders."
+        },
+        "items": {
+            "type": "array",
+            "default": [],
+            "description": "An array of accordion items."
+        },
+        "multiselectable": {
+            "type": "boolean",
+            "default": false,
+            "description": "Whether multiple accordion items can be expanded at the same time."
+        },
+        "className": {
+            "type": "string",
+            "default": "",
+            "description": "Additional CSS classes to apply to the accordion."
+        }
+    }
+}

@@ -1,6 +1,7 @@
-import '@uswds/uswds/css/uswds.min.css';
-import '../../../packages/core/src/styles/core.scss';
-
+import "@uswds/uswds/css/uswds.min.css";
+import './styles.scss';
+// Import USWDS JS so interactive components (accordion, etc.) initialize in the preview
+import '../../../node_modules/@uswds/uswds/dist/js/uswds.min.js';
 
 const preview = {
   parameters: {

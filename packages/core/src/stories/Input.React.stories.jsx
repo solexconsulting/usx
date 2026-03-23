@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from '../index.js';
-import inputConfig from '../components/input/input_config.json';
+import inputConfig from '../components/input/config.json';
 import { buildArgTypes } from './helper';
 
 const generatedArgTypes = buildArgTypes(inputConfig.props || {});

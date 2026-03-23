@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert } from '../index.js';
-import alertConfig from '../components/alert/alert_config.json';
+import alertConfig from '../components/alert/config.json';
 import { buildArgTypes } from './helper';
 
 const generatedArgTypes = buildArgTypes(alertConfig.props || {});
