@@ -1,0 +1,11 @@
+{
+  "name": "side-nav",
+  "template": "side-nav/side-nav.django.html",
+  "default": {
+    "children": "SideNav default content"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

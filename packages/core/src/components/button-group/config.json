@@ -1,0 +1,11 @@
+{
+  "name": "button-group",
+  "template": "button-group/button-group.django.html",
+  "default": {
+    "children": "ButtonGroup default content"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

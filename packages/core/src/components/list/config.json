@@ -1,0 +1,11 @@
+{
+  "name": "list",
+  "template": "list/list.django.html",
+  "default": {
+    "children": "List default content"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

@@ -19,7 +19,7 @@ export default function Prose({
   const Element = normalizeContainerElement();
 
   if (content && children) {
-    console.warn('Prose component: Both "content" and "children" props are provided. "content" will take precedence over "children".');
+    // When both `content` and `children` are provided, `content` takes precedence.
   }
 
   return (

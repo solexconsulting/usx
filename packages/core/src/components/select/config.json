@@ -1,0 +1,11 @@
+{
+  "name": "select",
+  "template": "select/select.django.html",
+  "default": {
+    "children": "Select default content"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

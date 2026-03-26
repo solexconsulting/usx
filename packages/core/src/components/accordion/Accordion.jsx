@@ -30,19 +30,20 @@ function AccordionItem({
 
     return (
         <>
-            <Heading className={headingClasses}>
+            <Heading id={`${id}-heading`} className={headingClasses}>
                 <button
                     type="button"
                     className="usa-accordion__button"
                     aria-expanded={expanded}
-                    aria-controls={id}
+                    aria-controls={`${id}-content`}
                     data-testid={`accordionButton_${id}`}
                     onClickCapture={handleClick}>
                     {title}
                 </button>
             </Heading>
             <div
-                id={id}
+                id={`${id}-content`}
+                aria-labelledby={`${id}-heading`}
                 data-testid={`accordionItem_${id}`}
                 className={contentClasses}
                 hidden={!expanded}>
@@ -117,6 +118,7 @@ export function Accordion({
         <div
             className={accordionClasses}
             data-allow-multiple={multiselectable}
+            {...props}
         >
             {items.map((item) => (
                 <AccordionItem

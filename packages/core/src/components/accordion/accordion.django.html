@@ -1,0 +1,48 @@
+<div
+    class="usa-accordion usx-accordion {% if bordered %}usa-accordion--bordered{% endif %} {{ className }}"
+    {% if multiselectable %}
+    data-allow-multiple="true"
+    {% endif %}
+>
+{% for item in items %}
+    {% if headingLevel == 'h1' %}
+        <h1 id="{{ item.id }}-heading" class="usa-accordion__heading {{ className }}">
+    {% elif headingLevel == 'h2' %}
+        <h2 id="{{ item.id }}-heading" class="usa-accordion__heading {{ className }}">
+    {% elif headingLevel == 'h4' %}
+        <h4 id="{{ item.id }}-heading" class="usa-accordion__heading {{ className }}">
+    {% else %}
+        <h3 id="{{ item.id }}-heading" class="usa-accordion__heading {{ className }}">
+    {% endif %}
+        <button
+            class="usa-accordion__button"
+            aria-expanded="false"
+            aria-controls="{{ item.id }}-content"
+            id="{{ item.id }}-heading"
+            type="button"
+        >
+            {{ item.title }}
+        </button>
+    {% if headingLevel == 'h1' %}
+        </h1>
+    {% elif headingLevel == 'h2' %}
+        </h2>
+    {% elif headingLevel == 'h4' %}
+        </h4>
+    {% else %}
+        </h3>
+    {% endif %}
+
+    <div
+        id="{{ item.id }}-content"
+        class="usa-accordion__content"
+        aria-labelledby="{{ item.id }}-heading"
+        data-testid="accordionItem_{{ item.id }}"
+        hidden
+    >
+        {{ item.content }}
+    </div>
+
+{% endfor %}
+
+</div>

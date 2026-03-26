@@ -1,0 +1,11 @@
+{
+  "name": "banner",
+  "template": "banner/banner.django.html",
+  "default": {
+    "children": "Banner default content"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

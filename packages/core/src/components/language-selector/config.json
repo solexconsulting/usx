@@ -1,0 +1,11 @@
+{
+  "name": "language-selector",
+  "template": "language-selector/language-selector.django.html",
+  "default": {
+    "children": "LanguageSelector default content"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

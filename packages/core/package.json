@@ -8,7 +8,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "echo \"Core package build placeholder\""
+    "build": "echo \"Core package build placeholder\"",
+    "lint": "eslint --ext .js,.jsx src || true",
+    "lint:fix": "eslint --ext .js,.jsx src --fix || true"
   },
   "dependencies": {
     "classnames": "^2.5.1"

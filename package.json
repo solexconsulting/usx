@@ -12,7 +12,9 @@
     "storybook": "pnpm --filter @agency-ui-platform/storybook run dev",
     "storybook:build": "pnpm --filter @agency-ui-platform/storybook run build",
     "dev": "pnpm -r --parallel dev",
-    "lint": "pnpm -r lint",
+    "new-component": "node scripts/new-component.js",
+    "generate-exports": "node scripts/generate-exports.cjs",
+    "lint": "pnpm -w --filter @agency-ui-platform/core run lint",
     "test": "pnpm -r test",
     "tokens:build": "pnpm --filter @agency-ui-platform/tokens run build"
   },
@@ -27,6 +29,14 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sass": "^1.98.0",
-    "storybook": "8.6.18"
+    "storybook": "8.6.18",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.33.2",
+    "prettier": "^3.8.1"
+  }
+  ,
+  "dependencies": {
+    "ajv": "^8.12.0"
   }
 }

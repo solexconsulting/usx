@@ -1,0 +1,11 @@
+{
+  "name": "time-picker",
+  "template": "time-picker/time-picker.django.html",
+  "default": {
+    "children": "TimePicker default content"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

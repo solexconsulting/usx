@@ -1,0 +1,11 @@
+{
+  "name": "checkbox",
+  "template": "checkbox/checkbox.django.html",
+  "default": {
+    "children": "Checkbox default content"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}
