@@ -2,7 +2,7 @@
   "name": "summary-box",
   "template": "summary-box/summary-box.django.html",
   "default": {
-    "children": "SummaryBox default content"
+    "children": "NOT IMPLEMENTED: SummaryBox"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

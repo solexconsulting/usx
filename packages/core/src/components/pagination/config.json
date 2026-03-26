@@ -2,7 +2,7 @@
   "name": "pagination",
   "template": "pagination/pagination.django.html",
   "default": {
-    "children": "Pagination default content"
+    "children": "NOT IMPLEMENTED: Pagination"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

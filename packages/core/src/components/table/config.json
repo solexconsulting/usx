@@ -2,7 +2,7 @@
   "name": "table",
   "template": "table/table.django.html",
   "default": {
-    "children": "Table default content"
+    "children": "NOT IMPLEMENTED: Table"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

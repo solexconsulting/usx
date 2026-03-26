@@ -2,7 +2,7 @@
   "name": "search",
   "template": "search/search.django.html",
   "default": {
-    "children": "Search default content"
+    "children": "NOT IMPLEMENTED: Search"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

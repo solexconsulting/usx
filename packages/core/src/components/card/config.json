@@ -2,7 +2,7 @@
   "name": "card",
   "template": "card/card.django.html",
   "default": {
-    "children": "Card default content"
+    "children": "NOT IMPLEMENTED: Card"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

@@ -2,7 +2,7 @@
   "name": "footer",
   "template": "footer/footer.django.html",
   "default": {
-    "children": "Footer default content"
+    "children": "NOT IMPLEMENTED: Footer"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

@@ -2,7 +2,7 @@
   "name": "select",
   "template": "select/select.django.html",
   "default": {
-    "children": "Select default content"
+    "children": "NOT IMPLEMENTED: Select"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

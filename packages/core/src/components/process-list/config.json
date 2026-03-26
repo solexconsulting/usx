@@ -2,7 +2,7 @@
   "name": "process-list",
   "template": "process-list/process-list.django.html",
   "default": {
-    "children": "ProcessList default content"
+    "children": "NOT IMPLEMENTED: ProcessList"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

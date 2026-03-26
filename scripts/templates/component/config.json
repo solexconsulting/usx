@@ -2,7 +2,7 @@
   "name": "{{kebab}}",
   "template": "{{kebab}}/{{kebab}}.django.html",
   "default": {
-    "children": "{{Name}} default content"
+    "children": "NOT IMPLEMENTED: {{Name}}"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

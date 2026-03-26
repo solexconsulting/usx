@@ -2,7 +2,7 @@
   "name": "modal",
   "template": "modal/modal.django.html",
   "default": {
-    "children": "Modal default content"
+    "children": "NOT IMPLEMENTED: Modal"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

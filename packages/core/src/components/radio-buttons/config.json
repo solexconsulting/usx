@@ -2,7 +2,7 @@
   "name": "radio-buttons",
   "template": "radio-buttons/radio-buttons.django.html",
   "default": {
-    "children": "RadioButtons default content"
+    "children": "NOT IMPLEMENTED: RadioButtons"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

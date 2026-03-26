@@ -2,7 +2,7 @@
   "name": "file-input",
   "template": "file-input/file-input.django.html",
   "default": {
-    "children": "FileInput default content"
+    "children": "NOT IMPLEMENTED: FileInput"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

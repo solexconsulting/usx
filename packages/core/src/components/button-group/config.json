@@ -2,7 +2,7 @@
   "name": "button-group",
   "template": "button-group/button-group.django.html",
   "default": {
-    "children": "ButtonGroup default content"
+    "children": "NOT IMPLEMENTED: ButtonGroup"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

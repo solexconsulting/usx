@@ -2,7 +2,7 @@
   "name": "collection",
   "template": "collection/collection.django.html",
   "default": {
-    "children": "Collection default content"
+    "children": "NOT IMPLEMENTED: Collection"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

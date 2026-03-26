@@ -2,7 +2,7 @@
   "name": "memorable-date",
   "template": "memorable-date/memorable-date.django.html",
   "default": {
-    "children": "MemorableDate default content"
+    "children": "NOT IMPLEMENTED: MemorableDate"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

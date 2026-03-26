@@ -2,7 +2,7 @@
   "name": "range-slider",
   "template": "range-slider/range-slider.django.html",
   "default": {
-    "children": "RangeSlider default content"
+    "children": "NOT IMPLEMENTED: RangeSlider"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

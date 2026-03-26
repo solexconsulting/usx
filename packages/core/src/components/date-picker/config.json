@@ -2,7 +2,7 @@
   "name": "date-picker",
   "template": "date-picker/date-picker.django.html",
   "default": {
-    "children": "DatePicker default content"
+    "children": "NOT IMPLEMENTED: DatePicker"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

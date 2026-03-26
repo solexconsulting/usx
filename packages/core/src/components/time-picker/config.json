@@ -2,7 +2,7 @@
   "name": "time-picker",
   "template": "time-picker/time-picker.django.html",
   "default": {
-    "children": "TimePicker default content"
+    "children": "NOT IMPLEMENTED: TimePicker"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

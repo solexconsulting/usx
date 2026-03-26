@@ -1,0 +1,11 @@
+{
+  "name": "indicator",
+  "template": "indicator/indicator.django.html",
+  "default": {
+    "children": "NOT IMPLEMENTED: Indicator"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

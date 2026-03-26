@@ -1,5 +1,5 @@
 import React from 'react';
-import {{Name}} from './components/{{Name}}';
+import {{Name}} from './{{Name}}';
 import config from './config.json';
 
 export default {

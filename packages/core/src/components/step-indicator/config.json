@@ -2,7 +2,7 @@
   "name": "step-indicator",
   "template": "step-indicator/step-indicator.django.html",
   "default": {
-    "children": "StepIndicator default content"
+    "children": "NOT IMPLEMENTED: StepIndicator"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

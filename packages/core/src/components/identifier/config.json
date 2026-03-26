@@ -2,7 +2,7 @@
   "name": "identifier",
   "template": "identifier/identifier.django.html",
   "default": {
-    "children": "Identifier default content"
+    "children": "NOT IMPLEMENTED: Identifier"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

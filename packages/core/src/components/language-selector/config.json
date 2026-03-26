@@ -2,7 +2,7 @@
   "name": "language-selector",
   "template": "language-selector/language-selector.django.html",
   "default": {
-    "children": "LanguageSelector default content"
+    "children": "NOT IMPLEMENTED: LanguageSelector"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

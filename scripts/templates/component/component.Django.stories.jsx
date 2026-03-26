@@ -6,7 +6,7 @@ import { buildArgTypes, componentTag } from '../../../helper';
 const generatedArgTypes = buildArgTypes(config.props || {});
 
 export default {
-  title: `Django/{{Name}}`,
+  title: 'Django/{{Name}}',
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
 };

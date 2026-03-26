@@ -2,7 +2,7 @@
   "name": "list",
   "template": "list/list.django.html",
   "default": {
-    "children": "List default content"
+    "children": "NOT IMPLEMENTED: List"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

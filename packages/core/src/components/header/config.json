@@ -2,7 +2,7 @@
   "name": "header",
   "template": "header/header.django.html",
   "default": {
-    "children": "Header default content"
+    "children": "NOT IMPLEMENTED: Header"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

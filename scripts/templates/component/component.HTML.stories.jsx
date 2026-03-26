@@ -2,7 +2,7 @@ import React from 'react';
 import html from './{{kebab}}.html?raw';
 
 export default {
-  title: `HTML/{{Name}}`,
+  title: 'HTML/{{Name}}',
   tags: ['autodocs'],
 };
 

@@ -2,7 +2,7 @@
   "name": "checkbox",
   "template": "checkbox/checkbox.django.html",
   "default": {
-    "children": "Checkbox default content"
+    "children": "NOT IMPLEMENTED: Checkbox"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

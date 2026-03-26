@@ -2,7 +2,7 @@
   "name": "in-page-nav",
   "template": "in-page-nav/in-page-nav.django.html",
   "default": {
-    "children": "InPageNav default content"
+    "children": "NOT IMPLEMENTED: InPageNav"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

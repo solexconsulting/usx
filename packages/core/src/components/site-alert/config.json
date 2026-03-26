@@ -2,7 +2,7 @@
   "name": "site-alert",
   "template": "site-alert/site-alert.django.html",
   "default": {
-    "children": "SiteAlert default content"
+    "children": "NOT IMPLEMENTED: SiteAlert"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

@@ -8,7 +8,6 @@ custom context preparation based on props.
 
 import os
 import json
-from django.conf import settings
 
 
 class Component:
@@ -30,12 +29,17 @@ class Component:
         """
         Load props from the props_file if specified.
         """
+        # Import Django settings lazily to avoid requiring Django at module import time
+        try:
+            from django.conf import settings
+        except Exception:
+            settings = None
 
         if not self.props_file:
             raise RuntimeError(f"Component '{self.name or self.__class__.__name__}' must set 'props_file'.")
 
         # collect template dirs from settings, preserving order
-        tpl_settings = getattr(settings, 'TEMPLATES', [])
+        tpl_settings = getattr(settings, 'TEMPLATES', []) if settings is not None else []
         dirs = []
         if tpl_settings and isinstance(tpl_settings, (list, tuple)):
             for engine in tpl_settings:
@@ -44,7 +48,7 @@ class Component:
                     dirs.extend([str(d) for d in engine_dirs])
 
         # fallback to BASE_DIR
-        base_dir = getattr(settings, 'BASE_DIR', None)
+        base_dir = getattr(settings, 'BASE_DIR', None) if settings is not None else None
         if base_dir:
             dirs.append(str(base_dir))
 

@@ -2,7 +2,7 @@
   "name": "tooltip",
   "template": "tooltip/tooltip.django.html",
   "default": {
-    "children": "Tooltip default content"
+    "children": "NOT IMPLEMENTED: Tooltip"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

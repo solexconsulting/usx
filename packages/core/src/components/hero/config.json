@@ -2,7 +2,7 @@
   "name": "hero",
   "template": "hero/hero.django.html",
   "default": {
-    "children": "Hero default content"
+    "children": "NOT IMPLEMENTED: Hero"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

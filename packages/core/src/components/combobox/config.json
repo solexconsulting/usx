@@ -2,7 +2,7 @@
   "name": "combobox",
   "template": "combobox/combobox.django.html",
   "default": {
-    "children": "Combobox default content"
+    "children": "NOT IMPLEMENTED: Combobox"
   },
   "props": {
     "children": { "type": "string", "description": "Inner HTML or text" },

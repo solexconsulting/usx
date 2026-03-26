@@ -116,3 +116,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# USX integration defaults
+# - `USX_COMPONENT_PATHS` lists filesystem paths to search for Python
+#   component files or template-only components. Paths may be strings or
+#   pathlib-like objects; the registry code will cast to strings.
+USX_COMPONENT_PATHS = [
+    # include the local project components dir and the monorepo core components
+    # E.g. BASE_DIR / 'project' / 'components',
+    BASE_DIR / '..' / '..' / 'packages' / 'core' / 'src' / 'components',
+]
