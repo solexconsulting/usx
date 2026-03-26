@@ -1,6 +1,6 @@
 import React from 'react';
 import './button.scss';
-import Icon from '../icon/icon';
+import Icon from '../icon/Icon';
 
 export default function Button({
   label = 'Button',

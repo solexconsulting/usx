@@ -1,13 +1,13 @@
 import React from 'react';
-import Component from './Accordion.jsx';
-import config from '../config.json';
-import { buildArgTypes } from '../stories/helper.jsx';
+import { Accordion } from './Accordion.jsx';
+import config from './config.json';
+import { buildArgTypes } from '../../../helper';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
 export default {
     title: 'React/Accordion',
-    component: Component,
+    component: Accordion,
     tags: ['autodocs'],
     argTypes: generatedArgTypes,
 };

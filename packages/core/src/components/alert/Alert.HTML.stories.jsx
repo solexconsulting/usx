@@ -1,5 +1,5 @@
 import React from 'react';
-import alertHtml from '../components/alert/alert.html?raw';
+import alertHtml from './alert.html?raw';
 
 export default {
   title: 'HTML/Alert',

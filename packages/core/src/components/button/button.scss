@@ -1,4 +1,5 @@
 @use '../../../../tokens/src/tokens.scss' as *;
+@use "sass:color";
 
 /* Base: compile-time conditional properties only when tokens are set */
 .usx-button {
@@ -44,26 +45,26 @@
 
 	.#{$class-name}:not(:disabled):not([aria-disabled="true"]) {
 		@if $bg != null {
-			background-color: darken($bg, 30%);
+			background-color: color.adjust($bg, $lightness: -30%);
 		}
 		@if $color-light-text != null {
 			color: $color-light-text;
 		}
 		@if $border != null {
-			border-color: darken($border, 30%);
+			border-color: color.adjust($border, $lightness: -30%);
 		}
 
 		/* hover state */
 		&.usx-button--hover, &:hover {
 			@if $hover != null {
-				background-color: darken($hover, 20%);
+				background-color: color.adjust($hover, $lightness: -20%);
 			}
 		}
 
 		/* active state */
 		&.usx-button--active, &:active {
 			@if $active != null {
-				background-color: darken($active, 20%);
+				background-color: color.adjust($active, $lightness: -20%);
 			}
 		}
 	}

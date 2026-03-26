@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../components/accordion/accordion.html?raw';
+import html from './accordion.html?raw';
 
 export default {
   title: 'HTML/Accordion',

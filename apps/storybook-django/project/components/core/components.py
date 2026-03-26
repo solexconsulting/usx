@@ -42,3 +42,10 @@ class Accordion(Component):
     name = 'accordion'
     template = 'accordion/accordion.django.html'
     props_file = 'accordion/config.json'
+
+
+@register
+class MyWidget(Component):
+    name = 'my-widget'
+    template = 'my-widget/my-widget.django.html'
+    props_file = 'my-widget/config.json'

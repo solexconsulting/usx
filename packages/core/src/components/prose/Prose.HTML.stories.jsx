@@ -1,5 +1,5 @@
 import React from 'react';
-import proseHtml from '../components/prose/prose.html?raw';
+import proseHtml from './prose.html?raw';
 
 export default {
   title: 'HTML/Prose',

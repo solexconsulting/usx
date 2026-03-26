@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Color tokens
 $color-primary: #2563eb !default;
 $color-primary-hover: #5f85ec !default;
@@ -21,7 +23,7 @@ $color-error: #d83933 !default;
 $color-emergency: #b51d09 !default;
 $color-background: #f8fafc !default;
 $color-surface: #ffffff !default;
-$color-dark-bg: darken($color-primary, 50%) !default;
+$color-dark-bg: color.adjust($color-primary, $lightness: -50%) !default;
 
 // Text color tokens
 $color-text: #0f172a !default;

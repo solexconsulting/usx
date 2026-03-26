@@ -1,9 +1,9 @@
 import React from 'react';
-import {{Name}} from '../components/{{kebab}}';
-import config from '../components/{{kebab}}/config.json';
+import {{Name}} from './components/{{Name}}';
+import config from './config.json';
 
 export default {
-  title: 'Components/{{Name}}',
+  title: 'React/{{Name}}',
   component: {{Name}},
 };
 

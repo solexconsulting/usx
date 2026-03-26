@@ -1,7 +1,7 @@
 import React from 'react';
-import { djangoComponent } from '../../../../apps/storybook/.storybook/djangoComponent.js';
-import alertConfig from '../components/alert/config.json';
-import { buildArgTypes, componentTag } from './helper';
+import { djangoComponent } from '../../../djangoComponent.js';
+import alertConfig from './config.json';
+import { buildArgTypes, componentTag } from '../../../helper';
 
 const generatedArgTypes = buildArgTypes(alertConfig.props || {});
 

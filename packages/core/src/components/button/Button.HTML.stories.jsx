@@ -1,5 +1,5 @@
 import React from 'react';
-import buttonHtml from '../components/button/button.html?raw';
+import buttonHtml from './button.html?raw';
 
 export default {
   title: 'HTML/Button',

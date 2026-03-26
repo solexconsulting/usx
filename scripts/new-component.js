@@ -59,12 +59,12 @@ files.forEach((file) => {
 });
 
 // If an index.js wasn't part of templates, ensure there's a re-export index.js
-const indexPath = path.join(targetDir, 'index.js');
-if (!fs.existsSync(indexPath)) {
-  const reexport = `export { default } from './${Name}.jsx';\n`;
-  fs.writeFileSync(indexPath, reexport, 'utf8');
-  console.log('Created', indexPath);
-}
+//const indexPath = path.join(targetDir, 'index.js');
+//if (!fs.existsSync(indexPath)) {
+//  const reexport = `export { default } from './${Name}.jsx';\n`;
+//  fs.writeFileSync(indexPath, reexport, 'utf8');
+//  console.log('Created', indexPath);
+//}
 
 // Validate generated config.json against schema using AJV if available
 const generatedConfigPath = path.join(targetDir, 'config.json');
@@ -109,29 +109,22 @@ if (fs.existsSync(generatedConfigPath)) {
   console.warn('No config.json generated to validate');
 }
 
-// Add auto-export to packages/core/src/index.js
-const coreIndex = path.join(repoRoot, 'packages', 'core', 'src', 'index.js');
+// Regenerate core exports using the repo's export generator if available
 try {
-  if (fs.existsSync(coreIndex)) {
-    let idx = fs.readFileSync(coreIndex, 'utf8');
-    const exportLine = `export { default as ${Name} } from './components/${kebab}';`;
-    if (!idx.includes(exportLine)) {
-      idx = idx.trim() + '\n' + exportLine + '\n';
-      fs.writeFileSync(coreIndex, idx, 'utf8');
-      console.log('Updated', coreIndex, 'with new export');
-    } else {
-      console.log(`${Name} already exported from core index`);
-    }
+  const gen = path.join(repoRoot, 'scripts', 'generate-exports.cjs');
+  if (fs.existsSync(gen)) {
+    const { execSync } = require('child_process');
+    execSync(`node ${gen}`, { stdio: 'inherit' });
+    console.log('Regenerated core exports using scripts/generate-exports.cjs');
   } else {
-    console.warn('packages/core/src/index.js not found; skipping auto-export');
+    // fallback: warn so maintainers can run their export generator
+    console.warn('generate-exports.cjs not found; please run your export generation workflow to update packages/core/src/index.js');
   }
 } catch (e) {
-  console.error('Failed to update core index exports:', e.message);
+  console.warn('Failed to regenerate core exports automatically:', e.message);
 }
 
-// Create story files in packages/core/src/stories using templates
-const storiesDir = path.join(repoRoot, 'packages', 'core', 'src', 'stories');
-if (!fs.existsSync(storiesDir)) fs.mkdirSync(storiesDir, { recursive: true });
+// Create colocated story files in the component folder using templates
 const templateFiles = fs.readdirSync(templatesDir).filter((f) => f.endsWith('.stories.jsx'));
 if (templateFiles.length === 0) {
   console.warn('No story templates found in', templatesDir);
@@ -141,7 +134,11 @@ if (templateFiles.length === 0) {
     let contents = fs.readFileSync(src, 'utf8');
     contents = contents.replace(/{{Name}}/g, Name).replace(/{{kebab}}/g, kebab);
     const destFile = file.replace('component', Name);
-    const dest = path.join(storiesDir, destFile);
+    const dest = path.join(targetDir, destFile);
+    if (fs.existsSync(dest)) {
+      console.log('Skipping existing story', dest);
+      return;
+    }
     fs.writeFileSync(dest, contents, 'utf8');
     console.log('Created', dest);
   });

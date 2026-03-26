@@ -1,5 +1,5 @@
 import React from 'react';
-import iconHtml from '../components/icon/icon.html?raw';
+import iconHtml from './icon.html?raw';
 
 export default {
   title: 'HTML/Icon',

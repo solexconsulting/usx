@@ -1,3 +1,4 @@
+@use "sass:color";
 @use '../../../../tokens/src/tokens.scss' as *;
 
 
@@ -35,7 +36,7 @@
 		.#{$class-name},
 		.#{$class-name} .usx-alert__body {
 			@if $bg !=null {
-				background-color: darken($bg, 30%);
+				background-color: color.adjust($bg, $lightness: -30%);
 				::before {
 					background-color: $color-light-text;
 				}
@@ -52,7 +53,7 @@
 			}
 
 			@if $border !=null {
-				border-color: darken($border, 30%);
+				border-color: color.adjust($border, $lightness: -30%);
 			}
 		}
 	}

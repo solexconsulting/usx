@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../components/{{kebab}}/{{kebab}}.html?raw';
+import html from './{{kebab}}.html?raw';
 
 export default {
   title: `HTML/{{Name}}`,

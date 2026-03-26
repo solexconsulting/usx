@@ -1,7 +1,7 @@
 import React from 'react';
-import { djangoComponent } from '../../../../apps/storybook/.storybook/djangoComponent.js';
-import proseConfig from '../components/prose/config.json';
-import { buildArgTypes, componentTag } from './helper';
+import { djangoComponent } from '../../../djangoComponent.js';
+import proseConfig from './config.json';
+import { buildArgTypes, componentTag } from '../../../helper';
 
 const generatedArgTypes = buildArgTypes(proseConfig.props || {});
 
