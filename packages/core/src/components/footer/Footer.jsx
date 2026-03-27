@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './footer.scss';
 
 export default function Footer({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Footer({ children = null, className = '', ...props }) {
     </div>
   );
 }
+
+Footer.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

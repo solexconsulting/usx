@@ -59,7 +59,7 @@ export default function Button({
 Button.propTypes = {
   label: PropTypes.string,
   variant: PropTypes.oneOf(['primary', 'secondary', 'accent-cool', 'accent-warm', 'base', 'outline', 'unstyled']),
-  type: PropTypes.string,
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   href: PropTypes.string,
@@ -67,14 +67,16 @@ Button.propTypes = {
   big: PropTypes.bool,
   inverse: PropTypes.bool,
   leftIcon: PropTypes.shape({
-    name: PropTypes.string,
-    size: PropTypes.string,
+    name: PropTypes.string.isRequired,
     color: PropTypes.string,
+    size: PropTypes.string,
   }),
   rightIcon: PropTypes.shape({
-    name: PropTypes.string,
-    size: PropTypes.string,
+    name: PropTypes.string.isRequired,
     color: PropTypes.string,
+    size: PropTypes.string,
+    staticUrlPrefix: PropTypes.string,
   }),
   className: PropTypes.string,
+  style: PropTypes.object,
 };

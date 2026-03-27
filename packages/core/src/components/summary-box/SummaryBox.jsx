@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './summary-box.scss';
 
 export default function SummaryBox({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function SummaryBox({ children = null, className = '', ...props }
     </div>
   );
 }
+
+SummaryBox.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

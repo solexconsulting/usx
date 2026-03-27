@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './date-picker.scss';
 
 export default function DatePicker({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function DatePicker({ children = null, className = '', ...props }
     </div>
   );
 }
+
+DatePicker.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

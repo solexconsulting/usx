@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './modal.scss';
 
 export default function Modal({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Modal({ children = null, className = '', ...props }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

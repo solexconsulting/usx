@@ -1,31 +1,24 @@
 """
 Template tags for components.
 
-This module provides the 'component' template tag, which allows rendering components
-in Django templates.
+This module provides dynamically registered template tags for all discovered components.
 """
 
 from django import template
 from django.utils.safestring import mark_safe
 from ..core.render import render_component
+from ..core.registry import get_all_components
 
 register = template.Library()
 
-@register.simple_tag
-def component(component_name, **props):
-    """
-    Template tag to render a component.
+# Dynamically register tags for all discovered components
+components = get_all_components()
+for comp_name in components:
+    def create_tag(comp_name):
+        def tag(**props):
+            return mark_safe(render_component(comp_name, props))
+        return tag
 
-    Usage:
-        {% component "usx/button" label="Save" variant="secondary" %}
-
-    Args:
-        component_name (str): The name of the component.
-        **props: The props to pass to the component.
-
-    Returns:
-        str: The rendered HTML, marked as safe.
-    """
-    # render component and mark safe for inclusion in templates
-    html = render_component(component_name, props)
-    return mark_safe(html)
+    tag_func = create_tag(comp_name)
+    tag_name = comp_name.replace('-', '_')
+    register.simple_tag(tag_func, name=tag_name)

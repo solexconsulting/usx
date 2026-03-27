@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Input({
   label = 'Label',
@@ -110,3 +111,19 @@ export default function Input({
 
   return getFormGroupWrapper(content);
 }
+
+Input.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.string,
+  placeholder: PropTypes.string,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  success: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  disabled: PropTypes.bool,
+  characterCount: PropTypes.shape({
+    max: PropTypes.number.isRequired,
+    message: PropTypes.string.isRequired,
+  }),
+  hint: PropTypes.string,
+  textArea: PropTypes.bool,
+  className: PropTypes.string,
+};

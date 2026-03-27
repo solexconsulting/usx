@@ -15,7 +15,7 @@
     "new-component": "node scripts/new-component.js",
     "generate-exports": "node scripts/generate-exports.cjs",
     "validate:configs": "node scripts/validate-configs.js",
-    "lint": "eslint '**/*.{js,jsx}' --ignore-pattern '**/node_modules/**' --ignore-pattern '**/venv/**' && stylelint '**/*.{css,scss}' --ignore-path .gitignore",
+    "lint": "eslint '**/*.{js,jsx}' --ignore-pattern '**/node_modules/**' --ignore-pattern '**/venv/**' --ignore-pattern '**/storybook-static/**' && stylelint '**/*.{css,scss}' --ignore-path .gitignore --ignore-pattern '**/venv/**'",
     "format": "prettier --write .",
     "test": "pnpm -r test",
     "tokens:build": "pnpm --filter @agency-ui-platform/tokens run build"

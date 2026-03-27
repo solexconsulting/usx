@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './time-picker.scss';
 
 export default function TimePicker({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function TimePicker({ children = null, className = '', ...props }
     </div>
   );
 }
+
+TimePicker.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

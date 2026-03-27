@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './indicator.scss';
 
 export default function Indicator({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Indicator({ children = null, className = '', ...props })
     </div>
   );
 }
+
+Indicator.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

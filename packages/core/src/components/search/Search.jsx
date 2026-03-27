@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './search.scss';
 
 export default function Search({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Search({ children = null, className = '', ...props }) {
     </div>
   );
 }
+
+Search.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

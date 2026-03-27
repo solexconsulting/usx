@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "build": "echo \"Core package build placeholder\"",
-    "lint": "eslint --ext .js,.jsx src || true",
-    "lint:fix": "eslint --ext .js,.jsx src --fix || true"
+    "lint": "eslint --ext .js,.jsx src --ignore-pattern '**/*.stories.jsx' || true",
+    "lint:fix": "eslint --ext .js,.jsx src --ignore-pattern '**/*.stories.jsx' --fix || true"
   },
   "dependencies": {
     "classnames": "^2.5.1",

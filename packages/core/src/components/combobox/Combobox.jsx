@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './combobox.scss';
 
 export default function Combobox({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Combobox({ children = null, className = '', ...props }) 
     </div>
   );
 }
+
+Combobox.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

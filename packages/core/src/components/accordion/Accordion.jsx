@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames'
 
 function AccordionItem({
@@ -71,6 +72,26 @@ function buildExpansions(
         return map
     }, new Map())
 }
+
+AccordionItem.propTypes = {
+    title: PropTypes.node.isRequired,
+    id: PropTypes.string.isRequired,
+    content: PropTypes.node.isRequired,
+    expanded: PropTypes.bool,
+    className: PropTypes.string,
+    headingLevel: PropTypes.string,
+    handleToggle: PropTypes.func,
+}
+
+Accordion.propTypes = {
+    bordered: PropTypes.bool,
+    items: PropTypes.arrayOf(
+        AccordionItem.propTypes
+    ),
+    multiselectable: PropTypes.bool,
+    headingLevel: PropTypes.string,
+    className: PropTypes.string,
+};
 
 export function Accordion({
     bordered = false,

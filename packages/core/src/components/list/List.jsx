@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './list.scss';
 
 export default function List({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function List({ children = null, className = '', ...props }) {
     </div>
   );
 }
+
+List.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

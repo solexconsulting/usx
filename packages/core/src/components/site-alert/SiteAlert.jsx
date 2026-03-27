@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './site-alert.scss';
 
 export default function SiteAlert({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function SiteAlert({ children = null, className = '', ...props })
     </div>
   );
 }
+
+SiteAlert.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

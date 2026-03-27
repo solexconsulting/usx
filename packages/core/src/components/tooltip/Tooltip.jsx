@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './tooltip.scss';
 
 export default function Tooltip({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Tooltip({ children = null, className = '', ...props }) {
     </div>
   );
 }
+
+Tooltip.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

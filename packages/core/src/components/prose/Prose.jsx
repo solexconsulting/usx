@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Prose component for displaying rich text content.
@@ -27,4 +28,11 @@ export default function Prose({
       {children ? children : null}
     </Element>
   );
+};
+
+Prose.propTypes = {
+  content: PropTypes.string,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  containerElement: PropTypes.oneOf(['div', 'article', 'section', 'main']),
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './process-list.scss';
 
 export default function ProcessList({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function ProcessList({ children = null, className = '', ...props 
     </div>
   );
 }
+
+ProcessList.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

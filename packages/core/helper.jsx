@@ -7,7 +7,7 @@ export const componentTag = ({ name, props }) => {
     const propsString = Object.entries(props)
         .map(([key, value]) => ` ${key}="${value}"`)
         .join('');
-    return `{% component "${name}"${propsString} %}`;
+    return `{% ${name} ${propsString} %}`;
 }
 
 export const buildArgTypes = (props = {}) => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './pagination.scss';
 
 export default function Pagination({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Pagination({ children = null, className = '', ...props }
     </div>
   );
 }
+
+Pagination.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

@@ -15,4 +15,4 @@ __pycache__/
 *.pyc
 
 # Storybook
-.storybook-static/
+storybook-static/

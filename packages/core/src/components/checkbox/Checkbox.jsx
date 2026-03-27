@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './checkbox.scss';
 
 export default function Checkbox({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Checkbox({ children = null, className = '', ...props }) 
     </div>
   );
 }
+
+Checkbox.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

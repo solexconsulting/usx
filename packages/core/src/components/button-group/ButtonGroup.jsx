@@ -1,17 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
+import Button from '../button/Button';
 import './button-group.scss';
 
-export default function ButtonGroup({ children = null, className = '', ...props }) {
-  const classes = ['usx-button-group', className].filter(Boolean).join(' ');
+export default function ButtonGroup({
+  items = [],
+  segmented = false,
+  className = '',
+  ...props
+}) {
+  const classes = ClassNames(
+    'usa-button-group usx-button-group',
+    segmented && 'usa-button-group--segmented',
+    className
+  );
   return (
-    <div className={classes} {...props}>
-      {children || 'ButtonGroup'}
-    </div>
+    <ul className={classes} {...props}>
+      {items.map((item, index) => (
+        <li key={index} className="usa-button-group__item">
+          <Button {...item} />
+        </li>
+      ))}
+    </ul>
   );
 }
 
 ButtonGroup.propTypes = {
-  children: PropTypes.node,
+  items: PropTypes.arrayOf(PropTypes.node),
+  segmented: PropTypes.bool,
   className: PropTypes.string,
 };

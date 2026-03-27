@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './hero.scss';
 
 export default function Hero({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Hero({ children = null, className = '', ...props }) {
     </div>
   );
 }
+
+Hero.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

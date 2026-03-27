@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './in-page-nav.scss';
 
 export default function InPageNav({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function InPageNav({ children = null, className = '', ...props })
     </div>
   );
 }
+
+InPageNav.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

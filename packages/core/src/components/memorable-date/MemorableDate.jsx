@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './memorable-date.scss';
 
 export default function MemorableDate({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function MemorableDate({ children = null, className = '', ...prop
     </div>
   );
 }
+
+MemorableDate.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

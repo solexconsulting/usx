@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './step-indicator.scss';
 
 export default function StepIndicator({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function StepIndicator({ children = null, className = '', ...prop
     </div>
   );
 }
+
+StepIndicator.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

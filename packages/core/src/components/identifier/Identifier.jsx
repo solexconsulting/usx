@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './identifier.scss';
 
 export default function Identifier({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Identifier({ children = null, className = '', ...props }
     </div>
   );
 }
+
+Identifier.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

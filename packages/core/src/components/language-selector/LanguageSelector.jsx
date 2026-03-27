@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './language-selector.scss';
 
 export default function LanguageSelector({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function LanguageSelector({ children = null, className = '', ...p
     </div>
   );
 }
+
+LanguageSelector.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};
