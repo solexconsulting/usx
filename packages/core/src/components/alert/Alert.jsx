@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Alert({
   heading = 'Informative status',
@@ -41,3 +42,14 @@ export default function Alert({
     </div>
   );
 }
+
+Alert.propTypes = {
+  heading: PropTypes.string,
+  text: PropTypes.string,
+  children: PropTypes.node,
+  variant: PropTypes.oneOf(['info', 'warning', 'success', 'error', 'emergency']),
+  slim: PropTypes.bool,
+  noIcon: PropTypes.bool,
+  className: PropTypes.string,
+  role: PropTypes.string,
+};

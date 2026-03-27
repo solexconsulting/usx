@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './button.scss';
 import Icon from '../icon/Icon';
 
@@ -18,19 +19,19 @@ export default function Button({
   ...props
 }) {
   const variantClasses = {
-    primary: 'usa-button--primary usx-button--primary',
-    secondary: 'usa-button--secondary usx-button--secondary',
-    'accent-cool': 'usa-button--accent-cool usx-button--accent-cool',
-    'accent-warm': 'usa-button--accent-warm usx-button--accent-warm',
-    base: 'usa-button--base usx-button--base',
-    outline: 'usa-button--outline usx-button--outline',
-    unstyled: 'usa-button--unstyled usx-button--unstyled',
+    primary: 'usa-button--primary',
+    secondary: 'usa-button--secondary',
+    'accent-cool': 'usa-button--accent-cool',
+    'accent-warm': 'usa-button--accent-warm',
+    base: 'usa-button--base',
+    outline: 'usa-button--outline',
+    unstyled: 'usa-button--unstyled',
   };
 
   const variantClass = variantClasses[variant] || variantClasses['primary'];
   const modifierClasses = [
-    big && 'usa-button--big usx-button--big',
-    inverse && 'usa-button--inverse usx-button--inverse',
+    big && 'usa-button--big',
+    inverse && 'usa-button--inverse',
   ].filter(Boolean).join(' ');
 
   const classes = ['usa-button usx-button', variantClass, modifierClasses, className].filter(Boolean).join(' ');
@@ -54,3 +55,26 @@ export default function Button({
     </Element>
   );
 }
+
+Button.propTypes = {
+  label: PropTypes.string,
+  variant: PropTypes.oneOf(['primary', 'secondary', 'accent-cool', 'accent-warm', 'base', 'outline', 'unstyled']),
+  type: PropTypes.string,
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
+  href: PropTypes.string,
+  isExternal: PropTypes.bool,
+  big: PropTypes.bool,
+  inverse: PropTypes.bool,
+  leftIcon: PropTypes.shape({
+    name: PropTypes.string,
+    size: PropTypes.string,
+    color: PropTypes.string,
+  }),
+  rightIcon: PropTypes.shape({
+    name: PropTypes.string,
+    size: PropTypes.string,
+    color: PropTypes.string,
+  }),
+  className: PropTypes.string,
+};

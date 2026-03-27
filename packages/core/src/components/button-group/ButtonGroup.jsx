@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './button-group.scss';
 
 export default function ButtonGroup({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function ButtonGroup({ children = null, className = '', ...props 
     </div>
   );
 }
+
+ButtonGroup.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

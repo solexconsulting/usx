@@ -26,48 +26,48 @@ export const AllVariants = {
     <>
       <h3>Primary</h3>
       <Button label="Default" variant="primary" />{" "}
-      <Button label="Hover" variant="primary" className="usa-button--hover usx-button--hover" />{" "}
-      <Button label="Active" variant="primary" className="usa-button--active usx-button--active" />{" "}
+      <Button label="Hover" variant="primary" className="usa-button--hover" />{" "}
+      <Button label="Active" variant="primary" className="usa-button--active" />{" "}
       <Button label="Focus" variant="primary" className="usa-focus" />{" "}
       <Button label="Disabled" variant="primary" disabled />{" "}
       <Button label="aria-disabled" variant="primary" aria-disabled="true" />{" "}
       <Button label="Unstyled button" variant="unstyled" />
       <h3>Secondary</h3>
       <Button label="Default" variant="secondary" />{" "}
-      <Button label="Hover" variant="secondary" className="usa-button--hover usx-button--hover" />{" "}
-      <Button label="Active" variant="secondary" className="usa-button--active usx-button--active" />{" "}
+      <Button label="Hover" variant="secondary" className="usa-button--hover" />{" "}
+      <Button label="Active" variant="secondary" className="usa-button--active" />{" "}
       <Button label="Focus" variant="secondary" className="usa-focus" />{" "}
       <Button label="Disabled" variant="secondary" disabled />{" "}
       <Button label="aria-disabled" variant="secondary" aria-disabled="true" />{" "}
       <Button label="Unstyled button" variant="unstyled" />
       <h3>Accent Cool</h3>
       <Button label="Default" variant="accent-cool" />{" "}
-      <Button label="Hover" variant="accent-cool" className="usa-button--hover usx-button--hover" />{" "}
-      <Button label="Active" variant="accent-cool" className="usa-button--active usx-button--active" />{" "}
+      <Button label="Hover" variant="accent-cool" className="usa-button--hover" />{" "}
+      <Button label="Active" variant="accent-cool" className="usa-button--active" />{" "}
       <Button label="Focus" variant="accent-cool" className="usa-focus" />{" "}
       <Button label="Disabled" variant="accent-cool" disabled />{" "}
       <Button label="aria-disabled" variant="accent-cool" aria-disabled="true" />{" "}
       <Button label="Unstyled button" variant="unstyled" />
       <h3>Accent Warm</h3>
       <Button label="Default" variant="accent-warm" />{" "}
-      <Button label="Hover" variant="accent-warm" className="usa-button--hover usx-button--hover" />{" "}
-      <Button label="Active" variant="accent-warm" className="usa-button--active usx-button--active" />{" "}
+      <Button label="Hover" variant="accent-warm" className="usa-button--hover" />{" "}
+      <Button label="Active" variant="accent-warm" className="usa-button--active" />{" "}
       <Button label="Focus" variant="accent-warm" className="usa-focus" />{" "}
       <Button label="Disabled" variant="accent-warm" disabled />{" "}
       <Button label="aria-disabled" variant="accent-warm" aria-disabled="true" />{" "}
       <Button label="Unstyled button" variant="unstyled" />
       <h3>Base</h3>
       <Button label="Default" variant="base" />{" "}
-      <Button label="Hover" variant="base" className="usa-button--hover usx-button--hover" />{" "}
-      <Button label="Active" variant="base" className="usa-button--active usx-button--active" />{" "}
+      <Button label="Hover" variant="base" className="usa-button--hover" />{" "}
+      <Button label="Active" variant="base" className="usa-button--active" />{" "}
       <Button label="Focus" variant="base" className="usa-focus" />{" "}
       <Button label="Disabled" variant="base" disabled />{" "}
       <Button label="aria-disabled" variant="base" aria-disabled="true" />{" "}
       <Button label="Unstyled button" variant="unstyled" />
       <h3>Outline</h3>
       <Button label="Default" variant="outline" />{" "}
-      <Button label="Hover" variant="outline" className="usa-button--hover usx-button--hover" />{" "}
-      <Button label="Active" variant="outline" className="usa-button--active usx-button--active" />{" "}
+      <Button label="Hover" variant="outline" className="usa-button--hover" />{" "}
+      <Button label="Active" variant="outline" className="usa-button--active" />{" "}
       <Button label="Focus" variant="outline" className="usa-focus" />{" "}
       <Button label="Disabled" variant="outline" disabled />{" "}
       <Button label="aria-disabled" variant="outline" aria-disabled="true" />{" "}
@@ -75,8 +75,8 @@ export const AllVariants = {
       <h3>Outline Inverse</h3>
       <div style={{ backgroundColor: '#0f172a', padding: '1rem', marginLeft: '-1rem', width: 'fit-content' }}>
         <Button label="Default" variant="outline" inverse />{" "}
-        <Button label="Hover" variant="outline" inverse className="usa-button--hover usx-button--hover" />{" "}
-        <Button label="Active" variant="outline" inverse className="usa-button--active usx-button--active" />{" "}
+        <Button label="Hover" variant="outline" inverse className="usa-button--hover" />{" "}
+        <Button label="Active" variant="outline" inverse className="usa-button--active" />{" "}
         <Button label="Focus" variant="outline" inverse className="usa-focus" />{" "}
         <Button label="Disabled" variant="outline" inverse disabled />{" "}
         <Button label="aria-disabled" variant="outline" inverse aria-disabled="true" />{" "}
@@ -84,7 +84,7 @@ export const AllVariants = {
       </div>
       <h3>Big</h3>
       <Button label="Default" big />{" "}
-      <Button label="Active" big className="usa-button--active usx-button--active" />{" "}
+      <Button label="Active" big className="usa-button--active" />{" "}
       <Button label="Disabled" big disabled />{" "}
       <Button label="aria-disabled" big aria-disabled="true" />{" "}
       <Button label="Unstyled button" big variant="unstyled" />
@@ -96,7 +96,7 @@ export const DefaultHover = {
   args: {
     label: 'Hover',
     variant: undefined,
-    className: 'usa-button--hover usx-button--hover'
+    className: 'usa-button--hover'
   }
 };
 
@@ -104,7 +104,7 @@ export const DefaultActive = {
   args: {
     label: 'Active',
     variant: undefined,
-    className: 'usa-button--active usx-button--active'
+    className: 'usa-button--active'
   }
 };
 
@@ -151,7 +151,7 @@ export const SecondaryHover = {
   args: {
     label: 'Hover',
     variant: 'secondary',
-    className: 'usa-button--hover usx-button--hover'
+    className: 'usa-button--hover'
   }
 };
 
@@ -159,7 +159,7 @@ export const SecondaryActive = {
   args: {
     label: 'Active',
     variant: 'secondary',
-    className: 'usa-button--active usx-button--active'
+    className: 'usa-button--active'
   }
 };
 
@@ -199,7 +199,7 @@ export const AccentCoolHover = {
   args: {
     label: 'Hover',
     variant: 'accent-cool',
-    className: 'usa-button--hover usx-button--hover'
+    className: 'usa-button--hover'
   }
 };
 
@@ -207,7 +207,7 @@ export const AccentCoolActive = {
   args: {
     label: 'Active',
     variant: 'accent-cool',
-    className: 'usa-button--active usx-button--active'
+    className: 'usa-button--active'
   }
 };
 
@@ -247,7 +247,7 @@ export const AccentWarmHover = {
   args: {
     label: 'Hover',
     variant: 'accent-warm',
-    className: 'usa-button--hover usx-button--hover'
+    className: 'usa-button--hover'
   }
 };
 
@@ -255,7 +255,7 @@ export const AccentWarmActive = {
   args: {
     label: 'Active',
     variant: 'accent-warm',
-    className: 'usa-button--active usx-button--active'
+    className: 'usa-button--active'
   }
 };
 
@@ -295,7 +295,7 @@ export const BaseHover = {
   args: {
     label: 'Hover',
     variant: 'base',
-    className: 'usa-button--hover usx-button--hover'
+    className: 'usa-button--hover'
   }
 };
 
@@ -303,7 +303,7 @@ export const BaseActive = {
   args: {
     label: 'Active',
     variant: 'base',
-    className: 'usa-button--active usx-button--active'
+    className: 'usa-button--active'
   }
 };
 
@@ -343,7 +343,7 @@ export const OutlineHover = {
   args: {
     label: 'Hover',
     variant: 'outline',
-    className: 'usa-button--hover usx-button--hover'
+    className: 'usa-button--hover'
   }
 };
 
@@ -351,7 +351,7 @@ export const OutlineActive = {
   args: {
     label: 'Active',
     variant: 'outline',
-    className: 'usa-button--active usx-button--active'
+    className: 'usa-button--active'
   }
 };
 
@@ -390,7 +390,7 @@ export const OutlineInverse = {
 export const OutlineInverseHover = {
   render: () => (
     <div style={{backgroundColor: '#0f172a', padding: '1rem'}}>
-      <Button label="Hover" variant="outline" inverse className="usa-button--hover usx-button--hover" />
+      <Button label="Hover" variant="outline" inverse className="usa-button--hover" />
     </div>
   )
 }
@@ -398,7 +398,7 @@ export const OutlineInverseHover = {
 export const OutlineInverseActive = {
   render: () => (
     <div style={{backgroundColor: '#0f172a', padding: '1rem'}}>
-      <Button label="Active" variant="outline" inverse className="usa-button--active usx-button--active" />
+      <Button label="Active" variant="outline" inverse className="usa-button--active" />
     </div>
   )
 }

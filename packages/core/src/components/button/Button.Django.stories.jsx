@@ -11,14 +11,16 @@ export default {
   argTypes: generatedArgTypes,
 };
 
+const buttonItems = [
+  { label: 'Button 1', variant: 'primary' },
+  { label: 'Button 2', variant: 'secondary' },
+  { label: 'Button 3', variant: 'accent-cool' }
+]
+
 
 export const Button = {
   args: {
-    label: 'Continue',
-    variant: 'primary',
-    disabled: false,
-    className: '',
-    style: ''
+    items: buttonItems
   },
   parameters: {
     docs: {
@@ -26,9 +28,7 @@ export const Button = {
         code: componentTag({
           name: 'button',
           props: {
-            label: 'Continue',
-            variant: 'primary',
-            disabled: false
+            items: buttonItems
           }
         })
       }

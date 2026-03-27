@@ -1,111 +1,212 @@
 @use '../../../../tokens/src/tokens.scss' as *;
 @use "sass:color";
 
-/* Base: compile-time conditional properties only when tokens are set */
-.usx-button {
+/* ---------------------------------- */
+/* Base Enhancements (SAFE ONLY)      */
+/* ---------------------------------- */
+.usa-button.usx-button {
   @if $usx-button-border-radius != null {
     border-radius: $usx-button-border-radius;
   }
+
   @if $usx-button-box-shadow != null {
     box-shadow: $usx-button-box-shadow;
   }
 }
 
-/* DRY mixin for variants — emits properties only when tokens are non-null */
-@mixin usx-button-variant($name, $bg, $color, $border, $hover, $active) {
-  $class-name: unquote("usx-button--#{$name}");
+/* ---------------------------------- */
+/* Helper Mixin for Inverse Buttons   */
+/* ---------------------------------- */
+@mixin usx-button-inverse($hover-lightness: 20%, $active-lightness: 40%) {
+  color: if($color-light-text != null, $color-light-text, white);
 
-  .#{$class-name} {
-    @if $bg != null {
-      background-color: $bg;
-    }
-    @if $color != null {
-      color: $color;
-    }
-    @if $border != null {
-      border-color: $border;
-    }
-
-    /* hover state */
-    &.usx-button--hover, &:hover {
-      @if $hover != null {
-        background-color: $hover;
-      }
-    }
-
-    /* active state */
-    &.usx-button--active, &:active {
-      @if $active != null {
-        background-color: $active;
-      }
-    }
+  &.usa-button--hover,
+  &:hover {
+    color: color.adjust(if($color-light-text != null, $color-light-text, white), $lightness: -$hover-lightness);
   }
 
-  .theme-dark {
-
-	.#{$class-name}:not(:disabled):not([aria-disabled="true"]) {
-		@if $bg != null {
-			background-color: color.adjust($bg, $lightness: -30%);
-		}
-		@if $color-light-text != null {
-			color: $color-light-text;
-		}
-		@if $border != null {
-			border-color: color.adjust($border, $lightness: -30%);
-		}
-
-		/* hover state */
-		&.usx-button--hover, &:hover {
-			@if $hover != null {
-				background-color: color.adjust($hover, $lightness: -20%);
-			}
-		}
-
-		/* active state */
-		&.usx-button--active, &:active {
-			@if $active != null {
-				background-color: color.adjust($active, $lightness: -20%);
-			}
-		}
-	}
+  &.usa-button--active,
+  &:active {
+    color: color.adjust(if($color-light-text != null, $color-light-text, white), $lightness: -$active-lightness);
   }
 }
 
-/* Primary variant */
+/* ---------------------------------- */
+/* Variant Enhancer Mixin             */
+/* ---------------------------------- */
+@mixin usx-button-variant(
+  $selector,
+  $bg,
+  $bg-hover: null,
+  $bg-active: null,
+  $color: null,
+  $color-hover: null,
+  $color-active: null,
+  $box-shadow: null,
+  $is-outline: false
+) {
+  /* Non-disabled buttons only */
+  .usa-button.usx-button#{$selector}:not(:disabled):not([aria-disabled="true"]) {
+    @if $bg != null {
+      background-color: $bg;
+    }
+
+    @if $color != null {
+      color: $color;
+    }
+
+    @if $box-shadow != null {
+      box-shadow: $box-shadow;
+    }
+
+    /* Hover state */
+    &.usa-button--hover,
+    &:hover {
+      @if $bg-hover != null {
+        background-color: $bg-hover;
+      } @else if $bg != null {
+        background-color: color.adjust($bg, $lightness: -15%);
+      }
+
+      @if $color-hover != null {
+        color: $color-hover;
+      } @else if $color != null {
+        color: color.adjust($color, $lightness: -15%);
+      }
+    }
+
+    /* Active state */
+    &.usa-button--active,
+    &:active {
+      @if $bg-active != null {
+        background-color: $bg-active;
+      } @else if $bg != null {
+        background-color: color.adjust($bg, $lightness: -25%);
+      }
+
+      @if $color-active != null {
+        color: $color-active;
+      } @else if $color != null {
+        color: color.adjust($color, $lightness: -25%);
+      }
+    }
+
+    /* Inverse modifier */
+    &.usa-button--inverse {
+      @include usx-button-inverse();
+    }
+  }
+
+  /* Dark theme */
+  .theme-dark {
+    .usa-button.usx-button#{$selector}:not(:disabled):not([aria-disabled="true"]) {
+      @if $bg != null {
+        background-color: color.adjust($bg, $lightness: -30%);
+      }
+
+      @if $color-light-text != null and $is-outline == false {
+        color: $color-light-text;
+      }
+
+      @if $color != null and $is-outline == true {
+        color: color.adjust($color, $lightness: -30%);
+      }
+
+      &.usa-button--hover,
+      &:hover {
+        @if $bg-hover != null {
+          background-color: color.adjust($bg-hover, $lightness: -20%);
+        } @else if $bg != null {
+          background-color: color.adjust($bg, $lightness: -40%);
+        }
+
+        @if $color-hover != null {
+          color: $color-hover;
+        }
+      }
+
+      &.usa-button--active,
+      &:active {
+        @if $bg-active != null {
+          background-color: color.adjust($bg-active, $lightness: -20%);
+        } @else if $bg != null {
+          background-color: color.adjust($bg, $lightness: -60%);
+        }
+
+        @if $color-active != null {
+          color: $color-active;
+        }
+      }
+
+      /* Inverse modifier in dark theme */
+      &.usa-button--inverse {
+        @include usx-button-inverse(20%, 40%);
+      }
+    }
+  }
+}
+
+/* ---------------------------------- */
+/* Enhance USWDS Variants             */
+/* ---------------------------------- */
+
+/* Primary */
 @include usx-button-variant(
-  'primary',
+  ".usa-button--primary",
   $usx-button-primary-background-color,
+  $usx-button-primary-background-color-hover,
+  $usx-button-primary-background-color-active,
   $usx-button-primary-color,
-  $usx-button-primary-border-color,
-  $usx-button-primary-hover-background-color,
-  $usx-button-primary-active-background-color
+  $usx-button-primary-color-hover,
+  $usx-button-primary-color-active,
+  $usx-button-primary-border-color
 );
 
-/* Secondary variant */
+/* Secondary */
 @include usx-button-variant(
-  'secondary',
+  ".usa-button--secondary",
   $usx-button-secondary-background-color,
+  $usx-button-secondary-background-color-hover,
+  $usx-button-secondary-background-color-active,
   $usx-button-secondary-color,
-  $usx-button-secondary-border-color,
-  $usx-button-secondary-hover-background-color,
-  $usx-button-secondary-active-background-color
+  $usx-button-secondary-color-hover,
+  $usx-button-secondary-color-active,
+  $usx-button-secondary-border-color
 );
 
-/* Accent variants */
+/* Accent Cool */
 @include usx-button-variant(
-  'accent-cool',
+  ".usa-button--accent-cool",
   $usx-button-accent-cool-background-color,
+  $usx-button-accent-cool-background-color-hover,
+  $usx-button-accent-cool-background-color-active,
   $usx-button-accent-cool-color,
-  $usx-button-accent-cool-border-color,
-  $usx-button-accent-cool-hover-background-color,
-  $usx-button-accent-cool-active-background-color
-);
-@include usx-button-variant(
-  'accent-warm',
-  $usx-button-accent-warm-background-color,
-  $usx-button-accent-warm-color,
-  $usx-button-accent-warm-border-color,
-  $usx-button-accent-warm-hover-background-color,
-  $usx-button-accent-warm-active-background-color
+  $usx-button-accent-cool-color-hover,
+  $usx-button-accent-cool-color-active,
+  $usx-button-accent-cool-border-color
 );
 
+/* Accent Warm */
+@include usx-button-variant(
+  ".usa-button--accent-warm",
+  $usx-button-accent-warm-background-color,
+  $usx-button-accent-warm-background-color-hover,
+  $usx-button-accent-warm-background-color-active,
+  $usx-button-accent-warm-color,
+  $usx-button-accent-warm-color-hover,
+  $usx-button-accent-warm-color-active,
+  $usx-button-accent-warm-border-color
+);
+
+/* Outline */
+@include usx-button-variant(
+  ".usa-button--outline",
+  $usx-button-outline-background-color,
+  $usx-button-outline-background-color-hover,
+  $usx-button-outline-background-color-active,
+  $usx-button-outline-color,
+  $usx-button-outline-color-hover,
+  $usx-button-outline-color-active,
+  $usx-button-outline-box-shadow,
+  true
+);

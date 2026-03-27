@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Icon component for displaying SVG icons from a sprite.
@@ -27,4 +28,12 @@ export default function Icon({
       <use href={`${staticUrlPrefix}${name}`} />
     </svg>
   );
+};
+
+Icon.propTypes = {
+  name: PropTypes.string.isRequired,
+  size: PropTypes.number,
+  color: PropTypes.string,
+  staticUrlPrefix: PropTypes.string,
+  className: PropTypes.string,
 };

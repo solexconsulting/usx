@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './banner.scss';
 
 export default function Banner({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Banner({ children = null, className = '', ...props }) {
     </div>
   );
 }
+
+Banner.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

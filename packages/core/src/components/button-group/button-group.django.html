@@ -1,4 +1,10 @@
+{% load components %}
 {# Django template for ButtonGroup #}
-<div class="usx-button-group">
-  <div class="button-group__content">ButtonGroup</div>
-</div>
+<ul class="usa-button group usx-button-group {% if segmented %}usa-button-group--segmented{% endif %} {{ className }}">
+  {% for item in items %}
+    <li class="usa-button-group__item">
+      {% button label=item.label variant=item.variant type=item.type disabled=item.disabled onClick=item.onClick href=item.href isExternal=item.isExternal big=item.big inverse=item.inverse leftIcon=item.leftIcon rightIcon=item.rightIcon className=item.className style=item.style %}
+      {% endbutton %}
+    </li>
+  {% endfor %}
+</ul>

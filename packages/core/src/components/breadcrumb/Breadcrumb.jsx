@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './breadcrumb.scss';
 
 export default function Breadcrumb({ children = null, className = '', ...props }) {
@@ -9,3 +10,8 @@ export default function Breadcrumb({ children = null, className = '', ...props }
     </div>
   );
 }
+
+Breadcrumb.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+};

@@ -1,11 +1,9 @@
 {
   "name": "button-group",
   "template": "button-group/button-group.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: ButtonGroup"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
+    "items": { "type": "array", "description": "Array of button items" },
+    "segmented": { "type": "boolean", "description": "Whether the button group is segmented" },
     "className": { "type": "string", "description": "Additional classes" }
   }
 }
