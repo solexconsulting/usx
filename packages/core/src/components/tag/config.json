@@ -1,11 +1,12 @@
 {
   "name": "tag",
   "template": "tag/tag.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Tag"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "id": { "type": "string", "description": "Unique identifier for the tag" },
+    "big": { "type": "boolean", "default": false, "description": "Whether to use the big tag style" },
+    "value": { "type": "string", "default": "", "description": "Value of the tag, used as the inner text or HTML in lieu of children" },
+    "color": { "type": "string", "default": null, "description": "Color variant for the tag (e.g., null, 'primary', 'accent-cool', 'blue', 'base', etc.)" },
+    "className": { "type": "string", "description": "Additional classes to add to the tag" },
+    "children": { "type": "string", "description": "Inner HTML or text for the tag" }
   }
 }

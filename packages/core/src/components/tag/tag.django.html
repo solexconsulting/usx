@@ -1,4 +1,11 @@
 {# Django template for Tag #}
-<div class="usx-tag">
-  <div class="tag__content">Tag</div>
-</div>
+<span class=
+  "
+  usa-tag usx-tag
+  {% if big %}usa-tag--big{% endif %}
+  {% if color %}bg-{{ color }}{% endif %}
+  {{ className }}
+  "
+>
+  {{ children | default:value }}
+</span>

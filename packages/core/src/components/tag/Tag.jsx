@@ -1,17 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
 import './tag.scss';
 
-export default function Tag({ children = null, className = '', ...props }) {
-  const classes = ['usx-tag', className].filter(Boolean).join(' ');
+export default function Tag({
+  id,
+  big = false,
+  value,
+  color = null,
+  className = '',
+  children,
+  ...props
+}) {
+  const classes = ClassNames(
+    'usa-tag',
+    'usx-tag',
+    { 'usa-tag--big': big },
+    { [`bg-${color}`]: color },
+    className
+  );
+
   return (
-    <div className={classes} {...props}>
-      {children || 'Tag'}
-    </div>
+    <span id={id} className={classes} {...props}>
+      {children || value}
+    </span>
   );
 }
 
 Tag.propTypes = {
-  children: PropTypes.node,
+  id: PropTypes.string,
+  big: PropTypes.bool,
+  value: PropTypes.string,
+  color: PropTypes.string,
   className: PropTypes.string,
+  children: PropTypes.node,
 };
