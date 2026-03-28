@@ -22,7 +22,7 @@ export const Default = {
 export const DifferentSizes = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-      {[3, 4, 5, 6, 7, 8, 9].map(size => (
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(size => (
         <Icon key={size} name="accessibility_new" size={size} />
       ))}
     </div>

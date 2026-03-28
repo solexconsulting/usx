@@ -16,7 +16,7 @@ export default function Icon({
     <svg
       className={`
         usa-icon
-        ${size ? `usa-icon--size-${size}` : ''}
+        ${size ? size === 1 ? `usx-icon--size-1` : `usa-icon--size-${size}` : ''}
         ${color ? `text-${color}` : ''}
         ${className}
       `}

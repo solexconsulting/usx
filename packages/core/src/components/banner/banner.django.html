@@ -1,4 +1,73 @@
+{% load components %}
 {# Django template for Banner #}
-<div class="usx-banner">
-  <div class="banner__content">Banner</div>
-</div>
+<section class="usa-banner {{ className }}" aria-label="{{ ariaLabel }}">
+  <div class="usa-accordion">
+    <header class="usa-banner__header">
+      <div class="usa-banner__inner">
+        <div class="grid-col-auto">
+          <img
+            aria-hidden="true"
+            class="usa-banner__header-flag"
+            src="/img/us_flag_small.png"
+            alt=""
+          />
+        </div>
+        <div
+          class="grid-col-fill tablet:grid-col-auto"
+          aria-hidden="true"
+        >
+          <p class="usa-banner__header-text">
+            {{ bannerText }}
+          </p>
+          <p class="usa-banner__header-action">{{ bannerActionText }}</p>
+        </div>
+        <button
+          type="button"
+          class="usa-accordion__button usa-banner__button"
+          aria-expanded="false"
+          aria-controls="{{ id }}-content"
+        >
+          <span class="usa-banner__button-text">{{ bannerActionText }}</span>
+        </button>
+      </div>
+    </header>
+    <div
+      class="usa-banner__content usa-accordion__content"
+      id="{{ id }}-content"
+      hidden
+    >
+      <div class="grid-row grid-gap-lg">
+        <div class="usa-banner__guidance tablet:grid-col-6">
+          <img
+            class="usa-banner__icon usa-media-block__img"
+            src="/img/icon-dot-gov.svg"
+            role="img"
+            alt=""
+            aria-hidden="true"
+          />
+          <div class="usa-media-block__body">
+            <p>
+              <strong>{{ domainHeading }}</strong><br/>
+              {{ domainText }}
+            </p>
+          </div>
+        </div>
+        <div class="usa-banner__guidance tablet:grid-col-6">
+          <img
+            class="usa-banner__icon usa-media-block__img"
+            src="/img/icon-https.svg"
+            role="img"
+            alt=""
+            aria-hidden="true"
+          />
+          <div class="usa-media-block__body">
+            <p>
+              <strong>{{ httpsHeading }}</strong><br/>
+              {{ httpsText|safe }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

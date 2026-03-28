@@ -2,7 +2,9 @@
 @use "sass:color";
 
 /* ---------------------------------- */
+
 /* Base Enhancements (SAFE ONLY)      */
+
 /* ---------------------------------- */
 .usa-button.usx-button {
   @if $usx-button-border-radius != null {
@@ -15,7 +17,9 @@
 }
 
 /* ---------------------------------- */
+
 /* Helper Mixin for Inverse Buttons   */
+
 /* ---------------------------------- */
 @mixin usx-button-inverse($hover-lightness: 20%, $active-lightness: 40%) {
   color: if($color-light-text != null, $color-light-text, white);
@@ -32,7 +36,9 @@
 }
 
 /* ---------------------------------- */
+
 /* Variant Enhancer Mixin             */
+
 /* ---------------------------------- */
 @mixin usx-button-variant(
   $selector,
@@ -93,7 +99,7 @@
 
     /* Inverse modifier */
     &.usa-button--inverse {
-      @include usx-button-inverse();
+      @include usx-button-inverse;
     }
   }
 
@@ -147,7 +153,9 @@
 }
 
 /* ---------------------------------- */
+
 /* Enhance USWDS Variants             */
+
 /* ---------------------------------- */
 
 /* Primary */

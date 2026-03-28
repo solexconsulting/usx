@@ -11,12 +11,54 @@ export default {
   argTypes: generatedArgTypes,
 };
 
+const defaultArgs = {
+  id: 'default-banner',
+};
+
+const milArgs = {
+  id: 'mil-banner',
+  tld: '.mil'
+}
+
+const customArgs = {
+    id: 'custom-banner',
+    tld: '.space',
+    bannerText: 'An unofficial website of the United States Department of Defense',
+    bannerActionText: "Here's how you don't know",
+}
+
 export const Default = {
-  args: config.default || {},
+  args: defaultArgs,
   parameters: {
     docs: {
       source: {
-        code: componentTag({ name: 'banner', props: config.default || {} })
+        code: componentTag({ name: 'banner', props: defaultArgs })
+      }
+    }
+  },
+  render: djangoComponent('banner')
+};
+
+export const MIL = {
+  name: '.mil TLD',
+  args: milArgs,
+  parameters: {
+    docs: {
+      source: {
+        code: componentTag({ name: 'banner', props: milArgs })
+      }
+    }
+  },
+  render: djangoComponent('banner')
+};
+
+export const Custom = {
+  name: 'Custom text and TLD',
+  args: customArgs,
+  parameters: {
+    docs: {
+      source: {
+        code: componentTag({ name: 'banner', props: customArgs })
       }
     }
   },

@@ -58,14 +58,6 @@ files.forEach((file) => {
   console.log('Created', dest);
 });
 
-// If an index.js wasn't part of templates, ensure there's a re-export index.js
-//const indexPath = path.join(targetDir, 'index.js');
-//if (!fs.existsSync(indexPath)) {
-//  const reexport = `export { default } from './${Name}.jsx';\n`;
-//  fs.writeFileSync(indexPath, reexport, 'utf8');
-//  console.log('Created', indexPath);
-//}
-
 // Validate generated config.json against schema using AJV if available
 const generatedConfigPath = path.join(targetDir, 'config.json');
 if (fs.existsSync(generatedConfigPath)) {

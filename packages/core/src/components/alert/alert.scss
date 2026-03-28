@@ -37,6 +37,7 @@
 		.#{$class-name} .usx-alert__body {
 			@if $bg !=null {
 				background-color: color.adjust($bg, $lightness: -30%);
+
 				::before {
 					background-color: $color-light-text;
 				}
