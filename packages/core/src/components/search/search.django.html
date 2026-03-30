@@ -1,4 +1,59 @@
+{% load components %}
 {# Django template for Search #}
-<div class="usx-search">
-  <div class="search__content">Search</div>
-</div>
+<section aria-label="{{ ariaLabel|default:label }}">
+  <form
+    id="{{ id }}-form"
+    class="
+      usa-search
+      {% if iconOnly and not big %}usa-search--small{% endif %}
+      {% if big %}usa-search--big{% endif %}
+      {{ className }}
+    "
+    method="get"
+    role="search"
+    {% if action %}action="{{ action }}"{% endif %}
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-sr-only" for="{{ id }}">Search</label>
+    <input
+      id="{{ id }}"
+      class="usa-input usx-input"
+      placeholder="{{ placeholder }}"
+      value="{{ defaultValue }}"
+      type="search"
+      name="{{ searchKey|default:'q' }}"
+    />
+    {% with iconName=icon|default:'search' %}
+      {% with buttonVariant=buttonVariant|default:'primary' %}
+        {% button variant={{buttonVariant}} onClick="{{handleSubmit}}" type='submit' %}
+          {% if iconOnly %}
+            {% icon name={{iconName}} className="usa-search__submit-icon display-inline-block" %}{% endicon %}
+          {% elif not iconOnly %}
+            <span class="usa-search__submit-text">{{ label|default:'Search' }}</span>
+            {% icon name=iconName className="usa-search__submit-icon" %}{% endicon %}
+          {% endif %}
+        {% endbutton %}
+      {% endwith %}
+    {% endwith %}
+  </form>
+  <script data-id="{{ id }}" data-on-submit="{{ onSubmit }}" data-search-key="{{ searchKey|default:'q' }}">
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById(`${id}-form`).onsubmit = function(e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+
+  </script>
+</section>

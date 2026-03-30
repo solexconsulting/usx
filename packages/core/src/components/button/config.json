@@ -68,6 +68,11 @@
             "type": "string",
             "default": "",
             "description": "Inline styles to apply to the button component."
+        },
+        "children": {
+            "type": "string",
+            "default": null,
+            "description": "Inner HTML or text to be displayed within the button, allowing for more complex content such as additional elements or formatting."
         }
     }
 }

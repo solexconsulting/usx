@@ -16,6 +16,7 @@ export default function Button({
   leftIcon,
   rightIcon,
   className = '',
+  children = '',
   ...props
 }) {
   const variantClasses = {
@@ -43,14 +44,13 @@ export default function Button({
       type={type}
       className={classes}
       disabled={disabled}
-      onClick={onClick}
-      href={href}
-      target={isExternal ? '_blank' : undefined}
-      rel={isExternal ? 'noopener noreferrer' : undefined}
+      {...(onClick ? { onClick } : {})}
+      {...(href ? { href } : {})}
+      {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       {...props}
     >
       {leftIcon && <Icon name={leftIcon.name} size={leftIcon.size} color={leftIcon.color} />}
-      {label}
+      {children || label}
       {rightIcon && <Icon name={rightIcon.name} size={rightIcon.size} color={rightIcon.color} />}
     </Element>
   );
@@ -79,4 +79,5 @@ Button.propTypes = {
   }),
   className: PropTypes.string,
   style: PropTypes.object,
+  children: PropTypes.node,
 };

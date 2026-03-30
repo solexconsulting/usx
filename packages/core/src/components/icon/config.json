@@ -28,6 +28,11 @@
             "default": "",
             "description": "Additional CSS classes to apply to the icon component."
         },
+        "alt": {
+            "type": "string",
+            "default": "",
+            "description": "Alternative text for the icon, used for accessibility purposes to provide a textual description of the icon's meaning or function."
+        },
         "style": {
             "type": "string",
             "default": "",

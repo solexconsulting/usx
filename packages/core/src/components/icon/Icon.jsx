@@ -6,26 +6,30 @@ import PropTypes from 'prop-types';
  */
 export default function Icon({
     name,
-    size=2,
-    color=null,
-    staticUrlPrefix='/img/sprite.svg#',
-    className='',
+    size = 2,
+    color = null,
+    alt = name + ' icon',
+    staticUrlPrefix = '/img/sprite.svg#',
+    className = '',
     ...props
 }) {
   return (
     <svg
-      className={`
-        usa-icon
-        ${size ? size === 1 ? `usx-icon--size-1` : `usa-icon--size-${size}` : ''}
-        ${color ? `text-${color}` : ''}
-        ${className}
-      `}
+      className={
+        'usa-icon ' +
+        (size ? (size === 1 ? 'usx-icon--size-1' : 'usa-icon--size-' + size) : '') +
+        ' ' +
+        (color ? 'text-' + color : '') +
+        ' ' +
+        className
+      }
       aria-hidden="true"
+      aria-label={alt}
       focusable="false"
       role="img"
       {...props}
     >
-      <use href={`${staticUrlPrefix}${name}`} />
+      <use href={staticUrlPrefix + name} />
     </svg>
   );
 };
@@ -34,6 +38,7 @@ Icon.propTypes = {
   name: PropTypes.string.isRequired,
   size: PropTypes.number,
   color: PropTypes.string,
+  alt: PropTypes.string,
   staticUrlPrefix: PropTypes.string,
   className: PropTypes.string,
 };

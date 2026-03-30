@@ -44,7 +44,6 @@ class RenderComponentView(View):
             return HttpResponse('Invalid JSON in props parameter', status=400)
 
         try:
-            print("PROPS", props)
             html = render_component(component_name, props)
             return HttpResponse(html)
         except (KeyError, ValueError) as e:

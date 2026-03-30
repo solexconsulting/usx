@@ -31,14 +31,14 @@
         {% if disabled %} disabled="disabled" aria-disabled="true" {% endif %}
     >
 {% endif %}
-    {% if leftIcon %}
-        {% icon name=leftIcon.name color=leftIcon.color size=leftIcon.size %}
+    {% if leftIcon and leftIcon.name %}
+        {% icon name=leftIcon.name color=leftIcon.color size=leftIcon.size %}{% endicon %}
     {% endif %}
 
-    {{ label }}
+    {{ children|default:label }}
 
-    {% if rightIcon %}
-        {% icon name=rightIcon.name color=rightIcon.color size=rightIcon.size %}
+    {% if rightIcon and rightIcon.name %}
+        {% icon name=rightIcon.name color=rightIcon.color size=rightIcon.size %}{% endicon %}
     {% endif %}
 
 {% if href %}

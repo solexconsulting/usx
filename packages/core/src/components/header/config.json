@@ -1,11 +1,18 @@
 {
   "name": "header",
   "template": "header/header.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Header"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "projectTitle": { "type": "string", "description": "Title of the project, displayed in the header" },
+    "projectLogo": { "type": "string", "description": "(OPTIONAL) URL of the logo image to display in the header in place of the project title" },
+    "projectUrl": { "type": "string", "default": "/", "description": "URL for the project title or logo link" },
+    "navSections": { "type": "array", "description": "Array of menu section objects with 'title', and mutually exclusive 'links' or 'href' properties" },
+    "secondaryLinks": { "type": "array", "description": "Array of secondary link objects with 'href' and 'text' properties" },
+    "searchConfig": { "type": "object", "description": "(OPTIONAL) Configuration object for the search component, with 'action' and 'placeholder' properties" },
+    "extended": { "type": "boolean", "default": false, "description": "Whether to use the extended header style with larger logo and search input" },
+    "megamenu": { "type": "boolean", "default": false, "description": "Whether to use the megamenu style for the navigation sections" },
+    "useMenuIcon": { "type": "boolean", "default": false, "description": "Whether to use a menu icon instead of the word 'Menu' for the mobile menu toggle button" },
+    "className": { "type": "string", "description": "Additional classes" },
+    "id": { "type": "string", "default": "header", "description": "Unique identifier for the header component" },
+    "styles": { "type": "object", "description": "Inline styles for the header component" }
   }
 }

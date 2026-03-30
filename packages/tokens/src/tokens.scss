@@ -22,12 +22,12 @@ $color-success: #2e8540 !default;
 $color-error: #d83933 !default;
 $color-emergency: #b51d09 !default;
 $color-background: #f8fafc !default;
-$color-surface: #fff !default;
+$color-surface: #ffffff !default;
 $color-dark-bg: color.adjust($color-primary, $lightness: -50%) !default;
 
 // Text color tokens
 $color-text: #0f172a !default;
-$color-light-text: #fff !default;
+$color-light-text: #ffffff !default;
 $color-info-text: null !default;
 $color-warning-text: null !default;
 $color-success-text: null !default;
@@ -42,7 +42,7 @@ $spacing-lg: 1.5rem !default;
 $spacing-xl: 2rem !default;
 
 // Typography tokens
-$typography-fontFamilyBase: inter, system-ui, -apple-system, segoe ui, roboto, sans-serif !default;
+$typography-fontFamilyBase: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif !default;
 $typography-fontSizeBase: 1rem !default;
 $typography-fontWeightRegular: 400 !default;
 $typography-fontWeightBold: 700 !default;
@@ -112,7 +112,7 @@ $usx-button-outline-background-color-active: null !default;
 $usx-button-outline-color: $color-primary !default;
 $usx-button-outline-color-hover: $color-primary-hover !default;
 $usx-button-outline-color-active: $color-primary-active !default;
-$usx-button-outline-box-shadow: 0 0 0 2px currentcolor inset !default;
+$usx-button-outline-box-shadow: 0 0 0 2px currentColor inset !default;
 
 // Button Group tokens
 $usx-button-group-segmented-divider-primary: 1px solid color.adjust($color-primary, $lightness: -20%) !default;
