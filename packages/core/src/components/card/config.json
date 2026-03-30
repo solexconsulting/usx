@@ -1,11 +1,63 @@
 {
   "name": "card",
   "template": "card/card.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Card"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "heading": {
+      "type": "string",
+      "description": "The heading text displayed in the card header"
+    },
+    "body": {
+      "type": "string",
+      "description": "The main content text displayed in the card body"
+    },
+    "footer": {
+      "type": "node",
+      "description": "The footer content, typically containing action buttons or links"
+    },
+    "media": {
+      "type": "object",
+      "description": "Media object containing image source and alt text",
+      "properties": {
+        "src": { "type": "string", "description": "Image source URL" },
+        "alt": { "type": "string", "description": "Alt text for the image" }
+      }
+    },
+    "headerFirst": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to display the header before the media section"
+    },
+    "flag": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to use the flag layout where media and content are side-by-side"
+    },
+    "mediaRight": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to place media on the right side in flag layout"
+    },
+    "mediaInset": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to inset the media within the card container"
+    },
+    "mediaExdent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to extend the media outside the card container boundaries"
+    },
+    "children": {
+      "type": "node",
+      "description": "Inner HTML or text content (alternative to structured props)"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    },
+    "tag": {
+      "type": "string",
+      "description": "HTML tag to use for the card element (div or li)"
+    }
   }
 }

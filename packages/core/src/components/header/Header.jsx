@@ -106,6 +106,43 @@ function PrimaryNav({
   )
 }
 
+PrimaryNav.propTypes = {
+  navSections: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    links: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      href: PropTypes.string.isRequired,
+      ariaLabel: PropTypes.string,
+    })),
+    href: PropTypes.string,
+    ariaLabel: PropTypes.string,
+  })),
+  megamenu: PropTypes.bool,
+  showSecondary: PropTypes.bool,
+  secondaryLinks: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    href: PropTypes.string.isRequired,
+    ariaLabel: PropTypes.string,
+  })),
+  searchConfig: PropTypes.shape({
+    id: PropTypes.string,
+    ariaLabel: PropTypes.string,
+    searchKey: PropTypes.string,
+    label: PropTypes.string,
+    icon: PropTypes.string,
+    iconOnly: PropTypes.bool,
+    buttonVariant: PropTypes.string,
+    big: PropTypes.bool,
+    action: PropTypes.string,
+    placeholder: PropTypes.string,
+    defaultValue: PropTypes.string,
+    onSubmit: PropTypes.func,
+    className: PropTypes.string,
+  }),
+  headerId: PropTypes.string,
+  renderSearchDirectly: PropTypes.bool,
+};
+
 export default function Header({
   id = 'header',
   projectTitle,

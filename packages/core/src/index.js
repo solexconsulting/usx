@@ -26,6 +26,7 @@ export { default as Breadcrumb } from './components/breadcrumb';
 export { default as Button } from './components/button';
 export { default as ButtonGroup } from './components/button-group';
 export { default as Card } from './components/card';
+export { default as CardGroup } from './components/card-group';
 export { default as Checkbox } from './components/checkbox';
 export { default as Collection } from './components/collection';
 export { default as Combobox } from './components/combobox';
@@ -59,6 +60,8 @@ export { default as Tag } from './components/tag';
 export { default as TimePicker } from './components/time-picker';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
+
 
 
 

@@ -1,0 +1,6 @@
+{% load components %}
+<ul class="usa-card-group usx-card-group {% if className %} {{ className }}{% endif %}">
+  {% for card in cards %}
+    {% card tag='li' heading=card.heading body=card.body footer=card.footer media=card.media flag=card.flag mediaRight=card.mediaRight headerFirst=card.headerFirst className=card.className %}{% endcard %}
+  {% endfor %}
+</ul>

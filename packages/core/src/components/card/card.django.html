@@ -1,4 +1,31 @@
-{# Django template for Card #}
-<div class="usx-card">
-  <div class="card__content">Card</div>
-</div>
+{% load components %}
+<{% if tag %}{{ tag }}{% else %}div{% endif %} class="usa-card{% if headerFirst %} usa-card--header-first{% endif %}{% if flag %} usa-card--flag{% endif %}{% if mediaRight %} usa-card--media-right{% endif %}{% if className %} {{ className }}{% endif %}">
+  <div class="usa-card__container">
+    {% if heading or body or footer or media %}
+      {% if heading %}
+        <div class="usa-card__header">
+          <h4 class="usa-card__heading">{{ heading }}</h4>
+        </div>
+      {% endif %}
+      {% if media %}
+        <div class="usa-card__media{% if mediaInset %} usa-card__media--inset{% endif %}{% if mediaExdent %} usa-card__media--exdent{% endif %}">
+          <div class="usa-card__img">
+            <img src="{{ media.src }}" alt="{{ media.alt }}" />
+          </div>
+        </div>
+      {% endif %}
+      {% if body %}
+        <div class="usa-card__body">
+          <p>{{ body }}</p>
+        </div>
+      {% endif %}
+      {% if footer %}
+        <div class="usa-card__footer">
+          {{ footer|safe }}
+        </div>
+      {% endif %}
+    {% else %}
+      {{ children|default:"Card" }}
+    {% endif %}
+  </div>
+</{% if tag %}{{ tag }}{% else %}div{% endif %}>

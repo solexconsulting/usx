@@ -1,0 +1,8 @@
+{
+  "name": "card-group",
+  "template": "card-group/card-group.django.html",
+  "props": {
+    "cards": { "type": "array", "description": "Array of card prop objects" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}
