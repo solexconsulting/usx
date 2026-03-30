@@ -2,6 +2,7 @@
   "name": "header",
   "template": "header/header.django.html",
   "props": {
+    "id": { "type": "string", "default": "header", "description": "Unique identifier for the header component" },
     "projectTitle": { "type": "string", "description": "Title of the project, displayed in the header" },
     "projectLogo": { "type": "string", "description": "(OPTIONAL) URL of the logo image to display in the header in place of the project title" },
     "projectUrl": { "type": "string", "default": "/", "description": "URL for the project title or logo link" },
@@ -12,7 +13,6 @@
     "megamenu": { "type": "boolean", "default": false, "description": "Whether to use the megamenu style for the navigation sections" },
     "useMenuIcon": { "type": "boolean", "default": false, "description": "Whether to use a menu icon instead of the word 'Menu' for the mobile menu toggle button" },
     "className": { "type": "string", "description": "Additional classes" },
-    "id": { "type": "string", "default": "header", "description": "Unique identifier for the header component" },
     "styles": { "type": "object", "description": "Inline styles for the header component" }
   }
 }

@@ -1,19 +1,17 @@
 {% load components %}
 
-{# build classes inline to avoid {% with %} scoping issues #}
-
 {% if href %}
     <a
         href="{{ href }}"
         class="
             usa-button usx-button
-            {% if variant %} usa-button--{{ variant }}{% endif %}
-            {% if big %} usa-button--big{% endif %}
-            {% if disabled %} usa-button--disabled{% endif %}
-            {% if inverse %} usa-button--inverse{% endif %}
+            {% if variant and variant != '' %} usa-button--{{ variant }}{% endif %}
+            {% if big == True %} usa-button--big{% endif %}
+            {% if disabled == True %} usa-button--disabled{% endif %}
+            {% if inverse == True %} usa-button--inverse{% endif %}
             {% if className %} {{ className }}{% endif %}
         "
-        {% if disabled %} disabled="disabled" aria-disabled="true" {% endif %}
+        {% if disabled == True %} aria-disabled="true" {% endif %}
         {% if isExternal %} target="_blank" rel="noopener noreferrer" {% endif %}
     >
 {% else %}
@@ -22,13 +20,13 @@
         type="{{ type }}"
         class="
             usa-button usx-button
-            {% if variant %} usa-button--{{ variant }}{% endif %}
-            {% if big %} usa-button--big{% endif %}
-            {% if disabled %} usa-button--disabled{% endif %}
-            {% if inverse %} usa-button--inverse{% endif %}
+            {% if variant and variant != '' %} usa-button--{{ variant }}{% endif %}
+            {% if big == True %} usa-button--big{% endif %}
+            {% if disabled == True %} usa-button--disabled{% endif %}
+            {% if inverse == True %} usa-button--inverse{% endif %}
             {% if className %} {{ className }}{% endif %}
         "
-        {% if disabled %} disabled="disabled" aria-disabled="true" {% endif %}
+        {% if disabled == True %} disabled="disabled" aria-disabled="true" {% endif %}
     >
 {% endif %}
     {% if leftIcon and leftIcon.name %}

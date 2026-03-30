@@ -107,6 +107,7 @@ function PrimaryNav({
 }
 
 export default function Header({
+  id = 'header',
   projectTitle,
   projectLogo,
   projectUrl = '/',
@@ -117,7 +118,6 @@ export default function Header({
   megamenu = false,
   useMenuIcon = false,
   className = '',
-  id = 'header',
   ...props
 }) {
   const headerClasses = ClassNames(

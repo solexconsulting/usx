@@ -51,13 +51,22 @@ class ComponentNode(template.Node):
         resolved_props = {}
         for k, v in self.props.items():
             try:
-                resolved_props[k] = template.Variable(v).resolve(context)
+                resolved_value = template.Variable(v).resolve(context)
             except (template.VariableDoesNotExist, template.TemplateSyntaxError):
                 # If Variable fails, try rendering as template
                 try:
-                    resolved_props[k] = template.Template(v).render(context).strip()
+                    resolved_value = template.Template(v).render(context).strip()
                 except:
-                    resolved_props[k] = v  # fallback to literal
+                    resolved_value = v  # fallback to literal
+            
+            # Convert string booleans to actual booleans
+            if resolved_value == 'true':
+                resolved_value = True
+            elif resolved_value == 'false':
+                resolved_value = False
+            
+            resolved_props[k] = resolved_value
+        
         if children_html.strip():
             resolved_props['children'] = children_html
         html = render_component(self.comp_name, resolved_props)

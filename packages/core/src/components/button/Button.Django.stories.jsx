@@ -11,14 +11,12 @@ export default {
   argTypes: generatedArgTypes,
 };
 
-
 export const Button = {
   args: {
     label: 'Continue',
     variant: 'primary',
-    disabled: false,
     className: '',
-    style: ''
+    style: '',
   },
   parameters: {
     docs: {
@@ -28,11 +26,10 @@ export const Button = {
           props: {
             label: 'Continue',
             variant: 'primary',
-            disabled: false
-          }
-        })
-      }
-    }
+          },
+        }),
+      },
+    },
   },
-  render: djangoComponent('button')
+  render: djangoComponent('button'),
 };
