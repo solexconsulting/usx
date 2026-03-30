@@ -1,4 +1,23 @@
-{# Django template for Select #}
-<div class="usx-select">
-  <div class="select__content">Select</div>
+{% load components %}
+{% if error %}
+<div class="usa-form-group usx-form-group usa-form-group--error">
+{% endif %}
+  <label class="usa-label" for="{{ id }}">{{ label }}</label>
+  {% if hint %}
+  <span id="{{ id }}-hint" class="usa-hint">{{ hint }}</span>
+  {% endif %}
+  <select class="usa-select usx-select{% if error %} usa-input--error{% endif %}{% if success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"{% if id %} id="{{ id }}"{% endif %}{% if name %} name="{{ name }}"{% endif %}{% if disabled %} disabled{% endif %}{% if hint %} aria-describedby="{{ id }}-hint"{% endif %}>
+    <option value="">{{ placeholder|default:'Select an option' }}</option>
+    {% for option in options %}
+    <option value="{{ option.value }}">{{ option.label }}</option>
+    {% endfor %}
+  </select>
+  {% if error %}
+  <span class="usa-error-message">{{ error }}</span>
+  {% endif %}
+  {% if success %}
+  <span class="usa-success-message">{{ success }}</span>
+  {% endif %}
+{% if error %}
 </div>
+{% endif %}

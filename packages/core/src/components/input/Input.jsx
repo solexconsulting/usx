@@ -22,15 +22,15 @@ export default function Input({
   const hasError = !!error;
   const hasSuccess = !!success;
 
-  const characterCountClasses = 'usa-character-count usx-character-count';
+  const characterCountClasses = 'usa-character-count';
   const formGroupClasses = 'usa-form-group usx-form-group';
-  const formGroupErrorClasses = 'usa-form-group--error usx-form-group--error';
+  const formGroupErrorClasses = 'usa-form-group--error';
   const inputClasses = 'usa-input usx-input';
   const textareaClasses = 'usa-textarea usx-textarea';
-  const inputErrorClasses = 'usa-input--error usx-input--error';
-  const textareaErrorClasses = 'usa-textarea--error usx-textarea--error';
-  const inputSuccessClasses = 'usa-input--success usx-input--success';
-  const textareaSuccessClasses = 'usa-textarea--success usx-textarea--success';
+  const inputErrorClasses = 'usa-input--error';
+  const textareaErrorClasses = 'usa-textarea--error';
+  const inputSuccessClasses = 'usa-input--success';
+  const textareaSuccessClasses = 'usa-textarea--success';
 
   const labelClasses = 'usa-label usx-label';
 
@@ -82,12 +82,12 @@ export default function Input({
         </span>
       )}
       {hasError && (
-        <span className="usa-error-message usx-error-message">
+        <span className="usa-error-message">
           {typeof error === 'string' ? error : 'Error message goes here.'}
         </span>
       )}
       {hasSuccess && (
-        <span className="usa-success-message usx-success-message">
+        <span className="usa-success-message">
           {typeof success === 'string' ? success : 'Success message goes here.'}
         </span>
       )}

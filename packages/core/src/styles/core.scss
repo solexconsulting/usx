@@ -9,7 +9,7 @@
 
 
 
-.usx-form-group--error {
+.usx-form-group.usa-form-group--error {
 	@if $usx-form-group-error-color {
 		border-color: $usx-form-group-error-color;
 	}

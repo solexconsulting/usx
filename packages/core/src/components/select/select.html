@@ -1,4 +1,58 @@
-<div class="usx-select">
-  <!-- Canonical HTML for Select -->
-  <div class="select__content">NOT IMPLEMENTED</div>
-</div>
+<form class="usa-form">
+  <label class="usa-label" for="options">Dropdown label</label>
+  <select class="usa-select usx-select" name="options" id="options">
+    <option value>- Select -</option>
+    <option value="value1">Option A</option>
+    <option value="value2">Option B</option>
+    <option value="value3">Option C</option>
+  </select>
+</form>
+
+<form class="usa-form">
+  <div class="usa-form-group usx-form-group usa-form-group--error">
+    <label class="usa-label" for="select-with-error">Dropdown label</label>
+    <span id="select-with-error-hint" class="usa-hint">This is a select with an error message.</span>
+    <select id="select-with-error" class="usa-select usx-select usa-input--error" name="options" aria-describedby="select-with-error-hint">
+      <option value>- Select -</option>
+      <option value="value1">Option A</option>
+      <option value="value2">Option B</option>
+      <option value="value3">Option C</option>
+    </select>
+    <span id="select-with-error-info" class="usa-error-message">Selection error message</span>
+  </div>
+</form>
+
+<form class="usa-form">
+  <div class="usa-form-group">
+    <label class="usa-label" for="select-with-success">Success state select</label>
+    <select class="usa-select usx-select usa-input--success" name="options" id="select-with-success">
+      <option value>- Select -</option>
+      <option value="value1">Option A</option>
+      <option value="value2">Option B</option>
+      <option value="value3">Option C</option>
+    </select>
+    <span class="usa-success-message">Success message goes here.</span>
+  </div>
+</form>
+
+<form class="usa-form">
+  <label class="usa-label" for="select-disabled">Disabled select</label>
+  <select class="usa-select usx-select" id="select-disabled" name="options" disabled="disabled">
+    <option value>- Select -</option>
+    <option value="value1">Option A</option>
+    <option value="value2">Option B</option>
+    <option value="value3">Option C</option>
+  </select>
+</form>
+
+<form class="usa-form">
+  <div class="usa-form-group usx-form-group usa-form-group--error">
+    <label class="usa-label" for="select-disabled-error">Disabled with error</label>
+    <select class="usa-select usx-select usa-input--error" id="select-disabled-error" name="options" disabled="disabled">
+      <option value>- Select -</option>
+      <option value="value1">Option A</option>
+      <option value="value2">Option B</option>
+      <option value="value3">Option C</option>
+    </select>
+  </div>
+</form>

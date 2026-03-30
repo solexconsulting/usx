@@ -1,7 +1,13 @@
 
 @use '../../../../tokens/src/tokens.scss' as *;
 
-.usx-input {
+/* ---------------------------------- */
+
+/* Base Enhancements                  */
+
+/* ---------------------------------- */
+
+.usa-input.usx-input, .usa-select.usx-select {
 	@if $usx-input-border-radius {
 		border-radius: $usx-input-border-radius;
 	}
@@ -11,8 +17,7 @@
 	}
 }
 
-
-.usx-textarea {
+.usa-textarea.usx-textarea {
 	@if $usx-textarea-border-radius {
 		border-radius: $usx-textarea-border-radius;
 	}
@@ -22,23 +27,31 @@
 	}
 }
 
-.usx-input:not(.usa-input--error, .usa-input--success) {
-	&:not(:disabled) {
-		@if $usx-input-background-color {
-			background-color: $usx-input-background-color;
-		}
+/* ---------------------------------- */
 
-		@if $usx-input-text-color {
-			color: $usx-input-text-color;
-		}
+/* State Enhancements                 */
 
-		@if $usx-input-border-color {
-			border-color: $usx-input-border-color;
+/* ---------------------------------- */
+
+.usa-input.usx-input, .usa-select.usx-select {
+	&:not(.usa-input--error):not(.usa-input--success) {
+		&:not(:disabled) {
+			@if $usx-input-background-color {
+				background-color: $usx-input-background-color;
+			}
+
+			@if $usx-input-text-color {
+				color: $usx-input-text-color;
+			}
+
+			@if $usx-input-border-color {
+				border-color: $usx-input-border-color;
+			}
 		}
 	}
 }
 
-.usx-textarea:not(.usa-textarea--error, .usa-textarea--success) {
+.usa-textarea.usx-textarea:not(.usa-textarea--error):not(.usa-textarea--success) {
 	&:not(:disabled) {
 		@if $usx-textarea-background-color {
 			background-color: $usx-textarea-background-color;
@@ -54,52 +67,55 @@
 	}
 }
 
-.usx-input--error {
-	@if $usx-input-error-border-width {
-		border-width: $usx-input-error-border-width;
-	}
+.usa-input.usx-input, .usa-select.usx-select {
+    &.usa-input--error {
+		@if $usx-input-error-border-width {
+			border-width: $usx-input-error-border-width;
+		}
 
-	@if $usx-input-error-border-color {
-		border-color: $usx-input-error-border-color;
-	}
+		@if $usx-input-error-border-color {
+			border-color: $usx-input-error-border-color;
+		}
 
-	@if $usx-input-error-border-style {
-		border-style: $usx-input-error-border-style;
-	}
+		@if $usx-input-error-border-style {
+			border-style: $usx-input-error-border-style;
+		}
 
-	@if $usx-input-error-padding-top {
-		padding-top: $usx-input-error-padding-top;
-	}
+		@if $usx-input-error-padding-top {
+			padding-top: $usx-input-error-padding-top;
+		}
 
-	@if $usx-input-error-padding-bottom {
-		padding-bottom: $usx-input-error-padding-bottom;
+		@if $usx-input-error-padding-bottom {
+			padding-bottom: $usx-input-error-padding-bottom;
+		}
 	}
 }
 
-.usx-input--success {
-	@if $usx-input-success-border-width {
-		border-width: $usx-input-success-border-width;
-	}
+.usa-input.usx-input, .usa-select.usx-select {
+    &.usa-input--success {
+		@if $usx-input-success-border-width {
+			border-width: $usx-input-success-border-width;
+		}
 
-	@if $usx-input-success-border-color {
-		border-color: $usx-input-success-border-color;
-	}
+		@if $usx-input-success-border-color {
+			border-color: $usx-input-success-border-color;
+		}
 
-	@if $usx-input-success-border-style {
-		border-style: $usx-input-success-border-style;
-	}
+		@if $usx-input-success-border-style {
+			border-style: $usx-input-success-border-style;
+		}
 
-	@if $usx-input-success-padding-top {
-		padding-top: $usx-input-success-padding-top;
-	}
+		@if $usx-input-success-padding-top {
+			padding-top: $usx-input-success-padding-top;
+		}
 
-	@if $usx-input-success-padding-bottom {
-		padding-bottom: $usx-input-success-padding-bottom;
+		@if $usx-input-success-padding-bottom {
+			padding-bottom: $usx-input-success-padding-bottom;
+		}
 	}
-
 }
 
-.usx-textarea--error {
+.usa-textarea.usx-textarea.usa-textarea--error {
 	@if $usx-textarea-error-border-width {
 		border-width: $usx-textarea-error-border-width;
 	}
@@ -121,7 +137,7 @@
 	}
 }
 
-.usx-textarea--success {
+.usa-textarea.usx-textarea.usa-textarea--success {
 	@if $usx-textarea-success-border-width {
 		border-width: $usx-textarea-success-border-width;
 	}
@@ -143,13 +159,20 @@
 	}
 }
 
+/* ---------------------------------- */
 
-.usx-input:focus-visible {
-	@if $usx-input-focus-outline {
-		outline: $usx-input-focus-outline;
-	}
+/* Focus Enhancements                 */
 
-	@if $usx-input-focus-outline-offset {
-		outline-offset: $usx-input-focus-outline-offset;
+/* ---------------------------------- */
+
+.usa-input.usx-input, .usa-select.usx-select {
+    &:focus-visible {
+		@if $usx-input-focus-outline {
+			outline: $usx-input-focus-outline;
+		}
+
+		@if $usx-input-focus-outline-offset {
+			outline-offset: $usx-input-focus-outline-offset;
+		}
 	}
 }

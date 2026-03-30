@@ -1,11 +1,66 @@
 {
   "name": "select",
   "template": "select/select.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Select"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the select input, used for accessibility and form submission"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the select input, used for form submission"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the select input"
+    },
+    "options": {
+      "type": "array",
+      "description": "Array of option objects with 'value' and 'label' properties"
+    },
+    "defaultValue": {
+      "type": "string",
+      "default": null,
+      "description": "Default selected value for the select input"
+    },
+    "placeholder": {
+      "type": "string",
+      "default": "Select an option",
+      "description": "Placeholder text for the first option"
+    },
+    "onChange": {
+      "type": "string",
+      "default": null,
+      "description": "JavaScript function to call when the selected option changes"
+    },
+    "onBlur": {
+      "type": "string",
+      "default": null,
+      "description": "JavaScript function to call when the select input loses focus"
+    },
+    "error": {
+      "type": "string",
+      "default": null,
+      "description": "An error message that is displayed when the input value is invalid"
+    },
+    "success": {
+      "type": "string",
+      "default": null,
+      "description": "A success message that is displayed when the input value is valid"
+    },
+    "hint": {
+      "type": "string",
+      "default": null,
+      "description": "Hint text to provide additional guidance"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the select input is disabled"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

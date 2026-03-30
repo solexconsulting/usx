@@ -4,13 +4,13 @@
 
 
 {% if characterCount %}
-<div class="usa-character-count usx-character-count">
+<div class="usa-character-count">
 {% endif %}
   <div
     class="
       usa-form-group usx-form-group
-      {% if success and not error %} usa-form-group--success usx-form-group--success{% endif %}
-      {% if error %} usa-form-group--error usx-form-group--error{% endif %}
+      {% if success and not error %} usa-form-group--success{% endif %}
+      {% if error %} usa-form-group--error{% endif %}
     "
   >
     {% if label %}

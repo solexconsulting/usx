@@ -39,7 +39,18 @@
         },
         "hint": {
             "type": "string",
-            "default": null
+            "default": null,
+            "description": "Hint text to provide additional guidance"
+        },
+        "onChange": {
+            "type": "string",
+            "default": null,
+            "description": "JavaScript function to call when the input value changes"
+        },
+        "onBlur": {
+            "type": "string",
+            "default": null,
+            "description": "JavaScript function to call when the input loses focus"
         },
         "textArea": {
             "type": "boolean",
