@@ -33,10 +33,12 @@ export { default as Combobox } from './components/combobox';
 export { default as DatePicker } from './components/date-picker';
 export { default as FileInput } from './components/file-input';
 export { default as Footer } from './components/footer';
+export { default as FormGroup } from './components/form-group';
 export { default as Header } from './components/header';
 export { default as Hero } from './components/hero';
 export { default as Icon } from './components/icon';
 export { default as Identifier } from './components/identifier';
+export { default as Image } from './components/image';
 export { default as InPageNav } from './components/in-page-nav';
 export { default as Indicator } from './components/indicator';
 export { default as Input } from './components/input';
@@ -60,6 +62,9 @@ export { default as Tag } from './components/tag';
 export { default as TimePicker } from './components/time-picker';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
+
+
 
 
 

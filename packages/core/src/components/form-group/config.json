@@ -1,0 +1,11 @@
+{
+  "name": "form-group",
+  "template": "form-group/form-group.django.html",
+  "default": {
+    "children": "NOT IMPLEMENTED: FormGroup"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

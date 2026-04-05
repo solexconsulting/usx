@@ -1,0 +1,20 @@
+{
+  "name": "image",
+  "template": "image/image.django.html",
+  "props": {
+    "src": { "type": "string", "description": "Image source URL" },
+    "alt": { "type": "string", "description": "Alt text for accessibility" },
+    "rounded": { "type": "boolean", "default": false, "description": "Whether to apply rounded corners" },
+    "circular": { "type": "boolean", "default": false, "description": "Whether to make the image circular" },
+    "size": { "type": "string", "enum": ["small", "medium", "large"], "description": "Size variant of the image" },
+    "border": { "type": "boolean", "default": false, "description": "Whether to add a border" },
+    "shadow": { "type": "boolean", "default": false, "description": "Whether to add a shadow" },
+    "thumbnail": { "type": "boolean", "default": false, "description": "Whether to use thumbnail styling" },
+    "caption": { "type": "string", "description": "Caption text for the image" },
+    "fit": { "type": "boolean", "default": false, "description": "Whether to scale the image to fit its container" },
+    "maintainAspectRatio": { "type": "boolean", "default": true, "description": "Whether to maintain aspect ratio when fitting (only applies when fit is true)" },
+    "maxWidth": { "type": "string", "description": "Maximum width of the image container (CSS value like '300px' or '50%')" },
+    "maxHeight": { "type": "string", "description": "Maximum height of the image container (CSS value like '200px' or '50%')" },
+    "className": { "type": "string", "description": "Additional CSS classes" }
+  }
+}
