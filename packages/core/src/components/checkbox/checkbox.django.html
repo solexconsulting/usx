@@ -1,4 +1,16 @@
 {# Django template for Checkbox #}
-<div class="usx-checkbox">
-  <div class="checkbox__content">Checkbox</div>
+
+<div class="usa-checkbox usx-checkbox{% if small %} usx-checkbox--small{% endif %}{% if className %} {{ className }}{% endif %}">
+  <input class="usa-checkbox__input{% if tile %} usa-checkbox__input--tile{% endif %}" id="{{ id }}" type="checkbox" name="{{ name }}" value="{{ value }}"{% if checked %} checked{% endif %}{% if disabled %} disabled{% endif %}{% if required %} required{% endif %}{% if onChange %} onchange="{{ onChange }}"{% endif %}>
+  <label class="usa-checkbox__label" for="{{ id }}">
+    {% if required %}<span title="required" class="text-secondary">*</span>{% endif %}{{ label }}
+    {% if description %}
+    <span class="usa-checkbox__label-description">{{ description }}</span>
+    {% endif %}
+  </label>
 </div>
+{% if error %}
+<span class="usa-error-message text-secondary" role="alert">{{ error }}</span>
+{% elif success %}
+<span class="usa-success-message text-success" role="status">{{ success }}</span>
+{% endif %}
