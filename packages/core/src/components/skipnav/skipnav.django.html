@@ -1,0 +1,11 @@
+{% if href %}
+  <a class="usa-skipnav{% if className %} {{ className }}{% endif %}" href="{{ href }}">
+{% else %}
+  {% if target %}
+    <a class="usa-skipnav{% if className %} {{ className }}{% endif %}" href="#{{ target|cut:'#' }}">
+  {% else %}
+    <a class="usa-skipnav{% if className %} {{ className }}{% endif %}" href="#main-content">
+  {% endif %}
+{% endif %}
+  {{ children|default:content|default:"Skip to main content" }}
+</a>

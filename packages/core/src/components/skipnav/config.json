@@ -1,0 +1,28 @@
+{
+  "name": "skipnav",
+  "template": "skipnav/skipnav.django.html",
+  "props": {
+    "target": {
+      "type": "string",
+      "default": "#main-content",
+      "description": "Preferred: the ID (with or without '#') of the element to skip to. The component will normalize and add the leading '#'."
+    },
+    "href": {
+      "type": "string",
+      "description": "Full href for the skip link (overrides `target`/`skipTo`). Useful if you need to link to a different page or a non-anchor URL."
+    },
+    "content": {
+      "type": "string",
+      "default": "Skip to main content",
+      "description": "Text content for the skipnav link"
+    },
+    "children": {
+      "type": "node",
+      "description": "Custom content for the skipnav link. If provided, this will override the `content` prop."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes to add to the skipnav link"
+    }
+  }
+}
