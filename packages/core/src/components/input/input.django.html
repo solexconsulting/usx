@@ -14,7 +14,9 @@
     "
   >
     {% if label %}
-      <label class="usa-label usx-label" for="{{ field_id }}">{{ label }}</label>
+      <label class="usa-label usx-label" for="{{ field_id }}">
+        {% if required %}<span title="required" class="text-secondary">*</span>{% endif %}{{ label }}
+      </label>
     {% endif %}
     {% if hint %}
       <span id="{{ field_id }}-hint" class="usa-hint">{{ hint }}</span>

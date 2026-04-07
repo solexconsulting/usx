@@ -130,16 +130,13 @@ export const ContactForm = {
                   required
                 />
 
-                <Prose>
-                  <label htmlFor="message" className="usa-label">Message</label>
-                  <textarea
-                    className="usa-textarea"
-                    id="message"
-                    name="message"
-                    rows="5"
-                    required
-                  />
-                </Prose>
+                <Input
+                  id="message"
+                  name="message"
+                  label="Message"
+                  textArea={true}
+                  required
+                />
 
                 <fieldset className="usa-fieldset">
                   <legend className="usa-legend">How did you hear about us?</legend>
@@ -368,10 +365,10 @@ export const BlogPost = {
               <div className="border border-base-lighter border-1px padding-3">
                 <h3>Related Articles</h3>
                 <ul className="usa-list usa-list--unstyled">
-                  <li><a href="#">Cloud Migration Strategies</a></li>
-                  <li><a href="#">AI in Modern Business</a></li>
-                  <li><a href="#">Cybersecurity Best Practices</a></li>
-                  <li><a href="#">Agile Development Methods</a></li>
+                  <li><a className="usa-link" href="#">Cloud Migration Strategies</a></li>
+                  <li><a className="usa-link" href="#">AI in Modern Business</a></li>
+                  <li><a className="usa-link" href="#">Cybersecurity Best Practices</a></li>
+                  <li><a className="usa-link" href="#">Agile Development Methods</a></li>
                 </ul>
               </div>
 
@@ -404,17 +401,19 @@ export const Dashboard = {
         {...headerArgs}
       />
       <div className="grid-container">
-        <div className="grid-row grid-gap margin-bottom-4">
+        <div className="grid-row grid-gap flex-align-center">
           <div className="grid-col-fill">
             <h1>Dashboard</h1>
           </div>
           <div className="grid-col-auto">
-            <Button variant="secondary">Export Data</Button>
-            <Button variant="primary" className="margin-left-1">New Item</Button>
+            <ButtonGroup items={[
+              {children: 'Export Data', variant: 'secondary'},
+              {children: 'New Item', variant: 'primary'}
+            ]} />
           </div>
         </div>
 
-        <div className="grid-row grid-gap margin-bottom-4">
+        <div className="grid-row grid-gap margin-4">
           <div className="tablet:grid-col-3">
             <div className="bg-primary-lighter padding-3 border border-primary border-1px">
               <h3 className="margin-0 text-primary-dark">Total Users</h3>
@@ -758,7 +757,8 @@ export const SearchResults = {
                   actions: [
                     { children: 'Read Guide', variant: 'primary' },
                     { children: 'Watch Video', variant: 'secondary' }
-                  ]
+                  ],
+                  className: 'tablet:grid-col-6 widescreen:grid-col-4'
                 },
                 {
                   title: 'API Authentication',
@@ -773,7 +773,8 @@ export const SearchResults = {
                   ],
                   actions: [
                     { children: 'View Tutorial', variant: 'primary' }
-                  ]
+                  ],
+                  className: 'tablet:grid-col-6 widescreen:grid-col-4'
                 },
                 {
                   title: 'Dashboard Overview',
@@ -788,7 +789,8 @@ export const SearchResults = {
                   ],
                   actions: [
                     { children: 'Explore Dashboard', variant: 'primary' }
-                  ]
+                  ],
+                  className: 'tablet:grid-col-6 widescreen:grid-col-4'
                 }
               ]}
             />
@@ -893,10 +895,10 @@ export const SettingsPage = {
             />
 
             <div className="margin-bottom-3">
-              <label htmlFor="timezone" className="usa-label">Timezone</label>
               <Select
                 id="timezone"
                 name="timezone"
+                label="Timezone"
                 options={[
                   { value: 'America/New_York', label: 'Eastern Time (ET)' },
                   { value: 'America/Chicago', label: 'Central Time (CT)' },
@@ -910,10 +912,10 @@ export const SettingsPage = {
             </div>
 
             <div className="margin-bottom-3">
-              <label htmlFor="language" className="usa-label">Language</label>
               <Select
                 id="language"
                 name="language"
+                label="Language"
                 options={[
                   { value: 'en', label: 'English' },
                   { value: 'es', label: 'Español' },
@@ -931,6 +933,7 @@ export const SettingsPage = {
                 id="email-notifications"
                 name="emailNotifications"
                 label="Email notifications"
+                tile={true}
                 description="Receive important updates via email"
                 checked
               />
@@ -938,12 +941,14 @@ export const SettingsPage = {
                 id="marketing-emails"
                 name="marketingEmails"
                 label="Marketing emails"
+                tile={true}
                 description="Receive promotional content and newsletters"
               />
               <Checkbox
                 id="security-alerts"
                 name="securityAlerts"
                 label="Security alerts"
+                tile={true}
                 description="Get notified about security-related events"
                 checked
               />

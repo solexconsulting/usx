@@ -57,6 +57,11 @@
             "default": false,
             "description": "A boolean that determines whether the input field is a text area, allowing for multi-line input."
         },
+        "required": {
+            "type": "boolean",
+            "default": false,
+            "description": "A boolean that indicates whether the input field is required, meaning that the user must provide a value before submitting the form."
+        },
         "className": {
             "type": "string",
             "default": "",

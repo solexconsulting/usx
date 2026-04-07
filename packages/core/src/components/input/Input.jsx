@@ -11,6 +11,7 @@ export default function Input({
   characterCount,
   hint,
   textArea=false,
+  required=false,
   className = '',
   ...props
 }) {
@@ -68,7 +69,7 @@ export default function Input({
   const content = (
     <>
       <label className={labelClasses} htmlFor={inputId}>
-        {label}
+          {required && <span title="required" className="text-secondary">*</span>}{label}
       </label>
       {hint && (
         <span id={hintId} className="usa-hint">
@@ -125,5 +126,6 @@ Input.propTypes = {
   }),
   hint: PropTypes.string,
   textArea: PropTypes.bool,
+  required: PropTypes.bool,
   className: PropTypes.string,
 };
