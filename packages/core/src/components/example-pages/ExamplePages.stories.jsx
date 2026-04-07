@@ -1,4 +1,5 @@
 import React from 'react';
+import Skipnav from '../skipnav/Skipnav';
 import Banner from '../banner/Banner';
 import Header from '../header/Header';
 import Alert from '../alert/Alert';
@@ -73,6 +74,7 @@ export default {
 export const ContactForm = {
   render: () => (
     <>
+      <Skipnav target="contact-form-example" />
       <Banner
         id="example-1-banner"
         ariaLabel="Example banner"
@@ -81,7 +83,7 @@ export const ContactForm = {
         id="contact-header"
         {...headerArgs}
       />
-      <div className="grid-container">
+      <div id="contact-form-example" className="grid-container">
         <h1>Contact Us</h1>
         <p>Get in touch with our team for any questions or support.</p>
 
@@ -252,6 +254,7 @@ const productShowcaseCardArgs = [
 export const ProductShowcase = {
   render: () => (
     <>
+      <Skipnav target="product-showcase-example" />
       <Banner
         id="example-1-banner"
         ariaLabel="Example banner"
@@ -260,7 +263,7 @@ export const ProductShowcase = {
         id="product-header"
         {...headerArgs}
       />
-      <div className="grid-container">
+      <div id="product-showcase-example" className="grid-container">
         <h1>Our Products</h1>
         <p>Discover our range of innovative solutions designed to meet your needs.</p>
 
@@ -297,6 +300,7 @@ export const ProductShowcase = {
 export const BlogPost = {
   render: () => (
     <>
+      <Skipnav target="blog-post-example" />
       <Banner
         id="example-1-banner"
         ariaLabel="Example banner"
@@ -305,7 +309,7 @@ export const BlogPost = {
         id="blog-header"
         {...headerArgs}
       />
-      <div className="grid-container">
+      <div id="blog-post-example" className="grid-container">
         <article>
           <header className="margin-bottom-4">
             <h1>The Future of Digital Transformation</h1>
@@ -392,6 +396,7 @@ export const BlogPost = {
 export const Dashboard = {
   render: () => (
     <>
+      <Skipnav target="dashboard-example" />
       <Banner
         id="example-1-banner"
         ariaLabel="Example banner"
@@ -400,7 +405,7 @@ export const Dashboard = {
         id="dashboard-header"
         {...headerArgs}
       />
-      <div className="grid-container">
+      <div id="dashboard-example" className="grid-container">
         <div className="grid-row grid-gap flex-align-center">
           <div className="grid-col-fill">
             <h1>Dashboard</h1>
@@ -563,6 +568,7 @@ export const Dashboard = {
 export const FAQPage = {
   render: () => (
     <>
+      <Skipnav target="faq-page-example" />
       <Banner
         id="example-1-banner"
         ariaLabel="Example banner"
@@ -571,7 +577,7 @@ export const FAQPage = {
         id="faq-header"
         {...headerArgs}
       />
-      <div className="grid-container">
+      <div id="faq-page-example" className="grid-container">
         <h1>Frequently Asked Questions</h1>
         <p>Find answers to common questions about our products and services.</p>
 
@@ -666,6 +672,7 @@ export const FAQPage = {
 export const SearchResults = {
   render: () => (
     <>
+      <Skipnav target="search-results-example" />
       <Banner
         id="example-1-banner"
         ariaLabel="Example banner"
@@ -674,7 +681,7 @@ export const SearchResults = {
         id="search-header"
         {...headerArgs}
       />
-      <div className="grid-container">
+      <div id="search-results-example" className="grid-container">
         <div className="margin-y-4">
           <Search
             ariaLabel="Search documentation"
@@ -816,6 +823,7 @@ export const SearchResults = {
 export const SettingsPage = {
   render: () => (
     <>
+      <Skipnav target="settings-page-example" />
       <Banner
         id="example-1-banner"
         ariaLabel="Example banner"
@@ -826,6 +834,7 @@ export const SettingsPage = {
       />
 
       <main
+        id="settings-page-example"
         className="main-content"
         style={{
           display: 'block',

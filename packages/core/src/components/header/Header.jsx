@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 import Search from '../search/Search';
+import Image from '../image/Image';
 import './header.scss';
 
 function PrimaryNav({
@@ -178,16 +179,11 @@ export default function Header({
     <div className="usa-navbar">
       <div className="usa-logo">
         <em className="usa-logo__text">
-          <a
-            href={projectUrl}
-            title={projectTitle}
-          >
-            {projectLogo ? (
-              <img src={projectLogo} alt="Logo" className="usa-logo__image" />
-            ) : (
-              projectTitle
-            )}
-          </a>
+          {projectLogo ? (
+            <Image src={projectLogo} alt="Logo" title={projectTitle} href={projectUrl} className="usa-logo__image" />
+          ) : (
+            <a href={projectUrl} title={projectTitle}>{projectTitle}</a>
+          )}
         </em>
       </div>
       <button type="button" className="usa-menu-btn">

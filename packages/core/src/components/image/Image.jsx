@@ -6,6 +6,7 @@ import './image.scss';
 export default function Image({
   src,
   alt,
+  href,
   rounded = false,
   circular = false,
   caption,
@@ -57,16 +58,23 @@ export default function Image({
     );
   }
 
+  const Element = href ? 'a' : 'div';
+
   return (
-    <div className={classes} style={style}>
+    <Element
+      {...(href ? { href } : {})}
+      className={classes}
+      style={style}
+    >
       {imgElement}
-    </div>
+    </Element>
   );
 }
 
 Image.propTypes = {
   src: PropTypes.string,
   alt: PropTypes.string,
+  href: PropTypes.string,
   rounded: PropTypes.bool,
   circular: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'medium', 'large']),

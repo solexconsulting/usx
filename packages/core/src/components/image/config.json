@@ -4,6 +4,7 @@
   "props": {
     "src": { "type": "string", "description": "Image source URL" },
     "alt": { "type": "string", "description": "Alt text for accessibility" },
+    "href": { "type": "string", "description": "(OPTIONAL) If provided, the image will be wrapped in a link pointing to this URL" },
     "rounded": { "type": "boolean", "default": false, "description": "Whether to apply rounded corners" },
     "circular": { "type": "boolean", "default": false, "description": "Whether to make the image circular" },
     "caption": { "type": "string", "description": "Caption text for the image" },
