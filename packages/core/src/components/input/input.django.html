@@ -37,6 +37,7 @@
         placeholder="{{ placeholder|default:'' }}"
         {% if characterCount %} maxlength="{{ characterCount.max }}" aria-describedby="{{ field_id }}-hint {{ field_id }}-info"{% endif %}
         {% if disabled %} disabled="disabled"{% endif %}
+        {% if required %}required{% endif %}
         defaultValue="{{ value|default:'' }}"
       ></textarea>
     {% else %}
@@ -54,6 +55,7 @@
         placeholder="{{ placeholder|default:'' }}"
         {% if characterCount %} maxlength="{{ characterCount.max }}" aria-describedby="{{ field_id }}-hint {{ field_id }}-info"{% endif %}
         {% if disabled %} disabled="disabled"{% endif %}
+        {% if required %}required{% endif %}
         defaultValue="{{ value|default:'' }}"
       />
     {% endif %}
