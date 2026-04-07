@@ -53,6 +53,11 @@
       "default": null,
       "description": "Hint text to provide additional guidance"
     },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the select input is required, meaning that the user must select an option before submitting the form"
+    },
     "disabled": {
       "type": "boolean",
       "default": false,

@@ -13,6 +13,7 @@ export default function Select({
   success,
   hint,
   disabled = false,
+  required = false,
   className = '',
   ...props
 }) {
@@ -55,7 +56,7 @@ export default function Select({
   const content = (
     <>
       <label className={labelClasses} htmlFor={selectId}>
-        {label}
+        {required && <span title="required" className="text-secondary">*</span>}{label}
       </label>
       {hint && (
         <span id={hintId} className="usa-hint">
@@ -108,5 +109,6 @@ Select.propTypes = {
   success: PropTypes.string,
   hint: PropTypes.string,
   disabled: PropTypes.bool,
+  required: PropTypes.bool,
   className: PropTypes.string,
 };
