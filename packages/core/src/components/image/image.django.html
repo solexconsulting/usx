@@ -34,6 +34,6 @@
   Image
   {% endif %}
   {% if caption %}
-  <figcaption class="usx-image--caption">{{ caption }}</figcaption>
+  <figcaption class="usx-image--caption{% if hideCaption %} sr-only{% endif %}">{{ caption }}</figcaption>
   {% endif %}
 </figure>

@@ -5,19 +5,31 @@ import { buildArgTypes, componentTag } from '../../../helper';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
-const footerWithButton = '<a href="#" class="usa-button usx-button usa-button--primary">Visit Florida Keys</a>';
+const actionsWithButtons = [
+  { children: 'Learn More', variant: 'primary', onClick: () => alert('Learn More clicked') },
+  { children: 'View Details', variant: 'secondary', onClick: () => alert('View Details clicked') }
+];
 
 const baseArgs = {
-  heading: 'Card Title',
-  body: 'This is the main content of the card. It can contain text, links, or other elements.',
-  footer: footerWithButton,
+  title: 'Card Title',
+  description: 'This is the main content of the card. It can contain text, links, or other elements.',
+  actions: actionsWithButtons,
 };
 
-const mediaArgs = {
-  media: {
+const imageArgs = {
+  images: [{
     src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
     alt: 'Placeholder image for card',
-  },
+    caption: 'This is an image caption.'
+  }],
+};
+
+const tagsArgs = {
+  tags: [
+    { value: 'Primary', color: 'primary' },
+    { value: 'Success', color: 'success' },
+    { value: 'Warning', color: 'warning' }
+  ],
 };
 
 export default {
@@ -43,22 +55,35 @@ export const Default = createStory({
   className: 'tablet:grid-col-6 widescreen:grid-col-4',
 });
 
-export const WithMedia = createStory({
+export const WithImage = createStory({
   ...baseArgs,
-  ...mediaArgs,
+  ...imageArgs,
+  className: 'tablet:grid-col-6 widescreen:grid-col-4',
+});
+
+export const WithTags = createStory({
+  ...baseArgs,
+  ...tagsArgs,
+  className: 'tablet:grid-col-6 widescreen:grid-col-4',
+});
+
+export const WithImageAndTags = createStory({
+  ...baseArgs,
+  ...imageArgs,
+  ...tagsArgs,
   className: 'tablet:grid-col-6 widescreen:grid-col-4',
 });
 
 export const FlagLayout = createStory({
   ...baseArgs,
-  ...mediaArgs,
+  ...imageArgs,
   flag: true,
   className: 'grid-col-8',
 });
 
 export const MediaRight = createStory({
   ...baseArgs,
-  ...mediaArgs,
+  ...imageArgs,
   flag: true,
   mediaRight: true,
   className: 'grid-col-8',
@@ -66,40 +91,35 @@ export const MediaRight = createStory({
 
 export const HeaderFirst = createStory({
   ...baseArgs,
-  ...mediaArgs,
+  ...imageArgs,
   headerFirst: true,
   className: 'tablet:grid-col-6 widescreen:grid-col-4',
 });
 
 export const MediaInset = createStory({
   ...baseArgs,
-  ...mediaArgs,
+  ...imageArgs,
   mediaInset: true,
   className: 'tablet:grid-col-6 widescreen:grid-col-4',
 });
 
 export const MediaExdent = createStory({
   ...baseArgs,
-  ...mediaArgs,
+  ...imageArgs,
   mediaExdent: true,
   className: 'tablet:grid-col-6 widescreen:grid-col-4',
 });
 
-export const WithFooter = createStory({
-  ...baseArgs,
-  footer: footerWithButton,
-  className: 'tablet:grid-col-6 widescreen:grid-col-4',
-});
-
 export const Minimal = createStory({
-  heading: 'Simple Card',
-  body: 'Just the basics.',
+  title: 'Simple Card',
+  description: 'Just the basics.',
   className: 'tablet:grid-col-6 widescreen:grid-col-4',
 });
 
 export const FullFeatured = createStory({
   ...baseArgs,
-  ...mediaArgs,
+  ...imageArgs,
+  ...tagsArgs,
   flag: true,
   mediaRight: true,
   headerFirst: true,

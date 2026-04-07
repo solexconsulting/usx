@@ -2,24 +2,46 @@
   "name": "card",
   "template": "card/card.django.html",
   "props": {
-    "heading": {
+    "title": {
       "type": "string",
-      "description": "The heading text displayed in the card header"
+      "description": "The title text displayed in the card header"
     },
-    "body": {
+    "description": {
       "type": "string",
-      "description": "The main content text displayed in the card body"
+      "description": "The description text displayed in the card body"
     },
-    "footer": {
-      "type": "node",
-      "description": "The footer content, typically containing action buttons or links"
+    "tags": {
+      "type": "array",
+      "description": "Array of tag objects with value and color properties",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "string", "description": "Tag text" },
+          "color": { "type": "string", "description": "Tag color variant" }
+        }
+      }
     },
-    "media": {
-      "type": "object",
-      "description": "Media object containing image source and alt text",
-      "properties": {
-        "src": { "type": "string", "description": "Image source URL" },
-        "alt": { "type": "string", "description": "Alt text for the image" }
+    "actions": {
+      "type": "array",
+      "description": "Array of action button objects",
+      "items": {
+        "type": "object",
+        "properties": {
+          "children": { "type": "string", "description": "Button text" },
+          "variant": { "type": "string", "description": "Button variant" },
+          "onClick": { "type": "function", "description": "Click handler" }
+        }
+      }
+    },
+    "images": {
+      "type": "array",
+      "description": "Array of image objects (currently uses first image)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "src": { "type": "string", "description": "Image source URL" },
+          "alt": { "type": "string", "description": "Alt text for the image" }
+        }
       }
     },
     "headerFirst": {

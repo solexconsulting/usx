@@ -46,6 +46,7 @@ export { default as LanguageSelector } from './components/language-selector';
 export { default as List } from './components/list';
 export { default as MemorableDate } from './components/memorable-date';
 export { default as Modal } from './components/modal';
+export { default as Page } from './components/page';
 export { default as Pagination } from './components/pagination';
 export { default as ProcessList } from './components/process-list';
 export { default as Prose } from './components/prose';
@@ -62,6 +63,7 @@ export { default as Tag } from './components/tag';
 export { default as TimePicker } from './components/time-picker';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
 
 
 

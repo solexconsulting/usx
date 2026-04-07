@@ -45,6 +45,14 @@ export const WithCaption = {
   },
 };
 
+export const WithHiddenCaption = {
+  args: {
+    ...getArgs(11),
+    caption: 'This caption is visually hidden but accessible to screen readers.',
+    hideCaption: true,
+  },
+};
+
 export const Fit = {
   args: {
     ...getArgs(12),

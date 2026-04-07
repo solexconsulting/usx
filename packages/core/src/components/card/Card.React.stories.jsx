@@ -5,19 +5,31 @@ import { buildArgTypes } from '../../../helper';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
-const footerWithButton = <a href="#" className="usa-button usx-button usa-button--primary">Visit Florida Keys</a>;
+const actions = [
+  { children: 'Learn More', variant: 'primary', onClick: () => alert('Learn More clicked') },
+  { children: 'View Details', variant: 'secondary', onClick: () => alert('View Details clicked') }
+];
 
 const baseArgs = {
-  heading: 'Card Title',
-  body: 'This is the main content of the card. It can contain text, links, or other elements.',
-  footer: footerWithButton,
+  title: 'Card Title',
+  description: 'This is the main content of the card. It can contain text, links, or other elements.',
+  actions: actions,
 };
 
-const mediaArgs = {
-  media: {
+const imageArgs = {
+  images: [{
     src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
     alt: 'Placeholder image for card',
-  },
+    caption: 'This is an image caption.'
+  }],
+};
+
+const tagsArgs = {
+  tags: [
+    { value: 'Primary', color: 'primary' },
+    { value: 'Success', color: 'success' },
+    { value: 'Warning', color: 'warning' }
+  ],
 };
 
 export default {
@@ -34,10 +46,27 @@ export const Default = {
   },
 };
 
-export const WithMedia = {
+export const WithImage = {
   args: {
     ...baseArgs,
-    ...mediaArgs,
+    ...imageArgs,
+    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+  },
+};
+
+export const WithTags = {
+  args: {
+    ...baseArgs,
+    ...tagsArgs,
+    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+  },
+};
+
+export const WithImageAndTags = {
+  args: {
+    ...baseArgs,
+    ...imageArgs,
+    ...tagsArgs,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
 };
@@ -45,7 +74,7 @@ export const WithMedia = {
 export const FlagLayout = {
   args: {
     ...baseArgs,
-    ...mediaArgs,
+    ...imageArgs,
     flag: true,
     className: 'grid-col-8',
   },
@@ -54,7 +83,7 @@ export const FlagLayout = {
 export const MediaRight = {
   args: {
     ...baseArgs,
-    ...mediaArgs,
+    ...imageArgs,
     flag: true,
     mediaRight: true,
     className: 'grid-col-8',
@@ -64,7 +93,7 @@ export const MediaRight = {
 export const HeaderFirst = {
   args: {
     ...baseArgs,
-    ...mediaArgs,
+    ...imageArgs,
     headerFirst: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
@@ -73,7 +102,7 @@ export const HeaderFirst = {
 export const MediaInset = {
   args: {
     ...baseArgs,
-    ...mediaArgs,
+    ...imageArgs,
     mediaInset: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
@@ -82,24 +111,16 @@ export const MediaInset = {
 export const MediaExdent = {
   args: {
     ...baseArgs,
-    ...mediaArgs,
+    ...imageArgs,
     mediaExdent: true,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
-  },
-};
-
-export const WithFooter = {
-  args: {
-    ...baseArgs,
-    footer: footerWithButton,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
 };
 
 export const Minimal = {
   args: {
-    heading: 'Simple Card',
-    body: 'Just the basics.',
+    title: 'Simple Card',
+    description: 'Just the basics.',
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
 };
@@ -107,7 +128,8 @@ export const Minimal = {
 export const FullFeatured = {
   args: {
     ...baseArgs,
-    ...mediaArgs,
+    ...imageArgs,
+    ...tagsArgs,
     flag: true,
     mediaRight: true,
     headerFirst: true,

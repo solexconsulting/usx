@@ -12,7 +12,7 @@ function PrimaryNav({
   secondaryLinks = [],
   searchConfig = null,
   headerId = 'header',
-  renderSearchDirectly = false
+  renderSearchDirectly = false,
 }) {
   const navClasses = ClassNames(
     'usa-nav__primary', 'usa-accordion'
@@ -154,6 +154,7 @@ export default function Header({
   extended = false,
   megamenu = false,
   useMenuIcon = false,
+  stickyNav = false,
   className = '',
   ...props
 }) {
@@ -165,6 +166,12 @@ export default function Header({
     { 'usa-header--megamenu': megamenu && !extended },
     { 'usa-header--extended': extended },
     className
+  );
+
+  const navClasses = ClassNames(
+    'usa-nav',
+    'usx-nav',
+    { 'usx-nav--sticky': stickyNav },
   );
 
   const navbar = (
@@ -191,9 +198,12 @@ export default function Header({
 
   if (extended) {
     return (
-      <header className={headerClasses} {...props}>
-        {navbar}
-        <nav aria-label="Primary navigation" className="usa-nav">
+      <>
+        <header className={headerClasses} {...props}>
+          {navbar}
+        </header>
+
+        <nav aria-label="Primary navigation" className={navClasses}>
           <div className="usa-nav__inner">
             <PrimaryNav
               navSections={navSections}
@@ -215,7 +225,7 @@ export default function Header({
             </div>
           </div>
         </nav>
-      </header>
+      </>
     );
   }
 
@@ -223,7 +233,7 @@ export default function Header({
     <header className={headerClasses} {...props}>
       <div className="usa-nav-container">
         {navbar}
-        <nav aria-label="Primary navigation" className="usa-nav">
+        <nav aria-label="Primary navigation" className={navClasses}>
           <PrimaryNav
             navSections={navSections}
             megamenu={megamenu}
@@ -276,6 +286,7 @@ Header.propTypes = {
   extended: PropTypes.bool,
   megamenu: PropTypes.bool,
   useMenuIcon: PropTypes.bool,
+  stickyNav: PropTypes.bool,
   className: PropTypes.string,
   id: PropTypes.string,
   styles: PropTypes.object,

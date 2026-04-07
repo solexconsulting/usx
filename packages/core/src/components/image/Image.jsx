@@ -9,6 +9,7 @@ export default function Image({
   rounded = false,
   circular = false,
   caption,
+  hideCaption = false,
   fit = false,
   maxWidth,
   maxHeight,
@@ -36,6 +37,11 @@ export default function Image({
     style.height = 'auto';
   }
 
+  const captionClasses = classNames(
+    'usx-image--caption',
+    { 'usa-sr-only': hideCaption }
+  );
+
   const imgElement = src ? (
     <img src={src} alt={alt} style={style} {...props} />
   ) : (
@@ -46,7 +52,7 @@ export default function Image({
     return (
       <figure className={classes} style={style}>
         {imgElement}
-        <figcaption className="usx-image--caption">{caption}</figcaption>
+        <figcaption className={captionClasses} aria-hidden={hideCaption}>{caption}</figcaption>
       </figure>
     );
   }
@@ -68,6 +74,7 @@ Image.propTypes = {
   shadow: PropTypes.bool,
   thumbnail: PropTypes.bool,
   caption: PropTypes.string,
+  hideCaption: PropTypes.bool,
   fit: PropTypes.bool,
   maintainAspectRatio: PropTypes.bool,
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

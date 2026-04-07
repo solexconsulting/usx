@@ -19,7 +19,9 @@ export default function ButtonGroup({
     <ul className={classes} {...props}>
       {items.map((item, index) => (
         <li key={index} className="usa-button-group__item">
-          <Button {...item} />
+          <Button {...item}>
+            {item.children}
+          </Button>
         </li>
       ))}
     </ul>

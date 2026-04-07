@@ -44,6 +44,7 @@ export default function Banner({
 
   const classes = ClassNames(
     'usa-banner',
+    'usx-banner',
     className
   );
   return (

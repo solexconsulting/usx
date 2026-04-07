@@ -1,27 +1,40 @@
 {% load components %}
 <{% if tag %}{{ tag }}{% else %}div{% endif %} class="usa-card{% if headerFirst %} usa-card--header-first{% endif %}{% if flag %} usa-card--flag{% endif %}{% if mediaRight %} usa-card--media-right{% endif %}{% if className %} {{ className }}{% endif %}">
   <div class="usa-card__container">
-    {% if heading or body or footer or media %}
-      {% if heading %}
+    {% if title or description or tags or actions or images %}
+      {% if title %}
         <div class="usa-card__header">
-          <h4 class="usa-card__heading">{{ heading }}</h4>
+          <h4 class="usa-card__heading">{{ title }}</h4>
         </div>
       {% endif %}
-      {% if media %}
+      {% if images and images.0 %}
         <div class="usa-card__media{% if mediaInset %} usa-card__media--inset{% endif %}{% if mediaExdent %} usa-card__media--exdent{% endif %}">
           <div class="usa-card__img">
-            <img src="{{ media.src }}" alt="{{ media.alt }}" />
+            <img src="{{ images.0.src }}" alt="{{ images.0.alt }}" />
           </div>
         </div>
       {% endif %}
-      {% if body %}
-        <div class="usa-card__body">
-          <p>{{ body }}</p>
+      <div class="usa-card__body">
+      {% if tags %}
+        <div class="usx-tag--group">
+          {% for tag in tags %}
+            {% tag value=tag.value color=tag.color %}{% endtag %}
+          {% endfor %}
         </div>
       {% endif %}
-      {% if footer %}
+      {% if description %}
+          <p>{{ description }}</p>
+      {% endif %}
+      </div>
+      {% if actions %}
         <div class="usa-card__footer">
-          {{ footer|safe }}
+          {% buttongroup items=actions %}{% endbuttongroup %}
+
+          {% for action in actions %}
+          <button class="usa-button usa-button--{{ action.variant|default:'primary' }}{% if not forloop.first %} margin-left-1{% endif %}">
+            {{ action.children }}
+          </button>
+          {% endfor %}
         </div>
       {% endif %}
     {% else %}

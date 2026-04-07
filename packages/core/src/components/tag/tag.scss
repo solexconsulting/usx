@@ -1,4 +1,15 @@
+
 .usx-tag {
   letter-spacing: .1em;
   line-height: 1;
+}
+
+.usx-tag--group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+
+  .usx-tag {
+    margin: 0;
+  }
 }

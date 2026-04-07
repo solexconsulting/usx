@@ -1,6 +1,6 @@
 <h3 class="site-preview-heading">.gov domains</h3>
 <section
-  class="usa-banner"
+  class="usa-banner usx-banner"
   aria-label="Official website of the United States government"
 >
   <div class="usa-accordion">
@@ -95,7 +95,7 @@
 
 <h3 class="site-preview-heading">.mil domains</h3>
 <section
-  class="usa-banner"
+  class="usa-banner usx-banner"
   aria-label="Official website of the United States government,"
 >
   <div class="usa-accordion">
@@ -190,7 +190,7 @@
 
 <h3 class="site-preview-heading">.gov domains (Spanish)</h3>
 <section
-  class="usa-banner"
+  class="usa-banner usx-banner"
   aria-label="Un sitio oficial del Gobierno de Estados Unidos"
 >
   <div class="usa-accordion">
@@ -289,7 +289,7 @@
 
 <h3 class="site-preview-heading">.mil domains (Spanish)</h3>
 <section
-  class="usa-banner"
+  class="usa-banner usx-banner"
   aria-label="Un sitio oficial del Gobierno de Estados Unidos,"
 >
   <div class="usa-accordion">
@@ -394,13 +394,17 @@
 <h3 class="site-preview-heading">Web Component Variant (Spanish)</h3>
 <!-- The script tag should go in the head of your page, if possible -->
 <script src="/assets/uswds/components/usa-banner.js.mjs" type="module"></script>
-<usa-banner lang="es"></usa-banner>
+<usa-banner
+  lang="es"
+  class="usx-banner"
+></usa-banner>
 
 <h3 class="site-preview-heading">Web Component Variant (.mil domain, customized)</h3>
 <!-- The script tag should go in the head of your page, if possible -->
 <script src="/assets/uswds/components/usa-banner.js.mjs" type="module"></script>
 <usa-banner 
   tld="mil"
+  class="usx-banner"
   style="--theme-banner-background-color: #e1f3f8;"
   >
   <div slot="domain-text">A <strong>.mil</strong> website belongs to an official U.S. Department of Defense organization.</div>

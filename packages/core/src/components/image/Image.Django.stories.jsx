@@ -48,6 +48,12 @@ export const WithCaption = createStory({
   caption: shortCaption,
 });
 
+export const WithHiddenCaption = createStory({
+  ...getArgs(11),
+  caption: 'This caption is visually hidden but accessible to screen readers.',
+  hideCaption: true,
+});
+
 export const Fit = createStory({
   ...getArgs(12),
   src: 'https://picsum.photos/400/300?random=12',

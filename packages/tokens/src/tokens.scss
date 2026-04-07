@@ -1,7 +1,14 @@
 @use "sass:color";
 
+// Broad-scope tokens
+$max-layout-width: 64rem !default;
+
 // Color tokens
 $color-primary: #2563eb !default;
+$color-primary-darker: color.adjust($color-primary, $lightness: -20%) !default;
+$color-primary-darkest: color.adjust($color-primary, $lightness: -40%) !default;
+$color-primary-lighter: color.adjust($color-primary, $lightness: 20%) !default;
+$color-primary-lightest: color.adjust($color-primary, $lightness: 40%) !default;
 $color-primary-hover: #5f85ec !default;
 $color-primary-active: #1c3996 !default;
 $color-secondary: #7c3aed !default;
@@ -24,6 +31,29 @@ $color-emergency: #b51d09 !default;
 $color-background: #f8fafc !default;
 $color-surface: #ffffff !default;
 $color-dark-bg: color.adjust($color-primary, $lightness: -50%) !default;
+
+$colors: (
+  'primary': $color-primary,
+  'primary-darker': $color-primary-darker,
+  'primary-darkest': $color-primary-darkest,
+  'secondary': $color-secondary,
+  'accent-cool': $color-accent-cool,
+  'accent-warm': $color-accent-warm,
+  'base': $color-base,
+  'info': $color-info,
+  'warning': $color-warning,
+  'success': $color-success,
+  'error': $color-error,
+  'emergency': $color-emergency,
+) !default;
+
+@each $color-name, $color-value in $colors {
+    @if $color-value != null {
+        .bg-#{$color-name} {
+            background-color: $color-value;
+        }
+    }
+}
 
 // Text color tokens
 $color-text: #0f172a !default;
@@ -188,3 +218,20 @@ $usx-input-focus-outline-offset: null !default;
 // Image tokens
 $usx-image-object-fit-type: cover !default;
 $usx-image-rounded-border-radius: $r-md !default;
+
+
+// Banner tokens
+$usx-banner-background-color: $color-primary-darkest !default;
+$usx-banner-text-color: $color-light-text !default;
+$usx-banner-action-color: $color-light-text !default;
+$usx-banner-after-color: #2491ff !default;
+
+
+// Header tokens
+$usx-header-background-color: $color-primary-lightest !default;
+$usx-header-text-color: $color-light-text !default;
+$usx-header-secondary-link-color: $color-base !default;
+$usx-nav-border-bottom: 2px solid $color-primary-darkest !default;
+$usx-nav-border-top: 2px solid $color-primary-darkest !default;
+$usx-nav-link-color: $color-base-active !default;
+$usx-nav-background-color: $color-primary-lightest !default;
