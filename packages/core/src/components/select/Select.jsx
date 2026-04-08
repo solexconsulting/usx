@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
+import Required from '../required/Required';
+import Label from '../label/Label';
 import './select.scss';
 
 export default function Select({
@@ -29,19 +32,18 @@ export default function Select({
   const selectClasses = 'usa-select usx-select';
   const selectErrorClasses = 'usa-input--error';
   const selectSuccessClasses = 'usa-input--success';
-  const labelClasses = 'usa-label';
 
-  const combinedSelectClasses = [
+  const combinedSelectClasses = ClassNames(
     selectClasses,
     hasError && selectErrorClasses,
     hasSuccess && selectSuccessClasses,
     className,
-  ].filter(Boolean).join(' ');
+  );
 
-  const combinedFormGroupClasses = [
+  const combinedFormGroupClasses = ClassNames(
     formGroupClasses,
     hasError && formGroupErrorClasses,
-  ].filter(Boolean).join(' ');
+  );
 
   const selectProps = {
     id: selectId,
@@ -55,9 +57,9 @@ export default function Select({
 
   const content = (
     <>
-      <label className={labelClasses} htmlFor={selectId}>
-        {required && <span title="required" className="text-secondary">*</span>}{label}
-      </label>
+      <Label htmlFor={selectId} required={required}>
+        {label}
+      </Label>
       {hint && (
         <span id={hintId} className="usa-hint">
           {hint}

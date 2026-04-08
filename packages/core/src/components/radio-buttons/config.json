@@ -1,11 +1,13 @@
 {
   "name": "radio-buttons",
   "template": "radio-buttons/radio-buttons.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: RadioButtons"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "tile": { "type": "boolean", "description": "Render each radio as a tile when true" },
+    "small": { "type": "boolean", "description": "Render compact/small radios when true" },
+    "legend": { "type": "string", "description": "Legend text for the fieldset" },
+    "required": { "type": "boolean", "description": "Whether the fieldset is required" },
+    "name": { "type": "string", "description": "Name attribute for the radio inputs" },
+    "options": { "type": "array", "description": "Array of option objects: {id, value, label, description, checked, disabled}" },
+    "className": { "type": "string", "description": "Additional classes to apply to the wrapper" }
   }
 }

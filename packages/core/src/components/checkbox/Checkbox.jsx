@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
+import Label from '../label/Label';
 import './checkbox.scss';
 
 export default function Checkbox({
@@ -23,17 +25,17 @@ export default function Checkbox({
   const hasError = !!error;
   const hasSuccess = !!success;
 
-  const divClasses = [
+  const divClasses = ClassNames(
     'usa-checkbox',
     'usx-checkbox',
-    small && 'usx-checkbox--small',
+    { 'usx-checkbox--small': small },
     className
-  ].filter(Boolean).join(' ');
+  );
 
-  const inputClasses = [
+  const inputClasses = ClassNames(
     'usa-checkbox__input',
-    tile && 'usa-checkbox__input--tile',
-  ].filter(Boolean).join(' ');
+    { 'usa-checkbox__input--tile': tile }
+  );
 
   return (
     <>
@@ -49,14 +51,15 @@ export default function Checkbox({
           required={required}
           {...(onChange ? { onChange } : {})}
         />
-        <label className="usa-checkbox__label" htmlFor={id}>
-          {required && <span title="required" className="text-secondary">*</span>}{label}
+        <Label className="usa-checkbox__label" classOverride={true} htmlFor={id} required={required}>
+          {label}
           {description && (
             <span className="usa-checkbox__label-description">
               {description}
             </span>
           )}
-        </label>
+        </Label>
+
       </div>
       {hasError ? (
         <span className="usa-error-message text-secondary" role="alert">

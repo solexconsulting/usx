@@ -1,3 +1,5 @@
+{% load components %}
+
 {# normalize ids/names #}
 {% with name|default:"input" as field_name %}
 {% with id|default:field_name as field_id %}
@@ -14,9 +16,7 @@
     "
   >
     {% if label %}
-      <label class="usa-label usx-label" for="{{ field_id }}">
-        {% if required %}<span title="required" class="text-secondary">*</span>{% endif %}{{ label }}
-      </label>
+      {% label htmlFor=field_id required=required %}{{ label }}{% endlabel %}
     {% endif %}
     {% if hint %}
       <span id="{{ field_id }}-hint" class="usa-hint">{{ hint }}</span>

@@ -1,0 +1,6 @@
+@use '../../../../tokens/src/tokens.scss' as *;
+
+.usx-required {
+  color: $color-error;
+  text-decoration: none !important;
+}

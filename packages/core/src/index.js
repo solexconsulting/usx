@@ -32,6 +32,7 @@ export { default as Collection } from './components/collection';
 export { default as Combobox } from './components/combobox';
 export { default as DatePicker } from './components/date-picker';
 export { default as ExamplePages } from './components/example-pages';
+export { default as Fieldset } from './components/fieldset';
 export { default as FileInput } from './components/file-input';
 export { default as Footer } from './components/footer';
 export { default as FormGroup } from './components/form-group';
@@ -43,7 +44,9 @@ export { default as Image } from './components/image';
 export { default as InPageNav } from './components/in-page-nav';
 export { default as Indicator } from './components/indicator';
 export { default as Input } from './components/input';
+export { default as Label } from './components/label';
 export { default as LanguageSelector } from './components/language-selector';
+export { default as Legend } from './components/legend';
 export { default as List } from './components/list';
 export { default as MemorableDate } from './components/memorable-date';
 export { default as Modal } from './components/modal';
@@ -52,6 +55,7 @@ export { default as ProcessList } from './components/process-list';
 export { default as Prose } from './components/prose';
 export { default as RadioButtons } from './components/radio-buttons';
 export { default as RangeSlider } from './components/range-slider';
+export { default as Required } from './components/required';
 export { default as Search } from './components/search';
 export { default as Select } from './components/select';
 export { default as SideNav } from './components/side-nav';
@@ -64,6 +68,10 @@ export { default as Tag } from './components/tag';
 export { default as TimePicker } from './components/time-picker';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
+
+
+
 
 
 

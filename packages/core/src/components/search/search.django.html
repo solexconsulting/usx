@@ -14,7 +14,7 @@
     {% if action %}action="{{ action }}"{% endif %}
     onsubmit="handleSubmit"
   >
-    <label class="usa-sr-only" for="{{ id }}">Search</label>
+    {% label htmlFor=id screenReaderOnly=True %}Search{% endlabel %}
     <input
       id="{{ id }}"
       class="usa-input usx-input"

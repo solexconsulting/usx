@@ -1,4 +1,24 @@
 {# Django template for RadioButtons #}
-<div class="usx-radio-buttons">
-  <div class="radio-buttons__content">RadioButtons</div>
-</div>
+{% load components %}
+
+{% fieldset legend="{{ legend }}" required="{{ required }}" %}
+  {% for opt in options %}
+    <div id="{{ id }}" class="usa-radio usx-radio {% if small %}usx-radio--small{% endif %} {{ className }}">
+      <input
+        class="usa-radio__input{% if tile %} usa-radio__input--tile{% endif %}"
+        id="{{ opt.id|default:forloop.counter0 }}"
+        type="radio"
+        name="{{ name|default:'radio-group' }}"
+        value="{{ opt.value }}"
+        {% if opt.checked %}checked="checked"{% endif %}
+        {% if opt.disabled %}disabled="disabled"{% endif %}
+      />
+      {% label htmlFor=opt.id|default:forloop.counter0 className="usa-radio__label" classOverride=True %}{{ opt.label }}
+        {% if opt.description %}
+          <span class="usa-checkbox__label-description">{{ opt.description }}</span>
+        {% endif %}
+      {% endlabel %}
+    </div>
+  {% endfor %}
+{% endfieldset %}
+

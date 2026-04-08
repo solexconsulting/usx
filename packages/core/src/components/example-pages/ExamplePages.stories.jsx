@@ -15,6 +15,7 @@ import Search from '../search/Search';
 import Select from '../select/Select';
 import Tag from '../tag/Tag';
 import Prose from '../prose/Prose';
+import Fieldset from '../fieldset/Fieldset';
 
 
 /* These stories are pages for demonstrating various components */
@@ -90,9 +91,7 @@ export const ContactForm = {
         <div className="grid-row grid-gap">
           <div className="tablet:grid-col-8">
             <form className="usa-form">
-              <fieldset className="usa-fieldset">
-                <legend className="usa-legend usa-legend--large">Contact Information</legend>
-
+              <Fieldset legend="Contact Information" largeLegend={true}>
                 <Input
                   id="first-name"
                   name="firstName"
@@ -140,8 +139,7 @@ export const ContactForm = {
                   required
                 />
 
-                <fieldset className="usa-fieldset">
-                  <legend className="usa-legend">How did you hear about us?</legend>
+                <Fieldset legend="How did you hear about us?">
                   <Checkbox
                     id="referral-website"
                     name="referral"
@@ -166,7 +164,7 @@ export const ContactForm = {
                     value="other"
                     label="Other"
                   />
-                </fieldset>
+                </Fieldset>
 
                 <Checkbox
                   id="newsletter"
@@ -177,7 +175,7 @@ export const ContactForm = {
                 />
 
                 <Button type="submit" variant="primary">Send Message</Button>
-              </fieldset>
+              </Fieldset>
             </form>
           </div>
 
@@ -701,10 +699,10 @@ export const SearchResults = {
               <h4 className="margin-top-0">Filter Results</h4>
 
               <div className="margin-bottom-3">
-                <label htmlFor="category-filter" className="usa-label">Category</label>
                 <Select
                   id="category-filter"
                   name="category"
+                  label="Category"
                   options={[
                     { value: '', label: 'All Categories' },
                     { value: 'getting-started', label: 'Getting Started' },
@@ -717,10 +715,10 @@ export const SearchResults = {
               </div>
 
               <div className="margin-bottom-3">
-                <label htmlFor="content-type-filter" className="usa-label">Content Type</label>
                 <Select
                   id="content-type-filter"
                   name="contentType"
+                  label="Content Type"
                   options={[
                     { value: '', label: 'All Types' },
                     { value: 'guide', label: 'Guide' },
@@ -937,30 +935,31 @@ export const SettingsPage = {
             </div>
 
             <div className="margin-bottom-4">
-              <label className="usa-label">Notification Preferences</label>
-              <Checkbox
-                id="email-notifications"
-                name="emailNotifications"
-                label="Email notifications"
-                tile={true}
-                description="Receive important updates via email"
-                checked
-              />
-              <Checkbox
-                id="marketing-emails"
-                name="marketingEmails"
-                label="Marketing emails"
-                tile={true}
-                description="Receive promotional content and newsletters"
-              />
-              <Checkbox
-                id="security-alerts"
-                name="securityAlerts"
-                label="Security alerts"
-                tile={true}
-                description="Get notified about security-related events"
-                checked
-              />
+              <Fieldset legend="Notification Preferences">
+                <Checkbox
+                  id="email-notifications"
+                  name="emailNotifications"
+                  label="Email notifications"
+                  tile={true}
+                  description="Receive important updates via email"
+                  checked
+                />
+                <Checkbox
+                  id="marketing-emails"
+                  name="marketingEmails"
+                  label="Marketing emails"
+                  tile={true}
+                  description="Receive promotional content and newsletters"
+                />
+                <Checkbox
+                  id="security-alerts"
+                  name="securityAlerts"
+                  label="Security alerts"
+                  tile={true}
+                  description="Get notified about security-related events"
+                  checked
+                />
+              </Fieldset>
             </div>
 
             <ButtonGroup

@@ -1,0 +1,11 @@
+{# Django template for Legend #}
+{% load components %}
+<legend
+  class="
+    usa-legend usx-legend
+    {% if large %}usa-legend--large{% endif %}
+    {{ className }}
+  "
+>
+  {% if required %}{% required %}{% endrequired %}{% endif %}{{ children|default:text }}
+</legend>

@@ -2,9 +2,7 @@
 {% if error %}
 <div class="usa-form-group usx-form-group usa-form-group--error">
 {% endif %}
-  <label class="usa-label usx-label" for="{{ id }}">
-    {% if required %}<span title="required" class="text-secondary">*</span>{% endif %}{{ label }}
-  </label>
+  {% label htmlFor=id required=required %}{{ label }}{% endlabel %}
   {% if hint %}
   <span id="{{ id }}-hint" class="usa-hint">{{ hint }}</span>
   {% endif %}

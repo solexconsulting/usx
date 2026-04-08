@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
+import Label from '../label/Label';
+import './input.scss';
 
 export default function Input({
   label = 'Label',
@@ -33,19 +36,17 @@ export default function Input({
   const inputSuccessClasses = 'usa-input--success';
   const textareaSuccessClasses = 'usa-textarea--success';
 
-  const labelClasses = 'usa-label usx-label';
-
-  const combinedInputClasses = [
+  const combinedInputClasses = ClassNames(
     textArea ? textareaClasses : inputClasses,
     hasError && (textArea ? textareaErrorClasses : inputErrorClasses),
     hasSuccess && (textArea ? textareaSuccessClasses : inputSuccessClasses),
     className,
-  ].filter(Boolean).join(' ');
+  );
 
-  const combinedFormGroupClasses = [
+  const combinedFormGroupClasses = ClassNames(
     formGroupClasses,
-    (hasError) && formGroupErrorClasses,
-  ].filter(Boolean).join(' ');
+    hasError && formGroupErrorClasses,
+  );
 
   const InputElement = textArea ? 'textarea' : 'input';
 
@@ -68,9 +69,9 @@ export default function Input({
 
   const content = (
     <>
-      <label className={labelClasses} htmlFor={inputId}>
-          {required && <span title="required" className="text-secondary">*</span>}{label}
-      </label>
+      <Label htmlFor={inputId} required={required}>
+          {label}
+      </Label>
       {hint && (
         <span id={hintId} className="usa-hint">
           {hint}

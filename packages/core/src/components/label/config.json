@@ -1,0 +1,12 @@
+{
+  "name": "label",
+  "template": "label/label.django.html",
+  "props": {
+    "htmlFor": { "type": "string", "description": "ID of the form element this label is associated with" },
+    "required": { "type": "boolean", "description": "Whether to show the required field indicator" },
+    "screenReaderOnly": { "type": "boolean", "description": "Whether to visually hide the label but keep it accessible to screen readers" },
+    "classOverride": { "type": "boolean", "description": "Whether to override default classes" },
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

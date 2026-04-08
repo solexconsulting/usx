@@ -1,0 +1,9 @@
+{
+  "name": "required",
+  "template": "required/required.django.html",
+  "props": {
+    "title": { "type": "string", "default": "required", "description": "Title attribute for the required indicator (default: 'required')" },
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

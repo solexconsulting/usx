@@ -1,17 +1,65 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import Label from '../label/Label';
+import Fieldset from '../fieldset/Fieldset';
 import './radio-buttons.scss';
 
-export default function RadioButtons({ children = null, className = '', ...props }) {
-  const classes = ['usx-radio-buttons', className].filter(Boolean).join(' ');
+export default function RadioButtons({
+  tile = false,
+  small = false,
+  legend = 'Select one option',
+  required = false,
+  name = 'radio-group',
+  options = null,
+  className = '',
+  ...props
+}) {
+  const classes = classNames(
+    'usa-radio',
+    'usx-radio',
+    { 'usx-radio--small': small },
+    className
+  );
+
+  const inputClasses = classNames(
+    'usa-radio__input',
+    { 'usa-radio__input--tile': tile }
+  );
+
   return (
-    <div className={classes} {...props}>
-      {children || 'RadioButtons'}
-    </div>
+    <Fieldset legend={legend} required={required}>
+      {options.map((opt, idx) => {
+        const id = opt.id || `${name}-${idx}`;
+
+        return (
+          <div className={classes} key={id}>
+            <input
+              className={inputClasses}
+              id={id}
+              type="radio"
+              name={name}
+              value={opt.value}
+              defaultChecked={!!opt.checked}
+              disabled={!!opt.disabled}
+            />
+            <Label className="usa-radio__label" classOverride={true} htmlFor={id}>
+              {opt.label}
+              {opt.description ? <span className="usa-checkbox__label-description">{opt.description}</span> : null}
+            </Label>
+          </div>
+        );
+      })}
+    </Fieldset>
   );
 }
 
 RadioButtons.propTypes = {
-  children: PropTypes.node,
+  tile: PropTypes.bool,
+  small: PropTypes.bool,
+  name: PropTypes.string,
+  legend: PropTypes.string,
+  required: PropTypes.bool,
+  options: PropTypes.arrayOf(PropTypes.object),
   className: PropTypes.string,
 };

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 import Button from '../button/Button';
+import Label from '../label/Label';
 import './search.scss';
 
 export default function Search({
@@ -55,7 +56,7 @@ export default function Search({
         {...(action ? { action } : {})}
         {...(onSubmit ? { onSubmit: handleSubmit } : {})}
       >
-        <label className="usa-sr-only" htmlFor={id}>Search</label>
+        <Label screenReaderOnly={true} htmlFor={id}>Search</Label>
         <input
           id={id}
           className="usa-input usx-input"
