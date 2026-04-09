@@ -234,4 +234,5 @@ $usx-header-secondary-link-color: $color-base !default;
 $usx-nav-border-bottom: 2px solid $color-primary-darkest !default;
 $usx-nav-border-top: 2px solid $color-primary-darkest !default;
 $usx-nav-link-color: $color-base-active !default;
+$usx-nav-link-hover-color: color.adjust($color-base-hover, $lightness: -20%) !default;
 $usx-nav-background-color: $color-primary-lightest !default;

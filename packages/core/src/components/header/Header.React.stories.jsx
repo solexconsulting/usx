@@ -12,6 +12,12 @@ export default {
   argTypes: generatedArgTypes,
 };
 
+const lotsOfLinks = Array.from({ length: 30 }, (_, i) => ({
+  text: `Link ${i + 1}`,
+  href: `https://example.com/link${i + 1}`,
+  ariaLabel: `Link ${i + 1}`
+}));
+
 const baseArgs = {
   projectTitle: 'My Project',
   projectLogo: 'placeholder_logo.png',
@@ -20,15 +26,15 @@ const baseArgs = {
     {
       title: 'Section 1',
       links: [
-        { text: 'Link 1', href: 'https://example.com/link1', ariaLabel: 'Link 1' },
-        { text: 'Link 2', href: 'https://example.com/link2', ariaLabel: 'Link 2' },
+        { text: 'Link A', href: 'https://example.com/linkA', ariaLabel: 'Link A' },
+        { text: 'Link B', href: 'https://example.com/linkB', ariaLabel: 'Link B' },
       ],
     },
     {
       title: 'Section 2',
       links: [
-        { text: 'Link A', href: 'https://example.com/linkA', ariaLabel: 'Link A' },
-        { text: 'Link B', href: 'https://example.com/linkB', ariaLabel: 'Link B' },
+        { text: 'Link C', href: 'https://example.com/linkC', ariaLabel: 'Link C' },
+        { text: 'Link D', href: 'https://example.com/linkD', ariaLabel: 'Link D' },
       ],
     },
     {
@@ -58,8 +64,8 @@ const secondaryLinks = [
 
 export const Default = {
   args: {
-    id: 'header-default',
     ...baseArgs,
+    id: 'header-default',
     secondaryLinks: secondaryLinks,
     searchConfig: searchArgs,
     extended: true,
@@ -70,8 +76,8 @@ export const Default = {
 
 export const Basic = {
   args: {
-    id: 'header-basic',
     ...baseArgs,
+    id: 'header-basic',
     searchConfig: searchArgs,
     extended: false,
     megamenu: false,
@@ -150,12 +156,6 @@ export const Minimal = {
     ],
   },
 }
-
-const lotsOfLinks = Array.from({ length: 10 }, (_, i) => ({
-  text: `Link ${i + 1}`,
-  href: `https://example.com/link${i + 1}`,
-  ariaLabel: `Link ${i + 1}`
-}));
 
 export const Maximal = {
   args: {

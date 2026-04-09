@@ -1,4 +1,24 @@
 {# Django template for Breadcrumb #}
-<div class="usx-breadcrumb">
-  <div class="breadcrumb__content">Breadcrumb</div>
-</div>
+{# Props: items (array of {href,label,current}), wrap (bool), rdfa (bool), ariaLabel (string), className (string) #}
+<nav class="usa-breadcrumb usx-breadcrumb{% if wrap %} usa-breadcrumb--wrap{% endif %}{% if className %} {{ className }}{% endif %}" aria-label="{{ ariaLabel|default:'Breadcrumbs' }}">
+  <ol class="usa-breadcrumb__list"{% if rdfa %} vocab="http://schema.org/" typeof="BreadcrumbList"{% endif %}>
+    {% if items %}
+      {% for item in items %}
+        {% if item.current %}
+          <li class="usa-breadcrumb__list-item usa-current" aria-current="page"{% if rdfa %} property="itemListElement" typeof="ListItem"{% endif %}>
+            <span{% if rdfa %} property="name"{% endif %}>{{ item.label }}</span>
+            {% if rdfa %}<meta property="position" content="{{ forloop.counter }}" />{% endif %}
+          </li>
+        {% else %}
+          <li class="usa-breadcrumb__list-item"{% if rdfa %} property="itemListElement" typeof="ListItem"{% endif %}>
+            <a href="{{ item.href|default:'#' }}" class="usa-breadcrumb__link"{% if rdfa %} property="item" typeof="WebPage"{% endif %}><span{% if rdfa %} property="name"{% endif %}>{{ item.label }}</span></a>
+            {% if rdfa %}<meta property="position" content="{{ forloop.counter }}" />{% endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <li class="usa-breadcrumb__list-item"><a href="#" class="usa-breadcrumb__link"><span>Home</span></a></li>
+      <li class="usa-breadcrumb__list-item usa-current" aria-current="page"><span>Breadcrumb</span></li>
+    {% endif %}
+  </ol>
+</nav>

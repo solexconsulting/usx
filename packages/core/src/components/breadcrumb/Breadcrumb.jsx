@@ -2,16 +2,76 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './breadcrumb.scss';
 
-export default function Breadcrumb({ children = null, className = '', ...props }) {
-  const classes = ['usx-breadcrumb', className].filter(Boolean).join(' ');
+export default function Breadcrumb({
+  items = null,
+  wrap = false,
+  rdfa = false,
+  ariaLabel = 'Breadcrumbs',
+  className = '',
+  children = null,
+  ...props
+}) {
+  if (!items || items.length === 0) {
+    const classes = ['usx-breadcrumb', className].filter(Boolean).join(' ');
+    return (
+      <div className={classes} {...props}>
+        {children || 'Breadcrumb'}
+      </div>
+    );
+  }
+
+  const navClasses = ['usa-breadcrumb', 'usx-breadcrumb', wrap ? 'usa-breadcrumb--wrap' : null, className]
+    .filter(Boolean)
+    .join(' ');
+
   return (
-    <div className={classes} {...props}>
-      {children || 'Breadcrumb'}
-    </div>
+    <nav className={navClasses} aria-label={ariaLabel} {...props}>
+      <ol
+        className="usa-breadcrumb__list"
+        {...(rdfa ? { vocab: 'http://schema.org/', typeof: 'BreadcrumbList' } : {})}
+      >
+        {items.map((item, idx) => {
+          const isCurrent = !!item.current;
+          const liClass = ['usa-breadcrumb__list-item', isCurrent ? 'usa-current' : null].filter(Boolean).join(' ');
+
+          return (
+            <li
+              key={idx}
+              className={liClass}
+              {...(isCurrent ? { 'aria-current': 'page' } : {})}
+              {...(rdfa ? { property: 'itemListElement', typeof: 'ListItem' } : {})}
+            >
+              {isCurrent ? (
+                <span {...(rdfa ? { property: 'name' } : {})}>{item.label}</span>
+              ) : (
+                <a
+                  href={item.href || '#'}
+                  className="usa-breadcrumb__link"
+                  {...(rdfa ? { property: 'item', typeof: 'WebPage' } : {})}
+                >
+                  <span {...(rdfa ? { property: 'name' } : {})}>{item.label}</span>
+                </a>
+              )}
+              {rdfa && <meta property="position" content={String(idx + 1)} />}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
   );
 }
 
 Breadcrumb.propTypes = {
-  children: PropTypes.node,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      href: PropTypes.string,
+      label: PropTypes.string.isRequired,
+      current: PropTypes.bool,
+    })
+  ),
+  wrap: PropTypes.bool,
+  rdfa: PropTypes.bool,
+  ariaLabel: PropTypes.string,
   className: PropTypes.string,
+  children: PropTypes.node,
 };

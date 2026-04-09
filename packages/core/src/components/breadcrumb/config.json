@@ -1,11 +1,30 @@
 {
   "name": "breadcrumb",
   "template": "breadcrumb/breadcrumb.django.html",
-  "default": {
-    "children": "Breadcrumb default content"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "items": {
+      "type": "array",
+      "description": "Array of breadcrumb items",
+      "items": {
+        "type": "object",
+        "properties": {
+          "href": { "type": "string", "description": "URL for the breadcrumb link" },
+          "label": { "type": "string", "description": "Text label for the breadcrumb item" },
+          "current": { "type": "boolean", "description": "Whether this item is the current page" }
+        }
+      }
+    },
+    "wrap": { "type": "boolean", "default": false, "description": "Use wrapping breadcrumb style (adds usa-breadcrumb--wrap)" },
+    "rdfa": { "type": "boolean", "default": false, "description": "Include RDFa metadata attributes for Search engines" },
+    "ariaLabel": { "type": "string", "default": "Breadcrumbs", "description": "Custom aria-label for the nav element" },
+    "className": { "type": "string", "description": "Additional CSS classes to add to the nav element" }
+  },
+  "default": {
+    "items": [
+      { "href": "#", "label": "Home" },
+      { "href": "#", "label": "Federal Contracting" },
+      { "href": "#", "label": "Contracting assistance programs" },
+      { "href": "#", "label": "Economically disadvantaged women-owned small business federal contracting program", "current": true }
+    ]
   }
 }

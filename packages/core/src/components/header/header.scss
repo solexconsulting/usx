@@ -8,6 +8,10 @@
     color: $usx-header-text-color;
   }
 
+  &::after {
+    display: none;
+  }
+
   overflow: unset;
   position: relative;
 
@@ -34,10 +38,28 @@
       border-top: 1px solid #dfe1e2;
     }
   }
+
+  @media (min-width: 64em) {
+
+    .usa-nav__submenu.usa-megamenu {
+      left: 0;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: $max-layout-width;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 }
 
 .usa-nav.usx-nav {
   float: right;
+
+  &::after {
+    clear: both;
+    content: "";
+    display: block;
+  }
 
   @media (min-width: 64em) {
     width: 100%;
@@ -66,9 +88,14 @@
     }
   }
   
-  .usa-nav__link {
+  .usa-nav__link:not(.usa-nav__primary button[aria-expanded="true"]) {
     @if $usx-nav-link-color != null {
       color: $usx-nav-link-color;
+    }
+    &:hover {
+      @if $usx-nav-link-hover-color != null {
+        color: $usx-nav-link-hover-color;
+      }
     }
   }
 
