@@ -54,28 +54,56 @@ export const WithHiddenCaption = createStory({
   hideCaption: true,
 });
 
-export const Fit = createStory({
+export const ObjectFitCover = createStory({
   ...getArgs(12),
   src: 'https://picsum.photos/400/300?random=12',
-  fit: true,
+  objectFit: 'cover',
+  caption: shortCaption,
+});
+
+export const ObjectFitContain = createStory({
+  ...getArgs(13),
+  src: 'https://picsum.photos/200/500?random=13',
+  objectFit: 'contain',
+  caption: shortCaption,
+});
+
+export const ObjectFitFill = createStory({
+  ...getArgs(14),
+  src: 'https://picsum.photos/50/30?random=14',
+  objectFit: 'fill',
+  caption: shortCaption,
+});
+
+export const ObjectFitNone = createStory({
+  ...getArgs(15),
+  src: 'https://picsum.photos/400/300?random=15',
+  objectFit: 'none',
+  caption: shortCaption,
+});
+
+export const ObjectFitScaleDown = createStory({
+  ...getArgs(16),
+  src: 'https://picsum.photos/1300/500?random=16',
+  objectFit: 'scale-down',
   caption: shortCaption,
 });
 
 export const WithMaxWidth = createStory({
-  ...getArgs(13),
-  fit: true,
+  ...getArgs(17),
+  objectFit: 'fill',
   maxWidth: '200px',
   caption: shortCaption,
 });
 
 export const WithMaxHeight = createStory({
-  ...getArgs(14),
-  fit: true,
+  ...getArgs(18),
+  objectFit: 'fill',
   maxHeight: '150px',
   caption: shortCaption,
 });
 
 export const LongCaption = createStory({
-  ...getArgs(15),
+  ...getArgs(19),
   caption: longCaption,
 });

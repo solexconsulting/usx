@@ -11,7 +11,7 @@ export default function Image({
   circular = false,
   caption,
   hideCaption = false,
-  fit = false,
+  objectFit = '',
   maxWidth,
   maxHeight,
   className = '',
@@ -22,7 +22,7 @@ export default function Image({
     {
       'usx-image--rounded': rounded,
       'usx-image--circular': circular,
-      'usx-image--fit': fit,
+      [`usx-object-fit-${objectFit}`]: objectFit,
     },
     className
   );
@@ -83,7 +83,7 @@ Image.propTypes = {
   thumbnail: PropTypes.bool,
   caption: PropTypes.string,
   hideCaption: PropTypes.bool,
-  fit: PropTypes.bool,
+  objectFit: PropTypes.oneOf(['cover', 'contain', 'fill', 'none', 'scale-down']),
   maintainAspectRatio: PropTypes.bool,
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

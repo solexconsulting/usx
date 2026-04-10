@@ -4,6 +4,7 @@ import ClassNames from 'classnames';
 import ButtonGroup from '../button-group/ButtonGroup';
 import Tag from '../tag/Tag';
 import Image from '../image/Image';
+import Carousel from '../carousel/Carousel';
 import './card.scss';
 
 export default function Card({
@@ -17,6 +18,7 @@ export default function Card({
   mediaRight = false,
   mediaInset = false,
   mediaExdent = false,
+  showCarouselDots = true,
   children,
   className = '',
   tag: RootTag = 'div',
@@ -45,7 +47,19 @@ export default function Card({
   const shouldRenderStructured = hasStructuredContent && !children;
 
   // Get the first image if images array is provided
-  const firstImage = images && images.length > 0 ? images[0] : null;
+  const hasImages = images && images.length > 0;
+  const useCarousel = images && images.length > 1;
+  const media = useCarousel ? (
+    <Carousel
+      id={`${props.id || 'card'}-carousel`}
+      showDots={showCarouselDots}
+      slides={images.map((img, index) => (
+        <Image key={index} {...img} hideCaption={true} />
+      ))}
+    />
+  ) : hasImages ? (
+    <Image {...images[0]} hideCaption={true} className="usa-card__img" />
+  ) : null;
 
   return (
     <RootTag className={cardClasses} {...props}>
@@ -58,9 +72,9 @@ export default function Card({
               </div>
             )}
 
-            {firstImage && (
+            {media && (
               <div className={mediaClasses}>
-                <Image {...firstImage} hideCaption={true} className="usa-card__img" />
+                {media}
               </div>
             )}
 
@@ -113,6 +127,7 @@ Card.propTypes = {
   mediaRight: PropTypes.bool,
   mediaInset: PropTypes.bool,
   mediaExdent: PropTypes.bool,
+  showCarouselDots: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
   tag: PropTypes.string,

@@ -22,10 +22,14 @@ const images = {
     {
       src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
       alt: 'Placeholder image for card',
+      caption: 'This is an image caption.',
+      objectFit: 'cover',
     },
     {
       src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
       alt: 'Placeholder image for card',
+      caption: 'This is another image caption.',
+      objectFit: 'cover',
     }
   ]
 }

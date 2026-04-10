@@ -24,6 +24,85 @@ const imageArgs = {
   }],
 };
 
+const imageCoverArgs = {
+  images: [
+    {
+      src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
+      alt: 'Placeholder image for card',
+      caption: 'This is an image caption.',
+      objectFit: 'cover',
+    },
+    {
+      src: 'https://picsum.photos/800/300?random=1',
+      alt: 'Placeholder image for card',
+      caption: 'This is another image caption.',
+      objectFit: 'cover',
+    },
+    {
+      src: 'https://picsum.photos/800/300?random=2',
+      alt: 'Placeholder image for card',
+      caption: 'This is yet another image caption.',
+      objectFit: 'cover',
+    }
+  ],
+};
+
+const imageContainArgs = {
+  images: [
+    {
+      src: 'https://picsum.photos/800/300?random=1',
+      alt: 'Placeholder image for card',
+      caption: 'This is another image caption.',
+      objectFit: 'contain',
+    },
+    {
+      src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
+      alt: 'Placeholder image for card',
+      caption: 'This is an image caption.',
+      objectFit: 'contain',
+    },
+    {
+      src: 'https://picsum.photos/800/300?random=2',
+      alt: 'Placeholder image for card',
+      caption: 'This is yet another image caption.',
+      objectFit: 'contain',
+    }
+  ],
+};
+
+const imageFillArgs = {
+  images: [
+    {
+      src: 'https://picsum.photos/800/300?random=1',
+      alt: 'Placeholder image for card',
+      caption: 'This is another image caption.',
+      objectFit: 'fill',
+    },
+    {
+      src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
+      alt: 'Placeholder image for card',
+      caption: 'This is an image caption.',
+      objectFit: 'fill',
+    },
+    {
+      src: 'https://picsum.photos/800/300?random=2',
+      alt: 'Placeholder image for card',
+      caption: 'This is yet another image caption.',
+      objectFit: 'fill',
+    }
+  ],
+};
+
+const singleImageArgs = {
+  images: [
+    {
+      src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
+      alt: 'Placeholder image for card',
+      caption: 'This is an image caption.'
+    }
+  ],
+};
+
 const tagsArgs = {
   tags: [
     { value: 'Primary', color: 'primary' },
@@ -125,4 +204,43 @@ export const FullFeatured = createStory({
   headerFirst: true,
   mediaInset: true,
   className: 'tablet:grid-col-6 widescreen:grid-col-4',
+});
+
+export const WithCarousel = createStory({
+  ...baseArgs,
+  ...imageCoverArgs,
+  className: 'tablet:grid-col-6 widescreen:grid-col-4',
+});
+
+export const WithCarouselNoDots = createStory({
+  ...baseArgs,
+  ...imageCoverArgs,
+  showCarouselDots: false,
+  className: 'tablet:grid-col-6 widescreen:grid-col-4',
+});
+
+export const WithCarouselAndTags = createStory({
+  ...baseArgs,
+  ...imageCoverArgs,
+  ...tagsArgs,
+  className: 'tablet:grid-col-6 widescreen:grid-col-4',
+});
+
+export const WithCarouselFlagLayout = createStory({
+  ...baseArgs,
+  ...imageCoverArgs,
+  flag: true,
+  className: 'grid-col-8',
+});
+
+export const ImagesWithObjectFitContain = createStory({
+  ...baseArgs,
+  ...imageContainArgs,
+  className: 'tablet:grid-col-4',
+});
+
+export const ImagesWithObjectFitFill = createStory({
+  ...baseArgs,
+  ...imageFillArgs,
+  className: 'tablet:grid-col-4',
 });

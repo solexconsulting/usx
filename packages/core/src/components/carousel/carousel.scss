@@ -1,0 +1,89 @@
+@use '../../../../tokens/src/tokens.scss' as *;
+
+/* ============================= */
+/* Base Carousel                 */
+/* ============================= */
+
+.usx-carousel {
+  height: 100%;
+  position: relative;
+}
+
+/* Viewport (scroll container) */
+.usx-carousel__viewport {
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  /* Improve UX */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* Track */
+.usx-carousel__track {
+  height: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+/* Slides */
+.usx-carousel__slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  overflow: clip;
+
+  outline: none;
+}
+
+.usx-carousel__slide:focus {
+    outline: .25rem solid #2491ff;
+    outline-offset: -.25rem;
+}
+
+/* ============================= */
+/* Dots Navigation               */
+/* ============================= */
+
+.usx-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+
+  @if $usx-carousel-dot-gap {
+    gap: $usx-carousel-dot-gap;
+  }
+}
+
+.usx-carousel__dots a {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c0c0c0;
+  display: inline-block;
+  text-decoration: none;
+
+  @if $usx-carousel-dot-color {
+    background: $usx-carousel-dot-color;
+  }
+
+  &:hover {
+    background: #a0a0a0;
+
+    @if $usx-carousel-dot-color-hover {
+      background: $usx-carousel-dot-color-hover;
+    }
+  }
+
+  &:active {
+    background: #808080;
+
+    @if $usx-carousel-dot-color-active {
+      background: $usx-carousel-dot-color-active;
+    }
+  }
+}

@@ -16,12 +16,83 @@ const baseArgs = {
   actions: actions,
 };
 
-const imageArgs = {
-  images: [{
-    src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
-    alt: 'Placeholder image for card',
-    caption: 'This is an image caption.'
-  }],
+const imageCoverArgs = {
+  images: [
+    {
+      src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
+      alt: 'Placeholder image for card',
+      caption: 'This is an image caption.',
+      objectFit: 'cover',
+    },
+    {
+      src: 'https://picsum.photos/800/300?random=1',
+      alt: 'Placeholder image for card',
+      caption: 'This is another image caption.',
+      objectFit: 'cover',
+    },
+    {
+      src: 'https://picsum.photos/800/300?random=2',
+      alt: 'Placeholder image for card',
+      caption: 'This is yet another image caption.',
+      objectFit: 'cover',
+    }
+  ],
+};
+
+const imageContainArgs = {
+  images: [
+    {
+      src: 'https://picsum.photos/800/300?random=1',
+      alt: 'Placeholder image for card',
+      caption: 'This is another image caption.',
+      objectFit: 'contain',
+    },
+    {
+      src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
+      alt: 'Placeholder image for card',
+      caption: 'This is an image caption.',
+      objectFit: 'contain',
+    },
+    {
+      src: 'https://picsum.photos/800/300?random=2',
+      alt: 'Placeholder image for card',
+      caption: 'This is yet another image caption.',
+      objectFit: 'contain',
+    }
+  ],
+};
+
+const imageFillArgs = {
+  images: [
+    {
+      src: 'https://picsum.photos/800/300?random=1',
+      alt: 'Placeholder image for card',
+      caption: 'This is another image caption.',
+      objectFit: 'fill',
+    },
+    {
+      src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
+      alt: 'Placeholder image for card',
+      caption: 'This is an image caption.',
+      objectFit: 'fill',
+    },
+    {
+      src: 'https://picsum.photos/800/300?random=2',
+      alt: 'Placeholder image for card',
+      caption: 'This is yet another image caption.',
+      objectFit: 'fill',
+    }
+  ],
+};
+
+const singleImageArgs = {
+  images: [
+    {
+      src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
+      alt: 'Placeholder image for card',
+      caption: 'This is an image caption.'
+    }
+  ],
 };
 
 const tagsArgs = {
@@ -49,7 +120,7 @@ export const Default = {
 export const WithImage = {
   args: {
     ...baseArgs,
-    ...imageArgs,
+    ...singleImageArgs,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
 };
@@ -57,7 +128,7 @@ export const WithImage = {
 export const WithTags = {
   args: {
     ...baseArgs,
-    ...tagsArgs,
+    ...singleImageArgs,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
 };
@@ -65,7 +136,7 @@ export const WithTags = {
 export const WithImageAndTags = {
   args: {
     ...baseArgs,
-    ...imageArgs,
+    ...singleImageArgs,
     ...tagsArgs,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
@@ -74,7 +145,7 @@ export const WithImageAndTags = {
 export const FlagLayout = {
   args: {
     ...baseArgs,
-    ...imageArgs,
+    ...singleImageArgs,
     flag: true,
     className: 'grid-col-8',
   },
@@ -83,7 +154,7 @@ export const FlagLayout = {
 export const MediaRight = {
   args: {
     ...baseArgs,
-    ...imageArgs,
+    ...singleImageArgs,
     flag: true,
     mediaRight: true,
     className: 'grid-col-8',
@@ -93,7 +164,7 @@ export const MediaRight = {
 export const HeaderFirst = {
   args: {
     ...baseArgs,
-    ...imageArgs,
+    ...singleImageArgs,
     headerFirst: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
@@ -102,7 +173,7 @@ export const HeaderFirst = {
 export const MediaInset = {
   args: {
     ...baseArgs,
-    ...imageArgs,
+    ...singleImageArgs,
     mediaInset: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
@@ -111,9 +182,44 @@ export const MediaInset = {
 export const MediaExdent = {
   args: {
     ...baseArgs,
-    ...imageArgs,
+    ...singleImageArgs,
     mediaExdent: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
+  },
+};
+
+export const WithCarousel = {
+  args: {
+    ...baseArgs,
+    ...imageCoverArgs,
+    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+  },
+};
+
+export const WithCarouselNoDots = {
+  args: {
+    ...baseArgs,
+    ...imageCoverArgs,
+    showCarouselDots: false,
+    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+  },
+};
+
+export const WithCarouselAndTags = {
+  args: {
+    ...baseArgs,
+    ...imageCoverArgs,
+    ...tagsArgs,
+    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+  },
+};
+
+export const WithCarouselFlagLayout = {
+  args: {
+    ...baseArgs,
+    ...imageCoverArgs,
+    flag: true,
+    className: 'grid-col-8',
   },
 };
 
@@ -128,12 +234,28 @@ export const Minimal = {
 export const FullFeatured = {
   args: {
     ...baseArgs,
-    ...imageArgs,
+    ...imageCoverArgs,
     ...tagsArgs,
     flag: true,
     mediaRight: true,
     headerFirst: true,
     mediaInset: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
+  },
+};
+
+export const ImagesWithObjectFitContain = {
+  args: {
+    ...baseArgs,
+    ...imageContainArgs,
+    className: 'tablet:grid-col-4',
+  },
+};
+
+export const ImagesWithObjectFitFill = {
+  args: {
+    ...baseArgs,
+    ...imageFillArgs,
+    className: 'tablet:grid-col-4',
   },
 };

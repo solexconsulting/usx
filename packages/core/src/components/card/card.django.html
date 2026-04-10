@@ -7,11 +7,13 @@
           <h4 class="usa-card__heading">{{ title }}</h4>
         </div>
       {% endif %}
-      {% if images and images.0 %}
+      {% if images and images|length > 1 %}
         <div class="usa-card__media{% if mediaInset %} usa-card__media--inset{% endif %}{% if mediaExdent %} usa-card__media--exdent{% endif %}">
-          <div class="usa-card__img">
-            <img src="{{ images.0.src }}" alt="{{ images.0.alt }}" />
-          </div>
+          {% include 'carousel/carousel.django.html' with slides=images id=id|default:'card'|add:'-carousel' showDots=showCarouselDots|default:True className='' only %}
+        </div>
+      {% elif images and images.0 %}
+        <div class="usa-card__media{% if mediaInset %} usa-card__media--inset{% endif %}{% if mediaExdent %} usa-card__media--exdent{% endif %}">
+          {% include 'image/image.django.html' with src=images.0.src alt=images.0.alt hideCaption=True className='usa-card__img' only %}
         </div>
       {% endif %}
       <div class="usa-card__body">
@@ -28,13 +30,7 @@
       </div>
       {% if actions %}
         <div class="usa-card__footer">
-          {% buttongroup items=actions %}{% endbuttongroup %}
-
-          {% for action in actions %}
-          <button class="usa-button usa-button--{{ action.variant|default:'primary' }}{% if not forloop.first %} margin-left-1{% endif %}">
-            {{ action.children }}
-          </button>
-          {% endfor %}
+          {% include 'button-group/button-group.django.html' with items=actions only %}
         </div>
       {% endif %}
     {% else %}

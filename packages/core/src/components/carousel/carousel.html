@@ -1,0 +1,64 @@
+<style>
+  .demo-card {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: #f0f0f0;
+    border-radius: 0.5rem;
+  }
+</style>
+
+<div
+  class="usx-carousel"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="Featured content"
+>
+  <div class="usx-carousel__viewport">
+    <div class="usx-carousel__track">
+
+      <section
+        id="slide-1"
+        class="usx-carousel__slide"
+        role="group"
+        aria-roledescription="slide"
+        aria-label="1 of 3"
+        tabindex="0"
+      >
+        <div class="demo-card">Slide 1</div>
+      </section>
+
+      <section
+        id="slide-2"
+        class="usx-carousel__slide"
+        role="group"
+        aria-roledescription="slide"
+        aria-label="2 of 3"
+        tabindex="0"
+      >
+        <div class="demo-card">Slide 2</div>
+      </section>
+
+      <section
+        id="slide-3"
+        class="usx-carousel__slide"
+        role="group"
+        aria-roledescription="slide"
+        aria-label="3 of 3"
+        tabindex="0"
+      >
+        <div class="demo-card">Slide 3</div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Navigation dots -->
+  <div class="usx-carousel__dots" aria-label="Slide navigation">
+    <a href="#slide-1" aria-label="Go to slide 1"></a>
+    <a href="#slide-2" aria-label="Go to slide 2"></a>
+    <a href="#slide-3" aria-label="Go to slide 3"></a>
+  </div>
+</div>

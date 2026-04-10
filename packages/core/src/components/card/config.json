@@ -69,6 +69,11 @@
       "default": false,
       "description": "Whether to extend the media outside the card container boundaries"
     },
+    "showCarouselDots": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to show navigation dots when multiple images are provided"
+    },
     "children": {
       "type": "node",
       "description": "Inner HTML or text content (alternative to structured props)"

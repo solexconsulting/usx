@@ -1,39 +1,33 @@
 {# Django template for Image #}
-<figure class="
-  usx-image
-  {% if rounded %}
-    usx-image--rounded
-  {% endif %}
-  {% if circular %}
-    usx-image--circular
-  {% endif %}
-  {% if fit %}
-    usx-image--fit
-  {% endif %}
-  {% if className %} {{ className }}{% endif %}"
-  {% if maxWidth or maxHeight %}
-    style="
-      {% if maxWidth %}
-        max-width: {{ maxWidth }};
-        width: {{ maxWidth }};
-        {% if not maxHeight %}
-          height: auto;
-        {% endif %}
-      {% endif %}
-      {% if maxHeight %}
-        max-height: {{ maxHeight }};
-        height: {{ maxHeight }};
-        {% if not maxWidth %}
-          width: auto;
-        {% endif %}
-      {% endif %}"
-  {% endif %}>
+{# Props: src, alt, href, rounded, circular, objectFit, maxWidth, maxHeight, caption, hideCaption, className #}
+
+{% comment %} Build classes inline to remain compatible with Django templating {% endcomment %}
+{% if caption %}
+<figure class="usx-image{% if rounded %} usx-image--rounded{% endif %}{% if circular %} usx-image--circular{% endif %}{% if objectFit %} usx-object-fit-{{ objectFit }}{% endif %}{% if className %} {{ className }}{% endif %}"{% if maxWidth or maxHeight %} style="{% if maxWidth %}max-width: {{ maxWidth }}; width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }}; height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %}>
   {% if src %}
-  <img src="{{ src }}"{% if alt %} alt="{{ alt }}"{% endif %}>
+    <img src="{{ src }}"{% if alt %} alt="{{ alt }}"{% endif %} />
   {% else %}
-  Image
+    Image
   {% endif %}
-  {% if caption %}
-  <figcaption class="usx-image--caption{% if hideCaption %} sr-only{% endif %}">{{ caption }}</figcaption>
-  {% endif %}
+  <figcaption class="usx-image--caption{% if hideCaption %} usa-sr-only{% endif %}">{{ caption }}</figcaption>
 </figure>
+{% else %}
+  {# No caption: render an anchor if href provided, otherwise a div #}
+  {% if href %}
+    <a href="{{ href }}" class="usx-image{% if rounded %} usx-image--rounded{% endif %}{% if circular %} usx-image--circular{% endif %}{% if objectFit %} usx-object-fit-{{ objectFit }}{% endif %}{% if className %} {{ className }}{% endif %}"{% if maxWidth or maxHeight %} style="{% if maxWidth %}max-width: {{ maxWidth }}; width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }}; height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %}>
+      {% if src %}
+        <img src="{{ src }}"{% if alt %} alt="{{ alt }}"{% endif %} />
+      {% else %}
+        Image
+      {% endif %}
+    </a>
+  {% else %}
+    <div class="usx-image{% if rounded %} usx-image--rounded{% endif %}{% if circular %} usx-image--circular{% endif %}{% if objectFit %} usx-object-fit-{{ objectFit }}{% endif %}{% if className %} {{ className }}{% endif %}"{% if maxWidth or maxHeight %} style="{% if maxWidth %}max-width: {{ maxWidth }}; width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }}; height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %}>
+      {% if src %}
+        <img src="{{ src }}"{% if alt %} alt="{{ alt }}"{% endif %} />
+      {% else %}
+        Image
+      {% endif %}
+    </div>
+  {% endif %}
+{% endif %}
