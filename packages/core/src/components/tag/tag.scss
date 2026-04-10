@@ -1,14 +1,5 @@
+@use '../tag-group/tag-group.scss' as *;
 
 .usx-tag {
   letter-spacing: .1rem;
-}
-
-.usx-tag--group {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: .25rem;
-
-  .usx-tag {
-    margin: 0;
-  }
 }

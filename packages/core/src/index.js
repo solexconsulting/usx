@@ -66,9 +66,11 @@ export { default as StepIndicator } from './components/step-indicator';
 export { default as SummaryBox } from './components/summary-box';
 export { default as Table } from './components/table';
 export { default as Tag } from './components/tag';
+export { default as TagGroup } from './components/tag-group';
 export { default as TimePicker } from './components/time-picker';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
 
 
 

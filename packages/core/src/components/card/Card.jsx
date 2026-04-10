@@ -81,7 +81,7 @@ export default function Card({
 
             <div className="usa-card__body">
               {tags && tags.length > 0 && (
-                <div className="usx-tag--group">
+                <div className="usx-tag-group">
                   {tags.map((tag, index) => (
                     <Tag key={index} {...tag} />
                   ))}

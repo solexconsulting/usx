@@ -1,0 +1,10 @@
+
+.usx-tag-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+
+  .usx-tag {
+    margin: 0;
+  }
+}

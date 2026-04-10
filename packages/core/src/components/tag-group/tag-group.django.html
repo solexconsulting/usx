@@ -1,0 +1,9 @@
+<div class="usx-tag-group{% if className %} {{ className }}{% endif %}">
+  {% if children %}
+    {{ children|safe }}
+  {% elif tags %}
+    {% for tag in tags %}
+      {% include 'tag/tag.django.html' with big=tag.big value=tag.value color=tag.color|default:'' className=tag.className|default:'' only %}
+    {% endfor %}
+  {% endif %}
+</div>
