@@ -53,7 +53,8 @@ export default function Card({
     <Carousel
       id={`${props.id || 'card'}-carousel`}
       showDots={showCarouselDots}
-      slides={images.map((img, index) => (
+      className="usx-card__carousel"
+      slides={images?.map((img, index) => (
         <Image key={index} {...img} hideCaption={true} />
       ))}
     />

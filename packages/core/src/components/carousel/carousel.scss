@@ -6,6 +6,7 @@
 
 .usx-carousel {
   height: 100%;
+  display: block;
   position: relative;
 }
 
@@ -84,6 +85,45 @@
 
     @if $usx-carousel-dot-color-active {
       background: $usx-carousel-dot-color-active;
+    }
+  }
+}
+
+
+/* ============================= */
+/* Card Specifics                */
+/* ============================= */
+
+
+.usa-card__media {
+  .usx-card__carousel {
+    border-top-left-radius: calc(.5rem - 2px);
+    border-top-right-radius: calc(.5rem - 2px);
+    overflow: hidden;
+    background-color: #f0f0f0;
+  }
+
+  &.usa-card__media--inset {
+    .usx-card__carousel {
+      border-radius: 0;
+    }
+  }
+}
+
+@media (min-width: 40em) {
+
+  .usa-card--flag .usa-card__media:not(.usa-card__media--inset) {
+
+    .usx-card__carousel {
+      border-radius: 0;
+      border-top-left-radius: calc(.5rem - 2px);
+      border-bottom-left-radius: calc(.5rem - 2px);
+    }
+
+    .usa-card--media-right .usx-card__carousel {
+      border-radius: 0;
+      border-top-right-radius: calc(.5rem - 2px);
+      border-bottom-right-radius: calc(.5rem - 2px);
     }
   }
 }

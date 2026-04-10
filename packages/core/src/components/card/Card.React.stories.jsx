@@ -179,6 +179,17 @@ export const MediaInset = {
   },
 };
 
+export const MediaInsetRight = {
+  args: {
+    ...baseArgs,
+    ...singleImageArgs,
+    flag: true,
+    mediaInset: true,
+    mediaRight: true,
+    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+  },
+};
+
 export const MediaExdent = {
   args: {
     ...baseArgs,
@@ -192,6 +203,15 @@ export const WithCarousel = {
   args: {
     ...baseArgs,
     ...imageCoverArgs,
+    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+  },
+};
+
+export const WithCarouselInset = {
+  args: {
+    ...baseArgs,
+    ...imageCoverArgs,
+    mediaInset: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
 };
