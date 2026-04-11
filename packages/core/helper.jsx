@@ -3,6 +3,8 @@
 An array of helpers for story rendering.
 */
 
+import { djangoComponent } from './djangoComponent.js';
+
 export const componentTag = ({ name, props }) => {
     const propsString = Object.entries(props)
         .map(([key, value]) => ` ${key}="${value}"`)
@@ -47,3 +49,25 @@ export const buildArgTypes = (props = {}) => {
 });
 return argTypes;
 };
+
+/**
+ * Returns a story factory bound to a Django component name.
+ * Call once with the component name, then use the returned function per story.
+ *
+ * Usage:
+ *   const createStory = createDjangoStory('my-component');
+ *   export const Default = createStory(storyDefs.Default);
+ */
+export const createDjangoStory = (componentName) => (args) => ({
+  args,
+  parameters: {
+    docs: {
+      source: {
+        code: componentTag({ name: componentName, props: args }),
+      },
+    },
+  },
+  render: djangoComponent(componentName),
+});
+
+

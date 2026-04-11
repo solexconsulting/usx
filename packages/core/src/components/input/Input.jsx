@@ -60,15 +60,16 @@ export default function Input({
         </span>
       )}
       <input {...inputProps} />
-      {hasError ? (
+      {hasError && typeof error === 'string' && (
         <span id={`${inputId}-error`} className="usa-error-message" role="alert">
           {error}
         </span>
-      ) : hasSuccess ? (
+      )}
+      {hasSuccess && typeof success === 'string' && (
         <span id={`${inputId}-success`} className="usa-success-message" role="status">
           {success}
         </span>
-      ) : null}
+      )}
     </>
   );
 }

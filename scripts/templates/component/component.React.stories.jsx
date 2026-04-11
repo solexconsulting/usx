@@ -1,13 +1,18 @@
 import React from 'react';
 import {{Name}} from './{{Name}}';
 import config from './config.json';
+import { buildArgTypes } from '../../../helper';
+
+export const storyDefs = {
+  Default: config.default || {},
+};
 
 export default {
   title: 'React/{{Name}}',
   component: {{Name}},
+  tags: ['autodocs'],
+  argTypes: buildArgTypes(config.props || {}),
+  excludeStories: ['storyDefs'],
 };
 
-const Template = (args) => <{{Name}} {...args} />;
-
-export const Default = Template.bind({});
-Default.args = config.default || {};
+export const Default = { args: storyDefs.Default };

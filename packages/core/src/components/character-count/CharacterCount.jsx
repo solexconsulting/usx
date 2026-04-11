@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import FormGroup from '../form-group/FormGroup';
-import Label from '../label/Label';
+import Input from '../input/Input';
+import TextArea from '../text-area/TextArea';
 import './character-count.scss';
 
 export default function CharacterCount({
@@ -37,28 +38,28 @@ export default function CharacterCount({
     ? `${Math.abs(charsRemaining)} character${Math.abs(charsRemaining) !== 1 ? 's' : ''} over limit`
     : `${charsRemaining} character${charsRemaining !== 1 ? 's' : ''} left`;
 
+  // infoId must come first in aria-describedby (USWDS spec)
   const describedByParts = [infoId];
   if (hintId) describedByParts.push(hintId);
   if (hasError && typeof error === 'string') describedByParts.push(`${fieldId}-error`);
   if (hasSuccess && typeof success === 'string') describedByParts.push(`${fieldId}-success`);
 
-  const fieldClasses = ClassNames(
-    textArea ? ['usa-textarea', 'usx-textarea'] : ['usa-input', 'usx-input'],
-    'usa-character-count__field',
-    hasError ? (textArea ? 'usa-textarea--error' : 'usa-input--error') : null,
-    !hasError && hasSuccess ? (textArea ? 'usa-textarea--success' : 'usa-input--success') : null,
-  );
-
   const outerClasses = ClassNames('usa-character-count', 'usx-character-count', className);
 
-  const sharedFieldProps = {
+  const fieldProps = {
     id: fieldId,
-    className: fieldClasses,
+    label,
+    hint,
+    required,
+    screenReaderOnlyLabel,
     placeholder,
-    ...(hardLimit ? { maxLength: max } : {}),
     disabled,
+    error: hasError ? (typeof error === 'string' ? error : true) : null,
+    success: hasSuccess ? success : null,
+    className: 'usa-character-count__field',
+    ...(hardLimit ? { maxLength: max } : {}),
+    // Override internal aria-describedby so infoId is included first
     'aria-describedby': describedByParts.join(' '),
-    'aria-invalid': hasError ? 'true' : undefined,
     onChange: (e) => setCurrentLength(e.target.value.length),
     ...props,
   };
@@ -66,36 +67,7 @@ export default function CharacterCount({
   return (
     <div className={outerClasses} data-maxlength={max}>
       <FormGroup error={hasError} success={hasSuccess}>
-        {label && (
-          <Label
-            htmlFor={fieldId}
-            required={required}
-            screenReaderOnly={screenReaderOnlyLabel}
-            className={hasError ? 'usa-label--error' : undefined}
-          >
-            {label}
-          </Label>
-        )}
-        {hint && (
-          <span id={hintId} className="usa-hint">
-            {hint}
-          </span>
-        )}
-        {textArea ? (
-          <textarea {...sharedFieldProps} {...(required ? { required: true } : {})} />
-        ) : (
-          <input {...sharedFieldProps} required={required} />
-        )}
-        {error && typeof error === 'string' && (
-          <span id={`${fieldId}-error`} className="usa-error-message" role="alert">
-            {error}
-          </span>
-        )}
-        {hasSuccess && typeof success === 'string' && (
-          <span id={`${fieldId}-success`} className="usa-success-message" role="status">
-            {success}
-          </span>
-        )}
+        {textArea ? <TextArea {...fieldProps} /> : <Input {...fieldProps} />}
       </FormGroup>
       {/* Static fallback message — hidden visually once user starts typing */}
       <span
@@ -126,22 +98,6 @@ export default function CharacterCount({
     </div>
   );
 }
-
-CharacterCount.propTypes = {
-  id: PropTypes.string,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  max: PropTypes.number.isRequired,
-  hardLimit: PropTypes.bool,
-  hint: PropTypes.string,
-  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  success: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  disabled: PropTypes.bool,
-  required: PropTypes.bool,
-  screenReaderOnlyLabel: PropTypes.bool,
-  placeholder: PropTypes.string,
-  textArea: PropTypes.bool,
-  className: PropTypes.string,
-};
 
 CharacterCount.propTypes = {
   id: PropTypes.string,
