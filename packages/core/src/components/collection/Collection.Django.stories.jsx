@@ -1,24 +1,17 @@
 import React from 'react';
-import { djangoComponent } from '../../../djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../../helper';
-
-const generatedArgTypes = buildArgTypes(config.props || {});
+import { buildArgTypes, createDjangoStory } from '../../../helper';
+import { storyDefs } from './Collection.React.stories.jsx';
 
 export default {
   title: 'Django/Collection',
   tags: ['autodocs'],
-  argTypes: generatedArgTypes,
+  argTypes: buildArgTypes(config.props || {}),
 };
 
-export const Default = {
-  args: config.default || {},
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'collection', props: config.default || {} })
-      }
-    }
-  },
-  render: djangoComponent('collection')
-};
+const createStory = createDjangoStory('collection');
+
+export const Default = createStory(storyDefs.Default);
+export const WithThumbnail = createStory(storyDefs.WithThumbnail);
+export const Calendar = createStory(storyDefs.Calendar);
+export const Condensed = createStory(storyDefs.Condensed);

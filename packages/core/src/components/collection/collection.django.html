@@ -1,4 +1,48 @@
-{# Django template for Collection #}
-<div class="usx-collection">
-  <div class="collection__content">Collection</div>
-</div>
+{% load components %}
+
+<ul class="usa-collection usx-collection{% if condensed %} usa-collection--condensed{% endif %}{% if className %} {{ className }}{% endif %}">
+  {% for item in items %}
+    <li class="usa-collection__item">
+      {% if item.imgSrc %}
+        <img class="usa-collection__img" src="{{ item.imgSrc }}" alt="{{ item.imgAlt }}" />
+      {% endif %}
+      {% if item.calendarDate %}
+        {% with datetime=item.calendarDate %}
+          {% include "calendar-date/calendar-date.django.html" with datetime=datetime only%}
+        {% endwith %}
+      {% endif %}
+      <div class="usa-collection__body">
+        <h4 class="usa-collection__heading">
+          <a class="usa-link" href="{{ item.href }}">{{ item.heading }}</a>
+        </h4>
+        {% if item.description %}
+          <p class="usa-collection__description">{{ item.description }}</p>
+        {% endif %}
+        {% if item.meta %}
+          <ul class="usa-collection__meta" aria-label="More information">
+            {% for m in item.meta %}
+              {% if m.datetime %}
+                <li class="usa-collection__meta-item"><time datetime="{{ m.datetime }}">{{ m.text }}</time></li>
+              {% elif m.text %}
+                <li class="usa-collection__meta-item">{{ m.text }}</li>
+              {% else %}
+                <li class="usa-collection__meta-item">{{ m }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if item.tags %}
+          <ul class="usa-collection__meta" aria-label="Topics">
+            {% for tag in item.tags %}
+              {% if tag.label %}
+                <li class="usa-collection__meta-item usa-tag usx-tag{% if tag.isNew %} usa-tag--new{% endif %}">{{ tag.label }}</li>
+              {% else %}
+                <li class="usa-collection__meta-item usa-tag usx-tag">{{ tag }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </li>
+  {% endfor %}
+</ul>

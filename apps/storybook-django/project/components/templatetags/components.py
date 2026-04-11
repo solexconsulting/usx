@@ -8,6 +8,8 @@ from django import template
 from django.utils.safestring import mark_safe
 from ..core.render import render_component
 from ..core.registry import get_all_components, _autodiscover_components
+from datetime import datetime
+import re
 
 # Force discovery of components at import time
 _autodiscover_components()
@@ -71,3 +73,28 @@ class ComponentNode(template.Node):
             resolved_props['children'] = children_html
         html = render_component(self.comp_name, resolved_props)
         return mark_safe(html)
+
+
+def _parse_iso(datetime_str):
+    """Parse an ISO 8601 string, stripping timezone offset if present."""
+    s = re.sub(r'([+-]\d{2}:\d{2}|Z)$', '', str(datetime_str))
+    for fmt in ('%Y-%m-%dT%H:%M:%S', '%Y-%m-%dT%H:%M', '%Y-%m-%d'):
+        try:
+            return datetime.strptime(s, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+@register.filter
+def iso_month(datetime_str):
+    """Return the 3-letter uppercase month abbreviation from an ISO 8601 string."""
+    dt = _parse_iso(datetime_str)
+    return dt.strftime('%b').upper() if dt else ''
+
+
+@register.filter
+def iso_day(datetime_str):
+    """Return the day (no leading zero) from an ISO 8601 string."""
+    dt = _parse_iso(datetime_str)
+    return str(dt.day) if dt else ''

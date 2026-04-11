@@ -25,6 +25,7 @@ export { default as Banner } from './components/banner';
 export { default as Breadcrumb } from './components/breadcrumb';
 export { default as Button } from './components/button';
 export { default as ButtonGroup } from './components/button-group';
+export { default as CalendarDate } from './components/calendar-date';
 export { default as Card } from './components/card';
 export { default as CardGroup } from './components/card-group';
 export { default as Carousel } from './components/carousel';
@@ -72,6 +73,8 @@ export { default as TextArea } from './components/text-area';
 export { default as TimePicker } from './components/time-picker';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
+
 
 
 

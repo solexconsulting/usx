@@ -1,0 +1,8 @@
+{% load components %}
+
+<div class="usa-collection__calendar-date">
+  <time datetime="{{ datetime }}">
+    <span class="usa-collection__calendar-date-month">{{ datetime|iso_month }}</span>
+    <span class="usa-collection__calendar-date-day">{{ datetime|iso_day }}</span>
+  </time>
+</div>

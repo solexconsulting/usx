@@ -1,0 +1,11 @@
+{
+  "name": "calendar-date",
+  "template": "calendar-date/calendar-date.django.html",
+  "props": {
+    "datetime": {
+      "type": "string",
+      "default": null,
+      "description": "ISO 8601 datetime string. Month and day are parsed from this value."
+    }
+  }
+}

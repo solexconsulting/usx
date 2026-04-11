@@ -1,11 +1,21 @@
 {
   "name": "collection",
   "template": "collection/collection.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Collection"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "items": {
+      "type": "object",
+      "default": [],
+      "description": "Array of collection item objects. Each item: { href, heading, description?, imgSrc?, imgAlt?, calendarDate?: { datetime, month, day }, meta?: [{ text, datetime? }], tags?: [{ label, isNew? }] }"
+    },
+    "condensed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Applies usa-collection--condensed for a compact headings-only layout."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes for the collection wrapper."
+    }
   }
 }
