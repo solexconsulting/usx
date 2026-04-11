@@ -1,94 +1,41 @@
-<label class="usa-label usx-label" for="input-type-text">Text input label</label>
+<!-- Default -->
+<label class="usa-label usx-label" for="input-1">Text input label</label>
+<input class="usa-input usx-input" id="input-1" placeholder="Type here" />
 
-<input class="usa-input usx-input" id="input-type-text" name="input-type-text" />
+<!-- WithHint -->
+<label class="usa-label usx-label" for="input-2">Input with hint</label>
+<span id="input-2-hint" class="usa-hint">Enter your full legal name.</span>
+<input class="usa-input usx-input" id="input-2" placeholder="Type here" aria-describedby="input-2-hint" />
 
-<label class="usa-label usx-label" for="input-type-textarea">Text area label</label>
-<textarea
-  class="usa-textarea usx-textarea"
-  id="input-type-textarea"
-  name="input-type-textarea"
-></textarea>
+<!-- Required -->
+<label class="usa-label usx-label" for="input-3">
+  <abbr title="required" class="usx-required">*</abbr>Required input
+</label>
+<input class="usa-input usx-input" id="input-3" placeholder="Type here" required />
 
-<div class="usa-form-group usx-form-group usa-form-group--error">
-  <label class="usa-label usx-label" for="input-type-text-2">Error state input</label>
-  <input class="usa-input usx-input usa-input--error usx-input--error" id="input-type-text-2" name="input-type-text-2" />
-  <span class="usa-error-message usx-error-message">Error message goes here.</span>
-</div>
+<!-- ScreenReaderOnlyLabel -->
+<br/><br/>
+<label class="usa-label usx-label usa-sr-only" for="input-4">Visually hidden label</label>
+<input class="usa-input usx-input" id="input-4" placeholder="Label is screen reader only" />
 
-<div class="usa-form-group usx-form-group">
-  <label class="usa-label usx-label" for="input-type-text-3">Success state input</label>
-  <input class="usa-input usx-input usa-input--success usx-input--success" id="input-type-text-3" name="input-type-text-3" />
-  <span class="usa-success-message usx-success-message">Success message goes here.</span>
-</div>
+<!-- ErrorState -->
+<label class="usa-label usx-label" for="input-5">Error state input</label>
+<input class="usa-input usx-input usa-input--error" id="input-5" placeholder="Type here" aria-describedby="input-5-error" aria-invalid="true" />
+<span id="input-5-error" class="usa-error-message" role="alert">Enter a valid email address.</span>
 
-<div class="usa-form-group usx-form-group usa-form-group--error">
-  <label class="usa-label usx-label" for="input-type-textarea-2">Error state textarea</label>
-  <textarea class="usa-textarea usx-textarea usa-textarea--error usx-textarea--error" id="input-type-textarea-2" name="input-type-textarea-2"></textarea>
-  <span class="usa-error-message usx-error-message">Error message goes here.</span>
-</div>
+<!-- ErrorStateNoMessage -->
+<label class="usa-label usx-label" for="input-6">Error state (no message)</label>
+<input class="usa-input usx-input usa-input--error" id="input-6" placeholder="Type here" aria-invalid="true" />
 
-<div class="usa-form-group usx-form-group">
-  <label class="usa-label usx-label" for="input-type-textarea-3">Success state textarea</label>
-  <textarea class="usa-textarea usx-textarea usa-textarea--success usx-textarea--success" id="input-type-textarea-3" name="input-type-textarea-3"></textarea>
-  <span class="usa-success-message usx-success-message">Success message goes here.</span>
-</div>
+<!-- SuccessState -->
+<label class="usa-label usx-label" for="input-7">Success state input</label>
+<input class="usa-input usx-input usa-input--success" id="input-7" placeholder="Type here" aria-describedby="input-7-success" />
+<span id="input-7-success" class="usa-success-message" role="status">Your email address has been accepted.</span>
 
-<label class="usa-label usx-label" for="input-type-text-disabled">Disabled input</label>
-<input class="usa-input usx-input" id="input-type-text-disabled" name="input-type-text-disabled" disabled="disabled" />
+<!-- SuccessStateNoMessage -->
+<label class="usa-label usx-label" for="input-8">Success state (no message)</label>
+<input class="usa-input usx-input usa-input--success" id="input-8" placeholder="Type here" />
 
-<label class="usa-label usx-label" for="input-type-textarea-disabled">Disabled textarea</label>
-<textarea class="usa-textarea usx-textarea" id="input-type-textarea-disabled" name="input-type-textarea-disabled" disabled="disabled"></textarea>
-
-<div class="usa-form-group usx-form-group usa-form-group--error">
-  <label class="usa-label usx-label" for="input-type-text-disabled-error">Disabled with error</label>
-  <input class="usa-input usx-input usa-input--error usx-input--error" id="input-type-text-disabled-error" name="input-type-text-disabled-error" disabled="disabled" />
-</div>
-
-<div class="usa-form-group usx-form-group usa-form-group--error">
-  <label class="usa-label usx-label" for="input-type-textarea-disabled-error">Disabled textarea with error</label>
-  <textarea class="usa-textarea usx-textarea usa-textarea--error usx-textarea--error" id="input-type-textarea-disabled-error" name="input-type-textarea-disabled-error" disabled="disabled"></textarea>
-</div>
-
-<form class="usa-form">
-  <div class="usa-character-count">
-    <div class="usa-form-group usx-form-group">
-      <label class="usa-label usx-label" for="with-hint-input">Input with character count</label>
-      <span id="with-hint-input-hint" class="usa-hint">This is an input with a character count.</span>
-
-      <input
-        class="usa-input usx-input"
-        id="with-hint-input"
-        name="with-hint-input"
-        maxlength="25"
-        aria-describedby="with-hint-input-hint with-hint-input-info"
-      />
-
-      <span id="with-hint-input-info" class="usa-character-count__message"
-        >You can enter up to 25 characters</span
-      >
-    </div>
-  </div>
-</form>
-
-
-<form class="usa-form">
-  <div class="usa-character-count">
-    <div class="usa-form-group usx-form-group usa-form-group--error">
-      <label class="usa-label usx-label" for="with-hint-input">Input with invalid character count</label>
-      <span id="with-hint-input-hint" class="usa-hint">This is an input with a character count.</span>
-
-      <input
-        class="usa-input usx-input usa-input--error usx-input--error"
-        id="with-hint-input"
-        name="with-hint-input"
-        maxlength="25"
-        value="This value exceeds the maximum character count."
-        aria-describedby="with-hint-input-hint with-hint-input-info"
-      />
-
-      <span id="with-hint-input-info" class="usa-character-count__message usa-error-message usx-error-message"
-        >Character count exceeded</span
-      >
-    </div>
-  </div>
-</form>
+<!-- Disabled -->
+<label class="usa-label usx-label" for="input-9">Disabled input</label>
+<input class="usa-input usx-input" id="input-9" placeholder="Type here" disabled />

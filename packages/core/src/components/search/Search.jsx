@@ -4,6 +4,7 @@ import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 import Button from '../button/Button';
 import Label from '../label/Label';
+import Input from '../input/Input';
 import './search.scss';
 
 export default function Search({
@@ -56,10 +57,10 @@ export default function Search({
         {...(action ? { action } : {})}
         {...(onSubmit ? { onSubmit: handleSubmit } : {})}
       >
-        <Label screenReaderOnly={true} htmlFor={id}>Search</Label>
-        <input
+        <Input
           id={id}
-          className="usa-input usx-input"
+          label={label}
+          screenReaderOnlyLabel={true}
           placeholder={placeholder}
           defaultValue={defaultValue}
           type="search"

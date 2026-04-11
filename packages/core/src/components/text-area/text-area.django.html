@@ -1,6 +1,6 @@
 {% load components %}
 
-{% with id|default:"input" as field_id %}
+{% with id|default:"text-area" as field_id %}
 
 {% if label %}
   {% label htmlFor=field_id screenReaderOnly=screenReaderOnlyLabel required=required only %}{{ label }}{% endlabel %}
@@ -8,10 +8,10 @@
 {% if hint %}
   <span id="{{ field_id }}-hint" class="usa-hint">{{ hint }}</span>
 {% endif %}
-<input
-  class="usa-input usx-input{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
+<textarea
+  class="usa-textarea usx-textarea{% if error %} usa-textarea--error{% elif success %} usa-textarea--success{% endif %}{% if className %} {{ className }}{% endif %}"
   id="{{ field_id }}"
-  placeholder="{{ placeholder|default:'Type here' }}"
+  placeholder="{{ placeholder|default:'' }}"
   {% if hint and error %}aria-describedby="{{ field_id }}-hint {{ field_id }}-error"
   {% elif hint and success %}aria-describedby="{{ field_id }}-hint {{ field_id }}-success"
   {% elif hint %}aria-describedby="{{ field_id }}-hint"
@@ -21,7 +21,7 @@
   {% if error %}aria-invalid="true" {% endif %}
   {% if disabled %}disabled {% endif %}
   {% if required %}required{% endif %}
-/>
+>{{ defaultValue|default:'' }}</textarea>
 {% if error %}
   <span id="{{ field_id }}-error" class="usa-error-message" role="alert">{{ error }}</span>
 {% elif success %}

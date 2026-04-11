@@ -1,0 +1,542 @@
+<!-- Default: soft limit (idle) -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-1">Text input (soft limit)</label>
+    <input class="usa-input usx-input usa-character-count__field" id="cc-1" aria-describedby="cc-1-info" />
+  </div>
+  <span id="cc-1-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- Soft limit: active (within limit) -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-1a">Text input (soft limit, active)</label>
+    <input class="usa-input usx-input usa-character-count__field" id="cc-1a" aria-describedby="cc-1a-info" value="Hello" />
+  </div>
+  <span id="cc-1a-info" class="usa-character-count__message usa-sr-only">You can enter up to 25 characters</span>
+  <div class="usa-character-count__status usa-hint" aria-hidden="true">20 characters left</div>
+  <div class="usa-character-count__sr-status usa-sr-only" aria-live="polite">20 characters left</div>
+</div>
+
+<!-- Soft limit: over limit -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group usa-form-group--error">
+    <label class="usa-label usx-label usa-label--error" for="cc-1b">Text input (over limit)</label>
+    <input class="usa-input usx-input usa-character-count__field usa-input--error" id="cc-1b" aria-describedby="cc-1b-info" aria-invalid="true" value="abcdefghijklmnopqrstuvwxyz123456789" />
+  </div>
+  <span id="cc-1b-info" class="usa-character-count__message usa-sr-only">You can enter up to 25 characters</span>
+  <div class="usa-character-count__status usa-hint usa-character-count__status--invalid" aria-hidden="true">10 characters over limit</div>
+  <div class="usa-character-count__sr-status usa-sr-only" aria-live="polite">10 characters over limit</div>
+</div>
+
+<!-- HardLimit: maxlength prevents typing past the limit -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-2">Text input (hard limit)</label>
+    <input class="usa-input usx-input usa-character-count__field" id="cc-2" maxlength="25" aria-describedby="cc-2-info" />
+  </div>
+  <span id="cc-2-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- WithHint -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-3">Text input with hint</label>
+    <span id="cc-3-hint" class="usa-hint">You can enter up to 25 characters.</span>
+    <input class="usa-input usx-input usa-character-count__field" id="cc-3" aria-describedby="cc-3-info cc-3-hint" />
+  </div>
+  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- WithTextArea: soft limit -->
+<div class="usa-character-count usx-character-count" data-maxlength="50">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-4">Text area (soft limit)</label>
+    <textarea class="usa-textarea usx-textarea usa-character-count__field" id="cc-4" aria-describedby="cc-4-info"></textarea>
+  </div>
+  <span id="cc-4-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
+<!-- WithTextAreaHardLimit -->
+<div class="usa-character-count usx-character-count" data-maxlength="50">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-5">Text area (hard limit)</label>
+    <textarea class="usa-textarea usx-textarea usa-character-count__field" id="cc-5" maxlength="50" aria-describedby="cc-5-info"></textarea>
+  </div>
+  <span id="cc-5-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
+<!-- Required -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-6">
+      <abbr title="required" class="usx-required">*</abbr>Required field
+    </label>
+    <input class="usa-input usx-input usa-character-count__field" id="cc-6" aria-describedby="cc-6-info" required />
+  </div>
+  <span id="cc-6-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- SuccessState -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group usa-form-group--success">
+    <label class="usa-label usx-label" for="cc-7">Success state</label>
+    <input class="usa-input usx-input usa-character-count__field usa-input--success" id="cc-7" aria-describedby="cc-7-info cc-7-success" />
+    <span id="cc-7-success" class="usa-success-message" role="status">Looks good!</span>
+  </div>
+  <span id="cc-7-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- Disabled -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-8">Disabled field</label>
+    <input class="usa-input usx-input usa-character-count__field" id="cc-8" aria-describedby="cc-8-info" disabled />
+  </div>
+  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-1">Text input (soft limit)</label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-1"
+      aria-describedby="cc-1-info"
+    />
+  </div>
+  <span id="cc-1-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- Soft limit: active state (user has typed, within limit) -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-1a">Text input (soft limit, active)</label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-1a"
+      aria-describedby="cc-1a-info"
+      value="Hello"
+    />
+  </div>
+  <span id="cc-1a-info" class="usa-character-count__message usa-sr-only">You can enter up to 25 characters</span>
+  <div class="usa-character-count__status usa-hint" aria-hidden="true">20 characters left</div>
+  <div class="usa-character-count__sr-status usa-sr-only" aria-live="polite">20 characters left</div>
+</div>
+
+<!-- Soft limit: over-limit state -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group usa-form-group--error">
+    <label class="usa-label usx-label usa-label--error" for="cc-1b">Text input (over limit)</label>
+    <input
+      class="usa-input usx-input usa-character-count__field usa-input--error"
+      id="cc-1b"
+      aria-describedby="cc-1b-info"
+      aria-invalid="true"
+      value="abcdefghijklmnopqrstuvwxyz123456789"
+    />
+  </div>
+  <span id="cc-1b-info" class="usa-character-count__message usa-sr-only">You can enter up to 25 characters</span>
+  <div class="usa-character-count__status usa-hint usa-character-count__status--invalid" aria-hidden="true">10 characters over limit</div>
+  <div class="usa-character-count__sr-status usa-sr-only" aria-live="polite">10 characters over limit</div>
+</div>
+
+<!-- HardLimit: maxlength prevents typing past the limit -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-2">Text input (hard limit)</label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-2"
+      maxlength="25"
+      aria-describedby="cc-2-info"
+    />
+  </div>
+  <span id="cc-2-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- WithHint -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-3">Text input with hint</label>
+    <span id="cc-3-hint" class="usa-hint">You can enter up to 25 characters.</span>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-3"
+      aria-describedby="cc-3-info cc-3-hint"
+    />
+  </div>
+  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- WithTextArea: soft limit -->
+<div class="usa-character-count usx-character-count" data-maxlength="50">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-4">Text area (soft limit)</label>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-4"
+      aria-describedby="cc-4-info"
+    ></textarea>
+  </div>
+  <span id="cc-4-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
+<!-- WithTextAreaHardLimit -->
+<div class="usa-character-count usx-character-count" data-maxlength="50">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-5">Text area (hard limit)</label>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-5"
+      maxlength="50"
+      aria-describedby="cc-5-info"
+    ></textarea>
+  </div>
+  <span id="cc-5-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
+<!-- Required -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-6">
+      <abbr title="required" class="usx-required">*</abbr>Required field
+    </label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-6"
+      aria-describedby="cc-6-info"
+      required
+    />
+  </div>
+  <span id="cc-6-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- SuccessState -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group usa-form-group--success">
+    <label class="usa-label usx-label" for="cc-7">Success state</label>
+    <input
+      class="usa-input usx-input usa-character-count__field usa-input--success"
+      id="cc-7"
+      aria-describedby="cc-7-info cc-7-success"
+    />
+    <span id="cc-7-success" class="usa-success-message" role="status">Looks good!</span>
+  </div>
+  <span id="cc-7-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- Disabled -->
+<div class="usa-character-count usx-character-count" data-maxlength="25">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-8">Disabled field</label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-8"
+      aria-describedby="cc-8-info"
+      disabled
+    />
+  </div>
+  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- HardLimit: maxlength prevents typing past the limit -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-2">Text input (hard limit)</label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-2"
+      maxlength="25"
+      aria-describedby="cc-2-info"
+    />
+  </div>
+  <span id="cc-2-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- WithHint -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-3">Text input with hint</label>
+    <span id="cc-3-hint" class="usa-hint">You can enter up to 25 characters.</span>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-3"
+      aria-describedby="cc-3-info cc-3-hint"
+    />
+  </div>
+  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- WithTextArea: soft limit -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-4">Text area (soft limit)</label>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-4"
+      aria-describedby="cc-4-info"
+    ></textarea>
+  </div>
+  <span id="cc-4-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
+<!-- WithTextAreaHardLimit -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-5">Text area (hard limit)</label>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-5"
+      maxlength="50"
+      aria-describedby="cc-5-info"
+    ></textarea>
+  </div>
+  <span id="cc-5-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
+<!-- Required -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-6">
+      <abbr title="required" class="usx-required">*</abbr>Required field
+    </label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-6"
+      aria-describedby="cc-6-info"
+      required
+    />
+  </div>
+  <span id="cc-6-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- SuccessState -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group usa-form-group--success">
+    <label class="usa-label usx-label" for="cc-7">Success state</label>
+    <input
+      class="usa-input usx-input usa-character-count__field usa-input--success"
+      id="cc-7"
+      aria-describedby="cc-7-info cc-7-success"
+    />
+    <span id="cc-7-success" class="usa-success-message" role="status">Looks good!</span>
+  </div>
+  <span id="cc-7-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- Disabled -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-8">Disabled field</label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-8"
+      aria-describedby="cc-8-info"
+      disabled
+    />
+  </div>
+  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- WithHint: input + hint -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-2">Text input with hint</label>
+    <span id="cc-2-hint" class="usa-hint">You can enter up to 25 characters.</span>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-2"
+      maxlength="25"
+      aria-describedby="cc-2-info cc-2-hint"
+    />
+  </div>
+  <span id="cc-2-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- WithTextArea -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-3">Text area</label>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-3"
+      maxlength="50"
+      aria-describedby="cc-3-info"
+    ></textarea>
+  </div>
+  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
+<!-- Required -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-4">
+      <abbr title="required" class="usx-required">*</abbr>Required field
+    </label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-4"
+      maxlength="25"
+      aria-describedby="cc-4-info"
+      required
+    />
+  </div>
+  <span id="cc-4-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- ErrorState -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group usa-form-group--error">
+    <label class="usa-label usx-label" for="cc-5">Error state</label>
+    <input
+      class="usa-input usx-input usa-character-count__field usa-input--error"
+      id="cc-5"
+      maxlength="25"
+      aria-describedby="cc-5-info cc-5-error"
+      aria-invalid="true"
+    />
+    <span id="cc-5-error" class="usa-error-message" role="alert">Character limit exceeded.</span>
+  </div>
+  <span id="cc-5-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- SuccessState -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group usa-form-group--success">
+    <label class="usa-label usx-label" for="cc-6">Success state</label>
+    <input
+      class="usa-input usx-input usa-character-count__field usa-input--success"
+      id="cc-6"
+      maxlength="25"
+      aria-describedby="cc-6-info cc-6-success"
+    />
+    <span id="cc-6-success" class="usa-success-message" role="status">Looks good!</span>
+  </div>
+  <span id="cc-6-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- Disabled -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-7">Disabled field</label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-7"
+      maxlength="25"
+      aria-describedby="cc-7-info"
+      disabled
+    />
+  </div>
+  <span id="cc-7-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- TextAreaWithHintAndError -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group usa-form-group--error">
+    <label class="usa-label usx-label" for="cc-8">Text area with hint and error</label>
+    <span id="cc-8-hint" class="usa-hint">Describe the issue in detail.</span>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field usa-textarea--error"
+      id="cc-8"
+      maxlength="50"
+      aria-describedby="cc-8-info cc-8-hint cc-8-error"
+      aria-invalid="true"
+    ></textarea>
+    <span id="cc-8-error" class="usa-error-message" role="alert">Character limit exceeded.</span>
+  </div>
+  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
+<!-- WithTextArea -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-3">Text area</label>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-3"
+      maxlength="50"
+      aria-describedby="cc-3-info"
+    ></textarea>
+  </div>
+  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
+<!-- Required -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-4">
+      <abbr title="required" class="usx-required">*</abbr>Required field
+    </label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-4"
+      maxlength="25"
+      aria-describedby="cc-4-info"
+      required
+    />
+  </div>
+  <span id="cc-4-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- ErrorState -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group usa-form-group--error">
+    <label class="usa-label usx-label" for="cc-5">Error state</label>
+    <input
+      class="usa-input usx-input usa-character-count__field usa-input--error"
+      id="cc-5"
+      maxlength="25"
+      aria-describedby="cc-5-info cc-5-error"
+      aria-invalid="true"
+    />
+    <span id="cc-5-error" class="usa-error-message" role="alert">Character limit exceeded.</span>
+  </div>
+  <span id="cc-5-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- SuccessState -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group usa-form-group--success">
+    <label class="usa-label usx-label" for="cc-6">Success state</label>
+    <input
+      class="usa-input usx-input usa-character-count__field usa-input--success"
+      id="cc-6"
+      maxlength="25"
+      aria-describedby="cc-6-info cc-6-success"
+    />
+    <span id="cc-6-success" class="usa-success-message" role="status">Looks good!</span>
+  </div>
+  <span id="cc-6-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- Disabled -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-7">Disabled field</label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-7"
+      maxlength="25"
+      aria-describedby="cc-7-info"
+      disabled
+    />
+  </div>
+  <span id="cc-7-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- TextAreaWithHintAndError -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group usa-form-group--error">
+    <label class="usa-label usx-label" for="cc-8">Text area with hint and error</label>
+    <span id="cc-8-hint" class="usa-hint">Describe the issue in detail.</span>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field usa-textarea--error"
+      id="cc-8"
+      maxlength="50"
+      aria-describedby="cc-8-hint cc-8-info cc-8-error"
+      aria-invalid="true"
+    ></textarea>
+    <span id="cc-8-error" class="usa-error-message" role="alert">Character limit exceeded.</span>
+  </div>
+  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>

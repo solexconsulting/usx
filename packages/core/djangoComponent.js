@@ -85,7 +85,8 @@ export function djangoComponent(componentName) {
       const fetchHtml = async () => {
         setError(null);
         const propsJson = JSON.stringify(props);
-        const url = `http://192.168.86.60:9090/storybook/render/${componentName}/?props=${encodeURIComponent(propsJson)}`;
+        const host = (typeof window !== 'undefined' && window.location && window.location.hostname) ? window.location.hostname : '127.0.0.1';
+        const url = `http://${host}:9090/storybook/render/${componentName}/?props=${encodeURIComponent(propsJson)}`;
 
         try {
           const response = await fetch(url);

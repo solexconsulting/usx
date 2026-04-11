@@ -1,4 +1,3 @@
-{# Django template for FormGroup #}
-<div class="usx-form-group">
-  <div class="form-group__content">FormGroup</div>
+<div class="usa-form-group usx-form-group{% if error %} usa-form-group--error{% endif %}{% if className %} {{ className }}{% endif %}">
+  {{ children|safe }}
 </div>

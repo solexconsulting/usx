@@ -4,8 +4,8 @@
     "props": {
         "label": {
             "type": "string",
-            "default": "Label",
-            "description": "The label for the input field, which provides a clear and concise description of the expected input."
+            "default": null,
+            "description": "The label for the input field. If provided, it will render a label element associated with the control."
         },
         "id": {
             "type": "string",
@@ -14,48 +14,33 @@
         },
         "placeholder": {
             "type": "string",
-            "default": "Placeholder text",
+            "default": "Type here",
             "description": "Text displayed inside the input field when it is empty, providing a hint to the user about the expected input."
         },
         "error": {
-            "type": "string",
+            "type": ["string", "boolean"],
             "default": null,
-            "description": "An error message that is displayed when the input value is invalid, providing feedback to the user about what went wrong and how to correct it."
+            "description": "An error message (string) to display when invalid, or `true` to mark the control as errored without a message."
         },
         "success": {
-            "type": "string",
+            "type": ["string", "boolean"],
             "default": null,
-            "description": "A success message that is displayed when the input value is valid, providing positive feedback to the user and confirming that their input has been accepted."
+            "description": "A success message (string) to display when valid, or `true` to mark the control as successful without a message."
         },
         "disabled": {
             "type": "boolean",
             "default": false,
             "description": "A boolean that determines whether the input field is disabled, preventing user interaction and indicating that the field is not currently available for input."
         },
-        "characterCount": {
-            "type": "object",
-            "default": null,
-            "description": "An object that defines the character count settings for the input field, including the maximum number of characters allowed and the message to display explaining the requirement."
-        },
         "hint": {
             "type": "string",
             "default": null,
-            "description": "Hint text to provide additional guidance"
+            "description": "Hint text to provide additional guidance. Rendered as an element and referenced by `aria-describedby`."
         },
-        "onChange": {
-            "type": "string",
-            "default": null,
-            "description": "JavaScript function to call when the input value changes"
-        },
-        "onBlur": {
-            "type": "string",
-            "default": null,
-            "description": "JavaScript function to call when the input loses focus"
-        },
-        "textArea": {
+        "screenReaderOnlyLabel": {
             "type": "boolean",
             "default": false,
-            "description": "A boolean that determines whether the input field is a text area, allowing for multi-line input."
+            "description": "A boolean that indicates whether the label for the input field should be visually hidden but still accessible to screen readers, providing an accessible experience for users who rely on assistive technologies."
         },
         "required": {
             "type": "boolean",
@@ -66,11 +51,6 @@
             "type": "string",
             "default": "",
             "description": "Additional CSS classes to apply to the input field."
-        },
-        "style": {
-            "type": "string",
-            "default": "",
-            "description": "Inline styles to apply to the input field."
         }
     }
 }

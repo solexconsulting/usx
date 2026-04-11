@@ -28,6 +28,7 @@ export { default as ButtonGroup } from './components/button-group';
 export { default as Card } from './components/card';
 export { default as CardGroup } from './components/card-group';
 export { default as Carousel } from './components/carousel';
+export { default as CharacterCount } from './components/character-count';
 export { default as Checkbox } from './components/checkbox';
 export { default as Collection } from './components/collection';
 export { default as Combobox } from './components/combobox';
@@ -67,9 +68,12 @@ export { default as SummaryBox } from './components/summary-box';
 export { default as Table } from './components/table';
 export { default as Tag } from './components/tag';
 export { default as TagGroup } from './components/tag-group';
+export { default as TextArea } from './components/text-area';
 export { default as TimePicker } from './components/time-picker';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
+
 
 
 

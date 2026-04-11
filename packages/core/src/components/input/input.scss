@@ -17,16 +17,6 @@
 	}
 }
 
-.usa-textarea.usx-textarea {
-	@if $usx-textarea-border-radius {
-		border-radius: $usx-textarea-border-radius;
-	}
-
-	@if $usx-textarea-padding {
-		padding: $usx-textarea-padding;
-	}
-}
-
 /* ---------------------------------- */
 
 /* State Enhancements                 */
@@ -47,22 +37,6 @@
 			@if $usx-input-border-color {
 				border-color: $usx-input-border-color;
 			}
-		}
-	}
-}
-
-.usa-textarea.usx-textarea:not(.usa-textarea--error):not(.usa-textarea--success) {
-	&:not(:disabled) {
-		@if $usx-textarea-background-color {
-			background-color: $usx-textarea-background-color;
-		}
-
-		@if $usx-textarea-text-color {
-			color: $usx-textarea-text-color;
-		}
-
-		@if $usx-textarea-border-color {
-			border-color: $usx-textarea-border-color;
 		}
 	}
 }
@@ -112,50 +86,6 @@
 		@if $usx-input-success-padding-bottom {
 			padding-bottom: $usx-input-success-padding-bottom;
 		}
-	}
-}
-
-.usa-textarea.usx-textarea.usa-textarea--error {
-	@if $usx-textarea-error-border-width {
-		border-width: $usx-textarea-error-border-width;
-	}
-
-	@if $usx-textarea-error-border-color {
-		border-color: $usx-textarea-error-border-color;
-	}
-
-	@if $usx-textarea-error-border-style {
-		border-style: $usx-textarea-error-border-style;
-	}
-
-	@if $usx-textarea-error-padding-top {
-		padding-top: $usx-textarea-error-padding-top;
-	}
-
-	@if $usx-textarea-error-padding-bottom {
-		padding-bottom: $usx-textarea-error-padding-bottom;
-	}
-}
-
-.usa-textarea.usx-textarea.usa-textarea--success {
-	@if $usx-textarea-success-border-width {
-		border-width: $usx-textarea-success-border-width;
-	}
-
-	@if $usx-textarea-success-border-color {
-		border-color: $usx-textarea-success-border-color;
-	}
-
-	@if $usx-textarea-success-border-style {
-		border-style: $usx-textarea-success-border-style;
-	}
-
-	@if $usx-textarea-success-padding-top {
-		padding-top: $usx-textarea-success-padding-top;
-	}
-
-	@if $usx-textarea-success-padding-bottom {
-		padding-bottom: $usx-textarea-success-padding-bottom;
 	}
 }
 

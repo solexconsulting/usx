@@ -6,12 +6,12 @@ import { buildArgTypes, componentTag } from '../../../helper';
 const generatedArgTypes = buildArgTypes(config.props || {});
 
 const getArgs = (index) => ({
-  id: `example-input-${index}`,
-  label: `Example Input ${index}`,
+  id: `example-textarea-${index}`,
+  label: `Example TextArea ${index}`,
 });
 
 export default {
-  title: 'Django/Input',
+  title: 'Django/TextArea',
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
 };
@@ -21,11 +21,11 @@ const createStory = (args) => ({
   parameters: {
     docs: {
       source: {
-        code: componentTag({ name: 'input', props: args })
+        code: componentTag({ name: 'text-area', props: args })
       }
     }
   },
-  render: djangoComponent('input')
+  render: djangoComponent('text-area')
 });
 
 export const Default = createStory({
@@ -35,7 +35,7 @@ export const Default = createStory({
 
 export const WithHint = createStory({
   ...getArgs(2),
-  hint: 'Enter your full legal name.',
+  hint: 'Enter a detailed description.',
 });
 
 export const Required = createStory({
@@ -46,17 +46,17 @@ export const Required = createStory({
 export const ScreenReaderOnlyLabel = createStory({
   ...getArgs(4),
   screenReaderOnlyLabel: true,
-  placeholder: 'Search…',
+  placeholder: 'Enter your message…',
 });
 
 export const ErrorState = createStory({
   ...getArgs(5),
-  error: 'Enter a valid email address.',
+  error: 'Enter at least 10 characters.',
 });
 
 export const SuccessState = createStory({
   ...getArgs(6),
-  success: 'Your email address has been accepted.',
+  success: 'Your message has been accepted.',
 });
 
 export const Disabled = createStory({
