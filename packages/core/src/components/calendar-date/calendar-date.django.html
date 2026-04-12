@@ -1,8 +1,8 @@
 {% load components %}
 
-<div class="usa-collection__calendar-date">
+<div class="{% if under_collection %}usa-collection__calendar-date{% endif %} usx-calendar-date">
   <time datetime="{{ datetime }}">
-    <span class="usa-collection__calendar-date-month">{{ datetime|iso_month }}</span>
-    <span class="usa-collection__calendar-date-day">{{ datetime|iso_day }}</span>
+    <span class="{% if under_collection %}usa-collection__calendar-date-month{% endif %} usx-calendar-date-month">{{ datetime|iso_month }}</span>
+    <span class="{% if under_collection %}usa-collection__calendar-date-day{% endif %} usx-calendar-date-day">{{ datetime|iso_day }}</span>
   </time>
 </div>

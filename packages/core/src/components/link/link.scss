@@ -1,0 +1,19 @@
+@use '../../../../tokens/src/tokens.scss' as *;
+
+.usx-link {
+  @if $color-primary {
+    color: $color-primary;
+  }
+
+  &:hover {
+    @if $color-primary-hover {
+      color: $color-primary-hover;
+    }
+  }
+
+  &:active {
+    @if $color-primary-active {
+      color: $color-primary-active;
+    }
+  }
+}

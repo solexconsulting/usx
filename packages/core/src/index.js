@@ -50,6 +50,7 @@ export { default as Input } from './components/input';
 export { default as Label } from './components/label';
 export { default as LanguageSelector } from './components/language-selector';
 export { default as Legend } from './components/legend';
+export { default as Link } from './components/link';
 export { default as List } from './components/list';
 export { default as MemorableDate } from './components/memorable-date';
 export { default as Modal } from './components/modal';
@@ -73,6 +74,7 @@ export { default as TextArea } from './components/text-area';
 export { default as TimePicker } from './components/time-picker';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
 
 
 

@@ -6,6 +6,11 @@
       "type": "string",
       "default": null,
       "description": "ISO 8601 datetime string. Month and day are parsed from this value."
+    },
+    "underCollection": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the calendar date is being rendered within a collection item, which applies specific collection-related styles."
     }
   }
 }

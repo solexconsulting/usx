@@ -8,12 +8,12 @@
       {% endif %}
       {% if item.calendarDate %}
         {% with datetime=item.calendarDate %}
-          {% include "calendar-date/calendar-date.django.html" with datetime=datetime only%}
+          {% include "calendar-date/calendar-date.django.html" with datetime=datetime under_collection=True only%}
         {% endwith %}
       {% endif %}
       <div class="usa-collection__body">
         <h4 class="usa-collection__heading">
-          <a class="usa-link" href="{{ item.href }}">{{ item.heading }}</a>
+          <a class="usa-link usx-link" href="{{ item.href }}">{{ item.heading }}</a>
         </h4>
         {% if item.description %}
           <p class="usa-collection__description">{{ item.description }}</p>

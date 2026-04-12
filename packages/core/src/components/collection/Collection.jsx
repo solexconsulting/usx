@@ -11,11 +11,11 @@ function CollectionItem({ href, heading, description, imgSrc, imgAlt = '', calen
         <img className="usa-collection__img" src={imgSrc} alt={imgAlt} />
       )}
       {calendarDate && (
-        <CalendarDate datetime={typeof calendarDate === 'string' ? calendarDate : calendarDate.datetime} />
+        <CalendarDate datetime={typeof calendarDate === 'string' ? calendarDate : calendarDate.datetime} underCollection={true} />
       )}
       <div className="usa-collection__body">
         <h4 className="usa-collection__heading">
-          <a className="usa-link" href={href}>{heading}</a>
+          <a className="usa-link usx-link" href={href}>{heading}</a>
         </h4>
         {description && (
           <p className="usa-collection__description">{description}</p>
@@ -42,7 +42,7 @@ function CollectionItem({ href, heading, description, imgSrc, imgAlt = '', calen
                 key={i}
                 className={ClassNames(
                   'usa-collection__meta-item',
-                  'usa-tag',
+                  'usa-tag usx-tag',
                   typeof tag === 'object' && tag.isNew && 'usa-tag--new',
                 )}
               >
