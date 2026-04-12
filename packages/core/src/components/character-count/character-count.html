@@ -4,7 +4,7 @@
     <label class="usa-label usx-label" for="cc-1">Text input (soft limit)</label>
     <input class="usa-input usx-input usa-character-count__field" id="cc-1" aria-describedby="cc-1-info" />
   </div>
-  <span id="cc-1-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-1-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- Soft limit: active (within limit) -->
@@ -35,7 +35,7 @@
     <label class="usa-label usx-label" for="cc-2">Text input (hard limit)</label>
     <input class="usa-input usx-input usa-character-count__field" id="cc-2" maxlength="25" aria-describedby="cc-2-info" />
   </div>
-  <span id="cc-2-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-2-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- WithHint -->
@@ -45,7 +45,7 @@
     <span id="cc-3-hint" class="usa-hint">You can enter up to 25 characters.</span>
     <input class="usa-input usx-input usa-character-count__field" id="cc-3" aria-describedby="cc-3-info cc-3-hint" />
   </div>
-  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-3-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- WithTextArea: soft limit -->
@@ -54,7 +54,7 @@
     <label class="usa-label usx-label" for="cc-4">Text area (soft limit)</label>
     <textarea class="usa-textarea usx-textarea usa-character-count__field" id="cc-4" aria-describedby="cc-4-info"></textarea>
   </div>
-  <span id="cc-4-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+  <span id="cc-4-info" class="usa-character-count__status usa-hint">You can enter up to 50 characters</span>
 </div>
 
 <!-- WithTextAreaHardLimit -->
@@ -63,7 +63,7 @@
     <label class="usa-label usx-label" for="cc-5">Text area (hard limit)</label>
     <textarea class="usa-textarea usx-textarea usa-character-count__field" id="cc-5" maxlength="50" aria-describedby="cc-5-info"></textarea>
   </div>
-  <span id="cc-5-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+  <span id="cc-5-info" class="usa-character-count__status usa-hint">You can enter up to 50 characters</span>
 </div>
 
 <!-- Required -->
@@ -74,7 +74,7 @@
     </label>
     <input class="usa-input usx-input usa-character-count__field" id="cc-6" aria-describedby="cc-6-info" required />
   </div>
-  <span id="cc-6-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-6-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- SuccessState -->
@@ -84,7 +84,7 @@
     <input class="usa-input usx-input usa-character-count__field usa-input--success" id="cc-7" aria-describedby="cc-7-info cc-7-success" />
     <span id="cc-7-success" class="usa-success-message" role="status">Looks good!</span>
   </div>
-  <span id="cc-7-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-7-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- Disabled -->
@@ -93,7 +93,7 @@
     <label class="usa-label usx-label" for="cc-8">Disabled field</label>
     <input class="usa-input usx-input usa-character-count__field" id="cc-8" aria-describedby="cc-8-info" disabled />
   </div>
-  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-8-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
   <div class="usa-form-group usx-form-group">
@@ -104,7 +104,7 @@
       aria-describedby="cc-1-info"
     />
   </div>
-  <span id="cc-1-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-1-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- Soft limit: active state (user has typed, within limit) -->
@@ -151,7 +151,7 @@
       aria-describedby="cc-2-info"
     />
   </div>
-  <span id="cc-2-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-2-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- WithHint -->
@@ -165,7 +165,7 @@
       aria-describedby="cc-3-info cc-3-hint"
     />
   </div>
-  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-3-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- WithTextArea: soft limit -->
@@ -178,7 +178,7 @@
       aria-describedby="cc-4-info"
     ></textarea>
   </div>
-  <span id="cc-4-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+  <span id="cc-4-info" class="usa-character-count__status usa-hint">You can enter up to 50 characters</span>
 </div>
 
 <!-- WithTextAreaHardLimit -->
@@ -192,7 +192,7 @@
       aria-describedby="cc-5-info"
     ></textarea>
   </div>
-  <span id="cc-5-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+  <span id="cc-5-info" class="usa-character-count__status usa-hint">You can enter up to 50 characters</span>
 </div>
 
 <!-- Required -->
@@ -208,7 +208,7 @@
       required
     />
   </div>
-  <span id="cc-6-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-6-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- SuccessState -->
@@ -222,7 +222,7 @@
     />
     <span id="cc-7-success" class="usa-success-message" role="status">Looks good!</span>
   </div>
-  <span id="cc-7-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-7-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- Disabled -->
@@ -236,7 +236,7 @@
       disabled
     />
   </div>
-  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-8-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- HardLimit: maxlength prevents typing past the limit -->
@@ -250,7 +250,7 @@
       aria-describedby="cc-2-info"
     />
   </div>
-  <span id="cc-2-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-2-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- WithHint -->
@@ -264,7 +264,7 @@
       aria-describedby="cc-3-info cc-3-hint"
     />
   </div>
-  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-3-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- WithTextArea: soft limit -->
@@ -277,7 +277,7 @@
       aria-describedby="cc-4-info"
     ></textarea>
   </div>
-  <span id="cc-4-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+  <span id="cc-4-info" class="usa-character-count__status usa-hint">You can enter up to 50 characters</span>
 </div>
 
 <!-- WithTextAreaHardLimit -->
@@ -291,7 +291,7 @@
       aria-describedby="cc-5-info"
     ></textarea>
   </div>
-  <span id="cc-5-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+  <span id="cc-5-info" class="usa-character-count__status usa-hint">You can enter up to 50 characters</span>
 </div>
 
 <!-- Required -->
@@ -307,7 +307,7 @@
       required
     />
   </div>
-  <span id="cc-6-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-6-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- SuccessState -->
@@ -321,7 +321,7 @@
     />
     <span id="cc-7-success" class="usa-success-message" role="status">Looks good!</span>
   </div>
-  <span id="cc-7-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-7-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- Disabled -->
@@ -335,7 +335,7 @@
       disabled
     />
   </div>
-  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-8-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- WithHint: input + hint -->
@@ -350,7 +350,7 @@
       aria-describedby="cc-2-info cc-2-hint"
     />
   </div>
-  <span id="cc-2-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-2-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- WithTextArea -->
@@ -364,7 +364,7 @@
       aria-describedby="cc-3-info"
     ></textarea>
   </div>
-  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+  <span id="cc-3-info" class="usa-character-count__status usa-hint">You can enter up to 50 characters</span>
 </div>
 
 <!-- Required -->
@@ -381,7 +381,7 @@
       required
     />
   </div>
-  <span id="cc-4-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-4-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- ErrorState -->
@@ -397,7 +397,7 @@
     />
     <span id="cc-5-error" class="usa-error-message" role="alert">Character limit exceeded.</span>
   </div>
-  <span id="cc-5-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-5-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- SuccessState -->
@@ -412,7 +412,7 @@
     />
     <span id="cc-6-success" class="usa-success-message" role="status">Looks good!</span>
   </div>
-  <span id="cc-6-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-6-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- Disabled -->
@@ -427,7 +427,7 @@
       disabled
     />
   </div>
-  <span id="cc-7-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-7-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- TextAreaWithHintAndError -->
@@ -444,7 +444,7 @@
     ></textarea>
     <span id="cc-8-error" class="usa-error-message" role="alert">Character limit exceeded.</span>
   </div>
-  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+  <span id="cc-8-info" class="usa-character-count__status usa-hint">You can enter up to 50 characters</span>
 </div>
 
 <!-- WithTextArea -->
@@ -458,7 +458,7 @@
       aria-describedby="cc-3-info"
     ></textarea>
   </div>
-  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+  <span id="cc-3-info" class="usa-character-count__status usa-hint">You can enter up to 50 characters</span>
 </div>
 
 <!-- Required -->
@@ -475,7 +475,7 @@
       required
     />
   </div>
-  <span id="cc-4-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-4-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- ErrorState -->
@@ -491,7 +491,7 @@
     />
     <span id="cc-5-error" class="usa-error-message" role="alert">Character limit exceeded.</span>
   </div>
-  <span id="cc-5-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-5-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- SuccessState -->
@@ -506,7 +506,7 @@
     />
     <span id="cc-6-success" class="usa-success-message" role="status">Looks good!</span>
   </div>
-  <span id="cc-6-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-6-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- Disabled -->
@@ -521,7 +521,7 @@
       disabled
     />
   </div>
-  <span id="cc-7-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-7-info" class="usa-character-count__status usa-hint">You can enter up to 25 characters</span>
 </div>
 
 <!-- TextAreaWithHintAndError -->
@@ -538,5 +538,5 @@
     ></textarea>
     <span id="cc-8-error" class="usa-error-message" role="alert">Character limit exceeded.</span>
   </div>
-  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+  <span id="cc-8-info" class="usa-character-count__status usa-hint">You can enter up to 50 characters</span>
 </div>

@@ -72,7 +72,7 @@ export default function CharacterCount({
       {/* Static fallback message — hidden visually once user starts typing */}
       <span
         id={infoId}
-        className={ClassNames('usa-character-count__message', isActive && 'usa-sr-only')}
+        className={ClassNames('usa-character-count__status usa-hint', isActive && 'usa-sr-only')}
       >
         You can enter up to {max} characters
       </span>
