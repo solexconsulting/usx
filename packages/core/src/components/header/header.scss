@@ -1,4 +1,5 @@
 @use '../../../../tokens/src/tokens.scss' as *;
+@use './logo.scss';
 
 .usx-header {
   @if $usx-header-background-color != null {

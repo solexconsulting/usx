@@ -30,23 +30,33 @@ export default function Image({
   const style = {};
   if (maxWidth) style.maxWidth = maxWidth;
   if (maxHeight) style.maxHeight = maxHeight;
-
-  if (maxHeight && !maxWidth) {
-    style.width = 'auto';
-  }
-  if (maxWidth && !maxHeight) {
-    style.height = 'auto';
-  }
+  if (maxHeight && !maxWidth) style.width = 'auto';
+  if (maxWidth && !maxHeight) style.height = 'auto';
 
   const captionClasses = classNames(
     'usx-image--caption',
     { 'usa-sr-only': hideCaption }
   );
 
-  const imgElement = src ? (
-    <img src={src} alt={alt} style={style} {...props} />
-  ) : (
+  const isResponsive = src && typeof src === 'object';
+
+  const imgElement = !src ? (
     'Image'
+  ) : isResponsive ? (
+    <picture>
+      {src.sources.map((source, i) => (
+        <source
+          key={i}
+          {...(source.media ? { media: source.media } : {})}
+          srcSet={source.srcSet}
+          {...(source.type ? { type: source.type } : {})}
+          {...(source.sizes ? { sizes: source.sizes } : {})}
+        />
+      ))}
+      <img src={src.fallback} alt={alt} style={style} {...props} />
+    </picture>
+  ) : (
+    <img src={src} alt={alt} style={style} {...props} />
   );
 
   if (caption) {
@@ -71,20 +81,28 @@ export default function Image({
   );
 }
 
+const sourcePropType = PropTypes.shape({
+  srcSet: PropTypes.string.isRequired,
+  media: PropTypes.string,
+  type: PropTypes.string,
+  sizes: PropTypes.string,
+});
+
 Image.propTypes = {
-  src: PropTypes.string,
+  src: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      fallback: PropTypes.string.isRequired,
+      sources: PropTypes.arrayOf(sourcePropType).isRequired,
+    }),
+  ]),
   alt: PropTypes.string,
   href: PropTypes.string,
   rounded: PropTypes.bool,
   circular: PropTypes.bool,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  border: PropTypes.bool,
-  shadow: PropTypes.bool,
-  thumbnail: PropTypes.bool,
   caption: PropTypes.string,
   hideCaption: PropTypes.bool,
   objectFit: PropTypes.oneOf(['cover', 'contain', 'fill', 'none', 'scale-down']),
-  maintainAspectRatio: PropTypes.bool,
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,

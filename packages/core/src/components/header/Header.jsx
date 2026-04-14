@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 import Search from '../search/Search';
-import Image from '../image/Image';
+import HeaderBranding from './HeaderBranding';
 import './header.scss';
 
 function PrimaryNav({
@@ -146,8 +146,7 @@ PrimaryNav.propTypes = {
 
 export default function Header({
   id = 'header',
-  projectTitle,
-  projectLogo,
+  branding = null,
   projectUrl = '/',
   navSections = [],
   secondaryLinks = [],
@@ -177,17 +176,9 @@ export default function Header({
 
   const navbar = (
     <div className="usa-navbar">
-      <div className="usa-logo">
-        <em className="usa-logo__text">
-          {projectLogo ? (
-            <Image src={projectLogo} alt="Logo" title={projectTitle} href={projectUrl} className="usa-logo__image" />
-          ) : (
-            <a href={projectUrl} title={projectTitle}>{projectTitle}</a>
-          )}
-        </em>
-      </div>
-      <button type="button" className="usa-menu-btn">
-        {useMenuIcon ? <Icon name="menu" /> : 'Menu'}
+      <HeaderBranding branding={branding} projectUrl={projectUrl} />
+      <button type="button" className="usa-menu-btn align-center">
+        {useMenuIcon ? <Icon name="menu" size={3} /> : 'Menu'}
       </button>
     </div>
   );
@@ -245,9 +236,32 @@ export default function Header({
   );
 }
 
+const brandingConfigShape = PropTypes.shape({
+  title: PropTypes.string.isRequired,
+  symbol: PropTypes.string,
+  logo: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      fallback: PropTypes.string.isRequired,
+      sources: PropTypes.arrayOf(PropTypes.shape({
+        srcSet: PropTypes.string.isRequired,
+        media: PropTypes.string,
+        type: PropTypes.string,
+        sizes: PropTypes.string,
+      })).isRequired,
+    }),
+  ]),
+  alt: PropTypes.string,
+});
+
 Header.propTypes = {
-  projectTitle: PropTypes.string,
-  projectLogo: PropTypes.string,
+  id: PropTypes.string,
+  branding: PropTypes.oneOfType([
+    brandingConfigShape,
+    PropTypes.shape({
+      responsive: PropTypes.objectOf(brandingConfigShape).isRequired,
+    }),
+  ]),
   projectUrl: PropTypes.string,
   navSections: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -284,6 +298,4 @@ Header.propTypes = {
   useMenuIcon: PropTypes.bool,
   stickyNav: PropTypes.bool,
   className: PropTypes.string,
-  id: PropTypes.string,
-  styles: PropTypes.object,
 };

@@ -14,10 +14,20 @@
 </div>
 
 <h3 class="site-preview-heading margin-top-7 margin-bottom-0">With Caption</h3>
-<figure class="usx-image usx-image--caption">
+<figure class="usx-image">
   <img src="https://picsum.photos/600/400?random=10" alt="Example image 10" />
   <figcaption class="usx-image--caption">This is a caption describing the image above.</figcaption>
 </figure>
+
+<h3 class="site-preview-heading margin-top-7 margin-bottom-0">Responsive (&lt;picture&gt;)</h3>
+<div class="usx-image">
+  <picture>
+    <source media="(min-width: 64em)" srcset="/linear-w-symbol_left.svg" />
+    <source media="(min-width: 40em)" srcset="/linear.svg" />
+    <source media="(min-width: 20em)" srcset="/solex-only.svg" />
+    <img src="/symbol-only.svg" alt="SOLEX" />
+  </picture>
+</div>
 
 <h3 class="site-preview-heading margin-top-7 margin-bottom-0">Fit</h3>
 <div class="usx-image usx-image--fit">
@@ -37,7 +47,7 @@
 </figure>
 
 <h3 class="site-preview-heading margin-top-7 margin-bottom-0">Long Caption</h3>
-<figure class="usx-image usx-image--caption">
+<figure class="usx-image">
   <img src="https://picsum.photos/600/400?random=15" alt="Example image 15" />
   <figcaption class="usx-image--caption">This is a longer caption that provides more detailed information about the image above. It can span multiple lines and gives context to the visual content.</figcaption>
 </figure>

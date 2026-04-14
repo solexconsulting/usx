@@ -3,13 +3,12 @@ import Header from './Header';
 import config from './config.json';
 import { buildArgTypes } from '../../../helper';
 
-const generatedArgTypes = buildArgTypes(config.props || {});
-
 export default {
   title: 'React/Header',
   component: Header,
   tags: ['autodocs'],
-  argTypes: generatedArgTypes,
+  argTypes: buildArgTypes(config.props || {}),
+  excludeStories: ['storyDefs'],
 };
 
 const lotsOfLinks = Array.from({ length: 30 }, (_, i) => ({
@@ -18,32 +17,44 @@ const lotsOfLinks = Array.from({ length: 30 }, (_, i) => ({
   ariaLabel: `Link ${i + 1}`
 }));
 
-const baseArgs = {
-  projectTitle: 'My Project',
-  projectLogo: 'placeholder_logo.png',
-  projectUrl: 'https://google.com',
-  navSections: [
-    {
-      title: 'Section 1',
-      links: [
-        { text: 'Link A', href: 'https://example.com/linkA', ariaLabel: 'Link A' },
-        { text: 'Link B', href: 'https://example.com/linkB', ariaLabel: 'Link B' },
-      ],
-    },
-    {
-      title: 'Section 2',
-      links: [
-        { text: 'Link C', href: 'https://example.com/linkC', ariaLabel: 'Link C' },
-        { text: 'Link D', href: 'https://example.com/linkD', ariaLabel: 'Link D' },
-      ],
-    },
-    {
-      title: 'Section 3',
-      href: 'https://example.com/section3',
-      ariaLabel: 'Section 3'
-    }
-  ],
+const responsiveBranding = {
+  logo: {
+    fallback: '/symbol-only.svg',
+    sources: [
+      { media: '(min-width: 64em)', srcSet: '/stacked-w-symbol_left.svg' },
+      { media: '(min-width: 40em)', srcSet: '/linear.svg' },
+      { media: '(min-width: 20em)', srcSet: '/solex-only.svg' },
+    ],
+  },
+  title: 'Agency Name',
 };
+
+const standardBranding = {
+  symbol: '/symbol-only.svg',
+  title: 'Agency Name',
+}
+
+const navSections = [
+  {
+    title: 'Section 1',
+    links: [
+      { text: 'Link A', href: 'https://example.com/linkA', ariaLabel: 'Link A' },
+      { text: 'Link B', href: 'https://example.com/linkB', ariaLabel: 'Link B' },
+    ],
+  },
+  {
+    title: 'Section 2',
+    links: [
+      { text: 'Link C', href: 'https://example.com/linkC', ariaLabel: 'Link C' },
+      { text: 'Link D', href: 'https://example.com/linkD', ariaLabel: 'Link D' },
+    ],
+  },
+  {
+    title: 'Section 3',
+    href: 'https://example.com/section3',
+    ariaLabel: 'Section 3'
+  }
+];
 
 const searchArgs = {
   ariaLabel: 'Header search',
@@ -62,141 +73,82 @@ const secondaryLinks = [
   { text: 'Secondary Link 2', href: 'https://example.com/secondary2', ariaLabel: 'Secondary Link 2' },
 ];
 
-export const Default = {
-  args: {
-    ...baseArgs,
-    id: 'header-default',
-    secondaryLinks: secondaryLinks,
-    searchConfig: searchArgs,
-    extended: true,
-    megamenu: true,
-    useMenuIcon: true,
-  },
-}
+const baseArgs = {
+  projectUrl: 'https://example.com',
+  useMenuIcon: true,
+  navSections,
+};
 
-export const Basic = {
-  args: {
-    ...baseArgs,
-    id: 'header-basic',
-    searchConfig: searchArgs,
-    extended: false,
-    megamenu: false,
-  },
-}
-
-export const BasicWithMegamenu = {
-  args: {
-    ...baseArgs,
-    secondaryLinks: secondaryLinks,
-    searchConfig: searchArgs,
-    id: 'header-basic-megamenu',
-    extended: false,
-    megamenu: true,
-  },
-}
-
-export const Extended = {
-  args: {
-    ...baseArgs,
-    secondaryLinks: secondaryLinks,
-    searchConfig: searchArgs,
-    id: 'header-extended',
-    extended: true,
-    megamenu: false,
-  },
-}
-
-export const ExtendedWithMegamenu = {
-  args: {
-    ...baseArgs,
-    secondaryLinks: secondaryLinks,
-    searchConfig: searchArgs,
-    id: 'header-extended-megamenu',
-    extended: true,
-    megamenu: true,
-  },
-}
-
-export const WithMenuIcon = {
-  args: {
-    ...baseArgs,
-    secondaryLinks: secondaryLinks,
-    searchConfig: searchArgs,
-    id: 'header-menu-icon',
-    useMenuIcon: true,
-  },
-}
-
-const noLogoArgs = {
+const fullArgs = {
   ...baseArgs,
-  id: 'header-no-logo',
-  projectLogo: null
-}
+  branding: standardBranding,
+  secondaryLinks,
+  searchConfig: searchArgs,
+};
 
-export const NoLogo = {
-  args: {
-    ...noLogoArgs,
-    searchConfig: searchArgs,
-  },
-}
-
-export const Minimal = {
-  args: {
-    id: 'header-minimal',
-    projectTitle: 'Simple Site',
-    navSections: [
-      {
-        title: 'Home',
-        href: '/',
-      },
-      {
-        title: 'About',
-        href: '/about',
-      },
-    ],
-  },
-}
-
-export const Maximal = {
-  args: {
-    id: 'header-maximal',
+export const storyDefs = {
+  TextOnly: { ...baseArgs, id: 'header-text-only', branding: { title: 'Agency Name' } },
+  SymbolAndText: { ...baseArgs, id: 'header-symbol-text', branding: standardBranding },
+  SingleLogo: { ...baseArgs, id: 'header-single-logo', branding: { logo: '/linear.svg', title: 'Agency Name' } },
+  ResponsiveLogo: {
     ...baseArgs,
+    id: 'header-responsive-logo',
+    branding: responsiveBranding,
+  },
+  ResponsiveLogoExtended: {
+    ...baseArgs,
+    id: 'header-responsive-logo-extended',
+    branding: responsiveBranding,
+    extended: true,
+  },
+  Default: { ...fullArgs, id: 'header-default', extended: true, megamenu: true, useMenuIcon: true },
+  Basic: { ...fullArgs, id: 'header-basic', extended: false, megamenu: false },
+  BasicWithMegamenu: { ...fullArgs, id: 'header-basic-megamenu', extended: false, megamenu: true },
+  Extended: { ...fullArgs, id: 'header-extended', extended: true, megamenu: false },
+  ExtendedWithMegamenu: { ...fullArgs, id: 'header-extended-megamenu', extended: true, megamenu: true },
+  WithMenuIcon: { ...fullArgs, id: 'header-menu-icon', useMenuIcon: true },
+  Minimal: {
+    id: 'header-minimal',
+    branding: { title: 'Simple Site' },
     navSections: [
-      {
-        title: 'Section 1',
-        links: lotsOfLinks,
-      },
-      {
-        title: 'Section 2',
-        links: lotsOfLinks,
-      },
-      {
-        title: 'Section 3',
-        links: lotsOfLinks,
-      },
-      {
-        title: 'Section 4',
-        links: lotsOfLinks,
-      },
-      {
-        title: 'Section 5',
-        links: lotsOfLinks,
-      },
-      {
-        title: 'Section 6',
-        links: lotsOfLinks,
-      },
-      {
-        title: 'Section 7',
-        href: 'https://example.com/section7',
-      },
+      { title: 'Home', href: '/' },
+      { title: 'About', href: '/about' },
     ],
-    secondaryLinks: secondaryLinks,
-    searchConfig: searchArgs,
+  },
+  Maximal: {
+    id: 'header-maximal',
+    ...fullArgs,
+    navSections: [
+      { title: 'Section 1', links: lotsOfLinks },
+      { title: 'Section 2', links: lotsOfLinks },
+      { title: 'Section 3', links: lotsOfLinks },
+      { title: 'Section 4', links: lotsOfLinks },
+      { title: 'Section 5', links: lotsOfLinks },
+      { title: 'Section 6', links: lotsOfLinks },
+      { title: 'Section 7', href: 'https://example.com/section7' },
+    ],
     extended: true,
     megamenu: true,
     useMenuIcon: true,
     className: 'bg-primary-lighter',
   },
+};
 
-}
+// ─── Branding variants ───────────────────────────────────────────────────────
+
+export const TextOnly = { args: storyDefs.TextOnly };
+export const SymbolAndText = { args: storyDefs.SymbolAndText };
+export const SingleLogo = { args: storyDefs.SingleLogo };
+export const ResponsiveLogo = { args: storyDefs.ResponsiveLogo };
+export const ResponsiveLogoExtended = { args: storyDefs.ResponsiveLogoExtended };
+
+// ─── Layout variants ─────────────────────────────────────────────────────────
+
+export const Default = { args: storyDefs.Default };
+export const Basic = { args: storyDefs.Basic };
+export const BasicWithMegamenu = { args: storyDefs.BasicWithMegamenu };
+export const Extended = { args: storyDefs.Extended };
+export const ExtendedWithMegamenu = { args: storyDefs.ExtendedWithMegamenu };
+export const WithMenuIcon = { args: storyDefs.WithMenuIcon };
+export const Minimal = { args: storyDefs.Minimal };
+export const Maximal = { args: storyDefs.Maximal };

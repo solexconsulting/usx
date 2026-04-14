@@ -33,8 +33,9 @@ const searchArgs = {
 }
 
 const headerArgs = {
-  projectTitle: 'Example Project',
-  projectLogo: 'placeholder_logo.png',
+  projectTitle: 'SOLEX Consulting',
+  projectLogo: 'solex-only.svg',
+  projectSymbol: 'symbol-only.svg',
   projectUrl: 'https://google.com',
   navSections: [
     {

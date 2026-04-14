@@ -1,33 +1,62 @@
 {# Django template for Image #}
 {# Props: src, alt, href, rounded, circular, objectFit, maxWidth, maxHeight, caption, hideCaption, className #}
+{# For responsive images, src may be an object: { fallback, sources: [{ srcSet, media?, type?, sizes? }] } #}
 
-{% comment %} Build classes inline to remain compatible with Django templating {% endcomment %}
+{% comment %} Build shared values {% endcomment %}
+{% with classes="usx-image"|add:" usx-image--rounded"|yesno:","|slice:"0" %}
+{% endwith %}
+
+{% comment %} Inline image element (string src or picture) {% endcomment %}
+{% with img_style=""|add:"" %}
+{% endwith %}
+
 {% if caption %}
-<figure class="usx-image{% if rounded %} usx-image--rounded{% endif %}{% if circular %} usx-image--circular{% endif %}{% if objectFit %} usx-object-fit-{{ objectFit }}{% endif %}{% if className %} {{ className }}{% endif %}"{% if maxWidth or maxHeight %} style="{% if maxWidth %}max-width: {{ maxWidth }}; width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }}; height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %}>
-  {% if src %}
-    <img src="{{ src }}"{% if alt %} alt="{{ alt }}"{% endif %} />
+<figure class="usx-image{% if rounded %} usx-image--rounded{% endif %}{% if circular %} usx-image--circular{% endif %}{% if objectFit %} usx-object-fit-{{ objectFit }}{% endif %}{% if className %} {{ className }}{% endif %}"
+  {% if maxWidth or maxHeight %} style="{% if maxWidth %}max-width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %}>
+  {% if src.fallback %}
+    <picture>
+      {% for source in src.sources %}
+        <source srcset="{{ source.srcSet }}"
+          {% if source.media %}media="{{ source.media }}"{% endif %}
+          {% if source.type %}type="{{ source.type }}"{% endif %}
+          {% if source.sizes %}sizes="{{ source.sizes }}"{% endif %}
+        />
+      {% endfor %}
+      <img src="{{ src.fallback }}"{% if alt %} alt="{{ alt }}"{% endif %}
+        {% if maxWidth or maxHeight %}style="{% if maxWidth %}max-width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %} />
+    </picture>
+  {% elif src %}
+    <img src="{{ src }}"{% if alt %} alt="{{ alt }}"{% endif %}
+      {% if maxWidth or maxHeight %}style="{% if maxWidth %}max-width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %} />
   {% else %}
     Image
   {% endif %}
   <figcaption class="usx-image--caption{% if hideCaption %} usa-sr-only{% endif %}">{{ caption }}</figcaption>
 </figure>
 {% else %}
-  {# No caption: render an anchor if href provided, otherwise a div #}
-  {% if href %}
-    <a href="{{ href }}" class="usx-image{% if rounded %} usx-image--rounded{% endif %}{% if circular %} usx-image--circular{% endif %}{% if objectFit %} usx-object-fit-{{ objectFit }}{% endif %}{% if className %} {{ className }}{% endif %}"{% if maxWidth or maxHeight %} style="{% if maxWidth %}max-width: {{ maxWidth }}; width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }}; height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %}>
-      {% if src %}
-        <img src="{{ src }}"{% if alt %} alt="{{ alt }}"{% endif %} />
-      {% else %}
-        Image
-      {% endif %}
-    </a>
-  {% else %}
-    <div class="usx-image{% if rounded %} usx-image--rounded{% endif %}{% if circular %} usx-image--circular{% endif %}{% if objectFit %} usx-object-fit-{{ objectFit }}{% endif %}{% if className %} {{ className }}{% endif %}"{% if maxWidth or maxHeight %} style="{% if maxWidth %}max-width: {{ maxWidth }}; width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }}; height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %}>
-      {% if src %}
-        <img src="{{ src }}"{% if alt %} alt="{{ alt }}"{% endif %} />
-      {% else %}
-        Image
-      {% endif %}
-    </div>
+  {% if href %}<a href="{{ href }}"
+  {% else %}<div
   {% endif %}
+    class="usx-image{% if rounded %} usx-image--rounded{% endif %}{% if circular %} usx-image--circular{% endif %}{% if objectFit %} usx-object-fit-{{ objectFit }}{% endif %}{% if className %} {{ className }}{% endif %}"
+    {% if maxWidth or maxHeight %}style="{% if maxWidth %}max-width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %}
+  >
+    {% if src.fallback %}
+      <picture>
+        {% for source in src.sources %}
+          <source srcset="{{ source.srcSet }}"
+            {% if source.media %}media="{{ source.media }}"{% endif %}
+            {% if source.type %}type="{{ source.type }}"{% endif %}
+            {% if source.sizes %}sizes="{{ source.sizes }}"{% endif %}
+          />
+        {% endfor %}
+        <img src="{{ src.fallback }}"{% if alt %} alt="{{ alt }}"{% endif %}
+          {% if maxWidth or maxHeight %}style="{% if maxWidth %}max-width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %} />
+      </picture>
+    {% elif src %}
+      <img src="{{ src }}"{% if alt %} alt="{{ alt }}"{% endif %}
+        {% if maxWidth or maxHeight %}style="{% if maxWidth %}max-width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %} />
+    {% else %}
+      Image
+    {% endif %}
+  {% if href %}</a>{% else %}</div>{% endif %}
 {% endif %}

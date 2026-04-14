@@ -1,0 +1,36 @@
+@use '../../../../tokens/src/tokens.scss' as *;
+
+// Logo-image mode: .usx-image wrapper (<a> or <div>) produced by Image component.
+// Override inline-block and constrain the inner image height.
+.usx-logo {
+    margin-right: 1rem;
+}
+
+.usx-logo__image {
+    display: block;
+
+    img {
+        display: block;
+        height: auto;
+        max-height: 2rem;
+        width: auto;
+
+        @media (min-width: 64em) {
+            max-height: 3rem;
+        }
+    }
+}
+
+// Symbol + title mode: make .usa-logo__text (<em>) a flex row when a symbol is present.
+.usa-logo__text:has(.usx-logo__symbol) {
+    display: flex;
+    align-items: center;
+
+    .usx-logo__symbol {
+        display: block;
+        flex-shrink: 0;
+        height: 1.5rem;
+        margin-right: 0.5rem;
+        width: auto;
+    }
+}
