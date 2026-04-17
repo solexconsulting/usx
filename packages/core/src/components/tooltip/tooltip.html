@@ -1,4 +1,57 @@
-<div class="usx-tooltip">
-  <!-- Canonical HTML for Tooltip -->
-  <div class="tooltip__content">NOT IMPLEMENTED</div>
+<h3 class="site-preview-heading">Standard tooltip</h3>
+<div class="padding-8">
+  <div class="margin-4">
+    <span class="usx-tooltip">
+      <button type="button" class="usa-button usx-button usa-button--primary">Show on top</button>
+      <span class="usa-tooltip__body usa-tooltip__body--top" role="tooltip">Top</span>
+    </span>
+  </div>
+  <div class="margin-4">
+    <span class="usx-tooltip">
+      <button type="button" class="usa-button usx-button usa-button--primary">Show on right</button>
+      <span class="usa-tooltip__body usa-tooltip__body--right" role="tooltip">Right</span>
+    </span>
+  </div>
+  <div class="margin-4">
+    <span class="usx-tooltip">
+      <button type="button" class="usa-button usx-button usa-button--primary">Show on left</button>
+      <span class="usa-tooltip__body usa-tooltip__body--left" role="tooltip">Left</span>
+    </span>
+  </div>
+  <div class="margin-4">
+    <span class="usx-tooltip">
+      <button type="button" class="usa-button usx-button usa-button--primary">Show on bottom</button>
+      <span class="usa-tooltip__body usa-tooltip__body--bottom" role="tooltip">Bottom</span>
+    </span>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Tooltip on non-button elements</h3>
+<div class="padding-8">
+  <div class="margin-4">
+    <span class="usx-tooltip">
+      <a href="#" class="usa-link usx-link">Hover over this link</a>
+      <span class="usa-tooltip__body usa-tooltip__body--top" role="tooltip">Helpful info</span>
+    </span>
+  </div>
+  <div class="margin-4">
+    <span class="usx-tooltip">
+      <span tabindex="0">Hover over this text</span>
+      <span class="usa-tooltip__body usa-tooltip__body--top" role="tooltip">Plain text trigger</span>
+    </span>
+  </div>
+  <div class="margin-4">
+    <span class="usx-tooltip">
+      <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img" tabindex="0">
+        <use href="/img/sprite.svg#info"></use>
+      </svg>
+      <span class="usa-tooltip__body usa-tooltip__body--right" role="tooltip">More information</span>
+    </span>
+  </div>
+  <div class="margin-4">
+    <span class="usx-tooltip">
+      <abbr title="" tabindex="0">SSN</abbr>
+      <span class="usa-tooltip__body usa-tooltip__body--top" role="tooltip">Social Security Number</span>
+    </span>
+  </div>
 </div>

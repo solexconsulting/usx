@@ -1,11 +1,27 @@
 {
   "name": "tooltip",
   "template": "tooltip/tooltip.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Tooltip"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "label": {
+      "type": "string",
+      "default": "Tooltip text",
+      "description": "The text content displayed inside the tooltip body."
+    },
+    "position": {
+      "type": "select",
+      "options": ["top", "bottom", "left", "right"],
+      "default": "top",
+      "description": "The direction the tooltip appears relative to its trigger."
+    },
+    "children": {
+      "type": "string",
+      "default": null,
+      "description": "The trigger element that activates the tooltip on hover or focus."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes to apply to the tooltip wrapper."
+    }
   }
 }
