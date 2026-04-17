@@ -2,11 +2,25 @@ import React from 'react';
 import config from './config.json';
 import { buildArgTypes, createDjangoStory } from '../../../helper';
 import { storyDefs } from './CharacterCount.React.stories.jsx';
+import characterCount from "@uswds/uswds/js/usa-character-count";
 
 export default {
   title: 'Django/CharacterCount',
   tags: ['autodocs'],
   argTypes: buildArgTypes(config.props || {}),
+  decorators: [
+    (Story) => {
+      // Ensure USWDS JS is initialized for the story
+      React.useEffect(() => {
+        characterCount.on();
+        return () => {
+          characterCount.off();
+        };
+      }, []);
+
+      return <Story />;
+    }
+  ]
 };
 
 const createStory = createDjangoStory('character-count');

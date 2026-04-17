@@ -12,4 +12,9 @@ export default {
     '../../../node_modules/@uswds/uswds/dist',
     '../static',
   ],
+  previewHead: (head) => `
+    ${head}
+    <script src="../node_modules/@uswds/uswds/dist/js/uswds.min.js"></script>
+    <script src="../node_modules/@uswds/uswds/dist/js/uswds-init.min.js"></script>
+  `
 };

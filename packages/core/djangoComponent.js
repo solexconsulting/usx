@@ -75,7 +75,7 @@ const simulateLoading = (element, html) => {
  * @param {string} componentName - The name of the Django component (e.g., 'usx/button').
  * @returns {Function} A React component that takes props and renders the HTML.
  */
-export function djangoComponent(componentName) {
+export function djangoComponent(componentName, postRender=null) {
   return function DjangoRenderedComponent(props) {
     const [html, setHtml] = useState('');
     const [error, setError] = useState(null);
@@ -107,6 +107,9 @@ export function djangoComponent(componentName) {
     useEffect(() => {
       if (html && containerRef.current) {
         simulateLoading(containerRef.current, html);
+      }
+      if (postRender) {
+        postRender();
       }
     }, [html]);
 

@@ -58,7 +58,7 @@ return argTypes;
  *   const createStory = createDjangoStory('my-component');
  *   export const Default = createStory(storyDefs.Default);
  */
-export const createDjangoStory = (componentName) => (args) => ({
+export const createDjangoStory = (componentName, postRender=null) => (args) => ({
   args,
   parameters: {
     docs: {
@@ -67,7 +67,7 @@ export const createDjangoStory = (componentName) => (args) => ({
       },
     },
   },
-  render: djangoComponent(componentName),
+  render: djangoComponent(componentName, postRender),
 });
 
 

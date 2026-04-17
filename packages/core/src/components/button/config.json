@@ -73,6 +73,11 @@
             "type": "string",
             "default": null,
             "description": "Inner HTML or text to be displayed within the button, allowing for more complex content such as additional elements or formatting."
+        },
+        "extraAttributes": {
+            "type": "object",
+            "default": null,
+            "description": "An object containing any additional HTML attributes to be spread onto the button element, providing flexibility for custom use cases or integrations."
         }
     }
 }

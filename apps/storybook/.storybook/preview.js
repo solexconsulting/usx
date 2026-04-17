@@ -4,6 +4,7 @@ import './styles.scss';
 import '../../../node_modules/@uswds/uswds/dist/js/uswds.min.js';
 import '../../../node_modules/@uswds/uswds/dist/components/usa-banner.js.mjs';
 import '../../../node_modules/@uswds/uswds/dist/js/uswds-init.min.js';
+import '../../../node_modules/@uswds/uswds/dist/js/uswds-init.js';
 
 const preview = {
   parameters: {
@@ -14,7 +15,7 @@ const preview = {
         date: /Date$/i
       }
     }
-  }
+  },
 };
 
 export default preview;

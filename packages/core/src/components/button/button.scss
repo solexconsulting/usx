@@ -218,3 +218,15 @@
   $usx-button-outline-box-shadow,
   true
 );
+
+/* Unstyled */
+@include usx-button-variant(
+  ".usa-button--unstyled",
+  null,
+  null,
+  null,
+  $color-primary,
+  $color-primary-hover,
+  $color-primary-active,
+  null
+);

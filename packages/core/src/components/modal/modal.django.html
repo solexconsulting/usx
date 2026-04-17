@@ -1,4 +1,42 @@
 {# Django template for Modal #}
-<div class="usx-modal">
-  <div class="modal__content">Modal</div>
+{% load components %}
+<div
+    class="usa-modal usx-modal{% if size == 'lg' %} usa-modal--lg{% elif size == 'lg-collapsed' %} usx-modal--lg-collapsed{% endif %}{% if className %} {{ className }}{% endif %}"
+    id="{{ id }}"
+    aria-labelledby="{{ id }}-heading"
+    aria-describedby="{{ id }}-description"
+    {% if forceAction %}data-force-action{% endif %}
+  >
+    <div class="usa-modal__content">
+      <div class="usa-modal__main">
+        <h2 class="usa-modal__heading" id="{{ id }}-heading">
+          {{ heading|default:"Are you sure you want to continue?" }}
+        </h2>
+        <div class="usa-prose">
+          <p id="{{ id }}-description">
+            {% if children %}
+              {{ children|safe }}
+            {% else %}
+              {{ description|default:"You have unsaved changes that will be lost." }}
+            {% endif %}
+          </p>
+        </div>
+        <div class="usa-modal__footer">
+          {% include 'button-group/button-group.django.html' with items=actions only %}
+        </div>
+      </div>
+      {% if not forceAction %}
+      <button
+        type="button"
+        class="usa-button usa-modal__close"
+        aria-label="Close this window"
+        data-close-modal
+      >
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+          <use href="/img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      {% endif %}
+    </div>
+  </div>
 </div>

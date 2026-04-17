@@ -1,9 +1,24 @@
 import React from 'react';
 import html from './character-count.html?raw';
+import characterCount from "@uswds/uswds/js/usa-character-count";
+
 
 export default {
   title: 'HTML/CharacterCount',
   tags: ['autodocs'],
+  decorators: [
+    (Story) => {
+      // Ensure USWDS JS is initialized for the story
+      React.useEffect(() => {
+        characterCount.on();
+        return () => {
+          characterCount.off();
+        };
+      }, []);
+
+      return <Story />;
+    }
+  ]
 };
 
 export const AllVariants = {

@@ -1,7 +1,25 @@
 .usx-modal {
-  display: block;
+  
+  &.usx-modal--lg-collapsed {
 
-  .modal__content {
-    padding: 1rem;
+    max-width: 55rem;
+    width: 100%;
+    
+    .usa-modal__heading {
+      font-size: 1.34rem;
+      margin-top: 0;
+      line-height: 1.34em;
+    }
+
+    .usa-modal__main {
+      padding: 2rem;
+      padding-top: 0;
+      width: 100%;
+      max-width: 100%;
+    
+      .usa-prose {
+        min-height: 3rem;
+      }
+    }
   }
 }

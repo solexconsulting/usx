@@ -1,11 +1,47 @@
 {
   "name": "modal",
   "template": "modal/modal.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Modal"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "id": {
+      "type": "string",
+      "default": "example-modal",
+      "description": "Unique ID for the modal, used to link the trigger button and the modal panel via aria-controls and href."
+    },
+    "heading": {
+      "type": "string",
+      "default": "Are you sure you want to continue?",
+      "description": "The heading text displayed at the top of the modal."
+    },
+    "description": {
+      "type": "string",
+      "default": "You have unsaved changes that will be lost.",
+      "description": "The body text displayed inside the modal. Overridden by children if provided."
+    },
+    "actions": {
+      "type": "array",
+      "default": [],
+      "description": "Array of button prop objects rendered as the modal footer actions. Each item maps directly onto Button props (children, variant, onClick, href, etc.)."
+    },
+    "size": {
+      "type": "select",
+      "options": ["default", "lg", "lg-collapsed"],
+      "default": "default",
+      "description": "The size variant of the modal. 'lg' renders a large modal, 'lg-collapsed' renders a large modal that collapses at smaller breakpoints."
+    },
+    "forceAction": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, prevents closing the modal via the overlay or Escape key, and hides the close button. Used for required-action flows."
+    },
+    "children": {
+      "type": "string",
+      "default": null,
+      "description": "Inner HTML to render as the modal body, replacing the description text."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes to apply to the modal element."
+    }
   }
 }

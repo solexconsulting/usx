@@ -27,6 +27,7 @@
             {% if className %} {{ className }}{% endif %}
         "
         {% if disabled == True %} disabled="disabled" aria-disabled="true" {% endif %}
+        {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{{ value }}"{% endfor %}{% endif %}
     >
 {% endif %}
     {% if leftIcon and leftIcon.name %}

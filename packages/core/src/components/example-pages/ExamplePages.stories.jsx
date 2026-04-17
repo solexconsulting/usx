@@ -33,9 +33,17 @@ const searchArgs = {
 }
 
 const headerArgs = {
-  projectTitle: 'SOLEX Consulting',
-  projectLogo: 'solex-only.svg',
-  projectSymbol: 'symbol-only.svg',
+  branding: {
+    logo: {
+      fallback: '/symbol-only.svg',
+      sources: [
+        { media: '(min-width: 64em)', srcSet: '/stacked-w-symbol_left.svg' },
+        { media: '(min-width: 40em)', srcSet: '/linear.svg' },
+        { media: '(min-width: 20em)', srcSet: '/solex-only.svg' },
+      ],
+    },
+    title: 'SOLEX Consulting',
+  },
   projectUrl: 'https://google.com',
   navSections: [
     {

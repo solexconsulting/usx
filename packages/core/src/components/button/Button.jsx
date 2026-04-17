@@ -17,6 +17,7 @@ export default function Button({
   rightIcon,
   className = '',
   children = '',
+  extraAttributes = {},
   ...props
 }) {
   const variantClasses = {
@@ -48,6 +49,7 @@ export default function Button({
       {...(href ? { href } : {})}
       {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       {...props}
+      {...extraAttributes}
     >
       {leftIcon && <Icon name={leftIcon.name} size={leftIcon.size} color={leftIcon.color} />}
       {children || label}
@@ -80,4 +82,6 @@ Button.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   children: PropTypes.node,
+  // This is mostly provided for props contract compatibility with the Django component
+  extraAttributes: PropTypes.object,
 };

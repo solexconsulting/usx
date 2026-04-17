@@ -1,7 +1,6 @@
 {% load components %}
 
 {% with id|default:"character-count" as field_id %}
-
 <div class="usa-character-count usx-character-count{% if className %} {{ className }}{% endif %}" data-maxlength="{{ max }}">
   <div class="usa-form-group usx-form-group{% if error %} usa-form-group--error{% elif success %} usa-form-group--success{% endif %}">
     {% if label %}
@@ -43,8 +42,7 @@
       <span id="{{ field_id }}-success" class="usa-success-message" role="status">{{ success }}</span>
     {% endif %}
   </div>
-  {# Static no-JS fallback — USWDS JS will hide this and inject __status/__sr-status elements #}
-  <span id="{{ field_id }}-info" class="usa-character-count__status usa-hint">
+  <span id="{{ field_id }}-info" class="usa-character-count__message usa-sr-only">
     You can enter up to {{ max }} characters
   </span>
 </div>
