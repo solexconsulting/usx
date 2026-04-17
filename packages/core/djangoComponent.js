@@ -66,6 +66,18 @@ const simulateLoading = (element, html) => {
   );
 };
 
+export const fetchComponentHtml = async (componentName, props) => {
+  const host = (typeof window !== 'undefined' && window.location && window.location.hostname) ? window.location.hostname : '127.0.0.1';
+  const url = `http://${host}:9090/storybook/render/${componentName}/?props=${encodeURIComponent(JSON.stringify(props))}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Failed to fetch component HTML');
+  }
+  const html = await response.text();
+  return html;
+};
+
+
 /**
  * Create a Storybook render component for a Django component.
  *
@@ -84,16 +96,10 @@ export function djangoComponent(componentName, postRender=null) {
     useEffect(() => {
       const fetchHtml = async () => {
         setError(null);
-        const propsJson = JSON.stringify(props);
-        const host = (typeof window !== 'undefined' && window.location && window.location.hostname) ? window.location.hostname : '127.0.0.1';
-        const url = `http://${host}:9090/storybook/render/${componentName}/?props=${encodeURIComponent(propsJson)}`;
 
         try {
-          const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error(`Failed to render component: ${response.statusText}`);
-          }
-          const html = await response.text();
+          const html = await fetchComponentHtml(componentName, props);
+
           setHtml(html);
         } catch (err) {
           console.error('Error rendering Django component:', err);
