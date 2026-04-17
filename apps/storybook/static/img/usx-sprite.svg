@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!--
+    Custom USX icon sprite.
+    Add new <symbol> entries here to register additional custom icons.
+    Reference icons with: <use href="/img/usx-sprite.svg#icon-name" />
+  -->
+
+  <!-- Spinner: 3/4 opacity-0.2 track + 1/4 solid arc head, animated with rotate() -->
+  <symbol id="spinner" viewBox="0 0 24 24">
+    <!-- Track: full circle at low opacity -->
+    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.2" />
+    <!-- Head: 90° arc at full opacity -->
+    <circle
+      cx="12" cy="12" r="10"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-dasharray="15.71 47.12"
+      stroke-linecap="round"
+      transform="rotate(-90 12 12)"
+    />
+  </symbol>
+</svg>

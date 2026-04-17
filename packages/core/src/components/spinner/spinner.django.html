@@ -1,0 +1,7 @@
+{# Django template for Spinner #}
+<span role="status" aria-live="polite" tabindex="0"{% if className %} class="{{ className }}"{% endif %}>
+  <svg class="usa-icon usx-spinner {% if size == 1 %}usx-spinner--size-1{% else %}usa-icon--size-{{ size|default:3 }}{% endif %}{% if color %} text-{{ color }}{% endif %}" aria-hidden="true" focusable="false">
+    <use href="/img/usx-sprite.svg#spinner"></use>
+  </svg>
+  {% if label and not omitLabel %}<span class="usa-sr-only">{{ label }}</span>{% endif %}
+</span>

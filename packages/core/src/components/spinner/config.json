@@ -1,0 +1,32 @@
+{
+  "name": "spinner",
+  "template": "spinner/spinner.django.html",
+  "props": {
+    "size": {
+      "type": "select",
+      "options": [null, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "default": 3,
+      "description": "Controls the diameter of the spinner. Matches USWDS icon size scale (1\u20139)."
+    },
+    "color": {
+      "type": "string",
+      "default": null,
+      "description": "USWDS color token applied as text-{color}, e.g. 'primary', 'white', 'accent-cool'."
+    },
+    "label": {
+      "type": "string",
+      "default": "Loading...",
+      "description": "Screen-reader-only label text."
+    },
+    "omitLabel": {
+      "type": "boolean",
+      "default": false,
+      "description": "Set to true to omit the sr-only label, e.g. when wrapped in a Tooltip."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes on the wrapper element."
+    }
+  }
+}

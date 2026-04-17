@@ -65,6 +65,7 @@ export { default as Select } from './components/select';
 export { default as SideNav } from './components/side-nav';
 export { default as SiteAlert } from './components/site-alert';
 export { default as Skipnav } from './components/skipnav';
+export { default as Spinner } from './components/spinner';
 export { default as StepIndicator } from './components/step-indicator';
 export { default as SummaryBox } from './components/summary-box';
 export { default as Table } from './components/table';
@@ -74,6 +75,7 @@ export { default as TextArea } from './components/text-area';
 export { default as TimePicker } from './components/time-picker';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
 
 
 
