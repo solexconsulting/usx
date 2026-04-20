@@ -56,7 +56,7 @@ export default function Banner({
               <img
                 aria-hidden="true"
                 className="usa-banner__header-flag"
-                src="/img/us_flag_small.png"
+                src={((typeof window !== 'undefined' && window.usxBaseUrl) || '/') + 'img/us_flag_small.png'}
                 alt=""
               />
             </div>
@@ -88,7 +88,7 @@ export default function Banner({
               <div className="usa-banner__guidance tablet:grid-col-6">
                 <img
                   className="usa-banner__icon usa-media-block__img"
-                  src="/img/icon-dot-gov.svg"
+                  src={((typeof window !== 'undefined' && window.usxBaseUrl) || '/') + 'img/icon-dot-gov.svg'}
                   role="img"
                   alt=""
                   aria-hidden="true"
@@ -103,7 +103,7 @@ export default function Banner({
               <div className="usa-banner__guidance tablet:grid-col-6">
                 <img
                   className="usa-banner__icon usa-media-block__img"
-                  src="/img/icon-https.svg"
+                  src={((typeof window !== 'undefined' && window.usxBaseUrl) || '/') + 'img/icon-https.svg'}
                   role="img"
                   alt=""
                   aria-hidden="true"

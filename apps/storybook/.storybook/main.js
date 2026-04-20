@@ -20,6 +20,7 @@ export default {
   },
   previewHead: (head) => `
     ${head}
+    <script>window.usxBaseUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);</script>
     <script>fetch('./env-config.js').then(r=>r.ok&&r.text()).then(t=>t&&new Function(t)()).catch(()=>{})</script>
     <script src="./js/uswds-init.min.js"></script>
     <script src="./js/uswds.min.js" defer></script>

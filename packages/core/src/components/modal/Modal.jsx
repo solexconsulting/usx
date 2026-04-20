@@ -52,7 +52,7 @@ export default function Modal({
             data-close-modal
           >
             <svg className="usa-icon" aria-hidden="true" focusable="false" role="img">
-              <use href="/img/sprite.svg#close" />
+              <use href={((typeof window !== 'undefined' && window.usxBaseUrl) || '/') + 'img/sprite.svg#close'} />
             </svg>
           </button>
         )}

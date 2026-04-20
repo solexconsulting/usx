@@ -5,4 +5,4 @@ cat > /storybook-static/env-config.js <<EOF
 window.USX_DJANGO_URL = "${USX_DJANGO_URL:-http://localhost:9090}";
 EOF
 
-exec serve /storybook-static -l 6006
+exec nginx -g 'daemon off;'

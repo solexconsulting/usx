@@ -22,16 +22,15 @@ COPY apps/storybook/ apps/storybook/
 # ── Build static Storybook ─────────────────────────────────────────────────
 RUN pnpm storybook:build
 
-# ── Serve with a lightweight static file server ────────────────────────────
-FROM node:22-slim AS serve
-RUN npm install -g serve@latest
+# ── Serve with nginx ─────────────────────────────────────────────────────
+FROM nginx:alpine AS serve
 COPY --from=base /app/apps/storybook/storybook-static /storybook-static
 
 # Runtime environment — set the URL the *browser* will use to reach Django.
-# This is written into /storybook-static/env-config.js at container startup
-# so the same image works in any environment without rebuilding.
+# Written into /storybook-static/env-config.js at container startup.
 ENV USX_DJANGO_URL=http://localhost:9090
 
+COPY deploy/storybook/nginx.conf /etc/nginx/conf.d/default.conf
 COPY deploy/storybook/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

@@ -9,7 +9,7 @@ export default function Icon({
     size = 2,
     color = null,
     alt = name + ' icon',
-    staticUrlPrefix = '/img/sprite.svg#',
+    staticUrlPrefix = ((typeof window !== 'undefined' && window.usxBaseUrl) || '/') + 'img/sprite.svg#',
     className = '',
     ...props
 }) {

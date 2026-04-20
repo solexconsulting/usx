@@ -7,7 +7,7 @@ export default function Spinner({
   color = null,
   label = 'Loading...',
   omitLabel = false,
-  staticUrlPrefix = '/img/usx-sprite.svg#',
+  staticUrlPrefix = ((typeof window !== 'undefined' && window.usxBaseUrl) || '/') + 'img/usx-sprite.svg#',
   className = '',
   ...props
 }) {
