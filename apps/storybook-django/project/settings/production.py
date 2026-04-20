@@ -22,9 +22,20 @@ if _cors_origins:
 else:
     CORS_ALLOW_ALL_ORIGINS = False
 
+# Django is behind one or more reverse proxies that terminate SSL.
+# Trust the X-Forwarded-Proto header from the proxy so Django knows the
+# original request was HTTPS and doesn't issue an HTTP→HTTPS redirect.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # Enforce HTTPS in production.
 SECURE_SSL_REDIRECT = os.environ.get('DJANGO_SECURE_SSL_REDIRECT', 'true').lower() == 'true'
 SECURE_HSTS_SECONDS = int(os.environ.get('DJANGO_HSTS_SECONDS', '31536000'))
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+# If Django is mounted at a subpath (e.g. /storybook-django/), set this so
+# CommonMiddleware generates correct redirect URLs with the prefix included.
+_force_script_name = os.environ.get('DJANGO_FORCE_SCRIPT_NAME', '')
+if _force_script_name:
+    FORCE_SCRIPT_NAME = _force_script_name
