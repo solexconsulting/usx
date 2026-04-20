@@ -5,6 +5,10 @@ bind = "0.0.0.0:9090"
 workers = 2
 threads = 2
 
+# Trust X-Forwarded-Proto from any upstream IP so Django's
+# SECURE_PROXY_SSL_HEADER works correctly behind Docker/nginx proxies.
+forwarded_allow_ips = "*"
+
 # Keep worker output streaming to container logs.
 accesslog = "-"
 errorlog = "-"
