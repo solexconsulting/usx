@@ -71,15 +71,11 @@ const simulateLoading = (element, html) => {
  *
  * Resolution order (first match wins):
  *  1. window.USX_DJANGO_URL  — injected at container startup via env-config.js
- *  2. import.meta.env.VITE_DJANGO_STORYBOOK_URL — local dev .env.local fallback
- *  3. http://<current-hostname>:9090  — last-resort default
+ *  2. http://<current-hostname>:9090  — last-resort default for local dev
  */
 const getDjangoBaseUrl = () => {
   if (typeof window !== 'undefined' && window.USX_DJANGO_URL) {
     return window.USX_DJANGO_URL.replace(/\/$/, '');
-  }
-  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_DJANGO_STORYBOOK_URL) {
-    return import.meta.env.VITE_DJANGO_STORYBOOK_URL.replace(/\/$/, '');
   }
   const hostname = (typeof window !== 'undefined' && window.location && window.location.hostname)
     ? window.location.hostname
@@ -89,7 +85,7 @@ const getDjangoBaseUrl = () => {
 
 export const fetchComponentHtml = async (componentName, props) => {
   const baseUrl = getDjangoBaseUrl();
-  const url = `${baseUrl}/storybook/render/${componentName}/?props=${encodeURIComponent(JSON.stringify(props))}`;
+  const url = `${baseUrl}/render/${componentName}/?props=${encodeURIComponent(JSON.stringify(props))}`;
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Failed to fetch component HTML');
