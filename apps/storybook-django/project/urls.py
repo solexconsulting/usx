@@ -25,5 +25,5 @@ def health(request):
 
 urlpatterns = [
     path('health/', health, name='health'),
-    path('storybook/', include(storybook_urls)),
+    path('', include(storybook_urls)),
 ]
