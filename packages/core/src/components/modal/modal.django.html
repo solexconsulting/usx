@@ -1,5 +1,6 @@
 {# Django template for Modal #}
 {% load components %}
+{% load static %}
 <div
     class="usa-modal usx-modal{% if size == 'lg' %} usa-modal--lg{% elif size == 'lg-collapsed' %} usx-modal--lg-collapsed{% endif %}{% if className %} {{ className }}{% endif %}"
     id="{{ id }}"
@@ -33,7 +34,7 @@
         data-close-modal
       >
         <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-          <use href="/img/sprite.svg#close"></use>
+          <use href="{% static 'img/sprite.svg' %}#close"></use>
         </svg>
       </button>
       {% endif %}

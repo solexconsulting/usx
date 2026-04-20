@@ -34,6 +34,11 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
+# STATIC_URL controls the {% static %} template tag prefix.
+# Set to the subpath where static assets are served from (same as FORCE_SCRIPT_NAME
+# since the Storybook nginx container serves them). Defaults to '/'.
+STATIC_URL = os.environ.get('DJANGO_STATIC_URL', '/')
+
 # If Django is mounted at a subpath (e.g. /storybook-django/), set this so
 # CommonMiddleware generates correct redirect URLs with the prefix included.
 _force_script_name = os.environ.get('DJANGO_FORCE_SCRIPT_NAME', '')

@@ -1,4 +1,5 @@
 {% load components %}
+{% load static %}
 {# Django template for Banner #}
 <section class="usa-banner usx-banner {{ className }}" aria-label="{{ ariaLabel }}">
   <div class="usa-accordion">
@@ -8,7 +9,7 @@
           <img
             aria-hidden="true"
             class="usa-banner__header-flag"
-            src="/img/us_flag_small.png"
+            src="{% static 'img/us_flag_small.png' %}"
             alt=""
           />
         </div>
@@ -40,7 +41,7 @@
         <div class="usa-banner__guidance tablet:grid-col-6">
           <img
             class="usa-banner__icon usa-media-block__img"
-            src="/img/icon-dot-gov.svg"
+            src="{% static 'img/icon-dot-gov.svg' %}"
             role="img"
             alt=""
             aria-hidden="true"
@@ -55,7 +56,7 @@
         <div class="usa-banner__guidance tablet:grid-col-6">
           <img
             class="usa-banner__icon usa-media-block__img"
-            src="/img/icon-https.svg"
+            src="{% static 'img/icon-https.svg' %}"
             role="img"
             alt=""
             aria-hidden="true"
