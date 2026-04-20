@@ -2,7 +2,7 @@ import React from 'react';
 import Fieldset from './Fieldset';
 import config from './config.json';
 import Input from '../input/Input';
-import { buildArgTypes } from '../../../helper';
+import { buildArgTypes } from '../../utils/storyHelpers';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 

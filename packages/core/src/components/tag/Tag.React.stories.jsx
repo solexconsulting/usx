@@ -1,7 +1,7 @@
 import React from 'react';
 import Tag from './Tag';
 import config from './config.json';
-import { buildArgTypes } from '../../../helper';
+import { buildArgTypes } from '../../utils/storyHelpers';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 

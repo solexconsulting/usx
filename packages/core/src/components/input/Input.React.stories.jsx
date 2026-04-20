@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from './Input.jsx';
 import inputConfig from './config.json';
-import { buildArgTypes } from '../../../helper';
+import { buildArgTypes } from '../../utils/storyHelpers';
 
 const generatedArgTypes = buildArgTypes(inputConfig.props || {});
 

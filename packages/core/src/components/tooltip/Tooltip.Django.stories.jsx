@@ -1,7 +1,7 @@
 import React from 'react';
-import { djangoComponent } from '../../../djangoComponent.js';
+import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../../helper';
+import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 const TooltipDjango = djangoComponent('tooltip');

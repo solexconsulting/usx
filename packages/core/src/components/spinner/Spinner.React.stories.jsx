@@ -2,7 +2,7 @@ import React from 'react';
 import Spinner from './Spinner';
 import config from './config.json';
 import Tooltip from '../tooltip/Tooltip';
-import { buildArgTypes } from '../../../helper';
+import { buildArgTypes } from '../../utils/storyHelpers';
 
 export const storyDefs = {
   Default: { size: 3, label: 'Loading...', omitLabel: false },

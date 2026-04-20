@@ -1,8 +1,9 @@
 import React from 'react';
-import { djangoComponent } from '../../../djangoComponent.js';
+import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../../helper';
+import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
 import Button from '../button/Button.jsx';
+import modal from "@uswds/uswds/js/usa-modal";
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -24,17 +25,7 @@ export default {
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
-        const uswds_min = document.createElement('script');
-        const uswds_init = document.createElement('script');
-        uswds_min.src = '../node_modules/@uswds/uswds/dist/js/uswds.min.js';
-        uswds_init.src = '../node_modules/@uswds/uswds/dist/js/uswds-init.min.js';
-        document.body.appendChild(uswds_min);
-        document.body.appendChild(uswds_init);
-
-        return () => {
-          document.body.removeChild(uswds_min);
-          document.body.removeChild(uswds_init);
-        };
+        return () => modal.off();
       }, []);
 
       return <Story />;
@@ -42,7 +33,16 @@ export default {
   ]
 };
 
-const ModalDjango = djangoComponent('modal');
+
+var componentRendered = false;
+function postRender() {
+  if (!componentRendered) {
+    modal.on();
+  }
+  componentRendered = true;
+}
+
+const ModalDjango = djangoComponent('modal', postRender=postRender);
 
 const createStory = (args) => ({
   args,

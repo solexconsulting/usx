@@ -15,8 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
+from django.http import HttpResponse
 from project.storybook import urls as storybook_urls
 
+
+def health(request):
+    return HttpResponse("OK. Django Storybook is healthy.", content_type='text/plain')
+
+
 urlpatterns = [
+    path('health/', health, name='health'),
     path('storybook/', include(storybook_urls)),
 ]

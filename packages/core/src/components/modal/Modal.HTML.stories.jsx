@@ -1,6 +1,7 @@
 import React from 'react';
 import html from './modal.html?raw';
-import '../../../../../node_modules/@uswds/uswds/dist/js/uswds-init.js';
+
+import modal from "@uswds/uswds/js/usa-modal";
 
 export default {
   title: 'HTML/Modal',
@@ -9,17 +10,8 @@ export default {
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
-        const uswds_min = document.createElement('script');
-        const uswds_init = document.createElement('script');
-        uswds_min.src = '../node_modules/@uswds/uswds/dist/js/uswds.min.js';
-        uswds_init.src = '../node_modules/@uswds/uswds/dist/js/uswds-init.min.js';
-        document.body.appendChild(uswds_min);
-        document.body.appendChild(uswds_init);
-
-        return () => {
-          document.body.removeChild(uswds_min);
-          document.body.removeChild(uswds_init);
-        };
+        modal.on();
+        return () => modal.off();
       }, []);
 
       return <Story />;

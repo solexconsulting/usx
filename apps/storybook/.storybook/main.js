@@ -12,9 +12,16 @@ export default {
     '../../../node_modules/@uswds/uswds/dist',
     '../static',
   ],
+  // base: './' makes Vite emit relative asset URLs so Storybook works
+  // behind any subpath proxy without a build-time configuration.
+  viteFinal: (config) => {
+    config.base = './';
+    return config;
+  },
   previewHead: (head) => `
     ${head}
-    <script src="../node_modules/@uswds/uswds/dist/js/uswds.min.js"></script>
-    <script src="../node_modules/@uswds/uswds/dist/js/uswds-init.min.js"></script>
+    <script>fetch('./env-config.js').then(r=>r.ok&&r.text()).then(t=>t&&new Function(t)()).catch(()=>{})</script>
+    <script src="./js/uswds-init.min.js"></script>
+    <script src="./js/uswds.min.js" defer></script>
   `
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import FormGroup from './FormGroup';
 import config from './config.json';
-import { buildArgTypes } from '../../../helper';
+import { buildArgTypes } from '../../utils/storyHelpers';
 import Input from '../input/Input';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

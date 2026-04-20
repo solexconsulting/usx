@@ -1,5 +1,5 @@
 import React from 'react';
-import typography from '../../../tokens/src/typography.json';
+import typography from '../../../tokens/src/primitives/typography.json';
 
 export default {
   title: 'Typography',

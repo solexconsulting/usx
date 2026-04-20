@@ -7,14 +7,13 @@ To regenerate, run: node scripts/generate-exports.cjs
 
 // MANUAL-EXPORTS START
 /*
-Use lines like: // EXCLUDE: ComponentName
+Use lines like:    EXCLUDE: ComponentName
 to prevent automatic generation for a component.
-# Example
-- Uncomment the following two lines to include an export for
-  MyComponent and to exclude a Button export:
-export { default as MyComponent } from './components/MyComponent';
-EXCLUDE: Button
+Uncommented lines starting with EXCLUDE: are active directives.
 */
+
+// example-pages is a Storybook-only demo page with no React component export.
+EXCLUDE: ExamplePages
 
 // MANUAL-EXPORTS END
 
@@ -34,7 +33,6 @@ export { default as Checkbox } from './components/checkbox';
 export { default as Collection } from './components/collection';
 export { default as Combobox } from './components/combobox';
 export { default as DatePicker } from './components/date-picker';
-export { default as ExamplePages } from './components/example-pages';
 export { default as Fieldset } from './components/fieldset';
 export { default as FileInput } from './components/file-input';
 export { default as Footer } from './components/footer';
@@ -75,6 +73,11 @@ export { default as TextArea } from './components/text-area';
 export { default as TimePicker } from './components/time-picker';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
+
+
+
+
 
 
 

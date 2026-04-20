@@ -1,7 +1,7 @@
 import React from 'react';
-import colors from '../../..//tokens/src/color.json';
-import spacing from '../../../tokens/src/spacing.json';
-import typography from '../../..//tokens/src/typography.json';
+import colors from '../../../tokens/src/primitives/color.json';
+import spacing from '../../../tokens/src/primitives/spacing.json';
+import typography from '../../../tokens/src/primitives/typography.json';
 
 export default {
   title: 'Tokens',

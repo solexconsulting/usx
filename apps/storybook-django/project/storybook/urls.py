@@ -1,5 +1,9 @@
 from django.urls import path
-from project.storybook.views import TestView, ComponentsView, RenderComponentView
+from project.storybook.views import (
+    TestView,
+    ComponentsView,
+    RenderComponentView
+)
 
 urlpatterns = [
     path('test/', TestView.as_view(), name='test'),

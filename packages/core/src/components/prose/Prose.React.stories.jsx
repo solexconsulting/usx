@@ -1,7 +1,7 @@
 import React from 'react';
 import Prose from './Prose.jsx';
 import config from './config.json';
-import { buildArgTypes } from '../../../helper';
+import { buildArgTypes } from '../../utils/storyHelpers';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 

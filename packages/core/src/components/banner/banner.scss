@@ -1,4 +1,4 @@
-@use '../../../../tokens/src/tokens.scss' as *;
+@use '../../../../tokens/src/_variables' as *;
 
 .usa-banner.usx-banner {
     @if $usx-banner-background-color {

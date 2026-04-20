@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import config from './config.json';
-import { buildArgTypes, createDjangoStory, createBulkDjangoStory, getComponentHtml, componentTag } from '../../../helper';
+import { buildArgTypes, createDjangoStory, createBulkDjangoStory, getComponentHtml, componentTag } from '../../utils/storyHelpers';
 import { storyDefs } from './Spinner.React.stories.jsx';
 
 export default {

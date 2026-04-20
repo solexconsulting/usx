@@ -1,22 +1,61 @@
+// AUTO-GENERATED-SCSS START
+@use '../components/accordion/accordion';
+@use '../components/alert/alert';
+@use '../components/banner/banner';
+@use '../components/breadcrumb/breadcrumb';
 @use '../components/button/button';
 @use '../components/button-group/button-group';
-@use '../components/input/input';
-@use '../components/text-area/text-area';
-@use '../components/alert/alert';
-@use '../components/icon/icon';
-@use '../components/tag/tag';
-@use '../components/search/search';
-@use '../components/checkbox/checkbox';
-@use '../components/radio-buttons/radio-buttons';
-@use '../components/image/image';
-@use '../components/header/header';
-@use '../components/carousel/carousel';
-@use '../components/collection/collection';
 @use '../components/calendar-date/calendar-date';
+@use '../components/card/card';
+@use '../components/card-group/card-group';
+@use '../components/carousel/carousel';
+@use '../components/character-count/character-count';
+@use '../components/checkbox/checkbox';
+@use '../components/collection/collection';
+@use '../components/combobox/combobox';
+@use '../components/date-picker/date-picker';
+@use '../components/fieldset/fieldset';
+@use '../components/file-input/file-input';
+@use '../components/footer/footer';
+@use '../components/form-group/form-group';
+@use '../components/header/header';
+@use '../components/hero/hero';
+@use '../components/icon/icon';
+@use '../components/identifier/identifier';
+@use '../components/image/image';
+@use '../components/in-page-nav/in-page-nav';
+@use '../components/indicator/indicator';
+@use '../components/input/input';
+@use '../components/label/label';
+@use '../components/language-selector/language-selector';
+@use '../components/legend/legend';
 @use '../components/link/link';
+@use '../components/list/list';
+@use '../components/memorable-date/memorable-date';
 @use '../components/modal/modal';
-@use '../components/tooltip/tooltip';
+@use '../components/pagination/pagination';
+@use '../components/process-list/process-list';
+@use '../components/radio-buttons/radio-buttons';
+@use '../components/range-slider/range-slider';
+@use '../components/required/required';
+@use '../components/search/search';
+@use '../components/select/select';
+@use '../components/side-nav/side-nav';
+@use '../components/site-alert/site-alert';
+@use '../components/skipnav/skipnav';
 @use '../components/spinner/spinner';
+@use '../components/step-indicator/step-indicator';
+@use '../components/summary-box/summary-box';
+@use '../components/table/table';
+@use '../components/tag/tag';
+@use '../components/tag-group/tag-group';
+@use '../components/text-area/text-area';
+@use '../components/time-picker/time-picker';
+@use '../components/tooltip/tooltip';
+// AUTO-GENERATED-SCSS END
+
+// MANUAL-SCSS START
+// Import tokens.scss (not _variables) so utility classes (.bg-*) are generated here once.
 @use '../../../tokens/src/tokens.scss' as *;
 
 
@@ -30,3 +69,4 @@
 		border-width: $usx-form-group-error-border-thickness;
 	}
 }
+// MANUAL-SCSS END

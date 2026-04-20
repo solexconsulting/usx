@@ -1,0 +1,240 @@
+// _variables.scss — Design token Sass variables.
+// @use this file to access tokens without generating any CSS output.
+//
+// All variables use !default so consumers can override them before @use-ing
+// this file via the `with` syntax:
+//   @use '@agency-ui-platform/tokens/src/_variables' with ($color-primary: red);
+
+@use "sass:color";
+
+// ── Layout ─────────────────────────────────────────────────────────────────
+$max-layout-width: 64rem !default;
+
+// ── Color — primitives ──────────────────────────────────────────────────────
+$color-primary:            #2563eb !default;
+$color-primary-darker:     color.adjust($color-primary, $lightness: -20%) !default;
+$color-primary-darkest:    color.adjust($color-primary, $lightness: -40%) !default;
+$color-primary-lighter:    color.adjust($color-primary, $lightness:  20%) !default;
+$color-primary-lightest:   color.adjust($color-primary, $lightness:  40%) !default;
+$color-primary-hover:      #5f85ec !default;
+$color-primary-active:     #1c3996 !default;
+$color-secondary:          #7c3aed !default;
+$color-secondary-hover:    #955df0 !default;
+$color-secondary-active:   #5b21b6 !default;
+$color-accent-cool:        #66b5ee !default;
+$color-accent-cool-hover:  #2695df !default;
+$color-accent-cool-active: #1175b3 !default;
+$color-accent-warm:        #dfb734 !default;
+$color-accent-warm-hover:  #e9aa22 !default;
+$color-accent-warm-active: #c7a01f !default;
+$color-base:               #71767a !default;
+$color-base-hover:         #565c65 !default;
+$color-base-active:        #3d4551 !default;
+$color-info:               #6bc6ff !default;
+$color-warning:            #f8c41b !default;
+$color-success:            #2e8540 !default;
+$color-error:              #d83933 !default;
+$color-emergency:          #b51d09 !default;
+$color-background:         #f8fafc !default;
+$color-surface:            #ffffff !default;
+$color-dark-bg:            color.adjust($color-primary, $lightness: -50%) !default;
+
+// ── Color — text ────────────────────────────────────────────────────────────
+$color-text:           #0f172a !default;
+$color-light-text:     #ffffff !default;
+$color-info-text:      null !default;
+$color-warning-text:   null !default;
+$color-success-text:   null !default;
+$color-error-text:     null !default;
+$color-emergency-text: null !default;
+
+// ── Color map (used by _utilities.scss) ─────────────────────────────────────
+$colors: (
+  'primary':        $color-primary,
+  'primary-darker': $color-primary-darker,
+  'primary-darkest': $color-primary-darkest,
+  'secondary':      $color-secondary,
+  'accent-cool':    $color-accent-cool,
+  'accent-warm':    $color-accent-warm,
+  'base':           $color-base,
+  'info':           $color-info,
+  'warning':        $color-warning,
+  'success':        $color-success,
+  'error':          $color-error,
+  'emergency':      $color-emergency,
+) !default;
+
+// ── Spacing ─────────────────────────────────────────────────────────────────
+$spacing-xs: 0.25rem !default;
+$spacing-sm: 0.5rem  !default;
+$spacing-md: 1rem    !default;
+$spacing-lg: 1.5rem  !default;
+$spacing-xl: 2rem    !default;
+
+// ── Typography ───────────────────────────────────────────────────────────────
+$typography-fontFamilyBase:    Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif !default;
+$typography-fontSizeBase:      1rem !default;
+$typography-fontWeightRegular: 400  !default;
+$typography-fontWeightBold:    700  !default;
+$typography-lineHeightBase:    1.5  !default;
+
+// ── Radius ───────────────────────────────────────────────────────────────────
+$r-none: 0       !default;
+$r-sm:   0.25rem !default;
+$r-md:   0.5rem  !default;
+$r-lg:   1.0rem  !default;
+$r-xl:   2.0rem  !default;
+$r-full: 9999px  !default;
+
+// ── Border ───────────────────────────────────────────────────────────────────
+$border-width-thin:  1px !default;
+$border-width-thick: 4px !default;
+
+// ── Component tokens: Button ─────────────────────────────────────────────────
+$usx-button-border-radius: $r-md !default;
+$usx-button-box-shadow: null !default;
+$usx-button-primary-background-color: $color-primary !default;
+$usx-button-primary-background-color-hover: $color-primary-hover !default;
+$usx-button-primary-background-color-active: $color-primary-active !default;
+$usx-button-primary-color: null !default;
+$usx-button-primary-color-hover: null !default;
+$usx-button-primary-color-active: null !default;
+$usx-button-primary-border-color: null !default;
+$usx-button-secondary-background-color: $color-secondary !default;
+$usx-button-secondary-background-color-hover: $color-secondary-hover !default;
+$usx-button-secondary-background-color-active: $color-secondary-active !default;
+$usx-button-secondary-color: null !default;
+$usx-button-secondary-color-hover: null !default;
+$usx-button-secondary-color-active: null !default;
+$usx-button-secondary-border-color: null !default;
+$usx-button-accent-cool-background-color: $color-accent-cool !default;
+$usx-button-accent-cool-background-color-hover: $color-accent-cool-hover !default;
+$usx-button-accent-cool-background-color-active: $color-accent-cool-active !default;
+$usx-button-accent-cool-color: null !default;
+$usx-button-accent-cool-color-hover: null !default;
+$usx-button-accent-cool-color-active: null !default;
+$usx-button-accent-cool-border-color: null !default;
+$usx-button-accent-warm-background-color: $color-accent-warm !default;
+$usx-button-accent-warm-background-color-hover: $color-accent-warm-hover !default;
+$usx-button-accent-warm-background-color-active: $color-accent-warm-active !default;
+$usx-button-accent-warm-color: null !default;
+$usx-button-accent-warm-color-hover: null !default;
+$usx-button-accent-warm-color-active: null !default;
+$usx-button-accent-warm-border-color: null !default;
+$usx-button-base-background-color: $color-base !default;
+$usx-button-base-background-color-hover: $color-base-hover !default;
+$usx-button-base-background-color-active: $color-base-active !default;
+$usx-button-base-color-: null !default;
+$usx-button-base-color-hover: null !default;
+$usx-button-base-color-active: null !default;
+$usx-button-base-border-color: null !default;
+$usx-button-outline-background-color: null !default;
+$usx-button-outline-background-color-hover: null !default;
+$usx-button-outline-background-color-active: null !default;
+$usx-button-outline-color: $color-primary !default;
+$usx-button-outline-color-hover: $color-primary-hover !default;
+$usx-button-outline-color-active: $color-primary-active !default;
+$usx-button-outline-box-shadow: 0 0 0 2px currentColor inset !default;
+
+// ── Component tokens: Button Group ───────────────────────────────────────────
+$usx-button-group-segmented-divider-primary:    1px solid color.adjust($color-primary, $lightness: -20%) !default;
+$usx-button-group-segmented-divider-secondary:  1px solid color.adjust($color-secondary, $lightness: -20%) !default;
+$usx-button-group-segmented-divider-accent-cool: 1px solid color.adjust($color-accent-cool, $lightness: -20%) !default;
+$usx-button-group-segmented-divider-accent-warm: 1px solid color.adjust($color-accent-warm, $lightness: -20%) !default;
+$usx-button-group-segmented-divider-base:       1px solid color.adjust($color-base, $lightness: -20%) !default;
+
+// ── Component tokens: Alert ───────────────────────────────────────────────────
+$usx-alert-background-color: null !default;
+$usx-alert-text-color: null !default;
+$usx-alert-border-color: null !default;
+$usx-alert-border-radius: $r-lg !default;
+$usx-alert-box-shadow: null !default;
+$usx-alert-info-background-color: $color-info !default;
+$usx-alert-info-text-color: null !default;
+$usx-alert-info-border-color: color.adjust($color-info, $lightness: -20%) !default;
+$usx-alert-warning-background-color: $color-warning !default;
+$usx-alert-warning-text-color: null !default;
+$usx-alert-warning-border-color: null !default;
+$usx-alert-success-background-color: $color-success !default;
+$usx-alert-success-text-color: null !default;
+$usx-alert-success-border-color: null !default;
+$usx-alert-error-background-color: $color-error !default;
+$usx-alert-error-text-color: null !default;
+$usx-alert-error-border-color: null !default;
+$usx-alert-emergency-background-color: $color-emergency !default;
+$usx-alert-emergency-text-color: null !default;
+$usx-alert-emergency-border-color: null !default;
+$usx-alert-slim-padding-block: null !default;
+$usx-alert-slim-padding-inline: null !default;
+$usx-alert-no-icon-padding-inline-start: null !default;
+$usx-alert-body-gap: null !default;
+$usx-alert-heading-font-size: null !default;
+$usx-alert-heading-font-weight: null !default;
+$usx-alert-heading-margin-block-end: null !default;
+$usx-alert-text-font-size: null !default;
+$usx-alert-text-line-height: null !default;
+
+// ── Component tokens: Input / Textarea ───────────────────────────────────────
+$usx-input-border-radius: $r-sm !default;
+$usx-input-background-color: null !default;
+$usx-input-text-color: null !default;
+$usx-input-border-color: null !default;
+$usx-input-padding: null !default;
+$usx-input-error-border-width: $border-width-thick !default;
+$usx-input-error-border-color: $color-error !default;
+$usx-input-error-border-style: null !default;
+$usx-input-error-padding-top: null !default;
+$usx-input-error-padding-bottom: null !default;
+$usx-input-success-border-width: $border-width-thick !default;
+$usx-input-success-border-color: $color-success !default;
+$usx-input-success-border-style: null !default;
+$usx-input-success-padding-top: null !default;
+$usx-input-success-padding-bottom: null !default;
+$usx-input-focus-outline: null !default;
+$usx-input-focus-outline-offset: null !default;
+$usx-textarea-border-radius: $r-sm !default;
+$usx-textarea-background-color: null !default;
+$usx-textarea-text-color: null !default;
+$usx-textarea-border-color: null !default;
+$usx-textarea-padding: null !default;
+$usx-textarea-error-border-width: $border-width-thick !default;
+$usx-textarea-error-border-color: $color-error !default;
+$usx-textarea-error-border-style: null !default;
+$usx-textarea-error-padding-top: null !default;
+$usx-textarea-error-padding-bottom: null !default;
+$usx-textarea-success-border-width: $border-width-thick !default;
+$usx-textarea-success-border-color: $color-success !default;
+$usx-textarea-success-border-style: null !default;
+$usx-textarea-success-padding-top: null !default;
+$usx-textarea-success-padding-bottom: null !default;
+
+// ── Component tokens: Form group ─────────────────────────────────────────────
+$usx-form-group-error-color:            $color-error        !default;
+$usx-form-group-error-border-thickness: $border-width-thick !default;
+
+// ── Component tokens: Image ───────────────────────────────────────────────────
+$usx-image-object-fit-type:       cover !default;
+$usx-image-rounded-border-radius: $r-md !default;
+
+// ── Component tokens: Banner ─────────────────────────────────────────────────
+$usx-banner-background-color: $color-primary-darkest !default;
+$usx-banner-text-color:        $color-light-text     !default;
+$usx-banner-action-color:      $color-light-text     !default;
+$usx-banner-after-color:       #2491ff               !default;
+
+// ── Component tokens: Header / Nav ───────────────────────────────────────────
+$usx-header-background-color:       $color-primary-lightest                        !default;
+$usx-header-text-color:             $color-light-text                              !default;
+$usx-header-secondary-link-color:   $color-base                                    !default;
+$usx-nav-border-bottom:             2px solid $color-primary-darkest               !default;
+$usx-nav-border-top:                2px solid $color-primary-darkest               !default;
+$usx-nav-link-color:                $color-base-active                             !default;
+$usx-nav-link-hover-color:          color.adjust($color-base-hover, $lightness: -20%) !default;
+$usx-nav-background-color:          $color-primary-lightest                        !default;
+
+// ── Component tokens: Carousel ───────────────────────────────────────────────
+$usx-carousel-dot-color:        #c0c0c0  !default;
+$usx-carousel-dot-color-hover:  #a0a0a0  !default;
+$usx-carousel-dot-color-active: #808080  !default;
+$usx-carousel-dot-gap:          0.5rem   !default;
+

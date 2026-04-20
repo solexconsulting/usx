@@ -1,0 +1,39 @@
+# USX Monorepo — Docker Compose
+#
+# Starts both the React Storybook and the Django render server.
+# Build images from the repo root:
+#
+#   docker compose -f deploy/docker-compose.yml build
+#   docker compose -f deploy/docker-compose.yml up
+#
+# Production secrets must be supplied via a .env file or external secrets manager.
+# See .env.example at the repo root for reference variables.
+
+services:
+  storybook:
+    build:
+      context: ..
+      dockerfile: deploy/storybook/Dockerfile
+    image: ${REGISTRY:-localhost}/usx-storybook:${TAG:-latest}
+    ports:
+      - "${STORYBOOK_PORT:-6006}:6006"
+    environment:
+      # Runtime — the URL the *browser* uses to reach the Django render server.
+      # Override per deployment without rebuilding the image.
+      - USX_DJANGO_URL=${USX_DJANGO_URL:-http://localhost:9090}
+    depends_on:
+      - storybook-django
+
+  storybook-django:
+    build:
+      context: ..
+      dockerfile: deploy/storybook-django/Dockerfile
+    image: ${REGISTRY:-localhost}/usx-storybook-django:${TAG:-latest}
+    ports:
+      - "${DJANGO_PORT:-9090}:9090"
+    environment:
+      - DJANGO_SETTINGS_MODULE=project.settings.production
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS:-localhost}
+      - DJANGO_CORS_ALLOWED_ORIGINS=${DJANGO_CORS_ALLOWED_ORIGINS:-http://localhost:6006}
+      - DJANGO_SECURE_SSL_REDIRECT=false

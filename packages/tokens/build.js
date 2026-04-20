@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const srcDir = path.join(__dirname, 'src');
+const primitivesDir = path.join(srcDir, 'primitives');
 const distDir = path.join(__dirname, 'dist');
 
 const tokenFiles = [
@@ -15,7 +16,7 @@ function loadTokens() {
   const tokens = {};
 
   for (const { key, file } of tokenFiles) {
-    const filePath = path.join(srcDir, file);
+    const filePath = path.join(primitivesDir, file);
     const content = fs.readFileSync(filePath, 'utf8');
     tokens[key] = JSON.parse(content);
   }

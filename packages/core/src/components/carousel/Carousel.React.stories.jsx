@@ -2,7 +2,7 @@ import React from 'react';
 import Carousel, { Slide } from './Carousel';
 import config from './config.json';
 import Image from '../image/Image';
-import { buildArgTypes } from '../../../helper';
+import { buildArgTypes } from '../../utils/storyHelpers';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 

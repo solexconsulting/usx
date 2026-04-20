@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from './Image';
 import config from './config.json';
-import { buildArgTypes } from '../../../helper';
+import { buildArgTypes } from '../../utils/storyHelpers';
 
 const shortCaption = 'This is a caption describing the image above.';
 const longCaption = 'This is a longer caption that provides more detailed information about the image above. It can span multiple lines and gives context to the visual content.';

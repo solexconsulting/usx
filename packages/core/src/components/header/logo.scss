@@ -1,4 +1,4 @@
-@use '../../../../tokens/src/tokens.scss' as *;
+@use '../../../../tokens/src/_variables' as *;
 
 // Logo-image mode: .usx-image wrapper (<a> or <div>) produced by Image component.
 // Override inline-block and constrain the inner image height.

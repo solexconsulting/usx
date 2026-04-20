@@ -1,7 +1,7 @@
 import React from 'react';
-import { djangoComponent } from '../../../djangoComponent.js';
+import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../../helper';
+import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
 import accordion from "@uswds/uswds/js/usa-accordion";
 
 const generatedArgTypes = buildArgTypes(config.props || {});
@@ -15,14 +15,7 @@ export default {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
         accordion.on();
-        const uswds_min = document.createElement('script');
-        uswds_min.src = '../node_modules/@uswds/uswds/dist/js/uswds.min.js';
-        document.body.appendChild(uswds_min);
-
-        return () => {
-          accordion.off();
-          document.body.removeChild(uswds_min);
-        };
+        return () => accordion.off();
       }, []);
 
       return <Story />;

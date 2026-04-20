@@ -1,7 +1,7 @@
 import React from 'react';
 import CharacterCount from './CharacterCount';
 import config from './config.json';
-import { buildArgTypes } from '../../../helper';
+import { buildArgTypes } from '../../utils/storyHelpers';
 
 export const storyDefs = {
   Default: { id: 'cc-1', label: 'Text input (soft limit)', max: 25 },

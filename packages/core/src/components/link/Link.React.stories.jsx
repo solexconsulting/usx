@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from './Link';
 import config from './config.json';
-import { buildArgTypes } from '../../../helper';
+import { buildArgTypes } from '../../utils/storyHelpers';
 
 export const storyDefs = {
   Default: config.default || {},

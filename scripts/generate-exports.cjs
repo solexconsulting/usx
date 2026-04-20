@@ -138,3 +138,75 @@ if (existing) {
 
 fs.writeFileSync(indexPath, out, 'utf8');
 console.log('Updated', indexPath);
+
+// ─── Per-component barrel index.js files ─────────────────────────────────────
+// Each component folder gets a tiny index.js that re-exports the default React
+// component. This lets the root src/index.js resolve `from './components/button'`
+// (a directory) correctly for both Node and Vite consumers.
+
+for (const dir of dirs) {
+  const name = toPascal(dir);
+  const componentFile = path.join(componentsDir, dir, `${name}.jsx`);
+  const barrelPath = path.join(componentsDir, dir, 'index.js');
+
+  // Only create/overwrite the barrel if the component file actually exists.
+  if (!fs.existsSync(componentFile)) continue;
+
+  const barrelContent = `// Auto-generated — do not edit by hand. Run: node scripts/generate-exports.cjs\nexport { default } from './${name}.jsx';\n`;
+  fs.writeFileSync(barrelPath, barrelContent, 'utf8');
+}
+
+console.log('Updated per-component index.js barrels');
+
+// ─── core.scss regeneration ──────────────────────────────────────────────────
+
+const scssPath = path.join(repoRoot, 'packages', 'core', 'src', 'styles', 'core.scss');
+
+const SCSS_START_AUTO = '// AUTO-GENERATED-SCSS START';
+const SCSS_END_AUTO   = '// AUTO-GENERATED-SCSS END';
+const SCSS_START_MANUAL = '// MANUAL-SCSS START';
+const SCSS_END_MANUAL   = '// MANUAL-SCSS END';
+
+// Build @use lines for every component dir that has a matching <name>.scss file.
+const scssUseLines = dirs
+  .filter((dir) => {
+    const scssFile = path.join(componentsDir, dir, `${dir}.scss`);
+    return fs.existsSync(scssFile);
+  })
+  .map((dir) => `@use '../components/${dir}/${dir}';`);
+
+const scssAutoBlock = `${SCSS_START_AUTO}\n${scssUseLines.join('\n')}\n${SCSS_END_AUTO}`;
+
+let existingScss = '';
+if (fs.existsSync(scssPath)) {
+  existingScss = fs.readFileSync(scssPath, 'utf8');
+}
+
+let scssOut = '';
+const scssAutoStartIdx = existingScss.indexOf(SCSS_START_AUTO);
+const scssAutoEndIdx   = existingScss.indexOf(SCSS_END_AUTO);
+
+if (scssAutoStartIdx !== -1 && scssAutoEndIdx !== -1 && scssAutoEndIdx > scssAutoStartIdx) {
+  // Replace just the auto block; leave the manual block untouched.
+  scssOut = existingScss.slice(0, scssAutoStartIdx)
+    + scssAutoBlock
+    + existingScss.slice(scssAutoEndIdx + SCSS_END_AUTO.length);
+} else {
+  // First run: migrate existing core.scss.
+  // Preserve any non-component-@use content as the manual block.
+  // Identify lines that are auto-generated component @use statements.
+  const componentDirSet = new Set(dirs);
+  const manualLines = [];
+  for (const line of existingScss.split('\n')) {
+    const match = line.match(/^@use\s+['"]\.\.\/components\/([\w-]+)\//);
+    if (match && componentDirSet.has(match[1])) continue; // will be auto-generated
+    manualLines.push(line);
+  }
+  // Trim leading/trailing blank lines from the manual section.
+  const manualContent = manualLines.join('\n').trim();
+  const scssManualBlock = `${SCSS_START_MANUAL}\n${manualContent}\n${SCSS_END_MANUAL}`;
+  scssOut = `${scssAutoBlock}\n\n${scssManualBlock}\n`;
+}
+
+fs.writeFileSync(scssPath, scssOut, 'utf8');
+console.log('Updated', scssPath);
