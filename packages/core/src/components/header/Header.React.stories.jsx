@@ -19,18 +19,18 @@ const lotsOfLinks = Array.from({ length: 30 }, (_, i) => ({
 
 const responsiveBranding = {
   logo: {
-    fallback: '/symbol-only.svg',
+    fallback: `${window.usxBaseUrl}/symbol-only.svg`,
     sources: [
-      { media: '(min-width: 64em)', srcSet: '/stacked-w-symbol_left.svg' },
-      { media: '(min-width: 40em)', srcSet: '/linear.svg' },
-      { media: '(min-width: 20em)', srcSet: '/solex-only.svg' },
+      { media: '(min-width: 64em)', srcSet: `${window.usxBaseUrl}/stacked-w-symbol_left.svg` },
+      { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}/linear.svg` },
+      { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}/solex-only.svg` },
     ],
   },
   title: 'Agency Name',
 };
 
 const standardBranding = {
-  symbol: '/symbol-only.svg',
+  symbol: `${window.usxBaseUrl}/symbol-only.svg`,
   title: 'Agency Name',
 }
 
