@@ -1,24 +1,20 @@
 import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
-
-const generatedArgTypes = buildArgTypes(config.props || {});
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './Footer.React.stories.jsx';
 
 export default {
   title: 'Django/Footer',
   tags: ['autodocs'],
-  argTypes: generatedArgTypes,
+  argTypes: buildArgTypes(config.props || {}),
 };
 
-export const Default = {
-  args: config.default || {},
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'footer', props: config.default || {} })
-      }
-    }
-  },
-  render: djangoComponent('footer')
-};
+const createStory = createDjangoStory('footer');
+
+export const Big      = createStory(storyDefs.Big);
+export const Medium   = createStory(storyDefs.Medium);
+export const Slim     = createStory(storyDefs.Slim);
+export const LogoOnly = createStory(storyDefs.LogoOnly);
+export const NoNav    = createStory(storyDefs.NoNav);
+export const Minimal  = createStory(storyDefs.Minimal);
+

@@ -1,11 +1,79 @@
 {
   "name": "footer",
   "template": "footer/footer.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Footer"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "variant": {
+      "type": "select",
+      "options": ["big", "medium", "slim"],
+      "default": "medium",
+      "description": "Footer layout variant. 'big' includes collapsible nav columns and an optional sign-up form. 'medium' shows flat primary links. 'slim' puts contact info in the primary bar."
+    },
+    "returnToTop": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show the 'Return to top' link. Set false to hide."
+    },
+    "returnToTopLabel": {
+      "type": "string",
+      "default": "Return to top",
+      "description": "Label for the return-to-top link."
+    },
+    "returnToTopHref": {
+      "type": "string",
+      "default": "#",
+      "description": "Anchor href for the return-to-top link."
+    },
+    "navColumns": {
+      "type": "object",
+      "description": "(big variant) Array of nav column objects: [{ heading, links: [{ text, href, ariaLabel? }] }]"
+    },
+    "navLinks": {
+      "type": "object",
+      "description": "(medium/slim variants) Array of primary nav links: [{ text, href, ariaLabel? }]"
+    },
+    "navAriaLabel": {
+      "type": "string",
+      "default": "Footer navigation",
+      "description": "Accessible aria-label for the footer nav element."
+    },
+    "signUp": {
+      "type": "object",
+      "description": "(big variant, optional) Email sign-up config: { heading?, emailLabel?, emailId?, buttonText?, action? }"
+    },
+    "branding": {
+      "type": "object",
+      "description": "Branding config (same shape as Header branding): { title?, symbol?, logo?, alt? }. Use 'symbol' + 'title' to show a decorative image beside agency name text. Use 'logo' for a full standalone logo image (title used as alt text)."
+    },
+    "brandingUrl": {
+      "type": "string",
+      "default": "/",
+      "description": "URL for the branding link (wraps the logo/symbol image and title)."
+    },
+    "socialLinks": {
+      "type": "object",
+      "description": "Array of social icon links: [{ icon (img src), href, alt }]"
+    },
+    "contactHeading": {
+      "type": "string",
+      "description": "Heading label above the contact info block."
+    },
+    "contactPhone": {
+      "type": "object",
+      "description": "Phone contact. Object: { href, text } — or a plain string (auto-prefixed with tel:)."
+    },
+    "contactEmail": {
+      "type": "object",
+      "description": "Email contact. Object: { href, text } — or a plain string (auto-prefixed with mailto:)."
+    },
+    "contactLinks": {
+      "type": "object",
+      "description": "Additional contact links: [{ href, text }]"
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes applied to the root footer element."
+    }
   }
 }
+

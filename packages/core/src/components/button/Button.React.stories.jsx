@@ -88,6 +88,13 @@ export const AllVariants = {
       <Button label="Disabled" big disabled />{" "}
       <Button label="aria-disabled" big aria-disabled="true" />{" "}
       <Button label="Unstyled button" big variant="unstyled" />
+      <h3>Unstyled</h3>
+      <Button label="Default" variant="unstyled" />{" "}
+      <Button label="Hover" variant="unstyled" className="usa-button--hover" />{" "}
+      <Button label="Active" variant="unstyled" className="usa-button--active" />{" "}
+      <Button label="Focus" variant="unstyled" className="usa-focus" />{" "}
+      <Button label="Disabled" variant="unstyled" disabled />{" "}
+      <Button label="aria-disabled" variant="unstyled" aria-disabled="true" />
     </>
   )
 }

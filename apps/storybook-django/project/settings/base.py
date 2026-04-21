@@ -80,7 +80,7 @@ USE_TZ = True
 
 
 # Static files
-STATIC_URL = 'static/'
+STATIC_URL = '../'
 
 
 # USX integration — filesystem paths to search for components/templates.

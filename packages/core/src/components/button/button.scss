@@ -6,7 +6,7 @@
 /* Base Enhancements (SAFE ONLY)      */
 
 /* ---------------------------------- */
-.usa-button.usx-button {
+.usa-button.usx-button:not(.usa-button--unstyled) {
   @if $usx-button-border-radius != null {
     border-radius: $usx-button-border-radius;
   }

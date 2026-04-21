@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 import Search from '../search/Search';
-import HeaderBranding from './HeaderBranding';
+import Branding from '../branding/Branding';
 import './header.scss';
 
 function PrimaryNav({
@@ -176,7 +176,7 @@ export default function Header({
 
   const navbar = (
     <div className="usa-navbar">
-      <HeaderBranding branding={branding} projectUrl={projectUrl} />
+      <Branding branding={branding} projectUrl={projectUrl} />
       <button type="button" className="usa-menu-btn align-center">
         {useMenuIcon ? <Icon name="menu" size={3} /> : 'Menu'}
       </button>

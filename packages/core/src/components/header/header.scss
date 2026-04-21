@@ -1,5 +1,4 @@
 @use '../../../../tokens/src/_variables' as *;
-@use './logo.scss';
 
 .usx-header {
   @if $usx-header-background-color != null {
@@ -9,12 +8,34 @@
     color: $usx-header-text-color;
   }
 
+  @if $usx-header-border-bottom != null {
+    border-bottom: $usx-header-border-bottom;
+  }
+
+  @if $usx-header-border-top != null {
+    border-top: $usx-header-border-top;
+  }
+
   &::after {
     display: none;
   }
 
   overflow: unset;
   position: relative;
+
+  .usa-navbar {
+
+    .usa-menu-btn {
+      @if $usx-header-menu-btn-background-color != null {
+        background-color: $usx-header-menu-btn-background-color;
+      }
+      &:hover {
+        @if $usx-header-menu-btn-background-color-hover != null {
+          background-color: $usx-header-menu-btn-background-color-hover;
+        }
+      }
+    }
+  }
 
 }
 
@@ -62,6 +83,17 @@
     display: block;
   }
 
+  .usa-nav__close {
+    @if $usx-nav-link-color != null {
+      background-color: $usx-nav-link-color;
+    }
+    &:hover {
+      @if $usx-nav-link-hover-color != null {
+        background-color: $usx-nav-link-hover-color;
+      }
+    }
+  }
+
   @media (min-width: 64em) {
     width: 100%;
     
@@ -89,13 +121,42 @@
     }
   }
   
-  .usa-nav__link:not(.usa-nav__primary button[aria-expanded="true"]) {
-    @if $usx-nav-link-color != null {
-      color: $usx-nav-link-color;
+  .usa-nav__link {
+
+    &:not(.usa-nav__primary button[aria-expanded="true"]) {
+
+      @if $usx-nav-link-color != null {
+        color: $usx-nav-link-color;
+      }
+
+      ::after {
+        @if $usx-nav-link-color != null {
+          background-color: $usx-nav-link-color;
+        }
+      }
+
+      &:hover {
+        @if $usx-nav-link-hover-color != null {
+          color: $usx-nav-link-hover-color;
+        }
+      }
+
     }
-    &:hover {
-      @if $usx-nav-link-hover-color != null {
-        color: $usx-nav-link-hover-color;
+
+    &[aria-expanded="true"] {
+      @if $usx-nav-link-bg-color != null {
+        background-color: $usx-nav-link-bg-color !important;
+      }
+
+      & + .usa-nav__submenu {
+        @if $usx-nav-submenu-bg-color != null {
+          background-color: $usx-nav-submenu-bg-color;
+        }
+        &::before, &::after {
+          @if $usx-nav-submenu-bg-color != null {
+            background-color: $usx-nav-submenu-bg-color;
+          }
+        }
       }
     }
   }
@@ -103,6 +164,11 @@
   .usa-nav__secondary-item > a {
     @if $usx-header-secondary-link-color != null {
       color: $usx-header-secondary-link-color;
+    }
+    &:hover {
+      @if $usx-header-secondary-link-hover != null {
+        color: $usx-header-secondary-link-hover;
+      }
     }
   }
 

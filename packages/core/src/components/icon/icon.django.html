@@ -1,3 +1,5 @@
+{% load static %}
+
 <svg
     class="
         usa-icon
@@ -16,5 +18,5 @@
     focusable="false"
     role="img"
 >
-    <use href="{{ staticUrlPrefix }}{{ name }}"></use>
+    <use href="{% static 'img/sprite.svg' %}#{{ name }}"></use>
 </svg>

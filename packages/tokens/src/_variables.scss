@@ -22,6 +22,7 @@ $color-secondary:          #7c3aed !default;
 $color-secondary-hover:    #955df0 !default;
 $color-secondary-active:   #5b21b6 !default;
 $color-accent-cool:        #66b5ee !default;
+$color-accent-cool-light:  color.adjust($color-accent-cool, $lightness: 20%) !default;
 $color-accent-cool-hover:  #2695df !default;
 $color-accent-cool-active: #1175b3 !default;
 $color-accent-warm:        #dfb734 !default;
@@ -38,6 +39,12 @@ $color-emergency:          #b51d09 !default;
 $color-background:         #f8fafc !default;
 $color-surface:            #ffffff !default;
 $color-dark-bg:            color.adjust($color-primary, $lightness: -50%) !default;
+
+
+// ── Color — additional primitives ──────────────────────────────────────────────
+$color-accent-cool-light:  color.adjust($color-accent-cool, $lightness: 20%) !default;
+$color-accent-warm-light:  color.adjust($color-accent-warm, $lightness: 20%) !default;
+
 
 // ── Color — text ────────────────────────────────────────────────────────────
 $color-text:           #0f172a !default;
@@ -89,6 +96,12 @@ $r-full: 9999px  !default;
 // ── Border ───────────────────────────────────────────────────────────────────
 $border-width-thin:  1px !default;
 $border-width-thick: 4px !default;
+$sm-border: 1px solid $color-dark-bg !default;
+$md-border: 2px solid $color-dark-bg !default;
+$lg-border: 4px solid $color-dark-bg !default;
+$sm-border-light: 1px solid $color-base !default;
+$md-border-light: 2px solid $color-base !default;
+$lg-border-light: 4px solid $color-base !default;
 
 // ── Component tokens: Button ─────────────────────────────────────────────────
 $usx-button-border-radius: $r-md !default;
@@ -139,8 +152,8 @@ $usx-button-outline-box-shadow: 0 0 0 2px currentColor inset !default;
 // ── Component tokens: Button Group ───────────────────────────────────────────
 $usx-button-group-segmented-divider-primary:    1px solid color.adjust($color-primary, $lightness: -20%) !default;
 $usx-button-group-segmented-divider-secondary:  1px solid color.adjust($color-secondary, $lightness: -20%) !default;
-$usx-button-group-segmented-divider-accent-cool: 1px solid color.adjust($color-accent-cool, $lightness: -20%) !default;
-$usx-button-group-segmented-divider-accent-warm: 1px solid color.adjust($color-accent-warm, $lightness: -20%) !default;
+$usx-button-group-segmented-divider-accent-cool: 1px solid $color-accent-cool-light !default;
+$usx-button-group-segmented-divider-accent-warm: 1px solid $color-accent-warm-light !default;
 $usx-button-group-segmented-divider-base:       1px solid color.adjust($color-base, $lightness: -20%) !default;
 
 // ── Component tokens: Alert ───────────────────────────────────────────────────
@@ -217,20 +230,53 @@ $usx-image-object-fit-type:       cover !default;
 $usx-image-rounded-border-radius: $r-md !default;
 
 // ── Component tokens: Banner ─────────────────────────────────────────────────
-$usx-banner-background-color: $color-primary-darkest !default;
+$usx-banner-background-color:  $color-primary-darkest !default;
 $usx-banner-text-color:        $color-light-text     !default;
 $usx-banner-action-color:      $color-light-text     !default;
 $usx-banner-after-color:       #2491ff               !default;
 
 // ── Component tokens: Header / Nav ───────────────────────────────────────────
-$usx-header-background-color:       $color-primary-lightest                        !default;
+$usx-header-background-color:       $color-dark-bg                                 !default;
 $usx-header-text-color:             $color-light-text                              !default;
-$usx-header-secondary-link-color:   $color-base                                    !default;
-$usx-nav-border-bottom:             2px solid $color-primary-darkest               !default;
-$usx-nav-border-top:                2px solid $color-primary-darkest               !default;
-$usx-nav-link-color:                $color-base-active                             !default;
-$usx-nav-link-hover-color:          color.adjust($color-base-hover, $lightness: -20%) !default;
-$usx-nav-background-color:          $color-primary-lightest                        !default;
+$usx-header-border-bottom:          null                                           !default;
+$usx-header-border-top:             $sm-border-light                               !default;
+$usx-header-secondary-link-color:   $color-light-text                              !default;
+$usx-header-secondary-link-hover:   $color-accent-cool-light                       !default;
+$usx-header-menu-btn-background-color: $color-primary                              !default;
+$usx-header-menu-btn-background-color-hover: $color-primary-hover                  !default;
+$usx-nav-border-bottom:             $md-border-light                               !default;
+$usx-nav-border-top:                $sm-border-light                               !default;
+$usx-nav-link-color:                $color-light-text                              !default;
+$usx-nav-link-bg-color:             $color-primary-darkest                         !default;
+$usx-nav-submenu-bg-color:          $usx-nav-link-bg-color                         !default;
+$usx-nav-link-hover-color:          $color-accent-cool-light                       !default;
+$usx-nav-background-color:          $color-dark-bg                                 !default;
+$usx-header-invert-logo:            true                                           !default;
+
+// ── Component tokens: Footer ────────────────────────────────────────────────
+$usx-footer-background-color:     $color-dark-bg                                    !default;
+$usx-footer-text-color:           $color-light-text                                 !default;
+$usx-footer-link-color:           $color-light-text                                 !default;
+$usx-footer-link-hover-color:     $color-accent-cool                                !default;
+$usx-footer-secondary-link-color:           $color-light-text                       !default;
+$usx-footer-secondary-link-hover-color:     $color-accent-cool                      !default;
+$usx-footer-heading-color:        $color-light-text                                 !default;
+$usx-footer-secondary-bg-color:   color.adjust($color-dark-bg, $lightness: -5%)     !default;
+$usx-footer-primary-bg-color:     color.adjust($color-dark-bg, $lightness: 10%)     !default;
+$usx-footer-social-icon-filter:   brightness(0) invert(1)                           !default;
+$usx-footer-sign-up-button-color: $color-primary                                    !default;
+$usx-footer-social-hover-color:   $color-primary                                    !default;
+$usx-footer-social-radius     :   $usx-button-border-radius                         !default;
+$usx-footer-invert-logo:          true                                              !default;
+// Using border shrinks the icon on hover, using outline does not. Both are included as options.
+// Neither are required.
+// E.g. 2px solid $color-primary;
+$usx-footer-social-hover-border:  null                                              !default;
+$usx-footer-social-hover-outline:  null                                             !default;
+// Footer borders
+$usx-footer-border-top:          $sm-border-light                                   !default;
+$usx-footer-primary-section-border-top:   $sm-border-light                          !default;
+$usx-footer-secondary-section-border-top: $sm-border-light                        !default;
 
 // ── Component tokens: Carousel ───────────────────────────────────────────────
 $usx-carousel-dot-color:        #c0c0c0  !default;

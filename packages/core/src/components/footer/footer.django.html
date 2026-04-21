@@ -1,4 +1,250 @@
 {# Django template for Footer #}
-<div class="usx-footer">
-  <div class="footer__content">Footer</div>
-</div>
+{# Supports variant: 'big' (default), 'medium', 'slim' #}
+{# See config.json for full prop reference. #}
+<footer class="
+  usa-footer
+  usx-footer
+  {% if variant == 'big' %}usa-footer--big{% endif %}
+  {% if variant == 'slim' %}usa-footer--slim{% endif %}
+  {{ className }}
+">
+
+  {# ── Return to top ──────────────────────────────────────────── #}
+  {% if returnToTop %}
+  <div class="grid-container usa-footer__return-to-top usx-footer__return-to-top">
+    <a href="{{ returnToTopHref|default:'#main-content' }}" class="usa-link usx-link usx-return-to-top"
+    >{{ returnToTopLabel|default:'Return to top' }}{% include "icon/icon.django.html" with name='arrow_upward' only %}
+    </a>
+  </div>
+  {% endif %}
+
+  {# ── Primary section ────────────────────────────────────────── #}
+  <div class="usa-footer__primary-section">
+
+    {% if variant == 'big' %}
+      {# Big footer: nav columns + optional sign-up form #}
+      <div class="grid-container">
+        <div class="grid-row grid-gap">
+          {% if navColumns %}
+          <div class="tablet:grid-col-8">
+            <nav class="usa-footer__nav" aria-label="{{ navAriaLabel|default:'Footer navigation' }}">
+              <div class="grid-row grid-gap-4">
+                {% for col in navColumns %}
+                <div class="mobile-lg:grid-col-6 desktop:grid-col-3">
+                  <section class="usa-footer__primary-content usa-footer__primary-content--collapsible usx-footer__nav-column">
+                    {% if col.heading %}<h4 class="usa-footer__primary-link">{{ col.heading }}</h4>{% endif %}
+                    {% if col.links %}
+                    <ul class="usa-list usa-list--unstyled">
+                      {% for link in col.links %}
+                      <li class="usa-footer__secondary-link">
+                        <a href="{{ link.href }}"{% if link.ariaLabel %} aria-label="{{ link.ariaLabel }}"{% endif %}>{{ link.text }}</a>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                    {% endif %}
+                  </section>
+                </div>
+                {% endfor %}
+              </div>
+            </nav>
+          </div>
+          {% endif %}
+
+          {% if signUp %}
+          <div class="{% if navColumns %}tablet:grid-col-4{% else %}tablet:grid-col-12{% endif %}">
+            <div class="usa-sign-up usx-footer__sign-up">
+              <h3 class="usa-sign-up__heading">{{ signUp.heading|default:'Sign up' }}</h3>
+              <form class="usa-form"{% if signUp.action %} action="{{ signUp.action }}"{% endif %}>
+                <label class="usa-label" for="{{ signUp.emailId|default:'footer-email' }}">
+                  {{ signUp.emailLabel|default:'Your email address' }}
+                </label>
+                <input class="usa-input" id="{{ signUp.emailId|default:'footer-email' }}" name="email" type="email" autocomplete="email" />
+                <button class="usa-button usx-button usa-button--primary" type="submit">
+                  {{ signUp.buttonText|default:'Sign up' }}
+                </button>
+              </form>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+    {% elif variant == 'slim' %}
+      {# Slim footer: flat nav links (left) + contact info (right) #}
+      <div class="usa-footer__primary-container grid-row">
+        {% if navLinks %}
+        <div class="mobile-lg:grid-col-8">
+          <nav class="usa-footer__nav" aria-label="{{ navAriaLabel|default:'Footer navigation' }}">
+            <ul class="grid-row grid-gap">
+              {% for link in navLinks %}
+              <li class="mobile-lg:grid-col-6 desktop:grid-col-auto usa-footer__primary-content">
+                <a class="usa-footer__primary-link" href="{{ link.href }}"{% if link.ariaLabel %} aria-label="{{ link.ariaLabel }}"{% endif %}>{{ link.text }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        </div>
+        {% endif %}
+
+        {% if contactPhone or contactEmail or contactLinks %}
+        <div class="mobile-lg:grid-col-4">
+          <address class="usa-footer__address usx-footer__contact">
+            <div class="grid-row grid-gap">
+              {% if contactPhone %}
+              <div class="grid-col-auto mobile-lg:grid-col-12 desktop:grid-col-auto">
+                <div class="usa-footer__contact-info">
+                  {% if contactPhone.href %}
+                    <a href="{{ contactPhone.href }}">{{ contactPhone.text }}</a>
+                  {% else %}
+                    <a href="tel:{{ contactPhone }}">{{ contactPhone }}</a>
+                  {% endif %}
+                </div>
+              </div>
+              {% endif %}
+              {% if contactEmail %}
+              <div class="grid-col-auto mobile-lg:grid-col-12 desktop:grid-col-auto">
+                <div class="usa-footer__contact-info">
+                  {% if contactEmail.href %}
+                    <a href="{{ contactEmail.href }}">{{ contactEmail.text }}</a>
+                  {% else %}
+                    <a href="mailto:{{ contactEmail }}">{{ contactEmail }}</a>
+                  {% endif %}
+                </div>
+              </div>
+              {% endif %}
+              {% for link in contactLinks %}
+              <div class="grid-col-auto mobile-lg:grid-col-12 desktop:grid-col-auto">
+                <div class="usa-footer__contact-info">
+                  <a href="{{ link.href }}">{{ link.text }}</a>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </address>
+        </div>
+        {% endif %}
+      </div>
+
+    {% else %}
+      {# Medium footer (default): flat centered nav links #}
+      {% if navLinks %}
+      <nav class="usa-footer__nav" aria-label="{{ navAriaLabel|default:'Footer navigation' }}">
+        <ul class="grid-row grid-gap">
+          {% for link in navLinks %}
+          <li class="mobile-lg:grid-col-4 desktop:grid-col-auto usa-footer__primary-content">
+            <a class="usa-footer__primary-link" href="{{ link.href }}"{% if link.ariaLabel %} aria-label="{{ link.ariaLabel }}"{% endif %}>{{ link.text }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+      {% endif %}
+    {% endif %}
+
+  </div>{# /primary-section #}
+
+  {# ── Secondary section ──────────────────────────────────────── #}
+  {% if branding or socialLinks or contactHeading or contactPhone or contactEmail or contactLinks %}
+  <div class="usa-footer__secondary-section">
+    <div class="grid-container">
+
+      {% if variant == 'slim' %}
+        {# Slim: compact branding row, no contact (contact is in primary) #}
+        {% if branding %}
+        <div class="usa-logo usx-logo usa-footer__logo grid-row grid-gap-2 usx-footer__logo">
+          {% if branding.logo %}
+            {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-logo__image">{% endif %}
+            <img src="{{ branding.logo }}" alt="{{ branding.alt|default:branding.title|default:'' }}" />
+            {% if brandingUrl %}</a>{% endif %}
+          {% else %}
+          <em class="usa-logo__text">
+            {% if branding.symbol %}
+              <img src="{{ branding.symbol }}" alt="" aria-hidden="true" class="usx-logo__symbol" />
+            {% endif %}
+            {% if branding.title %}
+              {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-logo__title">{{ branding.title }}</a>
+              {% else %}<span class="usx-logo__title">{{ branding.title }}</span>{% endif %}
+            {% endif %}
+          </em>
+          {% endif %}
+        </div>
+        {% endif %}
+
+      {% else %}
+        {# Big / medium: branding (left) + social + contact (right) #}
+        <div class="grid-row grid-gap">
+          {% if branding %}
+          <div class="usa-logo usx-logo usa-footer__logo grid-row mobile-lg:grid-col-6 mobile-lg:grid-gap-2 usx-footer__logo">
+            {% if branding.logo %}
+              {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-logo__image">{% endif %}
+              <img src="{{ branding.logo }}" alt="{{ branding.alt|default:branding.title|default:'' }}" />
+              {% if brandingUrl %}</a>{% endif %}
+            {% else %}
+            <em class="usa-logo__text">
+              {% if branding.symbol %}
+                <img src="{{ branding.symbol }}" alt="" aria-hidden="true" class="usx-logo__symbol" />
+              {% endif %}
+              {% if branding.title %}
+                {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-logo__title">{{ branding.title }}</a>
+                {% else %}<span class="usx-logo__title">{{ branding.title }}</span>{% endif %}
+              {% endif %}
+            </em>
+            {% endif %}
+          </div>
+          {% endif %}
+
+          {% if socialLinks or contactHeading or contactPhone or contactEmail or contactLinks %}
+          <div class="usa-footer__contact-links mobile-lg:grid-col-6">
+            {% if socialLinks %}
+            <div class="usa-footer__social-links grid-row grid-gap-1 usx-footer__social-links">
+              {% for social in socialLinks %}
+              <div class="grid-col-auto">
+                <a class="usa-social-link" href="{{ social.href }}"{% if social.alt %} aria-label="{{ social.alt }}"{% endif %}>
+                  <img class="usa-social-link__icon" src="{{ social.icon }}" alt="{{ social.alt|default:'' }}" />
+                </a>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+
+            <address class="usa-footer__address usx-footer__contact">
+              {% if contactHeading %}
+              <p class="usa-footer__contact-heading">{{ contactHeading }}</p>
+              {% endif %}
+              {% if contactPhone or contactEmail or contactLinks %}
+              <div class="usa-footer__contact-info grid-row grid-gap">
+                {% if contactPhone %}
+                <div class="grid-col-auto">
+                  {% if contactPhone.href %}
+                    <a href="{{ contactPhone.href }}">{{ contactPhone.text }}</a>
+                  {% else %}
+                    <a href="tel:{{ contactPhone }}">{{ contactPhone }}</a>
+                  {% endif %}
+                </div>
+                {% endif %}
+                {% if contactEmail %}
+                <div class="grid-col-auto">
+                  {% if contactEmail.href %}
+                    <a href="{{ contactEmail.href }}">{{ contactEmail.text }}</a>
+                  {% else %}
+                    <a href="mailto:{{ contactEmail }}">{{ contactEmail }}</a>
+                  {% endif %}
+                </div>
+                {% endif %}
+                {% for link in contactLinks %}
+                <div class="grid-col-auto">
+                  <a href="{{ link.href }}">{{ link.text }}</a>
+                </div>
+                {% endfor %}
+              </div>
+              {% endif %}
+            </address>
+          </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+  {% endif %}{# /secondary-section #}
+
+</footer>

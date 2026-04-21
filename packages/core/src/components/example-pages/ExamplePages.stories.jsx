@@ -2,6 +2,7 @@ import React from 'react';
 import Skipnav from '../skipnav/Skipnav';
 import Banner from '../banner/Banner';
 import Header from '../header/Header';
+import Footer from '../footer/Footer';
 import Alert from '../alert/Alert';
 import Accordion from '../accordion/Accordion';
 import Checkbox from '../checkbox/Checkbox';
@@ -35,11 +36,11 @@ const searchArgs = {
 const headerArgs = {
   branding: {
     logo: {
-      fallback: `${window.usxBaseUrl}/symbol-only.svg`,
+      fallback: `${window.usxBaseUrl}symbol-only.svg`,
       sources: [
-        { media: '(min-width: 64em)', srcSet: `${window.usxBaseUrl}/stacked-w-symbol_left.svg` },
-        { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}/linear.svg` },
-        { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}/solex-only.svg` },
+        { media: '(min-width: 64em)', srcSet: `${window.usxBaseUrl}stacked-w-symbol_left.svg` },
+        { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}linear.svg` },
+        { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}solex-only.svg` },
       ],
     },
     title: 'SOLEX Consulting',
@@ -77,6 +78,78 @@ const headerArgs = {
   stickyNav: true,
 }
 
+// ── Shared footer args ────────────────────────────────────────────────────
+
+const footerNavColumns = [
+  {
+    heading: 'Programs',
+    links: [
+      { text: 'Benefits',        href: '/programs/benefits' },
+      { text: 'Health Services', href: '/programs/health' },
+      { text: 'Education',       href: '/programs/education' },
+      { text: 'Housing',         href: '/programs/housing' },
+    ],
+  },
+  {
+    heading: 'Resources',
+    links: [
+      { text: 'Forms',           href: '/resources/forms' },
+      { text: 'Publications',    href: '/resources/publications' },
+      { text: 'Data & Research', href: '/resources/data' },
+      { text: 'Tools',           href: '/resources/tools' },
+    ],
+  },
+  {
+    heading: 'Connect',
+    links: [
+      { text: 'Newsroom',        href: '/newsroom' },
+      { text: 'Events',          href: '/events' },
+      { text: 'Social Media',    href: '/social' },
+      { text: 'Newsletter',      href: '/newsletter' },
+    ],
+  },
+  {
+    heading: 'About',
+    links: [
+      { text: 'Mission',         href: '/about/mission' },
+      { text: 'Leadership',      href: '/about/leadership' },
+      { text: 'Careers',         href: '/about/careers' },
+      { text: 'Contact Us',      href: '/contact' },
+    ],
+  },
+];
+
+const footerArgs = {
+  variant: 'big',
+  returnToTop: true,
+  branding: {
+    logo: {
+      fallback: `${window.usxBaseUrl}symbol-only.svg`,
+      sources: [
+        { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}linear.svg` },
+      ],
+    },
+    title: 'SOLEX Consulting',
+  },
+  brandingUrl: '/',
+  navColumns: footerNavColumns,
+  signUp: {
+    heading: 'Stay informed',
+    emailLabel: 'Your email address',
+    emailId: 'footer-email',
+    buttonText: 'Subscribe',
+  },
+  socialLinks: [
+    { icon: `${window.usxBaseUrl}img/usa-icons/facebook.svg`,  href: '#', alt: 'Facebook' },
+    { icon: `${window.usxBaseUrl}img/usa-icons/twitter.svg`,   href: '#', alt: 'Twitter' },
+    { icon: `${window.usxBaseUrl}img/usa-icons/youtube.svg`,   href: '#', alt: 'YouTube' },
+    { icon: `${window.usxBaseUrl}img/usa-icons/instagram.svg`, href: '#', alt: 'Instagram' },
+  ],
+  contactHeading: 'Agency Contact Center',
+  contactPhone: { href: 'tel:1-800-555-5555', text: '(800) 555-GOVT' },
+  contactEmail: { href: 'mailto:info@agency.gov', text: 'info@agency.gov' },
+};
+
 export default {
   title: 'Examples',
 };
@@ -93,7 +166,7 @@ export const ContactForm = {
         id="contact-header"
         {...headerArgs}
       />
-      <div id="contact-form-example" className="grid-container">
+      <div id="contact-form-example" className="grid-container margin-bottom-7">
         <h1>Contact Us</h1>
         <p>Get in touch with our team for any questions or support.</p>
 
@@ -202,6 +275,7 @@ export const ContactForm = {
           </div>
         </div>
       </div>
+      <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-contact' }} />
     </>
   )
 }
@@ -300,6 +374,7 @@ export const ProductShowcase = {
           </div>
         </div>
       </div>
+      <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-product' }} />
     </>
   )
 }
@@ -396,6 +471,7 @@ export const BlogPost = {
           </div>
         </article>
       </div>
+      <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-blog' }} />
     </>
   )
 }
@@ -568,6 +644,7 @@ export const Dashboard = {
           </div>
         </div>
       </div>
+      <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-dashboard' }} />
     </>
   )
 }
@@ -672,6 +749,7 @@ export const FAQPage = {
           ]}
         />
       </div>
+      <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-faq' }} />
     </>
   )
 }
@@ -823,6 +901,7 @@ export const SearchResults = {
           </div>
         </div>
       </div>
+      <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-search' }} />
     </>
   )
 }
@@ -981,6 +1060,7 @@ export const SettingsPage = {
           </form>
         </div>
       </main>
+      <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-settings' }} />
     </>
   )
 }
