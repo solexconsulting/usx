@@ -1,8 +1,8 @@
 import React from 'react';
-import html from './side-nav.html?raw';
+import html from './layout.html?raw';
 
 export default {
-  title: 'HTML/SideNav',
+  title: 'HTML/Layout',
   tags: ['autodocs'],
 };
 

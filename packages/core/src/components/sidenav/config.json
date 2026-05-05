@@ -1,0 +1,19 @@
+{
+  "name": "sidenav",
+  "template": "sidenav/sidenav.django.html",
+  "props": {
+    "items": {
+      "type": "object",
+      "description": "Array of navigation items: [{ text, href, current?, children?: [{ text, href, current?, children? }] }]"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "default": "Side navigation",
+      "description": "Accessible aria-label for the nav element."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes. Use responsive utilities like 'display-none tablet:display-block' to hide/show at breakpoints."
+    }
+  }
+}

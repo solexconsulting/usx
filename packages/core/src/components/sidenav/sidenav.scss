@@ -1,0 +1,48 @@
+@use '../../../../tokens/src/_variables' as *;
+
+.usx-layout {
+
+  .usx-sidenav {
+    margin-top: 2rem;
+  }
+}
+
+.usx-sidenav {
+
+  &.usx-sidenav--sticky {
+    position: sticky;
+    top: 2rem;
+  }
+
+  a {
+
+    &.usa-current {
+      @if $usx-sidenav-current-color != null {
+        color: $usx-sidenav-current-color;
+      }
+
+      &::after {
+        @if $usx-sidenav-current-color != null {
+          background-color: $usx-sidenav-current-color;
+        }
+      }
+    }
+
+    &:not(.usa-button):not(.usa-current) {
+      @if $usx-sidenav-link-color != null {
+        color: $usx-sidenav-link-color;
+      }
+
+      &:hover {
+        @if $usx-sidenav-link-hover-color != null {
+          color: $usx-sidenav-link-hover-color;
+        }
+      }
+    }
+  }
+}
+
+// Adjust sticky positioning when nav is present at the same level as layout
+.usx-nav--sticky ~ .usx-layout .usx-sidenav--sticky {
+  top: 5rem;
+}

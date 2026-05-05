@@ -9,6 +9,13 @@
 
 // ── Layout ─────────────────────────────────────────────────────────────────
 $max-layout-width: 64rem !default;
+$max-sidebar-width: 16rem !default;
+$dynamic-content-width: calc(50% + 24rem) !default;
+
+// ── Breakpoints ─────────────────────────────────────────────────────────────
+$breakpoint-mobile:  640px !default;
+$breakpoint-tablet:  640px !default;
+$breakpoint-desktop: 1024px !default;
 
 // ── Color — primitives ──────────────────────────────────────────────────────
 $color-primary:            #2563eb !default;
@@ -77,6 +84,42 @@ $spacing-sm: 0.5rem  !default;
 $spacing-md: 1rem    !default;
 $spacing-lg: 1.5rem  !default;
 $spacing-xl: 2rem    !default;
+
+// ── Spacing function ────────────────────────────────────────────────────────
+@function units($value) {
+  @return $value * 8px;
+}
+
+// ── Responsive mixin ─────────────────────────────────────────────────────────
+@mixin at-media($breakpoint) {
+  @if $breakpoint == 'mobile' {
+    @media (max-width: ($breakpoint-tablet - 1px)) {
+      @content;
+    }
+  } @else if $breakpoint == 'tablet' {
+    @media (min-width: $breakpoint-tablet) {
+      @content;
+    }
+  } @else if $breakpoint == 'desktop' {
+    @media (min-width: $breakpoint-desktop) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$breakpoint}";
+  }
+}
+
+// ── Color function ───────────────────────────────────────────────────────────
+@function color($name) {
+  @if $name == 'white' {
+    @return #ffffff;
+  } @else if $name == 'black' {
+    @return #000000;
+  } @else {
+    @warn "Unknown color name: #{$name}";
+    @return #000000;
+  }
+}
 
 // ── Typography ───────────────────────────────────────────────────────────────
 $typography-fontFamilyBase:    Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif !default;
@@ -284,3 +327,8 @@ $usx-carousel-dot-color-hover:  #a0a0a0  !default;
 $usx-carousel-dot-color-active: #808080  !default;
 $usx-carousel-dot-gap:          0.5rem   !default;
 
+
+// ── Component tokens: SideNav ─────────────────────────────────────────────
+$usx-sidenav-current-color:       $color-primary                     !default;
+$usx-sidenav-link-color:          null                         !default;
+$usx-sidenav-link-hover-color:    $color-primary               !default;

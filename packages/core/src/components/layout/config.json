@@ -1,0 +1,32 @@
+{
+  "name": "layout",
+  "template": "layout/layout.django.html",
+  "props": {
+    "variant": {
+      "type": "select",
+      "options": ["single-column", "grid"],
+      "default": "single-column",
+      "description": "Layout variant: single-column centers content, grid supports sidebars"
+    },
+    "children": {
+      "type": "string",
+      "description": "Inner HTML or text content (for single-column)"
+    },
+    "content": {
+      "type": "string",
+      "description": "Main content for grid layout"
+    },
+    "leftSidebar": {
+      "type": "string",
+      "description": "Left sidebar content (grid variant only)"
+    },
+    "rightSidebar": {
+      "type": "string",
+      "description": "Right sidebar content (grid variant only)"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
+  }
+}

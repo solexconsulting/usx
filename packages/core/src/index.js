@@ -21,6 +21,7 @@ EXCLUDE: ExamplePages
 export { default as Accordion } from './components/accordion';
 export { default as Alert } from './components/alert';
 export { default as Banner } from './components/banner';
+export { default as Branding } from './components/branding';
 export { default as Breadcrumb } from './components/breadcrumb';
 export { default as Button } from './components/button';
 export { default as ButtonGroup } from './components/button-group';
@@ -47,6 +48,7 @@ export { default as Indicator } from './components/indicator';
 export { default as Input } from './components/input';
 export { default as Label } from './components/label';
 export { default as LanguageSelector } from './components/language-selector';
+export { default as Layout } from './components/layout';
 export { default as Legend } from './components/legend';
 export { default as Link } from './components/link';
 export { default as List } from './components/list';
@@ -60,7 +62,7 @@ export { default as RangeSlider } from './components/range-slider';
 export { default as Required } from './components/required';
 export { default as Search } from './components/search';
 export { default as Select } from './components/select';
-export { default as SideNav } from './components/side-nav';
+export { default as Sidenav } from './components/sidenav';
 export { default as SiteAlert } from './components/site-alert';
 export { default as Skipnav } from './components/skipnav';
 export { default as Spinner } from './components/spinner';
@@ -73,6 +75,8 @@ export { default as TextArea } from './components/text-area';
 export { default as TimePicker } from './components/time-picker';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
+
 
 
 

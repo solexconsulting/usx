@@ -1,0 +1,31 @@
+{# Django template for Layout #}
+{# Supports variant: 'single-column' (default), 'grid' #}
+{# For grid: content, leftSidebar, rightSidebar #}
+<div class="usx-layout{% if className %} {{ className }}{% endif %}">
+  {% if variant == 'single-column' %}
+    <div class="usx-layout__single-column">
+      {{ children|default:content|safe }}
+    </div>
+  {% elif variant == 'grid' %}
+    <div class="usx-layout__grid-container">
+      {% if leftSidebar %}
+      <aside class="usx-layout__sidebar--left">
+        {{ leftSidebar|safe }}
+      </aside>
+      {% endif %}
+      <main class="usx-layout__content usx-layout__content--{{ contentModifier|default:'full' }}">
+        {{ content|default:children|safe }}
+      </main>
+      {% if rightSidebar %}
+      <aside class="usx-layout__sidebar--right">
+        {{ rightSidebar|safe }}
+      </aside>
+      {% endif %}
+    </div>
+  {% else %}
+    {{ children|default:content|safe }}
+  {% endif %}
+</div>
+    {{ children|default:content }}
+  {% endif %}
+</div>
