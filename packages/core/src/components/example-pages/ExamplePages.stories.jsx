@@ -17,7 +17,8 @@ import Select from '../select/Select';
 import Tag from '../tag/Tag';
 import Prose from '../prose/Prose';
 import Fieldset from '../fieldset/Fieldset';
-
+import Layout from '../layout/Layout';
+import SideNav from '../sidenav/SideNav';
 
 /* These stories are pages for demonstrating various components */
 
@@ -391,86 +392,98 @@ export const BlogPost = {
         id="blog-header"
         {...headerArgs}
       />
-      <div id="blog-post-example" className="grid-container">
-        <article>
-          <header className="margin-bottom-4">
-            <h1>The Future of Digital Transformation</h1>
-            <div className="text-base margin-top-2">
-              <span>By John Doe</span>
-              <span className="margin-left-2">Published March 15, 2024</span>
-              <span className="margin-left-2">5 min read</span>
-            </div>
-            <div className="margin-top-1">
-              <Tag value="Technology" color="info" />
-              <Tag value="Innovation" color="success" className="margin-left-1" />
-            </div>
-          </header>
-
-          <div className="grid-row grid-gap">
-            <div className="tablet:grid-col-8">
-              <Image
-                src="https://picsum.photos/800/400?random=3"
-                alt="Digital transformation concept"
-                rounded
-                className="margin-bottom-3"
-              />
-
-              <Prose>
-                <p>In today's rapidly evolving digital landscape, organizations face unprecedented challenges and opportunities. Digital transformation has become not just a competitive advantage, but a necessity for survival in an increasingly connected world.</p>
-
-                <h2>The Current State</h2>
-                <p>According to recent industry reports, over 70% of organizations have either begun or completed their digital transformation initiatives. However, only 20% consider their efforts successful. This gap highlights the complexity and challenges involved in truly transforming how businesses operate.</p>
-
-                <h2>Key Challenges</h2>
-                <ul>
-                  <li>Legacy system integration</li>
-                  <li>Skills gap in digital technologies</li>
-                  <li>Cultural resistance to change</li>
-                  <li>Security and compliance concerns</li>
-                </ul>
-
-                <h2>The Path Forward</h2>
-                <p>Successful digital transformation requires a holistic approach that encompasses technology, processes, and people. Organizations must focus on:</p>
-                <ol>
-                  <li>Building a clear digital strategy</li>
-                  <li>Investing in employee training</li>
-                  <li>Starting with pilot projects</li>
-                  <li>Measuring and iterating continuously</li>
-                </ol>
-
-                <blockquote>
-                  "Digital transformation is not about technology—it's about people and processes."
-                  <cite>— John Doe, CTO</cite>
-                </blockquote>
-
-                <p>As we look to the future, the organizations that thrive will be those that embrace digital transformation not as a one-time project, but as an ongoing journey of innovation and adaptation.</p>
-              </Prose>
-            </div>
-
-            <div className="tablet:grid-col-4">
-              <div className="border border-base-lighter border-1px padding-3">
-                <h3>Related Articles</h3>
-                <ul className="usa-list usa-list--unstyled">
-                  <li><a className="usa-link" href="#">Cloud Migration Strategies</a></li>
-                  <li><a className="usa-link" href="#">AI in Modern Business</a></li>
-                  <li><a className="usa-link" href="#">Cybersecurity Best Practices</a></li>
-                  <li><a className="usa-link" href="#">Agile Development Methods</a></li>
-                </ul>
+      <Layout
+        variant="grid"
+        content={
+          <article>
+            <header className="margin-bottom-4">
+              <h1>The Future of Digital Transformation</h1>
+              <div className="text-base margin-top-2">
+                <span>By John Doe</span>
+                <span className="margin-left-2">Published March 15, 2024</span>
+                <span className="margin-left-2">5 min read</span>
               </div>
+              <div className="margin-top-1">
+                <Tag value="Technology" color="info" />
+                <Tag value="Innovation" color="success" className="margin-left-1" />
+              </div>
+            </header>
 
-              <div className="border border-base-lighter border-1px padding-3 margin-top-3">
-                <h3>Tags</h3>
-                <div className="margin-top-2 display-flex flex-wrap">
-                  <Tag value="Digital Transformation" color="primary" className="margin-05" />
-                  <Tag value="Technology" color="info" className="margin-05" />
-                  <Tag value="Innovation" color="success" className="margin-05" />
-                  <Tag value="Business Strategy" color="warning" className="margin-05" />
-                </div>
+            <Image
+              src="https://picsum.photos/800/400?random=3"
+              alt="Digital transformation concept"
+              rounded
+              className="margin-bottom-3"
+            />
+
+            <Prose>
+              <p>In today's rapidly evolving digital landscape, organizations face unprecedented challenges and opportunities. Digital transformation has become not just a competitive advantage, but a necessity for survival in an increasingly connected world.</p>
+
+              <h2>The Current State</h2>
+              <p>According to recent industry reports, over 70% of organizations have either begun or completed their digital transformation initiatives. However, only 20% consider their efforts successful. This gap highlights the complexity and challenges involved in truly transforming how businesses operate.</p>
+
+              <h2>Key Challenges</h2>
+              <ul>
+                <li>Legacy system integration</li>
+                <li>Skills gap in digital technologies</li>
+                <li>Cultural resistance to change</li>
+                <li>Security and compliance concerns</li>
+              </ul>
+
+              <h2>The Path Forward</h2>
+              <p>Successful digital transformation requires a holistic approach that encompasses technology, processes, and people. Organizations must focus on:</p>
+              <ol>
+                <li>Building a clear digital strategy</li>
+                <li>Investing in employee training</li>
+                <li>Starting with pilot projects</li>
+                <li>Measuring and iterating continuously</li>
+              </ol>
+
+              <blockquote>
+                "Digital transformation is not about technology—it's about people and processes."
+                <cite>— John Doe, CTO</cite>
+              </blockquote>
+
+              <p>As we look to the future, the organizations that thrive will be those that embrace digital transformation not as a one-time project, but as an ongoing journey of innovation and adaptation.</p>
+            </Prose>
+          </article>
+        }
+        leftSidebar={
+          <SideNav
+            items={[
+              { text: 'Home', href: '#', current: true },
+              { text: 'About', href: '#' },
+              { text: 'Blog', href: '#' },
+              { text: 'Contact', href: '#' },
+            ]}
+            sticky={true}
+          />
+        }
+        expandRightSidebar={true}
+        rightSidebar={
+          <>
+            <div className="border border-base-lighter border-1px padding-4 margin-bottom-3">
+              <h3>Related Articles</h3>
+              <ul className="usa-list usa-list--unstyled">
+                <li><a className="usa-link" href="#">Cloud Migration Strategies</a></li>
+                <li><a className="usa-link" href="#">AI in Modern Business</a></li>
+                <li><a className="usa-link" href="#">Cybersecurity Best Practices</a></li>
+                <li><a className="usa-link" href="#">Agile Development Methods</a></li>
+              </ul>
+            </div>
+
+            <div className="border border-base-lighter border-1px padding-3">
+              <h3>Tags</h3>
+              <div className="margin-top-2 display-flex flex-wrap">
+                <Tag value="Digital Transformation" color="primary" className="margin-05" />
+                <Tag value="Technology" color="info" className="margin-05" />
+                <Tag value="Innovation" color="success" className="margin-05" />
+                <Tag value="Business Strategy" color="warning" className="margin-05" />
               </div>
             </div>
-          </div>
-        </article>
-      </div>
+          </>
+        }
+      />
       <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-blog' }} />
     </>
   )
@@ -488,108 +501,115 @@ export const Dashboard = {
         id="dashboard-header"
         {...headerArgs}
       />
-      <div id="dashboard-example" className="grid-container">
-        <div className="grid-row grid-gap flex-align-center">
-          <div className="grid-col-fill">
-            <h1>Dashboard</h1>
-          </div>
-          <div className="grid-col-auto">
-            <ButtonGroup items={[
-              {children: 'Export Data', variant: 'secondary'},
-              {children: 'New Item', variant: 'primary'}
-            ]} />
-          </div>
-        </div>
-
-        <div className="grid-row grid-gap margin-4">
-          <div className="tablet:grid-col-3">
-            <div className="bg-primary-lighter padding-3 border border-primary border-1px">
-              <h3 className="margin-0 text-primary-dark">Total Users</h3>
-              <div className="font-heading-xl margin-top-1">12,847</div>
-              <div className="text-success margin-top-1">
-                <Icon name="trending_up" size="sm" className="margin-right-1" />
-                +12.5% from last month
+      <Layout
+        variant="grid"
+        content={
+          <>
+            <div className="grid-row grid-gap flex-align-center">
+              <div className="grid-col-fill">
+                <h1>Dashboard</h1>
+              </div>
+              <div className="grid-col-auto">
+                <ButtonGroup items={[
+                  {children: 'Export Data', variant: 'secondary'},
+                  {children: 'New Item', variant: 'primary'}
+                ]} />
               </div>
             </div>
-          </div>
 
-          <div className="tablet:grid-col-3">
-            <div className="bg-success-lighter padding-3 border border-success border-1px">
-              <h3 className="margin-0 text-success-dark">Active Sessions</h3>
-              <div className="font-heading-xl margin-top-1">3,429</div>
-              <div className="text-success margin-top-1">
-                <Icon name="trending_up" size="sm" className="margin-right-1" />
-                +8.2% from last month
-              </div>
-            </div>
-          </div>
-
-          <div className="tablet:grid-col-3">
-            <div className="bg-warning-lighter padding-3 border border-warning border-1px">
-              <h3 className="margin-0 text-warning-dark">Conversion Rate</h3>
-              <div className="font-heading-xl margin-top-1">24.7%</div>
-              <div className="text-error margin-top-1">
-                <Icon name="trending_down" size="sm" className="margin-right-1" />
-                -2.1% from last month
-              </div>
-            </div>
-          </div>
-
-          <div className="tablet:grid-col-3">
-            <div className="bg-accent-cool-lighter padding-3 border border-accent-cool border-1px">
-              <h3 className="margin-0 text-accent-cool-dark">Revenue</h3>
-              <div className="font-heading-xl margin-top-1">$89,432</div>
-              <div className="text-success margin-top-1">
-                <Icon name="trending_up" size="sm" className="margin-right-1" />
-                +15.3% from last month
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid-row grid-gap">
-          <div className="tablet:grid-col-8">
-            <div className="border border-base-lighter border-1px padding-3">
-              <h3>Recent Activity</h3>
-              <div className="margin-top-3">
-                <div className="grid-row grid-gap margin-bottom-2">
-                  <div className="grid-col-auto">
-                    <Icon name="person" size="md" />
+            <div className="grid-row grid-gap margin-4">
+              <div className="tablet:grid-col-3">
+                <div className="bg-primary-lighter padding-3 border border-primary border-1px">
+                  <h3 className="margin-0 text-primary-dark">Total Users</h3>
+                  <div className="font-heading-xl margin-top-1">12,847</div>
+                  <div className="text-success margin-top-1">
+                    <Icon name="trending_up" size="sm" className="margin-right-1" />
+                    +12.5% from last month
                   </div>
-                  <div className="grid-col-fill">
-                    <div className="text-bold">New user registration</div>
-                    <div className="text-base">John Smith joined 2 minutes ago</div>
-                  </div>
-                  <div className="grid-col-auto text-base">2m ago</div>
                 </div>
+              </div>
 
-                <div className="grid-row grid-gap margin-bottom-2">
-                  <div className="grid-col-auto">
-                    <Icon name="local_grocery_store" size="md" />
+              <div className="tablet:grid-col-3">
+                <div className="bg-success-lighter padding-3 border border-success border-1px">
+                  <h3 className="margin-0 text-success-dark">Active Sessions</h3>
+                  <div className="font-heading-xl margin-top-1">3,429</div>
+                  <div className="text-success margin-top-1">
+                    <Icon name="trending_up" size="sm" className="margin-right-1" />
+                    +8.2% from last month
                   </div>
-                  <div className="grid-col-fill">
-                    <div className="text-bold">New order</div>
-                    <div className="text-base">Order #12345 for $299.99</div>
-                  </div>
-                  <div className="grid-col-auto text-base">5m ago</div>
                 </div>
+              </div>
 
-                <div className="grid-row grid-gap margin-bottom-2">
-                  <div className="grid-col-auto">
-                    <Icon name="mail" size="md" />
+              <div className="tablet:grid-col-3">
+                <div className="bg-warning-lighter padding-3 border border-warning border-1px">
+                  <h3 className="margin-0 text-warning-dark">Conversion Rate</h3>
+                  <div className="font-heading-xl margin-top-1">24.7%</div>
+                  <div className="text-error margin-top-1">
+                    <Icon name="trending_down" size="sm" className="margin-right-1" />
+                    -2.1% from last month
                   </div>
-                  <div className="grid-col-fill">
-                    <div className="text-bold">Email campaign sent</div>
-                    <div className="text-base">Monthly newsletter sent to 12,847 subscribers</div>
+                </div>
+              </div>
+
+              <div className="tablet:grid-col-3">
+                <div className="bg-accent-cool-lighter padding-3 border border-accent-cool border-1px">
+                  <h3 className="margin-0 text-accent-cool-dark">Revenue</h3>
+                  <div className="font-heading-xl margin-top-1">$89,432</div>
+                  <div className="text-success margin-top-1">
+                    <Icon name="trending_up" size="sm" className="margin-right-1" />
+                    +15.3% from last month
                   </div>
-                  <div className="grid-col-auto text-base">1h ago</div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="tablet:grid-col-4">
-            <div className="border border-base-lighter border-1px padding-3">
+            <div className="grid-row grid-gap">
+              <div className="tablet:grid-col-8">
+                <div className="border border-base-lighter border-1px padding-3">
+                  <h3>Recent Activity</h3>
+                  <div className="margin-top-3">
+                    <div className="grid-row grid-gap margin-bottom-2">
+                      <div className="grid-col-auto">
+                        <Icon name="person" size="md" />
+                      </div>
+                      <div className="grid-col-fill">
+                        <div className="text-bold">New user registration</div>
+                        <div className="text-base">John Smith joined 2 minutes ago</div>
+                      </div>
+                      <div className="grid-col-auto text-base">2m ago</div>
+                    </div>
+
+                    <div className="grid-row grid-gap margin-bottom-2">
+                      <div className="grid-col-auto">
+                        <Icon name="local_grocery_store" size="md" />
+                      </div>
+                      <div className="grid-col-fill">
+                        <div className="text-bold">New order</div>
+                        <div className="text-base">Order #12345 for $299.99</div>
+                      </div>
+                      <div className="grid-col-auto text-base">5m ago</div>
+                    </div>
+
+                    <div className="grid-row grid-gap margin-bottom-2">
+                      <div className="grid-col-auto">
+                        <Icon name="mail" size="md" />
+                      </div>
+                      <div className="grid-col-fill">
+                        <div className="text-bold">Email campaign sent</div>
+                        <div className="text-base">Monthly newsletter sent to 12,847 subscribers</div>
+                      </div>
+                      <div className="grid-col-auto text-base">1h ago</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        }
+        expandRightSidebar={true}
+        rightSidebar={
+          <>
+            <div className="border border-base-lighter border-1px padding-4 margin-bottom-3">
               <h3>Quick Actions</h3>
               <div className="margin-top-3">
                 <Button variant="primary" className="margin-bottom-2" leftIcon={{ name: 'add', size: 'sm' }}>
@@ -607,7 +627,7 @@ export const Dashboard = {
               </div>
             </div>
 
-            <div className="border border-base-lighter border-1px padding-3 margin-top-3">
+            <div className="border border-base-lighter border-1px padding-3">
               <h3>System Status</h3>
               <div className="margin-top-3">
                 <div className="grid-row grid-gap margin-bottom-2">
@@ -641,9 +661,9 @@ export const Dashboard = {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </>
+        }
+      />
       <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-dashboard' }} />
     </>
   )
@@ -766,68 +786,23 @@ export const SearchResults = {
         id="search-header"
         {...headerArgs}
       />
-      <div id="search-results-example" className="grid-container">
-        <div className="margin-y-4">
-          <Search
-            ariaLabel="Search documentation"
-            searchKey="q"
-            label="Search"
-            icon="search"
-            buttonVariant="primary"
-            big={true}
-            action="#"
-            placeholder="Search documentation, guides, and articles..."
-          />
-        </div>
-
-        <div className="grid-row grid-gap margin-bottom-4">
-          <div className="tablet:grid-col-3">
-            <div className="border border-base-lighter border-1px padding-3">
-              <h4 className="margin-top-0">Filter Results</h4>
-
-              <div className="margin-bottom-3">
-                <Select
-                  id="category-filter"
-                  name="category"
-                  label="Category"
-                  options={[
-                    { value: '', label: 'All Categories' },
-                    { value: 'getting-started', label: 'Getting Started' },
-                    { value: 'api-reference', label: 'API Reference' },
-                    { value: 'tutorials', label: 'Tutorials' },
-                    { value: 'troubleshooting', label: 'Troubleshooting' }
-                  ]}
-                  defaultValue=""
-                />
-              </div>
-
-              <div className="margin-bottom-3">
-                <Select
-                  id="content-type-filter"
-                  name="contentType"
-                  label="Content Type"
-                  options={[
-                    { value: '', label: 'All Types' },
-                    { value: 'guide', label: 'Guide' },
-                    { value: 'tutorial', label: 'Tutorial' },
-                    { value: 'reference', label: 'Reference' },
-                    { value: 'faq', label: 'FAQ' }
-                  ]}
-                  defaultValue=""
-                />
-              </div>
-
-              <ButtonGroup
-                buttons={[
-                  { children: 'Apply Filters', variant: 'primary' },
-                  { children: 'Clear All', variant: 'secondary' }
-                ]}
-                direction="vertical"
+      <Layout
+        variant="grid"
+        content={
+          <>
+            <div className="margin-y-4">
+              <Search
+                ariaLabel="Search documentation"
+                searchKey="q"
+                label="Search"
+                icon="search"
+                buttonVariant="primary"
+                big={true}
+                action="#"
+                placeholder="Search documentation, guides, and articles..."
               />
             </div>
-          </div>
 
-          <div className="tablet:grid-col-9">
             <div className="margin-bottom-3">
               <h2 className="margin-top-0">Search Results</h2>
               <p className="text-base">Showing 24 results for "getting started"</p>
@@ -898,9 +873,55 @@ export const SearchResults = {
                 ]}
               />
             </div>
+          </>
+        }
+        expandLeftSidebar={true}
+        leftSidebar={
+          <div className="border border-base-lighter border-1px padding-4">
+            <h4 className="margin-top-0">Filter Results</h4>
+
+            <div className="margin-bottom-3">
+              <Select
+                id="category-filter"
+                name="category"
+                label="Category"
+                options={[
+                  { value: '', label: 'All Categories' },
+                  { value: 'getting-started', label: 'Getting Started' },
+                  { value: 'api-reference', label: 'API Reference' },
+                  { value: 'tutorials', label: 'Tutorials' },
+                  { value: 'troubleshooting', label: 'Troubleshooting' }
+                ]}
+                defaultValue=""
+              />
+            </div>
+
+            <div className="margin-bottom-3">
+              <Select
+                id="content-type-filter"
+                name="contentType"
+                label="Content Type"
+                options={[
+                  { value: '', label: 'All Types' },
+                  { value: 'guide', label: 'Guide' },
+                  { value: 'tutorial', label: 'Tutorial' },
+                  { value: 'reference', label: 'Reference' },
+                  { value: 'faq', label: 'FAQ' }
+                ]}
+                defaultValue=""
+              />
+            </div>
+
+            <ButtonGroup
+              buttons={[
+                { children: 'Apply Filters', variant: 'primary' },
+                { children: 'Clear All', variant: 'secondary' }
+              ]}
+              direction="vertical"
+            />
           </div>
-        </div>
-      </div>
+        }
+      />
       <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-search' }} />
     </>
   )
@@ -919,147 +940,120 @@ export const SettingsPage = {
         {...headerArgs}
       />
 
-      <main
-        id="settings-page-example"
-        className="main-content"
-        style={{
-          display: 'block',
-          position: 'relative',
-          width: '100%',
-          maxWidth: '64rem',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          borderTop: 'none'
+      <Layout
+        variant="grid"
+        content={
+          <div className="padding-x-4 margin-top-3">
+            <h2>Profile Settings</h2>
+            <Alert
+              type="success"
+              heading="Settings Updated"
+              className="margin-bottom-4"
+            >
+              Your profile settings have been successfully updated.
+            </Alert>
 
-        }}
-      >
-        <aside
-          aria-label="Settings navigation"
-          style={{
-            display: 'block',
-            marginTop: '3rem',
-            marginBottom: '3rem',
-            paddingRight: 0,
-            paddingLeft: '2rem',
-            width: '15rem',
-            position: 'absolute',
-            left: '-15rem'
-          }}
-        >
-          <ul className="usa-sidenav">
-            <li className="usa-sidenav__item">
-              <a href="#profile" className="usa-current">Profile</a>
-            </li>
-            <li className="usa-sidenav__item">
-              <a href="#security">Security</a>
-            </li>
-            <li className="usa-sidenav__item">
-              <a href="#notifications">Notifications</a>
-            </li>
-            <li className="usa-sidenav__item">
-              <a href="#billing">Billing</a>
-            </li>
-          </ul>
-        </aside>
-        <div className="padding-x-4 margin-top-3">
-          <h2>Profile Settings</h2>
-          <Alert
-            type="success"
-            heading="Settings Updated"
-            className="margin-bottom-4"
-          >
-            Your profile settings have been successfully updated.
-          </Alert>
+            <form className="usa-form">
 
-          <form className="usa-form">
-
-            <Input
-              id="display-name"
-              name="displayName"
-              label="Display Name"
-              type="text"
-              defaultValue="John Doe"
-            />
-
-            <Input
-              id="email"
-              name="email"
-              label="Email Address"
-              type="email"
-              defaultValue="john.doe@example.com"
-            />
-
-            <div className="margin-bottom-3">
-              <Select
-                id="timezone"
-                name="timezone"
-                label="Timezone"
-                options={[
-                  { value: 'America/New_York', label: 'Eastern Time (ET)' },
-                  { value: 'America/Chicago', label: 'Central Time (CT)' },
-                  { value: 'America/Denver', label: 'Mountain Time (MT)' },
-                  { value: 'America/Los_Angeles', label: 'Pacific Time (PT)' },
-                  { value: 'Europe/London', label: 'Greenwich Mean Time (GMT)' },
-                  { value: 'Asia/Tokyo', label: 'Japan Standard Time (JST)' }
-                ]}
-                defaultValue="America/New_York"
+              <Input
+                id="display-name"
+                name="displayName"
+                label="Display Name"
+                type="text"
+                defaultValue="John Doe"
               />
-            </div>
 
-            <div className="margin-bottom-3">
-              <Select
-                id="language"
-                name="language"
-                label="Language"
-                options={[
-                  { value: 'en', label: 'English' },
-                  { value: 'es', label: 'Español' },
-                  { value: 'fr', label: 'Français' },
-                  { value: 'de', label: 'Deutsch' },
-                  { value: 'ja', label: '日本語' }
-                ]}
-                defaultValue="en"
+              <Input
+                id="email"
+                name="email"
+                label="Email Address"
+                type="email"
+                defaultValue="john.doe@example.com"
               />
-            </div>
 
-            <div className="margin-bottom-4">
-              <Fieldset legend="Notification Preferences">
-                <Checkbox
-                  id="email-notifications"
-                  name="emailNotifications"
-                  label="Email notifications"
-                  tile={true}
-                  description="Receive important updates via email"
-                  checked
+              <div className="margin-bottom-3">
+                <Select
+                  id="timezone"
+                  name="timezone"
+                  label="Timezone"
+                  options={[
+                    { value: 'America/New_York', label: 'Eastern Time (ET)' },
+                    { value: 'America/Chicago', label: 'Central Time (CT)' },
+                    { value: 'America/Denver', label: 'Mountain Time (MT)' },
+                    { value: 'America/Los_Angeles', label: 'Pacific Time (PT)' },
+                    { value: 'Europe/London', label: 'Greenwich Mean Time (GMT)' },
+                    { value: 'Asia/Tokyo', label: 'Japan Standard Time (JST)' }
+                  ]}
+                  defaultValue="America/New_York"
                 />
-                <Checkbox
-                  id="marketing-emails"
-                  name="marketingEmails"
-                  label="Marketing emails"
-                  tile={true}
-                  description="Receive promotional content and newsletters"
-                />
-                <Checkbox
-                  id="security-alerts"
-                  name="securityAlerts"
-                  label="Security alerts"
-                  tile={true}
-                  description="Get notified about security-related events"
-                  checked
-                />
-              </Fieldset>
-            </div>
+              </div>
 
-            <ButtonGroup
-              buttons={[
-                { children: 'Save Changes', variant: 'primary' },
-                { children: 'Cancel', variant: 'secondary' },
-                { children: 'Reset to Defaults', variant: 'secondary' }
-              ]}
-            />
-          </form>
-        </div>
-      </main>
+              <div className="margin-bottom-3">
+                <Select
+                  id="language"
+                  name="language"
+                  label="Language"
+                  options={[
+                    { value: 'en', label: 'English' },
+                    { value: 'es', label: 'Español' },
+                    { value: 'fr', label: 'Français' },
+                    { value: 'de', label: 'Deutsch' },
+                    { value: 'ja', label: '日本語' }
+                  ]}
+                  defaultValue="en"
+                />
+              </div>
+
+              <div className="margin-bottom-4">
+                <Fieldset legend="Notification Preferences">
+                  <Checkbox
+                    id="email-notifications"
+                    name="emailNotifications"
+                    label="Email notifications"
+                    tile={true}
+                    description="Receive important updates via email"
+                    checked
+                  />
+                  <Checkbox
+                    id="marketing-emails"
+                    name="marketingEmails"
+                    label="Marketing emails"
+                    tile={true}
+                    description="Receive promotional content and newsletters"
+                  />
+                  <Checkbox
+                    id="security-alerts"
+                    name="securityAlerts"
+                    label="Security alerts"
+                    tile={true}
+                    description="Get notified about security-related events"
+                    checked
+                  />
+                </Fieldset>
+              </div>
+
+              <ButtonGroup
+                buttons={[
+                  { children: 'Save Changes', variant: 'primary' },
+                  { children: 'Cancel', variant: 'secondary' },
+                  { children: 'Reset to Defaults', variant: 'secondary' }
+                ]}
+              />
+            </form>
+          </div>
+        }
+        leftSidebar={
+          <SideNav
+            items={[
+              { text: 'Profile', href: '#profile', current: true },
+              { text: 'Security', href: '#security' },
+              { text: 'Notifications', href: '#notifications' },
+              { text: 'Billing', href: '#billing' },
+            ]}
+            sticky={true}
+          />
+        }
+      />
       <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-settings' }} />
     </>
   )

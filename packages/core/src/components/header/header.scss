@@ -96,13 +96,13 @@
 
   @media (min-width: 64em) {
     width: 100%;
+    float: none;
     
     &.usx-nav--sticky:not(.is-visible) {
       display: block;
       z-index: 200;
       position: sticky;
       top: 0;
-      float: none;
     }
 
     .usa-nav__inner {
