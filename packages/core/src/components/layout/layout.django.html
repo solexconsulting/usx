@@ -4,7 +4,7 @@
 <div class="usx-layout{% if className %} {{ className }}{% endif %}">
   {% if variant == 'single-column' %}
     <div class="usx-layout__single-column">
-      {{ children|default:content|safe }}
+      {% if children %}{{ children|safe }}{% else %}{{ content|safe }}{% endif %}
     </div>
   {% elif variant == 'grid' %}
     <div class="usx-layout__grid-container">
@@ -13,8 +13,8 @@
         {{ leftSidebar|safe }}
       </aside>
       {% endif %}
-      <main class="usx-layout__content usx-layout__content--{{ contentModifier|default:'full' }}">
-        {{ content|default:children|safe }}
+      <main class="usx-layout__content{% if rightSidebar and not leftSidebar %} usx-layout__content--left{% elif leftSidebar and not rightSidebar %} usx-layout__content--right{% endif %}">
+        {% if children %}{{ children|safe }}{% else %}{{ content|safe }}{% endif %}
       </main>
       {% if rightSidebar %}
       <aside class="usx-layout__sidebar--right">
@@ -23,9 +23,6 @@
       {% endif %}
     </div>
   {% else %}
-    {{ children|default:content|safe }}
-  {% endif %}
-</div>
-    {{ children|default:content }}
+    {% if children %}{{ children|safe }}{% else %}{{ content|safe }}{% endif %}
   {% endif %}
 </div>

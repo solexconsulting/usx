@@ -54,7 +54,6 @@ export const GridFullContent = {
 export const GridWithLeftSidebar = {
   args: {
     variant: 'grid',
-    contentModifier: 'right',
     content: '<div style="padding: 2rem; background: #e8f4f8;"><h2>Grid Layout - Content with Left Sidebar</h2><p>Content adjusts to leave space for the left sidebar on desktop.</p><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p></div>',
     leftSidebar: '<nav aria-label="Side navigation" class="usa-sidenav usx-side-nav"><ul class="usa-sidenav"><li class="usa-sidenav__item"><a href="#" class="usa-current">Home</a></li><li class="usa-sidenav__item"><a href="#">About</a></li><li class="usa-sidenav__item"><a href="#">Services</a></li><li class="usa-sidenav__item"><a href="#">Contact</a></li></ul></nav>',
   },
@@ -63,7 +62,6 @@ export const GridWithLeftSidebar = {
       source: {
         code: componentTag({ name: 'layout', props: {
           variant: 'grid',
-          contentModifier: 'right',
           content: '<div style="padding: 2rem; background: #e8f4f8;"><h2>Grid Layout - Content with Left Sidebar</h2><p>Content adjusts...</p></div>',
           leftSidebar: '<nav aria-label="Side navigation" class="usa-sidenav usx-side-nav"><ul class="usa-sidenav"><li class="usa-sidenav__item"><a href="#" class="usa-current">Home</a></li>...</ul></nav>',
         } })
