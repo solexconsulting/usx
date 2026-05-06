@@ -1,0 +1,6 @@
+{# Sub-template: pagination summary (e.g. "Showing 1–10 of 100 items") #}
+{# Props: firstItem, lastItem, totalItems, itemLabel #}
+<p class="usa-label usx-label usx-pagination__summary" aria-live="polite" aria-atomic="true">
+  Showing <strong>{{ firstItem }}–{{ lastItem }}</strong>
+  of <strong>{{ totalItems }}</strong> {{ itemLabel }}
+</p>

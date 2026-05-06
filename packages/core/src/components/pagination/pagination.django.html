@@ -1,4 +1,44 @@
 {# Django template for Pagination #}
-<div class="usx-pagination">
-  <div class="pagination__content">Pagination</div>
+{# ─────────────────────────────────────────────────────────── #}
+{# Required props:                                             #}
+{#   currentPage   – current 1-based page number              #}
+{#   pages         – list of {type, page} dicts pre-computed  #}
+{#                   server-side (see Paginator helper)        #}
+{# Common optional props:                                      #}
+{#   totalPages    – omit for unbounded mode                   #}
+{#   unbounded     – true when total pages is unknown          #}
+{#   arrowsOnly    – hide page number buttons                  #}
+{#   prevLabel     – default "Previous"                        #}
+{#   nextLabel     – default "Next"                            #}
+{#   hideLinkText  – sr-only the prev/next labels              #}
+{#   ariaLabel     – nav aria-label, default "Pagination"      #}
+{#   pageUrlPrefix – URL prefix for page links, e.g. "?page=" #}
+{#   showSummary   – display "Showing X–Y of Z items"         #}
+{#   firstItem, lastItem, totalItems, itemLabel                #}
+{#   showStepOptions – display items-per-page selector        #}
+{#   pageSize, pageSizeOptions (list), stepOptionsLabel        #}
+{#   className     – extra classes on the outer wrapper        #}
+{# ─────────────────────────────────────────────────────────── #}
+<div class="usx-pagination{% if className %} {{ className }}{% endif %}">
+  <div class="usx-pagination__container">
+
+    {# ── Summary (left slot) ───────────────────────────────── #}
+    {% if showSummary %}
+    <div class="usx-pagination__container-summary">
+      {% include "pagination/summary/pagination-summary.django.html" %}
+    </div>
+    {% endif %}
+
+    {# ── Nav + step options (right slot) ─────────────────── #}
+    <div class="usx-pagination__container-end">
+
+      {% if showStepOptions %}
+      {% include "pagination/step-options/pagination-step-options.django.html" %}
+      {% endif %}
+
+      {% include "pagination/navigation/pagination-navigation.django.html" %}
+
+    </div>
+
+  </div>
 </div>

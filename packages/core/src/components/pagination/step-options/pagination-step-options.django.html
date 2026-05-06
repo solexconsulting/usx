@@ -1,0 +1,7 @@
+{# Sub-template: pagination step options (items-per-page selector) #}
+{# Props: pageSize, pageSizeOptions (list of ints), stepOptionsLabel, stepOptionsId #}
+<div class="usx-pagination__step-options">
+  {% with id=stepOptionsId label=stepOptionsLabel defaultValue=pageSize options=pageSizeOptions|dictsort:"value" className="usx-pagination__step-options-select" %}
+  {% include "select/select.django.html" with id=id label=label defaultValue=defaultValue options=options only %}
+  {% endwith %}
+</div>

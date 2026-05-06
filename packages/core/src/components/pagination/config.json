@@ -1,11 +1,109 @@
 {
   "name": "pagination",
   "template": "pagination/pagination.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Pagination"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "currentPage": {
+      "type": "number",
+      "default": 1,
+      "description": "Current 1-based page number"
+    },
+    "totalPages": {
+      "type": "number",
+      "description": "Total page count — omit for unbounded mode"
+    },
+    "pages": {
+      "type": "json",
+      "default": [],
+      "description": "Pre-computed list of page items: [{type: 'page', page: N} | {type: 'ellipsis'}]. Compute server-side with Django's Paginator."
+    },
+    "unbounded": {
+      "type": "boolean",
+      "default": false,
+      "description": "True when total pages is unknown — hides the disabled state on Next"
+    },
+    "arrowsOnly": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show only the prev/next arrows, no page number buttons"
+    },
+    "prevLabel": {
+      "type": "string",
+      "default": "Previous",
+      "description": "Label for the previous arrow link"
+    },
+    "nextLabel": {
+      "type": "string",
+      "default": "Next",
+      "description": "Label for the next arrow link"
+    },
+    "hideLinkText": {
+      "type": "boolean",
+      "default": false,
+      "description": "Visually hide prev/next labels (still readable by screen readers)"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "default": "Pagination",
+      "description": "aria-label for the nav element"
+    },
+    "pageUrlPrefix": {
+      "type": "string",
+      "default": "?page=",
+      "description": "URL prefix that the page number is appended to, e.g. '?page='"
+    },
+    "showSummary": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show the 'Showing X–Y of Z items' summary"
+    },
+    "firstItem": {
+      "type": "number",
+      "default": 1,
+      "description": "First item number on the current page (for summary)"
+    },
+    "lastItem": {
+      "type": "number",
+      "default": 10,
+      "description": "Last item number on the current page (for summary)"
+    },
+    "totalItems": {
+      "type": "number",
+      "description": "Total number of items (for summary)"
+    },
+    "itemLabel": {
+      "type": "string",
+      "default": "items",
+      "description": "Noun for items in the summary (e.g. 'results', 'records')"
+    },
+    "showStepOptions": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show the items-per-page selector"
+    },
+    "pageSize": {
+      "type": "number",
+      "default": 10,
+      "description": "Currently selected page size"
+    },
+    "pageSizeOptions": {
+      "type": "json",
+      "default": [10, 25, 50, 100],
+      "description": "Available page size choices"
+    },
+    "stepOptionsLabel": {
+      "type": "string",
+      "default": "Items per page",
+      "description": "Label for the items-per-page selector"
+    },
+    "stepOptionsId": {
+      "type": "string",
+      "default": "pagination-step-options",
+      "description": "HTML id for the step options select element"
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes on the outer wrapper"
+    }
   }
 }

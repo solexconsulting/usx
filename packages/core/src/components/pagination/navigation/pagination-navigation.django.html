@@ -1,0 +1,74 @@
+{# Sub-template: pagination navigation bar #}
+{# Props: currentPage, totalPages, pages, unbounded, arrowsOnly, #}
+{#        prevLabel, nextLabel, hideLinkText, ariaLabel, pageUrlPrefix #}
+<nav aria-label="{{ ariaLabel }}" class="usa-pagination usx-pagination__nav">
+  <ul class="usa-pagination__list">
+
+    {# ── Previous arrow ──────────────────────────────────────────────── #}
+    <li class="usa-pagination__item usa-pagination__arrow">
+      {% if currentPage == 1 %}
+      <span class="usa-pagination__link usa-pagination__previous-page usa-pagination__link--disabled" aria-disabled="true">
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="/img/sprite.svg#navigate_before"></use>
+        </svg>
+        <span class="usa-pagination__link-text{% if hideLinkText %} usa-sr-only{% endif %}">{{ prevLabel }}</span>
+      </span>
+      {% else %}
+      <a href="{{ pageUrlPrefix }}{{ currentPage|add:"-1" }}"
+         class="usa-pagination__link usa-pagination__previous-page"
+         aria-label="{{ prevLabel }} page">
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="/img/sprite.svg#navigate_before"></use>
+        </svg>
+        <span class="usa-pagination__link-text{% if hideLinkText %} usa-sr-only{% endif %}">{{ prevLabel }}</span>
+      </a>
+      {% endif %}
+    </li>
+
+    {# ── Page number / ellipsis items (suppressed in arrowsOnly mode) ── #}
+    {% if not arrowsOnly %}
+      {% for item in pages %}
+        {% if item.type == 'ellipsis' %}
+        <li class="usa-pagination__item usa-pagination__overflow" aria-hidden="true">
+          <span>…</span>
+        </li>
+        {% else %}
+        <li class="usa-pagination__item usa-pagination__page-no">
+          {% if item.page == currentPage %}
+          <a href="{{ pageUrlPrefix }}{{ item.page }}"
+             class="usa-pagination__button usa-current"
+             aria-label="Page {{ item.page }}"
+             aria-current="page">{{ item.page }}</a>
+          {% else %}
+          <a href="{{ pageUrlPrefix }}{{ item.page }}"
+             class="usa-pagination__button"
+             aria-label="Page {{ item.page }}">{{ item.page }}</a>
+          {% endif %}
+        </li>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {# ── Next arrow ──────────────────────────────────────────────────── #}
+    <li class="usa-pagination__item usa-pagination__arrow">
+      {% if not unbounded and currentPage == totalPages %}
+      <span class="usa-pagination__link usa-pagination__next-page usa-pagination__link--disabled" aria-disabled="true">
+        <span class="usa-pagination__link-text{% if hideLinkText %} usa-sr-only{% endif %}">{{ nextLabel }}</span>
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="/img/sprite.svg#navigate_next"></use>
+        </svg>
+      </span>
+      {% else %}
+      <a href="{{ pageUrlPrefix }}{{ currentPage|add:"1" }}"
+         class="usa-pagination__link usa-pagination__next-page"
+         aria-label="{{ nextLabel }} page">
+        <span class="usa-pagination__link-text{% if hideLinkText %} usa-sr-only{% endif %}">{{ nextLabel }}</span>
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="/img/sprite.svg#navigate_next"></use>
+        </svg>
+      </a>
+      {% endif %}
+    </li>
+
+  </ul>
+</nav>
