@@ -35,21 +35,6 @@
     &--align-center { text-align: center; }
     &--align-right  { text-align: right; }
 
-    // Pinned / sticky column
-    &--pin {
-      position: sticky;
-      left: 0;
-      z-index: 1;
-      background-color: var(--usx-table-pin-bg, #fff);
-      border: 1px solid black;
-
-
-      // When inside sticky header, bump z-index so it stays above body pins
-      thead & {
-        z-index: 3;
-      }
-    }
-
     // Selection checkbox / radio column
     &--selection {
       width: 2.5rem;
@@ -60,6 +45,7 @@
     // Detail-toggle column
     &--detail-toggle {
       width: 3rem;
+      min-width: 2rem;
       padding: 0;
     }
   }
@@ -204,6 +190,7 @@
       position: sticky;
       left: 0;
       z-index: 1;
+      box-shadow: 1px 0 0 0 #1b1b1b;
     }
 
     thead th:first-child {

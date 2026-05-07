@@ -222,10 +222,6 @@ export default function Table({
     responsive === 'stack' && 'usa-table--stacked',
     responsive === 'stack-header' && 'usa-table--stacked-header',
     'usx-table',
-    striped && 'usx-table--striped',
-    borderless && 'usx-table--borderless',
-    compact && 'usx-table--compact',
-    stickyHeader && 'usx-table--sticky-header',
     stickyFirstColumn && 'usx-table--sticky-first-col',
     className,
   );
@@ -310,7 +306,6 @@ const ColumnDefShape = PropTypes.shape({
   sortFn: PropTypes.func,
   width: PropTypes.string,
   minWidth: PropTypes.string,
-  pin: PropTypes.bool,
   primary: PropTypes.bool,
   hidden: PropTypes.bool,
   className: PropTypes.string,

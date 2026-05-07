@@ -56,7 +56,6 @@ function DataRow({ row, rowIndex }) { // eslint-disable-line react/prop-types
     handleSelect,
     disabled: disabledKeys,
     responsive,
-    stickyFirstColumn,
     rowDetails,
     toggleRow,
     isRowExpanded,
@@ -100,11 +99,7 @@ function DataRow({ row, rowIndex }) { // eslint-disable-line react/prop-types
   const selectionCell = (
     <td
       key="__selection__"
-      className={classnames(
-        'usx-table__cell',
-        'usx-table__cell--selection',
-        selectionPosition === 'left' && stickyFirstColumn && 'usx-table__cell--pin',
-      )}
+      className="usx-table__cell usx-table__cell--selection"
     >
       <input {...inputProps} />
     </td>
@@ -147,7 +142,6 @@ function DataRow({ row, rowIndex }) { // eslint-disable-line react/prop-types
     const cellClasses = classnames(
       'usx-table__cell',
       col.align && `usx-table__cell--align-${col.align}`,
-      col.pin && 'usx-table__cell--pin',
       col.className,
     );
 

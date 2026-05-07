@@ -138,7 +138,7 @@ export const ScrollableVertical = {
 export const StickyFirstColumn = {
   args: {
     columns: [
-      { key: 'name', header: 'State', primary: true, pin: true },
+      { key: 'name', header: 'State', primary: true },
       ...Array.from({ length: 8 }, (_, i) => ({
         key: `col${i}`,
         header: `Column ${i + 1}`,

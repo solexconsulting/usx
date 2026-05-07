@@ -87,7 +87,6 @@ export default function TableHead({ className = '', children, ...props }) {
     handleSelectAll,
     allowSelectAll,
     rowDetails,
-    stickyFirstColumn,
   } = useTableContext();
 
   // Compound component mode — activated when children are explicitly passed.
@@ -138,11 +137,7 @@ export default function TableHead({ className = '', children, ...props }) {
             <th
               scope="col"
               rowSpan={totalDepth}
-              className={classnames(
-                'usx-table__cell',
-                'usx-table__cell--selection',
-                stickyFirstColumn && 'usx-table__cell--pin',
-              )}
+              className="usx-table__cell usx-table__cell--selection"
             >
               {selectionMode === 'checkbox' && allowSelectAll && (
                 <input
@@ -169,7 +164,6 @@ export default function TableHead({ className = '', children, ...props }) {
               'usx-table__cell',
               col.headerAlign && `usx-table__cell--align-${col.headerAlign}`,
               !col.headerAlign && col.align && `usx-table__cell--align-${col.align}`,
-              col.pin && 'usx-table__cell--pin',
               col.headerClassName,
             );
 

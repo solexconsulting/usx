@@ -50,7 +50,7 @@ export default function TableGroup({
           className="usx-table__group-cell"
         >
           <div
-            className="usa-accordion usx-accordion"
+            className="usa-accordion"
           >
             <h4 className="usa-accordion__heading">
                 <button

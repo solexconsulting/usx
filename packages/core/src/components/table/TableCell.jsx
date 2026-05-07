@@ -14,7 +14,6 @@ export default function TableCell({
   colSpan,
   rowSpan,
   scope,
-  pin = false,
   dataLabel,
   className = '',
   children,
@@ -24,7 +23,6 @@ export default function TableCell({
   const classes = classnames(
     'usx-table__cell',
     resolvedAlign && `usx-table__cell--align-${resolvedAlign}`,
-    pin && 'usx-table__cell--pin',
     className,
   );
 
@@ -49,7 +47,6 @@ TableCell.propTypes = {
   colSpan: PropTypes.number,
   rowSpan: PropTypes.number,
   scope: PropTypes.string,
-  pin: PropTypes.bool,
   dataLabel: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.node,
