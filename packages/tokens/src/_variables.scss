@@ -22,7 +22,7 @@ $color-primary:            #2563eb !default;
 $color-primary-darker:     color.adjust($color-primary, $lightness: -20%) !default;
 $color-primary-darkest:    color.adjust($color-primary, $lightness: -40%) !default;
 $color-primary-lighter:    color.adjust($color-primary, $lightness:  20%) !default;
-$color-primary-lightest:   color.adjust($color-primary, $lightness:  40%) !default;
+$color-primary-lightest:   color.adjust($color-primary, $lightness:  30%) !default;
 $color-primary-hover:      #5f85ec !default;
 $color-primary-active:     #1c3996 !default;
 $color-secondary:          #7c3aed !default;
@@ -332,3 +332,8 @@ $usx-carousel-dot-gap:          0.5rem   !default;
 $usx-sidenav-current-color:       $color-primary                     !default;
 $usx-sidenav-link-color:          null                         !default;
 $usx-sidenav-link-hover-color:    $color-primary               !default;
+
+
+// ── Component tokens: Table ───────────────────────────────────────────
+$usx-table-grouped-row-bg-color: $color-primary-lightest !default;
+$usx-table-grouped-row-text-color: $color-text !default;

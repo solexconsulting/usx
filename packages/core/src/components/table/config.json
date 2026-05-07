@@ -1,11 +1,140 @@
 {
   "name": "table",
   "template": "table/table.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Table"
-  },
+  "default": {},
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "columns": {
+      "type": "array",
+      "description": "Column definitions. Each item: { key, header, render, align, sortable, width, pin, primary, hidden, aggregate, footer, className, headerClassName }."
+    },
+    "data": {
+      "type": "array",
+      "description": "Array of row data objects."
+    },
+    "primaryKey": {
+      "type": "string",
+      "default": "id",
+      "description": "Property name used as the unique row identifier."
+    },
+    "caption": {
+      "type": "string",
+      "description": "Table caption rendered as <caption>."
+    },
+    "striped": {
+      "type": "boolean",
+      "default": false,
+      "description": "Apply alternating row shading (usa-table--striped)."
+    },
+    "borderless": {
+      "type": "boolean",
+      "default": false,
+      "description": "Remove cell borders (usa-table--borderless)."
+    },
+    "compact": {
+      "type": "boolean",
+      "default": false,
+      "description": "Reduce cell padding (usa-table--compact)."
+    },
+    "scrollable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Wrap the table in a horizontally-scrollable container."
+    },
+    "height": {
+      "type": "string",
+      "description": "CSS max-height for vertical scrolling (e.g. '400px')."
+    },
+    "responsive": {
+      "type": "select",
+      "options": ["false", "stack", "stack-header"],
+      "default": "false",
+      "description": "Responsive mode: 'stack' or 'stack-header' for mobile stacking behaviour."
+    },
+    "stickyHeader": {
+      "type": "boolean",
+      "default": false,
+      "description": "Keep the header row visible while scrolling (usa-table--sticky-header)."
+    },
+    "stickyFirstColumn": {
+      "type": "boolean",
+      "default": false,
+      "description": "Sticky-pin the first column on horizontal scroll."
+    },
+    "sortable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable sorting on all columns (individual columns can opt out via column.sortable: false)."
+    },
+    "sort": {
+      "type": "object",
+      "description": "Controlled sort state: { key: string, direction: 'asc' | 'desc' | null }."
+    },
+    "onSort": {
+      "type": "function",
+      "description": "Callback fired when a column header is clicked: ({ key, direction }) => void."
+    },
+    "selectionMode": {
+      "type": "select",
+      "options": ["null", "checkbox", "radio"],
+      "default": "null",
+      "description": "Row selection mode. 'checkbox' enables multi-select; 'radio' enables single-select."
+    },
+    "selectionPosition": {
+      "type": "select",
+      "options": ["left", "right"],
+      "default": "left",
+      "description": "Position of the selection column."
+    },
+    "select": {
+      "type": "array",
+      "description": "Controlled array of selected primary key values."
+    },
+    "onSelect": {
+      "type": "function",
+      "description": "Callback fired when selection changes: (selectedKeys[]) => void."
+    },
+    "allowSelectAll": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show 'select all' checkbox in header (checkbox mode only)."
+    },
+    "disabled": {
+      "type": "array",
+      "description": "Array of primary key values for rows that should be non-interactive."
+    },
+    "onClickRow": {
+      "type": "function",
+      "description": "Callback fired when a row is clicked: (rowData, event) => void."
+    },
+    "groupBy": {
+      "type": "object",
+      "description": "Group rows by a property. String shorthand or object: { property, expand, onExpand, defaultExpanded }."
+    },
+    "rowDetails": {
+      "type": "object",
+      "description": "Enable expandable row detail panels. Function: (row) => ReactNode. Object: { render, expand, onExpand, expandLabel }."
+    },
+    "showFooter": {
+      "type": "boolean",
+      "default": false,
+      "description": "Render a <tfoot> row using column.footer or column.aggregate values."
+    },
+    "paginate": {
+      "type": "object",
+      "description": "Enable pagination. true for client-side; object { pageSize, totalCount, onPageChange } for server-side."
+    },
+    "onMore": {
+      "type": "function",
+      "description": "Infinite scroll callback, called when the last row becomes visible."
+    },
+    "placeholder": {
+      "type": "string",
+      "description": "Content shown when the data array is empty."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes applied to the <table> element."
+    }
   }
 }
