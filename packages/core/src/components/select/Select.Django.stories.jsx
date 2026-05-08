@@ -64,3 +64,17 @@ export const DisabledWithError = createStory({
   disabled: true,
   error: 'This field is disabled due to an error.',
 });
+
+export const DefaultValue = createStory({
+  id: 'select-default-value',
+  label: 'Select with default value',
+  options: sampleOptions,
+  defaultValue: 'option2',
+});
+
+export const WithHint = createStory({
+  id: 'select-with-hint',
+  label: 'Select with hint',
+  options: sampleOptions,
+  hint: 'This is a helpful hint for the select.',
+});

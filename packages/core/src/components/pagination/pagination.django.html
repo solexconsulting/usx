@@ -25,20 +25,22 @@
   <div class="usx-pagination__container">
 
     {# ── Summary (left slot) ───────────────────────────────── #}
-    {% if showSummary %}
-    <div class="usx-pagination__container-summary">
-      {% pagination_summary %}{% endpagination_summary %}
-    </div>
+    {% if totalItems %}
+      {% if showSummary != False and showSummary != "false" %}
+      <div class="usx-pagination__container-summary">
+        {% pagination_summary firstItem=firstItem lastItem=lastItem currentPage=currentPage pageSize=pageSize|default:10 totalItems=totalItems itemLabel=itemLabel|default:"items" %}{% endpagination_summary %}
+      </div>
+      {% endif %}
     {% endif %}
 
     {# ── Nav + step options (right slot) ─────────────────── #}
     <div class="usx-pagination__container-end">
 
-      {% if showStepOptions %}
-      {% pagination_step_options %}{% endpagination_step_options %}
+      {% if showStepOptions != False %}
+      {% pagination_step_options pageSize=pageSize|default:10 pageSizeOptions=pageSizeOptions stepOptionsLabel=stepOptionsLabel|default:"Items per page" stepOptionsId=stepOptionsId|default:"pagination-step-options" %}{% endpagination_step_options %}
       {% endif %}
 
-      {% pagination_navigation %}{% endpagination_navigation %}
+      {% pagination_navigation currentPage=currentPage|default:1 totalPages=totalPages pages=pages unbounded=unbounded arrowsOnly=arrowsOnly prevLabel=prevLabel|default:"Previous" nextLabel=nextLabel|default:"Next" hideLinkText=hideLinkText|default:True ariaLabel=ariaLabel|default:"Pagination" pageUrlPrefix=pageUrlPrefix|default:"?page=" %}{% endpagination_navigation %}
 
     </div>
 

@@ -1,9 +1,7 @@
 {% load components %}
 
 {# Sub-template: pagination step options (items-per-page selector) #}
-{# Props: pageSize, pageSizeOptions (list of ints), stepOptionsLabel, stepOptionsId #}
+{# Props: pageSize, pageSizeOptions (list of ints or {value,label}), stepOptionsLabel, stepOptionsId #}
 <div class="usx-pagination__step-options">
-  {% with id=stepOptionsId label=stepOptionsLabel defaultValue=pageSize options=pageSizeOptions|dictsort:"value" className="usx-pagination__step-options-select" %}
-  {% select id=id label=label defaultValue=defaultValue options=options %}{% endselect %}
-  {% endwith %}
+  {% select id=stepOptionsId|default:'pagination-step-options' label=stepOptionsLabel|default:'Items per page' options=pageSizeOptions defaultValue=pageSize %}{% endselect %}
 </div>

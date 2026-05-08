@@ -58,3 +58,19 @@ export const DisabledWithError = {
     error: 'This field is disabled due to an error.',
   },
 };
+
+export const DefaultValue = {
+  args: {
+    label: 'Select with default value',
+    options: sampleOptions,
+    defaultValue: 'option2',
+  },
+};
+
+export const WithHint = {
+  args: {
+    label: 'Select with hint',
+    options: sampleOptions,
+    hint: 'This is a helpful hint for the select.',
+  },
+};

@@ -1,23 +1,18 @@
 {# Sub-template: pagination navigation bar #}
 {# Props: currentPage, totalPages, pages, unbounded, arrowsOnly, #}
 {#        prevLabel, nextLabel, hideLinkText, ariaLabel, pageUrlPrefix #}
-<nav aria-label="{{ ariaLabel }}" class="usa-pagination usx-pagination__nav">
+<nav aria-label="{{ ariaLabel }}" class="usa-pagination usx-pagination__nav{% if arrowsOnly %} usx-pagination__arrows-only{% endif %}">
   <ul class="usa-pagination__list">
 
     {# ── Previous arrow ──────────────────────────────────────────────── #}
     <li class="usa-pagination__item usa-pagination__arrow">
       {% if currentPage == 1 %}
-      <span class="usa-pagination__link usa-pagination__previous-page usa-pagination__link--disabled" aria-disabled="true">
-        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
-          <use href="/img/sprite.svg#navigate_before"></use>
-        </svg>
-        <span class="usa-pagination__link-text{% if hideLinkText %} usa-sr-only{% endif %}">{{ prevLabel }}</span>
-      </span>
+      {% comment %} Don't render the previous link when on first page per USWDS recommendation {% endcomment %}
       {% else %}
       <a href="{{ pageUrlPrefix }}{{ currentPage|add:"-1" }}"
-         class="usa-pagination__link usa-pagination__previous-page"
+         class="usa-pagination__link usa-pagination__previous-page{% if hideLinkText %} padding-1 margin-0{% endif %}"
          aria-label="{{ prevLabel }} page">
-        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
           <use href="/img/sprite.svg#navigate_before"></use>
         </svg>
         <span class="usa-pagination__link-text{% if hideLinkText %} usa-sr-only{% endif %}">{{ prevLabel }}</span>
@@ -52,18 +47,13 @@
     {# ── Next arrow ──────────────────────────────────────────────────── #}
     <li class="usa-pagination__item usa-pagination__arrow">
       {% if not unbounded and currentPage == totalPages %}
-      <span class="usa-pagination__link usa-pagination__next-page usa-pagination__link--disabled" aria-disabled="true">
-        <span class="usa-pagination__link-text{% if hideLinkText %} usa-sr-only{% endif %}">{{ nextLabel }}</span>
-        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
-          <use href="/img/sprite.svg#navigate_next"></use>
-        </svg>
-      </span>
+      {% comment %} Don't render the next link when on last page per USWDS recommendation {% endcomment %}
       {% else %}
       <a href="{{ pageUrlPrefix }}{{ currentPage|add:"1" }}"
-         class="usa-pagination__link usa-pagination__next-page"
+         class="usa-pagination__link usa-pagination__next-page{% if hideLinkText %} padding-1 margin-0{% endif %}"
          aria-label="{{ nextLabel }} page">
         <span class="usa-pagination__link-text{% if hideLinkText %} usa-sr-only{% endif %}">{{ nextLabel }}</span>
-        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
           <use href="/img/sprite.svg#navigate_next"></use>
         </svg>
       </a>

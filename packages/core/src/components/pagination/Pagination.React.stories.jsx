@@ -8,6 +8,7 @@ export default {
   title: 'React/Pagination',
   component: Pagination,
   tags: ['autodocs'],
+  excludeStories: ['storyDefs'],
   argTypes: {
     totalItems: { control: 'number' },
     initialPage: { control: 'number' },
@@ -21,90 +22,235 @@ export default {
   },
 };
 
-// ── Full component stories ─────────────────────────────────────────────────
+// ── Shared page-item arrays (for Django parity) ───────────────────────────
 
-export const Default = {
-  args: {
+const PAGES_MIDDLE = [
+  { type: 'page', page: 1 },
+  { type: 'ellipsis' },
+  { type: 'page', page: 9 },
+  { type: 'page', page: 10 },
+  { type: 'page', page: 11 },
+  { type: 'ellipsis' },
+  { type: 'page', page: 24 },
+];
+
+const PAGES_NEAR_START = [
+  { type: 'page', page: 1 },
+  { type: 'page', page: 2 },
+  { type: 'page', page: 3 },
+  { type: 'page', page: 4 },
+  { type: 'page', page: 5 },
+  { type: 'ellipsis' },
+  { type: 'page', page: 24 },
+];
+
+const PAGES_NEAR_END = [
+  { type: 'page', page: 1 },
+  { type: 'ellipsis' },
+  { type: 'page', page: 20 },
+  { type: 'page', page: 21 },
+  { type: 'page', page: 22 },
+  { type: 'page', page: 23 },
+  { type: 'page', page: 24 },
+];
+
+const PAGES_FEW = [
+  { type: 'page', page: 1 },
+  { type: 'page', page: 2 },
+  { type: 'page', page: 3 },
+];
+
+const PAGES_UNBOUNDED = [
+  { type: 'page', page: 1 },
+  { type: 'ellipsis' },
+  { type: 'page', page: 4 },
+  { type: 'page', page: 5 },
+  { type: 'page', page: 6 },
+  { type: 'ellipsis' },
+];
+
+// ── Exportable story definitions (reused by Django stories) ───────────────
+
+export const storyDefs = {
+  Default: {
     totalItems: 240,
     initialPage: 10,
     initialPageSize: 10,
+    currentPage: 10,
+    totalPages: 24,
+    pages: PAGES_MIDDLE,
+    pageUrlPrefix: '?page=',
   },
-};
-
-export const Unbounded = {
-  args: {
+  Unbounded: {
     unbounded: true,
     initialPage: 5,
     showSummary: false,
+    currentPage: 5,
+    pages: PAGES_UNBOUNDED,
+    pageUrlPrefix: '?page=',
   },
-};
-
-export const NoStepOptions = {
-  args: {
+  NoStepOptions: {
     totalItems: 100,
     initialPage: 3,
     showStepOptions: false,
     initialPageSize: 10,
+    currentPage: 3,
+    totalPages: 10,
+    pages: PAGES_MIDDLE,
+    pageUrlPrefix: '?page=',
   },
-};
-
-export const NavigationOnly = {
-  args: {
+  NavigationOnly: {
     totalItems: 100,
     initialPage: 5,
     showStepOptions: false,
     showSummary: false,
     initialPageSize: 10,
+    currentPage: 5,
+    totalPages: 10,
+    pages: PAGES_MIDDLE,
+    pageUrlPrefix: '?page=',
   },
-};
-
-export const SpanishLocale = {
-  args: {
+  SpanishLocale: {
     totalItems: 240,
     initialPage: 10,
     initialPageSize: 10,
+    currentPage: 10,
+    totalPages: 24,
+    pages: PAGES_MIDDLE,
+    pageUrlPrefix: '?pagina=',
     ariaLabel: 'Paginación',
     prevLabel: 'Anterior',
     nextLabel: 'Siguiente',
     itemLabel: 'elementos',
+    showSummary: true,
+    firstItem: 91,
+    lastItem: 100,
   },
-};
-
-export const FewPages = {
-  args: {
+  FewPages: {
     totalItems: 25,
     initialPage: 1,
     initialPageSize: 10,
+    currentPage: 1,
+    totalPages: 3,
+    pages: PAGES_FEW,
+    pageUrlPrefix: '?page=',
   },
-};
-
-export const LastPage = {
-  args: {
+  FirstPage: {
+    totalItems: 240,
+    initialPage: 1,
+    initialPageSize: 10,
+    currentPage: 1,
+    totalPages: 24,
+    pages: PAGES_NEAR_START,
+    pageUrlPrefix: '?page=',
+  },
+  LastPage: {
     totalItems: 100,
     initialPage: 10,
     initialPageSize: 10,
+    currentPage: 10,
+    totalPages: 10,
+    pages: PAGES_NEAR_END,
+    pageUrlPrefix: '?page=',
   },
-};
-
-export const ArrowsOnly = {
-  args: {
+  ArrowsOnly: {
     totalItems: 100,
     initialPage: 5,
     initialPageSize: 10,
+    currentPage: 5,
+    totalPages: 10,
+    pages: PAGES_MIDDLE,
+    pageUrlPrefix: '?page=',
     arrowsOnly: true,
   },
-};
-
-export const ArrowsOnlyNoExtras = {
-  name: 'Arrows Only (no summary or step options)',
-  args: {
+  ArrowsOnlyNoExtras: {
     totalItems: 100,
     initialPage: 5,
     initialPageSize: 10,
+    currentPage: 5,
+    totalPages: 10,
+    pages: PAGES_MIDDLE,
+    pageUrlPrefix: '?page=',
     arrowsOnly: true,
     showSummary: false,
     showStepOptions: false,
   },
+  IconOnlyArrows: {
+    totalItems: 240,
+    initialPage: 10,
+    initialPageSize: 10,
+    currentPage: 10,
+    totalPages: 24,
+    pages: PAGES_MIDDLE,
+    pageUrlPrefix: '?page=',
+    hideLinkText: true,
+  },
+  WithSummaryAndStepOptions: {
+    totalItems: 240,
+    initialPage: 10,
+    initialPageSize: 10,
+    currentPage: 10,
+    totalPages: 24,
+    pages: PAGES_MIDDLE,
+    pageUrlPrefix: '?page=',
+    showSummary: true,
+    firstItem: 91,
+    lastItem: 100,
+    showStepOptions: true,
+    pageSize: 10,
+    pageSizeOptions: [10, 25, 50, 100],
+  },
+};
+
+// ── Full component stories ─────────────────────────────────────────────────
+
+export const Default = {
+  args: storyDefs.Default,
+};
+
+export const Unbounded = {
+  args: storyDefs.Unbounded,
+};
+
+export const NoStepOptions = {
+  args: storyDefs.NoStepOptions,
+};
+
+export const NavigationOnly = {
+  args: storyDefs.NavigationOnly,
+};
+
+export const SpanishLocale = {
+  args: storyDefs.SpanishLocale,
+};
+
+export const FewPages = {
+  args: storyDefs.FewPages,
+};
+
+export const FirstPage = {
+  args: storyDefs.FirstPage,
+};
+
+export const LastPage = {
+  args: storyDefs.LastPage,
+};
+
+export const ArrowsOnly = {
+  args: storyDefs.ArrowsOnly,
+};
+
+export const ArrowsOnlyNoExtras = {
+  name: 'Arrows Only (no summary or step options)',
+  args: storyDefs.ArrowsOnlyNoExtras,
+};
+
+export const IconOnlyArrows = {
+  args: storyDefs.IconOnlyArrows,
+};
+
+export const WithSummaryAndStepOptions = {
+  args: storyDefs.WithSummaryAndStepOptions,
 };
 
 // ── Subcomponent stories ───────────────────────────────────────────────────

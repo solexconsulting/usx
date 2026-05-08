@@ -104,10 +104,16 @@
 
     .usa-pagination__arrow {
       display: flex;
-    }
-    .usa-icon {
-      height: 2rem;
-      width: 2rem;
+
+      .usa-pagination__link {
+        padding: .5rem;
+        margin: 0;
+
+        .usa-icon {
+          height: 2rem;
+          width: 2rem;
+        }
+      }
     }
   }
 }

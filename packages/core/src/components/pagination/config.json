@@ -38,7 +38,7 @@
     },
     "hideLinkText": {
       "type": "boolean",
-      "default": false,
+      "default": true,
       "description": "Visually hide prev/next labels (still readable by screen readers)"
     },
     "ariaLabel": {
@@ -53,7 +53,6 @@
     },
     "showSummary": {
       "type": "boolean",
-      "default": false,
       "description": "Show the 'Showing X–Y of Z items' summary"
     },
     "firstItem": {
@@ -77,7 +76,6 @@
     },
     "showStepOptions": {
       "type": "boolean",
-      "default": false,
       "description": "Show the items-per-page selector"
     },
     "pageSize": {

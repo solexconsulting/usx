@@ -1,6 +1,12 @@
 {# Sub-template: pagination summary (e.g. "Showing 1–10 of 100 items") #}
 {# Props: firstItem, lastItem, totalItems, itemLabel #}
+{% with resolvedPage=currentPage|default:1 resolvedPageSize=pageSize|default:10 %}
+{% with previousPages=resolvedPage|add:"-1" %}
+{% widthratio previousPages 1 resolvedPageSize as computedOffset %}
+{% widthratio resolvedPage 1 resolvedPageSize as computedLast %}
 <p class="usa-label usx-label usx-pagination__summary" aria-live="polite" aria-atomic="true">
-  Showing <strong>{{ firstItem }}–{{ lastItem }}</strong>
+  Showing <strong>{% if firstItem %}{{ firstItem }}{% else %}{{ computedOffset|add:"1" }}{% endif %}–{% if lastItem %}{{ lastItem }}{% elif totalItems and computedLast > totalItems %}{{ totalItems }}{% else %}{{ computedLast }}{% endif %}</strong>
   of <strong>{{ totalItems }}</strong> {{ itemLabel }}
 </p>
+{% endwith %}
+{% endwith %}

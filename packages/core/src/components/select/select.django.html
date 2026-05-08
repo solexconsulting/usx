@@ -16,7 +16,9 @@
   >
     <option value="">{{ placeholder|default:'Select an option' }}</option>
     {% for option in options %}
-    <option value="{{ option.value }}" {% if option.value == defaultValue %}selected{% endif %}>{{ option.label }}</option>
+    {% with optionValue=option.value|default:option optionLabel=option.label|default:option %}
+    <option value="{{ optionValue }}" {% if optionValue == defaultValue %}selected{% endif %}>{{ optionLabel }}</option>
+    {% endwith %}
     {% endfor %}
   </select>
   {% if error %}

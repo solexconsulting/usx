@@ -16,5 +16,5 @@
     for="{{ htmlFor }}"
   {% endif %}
 >
-  {% if required %}{% required %}{% endrequired %}{% endif %}{{ children|default:'Label' }}
+  {% if required %}{% required %}{% endrequired %}{% endif %}{% if children %}{{ children }}{% else %}{{ label|default:"" }}{% endif %}
 </label>

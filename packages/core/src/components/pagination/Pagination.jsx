@@ -19,7 +19,7 @@ export default function Pagination({
   nextLabel = 'Next',
   itemLabel = 'items',
   showStepOptions = true,
-  showSummary,
+  showSummary = true,
   hideLinkText = true,
   arrowsOnly = false,
   className = '',
