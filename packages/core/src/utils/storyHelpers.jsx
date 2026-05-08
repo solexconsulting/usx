@@ -9,28 +9,25 @@ export const getComponentHtml = async (componentName, props) => {
     return fetchComponentHtml(componentName, props);
 };
 
-const addLineBreaksToDjangoComponentTag = (tag) => {
-    const selfClosingTagPattern = /{%\s*(\w+)([^%]*)%}/g;
-    return tag.replace(selfClosingTagPattern, (match, componentName, props) => {
-        const formattedProps = props
-            .split(/\s+/)
-            .filter(Boolean)
-            .map(prop => `  ${prop}`)
-            .join('\n');
-        return `{% ${componentName}\n${formattedProps}\n%}`;
-    });
-};
-
 export const componentTag = ({ name, props, children=null }) => {
-    const propsString = Object.entries(props)
+    const formattedProps = Object.entries(props)
         .filter(([, value]) => value !== undefined && value !== null)
-        .map(([key, value]) => ` ${key}=${JSON.stringify(value)}`)
-        .join('');
-    const tag = children
-        ? `{% ${name} ${propsString} %}\n  ${children}\n{% end${name} %}`
-        : `{% ${name} ${propsString} %}{% end${name} %}`;
-    return addLineBreaksToDjangoComponentTag(tag);
-};
+        .map(([key, value]) => {
+            const jsonStr = JSON.stringify(value, null, 4);
+            const lines = jsonStr.split('\n');
+            // Indent continuation lines (first line has prop indent, rest get extra JSON indent)
+            const formatted = lines
+                .map((line, i) => i === 0 ? line : '    ' + line)
+                .join('\n');
+            return `    ${key}=${formatted}`;
+        })
+        .join('\n');
+
+    if (children) {
+        return `{% ${name}\n${formattedProps}\n%}\n  ${children}\n{% end${name} %}`;
+    }
+    return `{% ${name}\n${formattedProps}\n%}{% end${name} %}`;
+}
 
 export const buildArgTypes = (props = {}) => {
     const argTypes = {};
@@ -70,6 +67,10 @@ export const buildArgTypes = (props = {}) => {
 return argTypes;
 };
 
+const getSnakeCase = (str) => {
+    return str.replace(/-/g, '_').toLowerCase();
+};
+
 /**
  * Returns a story factory bound to a Django component name.
  * Call once with the component name, then use the returned function per story.
@@ -83,7 +84,7 @@ export const createDjangoStory = (componentName, postRender=null) => (args) => (
   parameters: {
     docs: {
       source: {
-        code: componentTag({ name: componentName, props: args }),
+        code: componentTag({ name: getSnakeCase(componentName), props: args }),
       },
     },
   },

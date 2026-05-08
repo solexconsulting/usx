@@ -1,7 +1,7 @@
 {# Django template for RadioButtons #}
 {% load components %}
 
-{% fieldset legend="{{ legend }}" required="{{ required }}" %}
+{% fieldset legend=legend required=required %}
   {% for opt in options %}
     <div id="{{ id }}" class="usa-radio usx-radio {% if small %}usx-radio--small{% endif %} {{ className }}">
       <input
