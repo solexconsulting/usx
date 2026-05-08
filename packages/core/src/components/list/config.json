@@ -2,10 +2,27 @@
   "name": "list",
   "template": "list/list.django.html",
   "default": {
-    "children": "NOT IMPLEMENTED: List"
+    "items": [
+      "List item",
+      "List item",
+      "List item"
+    ]
   },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
+    "items": {
+      "type": "object",
+      "description": "Array of list item content. Strings render as simple list items."
+    },
+    "ordered": {
+      "type": "boolean",
+      "default": false,
+      "description": "Render an ordered list using an ol element."
+    },
+    "unstyled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Remove default list styling with usa-list--unstyled."
+    },
     "className": { "type": "string", "description": "Additional classes" }
   }
 }

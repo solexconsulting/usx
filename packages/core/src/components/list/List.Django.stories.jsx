@@ -1,7 +1,7 @@
 import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './List.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -11,14 +11,8 @@ export default {
   argTypes: generatedArgTypes,
 };
 
-export const Default = {
-  args: config.default || {},
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'list', props: config.default || {} })
-      }
-    }
-  },
-  render: djangoComponent('list')
-};
+const createStory = createDjangoStory('list');
+
+export const Default = createStory(storyDefs.Default);
+export const Ordered = createStory(storyDefs.Ordered);
+export const Unstyled = createStory(storyDefs.Unstyled);

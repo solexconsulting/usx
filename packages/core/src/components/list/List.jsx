@@ -2,16 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './list.scss';
 
-export default function List({ children = null, className = '', ...props }) {
-  const classes = ['usx-list', className].filter(Boolean).join(' ');
+export default function List({ items = [], ordered = false, unstyled = false, className = '', ...props }) {
+  const classes = ['usa-list', 'usx-list', unstyled && 'usa-list--unstyled', className].filter(Boolean).join(' ');
+  const Tag = ordered ? 'ol' : 'ul';
+
   return (
-    <div className={classes} {...props}>
-      {children || 'List'}
-    </div>
+    <Tag className={classes} {...props}>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </Tag>
   );
 }
 
 List.propTypes = {
-  children: PropTypes.node,
+  items: PropTypes.arrayOf(PropTypes.node),
+  ordered: PropTypes.bool,
+  unstyled: PropTypes.bool,
   className: PropTypes.string,
 };

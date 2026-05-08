@@ -1,0 +1,41 @@
+{
+  "name": "icon-list",
+  "template": "icon-list/icon-list.django.html",
+  "default": {
+    "items": [
+      {
+        "iconName": "check_circle",
+        "iconColor": "green",
+        "content": "Wash your hands for 20 seconds with soap"
+      },
+      {
+        "iconName": "check_circle",
+        "iconColor": "green",
+        "content": "Stay six feet away from others"
+      },
+      {
+        "iconName": "cancel",
+        "iconColor": "red",
+        "content": "Avoid large gatherings"
+      }
+    ]
+  },
+  "props": {
+    "items": {
+      "type": "object",
+      "description": "Array of icon list item objects. Each item supports iconName, iconColor, iconSize, title, content, and optional class names."
+    },
+    "primary": {
+      "type": "boolean",
+      "default": false,
+      "description": "Adds the usa-icon-list--primary modifier."
+    },
+    "size": {
+      "type": "select",
+      "options": [null, "lg"],
+      "default": null,
+      "description": "Optional list size modifier. Use lg for usa-icon-list--size-lg."
+    },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

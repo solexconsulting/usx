@@ -9,15 +9,28 @@ export const getComponentHtml = async (componentName, props) => {
     return fetchComponentHtml(componentName, props);
 };
 
+const addLineBreaksToDjangoComponentTag = (tag) => {
+    const selfClosingTagPattern = /{%\s*(\w+)([^%]*)%}/g;
+    return tag.replace(selfClosingTagPattern, (match, componentName, props) => {
+        const formattedProps = props
+            .split(/\s+/)
+            .filter(Boolean)
+            .map(prop => `  ${prop}`)
+            .join('\n');
+        return `{% ${componentName}\n${formattedProps}\n%}`;
+    });
+};
+
 export const componentTag = ({ name, props, children=null }) => {
     const propsString = Object.entries(props)
-        .map(([key, value]) => ` ${key}="${value}"`)
+        .filter(([, value]) => value !== undefined && value !== null)
+        .map(([key, value]) => ` ${key}=${JSON.stringify(value)}`)
         .join('');
-    if (children) {
-        return `{% ${name} ${propsString} %}\n  ${children}\n{% end${name} %}`;
-    }
-    return `{% ${name} ${propsString} %}`;
-}
+    const tag = children
+        ? `{% ${name} ${propsString} %}\n  ${children}\n{% end${name} %}`
+        : `{% ${name} ${propsString} %}{% end${name} %}`;
+    return addLineBreaksToDjangoComponentTag(tag);
+};
 
 export const buildArgTypes = (props = {}) => {
     const argTypes = {};

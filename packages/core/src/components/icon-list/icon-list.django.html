@@ -1,0 +1,17 @@
+{% load components %}
+
+<ul class="usa-icon-list usx-icon-list{% if primary %} usa-icon-list--primary{% endif %}{% if size == 'lg' %} usa-icon-list--size-lg{% endif %}{% if className %} {{ className }}{% endif %}">
+  {% for item in items %}
+    <li class="usa-icon-list__item{% if item.itemClassName %} {{ item.itemClassName }}{% endif %}">
+      <div class="usa-icon-list__icon{% if item.iconColor %} text-{{ item.iconColor }}{% endif %}{% if item.iconClassName %} {{ item.iconClassName }}{% endif %}">
+        {% icon name=item.iconName color=item.iconColor size=item.iconSize className=item.iconClassName %}{% endicon %}
+      </div>
+      <div class="usa-icon-list__content{% if item.contentClassName %} {{ item.contentClassName }}{% endif %}">
+        {% if item.title %}
+          <h4 class="usa-icon-list__title">{{ item.title }}</h4>
+        {% endif %}
+        {{ item.content|safe }}
+      </div>
+    </li>
+  {% endfor %}
+</ul>

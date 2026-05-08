@@ -41,6 +41,7 @@ export { default as FormGroup } from './components/form-group';
 export { default as Header } from './components/header';
 export { default as Hero } from './components/hero';
 export { default as Icon } from './components/icon';
+export { default as IconList } from './components/icon-list';
 export { default as Identifier } from './components/identifier';
 export { default as Image } from './components/image';
 export { default as InPageNav } from './components/in-page-nav';
