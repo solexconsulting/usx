@@ -24,5 +24,13 @@ export default {
     <script>fetch('./env-config.js').then(r=>r.ok&&r.text()).then(t=>t&&new Function(t)()).catch(()=>{})</script>
     <script src="./js/uswds-init.min.js"></script>
     <script src="./js/uswds.min.js" defer></script>
+    <script>
+      console.log('USX Storybook: USWDS JS initialized');
+      const handleTableSort = (colKey) => {
+        console.log('Sorting by column:', colKey);
+        // Use alert to imply functionality since we don't have a real data source in Storybook
+        alert("Sorting by column: " + colKey);
+      };
+    </script>
   `
 };

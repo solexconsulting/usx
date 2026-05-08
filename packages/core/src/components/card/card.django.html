@@ -9,11 +9,11 @@
       {% endif %}
       {% if images and images|length > 1 %}
         <div class="usa-card__media{% if mediaInset %} usa-card__media--inset{% endif %}{% if mediaExdent %} usa-card__media--exdent{% endif %}">
-          {% include 'carousel/carousel.django.html' with slides=images id=id|default:'card'|add:'-carousel' showDots=showCarouselDots|default:True className='' only %}
+          {% carousel slides=images id=id|default:'card'|add:'-carousel' showDots=showCarouselDots|default:True className='' %}{% endcarousel %}
         </div>
       {% elif images and images.0 %}
         <div class="usa-card__media{% if mediaInset %} usa-card__media--inset{% endif %}{% if mediaExdent %} usa-card__media--exdent{% endif %}">
-          {% include 'image/image.django.html' with src=images.0.src alt=images.0.alt hideCaption=True className='usa-card__img' only %}
+          {% image src=images.0.src alt=images.0.alt hideCaption=True className='usa-card__img' %}{% endimage %}
         </div>
       {% endif %}
       <div class="usa-card__body">
@@ -30,7 +30,7 @@
       </div>
       {% if actions %}
         <div class="usa-card__footer">
-          {% include 'button-group/button-group.django.html' with items=actions only %}
+          {% button_group items=actions %}{% endbutton_group %}
         </div>
       {% endif %}
     {% else %}

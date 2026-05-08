@@ -1,0 +1,85 @@
+{% load static components %}
+{# ─── USX Table Head ──────────────────────────────────────────────────────────── #}
+{# Props (all passed via {% include ... with ... %}): #}
+{# header_rows list[list[dict]] from build_header_rows() #}
+{# total_depth int len(header_rows) #}
+{# sort dict {'key': ..., 'direction': 'asc'|'desc'} #}
+{# onSort str|None JS function name for controlled sort; #}
+{# if set, button calls window[onSort](key) #}
+{# and USWDS enhances sortable headers #}
+{# selectionMode 'checkbox'|'radio'|None #}
+{# selectionPosition 'left'|'right' #}
+{# rowDetails truthy when row-detail column is needed #}
+{# stickyFirstColumn bool #}
+{# ──────────────────────────────────────────────────────────────────────────────── #}
+
+{% with depth=total_depth|default:1 %}
+<thead class="usx-table__head">
+
+    {% for row in header_rows %}
+    <tr class="usx-table__head-row">
+
+        {# ── Row-detail expand column (first header row only) ───────────────── #}
+        {% if rowDetails and forloop.first %}
+        <th scope="col" {% if depth > 1 %}rowspan="{{ depth }}"{% endif %}
+            class="usx-table__cell usx-table__cell--detail-toggle"
+            aria-label="Row details">
+        </th>
+        {% endif %}
+
+        {# ── Selection column left (first header row only) ──────────────────── #}
+        {% if selectionMode and selectionMode != "null" and selectionPosition != 'right' and forloop.first %}
+        <th scope="col" {% if depth > 1 %}rowspan="{{ depth }}"{% endif %}
+            class="usx-table__cell usx-table__cell--selection">
+            {# select-all intentionally omitted — no JS; individual rows still work #}
+        </th>
+        {% endif %}
+
+        {# ── Data columns ────────────────────────────────────────────────────── #}
+        {% for cell in row %}
+        {% with col=cell.col %}
+        {% with sortable=col.sortable|default:False %}
+        {% with sort_dir=col.sort_direction|default:None %}
+
+        <th scope="col" role="columnheader"
+            class="usx-table__cell{% if col.headerAlign %} usx-table__cell--align-{{ col.headerAlign }}{% elif col.align %} usx-table__cell--align-{{ col.align }}{% endif %}{% if col.headerClassName %} {{ col.headerClassName }}{% endif %}"
+            {% if cell.row_span > 1 %}rowspan="{{ cell.row_span }}"{% endif %}
+            {% if cell.col_span > 1 %}colspan="{{ cell.col_span }}"{% endif %}
+            {% if col.width %}style="width: {{ col.width }}"{% endif %}
+            {% if sortable %}data-sortable{% endif %}
+        >
+            {% if onSort %}
+                {# Controlled mode: call the named JS function with the column key #}
+                <button type="button"
+                    class="usx-table__sort-button{% if sort_dir %} usx-table__sort-button--active{% endif %}"
+                    onclick="{{ onSort }}('{{ col.key }}')">
+                    {{ col.header }}
+                    {% if sort_dir == 'asc' %}
+                        {% icon name='arrow_upward' ariaHidden=True %}{% endicon %}
+                    {% elif sort_dir == 'desc' %}
+                        {% icon name='arrow_downward' ariaHidden=True %}{% endicon %}
+                    {% else %}
+                        {% icon name='sort_arrow' ariaHidden=True %}{% endicon %}
+                    {% endif %}
+                </button>
+            {% else %}
+                {# USWDS uncontrolled mode: plain text only; USWDS injects button/icon #}
+                {{ col.header }}
+            {% endif %}
+        </th>
+
+        {% endwith %}{% endwith %}{% endwith %}
+        {% endfor %}
+
+        {# ── Selection column right (first header row only) ─────────────────── #}
+        {% if selectionMode and selectionMode != "null" and selectionPosition == 'right' and forloop.first %}
+        <th scope="col" {% if depth > 1 %}rowspan="{{ depth }}"{% endif %}
+            class="usx-table__cell usx-table__cell--selection">
+        </th>
+        {% endif %}
+
+    </tr>
+    {% endfor %}
+
+</thead>
+{% endwith %}

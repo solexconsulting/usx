@@ -8,7 +8,7 @@
       {% endif %}
       {% if item.calendarDate %}
         {% with datetime=item.calendarDate %}
-          {% include "calendar-date/calendar-date.django.html" with datetime=datetime under_collection=True only%}
+          {% calendar_date datetime=datetime under_collection=True %}{% endcalendar_date %}
         {% endwith %}
       {% endif %}
       <div class="usa-collection__body">

@@ -1,3 +1,5 @@
+{% load components %}
+
 {# Django template for Pagination #}
 {# ─────────────────────────────────────────────────────────── #}
 {# Required props:                                             #}
@@ -25,7 +27,7 @@
     {# ── Summary (left slot) ───────────────────────────────── #}
     {% if showSummary %}
     <div class="usx-pagination__container-summary">
-      {% include "pagination/summary/pagination-summary.django.html" %}
+      {% pagination_summary %}{% endpagination_summary %}
     </div>
     {% endif %}
 
@@ -33,10 +35,10 @@
     <div class="usx-pagination__container-end">
 
       {% if showStepOptions %}
-      {% include "pagination/step-options/pagination-step-options.django.html" %}
+      {% pagination_step_options %}{% endpagination_step_options %}
       {% endif %}
 
-      {% include "pagination/navigation/pagination-navigation.django.html" %}
+      {% pagination_navigation %}{% endpagination_navigation %}
 
     </div>
 

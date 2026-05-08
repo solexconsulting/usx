@@ -1,0 +1,98 @@
+{% load static components %}
+{# ─── USX Table Row ───────────────────────────────────────────────────────────── #}
+{# Props (passed via {% include ... with ... %}):                                 #}
+{#   row              dict              the data row                              #}
+{#   rowIndex         int               0-based row index                         #}
+{#   leaf_columns     list[dict]        visible leaf column definitions           #}
+{#   total_cols       int               total column count                        #}
+{#   primaryKey       str               default 'id'                              #}
+{#   select           list              selected primary-key values               #}
+{#   disabled         list              disabled primary-key values               #}
+{#   selectionMode    'checkbox'|'radio'|None                                     #}
+{#   selectionPosition 'left'|'right'                                             #}
+{#   onClickRow       truthy when rows are navigable                              #}
+{#   rowUrlField      str               row dict key for the navigation URL       #}
+{#   rowDetails       truthy when row-detail toggle column is present             #}
+{#   rowDetailTemplate str|None         path to partial template for detail       #}
+{#   rowDetailField   str|None          row dict key for inline detail content    #}
+{#   expandedRows     list              primary-key values with detail open       #}
+{#   responsive       'stack'|'stack-header'|False                               #}
+{# ──────────────────────────────────────────────────────────────────────────────── #}
+
+{% with pk=row.id|default:"" %}
+{# ── Data row ────────────────────────────────────────────────────────────── #}
+<tr class="usx-table__row{% if pk in select %} usx-table__row--selected{% endif %}{% if pk in disabled %} usx-table__row--disabled{% endif %}{% if onClickRow and not pk in disabled %} usx-table__row--clickable{% endif %}">
+
+  {# ── Row detail toggle cell ─────────────────────────────────────────────── #}
+  {% if rowDetails and rowDetails != "null" %}
+  <td class="usx-table__cell usx-table__cell--detail-toggle">
+    <details class="usx-table__detail-disclosure"{% if pk in expandedRows %} open{% endif %}>
+      <summary class="usx-table__detail-toggle" aria-controls="row-detail-{{ pk }}-panel">
+        {% icon name='expand_more' className='usx-table__detail-icon' %}{% endicon %}
+        <span class="usa-sr-only">Toggle row details</span>
+      </summary>
+    </details>
+  </td>
+  {% endif %}
+
+  {# ── Selection cell (left) ──────────────────────────────────────────────── #}
+  {% if selectionMode and selectionMode != "null" and selectionPosition != 'right' %}
+  <td class="usx-table__cell usx-table__cell--selection">
+    <input
+      type="{{ selectionMode|default:'checkbox' }}"
+      class="{% if selectionMode == 'radio' %}usx-table__radio{% else %}usx-table__checkbox{% endif %}"
+      name="table-select{% if selectionMode == 'radio' %}-row{% endif %}"
+      value="{{ pk }}"
+      {% if pk in select %}checked{% endif %}
+      {% if pk in disabled %}disabled{% endif %}
+      aria-label="Select row {{ rowIndex|add:1 }}"
+    >
+  </td>
+  {% endif %}
+
+  {# ── Data cells ─────────────────────────────────────────────────────────── #}
+  {% for col in leaf_columns %}
+  {% if col.primary %}
+  <th scope="row"
+      class="usx-table__cell{% if col.align %} usx-table__cell--align-{{ col.align }}{% endif %}{% if col.className %} {{ col.className }}{% endif %}"
+      {% if col.width %}style="width: {{ col.width }}"{% endif %}
+      {% if responsive == 'stack' or responsive == 'stack-header' and col.header %}data-label="{{ col.stackLabel|default:col.header }}"{% endif %}
+  >
+    {% for rk, rv in row.items %}{% if rk == col.key %}{{ rv }}{% endif %}{% endfor %}
+  </th>
+  {% else %}
+  <td class="usx-table__cell{% if col.align %} usx-table__cell--align-{{ col.align }}{% endif %}{% if col.className %} {{ col.className }}{% endif %}"
+      {% if col.width %}style="width: {{ col.width }}"{% endif %}
+      {% if responsive == 'stack' or responsive == 'stack-header' and col.header %}data-label="{{ col.stackLabel|default:col.header }}"{% endif %}
+  >{% for rk, rv in row.items %}{% if rk == col.key %}{{ rv }}{% endif %}{% endfor %}</td>
+  {% endif %}
+  {% endfor %}{# /leaf_columns #}
+
+  {# ── Selection cell (right) ─────────────────────────────────────────────── #}
+  {% if selectionMode and selectionMode != "null" and selectionPosition == 'right' %}
+  <td class="usx-table__cell usx-table__cell--selection">
+    <input
+      type="{{ selectionMode|default:'checkbox' }}"
+      class="{% if selectionMode == 'radio' %}usx-table__radio{% else %}usx-table__checkbox{% endif %}"
+      name="table-select{% if selectionMode == 'radio' %}-row{% endif %}"
+      value="{{ pk }}"
+      {% if pk in select %}checked{% endif %}
+      {% if pk in disabled %}disabled{% endif %}
+      aria-label="Select row {{ rowIndex|add:1 }}"
+    >
+  </td>
+  {% endif %}
+
+</tr>
+
+{# ── Detail row (expands below; <details> open state controls visibility) ── #}
+{% if rowDetails and rowDetails != "null" %}
+<tr id="row-detail-{{ pk }}-panel" class="usx-table__detail-row">
+  <td colspan="{{ total_cols|default:1 }}" class="usx-table__detail-cell">
+      {% if rowDetailField %}
+        {% for rk, rv in row.items %}{% if rk == rowDetailField %}{{ rv }}{% endif %}{% endfor %}
+      {% endif %}
+  </td>
+</tr>
+{% endif %}
+{% endwith %}

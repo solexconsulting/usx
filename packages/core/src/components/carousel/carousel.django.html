@@ -1,3 +1,5 @@
+{% load components %}
+
 {# Django template for Carousel #}
 <div class="usx-carousel {{ className|default:'' }}">
   <div class="usx-carousel__viewport" tabindex="-1" role="region" aria-roledescription="carousel" aria-label="{{ ariaLabel|default:'Featured content' }}">
@@ -8,7 +10,7 @@
               {% if slide.content %}
                 {{ slide.content|safe }}
               {% elif slide.src %}
-                {% include 'image/image.django.html' with src=slide.src alt=slide.alt caption=slide.caption hideCaption=True objectFit=slide.objectFit className=slide.className %}
+                {% image src=slide.src alt=slide.alt caption=slide.caption hideCaption=True objectFit=slide.objectFit className=slide.className %}{% endimage %}
               {% else %}
                 {# Fallback: render the slide object/string directly #}
                 {{ slide|safe }}

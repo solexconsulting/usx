@@ -1,4 +1,60 @@
-{# Django template for Table #}
-<div class="usx-table">
-  <div class="table__content">Table</div>
+{% load static components %}
+{# ─── USX Table ───────────────────────────────────────────────────────────────── #}
+{#                                                                               #}
+{# Primary props (same contract as React Table):                                 #}
+{#   columns, data, primaryKey, caption, striped, borderless, compact,           #}
+{#   scrollable, height, responsive, stickyHeader, stickyFirstColumn,            #}
+{#   selectionMode, selectionPosition, select, disabled, onClickRow,             #}
+{#   rowDetails, showFooter, paginate, placeholder, loading, className           #}
+{#                                                                               #}
+{# Django-only props (pre-computed by view via table_helper):                    #}
+{#   header_rows     — output of build_header_rows(columns)                     #}
+{#   leaf_columns    — output of get_leaf_cols(columns)                         #}
+{#   total_cols      — output of total_col_count(...)                           #}
+{#   total_depth     — len(header_rows)                                         #}
+{#   sort            — {'key': ..., 'direction': 'asc'|'desc'|None}             #}
+{#   groups          — output of group_data() when groupBy is set               #}
+{#   footerValues    — output of compute_footer() when showFooter is True       #}
+{#   expandedRows    — list of primary-key values with detail open              #}
+{#   rowDetailTemplate — path to a partial template for detail content          #}
+{#   rowDetailField  — row dict key whose value is used as detail content       #}
+{#   rowUrlField     — row dict key whose value is the navigation URL           #}
+{#   paginateUrlPrefix — URL prefix for pagination links (default '?page=')    #}
+{#   pagination      — {'current_page', 'total_pages', 'total', 'page_size'}    #}
+{# ─────────────────────────────────────────────────────────────────────────── #}
+
+{# ── Scrollable wrapper ──────────────────────────────────────────────────── #}
+{% if scrollable|default:False or height %}
+<div class="usa-table-container--scrollable usx-table-container--scrollable"
+     tabindex="0"
+     {% if height %}style="max-height: {{ height }}; overflow: auto;"{% endif %}>
+{% endif %}
+
+<table id="{{ id }}" class="usa-table usx-table{% if striped|default:False %} usa-table--striped{% endif %}{% if borderless|default:False %} usa-table--borderless{% endif %}{% if compact|default:False %} usa-table--compact{% endif %}{% if stickyHeader|default:False %} usa-table--sticky-header{% endif %}{% if responsive == 'stack' %} usa-table--stacked{% endif %}{% if responsive == 'stack-header' %} usa-table--stacked-header{% endif %}{% if stickyFirstColumn|default:False %} usx-table--sticky-first-col{% endif %}{% if className %} {{ className }}{% endif %}"
+>
+  {% if caption %}
+  <caption class="usx-table__caption">{{ caption }}</caption>
+  {% endif %}
+
+  {% table_head tableId=id header_rows=header_rows total_depth=total_depth sort=sort onSort=onSort selectionMode=selectionMode|default:None selectionPosition=selectionPosition|default:"left" rowDetails=rowDetails stickyFirstColumn=stickyFirstColumn|default:False %}{% endtable_head %}
+
+  {% table_body tableId=id data=data groups=groups leaf_columns=leaf_columns total_cols=total_cols primaryKey=primaryKey|default:"id" select=select|default:"" disabled=disabled|default:"" selectionMode=selectionMode|default:None selectionPosition=selectionPosition|default:"left" onClickRow=onClickRow rowUrlField=rowUrlField rowDetails=rowDetails rowDetailTemplate=rowDetailTemplate rowDetailField=rowDetailField expandedRows=expandedRows responsive=responsive|default:False placeholder=placeholder loading=loading defaultExpanded=defaultExpanded %}{% endtable_body %}
+
+  {% if showFooter %}
+  {% table_foot tableId=id leaf_columns=leaf_columns footerValues=footerValues selectionMode=selectionMode|default:None rowDetails=rowDetails %}{% endtable_foot %}
+  {% endif %}
+
+</table>
+
+{# USWDS sort announcement region — required for uncontrolled sort accessibility #}
+<div class="usa-sr-only usa-table__announcement-region" aria-live="polite"></div>
+
+{% if scrollable|default:False or height %}</div>{% endif %}
+
+{# ── Pagination ─────────────────────────────────────────────────────────── #}
+{% if paginate and pagination %}
+<div class="usx-table__pagination">
+  {% pagination currentPage=pagination.current_page totalPages=pagination.total_pages pages=pagination.pages pageUrlPrefix=paginateUrlPrefix|default:"?page=" %}{% endpagination %}
 </div>
+{% endif %}
+

@@ -1,0 +1,40 @@
+{% load static components %}
+{# ─── USX Table Group ─────────────────────────────────────────────────────────── #}
+{# Props (passed via {% include ... with ... %}):                                 #}
+{#   tableId          str               used for aria-controls in group toggles   #}
+{#   groupKey         str               unique group identifier string            #}
+{#   label            str               display label for the group header        #}
+{#   rows             list[dict]        data rows belonging to this group         #}
+{#   defaultExpanded  bool              whether group starts expanded (default T) #}
+{#   total_cols       int               colspan for group header cell             #}
+{#   (plus all table-row.django.html props forwarded below)                      #}
+{# ──────────────────────────────────────────────────────────────────────────────── #}
+
+{% with expanded=defaultExpanded|default_bool:True %}
+<tbody class="usx-table__group usx-table__group--header">
+  {# ── Group subheader row (always visible) ──────────────────────────────── #}
+  <tr class="usx-table__group-row">
+    <td colspan="{{ total_cols|default:1 }}" class="usx-table__group-cell">
+      {# USWDS accordion button — driven by USWDS JS already on the page #}
+      <div class="usa-accordion">
+        <h4 class="usa-accordion__heading">
+          <button
+            type="button"
+            class="usa-accordion__button usx-table__group-toggle"
+            aria-expanded="{{ expanded|yesno:'true,false' }}"
+            aria-controls="{{ tableId }}-group-{{ groupKey }}-content"
+          >{{ label }}</button>
+        </h4>
+      </div>
+    </td>
+  </tr>
+</tbody>
+
+<tbody class="usx-table__group usx-table__group--content" id="{{ tableId }}-group-{{ groupKey }}-content" {% if not expanded %}hidden{% endif %}>
+  {# ── Child rows (direct rows in main table, no nested table) ───────────── #}
+  {% for row in rows %}
+    {% table_row row=row rowIndex=forloop.counter0 leaf_columns=leaf_columns total_cols=total_cols primaryKey=primaryKey select=select disabled=disabled selectionMode=selectionMode selectionPosition=selectionPosition onClickRow=onClickRow rowUrlField=rowUrlField rowDetails=rowDetails rowDetailTemplate=rowDetailTemplate rowDetailField=rowDetailField expandedRows=expandedRows responsive=responsive %}{% endtable_row %}
+  {% endfor %}
+</tbody>
+
+{% endwith %}

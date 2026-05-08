@@ -1,0 +1,68 @@
+{# ─── USX Table Body ──────────────────────────────────────────────────────────── #}
+{# Props (passed via {% include ... with ... %}):                                 #}
+{#   tableId          str               used for aria-controls in group toggles   #}
+{#   data             list[dict]        rows to render (flat mode)                #}
+{#   groups           list[dict]|None   {'key', 'rows'} list (grouped mode)       #}
+{#   leaf_columns     list[dict]        output of get_leaf_cols()                 #}
+{#   total_cols       int               total columns including aux               #}
+{#   primaryKey       str               default 'id'                              #}
+{#   select           list              selected primary-key values               #}
+{#   disabled         list              disabled primary-key values               #}
+{#   selectionMode    'checkbox'|'radio'|None                                     #}
+{#   selectionPosition 'left'|'right'                                             #}
+{#   onClickRow       truthy when rows are clickable                              #}
+{#   rowUrlField      str               row dict key for click navigation URL     #}
+{#   rowDetails       truthy when row-detail column is present                   #}
+{#   rowDetailTemplate str|None         path to a partial detail template         #}
+{#   rowDetailField   str|None          row dict key for inline detail content    #}
+{#   expandedRows     list              primary keys whose detail rows are open   #}
+{#   responsive       'stack'|'stack-header'|False                               #}
+{#   placeholder      str|None          shown when data is empty                  #}
+{#   loading          bool              show spinner row                          #}
+{# ──────────────────────────────────────────────────────────────────────────────── #}
+{% load static components %}
+
+{# ── Grouped mode: render one <tbody> per group (no nested tables) ───────── #}
+{% if groups %}
+  {% for group in groups %}
+    {% table_group tableId=tableId groupKey=group.key label=group.key rows=group.rows leaf_columns=leaf_columns total_cols=total_cols primaryKey=primaryKey select=select disabled=disabled selectionMode=selectionMode selectionPosition=selectionPosition onClickRow=onClickRow rowUrlField=rowUrlField rowDetails=rowDetails rowDetailTemplate=rowDetailTemplate rowDetailField=rowDetailField expandedRows=expandedRows responsive=responsive defaultExpanded=defaultExpanded %}{% endtable_group %}
+  {% endfor %}
+
+  {% if loading %}
+  <tbody class="usx-table__body usx-table__body--loading">
+    <tr class="usx-table__loading-row" aria-live="polite">
+      <td class="usx-table__loading-cell" colspan="{{ total_cols|default:1 }}">
+        {% spinner label="Loading more rows…" size=3 %}{% endspinner %}
+      </td>
+    </tr>
+  </tbody>
+  {% endif %}
+
+{# ── Flat / empty mode: single tbody ─────────────────────────────────────── #}
+{% else %}
+<tbody class="usx-table__body">
+
+  {% if not data %}
+    {% if placeholder %}
+    <tr class="usx-table__placeholder-row">
+      <td class="usx-table__placeholder-cell" colspan="{{ total_cols|default:1 }}">
+        {{ placeholder }}
+      </td>
+    </tr>
+    {% endif %}
+  {% else %}
+    {% for row in data %}
+      {% table_row row=row rowIndex=forloop.counter0 leaf_columns=leaf_columns total_cols=total_cols primaryKey=primaryKey select=select disabled=disabled selectionMode=selectionMode selectionPosition=selectionPosition onClickRow=onClickRow rowUrlField=rowUrlField rowDetails=rowDetails rowDetailTemplate=rowDetailTemplate rowDetailField=rowDetailField expandedRows=expandedRows responsive=responsive %}{% endtable_row %}
+    {% endfor %}
+  {% endif %}
+
+  {% if loading %}
+  <tr class="usx-table__loading-row" aria-live="polite">
+    <td class="usx-table__loading-cell" colspan="{{ total_cols|default:1 }}">
+      {% spinner label="Loading more rows…" size=3 %}{% endspinner %}
+    </td>
+  </tr>
+  {% endif %}
+
+</tbody>
+{% endif %}

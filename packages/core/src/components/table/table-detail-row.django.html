@@ -1,0 +1,14 @@
+{% load components %}
+{# ─── USX Table Detail Row ────────────────────────────────────────────────────── #}
+{# Standalone partial for row-detail content.                                     #}
+{# Normally included from table-row.django.html, but can also be pointed to      #}
+{# via rowDetailTemplate from a parent view for fully custom detail markup.       #}
+{#                                                                                #}
+{# Props available in scope:                                                      #}
+{#   row              dict    the data row                                        #}
+{#   rowDetailField   str     key in `row` whose value is the detail content      #}
+{# ──────────────────────────────────────────────────────────────────────────────── #}
+
+{% if rowDetailField %}
+	{% for rk, rv in row.items %}{% if rk == rowDetailField %}{{ rv }}{% endif %}{% endfor %}
+{% endif %}

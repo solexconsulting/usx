@@ -141,10 +141,18 @@ def _discover_template_only_components(template_dirs: Iterable[str], extra_paths
             if not cfg.exists():
                 continue
             tpl_file = None
-            for f in child.iterdir():
-                if f.suffix == ".html" and "django" in f.name:
-                    tpl_file = f.name
-                    break
+
+            # Prefer the canonical template naming convention:
+            #   <component-name>.django.html
+            preferred_name = f"{child.name}.django.html"
+            preferred_path = child / preferred_name
+            if preferred_path.exists() and preferred_path.is_file():
+                tpl_file = preferred_name
+            else:
+                for f in child.iterdir():
+                    if f.suffix == ".html" and "django" in f.name:
+                        tpl_file = f.name
+                        break
             if not tpl_file:
                 continue
             comp_name = child.name

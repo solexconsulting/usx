@@ -23,7 +23,7 @@
           </p>
         </div>
         <div class="usa-modal__footer">
-          {% include 'button-group/button-group.django.html' with items=actions only %}
+          {% button_group items=actions %}{% endbutton_group %}
         </div>
       </div>
       {% if not forceAction %}

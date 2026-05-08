@@ -1,6 +1,6 @@
 {% load components %}
 <ul class="usa-card-group usx-card-group{% if className %} {{ className }}{% endif %}">
   {% for card in cards %}
-    {% include 'card/card.django.html' with tag='li' title=card.title description=card.description footer=card.footer actions=card.actions images=card.images flag=card.flag mediaRight=card.mediaRight headerFirst=card.headerFirst className=card.className only %}
+    {% card tag='li' title=card.title description=card.description footer=card.footer actions=card.actions images=card.images flag=card.flag mediaRight=card.mediaRight headerFirst=card.headerFirst className=card.className %}{% endcard %}
   {% endfor %}
 </ul>

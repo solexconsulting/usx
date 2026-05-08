@@ -64,6 +64,7 @@ const simulateLoading = (element, html) => {
       cancelable: true,
     }),
   );
+
 };
 
 /**
@@ -127,12 +128,18 @@ export function djangoComponent(componentName, postRender=null) {
     }, [JSON.stringify(props)]); // Depend on serialized props to avoid unnecessary re-renders
 
     useEffect(() => {
+      let cleanup;
       if (html && containerRef.current) {
         simulateLoading(containerRef.current, html);
+        if (postRender) {
+          cleanup = postRender(containerRef.current);
+        }
       }
-      if (postRender) {
-        postRender();
-      }
+      return () => {
+        if (typeof cleanup === 'function') {
+          cleanup();
+        }
+      };
     }, [html]);
 
     if (error) {

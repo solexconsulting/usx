@@ -2,7 +2,7 @@
 {% if error %}
 <div class="usa-form-group usx-form-group usa-form-group--error">
 {% endif %}
-  {% include "label/label.django.html" with htmlFor=id label=label required=required|default:False %}
+  {% label htmlFor=id label=label required=required|default:False %}{% endlabel %}
   {% if hint %}
   <span id="{{ id }}-hint" class="usa-hint">{{ hint }}</span>
   {% endif %}

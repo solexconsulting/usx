@@ -3,6 +3,10 @@
   "template": "table/table.django.html",
   "default": {},
   "props": {
+    "id": {
+      "type": "string",
+      "description": "ID for the <table> element. Required for accessibility when using sticky headers or scrollable tables."
+    },
     "columns": {
       "type": "array",
       "description": "Column definitions. Each item: { key, header, render, align, sortable, width, pin, primary, hidden, aggregate, footer, className, headerClassName }."
@@ -135,6 +139,71 @@
       "type": "string",
       "default": "",
       "description": "Additional CSS classes applied to the <table> element."
+    },
+    "header_rows": {
+      "type": "array",
+      "default": null,
+      "description": "Django only. Pre-computed header row structure from table_helper.build_header_rows(columns). Required for rendering; compute in the view and pass as context."
+    },
+    "leaf_columns": {
+      "type": "array",
+      "default": null,
+      "description": "Django only. Flat list of leaf (non-parent) columns from table_helper.get_leaf_cols(columns). Required for body and footer rendering."
+    },
+    "total_cols": {
+      "type": "number",
+      "default": null,
+      "description": "Django only. Total column count including aux columns (selection, detail). From table_helper.total_col_count()."
+    },
+    "total_depth": {
+      "type": "number",
+      "default": 1,
+      "description": "Django only. Number of header levels; len(header_rows). Required for rowspan calculations."
+    },
+    "groups": {
+      "type": "array",
+      "default": null,
+      "description": "Django only. Pre-grouped data from table_helper.group_data(data, field). Required when groupBy is set."
+    },
+    "defaultExpanded": {
+      "type": "boolean",
+      "default": true,
+      "description": "Django only. Whether grouped rows start expanded. Defaults to true. Pass false to render all groups collapsed."
+    },
+    "footerValues": {
+      "type": "object",
+      "default": null,
+      "description": "Django only. Pre-computed footer values dict from table_helper.compute_footer(columns, data). Required when showFooter is True."
+    },
+    "expandedRows": {
+      "type": "array",
+      "default": [],
+      "description": "Django only. List of primary-key values whose detail rows are open on initial render. Mirrors the React rowDetails.expand controlled prop."
+    },
+    "rowDetailTemplate": {
+      "type": "string",
+      "default": null,
+      "description": "Django only. Path to a Django partial template rendered as row-detail content (replaces React rowDetails.render)."
+    },
+    "rowDetailField": {
+      "type": "string",
+      "default": null,
+      "description": "Django only. Key in each row dict whose value is used as inline row-detail content (simpler alternative to rowDetailTemplate)."
+    },
+    "rowUrlField": {
+      "type": "string",
+      "default": null,
+      "description": "Django only. Key in each row dict holding the navigation URL for clickable rows (replaces React onClickRow). The block-link CSS pattern is used; no JS required."
+    },
+    "paginateUrlPrefix": {
+      "type": "string",
+      "default": "?page=",
+      "description": "Django only. URL prefix for pagination page links, forwarded to the pagination sub-template."
+    },
+    "pagination": {
+      "type": "object",
+      "default": null,
+      "description": "Django only. Pagination state dict from table_helper.paginate_table(): {current_page, total_pages, total, page_size}. Required when paginate is True."
     }
   }
 }

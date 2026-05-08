@@ -136,13 +136,28 @@
   }
 
   // ── Expandable row details ────────────────────────────────────────────────────
+  .usx-table__detail-disclosure {
+    display: block;
+    height: 100%;
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::marker {
+      content: '';
+    }
+  }
+
   .usx-table__detail-toggle {
     padding: 0;
     cursor: pointer;
     color: inherit;
-    height: 100%;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    align-content: center;
+    height: 100%;
+    list-style: none;
 
     &:focus {
       outline-offset: -.125rem;
@@ -172,6 +187,24 @@
     text-align: center;
     padding: 1rem;
     border: none;
+  }
+
+  // ── Row detail toggle button (Django) ───────────────────────────────────────
+  .usx-table__detail-toggle .usx-table__detail-icon {
+    transition: transform 120ms ease-in-out;
+  }
+
+  .usx-table__detail-disclosure[open] .usx-table__detail-icon {
+    transform: rotate(180deg);
+  }
+
+  // No-JS row details: reveal the adjacent detail row when disclosure is open.
+  .usx-table__detail-row {
+    display: none;
+  }
+
+  .usx-table__row:has(.usx-table__detail-disclosure[open]) + .usx-table__detail-row {
+    display: table-row;
   }
 
   // ── Sentinel (IntersectionObserver anchor for onMore) ─────────────────────────
