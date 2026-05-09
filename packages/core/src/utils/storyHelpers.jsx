@@ -9,25 +9,42 @@ export const getComponentHtml = async (componentName, props) => {
     return fetchComponentHtml(componentName, props);
 };
 
-export const componentTag = ({ name, props, children=null }) => {
-    const formattedProps = Object.entries(props)
-        .filter(([, value]) => value !== undefined && value !== null)
+export const getFormattedProps = (props) => {
+    return Object.entries(props)
+        .filter(([key, value]) =>
+            value !== undefined &&
+            value !== null &&
+            key !== 'children'
+        )
         .map(([key, value]) => {
-            const jsonStr = JSON.stringify(value, null, 4);
-            const lines = jsonStr.split('\n');
-            // Indent continuation lines (first line has prop indent, rest get extra JSON indent)
-            const formatted = lines
-                .map((line, i) => i === 0 ? line : '    ' + line)
-                .join('\n');
-            return `    ${key}=${formatted}`;
+            return `    ${key}=${JSON.stringify(value, null, 4)}`;
         })
         .join('\n');
+};
 
-    if (children) {
-        return `{% ${name}\n${formattedProps}\n%}\n  ${children}\n{% end${name} %}`;
+export const componentTag = ({ name, props, children = null }) => {
+    const formattedProps = getFormattedProps(props);
+    const hasProps = formattedProps.length > 0;
+    const content = children || props.children;
+
+    const componentName = getSnakeCase(name);
+    
+    let openTag = `{% ${componentName}`;
+
+    if (hasProps) {
+        openTag += `\n${formattedProps}\n%}`;
+    } else {
+        openTag += ` %}`;
     }
-    return `{% ${name}\n${formattedProps}\n%}{% end${name} %}`;
-}
+
+    if (content) {
+        return `${openTag}
+  ${content}
+{% end${componentName} %}`;
+    }
+
+    return `${openTag}{% end${componentName} %}`;
+};
 
 export const buildArgTypes = (props = {}) => {
     const argTypes = {};
@@ -84,7 +101,7 @@ export const createDjangoStory = (componentName, postRender=null) => (args) => (
   parameters: {
     docs: {
       source: {
-        code: componentTag({ name: getSnakeCase(componentName), props: args }),
+        code: componentTag({ name: componentName, props: args }),
       },
     },
   },
