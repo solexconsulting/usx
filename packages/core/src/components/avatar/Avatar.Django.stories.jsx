@@ -10,5 +10,13 @@ export default {
 };
 
 const createStory = createDjangoStory('avatar');
+const allowedPropNames = new Set(Object.keys(config.props || {}));
+const toDjangoArgs = (args) => Object.fromEntries(
+  Object.entries(args).filter(([key]) => allowedPropNames.has(key))
+);
 
-export const Default = createStory(storyDefs.Default);
+export const BasicAvatar = createStory(toDjangoArgs(storyDefs.BasicAvatar));
+export const CircleAvatar = createStory(toDjangoArgs(storyDefs.CircleAvatar));
+export const MediumRoundedAvatar = createStory(toDjangoArgs(storyDefs.MediumRoundedAvatar));
+export const LargeRoundedAvatar = createStory(toDjangoArgs(storyDefs.LargeRoundedAvatar));
+export const AvatarWithTooltip = createStory(toDjangoArgs(storyDefs.AvatarWithTooltip));

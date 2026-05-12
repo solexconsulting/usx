@@ -1,4 +1,19 @@
 {# Django template for Avatar #}
-<div class="usx-avatar">
-  <div class="avatar__content">Avatar</div>
-</div>
+
+{% if tooltip %}
+<span class="usx-tooltip">
+{% endif %}
+
+<a href="{{ href|default:'#' }}" class="usa-identifier__logo usx-avatar{% if className %} {{ className }}{% endif %}">
+  <img
+    class="usa-identifier__logo-img{% if shape == 'circle' %} usx-circle{% elif shape == 'rounded-md' %} usx-rounded-md{% elif shape == 'rounded-lg' %} usx-rounded-lg{% endif %}{% if imageClassName %} {{ imageClassName }}{% endif %}"
+    src="{{ src }}"
+    alt="{{ alt }}"
+    role="img"
+  />
+</a>
+
+{% if tooltip %}
+  <span class="usa-tooltip__body usa-tooltip__body--right" role="tooltip">{{ tooltip }}</span>
+</span>
+{% endif %}

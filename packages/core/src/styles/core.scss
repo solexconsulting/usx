@@ -1,7 +1,8 @@
 // AUTO-GENERATED-SCSS START
 @use '../components/accordion/accordion';
 @use '../components/alert/alert';
-@use '../components/avatar/avatar';
+// @use '../components/avatar/avatar'; <-- No styles
+@use '../components/avatar-group/avatar-group';
 @use '../components/back-to-top/back-to-top';
 @use '../components/banner/banner';
 @use '../components/branding/branding';
@@ -64,6 +65,7 @@
 @use '../components/time-picker/time-picker';
 @use '../components/toggle/toggle';
 @use '../components/tooltip/tooltip';
+@use '../components/utilities/utilities';
 // AUTO-GENERATED-SCSS END
 
 // MANUAL-SCSS START

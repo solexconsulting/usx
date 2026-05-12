@@ -1,0 +1,29 @@
+{
+  "name": "avatar-group",
+  "template": "avatar-group/avatar-group.django.html",
+  "default": {
+    "avatars": [
+      {
+        "href": "https://google.com/search?q=George+Washington",
+        "src": "./george_washington.png",
+        "alt": "George Washington"
+      },
+      {
+        "href": "https://google.com/search?q=Thomas+Jefferson",
+        "src": "./thomas_jefferson.png",
+        "alt": "Thomas Jefferson"
+      },
+      {
+        "href": "https://google.com/search?q=Benjamin+Franklin",
+        "src": "./benjamin_franklin.png",
+        "alt": "Benjamin Franklin"
+      }
+    ]
+  },
+  "props": {
+    "avatars": { "type": "object", "description": "Array of avatar objects with href, src, alt, optional shape, and optional tooltip." },
+    "overlap": { "type": "boolean", "description": "When true, avatars overlap each other in the group." },
+    "stacked": { "type": "boolean", "description": "When true, avatars are stacked vertically." },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

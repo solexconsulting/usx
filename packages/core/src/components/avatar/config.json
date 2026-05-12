@@ -2,10 +2,21 @@
   "name": "avatar",
   "template": "avatar/avatar.django.html",
   "default": {
-    "children": "NOT IMPLEMENTED: Avatar"
+    "href": "https://google.com/search?q=Statue+of+Liberty",
+    "src": "./lady_liberty.png",
+    "alt": "Statue of Liberty"
   },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "href": { "type": "string", "description": "Link target for the avatar image." },
+    "src": { "type": "string", "description": "Image source URL for the avatar." },
+    "alt": { "type": "string", "description": "Accessible alt text for the avatar image." },
+    "shape": {
+      "type": "select",
+      "options": ["circle", "rounded-md", "rounded-lg"],
+      "description": "Optional shape utility for the avatar image."
+    },
+    "tooltip": { "type": "string", "description": "Optional tooltip text displayed on hover." },
+    "className": { "type": "string", "description": "Additional classes for the avatar link element." },
+    "imageClassName": { "type": "string", "description": "Additional classes for the avatar image element." }
   }
 }

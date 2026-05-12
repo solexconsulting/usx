@@ -18,6 +18,7 @@ $breakpoint-tablet:  640px !default;
 $breakpoint-desktop: 1024px !default;
 
 // ── Color — primitives ──────────────────────────────────────────────────────
+$color-light:              #ffffff !default;
 $color-primary:            #2563eb !default;
 $color-primary-darker:     color.adjust($color-primary, $lightness: -20%) !default;
 $color-primary-darkest:    color.adjust($color-primary, $lightness: -40%) !default;
@@ -44,7 +45,7 @@ $color-success:            #2e8540 !default;
 $color-error:              null      !default;
 $color-emergency:          #b51d09 !default;
 $color-background:         #f8fafc !default;
-$color-surface:            #ffffff !default;
+$color-surface:            $color-light !default;
 $color-dark-bg:            color.adjust($color-primary, $lightness: -50%) !default;
 
 
@@ -55,7 +56,7 @@ $color-accent-warm-light:  color.adjust($color-accent-warm, $lightness: 20%) !de
 
 // ── Color — text ────────────────────────────────────────────────────────────
 $color-text:           #0f172a !default;
-$color-light-text:     #ffffff !default;
+$color-light-text:     $color-light !default;
 $color-info-text:      null !default;
 $color-warning-text:   null !default;
 $color-success-text:   null !default;
@@ -134,7 +135,7 @@ $r-sm:   0.25rem !default;
 $r-md:   0.5rem  !default;
 $r-lg:   1.0rem  !default;
 $r-xl:   2.0rem  !default;
-$r-full: 9999px  !default;
+$r-full: 100%    !default;
 
 // ── Border ───────────────────────────────────────────────────────────────────
 $border-width-thin:  1px !default;

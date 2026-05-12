@@ -1,0 +1,27 @@
+@use '../../../../tokens/src/_variables' as *;
+
+
+.usx-rounded-sm {
+    border-radius: $r-sm;
+    overflow: clip;
+}
+
+.usx-rounded-md {
+    border-radius: $r-md;
+    overflow: clip;
+}
+
+.usx-rounded-lg {
+    border-radius: $r-lg;
+    overflow: clip;
+}
+
+.usx-rounded-xl {
+    border-radius: $r-xl;
+    overflow: clip;
+}
+
+.usx-circle {
+    border-radius: $r-full;
+    overflow: clip;
+}

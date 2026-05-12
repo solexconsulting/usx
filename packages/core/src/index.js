@@ -21,6 +21,7 @@ EXCLUDE: ExamplePages
 export { default as Accordion } from './components/accordion';
 export { default as Alert } from './components/alert';
 export { default as Avatar } from './components/avatar';
+export { default as AvatarGroup } from './components/avatar-group';
 export { default as BackToTop } from './components/back-to-top';
 export { default as Banner } from './components/banner';
 export { default as Branding } from './components/branding';
@@ -84,7 +85,9 @@ export { default as TextArea } from './components/text-area';
 export { default as TimePicker } from './components/time-picker';
 export { default as Toggle } from './components/toggle';
 export { default as Tooltip } from './components/tooltip';
+export { default as Utilities } from './components/utilities';
 // AUTO-GENERATED-EXPORTS END
+
 
 
 
