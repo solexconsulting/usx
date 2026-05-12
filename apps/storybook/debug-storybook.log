@@ -1,0 +1,24 @@
+[04:19:00.947] [INFO] storybook v10.3.6
+[04:19:02.001] [DEBUG] Getting package.json info for /home/olsonap/code/solex-usx/package.json...
+[04:19:02.071] [WARN] --host is set to 0.0.0.0 but no allowedHosts are defined. Allowing all hosts.
+To restrict allowed hosts, set core.allowedHosts in your main Storybook config.
+See: https://storybook.js.org/docs/api/main-config/main-config-core
+[04:19:03.995] [DEBUG] Serving static files from [36mnode_modules/@uswds/uswds/dist[39m at [36m/[39m
+[04:19:03.996] [DEBUG] Serving static files from [36mapps/storybook/static[39m at [36m/[39m
+[04:19:03.996] [INFO] Starting...
+[04:19:04.832] [WARN] Unexpected usage of "storyName" in "CustomComposition". Please use "name" instead.
+[04:19:05.701] [ERROR] [38;2;241;97;97mError: Build failed with 2 errors:
+.storybook/manager.js:1:23: ERROR: Could not resolve "@storybook/manager-api"
+.storybook/solexTheme.js:1:23: ERROR: Could not resolve "@storybook/theming"[39m
+    at failureErrorWithLog (/home/olsonap/code/solex-usx/node_modules/.pnpm/esbuild@0.27.7/node_modules/esbuild/lib/main.js:1748:15)
+    at /home/olsonap/code/solex-usx/node_modules/.pnpm/esbuild@0.27.7/node_modules/esbuild/lib/main.js:1207:25
+    at runOnEndCallbacks (/home/olsonap/code/solex-usx/node_modules/.pnpm/esbuild@0.27.7/node_modules/esbuild/lib/main.js:1588:45)
+    at buildResponseToResult (/home/olsonap/code/solex-usx/node_modules/.pnpm/esbuild@0.27.7/node_modules/esbuild/lib/main.js:1205:7)
+    at /home/olsonap/code/solex-usx/node_modules/.pnpm/esbuild@0.27.7/node_modules/esbuild/lib/main.js:1232:16
+    at responseCallbacks.<computed> (/home/olsonap/code/solex-usx/node_modules/.pnpm/esbuild@0.27.7/node_modules/esbuild/lib/main.js:884:9)
+    at handleIncomingPacket (/home/olsonap/code/solex-usx/node_modules/.pnpm/esbuild@0.27.7/node_modules/esbuild/lib/main.js:939:12)
+    at Socket.readFromStdout (/home/olsonap/code/solex-usx/node_modules/.pnpm/esbuild@0.27.7/node_modules/esbuild/lib/main.js:862:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:563:12)
+[04:19:05.707] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.

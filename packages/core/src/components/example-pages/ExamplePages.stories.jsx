@@ -943,7 +943,7 @@ export const SettingsPage = {
       <Layout
         variant="grid"
         content={
-          <div className="padding-x-4 margin-top-3">
+          <div className="margin-top-3">
             <h2>Profile Settings</h2>
             <Alert
               type="success"
