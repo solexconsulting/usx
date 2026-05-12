@@ -1,4 +1,99 @@
 {# Django template for Identifier #}
-<div class="usx-identifier">
-  <div class="identifier__content">Identifier</div>
+
+<div class="usa-identifier usx-identifier{% if className %} {{ className }}{% endif %}">
+  <section
+    class="usa-identifier__section usa-identifier__section--masthead"
+    aria-label="{% if language == 'es' %}Identificador de la agencia,{% else %}Agency identifier,{% endif %}"
+  >
+    <div class="usa-identifier__container">
+      {% if logos %}
+      <div class="usa-identifier__logos usx-avatar-group{% if overlapAvatars %} usa-avatar-group--overlap{% endif %}">
+        {% for logo in logos %}
+          <a href="{{ logo.href|default:'' }}" class="usa-identifier__logo usx-avatar">
+            <img
+              class="usa-identifier__logo-img{% if logo.shape == 'circle' or logoShape == 'circle' and not logo.shape %} usx-circle{% elif logo.shape == 'rounded-sm' or logoShape == 'rounded-sm' and not logo.shape %} usx-rounded-sm{% elif logo.shape == 'rounded-md' or logoShape == 'rounded-md' and not logo.shape %} usx-rounded-md{% elif logo.shape == 'rounded-lg' or logoShape == 'rounded-lg' and not logo.shape %} usx-rounded-lg{% elif logo.shape == 'rounded-xl' or logoShape == 'rounded-xl' and not logo.shape %} usx-rounded-xl{% endif %}{% if logo.imageClassName %} {{ logo.imageClassName }}{% endif %}"
+              src="{{ logo.src }}"
+              alt="{{ logo.alt }}"
+              role="img"
+            />
+          </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <section
+        class="usa-identifier__identity"
+        aria-label="{% if language == 'es' %}Descripcion de la agencia,{% else %}Agency description,{% endif %}"
+      >
+        <p class="usa-identifier__identity-domain">{{ domain|default:'domain.gov' }}</p>
+        <p class="usa-identifier__identity-disclaimer">
+          {% if language == 'es' %}
+            Un sitio web oficial de
+            {% for agency in parentAgencies %}
+              {% if not forloop.first %} y{% endif %}
+              <a href="{{ agency.href|default:'' }}">{{ agency.name }}</a>
+            {% endfor %}
+            {% if taxpayerDisclaimer %} . Producido y publicado con dinero de los contribuyentes de impuestos.{% endif %}
+          {% else %}
+            <span aria-hidden="true">An </span>official website of the
+            {% for agency in parentAgencies %}
+              {% if not forloop.first %}{% if forloop.last %} and the{% else %}, the{% endif %}{% endif %}
+              <a href="{{ agency.href|default:'' }}">{{ agency.name }}</a>
+            {% endfor %}
+            {% if taxpayerDisclaimer %} . Produced and published at taxpayer expense.{% endif %}
+          {% endif %}
+        </p>
+      </section>
+    </div>
+  </section>
+
+  <nav
+    class="usa-identifier__section usa-identifier__section--required-links"
+    aria-label="{% if language == 'es' %}Enlaces importantes,{% else %}Important links,{% endif %}"
+  >
+    <div class="usa-identifier__container">
+      <ul class="usa-identifier__required-links-list">
+        {% for link in requiredLinks %}
+          <li class="usa-identifier__required-links-item">
+            <a href="{{ link.href|default:'' }}" class="usa-identifier__required-link usa-link">
+              {{ link.label|default:link }}
+            </a>
+          </li>
+        {% empty %}
+          {% if language == 'es' %}
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">Acerca de &lt;Parent shortname&gt;</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">Declaracion de accesibilidad</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">Solicitud a traves de FOIA</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">Datos de la ley No FEAR</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">Oficina del Inspector General</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">Informes de desempeno</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">Politica de privacidad</a></li>
+          {% else %}
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">About &lt;Parent shortname&gt;</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">Accessibility statement</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">FOIA requests</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">No FEAR Act data</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">Office of the Inspector General</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">Performance reports</a></li>
+            <li class="usa-identifier__required-links-item"><a href="" class="usa-identifier__required-link usa-link">Privacy policy</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+
+  <section
+    class="usa-identifier__section usa-identifier__section--usagov"
+    aria-label="{% if language == 'es' %}Informacion y servicios del Gobierno de EE. UU.,{% else %}U.S. government information and services,{% endif %}"
+  >
+    <div class="usa-identifier__container">
+      {% if language == 'es' %}
+        <div class="usa-identifier__usagov-description">Necesita informacion y servicios del Gobierno?</div>
+        <a href="https://www.usa.gov/es/" class="usa-link">Visite USAGov en Espanol</a>
+      {% else %}
+        <div class="usa-identifier__usagov-description">Looking for U.S. government information and services?</div>
+        <a href="https://www.usa.gov/" class="usa-link">Visit USA.gov</a>
+      {% endif %}
+    </div>
+  </section>
 </div>

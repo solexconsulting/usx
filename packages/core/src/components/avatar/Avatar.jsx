@@ -5,8 +5,10 @@ import './avatar.scss';
 
 const shapeClassMap = {
   circle: 'usx-circle',
+  'rounded-sm': 'usx-rounded-sm',
   'rounded-md': 'usx-rounded-md',
   'rounded-lg': 'usx-rounded-lg',
+  'rounded-xl': 'usx-rounded-xl',
 };
 
 export default function Avatar({
@@ -50,7 +52,7 @@ Avatar.propTypes = {
   href: PropTypes.string,
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
-  shape: PropTypes.oneOf([null, 'circle', 'rounded-md', 'rounded-lg']),
+  shape: PropTypes.oneOf([null, 'circle', 'rounded-sm', 'rounded-md', 'rounded-lg', 'rounded-xl']),
   tooltip: PropTypes.string,
   className: PropTypes.string,
   imageClassName: PropTypes.string,

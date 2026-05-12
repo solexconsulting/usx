@@ -5,10 +5,33 @@
   align-items: center;
   gap: 0.5rem;
 
-  &.usa-avatar-group--overlap:not(.usa-avatar-group--stacked) {
+  &.usa-avatar-group--overlap {
+  
+    &:not(.usa-avatar-group--stacked) {
 
-    .usx-avatar:not(:first-child) {
-      margin-left: -1.5rem;
+      .usx-avatar:not(:first-child) {
+        margin-left: -1.5rem;
+
+        @if $usx-avatar-group-overlap-size {
+          margin-left: -$usx-avatar-group-overlap-size;
+        }
+      }
+    }
+
+    .usx-avatar {
+
+      &:hover {
+        z-index: 1;
+
+        img {
+          box-shadow: 0 0 2px 0 $color-light;
+
+          @if $usx-avatar-group-overlap-box-shadow {
+            box-shadow: $usx-avatar-group-overlap-box-shadow;
+          }
+        }
+      }
+      
     }
   }
 
@@ -26,13 +49,5 @@
 
   .usx-avatar {
     margin: 0;
-
-    &:hover {
-      z-index: 1;
-
-      img {
-        box-shadow: 0 0 2px 2px $color-light;
-      }
-    }
   }
 }

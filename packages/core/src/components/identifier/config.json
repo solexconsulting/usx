@@ -2,10 +2,65 @@
   "name": "identifier",
   "template": "identifier/identifier.django.html",
   "default": {
-    "children": "NOT IMPLEMENTED: Identifier"
+    "domain": "domain.gov",
+    "language": "en",
+    "parentAgencies": [
+      {
+        "name": "<Parent agency>",
+        "href": ""
+      }
+    ],
+    "logos": [
+      {
+        "href": "",
+        "src": "./lady_liberty.png",
+        "alt": "Statue of Liberty"
+      }
+    ],
+    "requiredLinks": [
+      { "href": "", "label": "About <Parent shortname>" },
+      { "href": "", "label": "Accessibility statement" },
+      { "href": "", "label": "FOIA requests" },
+      { "href": "", "label": "No FEAR Act data" },
+      { "href": "", "label": "Office of the Inspector General" },
+      { "href": "", "label": "Performance reports" },
+      { "href": "", "label": "Privacy policy" }
+    ],
+    "taxpayerDisclaimer": false,
+    "overlapAvatars": false
   },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
+    "domain": { "type": "string", "description": "Agency domain displayed in the identifier." },
+    "language": {
+      "type": "select",
+      "options": ["en", "es"],
+      "description": "Language for labels and helper text."
+    },
+    "parentAgencies": {
+      "type": "object",
+      "description": "Array of parent agency links used in the disclaimer."
+    },
+    "logos": {
+      "type": "object",
+      "description": "Array of avatar-style logos. Each item supports: src, alt, href, shape ('circle'|'rounded-sm'|'rounded-md'|'rounded-lg'|'rounded-xl'), and imageClassName."
+    },
+    "requiredLinks": {
+      "type": "object",
+      "description": "Array of required footer links."
+    },
+    "taxpayerDisclaimer": {
+      "type": "boolean",
+      "description": "Appends the taxpayer disclaimer sentence to the identity disclaimer."
+    },
+    "overlapAvatars": {
+      "type": "boolean",
+      "description": "Apply overlap styling to avatar logos."
+    },
+    "logoShape": {
+      "type": "select",
+      "options": [null, "circle", "rounded-sm", "rounded-md", "rounded-lg", "rounded-xl"],
+      "description": "Default shape applied to all logos. Per-logo shape field takes precedence."
+    },
     "className": { "type": "string", "description": "Additional classes" }
   }
 }

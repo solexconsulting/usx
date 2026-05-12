@@ -193,6 +193,10 @@ $usx-button-outline-color-hover: $color-primary-hover !default;
 $usx-button-outline-color-active: $color-primary-active !default;
 $usx-button-outline-box-shadow: 0 0 0 2px currentColor inset !default;
 
+// ── Component tokens: Avatar Group ───────────────────────────────────────────
+$usx-avatar-group-overlap-size: 1rem !default;
+$usx-avatar-group-overlap-box-shadow: 0 0 2px 1px $color-light !default;
+
 // ── Component tokens: Button Group ───────────────────────────────────────────
 $usx-button-group-segmented-divider-primary:    1px solid color.adjust($color-primary, $lightness: -20%) !default;
 $usx-button-group-segmented-divider-secondary:  1px solid color.adjust($color-secondary, $lightness: -20%) !default;
