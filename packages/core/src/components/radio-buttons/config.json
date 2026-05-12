@@ -2,11 +2,13 @@
   "name": "radio-buttons",
   "template": "radio-buttons/radio-buttons.django.html",
   "props": {
+    "id": { "type": "string", "description": "Base ID for the radio group. Each radio's ID will be this base plus the option's id or index." },
     "tile": { "type": "boolean", "description": "Render each radio as a tile when true" },
     "small": { "type": "boolean", "description": "Render compact/small radios when true" },
     "legend": { "type": "string", "description": "Legend text for the fieldset" },
     "required": { "type": "boolean", "description": "Whether the fieldset is required" },
     "name": { "type": "string", "description": "Name attribute for the radio inputs" },
+    "defaultValue": { "type": "string", "description": "Value of the option to be selected by default" },
     "options": { "type": "array", "description": "Array of option objects: {id, value, label, description, checked, disabled}" },
     "className": { "type": "string", "description": "Additional classes to apply to the wrapper" }
   }

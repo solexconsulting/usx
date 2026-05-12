@@ -5,15 +5,48 @@ import { buildArgTypes } from '../../utils/storyHelpers';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
+
+const defaultList = {
+  items: [
+    "List item",
+    "List item",
+    "List item"
+  ]
+};
+
 export const storyDefs = {
-  Default: config.default || {},
+  Default: defaultList,
   Ordered: {
-    ...(config.default || {}),
+    ...defaultList,
     ordered: true,
   },
   Unstyled: {
-    ...(config.default || {}),
+    ...defaultList,
     unstyled: true,
+  },
+  Nested: {
+    items: [
+      'Main point',
+      {
+        content: 'Program requirements',
+        children: [
+          'Submit application',
+          {
+            content: 'Provide supporting documents',
+            children: [
+              'Photo identification',
+              'Proof of address',
+              {
+                content: 'Income documents',
+                ordered: true,
+                children: ['Recent pay stubs', 'Most recent tax return'],
+              },
+            ],
+          },
+        ],
+      },
+      'Final confirmation',
+    ],
   },
 };
 
@@ -35,3 +68,6 @@ Ordered.args = storyDefs.Ordered;
 
 export const Unstyled = Template.bind({});
 Unstyled.args = storyDefs.Unstyled;
+
+export const Nested = Template.bind({});
+Nested.args = storyDefs.Nested;

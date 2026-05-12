@@ -2,6 +2,10 @@
     "name": "accordion",
     "template": "accordion/accordion.django.html",
     "props": {
+        "id": {
+            "type": "string",
+            "description": "Base ID for the accordion. Each item's ID will be this base plus the item's index."
+        },
         "bordered": {
             "type": "boolean",
             "default": false,

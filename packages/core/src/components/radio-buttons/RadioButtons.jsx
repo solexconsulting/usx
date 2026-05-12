@@ -12,6 +12,7 @@ export default function RadioButtons({
   required = false,
   name = 'radio-group',
   options = null,
+  defaultValue = null,
   className = '',
   ...props
 }) {
@@ -40,7 +41,7 @@ export default function RadioButtons({
               type="radio"
               name={name}
               value={opt.value}
-              defaultChecked={!!opt.checked}
+              defaultChecked={defaultValue === opt.value || !!opt.checked}
               disabled={!!opt.disabled}
             />
             <Label className="usa-radio__label" classOverride={true} htmlFor={id}>
@@ -60,6 +61,7 @@ RadioButtons.propTypes = {
   name: PropTypes.string,
   legend: PropTypes.string,
   required: PropTypes.bool,
+  defaultValue: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.object),
   className: PropTypes.string,
 };

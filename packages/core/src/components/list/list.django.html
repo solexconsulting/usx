@@ -2,14 +2,10 @@
 
 {% if ordered %}
 <ol class="usa-list usx-list{% if unstyled %} usa-list--unstyled{% endif %}{% if className %} {{ className }}{% endif %}">
-  {% for item in items %}
-    <li>{{ item }}</li>
-  {% endfor %}
+  {% include "list/_list-items.django.html" with items=items ordered=ordered unstyled=unstyled only %}
 </ol>
 {% else %}
 <ul class="usa-list usx-list{% if unstyled %} usa-list--unstyled{% endif %}{% if className %} {{ className }}{% endif %}">
-  {% for item in items %}
-    <li>{{ item }}</li>
-  {% endfor %}
+  {% include "list/_list-items.django.html" with items=items ordered=ordered unstyled=unstyled only %}
 </ul>
 {% endif %}

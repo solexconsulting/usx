@@ -131,6 +131,11 @@
       "type": "function",
       "description": "Infinite scroll callback, called when the last row becomes visible."
     },
+    "loading": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show a loading state overlay. Does not affect interactivity."
+    },
     "placeholder": {
       "type": "string",
       "description": "Content shown when the data array is empty."

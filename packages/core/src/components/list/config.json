@@ -1,17 +1,10 @@
 {
   "name": "list",
   "template": "list/list.django.html",
-  "default": {
-    "items": [
-      "List item",
-      "List item",
-      "List item"
-    ]
-  },
   "props": {
     "items": {
       "type": "object",
-      "description": "Array of list item content. Strings render as simple list items."
+      "description": "Array of list items. A string renders a simple item. Objects can include content and children for nested lists of any depth; optional ordered/unstyled/className customize nested lists."
     },
     "ordered": {
       "type": "boolean",

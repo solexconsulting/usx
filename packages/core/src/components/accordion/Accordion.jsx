@@ -84,6 +84,7 @@ AccordionItem.propTypes = {
 }
 
 Accordion.propTypes = {
+    id: PropTypes.string,
     bordered: PropTypes.bool,
     items: PropTypes.arrayOf(
         AccordionItem.propTypes
@@ -94,6 +95,7 @@ Accordion.propTypes = {
 };
 
 export function Accordion({
+    id,
     bordered = false,
     items = [],
     multiselectable = false,
@@ -137,6 +139,7 @@ export function Accordion({
 
     return (
         <div
+            id={id}
             className={accordionClasses}
             data-allow-multiple={multiselectable}
             {...props}

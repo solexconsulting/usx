@@ -467,3 +467,59 @@ export const BigUnstyled = {
     variant: 'unstyled',
   }
 };
+
+export const storyDefs = {
+  Default: Default.args,
+  DefaultHover: DefaultHover.args,
+  DefaultActive: DefaultActive.args,
+  DefaultFocus: DefaultFocus.args,
+  DefaultDisabled: DefaultDisabled.args,
+  DefaultAriaDisabled: DefaultAriaDisabled.args,
+  DefaultUnstyled: DefaultUnstyled.args,
+
+  Secondary: Secondary.args,
+  SecondaryHover: SecondaryHover.args,
+  SecondaryActive: SecondaryActive.args,
+  SecondaryFocus: SecondaryFocus.args,
+  SecondaryDisabled: SecondaryDisabled.args,
+  SecondaryAriaDisabled: SecondaryAriaDisabled.args,
+
+  AccentCool: AccentCool.args,
+  AccentCoolHover: AccentCoolHover.args,
+  AccentCoolActive: AccentCoolActive.args,
+  AccentCoolFocus: AccentCoolFocus.args,
+  AccentCoolDisabled: AccentCoolDisabled.args,
+  AccentCoolAriaDisabled: AccentCoolAriaDisabled.args,
+
+  AccentWarm: AccentWarm.args,
+  AccentWarmHover: AccentWarmHover.args,
+  AccentWarmActive: AccentWarmActive.args,
+  AccentWarmFocus: AccentWarmFocus.args,
+  AccentWarmDisabled: AccentWarmDisabled.args,
+  AccentWarmAriaDisabled: AccentWarmAriaDisabled.args,
+
+  Base: Base.args,
+  BaseHover: BaseHover.args,
+  BaseActive: BaseActive.args,
+  BaseFocus: BaseFocus.args,
+  BaseDisabled: BaseDisabled.args,
+  BaseAriaDisabled: BaseAriaDisabled.args,
+
+  Outline: Outline.args,
+  OutlineHover: OutlineHover.args,
+  OutlineActive: OutlineActive.args,
+  OutlineFocus: OutlineFocus.args,
+  OutlineDisabled: OutlineDisabled.args,
+  OutlineAriaDisabled: OutlineAriaDisabled.args,
+  OutlineInverse: { label: 'Default', variant: 'outline', inverse: true },
+  OutlineInverseHover: { label: 'Hover', variant: 'outline', inverse: true, className: 'usa-button--hover' },
+  OutlineInverseActive: { label: 'Active', variant: 'outline', inverse: true, className: 'usa-button--active' },
+  OutlineInverseFocus: { label: 'Focus', variant: 'outline', inverse: true, className: 'usa-focus' },
+  OutlineInverseDisabled: OutlineInverseDisabled.args,
+  OutlineInverseAriaDisabled: OutlineInverseAriaDisabled.args,
+
+  Big: Big.args,
+  BigDisabled: BigDisabled.args,
+  BigAriaDisabled: BigAriaDisabled.args,
+  BigUnstyled: BigUnstyled.args,
+};

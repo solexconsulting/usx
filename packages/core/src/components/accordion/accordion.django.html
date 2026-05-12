@@ -1,4 +1,5 @@
 <div
+    id="{{ id }}"
     class="usa-accordion usx-accordion {% if bordered %}usa-accordion--bordered{% endif %} {{ className }}"
     {% if multiselectable %}
     data-allow-multiple="true"
@@ -6,19 +7,18 @@
 >
 {% for item in items %}
     {% if headingLevel == 'h1' %}
-        <h1 id="{{ item.id }}-heading" class="usa-accordion__heading {{ className }}">
+        <h1 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ className }}">
     {% elif headingLevel == 'h2' %}
-        <h2 id="{{ item.id }}-heading" class="usa-accordion__heading {{ className }}">
+        <h2 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ className }}">
     {% elif headingLevel == 'h4' %}
-        <h4 id="{{ item.id }}-heading" class="usa-accordion__heading {{ className }}">
+        <h4 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ className }}">
     {% else %}
-        <h3 id="{{ item.id }}-heading" class="usa-accordion__heading {{ className }}">
+        <h3 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ className }}">
     {% endif %}
         <button
             class="usa-accordion__button"
             aria-expanded="false"
-            aria-controls="{{ item.id }}-content"
-            id="{{ item.id }}-heading"
+            aria-controls="{{ id }}-{{ forloop.counter0 }}-content"
             type="button"
         >
             {{ item.title }}
@@ -34,10 +34,9 @@
     {% endif %}
 
     <div
-        id="{{ item.id }}-content"
+        id="{{ id }}-{{ forloop.counter0 }}-content"
         class="usa-accordion__content"
-        aria-labelledby="{{ item.id }}-heading"
-        data-testid="accordionItem_{{ item.id }}"
+        aria-labelledby="{{ id }}-{{ forloop.counter0 }}-heading"
         hidden
     >
         {{ item.content }}

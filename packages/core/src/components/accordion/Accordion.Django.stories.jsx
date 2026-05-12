@@ -1,61 +1,22 @@
 import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
-import accordion from "@uswds/uswds/js/usa-accordion";
-
-const generatedArgTypes = buildArgTypes(config.props || {});
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './Accordion.React.stories.jsx';
 
 export default {
   title: 'Django/Accordion',
   tags: ['autodocs'],
-  argTypes: generatedArgTypes,
-  decorators: [
-    (Story) => {
-      // Ensure USWDS JS is initialized for the story
-      React.useEffect(() => {
-        accordion.on();
-        return () => accordion.off();
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  argTypes: buildArgTypes(config.props || {}),
 };
 
-const items1 = [
-    {
-        title: 'Accordion Item 1',
-        id: 'item1',
-        content: 'Content for accordion item 1.',
-    },
-    {
-        title: 'Accordion Item 2',
-        id: 'item2',
-        content: 'Content for accordion item 2.',
-    },
-    {
-        title: 'Accordion Item 3',
-        id: 'item3',
-        content: 'Content for accordion item 3.'
-    }
-]
+const createStory = createDjangoStory('accordion');
+const allowedPropNames = new Set(Object.keys(config.props || {}));
+const toDjangoArgs = (args) => Object.fromEntries(
+  Object.entries(args).filter(([key]) => allowedPropNames.has(key))
+);
 
-export const Accordion = {
-  args: {
-    items: items1
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({
-          name: 'accordion',
-          props: {
-            items: items1
-          }
-        })
-      }
-    }
-  },
-  render: djangoComponent('accordion')
-};
+export const Default = createStory(toDjangoArgs(storyDefs.Default));
+export const Bordered = createStory(toDjangoArgs(storyDefs.Bordered));
+export const MultiSelectable = createStory(toDjangoArgs(storyDefs.MultiSelectable));
+export const CustomHeadingLevel = createStory(toDjangoArgs(storyDefs.CustomHeadingLevel));
+export const BorderedMultiSelectableH4 = createStory(toDjangoArgs(storyDefs.BorderedMultiSelectableH4));

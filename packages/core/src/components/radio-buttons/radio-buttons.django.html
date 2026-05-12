@@ -3,22 +3,24 @@
 
 {% fieldset legend=legend required=required %}
   {% for opt in options %}
-    <div id="{{ id }}" class="usa-radio usx-radio {% if small %}usx-radio--small{% endif %} {{ className }}">
+    {% with optionId=id|add:"-"|add:opt.value %}
+    <div class="usa-radio usx-radio {% if small %}usx-radio--small{% endif %} {{ className }}">
       <input
         class="usa-radio__input{% if tile %} usa-radio__input--tile{% endif %}"
-        id="{{ opt.id|default:forloop.counter0 }}"
+        id="{{ optionId }}"
         type="radio"
         name="{{ name|default:'radio-group' }}"
         value="{{ opt.value }}"
-        {% if opt.checked %}checked="checked"{% endif %}
+        {% if defaultValue == opt.value or opt.checked %}checked="checked"{% endif %}
         {% if opt.disabled %}disabled="disabled"{% endif %}
       />
-      {% label htmlFor=opt.id|default:forloop.counter0 className="usa-radio__label" classOverride=True %}{{ opt.label }}
+      {% label htmlFor=optionId className="usa-radio__label" classOverride=True %}{{ opt.label }}
         {% if opt.description %}
           <span class="usa-checkbox__label-description">{{ opt.description }}</span>
         {% endif %}
       {% endlabel %}
     </div>
+    {% endwith %}
   {% endfor %}
 {% endfieldset %}
 

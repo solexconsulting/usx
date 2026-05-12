@@ -1,0 +1,17 @@
+{% for item in items %}
+  <li>
+    {% if item.content %}{{ item.content }}{% else %}{{ item }}{% endif %}
+
+    {% if item.children %}
+      {% if item.ordered %}
+        <ol class="usa-list usx-list{% if item.unstyled %} usa-list--unstyled{% elif unstyled %} usa-list--unstyled{% endif %}{% if item.className %} {{ item.className }}{% endif %}">
+          {% include "list/_list-items.django.html" with items=item.children ordered=True unstyled=unstyled only %}
+        </ol>
+      {% else %}
+        <ul class="usa-list usx-list{% if item.unstyled %} usa-list--unstyled{% elif unstyled %} usa-list--unstyled{% endif %}{% if item.className %} {{ item.className }}{% endif %}">
+          {% include "list/_list-items.django.html" with items=item.children ordered=False unstyled=unstyled only %}
+        </ul>
+      {% endif %}
+    {% endif %}
+  </li>
+{% endfor %}

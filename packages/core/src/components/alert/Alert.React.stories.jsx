@@ -10,53 +10,48 @@ export default {
   component: Alert,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
-export const Info = {
-  args: {
+export const storyDefs = {
+  Info: {
     heading: 'Informative status',
     text: 'System status and notification updates appear here.',
     slim: false,
     noIcon: false
-  }
-};
-
-export const Warning = {
-  args: {
+  },
+  Warning: {
     variant: 'warning',
     heading: 'Warning status',
     text: 'This is a warning message.',
     slim: false,
     noIcon: false
-  }
-};
-
-export const Success = {
-  args: {
+  },
+  Success: {
     variant: 'success',
     heading: 'Success status',
     text: 'Operation completed successfully.',
     slim: false,
     noIcon: false
-  }
-};
-
-export const Error = {
-  args: {
+  },
+  Error: {
     variant: 'error',
     heading: 'Error status',
     text: 'An error occurred.',
     slim: false,
     noIcon: false
-  }
-};
-
-export const Emergency = {
-  args: {
+  },
+  Emergency: {
     variant: 'emergency',
     heading: 'Emergency status',
     text: 'This is an emergency alert.',
     slim: false,
     noIcon: false
-  }
+  },
 };
+
+export const Info = { args: storyDefs.Info };
+export const Warning = { args: storyDefs.Warning };
+export const Success = { args: storyDefs.Success };
+export const Error = { args: storyDefs.Error };
+export const Emergency = { args: storyDefs.Emergency };

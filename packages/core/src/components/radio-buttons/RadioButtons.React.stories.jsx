@@ -9,11 +9,12 @@ export default {
   title: 'React/RadioButtons',
   component: RadioButtons,
   tags: ['autodocs'],
+  excludeStories: ['storyDefs'],
   argTypes: generatedArgTypes,
 };
 
 const options = [
-  { value: 'sojourner-truth', label: 'Sojourner Truth', checked: true },
+  { value: 'sojourner-truth', label: 'Sojourner Truth' },
   { value: 'frederick-douglass', label: 'Frederick Douglass' },
   { value: 'booker-t-washington', label: 'Booker T. Washington' },
   { value: 'george-washington-carver', label: 'George Washington Carver', disabled: true },
@@ -23,7 +24,6 @@ const optionsWithDescriptions = [
   {
     value: 'sojourner-truth',
     label: 'Sojourner Truth',
-    checked: true,
     description: 'A prominent abolitionist and women\'s rights activist.',
   },
   {
@@ -44,68 +44,97 @@ const optionsWithDescriptions = [
   },
 ];
 
-
-export const Default = {
-  args: {
+export const storyDefs = {
+  Default: {
+    id: 'historical-figures',
     name: 'historical-figures',
     options,
   },
-};
-
-export const WithDescriptions = {
-  args: {
+  WithDescriptions: {
+    id: 'historical-figures-with-descriptions',
     name: 'historical-figures-with-descriptions',
     options: optionsWithDescriptions,
   },
-};
-
-export const Tile = {
-  args: {
+  WithDefaultValue: {
+    id: 'historical-figures-with-default',
+    name: 'historical-figures-with-default',
+    defaultValue: 'frederick-douglass',
+    options,
+  },
+  Tile: {
+    id: 'tile-options',
     name: 'tile-options',
     tile: true,
     options,
   },
-};
-
-export const TileWithDescriptions = {
-  args: {
+  TileWithDescriptions: {
+    id: 'tile-options-with-descriptions',
     name: 'tile-options-with-descriptions',
     tile: true,
     options: optionsWithDescriptions,
   },
-};
-
-export const Small = {
-  args: {
+  Small: {
+    id: 'small-options',
     name: 'small-options',
     small: true,
     options,
   },
-};
-
-export const SmallTile = {
-  args: {
+  SmallTile: {
+    id: 'small-tile-options',
     name: 'small-tile-options',
     small: true,
     tile: true,
     options,
   },
-};
-
-export const SmallTileWithDescriptions = {
-  args: {
-    name: 'small-tile-options',
+  SmallTileWithDescriptions: {
+    id: 'small-tile-options-with-descriptions',
+    name: 'small-tile-options-with-descriptions',
     small: true,
     tile: true,
     options: optionsWithDescriptions,
   },
-};
-
-export const WithAdditionalClass = {
-  args: {
+  WithAdditionalClass: {
+    id: 'custom-class-options',
     name: 'custom-class-options',
     options: optionsWithDescriptions,
     tile: true,
     className: 'maxw-mobile font-heading-xl',
   },
+};
+
+
+export const Default = {
+  args: storyDefs.Default,
+};
+
+export const WithDefaultValue = {
+  args: storyDefs.WithDefaultValue,
+};
+
+export const WithDescriptions = {
+  args: storyDefs.WithDescriptions,
+};
+
+export const Tile = {
+  args: storyDefs.Tile,
+};
+
+export const TileWithDescriptions = {
+  args: storyDefs.TileWithDescriptions,
+};
+
+export const Small = {
+  args: storyDefs.Small,
+};
+
+export const SmallTile = {
+  args: storyDefs.SmallTile,
+};
+
+export const SmallTileWithDescriptions = {
+  args: storyDefs.SmallTileWithDescriptions,
+};
+
+export const WithAdditionalClass = {
+  args: storyDefs.WithAdditionalClass,
 };

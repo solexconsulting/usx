@@ -3,9 +3,19 @@
 
 @mixin usx-button-variant($selector, $divider) {
   .usa-button-group.usx-button-group {
-    &.usa-button-group--segmented .usa-button-group__item:where(:not(:last-child)) #{$selector}::before {
-      @if $divider !=null {
-        border-right: $divider;
+    &.usa-button-group--segmented {
+      .usa-button-group__item {
+        &:where(:not(:last-child)) #{$selector}::before {
+          @if $divider !=null {
+            border-right: $divider;
+          }
+        }
+
+        &:where(:not(:first-child):not(:last-child)) {
+          button {
+            border-radius: 0;
+          }
+        }
       }
     }
   }

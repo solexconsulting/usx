@@ -10,6 +10,7 @@ export default {
   component: Prose,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
 const BigHTMLString = `
@@ -141,36 +142,16 @@ const SmallHTMLString = `
 `;
 
 
-export const Default = {
-  args: {
-    content: BigHTMLString,
-    containerElement: 'div'
-  }
-};
-export const ProseWithDiv = {
-  args: {
-    content: SmallHTMLString,
-    containerElement: 'div'
-  }
+export const storyDefs = {
+  Default: { content: BigHTMLString, containerElement: 'div' },
+  ProseWithDiv: { content: SmallHTMLString, containerElement: 'div' },
+  ProseWithArticle: { content: SmallHTMLString, containerElement: 'article' },
+  ProseWithSection: { content: SmallHTMLString, containerElement: 'section' },
+  ProseWithMain: { content: SmallHTMLString, containerElement: 'main' },
 };
 
-export const ProseWithArticle = {
-  args: {
-    content: SmallHTMLString,
-    containerElement: 'article'
-  }
-};
-
-export const ProseWithSection = {
-  args: {
-    content: SmallHTMLString,
-    containerElement: 'section'
-  }
-};
-
-export const ProseWithMain = {
-  args: {
-    content: SmallHTMLString,
-    containerElement: 'main'
-  }
-};
+export const Default = { args: storyDefs.Default };
+export const ProseWithDiv = { args: storyDefs.ProseWithDiv };
+export const ProseWithArticle = { args: storyDefs.ProseWithArticle };
+export const ProseWithSection = { args: storyDefs.ProseWithSection };
+export const ProseWithMain = { args: storyDefs.ProseWithMain };
