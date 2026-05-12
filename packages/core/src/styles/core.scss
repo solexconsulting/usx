@@ -1,6 +1,8 @@
 // AUTO-GENERATED-SCSS START
 @use '../components/accordion/accordion';
 @use '../components/alert/alert';
+@use '../components/avatar/avatar';
+@use '../components/back-to-top/back-to-top';
 @use '../components/banner/banner';
 @use '../components/branding/branding';
 @use '../components/breadcrumb/breadcrumb';
@@ -15,6 +17,8 @@
 @use '../components/collection/collection';
 @use '../components/combobox/combobox';
 @use '../components/date-picker/date-picker';
+@use '../components/env-banner/env-banner';
+@use '../components/eyebrow/eyebrow';
 @use '../components/fieldset/fieldset';
 @use '../components/file-input/file-input';
 @use '../components/footer/footer';
@@ -22,6 +26,7 @@
 @use '../components/header/header';
 @use '../components/hero/hero';
 @use '../components/icon/icon';
+@use '../components/icon-list/icon-list';
 @use '../components/identifier/identifier';
 @use '../components/image/image';
 @use '../components/in-page-nav/in-page-nav';
@@ -35,12 +40,14 @@
 @use '../components/list/list';
 @use '../components/memorable-date/memorable-date';
 @use '../components/modal/modal';
+@use '../components/page/page';
 @use '../components/pagination/pagination';
 @use '../components/process-list/process-list';
 @use '../components/radio-buttons/radio-buttons';
 @use '../components/range-slider/range-slider';
 @use '../components/required/required';
 @use '../components/search/search';
+@use '../components/section/section';
 @use '../components/select/select';
 @use '../components/sidenav/sidenav';
 @use '../components/site-alert/site-alert';
@@ -48,11 +55,14 @@
 @use '../components/spinner/spinner';
 @use '../components/step-indicator/step-indicator';
 @use '../components/summary-box/summary-box';
+@use '../components/swap/swap';
+@use '../components/switch/switch';
 @use '../components/table/table';
 @use '../components/tag/tag';
 @use '../components/tag-group/tag-group';
 @use '../components/text-area/text-area';
 @use '../components/time-picker/time-picker';
+@use '../components/toggle/toggle';
 @use '../components/tooltip/tooltip';
 // AUTO-GENERATED-SCSS END
 

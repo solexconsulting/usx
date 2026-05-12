@@ -1,0 +1,11 @@
+{
+  "name": "eyebrow",
+  "template": "eyebrow/eyebrow.django.html",
+  "default": {
+    "children": "NOT IMPLEMENTED: Eyebrow"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

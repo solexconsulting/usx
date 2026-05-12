@@ -1,0 +1,11 @@
+{
+  "name": "avatar",
+  "template": "avatar/avatar.django.html",
+  "default": {
+    "children": "NOT IMPLEMENTED: Avatar"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "back-to-top",
+  "template": "back-to-top/back-to-top.django.html",
+  "default": {
+    "children": "NOT IMPLEMENTED: BackToTop"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

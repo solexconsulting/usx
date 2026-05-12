@@ -1,0 +1,11 @@
+{
+  "name": "section",
+  "template": "section/section.django.html",
+  "default": {
+    "children": "NOT IMPLEMENTED: Section"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

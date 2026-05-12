@@ -20,6 +20,8 @@ EXCLUDE: ExamplePages
 // AUTO-GENERATED-EXPORTS START
 export { default as Accordion } from './components/accordion';
 export { default as Alert } from './components/alert';
+export { default as Avatar } from './components/avatar';
+export { default as BackToTop } from './components/back-to-top';
 export { default as Banner } from './components/banner';
 export { default as Branding } from './components/branding';
 export { default as Breadcrumb } from './components/breadcrumb';
@@ -34,6 +36,8 @@ export { default as Checkbox } from './components/checkbox';
 export { default as Collection } from './components/collection';
 export { default as Combobox } from './components/combobox';
 export { default as DatePicker } from './components/date-picker';
+export { default as EnvBanner } from './components/env-banner';
+export { default as Eyebrow } from './components/eyebrow';
 export { default as Fieldset } from './components/fieldset';
 export { default as FileInput } from './components/file-input';
 export { default as Footer } from './components/footer';
@@ -55,6 +59,7 @@ export { default as Link } from './components/link';
 export { default as List } from './components/list';
 export { default as MemorableDate } from './components/memorable-date';
 export { default as Modal } from './components/modal';
+export { default as Page } from './components/page';
 export { default as Pagination } from './components/pagination';
 export { default as ProcessList } from './components/process-list';
 export { default as Prose } from './components/prose';
@@ -62,6 +67,7 @@ export { default as RadioButtons } from './components/radio-buttons';
 export { default as RangeSlider } from './components/range-slider';
 export { default as Required } from './components/required';
 export { default as Search } from './components/search';
+export { default as Section } from './components/section';
 export { default as Select } from './components/select';
 export { default as Sidenav } from './components/sidenav';
 export { default as SiteAlert } from './components/site-alert';
@@ -69,13 +75,25 @@ export { default as Skipnav } from './components/skipnav';
 export { default as Spinner } from './components/spinner';
 export { default as StepIndicator } from './components/step-indicator';
 export { default as SummaryBox } from './components/summary-box';
+export { default as Swap } from './components/swap';
+export { default as Switch } from './components/switch';
 export { default as Table } from './components/table';
 export { default as Tag } from './components/tag';
 export { default as TagGroup } from './components/tag-group';
 export { default as TextArea } from './components/text-area';
 export { default as TimePicker } from './components/time-picker';
+export { default as Toggle } from './components/toggle';
 export { default as Tooltip } from './components/tooltip';
 // AUTO-GENERATED-EXPORTS END
+
+
+
+
+
+
+
+
+
 
 
 

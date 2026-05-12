@@ -1,0 +1,11 @@
+{
+  "name": "swap",
+  "template": "swap/swap.django.html",
+  "default": {
+    "children": "NOT IMPLEMENTED: Swap"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

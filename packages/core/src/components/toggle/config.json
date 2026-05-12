@@ -1,0 +1,11 @@
+{
+  "name": "toggle",
+  "template": "toggle/toggle.django.html",
+  "default": {
+    "children": "NOT IMPLEMENTED: Toggle"
+  },
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}
