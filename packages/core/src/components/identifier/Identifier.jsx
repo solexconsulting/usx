@@ -40,7 +40,7 @@ function renderDisclaimer({ language, parentAgencies, taxpayerDisclaimer }) {
           <a href={agency.href || ''}>{agency.name}</a>
         </React.Fragment>
       ))}
-      {taxpayerDisclaimer ? ' . Produced and published at taxpayer expense.' : ''}
+      {taxpayerDisclaimer ? '. Produced and published at taxpayer expense.' : ''}
     </>
   );
 }
@@ -157,7 +157,7 @@ export default function Identifier({
 
       <section className="usa-identifier__section usa-identifier__section--usagov" aria-label={labels.usagov}>
         <div className="usa-identifier__container">
-          <div className="usa-identifier__usagov-description">{usaGov.text}</div>
+          <div className="usa-identifier__usagov-description">{usaGov.text}</div>{" "}
           <a href={usaGov.href} className="usa-link">{usaGov.label}</a>
         </div>
       </section>
