@@ -6,7 +6,7 @@ export default {
   tags: ['autodocs'],
 };
 
-export const AllVariants = {
+export const Default = {
   parameters: {
     docs: {
       source: {

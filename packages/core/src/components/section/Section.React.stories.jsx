@@ -4,7 +4,30 @@ import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
 
 export const storyDefs = {
-  Default: config.default || {},
+  Default: {
+    ...(config.default || {}),
+    content: undefined,
+    children: (
+      <p>Use section to group related page content with consistent spacing.</p>
+    ),
+  },
+  WithTitle: {
+    ...(config.default || {}),
+    title: 'Program details',
+    content: undefined,
+    children: (
+      <p>Optional section titles help organize long pages into meaningful chunks.</p>
+    ),
+  },
+  WithAdditionalClasses: {
+    ...(config.default || {}),
+    title: 'Highlighted section',
+    className: 'bg-primary-darkest text-white padding-3',
+    content: undefined,
+    children: (
+      <p>This variant demonstrates adding utility classes directly on the section component.</p>
+    ),
+  },
 };
 
 export default {
@@ -16,3 +39,5 @@ export default {
 };
 
 export const Default = { args: storyDefs.Default };
+export const WithTitle = { args: storyDefs.WithTitle };
+export const WithAdditionalClasses = { args: storyDefs.WithAdditionalClasses };

@@ -1,4 +1,4 @@
 {# Django template for Eyebrow #}
-<div class="usx-eyebrow">
-  <div class="eyebrow__content">Eyebrow</div>
-</div>
+<span class="usx-eyebrow{% if className %} {{ className }}{% endif %}">
+  {{ children }}
+</span>

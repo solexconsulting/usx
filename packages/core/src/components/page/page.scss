@@ -1,6 +1,17 @@
 .usx-page {
-  display: block;
-  .page__content {
-    padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+
+  .usx-page__title {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .usx-page__content {
+    display: block;
+
+    p {
+      max-width: 64ex;
+    }
   }
 }

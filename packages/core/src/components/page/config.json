@@ -2,10 +2,15 @@
   "name": "page",
   "template": "page/page.django.html",
   "default": {
-    "children": "NOT IMPLEMENTED: Page"
+    "title": "Page title",
+    "eyebrow": "",
+    "content": "This page wrapper provides consistent spacing between a site header and footer. Use this region for page-specific content."
   },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
+    "title": { "type": "string", "description": "Required page title rendered as an h1." },
+    "eyebrow": { "type": "string", "description": "Optional eyebrow text rendered above the page title inside the h1." },
+    "content": { "type": "string", "description": "Body content rendered below the title. Supports HTML in Django stories." },
+    "children": { "type": "string", "description": "Body content for React usage." },
     "className": { "type": "string", "description": "Additional classes" }
   }
 }

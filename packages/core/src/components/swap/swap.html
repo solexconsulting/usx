@@ -1,4 +1,91 @@
-<div class="usx-swap">
-  <!-- Canonical HTML for Swap -->
-  <div class="swap__content">NOT IMPLEMENTED</div>
-</div>
+<h1 class="site-preview-heading">Swap Component Variants</h1>
+
+<!-- Default Text Swap -->
+<h3 class="site-preview-heading">Default - Text Toggle</h3>
+<label class="usx-swap">
+  <input type="checkbox" autocomplete="off"/>
+  <span class="usx-swap-on">ON</span>
+  <span class="usx-swap-off">OFF</span>
+</label>
+
+<!-- Default Icon Swap -->
+<h3 class="site-preview-heading">Default - Icon Toggle</h3>
+<label class="usx-swap">
+  <input type="checkbox" autocomplete="off"/>
+  <svg class="usa-icon usa-icon--size-3 usx-swap-on" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#visibility"></use>
+  </svg>
+  <svg class="usa-icon usa-icon--size-3 usx-swap-off" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#info"></use>
+  </svg>
+</label>
+
+<!-- Active Text Swap -->
+<h3 class="site-preview-heading margin-bottom-0">Activated using "usx-swap-active" class</h3>
+<p class="usa-hint margin-top-0">Remove "usx-swap-active" class to trigger swap</p>
+<label class="usx-swap usx-swap-active">
+  <span class="usx-swap-on">ACTIVE</span>
+  <span class="usx-swap-off">INACTIVE</span>
+</label>
+
+<!-- Rotate Text Swap -->
+<h3 class="site-preview-heading">Rotate - Text with Rotation</h3>
+<label class="usx-swap usx-swap-rotate">
+  <input type="checkbox" autocomplete="off"/>
+  <span class="usx-swap-on">Hello</span>
+  <span class="usx-swap-off">Goodbye</span>
+</label>
+
+<!-- Rotate Icon Swap -->
+<h3 class="site-preview-heading">Rotate - Icon with Rotation</h3>
+<label class="usx-swap usx-swap-rotate">
+  <input type="checkbox" autocomplete="off"/>
+  <svg class="usa-icon usa-icon--size-3 usx-swap-on" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#security"></use>
+  </svg>
+  <svg class="usa-icon usa-icon--size-3 usx-swap-off" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#support_agent"></use>
+  </svg>
+</label>
+
+<!-- Flip Text Swap -->
+<h3 class="site-preview-heading">Flip - Text with 3D Flip</h3>
+<label class="usx-swap usx-swap-flip">
+  <input type="checkbox" autocomplete="off"/>
+  <span class="usx-swap-on">👍</span>
+  <span class="usx-swap-off">👎</span>
+</label>
+
+<!-- Flip Icon Swap -->
+<h3 class="site-preview-heading">Flip - Icon with 3D Flip</h3>
+<label class="usx-swap usx-swap-flip">
+  <input type="checkbox" autocomplete="off"/>
+  <span class="usx-swap-on">😊</span>
+  <span class="usx-swap-off">😞</span>
+</label>
+
+<!-- Change color of icon -->
+<h3 class="site-preview-heading">Color Change - Icon</h3>
+<label class="usx-swap">
+  <input type="checkbox" autocomplete="off"/>
+  <svg class="usa-icon usa-icon--size-3 usx-swap-on text-success" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#check_circle"></use>
+  </svg>
+  <svg class="usa-icon usa-icon--size-3 usx-swap-off text-error" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#check_circle"></use>
+  </svg>
+</label>
+
+<!-- View More / View Less Example -->
+<h3 class="site-preview-heading">View More / View Less</h3>
+<label class="usx-swap maxw-mobile">
+  <input type="checkbox" autocomplete="off"/>
+  <span class="usx-swap-off">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad...</p>
+  </span>
+  <span class="usx-swap-on">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </span>
+</label>
+
+

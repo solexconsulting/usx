@@ -62,6 +62,7 @@ $color-warning-text:   null !default;
 $color-success-text:   null !default;
 $color-error-text:     null !default;
 $color-emergency-text: null !default;
+$color-text-base:       $color-base !default;
 
 // ── Color map (used by _utilities.scss) ─────────────────────────────────────
 $colors: (

@@ -1,4 +1,14 @@
 {# Django template for Swap #}
-<div class="usx-swap">
-  <div class="swap__content">Swap</div>
-</div>
+<label class="usx-swap{% if variant and variant != 'default' %} usx-swap-{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}">
+  {% if content %}
+    {{ content|safe }}
+  {% elif children %}
+    {{ children|safe }}
+  {% else %}
+    {% if includeInput != False %}
+      <input type="checkbox" autocomplete="off"{% if inputId %} id="{{ inputId }}"{% endif %}{% if inputClassName %} class="{{ inputClassName }}"{% endif %}{% if inputChecked %} checked{% endif %}/>
+    {% endif %}
+    <span class="usx-swap-on{% if onClassName %} {{ onClassName }}{% endif %}">{{ onContent|default:'ON'|safe }}</span>
+    <span class="usx-swap-off{% if offClassName %} {{ offClassName }}{% endif %}">{{ offContent|default:'OFF'|safe }}</span>
+  {% endif %}
+</label>

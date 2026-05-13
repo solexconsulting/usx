@@ -1,4 +1,5 @@
 {# Django template for Section #}
-<div class="usx-section">
-  <div class="section__content">Section</div>
-</div>
+<section class="usx-section{% if className %} {{ className }}{% endif %}">
+  {% if title %}<h2 class="usx-section__title">{{ title }}</h2>{% endif %}
+  <div class="usx-section__content">{% if content %}{{ content|safe }}{% elif children %}{{ children|safe }}{% endif %}</div>
+</section>

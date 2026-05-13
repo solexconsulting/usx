@@ -1,6 +1,14 @@
+@use '../../../../tokens/src/_variables' as *;
+
 .usx-eyebrow {
   display: block;
-  .eyebrow__content {
-    padding: 1rem;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  color: #3d4551;
+  text-transform: uppercase;
+
+  @if $color-text-base {
+    color: $color-text-base;
   }
 }

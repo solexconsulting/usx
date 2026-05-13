@@ -2,10 +2,10 @@
   "name": "eyebrow",
   "template": "eyebrow/eyebrow.django.html",
   "default": {
-    "children": "NOT IMPLEMENTED: Eyebrow"
+    "children": "Eyebrow Title"
   },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
+    "children": { "type": "string", "description": "Eyebrow text content" },
     "className": { "type": "string", "description": "Additional classes" }
   }
 }

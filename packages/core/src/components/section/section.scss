@@ -1,6 +1,17 @@
+@use '../../../../tokens/src/_variables' as *;
+
 .usx-section {
-  display: block;
-  .section__content {
-    padding: 1rem;
-  }
+	margin: 2rem 0;
+}
+
+.usx-section__title {
+	margin-top: 0;
+}
+
+.usx-section__content > :first-child {
+	margin-top: 0;
+}
+
+.usx-section__content > :last-child {
+	margin-bottom: 0;
 }
