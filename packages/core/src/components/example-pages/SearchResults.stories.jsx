@@ -1,13 +1,16 @@
 import React from 'react';
 import Skipnav from '../skipnav/Skipnav';
 import Banner from '../banner/Banner';
+import MiscBanner from '../misc-banner/MiscBanner';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import ButtonGroup from '../button-group/ButtonGroup';
 import CardGroup from '../card-group/CardGroup';
 import Identifier from '../identifier/Identifier';
 import Layout from '../layout/Layout';
+import Page from '../page/Page';
 import Search from '../search/Search';
+import Section from '../section/Section';
 import Select from '../select/Select';
 import { headerArgs, footerArgs, identifierArgs } from './commonArgs';
 
@@ -23,6 +26,16 @@ export const SearchResults = {
         id="example-1-banner"
         ariaLabel="Example banner"
       />
+      <MiscBanner
+        tone="base"
+        badgeText="misc"
+        message="This is a miscellaneous banner."
+        learnMoreText="Casual Link"
+        learnMoreHref="#"
+        returnText="Important Link"
+        returnHref="#"
+        returnIcon="arrow_forward"
+      />
       <Header
         id="search-header"
         {...headerArgs}
@@ -30,27 +43,29 @@ export const SearchResults = {
       <Layout
         variant="grid"
         content={
-          <>
-            <div className="margin-y-4">
-              <Search
-                ariaLabel="Search documentation"
-                searchKey="q"
-                label="Search"
-                icon="search"
-                buttonVariant="primary"
-                big={true}
-                action="#"
-                placeholder="Search documentation, guides, and articles..."
-              />
-            </div>
+          <Page id="search-results-example" title="Search Documentation">
+              <Section>
+                <div className="margin-y-4">
+                  <Search
+                    ariaLabel="Search documentation"
+                    searchKey="q"
+                    label="Search"
+                    icon="search"
+                    buttonVariant="primary"
+                    big={true}
+                    action="#"
+                    placeholder="Search documentation, guides, and articles..."
+                  />
+                </div>
+              </Section>
 
-            <div className="margin-bottom-3">
-              <h2 className="margin-top-0">Search Results</h2>
-              <p className="text-base">Showing 24 results for "getting started"</p>
-            </div>
+              <Section title="Search Results">
+                <p className="text-base">Showing 24 results for "getting started"</p>
+              </Section>
 
-            <CardGroup
-              cards={[
+              <Section>
+                <CardGroup
+                  cards={[
                 {
                   title: 'Quick Start Guide',
                   description: 'Get up and running in under 5 minutes with our comprehensive quick start guide.',
@@ -100,69 +115,70 @@ export const SearchResults = {
                   ],
                   className: 'tablet:grid-col-6 widescreen:grid-col-4',
                 },
-              ]}
-            />
+                  ]}
+                />
+              </Section>
 
-            <div className="margin-top-4 text-center">
+              <Section>
+                <div className="margin-top-4 text-center">
+                  <ButtonGroup
+                    buttons={[
+                      { children: 'Previous', variant: 'secondary', disabled: true },
+                      { children: '1', variant: 'primary' },
+                      { children: '2', variant: 'secondary' },
+                      { children: '3', variant: 'secondary' },
+                      { children: 'Next', variant: 'secondary' },
+                    ]}
+                  />
+                </div>
+              </Section>
+          </Page>
+        }
+          expandLeftSidebar={true}
+          leftSidebar={
+            <Section title="Filter Results" className="border border-base-lighter border-1px padding-4">
+              <div className="margin-bottom-3">
+                <Select
+                  id="category-filter"
+                  name="category"
+                  label="Category"
+                  options={[
+                    { value: '', label: 'All Categories' },
+                    { value: 'getting-started', label: 'Getting Started' },
+                    { value: 'api-reference', label: 'API Reference' },
+                    { value: 'tutorials', label: 'Tutorials' },
+                    { value: 'troubleshooting', label: 'Troubleshooting' },
+                  ]}
+                  defaultValue=""
+                />
+              </div>
+
+              <div className="margin-bottom-3">
+                <Select
+                  id="content-type-filter"
+                  name="contentType"
+                  label="Content Type"
+                  options={[
+                    { value: '', label: 'All Types' },
+                    { value: 'guide', label: 'Guide' },
+                    { value: 'tutorial', label: 'Tutorial' },
+                    { value: 'reference', label: 'Reference' },
+                    { value: 'faq', label: 'FAQ' },
+                  ]}
+                  defaultValue=""
+                />
+              </div>
+
               <ButtonGroup
                 buttons={[
-                  { children: 'Previous', variant: 'secondary', disabled: true },
-                  { children: '1', variant: 'primary' },
-                  { children: '2', variant: 'secondary' },
-                  { children: '3', variant: 'secondary' },
-                  { children: 'Next', variant: 'secondary' },
+                  { children: 'Apply Filters', variant: 'primary' },
+                  { children: 'Clear All', variant: 'secondary' },
                 ]}
+                direction="vertical"
               />
-            </div>
-          </>
-        }
-        expandLeftSidebar={true}
-        leftSidebar={
-          <div className="border border-base-lighter border-1px padding-4">
-            <h4 className="margin-top-0">Filter Results</h4>
-
-            <div className="margin-bottom-3">
-              <Select
-                id="category-filter"
-                name="category"
-                label="Category"
-                options={[
-                  { value: '', label: 'All Categories' },
-                  { value: 'getting-started', label: 'Getting Started' },
-                  { value: 'api-reference', label: 'API Reference' },
-                  { value: 'tutorials', label: 'Tutorials' },
-                  { value: 'troubleshooting', label: 'Troubleshooting' },
-                ]}
-                defaultValue=""
-              />
-            </div>
-
-            <div className="margin-bottom-3">
-              <Select
-                id="content-type-filter"
-                name="contentType"
-                label="Content Type"
-                options={[
-                  { value: '', label: 'All Types' },
-                  { value: 'guide', label: 'Guide' },
-                  { value: 'tutorial', label: 'Tutorial' },
-                  { value: 'reference', label: 'Reference' },
-                  { value: 'faq', label: 'FAQ' },
-                ]}
-                defaultValue=""
-              />
-            </div>
-
-            <ButtonGroup
-              buttons={[
-                { children: 'Apply Filters', variant: 'primary' },
-                { children: 'Clear All', variant: 'secondary' },
-              ]}
-              direction="vertical"
-            />
-          </div>
-        }
-      />
+            </Section>
+          }
+        />
       <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-search' }} />
       <Identifier {...identifierArgs} />
     </>

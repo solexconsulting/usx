@@ -8,5 +8,8 @@
     .bg-#{$color-name} {
       background-color: $color-value;
     }
+    .text-#{$color-name} {
+      color: $color-value;
+    }
   }
 }

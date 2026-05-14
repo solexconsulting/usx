@@ -59,6 +59,7 @@ export { default as Legend } from './components/legend';
 export { default as Link } from './components/link';
 export { default as List } from './components/list';
 export { default as MemorableDate } from './components/memorable-date';
+export { default as MiscBanner } from './components/misc-banner';
 export { default as Modal } from './components/modal';
 export { default as Page } from './components/page';
 export { default as Pagination } from './components/pagination';
@@ -87,6 +88,7 @@ export { default as Toggle } from './components/toggle';
 export { default as Tooltip } from './components/tooltip';
 export { default as Utilities } from './components/utilities';
 // AUTO-GENERATED-EXPORTS END
+
 
 
 

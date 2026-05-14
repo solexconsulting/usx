@@ -8,7 +8,7 @@
 @use "sass:color";
 
 // ── Layout ─────────────────────────────────────────────────────────────────
-$max-layout-width: 64rem !default;
+$max-layout-width: 60rem !default;
 $max-sidebar-width: 16rem !default;
 $dynamic-content-width: calc(50% + 24rem) !default;
 
@@ -47,6 +47,9 @@ $color-emergency:          #b51d09 !default;
 $color-background:         #f8fafc !default;
 $color-surface:            $color-light !default;
 $color-dark-bg:            color.adjust($color-primary, $lightness: -50%) !default;
+$color-beta:               #2e8540 !default;
+$color-test:               #7800af !default;
+$color-dev:                #ee9a2d !default;
 
 
 // ── Color — additional primitives ──────────────────────────────────────────────
@@ -78,6 +81,9 @@ $colors: (
   'success':        $color-success,
   'error':          $color-error,
   'emergency':      $color-emergency,
+  'beta':           $color-beta,
+  'dev':            $color-dev,
+  'test':           $color-test,
 ) !default;
 
 // ── Spacing ─────────────────────────────────────────────────────────────────

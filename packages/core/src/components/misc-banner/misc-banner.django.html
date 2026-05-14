@@ -1,0 +1,28 @@
+{# Django template for MiscBanner #}
+<div class="usx-misc-banner bg-{{ tone|default:'beta' }}{% if className %} {{ className }}{% endif %}">
+  <div class="usx-misc-banner__content grid-container">
+    {% if content %}
+      {{ content|safe }}
+    {% elif children %}
+      {{ children|safe }}
+    {% else %}
+      <strong class="usx-misc-banner__badge text-{{ tone|default:'beta' }}">{{ badgeText|default:tone|default:'beta' }}</strong>
+      <p class="usx-misc-banner__text">
+        {{ message|default:'Welcome to the beta website!' }}
+        {% if learnMoreText %}
+          <a class="usa-link usx-misc-banner__link" href="{{ learnMoreHref|default:'https://usx.solex.studio/' }}">{{ learnMoreText }}</a>
+        {% endif %}
+      </p>
+      {% if returnText %}
+        <span class="usx-misc-banner__return-text">
+          <a class="usa-link usx-misc-banner__link" href="{{ returnHref|default:'https://usx.solex.studio/' }}">
+            <svg class="usa-icon usx-icon--size-1" aria-hidden="true" focusable="false" role="img">
+              <use href="/img/sprite.svg#{{ returnIcon|default:'undo' }}"></use>
+            </svg>
+            {{ returnText }}
+          </a>
+        </span>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>

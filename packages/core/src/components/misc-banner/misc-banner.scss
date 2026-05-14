@@ -1,0 +1,59 @@
+@use '../../../../tokens/src/_variables' as *;
+
+.usx-misc-banner {
+  display: block;
+  position: relative;
+
+  .usx-misc-banner__content {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.07rem;
+    color: white;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+
+    .usx-misc-banner__badge {
+      background-color: white;
+      font-size: 1.07rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 6px 11px 5px;
+      border-radius: 6px;
+      margin-right: 1.25rem;
+    }
+
+    .usx-misc-banner__text {
+      margin: 0;
+      margin-right: .75rem;
+      max-width: 610px;
+    }
+
+
+    .usx-misc-banner__link {
+      display: none;
+
+      &:visited {
+        color: $color-light-text;
+      }
+
+      @media (min-width: 64em) {
+        display: inline-block;
+        color: $color-light-text;
+      }
+    }
+
+    .usx-misc-banner__return-text {
+      margin: 0;
+      position: relative;
+      padding-left: 2rem;
+      display: none;
+      margin-left: auto;
+
+      @media (min-width: 64em) {
+        display: inline-block;
+      }
+    }
+  }
+}

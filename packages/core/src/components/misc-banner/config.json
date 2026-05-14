@@ -1,0 +1,30 @@
+{
+  "name": "misc-banner",
+  "template": "misc-banner/misc-banner.django.html",
+  "default": {
+    "tone": "beta",
+    "badgeText": "beta",
+    "message": "Welcome to the beta website!",
+    "learnMoreText": "Learn more",
+    "learnMoreHref": "https://usx.solex.studio/",
+    "showLearnMore": true,
+    "returnText": "Return to Classic Site",
+    "returnHref": "https://usx.solex.studio/",
+    "returnIcon": "undo",
+    "showReturnLink": true
+  },
+  "props": {
+    "children": { "type": "string", "description": "Advanced override for custom inner markup" },
+    "className": { "type": "string", "description": "Additional classes for the root banner" },
+    "tone": { "type": "string", "description": "Banner tone and style: beta, dev, or test" },
+    "badgeText": { "type": "string", "description": "Badge label text" },
+    "message": { "type": "string", "description": "Main banner message" },
+    "learnMoreText": { "type": "string", "description": "Learn more link text" },
+    "learnMoreHref": { "type": "string", "description": "Learn more link destination" },
+    "showLearnMore": { "type": "boolean", "description": "Show learn more link" },
+    "returnText": { "type": "string", "description": "Secondary return link text" },
+    "returnHref": { "type": "string", "description": "Secondary return link destination" },
+    "returnIcon": { "type": "string", "description": "Icon name used before return text" },
+    "showReturnLink": { "type": "boolean", "description": "Show return link section" }
+  }
+}

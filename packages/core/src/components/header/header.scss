@@ -67,7 +67,7 @@
       left: 0;
       padding-left: 2rem;
       padding-right: 2rem;
-      max-width: $max-layout-width;
+      max-width: calc($max-layout-width + 4rem);
       margin-left: auto;
       margin-right: auto;
     }
@@ -97,6 +97,10 @@
   @media (min-width: 64em) {
     width: 100%;
     float: none;
+
+    .usa-nav__secondary {
+      right: calc(((100% - 64em)/2) - .25rem);
+    }
     
     &.usx-nav--sticky:not(.is-visible) {
       display: block;
@@ -107,7 +111,7 @@
 
     .usa-nav__inner {
       @if $max-layout-width != null {
-        max-width: $max-layout-width;
+        max-width: calc($max-layout-width + 4rem);
       }
       margin-left: auto;
       margin-right: auto;

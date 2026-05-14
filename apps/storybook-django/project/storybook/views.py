@@ -47,4 +47,5 @@ class RenderComponentView(View):
             html = render_component(component_name, props)
             return HttpResponse(html)
         except (KeyError, ValueError) as e:
+            print(f"Error rendering component '{component_name}': {e}")
             return HttpResponse(str(e), status=400)

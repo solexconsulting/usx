@@ -1,7 +1,7 @@
 // AUTO-GENERATED-SCSS START
 @use '../components/accordion/accordion';
 @use '../components/alert/alert';
-// @use '../components/avatar/avatar'; <-- No styles
+@use '../components/avatar/avatar';
 @use '../components/avatar-group/avatar-group';
 @use '../components/back-to-top/back-to-top';
 @use '../components/banner/banner';
@@ -40,6 +40,7 @@
 @use '../components/link/link';
 @use '../components/list/list';
 @use '../components/memorable-date/memorable-date';
+@use '../components/misc-banner/misc-banner';
 @use '../components/modal/modal';
 @use '../components/page/page';
 @use '../components/pagination/pagination';

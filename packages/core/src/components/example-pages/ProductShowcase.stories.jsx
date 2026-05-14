@@ -1,12 +1,15 @@
 import React from 'react';
 import Skipnav from '../skipnav/Skipnav';
 import Banner from '../banner/Banner';
+import MiscBanner from '../misc-banner/MiscBanner';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import CardGroup from '../card-group/CardGroup';
 import Icon from '../icon/Icon';
 import Identifier from '../identifier/Identifier';
+import Page from '../page/Page';
 import Prose from '../prose/Prose';
+import Section from '../section/Section';
 import { headerArgs, footerArgs, identifierArgs } from './commonArgs';
 
 export default {
@@ -72,40 +75,52 @@ export const ProductShowcase = {
         id="example-1-banner"
         ariaLabel="Example banner"
       />
+      <MiscBanner
+        tone="base"
+        badgeText="misc"
+        message="This is a miscellaneous banner."
+        learnMoreText="Casual Link"
+        learnMoreHref="#"
+        returnText="Important Link"
+        returnHref="#"
+        returnIcon="arrow_forward"
+      />
       <Header
         id="product-header"
         {...headerArgs}
       />
-      <div id="product-showcase-example" className="grid-container">
-        <h1>Our Products</h1>
-        <p>Discover our range of innovative solutions designed to meet your needs.</p>
+      <Page id="product-showcase-example" title="Our Products" className="grid-container">
+        <Section>
+          <p>Discover our range of innovative solutions designed to meet your needs.</p>
+        </Section>
 
-        <CardGroup cards={productShowcaseCardArgs} />
+        <Section title="Product Packages">
+          <CardGroup cards={productShowcaseCardArgs} />
+        </Section>
 
-        <div className="margin-top-4">
-          <h2 className="margin-bottom-0">Why Choose Us?</h2>
+        <Section title="Why Choose Us?" className="margin-top-4">
           <div className="grid-row grid-gap">
             <div className="tablet:grid-col-4">
-              <h4 className="display-flex flex-align-center"><Icon name="check_circle" size="lg" className="text-success" /> Reliable</h4>
+              <h3 className="display-flex flex-align-center"><Icon name="check_circle" size="lg" className="text-success" /> Reliable</h3>
               <Prose>
                 <p>Trusted by thousands of customers worldwide with 99.9% uptime.</p>
               </Prose>
             </div>
             <div className="tablet:grid-col-4">
-              <h4 className="display-flex flex-align-center"><Icon name="security" size="lg" className="text-primary" /> Secure</h4>
+              <h3 className="display-flex flex-align-center"><Icon name="security" size="lg" className="text-primary" /> Secure</h3>
               <Prose>
                 <p>Enterprise-grade security with end-to-end encryption.</p>
               </Prose>
             </div>
             <div className="tablet:grid-col-4">
-              <h4 className="display-flex flex-align-center"><Icon name="support" size="lg" className="text-accent-cool" /> Support</h4>
+              <h3 className="display-flex flex-align-center"><Icon name="support" size="lg" className="text-accent-cool" /> Support</h3>
               <Prose>
                 <p>24/7 customer support with dedicated account managers.</p>
               </Prose>
             </div>
           </div>
-        </div>
-      </div>
+        </Section>
+      </Page>
       <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-product' }} />
       <Identifier {...identifierArgs} />
     </>
