@@ -84,6 +84,14 @@ export const storyDefs = {
       </>
     ),
   },
+  'Trigger Alert On Swap': {
+    ...commonArgs,
+    onContent: 'ON',
+    offContent: 'OFF',
+    inputProps: {
+      onChange: () => alert('Swap triggered!'),
+    },
+  },
 };
 
 export default {
@@ -132,4 +140,8 @@ export const ViewMoreViewLess = {
 
 export const AdvancedCustomChildren = {
   args: storyDefs['Advanced - Custom Children'],
+};
+
+export const TriggerAlertOnSwap = {
+  args: storyDefs['Trigger Alert On Swap'],
 };

@@ -188,7 +188,7 @@ export const SortableUswdsUncontrolled = {
 };
 
 // ─── 10b. Sortable (JS-controlled) ──────────────────────────────────────────────
-// Demonstrates controlled sort via a named JS function (handleTableSort).
+// Demonstrates controlled sort via a named JS function (exampleEventTrigger).
 // The function receives the column key and is responsible for re-rendering the
 // component with updated sort state (mirroring React's onSort callback).
 
@@ -197,8 +197,8 @@ export const SortableControlled = {
   args: {
     columns:      STATE_COLUMNS.map((col) => ({ ...col, sort_direction: col.key === 'name' ? 'asc' : null })),
     data:         [...STATES].sort((a, b) => a.name.localeCompare(b.name)),
-    caption:      'Controlled sort — handled by handleTableSort',
-    onSort:       'handleTableSort',
+    caption:      'Controlled sort — handled by exampleEventTrigger',
+    onSort:       'exampleEventTrigger',
     header_rows:  singleLevelHeaderRows(STATE_COLUMNS.map((col) => ({ ...col, sort_direction: col.key === 'name' ? 'asc' : null }))),
     leaf_columns: STATE_COLUMNS.map((col) => ({ ...col, sort_direction: col.key === 'name' ? 'asc' : null })),
     total_cols:   STATE_COLUMNS.length,

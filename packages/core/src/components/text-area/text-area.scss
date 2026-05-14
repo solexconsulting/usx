@@ -22,7 +22,7 @@
 
 /* ---------------------------------- */
 
-.usa-textarea.usx-textarea:not(.usa-textarea--error):not(.usa-textarea--success) {
+.usa-textarea.usx-textarea:not(.usa-input--error):not(.usa-input--success) {
 	&:not(:disabled) {
 		@if $usx-textarea-background-color {
 			background-color: $usx-textarea-background-color;
@@ -38,7 +38,7 @@
 	}
 }
 
-.usa-textarea.usx-textarea.usa-textarea--error {
+.usa-textarea.usx-textarea.usa-input--error {
 	@if $usx-textarea-error-border-width {
 		border-width: $usx-textarea-error-border-width;
 	}
@@ -60,7 +60,7 @@
 	}
 }
 
-.usa-textarea.usx-textarea.usa-textarea--success {
+.usa-textarea.usx-textarea.usa-input--success {
 	@if $usx-textarea-success-border-width {
 		border-width: $usx-textarea-success-border-width;
 	}

@@ -59,3 +59,16 @@ export const ColorChangeIcon = createStory({
 export const AdvancedCustomChildren = createStory({
   children: '<input type="checkbox" autocomplete="off"/><span class="usx-swap-on">Custom ON</span><span class="usx-swap-off">Custom OFF</span>',
 });
+
+export const ViewMoreViewLess = createStory({
+  onContent: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
+  offContent: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad...</p>',
+});
+
+export const TriggerAlertOnSwap = createStory({
+  onContent: 'ON',
+  offContent: 'OFF',
+  inputProps: {
+    onchange: "exampleEventTrigger('Swap triggered!')",
+  },
+});

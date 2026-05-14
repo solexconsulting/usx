@@ -9,7 +9,7 @@
   <span id="{{ field_id }}-hint" class="usa-hint">{{ hint }}</span>
 {% endif %}
 <textarea
-  class="usa-textarea usx-textarea{% if error %} usa-textarea--error{% elif success %} usa-textarea--success{% endif %}{% if className %} {{ className }}{% endif %}"
+  class="usa-textarea usx-textarea{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
   id="{{ field_id }}"
   placeholder="{{ placeholder|default:'' }}"
   {% if hint and error %}aria-describedby="{{ field_id }}-hint {{ field_id }}-error"

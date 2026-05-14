@@ -23,7 +23,7 @@ export default function TextArea({
   const hasSuccess = !!success;
   const classes = ClassNames(
     'usa-textarea', 'usx-textarea',
-    hasError ? 'usa-textarea--error' : hasSuccess ? 'usa-textarea--success' : null,
+    hasError ? 'usa-input--error' : hasSuccess ? 'usa-input--success' : null,
     className,
   );
   const hintId = hint ? `${textAreaId}-hint` : undefined;

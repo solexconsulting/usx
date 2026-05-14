@@ -30,11 +30,17 @@ export default {
     <script src="./js/uswds.min.js" defer></script>
     <script>
       console.log('USX Storybook: USWDS JS initialized');
-      const handleTableSort = (colKey) => {
-        console.log('Sorting by column:', colKey);
-        // Use alert to imply functionality since we don't have a real data source in Storybook
-        alert("Sorting by column: " + colKey);
+      const exampleEventTrigger = (tada=null) => {
+        if (tada) {
+          console.log('Event triggered with context:', tada);
+          // Use alert to imply functionality since we don't have a real data source in Storybook
+          alert("Event triggered with context: " + tada);
+        } else {
+          console.log('Event triggered with no context');
+          alert("Event triggered with no context");
+        }
       };
+      window.exampleEventTrigger = exampleEventTrigger;
     </script>
   `
 };

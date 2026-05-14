@@ -15,7 +15,7 @@
     {% endif %}
     {% if textArea %}
       <textarea
-        class="usa-textarea usx-textarea usa-character-count__field{% if error %} usa-textarea--error{% elif success %} usa-textarea--success{% endif %}"
+        class="usa-textarea usx-textarea usa-character-count__field{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}"
         id="{{ field_id }}"
         {% if hardLimit %}maxlength="{{ max }}"{% endif %}
         placeholder="{{ placeholder|default:'' }}"
