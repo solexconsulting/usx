@@ -8,6 +8,9 @@
   {% if extended %}usa-header--extended{% endif %}
   {{ className }}
 " {% if id %}id="{{ id }}"{% endif %} {% if styles %}style="{{ styles|safe }}"{% endif %}>
+  {% if not extended %}
+    <div class="usa-nav-container">
+  {% endif %}
   <div class="usa-navbar">
     <div class="usa-logo usx-logo">
       {% if branding.logo %}
@@ -110,8 +113,8 @@
       </div>
     </nav>
   {% else %}
-    <div class="usa-nav-container">
-      <nav aria-label="Primary navigation" class="usa-nav">
+    
+      <nav aria-label="Primary navigation" class="usa-nav usx-nav">
         <button type="button" class="usa-nav__close">
           {% icon name='close' %}{% endicon %}
         </button>
@@ -164,5 +167,9 @@
         {% endif %}
       </nav>
     </div>
+  {% endif %}
+
+  {% if not extended %}
+  </div>
   {% endif %}
 </header>
