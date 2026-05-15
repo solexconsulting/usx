@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './page.scss';
 
 export default function Page({
+  id = undefined,
   title = 'Page title',
   eyebrow = null,
   children = null,
@@ -14,7 +15,7 @@ export default function Page({
   const pageContent = children || content;
 
   return (
-    <main className={classes} {...props}>
+    <main id={id} className={classes} {...props}>
       <h1 className="usx-page__title">
         {eyebrow ? <span className="usx-eyebrow">{eyebrow}</span> : null}
         {title}
@@ -25,6 +26,7 @@ export default function Page({
 }
 
 Page.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
   eyebrow: PropTypes.node,
   children: PropTypes.node,

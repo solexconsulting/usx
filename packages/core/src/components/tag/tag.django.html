@@ -1,4 +1,6 @@
 {# Django template for Tag #}
+{% load components %}
+
 <span class=
   "
   usa-tag usx-tag
@@ -7,5 +9,5 @@
   {{ className }}
   "
 >
-  {{ children | default:value }}
+  {% if icon %}{% icon name=icon size="3" %}{% endicon %}{% endif %}{{ children | default:value }}
 </span>

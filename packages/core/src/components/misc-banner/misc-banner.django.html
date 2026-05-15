@@ -9,19 +9,54 @@
       <strong class="usx-misc-banner__badge text-{{ tone|default:'beta' }}">{{ badgeText|default:tone|default:'beta' }}</strong>
       <p class="usx-misc-banner__text">
         {{ message|default:'Welcome to the beta website!' }}
-        {% if learnMoreText %}
-          <a class="usa-link usx-misc-banner__link" href="{{ learnMoreHref|default:'https://usx.solex.studio/' }}">{{ learnMoreText }}</a>
+        {% if casualLinkText %}
+          <a class="usa-link usx-misc-banner__link" href="{{ casualLinkHref|default:'https://usx.solex.studio/' }}">{{ casualLinkText }}</a>
         {% endif %}
       </p>
-      {% if returnText %}
+      {% if importantLinkText %}
         <span class="usx-misc-banner__return-text">
-          <a class="usa-link usx-misc-banner__link" href="{{ returnHref|default:'https://usx.solex.studio/' }}">
+          <a class="usa-link usx-misc-banner__link" href="{{ importantLinkHref|default:'https://usx.solex.studio/' }}">
             <svg class="usa-icon usx-icon--size-1" aria-hidden="true" focusable="false" role="img">
-              <use href="/img/sprite.svg#{{ returnIcon|default:'undo' }}"></use>
+              <use href="/img/sprite.svg#{{ importantLinkIcon|default:'undo' }}"></use>
             </svg>
-            {{ returnText }}
+            {{ importantLinkText }}
           </a>
         </span>
+      {% endif %}
+      {% if casualLinkText or importantLinkText %}
+        {% with dropdownBase=id|default:tone|default:'misc-banner' %}
+          <div class="usx-misc-banner__dropdown">
+            <input
+              id="{{ dropdownBase }}-dropdown-toggle"
+              type="checkbox"
+              class="usx-misc-banner__dropdown-toggle"
+            >
+            <label
+              class="usx-misc-banner__dropdown-button"
+              for="{{ dropdownBase }}-dropdown-toggle"
+              aria-controls="{{ dropdownBase }}-dropdown"
+              aria-label="Toggle banner links"
+            >
+              <svg class="usa-icon usx-icon usa-icon--size-4" aria-hidden="true" focusable="false" role="img">
+                <use href="/img/sprite.svg#expand_more"></use>
+              </svg>
+            </label>
+            <div id="{{ dropdownBase }}-dropdown" class="usx-misc-banner__dropdown-content">
+              <ul>
+                {% if casualLinkText and casualLinkHref %}
+                  <li>
+                    <a class="usa-link usx-misc-banner__link" href="{{ casualLinkHref }}">{{ casualLinkText }}</a>
+                  </li>
+                {% endif %}
+                {% if importantLinkText and importantLinkHref %}
+                  <li>
+                    <a class="usa-link usx-misc-banner__link" href="{{ importantLinkHref|default:'https://usx.solex.studio/' }}">{{ importantLinkText }}</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        {% endwith %}
       {% endif %}
     {% endif %}
   </div>

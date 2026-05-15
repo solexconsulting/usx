@@ -12,7 +12,7 @@ import Prose from '../prose/Prose';
 import Section from '../section/Section';
 import SideNav from '../sidenav/SideNav';
 import Tag from '../tag/Tag';
-import { headerArgs, footerArgs, identifierArgs } from './commonArgs';
+import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './commonArgs';
 
 export default {
   title: 'Examples',
@@ -26,16 +26,7 @@ export const BlogPost = {
         id="example-1-banner"
         ariaLabel="Example banner"
       />
-      <MiscBanner
-        tone="base"
-        badgeText="misc"
-        message="This is a miscellaneous banner."
-        learnMoreText="Casual Link"
-        learnMoreHref="#"
-        returnText="Important Link"
-        returnHref="#"
-        returnIcon="arrow_forward"
-      />
+      <MiscBanner {...miscBannerArgs} />
       <Header
         id="blog-header"
         {...headerArgs}

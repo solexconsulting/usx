@@ -2,4 +2,10 @@
 
 .usx-tag {
   letter-spacing: .07rem;
+  display: inline-flex;
+  align-items: center;
+
+  .usa-icon {
+    margin-right: .25rem;
+  }
 }

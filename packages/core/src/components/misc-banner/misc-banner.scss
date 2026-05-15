@@ -11,6 +11,7 @@
     margin-bottom: 0;
     font-size: 1.07rem;
     color: white;
+    background-color: inherit;
     padding-top: .75rem;
     padding-bottom: .75rem;
 
@@ -53,6 +54,83 @@
 
       @media (min-width: 64em) {
         display: inline-block;
+      }
+    }
+    
+    .usx-misc-banner__dropdown {
+      display: inline-block;
+      margin: 0 0 0 auto;
+      background-color: inherit;
+
+      @media (min-width: 64em) {
+        display: none;
+      }
+
+      .usx-misc-banner__dropdown-toggle {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .usx-misc-banner__dropdown-toggle:focus + .usx-misc-banner__dropdown-button {
+        outline: 0.25rem solid #9bdaf1;
+      }
+
+      .usx-misc-banner__dropdown-button {
+        height: 3em;
+        width: 3em;
+        background: none;
+        border: none;
+        display: flex;
+        padding: 0;
+        margin: -.5rem;
+        margin-right: -1rem;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        user-select: none;
+
+        svg {
+          transition: transform 0.2s ease;
+        }
+      }
+
+      .usx-misc-banner__dropdown-toggle:checked + .usx-misc-banner__dropdown-button > svg {
+        transform: rotate(180deg);
+      }
+      
+      .usx-misc-banner__dropdown-content {
+        display: none;
+        position: absolute;
+        z-index: 400;
+        background-color: inherit;
+        top: 100%;
+        right: 0;
+
+        .usx-misc-banner__link {
+          display: inline-block;
+          color: $color-light-text;
+        }
+
+        ul {
+          line-height: 1.6;
+          margin: 0;
+          padding: .75rem 2rem .75rem 1.25rem;
+          list-style-type: none;
+          width: 20rem;
+
+          li {
+            margin-bottom: 0.75rem;
+
+            &:last-child {
+              margin-bottom: .25rem;
+            }
+          }
+        }
+      }
+
+      .usx-misc-banner__dropdown-toggle:checked ~ .usx-misc-banner__dropdown-content {
+        display: block;
       }
     }
   }

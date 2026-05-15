@@ -1,7 +1,6 @@
-import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './Tag.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -11,126 +10,17 @@ export default {
   argTypes: generatedArgTypes,
 };
 
-const defaultArgs = {
-  children: 'Info',
-};
+const createStory = createDjangoStory('tag');
 
-const bigArgs = {
-  children: 'Big',
-  big: true,
-};
-
-const primaryArgs = {
-  children: 'Primary',
-  color: 'primary',
-};
-
-const secondaryArgs = {
-  children: 'Secondary',
-  color: 'secondary',
-};
-
-const accentCoolArgs = {
-  children: 'Accent Cool',
-  color: 'accent-cool',
-};
-
-const blueArgs = {
-  children: 'Blue',
-  color: 'blue',
-};
-
-const baseArgs = {
-  children: 'Base',
-  color: 'base',
-};
-
-export const Default = {
-  args: defaultArgs,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'tag', props: defaultArgs })
-      }
-    }
-  },
-  render: djangoComponent('tag')
-};
-
-export const Big = {
-  name: 'Big tag',
-  args: bigArgs,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'tag', props: bigArgs })
-      }
-    }
-  },
-  render: djangoComponent('tag')
-};
-
-export const Primary = {
-  name: 'Primary color',
-  args: primaryArgs,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'tag', props: primaryArgs })
-      }
-    }
-  },
-  render: djangoComponent('tag')
-};
-
-export const Secondary = {
-  name: 'Secondary color',
-  args: secondaryArgs,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'tag', props: secondaryArgs })
-      }
-    }
-  },
-  render: djangoComponent('tag')
-};
-
-export const AccentCool = {
-  name: 'Accent Cool color',
-  args: accentCoolArgs,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'tag', props: accentCoolArgs })
-      }
-    }
-  },
-  render: djangoComponent('tag')
-};
-
-export const Blue = {
-  name: 'Blue color',
-  args: blueArgs,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'tag', props: blueArgs })
-      }
-    }
-  },
-  render: djangoComponent('tag')
-};
-
-export const Base = {
-  name: 'Base color',
-  args: baseArgs,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'tag', props: baseArgs })
-      }
-    }
-  },
-  render: djangoComponent('tag')
-};
+export const Default = createStory(storyDefs.Default);
+export const WithIcon = createStory(storyDefs.WithIcon);
+export const Big = createStory(storyDefs.Big);
+export const Primary = createStory(storyDefs.Primary);
+export const Secondary = createStory(storyDefs.Secondary);
+export const AccentCool = createStory(storyDefs.AccentCool);
+export const Blue = createStory(storyDefs.Blue);
+export const Base = createStory(storyDefs.Base);
+export const Info = createStory(storyDefs.Info);
+export const Success = createStory(storyDefs.Success);
+export const Warning = createStory(storyDefs.Warning);
+export const Error = createStory(storyDefs.Error);

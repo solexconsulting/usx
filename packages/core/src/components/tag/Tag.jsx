@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
+import Icon from '../icon/Icon';
 import './tag.scss';
 
 export default function Tag({
@@ -8,6 +9,7 @@ export default function Tag({
   big = false,
   value,
   color = null,
+  icon = null,
   className = '',
   children,
   ...props
@@ -22,7 +24,7 @@ export default function Tag({
 
   return (
     <span id={id} className={classes} {...props}>
-      {children || value}
+      {icon && <Icon name={icon} size="3" />} {children || value}
     </span>
   );
 }

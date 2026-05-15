@@ -12,6 +12,17 @@ const searchArgs = {
   placeholder: 'Search...',
 };
 
+export const miscBannerArgs = {
+  tone: 'beta',
+  badgeText: 'beta',
+  message: 'Welcome to the beta website!',
+  casualLinkText: 'Learn more',
+  casualLinkHref: '#',
+  importantLinkText: 'Return to classic site',
+  importantLinkHref: '#',
+  importantLinkIcon: 'arrow_forward',
+};
+
 export const headerArgs = {
   branding: {
     logo: {

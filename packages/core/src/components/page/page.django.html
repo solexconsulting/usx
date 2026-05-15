@@ -1,5 +1,5 @@
 {# Django template for Page #}
-<main class="usx-page{% if className %} {{ className }}{% endif %}">
+<main{% if id %} id="{{ id }}"{% endif %} class="usx-page{% if className %} {{ className }}{% endif %}">
   <h1 class="usx-page__title">{% if eyebrow %}<span class="usx-eyebrow">{{ eyebrow }}</span>{% endif %}{{ title|default:'Page title' }}</h1>
   <div class="usx-page__content">{{ content|default:''|safe }}</div>
 </main>
