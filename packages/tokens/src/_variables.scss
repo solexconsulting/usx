@@ -248,6 +248,16 @@ $usx-site-alert-default-border-color: null !default;
 $usx-site-alert-emergency-bg-color: null !default;
 $usx-site-alert-maintenance-bg-color: null !default;
 
+// ── Component tokens: Summary Box ────────────────────────────────────────────
+$usx-summary-box-border: 2px solid $color-primary !default;
+$usx-summary-box-border-radius: $r-lg !default;
+$usx-summary-box-padding: null !default;
+$usx-summary-box-background-color: $color-primary-darkest !default;
+$usx-summary-box-text-color: $color-light-text !default;
+$usx-summary-box-link-color: $color-light-text !default;
+$usx-summary-box-link-hover-color: $color-accent-cool !default;
+$usx-summary-box-link-visited-color: #c254ee !default;
+
 // ── Component tokens: Input / Textarea ───────────────────────────────────────
 $usx-input-border-radius: $r-sm !default;
 $usx-input-background-color: null !default;

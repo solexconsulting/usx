@@ -1,4 +1,19 @@
 {# Django template for SummaryBox #}
-<div class="usx-summary-box">
-  <div class="summary-box__content">SummaryBox</div>
+<div
+  class="usa-summary-box usx-summary-box {{ className }}"
+  role="region"
+  aria-labelledby="{{ id|default:'summary-box-heading' }}"
+>
+  <div class="usa-summary-box__body">
+    <h4 class="usa-summary-box__heading" id="{{ id|default:'summary-box-heading' }}">
+      {{ heading }}
+    </h4>
+    <div class="usa-summary-box__text">
+      {% if children %}
+        {{ children|safe }}
+      {% elif content %}
+        {{ content|safe }}
+      {% endif %}
+    </div>
+  </div>
 </div>
