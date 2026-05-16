@@ -1,11 +1,17 @@
 {
   "name": "site-alert",
   "template": "site-alert/site-alert.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: SiteAlert"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "className": { "type": "string", "description": "Additional classes" },
+    "variant": { "type": "select", "options": ["info", "emergency", "maintenance", "maintenance-warning"], "description": "Site alert variant" },
+    "slim": { "type": "boolean", "description": "Slim alert variant" },
+    "noIcon": { "type": "boolean", "description": "Hide the alert icon" },
+    "dismissible": { "type": "boolean", "description": "Make alert dismissible" },
+    "role": { "type": "select", "options": ["", "alert", "status"], "description": "Optional ARIA role for the site alert section" },
+    "alertHeading": { "type": "string", "description": "Alert heading text" },
+    "alertText": { "type": "string", "description": "Alert text content" },
+    "alertContent": { "type": "object", "description": "Alert rich content (React node / HTML string)" },
+    "ariaLabel": { "type": "string", "description": "Aria label for section" },
+    "ariaLabelledby": { "type": "string", "description": "Aria-labelledby target for section (preferred over ariaLabel)" }
   }
 }

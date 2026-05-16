@@ -48,6 +48,33 @@ export const storyDefs = {
     slim: false,
     noIcon: false
   },
+  RegionRoleDefault: {
+    variant: 'info',
+    heading: 'Informative region',
+    text: 'Info and warning alerts default to role="region".',
+  },
+  StatusRoleDefault: {
+    variant: 'success',
+    heading: 'Success status',
+    text: 'Success alerts default to role="status".',
+  },
+  AlertRoleDefault: {
+    variant: 'error',
+    heading: 'Error alert',
+    text: 'Error and emergency alerts default to role="alert".',
+  },
+  RegionWithAriaLabel: {
+    variant: 'warning',
+    heading: 'Warning region with label',
+    text: 'Region role with explicit aria-label.',
+    ariaLabel: 'Warning notification',
+  },
+  ExplicitRoleOverride: {
+    variant: 'warning',
+    heading: 'Warning as status',
+    text: 'Role can still be overridden when needed.',
+    role: 'status',
+  },
 };
 
 export const Info = { args: storyDefs.Info };
@@ -55,3 +82,8 @@ export const Warning = { args: storyDefs.Warning };
 export const Success = { args: storyDefs.Success };
 export const Error = { args: storyDefs.Error };
 export const Emergency = { args: storyDefs.Emergency };
+export const RegionRoleDefault = { name: 'Default: region', args: storyDefs.RegionRoleDefault };
+export const StatusRoleDefault = { name: 'Default: status', args: storyDefs.StatusRoleDefault };
+export const AlertRoleDefault = { name: 'Default: alert', args: storyDefs.AlertRoleDefault };
+export const RegionWithAriaLabel = { name: 'Region with aria-label', args: storyDefs.RegionWithAriaLabel };
+export const ExplicitRoleOverride = { name: 'Role override', args: storyDefs.ExplicitRoleOverride };

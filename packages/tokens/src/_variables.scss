@@ -242,6 +242,12 @@ $usx-alert-heading-margin-block-end: null !default;
 $usx-alert-text-font-size: null !default;
 $usx-alert-text-line-height: null !default;
 
+// ── Component tokens: Site Alert ─────────────────────────────────────────────
+$usx-site-alert-default-bg-color: null !default;
+$usx-site-alert-default-border-color: null !default;
+$usx-site-alert-emergency-bg-color: null !default;
+$usx-site-alert-maintenance-bg-color: null !default;
+
 // ── Component tokens: Input / Textarea ───────────────────────────────────────
 $usx-input-border-radius: $r-sm !default;
 $usx-input-background-color: null !default;

@@ -6,7 +6,22 @@
         {% if slim %} usa-alert--slim usx-alert--slim{% endif %}
         {% if noIcon %} usa-alert--no-icon usx-alert--no-icon{% endif %}
     "
+    {% if role %}
+    role="{{ role }}"
+    {% elif variant == 'error' or variant == 'emergency' %}
     role="alert"
+    {% elif variant == 'success' %}
+    role="status"
+    {% else %}
+    role="region"
+    {% endif %}
+    {% if ariaLabelledby %}
+    aria-labelledby="{{ ariaLabelledby }}"
+    {% elif ariaLabel %}
+    aria-label="{{ ariaLabel }}"
+    {% elif variant == 'info' or variant == 'warning' %}
+    aria-label="{{ heading|default:'Informative status' }}"
+    {% endif %}
 >
   <div class="usa-alert__body usx-alert__body">
     {% if heading %}

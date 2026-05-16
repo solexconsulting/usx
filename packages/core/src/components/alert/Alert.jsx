@@ -9,6 +9,9 @@ export default function Alert({
   slim = false,
   noIcon = false,
   className = '',
+  role,
+  ariaLabel,
+  ariaLabelledby,
   ...props
 }) {
   const normalizedVariant = ['info', 'warning', 'success', 'error', 'emergency'].includes(variant)
@@ -29,10 +32,28 @@ export default function Alert({
     .filter(Boolean)
     .join(' ');
 
-  const role = normalizedVariant === 'error' || normalizedVariant === 'emergency' ? 'alert' : props.role;
+  const resolvedRole = role || (
+    normalizedVariant === 'error' || normalizedVariant === 'emergency'
+      ? 'alert'
+      : normalizedVariant === 'success'
+        ? 'status'
+        : 'region'
+  );
+
+  const accessibilityProps = {
+    role: resolvedRole,
+  };
+
+  if (ariaLabelledby) {
+    accessibilityProps['aria-labelledby'] = ariaLabelledby;
+  } else if (ariaLabel) {
+    accessibilityProps['aria-label'] = ariaLabel;
+  } else if (resolvedRole === 'region') {
+    accessibilityProps['aria-label'] = heading || `${normalizedVariant} alert`;
+  }
 
   return (
-    <div className={classes} role={role} {...props}>
+    <div className={classes} {...accessibilityProps} {...props}>
       <div className="usa-alert__body usx-alert__body">
         {!slim && heading ? <h4 className="usa-alert__heading usx-alert__heading">{heading}</h4> : null}
         <p className="usa-alert__text usx-alert__text">
@@ -52,4 +73,6 @@ Alert.propTypes = {
   noIcon: PropTypes.bool,
   className: PropTypes.string,
   role: PropTypes.string,
+  ariaLabel: PropTypes.string,
+  ariaLabelledby: PropTypes.string,
 };

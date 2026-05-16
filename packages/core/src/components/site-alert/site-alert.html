@@ -1,4 +1,373 @@
-<div class="usx-site-alert">
-  <!-- Canonical HTML for SiteAlert -->
-  <div class="site-alert__content">NOT IMPLEMENTED</div>
-</div>
+<h3 class="site-preview-heading">Standard informational site alert</h3>
+
+<section class="usa-site-alert usx-site-alert usa-site-alert--info" aria-label="Informational site alert">
+  <div class="usa-alert usa-alert--info usx-alert usx-alert--info">
+    <div class="usa-alert__body">
+      <h4 class="usa-alert__heading">Short alert message</h4>
+      <p class="usa-alert__text">
+        Additional context and followup information including
+        <a class="usa-link" href="javascript:void(0);">a link</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Dismissible informational site alert</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usa-site-alert--info usa-site-alert--dismissible"
+  aria-label="Dismissible informational site alert"
+>
+  <div class="usa-alert usa-alert--info usx-alert usx-alert--info">
+    <div class="usa-alert__body">
+      <h4 class="usa-alert__heading">Short alert message</h4>
+      <p class="usa-alert__text">
+        Additional context and followup information including
+        <a class="usa-link" href="javascript:void(0);">a link</a>.
+      </p>
+    </div>
+  </div>
+  <button
+    class="usx-site-alert__close"
+    aria-label="Close alert"
+    onclick="this.closest('.usa-site-alert').remove();"
+  >
+    <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+      <use href="/img/sprite.svg#close"></use>
+    </svg>
+  </button>
+</section>
+
+<h3 class="site-preview-heading">Standard emergency site alert</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usa-site-alert--emergency"
+  aria-label="Emergency site alert"
+>
+  <div class="usa-alert usa-alert--emergency usx-alert usx-alert--emergency">
+    <div class="usa-alert__body">
+      <h4 class="usa-alert__heading">Emergency alert message</h4>
+      <p class="usa-alert__text">
+        Additional context and followup information including
+        <a class="usa-link" href="javascript:void(0);">a link</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Dismissible emergency site alert</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usa-site-alert--emergency usa-site-alert--dismissible"
+  aria-label="Dismissible emergency site alert"
+>
+  <div class="usa-alert usa-alert--emergency usx-alert usx-alert--emergency">
+    <div class="usa-alert__body">
+      <h4 class="usa-alert__heading">Emergency alert message</h4>
+      <p class="usa-alert__text">
+        Additional context and followup information including
+        <a class="usa-link" href="javascript:void(0);">a link</a>.
+      </p>
+    </div>
+  </div>
+  <button
+    class="usx-site-alert__close"
+    aria-label="Close alert"
+    onclick="this.closest('.usa-site-alert').remove();"
+  >
+    <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+      <use href="/img/sprite.svg#close"></use>
+    </svg>
+  </button>
+</section>
+
+<h3 class="site-preview-heading">Site alert with no header</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usa-site-alert--emergency usa-site-alert--no-heading"
+  aria-label="Emergency site alert without heading"
+>
+  <div class="usa-alert usa-alert--emergency usx-alert usx-alert--emergency">
+    <div class="usa-alert__body">
+      <p class="usa-alert__text">
+        <strong>Short alert message.</strong> Additional context and followup
+        information including
+        <a class="usa-link" href="javascript:void(0);">a link</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Dismissible site alert with no header</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usa-site-alert--emergency usa-site-alert--no-heading usa-site-alert--dismissible"
+  aria-label="Dismissible emergency site alert without heading"
+>
+  <div class="usa-alert usa-alert--emergency usx-alert usx-alert--emergency">
+    <div class="usa-alert__body">
+      <p class="usa-alert__text">
+        <strong>Short alert message.</strong> Additional context and followup
+        information including
+        <a class="usa-link" href="javascript:void(0);">a link</a>.
+      </p>
+    </div>
+  </div>
+  <button
+    class="usx-site-alert__close"
+    aria-label="Close alert"
+    onclick="this.closest('.usa-site-alert').remove();"
+  >
+    <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+      <use href="/img/sprite.svg#close"></use>
+    </svg>
+  </button>
+</section>
+
+<h3 class="site-preview-heading">Site alert with list </h3>
+
+<section
+  class="usa-site-alert usx-site-alert usa-site-alert--emergency"
+  aria-label="Emergency site alert with list"
+>
+  <div class="usa-alert usa-alert--emergency usx-alert usx-alert--emergency">
+    <div class="usa-alert__body">
+      <h4 class="usa-alert__heading">Emergency alert message</h4>
+      <ul class="usa-list">
+        <li>
+          The primary emergency message and
+          <a class="usa-link" href="javascript:void(0);">a link</a> for
+          supporting context.
+        </li>
+        <li>
+          Another message,
+          <a class="usa-link" href="javascript:void(0);">and another link</a>.
+        </li>
+        <li>A final emergency message.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Dismissible site alert with list</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usa-site-alert--emergency usa-site-alert--dismissible"
+  aria-label="Dismissible emergency site alert with list"
+>
+  <div class="usa-alert usa-alert--emergency usx-alert usx-alert--emergency">
+    <div class="usa-alert__body">
+      <h4 class="usa-alert__heading">Emergency alert message</h4>
+      <ul class="usa-list">
+        <li>
+          The primary emergency message and
+          <a class="usa-link" href="javascript:void(0);">a link</a> for
+          supporting context.
+        </li>
+        <li>
+          Another message,
+          <a class="usa-link" href="javascript:void(0);">and another link</a>.
+        </li>
+        <li>A final emergency message.</li>
+      </ul>
+    </div>
+  </div>
+  <button
+    class="usx-site-alert__close"
+    aria-label="Close alert"
+    onclick="this.closest('.usa-site-alert').remove();"
+  >
+    <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+      <use href="/img/sprite.svg#close"></use>
+    </svg>
+  </button>
+</section>
+
+<h3 class="site-preview-heading">Slim site alert</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usa-site-alert--emergency usa-site-alert--slim"
+  aria-label="Slim emergency site alert"
+>
+  <div class="usa-alert usa-alert--emergency usa-alert--slim usx-alert usx-alert--emergency usx-alert--slim">
+    <div class="usa-alert__body">
+      <p class="usa-alert__text">
+        <strong>Short alert message.</strong> Additional context and followup
+        information including
+        <a class="usa-link" href="javascript:void(0);">a link</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Dismissible slim site alert</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usa-site-alert--emergency usa-site-alert--slim usa-site-alert--dismissible"
+  aria-label="Dismissible slim emergency site alert"
+>
+  <div class="usa-alert usa-alert--emergency usa-alert--slim usx-alert usx-alert--emergency usx-alert--slim">
+    <div class="usa-alert__body">
+      <p class="usa-alert__text">
+        <strong>Short alert message.</strong> Additional context and followup
+        information including
+        <a class="usa-link" href="javascript:void(0);">a link</a>.
+      </p>
+    </div>
+  </div>
+  <button
+    class="usx-site-alert__close"
+    aria-label="Close alert"
+    onclick="this.closest('.usa-site-alert').remove();"
+  >
+    <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+      <use href="/img/sprite.svg#close"></use>
+    </svg>
+  </button>
+</section>
+
+<h3 class="site-preview-heading">Site alert with no icon</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usa-site-alert--emergency usa-site-alert--no-icon"
+  aria-label="Emergency site alert without icon"
+>
+  <div class="usa-alert usa-alert--emergency usa-alert--no-icon usx-alert usx-alert--emergency usx-alert--no-icon">
+    <div class="usa-alert__body">
+      <p class="usa-alert__text">
+        <strong>Short alert message.</strong> Additional context and followup
+        information including
+        <a class="usa-link" href="javascript:void(0);">a link</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Dismissible site alert with no icon</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usa-site-alert--emergency usa-site-alert--no-icon usa-site-alert--dismissible"
+  aria-label="Dismissible emergency site alert without icon"
+>
+  <div class="usa-alert usa-alert--emergency usa-alert--no-icon usx-alert usx-alert--emergency usx-alert--no-icon">
+    <div class="usa-alert__body">
+      <p class="usa-alert__text">
+        <strong>Short alert message.</strong> Additional context and followup
+        information including
+        <a class="usa-link" href="javascript:void(0);">a link</a>.
+      </p>
+    </div>
+  </div>
+  <button
+    class="usx-site-alert__close"
+    aria-label="Close alert"
+    onclick="this.closest('.usa-site-alert').remove();"
+  >
+    <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+      <use href="/img/sprite.svg#close"></use>
+    </svg>
+  </button>
+</section>
+
+<h3 class="site-preview-heading">Site Maintenance Alert</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usx-site-alert--maintenance"
+  aria-label="Maintenance site alert"
+>
+  <div class="usa-alert usa-alert--error usx-alert usx-alert--error">
+    <div class="usa-alert__body">
+      <h4 class="usa-alert__heading">Site Maintenance</h4>
+      <p class="usa-alert__text">
+        The site is currently undergoing maintenance.
+        If you have trouble signing in or using tools,
+        check back after we're finished. Thank you for
+        your patience.<br/>
+        <strong>Date:</strong> Sunday, June 21, 2099<br/>
+        <strong>Time:</strong> 1:00 AM EST<br/>
+        <strong>Expected duration:</strong> 4 hours 30 minutes
+      </p>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Dismissible Site Maintenance Alert</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usx-site-alert--maintenance usa-site-alert--dismissible"
+  aria-label="Dismissible maintenance site alert"
+>
+  <div class="usa-alert usa-alert--error usx-alert usx-alert--error">
+    <div class="usa-alert__body">
+      <h4 class="usa-alert__heading">Site Maintenance</h4>
+      <p class="usa-alert__text">
+        The site is currently undergoing maintenance.
+        If you have trouble signing in or using tools,
+        check back after we're finished. Thank you for
+        your patience.<br/>
+        <strong>Date:</strong> Sunday, June 21, 2099<br/>
+        <strong>Time:</strong> 1:00 AM EST<br/>
+        <strong>Expected duration:</strong> 4 hours 30 minutes
+      </p>
+    </div>
+  </div>
+  <button
+    class="usx-site-alert__close"
+    aria-label="Close alert"
+    onclick="this.closest('.usa-site-alert').remove();"
+  >
+    <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+      <use href="/img/sprite.svg#close"></use>
+    </svg>
+  </button>
+</section>
+
+
+<h3 class="site-preview-heading">Site Maintenance Warning Alert</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usx-site-alert--maintenance-warning"
+  aria-label="Maintenance warning site alert"
+>
+  <div class="usa-alert usa-alert--warning usx-alert usx-alert--warning">
+    <div class="usa-alert__body">
+      <h4 class="usa-alert__heading">Site Maintenance</h4>
+      <p class="usa-alert__text">
+        This site is scheduled for maintenance. The work is expected to last 2 hours.
+        During that time, you won't be able to sign in or use tools.<br/>
+        <strong>Date:</strong> Monday, June 22, 2099<br/>
+        <strong>Time:</strong> 1:00 AM EST<br/>
+        <strong>Expected duration:</strong> 2 hours
+      </p>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Dismissible Site Maintenance Warning Alert</h3>
+
+<section
+  class="usa-site-alert usx-site-alert usx-site-alert--maintenance-warning usa-site-alert--dismissible"
+  aria-label="Dismissible maintenance warning site alert"
+>
+  <div class="usa-alert usa-alert--warning usx-alert usx-alert--warning">
+    <div class="usa-alert__body">
+      <h4 class="usa-alert__heading">Site Maintenance</h4>
+      <p class="usa-alert__text">
+        This site is scheduled for maintenance. The work is expected to last 2 hours.
+        During that time, you won't be able to sign in or use tools.<br/>
+        <strong>Date:</strong> Monday, June 22, 2099<br/>
+        <strong>Time:</strong> 1:00 AM EST<br/>
+        <strong>Expected duration:</strong> 2 hours
+      </p>
+    </div>
+  </div>
+  <button
+    class="usx-site-alert__close"
+    aria-label="Close alert"
+    onclick="this.closest('.usa-site-alert').remove();"
+  >
+    <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+      <use href="/img/sprite.svg#close"></use>
+    </svg>
+  </button>
+</section>

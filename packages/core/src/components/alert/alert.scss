@@ -2,8 +2,10 @@
 @use '../../../../tokens/src/_variables' as *;
 
 
-.usx-alert,
-.usa-alert__body {
+// For alerts that aren't under usx-site-alert
+.usx-alert:not(.usx-site-alert *){
+// Not sure why this was here
+// .usa-alert__body {
 	@if $usx-alert-border-radius {
 		border-radius: $usx-alert-border-radius;
 	}

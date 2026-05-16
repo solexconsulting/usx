@@ -14,7 +14,7 @@
         },
         "variant": {
             "type": "select",
-            "options": ["info", "success", "warning", "error"],
+            "options": ["info", "success", "warning", "error", "emergency"],
             "default": "info",
             "description": "The visual style of the alert, indicating the type of message being conveyed."
         },
@@ -37,6 +37,22 @@
             "type": "string",
             "default": "",
             "description": "Inline styles to apply to the alert component."
+        },
+        "role": {
+            "type": "select",
+            "options": ["", "alert", "status", "region"],
+            "default": "",
+            "description": "Optional ARIA role override. Defaults by variant: error/emergency -> alert, success -> status, info/warning -> region."
+        },
+        "ariaLabel": {
+            "type": "string",
+            "default": "",
+            "description": "Accessible label used when needed (especially for role=region)."
+        },
+        "ariaLabelledby": {
+            "type": "string",
+            "default": "",
+            "description": "ID reference to a labeling element. Takes precedence over ariaLabel."
         }
     }
 }
