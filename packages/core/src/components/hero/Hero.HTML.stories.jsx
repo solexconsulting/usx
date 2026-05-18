@@ -7,14 +7,13 @@ export default {
 };
 
 export const AllVariants = {
+  name: 'All variants',
   parameters: {
     docs: {
       source: {
-        code: html
-      }
-    }
+        code: html,
+      },
+    },
   },
-  render: () => {
-    return <div dangerouslySetInnerHTML={{ __html: html }} />;
-  }
-}
+  render: () => <div dangerouslySetInnerHTML={{ __html: html }} />,
+};

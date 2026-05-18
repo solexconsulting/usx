@@ -1,24 +1,20 @@
-import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
-
-const generatedArgTypes = buildArgTypes(config.props || {});
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './Hero.React.stories.jsx';
 
 export default {
   title: 'Django/Hero',
   tags: ['autodocs'],
-  argTypes: generatedArgTypes,
+  argTypes: buildArgTypes(config.props || {}),
+  excludeStories: [],
 };
 
-export const Default = {
-  args: config.default || {},
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'hero', props: config.default || {} })
-      }
-    }
-  },
-  render: djangoComponent({ componentName: 'hero' })
-};
+const createStory = createDjangoStory({ componentName: 'hero' });
+
+export const Default = createStory(storyDefs.Default);
+export const NoBackground = createStory(storyDefs.NoBackground);
+export const WithoutCallout = createStory(storyDefs.WithoutCallout);
+export const WithoutButton = createStory(storyDefs.WithoutButton);
+export const NoOverlay = createStory(storyDefs.NoOverlay);
+export const WithSearch = createStory(storyDefs.WithSearch);
+

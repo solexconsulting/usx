@@ -2,10 +2,66 @@
   "name": "hero",
   "template": "hero/hero.django.html",
   "default": {
-    "children": "NOT IMPLEMENTED: Hero"
+    "title": "The hero heading",
+    "callout": "A callout heading",
+    "paragraph": "A short description of the hero section that provides context for the call to action.",
+    "button": {
+      "href": "#",
+      "text": "Call to action"
+    },
+    "backgroundImage": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
+    "overlay": true
   },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "title": {
+      "type": "string",
+      "description": "The main heading text"
+    },
+    "callout": {
+      "type": "string",
+      "description": "Optional alternate heading span displayed above the main title"
+    },
+    "paragraph": {
+      "type": "string",
+      "description": "Optional body paragraph text"
+    },
+    "button": {
+      "type": "object",
+      "description": "Optional call-to-action button. Mutually exclusive with search.",
+      "properties": {
+        "href": { "type": "string", "description": "Button link URL" },
+        "text": { "type": "string", "description": "Button label text" },
+        "onClick": { "type": "function", "description": "Optional click handler for the button" }
+      }
+    },
+    "search": {
+      "type": "object",
+      "description": "Optional search form. When provided, renders a Search component instead of the button.",
+      "properties": {
+        "id": { "type": "string", "description": "Input/form ID" },
+        "label": { "type": "string", "description": "Search label and button text" },
+        "placeholder": { "type": "string", "description": "Input placeholder text" },
+        "action": { "type": "string", "description": "Form action URL" },
+        "big": { "type": "boolean", "description": "Use the big search variant" },
+        "buttonVariant": { "type": "string", "description": "Button variant override" }
+      }
+    },
+    "backgroundImage": {
+      "type": "string",
+      "description": "URL of the background image applied via inline style"
+    },
+    "overlay": {
+      "type": "boolean",
+      "default": true,
+      "description": "When true, adds a semi-transparent dark overlay over the background image to improve text legibility"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "description": "Accessible label for the section element (defaults to 'Introduction')"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
   }
 }

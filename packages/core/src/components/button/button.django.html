@@ -34,7 +34,7 @@
         {% icon name=leftIcon.name color=leftIcon.color size=leftIcon.size %}{% endicon %}
     {% endif %}
 
-    {{ children|default:label }}
+    {% if children %}{{ children }}{% elif label %}{{ label }}{% endif %}
 
     {% if rightIcon and rightIcon.name %}
         {% icon name=rightIcon.name color=rightIcon.color size=rightIcon.size %}{% endicon %}

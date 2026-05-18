@@ -1,4 +1,22 @@
 {# Django template for Hero #}
-<div class="usx-hero">
-  <div class="hero__content">Hero</div>
-</div>
+{% load components %}
+<section
+  class="usx-hero{% if overlay != False %} usx-hero--has-overlay{% endif %}{% if className %} {{ className }}{% endif %}"
+  aria-label="{% if ariaLabel %}{{ ariaLabel }}{% else %}Introduction{% endif %}"
+  {% if backgroundImage %}style="background-image: url('{{ backgroundImage }}')"{% endif %}
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        {% if callout %}<span class="usx-hero__heading--alt">{{ callout }}</span>{% endif %}
+        {{ title }}
+      </h1>
+      {% if paragraph %}<p class="usx-hero__paragraph">{{ paragraph }}</p>{% endif %}
+      {% if search %}
+        {% search id=search.id label=search.label placeholder=search.placeholder action=search.action big=search.big buttonVariant=search.buttonVariant %}{% endsearch %}
+      {% elif button %}
+        {% button variant="primary" href=button.href %}{{ button.text }}{% endbutton %}
+      {% endif %}
+    </div>
+  </div>
+</section>
