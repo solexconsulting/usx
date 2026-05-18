@@ -1,15 +1,9 @@
 import React from 'react';
 import TagGroup from './TagGroup';
-import Tag from '../tag/Tag';
 import config from './config.json';
+import { buildArgTypes } from '../../utils/storyHelpers';
 
-export default {
-  title: 'React/TagGroup',
-  component: TagGroup,
-  tags: ['autodocs'],
-};
-
-const Template = (args) => <TagGroup {...args} />;
+const generatedArgTypes = buildArgTypes(config.props || {});
 
 const defaultTags = [
   { value: 'Primary', color: 'primary' },
@@ -21,10 +15,22 @@ const defaultTags = [
 
 const bigTags = defaultTags.map((t) => ({ ...t, big: true }));
 
-export const Default = {
-  args: { tags: defaultTags }
+export const storyDefs = {
+  Default: {
+    tags: defaultTags,
+  },
+  Big: {
+    tags: bigTags,
+  },
 };
 
-export const Big = {
-  args: { tags: bigTags }
+export default {
+  title: 'React/TagGroup',
+  component: TagGroup,
+  tags: ['autodocs'],
+  argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
+
+export const Default = { args: storyDefs.Default };
+export const Big = { args: storyDefs.Big };

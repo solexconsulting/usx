@@ -10,21 +10,19 @@ export default {
   component: Breadcrumb,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
-const Template = (args) => <Breadcrumb {...args} />;
+export const storyDefs = {
+  Default: config.default || {},
+  WithRdfa: { ...(config.default || {}), rdfa: true },
+  Wrap: { ...(config.default || {}), wrap: true },
+  WithClassName: { ...(config.default || {}), className: 'custom-breadcrumb-class' },
+  Empty: { items: [] },
+};
 
-export const Default = Template.bind({});
-Default.args = config.default || {};
-
-export const WithRdfa = Template.bind({});
-WithRdfa.args = { ...(config.default || {}), rdfa: true };
-
-export const Wrap = Template.bind({});
-Wrap.args = { ...(config.default || {}), wrap: true };
-
-export const WithClassName = Template.bind({});
-WithClassName.args = { ...(config.default || {}), className: 'custom-breadcrumb-class' };
-
-export const Empty = Template.bind({});
-Empty.args = { items: [] };
+export const Default = { args: storyDefs.Default };
+export const WithRdfa = { args: storyDefs.WithRdfa };
+export const Wrap = { args: storyDefs.Wrap };
+export const WithClassName = { args: storyDefs.WithClassName };
+export const Empty = { args: storyDefs.Empty };

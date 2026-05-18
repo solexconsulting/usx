@@ -1,65 +1,24 @@
-import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './Input.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
-
-const getArgs = (index) => ({
-  id: `example-input-${index}`,
-  label: `Example Input ${index}`,
-});
 
 export default {
   title: 'Django/Input',
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: [],
 };
 
-const createStory = (args) => ({
-  args,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'input', props: args })
-      }
-    }
-  },
-  render: djangoComponent('input')
-});
+const createStory = createDjangoStory('input');
 
-export const Default = createStory({
-  ...getArgs(1),
-  placeholder: 'Type here',
-});
-
-export const WithHint = createStory({
-  ...getArgs(2),
-  hint: 'Enter your full legal name.',
-});
-
-export const Required = createStory({
-  ...getArgs(3),
-  required: true,
-});
-
-export const ScreenReaderOnlyLabel = createStory({
-  ...getArgs(4),
-  screenReaderOnlyLabel: true,
-  placeholder: 'Search…',
-});
-
-export const ErrorState = createStory({
-  ...getArgs(5),
-  error: 'Enter a valid email address.',
-});
-
-export const SuccessState = createStory({
-  ...getArgs(6),
-  success: 'Your email address has been accepted.',
-});
-
-export const Disabled = createStory({
-  ...getArgs(7),
-  disabled: true,
-});
+export const Default = createStory(storyDefs.Default);
+export const WithHint = createStory(storyDefs.WithHint);
+export const Required = createStory(storyDefs.Required);
+export const ScreenReaderOnlyLabel = createStory(storyDefs.ScreenReaderOnlyLabel);
+export const ErrorState = createStory(storyDefs.ErrorState);
+export const ErrorStateNoMessage = createStory(storyDefs.ErrorStateNoMessage);
+export const SuccessState = createStory(storyDefs.SuccessState);
+export const SuccessStateNoMessage = createStory(storyDefs.SuccessStateNoMessage);
+export const Disabled = createStory(storyDefs.Disabled);

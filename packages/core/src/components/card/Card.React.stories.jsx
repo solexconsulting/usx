@@ -108,79 +108,56 @@ export default {
   component: Card,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
-export const Default = {
-  args: {
+export const storyDefs = {
+  Default: {
     ...baseArgs,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const WithImage = {
-  args: {
+  WithImage: {
     ...baseArgs,
     ...singleImageArgs,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const WithTags = {
-  args: {
+  WithTags: {
     ...baseArgs,
     ...singleImageArgs,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const WithImageAndTags = {
-  args: {
+  WithImageAndTags: {
     ...baseArgs,
     ...singleImageArgs,
     ...tagsArgs,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const FlagLayout = {
-  args: {
+  FlagLayout: {
     ...baseArgs,
     ...singleImageArgs,
     flag: true,
     className: 'grid-col-8',
   },
-};
-
-export const MediaRight = {
-  args: {
+  MediaRight: {
     ...baseArgs,
     ...singleImageArgs,
     flag: true,
     mediaRight: true,
     className: 'grid-col-8',
   },
-};
-
-export const HeaderFirst = {
-  args: {
+  HeaderFirst: {
     ...baseArgs,
     ...singleImageArgs,
     headerFirst: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const MediaInset = {
-  args: {
+  MediaInset: {
     ...baseArgs,
     ...singleImageArgs,
     mediaInset: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const MediaInsetRight = {
-  args: {
+  MediaInsetRight: {
     ...baseArgs,
     ...singleImageArgs,
     flag: true,
@@ -188,71 +165,47 @@ export const MediaInsetRight = {
     mediaRight: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const MediaExdent = {
-  args: {
+  MediaExdent: {
     ...baseArgs,
     ...singleImageArgs,
     mediaExdent: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const WithCarousel = {
-  args: {
+  WithCarousel: {
     ...baseArgs,
     ...imageCoverArgs,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const WithCarouselInset = {
-  args: {
+  WithCarouselInset: {
     ...baseArgs,
     ...imageCoverArgs,
     mediaInset: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const WithCarouselNoDots = {
-  args: {
+  WithCarouselNoDots: {
     ...baseArgs,
     ...imageCoverArgs,
     showCarouselDots: false,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const WithCarouselAndTags = {
-  args: {
+  WithCarouselAndTags: {
     ...baseArgs,
     ...imageCoverArgs,
     ...tagsArgs,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const WithCarouselFlagLayout = {
-  args: {
+  WithCarouselFlagLayout: {
     ...baseArgs,
     ...imageCoverArgs,
     flag: true,
     className: 'grid-col-8',
   },
-};
-
-export const Minimal = {
-  args: {
+  Minimal: {
     title: 'Simple Card',
     description: 'Just the basics.',
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const FullFeatured = {
-  args: {
+  FullFeatured: {
     ...baseArgs,
     ...imageCoverArgs,
     ...tagsArgs,
@@ -262,20 +215,34 @@ export const FullFeatured = {
     mediaInset: true,
     className: 'tablet:grid-col-6 widescreen:grid-col-4',
   },
-};
-
-export const ImagesWithObjectFitContain = {
-  args: {
+  ImagesWithObjectFitContain: {
     ...baseArgs,
     ...imageContainArgs,
     className: 'tablet:grid-col-4',
   },
-};
-
-export const ImagesWithObjectFitFill = {
-  args: {
+  ImagesWithObjectFitFill: {
     ...baseArgs,
     ...imageFillArgs,
     className: 'tablet:grid-col-4',
   },
 };
+
+export const Default = { args: storyDefs.Default };
+export const WithImage = { args: storyDefs.WithImage };
+export const WithTags = { args: storyDefs.WithTags };
+export const WithImageAndTags = { args: storyDefs.WithImageAndTags };
+export const FlagLayout = { args: storyDefs.FlagLayout };
+export const MediaRight = { args: storyDefs.MediaRight };
+export const HeaderFirst = { args: storyDefs.HeaderFirst };
+export const MediaInset = { args: storyDefs.MediaInset };
+export const MediaInsetRight = { args: storyDefs.MediaInsetRight };
+export const MediaExdent = { args: storyDefs.MediaExdent };
+export const WithCarousel = { args: storyDefs.WithCarousel };
+export const WithCarouselInset = { args: storyDefs.WithCarouselInset };
+export const WithCarouselNoDots = { args: storyDefs.WithCarouselNoDots };
+export const WithCarouselAndTags = { args: storyDefs.WithCarouselAndTags };
+export const WithCarouselFlagLayout = { args: storyDefs.WithCarouselFlagLayout };
+export const Minimal = { args: storyDefs.Minimal };
+export const FullFeatured = { args: storyDefs.FullFeatured };
+export const ImagesWithObjectFitContain = { args: storyDefs.ImagesWithObjectFitContain };
+export const ImagesWithObjectFitFill = { args: storyDefs.ImagesWithObjectFitFill };

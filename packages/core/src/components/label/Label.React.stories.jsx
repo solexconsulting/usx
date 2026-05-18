@@ -9,50 +9,41 @@ export default {
   title: 'React/Label',
   component: Label,
   tags: ['autodocs'],
-  argTypes: generatedArgTypes
+  argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
-export const Default = {
-  args: {
+export const storyDefs = {
+  Default: {
     children: 'Label Text',
-  }
-};
-
-export const WithRequired = {
-  args: {
+  },
+  WithRequired: {
     children: 'Label Text',
     required: true,
-  }
-};
-
-export const ScreenReaderOnly = {
-  args: {
+  },
+  ScreenReaderOnly: {
     children: 'Label Text',
     screenReaderOnly: true,
-  }
-};
-
-export const WithCustomClass = {
-  args: {
+  },
+  WithCustomClass: {
     children: 'Label Text',
     className: 'text-primary',
-  }
-};
-
-export const WithClassOverride1 = {
-  name: 'With Class Override (radio button)',
-  args: {
+  },
+  WithClassOverride1: {
     children: 'Label Text',
     className: 'usa-radio__label',
     classOverride: true,
-  }
-}
-
-export const WithClassOverride2 = {
-  name: 'With Class Override (checkbox)',
-  args: {
+  },
+  WithClassOverride2: {
     children: 'Label Text',
     className: 'usa-checkbox__label',
     classOverride: true,
-  }
-}
+  },
+};
+
+export const Default = { args: storyDefs.Default };
+export const WithRequired = { args: storyDefs.WithRequired };
+export const ScreenReaderOnly = { args: storyDefs.ScreenReaderOnly };
+export const WithCustomClass = { args: storyDefs.WithCustomClass };
+export const WithClassOverride1 = { name: 'With Class Override (radio button)', args: storyDefs.WithClassOverride1 };
+export const WithClassOverride2 = { name: 'With Class Override (checkbox)', args: storyDefs.WithClassOverride2 };

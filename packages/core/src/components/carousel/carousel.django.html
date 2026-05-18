@@ -4,7 +4,9 @@
 <div class="usx-carousel {{ className|default:'' }}">
   <div class="usx-carousel__viewport" tabindex="-1" role="region" aria-roledescription="carousel" aria-label="{{ ariaLabel|default:'Featured content' }}">
     <div class="usx-carousel__track">
-      {% if slides %}
+      {% if children %}
+        {{ children|safe }}
+      {% elif slides %}
         {% for slide in slides %}
             <section id="{{ id }}-slide-{{ forloop.counter }}" class="usx-carousel__slide" role="group" aria-roledescription="slide" aria-label="{{ forloop.counter }} of {{ slides|length }}" tabindex="0">
               {% if slide.content %}
@@ -28,6 +30,10 @@
       {% if slides %}
         {% for slide in slides %}
           <a href="#{{ id }}-slide-{{ forloop.counter }}" aria-label="Go to slide {{ forloop.counter }}" tabindex="-1"></a>
+        {% endfor %}
+      {% elif slideIds %}
+        {% for slideId in slideIds %}
+          <a href="{{ slideId }}" aria-label="Go to slide {{ forloop.counter }}" tabindex="-1"></a>
         {% endfor %}
       {% endif %}
     </div>

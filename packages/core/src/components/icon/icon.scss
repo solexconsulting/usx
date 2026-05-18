@@ -2,3 +2,15 @@
   width: .75em;
   height: .75em;
 }
+
+.usx-icon--mirror {
+  transform: scaleX(-1);
+}
+
+.usx-icon--flip {
+  transform: scaleY(-1);
+
+  &.usx-icon--mirror {
+    transform: rotate(180deg);
+  }
+}

@@ -16,61 +16,59 @@ export default {
   component: Select,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
-export const Default = {
-  args: {
+export const storyDefs = {
+  Default: {
+    id: 'select-default',
     label: 'Dropdown label',
     options: sampleOptions,
   },
-};
-
-export const ErrorState = {
-  args: {
+  ErrorState: {
+    id: 'select-error',
     label: 'Dropdown label',
     options: sampleOptions,
     hint: 'This is a select with an error message.',
     error: 'Selection error message',
   },
-};
-
-export const SuccessState = {
-  args: {
+  SuccessState: {
+    id: 'select-success',
     label: 'Success state select',
     options: sampleOptions,
     success: 'Success message goes here.',
   },
-};
-
-export const Disabled = {
-  args: {
+  Disabled: {
+    id: 'select-disabled',
     label: 'Disabled select',
     options: sampleOptions,
     disabled: true,
   },
-};
-
-export const DisabledWithError = {
-  args: {
+  DisabledWithError: {
+    id: 'select-disabled-error',
     label: 'Disabled with error',
     options: sampleOptions,
     disabled: true,
     error: 'This field is disabled due to an error.',
   },
-};
-
-export const DefaultValue = {
-  args: {
+  DefaultValue: {
+    id: 'select-default-value',
     label: 'Select with default value',
     options: sampleOptions,
     defaultValue: 'option2',
   },
-};
-
-export const WithHint = {
-  args: {
+  WithHint: {
+    id: 'select-with-hint',
     label: 'Select with hint',
     options: sampleOptions,
     hint: 'This is a helpful hint for the select.',
   },
 };
+
+export const Default = { args: storyDefs.Default };
+export const ErrorState = { args: storyDefs.ErrorState };
+export const SuccessState = { args: storyDefs.SuccessState };
+export const Disabled = { args: storyDefs.Disabled };
+export const DisabledWithError = { args: storyDefs.DisabledWithError };
+export const DefaultValue = { args: storyDefs.DefaultValue };
+export const WithHint = { args: storyDefs.WithHint };

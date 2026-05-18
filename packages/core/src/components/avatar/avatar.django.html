@@ -4,13 +4,17 @@
 <span class="usx-tooltip">
 {% endif %}
 
-<a href="{{ href|default:'#' }}" class="usa-identifier__logo usx-avatar{% if className %} {{ className }}{% endif %}">
-  <img
-    class="usa-identifier__logo-img{% if shape == 'circle' %} usx-circle{% elif shape == 'rounded-md' %} usx-rounded-md{% elif shape == 'rounded-lg' %} usx-rounded-lg{% endif %}{% if imageClassName %} {{ imageClassName }}{% endif %}"
-    src="{{ src }}"
-    alt="{{ alt }}"
-    role="img"
-  />
+<a href="{{ href|default:'#' }}" class="usx-avatar{% if initials %} usx-avatar--initials{% endif %}{% if className %} {{ className }}{% endif %}"{% if initials and alt %} aria-label="{{ alt }}"{% endif %}>
+  {% if initials %}
+    <span class="usx-avatar__initials{% if shape == 'circle' %} usx-circle{% elif shape == 'rounded-sm' %} usx-rounded-sm{% elif shape == 'rounded-md' %} usx-rounded-md{% elif shape == 'rounded-lg' %} usx-rounded-lg{% elif shape == 'rounded-xl' %} usx-rounded-xl{% else %} usx-circle{% endif %}{% if initialsClassName %} {{ initialsClassName }}{% endif %}">{{ initials }}</span>
+  {% else %}
+    <img
+      class="usx-avatar__img{% if shape == 'circle' %} usx-circle{% elif shape == 'rounded-sm' %} usx-rounded-sm{% elif shape == 'rounded-md' %} usx-rounded-md{% elif shape == 'rounded-lg' %} usx-rounded-lg{% elif shape == 'rounded-xl' %} usx-rounded-xl{% endif %}{% if imageClassName %} {{ imageClassName }}{% endif %}"
+      src="{{ src }}"
+      alt="{{ alt }}"
+      role="img"
+    />
+  {% endif %}
 </a>
 
 {% if tooltip %}

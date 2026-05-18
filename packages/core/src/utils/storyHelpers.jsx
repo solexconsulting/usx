@@ -28,7 +28,7 @@ export const componentTag = ({ name, props, children = null }) => {
     const content = children || props.children;
 
     const componentName = getSnakeCase(name);
-    
+
     let openTag = `{% ${componentName}`;
 
     if (hasProps) {
@@ -77,11 +77,11 @@ export const buildArgTypes = (props = {}) => {
                 control: { type: 'text' }
             };
         }
-    if (meta && meta.description) {
-        argTypes[name].description = meta.description;
-    }
-});
-return argTypes;
+        if (meta && meta.description) {
+            argTypes[name].description = meta.description;
+        }
+    });
+    return argTypes;
 };
 
 const getSnakeCase = (str) => {
@@ -95,26 +95,40 @@ const getSnakeCase = (str) => {
  * Usage:
  *   const createStory = createDjangoStory('my-component');
  *   export const Default = createStory(storyDefs.Default);
+ *
+ * With wrapper context:
+ *   const createStory = createDjangoStory(
+ *     'my-component',
+ *     null,
+ *     (component) => <section>{component}</section>
+ *   );
  */
-export const createDjangoStory = (componentName, postRender=null) => (args) => ({
-  args,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: componentName, props: args }),
-      },
-    },
-  },
-  render: djangoComponent(componentName, postRender),
-});
+export const createDjangoStory = (componentName, postRender = null, wrapper = null) => {
+    const baseRender = djangoComponent(componentName, postRender);
 
-export const createBulkDjangoStory = (componentName, storyDefs, postRender=null, wrapper=null) => {
-    
+    return (args) => ({
+        args,
+        parameters: {
+            docs: {
+                source: {
+                    code: componentTag({ name: componentName, props: args }),
+                },
+            },
+        },
+        render: (storyArgs) => {
+            const component = baseRender(storyArgs);
+            return wrapper ? wrapper(component, storyArgs) : component;
+        },
+    });
+};
+
+export const createBulkDjangoStory = (componentName, storyDefs, postRender = null, wrapper = null) => {
+
     const createStory = createDjangoStory(componentName, postRender);
 
     const Wrapper = ({ children }) => {
         if (wrapper) {
-            return wrapper({children});
+            return wrapper({ children });
         }
         return (
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -124,31 +138,32 @@ export const createBulkDjangoStory = (componentName, storyDefs, postRender=null,
     };
 
     return {
-    args: {},
-    parameters: {
-        docs: {
-            source: {
-                code: storyDefs?.map((props) => {
-                    return componentTag({ name: componentName, props: props.props || props });
-                }).join('\n\n'),
+        args: {},
+        parameters: {
+            docs: {
+                source: {
+                    code: storyDefs?.map((props) => {
+                        return componentTag({ name: componentName, props: props.props || props });
+                    }).join('\n\n'),
+                },
             },
         },
-    },
-    render: () => (
-        <Wrapper>
-            {storyDefs?.map((props, index) => (
-                <>
-                    {props.storyName ? (
-                        <div className="display-flex flex-column flex-align-center color-inherit" key={index}>
-                            <h4 className="color-inherit">{props.storyName}</h4>
-                            {createStory(props.props || props).render(props.props || props)}
-                        </div>
-                    ) : (
-                        createStory(props.props || props).render(props.props || props)
-                    )}
-                </>
-            ))}
-        </Wrapper>
-    )
+        render: () => (
+            <Wrapper>
+                {storyDefs?.map((props, index) => (
+                    <>
+                        {props.storyName ? (
+                            <div className="display-flex flex-column flex-align-center color-inherit" key={index}>
+                                <h4 className="color-inherit">{props.storyName}</h4>
+                                {createStory(props.props || props).render(props.props || props)}
+                            </div>
+                        ) : (
+                            createStory(props.props || props).render(props.props || props)
+                        )}
+                    </>
+                ))}
+            </Wrapper>
+        )
 
-}}
+    }
+}

@@ -1,7 +1,6 @@
-import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import iconConfig from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './Icon.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(iconConfig.props || {});
 
@@ -9,26 +8,9 @@ export default {
   title: 'Django/Icon',
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: [],
 };
 
+const createStory = createDjangoStory('icon');
 
-export const Icon = {
-    args: {
-        name: 'accessibility_new',
-        size: 2
-    },
-    parameters: {
-        docs: {
-            source: {
-                code: componentTag({
-                    name: 'icon',
-                    props: {
-                        name: 'accessibility_new',
-                        size: 2
-                    }
-                })
-            }
-        }
-    },
-    render: djangoComponent('icon')
-}
+export const Default = createStory(storyDefs.Default);

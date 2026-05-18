@@ -4,7 +4,15 @@ import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
 
 export const storyDefs = {
-  Default: config.default || {},
+  InH1: {
+    children: 'Page Title',
+  },
+  InH2: {
+    children: 'Section Heading',
+  },
+  InH3: {
+    children: 'Subsection',
+  },
 };
 
 export default {
@@ -15,4 +23,29 @@ export default {
   excludeStories: ['storyDefs'],
 };
 
-export const Default = { args: storyDefs.Default };
+export const InH1 = {
+  render: () => (
+    <h1>
+      <Eyebrow {...storyDefs.InH1} />
+      Full Page Title
+    </h1>
+  ),
+};
+
+export const InH2 = {
+  render: () => (
+    <h2>
+      <Eyebrow {...storyDefs.InH2} />
+      Full Section Heading
+    </h2>
+  ),
+};
+
+export const InH3 = {
+  render: () => (
+    <h3>
+      <Eyebrow {...storyDefs.InH3} />
+      Full Subsection
+    </h3>
+  ),
+};

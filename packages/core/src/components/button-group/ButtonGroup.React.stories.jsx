@@ -10,6 +10,7 @@ export default {
   component: ButtonGroup,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
 const story0Args = {
@@ -66,26 +67,35 @@ const story5Args = {
   segmented: true,
 }
 
+export const storyDefs = {
+  Default: story0Args,
+  Icons: story1Args,
+  SegmentedIcons: story2Args,
+  SegmentedSecondary: story3Args,
+  SegmentedAccentCool: story4Args,
+  SegmentedAccentWarm: story5Args,
+};
+
 export const Default = {
-  args: story0Args
+  args: storyDefs.Default
 }
 
 export const Icons = {
-  args: story1Args
+  args: storyDefs.Icons
 };
 
 export const SegmentedIcons = {
-  args: story2Args
+  args: storyDefs.SegmentedIcons
 };
 
 export const SegmentedSecondary = {
-  args: story3Args
+  args: storyDefs.SegmentedSecondary
 };
 
 export const SegmentedAccentCool = {
-  args: story4Args
+  args: storyDefs.SegmentedAccentCool
 };
 
 export const SegmentedAccentWarm = {
-  args: story5Args
+  args: storyDefs.SegmentedAccentWarm
 };

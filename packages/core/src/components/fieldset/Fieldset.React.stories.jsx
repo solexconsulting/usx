@@ -10,50 +10,43 @@ export default {
   title: 'React/Fieldset',
   component: Fieldset,
   tags: ['autodocs'],
-  argTypes: generatedArgTypes
+  argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
-export const Default = {
-  args: {
+export const storyDefs = {
+  Default: {
     legend: 'Fieldset Legend',
-    children: <label className="usa-checkbox__label">Hello world</label>
-  }
-};
-
-export const NoLegend = {
-  args: {
-    children: <label className="usa-checkbox__label">Hello world</label>
-  }
-};
-
-export const RequiredLegend = {
-  args: {
+    children: <label className="usa-checkbox__label">Hello world</label>,
+  },
+  NoLegend: {
+    children: <label className="usa-checkbox__label">Hello world</label>,
+  },
+  RequiredLegend: {
     legend: 'Required Fieldset',
     required: true,
-    children: <label className="usa-checkbox__label">Hello world</label>
-  }
-};
-
-export const WithCustomClass = {
-  args: {
+    children: <label className="usa-checkbox__label">Hello world</label>,
+  },
+  WithCustomClass: {
     legend: 'Custom Class Fieldset',
     className: 'border-1px border-base padding-2',
-    children: <label className="usa-checkbox__label">Hello world</label>
-  }
-};
-
-export const LargeLegend = {
-  args: {
+    children: <label className="usa-checkbox__label">Hello world</label>,
+  },
+  LargeLegend: {
     legend: 'Large Legend Fieldset',
     largeLegend: true,
-    children: <label className="usa-checkbox__label">Hello world</label>
-  }
-};
-
-export const Disabled = {
-  args: {
+    children: <label className="usa-checkbox__label">Hello world</label>,
+  },
+  Disabled: {
     legend: 'Disabled Fieldset',
     disabled: true,
-    children: <Input id="lonely-input" label="Lonely input" placeholder="Type here..." />
-  }
+    children: <Input id="lonely-input" label="Lonely input" placeholder="Type here..." />,
+  },
 };
+
+export const Default = { args: storyDefs.Default };
+export const NoLegend = { args: storyDefs.NoLegend };
+export const RequiredLegend = { args: storyDefs.RequiredLegend };
+export const WithCustomClass = { args: storyDefs.WithCustomClass };
+export const LargeLegend = { args: storyDefs.LargeLegend };
+export const Disabled = { args: storyDefs.Disabled };

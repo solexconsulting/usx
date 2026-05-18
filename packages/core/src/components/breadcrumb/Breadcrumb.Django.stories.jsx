@@ -1,7 +1,6 @@
-import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './Breadcrumb.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -9,36 +8,13 @@ export default {
   title: 'Django/Breadcrumb',
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: [],
 };
 
-const createStory = (args) => ({
-  args,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'breadcrumb', props: args })
-      }
-    }
-  },
-  render: djangoComponent('breadcrumb')
-});
+const createStory = createDjangoStory('breadcrumb');
 
-export const Default = {
-  ...createStory(config.default || {})
-};
-
-export const WithRdfa = {
-  ...createStory({ ...(config.default || {}), rdfa: true })
-};
-
-export const Wrap = {
-  ...createStory({ ...(config.default || {}), wrap: true })
-};
-
-export const WithClassName = {
-  ...createStory({ ...(config.default || {}), className: 'custom-breadcrumb-class' })
-};
-
-export const Empty = {
-  ...createStory({ items: [] })
-};
+export const Default = createStory(storyDefs.Default);
+export const WithRdfa = createStory(storyDefs.WithRdfa);
+export const Wrap = createStory(storyDefs.Wrap);
+export const WithClassName = createStory(storyDefs.WithClassName);
+export const Empty = createStory(storyDefs.Empty);

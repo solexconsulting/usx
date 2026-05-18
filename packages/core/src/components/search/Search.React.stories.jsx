@@ -10,72 +10,74 @@ export default {
   component: Search,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
-export const Default = {
-  args: {},
-};
-
-export const CustomPlaceholder = {
-  args: {
+export const storyDefs = {
+  Default: {
+    id: 'search-default',
+  },
+  CustomPlaceholder: {
+    id: 'search-custom-placeholder',
     placeholder: 'Custom placeholder...',
   },
-};
-
-export const WithDefaultValue = {
-  args: {
+  WithDefaultValue: {
+    id: 'search-default-value',
     defaultValue: 'Default search value',
   },
-};
-
-export const Big = {
-  args: {
+  Big: {
+    id: 'search-big',
     big: true,
   },
-};
-
-export const IconOnly = {
-  args: {
+  IconOnly: {
+    id: 'search-icon-only',
     iconOnly: true,
   },
-};
-
-export const BigIconOnly = {
-  args: {
+  BigIconOnly: {
+    id: 'search-big-icon-only',
     big: true,
     iconOnly: true,
   },
-};
-
-export const NonStandardIcon = {
-  args: {
+  NonStandardIcon: {
+    id: 'search-non-standard-icon',
     icon: 'star',
     iconOnly: true,
   },
-}
-
-export const WithCustomButtonVariant = {
-  args: {
+  WithCustomButtonVariant: {
+    id: 'search-custom-variant',
     buttonVariant: 'accent-cool',
   },
-};
-
-export const GoogleAction = {
-  args: {
+  GoogleAction: {
+    id: 'search-google-action',
     action: 'https://www.google.com/search',
     placeholder: 'Search Google...',
   },
-}
-
-export const PathAction = {
-  args: {
+  PathAction: {
+    id: 'search-path-action',
     action: '/searching-with-an-action/',
     placeholder: 'Search the site...',
   },
-}
-
-export const WithOnSubmit = {
-  args: {
-    onSubmit: (query) => alert(`Search submitted: ${query}`),
+  WithOnSubmit: {
+    id: 'search-with-onsubmit',
+    placeholder: 'Type something and submit...',
+    onSubmit: '(query) => alert("Search submitted: " + query)',
   },
-}
+};
+
+export const Default = { args: storyDefs.Default };
+export const CustomPlaceholder = { args: storyDefs.CustomPlaceholder };
+export const WithDefaultValue = { args: storyDefs.WithDefaultValue };
+export const Big = { args: storyDefs.Big };
+export const IconOnly = { args: storyDefs.IconOnly };
+export const BigIconOnly = { args: storyDefs.BigIconOnly };
+export const NonStandardIcon = { args: storyDefs.NonStandardIcon };
+export const WithCustomButtonVariant = { args: storyDefs.WithCustomButtonVariant };
+export const GoogleAction = { args: storyDefs.GoogleAction };
+export const PathAction = { args: storyDefs.PathAction };
+export const WithOnSubmit = {
+  args: storyDefs.WithOnSubmit,
+  render: (args) => {
+    const onSubmit = typeof args.onSubmit === 'string' ? eval(args.onSubmit) : args.onSubmit;
+    return <Search {...args} onSubmit={onSubmit} />;
+  },
+};

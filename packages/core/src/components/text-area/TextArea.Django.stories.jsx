@@ -1,65 +1,27 @@
-import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
-import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
-
-const generatedArgTypes = buildArgTypes(config.props || {});
-
-const getArgs = (index) => ({
-  id: `example-textarea-${index}`,
-  label: `Example TextArea ${index}`,
-});
+import { storyDefs } from './TextArea.React.stories.jsx';
+import { createDjangoStory } from '../../utils/storyHelpers';
 
 export default {
   title: 'Django/TextArea',
   tags: ['autodocs'],
-  argTypes: generatedArgTypes,
+  parameters: {
+    renderer: 'django',
+    docs: {
+      description: {
+        component: 'Django TextArea component - consumes React storyDefs',
+      },
+    },
+  },
 };
 
-const createStory = (args) => ({
-  args,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'text-area', props: args })
-      }
-    }
-  },
-  render: djangoComponent('text-area')
-});
+const createStory = createDjangoStory('text-area');
 
-export const Default = createStory({
-  ...getArgs(1),
-  placeholder: 'Type here',
-});
-
-export const WithHint = createStory({
-  ...getArgs(2),
-  hint: 'Enter a detailed description.',
-});
-
-export const Required = createStory({
-  ...getArgs(3),
-  required: true,
-});
-
-export const ScreenReaderOnlyLabel = createStory({
-  ...getArgs(4),
-  screenReaderOnlyLabel: true,
-  placeholder: 'Enter your message…',
-});
-
-export const ErrorState = createStory({
-  ...getArgs(5),
-  error: 'Enter at least 10 characters.',
-});
-
-export const SuccessState = createStory({
-  ...getArgs(6),
-  success: 'Your message has been accepted.',
-});
-
-export const Disabled = createStory({
-  ...getArgs(7),
-  disabled: true,
-});
+export const Default = createStory(storyDefs.Default);
+export const WithHint = createStory(storyDefs.WithHint);
+export const Required = createStory(storyDefs.Required);
+export const ScreenReaderOnlyLabel = createStory(storyDefs.ScreenReaderOnlyLabel);
+export const ErrorState = createStory(storyDefs.ErrorState);
+export const ErrorStateNoMessage = createStory(storyDefs.ErrorStateNoMessage);
+export const SuccessState = createStory(storyDefs.SuccessState);
+export const SuccessStateNoMessage = createStory(storyDefs.SuccessStateNoMessage);
+export const Disabled = createStory(storyDefs.Disabled);

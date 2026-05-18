@@ -1,7 +1,6 @@
-import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { storyDefs } from './SideNav.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -9,128 +8,11 @@ export default {
   title: 'Django/SideNav',
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: [],
 };
 
-export const Simple = {
-  args: {
-    items: [
-      { text: 'Current page', href: 'javascript:void(0);', current: true },
-      { text: 'Parent link', href: 'javascript:void(0);' },
-      { text: 'Parent link', href: 'javascript:void(0);' },
-    ],
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'sidenav', props: {
-          items: [
-            { text: 'Current page', href: 'javascript:void(0);', current: true },
-            { text: 'Parent link', href: 'javascript:void(0);' },
-            { text: 'Parent link', href: 'javascript:void(0);' },
-          ],
-        } })
-      }
-    }
-  },
-  render: djangoComponent('sidenav')
-};
+const createStory = createDjangoStory('sidenav');
 
-export const WithSublist = {
-  args: {
-    items: [
-      { text: 'Parent link', href: 'javascript:void(0);' },
-      {
-        text: 'Current page',
-        href: 'javascript:void(0);',
-        current: true,
-        children: [
-          { text: 'Child link', href: 'javascript:void(0);' },
-          { text: 'Child link', href: 'javascript:void(0);' },
-          { text: 'Child link', href: 'javascript:void(0);', current: true },
-        ],
-      },
-      { text: 'Parent link', href: 'javascript:void(0);' },
-    ],
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'sidenav', props: {
-          items: [
-            { text: 'Parent link', href: 'javascript:void(0);' },
-            {
-              text: 'Current page',
-              href: 'javascript:void(0);',
-              current: true,
-              children: [
-                { text: 'Child link', href: 'javascript:void(0);' },
-                { text: 'Child link', href: 'javascript:void(0);' },
-                { text: 'Child link', href: 'javascript:void(0);', current: true },
-              ],
-            },
-            { text: 'Parent link', href: 'javascript:void(0);' },
-          ],
-        } })
-      }
-    }
-  },
-  render: djangoComponent('sidenav')
-};
-
-export const Nested = {
-  args: {
-    items: [
-      { text: 'Parent link', href: 'javascript:void(0);' },
-      {
-        text: 'Current page',
-        href: 'javascript:void(0);',
-        current: true,
-        children: [
-          { text: 'Child link', href: 'javascript:void(0);' },
-          {
-            text: 'Child link',
-            href: 'javascript:void(0);',
-            children: [
-              { text: 'Grandchild link', href: 'javascript:void(0);' },
-              { text: 'Grandchild link', href: 'javascript:void(0);', current: true },
-              { text: 'Grandchild link', href: 'javascript:void(0);' },
-            ],
-          },
-          { text: 'Child link', href: 'javascript:void(0);' },
-        ],
-      },
-      { text: 'Parent link', href: 'javascript:void(0);' },
-    ],
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'sidenav', props: {
-          items: [
-            { text: 'Parent link', href: 'javascript:void(0);' },
-            {
-              text: 'Current page',
-              href: 'javascript:void(0);',
-              current: true,
-              children: [
-                { text: 'Child link', href: 'javascript:void(0);' },
-                {
-                  text: 'Child link',
-                  href: 'javascript:void(0);',
-                  children: [
-                    { text: 'Grandchild link', href: 'javascript:void(0);' },
-                    { text: 'Grandchild link', href: 'javascript:void(0);', current: true },
-                    { text: 'Grandchild link', href: 'javascript:void(0);' },
-                  ],
-                },
-                { text: 'Child link', href: 'javascript:void(0);' },
-              ],
-            },
-            { text: 'Parent link', href: 'javascript:void(0);' },
-          ],
-        } })
-      }
-    }
-  },
-  render: djangoComponent('sidenav')
-};
+export const Simple = createStory(storyDefs.Simple);
+export const WithSublist = createStory(storyDefs.WithSublist);
+export const Nested = createStory(storyDefs.Nested);

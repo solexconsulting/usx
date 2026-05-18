@@ -1,7 +1,6 @@
-import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './Label.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -9,62 +8,14 @@ export default {
   title: 'Django/Label',
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: [],
 };
 
+const createStory = createDjangoStory('label');
 
-const createStory = (args) => ({
-  args,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'label', props: args })
-      }
-    }
-  },
-  render: djangoComponent('label')
-});
-
-export const Default = {
-  ...createStory({
-    children: 'This is a label',
-  })
-}
-
-export const WithRequired = {
-  ...createStory({
-    children: 'This is a label for a required field',
-    required: true,
-  })
-}
-
-export const ScreenReaderOnly = {
-  ...createStory({
-    children: 'This label is only visible to screen readers',
-    screenReaderOnly: true,
-  })
-}
-
-export const WithCustomClass = {
-  ...createStory({
-    children: 'This label has a custom class',
-    className: 'text-primary',
-  })
-}
-
-export const WithClassOverride1 = {
-  name: 'With Class Override (radio button)',
-  ...createStory({
-    children: 'This label overrides default classes with radio button class',
-    className: 'usa-radio__label',
-    classOverride: true,
-  })
-}
-
-export const WithClassOverride2 = {
-  name: 'With Class Override (checkbox)',
-  ...createStory({
-    children: 'This label overrides default classes with checkbox class',
-    className: 'usa-checkbox__label',
-    classOverride: true,
-  })
-}
+export const Default = createStory(storyDefs.Default);
+export const WithRequired = createStory(storyDefs.WithRequired);
+export const ScreenReaderOnly = createStory(storyDefs.ScreenReaderOnly);
+export const WithCustomClass = createStory(storyDefs.WithCustomClass);
+export const WithClassOverride1 = { name: 'With Class Override (radio button)', ...createStory(storyDefs.WithClassOverride1) };
+export const WithClassOverride2 = { name: 'With Class Override (checkbox)', ...createStory(storyDefs.WithClassOverride2) };

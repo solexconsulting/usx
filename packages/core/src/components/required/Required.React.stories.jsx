@@ -10,17 +10,18 @@ export default {
   component: Required,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
-export const Default = {
-  args: {
+export const storyDefs = {
+  Default: {
     children: 'This field is required',
-  }
-};
-
-export const WithCustomTitle = {
-  args: {
+  },
+  WithCustomTitle: {
     children: 'Hover over the asterisk',
     title: 'Custom Title Example'
-  }
+  },
 };
+
+export const Default = { args: storyDefs.Default };
+export const WithCustomTitle = { args: storyDefs.WithCustomTitle };

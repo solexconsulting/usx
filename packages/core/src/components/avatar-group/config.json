@@ -21,7 +21,7 @@
     ]
   },
   "props": {
-    "avatars": { "type": "object", "description": "Array of avatar objects with href, src, alt, optional shape, and optional tooltip." },
+    "avatars": { "type": "object", "description": "Array of avatar objects. Each supports: href, src, alt, initials, shape, tooltip, className, imageClassName, initialsClassName." },
     "overlap": { "type": "boolean", "description": "When true, avatars overlap each other in the group." },
     "stacked": { "type": "boolean", "description": "When true, avatars are stacked vertically." },
     "className": { "type": "string", "description": "Additional classes" }

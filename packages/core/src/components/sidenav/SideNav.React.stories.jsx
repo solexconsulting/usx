@@ -9,59 +9,60 @@ export default {
     ariaLabel: { control: 'text' },
     className: { control: 'text' },
   },
+  tags: ['autodocs'],
+  excludeStories: ['storyDefs'],
 };
 
-const Template = (args) => <SideNav {...args} />;
-
-export const Simple = Template.bind({});
-Simple.args = {
-  items: [
-    { text: 'Current page', href: 'javascript:void(0);', current: true },
-    { text: 'Parent link', href: 'javascript:void(0);' },
-    { text: 'Parent link', href: 'javascript:void(0);' },
-  ],
+export const storyDefs = {
+  Simple: {
+    items: [
+      { text: 'Current page', href: 'javascript:void(0);', current: true },
+      { text: 'Parent link', href: 'javascript:void(0);' },
+      { text: 'Parent link', href: 'javascript:void(0);' },
+    ],
+  },
+  WithSublist: {
+    items: [
+      { text: 'Parent link', href: 'javascript:void(0);' },
+      {
+        text: 'Current page',
+        href: 'javascript:void(0);',
+        current: true,
+        children: [
+          { text: 'Child link', href: 'javascript:void(0);' },
+          { text: 'Child link', href: 'javascript:void(0);' },
+          { text: 'Child link', href: 'javascript:void(0);', current: true },
+        ],
+      },
+      { text: 'Parent link', href: 'javascript:void(0);' },
+    ],
+  },
+  Nested: {
+    items: [
+      { text: 'Parent link', href: 'javascript:void(0);' },
+      {
+        text: 'Current page',
+        href: 'javascript:void(0);',
+        current: true,
+        children: [
+          { text: 'Child link', href: 'javascript:void(0);' },
+          {
+            text: 'Child link',
+            href: 'javascript:void(0);',
+            children: [
+              { text: 'Grandchild link', href: 'javascript:void(0);' },
+              { text: 'Grandchild link', href: 'javascript:void(0);', current: true },
+              { text: 'Grandchild link', href: 'javascript:void(0);' },
+            ],
+          },
+          { text: 'Child link', href: 'javascript:void(0);' },
+        ],
+      },
+      { text: 'Parent link', href: 'javascript:void(0);' },
+    ],
+  },
 };
 
-export const WithSublist = Template.bind({});
-WithSublist.args = {
-  items: [
-    { text: 'Parent link', href: 'javascript:void(0);' },
-    {
-      text: 'Current page',
-      href: 'javascript:void(0);',
-      current: true,
-      children: [
-        { text: 'Child link', href: 'javascript:void(0);' },
-        { text: 'Child link', href: 'javascript:void(0);' },
-        { text: 'Child link', href: 'javascript:void(0);', current: true },
-      ],
-    },
-    { text: 'Parent link', href: 'javascript:void(0);' },
-  ],
-};
-
-export const Nested = Template.bind({});
-Nested.args = {
-  items: [
-    { text: 'Parent link', href: 'javascript:void(0);' },
-    {
-      text: 'Current page',
-      href: 'javascript:void(0);',
-      current: true,
-      children: [
-        { text: 'Child link', href: 'javascript:void(0);' },
-        {
-          text: 'Child link',
-          href: 'javascript:void(0);',
-          children: [
-            { text: 'Grandchild link', href: 'javascript:void(0);' },
-            { text: 'Grandchild link', href: 'javascript:void(0);', current: true },
-            { text: 'Grandchild link', href: 'javascript:void(0);' },
-          ],
-        },
-        { text: 'Child link', href: 'javascript:void(0);' },
-      ],
-    },
-    { text: 'Parent link', href: 'javascript:void(0);' },
-  ],
-};
+export const Simple = { args: storyDefs.Simple };
+export const WithSublist = { args: storyDefs.WithSublist };
+export const Nested = { args: storyDefs.Nested };

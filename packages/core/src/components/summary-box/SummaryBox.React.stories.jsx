@@ -41,18 +41,7 @@ export const storyDefs = {
     content: 'This narrative should not render because children is provided.',
     children: 'Children content takes priority and can be used for tailored, page-specific summaries.',
   },
-};
-
-export const ExecutiveSummary = { args: storyDefs.ExecutiveSummary };
-export const StoryStep1Context = { args: storyDefs.StoryStep1Context };
-export const StoryStep2Actions = { args: storyDefs.StoryStep2Actions };
-export const StoryStep3Outcomes = { args: storyDefs.StoryStep3Outcomes };
-export const StoryStep4Decision = { args: storyDefs.StoryStep4Decision };
-export const ChildrenPriority = { args: storyDefs.ChildrenPriority };
-
-export const WithListComponent = {
-  name: 'Action plan summary',
-  args: {
+  WithListComponent: {
     heading: '90-day action plan summary',
     children: (
       <List
@@ -65,11 +54,7 @@ export const WithListComponent = {
       />
     ),
   },
-};
-
-export const WithIconHighlights = {
-  name: 'KPI highlights summary',
-  args: {
+  WithIconHighlights: {
     heading: 'Weekly KPI highlights',
     children: (
       <IconList
@@ -93,4 +78,21 @@ export const WithIconHighlights = {
       />
     ),
   },
+};
+
+export const ExecutiveSummary = { args: storyDefs.ExecutiveSummary };
+export const StoryStep1Context = { args: storyDefs.StoryStep1Context };
+export const StoryStep2Actions = { args: storyDefs.StoryStep2Actions };
+export const StoryStep3Outcomes = { args: storyDefs.StoryStep3Outcomes };
+export const StoryStep4Decision = { args: storyDefs.StoryStep4Decision };
+export const ChildrenPriority = { args: storyDefs.ChildrenPriority };
+
+export const WithListComponent = {
+  name: 'Action plan summary',
+  args: storyDefs.WithListComponent,
+};
+
+export const WithIconHighlights = {
+  name: 'KPI highlights summary',
+  args: storyDefs.WithIconHighlights,
 };

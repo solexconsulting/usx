@@ -6,7 +6,6 @@ import './avatar-group.scss';
 
 export default function AvatarGroup({ avatars = [], overlap = false, stacked = false, className = '', ...props }) {
   const classes = classNames(
-    'usa-identifier__logos',
     'usx-avatar-group',
     overlap && 'usa-avatar-group--overlap',
     stacked && 'usa-avatar-group--stacked',
@@ -17,14 +16,16 @@ export default function AvatarGroup({ avatars = [], overlap = false, stacked = f
     <div className={classes} {...props}>
       {avatars.map((avatar, index) => (
         <Avatar
-          key={`${avatar.src || 'avatar'}-${index}`}
+          key={`${avatar.src || avatar.initials || 'avatar'}-${index}`}
           href={avatar.href}
           src={avatar.src}
           alt={avatar.alt}
+          initials={avatar.initials}
           shape={avatar.shape}
           tooltip={avatar.tooltip}
           className={avatar.className}
           imageClassName={avatar.imageClassName}
+          initialsClassName={avatar.initialsClassName}
         />
       ))}
     </div>
@@ -34,12 +35,14 @@ export default function AvatarGroup({ avatars = [], overlap = false, stacked = f
 AvatarGroup.propTypes = {
   avatars: PropTypes.arrayOf(PropTypes.shape({
     href: PropTypes.string,
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-    shape: PropTypes.oneOf([null, 'circle', 'rounded-md', 'rounded-lg']),
+    src: PropTypes.string,
+    alt: PropTypes.string,
+    initials: PropTypes.string,
+    shape: PropTypes.oneOf([null, 'circle', 'rounded-sm', 'rounded-md', 'rounded-lg', 'rounded-xl']),
     tooltip: PropTypes.string,
     className: PropTypes.string,
     imageClassName: PropTypes.string,
+    initialsClassName: PropTypes.string,
   })),
   overlap: PropTypes.bool,
   stacked: PropTypes.bool,

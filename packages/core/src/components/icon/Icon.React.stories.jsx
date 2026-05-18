@@ -10,13 +10,18 @@ export default {
   component: Icon,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
-export const Default = {
-  args: {
+export const storyDefs = {
+  Default: {
     name: 'accessibility_new',
     size: 2,
   },
+};
+
+export const Default = {
+  args: storyDefs.Default,
 };
 
 export const DifferentSizes = {

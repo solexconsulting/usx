@@ -24,6 +24,52 @@ export const storyDefs = {
     shape: 'rounded-lg',
     tooltip: 'Statue of Liberty',
   },
+  InitialsAvatar: {
+    href: '#',
+    initials: 'AB',
+    alt: 'Alex Brown',
+    initialsClassName: 'bg-primary-lighter text-primary-darker',
+  },
+  InitialsAvatarSmall: {
+    href: '#',
+    initials: 'GW',
+    alt: 'George Washington',
+    className: 'usx-avatar--size-sm',
+    initialsClassName: 'bg-primary-lighter text-primary-darker',
+  },
+  ImageAvatarMedium: {
+    ...(config.default || {}),
+    className: 'usx-avatar--size-md',
+  },
+  ImageAvatarLarge: {
+    ...(config.default || {}),
+    className: 'usx-avatar--size-lg',
+  },
+  ImageAvatarExtraLarge: {
+    ...(config.default || {}),
+    className: 'usx-avatar--size-xl',
+  },
+  InitialsAvatarMedium: {
+    href: '#',
+    initials: 'AB',
+    alt: 'Alex Brown',
+    className: 'usx-avatar--size-md',
+    initialsClassName: 'bg-primary-lighter text-primary-darker',
+  },
+  InitialsAvatarLarge: {
+    href: '#',
+    initials: 'AB',
+    alt: 'Alex Brown',
+    className: 'usx-avatar--size-lg',
+    initialsClassName: 'bg-primary-lighter text-primary-darker',
+  },
+  InitialsAvatarExtraLarge: {
+    href: '#',
+    initials: 'AB',
+    alt: 'Alex Brown',
+    className: 'usx-avatar--size-xl',
+    initialsClassName: 'bg-primary-lighter text-primary-darker',
+  },
 };
 
 export default {
@@ -39,3 +85,11 @@ export const CircleAvatar = { args: storyDefs.CircleAvatar };
 export const MediumRoundedAvatar = { args: storyDefs.MediumRoundedAvatar };
 export const LargeRoundedAvatar = { args: storyDefs.LargeRoundedAvatar };
 export const AvatarWithTooltip = { args: storyDefs.AvatarWithTooltip };
+export const InitialsAvatar = { args: storyDefs.InitialsAvatar };
+export const InitialsAvatarSmall = { args: storyDefs.InitialsAvatarSmall };
+export const ImageAvatarMedium = { args: storyDefs.ImageAvatarMedium };
+export const ImageAvatarLarge = { args: storyDefs.ImageAvatarLarge };
+export const ImageAvatarExtraLarge = { args: storyDefs.ImageAvatarExtraLarge };
+export const InitialsAvatarMedium = { args: storyDefs.InitialsAvatarMedium };
+export const InitialsAvatarLarge = { args: storyDefs.InitialsAvatarLarge };
+export const InitialsAvatarExtraLarge = { args: storyDefs.InitialsAvatarExtraLarge };

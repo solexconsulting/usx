@@ -8,15 +8,17 @@
   },
   "props": {
     "href": { "type": "string", "description": "Link target for the avatar image." },
-    "src": { "type": "string", "description": "Image source URL for the avatar." },
-    "alt": { "type": "string", "description": "Accessible alt text for the avatar image." },
+    "src": { "type": "string", "description": "Image source URL for the avatar image variant." },
+    "alt": { "type": "string", "description": "Accessible label for the avatar. Used as image alt text or initials-link aria-label." },
+    "initials": { "type": "string", "description": "Initials text for the initials avatar variant. When provided, image markup is replaced with initials markup." },
     "shape": {
       "type": "select",
-      "options": ["circle", "rounded-md", "rounded-lg"],
-      "description": "Optional shape utility for the avatar image."
+      "options": ["circle", "rounded-sm", "rounded-md", "rounded-lg", "rounded-xl"],
+      "description": "Optional shape utility for avatar image or initials."
     },
     "tooltip": { "type": "string", "description": "Optional tooltip text displayed on hover." },
     "className": { "type": "string", "description": "Additional classes for the avatar link element." },
-    "imageClassName": { "type": "string", "description": "Additional classes for the avatar image element." }
+    "imageClassName": { "type": "string", "description": "Additional classes for the avatar image element." },
+    "initialsClassName": { "type": "string", "description": "Additional classes for the initials element." }
   }
 }

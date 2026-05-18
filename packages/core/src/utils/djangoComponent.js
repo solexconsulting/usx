@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 /**
  * Inserts HTML into an element, executing embedded script tags.
@@ -95,6 +96,54 @@ export const fetchComponentHtml = async (componentName, props) => {
   return html;
 };
 
+const renderReactNodeToHtml = (node) => {
+  try {
+    return renderToStaticMarkup(
+      React.createElement(React.Fragment, null, node),
+    );
+  } catch (error) {
+    console.error('Error serializing React node for Django story rendering:', error);
+    return '';
+  }
+};
+
+const serializePropsForDjango = (value) => {
+  if (value === undefined) {
+    return undefined;
+  }
+
+  if (value === null || typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+    return value;
+  }
+
+  if (typeof value === 'function' || typeof value === 'symbol') {
+    return undefined;
+  }
+
+  if (React.isValidElement(value)) {
+    return renderReactNodeToHtml(value);
+  }
+
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => serializePropsForDjango(item))
+      .filter((item) => item !== undefined);
+  }
+
+  if (typeof value === 'object') {
+    const serialized = {};
+    Object.entries(value).forEach(([key, item]) => {
+      const next = serializePropsForDjango(item);
+      if (next !== undefined) {
+        serialized[key] = next;
+      }
+    });
+    return serialized;
+  }
+
+  return value;
+};
+
 /**
  * Create a Storybook render component for a Django component.
  *
@@ -113,9 +162,10 @@ export function djangoComponent(componentName, postRender=null) {
     useEffect(() => {
       const fetchHtml = async () => {
         setError(null);
+        const requestProps = serializePropsForDjango(props);
 
         try {
-          const html = await fetchComponentHtml(componentName, props);
+          const html = await fetchComponentHtml(componentName, requestProps);
 
           setHtml(html);
         } catch (err) {

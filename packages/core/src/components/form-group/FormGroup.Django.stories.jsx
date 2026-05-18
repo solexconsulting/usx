@@ -1,39 +1,18 @@
-import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './FormGroup.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
-
-const sampleChildren = '<label class="usa-label usx-label" for="fg-input">Form group label</label><input class="usa-input usx-input" id="fg-input" placeholder="Type here" />';
 
 export default {
   title: 'Django/FormGroup',
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: [],
 };
 
-const createStory = (args) => ({
-  args,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'form-group', props: args })
-      }
-    }
-  },
-  render: djangoComponent('form-group')
-});
+const createStory = createDjangoStory('form-group');
 
-export const Default = createStory({
-  children: sampleChildren,
-});
-
-export const ErrorState = createStory({
-  error: true,
-  children: '<label class="usa-label usx-label" for="fg-error">Error state</label><input class="usa-input usx-input usa-input--error" id="fg-error" aria-invalid="true" />',
-});
-
-export const SuccessState = createStory({
-  children: '<label class="usa-label usx-label" for="fg-success">Success state</label><input class="usa-input usx-input usa-input--success" id="fg-success" />',
-});
+export const Default = createStory(storyDefs.Default);
+export const ErrorState = createStory(storyDefs.ErrorState);
+export const SuccessState = createStory(storyDefs.SuccessState);

@@ -1,19 +1,8 @@
 {# Django template for AvatarGroup #}
+{% load components %}
 
-<div class="usa-identifier__logos usx-avatar-group{% if stacked %} usa-avatar-group--stacked{% endif %}{% if overlap %} usa-avatar-group--overlap{% endif %}{% if className %} {{ className }}{% endif %}">
+<div class="usx-avatar-group{% if stacked %} usa-avatar-group--stacked{% endif %}{% if overlap %} usa-avatar-group--overlap{% endif %}{% if className %} {{ className }}{% endif %}">
   {% for avatar in avatars %}
-    {% if avatar.tooltip %}<span class="usx-tooltip">{% endif %}
-      <a href="{{ avatar.href|default:'#' }}" class="usa-identifier__logo usx-avatar{% if avatar.className %} {{ avatar.className }}{% endif %}">
-        <img
-          class="usa-identifier__logo-img{% if avatar.shape == 'circle' %} usx-circle{% elif avatar.shape == 'rounded-md' %} usx-rounded-md{% elif avatar.shape == 'rounded-lg' %} usx-rounded-lg{% endif %}{% if avatar.imageClassName %} {{ avatar.imageClassName }}{% endif %}"
-          src="{{ avatar.src }}"
-          alt="{{ avatar.alt }}"
-          role="img"
-        />
-      </a>
-    {% if avatar.tooltip %}
-      <span class="usa-tooltip__body usa-tooltip__body--right" role="tooltip">{{ avatar.tooltip }}</span>
-      </span>
-    {% endif %}
+    {% avatar href=avatar.href src=avatar.src alt=avatar.alt initials=avatar.initials shape=avatar.shape tooltip=avatar.tooltip className=avatar.className imageClassName=avatar.imageClassName initialsClassName=avatar.initialsClassName %}{% endavatar %}
   {% endfor %}
 </div>

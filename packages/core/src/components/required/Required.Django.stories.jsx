@@ -1,7 +1,6 @@
-import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './Required.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -9,29 +8,10 @@ export default {
   title: 'Django/Required',
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: [],
 };
 
-const createStory = (args) => ({
-  args,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'required', props: args })
-      }
-    }
-  },
-  render: djangoComponent('required')
-});
+const createStory = createDjangoStory('required');
 
-export const Default = {
-  ...createStory({
-    children: 'This field is required',
-  }),
-}
-
-export const WithCustomTitle = {
-  ...createStory({
-    children: 'Hover over the asterisk',
-    title: 'Custom Title Example'
-  }),
-}
+export const Default = createStory(storyDefs.Default);
+export const WithCustomTitle = createStory(storyDefs.WithCustomTitle);

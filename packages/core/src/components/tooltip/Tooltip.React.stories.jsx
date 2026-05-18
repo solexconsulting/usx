@@ -11,11 +11,47 @@ export default {
   component: Tooltip,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
+};
+
+export const storyDefs = {
+  OnButton: {
+    label: 'Helpful info',
+    position: 'top',
+  },
+  Top: {
+    label: 'Top tooltip',
+    position: 'top',
+  },
+  Bottom: {
+    label: 'Bottom tooltip',
+    position: 'bottom',
+  },
+  Left: {
+    label: 'Left tooltip',
+    position: 'left',
+  },
+  Right: {
+    label: 'Right tooltip',
+    position: 'right',
+  },
+  OnLink: {
+    label: 'Helpful info',
+    position: 'right',
+  },
+  OnIcon: {
+    label: 'More information',
+    position: 'right',
+  },
+  OnAbbreviation: {
+    label: 'Social Security Number',
+    position: 'right',
+  },
 };
 
 export const OnButton = {
   render: () => (
-    <Tooltip label="Helpful info">
+    <Tooltip {...storyDefs.OnButton}>
       <Button>Hover me</Button>
     </Tooltip>
   )
@@ -23,7 +59,7 @@ export const OnButton = {
 
 export const Top = {
   render: () => (
-    <Tooltip label="Top tooltip" position="top">
+    <Tooltip {...storyDefs.Top}>
       <Button>Top</Button>
     </Tooltip>
   )
@@ -31,7 +67,7 @@ export const Top = {
 
 export const Bottom = {
   render: () => (
-    <Tooltip label="Bottom tooltip" position="bottom">
+    <Tooltip {...storyDefs.Bottom}>
       <Button>Bottom</Button>
     </Tooltip>
   )
@@ -39,7 +75,7 @@ export const Bottom = {
 
 export const Left = {
   render: () => (
-    <Tooltip label="Left tooltip" position="left">
+    <Tooltip {...storyDefs.Left}>
       <Button>Left</Button>
     </Tooltip>
   )
@@ -47,7 +83,7 @@ export const Left = {
 
 export const Right = {
   render: () => (
-    <Tooltip label="Right tooltip" position="right">
+    <Tooltip {...storyDefs.Right}>
       <Button>Right</Button>
     </Tooltip>
   )
@@ -55,7 +91,7 @@ export const Right = {
 
 export const OnLink = {
   render: () => (
-    <Tooltip label="Helpful info">
+    <Tooltip {...storyDefs.OnLink}>
       <a href="#" className="usa-link usx-link">Hover over this link</a>
     </Tooltip>
   )
@@ -63,7 +99,7 @@ export const OnLink = {
 
 export const OnIcon = {
   render: () => (
-    <Tooltip label="More information" position="right">
+    <Tooltip {...storyDefs.OnIcon}>
       <svg className="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img" tabIndex={0}>
         <use href="/img/sprite.svg#info" />
       </svg>
@@ -73,7 +109,7 @@ export const OnIcon = {
 
 export const OnAbbreviation = {
   render: () => (
-    <Tooltip label="Social Security Number" position="right">
+    <Tooltip {...storyDefs.OnAbbreviation}>
       <abbr title="" tabIndex={0}>SSN</abbr>
     </Tooltip>
   )

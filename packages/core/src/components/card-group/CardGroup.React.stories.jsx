@@ -47,32 +47,31 @@ export default {
   component: CardGroup,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
-const Template = (args) => <CardGroup {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {
-  cards: [
-    baseCardArgs,
-    { ...baseCardArgs, ...images, heading: 'Card with Media' },
-    { ...baseCardArgs, ...images, heading: 'Media with header first', headerFirst: true },
-  ],
-};
-
-export const FlagLayout = Template.bind({});
-FlagLayout.args = {
-  cards: [
-    { ...baseCardArgs, ...images, flag: true, heading: 'Default flag', className: 'flex-1' },
-    { ...baseCardArgs, ...images, flag: true, mediaRight: true, heading: 'Flag media right', className: 'flex-1' },
-  ],
-};
-
-export const WithTags = {
-  args: {
+export const storyDefs = {
+  Default: {
     cards: [
-      { ...baseCardArgs, ...images, ...tagsArgs, className: 'tablet:grid-col-6 widescreen:grid-col-4'},
-      { ...baseCardArgs, ...images, ...tagsArgs, className: 'tablet:grid-col-6 widescreen:grid-col-4'},
-    ]
-  }
-}
+      baseCardArgs,
+      { ...baseCardArgs, ...images, title: 'Card with Media' },
+      { ...baseCardArgs, ...images, title: 'Media with header first', headerFirst: true },
+    ],
+  },
+  FlagLayout: {
+    cards: [
+      { ...baseCardArgs, ...images, flag: true, title: 'Default flag', className: 'flex-1' },
+      { ...baseCardArgs, ...images, flag: true, mediaRight: true, title: 'Flag media right', className: 'flex-1' },
+    ],
+  },
+  WithTags: {
+    cards: [
+      { ...baseCardArgs, ...images, ...tagsArgs, className: 'tablet:grid-col-6 widescreen:grid-col-4' },
+      { ...baseCardArgs, ...images, ...tagsArgs, className: 'tablet:grid-col-6 widescreen:grid-col-4' },
+    ],
+  },
+};
+
+export const Default = { args: storyDefs.Default };
+export const FlagLayout = { args: storyDefs.FlagLayout };
+export const WithTags = { args: storyDefs.WithTags };

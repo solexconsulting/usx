@@ -1,80 +1,22 @@
-import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './Select.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
-
-const sampleOptions = [
-  { value: 'option1', label: 'Option A' },
-  { value: 'option2', label: 'Option B' },
-  { value: 'option3', label: 'Option C' },
-];
 
 export default {
   title: 'Django/Select',
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: [],
 };
 
-const createStory = (args) => ({
-  args,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'select', props: args })
-      }
-    }
-  },
-  render: djangoComponent('select')
-});
+const createStory = createDjangoStory('select');
 
-export const Default = createStory({
-  id: 'select-default',
-  label: 'Dropdown label',
-  options: sampleOptions,
-});
-
-export const ErrorState = createStory({
-  id: 'select-error',
-  label: 'Dropdown label',
-  options: sampleOptions,
-  hint: 'This is a select with an error message.',
-  error: 'Selection error message',
-});
-
-export const SuccessState = createStory({
-  id: 'select-success',
-  label: 'Success state select',
-  options: sampleOptions,
-  success: 'Success message goes here.',
-});
-
-export const Disabled = createStory({
-  id: 'select-disabled',
-  label: 'Disabled select',
-  options: sampleOptions,
-  disabled: true,
-});
-
-export const DisabledWithError = createStory({
-  id: 'select-disabled-error',
-  label: 'Disabled with error',
-  options: sampleOptions,
-  disabled: true,
-  error: 'This field is disabled due to an error.',
-});
-
-export const DefaultValue = createStory({
-  id: 'select-default-value',
-  label: 'Select with default value',
-  options: sampleOptions,
-  defaultValue: 'option2',
-});
-
-export const WithHint = createStory({
-  id: 'select-with-hint',
-  label: 'Select with hint',
-  options: sampleOptions,
-  hint: 'This is a helpful hint for the select.',
-});
+export const Default = createStory(storyDefs.Default);
+export const ErrorState = createStory(storyDefs.ErrorState);
+export const SuccessState = createStory(storyDefs.SuccessState);
+export const Disabled = createStory(storyDefs.Disabled);
+export const DisabledWithError = createStory(storyDefs.DisabledWithError);
+export const DefaultValue = createStory(storyDefs.DefaultValue);
+export const WithHint = createStory(storyDefs.WithHint);

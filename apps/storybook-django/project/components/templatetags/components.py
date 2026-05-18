@@ -257,6 +257,18 @@ class BlockInclusionNode(template.Node):
 
 # ── Component tags ────────────────────────────────────────────────────────────
 
+class AvatarBlock(BlockInclusionNode):
+    template = "avatar/avatar.django.html"
+
+class AvatarGroupBlock(BlockInclusionNode):
+    template = "avatar-group/avatar-group.django.html"
+
+class AttributionBlock(BlockInclusionNode):
+    template = "attribution/attribution.django.html"
+
+class BlockBlock(BlockInclusionNode):
+    template = "block/block.django.html"
+
 class AccordionBlock(BlockInclusionNode):
     template = "accordion/accordion.django.html"
 
@@ -447,6 +459,10 @@ class TooltipBlock(BlockInclusionNode):
     template = "tooltip/tooltip.django.html"
 
 
+register.tag('avatar', AvatarBlock.handle)
+register.tag('avatar_group', AvatarGroupBlock.handle)
+register.tag('attribution', AttributionBlock.handle)
+register.tag('block', BlockBlock.handle)
 register.tag('accordion', AccordionBlock.handle)
 register.tag('alert', AlertBlock.handle)
 register.tag('banner', BannerBlock.handle)

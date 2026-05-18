@@ -9,32 +9,29 @@ export default {
   title: 'React/Legend',
   component: Legend,
   tags: ['autodocs'],
-  argTypes: generatedArgTypes
+  argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
-export const Default = {
-  args: {
+export const storyDefs = {
+  Default: {
     text: 'Legend Text',
   },
-};
-
-export const WithAdditionalClasses = {
-  args: {
+  WithAdditionalClasses: {
     text: 'Legend with Additional Classes',
     className: 'text-primary',
   },
-};
-
-export const WithRequired = {
-  args: {
+  WithRequired: {
     text: 'Legend Text',
     required: true,
   },
-};
-
-export const Large = {
-  args: {
+  Large: {
     text: 'Large Legend Text',
     large: true
   },
 };
+
+export const Default = { args: storyDefs.Default };
+export const WithAdditionalClasses = { args: storyDefs.WithAdditionalClasses };
+export const WithRequired = { args: storyDefs.WithRequired };
+export const Large = { args: storyDefs.Large };

@@ -11,6 +11,7 @@ export default {
   component: FormGroup,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
 const defaultInput = (
@@ -34,20 +35,19 @@ const successInput = (
   />
 );
 
-export const Default = () => (
-  <FormGroup>
-    {defaultInput}
-  </FormGroup>
-)
+export const storyDefs = {
+  Default: {
+    children: defaultInput,
+  },
+  ErrorState: {
+    error: true,
+    children: errorInput,
+  },
+  SuccessState: {
+    children: successInput,
+  },
+};
 
-export const ErrorState = () => (
-  <FormGroup error>
-    {errorInput}
-  </FormGroup>
-)
-
-export const SuccessState = () => (
-  <FormGroup>
-    {successInput}
-  </FormGroup>
-)
+export const Default = { args: storyDefs.Default };
+export const ErrorState = { args: storyDefs.ErrorState };
+export const SuccessState = { args: storyDefs.SuccessState };

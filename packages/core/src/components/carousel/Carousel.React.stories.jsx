@@ -11,6 +11,7 @@ export default {
   component: Carousel,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
 const getSlideContent = (bgColor, textColor, index) => (
@@ -34,41 +35,44 @@ const imageSlides = [
   { content: <Image src="https://picsum.photos/400/300?random=3" alt="Random image 3" fit={true} /> }
 ];
 
-export const Default = {
-  args: baseArgs
-};
-
-
-
-export const WithoutDots = {
-  args: { ...baseArgs, showDots: false }
-}
-
-export const CustomId = {
-  args: { ...baseArgs, id: 'custom-carousel' }
-}
-
-
-export const WithImages = {
-  args: {
+export const storyDefs = {
+  Default: baseArgs,
+  WithoutDots: { ...baseArgs, showDots: false },
+  CustomId: { ...baseArgs, id: 'custom-carousel' },
+  WithImages: {
     ...baseArgs,
     id: 'carousel-with-images',
-    slides: imageSlides
-  }
+    slides: imageSlides,
+  },
+  WithSlideChildren: {
+    id: 'carousel-children',
+    showDots: true,
+    slideIds: ['#child-1', '#child-2', '#child-3'],
+    children: (
+      <>
+        <Slide id="child-1">{getSlideContent('primary-dark', 'white', 0)}</Slide>
+        <Slide id="child-2">{getSlideContent('primary-light', 'black', 1)}</Slide>
+        <Slide id="child-3">{getSlideContent('secondary-dark', 'white', 2)}</Slide>
+      </>
+    ),
+  },
+  WithHTMLChildren: {
+    id: 'carousel-manual',
+    showDots: true,
+    slideIds: ['#manual-1', '#manual-2', '#manual-3'],
+    children: (
+      <>
+        <section id="manual-1" className="usx-carousel__slide" tabIndex={0}>{getSlideContent('primary-dark', 'white', 0)}</section>
+        <section id="manual-2" className="usx-carousel__slide" tabIndex={0}>{getSlideContent('primary-light', 'black', 1)}</section>
+        <section id="manual-3" className="usx-carousel__slide" tabIndex={0}>{getSlideContent('secondary-dark', 'white', 2)}</section>
+      </>
+    ),
+  },
 };
 
-export const WithSlideChildren = () => (
-  <Carousel id="carousel-children" showDots slideIds={["#child-1", "#child-2", "#child-3"]}>
-    <Slide id="child-1">{getSlideContent('primary-dark', 'white', 0)}</Slide>
-    <Slide id="child-2">{getSlideContent('primary-light', 'black', 1)}</Slide>
-    <Slide id="child-3">{getSlideContent('secondary-dark', 'white', 2)}</Slide>
-  </Carousel>
-);
-
-export const WithHTMLChildren = () => (
-  <Carousel id="carousel-manual" showDots slideIds={["#manual-1", "#manual-2", "#manual-3"]}>
-    <section id="manual-1" className="usx-carousel__slide" tabIndex={0}>{getSlideContent('primary-dark', 'white', 0)}</section>
-    <section id="manual-2" className="usx-carousel__slide" tabIndex={0}>{getSlideContent('primary-light', 'black', 1)}</section>
-    <section id="manual-3" className="usx-carousel__slide" tabIndex={0}>{getSlideContent('secondary-dark', 'white', 2)}</section>
-  </Carousel>
-);
+export const Default = { args: storyDefs.Default };
+export const WithoutDots = { args: storyDefs.WithoutDots };
+export const CustomId = { args: storyDefs.CustomId };
+export const WithImages = { args: storyDefs.WithImages };
+export const WithSlideChildren = { args: storyDefs.WithSlideChildren };
+export const WithHTMLChildren = { args: storyDefs.WithHTMLChildren };

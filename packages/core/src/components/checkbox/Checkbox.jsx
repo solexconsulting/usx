@@ -62,7 +62,7 @@ export default function Checkbox({
 
       </div>
       {hasError ? (
-        <span className="usa-error-message text-secondary" role="alert">
+        <span className="usa-error-message" role="alert">
           {error}
         </span>
       ) : hasSuccess ? (
