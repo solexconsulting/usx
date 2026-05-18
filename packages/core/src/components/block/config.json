@@ -1,0 +1,27 @@
+{
+  "name": "block",
+  "template": "block/block.django.html",
+  "default": {
+    "children": "This is a block of content."
+  },
+  "props": {
+    "variant": {
+      "type": "select",
+      "options": ["callout"],
+      "description": "Visual variant. Omit for standard bordered block; 'callout' for top-border background style."
+    },
+    "indent": {
+      "type": "select",
+      "options": ["sm", "md", "lg", "xl"],
+      "description": "Left indent level applied to the block wrapper."
+    },
+    "dedent": { "type": "boolean", "description": "Pull the block left beyond the content edge." },
+    "big": { "type": "boolean", "description": "Increases border width for stronger emphasis." },
+    "quote": { "type": "boolean", "description": "Adds a quote icon and flex-row layout (non-callout only)." },
+    "color": { "type": "string", "description": "Border color token name. Applied as usx-border-{color} on content (or block wrapper for callout)." },
+    "contentClassName": { "type": "string", "description": "Additional classes for the inner content element." },
+    "attribution": { "type": "object", "description": "Attribution component props object rendered by the block component." },
+    "children": { "type": "string", "description": "Main block content." },
+    "className": { "type": "string", "description": "Additional classes for the block wrapper." }
+  }
+}

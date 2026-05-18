@@ -1,0 +1,21 @@
+{# Django template for Attribution #}
+{% load components %}
+<div class="usx-attribution{% if className %} {{ className }}{% endif %}">
+  {% if children %}
+    {{ children|safe }}
+  {% else %}
+    {% if avatar or media %}
+      <span class="usx-attribution__media">
+        {% if avatar %}
+          {% avatar href=avatar.href src=avatar.src alt=avatar.alt initials=avatar.initials shape=avatar.shape tooltip=avatar.tooltip className=avatar.className imageClassName=avatar.imageClassName initialsClassName=avatar.initialsClassName %}{% endavatar %}
+        {% else %}
+          {{ media|safe }}
+        {% endif %}
+      </span>
+    {% endif %}
+    <span class="usx-attribution__content">
+      <span class="usx-attribution__primary">{{ primary|safe }}</span>
+      <span class="usx-attribution__secondary">{{ secondary|safe }}</span>
+    </span>
+  {% endif %}
+</div>

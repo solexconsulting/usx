@@ -11,5 +11,8 @@
     .text-#{$color-name} {
       color: $color-value;
     }
+    .usx-border-#{$color-name} {
+      border-color: $color-value;
+    }
   }
 }

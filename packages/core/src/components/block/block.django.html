@@ -1,0 +1,26 @@
+{# Django template for Block #}
+{% load components %}
+<div class="usx-block{% if variant %} usx-block--{{ variant }}{% endif %}{% if dedent %} usx-block--dedent{% endif %}{% if indent %} usx-block--indent-{{ indent }}{% endif %}{% if big %} usx-block--big{% endif %}{% if quote and variant != 'callout' %} display-flex flex-row{% endif %}{% if variant == 'callout' and color %} usx-border-{{ color }}{% endif %}{% if className %} {{ className }}{% endif %}">
+  {% if quote and variant != 'callout' %}
+    <svg class="usa-icon usa-icon--size-4 usx-block__open-quote-icon" aria-hidden="true" focusable="false" role="img">
+      <use href="/img/sprite.svg#format_quote"></use>
+    </svg>
+    <div class="usx-block__content{% if color %} usx-border-{{ color }}{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">
+      {{ children|safe }}
+      {% if attribution %}
+        <div class="usx-block__attribution">
+          {% attribution avatar=attribution.avatar media=attribution.media primary=attribution.primary secondary=attribution.secondary className=attribution.className %}{% if attribution.children %}{{ attribution.children|safe }}{% endif %}{% endattribution %}
+        </div>
+      {% endif %}
+    </div>
+  {% else %}
+    <div class="usx-block__content{% if variant != 'callout' and color %} usx-border-{{ color }}{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">
+      {{ children|safe }}
+    </div>
+    {% if attribution %}
+      <div class="usx-block__attribution">
+        {% attribution avatar=attribution.avatar media=attribution.media primary=attribution.primary secondary=attribution.secondary className=attribution.className %}{% if attribution.children %}{{ attribution.children|safe }}{% endif %}{% endattribution %}
+      </div>
+    {% endif %}
+  {% endif %}
+</div>
