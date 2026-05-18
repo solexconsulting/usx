@@ -13,7 +13,16 @@
     grid-column-start: 1;
   }
 
-  &.usx-swap-ease, &.usx-swap-rotate, &.usx-swap-flip {
+  &.usx-swap--rotate, &.usx-swap--flip {
+    .usx-swap-off {
+      transition: transform 0.25s cubic-bezier(0, 0, .25, 1), max-height 0.25s step-end;
+    }
+    .usx-swap-on {
+      transition: transform 0.25s cubic-bezier(0, 0, .25, 1), max-height 0.25s step-start;
+    }
+  }
+
+  &.usx-swap--ease {
     .usx-swap-off {
       transition: opacity 0.25s cubic-bezier(0, 0, .25, 1), transform 0.25s cubic-bezier(0, 0, .25, 1), max-height 0.25s step-end;
     }
@@ -65,11 +74,10 @@
 
   .usx-swap-on {
       opacity: 1;
-      max-height: 100%;
   }
 }
 
-.usx-swap-rotate {
+.usx-swap--rotate {
   .usx-swap-on,
   input:indeterminate ~ .usx-swap-on {
     transform: rotate(-45deg);
@@ -86,7 +94,7 @@
   }
 }
 
-.usx-swap-flip {
+.usx-swap--flip {
   transform-style: preserve-3d;
   perspective: 20rem;
 
@@ -107,6 +115,5 @@
     transform: rotateY(-180deg);
     backface-visibility: hidden;
     opacity: 1;
-    max-height: 100%;
   }
 }
