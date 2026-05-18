@@ -20,12 +20,24 @@
   </svg>
 </label>
 
-<!-- Active Text Swap -->
-<h3 class="site-preview-heading margin-bottom-0">Activated using "usx-swap-active" class</h3>
-<p class="usa-hint margin-top-0">Remove "usx-swap-active" class to trigger swap</p>
-<label class="usx-swap usx-swap-active">
-  <span class="usx-swap-on">ACTIVE</span>
-  <span class="usx-swap-off">INACTIVE</span>
+<!-- Ease Text Swap -->
+ <h3 class="site-preview-heading">Ease - Text with Ease Transition</h3>
+<label class="usx-swap usx-swap-ease">
+  <input type="checkbox" autocomplete="off"/>
+  <span class="usx-swap-on">Smooth is Fast</span>
+  <span class="usx-swap-off">Slow is Smooth</span>
+</label>
+
+<!-- Ease Icon Swap -->
+<h3 class="site-preview-heading">Ease - Icon with Ease Transition</h3>
+<label class="usx-swap usx-swap-ease">
+  <input type="checkbox" autocomplete="off"/>
+  <svg class="usa-icon usa-icon--size-3 usx-swap-on" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#unfold_less"></use>
+  </svg>
+  <svg class="usa-icon usa-icon--size-3 usx-swap-off" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#unfold_more"></use>
+  </svg>
 </label>
 
 <!-- Rotate Text Swap -->
@@ -93,4 +105,12 @@
   <input type="checkbox" autocomplete="off" onchange="alert('Swap triggered!')"/>
   <span class="usx-swap-on">ON</span>
   <span class="usx-swap-off">OFF</span>
+</label>
+
+<!-- Active Text Swap -->
+<h3 class="site-preview-heading margin-bottom-0">Activated using "usx-swap-active" class</h3>
+<p class="usa-hint margin-top-0">Remove "usx-swap-active" class to trigger swap</p>
+<label class="usx-swap usx-swap-active">
+  <span class="usx-swap-on">ACTIVE</span>
+  <span class="usx-swap-off">INACTIVE</span>
 </label>
