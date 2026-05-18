@@ -1,4 +1,19 @@
-{# Django template for Toggle #}
-<div class="usx-toggle">
-  <div class="toggle__content">Toggle</div>
-</div>
+{# Django template for Toggle using USWDS segmented button group #}
+{% load components %}
+
+<ul class="usa-button-group usx-button-group usa-button-group--segmented usx-toggle{% if variant == 'icon' %} usx-toggle--icon{% endif %}{% if className %} {{ className }}{% endif %}" role="radiogroup"{% if name %} aria-label="{{ name }}"{% endif %}>
+  {% for option in options %}
+  {% with optValue=option.value|default:option optLabel=option.label|default:option optDisabled=option.disabled|default:False %}
+  <li class="usa-button-group__item usx-toggle__item{% if optDisabled %} usx-toggle__item--disabled{% endif %}">
+    <input class="usx-toggle__input" type="radio" id="{{ id }}-{{ forloop.counter }}" name="{{ name|default:id }}" value="{{ optValue }}" {% if optValue == value or optValue == defaultValue %}checked{% endif %}{% if disabled or optDisabled %} disabled{% endif %}>
+    <label for="{{ id }}-{{ forloop.counter }}" class="usa-button usx-button usa-button--outline">
+      {% if variant == 'icon' and option.icon %}
+        {% icon name=option.icon className="usx-toggle__label" %}{% endicon %}
+      {% else %}
+        <span class="usx-toggle__label">{{ optLabel }}</span>
+      {% endif %}
+    </label>
+  </li>
+  {% endwith %}
+  {% endfor %}
+</ul>

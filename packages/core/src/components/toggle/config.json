@@ -1,11 +1,14 @@
 {
   "name": "toggle",
   "template": "toggle/toggle.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Toggle"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
+    "id": { "type": "string", "description": "ID for the control (used as prefix for option IDs)" },
+    "options": { "type": "object", "description": "Array of option objects: {value,label,icon?,disabled?}" },
+    "value": { "type": "string", "description": "Controlled selected value" },
+    "defaultValue": { "type": "string", "description": "Uncontrolled initial value" },
+    "name": { "type": "string", "description": "Name attribute for radio inputs" },
+    "variant": { "type": "select", "options": ["text","icon"], "description": "Visual variant" },
+    "disabled": { "type": "boolean", "description": "Disable the whole control" },
     "className": { "type": "string", "description": "Additional classes" }
   }
 }

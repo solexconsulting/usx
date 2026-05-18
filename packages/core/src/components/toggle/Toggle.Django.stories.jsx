@@ -12,3 +12,6 @@ export default {
 const createStory = createDjangoStory({ componentName: 'toggle' });
 
 export const Default = createStory(storyDefs.Default);
+export const Icon = createStory(storyDefs.IconVariant);
+export const TotallyDisabled = createStory(storyDefs.TotallyDisabled);
+export const PartiallyDisabled = createStory(storyDefs.PartiallyDisabled);

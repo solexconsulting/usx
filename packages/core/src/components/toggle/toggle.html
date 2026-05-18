@@ -1,4 +1,85 @@
-<div class="usx-toggle">
-  <!-- Canonical HTML for Toggle -->
-  <div class="toggle__content">NOT IMPLEMENTED</div>
+<div class="usa-alert usa-alert--warning usx-alert usx-alert--warning">
+  <div class="usa-alert__body usx-alert__body">
+    <h4 class="usa-alert__heading usx-alert__heading">Accessibility Notice</h4>
+    <p class="usa-alert__text usx-alert__text">
+      Please note: The toggle component is undergoing maintenance for accessibility issues.
+    </p>
+  </div>
 </div>
+
+
+<h3 class="site-preview-heading">Default</h3>
+<ul class="usa-button-group usx-button-group usa-button-group--segmented usx-toggle" role="radiogroup" aria-label="alignment">
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-left" name="toggle-example" value="left">
+    <label for="toggle-left" class="usa-button usx-button usa-button--outline"><span class="usx-toggle__label">Left</span></label>
+  </li>
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-center" name="toggle-example" value="center" checked>
+    <label for="toggle-center" class="usa-button usx-button usa-button--outline"><span class="usx-toggle__label">Center</span></label>
+  </li>
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-right" name="toggle-example" value="right">
+    <label for="toggle-right" class="usa-button usx-button usa-button--outline"><span class="usx-toggle__label">Right</span></label>
+  </li>
+</ul>
+
+<h3 class="site-preview-heading">Icons</h3>
+<ul class="usa-button-group usx-button-group usa-button-group--segmented usx-toggle usx-toggle--icon" role="radiogroup" aria-label="alignment">
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-left-icon" name="toggle-icon-example" value="left">
+    <label for="toggle-left-icon" class="usa-button usx-button usa-button--outline">
+      <svg class="usa-icon usx-toggle__label" aria-hidden="true" focusable="false" role="img">
+        <use href="/img/sprite.svg#directions_bike"></use>
+      </svg>
+    </label>
+  </li>
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-center-icon" name="toggle-icon-example" value="center" checked>
+    <label for="toggle-center-icon" class="usa-button usx-button usa-button--outline">
+      <svg class="usa-icon usx-toggle__label" aria-hidden="true" focusable="false" role="img">
+        <use href="/img/sprite.svg#directions_bus"></use>
+      </svg>
+    </label>
+  </li>
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-right-icon" name="toggle-icon-example" value="right">
+    <label for="toggle-right-icon" class="usa-button usx-button usa-button--outline">
+      <svg class="usa-icon usx-toggle__label" aria-hidden="true" focusable="false" role="img">
+        <use href="/img/sprite.svg#flight"></use>
+      </svg>
+    </label>
+  </li>
+</ul>
+
+<h3 class="site-preview-heading">Disabled</h3>
+<ul class="usa-button-group usx-button-group usa-button-group--segmented usx-toggle" role="radiogroup" aria-label="alignment">
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-left-disabled" name="toggle-disabled-example" value="left" disabled>
+    <label for="toggle-left-disabled" class="usa-button usx-button usa-button--outline"><span class="usx-toggle__label">Left</span></label>
+  </li>
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-center-disabled" name="toggle-disabled-example" value="center" disabled>
+    <label for="toggle-center-disabled" class="usa-button usx-button usa-button--outline"><span class="usx-toggle__label">Center</span></label>
+  </li>
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-right-disabled" name="toggle-disabled-example" value="right" disabled>
+    <label for="toggle-right-disabled" class="usa-button usx-button usa-button--outline"><span class="usx-toggle__label">Right</span></label>
+  </li>
+</ul>
+
+<h3 class="site-preview-heading">Partially Disabled</h3>
+<ul class="usa-button-group usx-button-group usa-button-group--segmented usx-toggle" role="radiogroup" aria-label="alignment">
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-left-partial-disabled" name="toggle-partial-disabled-example" value="left">
+    <label for="toggle-left-partial-disabled" class="usa-button usx-button usa-button--outline"><span class="usx-toggle__label">Left</span></label>
+  </li>
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-center-partial-disabled" name="toggle-partial-disabled-example" value="center" disabled>
+    <label for="toggle-center-partial-disabled" class="usa-button usx-button usa-button--outline"><span class="usx-toggle__label">Center</span></label>
+  </li>
+  <li class="usa-button-group__item usx-toggle__item">
+    <input class="usx-toggle__input" type="radio" id="toggle-right-partial-disabled" name="toggle-partial-disabled-example" value="right">
+    <label for="toggle-right-partial-disabled" class="usa-button usx-button usa-button--outline"><span class="usx-toggle__label">Right</span></label>
+  </li>
+</ul>
