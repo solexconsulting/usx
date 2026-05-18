@@ -11,8 +11,10 @@
     border-radius: $usx-button-border-radius;
   }
 
-  @if $usx-button-box-shadow != null {
-    box-shadow: $usx-button-box-shadow;
+  &:not(.usa-button--outline){
+    @if $usx-button-box-shadow != null {
+      box-shadow: $usx-button-box-shadow;
+    }
   }
 }
 
@@ -230,3 +232,9 @@
   $color-primary-active,
   null
 );
+
+.usx-button {
+  .usa-button--outline {
+    box-shadow: 0 0 0 2px $color-primary;
+  }
+}

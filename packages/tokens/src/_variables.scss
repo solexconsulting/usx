@@ -281,6 +281,13 @@ $usx-summary-box-link-color: $color-light-text !default;
 $usx-summary-box-link-hover-color: $color-accent-cool !default;
 $usx-summary-box-link-visited-color: #c254ee !default;
 
+// ── Component tokens: Toggle ───────────────────────────────────────────
+/*
+Component is somewhat complicated due to the reuse of the button group component.
+Unless we decide to make this a fully custom component, it is limited to the
+outline style for inactive buttons, and the primary style for the active button.
+*/
+
 // ── Component tokens: Input / Textarea ───────────────────────────────────────
 $usx-input-border-radius: $r-sm !default;
 $usx-input-background-color: null !default;

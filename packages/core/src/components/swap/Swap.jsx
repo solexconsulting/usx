@@ -14,7 +14,7 @@ export default function Swap({
   offClassName = '',
   ...props
 }) {
-  const variantClass = variant !== 'default' ? `usx-swap-${variant}` : '';
+  const variantClass = variant !== 'default' ? `usx-swap--${variant}` : '';
   const classes = ['usx-swap', variantClass, className].filter(Boolean).join(' ');
   const onClasses = ['usx-swap-on', onClassName].filter(Boolean).join(' ');
   const offClasses = ['usx-swap-off', offClassName].filter(Boolean).join(' ');
