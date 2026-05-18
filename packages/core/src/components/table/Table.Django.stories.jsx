@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const createStory = createDjangoStory('table');
+const createStory = createDjangoStory({ componentName: 'table' });
 
 export const Standard = createStory(storyDefs.Standard);
 export const Striped = createStory(storyDefs.Striped);

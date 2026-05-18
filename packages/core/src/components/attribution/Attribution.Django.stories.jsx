@@ -8,7 +8,7 @@ export default {
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('attribution');
+const createStory = createDjangoStory({ componentName: 'attribution' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithAvatar = createStory(storyDefs.WithAvatar);

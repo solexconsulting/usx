@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const createStory = (args, children = '') => createDjangoStory('tooltip')({ ...args, children });
+const createStory = (args, children = '') => createDjangoStory({ componentName: 'tooltip' })({ ...args, children });
 
 export const OnButton = createStory(storyDefs.OnButton, '<button type="button" class="usa-button usx-button usa-button--primary">Hover me</button>');
 export const Top = createStory(storyDefs.Top, '<button type="button" class="usa-button usx-button usa-button--primary">Top</button>');

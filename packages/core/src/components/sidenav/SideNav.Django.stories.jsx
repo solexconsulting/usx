@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('sidenav');
+const createStory = createDjangoStory({ componentName: 'sidenav' });
 
 export const Simple = createStory(storyDefs.Simple);
 export const WithSublist = createStory(storyDefs.WithSublist);

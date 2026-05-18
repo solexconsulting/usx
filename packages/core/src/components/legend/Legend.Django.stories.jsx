@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('legend');
+const createStory = createDjangoStory({ componentName: 'legend' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithAdditionalClasses = createStory(storyDefs.WithAdditionalClasses);

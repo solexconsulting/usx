@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('breadcrumb');
+const createStory = createDjangoStory({ componentName: 'breadcrumb' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithRdfa = createStory(storyDefs.WithRdfa);

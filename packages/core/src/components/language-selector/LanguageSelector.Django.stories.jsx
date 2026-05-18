@@ -20,5 +20,5 @@ export const Default = {
       }
     }
   },
-  render: djangoComponent('language-selector')
+  render: djangoComponent({ componentName: 'language-selector' })
 };

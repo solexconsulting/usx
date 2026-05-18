@@ -8,6 +8,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
+const DEFAULT_RENDER_OPTIONS = {
+  executeScripts: false,
+  replayGlobalEvents: false,
+};
+
+const normalizeRenderOptions = (renderOptions = {}) => {
+  return {
+    ...DEFAULT_RENDER_OPTIONS,
+    ...(renderOptions || {}),
+  };
+};
+
 /**
  * Inserts HTML into an element, executing embedded script tags.
  * @param {HTMLElement} element
@@ -17,7 +29,6 @@ const insertHTMLWithScripts = (element, html) => {
   element.innerHTML = html;
 
   Array.from(element.querySelectorAll('script')).forEach((script) => {
-    console.log("Found script:", script);
     const newScript = document.createElement('script');
     Array.from(script.attributes).forEach((attr) =>
       newScript.setAttribute(attr.name, attr.value),
@@ -30,23 +41,16 @@ const insertHTMLWithScripts = (element, html) => {
   });
 };
 
-/**
- * Inserts HTML into an element, executing embedded script tags,
- * firing default loading events and custom ones.
- * @param {HTMLElement|null} element
- * @param {string} html
- */
-const simulateLoading = (element, html) => {
-  if (!element) {
+const insertHTML = (element, html, executeScripts) => {
+  if (executeScripts) {
+    insertHTMLWithScripts(element, html);
     return;
   }
 
-  insertHTMLWithScripts(element, html);
+  element.innerHTML = html;
+};
 
-  // Indicate the element has loaded at least once.
-  element.dataset.testid = 'storybook-django';
-  element.dataset.state = 'loaded';
-
+const replayGlobalLoadingEvents = () => {
   window.document.dispatchEvent(
     new Event('DOMContentLoaded', {
       bubbles: true,
@@ -65,6 +69,27 @@ const simulateLoading = (element, html) => {
       cancelable: true,
     }),
   );
+};
+
+/**
+ * Inserts HTML into an element, executing embedded script tags,
+ * firing default loading events and custom ones.
+ * @param {HTMLElement|null} element
+ * @param {string} html
+ */
+const simulateLoading = (element, html, renderOptions) => {
+  if (!element) {
+    return;
+  }
+
+  insertHTML(element, html, renderOptions.executeScripts);
+
+  element.dataset.testid = 'storybook-django';
+  element.dataset.state = 'loaded';
+
+  if (renderOptions.replayGlobalEvents) {
+    replayGlobalLoadingEvents();
+  }
 
 };
 
@@ -107,7 +132,7 @@ const renderReactNodeToHtml = (node) => {
   }
 };
 
-const serializePropsForDjango = (value) => {
+export const serializePropsForDjango = (value) => {
   if (value === undefined) {
     return undefined;
   }
@@ -144,6 +169,57 @@ const serializePropsForDjango = (value) => {
   return value;
 };
 
+const getErrorMessage = (error) => {
+  if (!error) {
+    return 'Unknown error';
+  }
+
+  if (typeof error === 'string') {
+    return error;
+  }
+
+  if (error instanceof Error && error.message) {
+    return error.message;
+  }
+
+  return 'Failed to fetch component HTML';
+};
+
+export const useDjangoRenderedHtml = (componentName, props) => {
+  const [html, setHtml] = useState('');
+  const [error, setError] = useState(null);
+
+  const requestProps = serializePropsForDjango(props);
+  const requestKey = JSON.stringify(requestProps);
+
+  useEffect(() => {
+    let active = true;
+
+    const fetchHtml = async () => {
+      setError(null);
+
+      try {
+        const nextHtml = await fetchComponentHtml(componentName, requestProps);
+        if (active) {
+          setHtml(nextHtml);
+        }
+      } catch (err) {
+        if (active) {
+          setError(getErrorMessage(err));
+        }
+      }
+    };
+
+    fetchHtml();
+
+    return () => {
+      active = false;
+    };
+  }, [componentName, requestKey]);
+
+  return { html, error };
+};
+
 /**
  * Create a Storybook render component for a Django component.
  *
@@ -151,36 +227,19 @@ const serializePropsForDjango = (value) => {
  * from the Django endpoint and displays it.
  *
  * @param {string} componentName - The name of the Django component (e.g., 'usx/button').
+ * @param {Function|null} postRender - Optional callback after HTML insertion.
  * @returns {Function} A React component that takes props and renders the HTML.
  */
-export function djangoComponent(componentName, postRender=null) {
+const createDjangoRenderedComponent = (componentName, postRender, renderOptions) => {
   return function DjangoRenderedComponent(props) {
-    const [html, setHtml] = useState('');
-    const [error, setError] = useState(null);
+    const { html, error } = useDjangoRenderedHtml(componentName, props);
     const containerRef = useRef(null);
-
-    useEffect(() => {
-      const fetchHtml = async () => {
-        setError(null);
-        const requestProps = serializePropsForDjango(props);
-
-        try {
-          const html = await fetchComponentHtml(componentName, requestProps);
-
-          setHtml(html);
-        } catch (err) {
-          console.error('Error rendering Django component:', err);
-          setError(err.message);
-        }
-      };
-
-      fetchHtml();
-    }, [JSON.stringify(props)]); // Depend on serialized props to avoid unnecessary re-renders
 
     useEffect(() => {
       let cleanup;
       if (html && containerRef.current) {
-        simulateLoading(containerRef.current, html);
+        simulateLoading(containerRef.current, html, renderOptions);
+
         if (postRender) {
           cleanup = postRender(containerRef.current);
         }
@@ -198,4 +257,20 @@ export function djangoComponent(componentName, postRender=null) {
 
     return React.createElement('div', { ref: containerRef });
   };
+};
+
+/**
+ * @param {{
+ *   componentName: string,
+ *   postRender?: Function|null,
+ *   renderOptions?: {executeScripts?: boolean, replayGlobalEvents?: boolean}|null
+ * }} options
+ */
+export function djangoComponent({ componentName, postRender = null, renderOptions = null }) {
+  if (!componentName) {
+    throw new Error('djangoComponent requires an options object with componentName');
+  }
+
+  const normalizedRenderOptions = normalizeRenderOptions(renderOptions);
+  return createDjangoRenderedComponent(componentName, postRender, normalizedRenderOptions);
 }

@@ -9,6 +9,6 @@ export default {
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('calendar-date');
+const createStory = createDjangoStory({ componentName: 'calendar-date' });
 
 export const Default = createStory(storyDefs.Default);

@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('carousel');
+const createStory = createDjangoStory({ componentName: 'carousel' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithoutDots = createStory(storyDefs.WithoutDots);

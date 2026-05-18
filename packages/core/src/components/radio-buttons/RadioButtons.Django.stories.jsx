@@ -9,7 +9,7 @@ export default {
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('radio-buttons');
+const createStory = createDjangoStory({ componentName: 'radio-buttons' });
 const allowedPropNames = new Set(Object.keys(config.props || {}));
 const toDjangoArgs = (args) => Object.fromEntries(
   Object.entries(args).filter(([key]) => allowedPropNames.has(key))

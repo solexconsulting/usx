@@ -2,7 +2,7 @@
 An array of helpers for story rendering.
 */
 
-import { djangoComponent, fetchComponentHtml } from './djangoComponent.js';
+import { djangoComponent, fetchComponentHtml, useDjangoRenderedHtml } from './djangoComponent.js';
 import React from 'react';
 
 export const getComponentHtml = async (componentName, props) => {
@@ -37,13 +37,19 @@ export const componentTag = ({ name, props, children = null }) => {
         openTag += ` %}`;
     }
 
+    let finalContent;
+
     if (content) {
-        return `${openTag}
+        finalContent = `${openTag}
   ${content}
 {% end${componentName} %}`;
     }
 
-    return `${openTag}{% end${componentName} %}`;
+    else {
+        finalContent = `${openTag}{% end${componentName} %}`;
+    }
+
+    return finalContent;
 };
 
 export const buildArgTypes = (props = {}) => {
@@ -93,38 +99,87 @@ const getSnakeCase = (str) => {
  * Call once with the component name, then use the returned function per story.
  *
  * Usage:
- *   const createStory = createDjangoStory('my-component');
+ *   const createStory = createDjangoStory({ componentName: 'my-component' });
  *   export const Default = createStory(storyDefs.Default);
  *
  * With wrapper context:
  *   const createStory = createDjangoStory(
- *     'my-component',
- *     null,
- *     (component) => <section>{component}</section>
+ *     {
+ *       componentName: 'my-component',
+ *       wrapper: (payload, args, { mode }) => {
+ *         if (mode === 'source') {
+ *           return `<section>${payload}</section>`;
+ *         }
+ *         return <section dangerouslySetInnerHTML={{ __html: payload }} />;
+ *       },
+ *     }
  *   );
+ *
+ * Renderer options (optional `renderOptions`):
+ *   { executeScripts: boolean, replayGlobalEvents: boolean }
  */
-export const createDjangoStory = (componentName, postRender = null, wrapper = null) => {
-    const baseRender = djangoComponent(componentName, postRender);
+export const createDjangoStory = ({
+    componentName,
+    postRender = null,
+    wrapper = null,
+    renderOptions = null,
+}) => {
+    if (!componentName) {
+        throw new Error('createDjangoStory requires an options object with componentName');
+    }
+
+    const baseRender = !wrapper
+        ? djangoComponent({ componentName, postRender, renderOptions })
+        : null;
+
+    const applyWrapperForSource = (baseCode, args) => {
+        if (!wrapper) {
+            return baseCode;
+        }
+
+        const wrappedCode = wrapper(baseCode, args, { mode: 'source' });
+        return typeof wrappedCode === 'string' ? wrappedCode : baseCode;
+    };
+
+    const applyWrapperForRender = (html, args) => {
+        return wrapper(html, args, { mode: 'render' });
+    };
+
+    const WrappedDjangoHtml = ({ storyArgs }) => {
+        const { html, error } = useDjangoRenderedHtml(componentName, storyArgs);
+
+        if (error) {
+            return <div style={{ color: 'red' }}>Error rendering component: {error}</div>;
+        }
+
+        return applyWrapperForRender(html, storyArgs);
+    };
 
     return (args) => ({
         args,
         parameters: {
             docs: {
                 source: {
-                    code: componentTag({ name: componentName, props: args }),
+                    code: (() => {
+                        const baseCode = componentTag({ name: componentName, props: args, children: null });
+                        return applyWrapperForSource(baseCode, args);
+                    })(),
                 },
             },
         },
         render: (storyArgs) => {
-            const component = baseRender(storyArgs);
-            return wrapper ? wrapper(component, storyArgs) : component;
+            if (!wrapper) {
+                return baseRender(storyArgs);
+            }
+
+            return <WrappedDjangoHtml storyArgs={storyArgs} />;
         },
     });
 };
 
 export const createBulkDjangoStory = (componentName, storyDefs, postRender = null, wrapper = null) => {
 
-    const createStory = createDjangoStory(componentName, postRender);
+    const createStory = createDjangoStory({ componentName, postRender });
 
     const Wrapper = ({ children }) => {
         if (wrapper) {
@@ -151,16 +206,16 @@ export const createBulkDjangoStory = (componentName, storyDefs, postRender = nul
         render: () => (
             <Wrapper>
                 {storyDefs?.map((props, index) => (
-                    <>
+                    <React.Fragment key={props.storyName || index}>
                         {props.storyName ? (
-                            <div className="display-flex flex-column flex-align-center color-inherit" key={index}>
+                            <div className="display-flex flex-column flex-align-center color-inherit">
                                 <h4 className="color-inherit">{props.storyName}</h4>
                                 {createStory(props.props || props).render(props.props || props)}
                             </div>
                         ) : (
                             createStory(props.props || props).render(props.props || props)
                         )}
-                    </>
+                    </React.Fragment>
                 ))}
             </Wrapper>
         )

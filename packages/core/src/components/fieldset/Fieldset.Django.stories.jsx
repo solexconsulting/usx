@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('fieldset');
+const createStory = createDjangoStory({ componentName: 'fieldset' });
 
 export const Default = createStory(storyDefs.Default);
 export const NoLegend = createStory(storyDefs.NoLegend);

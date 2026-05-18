@@ -9,7 +9,7 @@ export default {
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('spinner');
+const createStory = createDjangoStory({ componentName: 'spinner' });
 
 export const Default = createStory(storyDefs.Default);
 export const OmitLabel = createStory(storyDefs.OmitLabel);

@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('form-group');
+const createStory = createDjangoStory({ componentName: 'form-group' });
 
 export const Default = createStory(storyDefs.Default);
 export const ErrorState = createStory(storyDefs.ErrorState);

@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const createStory = createDjangoStory('text-area');
+const createStory = createDjangoStory({ componentName: 'text-area' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithHint = createStory(storyDefs.WithHint);

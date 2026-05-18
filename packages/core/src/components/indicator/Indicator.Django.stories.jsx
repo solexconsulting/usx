@@ -20,5 +20,5 @@ export const Default = {
       }
     }
   },
-  render: djangoComponent('indicator')
+  render: djangoComponent({ componentName: 'indicator' })
 };

@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('input');
+const createStory = createDjangoStory({ componentName: 'input' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithHint = createStory(storyDefs.WithHint);

@@ -9,6 +9,6 @@ export default {
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('toggle');
+const createStory = createDjangoStory({ componentName: 'toggle' });
 
 export const Default = createStory(storyDefs.Default);

@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('button-group');
+const createStory = createDjangoStory({ componentName: 'button-group' });
 
 export const Default = createStory(storyDefs.Default);
 export const Icons = createStory(storyDefs.Icons);

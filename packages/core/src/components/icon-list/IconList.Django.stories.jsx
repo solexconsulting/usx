@@ -11,7 +11,7 @@ export default {
   argTypes: generatedArgTypes,
 };
 
-const createStory = createDjangoStory('icon-list');
+const createStory = createDjangoStory({ componentName: 'icon-list' });
 
 export const Default = createStory(storyDefs.Default);
 export const SimpleContent = createStory(storyDefs.SimpleContent);

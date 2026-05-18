@@ -9,7 +9,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('swap');
+const createStory = createDjangoStory({ componentName: 'swap' });
 
 export const Default = createStory(storyDefs.Default);
 export const DefaultIcon = createStory(storyDefs['Default - Icon']);

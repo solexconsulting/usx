@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('card-group');
+const createStory = createDjangoStory({ componentName: 'card-group' });
 
 export const Default = createStory(storyDefs.Default);
 export const FlagLayout = createStory(storyDefs.FlagLayout);

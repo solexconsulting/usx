@@ -23,7 +23,7 @@ export default {
   ]
 };
 
-const createStory = createDjangoStory('character-count');
+const createStory = createDjangoStory({ componentName: 'character-count' });
 
 export const Default = createStory(storyDefs.Default);
 export const HardLimit = createStory(storyDefs.HardLimit);

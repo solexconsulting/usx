@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('skipnav');
+const createStory = createDjangoStory({ componentName: 'skipnav' });
 
 export const Default = createStory(storyDefs.Default);
 export const CustomContent = createStory(storyDefs.CustomContent);

@@ -20,5 +20,5 @@ export const Default = {
       }
     }
   },
-  render: djangoComponent('date-picker')
+  render: djangoComponent({ componentName: 'date-picker' })
 };

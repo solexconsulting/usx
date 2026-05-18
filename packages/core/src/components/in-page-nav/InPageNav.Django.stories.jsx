@@ -20,5 +20,5 @@ export const Default = {
       }
     }
   },
-  render: djangoComponent('in-page-nav')
+  render: djangoComponent({ componentName: 'in-page-nav' })
 };

@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('select');
+const createStory = createDjangoStory({ componentName: 'select' });
 
 export const Default = createStory(storyDefs.Default);
 export const ErrorState = createStory(storyDefs.ErrorState);

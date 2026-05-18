@@ -9,7 +9,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('page');
+const createStory = createDjangoStory({ componentName: 'page' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithLongContent = createStory(storyDefs.WithLongContent);

@@ -11,7 +11,7 @@ export default {
   argTypes: generatedArgTypes,
 };
 
-const createStory = createDjangoStory('list');
+const createStory = createDjangoStory({ componentName: 'list' });
 
 export const Default = createStory(storyDefs.Default);
 export const Ordered = createStory(storyDefs.Ordered);

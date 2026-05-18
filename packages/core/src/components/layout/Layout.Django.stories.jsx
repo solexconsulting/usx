@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('layout');
+const createStory = createDjangoStory({ componentName: 'layout' });
 
 export const SingleColumn = createStory(storyDefs.SingleColumn);
 export const GridFullContent = createStory(storyDefs.GridFullContent);

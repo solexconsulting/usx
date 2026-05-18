@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('site-alert');
+const createStory = createDjangoStory({ componentName: 'site-alert' });
 
 export const StandardInfo = createStory(storyDefs.StandardInfo);
 export const DismissibleInfo = createStory(storyDefs.DismissibleInfo);

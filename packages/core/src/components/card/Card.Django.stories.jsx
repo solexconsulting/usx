@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('card');
+const createStory = createDjangoStory({ componentName: 'card' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithImage = createStory(storyDefs.WithImage);

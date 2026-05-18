@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('banner');
+const createStory = createDjangoStory({ componentName: 'banner' });
 
 export const Default = createStory(storyDefs.Default);
 export const Mil = { name: '.mil TLD', ...createStory(storyDefs.Mil) };

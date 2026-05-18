@@ -20,5 +20,5 @@ export const Default = {
       }
     }
   },
-  render: djangoComponent('hero')
+  render: djangoComponent({ componentName: 'hero' })
 };

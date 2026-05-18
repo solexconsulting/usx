@@ -34,7 +34,7 @@ function postRender() {
   componentRendered = true;
 }
 
-const ModalDjango = djangoComponent('modal', postRender=postRender);
+const ModalDjango = djangoComponent({ componentName: 'modal', postRender });
 
 const createStory = (storyDef) => ({
   args: storyDef,

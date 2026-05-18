@@ -9,7 +9,7 @@ export default {
   argTypes: buildArgTypes(proseConfig.props || {}),
 };
 
-const createStory = createDjangoStory('prose');
+const createStory = createDjangoStory({ componentName: 'prose' });
 const allowedPropNames = new Set(Object.keys(proseConfig.props || {}));
 const toDjangoArgs = (args) => Object.fromEntries(
   Object.entries(args).filter(([key]) => allowedPropNames.has(key))

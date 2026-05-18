@@ -20,5 +20,5 @@ export const Default = {
       }
     }
   },
-  render: djangoComponent('range-slider')
+  render: djangoComponent({ componentName: 'range-slider' })
 };

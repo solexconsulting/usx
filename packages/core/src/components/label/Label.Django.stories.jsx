@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('label');
+const createStory = createDjangoStory({ componentName: 'label' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithRequired = createStory(storyDefs.WithRequired);

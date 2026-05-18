@@ -20,5 +20,5 @@ export const Default = {
       }
     }
   },
-  render: djangoComponent('file-input')
+  render: djangoComponent({ componentName: 'file-input' })
 };

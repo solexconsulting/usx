@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('search');
+const createStory = createDjangoStory({ componentName: 'search' });
 
 export const Default = createStory(storyDefs.Default);
 export const CustomPlaceholder = createStory(storyDefs.CustomPlaceholder);

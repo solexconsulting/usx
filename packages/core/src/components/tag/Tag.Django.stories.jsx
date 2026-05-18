@@ -10,7 +10,7 @@ export default {
   argTypes: generatedArgTypes,
 };
 
-const createStory = createDjangoStory('tag');
+const createStory = createDjangoStory({ componentName: 'tag' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithIcon = createStory(storyDefs.WithIcon);

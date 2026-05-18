@@ -9,6 +9,6 @@ export default {
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('switch');
+const createStory = createDjangoStory({ componentName: 'switch' });
 
 export const Default = createStory(storyDefs.Default);

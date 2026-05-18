@@ -20,5 +20,5 @@ export const Default = {
       }
     }
   },
-  render: djangoComponent('memorable-date')
+  render: djangoComponent({ componentName: 'memorable-date' })
 };

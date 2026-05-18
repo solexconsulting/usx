@@ -9,7 +9,7 @@ export default {
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('footer');
+const createStory = createDjangoStory({ componentName: 'footer' });
 
 export const Big      = createStory(storyDefs.Big);
 export const Medium   = createStory(storyDefs.Medium);

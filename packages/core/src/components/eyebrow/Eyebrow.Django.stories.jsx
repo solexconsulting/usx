@@ -15,25 +15,35 @@ export default {
   },
 };
 
-export const InH1 = createDjangoStory('eyebrow', null, (component) => (
-    <>
-      <h1>
-        {component}
-        Heading
-      </h1>
-    </>
-))(storyDefs.InH1);
+export const InH1 = createDjangoStory({
+  componentName: 'eyebrow',
+  wrapper: (payload, _args, { mode }) => {
+  if (mode === 'source') {
+    return `<h1>${payload}Heading</h1>`;
+  }
 
-export const InH2 = createDjangoStory('eyebrow', null, (component) => (
-    <h2>
-      {component}
-      Full Section Heading
-    </h2>
-))(storyDefs.InH2);
+  return <h1 dangerouslySetInnerHTML={{ __html: `${payload}Heading` }} />;
+  }
+})(storyDefs.InH1);
 
-export const InH3 = createDjangoStory('eyebrow', null, (component) => (
-    <h3>
-      {component}
-      Full Subsection
-    </h3>
-))(storyDefs.InH3);
+export const InH2 = createDjangoStory({
+  componentName: 'eyebrow',
+  wrapper: (payload, _args, { mode }) => {
+  if (mode === 'source') {
+    return `<h2>${payload}Full Section Heading</h2>`;
+  }
+
+  return <h2 dangerouslySetInnerHTML={{ __html: `${payload}Full Section Heading` }} />;
+  }
+})(storyDefs.InH2);
+
+export const InH3 = createDjangoStory({
+  componentName: 'eyebrow',
+  wrapper: (payload, _args, { mode }) => {
+  if (mode === 'source') {
+    return `<h3>${payload}Full Subsection</h3>`;
+  }
+
+  return <h3 dangerouslySetInnerHTML={{ __html: `${payload}Full Subsection` }} />;
+  }
+})(storyDefs.InH3);

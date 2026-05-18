@@ -9,6 +9,6 @@ export default {
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('back-to-top');
+const createStory = createDjangoStory({ componentName: 'back-to-top' });
 
 export const Default = createStory(storyDefs.Default);

@@ -1,19 +1,33 @@
 @use '../../../../tokens/src/_variables' as *;
 
 .usx-link {
-  @if $color-primary {
-    color: $color-primary;
+  @if $usx-link-color {
+    color: $usx-link-color;
   }
 
   &:hover {
-    @if $color-primary-hover {
-      color: $color-primary-hover;
+    @if $usx-link-hover-color {
+      color: $usx-link-hover-color;
     }
   }
 
   &:active {
-    @if $color-primary-active {
-      color: $color-primary-active;
+    @if $usx-link-active-color {
+      color: $usx-link-active-color;
+    }
+  }
+
+  &:visited {
+    @if $usx-link-visited-color {
+      color: $usx-link-visited-color;
+    }
+  }
+
+  &.usx-link--visited {
+    color: #54278f;
+
+    @if $usx-link-visited-color {
+      color: $usx-link-visited-color;
     }
   }
 }

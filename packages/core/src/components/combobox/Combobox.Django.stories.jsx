@@ -20,5 +20,5 @@ export const Default = {
       }
     }
   },
-  render: djangoComponent('combobox')
+  render: djangoComponent({ componentName: 'combobox' })
 };

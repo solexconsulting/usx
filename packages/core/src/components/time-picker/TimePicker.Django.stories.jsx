@@ -20,5 +20,5 @@ export const Default = {
       }
     }
   },
-  render: djangoComponent('time-picker')
+  render: djangoComponent({ componentName: 'time-picker' })
 };

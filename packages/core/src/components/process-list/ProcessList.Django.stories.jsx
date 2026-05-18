@@ -20,5 +20,5 @@ export const Default = {
       }
     }
   },
-  render: djangoComponent('process-list')
+  render: djangoComponent({ componentName: 'process-list' })
 };

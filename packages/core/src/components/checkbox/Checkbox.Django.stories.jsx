@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('checkbox');
+const createStory = createDjangoStory({ componentName: 'checkbox' });
 
 export const Default = createStory(storyDefs.Default);
 export const Checked = createStory(storyDefs.Checked);

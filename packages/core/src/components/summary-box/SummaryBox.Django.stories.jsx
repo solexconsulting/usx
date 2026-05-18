@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('summary-box');
+const createStory = createDjangoStory({ componentName: 'summary-box' });
 
 export const ExecutiveSummary = createStory(storyDefs.ExecutiveSummary);
 export const StoryStep1Context = createStory(storyDefs.StoryStep1Context);

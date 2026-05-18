@@ -11,7 +11,7 @@ export default {
   excludeStories: [],
 };
 
-const createStory = createDjangoStory('tag-group');
+const createStory = createDjangoStory({ componentName: 'tag-group' });
 
 export const Default = createStory(storyDefs.Default);
 export const Big = createStory(storyDefs.Big);

@@ -242,6 +242,12 @@ $usx-alert-heading-margin-block-end: null !default;
 $usx-alert-text-font-size: null !default;
 $usx-alert-text-line-height: null !default;
 
+// ── Component tokens: Link ─────────────────────────────────────────────
+$usx-link-color: $color-primary !default;
+$usx-link-hover-color: $color-primary-hover !default;
+$usx-link-active-color: $color-primary-active !default;
+$usx-link-visited-color: #54278f !default;
+
 // ── Component tokens: Site Alert ─────────────────────────────────────────────
 $usx-site-alert-default-bg-color: null !default;
 $usx-site-alert-default-border-color: null !default;

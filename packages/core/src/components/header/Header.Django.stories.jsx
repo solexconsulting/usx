@@ -9,7 +9,7 @@ export default {
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('header');
+const createStory = createDjangoStory({ componentName: 'header' });
 
 export const Default = createStory(storyDefs.Default);
 export const Basic = createStory(storyDefs.Basic);

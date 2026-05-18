@@ -9,7 +9,7 @@ export default {
   argTypes: buildArgTypes(alertConfig.props || {}),
 };
 
-const createStory = createDjangoStory('alert');
+const createStory = createDjangoStory({ componentName: 'alert' });
 const allowedPropNames = new Set(Object.keys(alertConfig.props || {}));
 const toDjangoArgs = (args) => Object.fromEntries(
   Object.entries(args).filter(([key]) => allowedPropNames.has(key))

@@ -2,10 +2,17 @@
   "name": "link",
   "template": "link/link.django.html",
   "default": {
-    "children": "NOT IMPLEMENTED: Link"
+    "href": "javascript:void(0);",
+    "children": "a text link"
   },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "href": { "type": "string", "description": "Link destination URL." },
+    "children": { "type": "string", "description": "Inner link text or HTML." },
+    "visited": { "type": "boolean", "description": "Apply visited styling class." },
+    "external": { "type": "boolean", "description": "Apply external-link styling and default rel=noreferrer." },
+    "alt": { "type": "boolean", "description": "Use alternate link style for dark backgrounds." },
+    "newTab": { "type": "boolean", "description": "Open link in a new tab (target=_blank)." },
+    "rel": { "type": "string", "description": "Optional rel attribute override." },
+    "className": { "type": "string", "description": "Additional classes." }
   }
 }

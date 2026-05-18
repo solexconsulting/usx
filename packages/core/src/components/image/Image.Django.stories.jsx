@@ -9,7 +9,7 @@ export default {
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('image');
+const createStory = createDjangoStory({ componentName: 'image' });
 
 // Responsive story is excluded — object-shaped src is not supported by the Django render endpoint
 export const Default = createStory(storyDefs.Default);

@@ -8,7 +8,7 @@ export default {
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('misc-banner');
+const createStory = createDjangoStory({ componentName: 'misc-banner' });
 
 export const Misc = createStory(storyDefs.Misc);
 export const Primary = createStory(storyDefs.Primary);
