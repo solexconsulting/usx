@@ -1,4 +1,28 @@
 {# Django template for Switch #}
-<div class="usx-switch">
-  <div class="switch__content">Switch</div>
-</div>
+{% if label %}
+<label class="usa-label usx-switch__label">
+  <input
+    type="checkbox"
+    class="usx-switch{% if size %} usx-toggle-{{ size }}{% endif %}{% if variant %} text-{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}"
+    {% if id %}id="{{ id }}"{% endif %}
+    {% if name %}name="{{ name }}"{% endif %}
+    {% if checked %}checked{% endif %}
+    {% if defaultChecked %}checked{% endif %}
+    {% if indeterminate %}indeterminate{% endif %}
+    {% if disabled %}disabled aria-disabled="true"{% endif %}
+    {% if ariaChecked is not none %}aria-checked="{{ ariaChecked }}"{% endif %}
+  />
+  {{ label }}
+</label>
+{% else %}
+<input
+  type="checkbox"
+  class="usx-switch{% if size %} usx-toggle-{{ size }}{% endif %}{% if variant %} text-{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}"
+  {% if id %}id="{{ id }}"{% endif %}
+  {% if name %}name="{{ name }}"{% endif %}
+  {% if checked %}checked{% endif %}
+  {% if defaultChecked %}checked{% endif %}
+  {% if indeterminate %}indeterminate{% endif %}
+  {% if disabled %}disabled aria-disabled="true"{% endif %}
+  {% if ariaChecked is not none %}aria-checked="{{ ariaChecked }}"{% endif %}
+/>{% endif %}

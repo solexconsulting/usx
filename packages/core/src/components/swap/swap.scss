@@ -54,21 +54,19 @@
 }
 
 .usx-swap-rotate {
-  @layer daisyui.l1.l2 {
-    .usx-swap-on,
-    input:indeterminate ~ .usx-swap-on {
-      transform: rotate(-45deg);
-    }
+  .usx-swap-on,
+  input:indeterminate ~ .usx-swap-on {
+    transform: rotate(-45deg);
+  }
 
-    input:is(:checked, :indeterminate) ~ .usx-swap-on,
-    &.usx-swap-active .usx-swap-on {
-      transform: rotate(0deg);
-    }
+  input:is(:checked, :indeterminate) ~ .usx-swap-on,
+  &.usx-swap-active .usx-swap-on {
+    transform: rotate(0deg);
+  }
 
-    input:is(:checked, :indeterminate) ~ .usx-swap-off,
-    &.usx-swap-active .usx-swap-off {
-      transform: rotate(45deg);
-    }
+  input:is(:checked, :indeterminate) ~ .usx-swap-off,
+  &.usx-swap-active .usx-swap-off {
+    transform: rotate(45deg);
   }
 }
 

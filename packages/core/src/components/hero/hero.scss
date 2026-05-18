@@ -1,23 +1,6 @@
 @use '../../../../tokens/src/_variables' as *;
 
-// ── Hero component tokens ────────────────────────────────────────────────────
-$usx-hero-min-height:        30rem                    !default;
-$usx-hero-bg-color:          $color-dark-bg           !default;
-$usx-hero-text-color:        $color-light             !default;
-$usx-hero-overlay-color:     rgba(0, 0, 0, 0.55)      !default;
-$usx-hero-padding-block:     4rem                     !default;
-$usx-hero-padding-inline:    $spacing-lg              !default;
-$usx-hero-callout-bg:        rgba(0, 0, 0, 0.6)       !default;
-$usx-hero-callout-max-width: 40rem                    !default;
-$usx-hero-callout-padding:   $spacing-xl              !default;
-$usx-hero-callout-radius:    $r-sm                    !default;
-$usx-hero-heading-size:      2.5rem                   !default;
-$usx-hero-heading-weight:    700                      !default;
-$usx-hero-alt-size:          1.125rem                 !default;
-$usx-hero-alt-color:         $color-accent-cool       !default;
-$usx-hero-paragraph-size:    1.125rem                 !default;
 
-// ── Base ─────────────────────────────────────────────────────────────────────
 .usx-hero {
   position: relative;
   display: flex;
