@@ -28,3 +28,7 @@ export const ImageAvatarExtraLarge = createStory(toDjangoArgs(storyDefs.ImageAva
 export const InitialsAvatarMedium = createStory(toDjangoArgs(storyDefs.InitialsAvatarMedium));
 export const InitialsAvatarLarge = createStory(toDjangoArgs(storyDefs.InitialsAvatarLarge));
 export const InitialsAvatarExtraLarge = createStory(toDjangoArgs(storyDefs.InitialsAvatarExtraLarge));
+export const IconAvatarPerson = createStory(toDjangoArgs(storyDefs.IconAvatarPerson));
+export const IconAvatarSupportAgent = createStory(toDjangoArgs(storyDefs.IconAvatarSupportAgent));
+export const IconAvatarSentiment = createStory(toDjangoArgs(storyDefs.IconAvatarSentiment));
+export const IconAvatarLarge = createStory(toDjangoArgs(storyDefs.IconAvatarLarge));

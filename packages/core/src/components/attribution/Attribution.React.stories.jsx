@@ -1,5 +1,6 @@
 import React from 'react';
 import Attribution from './Attribution';
+import Icon from '../icon/Icon';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
 
@@ -21,12 +22,24 @@ export const storyDefs = {
   WithInitials: {
     avatar: {
       href: '#',
-      initials: 'AB',
+      variant: 'initials',
+      value: 'AB',
       alt: 'Alex Brown',
-      initialsClassName: 'bg-primary-lighter text-primary-darker',
+      contentClassName: 'bg-primary-lighter text-primary-darker',
     },
     primary: 'Alex Brown',
     secondary: 'Case manager',
+  },
+  WithPersonIcon: {
+    avatar: {
+      href: '#',
+      variant: 'icon',
+      value: 'person',
+      alt: 'Person',
+      contentClassName: 'bg-primary-lighter text-base-darkest',
+    },
+    primary: 'Support Team',
+    secondary: 'Customer Success',
   },
 };
 
@@ -41,3 +54,4 @@ export default {
 export const Default = { args: storyDefs.Default };
 export const WithAvatar = { args: storyDefs.WithAvatar };
 export const WithInitials = { args: storyDefs.WithInitials };
+export const WithPersonIcon = { args: storyDefs.WithPersonIcon };

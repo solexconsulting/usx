@@ -7,7 +7,7 @@
     {% if avatar or media %}
       <span class="usx-attribution__media">
         {% if avatar %}
-          {% avatar href=avatar.href src=avatar.src alt=avatar.alt initials=avatar.initials shape=avatar.shape tooltip=avatar.tooltip className=avatar.className imageClassName=avatar.imageClassName initialsClassName=avatar.initialsClassName %}{% endavatar %}
+          {% avatar href=avatar.href src=avatar.src alt=avatar.alt variant=avatar.variant value=avatar.value shape=avatar.shape tooltip=avatar.tooltip className=avatar.className imageClassName=avatar.imageClassName contentClassName=avatar.contentClassName %}{% endavatar %}
         {% else %}
           {{ media|safe }}
         {% endif %}

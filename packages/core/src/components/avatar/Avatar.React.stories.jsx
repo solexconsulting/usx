@@ -26,16 +26,18 @@ export const storyDefs = {
   },
   InitialsAvatar: {
     href: '#',
-    initials: 'AB',
+    variant: 'initials',
+    value: 'AB',
     alt: 'Alex Brown',
-    initialsClassName: 'bg-primary-lighter text-primary-darker',
+    contentClassName: 'bg-primary-lighter text-primary-darker',
   },
   InitialsAvatarSmall: {
     href: '#',
-    initials: 'GW',
+    variant: 'initials',
+    value: 'GW',
     alt: 'George Washington',
     className: 'usx-avatar--size-sm',
-    initialsClassName: 'bg-primary-lighter text-primary-darker',
+    contentClassName: 'bg-primary-lighter text-primary-darker',
   },
   ImageAvatarMedium: {
     ...(config.default || {}),
@@ -51,24 +53,56 @@ export const storyDefs = {
   },
   InitialsAvatarMedium: {
     href: '#',
-    initials: 'AB',
+    variant: 'initials',
+    value: 'AB',
     alt: 'Alex Brown',
     className: 'usx-avatar--size-md',
-    initialsClassName: 'bg-primary-lighter text-primary-darker',
+    contentClassName: 'bg-primary-lighter text-primary-darker',
   },
   InitialsAvatarLarge: {
     href: '#',
-    initials: 'AB',
+    variant: 'initials',
+    value: 'AB',
     alt: 'Alex Brown',
     className: 'usx-avatar--size-lg',
-    initialsClassName: 'bg-primary-lighter text-primary-darker',
+    contentClassName: 'bg-primary-lighter text-primary-darker',
   },
   InitialsAvatarExtraLarge: {
     href: '#',
-    initials: 'AB',
+    variant: 'initials',
+    value: 'AB',
     alt: 'Alex Brown',
     className: 'usx-avatar--size-xl',
-    initialsClassName: 'bg-primary-lighter text-primary-darker',
+    contentClassName: 'bg-primary-lighter text-primary-darker',
+  },
+  IconAvatarPerson: {
+    href: '#',
+    variant: 'icon',
+    value: 'person',
+    alt: 'Person',
+    contentClassName: 'bg-primary-lighter text-base-darkest',
+  },
+  IconAvatarSupportAgent: {
+    href: '#',
+    variant: 'icon',
+    value: 'support_agent',
+    alt: 'Support Agent',
+    contentClassName: 'bg-primary-lighter text-primary-darker',
+  },
+  IconAvatarSentiment: {
+    href: '#',
+    variant: 'icon',
+    value: 'sentiment_satisfied_alt',
+    alt: 'Happy',
+    contentClassName: 'bg-primary-lighter text-success-darker',
+  },
+  IconAvatarLarge: {
+    href: '#',
+    variant: 'icon',
+    value: 'person',
+    alt: 'Person',
+    className: 'usx-avatar--size-lg',
+    contentClassName: 'bg-primary-lighter text-base-darkest',
   },
 };
 
@@ -93,3 +127,7 @@ export const ImageAvatarExtraLarge = { args: storyDefs.ImageAvatarExtraLarge };
 export const InitialsAvatarMedium = { args: storyDefs.InitialsAvatarMedium };
 export const InitialsAvatarLarge = { args: storyDefs.InitialsAvatarLarge };
 export const InitialsAvatarExtraLarge = { args: storyDefs.InitialsAvatarExtraLarge };
+export const IconAvatarPerson = { args: storyDefs.IconAvatarPerson };
+export const IconAvatarSupportAgent = { args: storyDefs.IconAvatarSupportAgent };
+export const IconAvatarSentiment = { args: storyDefs.IconAvatarSentiment };
+export const IconAvatarLarge = { args: storyDefs.IconAvatarLarge };

@@ -15,18 +15,20 @@ export default function Avatar({
   href = '#',
   src = null,
   alt = null,
-  initials = null,
+  variant = 'image',
+  value = null,
   shape = null,
   tooltip = null,
   className = '',
   imageClassName = '',
-  initialsClassName = '',
+  contentClassName = '',
   ...props
 }) {
-  const isInitialsVariant = Boolean(initials);
+  const isInitialsVariant = variant === 'initials';
+  const isIconVariant = variant === 'icon';
+
   const wrapperClasses = classNames(
     'usx-avatar',
-    isInitialsVariant && 'usx-avatar--initials',
     className,
   );
   const imgClasses = classNames(
@@ -34,18 +36,24 @@ export default function Avatar({
     shape ? shapeClassMap[shape] : null,
     imageClassName,
   );
-  const initialsClasses = classNames(
-    'usx-avatar__initials',
+  const contentClasses = classNames(
+    'usx-avatar__content',
     shape ? shapeClassMap[shape] : 'usx-circle',
-    initialsClassName,
+    contentClassName,
   );
 
   const avatarContent = isInitialsVariant
-    ? <span className={initialsClasses}>{initials}</span>
-    : <img className={imgClasses} src={src} alt={alt} role="img" {...props} />;
+    ? <span className={contentClasses}>{value}</span>
+    : isIconVariant
+      ? (
+        <span className={contentClasses}>
+          <Icon name={value} alt={alt || `${value} icon`} />
+        </span>
+      )
+      : <img className={imgClasses} src={src} alt={alt} role="img" {...props} />;
 
   const avatar = (
-    <a href={href} className={wrapperClasses} aria-label={isInitialsVariant ? alt : null}>
+    <a href={href} className={wrapperClasses} aria-label={(isInitialsVariant || isIconVariant) ? alt : null}>
       {avatarContent}
     </a>
   );
@@ -68,10 +76,11 @@ Avatar.propTypes = {
   href: PropTypes.string,
   src: PropTypes.string,
   alt: PropTypes.string,
-  initials: PropTypes.string,
+  variant: PropTypes.oneOf(['image', 'initials', 'icon']),
+  value: PropTypes.string,
+  contentClassName: PropTypes.string,
   shape: PropTypes.oneOf([null, 'circle', 'rounded-sm', 'rounded-md', 'rounded-lg', 'rounded-xl']),
   tooltip: PropTypes.string,
   className: PropTypes.string,
   imageClassName: PropTypes.string,
-  initialsClassName: PropTypes.string,
 };

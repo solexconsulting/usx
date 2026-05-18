@@ -8,7 +8,7 @@
     width: 2.5rem;
     height: 2.5rem;
 
-    .usx-avatar__initials {
+    .usx-avatar__content {
       font-size: 0.875rem;
     }
   }
@@ -22,7 +22,7 @@
     width: 4rem;
     height: 4rem;
 
-    .usx-avatar__initials {
+    .usx-avatar__content {
       font-size: 1.25rem;
     }
   }
@@ -31,7 +31,7 @@
     width: 5rem;
     height: 5rem;
 
-    .usx-avatar__initials {
+    .usx-avatar__content {
       font-size: 1.5rem;
     }
   }
@@ -42,7 +42,7 @@
     object-fit: cover;
   }
 
-  .usx-avatar__initials {
+  .usx-avatar__content {
     width: 100%;
     height: 100%;
     display: inline-flex;
@@ -50,5 +50,10 @@
     justify-content: center;
     font-weight: 600;
     line-height: 1;
+
+    .usa-icon {
+      width: 60%;
+      height: 60%;
+    }
   }
 }

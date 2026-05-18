@@ -13,3 +13,4 @@ const createStory = createDjangoStory('attribution');
 export const Default = createStory(storyDefs.Default);
 export const WithAvatar = createStory(storyDefs.WithAvatar);
 export const WithInitials = createStory(storyDefs.WithInitials);
+export const WithPersonIcon = createStory(storyDefs.WithPersonIcon);

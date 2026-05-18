@@ -9,8 +9,9 @@
   "props": {
     "href": { "type": "string", "description": "Link target for the avatar image." },
     "src": { "type": "string", "description": "Image source URL for the avatar image variant." },
-    "alt": { "type": "string", "description": "Accessible label for the avatar. Used as image alt text or initials-link aria-label." },
-    "initials": { "type": "string", "description": "Initials text for the initials avatar variant. When provided, image markup is replaced with initials markup." },
+    "alt": { "type": "string", "description": "Accessible label for the avatar. Used as image alt text or non-image avatar aria-label." },
+    "variant": { "type": "select", "options": ["image", "initials", "icon"], "description": "Avatar content mode." },
+    "value": { "type": "string", "description": "Value for non-image avatars. Initials text when variant='initials', icon name when variant='icon'." },
     "shape": {
       "type": "select",
       "options": ["circle", "rounded-sm", "rounded-md", "rounded-lg", "rounded-xl"],
@@ -19,6 +20,6 @@
     "tooltip": { "type": "string", "description": "Optional tooltip text displayed on hover." },
     "className": { "type": "string", "description": "Additional classes for the avatar link element." },
     "imageClassName": { "type": "string", "description": "Additional classes for the avatar image element." },
-    "initialsClassName": { "type": "string", "description": "Additional classes for the initials element." }
+    "contentClassName": { "type": "string", "description": "Additional classes for the non-image avatar content container." }
   }
 }
