@@ -56,24 +56,6 @@ export const storyDefs = {
     onContent: <Icon name="check_circle" size={4} color="success" />,
     offContent: <Icon name="check_circle" size={4} color="error" />,
   },
-  'View More / View Less': {
-    ...commonArgs,
-    className: 'maxw-mobile',
-    onContent: (
-      <>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <button type="button" className="usa-button usa-button--secondary">View Less</button>
-      </>
-    ),
-    offContent: (
-      <>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad...</p>
-        <button type="button" className="usa-button usa-button--secondary">View More</button>
-      </>
-    ),
-    onClassName: 'display-flex flex-column gap-2',
-    offClassName: 'display-flex flex-column gap-2',
-  },
   'Advanced - Custom Children': {
     ...commonArgs,
     children: (
@@ -132,10 +114,6 @@ export const FlipEmoji = {
 
 export const ColorChangeIcon = {
   args: storyDefs['Color Change - Icon'],
-};
-
-export const ViewMoreViewLess = {
-  args: storyDefs['View More / View Less'],
 };
 
 export const AdvancedCustomChildren = {

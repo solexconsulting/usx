@@ -1,5 +1,5 @@
 {# Django template for Swap #}
-<label class="usx-swap{% if variant and variant != 'default' %} usx-swap-{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}">
+<label class="usx-swap{% if variant and variant != 'default' %} usx-swap--{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}">
   {% if content %}
     {{ content|safe }}
   {% elif children %}

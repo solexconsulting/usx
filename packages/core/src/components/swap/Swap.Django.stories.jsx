@@ -19,6 +19,10 @@ export const RotateIcon = createStory(storyDefs['Rotate - Icon']);
 export const FlipText = createStory(storyDefs['Flip - Text']);
 export const FlipEmoji = createStory(storyDefs['Flip - Emoji']);
 export const ColorChangeIcon = createStory(storyDefs['Color Change - Icon']);
-export const ViewMoreViewLess = createStory(storyDefs['View More / View Less']);
 export const AdvancedCustomChildren = createStory(storyDefs['Advanced - Custom Children']);
-export const TriggerAlertOnSwap = createStory(storyDefs['Trigger Alert On Swap']);
+export const TriggerAlertOnSwap = createStory({
+  ...storyDefs['Trigger Alert On Swap'],
+  inputProps: {
+    onChange: "alert('Swap triggered!')",
+  }
+});
