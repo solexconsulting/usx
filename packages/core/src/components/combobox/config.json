@@ -1,11 +1,19 @@
 {
   "name": "combobox",
   "template": "combobox/combobox.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Combobox"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
+    "id": { "type": "string", "description": "id attribute for the select" },
+    "name": { "type": "string", "description": "name attribute for the select" },
+    "label": { "type": "string", "description": "Label text for the combobox" },
+    "disabled": { "type": "boolean", "description": "Disable the select" },
+    "required": { "type": "boolean", "description": "Make the select required" },
+    "hint": { "type": "string", "description": "Hint text (renders aria-describedby)" },
+    "placeholder": { "type": "string", "description": "Data-placeholder on the wrapper" },
+    "defaultValue": { "type": "string", "description": "Default selected value" },
+    "error": { "type": "string", "description": "Error message (renders aria-describedby and error class)" },
+    "options": { "type": "array", "description": "Array of { value, label } option objects" },
+    "onSearch": { "type": "func", "description": "Called on every keystroke in the text input; receives (value: string)" },
+    "onSelect": { "type": "func", "description": "Called when an option is selected or cleared; receives (value: string, option: object|null)" },
     "className": { "type": "string", "description": "Additional classes" }
   }
 }

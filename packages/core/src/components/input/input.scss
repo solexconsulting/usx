@@ -6,7 +6,7 @@
 
 /* ---------------------------------- */
 
-.usa-input.usx-input, .usa-select.usx-select {
+.usa-input.usx-input, .usa-select.usx-select, .usa-combo-box__input {
 	@if $usx-input-border-radius {
 		border-radius: $usx-input-border-radius;
 	}
@@ -94,8 +94,8 @@
 
 /* ---------------------------------- */
 
-.usa-input.usx-input, .usa-select.usx-select {
-    &:focus-visible {
+.usa-input.usx-input, .usa-select.usx-select, .usa-combo-box__input {
+    &:not([disabled]):focus {
 		@if $usx-input-focus-outline {
 			outline: $usx-input-focus-outline;
 		}

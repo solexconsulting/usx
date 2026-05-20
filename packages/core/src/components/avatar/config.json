@@ -1,11 +1,6 @@
 {
   "name": "avatar",
   "template": "avatar/avatar.django.html",
-  "default": {
-    "href": "https://google.com/search?q=Statue+of+Liberty",
-    "src": "./lady_liberty.png",
-    "alt": "Statue of Liberty"
-  },
   "props": {
     "href": { "type": "string", "description": "Link target for the avatar image." },
     "src": { "type": "string", "description": "Image source URL for the avatar image variant." },

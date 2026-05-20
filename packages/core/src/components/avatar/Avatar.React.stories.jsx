@@ -3,24 +3,30 @@ import Avatar from './Avatar';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
 
+const baseArgs = {
+  href: "https://google.com/search?q=Statue+of+Liberty",
+  src: "./lady_liberty.png",
+  alt: "Statue of Liberty"
+};
+
 export const storyDefs = {
   BasicAvatar: {
-    ...(config.default || {}),
+    ...baseArgs,
   },
   CircleAvatar: {
-    ...(config.default || {}),
+    ...baseArgs,
     shape: 'circle',
   },
   MediumRoundedAvatar: {
-    ...(config.default || {}),
+    ...baseArgs,
     shape: 'rounded-md',
   },
   LargeRoundedAvatar: {
-    ...(config.default || {}),
+    ...baseArgs,
     shape: 'rounded-lg',
   },
   AvatarWithTooltip: {
-    ...(config.default || {}),
+    ...baseArgs,
     shape: 'rounded-lg',
     tooltip: 'Statue of Liberty',
   },
@@ -40,15 +46,15 @@ export const storyDefs = {
     contentClassName: 'bg-primary-lighter text-primary-darker',
   },
   ImageAvatarMedium: {
-    ...(config.default || {}),
+    ...baseArgs,
     className: 'usx-avatar--size-md',
   },
   ImageAvatarLarge: {
-    ...(config.default || {}),
+    ...baseArgs,
     className: 'usx-avatar--size-lg',
   },
   ImageAvatarExtraLarge: {
-    ...(config.default || {}),
+    ...baseArgs,
     className: 'usx-avatar--size-xl',
   },
   InitialsAvatarMedium: {
