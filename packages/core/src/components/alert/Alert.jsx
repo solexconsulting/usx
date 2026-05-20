@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Alert({
-  heading = 'Informative status',
-  text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
+  heading,
+  text,
   children,
   variant = 'info',
   slim = false,
