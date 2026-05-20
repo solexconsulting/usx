@@ -15,15 +15,15 @@ const toDjangoArgs = (args) => Object.fromEntries(
   Object.entries(args).filter(([key]) => allowedPropNames.has(key))
 );
 
-export const Info = createStory(toDjangoArgs(storyDefs.Info));
-export const Warning = createStory(toDjangoArgs(storyDefs.Warning));
-export const Success = createStory(toDjangoArgs(storyDefs.Success));
-export const Error = createStory(toDjangoArgs(storyDefs.Error));
-export const Emergency = createStory(toDjangoArgs(storyDefs.Emergency));
-export const NoHeading = createStory(toDjangoArgs(storyDefs.NoHeading));
-export const Slim = createStory(toDjangoArgs(storyDefs.Slim));
-export const NoIcon = createStory(toDjangoArgs(storyDefs.NoIcon));
-export const NoText = createStory(toDjangoArgs(storyDefs.NoText));
+export const Default = createStory(storyDefs.Default);
+export const Warning = createStory(storyDefs.Warning);
+export const Success = createStory(storyDefs.Success);
+export const Error = createStory(storyDefs.Error);
+export const Emergency = createStory(storyDefs.Emergency);
+export const NoHeading = createStory(storyDefs.NoHeading);
+export const NoText = createStory(storyDefs.NoText);
+export const Slim = createStory(storyDefs.Slim);
+export const NoIcon = createStory(storyDefs.NoIcon);
 export const RegionRoleDefault = { name: 'Default: region', ...createStory(toDjangoArgs(storyDefs.RegionRoleDefault)) };
 export const StatusRoleDefault = { name: 'Default: status', ...createStory(toDjangoArgs(storyDefs.StatusRoleDefault)) };
 export const AlertRoleDefault = { name: 'Default: alert', ...createStory(toDjangoArgs(storyDefs.AlertRoleDefault)) };

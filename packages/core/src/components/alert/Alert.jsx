@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
 
 export default function Alert({
   heading,
   text,
   children,
-  variant = 'info',
+  variant,
   slim = false,
   noIcon = false,
   className = '',
@@ -16,21 +17,18 @@ export default function Alert({
 }) {
   const normalizedVariant = ['info', 'warning', 'success', 'error', 'emergency'].includes(variant)
     ? variant
-    : 'info';
+    : null;
 
-  const classes = [
+  const classes = ClassNames(
     'usa-alert',
-    `usa-alert--${normalizedVariant}`,
+    'usx-alert',
+    normalizedVariant ? `usa-alert--${normalizedVariant}` : '',
+    normalizedVariant ? `usx-alert--${normalizedVariant}` : '',
     slim ? 'usa-alert--slim' : '',
     noIcon ? 'usa-alert--no-icon' : '',
-    'usx-alert',
-    `usx-alert--${normalizedVariant}`,
-    slim ? 'usx-alert--slim' : '',
     noIcon ? 'usx-alert--no-icon' : '',
     className
-  ]
-    .filter(Boolean)
-    .join(' ');
+  )
 
   const resolvedRole = role || (
     normalizedVariant === 'error' || normalizedVariant === 'emergency'

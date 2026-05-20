@@ -14,11 +14,9 @@ export default {
 };
 
 export const storyDefs = {
-  Info: {
+  Default: {
     heading: 'Informative status',
     text: 'System status and notification updates appear here.',
-    slim: false,
-    noIcon: false
   },
   Warning: {
     variant: 'warning',
@@ -49,7 +47,12 @@ export const storyDefs = {
     noIcon: false
   },
   NoHeading: {
+    variant: 'info',
     text: 'This alert has no heading.',
+  },
+  NoText: {
+    variant: 'success',
+    heading: 'No text alert',
     slim: false,
     noIcon: false
   },
@@ -66,12 +69,6 @@ export const storyDefs = {
     text: 'This alert does not have an icon.',
     slim: false,
     noIcon: true
-  },
-  NoText: {
-    variant: 'success',
-    heading: 'No text alert',
-    slim: false,
-    noIcon: false
   },
   RegionRoleDefault: {
     variant: 'info',
@@ -102,15 +99,15 @@ export const storyDefs = {
   },
 };
 
-export const Info = { args: storyDefs.Info };
+export const Default = { args: storyDefs.Default };
 export const Warning = { args: storyDefs.Warning };
 export const Success = { args: storyDefs.Success };
 export const Error = { args: storyDefs.Error };
 export const Emergency = { args: storyDefs.Emergency };
 export const NoHeading = { args: storyDefs.NoHeading };
+export const NoText = { args: storyDefs.NoText };
 export const Slim = { args: storyDefs.Slim };
 export const NoIcon = { args: storyDefs.NoIcon };
-export const NoText = { args: storyDefs.NoText };
 export const RegionRoleDefault = { name: 'Default: region', args: storyDefs.RegionRoleDefault };
 export const StatusRoleDefault = { name: 'Default: status', args: storyDefs.StatusRoleDefault };
 export const AlertRoleDefault = { name: 'Default: alert', args: storyDefs.AlertRoleDefault };

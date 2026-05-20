@@ -20,11 +20,11 @@
     {% elif ariaLabel %}
     aria-label="{{ ariaLabel }}"
     {% elif variant == 'info' or variant == 'warning' %}
-    aria-label="{{ heading|default:'Informative status' }}"
+    aria-label="{{ heading }}"
     {% endif %}
 >
   <div class="usa-alert__body usx-alert__body">
-    {% if heading %}
+    {% if heading and not slim %}
         <h4 class="usa-alert__heading usx-alert__heading">{{ heading }}</h4>
     {% endif %}
     <p class="usa-alert__text usx-alert__text">
