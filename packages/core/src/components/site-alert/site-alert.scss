@@ -5,24 +5,6 @@
   display: block;
   position: relative;
 
-  .usx-site-alert__close {
-    padding: 6px;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    appearance: none;
-    border: none;
-    cursor: pointer;
-    background: transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    z-index: 1;
-  }
-
   &.usa-site-alert--info {
 
     @if $usx-site-alert-default-bg-color {
@@ -48,14 +30,6 @@
       .usa-alert {
         border-color: $usx-site-alert-emergency-bg-color;
         background-color: transparent;
-      }
-    }
-
-    .usx-site-alert__close {
-      color: #fff;
-
-      @if $color-light-text {
-        color: $color-light-text;
       }
     }
   }
@@ -88,7 +62,7 @@
   }
 
   .usa-alert.usx-alert .usa-alert__body {
-    background-color: transparent;
+    background-color: transparent !important;
   }
 }
 

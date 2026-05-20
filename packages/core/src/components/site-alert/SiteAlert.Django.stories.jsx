@@ -11,21 +11,28 @@ export default {
   excludeStories: [],
 };
 
+const replaceOnDismiss = (storyDef) => {
+    return {
+      ...storyDef,
+      onDismiss: "this.closest('.usa-site-alert').remove();"
+    }
+}
+
 const createStory = createDjangoStory({ componentName: 'site-alert' });
 
 export const StandardInfo = createStory(storyDefs.StandardInfo);
-export const DismissibleInfo = createStory(storyDefs.DismissibleInfo);
 export const StandardEmergency = createStory(storyDefs.StandardEmergency);
-export const DismissibleEmergency = createStory(storyDefs.DismissibleEmergency);
 export const NoHeader = createStory(storyDefs.NoHeader);
-export const DismissibleNoHeader = createStory(storyDefs.DismissibleNoHeader);
 export const List = createStory(storyDefs.List);
-export const DismissibleList = createStory(storyDefs.DismissibleList);
 export const Slim = createStory(storyDefs.Slim);
-export const DismissibleSlim = createStory(storyDefs.DismissibleSlim);
 export const NoIcon = createStory(storyDefs.NoIcon);
-export const DismissibleNoIcon = createStory(storyDefs.DismissibleNoIcon);
 export const Maintenance = createStory(storyDefs.Maintenance);
-export const DismissibleMaintenance = createStory(storyDefs.DismissibleMaintenance);
-export const MaintenanceWarning = createStory(storyDefs.MaintenanceWarning);
-export const DismissibleMaintenanceWarning = createStory(storyDefs.DismissibleMaintenanceWarning);
+export const MaintenanceWarning = createStory(replaceOnDismiss(storyDefs.MaintenanceWarning));
+export const DismissibleInfo = createStory(replaceOnDismiss(storyDefs.DismissibleInfo));
+export const DismissibleEmergency = createStory(replaceOnDismiss(storyDefs.DismissibleEmergency));
+export const DismissibleNoHeader = createStory(replaceOnDismiss(storyDefs.DismissibleNoHeader));
+export const DismissibleList = createStory(replaceOnDismiss(storyDefs.DismissibleList));
+export const DismissibleSlim = createStory(replaceOnDismiss(storyDefs.DismissibleSlim));
+export const DismissibleNoIcon = createStory(replaceOnDismiss(storyDefs.DismissibleNoIcon));
+export const DismissibleMaintenance = createStory(replaceOnDismiss(storyDefs.DismissibleMaintenance));
+export const DismissibleMaintenanceWarning = createStory(replaceOnDismiss(storyDefs.DismissibleMaintenanceWarning));

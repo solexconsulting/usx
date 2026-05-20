@@ -5,7 +5,6 @@ import ClassNames from 'classnames';
 export default function Alert({
   heading,
   text,
-  children,
   variant,
   slim = false,
   noIcon = false,
@@ -13,6 +12,7 @@ export default function Alert({
   role,
   ariaLabel,
   ariaLabelledby,
+  onDismiss = undefined,
   ...props
 }) {
   const normalizedVariant = ['info', 'warning', 'success', 'error', 'emergency'].includes(variant)
@@ -55,8 +55,15 @@ export default function Alert({
       <div className="usa-alert__body usx-alert__body">
         {!slim && heading ? <h4 className="usa-alert__heading usx-alert__heading">{heading}</h4> : null}
         <p className="usa-alert__text usx-alert__text">
-          {children ?? text}
+          {text}
         </p>
+        {onDismiss && (
+          <button className="usx-alert__dismiss" aria-label="Dismiss alert" onClick={onDismiss}>
+            <svg className="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+              <use href="/img/sprite.svg#close" />
+            </svg>
+          </button>
+        )}
       </div>
     </div>
   );
@@ -65,7 +72,6 @@ export default function Alert({
 Alert.propTypes = {
   heading: PropTypes.string,
   text: PropTypes.string,
-  children: PropTypes.node,
   variant: PropTypes.oneOf(['info', 'warning', 'success', 'error', 'emergency']),
   slim: PropTypes.bool,
   noIcon: PropTypes.bool,
@@ -73,4 +79,5 @@ Alert.propTypes = {
   role: PropTypes.string,
   ariaLabel: PropTypes.string,
   ariaLabelledby: PropTypes.string,
+  onDismiss: PropTypes.func,
 };

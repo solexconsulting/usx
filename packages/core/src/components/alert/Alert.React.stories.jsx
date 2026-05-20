@@ -1,4 +1,5 @@
 import React from 'react';
+import { fn } from 'storybook/test';
 import Alert from './Alert.jsx';
 import alertConfig from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
@@ -10,6 +11,7 @@ export default {
   component: Alert,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  args: { onDismiss: null },
   excludeStories: ['storyDefs'],
 };
 
@@ -45,6 +47,17 @@ export const storyDefs = {
     text: 'This is an emergency alert.',
     slim: false,
     noIcon: false
+  },
+  EmergencyList: {
+    variant: 'emergency',
+    heading: 'Emergency status',
+    children: (
+      <ul className="usa-list">
+        <li>The primary emergency message and a link for supporting context.</li>
+        <li>Another message, and another link.</li>
+        <li>A final emergency message.</li>
+      </ul>
+    ),
   },
   NoHeading: {
     variant: 'info',
@@ -97,6 +110,12 @@ export const storyDefs = {
     text: 'Role can still be overridden when needed.',
     role: 'status',
   },
+  Dismissible: {
+    variant: 'info',
+    heading: 'Dismissible alert',
+    text: 'This alert can be dismissed.',
+    onDismiss: (e) => e.currentTarget.closest('.usa-alert').remove(),
+  },
 };
 
 export const Default = { args: storyDefs.Default };
@@ -104,6 +123,7 @@ export const Warning = { args: storyDefs.Warning };
 export const Success = { args: storyDefs.Success };
 export const Error = { args: storyDefs.Error };
 export const Emergency = { args: storyDefs.Emergency };
+export const EmergencyList = { args: storyDefs.EmergencyList };
 export const NoHeading = { args: storyDefs.NoHeading };
 export const NoText = { args: storyDefs.NoText };
 export const Slim = { args: storyDefs.Slim };
@@ -113,3 +133,4 @@ export const StatusRoleDefault = { name: 'Default: status', args: storyDefs.Stat
 export const AlertRoleDefault = { name: 'Default: alert', args: storyDefs.AlertRoleDefault };
 export const RegionWithAriaLabel = { name: 'Region with aria-label', args: storyDefs.RegionWithAriaLabel };
 export const ExplicitRoleOverride = { name: 'Role override', args: storyDefs.ExplicitRoleOverride };
+export const Dismissible = { name: 'Dismissible', args: storyDefs.Dismissible };

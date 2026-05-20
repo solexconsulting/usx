@@ -8,7 +8,7 @@
     {% if variant == 'maintenance' or variant == 'maintenance-warning' %} usx-site-alert--{{ variant }}{% endif %}
     {% if slim %} usa-site-alert--slim{% endif %}
     {% if noIcon %} usa-site-alert--no-icon{% endif %}
-    {% if dismissible %} usa-site-alert--dismissible{% endif %}
+    {% if onDismiss %} usa-site-alert--dismissible{% endif %}
     {{ className }}
   "
   {% if role %}role="{{ role }}"{% endif %}
@@ -20,69 +20,15 @@
 >
   {% if variant == 'maintenance' %}
     {% with resolvedVariant='error' %}
-      {% if alertContent %}
-        <div class="usa-alert usa-alert--{{ resolvedVariant }} usx-alert usx-alert--{{ resolvedVariant }}{% if slim %} usa-alert--slim usx-alert--slim{% endif %}{% if noIcon %} usa-alert--no-icon usx-alert--no-icon{% endif %}">
-          <div class="usa-alert__body usx-alert__body">
-            {% if alertHeading %}
-              <h4 class="usa-alert__heading usx-alert__heading">{{ alertHeading }}</h4>
-            {% endif %}
-            {{ alertContent|safe }}
-          </div>
-        </div>
-      {% else %}
-        {% alert variant=resolvedVariant heading=alertHeading text=alertText slim=slim noIcon=noIcon %}{% endalert %}
-      {% endif %}
+      {% alert variant=resolvedVariant heading=alertHeading text=alertText slim=slim noIcon=noIcon onDismiss=onDismiss %}{{ alertContent|safe }}{% endalert %}
     {% endwith %}
   {% elif variant == 'maintenance-warning' %}
     {% with resolvedVariant='warning' %}
-      {% if alertContent %}
-        <div class="usa-alert usa-alert--{{ resolvedVariant }} usx-alert usx-alert--{{ resolvedVariant }}{% if slim %} usa-alert--slim usx-alert--slim{% endif %}{% if noIcon %} usa-alert--no-icon usx-alert--no-icon{% endif %}">
-          <div class="usa-alert__body usx-alert__body">
-            {% if alertHeading %}
-              <h4 class="usa-alert__heading usx-alert__heading">{{ alertHeading }}</h4>
-            {% endif %}
-            {{ alertContent|safe }}
-          </div>
-        </div>
-      {% else %}
-        {% alert variant=resolvedVariant heading=alertHeading text=alertText slim=slim noIcon=noIcon %}{% endalert %}
-      {% endif %}
+      {% alert variant=resolvedVariant heading=alertHeading text=alertText slim=slim noIcon=noIcon onDismiss=onDismiss %}{{ alertContent|safe }}{% endalert %}
     {% endwith %}
   {% elif variant == 'emergency' %}
-    {% if alertContent %}
-      <div class="usa-alert usa-alert--emergency usx-alert usx-alert--emergency{% if slim %} usa-alert--slim usx-alert--slim{% endif %}{% if noIcon %} usa-alert--no-icon usx-alert--no-icon{% endif %}">
-        <div class="usa-alert__body usx-alert__body">
-          {% if alertHeading %}
-            <h4 class="usa-alert__heading usx-alert__heading">{{ alertHeading }}</h4>
-          {% endif %}
-          {{ alertContent|safe }}
-        </div>
-      </div>
-    {% else %}
-      {% alert variant='emergency' heading=alertHeading text=alertText slim=slim noIcon=noIcon %}{% endalert %}
-    {% endif %}
+    {% alert variant='emergency' heading=alertHeading text=alertText slim=slim noIcon=noIcon onDismiss=onDismiss %}{{ alertContent|safe }}{% endalert %}
   {% else %}
-    {% if alertContent %}
-      <div class="usa-alert usa-alert--info usx-alert usx-alert--info{% if slim %} usa-alert--slim usx-alert--slim{% endif %}{% if noIcon %} usa-alert--no-icon usx-alert--no-icon{% endif %}">
-        <div class="usa-alert__body usx-alert__body">
-          {% if alertHeading %}
-            <h4 class="usa-alert__heading usx-alert__heading">{{ alertHeading }}</h4>
-          {% endif %}
-          {{ alertContent|safe }}
-        </div>
-      </div>
-    {% else %}
-      {% alert variant='info' heading=alertHeading text=alertText slim=slim noIcon=noIcon %}{% endalert %}
-    {% endif %}
-  {% endif %}
-  {% if dismissible %}
-    <button
-      class="usx-site-alert__close"
-      aria-label="Close alert"
-      onclick="this.closest('.usa-site-alert').remove();"
-    >
-
-      {% icon name="close" size=3 ariaHidden=True focusable=False %}{% endicon %}
-    </button>
+    {% alert variant='info' heading=alertHeading text=alertText slim=slim noIcon=noIcon onDismiss=onDismiss %}{{ alertContent|safe }}{% endalert %}
   {% endif %}
 </section>

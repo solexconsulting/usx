@@ -20,6 +20,7 @@ export const Warning = createStory(storyDefs.Warning);
 export const Success = createStory(storyDefs.Success);
 export const Error = createStory(storyDefs.Error);
 export const Emergency = createStory(storyDefs.Emergency);
+export const EmergencyList = createStory(storyDefs.EmergencyList);
 export const NoHeading = createStory(storyDefs.NoHeading);
 export const NoText = createStory(storyDefs.NoText);
 export const Slim = createStory(storyDefs.Slim);
@@ -29,3 +30,7 @@ export const StatusRoleDefault = { name: 'Default: status', ...createStory(toDja
 export const AlertRoleDefault = { name: 'Default: alert', ...createStory(toDjangoArgs(storyDefs.AlertRoleDefault)) };
 export const RegionWithAriaLabel = { name: 'Region with aria-label', ...createStory(toDjangoArgs(storyDefs.RegionWithAriaLabel)) };
 export const ExplicitRoleOverride = { name: 'Role override', ...createStory(toDjangoArgs(storyDefs.ExplicitRoleOverride)) };
+export const Dismissible = { name: 'Dismissible', ...createStory({
+  ...toDjangoArgs(storyDefs.Dismissible),
+  onDismiss: "this.closest('.usa-alert').remove();"
+}) };

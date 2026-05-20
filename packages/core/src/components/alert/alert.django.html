@@ -27,12 +27,15 @@
     {% if heading and not slim %}
         <h4 class="usa-alert__heading usx-alert__heading">{{ heading }}</h4>
     {% endif %}
-    <p class="usa-alert__text usx-alert__text">
-        {% if children %}
-            {{ children|safe }}
-        {% else %}
-            {{ text }}
-        {% endif %}
-    </p>
+    {% if children %}{{ children|safe }}{% elif text %}
+        <p class="usa-alert__text usx-alert__text">{{ text }}</p>
+    {% endif %}
+    {% if onDismiss %}
+    <button class="usx-alert__dismiss" aria-label="Dismiss alert" onclick="{{ onDismiss }}">
+      <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+        <use href="/img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    {% endif %}
   </div>
 </div>

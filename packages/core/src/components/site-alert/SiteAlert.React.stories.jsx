@@ -1,4 +1,5 @@
 import React from 'react';
+import { fn } from 'storybook/test';
 import SiteAlert from './SiteAlert';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
@@ -10,6 +11,7 @@ export default {
   component: SiteAlert,
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
+  args: { onDismiss: null },
   excludeStories: ['storyDefs'],
 };
 
@@ -23,7 +25,7 @@ export const storyDefs = {
     variant: 'info',
     alertHeading: 'Short alert message',
     alertText: 'Additional context and followup information including a link.',
-    dismissible: true,
+    onDismiss: (e) => e.currentTarget.closest('.usa-site-alert').remove(),
   },
   StandardEmergency: {
     variant: 'emergency',
@@ -34,18 +36,18 @@ export const storyDefs = {
     variant: 'emergency',
     alertHeading: 'Emergency alert message',
     alertText: 'Additional context and followup information including a link.',
-    dismissible: true,
+    onDismiss: (e) => e.currentTarget.closest('.usa-site-alert').remove(),
   },
   NoHeader: {
     variant: 'emergency',
     alertHeading: '',
-    alertText: 'Short alert message. Additional context and followup information including a link.',
+    alertText: 'This is not recommended. Use `slim` variant when no header is present.',
   },
   DismissibleNoHeader: {
     variant: 'emergency',
     alertHeading: '',
-    alertText: 'Short alert message. Additional context and followup information including a link.',
-    dismissible: true,
+    alertText: 'This is not recommended. Use `slim` variant when no header is present.',
+    onDismiss: (e) => e.currentTarget.closest('.usa-site-alert').remove(),
   },
   List: {
     variant: 'emergency',
@@ -62,13 +64,15 @@ export const storyDefs = {
     variant: 'emergency',
     alertHeading: 'Emergency alert message',
     alertContent: (
-      <ul className="usa-list">
-        <li>The primary emergency message and a link for supporting context.</li>
-        <li>Another message, and another link.</li>
-        <li>A final emergency message.</li>
-      </ul>
+      <>
+        <ul className="usa-list">
+          <li>The primary emergency message and a link for supporting context.</li>
+          <li>Another message, and another link.</li>
+          <li>A final emergency message.</li>
+        </ul>
+      </>
     ),
-    dismissible: true,
+    onDismiss: (e) => e.currentTarget.closest('.usa-site-alert').remove(),
   },
   Slim: {
     variant: 'emergency',
@@ -79,7 +83,7 @@ export const storyDefs = {
     variant: 'emergency',
     alertText: 'Short alert message. Additional context and followup information including a link.',
     slim: true,
-    dismissible: true,
+    onDismiss: (e) => e.currentTarget.closest('.usa-site-alert').remove(),
   },
   NoIcon: {
     variant: 'emergency',
@@ -90,13 +94,13 @@ export const storyDefs = {
     variant: 'emergency',
     alertText: 'Short alert message. Additional context and followup information including a link.',
     noIcon: true,
-    dismissible: true,
+    onDismiss: (e) => e.currentTarget.closest('.usa-site-alert').remove(),
   },
   Maintenance: {
     variant: 'maintenance',
     alertHeading: 'Site Maintenance',
     alertContent: (
-      <>
+      <p>
         The site is currently undergoing maintenance. If you have trouble signing in or using tools, check back after
         we&apos;re finished. Thank you for your patience.
         <br />
@@ -105,14 +109,14 @@ export const storyDefs = {
         <strong>Time:</strong> 1:00 AM EST
         <br />
         <strong>Expected duration:</strong> 4 hours 30 minutes
-      </>
+      </p>
     ),
   },
   DismissibleMaintenance: {
     variant: 'maintenance',
     alertHeading: 'Site Maintenance',
     alertContent: (
-      <>
+      <p>
         The site is currently undergoing maintenance. If you have trouble signing in or using tools, check back after
         we&apos;re finished. Thank you for your patience.
         <br />
@@ -121,15 +125,15 @@ export const storyDefs = {
         <strong>Time:</strong> 1:00 AM EST
         <br />
         <strong>Expected duration:</strong> 4 hours 30 minutes
-      </>
+      </p>
     ),
-    dismissible: true,
+    onDismiss: (e) => e.currentTarget.closest('.usa-site-alert').remove(),
   },
   MaintenanceWarning: {
     variant: 'maintenance-warning',
     alertHeading: 'Site Maintenance',
     alertContent: (
-      <>
+      <p>
         This site is scheduled for maintenance. The work is expected to last 2 hours. During that time, you won&apos;t
         be able to sign in or use tools.
         <br />
@@ -138,14 +142,14 @@ export const storyDefs = {
         <strong>Time:</strong> 1:00 AM EST
         <br />
         <strong>Expected duration:</strong> 2 hours
-      </>
+      </p>
     ),
   },
   DismissibleMaintenanceWarning: {
     variant: 'maintenance-warning',
     alertHeading: 'Site Maintenance',
     alertContent: (
-      <>
+      <p>
         This site is scheduled for maintenance. The work is expected to last 2 hours. During that time, you won&apos;t
         be able to sign in or use tools.
         <br />
@@ -154,25 +158,25 @@ export const storyDefs = {
         <strong>Time:</strong> 1:00 AM EST
         <br />
         <strong>Expected duration:</strong> 2 hours
-      </>
+      </p>
     ),
-    dismissible: true,
+    onDismiss: (e) => e.currentTarget.closest('.usa-site-alert').remove(),
   },
 };
 
 export const StandardInfo = { args: storyDefs.StandardInfo };
-export const DismissibleInfo = { args: storyDefs.DismissibleInfo };
 export const StandardEmergency = { args: storyDefs.StandardEmergency };
-export const DismissibleEmergency = { args: storyDefs.DismissibleEmergency };
 export const NoHeader = { args: storyDefs.NoHeader };
-export const DismissibleNoHeader = { args: storyDefs.DismissibleNoHeader };
 export const List = { args: storyDefs.List };
-export const DismissibleList = { args: storyDefs.DismissibleList };
 export const Slim = { args: storyDefs.Slim };
-export const DismissibleSlim = { args: storyDefs.DismissibleSlim };
 export const NoIcon = { args: storyDefs.NoIcon };
-export const DismissibleNoIcon = { args: storyDefs.DismissibleNoIcon };
 export const Maintenance = { args: storyDefs.Maintenance };
-export const DismissibleMaintenance = { args: storyDefs.DismissibleMaintenance };
 export const MaintenanceWarning = { args: storyDefs.MaintenanceWarning };
+export const DismissibleInfo = { args: storyDefs.DismissibleInfo };
+export const DismissibleEmergency = { args: storyDefs.DismissibleEmergency };
+export const DismissibleNoHeader = { args: storyDefs.DismissibleNoHeader };
+export const DismissibleList = { args: storyDefs.DismissibleList };
+export const DismissibleSlim = { args: storyDefs.DismissibleSlim };
+export const DismissibleNoIcon = { args: storyDefs.DismissibleNoIcon };
+export const DismissibleMaintenance = { args: storyDefs.DismissibleMaintenance };
 export const DismissibleMaintenanceWarning = { args: storyDefs.DismissibleMaintenanceWarning };

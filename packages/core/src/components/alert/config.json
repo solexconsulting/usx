@@ -43,6 +43,14 @@
         "ariaLabelledby": {
             "type": "string",
             "description": "ID reference to a labeling element. Takes precedence over ariaLabel."
+        },
+        "onDismiss": {
+            "type": "function",
+            "description": "Optional callback function that, if provided, makes the alert dismissible and is called when the alert is dismissed."
+        },
+        "children": {
+            "type": "object",
+            "description": "Alert rich content (React node / HTML string). If provided, this content will be rendered instead of the `heading` and `text` props."
         }
     }
 }

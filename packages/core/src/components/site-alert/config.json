@@ -6,7 +6,7 @@
     "variant": { "type": "select", "options": ["info", "emergency", "maintenance", "maintenance-warning"], "description": "Site alert variant" },
     "slim": { "type": "boolean", "description": "Slim alert variant" },
     "noIcon": { "type": "boolean", "description": "Hide the alert icon" },
-    "dismissible": { "type": "boolean", "description": "Make alert dismissible" },
+    "onDismiss": { "type": "function", "description": "Optional callback fired when the dismiss button is clicked. When provided, a dismiss button is rendered inside the alert body." },
     "role": { "type": "select", "options": ["", "alert", "status"], "description": "Optional ARIA role for the site alert section" },
     "alertHeading": { "type": "string", "description": "Alert heading text" },
     "alertText": { "type": "string", "description": "Alert text content" },
