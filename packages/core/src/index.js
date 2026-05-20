@@ -88,7 +88,9 @@ export { default as TimePicker } from './components/time-picker';
 export { default as Toggle } from './components/toggle';
 export { default as Tooltip } from './components/tooltip';
 export { default as Utilities } from './components/utilities';
+export { default as Villain } from './components/villain';
 // AUTO-GENERATED-EXPORTS END
+
 
 
 
