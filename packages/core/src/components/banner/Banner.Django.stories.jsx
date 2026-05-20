@@ -1,6 +1,8 @@
+import React from 'react';
 import config from './config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
 import { storyDefs } from './Banner.React.stories.jsx';
+import accordion from "@uswds/uswds/js/usa-accordion";
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -9,6 +11,19 @@ export default {
   tags: ['autodocs'],
   argTypes: generatedArgTypes,
   excludeStories: [],
+  decorators: [
+    (Story) => {
+      // Ensure the banner component is initialized for Django stories
+      React.useEffect(() => {
+        accordion.on();
+
+        return () => {
+          accordion.off();
+        }
+      }, []);
+      return <Story />;
+    }
+  ]
 };
 
 const createStory = createDjangoStory({ componentName: 'banner' });

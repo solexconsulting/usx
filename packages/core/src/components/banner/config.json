@@ -2,15 +2,45 @@
   "name": "banner",
   "template": "banner/banner.django.html",
   "props": {
-    "id": { "type": "string", "default": "gov-banner", "description": "The unique ID for the banner, used for aria-controls and element targeting." },
-    "ariaLabel": { "type": "string", "default": "Official government website", "description": "The custom aria label users can override." },
-    "tld": { "type": "string", "default": ".gov", "description": "The top level domain for the site. Defaults to `.gov`" },
-    "bannerText": { "type": "string", "default": "An official website of the United States government", "description": "The text for official government website text." },
-    "bannerActionText": { "type": "string", "default": "Here's how you know", "description": "Action text label \"Here's how you know.\"" },
-    "domainHeading": { "type": "string", "default": "Official websites use .gov", "description": "Heading text for the domain section." },
-    "domainText": { "type": "string", "default": "A .gov website belongs to an official government organization in the United States.", "description": "Body text for the domain section." },
-    "httpsHeading": { "type": "string", "default": "Secure .gov websites use HTTPS", "description": "Heading text for HTTPS section." },
-    "httpsText": { "type": "string", "default": "A <strong>lock</strong> (<svg class=\"usa-icon usx-icon--size-1\" aria-hidden=\"true\" focusable=\"false\" role=\"img\"><use href=\"/img/sprite.svg#lock\"></use></svg>) or <strong>https://</strong> means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.", "description": "Body text for the HTTPS section." },
-    "className": { "type": "string", "default": "", "description": "Additional classes to add to the banner" }
+    "id": {
+      "type": "string",
+      "description": "The unique ID for the banner, used for aria-controls and element targeting."
+    },
+    "ariaLabel": {
+      "type": "string",
+      "description": "The custom aria label users can override."
+    },
+    "tld": {
+      "type": "string",
+      "description": "The top level domain for the site. Defaults to `.gov`"
+    },
+    "bannerText": {
+      "type": "string",
+      "description": "The text for official government website text."
+    },
+    "bannerActionText": {
+      "type": "string",
+      "description": "Action text label \"Here's how you know.\""
+    },
+    "domainHeading": {
+      "type": "string",
+      "description": "Heading text for the domain section."
+    },
+    "domainText": {
+      "type": "string",
+      "description": "Body text for the domain section."
+    },
+    "httpsHeading": {
+      "type": "string",
+      "description": "Heading text for HTTPS section."
+    },
+    "httpsText": {
+      "type": "string",
+      "description": "Body text for the HTTPS section."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes to add to the banner"
+    }
   }
 }

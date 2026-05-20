@@ -1,8 +1,13 @@
 {% load components %}
 {% load static %}
 {# Django template for Banner #}
-<section class="usa-banner usx-banner {{ className }}" aria-label="{{ ariaLabel }}">
-  <div class="usa-accordion">
+{% with effective_tld=tld|default:'.gov' %}
+<section
+  id="{{ id|default:'gov-banner' }}"
+  class="usa-banner usx-banner {{ className }}"
+  aria-label="{{ ariaLabel|default:'Official government website' }}"
+>
+  <div id="{{ id|default:'gov-banner' }}-accordion" class="usa-accordion">
     <header class="usa-banner__header">
       <div class="usa-banner__inner">
         <div class="grid-col-auto">
@@ -18,23 +23,23 @@
           aria-hidden="true"
         >
           <p class="usa-banner__header-text">
-            {{ bannerText }}
+            {{ bannerText|default:'An official website of the United States government' }}
           </p>
-          <p class="usa-banner__header-action">{{ bannerActionText }}</p>
+          <p class="usa-banner__header-action">{{ bannerActionText|default:"Here's how you know" }}</p>
         </div>
         <button
           type="button"
           class="usa-accordion__button usa-banner__button"
           aria-expanded="false"
-          aria-controls="{{ id }}-content"
+          aria-controls="{{ id|default:'gov-banner' }}-content"
         >
-          <span class="usa-banner__button-text">{{ bannerActionText }}</span>
+          <span class="usa-banner__button-text">{{ bannerActionText|default:"Here's how you know" }}</span>
         </button>
       </div>
     </header>
     <div
       class="usa-banner__content usa-accordion__content"
-      id="{{ id }}-content"
+      id="{{ id|default:'gov-banner' }}-content"
       hidden
     >
       <div class="grid-row grid-gap-lg">
@@ -48,8 +53,8 @@
           />
           <div class="usa-media-block__body">
             <p>
-              <strong>{{ domainHeading }}</strong><br/>
-              {{ domainText }}
+              <strong>{% if domainHeading %}{{ domainHeading }}{% else %}Official websites use {{ effective_tld }}{% endif %}</strong><br/>
+              {% if domainText %}{{ domainText }}{% else %}A {{ effective_tld }} website belongs to an official government organization in the United States.{% endif %}
             </p>
           </div>
         </div>
@@ -63,8 +68,8 @@
           />
           <div class="usa-media-block__body">
             <p>
-              <strong>{{ httpsHeading }}</strong><br/>
-              {{ httpsText|safe }}
+              <strong>{% if httpsHeading %}{{ httpsHeading }}{% else %}Secure {{ effective_tld }} websites use HTTPS{% endif %}</strong><br/>
+              {% if httpsText %}{{ httpsText|safe }}{% else %}A <strong>lock</strong> ({% icon name="lock" size=1 ariaHidden=True focusable=False %}{% endicon %}) or <strong>https://</strong> means you've safely connected to the {{ effective_tld }} website. Share sensitive information only on official, secure websites.{% endif %}
             </p>
           </div>
         </div>
@@ -72,3 +77,4 @@
     </div>
   </div>
 </section>
+{% endwith %}
