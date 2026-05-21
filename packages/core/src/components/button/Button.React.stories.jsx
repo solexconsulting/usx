@@ -468,6 +468,80 @@ export const BigUnstyled = {
   }
 };
 
+export const Ghost = {
+  args: {
+    label: 'Ghost',
+    ghost: true
+  }
+};
+
+export const GhostPrimary = {
+  args: {
+    label: 'Primary Ghost',
+    variant: 'primary',
+    ghost: true,
+  }
+};
+
+export const GhostSecondary = {
+  args: {
+    label: 'Secondary Ghost',
+    variant: 'secondary',
+    ghost: true,
+  }
+};
+
+export const GhostAccentCool = {
+  args: {
+    label: 'Accent Cool Ghost',
+    variant: 'accent-cool',
+    ghost: true,
+  }
+};
+
+export const GhostAccentWarm = {
+  args: {
+    label: 'Accent Warm Ghost',
+    variant: 'accent-warm',
+    ghost: true,
+  }
+};
+
+export const GhostBase = {
+  args: {
+    label: 'Base Ghost',
+    variant: 'base',
+    ghost: true,
+  }
+};
+
+export const GhostDisabled = {
+  args: {
+    label: 'Ghost Disabled',
+    variant: 'primary',
+    ghost: true,
+    disabled: true
+  }
+};
+
+export const GhostAriaDisabled = {
+  args: {
+    label: 'Ghost aria-disabled',
+    variant: 'primary',
+    ghost: true,
+    'aria-disabled': true
+  }
+};
+
+export const GhostWithIcon = {
+  args: {
+    label: 'Ghost with icon',
+    variant: 'primary',
+    ghost: true,
+    leftIcon: { name: 'arrow_back', size: 2 }
+  }
+};
+
 export const storyDefs = {
   Default: Default.args,
   DefaultHover: DefaultHover.args,
@@ -522,4 +596,14 @@ export const storyDefs = {
   BigDisabled: BigDisabled.args,
   BigAriaDisabled: BigAriaDisabled.args,
   BigUnstyled: BigUnstyled.args,
+
+  Ghost: Ghost.args,
+  GhostPrimary: GhostPrimary.args,
+  GhostSecondary: GhostSecondary.args,
+  GhostAccentCool: GhostAccentCool.args,
+  GhostAccentWarm: GhostAccentWarm.args,
+  GhostBase: GhostBase.args,
+  GhostDisabled: GhostDisabled.args,
+  GhostAriaDisabled: GhostAriaDisabled.args,
+  GhostWithIcon: GhostWithIcon.args,
 };

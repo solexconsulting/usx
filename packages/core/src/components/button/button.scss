@@ -54,7 +54,7 @@
   $is-outline: false
 ) {
   /* Non-disabled buttons only */
-  .usa-button.usx-button#{$selector}:not(:disabled):not([aria-disabled="true"]) {
+  .usa-button.usx-button#{$selector}:not(:disabled):not([aria-disabled="true"]):not(.usx-button--ghost) {
     @if $bg != null {
       background-color: $bg;
     }
@@ -233,8 +233,56 @@
   null
 );
 
-.usx-button {
+.usa-button.usx-button {
   .usa-button--outline {
-    box-shadow: 0 0 0 2px $color-primary;
+    box-shadow: 0 0 0 2px currentColor;
+  }
+
+  &.usx-button--ghost {
+    background-color: transparent;
+    color: currentColor;
+
+    &:not([disabled]):not([aria-disabled="true"]) {
+
+      &.usa-button--primary {
+        @if $color-primary != null {
+          color: $color-primary;
+        }
+      }
+
+      &.usa-button--secondary {
+        @if $color-secondary != null {
+          color: $color-secondary;
+        }
+      }
+
+      &.usa-button--accent-cool {
+        @if $color-accent-cool != null {
+          color: $color-accent-cool;
+        }
+      }
+
+      &.usa-button--accent-warm {
+        @if $color-accent-warm != null {
+          color: $color-accent-warm;
+        }
+      }
+
+      &.usa-button--base {
+        @if $color-base != null {
+          color: $color-base;
+        }
+      }
+
+      &.usa-button--hover,
+      &:hover {
+        background-color: color-mix(in srgb, currentColor 20%, transparent);
+      }
+
+      &.usa-button--active,
+      &:active {
+        background-color: color-mix(in srgb, currentColor 35%, transparent);
+      }
+    }
   }
 }

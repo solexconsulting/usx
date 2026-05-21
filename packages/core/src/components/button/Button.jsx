@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './button.scss';
 import Icon from '../icon/Icon';
+import ClassNames from 'classnames';
 
 export default function Button({
   label = 'Button',
-  variant = 'primary',
+  variant,
   type = 'button',
   disabled = false,
   onClick,
@@ -13,6 +14,7 @@ export default function Button({
   isExternal = false,
   big = false,
   inverse = false,
+  ghost = false,
   leftIcon,
   rightIcon,
   className = '',
@@ -30,13 +32,15 @@ export default function Button({
     unstyled: 'usa-button--unstyled',
   };
 
-  const variantClass = variantClasses[variant] || variantClasses['primary'];
-  const modifierClasses = [
+  const classes = ClassNames(
+    'usa-button',
+    'usx-button',
+    variant && variantClasses[variant],
     big && 'usa-button--big',
     inverse && 'usa-button--inverse',
-  ].filter(Boolean).join(' ');
-
-  const classes = ['usa-button usx-button', variantClass, modifierClasses, className].filter(Boolean).join(' ');
+    ghost && 'usx-button--ghost',
+    className
+  )
 
   const Element = href ? 'a' : 'button';
 

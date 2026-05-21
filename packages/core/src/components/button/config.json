@@ -4,79 +4,68 @@
     "props": {
         "label": {
             "type": "string",
-            "default": "Button",
             "description": "The text to be displayed on the button, providing a clear and concise indication of the button's purpose or action."
         },
         "variant": {
             "type": "select",
             "options": ["primary", "secondary", "accent-cool", "accent-warm", "base", "outline"],
-            "default": "primary",
             "description": "The visual style of the button, which can be used to indicate the importance or type of action the button represents."
         },
         "type": {
             "type": "select",
             "options": ["button", "submit", "reset"],
-            "default": "button",
             "description": "The HTML button type attribute, which specifies the behavior of the button when it is clicked."
         },
         "disabled": {
             "type": "boolean",
-            "default": false,
             "description": "A boolean that determines whether the button is disabled, preventing user interaction and indicating that the button is not currently available for action."
         },
         "onClick": {
             "type": "function",
-            "default": null,
             "description": "A function that is called when the button is clicked, allowing for custom behavior to be executed in response to the user's interaction with the button."
         },
         "href": {
             "type": "string",
-            "default": null,
             "description": "The URL that the button should navigate to when clicked, if the button is used as a link."
         },
         "isExternal": {
             "type": "boolean",
-            "default": false,
             "description": "A boolean that determines whether the link should open in a new tab or window, indicating that the destination is external to the current site."
         },
         "big": {
             "type": "boolean",
-            "default": false,
             "description": "A boolean that determines whether the button should be displayed in a larger size, making it more prominent and easier to interact with."
         },
         "inverse": {
             "type": "boolean",
-            "default": false,
             "description": "A boolean that determines whether the button should be displayed with an inverse color scheme, which can be used to create contrast against a darker background."
+        },
+        "ghost": {
+            "type": "boolean",
+            "description": "A boolean that determines whether the button should be displayed in a ghost style, which typically features a transparent background and a border, giving it a more subtle appearance."
         },
         "leftIcon": {
             "type": "object",
-            "default": null,
             "description": "An object that defines the icon to be displayed on the left side of the button, including the icon's name, size, and any additional styling or attributes."
         },
         "rightIcon": {
             "type": "object",
-            "default": null,
             "description": "An object that defines the icon to be displayed on the right side of the button, including the icon's name, size, and any additional styling or attributes."
         },
         "className": {
             "type": "string",
-            "default": "",
             "description": "Additional CSS classes to apply to the button component."
         },
         "style": {
             "type": "string",
-            "default": "",
             "description": "Inline styles to apply to the button component."
         },
         "children": {
             "type": "string",
-            "default": null,
             "description": "Inner HTML or text to be displayed within the button, allowing for more complex content such as additional elements or formatting."
         },
         "extraAttributes": {
             "type": "object",
-            "default": null,
             "description": "An object containing any additional HTML attributes to be spread onto the button element, providing flexibility for custom use cases or integrations."
         }
     }

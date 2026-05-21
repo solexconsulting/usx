@@ -68,3 +68,13 @@ export const Big = createStory(toDjangoArgs(storyDefs.Big));
 export const BigDisabled = createStory(toDjangoArgs(storyDefs.BigDisabled));
 export const BigAriaDisabled = createStory(toDjangoArgs(storyDefs.BigAriaDisabled));
 export const BigUnstyled = createStory(toDjangoArgs(storyDefs.BigUnstyled));
+
+export const Ghost = createStory(toDjangoArgs(storyDefs.Ghost));
+export const GhostPrimary = createStory(toDjangoArgs(storyDefs.GhostPrimary));
+export const GhostSecondary = createStory(toDjangoArgs(storyDefs.GhostSecondary));
+export const GhostAccentCool = createStory(toDjangoArgs(storyDefs.GhostAccentCool));
+export const GhostAccentWarm = createStory(toDjangoArgs(storyDefs.GhostAccentWarm));
+export const GhostBase = createStory(toDjangoArgs(storyDefs.GhostBase));
+export const GhostDisabled = createStory(toDjangoArgs(storyDefs.GhostDisabled));
+export const GhostAriaDisabled = createStory(toDjangoArgs(storyDefs.GhostAriaDisabled));
+export const GhostWithIcon = createStory(toDjangoArgs(storyDefs.GhostWithIcon));
