@@ -12,7 +12,7 @@ import './footer.scss';
 export function FooterReturnToTop({ label = 'Return to top', href = '#', className = '' }) {
   return (
     <div className={['grid-container usa-footer__return-to-top usx-footer__return-to-top', className].filter(Boolean).join(' ')}>
-      <a href={href} className="usa-link usx-link usx-return-to-top">{label}<Icon name="arrow_upward" /></a>
+      <a href={href} className="usa-link usx-link usx-footer__return-to-top">{label}<Icon name="arrow_upward" /></a>
     </div>
   );
 }

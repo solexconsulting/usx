@@ -150,9 +150,10 @@
 
 
 // ── Return to top ────────────────────────────────────────────────────────
-.usx-link.usx-return-to-top {
+.usx-link.usx-footer__return-to-top {
   display: flex;
-  align-items: top;
+  align-items: center;
+  width: max-content;
   gap: .2rem;
 
   @if $usx-footer-link-color != null {

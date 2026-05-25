@@ -25,3 +25,8 @@
     border-radius: $r-full;
     overflow: clip;
 }
+
+.usx-no-visited {
+    // Passive class used to prevent visited styles from applying to links
+    // that should not have them (e.g., "Back to top" links)
+}

@@ -1,33 +1,54 @@
 @use '../../../../tokens/src/_variables' as *;
 
 .usx-link {
-  @if $usx-link-color {
-    color: $usx-link-color;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: .25rem;
+
+  &:not([class^="text-"]):not([class*=" text-"]) {
+
+    @if $usx-link-color {
+      color: $usx-link-color;
+    }
+
+    &:hover {
+      @if $usx-link-hover-color {
+        color: $usx-link-hover-color;
+      }
+    }
+
+    &:active {
+      @if $usx-link-active-color {
+        color: $usx-link-active-color;
+      }
+    }
+
+
   }
 
-  &:hover {
-    @if $usx-link-hover-color {
-      color: $usx-link-hover-color;
+  &:not(.usx-no-visited) {
+
+    &:visited {
+      color: #54278f;
+
+      @if $usx-link-visited-color {
+        color: $usx-link-visited-color;
+      }
+    }
+
+    &.usx-link--visited {
+      color: #54278f;
+
+      @if $usx-link-visited-color {
+        color: $usx-link-visited-color;
+      }
     }
   }
 
-  &:active {
-    @if $usx-link-active-color {
-      color: $usx-link-active-color;
-    }
-  }
-
-  &:visited {
-    @if $usx-link-visited-color {
-      color: $usx-link-visited-color;
-    }
-  }
-
-  &.usx-link--visited {
-    color: #54278f;
-
-    @if $usx-link-visited-color {
-      color: $usx-link-visited-color;
+  &:focus {
+    @if $usx-input-focus-outline {
+      color: $usx-input-focus-outline;
     }
   }
 }
