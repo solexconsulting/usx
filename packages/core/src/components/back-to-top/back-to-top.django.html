@@ -1,4 +1,38 @@
 {# Django template for BackToTop #}
-<div class="usx-back-to-top">
-  <div class="back-to-top__content">BackToTop</div>
-</div>
+{% if href %}
+<a
+    class="usx-link usx-no-visited{% if className %} {{ className }}{% endif %}"
+    href="{{ href }}"
+    {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
+>
+  {% if iconPosition == 'left' or not iconPosition %}
+  <svg class="usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#arrow_upward"></use>
+  </svg>
+  {% endif %}
+  {% if label %}{{ label }}{% else %}Back to top{% endif %}
+  {% if iconPosition == 'right' %}
+  <svg class="usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#arrow_upward"></use>
+  </svg>
+  {% endif %}
+</a>
+{% else %}
+<button
+    type="button"
+    class="usa-button usx-button{% if variant == 'primary' %} usa-button--primary{% endif %} usx-button--ghost{% if className %} {{ className }}{% endif %}"
+    onclick="{{ onClick|default:'window.scrollTo({ top: 0, behavior: \'smooth\' });' }}"
+>
+  {% if iconPosition == 'left' %}
+  <svg class="usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#arrow_upward"></use>
+  </svg>
+  {% endif %}
+  {% if label %}{{ label }}{% endif %}
+  {% if iconPosition != 'left' %}
+  <svg class="usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+    <use href="/img/sprite.svg#arrow_upward"></use>
+  </svg>
+  {% endif %}
+</button>
+{% endif %}

@@ -1,11 +1,33 @@
 {
   "name": "back-to-top",
   "template": "back-to-top/back-to-top.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: BackToTop"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "label": {
+      "type": "string",
+      "description": "The visible text label. Defaults to 'Back to top'. Set to empty string for icon-only display."
+    },
+    "href": {
+      "type": "string",
+      "description": "If provided, renders as an anchor link (<a>) targeting the given href. Otherwise renders as a <button>."
+    },
+    "variant": {
+      "type": "select",
+      "options": ["", "primary"],
+      "description": "Visual style for the button variant. Use 'primary' to add the primary color scheme."
+    },
+    "iconPosition": {
+      "type": "select",
+      "options": ["right", "left"],
+      "description": "Position of the arrow icon relative to the label text. Defaults to 'right'."
+    },
+    "iconSize": {
+      "type": "select",
+      "options": ["2", "3", "4"],
+      "description": "Size of the arrow icon. Corresponds to USWDS icon size utilities. Defaults to '2'."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes to apply to the component."
+    }
   }
 }
