@@ -4,7 +4,7 @@
   "props": {
     "label": {
       "type": "string",
-      "description": "The visible text label. Defaults to 'Back to top'. Set to empty string for icon-only display."
+      "description": "The visible text label. Defaults to 'Back to top'. Omit or pass null for icon-only display."
     },
     "href": {
       "type": "string",
