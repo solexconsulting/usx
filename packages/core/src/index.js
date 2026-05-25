@@ -76,6 +76,7 @@ export { default as Sidenav } from './components/sidenav';
 export { default as SiteAlert } from './components/site-alert';
 export { default as Skipnav } from './components/skipnav';
 export { default as Spinner } from './components/spinner';
+export { default as Status } from './components/status';
 export { default as StepIndicator } from './components/step-indicator';
 export { default as SummaryBox } from './components/summary-box';
 export { default as Swap } from './components/swap';
@@ -90,6 +91,7 @@ export { default as Tooltip } from './components/tooltip';
 export { default as Utilities } from './components/utilities';
 export { default as Villain } from './components/villain';
 // AUTO-GENERATED-EXPORTS END
+
 
 
 

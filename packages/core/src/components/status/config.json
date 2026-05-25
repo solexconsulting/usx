@@ -1,0 +1,25 @@
+{
+  "name": "status",
+  "template": "status/status.django.html",
+  "props": {
+    "color": {
+      "type": "select",
+      "options": ["", "primary", "accent-cool", "accent-warm", "secondary", "success", "warning", "error"],
+      "description": "Color of the status dot via USWDS text-* utilities. Uses currentColor, so any text color class applies."
+    },
+    "size": {
+      "type": "select",
+      "options": ["", "xs", "sm", "md", "lg", "xl"],
+      "description": "Size of the status dot. Defaults to md (.5rem)."
+    },
+    "animation": {
+      "type": "select",
+      "options": ["", "ping", "pulse", "bounce"],
+      "description": "Optional animation to apply to the status dot."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes."
+    }
+  }
+}
