@@ -1,11 +1,14 @@
 {
   "name": "process-list",
   "template": "process-list/process-list.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: ProcessList"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "items": {
+      "type": "object",
+      "description": "Array of process list item objects. Each item supports: heading (required), headingTag (default h4), headingClassName, body, bodyClassName, and className (applied to the <li>)."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes to apply to the <ol> element."
+    }
   }
 }

@@ -1,4 +1,15 @@
 {# Django template for ProcessList #}
-<div class="usx-process-list">
-  <div class="process-list__content">ProcessList</div>
-</div>
+<ol class="usa-process-list usx-process-list{% if className %} {{ className }}{% endif %}">
+  {% for item in items %}
+  <li class="usa-process-list__item{% if item.className %} {{ item.className }}{% endif %}">
+    {% with tag=item.headingTag|default:'h4' %}
+    <{{ tag }} class="usa-process-list__heading{% if item.headingClassName %} {{ item.headingClassName }}{% endif %}">
+      {{ item.heading }}
+    </{{ tag }}>
+    {% endwith %}
+    {% if item.body %}
+    <p{% if item.bodyClassName %} class="{{ item.bodyClassName }}"{% endif %}>{{ item.body|safe }}</p>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ol>

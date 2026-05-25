@@ -1,24 +1,24 @@
 import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
-
-const generatedArgTypes = buildArgTypes(config.props || {});
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './ProcessList.React.stories.jsx';
 
 export default {
   title: 'Django/ProcessList',
   tags: ['autodocs'],
-  argTypes: generatedArgTypes,
+  argTypes: buildArgTypes(config.props || {}),
 };
 
-export const Default = {
-  args: config.default || {},
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'process-list', props: config.default || {} })
-      }
-    }
-  },
-  render: djangoComponent({ componentName: 'process-list' })
-};
+const createStory = createDjangoStory({ componentName: 'process-list' });
+
+const toDjangoItems = (items) =>
+  items.map((item) => ({
+    ...item,
+    body: typeof item.body === 'string' ? item.body : undefined,
+  }));
+
+export const Default = createStory({ items: toDjangoItems(storyDefs.Default.items) });
+export const HeadingOnly = createStory({ items: toDjangoItems(storyDefs.HeadingOnly.items) });
+export const CustomSizing = createStory({ items: toDjangoItems(storyDefs.CustomSizing.items) });
+
+
