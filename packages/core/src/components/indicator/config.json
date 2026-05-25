@@ -1,11 +1,18 @@
 {
   "name": "indicator",
   "template": "indicator/indicator.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: Indicator"
-  },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "items": {
+      "type": "object",
+      "description": "Array of indicator badge objects. Each item supports: className (classes beyond usx-indicator-item), label (text content), and style (inline styles)."
+    },
+    "children": {
+      "type": "string",
+      "description": "The element being decorated by the indicator badges."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes to apply to the indicator wrapper."
+    }
   }
 }

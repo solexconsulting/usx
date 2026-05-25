@@ -1,4 +1,10 @@
 {# Django template for Indicator #}
-<div class="usx-indicator">
-  <div class="indicator__content">Indicator</div>
+<div class="usx-indicator{% if className %} {{ className }}{% endif %}">
+  {% for item in items %}
+  <span
+    class="usx-indicator-item{% if item.className %} {{ item.className }}{% endif %}"
+    {% if item.style %}style="{{ item.style }}"{% endif %}
+  >{% if item.label %}{{ item.label }}{% endif %}</span>
+  {% endfor %}
+  {% if children %}{{ children|safe }}{% endif %}
 </div>
