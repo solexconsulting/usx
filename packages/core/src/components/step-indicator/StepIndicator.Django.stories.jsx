@@ -1,24 +1,18 @@
 import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers';
-
-const generatedArgTypes = buildArgTypes(config.props || {});
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
+import { storyDefs } from './StepIndicator.React.stories.jsx';
 
 export default {
   title: 'Django/StepIndicator',
   tags: ['autodocs'],
-  argTypes: generatedArgTypes,
+  argTypes: buildArgTypes(config.props || {}),
 };
 
-export const Default = {
-  args: config.default || {},
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'step-indicator', props: config.default || {} })
-      }
-    }
-  },
-  render: djangoComponent({ componentName: 'step-indicator' })
-};
+const createStory = createDjangoStory({ componentName: 'step-indicator' });
+
+export const Default = createStory(storyDefs.Default);
+export const NoLabels = createStory(storyDefs.NoLabels);
+export const Centered = createStory(storyDefs.Centered);
+export const Counters = createStory(storyDefs.Counters);
+export const CountersSmall = createStory(storyDefs.CountersSmall);

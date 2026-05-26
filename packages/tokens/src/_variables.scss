@@ -386,6 +386,9 @@ $usx-sidenav-current-color:       $color-primary                     !default;
 $usx-sidenav-link-color:          null                         !default;
 $usx-sidenav-link-hover-color:    $color-primary               !default;
 
+// ── Component tokens: Step Indicator ──────────────────────────────────────────
+$usx-step-indicator-segment-complete-color: $color-primary-darkest !default;
+$usx-step-indicator-segment-current-color: $color-primary-darker !default;
 
 // ── Component tokens: Table ───────────────────────────────────────────
 $usx-table-grouped-row-bg-color: $color-primary-lightest !default;

@@ -1,4 +1,29 @@
 {# Django template for StepIndicator #}
-<div class="usx-step-indicator">
-  <div class="step-indicator__content">StepIndicator</div>
+{% with headingTagName=headingTag|default:'h4' %}
+<div class="usa-step-indicator usx-step-indicator{% if variant %} usa-step-indicator--{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}">
+  <ol class="usa-step-indicator__segments">
+    {% for step in steps %}
+    {% if forloop.counter < currentStep %}
+    <li class="usa-step-indicator__segment usa-step-indicator__segment--complete">
+      <span class="usa-step-indicator__segment-label">{{ step.label }} <span class="usa-sr-only">completed</span></span>
+    </li>
+    {% elif forloop.counter == currentStep %}
+    <li class="usa-step-indicator__segment usa-step-indicator__segment--current" aria-current="true">
+      <span class="usa-step-indicator__segment-label">{{ step.label }}</span>
+    </li>
+    {% else %}
+    <li class="usa-step-indicator__segment">
+      <span class="usa-step-indicator__segment-label">{{ step.label }} <span class="usa-sr-only">not completed</span></span>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ol>
+  <div class="usa-step-indicator__header">
+    <{{ headingTagName }} class="usa-step-indicator__heading">
+      <span class="usa-step-indicator__heading-counter"><span class="usa-sr-only">Step</span>
+        <span class="usa-step-indicator__current-step">{{ currentStep }}</span>
+        <span class="usa-step-indicator__total-steps">of {{ steps|length }}</span> </span><span class="usa-step-indicator__heading-text">{% for step in steps %}{% if forloop.counter == currentStep %}{{ step.label }}{% endif %}{% endfor %}</span>
+    </{{ headingTagName }}>
+  </div>
 </div>
+{% endwith %}
