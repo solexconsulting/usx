@@ -1,0 +1,16 @@
+{# Django template for CopyToClipboard #}
+{% if tooltip %}<span class="usx-tooltip">{% endif %}
+<button class="usa-button usx-button usx-button--ghost usx-copy{% if className %} {{ className }}{% endif %}"
+  onclick="navigator.clipboard.writeText('{{ copyText|escapejs }}')">
+  <svg class="usa-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
+    <use href="./img/sprite.svg#content_copy"></use>
+  </svg>
+  <svg class="usa-icon usx-copy__check" aria-hidden="true" focusable="false" role="img">
+    <use href="./img/sprite.svg#check"></use>
+  </svg>
+  {% if label %}<span class="margin-left-1">{{ label }}</span>{% endif %}
+</button>
+{% if tooltip %}
+  <span class="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copy" role="tooltip">{{ tooltip }}</span>
+  <span class="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copied" role="tooltip">{{ copiedTooltip|default:'Copied' }}</span>
+</span>{% endif %}

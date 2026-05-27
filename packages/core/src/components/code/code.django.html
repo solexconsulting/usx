@@ -1,0 +1,17 @@
+{# Django template for Code #}
+<div class="usx-mockup-code{% if className %} {{ className }}{% endif %}">
+  {% for line in lines %}
+  <pre{% if line.prefix %} data-prefix="{{ line.prefix }}"{% endif %}{% if line.className %} class="{{ line.className }}"{% endif %}><code>{{ line.code }}</code></pre>
+  {% endfor %}
+  {% if copyText %}
+  <button class="usa-button usx-button usx-button--ghost usx-copy"
+    onclick="navigator.clipboard.writeText('{{ copyText|escapejs }}')">
+    <svg class="usa-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
+      <use href="./img/sprite.svg#content_copy"></use>
+    </svg>
+    <svg class="usa-icon usx-copy__check" aria-hidden="true" focusable="false" role="img">
+      <use href="./img/sprite.svg#check"></use>
+    </svg>
+  </button>
+  {% endif %}
+</div>

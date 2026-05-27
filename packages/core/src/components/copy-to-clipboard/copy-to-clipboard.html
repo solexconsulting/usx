@@ -1,0 +1,68 @@
+<span id="example-text-to-copy">Example text to copy.</span></span>
+
+<h3 class="site-preview-heading">Copy to Clipboard</h3>
+<span class="usx-tooltip">
+
+  <button class="usa-button usx-button usx-button--ghost usx-copy"
+    onclick="navigator.clipboard.writeText(document.getElementById('example-text-to-copy').textContent)">
+    <svg class="usa-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
+      <use href="./img/sprite.svg#content_copy"></use>
+    </svg>
+    <svg class="usa-icon usx-copy__check" aria-hidden="true" focusable="false" role="img">
+      <use href="./img/sprite.svg#check"></use>
+    </svg>
+  </button>
+  <span class="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copy" role="tooltip">Copy to
+    clipboard</span>
+  <span class="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copied" role="tooltip">Copied</span>
+</span>
+
+<h3 class="site-preview-heading">With Text</h3>
+<span class="usx-tooltip">
+  <button class="usa-button usx-button usx-button--ghost usx-copy"
+    onclick="navigator.clipboard.writeText(document.getElementById('example-text-to-copy').textContent)">
+    <svg class="usa-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
+      <use href="./img/sprite.svg#content_copy"></use>
+    </svg>
+    <svg class="usa-icon usx-copy__check" aria-hidden="true" focusable="false" role="img">
+      <use href="./img/sprite.svg#check"></use>
+    </svg>
+    <span class="margin-left-1">Copy</span>
+  </button>
+  <span class="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copied" role="tooltip">Copied</span>
+</span>
+
+<h3 class="site-preview-heading">Dark Background</h3>
+<div class="bg-primary-darkest padding-2">
+  <h3 class="site-preview-heading text-white">Default</h3>
+  <span class="usx-tooltip">
+    <button class="usa-button usx-button usx-button--ghost usx-copy usx-copy--dark"
+      onclick="navigator.clipboard.writeText(document.getElementById('example-text-to-copy').textContent)">
+      <svg class="usa-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
+        <use href="./img/sprite.svg#content_copy"></use>
+      </svg>
+      <svg class="usa-icon usx-copy__check" aria-hidden="true" focusable="false" role="img">
+        <use href="./img/sprite.svg#check"></use>
+      </svg>
+    </button>
+    <span class="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copy" role="tooltip">Copy to
+      clipboard</span>
+    <span class="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copied" role="tooltip">Copied</span>
+  </span>
+
+
+  <h3 class="site-preview-heading text-white">With Text</h3>
+  <span class="usx-tooltip">
+    <button class="usa-button usa-button--inverse usx-button usx-button--ghost usx-copy"
+      onclick="navigator.clipboard.writeText(document.getElementById('example-text-to-copy').textContent)">
+      <svg class="usa-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
+        <use href="./img/sprite.svg#content_copy"></use>
+      </svg>
+      <svg class="usa-icon usx-copy__check" aria-hidden="true" focusable="false" role="img">
+        <use href="./img/sprite.svg#check"></use>
+      </svg>
+      <span class="margin-left-1">Copy</span>
+    </button>
+    <span class="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copied" role="tooltip">Copied</span>
+  </span>
+</div>

@@ -1,0 +1,11 @@
+{
+  "name": "copy-to-clipboard",
+  "template": "copy-to-clipboard/copy-to-clipboard.django.html",
+  "props": {
+    "copyText": { "type": "string", "description": "Text to copy to clipboard" },
+    "label": { "type": "string", "description": "Visible text label on the button" },
+    "tooltip": { "type": "string", "description": "Tooltip text; omit to hide the tooltip wrapper" },
+    "copiedTooltip": { "type": "string", "description": "Tooltip text shown after copying (default: 'Copied')" },
+    "className": { "type": "string", "description": "Additional CSS classes" }
+  }
+}

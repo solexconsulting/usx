@@ -1,0 +1,18 @@
+{
+  "name": "code",
+  "template": "code/code.django.html",
+  "props": {
+    "lines": {
+      "type": "object",
+      "description": "Array of line objects. Each supports: code (string), prefix (string, omit for no data-prefix attribute), className (string)."
+    },
+    "copyText": {
+      "type": "string",
+      "description": "Text to copy when the copy button is clicked. If provided, shows the copy button."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes to apply to the wrapper div."
+    }
+  }
+}

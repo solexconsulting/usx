@@ -1,0 +1,44 @@
+@use '../../../../tokens/src/_variables' as *;
+
+.usx-copy {
+
+  padding: .5rem;
+  gap: 0;
+  width: auto;
+
+  &.usx-copy--dark {
+    color: white !important;
+  }
+
+  &:hover {
+    background-color: color-mix(in oklab, currentColor 30%, #0000);
+  }
+
+  .usx-copy__check {
+    display: none;
+  }
+
+  &:focus:not(:focus-visible) {
+    .usx-copy__copy {
+      display: none;
+    }
+    .usx-copy__check {
+      display: inline-flex;
+    }
+  }
+}
+
+.usx-tooltip {
+  .usx-copy__tooltip--copied {
+    display: none !important;
+  }
+
+  &:has(.usx-copy:focus:not(:focus-visible)) {
+    .usx-copy__tooltip--copy {
+      display: none !important;
+    }
+    .usx-copy__tooltip--copied {
+      display: block !important;
+    }
+  }
+}
