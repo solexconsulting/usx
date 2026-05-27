@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from './Input.jsx';
+import Input from './Input';
 import inputConfig from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
 

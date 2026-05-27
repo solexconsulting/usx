@@ -1,2 +1,2 @@
 // Auto-generated — do not edit by hand. Run: node scripts/generate-exports.cjs
-export { default } from './SiteAlert.jsx';
+export { default } from './SiteAlert.tsx';

@@ -6,7 +6,7 @@
   width: max-content;
   gap: .25rem;
 
-  &:not([class^="text-"]):not([class*=" text-"]) {
+  &:not([class^="text-"]):not([class*=" text-"]):not(.usa-dark-background ~) {
 
     @if $usx-link-color {
       color: $usx-link-color;

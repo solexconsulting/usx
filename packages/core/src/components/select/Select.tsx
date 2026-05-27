@@ -1,0 +1,117 @@
+import React, { SelectHTMLAttributes } from 'react';
+import ClassNames from 'classnames';
+import Required from '../required/Required';
+import Label from '../label/Label';
+import './select.scss';
+
+export interface SelectOption {
+  value: string;
+  label: string;
+}
+
+export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
+  label: string;
+  id?: string;
+  name?: string;
+  options?: SelectOption[];
+  defaultValue?: string;
+  placeholder?: string;
+  error?: string;
+  success?: string;
+  hint?: string;
+  disabled?: boolean;
+  required?: boolean;
+  className?: string;
+}
+
+export default function Select({
+  label,
+  id,
+  name,
+  options = [],
+  defaultValue,
+  placeholder = 'Select an option',
+  error,
+  success,
+  hint,
+  disabled = false,
+  required = false,
+  className = '',
+  ...props
+}: SelectProps) {
+  const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`;
+  const hintId = hint ? `${selectId}-hint` : undefined;
+  const ariaDescribedBy = hintId || undefined;
+
+  const hasError = !!error;
+  const hasSuccess = !!success;
+
+  const formGroupClasses = 'usa-form-group usx-form-group';
+  const formGroupErrorClasses = 'usa-form-group--error';
+  const selectClasses = 'usa-select usx-select';
+  const selectErrorClasses = 'usa-input--error';
+  const selectSuccessClasses = 'usa-input--success';
+
+  const combinedSelectClasses = ClassNames(
+    selectClasses,
+    hasError && selectErrorClasses,
+    hasSuccess && selectSuccessClasses,
+    className,
+  );
+
+  const combinedFormGroupClasses = ClassNames(
+    formGroupClasses,
+    hasError && formGroupErrorClasses,
+  );
+
+  const selectProps = {
+    id: selectId,
+    name,
+    className: combinedSelectClasses,
+    disabled,
+    defaultValue,
+    'aria-describedby': ariaDescribedBy,
+    ...props,
+  };
+
+  const content = (
+    <>
+      <Label htmlFor={selectId} required={required}>
+        {label}
+      </Label>
+      {hint && (
+        <span id={hintId} className="usa-hint">
+          {hint}
+        </span>
+      )}
+      <select {...selectProps}>
+        <option value="">{placeholder}</option>
+        {options.map((option, index) => (
+          <option key={index} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      {hasError && (
+        <span className="usa-error-message">
+          {error}
+        </span>
+      )}
+      {hasSuccess && (
+        <span className="usa-success-message">
+          {success}
+        </span>
+      )}
+    </>
+  );
+
+  if (hasError) {
+    return (
+      <div className={combinedFormGroupClasses}>
+        {content}
+      </div>
+    );
+  }
+
+  return content;
+}

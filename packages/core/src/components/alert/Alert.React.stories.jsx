@@ -1,6 +1,6 @@
 import React from 'react';
 import { fn } from 'storybook/test';
-import Alert from './Alert.jsx';
+import Alert from './Alert';
 import alertConfig from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
 
