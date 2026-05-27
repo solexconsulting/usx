@@ -63,35 +63,41 @@ export const STATE_COLUMNS = [
 
 export const storyDefs = {
   Standard: {
+    id: "standard",
     columns: DOC_COLUMNS,
     data: DOCUMENTS,
     caption: 'Historic U.S. documents',
   },
   Striped: {
+    id: "striped",
     columns: DOC_COLUMNS,
     data: DOCUMENTS,
     caption: 'Striped table',
     striped: true,
   },
   Borderless: {
+    id: "borderless",
     columns: DOC_COLUMNS,
     data: DOCUMENTS,
     caption: 'Borderless table',
     borderless: true,
   },
   Compact: {
+    id: "compact",
     columns: DOC_COLUMNS,
     data: DOCUMENTS,
     caption: 'Compact table',
     compact: true,
   },
   ScrollableHorizontal: {
+    id: "scrollable-horizontal",
     columns: [...STATE_COLUMNS, { key: 'extraA', header: 'Extra A', render: () => 'Lorem ipsum' }, { key: 'extraB', header: 'Extra B', render: () => 'Dolor sit' }],
     data: STATES,
     caption: 'Horizontally scrollable table',
     scrollable: true,
   },
   ScrollableVertical: {
+    id: "scrollable-vertical",
     columns: DOC_COLUMNS,
     data: [...DOCUMENTS, ...DOCUMENTS, ...DOCUMENTS],
     caption: 'Vertically scrollable with sticky header',
@@ -99,6 +105,7 @@ export const storyDefs = {
     height: '250px',
   },
   StickyFirstColumn: {
+    id: "sticky-first-column",
     columns: [{ key: 'name', header: 'State', primary: true }, ...Array.from({ length: 8 }, (_, i) => ({ key: `col${i}`, header: `Column ${i + 1}`, render: () => 'Data value' }))],
     data: STATES,
     caption: 'Sticky first column',
@@ -106,30 +113,35 @@ export const storyDefs = {
     stickyFirstColumn: true,
   },
   ResponsiveStacked: {
+    id: "responsive-stacked",
     columns: DOC_COLUMNS,
     data: DOCUMENTS,
     caption: 'Stacked on mobile',
     responsive: 'stack',
   },
   ResponsiveStackedHeader: {
+    id: "responsive-stacked-header",
     columns: DOC_COLUMNS,
     data: DOCUMENTS,
     caption: 'Stacked with header on mobile',
     responsive: 'stack-header',
   },
   Sortable: {
+    id: "sortable",
     columns: STATE_COLUMNS,
     data: STATES,
     caption: 'Sortable table — click column headers',
     scrollable: true,
   },
   SortableAll: {
+    id: "sortable-all",
     columns: DOC_COLUMNS,
     data: DOCUMENTS,
     caption: 'All columns sortable via sortable prop',
     sortable: true,
   },
   CheckboxSelection: {
+    id: "checkbox-selection",
     columns: STATE_COLUMNS,
     data: STATES,
     caption: 'Multi-select with checkboxes',
@@ -137,6 +149,7 @@ export const storyDefs = {
     allowSelectAll: true,
   },
   CheckboxSelectionRight: {
+    id: "checkbox-selection-right",
     columns: STATE_COLUMNS,
     data: STATES,
     caption: 'Checkboxes on the right',
@@ -144,12 +157,14 @@ export const storyDefs = {
     selectionPosition: 'right',
   },
   RadioSelection: {
+    id: "radio-selection",
     columns: STATE_COLUMNS,
     data: STATES,
     caption: 'Single-select with radio buttons',
     selectionMode: 'radio',
   },
   DisabledRows: {
+    id: "disabled-rows",
     columns: STATE_COLUMNS,
     data: STATES,
     caption: 'Rows 2 and 4 are disabled',
@@ -157,12 +172,14 @@ export const storyDefs = {
     disabled: [2, 4],
   },
   GroupedRows: {
+    id: "grouped-rows",
     columns: STATE_COLUMNS,
     data: STATES,
     caption: 'States grouped by region',
     groupBy: 'region',
   },
   GroupedCollapsedByDefault: {
+    id: "grouped-collapsed",
     columns: STATE_COLUMNS,
     data: STATES,
     caption: 'Groups collapsed by default',
