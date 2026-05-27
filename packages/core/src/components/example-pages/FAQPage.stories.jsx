@@ -41,12 +41,11 @@ export const FAQPage = {
 
                             <Section>
                                 <Alert
-                                    type="info"
+                                    variant="info"
                                     heading="Need more help?"
+                                    text={<>Can't find what you're looking for? <a href="#contact">Contact our support team</a> for personalized assistance.</>}
                                     className="margin-bottom-4"
-                                >
-                                    Can't find what you're looking for? <a href="#contact">Contact our support team</a> for personalized assistance.
-                                </Alert>
+                                />
                             </Section>
 
                             <Section title="Questions and Answers">

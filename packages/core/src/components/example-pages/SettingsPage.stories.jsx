@@ -40,12 +40,11 @@ export const SettingsPage = {
                     <Page id="settings-page-example" title="Settings">
                         <Section title="Profile Settings" className="margin-top-3">
                             <Alert
-                                type="success"
+                                variant="success"
                                 heading="Settings Updated"
+                                text="Your profile settings have been successfully updated."
                                 className="margin-bottom-4"
-                            >
-                                Your profile settings have been successfully updated.
-                            </Alert>
+                            />
 
                             <form>
                                 <div className="usa-form">
