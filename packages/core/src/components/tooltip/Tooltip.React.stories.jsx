@@ -101,7 +101,7 @@ export const OnIcon = {
   render: () => (
     <Tooltip {...storyDefs.OnIcon}>
       <svg className="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img" tabIndex={0}>
-        <use href="/img/sprite.svg#info" />
+        <use href="./img/sprite.svg#info" />
       </svg>
     </Tooltip>
   )

@@ -283,6 +283,10 @@
       &:active {
         background-color: color-mix(in srgb, currentColor 35%, transparent);
       }
+
+      &.usa-button--inverse {
+        color: white;
+      }
     }
   }
 }

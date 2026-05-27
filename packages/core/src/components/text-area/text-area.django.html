@@ -18,13 +18,13 @@
   {% elif error %}aria-describedby="{{ field_id }}-error"
   {% elif success %}aria-describedby="{{ field_id }}-success"
   {% endif %}
-  {% if error %}aria-invalid="true" {% endif %}
+  {% if error and error != "false" %}aria-invalid="true" {% endif %}
   {% if disabled %}disabled {% endif %}
   {% if required %}required{% endif %}
 >{{ defaultValue|default:'' }}</textarea>
-{% if error %}
+{% if error and error != "true" and error != True and error != "false" %}
   <span id="{{ field_id }}-error" class="usa-error-message" role="alert">{{ error }}</span>
-{% elif success %}
+{% elif success and success != "true" and success != True and success != "false" %}
   <span id="{{ field_id }}-success" class="usa-success-message" role="status">{{ success }}</span>
 {% endif %}
 

@@ -48,5 +48,8 @@ def render_component(name, props):
     if invalid_props:
         raise ValueError(f"Invalid props for component '{name}': {invalid_props}")
 
+    # Prepare template context — components may inject derived variables
+    context = component.get_context(merged_props)
+
     # Render template
-    return render_to_string(component.template, merged_props)
+    return render_to_string(component.template, context)

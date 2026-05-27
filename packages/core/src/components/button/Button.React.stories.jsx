@@ -515,6 +515,19 @@ export const GhostBase = {
   }
 };
 
+export const GhostInverse = {
+  args: {
+    label: 'Inverse Ghost',
+    inverse: true,
+    ghost: true,
+  },
+  render: (args) => (
+    <div style={{backgroundColor: '#333', padding: '1rem'}}>
+      <Button {...args} />
+    </div>
+  )
+}
+
 export const GhostDisabled = {
   args: {
     label: 'Ghost Disabled',
@@ -603,6 +616,7 @@ export const storyDefs = {
   GhostAccentCool: GhostAccentCool.args,
   GhostAccentWarm: GhostAccentWarm.args,
   GhostBase: GhostBase.args,
+  GhostInverse: GhostInverse.args,
   GhostDisabled: GhostDisabled.args,
   GhostAriaDisabled: GhostAriaDisabled.args,
   GhostWithIcon: GhostWithIcon.args,

@@ -60,7 +60,7 @@ export default function Alert({
         {onDismiss && (
           <button className="usx-alert__dismiss" aria-label="Dismiss alert" onClick={onDismiss}>
             <svg className="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
-              <use href="/img/sprite.svg#close" />
+              <use href="./img/sprite.svg#close" />
             </svg>
           </button>
         )}

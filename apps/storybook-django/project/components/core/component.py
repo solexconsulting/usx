@@ -25,6 +25,15 @@ class Component:
     # Example: 'button/config.json'
     props_file = None
 
+    def get_context(self, props: dict) -> dict:
+        """
+        Prepare the template context from merged props.
+
+        Override in subclasses to inject derived/computed variables.
+        The default implementation returns props unchanged.
+        """
+        return props
+
     def load_props(self):
         """
         Load props from the props_file if specified.

@@ -36,8 +36,10 @@ export { default as CardGroup } from './components/card-group';
 export { default as Carousel } from './components/carousel';
 export { default as CharacterCount } from './components/character-count';
 export { default as Checkbox } from './components/checkbox';
+export { default as Code } from './components/code';
 export { default as Collection } from './components/collection';
 export { default as Combobox } from './components/combobox';
+export { default as CopyToClipboard } from './components/copy-to-clipboard';
 export { default as DatePicker } from './components/date-picker';
 export { default as Eyebrow } from './components/eyebrow';
 export { default as Fieldset } from './components/fieldset';
@@ -91,6 +93,8 @@ export { default as Tooltip } from './components/tooltip';
 export { default as Utilities } from './components/utilities';
 export { default as Villain } from './components/villain';
 // AUTO-GENERATED-EXPORTS END
+
+
 
 
 

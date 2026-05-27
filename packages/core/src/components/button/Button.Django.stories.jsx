@@ -75,6 +75,14 @@ export const GhostSecondary = createStory(toDjangoArgs(storyDefs.GhostSecondary)
 export const GhostAccentCool = createStory(toDjangoArgs(storyDefs.GhostAccentCool));
 export const GhostAccentWarm = createStory(toDjangoArgs(storyDefs.GhostAccentWarm));
 export const GhostBase = createStory(toDjangoArgs(storyDefs.GhostBase));
+export const GhostInverse = {
+  ...createStory(toDjangoArgs(storyDefs.GhostInverse)),
+  render: (args) => (
+    <div style={{ backgroundColor: '#333', padding: '1rem' }}>
+      {createStory(toDjangoArgs(storyDefs.GhostInverse)).render(args)}
+    </div>
+  )
+};
 export const GhostDisabled = createStory(toDjangoArgs(storyDefs.GhostDisabled));
 export const GhostAriaDisabled = createStory(toDjangoArgs(storyDefs.GhostAriaDisabled));
 export const GhostWithIcon = createStory(toDjangoArgs(storyDefs.GhostWithIcon));

@@ -2,7 +2,7 @@
   <!--
     Custom USX icon sprite.
     Add new <symbol> entries here to register additional custom icons.
-    Reference icons with: <use href="/img/usx-sprite.svg#icon-name" />
+    Reference icons with: <use href="./img/usx-sprite.svg#icon-name" />
   -->
 
   <!-- Spinner: 3/4 opacity-0.2 track + 1/4 solid arc head, animated with rotate() -->

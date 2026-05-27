@@ -40,6 +40,7 @@ export default {
           alert("Event triggered with no context");
         }
       };
+
       window.exampleEventTrigger = exampleEventTrigger;
     </script>
   `
