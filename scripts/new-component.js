@@ -2,6 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import Ajv from 'ajv';
+import { execSync } from 'child_process';
 
 function toKebab(name) {
   return name
@@ -25,7 +26,7 @@ if (!rawName) {
 const Name = toPascal(rawName);
 const kebab = toKebab(rawName);
 
-const repoRoot = path.resolve(__dirname, '..');
+const repoRoot = "./";
 const templatesDir = path.join(repoRoot, 'scripts', 'templates', 'component');
 const targetDir = path.join(repoRoot, 'packages', 'core', 'src', 'components', kebab);
 
@@ -98,7 +99,6 @@ if (fs.existsSync(generatedConfigPath)) {
 try {
   const gen = path.join(repoRoot, 'scripts', 'generate-exports.cjs');
   if (fs.existsSync(gen)) {
-    const { execSync } = require('child_process');
     execSync(`node ${gen}`, { stdio: 'inherit' });
     console.log('Regenerated core exports using scripts/generate-exports.cjs');
   } else {

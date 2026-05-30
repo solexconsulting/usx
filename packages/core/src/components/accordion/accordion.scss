@@ -1,0 +1,12 @@
+.usa-accordion {
+    .usa-accordion__button {
+        background-color: #d8d8d8;
+    }
+
+    &.usa-accordion--bordered {
+
+        .usa-accordion__content {
+            border-color: #d8d8d8;
+        }
+    }
+}

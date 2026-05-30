@@ -81,7 +81,15 @@
     }
 }
 
+// Utilities that USWDS should really provide but don't
 
-.usx-height-min {
-    height: min-content;
+$usx-sizes: (
+  min: min-content,
+  max: max-content,
+  fit: fit-content
+);
+
+@each $key, $value in $usx-sizes {
+  .usx-width-#{$key} { width: $value; }
+  .usx-height-#{$key} { height: $value; }
 }

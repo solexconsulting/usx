@@ -1,0 +1,54 @@
+@use '../../../../tokens/src/_variables' as *;
+
+.usx-clickable {
+  display: flex;
+  text-decoration: none;
+  color: currentColor;
+
+  .usx-clickable__link {
+    color: currentColor;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size 0.25s ease-in-out;
+    width: fit-content;
+    height: fit-content;
+  }
+
+
+  &:hover {
+
+    .usx-clickable__link {
+      background-size: 100% 1px;
+    }
+  }
+
+  &:focus {
+    background-color: color-mix(in oklab, #249  1ff 20%, transparent);
+
+    .usx-clickable__link {
+      transition: background-size 0s ease;
+      background-size: 100% 2px;
+    }
+  }
+
+  &:hover, &:focus {
+
+    .usx-clickable__color-on-hover {
+      color: #005ea2;
+
+      @if $color-primary {
+        color: $color-primary;
+      }
+    }
+
+    .usx-clickable__bg-color-on-hover {
+      background-color: #005ea2;
+
+      @if $color-primary {
+        background-color: $color-primary;
+      }
+    }
+  }
+}

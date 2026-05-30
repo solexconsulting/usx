@@ -1,0 +1,8 @@
+{
+  "name": "clickable",
+  "template": "clickable/clickable.django.html",
+  "props": {
+    "children": { "type": "string", "description": "Inner HTML or text" },
+    "className": { "type": "string", "description": "Additional classes" }
+  }
+}

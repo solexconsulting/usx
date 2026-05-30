@@ -13,7 +13,7 @@ Uncommented lines starting with EXCLUDE: are active directives.
 */
 
 // example-pages is a Storybook-only demo page with no React component export.
-// EXCLUDE: ExamplePages
+EXCLUDE: ExamplePages
 
 // MANUAL-EXPORTS END
 
