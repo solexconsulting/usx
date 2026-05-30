@@ -14,6 +14,7 @@
     transition: background-size 0.25s ease-in-out;
     width: fit-content;
     height: fit-content;
+    text-underline-offset: 2px;
   }
 
 
@@ -29,7 +30,8 @@
 
     .usx-clickable__link {
       transition: background-size 0s ease;
-      background-size: 100% 2px;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
     }
   }
 
