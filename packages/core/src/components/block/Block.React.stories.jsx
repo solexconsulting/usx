@@ -58,13 +58,13 @@ export const storyDefs = {
     quote: true,
     color: 'info',
     contentClassName: 'maxw-tablet',
-    children: <p class="font-serif-lg text-italic margin-0">The time is always right to do what is right.</p>,
+    children: <p className="font-serif-lg text-italic margin-0">The time is always right to do what is right.</p>,
     attribution: georgeAttribution,
   },
   CalloutQuote: {
     variant: 'callout',
     color: 'info',
-    children: <p class="font-serif-lg margin-0">❝The time is always right to do what is right.❞</p>,
+    children: <p className="font-serif-lg margin-0">❝The time is always right to do what is right.❞</p>,
     attribution: georgeAttribution,
   },
   WithAttribution: {

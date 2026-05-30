@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import alertConfig from './config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
 import { storyDefs } from './Alert.React.stories.jsx';
@@ -25,12 +25,12 @@ export const NoHeading = createStory(storyDefs.NoHeading);
 export const NoText = createStory(storyDefs.NoText);
 export const Slim = createStory(storyDefs.Slim);
 export const NoIcon = createStory(storyDefs.NoIcon);
-export const RegionRoleDefault = { name: 'Default: region', ...createStory(toDjangoArgs(storyDefs.RegionRoleDefault)) };
-export const StatusRoleDefault = { name: 'Default: status', ...createStory(toDjangoArgs(storyDefs.StatusRoleDefault)) };
-export const AlertRoleDefault = { name: 'Default: alert', ...createStory(toDjangoArgs(storyDefs.AlertRoleDefault)) };
-export const RegionWithAriaLabel = { name: 'Region with aria-label', ...createStory(toDjangoArgs(storyDefs.RegionWithAriaLabel)) };
-export const ExplicitRoleOverride = { name: 'Role override', ...createStory(toDjangoArgs(storyDefs.ExplicitRoleOverride)) };
-export const Dismissible = { name: 'Dismissible', ...createStory({
+export const RegionRoleDefault = { ...createStory(toDjangoArgs(storyDefs.RegionRoleDefault)) };
+export const StatusRoleDefault = { ...createStory(toDjangoArgs(storyDefs.StatusRoleDefault)) };
+export const AlertRoleDefault = { ...createStory(toDjangoArgs(storyDefs.AlertRoleDefault)) };
+export const RegionWithAriaLabel = { ...createStory(toDjangoArgs(storyDefs.RegionWithAriaLabel)) };
+export const ExplicitRoleOverride = { ...createStory(toDjangoArgs(storyDefs.ExplicitRoleOverride)) };
+export const Dismissible = { ...createStory({
   ...toDjangoArgs(storyDefs.Dismissible),
   onDismiss: "this.closest('.usa-alert').remove();"
 }) };

@@ -2,6 +2,5 @@
 <a
   href="{{ href|default:'javascript:void(0);' }}"
   class="usa-link usx-link{% if visited %} usx-link--visited{% endif %}{% if external %} usa-link--external{% endif %}{% if alt %} usa-link--alt{% endif %}{% if className %} {{ className }}{% endif %}"
-  {% if newTab %}target="_blank"{% endif %}
-  {% if rel %}rel="{{ rel }}"{% elif external %}rel="noreferrer"{% endif %}
->{{ children|default:'a text link'|safe }}</a>
+  {% if newTab or external %}target="_blank" rel="noreferrer noopener"{% endif %}
+>{{ children|safe }}</a>

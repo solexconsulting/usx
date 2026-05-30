@@ -1,5 +1,5 @@
 import React from 'react';
-import Branding, { BrandingProps } from '../branding/Branding';
+import Branding, { BrandingProps } from '../header/Branding';
 import Input from '../input/Input';
 import Button from '../button/Button';
 import Icon from '../icon/Icon';
@@ -14,8 +14,14 @@ export interface FooterReturnToTopProps {
   className?: string;
 }
 export function FooterReturnToTop({ label = 'Return to top', href = '#', className = '' }: FooterReturnToTopProps) {
+  const classes = ClassNames(
+    'grid-container',
+    'usa-footer__return-to-top',
+    'usx-footer__return-to-top',
+    className
+  )
   return (
-    <div className={['grid-container usa-footer__return-to-top usx-footer__return-to-top', className].filter(Boolean).join(' ')}>
+    <div className={classes}>
       <a href={href} className="usa-link usx-link usx-footer__return-to-top">{label}<Icon name="arrow_upward" /></a>
     </div>
   );

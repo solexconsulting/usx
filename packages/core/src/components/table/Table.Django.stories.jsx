@@ -1,4 +1,4 @@
-import { storyDefs, DOCUMENTS, STATES, DOC_COLUMNS, STATE_COLUMNS } from './Table.React.stories.jsx';
+import { storyDefs } from './Table.React.stories.jsx';
 import { createDjangoStory } from '../../utils/storyHelpers';
 
 export default {

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Collection from './Collection';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

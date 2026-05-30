@@ -1,4 +1,3 @@
-import React from 'react';
 import Label from './Label';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

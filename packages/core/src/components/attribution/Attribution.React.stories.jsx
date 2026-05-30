@@ -1,6 +1,5 @@
-import React from 'react';
+
 import Attribution from './Attribution';
-import Icon from '../icon/Icon';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
 

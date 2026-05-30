@@ -1,9 +1,8 @@
-import React from 'react';
+
 import { Accordion } from './Accordion.jsx';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
-
-import { expect, fn } from 'storybook/test';
+import { expect } from 'storybook/test';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 

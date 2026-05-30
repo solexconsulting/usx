@@ -1,8 +1,8 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
-import Search from '../search/Search';
-import Branding, { BrandingProps } from '../branding/Branding';
+import Search, { SearchProps } from '../search/Search';
+import Branding, { BrandingProps } from './Branding';
 import './header.scss';
 
 export interface HeaderNavLink {
@@ -18,28 +18,12 @@ export interface HeaderNavSection {
   ariaLabel?: string;
 }
 
-export interface HeaderSearchConfig {
-  id?: string;
-  ariaLabel?: string;
-  searchKey?: string;
-  label?: string;
-  icon?: string;
-  iconOnly?: boolean;
-  buttonVariant?: string;
-  big?: boolean;
-  action?: string;
-  placeholder?: string;
-  defaultValue?: string;
-  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
-  className?: string;
-}
-
 interface PrimaryNavProps {
   navSections: HeaderNavSection[];
   megamenu: boolean;
   showSecondary?: boolean;
   secondaryLinks?: HeaderNavLink[];
-  searchConfig?: HeaderSearchConfig | null;
+  searchConfig?: SearchProps | null;
   headerId?: string;
   renderSearchDirectly?: boolean;
 }
@@ -143,11 +127,11 @@ function PrimaryNav({
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   id?: string;
-  branding?: BrandingProps | null;
+  branding: BrandingProps;
   projectUrl?: string;
   navSections?: HeaderNavSection[];
   secondaryLinks?: HeaderNavLink[];
-  searchConfig?: HeaderSearchConfig | null;
+  searchConfig?: SearchProps | null;
   extended?: boolean;
   megamenu?: boolean;
   useMenuIcon?: boolean;
@@ -157,7 +141,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
 
 export default function Header({
   id = 'header',
-  branding = null,
+  branding,
   projectUrl = '/',
   navSections = [],
   secondaryLinks = [],

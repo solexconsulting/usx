@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Card from './Card';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

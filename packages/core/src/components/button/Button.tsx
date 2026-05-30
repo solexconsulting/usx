@@ -26,7 +26,7 @@ type ButtonBaseProps = {
   className?: string;
   style?: React.CSSProperties;
   children?: React.ReactNode;
-  extraAttributes?: Record<string, any>;
+  extraAttributes?: Record<string, unknown>;
 };
 
 type AnchorButtonProps = ButtonBaseProps & React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
@@ -74,9 +74,7 @@ export default function Button({
   if (href) {
     // Only pass anchor-allowed props
     const {
-      onClick: _onClick,
-      type: _type,
-      disabled: _disabled,
+      // Remove unused variables
       ...anchorProps
     } = props as React.AnchorHTMLAttributes<HTMLAnchorElement>;
     return (
@@ -107,8 +105,7 @@ export default function Button({
   }
   // Only pass button-allowed props
   const {
-    href: _href,
-    isExternal: _isExternal,
+    // Remove unused variables
     ...buttonProps
   } = props as React.ButtonHTMLAttributes<HTMLButtonElement>;
   return (

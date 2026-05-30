@@ -3,3 +3,11 @@ venv/
 packages/core/src/stories/
 scripts/templates/
 **/storybook-static/
+**/dist/
+*.cjs
+*.config.js
+*.config.cjs
+!packages/core/src/**/*.js
+!packages/core/src/**/*.jsx
+!packages/core/src/**/*.ts
+!packages/core/src/**/*.tsx

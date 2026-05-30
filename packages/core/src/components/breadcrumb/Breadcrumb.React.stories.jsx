@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Breadcrumb from './Breadcrumb';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

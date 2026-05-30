@@ -131,7 +131,7 @@ export default function Table({
   // Reset to page 1 whenever sort changes so the user isn't stranded mid-table.
   useEffect(() => {
     if (isPaginated) setCurrentPage(1);
-  }, [sortState.key, sortState.direction]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [sortState.key, sortState.direction]);
 
   const totalItems = isServerSide ? paginateConfig.totalCount : sortedData.length;
 

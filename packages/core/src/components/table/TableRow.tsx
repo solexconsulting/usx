@@ -1,14 +1,16 @@
 import React from 'react';
+import type { ReactNode } from 'react';
+
 import classnames from 'classnames';
 import { useTableContext } from './TableContext';
 
 export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
-  rowData?: any;
+  rowData?: Record<string, unknown>;
   selected?: boolean;
   disabled?: boolean;
   className?: string;
   onClick?: (e: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 const TableRow: React.FC<TableRowProps> = ({
@@ -38,7 +40,8 @@ const TableRow: React.FC<TableRowProps> = ({
     if (disabled) return;
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      handleClick(e as any);
+      // Synthesize a MouseEvent-like object for handleClick
+      handleClick(e as unknown as React.MouseEvent<HTMLTableRowElement, MouseEvent>);
     }
   }
   const interactiveProps =

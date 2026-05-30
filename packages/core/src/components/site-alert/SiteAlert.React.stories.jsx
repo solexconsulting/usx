@@ -1,5 +1,4 @@
 import React from 'react';
-import { fn } from 'storybook/test';
 import SiteAlert from './SiteAlert';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

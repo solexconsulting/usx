@@ -1,8 +1,7 @@
-import React from 'react';
+// import React from 'react';
 import Tag from './Tag';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
-import Icon from '../icon/Icon';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 

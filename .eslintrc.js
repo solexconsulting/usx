@@ -18,7 +18,7 @@ module.exports = {
     },
     ecmaVersion: 12,
     sourceType: 'module',
-    project: ['./tsconfig.json', './packages/core/tsconfig.json'],
+    // Removed 'project' to fix parsing error
   },
   plugins: ['react', '@typescript-eslint'],
   rules: {

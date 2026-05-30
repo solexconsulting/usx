@@ -1,4 +1,4 @@
-import React from 'react';
+
 import CalendarDate from './CalendarDate';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

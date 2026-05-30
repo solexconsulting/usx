@@ -32,7 +32,7 @@ const renderWithTarget = (args, targetId) => (
     <Skipnav {...args}>{args.children}</Skipnav>
     Click <button className="usa-button usa-button--unstyled">
       here
-    </button> and type "shift + tab" to focus the Skipnav link, then press "enter" to jump to the target content below.
+    </button> and type &quot;shift + tab&quot; to focus the Skipnav link, then press &quot;enter&quot; to jump to the target content below.
 
     <div style={{ height: '1200px' }} />
 

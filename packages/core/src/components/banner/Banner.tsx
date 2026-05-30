@@ -54,7 +54,7 @@ export default function Banner({
               <img
                 aria-hidden="true"
                 className="usa-banner__header-flag"
-                src={((typeof window !== 'undefined' && (window as any).usxBaseUrl) || '/') + 'img/us_flag_small.png'}
+                src={((typeof window !== 'undefined' && (window as { usxBaseUrl?: string }).usxBaseUrl) || '/') + 'img/us_flag_small.png'}
                 alt=""
               />
             </div>

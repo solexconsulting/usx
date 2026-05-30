@@ -1,6 +1,6 @@
-import React, { SelectHTMLAttributes } from 'react';
+// import React from 'react';
+import { SelectHTMLAttributes } from 'react';
 import ClassNames from 'classnames';
-import Required from '../required/Required';
 import Label from '../label/Label';
 import './select.scss';
 

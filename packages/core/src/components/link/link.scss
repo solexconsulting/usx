@@ -1,8 +1,7 @@
 @use '../../../../tokens/src/_variables' as *;
 
 .usx-link {
-  display: flex;
-  align-items: center;
+  display: inline-block;
   width: max-content;
   gap: .25rem;
 

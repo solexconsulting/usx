@@ -1,13 +1,14 @@
-import React, { ReactNode, HTMLAttributes } from 'react';
+import { ReactNode, HTMLAttributes } from 'react';
 import './modal.scss';
 import classNames from 'classnames';
-import ButtonGroup from '../button-group/ButtonGroup';
+import Icon from '../icon/Icon';
+import ButtonGroup, { ButtonGroupProps } from '../button-group/ButtonGroup';
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   id?: string;
   heading?: string;
   description?: string;
-  actions?: any[];
+  actions?: ButtonGroupProps['items'];
   size?: 'default' | 'lg' | 'lg-collapsed';
   forceAction?: boolean;
   className?: string;
@@ -19,8 +20,8 @@ export default function Modal({
   heading,
   description,
   actions = [
-    { children: 'Continue', variant: 'primary', 'data-close-modal': true },
-    { children: 'Go back', variant: 'unstyled', className: 'padding-105 text-center', 'data-close-modal': true },
+    { children: 'Continue', variant: 'primary', extraAttributes: { 'data-close-modal': true } },
+    { children: 'Go back', variant: 'unstyled', className: 'padding-105 text-center', extraAttributes: { 'data-close-modal': true } },
   ],
   size = 'default',
   forceAction = false,
@@ -61,9 +62,7 @@ export default function Modal({
             aria-label="Close this window"
             data-close-modal
           >
-            <svg className="usa-icon" aria-hidden="true" focusable="false" role="img">
-              <use href={((typeof window !== 'undefined' && window.usxBaseUrl) || '/') + 'img/sprite.svg#close'} />
-            </svg>
+            <Icon name="close" />
           </button>
         )}
       </div>

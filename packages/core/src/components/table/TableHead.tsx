@@ -3,7 +3,9 @@ import classnames from 'classnames';
 import { useTableContext } from './TableContext';
 import Icon from '../icon/Icon';
 
-function getDepth(columns: any[]): number {
+import type { TableColumn } from './types';
+
+function getDepth(columns: TableColumn[]): number {
   let max = 1;
   columns.forEach((col) => {
     if (col.columns?.length) {
@@ -14,14 +16,15 @@ function getDepth(columns: any[]): number {
   return max;
 }
 
-function getLeafCount(col: any): number {
+function getLeafCount(col: TableColumn): number {
   if (!col.columns?.length) return 1;
-  return col.columns.reduce((sum: number, c: any) => sum + getLeafCount(c), 0);
+  return col.columns.reduce((sum: number, c: TableColumn) => sum + getLeafCount(c), 0);
 }
 
-function buildHeaderRows(columns: any[], totalDepth: number) {
-  const rows: any[][] = Array.from({ length: totalDepth }, () => []);
-  function traverse(cols: any[], level: number) {
+type HeaderCell = { col: TableColumn; rowSpan: number; colSpan: number };
+function buildHeaderRows(columns: TableColumn[], totalDepth: number) {
+  const rows: HeaderCell[][] = Array.from({ length: totalDepth }, () => []);
+  function traverse(cols: TableColumn[], level: number) {
     cols.forEach((col) => {
       const isLeaf = !col.columns?.length;
       const rowSpan = isLeaf ? totalDepth - level : 1;
@@ -76,7 +79,7 @@ const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...prop
     );
   }
 
-  const visibleCols = columns.filter((c: any) => !c.hidden);
+  const visibleCols = columns.filter((c: TableColumn) => !c.hidden);
   const totalDepth = getDepth(visibleCols);
   const headerRows = buildHeaderRows(visibleCols, totalDepth);
   const hasRowDetails = !!rowDetails;
@@ -93,7 +96,7 @@ const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...prop
           />
         </td>
       </tr>
-      {headerRows.map((row, rowIndex) => (
+      {headerRows.map((row: HeaderCell[], rowIndex: number) => (
         <tr key={rowIndex} className="usx-table__head-row">
           {hasRowDetails && rowIndex === 0 && (
             <th
@@ -115,15 +118,15 @@ const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...prop
                   className="usx-table__checkbox"
                   aria-label="Select all rows"
                   checked={isAllSelected}
-                  ref={(el) => {
-                    if (el) (el as any).indeterminate = isIndeterminate;
+                  ref={(el: HTMLInputElement | null) => {
+                    if (el) el.indeterminate = isIndeterminate;
                   }}
                   onChange={handleSelectAll}
                 />
               )}
             </th>
           )}
-          {row.map(({ col, rowSpan, colSpan }: any) => {
+          {row.map(({ col, rowSpan, colSpan }: HeaderCell) => {
             const isSortable = col.sortable !== false && (col.sortable || false);
             const sortDir = sortState.key === col.key ? sortState.direction : null;
             const cellClasses = classnames(
@@ -181,8 +184,8 @@ const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...prop
                   className="usx-table__checkbox"
                   aria-label="Select all rows"
                   checked={isAllSelected}
-                  ref={(el) => {
-                    if (el) (el as any).indeterminate = isIndeterminate;
+                  ref={(el: HTMLInputElement | null) => {
+                    if (el) el.indeterminate = isIndeterminate;
                   }}
                   onChange={handleSelectAll}
                 />

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import Ajv from 'ajv';
 
 function toKebab(name) {
   return name
@@ -67,17 +68,9 @@ if (fs.existsSync(generatedConfigPath)) {
     let schema = null;
     try {
       schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
-    } catch (e) {
-      console.error('Failed to load config schema:', e.message);
+    } catch {
+      console.error('Failed to load config schema');
       process.exit(6);
-    }
-
-    let Ajv;
-    try {
-      Ajv = require('ajv');
-    } catch (e) {
-      console.error('AJV not found. Please run `pnpm install` to install dev dependencies.');
-      process.exit(7);
     }
 
     const ajv = new Ajv({ allErrors: true, strict: false });
@@ -93,8 +86,8 @@ if (fs.existsSync(generatedConfigPath)) {
       console.warn(`Warning: config.json name ('${cfg.name}') does not match folder name ('${kebab}').`);
     }
     console.log('config.json validated against schema');
-  } catch (e) {
-    console.error('Failed to parse config.json:', e.message);
+  } catch {
+    console.error('Failed to parse config.json');
     process.exit(5);
   }
 } else {

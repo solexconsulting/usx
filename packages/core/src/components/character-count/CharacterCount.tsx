@@ -19,7 +19,7 @@ export interface CharacterCountProps {
   placeholder?: string;
   textArea?: boolean;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export default function CharacterCount({

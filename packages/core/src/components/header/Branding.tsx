@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from '../image/Image';
 import './branding.scss';
+import ClassNames from 'classnames';
 
 export interface BrandingLogoSource {
   srcSet: string;
@@ -57,7 +58,13 @@ function BrandingContent({ config, projectUrl }: { config: BrandingConfig; proje
 
 export default function Branding({ branding, projectUrl = '/', className = '', ...props }: BrandingProps) {
   if (!branding) return null;
-  const classes = ['usa-logo', 'usx-logo', className].filter(Boolean).join(' ');
+
+  const classes = ClassNames(
+    'usa-logo',
+    'usx-logo',
+    className
+  );
+
   return (
     <div className={classes} {...props}>
       <BrandingContent config={branding} projectUrl={projectUrl} />

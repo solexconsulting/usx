@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import AvatarGroup from './AvatarGroup';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

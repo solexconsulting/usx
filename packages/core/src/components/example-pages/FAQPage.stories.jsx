@@ -43,7 +43,7 @@ export const FAQPage = {
                                 <Alert
                                     variant="info"
                                     heading="Need more help?"
-                                    text={<>Can't find what you're looking for? <a href="#contact">Contact our support team</a> for personalized assistance.</>}
+                                    text={<>Can&apos;t find what you&apos;re looking for? <a href="#contact">Contact our support team</a> for personalized assistance.</>}
                                     className="margin-bottom-4"
                                 />
                             </Section>
@@ -56,7 +56,7 @@ export const FAQPage = {
                                             title: 'Getting Started',
                                             content: (
                                                 <Prose>
-                                                    <p>Getting started with our platform is easy! Simply create an account, verify your email, and you'll be ready to explore all the features we offer.</p>
+                                                    <p>Getting started with our platform is easy! Simply create an account, verify your email, and you&apos;ll be ready to explore all the features we offer.</p>
                                                     <ul>
                                                         <li>Sign up for a free account</li>
                                                         <li>Complete your profile setup</li>

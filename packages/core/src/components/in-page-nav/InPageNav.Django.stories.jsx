@@ -1,4 +1,3 @@
-import React from 'react';
 import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from './config.json';
 import { buildArgTypes, componentTag } from '../../utils/storyHelpers';

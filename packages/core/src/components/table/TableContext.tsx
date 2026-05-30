@@ -1,37 +1,35 @@
-import React, { createContext, useContext } from 'react';
-
 export interface TableContextType {
-  columns: any[];
+  columns: TableColumn[];
   sortState: { key: string | null; direction: 'asc' | 'desc' | null };
   handleSort: (key: string) => void;
   selectionMode: null | 'checkbox' | 'radio';
   selectionPosition: 'left' | 'right';
-  selectedKeys: Set<any>;
-  handleSelect: (key: any) => void;
+  selectedKeys: Set<string | number>;
+  handleSelect: (key: string | number) => void;
   handleSelectAll: () => void;
-  isSelected: (key: any) => boolean;
+  isSelected: (key: string | number) => boolean;
   isAllSelected: boolean;
   isIndeterminate: boolean;
   allowSelectAll: boolean;
-  disabled: any[];
-  onClickRow: ((row: any, e: React.MouseEvent) => void) | null;
-  expandedGroups: Set<any>;
-  toggleGroup: (key: any) => void;
-  isGroupExpanded: (key: any) => boolean;
-  expandedRows: Set<any>;
-  toggleRow: (key: any) => void;
-  isRowExpanded: (key: any) => boolean;
-  rowDetails: any;
+  disabled: (string | number)[];
+  onClickRow: ((row: Record<string, unknown>, e: React.MouseEvent) => void) | null;
+  expandedGroups: Set<string | number>;
+  toggleGroup: (key: string | number) => void;
+  isGroupExpanded: (key: string | number) => boolean;
+  expandedRows: Set<string | number>;
+  toggleRow: (key: string | number) => void;
+  isRowExpanded: (key: string | number) => boolean;
+  rowDetails: { render?: (row: Record<string, unknown>) => React.ReactNode; expandLabel?: string | ((row: Record<string, unknown>) => string) } | null;
   responsive: boolean | 'stack' | 'stack-header';
   stickyFirstColumn: boolean;
   totalCols: number;
   placeholder: React.ReactNode;
   onMore: (() => void) | null;
   loading: boolean;
-  data?: any[];
+  data?: Record<string, unknown>[];
   primaryKey?: string;
-  groupBy?: any;
-  groups?: any[];
+  groupBy?: string;
+  groups?: { key: string; rows: Record<string, unknown>[] }[];
 }
 
 export const TableContext = createContext<TableContextType>({

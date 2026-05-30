@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 /*
 An array of helpers for story rendering.
 */
@@ -155,6 +156,18 @@ export const createDjangoStory = ({
         return applyWrapperForRender(html, storyArgs);
     };
 
+
+    WrappedDjangoHtml.propTypes = {
+        storyArgs: PropTypes.object,
+        children: PropTypes.node
+    };
+
+    // If you have a component that uses children, add propTypes for it here
+    // Example:
+    // MyComponent.propTypes = {
+    //   children: PropTypes.node
+    // };
+
     return (args) => ({
         args,
         parameters: {
@@ -190,6 +203,9 @@ export const createBulkDjangoStory = (componentName, storyDefs, postRender = nul
                 {children}
             </div>
         );
+    };
+    Wrapper.propTypes = {
+        children: PropTypes.node
     };
 
     return {

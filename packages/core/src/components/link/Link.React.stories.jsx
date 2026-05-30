@@ -5,7 +5,8 @@ import { buildArgTypes } from '../../utils/storyHelpers';
 
 export const storyDefs = {
   Default: {
-    ...(config.default || {}),
+    href: 'https://google.com/',
+    children: 'Google'
   },
   Visited: {
     href: 'javascript:void(0);',

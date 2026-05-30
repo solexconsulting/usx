@@ -57,7 +57,7 @@ export const BlogPost = {
                 />
 
                 <Prose>
-                  <p>In today's rapidly evolving digital landscape, organizations face unprecedented challenges and opportunities. Digital transformation has become not just a competitive advantage, but a necessity for survival in an increasingly connected world.</p>
+                  <p>In today&apos;s rapidly evolving digital landscape, organizations face unprecedented challenges and opportunities. Digital transformation has become not just a competitive advantage, but a necessity for survival in an increasingly connected world.</p>
 
                   <h2>The Current State</h2>
                   <p>According to recent industry reports, over 70% of organizations have either begun or completed their digital transformation initiatives. However, only 20% consider their efforts successful. This gap highlights the complexity and challenges involved in truly transforming how businesses operate.</p>
@@ -80,7 +80,7 @@ export const BlogPost = {
                   </ol>
 
                   <blockquote>
-                    "Digital transformation is not about technology—it's about people and processes."
+                    &quot;Digital transformation is not about technology—it&apos;s about people and processes.&quot;
                     <cite>— John Doe, CTO</cite>
                   </blockquote>
 

@@ -2,7 +2,9 @@ import React from 'react';
 import classnames from 'classnames';
 import { useTableContext } from './TableContext';
 
-function aggregate(data: any[], key: string, type: string) {
+import { TableColumn } from './types';
+
+function aggregate(data: Record<string, unknown>[], key: string, type: string) {
   const vals = data.map((row) => Number(row[key])).filter((v) => !isNaN(v));
   if (!vals.length) return '--';
   switch (type) {
@@ -29,15 +31,15 @@ const TableFoot: React.FC<TableFootProps> = ({ className = '', children, ...prop
       </tfoot>
     );
   }
-  const visibleCols = columns.filter((c: any) => !c.hidden);
-  const hasFooter = visibleCols.some((c: any) => c.footer !== undefined || c.aggregate);
+  const visibleCols = columns.filter((c: TableColumn) => !c.hidden);
+  const hasFooter = visibleCols.some((c: TableColumn) => c.footer !== undefined || c.aggregate);
   if (!hasFooter) return null;
   return (
     <tfoot className={classnames('usx-table__foot', className)} {...props}>
       <tr className="usx-table__foot-row">
         {!!rowDetails && <td className="usx-table__cell" />}
         {!!selectionMode && <td className="usx-table__cell usx-table__cell--selection" />}
-        {visibleCols.map((col: any) => {
+        {visibleCols.map((col: TableColumn) => {
           let content = '--';
           if (col.footer !== undefined) {
             content = typeof col.footer === 'function' ? col.footer(data) : col.footer;

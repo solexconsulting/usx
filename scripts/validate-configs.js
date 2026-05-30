@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
-const Ajv = require('ajv').default || require('ajv');
+import fs from 'fs';
+import path from 'path';
+import Ajv from 'ajv';
 
-const root = path.resolve(__dirname, '..');
+const root = "./";
 const schemaPath = path.join(root, 'packages', 'core', 'config.schema.json');
 
 if (!fs.existsSync(schemaPath)) {
@@ -17,7 +17,7 @@ const validate = ajv.compile(schema);
 
 // Component folders that are intentionally exempt from required-file checks.
 // These are non-standard entries (e.g. demonstration pages, not components).
-const FILE_CHECK_EXCEPTIONS = new Set(['example-pages']);
+const FILE_CHECK_EXCEPTIONS = new Set(['example-pages', 'branding', '']);
 
 // Every real component folder must contain these file patterns.
 // Each entry is a regex tested against the filenames in the folder.

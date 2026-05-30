@@ -51,7 +51,7 @@ export const SearchResults = {
               </Section>
 
               <Section title="Search Results">
-                <p className="text-base">Showing 24 results for "getting started"</p>
+                <p className="text-base">Showing 24 results for &quot;getting started&quot;</p>
               </Section>
 
               <Section>

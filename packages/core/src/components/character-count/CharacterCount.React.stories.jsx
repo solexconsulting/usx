@@ -1,4 +1,4 @@
-import React from 'react';
+
 import CharacterCount from './CharacterCount';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

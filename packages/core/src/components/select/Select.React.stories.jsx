@@ -1,4 +1,3 @@
-import React from 'react';
 import Select from './Select';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

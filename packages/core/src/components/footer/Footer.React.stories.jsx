@@ -1,12 +1,6 @@
 import React from 'react';
-import Footer, {
-  FooterReturnToTop,
-  FooterNavColumn,
-  FooterSignUp,
-  FooterSocialLinks,
-  FooterContact,
-} from './Footer';
-import Branding from '../branding/Branding';
+import Footer from './Footer';
+import Branding from '../header/Branding';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
 
@@ -159,15 +153,15 @@ Medium.storyName = 'Medium Footer';
 
 export const Slim = Template.bind({});
 Slim.args = storyDefs.Slim;
-Slim.storyName = 'Slim Footer';
+
 
 export const LogoOnly = Template.bind({});
 LogoOnly.args = storyDefs.LogoOnly;
-LogoOnly.storyName = 'Logo & Social Only';
+
 
 export const NoNav = Template.bind({});
 NoNav.args = storyDefs.NoNav;
-NoNav.storyName = 'Sign-Up, No Nav';
+
 
 export const Minimal = Template.bind({});
 Minimal.args = storyDefs.Minimal;
@@ -175,7 +169,6 @@ Minimal.args = storyDefs.Minimal;
 // ── Composition story: using sub-components directly ──────────────────────
 
 export const CustomComposition = {
-  storyName: 'Custom Composition',
   render: () => (
     <Footer
       variant="medium"
@@ -201,12 +194,7 @@ export const CustomComposition = {
               className="usa-footer__logo grid-row mobile-lg:grid-col-6 mobile-lg:grid-gap-2 usx-footer__logo"
             />
             <div className="usa-footer__contact-links mobile-lg:grid-col-6">
-              <FooterSocialLinks links={socialLinks} />
-              <FooterContact
-                heading="Agency Contact Center"
-                phone={{ href: 'tel:1-800-555-5555', text: '(800) 555-GOVT' }}
-                email={{ href: 'mailto:info@agency.gov', text: 'info@agency.gov' }}
-              />
+              {/* Social links and contact info can be added here if needed */}
             </div>
           </div>
         </div>

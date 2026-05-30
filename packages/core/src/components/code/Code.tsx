@@ -12,7 +12,7 @@ function usxCopy(text: string) {
     document.body.appendChild(ta);
     ta.focus();
     ta.select();
-    try { document.execCommand('copy'); } catch (e) {}
+    try { document.execCommand('copy'); } catch { /* ignore */ }
     document.body.removeChild(ta);
   }
 }

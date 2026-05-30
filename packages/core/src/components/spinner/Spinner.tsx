@@ -11,8 +11,8 @@ export interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 const getDefaultStaticUrlPrefix = () => {
-  if (typeof window !== 'undefined' && (window as any).usxBaseUrl) {
-    return (window as any).usxBaseUrl + 'img/usx-sprite.svg#';
+  if (typeof window !== 'undefined' && (window as unknown as { usxBaseUrl?: string }).usxBaseUrl) {
+    return (window as unknown as { usxBaseUrl?: string }).usxBaseUrl + 'img/usx-sprite.svg#';
   }
   return '/img/usx-sprite.svg#';
 };

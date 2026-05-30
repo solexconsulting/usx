@@ -15,9 +15,9 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
 export default function Icon({
   name,
   size = 2,
-  color = null,
+  color,
   alt = name + ' icon',
-  staticUrlPrefix = ((typeof window !== 'undefined' && (window as any).usxBaseUrl) || '/') + 'img/sprite.svg#',
+  staticUrlPrefix = ((typeof window !== 'undefined' && (window as unknown as { usxBaseUrl?: string }).usxBaseUrl) || '/') + 'img/sprite.svg#',
   className = '',
   ...props
 }: IconProps) {

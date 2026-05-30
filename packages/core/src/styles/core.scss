@@ -7,7 +7,6 @@
 @use '../components/back-to-top/back-to-top';
 @use '../components/banner/banner';
 @use '../components/block/block';
-@use '../components/branding/branding';
 @use '../components/breadcrumb/breadcrumb';
 @use '../components/button/button';
 @use '../components/button-group/button-group';
@@ -28,6 +27,7 @@
 @use '../components/footer/footer';
 @use '../components/form-group/form-group';
 @use '../components/header/header';
+@use '../components/header/branding';
 @use '../components/hero/hero';
 @use '../components/icon/icon';
 @use '../components/icon-list/icon-list';
@@ -70,13 +70,13 @@
 @use '../components/time-picker/time-picker';
 @use '../components/toggle/toggle';
 @use '../components/tooltip/tooltip';
-@use '../components/utilities/utilities';
 @use '../components/villain/villain';
 // AUTO-GENERATED-SCSS END
 
 // MANUAL-SCSS START
 // Import tokens.scss (not _variables) so utility classes (.bg-*) are generated here once.
 @use '../../../tokens/src/tokens.scss' as *;
+@use './utilities.scss' as *;
 
 
 

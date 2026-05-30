@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import config from './config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
 import { storyDefs } from './Status.React.stories.jsx';

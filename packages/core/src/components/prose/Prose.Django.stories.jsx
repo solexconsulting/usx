@@ -1,4 +1,3 @@
-import React from 'react';
 import proseConfig from './config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
 import { storyDefs } from './Prose.React.stories.jsx';

@@ -15,12 +15,11 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 
 export default function Link({
   href = 'javascript:void(0);',
-  children = 'a text link',
+  children,
   visited = false,
   external = false,
   alt = false,
   newTab = false,
-  rel = undefined,
   className = '',
   ...props
 }: LinkProps) {
@@ -33,14 +32,12 @@ export default function Link({
     className,
   );
 
-  const computedRel = rel || (external ? 'noreferrer' : undefined);
-
   return (
     <a
       href={href}
       className={classes}
-      target={newTab ? '_blank' : undefined}
-      rel={computedRel}
+      target={newTab || external ? '_blank' : undefined}
+      rel={newTab || external ? 'noreferrer noopener' : undefined}
       {...props}
     >
       {children}

@@ -18,6 +18,7 @@ export const storyDefs = {
   PreChecked: { id: 'switch-prechecked', defaultChecked: true },
   Disabled: { id: 'switch-disabled', disabled: true },
   DisabledChecked: { id: 'switch-disabled-checked', disabled: true, defaultChecked: true },
+  WithLabel: { id: 'switch-with-label', label: 'Switch Label' },
 };
 
 export default {
@@ -29,21 +30,21 @@ export default {
 };
 
 export const Default = { args: storyDefs.Default };
-export const XS = { name: 'Extra small', args: storyDefs.XS };
-export const SM = { name: 'Small', args: storyDefs.SM };
-export const MD = { name: 'Medium', args: storyDefs.MD };
-export const LG = { name: 'Large', args: storyDefs.LG };
-export const XL = { name: 'Extra large', args: storyDefs.XL };
-export const Primary = { name: 'Primary', args: storyDefs.Primary };
-export const Success = { name: 'Success', args: storyDefs.Success };
-export const Warning = { name: 'Warning', args: storyDefs.Warning };
-export const Error = { name: 'Error', args: storyDefs.Error };
-export const PreChecked = { name: 'Pre-checked', args: storyDefs.PreChecked };
-export const Disabled = { name: 'Disabled', args: storyDefs.Disabled };
-export const DisabledChecked = { name: 'Disabled Checked', args: storyDefs.DisabledChecked };
+export const XS = { args: storyDefs.XS };
+export const SM = { args: storyDefs.SM };
+export const MD = { args: storyDefs.MD };
+export const LG = { args: storyDefs.LG };
+export const XL = { args: storyDefs.XL };
+export const Primary = { args: storyDefs.Primary };
+export const Success = { args: storyDefs.Success };
+export const Warning = { args: storyDefs.Warning };
+export const Error = { args: storyDefs.Error };
+export const PreChecked = { args: storyDefs.PreChecked };
+export const Disabled = { args: storyDefs.Disabled };
+export const DisabledChecked = { args: storyDefs.DisabledChecked };
+export const WithLabel = { args: storyDefs.WithLabel };
 
 export const Indeterminate = {
-  name: 'Indeterminate',
   render: () => {
     const Indet = () => {
       const ref = React.useRef(null);
@@ -54,9 +55,4 @@ export const Indeterminate = {
     };
     return <Indet />;
   },
-};
-
-export const WithLabel = {
-  name: 'With label',
-  args: { ...storyDefs.Default, label: 'Switch Label' },
 };

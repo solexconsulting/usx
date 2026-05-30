@@ -4,20 +4,19 @@ import Icon from '../icon/Icon';
 import Attribution, { AttributionProps } from '../attribution/Attribution';
 import './block.scss';
 
-export interface BlockAttributionProps extends AttributionProps {}
 
-export interface BlockProps extends React.HTMLAttributes<HTMLDivElement> {
+export type BlockProps =  {
   variant?: null | 'callout';
   indent?: null | 'sm' | 'md' | 'lg' | 'xl';
   dedent?: boolean;
   big?: boolean;
   quote?: boolean;
-  color?: string | null;
+  color?: string;
   contentClassName?: string;
-  attribution?: BlockAttributionProps | null;
+  attribution?: AttributionProps | null;
   children?: React.ReactNode;
   className?: string;
-}
+} & React.HTMLAttributes<HTMLDivElement>;
 
 export default function Block({
   variant = null,
@@ -25,7 +24,7 @@ export default function Block({
   dedent = false,
   big = false,
   quote = false,
-  color = null,
+  color,
   contentClassName = '',
   attribution = null,
   children = null,

@@ -1,22 +1,16 @@
 import React from 'react';
-import Alert from '../alert/Alert';
+import Alert, { AlertProps } from '../alert/Alert';
 import Icon from '../icon/Icon';
 import './site-alert.scss';
 
 export type SiteAlertVariant = 'info' | 'emergency' | 'maintenance' | 'maintenance-warning';
 
-export interface SiteAlertProps extends React.HTMLAttributes<HTMLElement> {
-  className?: string;
+export interface SiteAlertProps extends Omit<AlertProps, 'variant'> {
   variant?: SiteAlertVariant;
-  slim?: boolean;
-  noIcon?: boolean;
-  onDismiss?: (() => void);
   alertHeading?: string;
   alertText?: string;
   alertContent?: React.ReactNode;
   role?: 'alert' | 'status';
-  ariaLabel?: string;
-  ariaLabelledby?: string;
 }
 
 const SiteAlert: React.FC<SiteAlertProps> = ({
@@ -95,7 +89,7 @@ const SiteAlert: React.FC<SiteAlertProps> = ({
         <Alert
           heading={alertHeading}
           text={alertText}
-          variant={alertVariant as any}
+          variant={alertVariant as unknown as AlertProps['variant']}
           slim={slim}
           noIcon={noIcon}
           onDismiss={onDismiss}

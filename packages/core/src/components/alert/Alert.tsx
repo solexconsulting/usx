@@ -1,7 +1,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 
-interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   heading?: string;
   text?: string;
   variant?: 'info' | 'warning' | 'success' | 'error' | 'emergency';

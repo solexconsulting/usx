@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import StepIndicator from './StepIndicator';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

@@ -1,4 +1,3 @@
-import React from 'react';
 import Legend from './Legend';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

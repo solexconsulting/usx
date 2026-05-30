@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Checkbox from './Checkbox';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';

@@ -1,8 +1,8 @@
-import React from 'react';
+
 import Combobox from './Combobox';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
-import combobox from "@uswds/uswds/js/usa-combo-box";
+
 
 const fruitOptions = [
   { value: '', label: 'Select a fruit' },

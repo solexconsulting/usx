@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Button from './Button.jsx';
 import buttonConfig from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
@@ -555,7 +555,7 @@ export const GhostWithIcon = {
   }
 };
 
-export const storyDefs = {
+export const StoryDefs = {
   Default: Default.args,
   DefaultHover: DefaultHover.args,
   DefaultActive: DefaultActive.args,

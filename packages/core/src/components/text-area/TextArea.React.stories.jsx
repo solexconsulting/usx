@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import TextArea from './TextArea';
 import config from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
