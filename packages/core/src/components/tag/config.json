@@ -6,6 +6,7 @@
     "big": { "type": "boolean", "default": false, "description": "Whether to use the big tag style" },
     "value": { "type": "string", "default": "", "description": "Value of the tag, used as the inner text or HTML in lieu of children" },
     "color": { "type": "string", "default": null, "description": "Color variant for the tag (e.g., null, 'primary', 'accent-cool', 'blue', 'base', etc.)" },
+    "outline": { "type": "boolean", "default": false, "description": "Whether to use the outline style (transparent background with border)" },
     "icon": { "type": "string", "default": null, "description": "Name of the icon to display before the tag text, from the USWDS sprite (e.g., 'check', 'close', 'warning', etc.)" },
     "className": { "type": "string", "description": "Additional classes to add to the tag" },
     "children": { "type": "string", "description": "Inner HTML or text for the tag" }

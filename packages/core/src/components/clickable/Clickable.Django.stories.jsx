@@ -4,42 +4,42 @@ import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers';
 export const storyDefs = {
   SingleClickable: {
     href: 'https://google.com',
-    className: 'flex-column padding-2 border',
+    className: 'display-flex flex-column padding-2 border',
     children: 'Everything taking up space in this box is clickable, but only the text below appears as a link.<br /><span class="usx-clickable__link">I look clickable</span>',
   },
   MultipleClickableCardOne: {
     href: 'https://google.com',
-    className: 'padding-1 flex-column flex-align-center',
+    className: 'padding-1 display-flex flex-column flex-align-center',
     children: '<div class="font-heading-2xl text-secondary text-center">#1</div><span class="usx-clickable__link">Choose this door</span>',
   },
   MultipleClickableCardTwo: {
     href: 'https://google.com',
-    className: 'padding-1 flex-column flex-align-center',
+    className: 'padding-1 display-flex flex-column flex-align-center',
     children: '<div class="font-heading-2xl text-secondary text-center">#2</div><span class="usx-clickable__link">Choose this door</span>',
   },
   MultipleClickableCardThree: {
     href: 'https://google.com',
-    className: 'padding-1 flex-column flex-align-center',
+    className: 'padding-1 display-flex flex-column flex-align-center',
     children: '<div class="font-heading-2xl text-secondary text-center">#3</div><span class="usx-clickable__link">Choose this door</span>',
   },
   WithColorChangeTornado: {
     href: 'https://google.com',
-    className: 'flex-align-center',
+    className: 'display-flex flex-align-center',
     children: '<svg class="usa-icon usa-icon--size-3 usx-clickable__color-on-hover" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#tornado"></use></svg><span class="margin-left-1 usx-clickable__link">Auntie Em!</span>',
   },
   WithColorChangeLocation: {
     href: 'https://google.com',
-    className: 'flex-align-center',
+    className: 'display-flex flex-align-center',
     children: '<svg class="usa-icon usa-icon--size-3 usx-clickable__color-on-hover" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#my_location"></use></svg><span class="margin-left-1 usx-clickable__link">We\'re not in Kansas anymore</span>',
   },
   WithColorChangePets: {
     href: 'https://google.com',
-    className: 'flex-align-center',
+    className: 'display-flex flex-align-center',
     children: '<svg class="usa-icon usa-icon--size-3 usx-clickable__color-on-hover" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#pets"></use></svg><span class="margin-left-1 usx-clickable__link">Oh, Toto!</span>',
   },
   ReadJohnsStoryCta: {
     href: 'https://google.com',
-    className: 'flex-align-center margin-1 usx-width-fit',
+    className: 'display-flex flex-align-center margin-1 usx-width-fit',
     children: '<span class="usx-circle bg-black text-white usx-clickable__bg-color-on-hover display-flex flex-align-center flex-justify-center width-4 height-4"><svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#arrow_forward"></use></svg></span><span class="margin-left-1 usx-clickable__link">Read John\'s Story</span>',
   },
   ReadJohnsStoryInsideBlockquote: {

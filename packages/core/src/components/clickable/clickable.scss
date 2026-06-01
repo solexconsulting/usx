@@ -1,14 +1,12 @@
 @use '../../../../tokens/src/_variables' as *;
 
 .usx-clickable {
-  display: flex;
   text-decoration: none;
   color: currentColor;
+  overflow: wrap;
 
   .usx-clickable__link {
-    display: inline-block;
     position: relative;
-    color: currentColor;
     width: fit-content; 
     height: fit-content;
     text-wrap: nowrap;
@@ -40,7 +38,7 @@
 
     .usx-clickable__link {
       text-decoration: underline;
-      text-decoration-thickness: 2px;
+      text-decoration-thickness: 1px;
       text-underline-offset: 2px;
 
       &::after {

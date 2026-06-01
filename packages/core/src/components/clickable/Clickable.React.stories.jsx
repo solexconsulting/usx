@@ -17,19 +17,19 @@ const Icon = ({ name, className = 'usa-icon usa-icon--size-3', ariaHidden = true
 export const storyDefs = {
   SingleClickable: {
     href: 'https://google.com',
-    className: 'flex-column padding-2 border',
+    className: 'display-flex flex-column padding-2 border',
   },
   MultipleClickableCard: {
     href: 'https://google.com',
-    className: 'padding-1 flex-column flex-align-center',
+    className: 'display-flex padding-1 flex-column flex-align-center',
   },
   WithColorChange: {
     href: 'https://google.com',
-    className: 'flex-align-center',
+    className: 'display-flex flex-align-center',
   },
   ReadJohnsStoryCta: {
     href: 'https://google.com',
-    className: 'flex-align-center margin-1 usx-width-fit',
+    className: 'display-flex flex-row flex-align-center margin-1 usx-width-fit',
   },
   ReadJohnsStoryInsideBlockquote: {
     href: 'https://google.com',

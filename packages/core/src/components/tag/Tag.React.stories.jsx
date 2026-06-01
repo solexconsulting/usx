@@ -45,6 +45,31 @@ export const storyDefs = {
     children: 'Base',
     color: 'base',
   },
+  OutlinePrimary: {
+    children: 'Primary',
+    color: 'primary',
+    outline: true,
+  },
+  OutlineSecondary: {
+    children: 'Secondary',
+    color: 'secondary',
+    outline: true,
+  },
+  OutlineAccentCool: {
+    children: 'Accent Cool',
+    color: 'accent-cool',
+    outline: true,
+  },
+  OutlineBlue: {
+    children: 'Blue',
+    color: 'blue',
+    outline: true,
+  },
+  OutlineBase: {
+    children: 'Base',
+    color: 'base',
+    outline: true,
+  },
   Info: {
     children: 'Info',
     color: 'info',
@@ -104,6 +129,31 @@ export const Blue = {
 export const Base = {
   name: 'Base color',
   args: storyDefs.Base,
+};
+
+export const OutlinePrimary = {
+  name: 'Outline style: Primary',
+  args: storyDefs.OutlinePrimary,
+};
+
+export const OutlineSecondary = {
+  name: 'Outline style: Secondary',
+  args: storyDefs.OutlineSecondary,
+};
+
+export const OutlineAccentCool = {
+  name: 'Outline style: Accent Cool',
+  args: storyDefs.OutlineAccentCool,
+};
+
+export const OutlineBlue = {
+  name: 'Outline style: Blue',
+  args: storyDefs.OutlineBlue,
+};
+
+export const OutlineBase = {
+  name: 'Outline style: Base',
+  args: storyDefs.OutlineBase,
 };
 
 export const Info = {

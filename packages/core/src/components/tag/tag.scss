@@ -4,8 +4,14 @@
   letter-spacing: .07rem;
   display: inline-flex;
   align-items: center;
+  line-height: 1.6;
 
   .usa-icon {
     margin-right: .25rem;
+  }
+
+  &.usx-tag--outline {
+    background-color: transparent;
+    border: 1px solid currentColor;
   }
 }

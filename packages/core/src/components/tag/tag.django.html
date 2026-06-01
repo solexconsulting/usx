@@ -5,7 +5,9 @@
   "
   usa-tag usx-tag
   {% if big %}usa-tag--big{% endif %}
-  {% if color %}bg-{{ color }}{% endif %}
+  {% if color and not outline %}bg-{{ color }}{% endif %}
+  {% if color and outline %}text-{{ color }}{% endif %}
+  {% if outline %}usx-tag--outline{% endif %}
   {{ className }}
   "
 >

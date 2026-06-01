@@ -1,0 +1,21 @@
+{
+  "name": "task-list",
+  "template": "task-list/task-list.django.html",
+  "default": {
+    "tasks": [
+      { "name": "Task 1", "href": "#", "status": "complete" },
+      { "name": "Task 2", "href": "#", "status": "complete" },
+      { "name": "Task 3", "href": "#", "status": "incomplete", "hint": "Due tomorrow" }
+    ]
+  },
+  "props": {
+    "tasks": {
+      "type": "array",
+      "description": "Array of task objects: { name: string, href: string, status: 'complete' | 'incomplete', hint?: string }"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes applied to the root ul element."
+    }
+  }
+}

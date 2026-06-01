@@ -1,0 +1,21 @@
+<ul class="usx-task-list{% if className %} {{ className }}{% endif %}">
+  {% for task in tasks %}
+  <li>
+    <a href="{{ task.href }}" class="usx-clickable usx-task-list__item">
+      {% if task.hint %}
+      <div class="display-flex flex-column">
+        <span class="usx-clickable__link usx-task-list__link">{{ task.name }}</span>
+        <span class="usa-hint usx-task-list__hint">{{ task.hint }}</span>
+      </div>
+      {% else %}
+      <span class="usx-clickable__link usx-task-list__link">{{ task.name }}</span>
+      {% endif %}
+      {% if task.status == 'complete' %}
+      <span class="usa-tag usx-tag usx-tag--outline text-ink">Completed</span>
+      {% else %}
+      <span class="usa-tag usx-tag bg-primary-light">Incomplete</span>
+      {% endif %}
+    </a>
+  </li>
+  {% endfor %}
+</ul>

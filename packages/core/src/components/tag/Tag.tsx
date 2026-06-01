@@ -8,6 +8,7 @@ export type TagProps = {
   big?: boolean;
   value?: string;
   color?: string | null;
+  outline?: boolean;
   icon?: string | null;
   className?: string;
   children?: React.ReactNode;
@@ -18,6 +19,7 @@ const Tag: React.FC<TagProps> = ({
   big = false,
   value,
   color = null,
+  outline = false,
   icon = null,
   className = '',
   children,
@@ -27,7 +29,9 @@ const Tag: React.FC<TagProps> = ({
     'usa-tag',
     'usx-tag',
     { 'usa-tag--big': big },
-    { [`bg-${color}`]: color },
+    { [`bg-${color}`]: color && !outline },
+    { [`text-${color}`]: color && outline },
+    { 'usx-tag--outline': outline },
     className
   );
   return (
