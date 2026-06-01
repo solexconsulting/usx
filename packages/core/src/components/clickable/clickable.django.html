@@ -1,4 +1,5 @@
-{# Django template for Clickable #}
-<div class="usx-clickable">
-  <div class="clickable__content">Clickable</div>
-</div>
+<a
+  class="usx-clickable{% if className %} {{ className }}{% endif %}"
+  href="{{ href }}"
+  {% if id %}id="{{ id }}"{% endif %}
+>{{ children|safe }}</a>

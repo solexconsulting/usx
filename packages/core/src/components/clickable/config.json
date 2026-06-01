@@ -2,7 +2,22 @@
   "name": "clickable",
   "template": "clickable/clickable.django.html",
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "href": {
+      "type": "string",
+      "description": "URL the clickable navigates to.",
+      "required": true
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional layout or utility classes applied to the root anchor (e.g. 'flex-column padding-2')."
+    },
+    "id": {
+      "type": "string",
+      "description": "Optional id attribute for the anchor element."
+    },
+    "children": {
+      "type": "string",
+      "description": "Safe inner HTML. Apply usx-clickable__link, usx-clickable__color-on-hover, and/or usx-clickable__bg-color-on-hover to any child elements as needed."
+    }
   }
 }

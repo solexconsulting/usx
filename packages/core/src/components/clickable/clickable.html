@@ -7,7 +7,7 @@
 
 <h3 class="site-preview-heading margin-top-5">Multiple Clickables</h3>
 <div class="grid-row grid-gap-6 bg-base-lighter padding-2">
-  <div class="grid-col-4 display-flex flex-justify-center">
+  <div class="grid-col-12 display-flex flex-justify-center tablet:grid-col-4">
     <a class="usx-clickable padding-1 flex-column flex-align-center" href="https://google.com">
       <div class="font-heading-2xl text-secondary" style="text-align: center;">
         #1
@@ -15,7 +15,7 @@
       <span class="usx-clickable__link">Choose this door</span>
     </a>
   </div>
-  <div class="grid-col-4 display-flex flex-justify-center">
+  <div class="grid-col-12 display-flex flex-justify-center tablet:grid-col-4">
     <a class="usx-clickable padding-1 flex-column flex-align-center" href="https://google.com">
       <div class="font-heading-2xl text-secondary" style="text-align: center;">
         #2
@@ -23,7 +23,7 @@
       <span class="usx-clickable__link">Choose this door</span>
     </a>
   </div>
-  <div class="grid-col-4 display-flex flex-justify-center">
+  <div class="grid-col-12 display-flex flex-justify-center tablet:grid-col-4">
     <a class="usx-clickable padding-1 flex-column flex-align-center" href="https://google.com">
       <div class="font-heading-2xl text-secondary" style="text-align: center;">
         #3
@@ -35,7 +35,7 @@
 
 <h3 class="site-preview-heading margin-top-5">With Color Change</h3>
 <div class="grid-row grid-gap-6 bg-base-lighter padding-2">
-  <div class="grid-col-4 display-flex flex-justify-center">
+  <div class="grid-col-12 display-flex flex-justify-center tablet:grid-col-4">
     <a class="usx-clickable flex-align-center" href="https://google.com">
       <svg class="usa-icon usa-icon--size-3 usx-clickable__color-on-hover" aria-hidden="true" focusable="false" role="img">
           <use href="./img/sprite.svg#tornado"></use>
@@ -43,7 +43,7 @@
       <span class="margin-left-1  usx-clickable__link">Auntie Em!</span>
     </a>
   </div>
-  <div class="grid-col-4 display-flex flex-justify-center">
+  <div class="grid-col-12 display-flex flex-justify-center margin-top-2 tablet:margin-top-0 tablet:grid-col-4">
     <a class="usx-clickable flex-align-center" href="https://google.com">
       <svg class="usa-icon usa-icon--size-3 usx-clickable__color-on-hover" aria-hidden="true" focusable="false" role="img">
           <use href="./img/sprite.svg#my_location"></use>
@@ -51,7 +51,7 @@
       <span class="margin-left-1 usx-clickable__link">We're not in Kansas anymore</span>
     </a>
   </div>
-  <div class="grid-col-4 display-flex flex-justify-center">
+  <div class="grid-col-12 display-flex flex-justify-center margin-top-2 tablet:margin-top-0 tablet:grid-col-4">
     <a class="usx-clickable flex-align-center" href="https://google.com">
       <svg class="usa-icon usa-icon--size-3 usx-clickable__color-on-hover" aria-hidden="true" focusable="false" role="img">
           <use href="./img/sprite.svg#pets"></use>
@@ -113,4 +113,21 @@
       <span class="margin-left-1 usx-clickable__link">Read John's Story</span>
     </div>
   </div>
+</a>
+
+<h2 class="site-preview-heading margin-top-5">Basic Class demonstrations</h2>
+
+<h3 class="site-preview-heading margin-top-5">All classes on single element</h3>
+<a class="usx-clickable text-primary-lightest" href="https://google.com">
+  <span class="usx-clickable__bg-color-on-hover usx-clickable__color-on-hover usx-clickable__link">Background and text changes color.</span>
+</a>
+
+<h3 class="site-preview-heading margin-top-5">Color classes within link class (fully underlined)</h3>
+<a class="usx-clickable text-primary-lightest" href="https://google.com">
+  <span class="usx-clickable__link"><span class="usx-clickable__bg-color-on-hover">Background changes color.</span><span class="usx-clickable__color-on-hover"> Text changes color.</span> No change to background or color.</span>
+</a>
+
+<h3 class="site-preview-heading margin-top-5">Color classes outside link class</h3>
+<a class="usx-clickable text-primary-lightest" href="https://google.com">
+  <span class="usx-clickable__bg-color-on-hover">Background changes color.</span><span class="usx-clickable__color-on-hover"> Text changes color. </span><span class="usx-clickable__link">No change to background or color.</span>
 </a>
