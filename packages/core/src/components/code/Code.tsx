@@ -38,7 +38,7 @@ export default function Code({ lines = [], copyText = null, className = '' }: Co
           {...(line.prefix != null ? { 'data-prefix': line.prefix } : {})}
           className={line.className || undefined}
         >
-          <code>{line.code}</code>
+          <code dangerouslySetInnerHTML={{ __html: line.code }} />
         </pre>
       ))}
       {copyText && (

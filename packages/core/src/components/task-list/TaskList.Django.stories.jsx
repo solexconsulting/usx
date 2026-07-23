@@ -11,6 +11,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'task-list' });
 
 export const Default = createStory(storyDefs.Default);
+export const NoStatus = createStory(storyDefs.NoStatus);
 export const AllComplete = createStory(storyDefs.AllComplete);
 export const AllIncomplete = createStory(storyDefs.AllIncomplete);
 export const WithHints = createStory(storyDefs.WithHints);

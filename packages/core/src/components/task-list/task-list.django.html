@@ -1,3 +1,5 @@
+{% load components %}
+
 <ul class="usx-task-list{% if className %} {{ className }}{% endif %}">
   {% for task in tasks %}
   <li>
@@ -10,10 +12,8 @@
       {% else %}
       <span class="usx-clickable__link usx-task-list__link">{{ task.name }}</span>
       {% endif %}
-      {% if task.status == 'complete' %}
-      <span class="usa-tag usx-tag usx-tag--outline text-ink">Completed</span>
-      {% else %}
-      <span class="usa-tag usx-tag bg-primary-light">Incomplete</span>
+      {% if task.tag %}
+        {% tag big=task.tag.big value=task.tag.value color=task.tag.color outline=task.tag.outline icon=task.tag.icon className=task.tag.className|default:'' %}{% endtag %}
       {% endif %}
     </a>
   </li>

@@ -23,7 +23,7 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 0.5rem;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
 
     @media (min-width: 40em) {
       flex-direction: row;
@@ -42,7 +42,7 @@
   }
 
   .usa-tag.usx-tag {
-    margin-right: .5rem;
+    margin-right: 0;
     flex-shrink: 0;
   }
 

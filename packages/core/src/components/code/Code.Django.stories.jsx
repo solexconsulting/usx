@@ -15,6 +15,7 @@ export const Default = createStory(storyDefs.Default);
 export const WithLineNumbers = createStory(storyDefs.WithLineNumbers);
 export const HighlightedLine = createStory(storyDefs.HighlightedLine);
 export const LongLine = createStory(storyDefs.LongLine);
+export const WithHTMLFragment = createStory(storyDefs.WithHTMLFragment);
 export const WithoutPrefix = createStory(storyDefs.WithoutPrefix);
 export const WithColor = createStory(storyDefs.WithColor);
 export const WithCopyButton = createStory(storyDefs.WithCopyButton);

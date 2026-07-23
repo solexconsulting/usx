@@ -1,7 +1,9 @@
 {# Django template for Code #}
 <div class="usx-mockup-code{% if className %} {{ className }}{% endif %}">
   {% for line in lines %}
-  <pre{% if line.prefix %} data-prefix="{{ line.prefix }}"{% endif %}{% if line.className %} class="{{ line.className }}"{% endif %}><code>{{ line.code }}</code></pre>
+  <pre
+    {% if line.prefix %} data-prefix="{{ line.prefix }}"{% endif %}{% if line.className %} class="{{ line.className }}"{% endif %}
+  ><code>{{ line.code|safe }}</code></pre>
   {% endfor %}
   {% if copyText %}
   <button class="usa-button usx-button usx-button--ghost usx-copy"

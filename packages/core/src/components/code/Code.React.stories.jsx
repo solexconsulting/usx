@@ -30,6 +30,13 @@ export const storyDefs = {
       { code: 'Magnam dolore beatae necessitatibus nemopsum itaque sit. Et porro quae qui et et dolore ratione.', prefix: '~' },
     ],
   },
+  WithHTMLFragment: {
+    lines: [
+      { code: 'npm install @solexllc/usx', prefix: '$' },
+      { code: 'This <em>line</em> has <strong>HTML fragments</strong>', prefix: '>', className: 'text-warning' },
+      { code: 'Done!', prefix: '>', className: 'text-success' },
+    ],
+  },
   WithoutPrefix: {
     lines: [{ code: 'without prefix' }],
   },
@@ -55,6 +62,7 @@ export const Default = { args: storyDefs.Default };
 export const WithLineNumbers = { args: storyDefs.WithLineNumbers };
 export const HighlightedLine = { args: storyDefs.HighlightedLine };
 export const LongLine = { args: storyDefs.LongLine };
+export const WithHTMLFragment = { args: storyDefs.WithHTMLFragment };
 export const WithoutPrefix = { args: storyDefs.WithoutPrefix };
 export const WithColor = { args: storyDefs.WithColor };
 export const WithCopyButton = { args: storyDefs.WithCopyButton };
