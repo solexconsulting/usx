@@ -34,7 +34,7 @@ type NativeButtonProps = ButtonBaseProps & React.ButtonHTMLAttributes<HTMLButton
 export type ButtonProps = AnchorButtonProps | NativeButtonProps;
 
 export default function Button({
-  label = 'Button',
+  label,
   variant,
   type = 'button',
   disabled = false,

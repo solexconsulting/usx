@@ -1,7 +1,9 @@
 {# Django template for Tag #}
 {% load components %}
 
-<span class=
+<span
+  {% if id %}id="{{ id }}"{% endif %}
+  class=
   "
   usa-tag usx-tag
   {% if big %}usa-tag--big{% endif %}
@@ -12,4 +14,18 @@
   "
 >
   {% if icon %}{% icon name=icon size="3" %}{% endicon %}{% endif %}{{ children | default:value }}
+  {% if dismissible %}
+    <button
+      type="button"
+      class="usx-tag__dismiss"
+      aria-label="Dismiss tag"
+      {% if onDismiss %}
+      onclick="{{ onDismiss }}"
+      {% else %}
+      onclick="this.closest('.usx-tag').remove();"
+      {% endif %}
+    >
+      {% icon name="close" size="2" %}{% endicon %}
+    </button>
+  {% endif %}
 </span>

@@ -25,6 +25,15 @@ export const storyDefs = {
     children: 'Big',
     big: true,
   },
+  Dismissible: {
+    children: 'Dismissible',
+    dismissible: true,
+  },
+  DismissibleWithCallback: {
+    children: 'Dismissible',
+    dismissible: true,
+    onDismiss: () => alert('Dismissed!'),
+  },
   Primary: {
     children: 'Primary',
     color: 'primary',
@@ -104,6 +113,14 @@ export const WithIcon = {
 export const Big = {
   name: 'Big tag',
   args: storyDefs.Big,
+};
+
+export const Dismissible = {
+  args: storyDefs.Dismissible,
+};
+
+export const DismissibleWithCallback = {
+  args: storyDefs.DismissibleWithCallback,
 };
 
 export const Primary = {
