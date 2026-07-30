@@ -1,7 +1,8 @@
 import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
+import { NodePackageImporter } from "sass";
 export default {
-  stories: ['../../../packages/core/src/**/*stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../../../packages/usx-stories/src/**/*stories.@(js|jsx|mjs|ts|tsx)'],
 
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
@@ -19,6 +20,10 @@ export default {
   // behind any subpath proxy without a build-time configuration.
   viteFinal: (config) => {
     config.base = './';
+    config.css ??= {};
+    config.css.preprocessorOptions ??= {};
+    config.css.preprocessorOptions.scss ??= {};
+    config.css.preprocessorOptions.scss.importers = [new NodePackageImporter()];
     return config;
   },
 

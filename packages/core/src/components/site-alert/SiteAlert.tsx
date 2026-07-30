@@ -1,7 +1,6 @@
 import React from 'react';
 import Alert, { AlertProps } from '../alert/Alert';
 import Icon from '../icon/Icon';
-import './site-alert.scss';
 
 export type SiteAlertVariant = 'info' | 'emergency' | 'maintenance' | 'maintenance-warning';
 

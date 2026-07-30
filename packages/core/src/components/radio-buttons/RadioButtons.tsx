@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import Label from '../label/Label';
 import Fieldset from '../fieldset/Fieldset';
-import './radio-buttons.scss';
 
 export interface RadioOption {
   id?: string;

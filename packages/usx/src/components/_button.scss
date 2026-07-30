@@ -1,0 +1,293 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+@use 'sass:color';
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+
+/* ---------------------------------- */
+
+/* Base Enhancements (SAFE ONLY)      */
+
+/* ---------------------------------- */
+.usa-button.usx-button:not(.usa-button--unstyled) {
+  @if $usx-button-border-radius {
+    border-radius: $usx-button-border-radius;
+  }
+
+  &:not(.usa-button--outline) {
+    @if $usx-button-box-shadow {
+      box-shadow: $usx-button-box-shadow;
+    }
+  }
+}
+
+/* ---------------------------------- */
+
+/* Helper Mixin for Inverse Buttons   */
+
+/* ---------------------------------- */
+@mixin usx-button-inverse($hover-lightness: 20%, $active-lightness: 40%) {
+  color: if($color-light-text, $color-light-text, white);
+
+  &.usa-button--hover,
+  &:hover {
+    color: color.adjust(if($color-light-text, $color-light-text, white), $lightness: $hover-lightness * -1);
+  }
+
+  &.usa-button--active,
+  &:active {
+    color: color.adjust(if($color-light-text, $color-light-text, white), $lightness: $active-lightness * -1);
+  }
+}
+
+/* ---------------------------------- */
+
+/* Variant Enhancer Mixin             */
+
+/* ---------------------------------- */
+@mixin usx-button-variant(
+  $selector,
+  $bg,
+  $bg-hover: null,
+  $bg-active: null,
+  $color: null,
+  $color-hover: null,
+  $color-active: null,
+  $box-shadow: null,
+  $is-outline: false
+) {
+  /* Non-disabled buttons only */
+  .usa-button.usx-button#{$selector}:not(:disabled):not([aria-disabled="true"]):not(.usx-button--ghost) {
+    @if $bg {
+      background-color: $bg;
+    }
+
+    @if $color {
+      color: $color;
+    }
+
+    @if $box-shadow {
+      box-shadow: $box-shadow;
+    }
+
+    /* Hover state */
+    &.usa-button--hover,
+    &:hover {
+      @if $bg-hover {
+        background-color: $bg-hover;
+      } @else if $bg {
+        background-color: color.adjust($bg, $lightness: -15%);
+      }
+
+      @if $color-hover {
+        color: $color-hover;
+      } @else if $color {
+        color: color.adjust($color, $lightness: -15%);
+      }
+    }
+
+    /* Active state */
+    &.usa-button--active,
+    &:active {
+      @if $bg-active {
+        background-color: $bg-active;
+      } @else if $bg {
+        background-color: color.adjust($bg, $lightness: -25%);
+      }
+
+      @if $color-active {
+        color: $color-active;
+      } @else if $color {
+        color: color.adjust($color, $lightness: -25%);
+      }
+    }
+
+    /* Inverse modifier */
+    &.usa-button--inverse {
+      @include usx-button-inverse;
+    }
+  }
+
+  /* Dark theme */
+  .theme-dark {
+    .usa-button.usx-button#{$selector}:not(:disabled):not([aria-disabled="true"]) {
+      @if $bg {
+        background-color: color.adjust($bg, $lightness: -30%);
+      }
+
+      @if $color-light-text and $is-outline == false {
+        color: $color-light-text;
+      }
+
+      @if $color and $is-outline == true {
+        color: color.adjust($color, $lightness: -30%);
+      }
+
+      &.usa-button--hover,
+      &:hover {
+        @if $bg-hover {
+          background-color: color.adjust($bg-hover, $lightness: -20%);
+        } @else if $bg {
+          background-color: color.adjust($bg, $lightness: -40%);
+        }
+
+        @if $color-hover {
+          color: $color-hover;
+        }
+      }
+
+      &.usa-button--active,
+      &:active {
+        @if $bg-active {
+          background-color: color.adjust($bg-active, $lightness: -20%);
+        } @else if $bg {
+          background-color: color.adjust($bg, $lightness: -60%);
+        }
+
+        @if $color-active {
+          color: $color-active;
+        }
+      }
+
+      /* Inverse modifier in dark theme */
+      &.usa-button--inverse {
+        @include usx-button-inverse(20%, 40%);
+      }
+    }
+  }
+}
+
+/* ---------------------------------- */
+
+/* Enhance USWDS Variants             */
+
+/* ---------------------------------- */
+
+/* Primary */
+@include usx-button-variant(
+  ".usa-button--primary",
+  $usx-button-primary-background-color,
+  $usx-button-primary-background-color-hover,
+  $usx-button-primary-background-color-active,
+  $usx-button-primary-color,
+  $usx-button-primary-color-hover,
+  $usx-button-primary-color-active,
+  $usx-button-primary-border-color
+);
+
+/* Secondary */
+@include usx-button-variant(
+  ".usa-button--secondary",
+  $usx-button-secondary-background-color,
+  $usx-button-secondary-background-color-hover,
+  $usx-button-secondary-background-color-active,
+  $usx-button-secondary-color,
+  $usx-button-secondary-color-hover,
+  $usx-button-secondary-color-active,
+  $usx-button-secondary-border-color
+);
+
+/* Accent Cool */
+@include usx-button-variant(
+  ".usa-button--accent-cool",
+  $usx-button-accent-cool-background-color,
+  $usx-button-accent-cool-background-color-hover,
+  $usx-button-accent-cool-background-color-active,
+  $usx-button-accent-cool-color,
+  $usx-button-accent-cool-color-hover,
+  $usx-button-accent-cool-color-active,
+  $usx-button-accent-cool-border-color
+);
+
+/* Accent Warm */
+@include usx-button-variant(
+  ".usa-button--accent-warm",
+  $usx-button-accent-warm-background-color,
+  $usx-button-accent-warm-background-color-hover,
+  $usx-button-accent-warm-background-color-active,
+  $usx-button-accent-warm-color,
+  $usx-button-accent-warm-color-hover,
+  $usx-button-accent-warm-color-active,
+  $usx-button-accent-warm-border-color
+);
+
+/* Outline */
+@include usx-button-variant(
+  ".usa-button--outline",
+  $usx-button-outline-background-color,
+  $usx-button-outline-background-color-hover,
+  $usx-button-outline-background-color-active,
+  $usx-button-outline-color,
+  $usx-button-outline-color-hover,
+  $usx-button-outline-color-active,
+  $usx-button-outline-box-shadow,
+  true
+);
+
+/* Unstyled */
+@include usx-button-variant(
+  ".usa-button--unstyled",
+  null,
+  null,
+  null,
+  $color-primary,
+  $color-primary-hover,
+  $color-primary-active,
+  null
+);
+
+.usa-button.usx-button {
+  .usa-button--outline {
+    box-shadow: 0 0 0 2px currentcolor;
+  }
+
+  &.usx-button--ghost {
+    background-color: transparent;
+    color: currentcolor;
+
+    &:not([disabled], [aria-disabled="true"]) {
+      &.usa-button--primary {
+        @if $color-primary {
+          color: $color-primary;
+        }
+      }
+
+      &.usa-button--secondary {
+        @if $color-secondary {
+          color: $color-secondary;
+        }
+      }
+
+      &.usa-button--accent-cool {
+        @if $color-accent-cool {
+          color: $color-accent-cool;
+        }
+      }
+
+      &.usa-button--accent-warm {
+        @if $color-accent-warm {
+          color: $color-accent-warm;
+        }
+      }
+
+      &.usa-button--base {
+        @if $color-base {
+          color: $color-base;
+        }
+      }
+
+      &.usa-button--hover,
+      &:hover {
+        background-color: color-mix(in srgb, currentcolor 20%, transparent);
+      }
+
+      &.usa-button--active,
+      &:active {
+        background-color: color-mix(in srgb, currentcolor 35%, transparent);
+      }
+
+      &.usa-button--inverse {
+        color: white;
+      }
+    }
+  }
+}

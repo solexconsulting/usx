@@ -2,7 +2,6 @@
 import { SelectHTMLAttributes } from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
-import './select.scss';
 
 export interface SelectOption {
   value: string;

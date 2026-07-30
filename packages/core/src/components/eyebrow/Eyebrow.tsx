@@ -1,5 +1,4 @@
 import React from 'react';
-import './eyebrow.scss';
 
 export interface EyebrowProps extends React.HTMLAttributes<HTMLSpanElement> {
   children?: React.ReactNode;

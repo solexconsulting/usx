@@ -1,0 +1,80 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-image {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+
+  &--rounded img {
+    border-radius: $usx-image-rounded-border-radius;
+  }
+
+  &--circular img {
+    border-radius: 50%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .usx-image--caption {
+    margin-top: .5rem;
+    font-style: italic;
+    contain: inline-size;
+  }
+}
+/* stylelint-enable selector-class-pattern */
+
+.usx-object-fit-cover,
+.usx-object-fit-contain,
+.usx-object-fit-fill {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.usx-object-fit-none,
+.usx-object-fit-scale-down {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.usx-object-fit-cover :is(img, object, video),
+.usx-object-fit-contain :is(img, object, video),
+.usx-object-fit-fill :is(img, object, video) {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.usx-object-fit-none :is(img, object, video),
+.usx-object-fit-scale-down :is(img, object, video) {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.usx-object-fit-cover :is(img, object, video) {
+  object-fit: cover;
+}
+
+.usx-object-fit-contain :is(img, object, video) {
+  object-fit: contain;
+}
+
+.usx-object-fit-fill :is(img, object, video) {
+  object-fit: fill;
+}
+
+.usx-object-fit-none :is(img, object, video) {
+  object-fit: none;
+}
+
+.usx-object-fit-scale-down :is(img, object, video) {
+  object-fit: scale-down;
+}

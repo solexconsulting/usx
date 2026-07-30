@@ -1,0 +1,14 @@
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-icon-list {
+  .usa-icon-list__item {
+    align-items: flex-start;
+  }
+
+  .usa-icon-list__icon {
+    flex: 0 0 auto;
+  }
+
+  .usa-icon-list__content {
+    flex: 1 1 auto;
+  }
+}

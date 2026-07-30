@@ -1,0 +1,26 @@
+{
+  "name": "@solexllc/usx",
+  "version": "0.1.0",
+  "private": true,
+  "sass": "src/index.scss",
+  "exports": {
+    ".": {
+      "sass": "./src/index.scss"
+    },
+    "./utilities": {
+      "sass": "./src/_utilities.scss"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@solexllc/usx-theme": "workspace:*"
+  },
+  "scripts": {
+    "build": "sass --pkg-importer=node --no-source-map src/index.scss dist/usx.css"
+  },
+  "devDependencies": {
+    "sass": "^1.98.0"
+  }
+}

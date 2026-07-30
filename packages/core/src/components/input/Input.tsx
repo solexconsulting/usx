@@ -1,7 +1,6 @@
 import React, { InputHTMLAttributes, ReactNode } from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
-import './input.scss';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label: string | ReactNode;

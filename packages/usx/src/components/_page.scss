@@ -1,0 +1,18 @@
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-page {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+
+  .usx-page__title {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .usx-page__content {
+    display: block;
+
+    p {
+      max-width: 64ex;
+    }
+  }
+}

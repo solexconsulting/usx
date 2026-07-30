@@ -1,6 +1,5 @@
 import React, { AnchorHTMLAttributes, ReactNode } from 'react';
 import classNames from 'classnames';
-import './link.scss';
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string;

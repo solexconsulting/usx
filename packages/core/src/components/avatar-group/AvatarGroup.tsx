@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import Avatar, { AvatarProps } from '../avatar/Avatar';
-import './avatar-group.scss';
 
 export interface AvatarGroupAvatar extends Omit<AvatarProps, 'variant'> {
   initials?: string;

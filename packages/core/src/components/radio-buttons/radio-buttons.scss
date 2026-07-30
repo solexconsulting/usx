@@ -1,7 +1,6 @@
-@use '../../../../tokens/src/_variables' as *;
+@use 'pkg:@solexllc/usx-theme/variables' as *;
 
 .usa-radio.usx-radio {
-  display: block;
 
   &.usx-radio--small {
 
@@ -27,10 +26,4 @@
       }
     }
   }
-
-  .usa-radio__input:disabled + .usa-radio__label {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
 }

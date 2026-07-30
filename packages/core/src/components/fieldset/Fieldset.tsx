@@ -1,7 +1,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Legend from '../legend/Legend';
-import './fieldset.scss';
 
 export interface FieldsetProps extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
   legend?: string | null;

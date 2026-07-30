@@ -1,5 +1,4 @@
 import React from 'react';
-import './breadcrumb.scss';
 
 export interface BreadcrumbItem {
   href?: string;

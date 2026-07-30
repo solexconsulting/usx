@@ -1,0 +1,28 @@
+
+import Breadcrumb from '../../../../core/src/components/breadcrumb/Breadcrumb.tsx';
+import config from '../../../../core/src/components/breadcrumb/config.json';
+import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+
+const generatedArgTypes = buildArgTypes(config.props || {});
+
+export default {
+  title: 'React/USWDS/Breadcrumb',
+  component: Breadcrumb,
+  tags: ['USWDS', 'autodocs'],
+  argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
+};
+
+export const storyDefs = {
+  Default: config.default || {},
+  WithRdfa: { ...(config.default || {}), rdfa: true },
+  Wrap: { ...(config.default || {}), wrap: true },
+  WithClassName: { ...(config.default || {}), className: 'custom-breadcrumb-class' },
+  Empty: { items: [] },
+};
+
+export const Default = { args: storyDefs.Default };
+export const WithRdfa = { args: storyDefs.WithRdfa };
+export const Wrap = { args: storyDefs.Wrap };
+export const WithClassName = { args: storyDefs.WithClassName };
+export const Empty = { args: storyDefs.Empty };

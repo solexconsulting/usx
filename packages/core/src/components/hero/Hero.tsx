@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '../button/Button';
 import Search from '../search/Search';
-import './hero.scss';
 
 export interface HeroButtonProps {
   href?: string;

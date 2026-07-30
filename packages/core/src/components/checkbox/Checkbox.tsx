@@ -1,7 +1,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
-import './checkbox.scss';
 
 export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;

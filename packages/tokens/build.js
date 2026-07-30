@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const srcDir = path.join(__dirname, 'src');
 const primitivesDir = path.join(srcDir, 'primitives');
 const distDir = path.join(__dirname, 'dist');

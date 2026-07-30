@@ -1,5 +1,4 @@
 import React from 'react';
-import './section.scss';
 
 export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   title?: string;

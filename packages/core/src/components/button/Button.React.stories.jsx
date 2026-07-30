@@ -1,4 +1,4 @@
-
+import React from 'react';
 import Button from './Button.jsx';
 import buttonConfig from './config.json';
 import { buildArgTypes } from '../../utils/storyHelpers';
@@ -11,6 +11,7 @@ export default {
   tags: ['autodocs'],
   layout: 'fullwidth',
   argTypes: generatedArgTypes,
+  excludeStories: ['storyDefs'],
 };
 
 // Default variant
@@ -555,7 +556,7 @@ export const GhostWithIcon = {
   }
 };
 
-export const StoryDefs = {
+export const storyDefs = {
   Default: Default.args,
   DefaultHover: DefaultHover.args,
   DefaultActive: DefaultActive.args,

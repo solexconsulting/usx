@@ -18,6 +18,16 @@ const preview = {
       },
     }
   },
+  // Declared so the manager tracks/persists the value written by the
+  // "Filter by technology" tool (see .storybook/technologyToggle.jsx).
+  // No `toolbar` — the addon renders its own control.
+  globalTypes: {
+    technology: {
+      name: 'Technology',
+      description: 'Which technology board to show',
+      defaultValue: 'all',
+    },
+  },
 };
 
 export default preview;

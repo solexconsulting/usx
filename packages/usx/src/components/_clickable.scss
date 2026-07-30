@@ -1,0 +1,69 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-clickable {
+  text-decoration: none;
+  color: currentcolor;
+  overflow: wrap;
+
+  .usx-clickable__link {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    text-wrap: nowrap;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background-color: currentcolor;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.25s ease-in-out;
+      pointer-events: none;
+    }
+  }
+
+  &:hover {
+    .usx-clickable__link::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &:focus {
+    background-color: color-mix(in oklab, $usx-clickable-focus-outline-color 20%, transparent);
+
+    .usx-clickable__link {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+
+      &::after {
+        transition: none;
+        transform: scaleX(1);
+        height: 2px;
+      }
+    }
+  }
+
+  &:hover, &:focus {
+    .usx-clickable__color-on-hover {
+      color: $usx-clickable-hover-color;
+
+      @if $color-primary {
+        color: $color-primary;
+      }
+    }
+
+    .usx-clickable__bg-color-on-hover {
+      background-color: $usx-clickable-hover-color;
+
+      @if $color-primary {
+        background-color: $color-primary;
+      }
+    }
+  }
+}

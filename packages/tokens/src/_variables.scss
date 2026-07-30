@@ -321,6 +321,10 @@ $usx-textarea-padding: null !default;
 $usx-form-group-error-color:            $color-error        !default;
 $usx-form-group-error-border-thickness: $border-width-thick !default;
 
+// ── Component tokens: Accordion ──────────────────────────────────────────────
+$usx-accordion-accent-color: #87c5ff !default;
+$usx-accordion-content-background: #d7ebff !default;
+
 // ── Component tokens: Image ───────────────────────────────────────────────────
 $usx-image-object-fit-type:       cover !default;
 $usx-image-rounded-border-radius: $r-md !default;
@@ -379,6 +383,8 @@ $usx-carousel-dot-color:        #c0c0c0  !default;
 $usx-carousel-dot-color-hover:  #a0a0a0  !default;
 $usx-carousel-dot-color-active: #808080  !default;
 $usx-carousel-dot-gap:          0.5rem   !default;
+$usx-carousel-focus-outline-color:       #2491ff !default;
+$usx-carousel-card-media-background-color: #f0f0f0 !default;
 
 
 // ── Component tokens: SideNav ─────────────────────────────────────────────
@@ -393,3 +399,21 @@ $usx-step-indicator-segment-current-color: $color-primary-darker !default;
 // ── Component tokens: Table ───────────────────────────────────────────
 $usx-table-grouped-row-bg-color: $color-primary-lightest !default;
 $usx-table-grouped-row-text-color: $color-text !default;
+
+// ── Component tokens: Task List ───────────────────────────────────────
+$usx-task-list-border-color: #d8d8d8 !default;
+$usx-task-list-hover-background-color: #e5e5e5 !default;
+$usx-task-list-link-color: #005ea2 !default;
+
+// ── Component tokens: Attribution ─────────────────────────────────────
+$usx-attribution-secondary-color: #757575 !default;
+
+// ── Component tokens: Block ───────────────────────────────────────────
+$usx-block-callout-background-color: #e0e0e0 !default;
+
+// ── Component tokens: Clickable ───────────────────────────────────────
+$usx-clickable-focus-outline-color: #2491ff !default;
+$usx-clickable-hover-color: #005ea2 !default;
+
+// ── Component tokens: Misc Banner ─────────────────────────────────────
+$usx-misc-banner-focus-outline-color: #9bdaf1 !default;

@@ -1,0 +1,7 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-required {
+  color: $color-error;
+  text-decoration: none !important;
+}

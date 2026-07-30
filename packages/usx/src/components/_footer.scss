@@ -1,0 +1,188 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern, no-descending-specificity -- Public USX classes use BEM naming; intentional cascade order. */
+.usx-footer {
+  @if $usx-footer-background-color {
+    background-color: $usx-footer-background-color;
+  }
+
+  @if $usx-footer-border-top {
+    border-top: $usx-footer-border-top;
+  }
+
+  @if $usx-footer-text-color {
+    color: $usx-footer-text-color;
+  }
+
+  // ── Nav columns (big footer) ──────────────────────────────────────────────
+  &__nav-column {
+    .usa-footer__primary-link {
+      @if $usx-footer-heading-color {
+        color: $usx-footer-heading-color;
+      }
+
+      &.usa-footer__primary-link--button {
+        @if $usx-footer-background-color {
+          background-color: $usx-footer-background-color;
+        }
+      }
+    }
+
+    .usa-footer__secondary-link a {
+      @if $usx-footer-link-color {
+        color: $usx-footer-secondary-link-color;
+      }
+
+      &:hover {
+        @if $usx-footer-link-hover-color {
+          color: $usx-footer-secondary-link-hover-color;
+        }
+      }
+    }
+  }
+
+  // ── Sign-up form ─────────────────────────────────────────────────────────
+  &__sign-up {
+    .usa-sign-up__heading {
+      @if $usx-footer-heading-color {
+        color: $usx-footer-heading-color;
+      }
+    }
+
+    .usa-button {
+      @if $usx-footer-sign-up-button-color {
+        background-color: $usx-footer-sign-up-button-color;
+      }
+    }
+  }
+
+  // ── Logo ─────────────────────────────────────────────────────────────────
+  &__logo {
+    .usa-footer__logo-heading,
+    a.usa-footer__logo-heading {
+      @if $usx-footer-heading-color {
+        color: $usx-footer-heading-color;
+      }
+
+      text-decoration: none;
+    }
+  }
+
+  // ── Social links ─────────────────────────────────────────────────────────
+  .usa-social-link {
+    @if $usx-footer-link-color {
+      color: $usx-footer-link-color;
+    }
+
+    @if $usx-footer-social-radius {
+      border-radius: $usx-footer-social-radius;
+    }
+
+    &:hover {
+      @if $usx-footer-social-hover-color {
+        background-color: $usx-footer-social-hover-color;
+      }
+
+      @if $usx-footer-social-hover-border {
+        border: $usx-footer-social-hover-border;
+      }
+
+      @if $usx-footer-social-hover-outline {
+        outline: $usx-footer-social-hover-outline;
+        outline-offset: -2px;
+      }
+    }
+
+    .usa-social-link__icon {
+      @if $usx-footer-social-icon-filter {
+        filter: $usx-footer-social-icon-filter;
+      }
+    }
+  }
+
+  // ── Contact / address ─────────────────────────────────────────────────────
+  &__contact {
+
+    &-info {
+        justify-content: end;
+    }
+
+    .usa-footer__contact-heading {
+      @if $usx-footer-heading-color {
+        color: $usx-footer-heading-color;
+      }
+    }
+
+    a {
+      @if $usx-footer-link-color {
+        color: $usx-footer-link-color;
+      }
+
+      &:hover {
+        @if $usx-footer-link-hover-color {
+          color: $usx-footer-link-hover-color;
+        }
+      }
+    }
+  }
+
+  // ── Secondary section background ─────────────────────────────────────────
+  .usa-footer__secondary-section {
+    @if $usx-footer-secondary-bg-color {
+      background-color: $usx-footer-secondary-bg-color;
+    }
+
+    @if $usx-footer-secondary-section-border-top {
+      border-top: $usx-footer-secondary-section-border-top;
+    }
+  }
+
+  .usa-footer__primary-section {
+    @if $usx-footer-primary-bg-color {
+      background-color: $usx-footer-primary-bg-color;
+    }
+
+    @if $usx-footer-primary-section-border-top {
+      border-top: $usx-footer-primary-section-border-top;
+    }
+  }
+
+  // ── Primary-section nav links ────────────────────────────────────────────
+  .usa-footer__nav {
+    a.usa-footer__primary-link {
+      @if $usx-footer-link-color {
+        color: $usx-footer-link-color;
+      }
+
+      &:hover {
+        @if $usx-footer-link-hover-color {
+          color: $usx-footer-link-hover-color;
+        }
+      }
+    }
+  }
+}
+
+
+
+// ── Return to top ────────────────────────────────────────────────────────
+.usx-link.usx-footer__return-to-top {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 0.2rem;
+
+  @if $usx-footer-link-color {
+    color: $usx-footer-link-color !important;
+  }
+
+  &:visited {
+    color: unset !important;
+  }
+
+  &:hover {
+    @if $usx-footer-link-hover-color {
+      color: $usx-footer-link-hover-color !important;
+    }
+  }
+}

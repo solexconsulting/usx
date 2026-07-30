@@ -26,7 +26,6 @@ export { default as AvatarGroup } from './components/avatar-group';
 export { default as BackToTop } from './components/back-to-top';
 export { default as Banner } from './components/banner';
 export { default as Block } from './components/block';
-export { default as Branding } from './components/branding';
 export { default as Breadcrumb } from './components/breadcrumb';
 export { default as Button } from './components/button';
 export { default as ButtonGroup } from './components/button-group';
@@ -36,6 +35,7 @@ export { default as CardGroup } from './components/card-group';
 export { default as Carousel } from './components/carousel';
 export { default as CharacterCount } from './components/character-count';
 export { default as Checkbox } from './components/checkbox';
+export { default as Clickable } from './components/clickable';
 export { default as Code } from './components/code';
 export { default as Collection } from './components/collection';
 export { default as Combobox } from './components/combobox';
@@ -74,7 +74,6 @@ export { default as Required } from './components/required';
 export { default as Search } from './components/search';
 export { default as Section } from './components/section';
 export { default as Select } from './components/select';
-export { default as Sidenav } from './components/sidenav';
 export { default as SiteAlert } from './components/site-alert';
 export { default as Skipnav } from './components/skipnav';
 export { default as Spinner } from './components/spinner';
@@ -86,11 +85,37 @@ export { default as Switch } from './components/switch';
 export { default as Table } from './components/table';
 export { default as Tag } from './components/tag';
 export { default as TagGroup } from './components/tag-group';
+export { default as TaskList } from './components/task-list';
 export { default as TextArea } from './components/text-area';
 export { default as TimePicker } from './components/time-picker';
 export { default as Toggle } from './components/toggle';
 export { default as Tooltip } from './components/tooltip';
-export { default as Utilities } from './components/utilities';
 export { default as Villain } from './components/villain';
 // AUTO-GENERATED-EXPORTS END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

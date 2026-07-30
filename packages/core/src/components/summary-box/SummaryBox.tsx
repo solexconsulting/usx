@@ -1,6 +1,5 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import './summary-box.scss';
 
 export interface SummaryBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   id?: string;

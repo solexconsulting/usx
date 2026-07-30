@@ -1,0 +1,55 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-task-list {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    border-bottom: 1px solid $usx-task-list-border-color;
+
+    &:first-child {
+      border-top: .125rem solid $usx-task-list-border-color;
+    }
+
+    &:last-child {
+      border-bottom: .125rem solid $usx-task-list-border-color;
+    }
+  }
+
+  .usx-task-list__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: .5rem;
+    padding: .5rem;
+
+    @media (width >= 40em) {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    &:hover {
+      background-color: $usx-task-list-hover-background-color;
+    }
+  }
+
+  .usx-task-list__link {
+    color: $usx-task-list-link-color;
+    font-size: 1.31rem !important;
+    line-height: 1;
+  }
+
+  .usa-tag.usx-tag {
+    margin-right: 0;
+    flex-shrink: 0;
+  }
+
+  .usx-task-list__hint {
+    margin-top: .125rem;
+  }
+}
+/* stylelint-enable selector-class-pattern */

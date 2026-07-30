@@ -1,7 +1,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
-import './icon-list.scss';
 
 export interface IconListItem {
   iconName: string;

@@ -1,2 +1,2 @@
 // Auto-generated — do not edit by hand. Run: node scripts/generate-exports.cjs
-export { default } from './Attribution';
+export { default } from './Attribution.tsx';

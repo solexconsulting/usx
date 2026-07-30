@@ -1,6 +1,5 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import './form-group.scss';
 
 export interface FormGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;

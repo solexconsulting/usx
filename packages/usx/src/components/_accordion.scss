@@ -1,0 +1,22 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-accordion {
+  @if $usx-accordion-accent-color {
+    .usa-accordion__button {
+      background-color: $usx-accordion-accent-color;
+    }
+
+    &.usa-accordion--bordered {
+      .usa-accordion__content {
+        border-color: $usx-accordion-accent-color;
+      }
+    }
+  }
+
+  @if $usx-accordion-content-background {
+    .usa-accordion__content {
+      background-color: $usx-accordion-content-background;
+    }
+  }
+}

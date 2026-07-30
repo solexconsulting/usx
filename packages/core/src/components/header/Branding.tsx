@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from '../image/Image';
-import './branding.scss';
 import ClassNames from 'classnames';
 
 export interface BrandingLogoSource {

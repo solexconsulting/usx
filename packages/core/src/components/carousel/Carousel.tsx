@@ -1,6 +1,5 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import './carousel.scss';
 
 export interface SlideProps extends React.HTMLAttributes<HTMLElement> {
   id?: string;

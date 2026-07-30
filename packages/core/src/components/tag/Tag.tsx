@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
-import './tag.scss';
 
 export type TagProps = {
   id?: string;
@@ -58,7 +57,7 @@ const Tag: React.FC<TagProps> = ({
 
   return (
     <span id={id} className={classes} {...props}>
-      {icon && <Icon name={icon} size={3} />} {children || value}
+      {icon && <Icon name={icon} size={big ? 3 : 2} />} {children || value}
       {dismissible && (
         <button
           type="button"

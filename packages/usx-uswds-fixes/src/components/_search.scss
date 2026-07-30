@@ -1,0 +1,21 @@
+/* stylelint-disable selector-class-pattern -- USWDS class names use their own BEM convention. */
+
+// Fix: enlarge the default (non-small) search submit icon button hit area.
+.usa-search:not(.usa-search--small) {
+  .usa-search__submit-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    min-width: 3rem;
+  }
+
+  @media screen and (width >= 30em) {
+    .usa-search__submit-icon {
+      width: 3rem;
+      height: 2rem;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}

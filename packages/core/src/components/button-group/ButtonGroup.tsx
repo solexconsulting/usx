@@ -2,8 +2,6 @@ import React from 'react';
 import ClassNames from 'classnames';
 import Button from '../button/Button';
 import type { ButtonProps } from '../button/Button';
-import './button-group.scss';
-
 export interface ButtonGroupProps extends React.HTMLAttributes<HTMLUListElement> {
   items?: ButtonProps[];
   segmented?: boolean;

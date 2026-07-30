@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './memorable-date.scss';
 
 export default function MemorableDate({ children = null, className = '', ...props }) {
   const classes = ['usx-memorable-date', className].filter(Boolean).join(' ');

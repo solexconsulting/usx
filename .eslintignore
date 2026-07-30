@@ -1,6 +1,6 @@
 node_modules/
 venv/
-packages/core/src/stories/
+packages/usx-stories/src/stories/
 scripts/templates/
 **/storybook-static/
 **/dist/

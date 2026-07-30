@@ -1,0 +1,10 @@
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usa-search .usx-input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.usa-search .usa-button.usx-button {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}

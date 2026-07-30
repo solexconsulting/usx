@@ -1,0 +1,56 @@
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+
+$usx-triangle-size: 5px;
+
+.usx-tooltip {
+  position: relative;
+  display: inline-block;
+
+  // Override USWDS default of display:none — we control visibility via CSS hover
+  .usa-tooltip__body {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    margin: 0;
+
+    // Replace JS-injected inline positioning with CSS transforms
+    &--top {
+      bottom: calc(100% + #{$usx-triangle-size});
+      left: 50%;
+      transform: translateX(-50%);
+      top: auto;
+    }
+
+    &--bottom {
+      top: calc(100% + #{$usx-triangle-size});
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: auto;
+    }
+
+    &--right {
+      left: calc(100% + #{$usx-triangle-size});
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &--left {
+      right: calc(100% + #{$usx-triangle-size});
+      left: auto;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &:hover .usa-tooltip__body,
+  &:focus-within .usa-tooltip__body {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &:has(.usa-button) {
+    .usa-button {
+      margin-right: 0;
+    }
+  }
+}

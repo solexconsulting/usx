@@ -4,7 +4,6 @@ import ButtonGroup from '../button-group/ButtonGroup';
 import Tag from '../tag/Tag';
 import Image from '../image/Image';
 import Carousel from '../carousel/Carousel';
-import './card.scss';
 
 export interface CardTag {
   value: string;

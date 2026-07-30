@@ -1,6 +1,5 @@
 import React, { ReactNode, HTMLAttributes } from 'react';
 import ClassNames from 'classnames';
-import './layout.scss';
 
 // ── Sub-components ──────────────────────────────────────────────────────────
 

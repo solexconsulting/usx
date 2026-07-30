@@ -1,6 +1,5 @@
 import React, { ReactNode, HTMLAttributes, useId } from 'react';
 import Icon from '../icon/Icon';
-import './misc-banner.scss';
 
 export interface MiscBannerProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;

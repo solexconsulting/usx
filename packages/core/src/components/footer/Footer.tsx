@@ -3,7 +3,6 @@ import Branding, { BrandingProps } from '../header/Branding';
 import Input from '../input/Input';
 import Button from '../button/Button';
 import Icon from '../icon/Icon';
-import './footer.scss';
 import ClassNames from 'classnames';
 
 // ── Sub-components ──────────────────────────────────────────────────────────

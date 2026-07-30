@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import Clickable from '../clickable/Clickable';
 import Tag, { type TagProps } from '../tag/Tag';
-import './task-list.scss';
 
 export interface Task {
     name: string;

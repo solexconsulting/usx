@@ -1,0 +1,25 @@
+@keyframes usx-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-spinner {
+  animation: usx-spin 800ms infinite linear;
+  will-change: transform;
+
+  @media (forced-colors: active) {
+    forced-color-adjust: auto;
+  }
+}
+
+.usx-spinner--size-1 {
+  height: .75em;
+  width: .75em;
+}
+/* stylelint-enable selector-class-pattern */

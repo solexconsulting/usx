@@ -1,7 +1,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
-import './text-area.scss';
 
 export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: React.ReactNode;

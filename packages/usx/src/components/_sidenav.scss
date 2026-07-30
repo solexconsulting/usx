@@ -1,0 +1,46 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-layout {
+  .usx-sidenav {
+    margin-top: 2rem;
+  }
+}
+
+.usx-sidenav {
+  &.usx-sidenav--sticky {
+    position: sticky;
+    top: 2rem;
+  }
+
+  a {
+    &.usa-current {
+      @if $usx-sidenav-current-color {
+        color: $usx-sidenav-current-color;
+      }
+
+      &::after {
+        @if $usx-sidenav-current-color {
+          background-color: $usx-sidenav-current-color;
+        }
+      }
+    }
+
+    &:not(.usa-button, .usa-current) {
+      @if $usx-sidenav-link-color {
+        color: $usx-sidenav-link-color;
+      }
+
+      &:hover {
+        @if $usx-sidenav-link-hover-color {
+          color: $usx-sidenav-link-hover-color;
+        }
+      }
+    }
+  }
+}
+
+// Adjust sticky positioning when nav is present at the same level as layout
+.usx-nav--sticky ~ .usx-layout .usx-sidenav--sticky {
+  top: 5rem;
+}

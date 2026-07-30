@@ -1,6 +1,5 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import './sidenav.scss';
 
 export interface SideNavItemType {
   text: string;
