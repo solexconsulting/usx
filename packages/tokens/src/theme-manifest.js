@@ -161,9 +161,9 @@ export const themeManifest = [
   // ── Component tokens (hardcoded-hex promotions) ───────────────────────────
   component('usx-link-visited-color', '#54278f'),
   component('usx-summary-box-link-visited-color', '#c254ee'),
-  component('usx-accordion-accent-color', '#87c5ff'),
-  component('usx-accordion-content-background', '#d7ebff'),
-  component('usx-banner-after-color', '#2491ff'),
+  component('usx-accordion-accent-color', '#f0f0f0', 'color-base-200'),
+  component('usx-accordion-content-background', '#ffffff', 'color-base-100'),
+  component('usx-banner-after-color', '#005ea2', 'color-primary'),
   component('usx-carousel-dot-color', '#c0c0c0'),
   component('usx-carousel-dot-color-hover', '#a0a0a0', 'usx-carousel-dot-color'),
   component('usx-carousel-dot-color-active', '#808080', 'usx-carousel-dot-color'),

@@ -541,9 +541,13 @@ $usx-checkbox-radius-var: null !default;
 $usx-checkbox-border-radius: usx-var($usx-checkbox-radius-var, $radius-selector) !default;
 
 // ── Component tokens: Banner ─────────────────────────────────────────────────
-$usx-banner-background-color:  $color-primary-darkest !default;
-$usx-banner-text-color:        $color-light-text     !default;
-$usx-banner-action-color:      $color-light-text     !default;
+// Matches USWDS defaults: background is "base-lightest" (a light gray bar),
+// text auto-contrasts to dark (left null so the ambient/base text color
+// shows through, same as USWDS's own set-text-from-bg auto-contrast), and
+// the "Here's how you know" action link/chevron use the default link color.
+$usx-banner-background-color:  $color-base-200 !default;
+$usx-banner-text-color:        null            !default;
+$usx-banner-action-color:      $color-primary  !default;
 $usx-banner-after-color-var: null !default;
 $usx-banner-after-color: usx-var($usx-banner-after-color-var) !default;
 

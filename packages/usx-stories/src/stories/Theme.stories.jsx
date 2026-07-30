@@ -1,5 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
+import navigation from "@uswds/uswds/js/usa-header";
+import accordion from "@uswds/uswds/js/usa-accordion";
 import {
   themeManifest,
   baseColorTokens,
@@ -9,6 +11,7 @@ import {
   hexToHsl,
   hslToHex
 } from '../utils/themeDerive.js';
+
 
 // Showcase components
 import Accordion from '../../../core/src/components/accordion/Accordion.jsx';
@@ -23,6 +26,8 @@ import Clickable from '../../../core/src/components/clickable/Clickable.tsx';
 import Code from '../../../core/src/components/code/Code.tsx';
 import CopyToClipboard from '../../../core/src/components/copy-to-clipboard/CopyToClipboard.tsx';
 import Eyebrow from '../../../core/src/components/eyebrow/Eyebrow.tsx';
+import Footer from '../../../core/src/components/footer/Footer.tsx';
+import Header from '../../../core/src/components/header/Header.tsx';
 import Hero from '../../../core/src/components/hero/Hero.tsx';
 import IconList from '../../../core/src/components/icon-list/IconList.tsx';
 import Input from '../../../core/src/components/input/Input.tsx';
@@ -205,15 +210,23 @@ const PLAYGROUND_CSS = `
   padding: .6rem; border-radius: 8px; border: 1px solid #2d3339; background: #1e2227; color: #d4d8de; resize: vertical;
 }
 .usx-pg-textarea:focus { outline: none; border-color: var(--pg-accent); }
+.usx-pg-container { display: flex; align-items: flex-start; }
+.usx-pg-sidebar { width: 21rem; flex-shrink: 0; height: 100vh; position: sticky; top: 0; }
+.usx-pg-sidebar-body { flex: 1; min-height: 0; overflow-y: auto; }
+.usx-pg-main { padding: 1.5rem; min-height: 100vh; }
+@media (max-width: 720px) {
+  .usx-pg-container { flex-direction: column; }
+  .usx-pg-sidebar {
+    width: 100%; height: auto; position: static; top: auto;
+    border-right: none; border-bottom: 1px solid var(--pg-line);
+  }
+  .usx-pg-sidebar-body { flex: none; overflow-y: visible; }
+  .usx-pg-main { padding: 1rem; min-height: 0; }
+}
 `;
 
 const ui = {
   sidebar: {
-    width: '21rem',
-    flexShrink: 0,
-    height: '100vh',
-    position: 'sticky',
-    top: 0,
     display: 'flex',
     flexDirection: 'column',
     borderRight: '1px solid #e5e7eb',
@@ -229,9 +242,6 @@ const ui = {
     background: '#fafbfc'
   },
   sidebarBody: {
-    flex: 1,
-    minHeight: 0,
-    overflowY: 'auto',
     padding: '0.2rem 1.1rem 1.1rem'
   },
   chipRow: { display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0.35rem 0' },
@@ -316,6 +326,25 @@ const sideNavItems = [
   { text: 'Another page', href: '#' }
 ];
 
+const headerNavSections = [
+  { title: 'Section one', href: '#' },
+  {
+    title: 'Section two',
+    links: [
+      { text: 'Sub-link one', href: '#' },
+      { text: 'Sub-link two', href: '#' }
+    ]
+  },
+  { title: 'Section three', href: '#' }
+];
+
+const footerNavLinks = [
+  { text: 'Primary link', href: '#' },
+  { text: 'Primary link', href: '#' },
+  { text: 'Primary link', href: '#' },
+  { text: 'Primary link', href: '#' }
+];
+
 const taskListTasks = [
   { name: 'Submit application', href: '#', tag: { value: 'Done', color: 'success-light', icon: 'check' } },
   { name: 'Upload documents', href: '#', tag: { value: 'In progress', color: 'warning-light' } }
@@ -339,16 +368,36 @@ const tableData = [
 ];
 
 function Showcase() {
+  useEffect(() => {
+    accordion.off();
+    navigation.off();
+    // Turn on USWDS enhanced components using <component>.on()
+    accordion.on();
+    navigation.on();
+
+    return () => {
+      // Clean up USWDS components when the component unmounts
+      accordion.off();
+      navigation.off();
+    }
+  }, []);
+
   return (
     <div style={{ columnWidth: '22rem', columnGap: '1rem' }}>
 
-      <div style={{ ...ui.card, gap: 0, padding: 0, overflow: 'hidden', breakInside: 'avoid', columnSpan: 'all', marginBottom: '1rem' }}>
+      <div style={{ ...ui.card, gap: 0, padding: 0, overflow: 'visible', breakInside: 'avoid', columnSpan: 'all', marginBottom: '1rem' }}>
         <Banner tld=".gov" />
         <MiscBanner tone="test" badgeText="test" message="You are viewing a test site." importantLinkText="Production site" />
         <MiscBanner tone="dev" badgeText="dev" message="You are viewing a dev site." importantLinkText="Production site" />
         <MiscBanner tone="beta" badgeText="beta" message="You are viewing a beta site." importantLinkText="Production site" />
         <MiscBanner tone="error" badgeText="oops" message="This banner has no links." />
-        <SiteAlert variant="info" alertHeading="Site-wide notice" alertText="Scheduled maintenance this weekend." />
+        <Header
+          branding={{ title: 'Project name' }}
+          navSections={headerNavSections}
+          secondaryLinks={[{ text: 'Sign in', href: '#' }]}
+          searchConfig={{ id: 'theme-header-search' }}
+        />
+        <SiteAlert variant="info" alertHeading="Site-wide notice" alertText="Bringing something to your attention politely." />
         <Hero
           title="A hero heading"
           callout="Bring attention to a project priority"
@@ -389,7 +438,9 @@ function Showcase() {
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
         <h3 style={ui.cardTitle}>Table</h3>
-        <Table columns={tableColumns} data={tableData} striped caption="Founding documents" />
+        <div style={{ overflowX: 'auto' }}>
+          <Table columns={tableColumns} data={tableData} striped caption="Founding documents" />
+        </div>
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
@@ -501,6 +552,17 @@ function Showcase() {
           Everything taking up space in this box is clickable, but only the text below appears as a link.
           <Clickable.Link>I look clickable</Clickable.Link>
         </Clickable>
+      </div>
+
+      <div style={{ ...ui.card, gap: 0, padding: 0, overflow: 'hidden', breakInside: 'avoid', columnSpan: 'all' }}>
+        <Footer
+          variant="medium"
+          navLinks={footerNavLinks}
+          branding={{ title: 'Project name' }}
+          contactHeading="Agency name"
+          contactPhone="(800) 555-0100"
+          contactEmail="info@example.gov"
+        />
       </div>
     </div>
   );
@@ -625,9 +687,9 @@ function ThemePlayground() {
   const typographyTokens = themeManifest.filter((t) => t.group === 'typography');
 
   return (
-    <div className="usx-pg" style={{ display: 'flex', alignItems: 'flex-start' }}>
+    <div className="usx-pg usx-pg-container">
       <style>{PLAYGROUND_CSS}</style>
-      <aside style={ui.sidebar}>
+      <aside className="usx-pg-sidebar" style={ui.sidebar}>
         <div style={ui.sidebarHeader}>
           <h2 style={{ margin: '0 0 0.2rem', fontSize: '1.05rem' }}>Theme generator</h2>
           <p style={{ margin: '0 0 0.85rem', fontSize: '0.75rem', color: '#6b7280' }}>
@@ -660,7 +722,7 @@ function ThemePlayground() {
           </label>
         </div>
 
-        <div style={ui.sidebarBody}>
+        <div className="usx-pg-sidebar-body" style={ui.sidebarBody}>
           <Section title="Colors" open count={mainColors.length}>
             {mainColors.map(renderColor)}
           </Section>
@@ -713,13 +775,12 @@ function ThemePlayground() {
 
       <style>{liveThemeCss}</style>
       <main
+        className="usx-pg-main"
         style={{
           flex: 1,
           minWidth: 0,
-          padding: '1.5rem',
           background: resolved['color-base-200'],
           color: resolved['color-text'],
-          minHeight: '100vh',
           boxSizing: 'border-box'
         }}
       >
