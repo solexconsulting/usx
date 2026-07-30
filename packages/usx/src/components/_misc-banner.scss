@@ -23,7 +23,7 @@
       font-weight: 700;
       text-transform: uppercase;
       padding: 6px 11px 5px;
-      border-radius: 6px;
+      border-radius: $usx-misc-banner-badge-radius;
       margin-right: 1.25rem;
     }
 
@@ -74,7 +74,11 @@
       }
 
       .usx-misc-banner__dropdown-toggle:focus + .usx-misc-banner__dropdown-button {
-        outline: 0.25rem solid $usx-misc-banner-focus-outline-color;
+        outline: 0.25rem solid #9bdaf1;
+
+        @if $usx-misc-banner-focus-outline-color {
+          outline-color: $usx-misc-banner-focus-outline-color;
+        }
       }
 
       .usx-misc-banner__dropdown-button {

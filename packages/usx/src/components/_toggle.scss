@@ -20,7 +20,10 @@
 
   &__input:checked + .usa-button.usx-button.usa-button--outline {
     background: $color-primary-active;
-    outline: 2px solid $color-primary-active inset;
+
+    @if $color-primary-active {
+      outline: 2px solid $color-primary-active inset;
+    }
   }
 
   &__input:disabled + .usa-button.usx-button,

@@ -14,6 +14,14 @@
     "./variables": {
       "sass": "./src/_variables.scss"
     },
+    "./hooks": {
+      "sass": "./dist/_hooks.scss"
+    },
+    "./theme.css": "./dist/theme.css",
+    "./theme-manifest": {
+      "default": "./src/theme-manifest.js"
+    },
+    "./theme-manifest.json": "./dist/theme-manifest.json",
     "./tokens.css": "./dist/tokens.css"
   },
   "files": [

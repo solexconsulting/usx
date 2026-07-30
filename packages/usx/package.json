@@ -7,6 +7,9 @@
     ".": {
       "sass": "./src/index.scss"
     },
+    "./themed": {
+      "sass": "./src/themed.scss"
+    },
     "./utilities": {
       "sass": "./src/_utilities.scss"
     }
@@ -18,7 +21,8 @@
     "@solexllc/usx-theme": "workspace:*"
   },
   "scripts": {
-    "build": "sass --pkg-importer=node --no-source-map src/index.scss dist/usx.css"
+    "build": "sass --pkg-importer=node --no-source-map src/index.scss dist/usx.css && sass --pkg-importer=node --no-source-map src/themed.scss dist/usx-themed.css",
+    "test": "node test/theme-parity.mjs && node test/theme-manifest-check.mjs"
   },
   "devDependencies": {
     "sass": "^1.98.0"

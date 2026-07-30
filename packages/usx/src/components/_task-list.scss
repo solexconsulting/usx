@@ -8,14 +8,26 @@
   list-style: none;
 
   li {
-    border-bottom: 1px solid $usx-task-list-border-color;
+    border-bottom: 1px solid #e2e8f0;
+
+    @if $usx-task-list-border-color {
+      border-bottom-color: $usx-task-list-border-color;
+    }
 
     &:first-child {
-      border-top: .125rem solid $usx-task-list-border-color;
+      border-top: .125rem solid #e2e8f0;
+
+      @if $usx-task-list-border-color {
+        border-top-color: $usx-task-list-border-color;
+      }
     }
 
     &:last-child {
-      border-bottom: .125rem solid $usx-task-list-border-color;
+      border-bottom: .125rem solid #e2e8f0;
+
+      @if $usx-task-list-border-color {
+        border-bottom-color: $usx-task-list-border-color;
+      }
     }
   }
 
@@ -33,14 +45,22 @@
     }
 
     &:hover {
-      background-color: $usx-task-list-hover-background-color;
+      background-color: #e2e8f0;
+
+      @if $usx-task-list-hover-background-color {
+        background-color: $usx-task-list-hover-background-color;
+      }
     }
   }
 
   .usx-task-list__link {
-    color: $usx-task-list-link-color;
+    color: #005ea2;
     font-size: 1.31rem !important;
     line-height: 1;
+
+    @if $usx-task-list-link-color {
+      color: $usx-task-list-link-color;
+    }
   }
 
   .usa-tag.usx-tag {

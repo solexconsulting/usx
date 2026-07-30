@@ -1,73 +1,208 @@
 // _variables.scss — Design token Sass variables.
 // @use this file to access tokens without generating any CSS output.
 //
-// All variables use !default so consumers can override them before @use-ing
-// this file via the `with` syntax:
-//   @use '@agency-ui-platform/tokens/src/_variables' with ($color-primary: red);
+// THEMING ARCHITECTURE — no static values live in this file:
+//   * Every themeable token publishes as `usx-var($usx-<token>-var)`:
+//       - hook null (the default) → the token is null → component SCSS
+//         declarations that reference it are dropped by Sass. We don't write
+//         rules unless we need to; USWDS defaults show through.
+//       - hook set to a custom property name → the token compiles to
+//         `var(--usx-*)` with NO fallback. Runtime values come from the
+//         generated theme stylesheet (pkg:@solexllc/usx-theme dist/theme.css),
+//         which defines every custom property on :root from the manifest.
+//   * Enable theming by loading 'pkg:@solexllc/usx-theme/hooks' (generated —
+//     sets every hook) before component styles, or set individual hooks via
+//     `with (...)`. The presence of a hook is the only switch.
+//   * USX-only (custom) components need defaults to be usable without a
+//     theme; those defaults are baked into each component's own SCSS file
+//     with an "override when the token is set" rule — never here.
+//   * Compile-time only (CSS cannot theme these at runtime): breakpoints,
+//     layout widths, media queries, and the units() function.
+//
+// NOTE: derived shades (darker/lighter/hover/active/...) are explicit,
+// first-class tokens — overriding a base color does NOT recompute its shades.
+// Override each shade you care about.
 
-@use "sass:color";
+// Resolves a themeable token: var(<hook>) when a hook is configured;
+// otherwise $fallback (used to chain advanced tokens to their group token).
+@function usx-var($hook, $fallback: null) {
+  @if $hook != null {
+    @return var(#{$hook});
+  }
 
-// ── Layout ─────────────────────────────────────────────────────────────────
+  @return $fallback;
+}
+
+// Guards composite values: returns $value only when $condition is non-null,
+// so partial composites like `1px solid null` never reach the CSS output.
+@function usx-when($condition, $value) {
+  @if $condition == null {
+    @return null;
+  }
+
+  @return $value;
+}
+
+// ── Layout (compile-time only) ───────────────────────────────────────────────
 $max-layout-width: 60rem !default;
 $max-sidebar-width: 16rem !default;
 $dynamic-content-width: calc(50% + 22rem) !default;
 
-// ── Breakpoints ─────────────────────────────────────────────────────────────
+// ── Breakpoints (compile-time only) ─────────────────────────────────────────
 $breakpoint-mobile:  640px !default;
 $breakpoint-tablet:  640px !default;
 $breakpoint-desktop: 1024px !default;
 
 // ── Color — primitives ──────────────────────────────────────────────────────
-$color-light:              #ffffff !default;
-$color-primary:            #2563eb !default;
-$color-primary-darker:     color.adjust($color-primary, $lightness: -20%) !default;
-$color-primary-darkest:    color.adjust($color-primary, $lightness: -40%) !default;
-$color-primary-lighter:    color.adjust($color-primary, $lightness:  20%) !default;
-$color-primary-lightest:   color.adjust($color-primary, $lightness:  30%) !default;
-$color-primary-hover:      #5f85ec !default;
-$color-primary-active:     #1c3996 !default;
-$color-secondary:          #7c3aed !default;
-$color-secondary-hover:    #955df0 !default;
-$color-secondary-active:   #5b21b6 !default;
-$color-accent-cool:        #66b5ee !default;
-$color-accent-cool-light:  color.adjust($color-accent-cool, $lightness: 20%) !default;
-$color-accent-cool-hover:  #2695df !default;
-$color-accent-cool-active: #1175b3 !default;
-$color-accent-warm:        #dfb734 !default;
-$color-accent-warm-hover:  #e9aa22 !default;
-$color-accent-warm-active: #c7a01f !default;
-$color-base:               #71767a !default;
-$color-base-hover:         #565c65 !default;
-$color-base-active:        #3d4551 !default;
-$color-info:               #85d0ff !default;
-$color-warning:            #f8c41b !default;
-$color-success:            #2e8540 !default;
-$color-error:              #d54309      !default;
-$color-emergency:          #b51d09 !default;
-$color-background:         #f8fafc !default;
-$color-surface:            $color-light !default;
-$color-dark-bg:            color.adjust($color-primary, $lightness: -50%) !default;
-$color-beta:               #2e8540 !default;
-$color-test:               #7800af !default;
-$color-dev:                #ee9a2d !default;
+$usx-color-light-var: null !default;
+$color-light: usx-var($usx-color-light-var) !default;
 
+$usx-color-primary-var: null !default;
+$color-primary: usx-var($usx-color-primary-var) !default;
 
-// ── Color — additional primitives ──────────────────────────────────────────────
-$color-accent-cool-light:  color.adjust($color-accent-cool, $lightness: 20%) !default;
-$color-accent-warm-light:  color.adjust($color-accent-warm, $lightness: 20%) !default;
+$usx-color-primary-darker-var: null !default;
+$color-primary-darker: usx-var($usx-color-primary-darker-var) !default;
 
+$usx-color-primary-darkest-var: null !default;
+$color-primary-darkest: usx-var($usx-color-primary-darkest-var) !default;
+
+$usx-color-primary-lighter-var: null !default;
+$color-primary-lighter: usx-var($usx-color-primary-lighter-var) !default;
+
+$usx-color-primary-lightest-var: null !default;
+$color-primary-lightest: usx-var($usx-color-primary-lightest-var) !default;
+
+$usx-color-primary-hover-var: null !default;
+$color-primary-hover: usx-var($usx-color-primary-hover-var) !default;
+
+$usx-color-primary-active-var: null !default;
+$color-primary-active: usx-var($usx-color-primary-active-var) !default;
+
+$usx-color-secondary-var: null !default;
+$color-secondary: usx-var($usx-color-secondary-var) !default;
+
+$usx-color-secondary-darker-var: null !default;
+$color-secondary-darker: usx-var($usx-color-secondary-darker-var) !default;
+
+$usx-color-secondary-hover-var: null !default;
+$color-secondary-hover: usx-var($usx-color-secondary-hover-var) !default;
+
+$usx-color-secondary-active-var: null !default;
+$color-secondary-active: usx-var($usx-color-secondary-active-var) !default;
+
+$usx-color-accent-cool-var: null !default;
+$color-accent-cool: usx-var($usx-color-accent-cool-var) !default;
+
+$usx-color-accent-cool-light-var: null !default;
+$color-accent-cool-light: usx-var($usx-color-accent-cool-light-var) !default;
+
+$usx-color-accent-cool-hover-var: null !default;
+$color-accent-cool-hover: usx-var($usx-color-accent-cool-hover-var) !default;
+
+$usx-color-accent-cool-active-var: null !default;
+$color-accent-cool-active: usx-var($usx-color-accent-cool-active-var) !default;
+
+$usx-color-accent-warm-var: null !default;
+$color-accent-warm: usx-var($usx-color-accent-warm-var) !default;
+
+$usx-color-accent-warm-light-var: null !default;
+$color-accent-warm-light: usx-var($usx-color-accent-warm-light-var) !default;
+
+$usx-color-accent-warm-hover-var: null !default;
+$color-accent-warm-hover: usx-var($usx-color-accent-warm-hover-var) !default;
+
+$usx-color-accent-warm-active-var: null !default;
+$color-accent-warm-active: usx-var($usx-color-accent-warm-active-var) !default;
+
+$usx-color-base-var: null !default;
+$color-base: usx-var($usx-color-base-var) !default;
+
+$usx-color-base-darker-var: null !default;
+$color-base-darker: usx-var($usx-color-base-darker-var) !default;
+
+$usx-color-base-hover-var: null !default;
+$color-base-hover: usx-var($usx-color-base-hover-var) !default;
+
+$usx-color-base-active-var: null !default;
+$color-base-active: usx-var($usx-color-base-active-var) !default;
+
+$usx-color-info-var: null !default;
+$color-info: usx-var($usx-color-info-var) !default;
+
+$usx-color-info-darker-var: null !default;
+$color-info-darker: usx-var($usx-color-info-darker-var) !default;
+
+$usx-color-info-lighter-var: null !default;
+$color-info-lighter: usx-var($usx-color-info-lighter-var) !default;
+
+$usx-color-warning-var: null !default;
+$color-warning: usx-var($usx-color-warning-var) !default;
+
+$usx-color-warning-lighter-var: null !default;
+$color-warning-lighter: usx-var($usx-color-warning-lighter-var) !default;
+
+$usx-color-success-var: null !default;
+$color-success: usx-var($usx-color-success-var) !default;
+
+$usx-color-success-lighter-var: null !default;
+$color-success-lighter: usx-var($usx-color-success-lighter-var) !default;
+
+$usx-color-error-var: null !default;
+$color-error: usx-var($usx-color-error-var) !default;
+
+$usx-color-error-lighter-var: null !default;
+$color-error-lighter: usx-var($usx-color-error-lighter-var) !default;
+
+$usx-color-emergency-var: null !default;
+$color-emergency: usx-var($usx-color-emergency-var) !default;
+
+// Base surfaces (DaisyUI-inspired scale): base-100 = card/large surfaces,
+// base-200 = page background, base-300 = small surfaces (switch tracks,
+// callouts, media placeholders) and the standard border color.
+$usx-color-base-100-var: null !default;
+$color-base-100: usx-var($usx-color-base-100-var) !default;
+
+$usx-color-base-200-var: null !default;
+$color-base-200: usx-var($usx-color-base-200-var) !default;
+
+$usx-color-base-300-var: null !default;
+$color-base-300: usx-var($usx-color-base-300-var) !default;
+
+$usx-color-dark-bg-var: null !default;
+$color-dark-bg: usx-var($usx-color-dark-bg-var) !default;
+
+$usx-color-dark-bg-darker-var: null !default;
+$color-dark-bg-darker: usx-var($usx-color-dark-bg-darker-var) !default;
+
+$usx-color-dark-bg-lighter-var: null !default;
+$color-dark-bg-lighter: usx-var($usx-color-dark-bg-lighter-var) !default;
+
+$usx-color-beta-var: null !default;
+$color-beta: usx-var($usx-color-beta-var) !default;
+
+$usx-color-test-var: null !default;
+$color-test: usx-var($usx-color-test-var) !default;
+
+$usx-color-dev-var: null !default;
+$color-dev: usx-var($usx-color-dev-var) !default;
 
 // ── Color — text ────────────────────────────────────────────────────────────
-$color-text:           #0f172a !default;
-$color-light-text:     $color-light !default;
+$usx-color-text-var: null !default;
+$color-text: usx-var($usx-color-text-var) !default;
+
+$usx-color-light-text-var: null !default;
+$color-light-text: usx-var($usx-color-light-text-var) !default;
+
+$usx-color-text-base-var: null !default;
+$color-text-base: usx-var($usx-color-text-base-var) !default;
+
 $color-info-text:      null !default;
 $color-warning-text:   null !default;
 $color-success-text:   null !default;
 $color-error-text:     null !default;
 $color-emergency-text: null !default;
-$color-text-base:       $color-base !default;
 
-// ── Color map (used by _utilities.scss) ─────────────────────────────────────
+// ── Color map (used by usx utilities; null entries emit no classes) ─────────
 $colors: (
   'primary':        $color-primary,
   'primary-darker': $color-primary-darker,
@@ -87,13 +222,22 @@ $colors: (
 ) !default;
 
 // ── Spacing ─────────────────────────────────────────────────────────────────
-$spacing-xs: 0.25rem !default;
-$spacing-sm: 0.5rem  !default;
-$spacing-md: 1rem    !default;
-$spacing-lg: 1.5rem  !default;
-$spacing-xl: 2rem    !default;
+$usx-spacing-xs-var: null !default;
+$spacing-xs: usx-var($usx-spacing-xs-var) !default;
 
-// ── Spacing function ────────────────────────────────────────────────────────
+$usx-spacing-sm-var: null !default;
+$spacing-sm: usx-var($usx-spacing-sm-var) !default;
+
+$usx-spacing-md-var: null !default;
+$spacing-md: usx-var($usx-spacing-md-var) !default;
+
+$usx-spacing-lg-var: null !default;
+$spacing-lg: usx-var($usx-spacing-lg-var) !default;
+
+$usx-spacing-xl-var: null !default;
+$spacing-xl: usx-var($usx-spacing-xl-var) !default;
+
+// ── Spacing function (compile-time only) ────────────────────────────────────
 @function units($value) {
   @return $value * 8px;
 }
@@ -130,32 +274,72 @@ $spacing-xl: 2rem    !default;
 }
 
 // ── Typography ───────────────────────────────────────────────────────────────
-$typography-fontFamilyBase:    Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif !default;
-$typography-fontSizeBase:      1rem !default;
-$typography-fontWeightRegular: 400  !default;
-$typography-fontWeightBold:    700  !default;
-$typography-lineHeightBase:    1.5  !default;
+$usx-typography-font-family-base-var: null !default;
+$typography-fontFamilyBase: usx-var($usx-typography-font-family-base-var) !default;
 
-// ── Radius ───────────────────────────────────────────────────────────────────
-$r-none: 0       !default;
-$r-sm:   0.25rem !default;
-$r-md:   0.5rem  !default;
-$r-lg:   1.0rem  !default;
-$r-xl:   2.0rem  !default;
-$r-full: 100%    !default;
+$usx-typography-font-size-base-var: null !default;
+$typography-fontSizeBase: usx-var($usx-typography-font-size-base-var) !default;
+
+$usx-typography-font-weight-regular-var: null !default;
+$typography-fontWeightRegular: usx-var($usx-typography-font-weight-regular-var) !default;
+
+$usx-typography-font-weight-bold-var: null !default;
+$typography-fontWeightBold: usx-var($usx-typography-font-weight-bold-var) !default;
+
+$usx-typography-line-height-base-var: null !default;
+$typography-lineHeightBase: usx-var($usx-typography-line-height-base-var) !default;
+
+// ── Radius — primitives (reserved for utility classes) ──────────────────────
+$usx-radius-sm-var: null !default;
+$r-sm: usx-var($usx-radius-sm-var) !default;
+
+$usx-radius-md-var: null !default;
+$r-md: usx-var($usx-radius-md-var) !default;
+
+$usx-radius-lg-var: null !default;
+$r-lg: usx-var($usx-radius-lg-var) !default;
+
+$usx-radius-xl-var: null !default;
+$r-xl: usx-var($usx-radius-xl-var) !default;
+
+$usx-radius-full-var: null !default;
+$r-full: usx-var($usx-radius-full-var) !default;
+
+// Semantic radii (DaisyUI-inspired): components pick a radius by group, so all
+// boxes, all fields, all selectors, and all square components are themed
+// independently with one variable each. Per-component "advanced" hooks
+// (--usx-<component>-radius) override the group.
+$usx-radius-box-var: null !default; // boxes: cards, code blocks, summary boxes, hero callouts, images
+$radius-box: usx-var($usx-radius-box-var) !default;
+
+$usx-radius-field-var: null !default; // fields: buttons, inputs, selects, comboboxes, text areas
+$radius-field: usx-var($usx-radius-field-var) !default;
+
+$usx-radius-selector-var: null !default; // selectors: checkboxes, badges/tags, small controls
+$radius-selector: usx-var($usx-radius-selector-var) !default;
+
+$usx-radius-none-var: null !default; // square-by-default components: accordions, alerts
+$radius-none: usx-var($usx-radius-none-var) !default;
 
 // ── Border ───────────────────────────────────────────────────────────────────
-$border-width-thin:  1px !default;
-$border-width-thick: 4px !default;
-$sm-border: 1px solid $color-dark-bg !default;
-$md-border: 2px solid $color-dark-bg !default;
-$lg-border: 4px solid $color-dark-bg !default;
-$sm-border-light: 1px solid $color-base !default;
-$md-border-light: 2px solid $color-base !default;
-$lg-border-light: 4px solid $color-base !default;
+$usx-border-width-thin-var: null !default;
+$border-width-thin: usx-var($usx-border-width-thin-var) !default;
+
+$usx-border-width-thick-var: null !default;
+$border-width-thick: usx-var($usx-border-width-thick-var) !default;
+
+// Composite borders are null unless their color part resolves (a `1px solid`
+// fragment must never reach the CSS output).
+$sm-border: usx-when($color-dark-bg, $border-width-thin solid $color-dark-bg) !default;
+$md-border: usx-when($color-dark-bg, 2px solid $color-dark-bg) !default;
+$lg-border: usx-when($color-dark-bg, $border-width-thick solid $color-dark-bg) !default;
+$sm-border-light: usx-when($color-base, $border-width-thin solid $color-base) !default;
+$md-border-light: usx-when($color-base, 2px solid $color-base) !default;
+$lg-border-light: usx-when($color-base, $border-width-thick solid $color-base) !default;
 
 // ── Component tokens: Button ─────────────────────────────────────────────────
-$usx-button-border-radius: $r-md !default;
+$usx-button-radius-var: null !default;
+$usx-button-border-radius: usx-var($usx-button-radius-var, $radius-field) !default;
 $usx-button-box-shadow: null !default;
 $usx-button-primary-background-color: $color-primary !default;
 $usx-button-primary-background-color-hover: $color-primary-hover !default;
@@ -188,7 +372,7 @@ $usx-button-accent-warm-border-color: null !default;
 $usx-button-base-background-color: $color-base !default;
 $usx-button-base-background-color-hover: $color-base-hover !default;
 $usx-button-base-background-color-active: $color-base-active !default;
-$usx-button-base-color-: null !default;
+$usx-button-base-color: null !default;
 $usx-button-base-color-hover: null !default;
 $usx-button-base-color-active: null !default;
 $usx-button-base-border-color: null !default;
@@ -200,39 +384,40 @@ $usx-button-outline-color-hover: $color-primary-hover !default;
 $usx-button-outline-color-active: $color-primary-active !default;
 $usx-button-outline-box-shadow: 0 0 0 2px currentColor inset !default;
 
-// ── Component tokens: Avatar Group ───────────────────────────────────────────
-$usx-avatar-group-overlap-size: 1rem !default;
-$usx-avatar-group-overlap-box-shadow: 0 0 2px 1px $color-light !default;
+// ── Component tokens: Avatar Group (custom; defaults baked in SCSS) ─────────
+$usx-avatar-group-overlap-size: null !default;
+$usx-avatar-group-overlap-box-shadow: usx-when($color-light, 0 0 2px 1px $color-light) !default;
 
 // ── Component tokens: Button Group ───────────────────────────────────────────
-$usx-button-group-segmented-divider-primary:    1px solid color.adjust($color-primary, $lightness: -20%) !default;
-$usx-button-group-segmented-divider-secondary:  1px solid color.adjust($color-secondary, $lightness: -20%) !default;
-$usx-button-group-segmented-divider-accent-cool: 1px solid $color-accent-cool-light !default;
-$usx-button-group-segmented-divider-accent-warm: 1px solid $color-accent-warm-light !default;
-$usx-button-group-segmented-divider-base:       1px solid color.adjust($color-base, $lightness: -20%) !default;
+$usx-button-group-segmented-divider-primary:     usx-when($color-primary-darker, 1px solid $color-primary-darker) !default;
+$usx-button-group-segmented-divider-secondary:   usx-when($color-secondary-darker, 1px solid $color-secondary-darker) !default;
+$usx-button-group-segmented-divider-accent-cool: usx-when($color-accent-cool-light, 1px solid $color-accent-cool-light) !default;
+$usx-button-group-segmented-divider-accent-warm: usx-when($color-accent-warm-light, 1px solid $color-accent-warm-light) !default;
+$usx-button-group-segmented-divider-base:        usx-when($color-base-darker, 1px solid $color-base-darker) !default;
 
 // ── Component tokens: Alert ───────────────────────────────────────────────────
 $usx-alert-background-color: null !default;
 $usx-alert-text-color: null !default;
 $usx-alert-border-color: null !default;
-$usx-alert-border-radius: $r-sm !default;
+$usx-alert-radius-var: null !default;
+$usx-alert-border-radius: usx-var($usx-alert-radius-var, $radius-none) !default;
 $usx-alert-box-shadow: null !default;
-$usx-alert-info-background-color: $color-info !default;
+$usx-alert-info-background-color: $color-info-lighter !default;
 $usx-alert-info-text-color: null !default;
 $usx-alert-info-link-color: null !default;
-$usx-alert-info-border-color: color.adjust($color-info, $lightness: -20%) !default;
-$usx-alert-warning-background-color: $color-warning !default;
+$usx-alert-info-border-color: $color-info !default;
+$usx-alert-warning-background-color: $color-warning-lighter !default;
 $usx-alert-warning-text-color: null !default;
 $usx-alert-warning-link-color: null !default;
-$usx-alert-warning-border-color: null !default;
-$usx-alert-success-background-color: $color-success !default;
-$usx-alert-success-text-color: $color-light-text !default;
-$usx-alert-success-link-color: $color-light-text !default;
-$usx-alert-success-border-color: null !default;
-$usx-alert-error-background-color: $color-error !default;
+$usx-alert-warning-border-color: $color-warning !default;
+$usx-alert-success-background-color: $color-success-lighter !default;
+$usx-alert-success-text-color: null !default;
+$usx-alert-success-link-color: null !default;
+$usx-alert-success-border-color: $color-success !default;
+$usx-alert-error-background-color: $color-error-lighter !default;
 $usx-alert-error-text-color: null !default;
-$usx-alert-error-link-color: $color-accent-warm !default;
-$usx-alert-error-border-color: null !default;
+$usx-alert-error-link-color: null !default;
+$usx-alert-error-border-color: $color-error !default;
 $usx-alert-emergency-background-color: $color-emergency !default;
 $usx-alert-emergency-text-color: $color-light-text !default;
 $usx-alert-emergency-link-color: null !default;
@@ -247,28 +432,30 @@ $usx-alert-heading-margin-block-end: null !default;
 $usx-alert-text-font-size: null !default;
 $usx-alert-text-line-height: null !default;
 
-// ── Component tokens: Hero ──────────────────────────────────────────────
-$usx-hero-min-height:        30rem                    !default;
-$usx-hero-bg-color:          $color-dark-bg           !default;
-$usx-hero-text-color:        $color-light             !default;
-$usx-hero-overlay-color:     rgba(0, 0, 0, 0.55)      !default;
-$usx-hero-padding-block:     4rem                     !default;
-$usx-hero-padding-inline:    $spacing-lg              !default;
-$usx-hero-callout-bg:        rgba(0, 0, 0, 0.6)       !default;
-$usx-hero-callout-max-width: 40rem                    !default;
-$usx-hero-callout-padding:   $spacing-xl              !default;
-$usx-hero-callout-radius:    $r-sm                    !default;
-$usx-hero-heading-size:      2.5rem                   !default;
-$usx-hero-heading-weight:    700                      !default;
-$usx-hero-alt-size:          1.125rem                 !default;
-$usx-hero-alt-color:         $color-accent-cool       !default;
-$usx-hero-paragraph-size:    1.125rem                 !default;
+// ── Component tokens: Hero (custom; defaults baked in _hero.scss) ───────────
+$usx-hero-min-height:        null !default;
+$usx-hero-bg-color:          $color-dark-bg !default;
+$usx-hero-text-color:        $color-light !default;
+$usx-hero-overlay-color:     null !default;
+$usx-hero-padding-block:     null !default;
+$usx-hero-padding-inline:    $spacing-lg !default;
+$usx-hero-callout-bg:        null !default;
+$usx-hero-callout-max-width: null !default;
+$usx-hero-callout-padding:   $spacing-xl !default;
+$usx-hero-callout-radius-var: null !default;
+$usx-hero-callout-radius:    usx-var($usx-hero-callout-radius-var, $radius-box) !default;
+$usx-hero-heading-size:      null !default;
+$usx-hero-heading-weight:    null !default;
+$usx-hero-alt-size:          null !default;
+$usx-hero-alt-color:         $color-accent-cool !default;
+$usx-hero-paragraph-size:    null !default;
 
 // ── Component tokens: Link ─────────────────────────────────────────────
 $usx-link-color: $color-primary !default;
 $usx-link-hover-color: $color-primary-hover !default;
 $usx-link-active-color: $color-primary-active !default;
-$usx-link-visited-color: #54278f !default;
+$usx-link-visited-color-var: null !default;
+$usx-link-visited-color: usx-var($usx-link-visited-color-var) !default;
 
 // ── Component tokens: Site Alert ─────────────────────────────────────────────
 $usx-site-alert-default-bg-color: null !default;
@@ -277,24 +464,28 @@ $usx-site-alert-emergency-bg-color: null !default;
 $usx-site-alert-maintenance-bg-color: null !default;
 
 // ── Component tokens: Summary Box ────────────────────────────────────────────
-$usx-summary-box-border: 2px solid $color-primary !default;
-$usx-summary-box-border-radius: $r-lg !default;
+$usx-summary-box-border: usx-when($color-primary, 2px solid $color-primary) !default;
+$usx-summary-box-radius-var: null !default;
+$usx-summary-box-border-radius: usx-var($usx-summary-box-radius-var, $radius-box) !default;
 $usx-summary-box-padding: null !default;
 $usx-summary-box-background-color: $color-primary-darkest !default;
 $usx-summary-box-text-color: $color-light-text !default;
 $usx-summary-box-link-color: $color-light-text !default;
 $usx-summary-box-link-hover-color: $color-accent-cool !default;
-$usx-summary-box-link-visited-color: #c254ee !default;
+$usx-summary-box-link-visited-color-var: null !default;
+$usx-summary-box-link-visited-color: usx-var($usx-summary-box-link-visited-color-var) !default;
 
 // ── Component tokens: Toggle ───────────────────────────────────────────
 /*
 Component is somewhat complicated due to the reuse of the button group component.
 Unless we decide to make this a fully custom component, it is limited to the
 outline style for inactive buttons, and the primary style for the active button.
+Active-state defaults are baked in _toggle.scss.
 */
 
 // ── Component tokens: Input / Textarea ───────────────────────────────────────
-$usx-input-border-radius: $r-sm !default;
+$usx-input-radius-var: null !default;
+$usx-input-border-radius: usx-var($usx-input-radius-var, $radius-field) !default;
 $usx-input-background-color: null !default;
 $usx-input-text-color: null !default;
 $usx-input-border-color: null !default;
@@ -309,9 +500,10 @@ $usx-input-success-border-color: $color-success !default;
 $usx-input-success-border-style: null !default;
 $usx-input-success-padding-top: null !default;
 $usx-input-success-padding-bottom: null !default;
-$usx-input-focus-outline: 4px solid $color-primary !default;
-$usx-input-focus-outline-offset: 2px !default;
-$usx-textarea-border-radius: $r-sm !default;
+$usx-input-focus-outline: null !default;
+$usx-input-focus-outline-offset: null !default;
+$usx-textarea-radius-var: null !default;
+$usx-textarea-border-radius: usx-var($usx-textarea-radius-var, $radius-field) !default;
 $usx-textarea-background-color: null !default;
 $usx-textarea-text-color: null !default;
 $usx-textarea-border-color: null !default;
@@ -322,18 +514,38 @@ $usx-form-group-error-color:            $color-error        !default;
 $usx-form-group-error-border-thickness: $border-width-thick !default;
 
 // ── Component tokens: Accordion ──────────────────────────────────────────────
-$usx-accordion-accent-color: #87c5ff !default;
-$usx-accordion-content-background: #d7ebff !default;
+$usx-accordion-accent-color-var: null !default;
+$usx-accordion-accent-color: usx-var($usx-accordion-accent-color-var) !default;
 
-// ── Component tokens: Image ───────────────────────────────────────────────────
-$usx-image-object-fit-type:       cover !default;
-$usx-image-rounded-border-radius: $r-md !default;
+$usx-accordion-content-background-var: null !default;
+$usx-accordion-content-background: usx-var($usx-accordion-content-background-var) !default;
+
+$usx-accordion-radius-var: null !default;
+$usx-accordion-border-radius: usx-var($usx-accordion-radius-var, $radius-none) !default;
+
+// ── Component tokens: Image (custom modifier; default baked in _image.scss) ──
+$usx-image-object-fit-type: null !default;
+$usx-image-radius-var: null !default;
+$usx-image-rounded-border-radius: usx-var($usx-image-radius-var, $radius-box) !default;
+
+// ── Component tokens: Code (custom; default baked in _code.scss) ─────────────
+$usx-code-radius-var: null !default;
+$usx-code-border-radius: usx-var($usx-code-radius-var, $radius-box) !default;
+
+// ── Component tokens: Tag ─────────────────────────────────────────────────────
+$usx-tag-radius-var: null !default;
+$usx-tag-border-radius: usx-var($usx-tag-radius-var, $radius-selector) !default;
+
+// ── Component tokens: Checkbox ────────────────────────────────────────────────
+$usx-checkbox-radius-var: null !default;
+$usx-checkbox-border-radius: usx-var($usx-checkbox-radius-var, $radius-selector) !default;
 
 // ── Component tokens: Banner ─────────────────────────────────────────────────
 $usx-banner-background-color:  $color-primary-darkest !default;
 $usx-banner-text-color:        $color-light-text     !default;
 $usx-banner-action-color:      $color-light-text     !default;
-$usx-banner-after-color:       #2491ff               !default;
+$usx-banner-after-color-var: null !default;
+$usx-banner-after-color: usx-var($usx-banner-after-color-var) !default;
 
 // ── Component tokens: Header / Nav ───────────────────────────────────────────
 $usx-header-background-color:       $color-dark-bg                                 !default;
@@ -351,7 +563,9 @@ $usx-nav-link-bg-color:             $color-primary-darkest                      
 $usx-nav-submenu-bg-color:          $usx-nav-link-bg-color                         !default;
 $usx-nav-link-hover-color:          $color-accent-cool-light                       !default;
 $usx-nav-background-color:          $color-dark-bg                                 !default;
-$usx-header-invert-logo:            true                                           !default;
+// null = invert only when a header/footer background is configured;
+// true/false forces it on/off.
+$usx-header-invert-logo:            null                                           !default;
 
 // ── Component tokens: Footer ────────────────────────────────────────────────
 $usx-footer-background-color:     $color-dark-bg                                    !default;
@@ -361,13 +575,13 @@ $usx-footer-link-hover-color:     $color-accent-cool                            
 $usx-footer-secondary-link-color:           $color-light-text                       !default;
 $usx-footer-secondary-link-hover-color:     $color-accent-cool                      !default;
 $usx-footer-heading-color:        $color-light-text                                 !default;
-$usx-footer-secondary-bg-color:   color.adjust($color-dark-bg, $lightness: -5%)     !default;
-$usx-footer-primary-bg-color:     color.adjust($color-dark-bg, $lightness: 10%)     !default;
-$usx-footer-social-icon-filter:   brightness(0) invert(1)                           !default;
+$usx-footer-secondary-bg-color:   $color-dark-bg-darker                             !default;
+$usx-footer-primary-bg-color:     $color-dark-bg-lighter                            !default;
+$usx-footer-social-icon-filter:   brightness(0) invert(1)                        !default;
 $usx-footer-sign-up-button-color: $color-primary                                    !default;
 $usx-footer-social-hover-color:   $color-primary                                    !default;
 $usx-footer-social-radius     :   $usx-button-border-radius                         !default;
-$usx-footer-invert-logo:          true                                              !default;
+$usx-footer-invert-logo:          null                                              !default;
 // Using border shrinks the icon on hover, using outline does not. Both are included as options.
 // Neither are required.
 // E.g. 2px solid $color-primary;
@@ -378,14 +592,22 @@ $usx-footer-border-top:          $sm-border-light                               
 $usx-footer-primary-section-border-top:   $sm-border-light                          !default;
 $usx-footer-secondary-section-border-top: $sm-border-light                        !default;
 
-// ── Component tokens: Carousel ───────────────────────────────────────────────
-$usx-carousel-dot-color:        #c0c0c0  !default;
-$usx-carousel-dot-color-hover:  #a0a0a0  !default;
-$usx-carousel-dot-color-active: #808080  !default;
-$usx-carousel-dot-gap:          0.5rem   !default;
-$usx-carousel-focus-outline-color:       #2491ff !default;
-$usx-carousel-card-media-background-color: #f0f0f0 !default;
+// ── Component tokens: Carousel (custom; defaults baked in _carousel.scss) ───
+$usx-carousel-dot-color-var: null !default;
+$usx-carousel-dot-color: usx-var($usx-carousel-dot-color-var) !default;
 
+$usx-carousel-dot-color-hover-var: null !default;
+$usx-carousel-dot-color-hover: usx-var($usx-carousel-dot-color-hover-var) !default;
+
+$usx-carousel-dot-color-active-var: null !default;
+$usx-carousel-dot-color-active: usx-var($usx-carousel-dot-color-active-var) !default;
+
+$usx-carousel-dot-gap: null !default;
+
+$usx-carousel-focus-outline-color-var: null !default;
+$usx-carousel-focus-outline-color: usx-var($usx-carousel-focus-outline-color-var) !default;
+
+$usx-carousel-card-media-background-color: $color-base-200 !default;
 
 // ── Component tokens: SideNav ─────────────────────────────────────────────
 $usx-sidenav-current-color:       $color-primary                     !default;
@@ -396,24 +618,41 @@ $usx-sidenav-link-hover-color:    $color-primary               !default;
 $usx-step-indicator-segment-complete-color: $color-primary-darkest !default;
 $usx-step-indicator-segment-current-color: $color-primary-darker !default;
 
-// ── Component tokens: Table ───────────────────────────────────────────
+// ── Component tokens: Table (custom; defaults baked in _table.scss) ─────────
 $usx-table-grouped-row-bg-color: $color-primary-lightest !default;
 $usx-table-grouped-row-text-color: $color-text !default;
 
-// ── Component tokens: Task List ───────────────────────────────────────
-$usx-task-list-border-color: #d8d8d8 !default;
-$usx-task-list-hover-background-color: #e5e5e5 !default;
-$usx-task-list-link-color: #005ea2 !default;
+$usx-table-selected-bg-var: null !default;
+$usx-table-selected-bg: usx-var($usx-table-selected-bg-var) !default;
 
-// ── Component tokens: Attribution ─────────────────────────────────────
-$usx-attribution-secondary-color: #757575 !default;
+$usx-table-hover-bg-var: null !default;
+$usx-table-hover-bg: usx-var($usx-table-hover-bg-var, $color-primary-lighter) !default;
 
-// ── Component tokens: Block ───────────────────────────────────────────
-$usx-block-callout-background-color: #e0e0e0 !default;
+// ── Component tokens: Task List (custom; defaults baked in _task-list.scss) ──
+$usx-task-list-border-color: $color-base-300 !default;
 
-// ── Component tokens: Clickable ───────────────────────────────────────
-$usx-clickable-focus-outline-color: #2491ff !default;
-$usx-clickable-hover-color: #005ea2 !default;
+$usx-task-list-hover-background-color: $color-base-300 !default;
 
-// ── Component tokens: Misc Banner ─────────────────────────────────────
-$usx-misc-banner-focus-outline-color: #9bdaf1 !default;
+$usx-task-list-link-color-var: null !default;
+$usx-task-list-link-color: usx-var($usx-task-list-link-color-var) !default;
+
+// ── Component tokens: Attribution (custom; default baked in SCSS) ────────────
+$usx-attribution-secondary-color-var: null !default;
+$usx-attribution-secondary-color: usx-var($usx-attribution-secondary-color-var) !default;
+
+// ── Component tokens: Block (custom; default baked in _block.scss) ───────────
+$usx-block-callout-background-color: $color-base-300 !default;
+
+// ── Component tokens: Clickable (custom; defaults baked in SCSS) ─────────────
+$usx-clickable-focus-outline-color-var: null !default;
+$usx-clickable-focus-outline-color: usx-var($usx-clickable-focus-outline-color-var) !default;
+
+$usx-clickable-hover-color-var: null !default;
+$usx-clickable-hover-color: usx-var($usx-clickable-hover-color-var) !default;
+
+// ── Component tokens: Misc Banner (custom; defaults baked in SCSS) ───────────
+$usx-misc-banner-focus-outline-color-var: null !default;
+$usx-misc-banner-focus-outline-color: usx-var($usx-misc-banner-focus-outline-color-var) !default;
+
+$usx-misc-banner-badge-radius-var: null !default;
+$usx-misc-banner-badge-radius: usx-var($usx-misc-banner-badge-radius-var, $radius-selector) !default;

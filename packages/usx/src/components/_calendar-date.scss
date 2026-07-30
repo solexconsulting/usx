@@ -21,8 +21,11 @@
   .usx-calendar-date-day {
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
-    border: 1px solid $color-primary;
     color: $color-primary;
+
+    @if $color-primary {
+      border: 1px solid $color-primary;
+    }
   }
 
   .usx-calendar-date-month, .usx-calendar-date-day {

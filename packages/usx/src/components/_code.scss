@@ -2,7 +2,7 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-mockup-code {
-  border-radius: $r-md;
+  border-radius: $usx-code-border-radius;
   overflow: auto hidden;
   padding: 1.25rem 0;
   position: relative;

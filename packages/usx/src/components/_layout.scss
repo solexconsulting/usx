@@ -2,8 +2,12 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-layout {
-  background-color: $color-background;
+  background-color: #f8fafc;
   min-height: 100vh;
+
+  @if $color-base-200 {
+    background-color: $color-base-200;
+  }
 
   // ── Single column layout ──────────────────────────────────────────────────
   // Centers content with max-width and responsive gutters

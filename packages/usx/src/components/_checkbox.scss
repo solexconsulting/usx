@@ -2,6 +2,10 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-checkbox {
+  .usa-checkbox__label::before {
+    border-radius: $usx-checkbox-border-radius;
+  }
+
   .usa-checkbox__input:checked:not(:disabled) {
     & + .usa-checkbox__label {
       @if $color-primary {

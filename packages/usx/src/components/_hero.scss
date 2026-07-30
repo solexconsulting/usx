@@ -1,23 +1,43 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
+// Hero is a USX-only (custom) component with no USWDS baseline, so its
+// default look is baked in here. Each declaration is overridden when the
+// corresponding token is set (via theme hooks or `with (...)`).
+
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-hero {
   position: relative;
   display: flex;
   align-items: center;
-  min-height: $usx-hero-min-height;
-  background-color: $usx-hero-bg-color;
+  min-height: 30rem;
+  background-color: #010610;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: $usx-hero-text-color;
+  color: #ffffff;
+
+  @if $usx-hero-min-height {
+    min-height: $usx-hero-min-height;
+  }
+
+  @if $usx-hero-bg-color {
+    background-color: $usx-hero-bg-color;
+  }
+
+  @if $usx-hero-text-color {
+    color: $usx-hero-text-color;
+  }
 
   &--has-overlay::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-color: $usx-hero-overlay-color;
+    background-color: rgba(0, 0, 0, 0.55);
     pointer-events: none;
+
+    @if $usx-hero-overlay-color {
+      background-color: $usx-hero-overlay-color;
+    }
   }
 
   &__inner {
@@ -26,40 +46,103 @@
     width: 100%;
     max-width: $max-layout-width;
     margin-inline: auto;
-    padding-block: $usx-hero-padding-block;
-    padding-inline: $usx-hero-padding-inline;
+    padding-block: 4rem;
+    padding-inline: 1.5rem;
+
+    @if $usx-hero-padding-block {
+      padding-block: $usx-hero-padding-block;
+    }
+
+    @if $usx-hero-padding-inline {
+      padding-inline: $usx-hero-padding-inline;
+    }
   }
 
   &__callout {
-    max-width: $usx-hero-callout-max-width;
-    padding: $usx-hero-callout-padding;
-    background-color: $usx-hero-callout-bg;
+    max-width: 40rem;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    // Radius follows the app-wide radius-box group (null/square by default,
+    // like every other radius-box consumer: image, code, summary-box).
     border-radius: $usx-hero-callout-radius;
+
+    @if $usx-hero-callout-max-width {
+      max-width: $usx-hero-callout-max-width;
+    }
+
+    @if $usx-hero-callout-padding {
+      padding: $usx-hero-callout-padding;
+    }
+
+    @if $usx-hero-callout-bg {
+      background-color: $usx-hero-callout-bg;
+    }
   }
 
   &__heading {
-    font-size: $usx-hero-heading-size;
-    font-weight: $usx-hero-heading-weight;
+    font-size: 2.5rem;
+    font-weight: 700;
     line-height: 1.2;
     margin-top: 0;
-    margin-bottom: $spacing-md;
-    color: $usx-hero-text-color;
+    margin-bottom: 1rem;
+    color: #ffffff;
+
+    @if $usx-hero-heading-size {
+      font-size: $usx-hero-heading-size;
+    }
+
+    @if $usx-hero-heading-weight {
+      font-weight: $usx-hero-heading-weight;
+    }
+
+    @if $spacing-md {
+      margin-bottom: $spacing-md;
+    }
+
+    @if $usx-hero-text-color {
+      color: $usx-hero-text-color;
+    }
 
     &--alt {
       display: block;
-      font-size: $usx-hero-alt-size;
+      font-size: 1.125rem;
       font-weight: 400;
-      margin-bottom: $spacing-xs;
-      color: $usx-hero-alt-color;
+      margin-bottom: 0.25rem;
+      color: #66b5ee;
+
+      @if $usx-hero-alt-size {
+        font-size: $usx-hero-alt-size;
+      }
+
+      @if $spacing-xs {
+        margin-bottom: $spacing-xs;
+      }
+
+      @if $usx-hero-alt-color {
+        color: $usx-hero-alt-color;
+      }
     }
   }
 
   &__paragraph {
-    font-size: $usx-hero-paragraph-size;
+    font-size: 1.125rem;
     line-height: 1.6;
     margin-top: 0;
-    margin-bottom: $spacing-lg;
-    color: $usx-hero-text-color;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+
+    @if $usx-hero-paragraph-size {
+      font-size: $usx-hero-paragraph-size;
+    }
+
+    @if $spacing-lg {
+      margin-bottom: $spacing-lg;
+    }
+
+    @if $usx-hero-text-color {
+      color: $usx-hero-text-color;
+    }
   }
 }
+/* stylelint-enable selector-class-pattern */
 /* stylelint-enable selector-class-pattern */

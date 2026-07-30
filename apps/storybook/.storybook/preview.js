@@ -1,4 +1,7 @@
 import "@uswds/uswds/css/uswds.min.css";
+// Runtime theme values (:root custom properties) — required because the
+// themed usx build emits bare var(--usx-*) with no fallback.
+import "@solexllc/usx-theme/theme.css";
 import './styles.scss';
 import solexTheme from "./solexTheme";
 

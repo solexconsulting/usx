@@ -24,8 +24,12 @@
   &.usx-block--callout {
     border-width: 0.25rem 0 0;
     border-style: solid;
-    background-color: $usx-block-callout-background-color;
+    background-color: #e2e8f0;
     padding: 1rem 1.25rem;
+
+    @if $usx-block-callout-background-color {
+      background-color: $usx-block-callout-background-color;
+    }
 
     .usx-block__content {
       border-left: none;

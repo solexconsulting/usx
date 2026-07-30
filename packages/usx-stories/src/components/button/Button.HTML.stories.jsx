@@ -19,15 +19,3 @@ export const AllVariants = {
   }
 }
 
-export const AllVariantsDarkTheme = {
-  parameters: {
-    docs: {
-      source: {
-        code: buttonHtml
-      }
-    }
-  },
-  render: () => {
-    return <div className="theme-dark" dangerouslySetInnerHTML={{ __html: buttonHtml }} />;
-  }
-}

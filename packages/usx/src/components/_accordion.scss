@@ -2,6 +2,20 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-accordion {
+  .usa-accordion__button {
+    border-radius: $usx-accordion-border-radius;
+  }
+
+  .usa-accordion__button[aria-expanded="true"] {
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  .usa-accordion__content {
+    border-end-start-radius: $usx-accordion-border-radius;
+    border-end-end-radius: $usx-accordion-border-radius;
+  }
+
   @if $usx-accordion-accent-color {
     .usa-accordion__button {
       background-color: $usx-accordion-accent-color;

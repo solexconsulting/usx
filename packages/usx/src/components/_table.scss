@@ -87,7 +87,7 @@
     min-height: 1px;
 
     &--selected {
-      background-color: var(--usx-table-selected-bg, #e7f0fa) !important;
+      background-color: $usx-table-selected-bg !important;
     }
 
     &--disabled {
@@ -99,7 +99,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: var(--usx-table-hover-bg, $color-primary-lighter) !important;
+        background-color: $usx-table-hover-bg !important;
 
         .usx-table__cell {
           background-color: transparent; // Keep cells from layering on top of hover color

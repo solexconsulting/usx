@@ -1,11 +1,17 @@
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
 .usx-switch {
   --size: calc(var(--size-selector, 0.25rem) * 6);
   --toggle-p: calc(var(--size) * 0.125);
   --border: 1px;
   --knob-size: calc(var(--size) - (var(--toggle-p) * 2));
   --off-color: #9c9c9c;
-  --track-bg: #fff;
+  --track-bg: #e2e8f0;
+
+  @if $color-base-300 {
+    --track-bg: #{$color-base-300};
+  }
 
   position: relative;
   display: inline-block;

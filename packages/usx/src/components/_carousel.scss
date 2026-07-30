@@ -42,8 +42,12 @@
 }
 
 .usx-carousel__slide:focus {
-  outline: .25rem solid $usx-carousel-focus-outline-color;
+  outline: .25rem solid #2491ff;
   outline-offset: -.25rem;
+
+  @if $usx-carousel-focus-outline-color {
+    outline-color: $usx-carousel-focus-outline-color;
+  }
 }
 
 /* ============================= */
@@ -107,7 +111,11 @@
     border-top-left-radius: calc(.5rem - 2px);
     border-top-right-radius: calc(.5rem - 2px);
     overflow: hidden;
-    background-color: $usx-carousel-card-media-background-color;
+    background-color: #f8fafc;
+
+    @if $usx-carousel-card-media-background-color {
+      background-color: $usx-carousel-card-media-background-color;
+    }
   }
 
   &.usa-card__media--inset {

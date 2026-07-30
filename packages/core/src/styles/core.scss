@@ -3,6 +3,11 @@
 // AUTO-GENERATED-SCSS END
 
 @use 'pkg:@solexllc/usx-theme/variables' as *;
-@use 'pkg:@solexllc/usx';
+// Themed entry = runtime theming opt-in (loads usx-theme's hooks before the
+// component styles). Swap to 'pkg:@solexllc/usx' for a fully static build.
+// NOTE: the hooks must be loaded from within the usx package — in a pnpm
+// workspace each package resolves usx-theme through its own symlink, and Sass
+// treats different canonical URLs as separate module instances.
+@use 'pkg:@solexllc/usx/themed';
 @use 'pkg:@solexllc/usx-uswds-fixes';
 

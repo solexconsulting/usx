@@ -1,5 +1,4 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
-@use 'sass:color';
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 
@@ -25,17 +24,23 @@
 /* Helper Mixin for Inverse Buttons   */
 
 /* ---------------------------------- */
-@mixin usx-button-inverse($hover-lightness: 20%, $active-lightness: 40%) {
-  color: if($color-light-text, $color-light-text, white);
+@mixin usx-button-inverse($hover-mix: 20%, $active-mix: 40%) {
+  $inverse-color: white;
+
+  @if $color-light-text {
+    $inverse-color: $color-light-text;
+  }
+
+  color: $inverse-color;
 
   &.usa-button--hover,
   &:hover {
-    color: color.adjust(if($color-light-text, $color-light-text, white), $lightness: $hover-lightness * -1);
+    color: color-mix(in srgb, $inverse-color, black $hover-mix);
   }
 
   &.usa-button--active,
   &:active {
-    color: color.adjust(if($color-light-text, $color-light-text, white), $lightness: $active-lightness * -1);
+    color: color-mix(in srgb, $inverse-color, black $active-mix);
   }
 }
 
@@ -74,14 +79,10 @@
     &:hover {
       @if $bg-hover {
         background-color: $bg-hover;
-      } @else if $bg {
-        background-color: color.adjust($bg, $lightness: -15%);
       }
 
       @if $color-hover {
         color: $color-hover;
-      } @else if $color {
-        color: color.adjust($color, $lightness: -15%);
       }
     }
 
@@ -90,68 +91,16 @@
     &:active {
       @if $bg-active {
         background-color: $bg-active;
-      } @else if $bg {
-        background-color: color.adjust($bg, $lightness: -25%);
       }
 
       @if $color-active {
         color: $color-active;
-      } @else if $color {
-        color: color.adjust($color, $lightness: -25%);
       }
     }
 
     /* Inverse modifier */
     &.usa-button--inverse {
       @include usx-button-inverse;
-    }
-  }
-
-  /* Dark theme */
-  .theme-dark {
-    .usa-button.usx-button#{$selector}:not(:disabled):not([aria-disabled="true"]) {
-      @if $bg {
-        background-color: color.adjust($bg, $lightness: -30%);
-      }
-
-      @if $color-light-text and $is-outline == false {
-        color: $color-light-text;
-      }
-
-      @if $color and $is-outline == true {
-        color: color.adjust($color, $lightness: -30%);
-      }
-
-      &.usa-button--hover,
-      &:hover {
-        @if $bg-hover {
-          background-color: color.adjust($bg-hover, $lightness: -20%);
-        } @else if $bg {
-          background-color: color.adjust($bg, $lightness: -40%);
-        }
-
-        @if $color-hover {
-          color: $color-hover;
-        }
-      }
-
-      &.usa-button--active,
-      &:active {
-        @if $bg-active {
-          background-color: color.adjust($bg-active, $lightness: -20%);
-        } @else if $bg {
-          background-color: color.adjust($bg, $lightness: -60%);
-        }
-
-        @if $color-active {
-          color: $color-active;
-        }
-      }
-
-      /* Inverse modifier in dark theme */
-      &.usa-button--inverse {
-        @include usx-button-inverse(20%, 40%);
-      }
     }
   }
 }

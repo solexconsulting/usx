@@ -1,4 +1,3 @@
-@use "sass:color";
 @use "sass:string";
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
@@ -64,34 +63,6 @@
 
 		@if $border {
 			border-color: $border;
-		}
-	}
-
-	.theme-dark {
-
-		.#{$uswds-class-name}.#{$usa-class-name}:not(.usx-site-alert *),
-		.#{$uswds-class-name}.#{$usa-class-name}:not(.usx-site-alert *) .usa-alert__body {
-			@if $bg {
-				background-color: color.adjust($bg, $lightness: -30%);
-
-				::before {
-					background-color: $color-light-text;
-				}
-
-				.usa-link {
-					@if $color-light-text {
-						color: $color-light-text;
-					}
-				}
-			}
-
-			@if $color-light-text {
-				color: $color-light-text;
-			}
-
-			@if $border {
-				border-color: color.adjust($border, $lightness: -30%);
-			}
 		}
 	}
 }
