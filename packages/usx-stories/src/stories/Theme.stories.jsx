@@ -8,7 +8,6 @@ import {
   shadesOf,
   resolveTheme,
   themeToCss,
-  hexToHsl,
   hslToHex
 } from '../utils/themeDerive.js';
 
@@ -95,7 +94,10 @@ const PRESETS = {
     'color-base-200': '#0f172a',
     'color-base-300': '#334155',
     'color-text': '#e2e8f0',
-    'color-dark-bg': '#020617'
+    'color-dark-bg': '#020617',
+    'usx-summary-box-background-color': '#0f1b2e',
+    'usx-summary-box-border-color': '#60a5fa',
+    'usx-link-visited-color': '#b39ddb'
   },
   Carbon: {
     'color-primary': '#fb923c',
@@ -106,7 +108,10 @@ const PRESETS = {
     'color-base-200': '#121214',
     'color-base-300': '#3a3a3d',
     'color-text': '#e5e5e5',
-    'color-dark-bg': '#000000'
+    'color-dark-bg': '#000000',
+    'usx-summary-box-background-color': '#241a10',
+    'usx-summary-box-border-color': '#fb923c',
+    'usx-link-visited-color': '#b39ddb'
   }
 };
 
@@ -123,19 +128,29 @@ const MAIN_COLORS = [
   'color-error',
   'color-emergency',
   'color-base-100',
+  'color-border',
   'color-dark-bg'
 ];
 
-const RANDOMIZED = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm'];
+const RANDOMIZED = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm', 'color-base-100'];
 
 function randomPalette() {
   const overrides = {};
-  const baseHue = Math.floor(Math.random() * 360);
-  RANDOMIZED.forEach((name, i) => {
-    const def = themeManifest.find((t) => t.name === name);
-    const { s, l } = hexToHsl(def.defaultValue);
-    overrides[name] = hslToHex({ h: (baseHue + i * 90) % 360, s, l });
+  let base100Lightness = 100;
+  RANDOMIZED.forEach((name) => {
+    const l = Math.random() * 100;
+    if (name === 'color-base-100') base100Lightness = l;
+    overrides[name] = hslToHex({ h: Math.random() * 360, s: Math.random() * 100, l });
   });
+  // Dark surface → the default dark ink (color-text) would be unreadable, so
+  // swap in a light color instead. Same reasoning for secondary/muted text
+  // (color-text-base) and visited links (usx-link-visited-color) — their
+  // light-mode defaults are just as illegible against a dark surface.
+  if (base100Lightness < 50) {
+    overrides['color-text'] = '#ffffff';
+    overrides['color-text-base'] = '#b9b9bb';
+    overrides['usx-link-visited-color'] = '#b39ddb';
+  }
   return overrides;
 }
 
@@ -356,18 +371,26 @@ const codeLines = [
 ];
 
 const tableColumns = [
-  { key: 'name', header: 'Document', primary: true },
-  { key: 'year', header: 'Year' },
-  { key: 'status', header: 'Status' }
+  { key: 'name', header: 'Document', primary: true, sortable: true },
+  { key: 'year', header: 'Year', align: 'right', sortable: true },
+  { key: 'status', header: 'Status', sortable: true }
 ];
 
 const tableData = [
-  { id: 1, name: 'Declaration of Independence', year: 1776, status: 'Signed' },
-  { id: 2, name: 'Constitution', year: 1787, status: 'Ratified' },
-  { id: 3, name: 'Bill of Rights', year: 1791, status: 'Ratified' }
+  { id: 1, name: 'Declaration of Independence', year: 1776, status: 'Signed', era: 'Founding' },
+  { id: 2, name: 'Constitution', year: 1787, status: 'Ratified', era: 'Founding' },
+  { id: 3, name: 'Bill of Rights', year: 1791, status: 'Ratified', era: 'Founding' },
+  { id: 4, name: 'Emancipation Proclamation', year: 1863, status: 'Signed', era: 'Civil War' },
+  { id: 5, name: '13th Amendment', year: 1865, status: 'Ratified', era: 'Civil War' },
+  { id: 6, name: '19th Amendment', year: 1920, status: 'Ratified', era: 'Modern' }
 ];
 
 function Showcase() {
+  // Pre-select a row so `usx-table-selected-bg` is visible without user
+  // interaction; `groupBy` + `onClickRow` exercise the grouped-row and
+  // hover-row color tokens too.
+  const [tableSelection, setTableSelection] = useState([2]);
+
   useEffect(() => {
     accordion.off();
     navigation.off();
@@ -387,20 +410,23 @@ function Showcase() {
 
       <div style={{ ...ui.card, gap: 0, padding: 0, overflow: 'visible', breakInside: 'avoid', columnSpan: 'all', marginBottom: '1rem' }}>
         <Banner tld=".gov" />
-        <MiscBanner tone="test" badgeText="test" message="You are viewing a test site." importantLinkText="Production site" />
-        <MiscBanner tone="dev" badgeText="dev" message="You are viewing a dev site." importantLinkText="Production site" />
-        <MiscBanner tone="beta" badgeText="beta" message="You are viewing a beta site." importantLinkText="Production site" />
+        <MiscBanner tone="test" badgeText="test" message="You are viewing a test site." importantLinkText="Production site" importantLinkHref="https://www.google.com" />
+        <MiscBanner tone="dev" badgeText="dev" message="You are viewing a dev site." importantLinkText="Production site" importantLinkHref="https://www.google.com" />
+        <MiscBanner tone="beta" badgeText="beta" message="You are viewing a beta site." importantLinkText="Production site" importantLinkHref="https://www.google.com" />
         <MiscBanner tone="error" badgeText="oops" message="This banner has no links." />
         <Header
           branding={{ title: 'Project name' }}
           navSections={headerNavSections}
-          secondaryLinks={[{ text: 'Sign in', href: '#' }]}
+          megamenu={true}
+          extended={true}
+          secondaryLinks={[{ text: 'Secondary Link', href: '#' }]}
           searchConfig={{ id: 'theme-header-search' }}
         />
         <SiteAlert variant="info" alertHeading="Site-wide notice" alertText="Bringing something to your attention politely." />
         <Hero
           title="A hero heading"
           callout="Bring attention to a project priority"
+          backgroundImage="https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg"
           paragraph="Support the callout with some short explanatory text."
           button={{ href: '#', text: 'Call to action' }}
           overlay
@@ -439,7 +465,17 @@ function Showcase() {
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
         <h3 style={ui.cardTitle}>Table</h3>
         <div style={{ overflowX: 'auto' }}>
-          <Table columns={tableColumns} data={tableData} striped caption="Founding documents" />
+          <Table
+            columns={tableColumns}
+            data={tableData}
+            striped
+            groupBy="era"
+            selectionMode="checkbox"
+            select={tableSelection}
+            onSelect={setTableSelection}
+            onClickRow={() => {}}
+            caption="Founding documents — grouped, sortable, selectable rows"
+          />
         </div>
       </div>
 
@@ -480,6 +516,15 @@ function Showcase() {
           ]}
           defaultValue='r1'
         />
+        <RadioButtons
+          name="theme-radios-tile"
+          tile={true}
+          options={[
+            { value: 'r1', label: 'Radio A', description: 'This radio button\'s description is appended with "A".' },
+            { value: 'r2', label: 'Radio B', description: 'This radio button\'s description is appended with "B".' }
+          ]}
+          defaultValue='r1'
+        />
         <Search id="theme-search" placeholder="Search…" />
       </div>
 
@@ -492,7 +537,7 @@ function Showcase() {
           variant="counters"
         />
         <p>
-          <Link href="#">A standard link</Link> and a <Link href="#" visited>visited link</Link>.
+          <Link href="javascript:void(0);">A standard link</Link> and a <Link href="javascript:void(0);" visited>visited link</Link>.
         </p>
       </div>
 
@@ -522,7 +567,10 @@ function Showcase() {
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
         <h3 style={ui.cardTitle}>Content</h3>
-        <Accordion items={accordionItems} />
+        <Accordion
+          bordered={true}
+          items={accordionItems}
+        />
         <h4 style={{ margin: 0 }}>
           <Eyebrow>Featured</Eyebrow>
           Section heading
@@ -650,10 +698,10 @@ function ThemePlayground() {
         onChange={setToken}
         onClear={clearToken}
       />
-      {shadesOf(t.name).length > 0 && (
+      {shadesOf(t.name).filter((s) => !MAIN_COLORS.includes(s.name)).length > 0 && (
         <details style={{ marginBottom: '0.25rem' }}>
           <summary className="usx-pg-shades-toggle">shades</summary>
-          {shadesOf(t.name).map((s) => (
+          {shadesOf(t.name).filter((s) => !MAIN_COLORS.includes(s.name)).map((s) => (
             <ColorControl
               key={s.name}
               token={s}

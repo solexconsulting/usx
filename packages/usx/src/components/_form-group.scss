@@ -10,3 +10,9 @@
     border-width: $usx-form-group-error-border-thickness;
   }
 }
+
+.usa-error-message {
+    @if $color-error {
+        color: $color-error;
+    }
+}

@@ -50,7 +50,12 @@ const UNCONSUMED = new Set([
   '--usx-radius-box',
   '--usx-radius-field',
   '--usx-radius-selector',
-  '--usx-radius-none'
+  '--usx-radius-none',
+  // Shared border-color group token: components reference their own
+  // per-component hook only (e.g. --usx-tile-border-color); the group var
+  // is consumed indirectly via theme.css's fallback chain
+  // (--usx-tile-border-color: var(--usx-color-border)), never directly.
+  '--usx-color-border'
 ]);
 
 // Walk every var(--usx-*) occurrence, extracting the name (nested-paren safe).

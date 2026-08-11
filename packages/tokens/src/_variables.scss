@@ -168,6 +168,12 @@ $color-base-200: usx-var($usx-color-base-200-var) !default;
 $usx-color-base-300-var: null !default;
 $color-base-300: usx-var($usx-color-base-300-var) !default;
 
+// Shared border color: checkbox/radio tiles, task-list item dividers, sidenav
+// item dividers, and the default (overridable) for header/footer section
+// dividers all chain to this unless their own hook is set individually.
+$usx-color-border-var: null !default;
+$color-border: usx-var($usx-color-border-var) !default;
+
 $usx-color-dark-bg-var: null !default;
 $color-dark-bg: usx-var($usx-color-dark-bg-var) !default;
 
@@ -451,11 +457,19 @@ $usx-hero-alt-color:         $color-accent-cool !default;
 $usx-hero-paragraph-size:    null !default;
 
 // ── Component tokens: Link ─────────────────────────────────────────────
-$usx-link-color: $color-primary !default;
+$usx-link-color-var: null !default;
+$usx-link-color: usx-var($usx-link-color-var, $color-primary) !default;
 $usx-link-hover-color: $color-primary-hover !default;
 $usx-link-active-color: $color-primary-active !default;
 $usx-link-visited-color-var: null !default;
 $usx-link-visited-color: usx-var($usx-link-visited-color-var) !default;
+// On a dark background (`.usa-dark-background`), USWDS swaps link/visited
+// color to a light neutral matching the surrounding text, instead of the
+// (illegible) blue/purple defaults above.
+$usx-link-color-dark-var: null !default;
+$usx-link-color-dark: usx-var($usx-link-color-dark-var) !default;
+$usx-link-visited-color-dark-var: null !default;
+$usx-link-visited-color-dark: usx-var($usx-link-visited-color-dark-var) !default;
 
 // ── Component tokens: Site Alert ─────────────────────────────────────────────
 $usx-site-alert-default-bg-color: null !default;
@@ -464,14 +478,22 @@ $usx-site-alert-emergency-bg-color: null !default;
 $usx-site-alert-maintenance-bg-color: null !default;
 
 // ── Component tokens: Summary Box ────────────────────────────────────────────
-$usx-summary-box-border: usx-when($color-primary, 2px solid $color-primary) !default;
+// Real USWDS's `.usa-summary-box` already ships an accurate light "info" tint
+// (background #e7f6f8, border #99deea) with no matching primitive in our
+// palette, so these get their own dedicated component tokens (registered in
+// theme-manifest.js) rather than being forced dark. Text/link colors DO
+// match existing primitives, so they chain to those instead.
+$usx-summary-box-border-color-var: null !default;
+$usx-summary-box-border-color: usx-var($usx-summary-box-border-color-var) !default;
+$usx-summary-box-border: usx-when($usx-summary-box-border-color, $border-width-thin solid $usx-summary-box-border-color) !default;
 $usx-summary-box-radius-var: null !default;
 $usx-summary-box-border-radius: usx-var($usx-summary-box-radius-var, $radius-box) !default;
 $usx-summary-box-padding: null !default;
-$usx-summary-box-background-color: $color-primary-darkest !default;
-$usx-summary-box-text-color: $color-light-text !default;
-$usx-summary-box-link-color: $color-light-text !default;
-$usx-summary-box-link-hover-color: $color-accent-cool !default;
+$usx-summary-box-background-color-var: null !default;
+$usx-summary-box-background-color: usx-var($usx-summary-box-background-color-var) !default;
+$usx-summary-box-text-color: $color-text !default;
+$usx-summary-box-link-color: $color-primary !default;
+$usx-summary-box-link-hover-color: $color-primary-darker !default;
 $usx-summary-box-link-visited-color-var: null !default;
 $usx-summary-box-link-visited-color: usx-var($usx-summary-box-link-visited-color-var) !default;
 
@@ -520,6 +542,21 @@ $usx-accordion-accent-color: usx-var($usx-accordion-accent-color-var) !default;
 $usx-accordion-content-background-var: null !default;
 $usx-accordion-content-background: usx-var($usx-accordion-content-background-var) !default;
 
+// Real USWDS CSS bakes button/content text as a fixed dark "ink" color at
+// build time (computed against USWDS's own light default background), so it
+// never follows our runtime background overrides above. Chaining to
+// $color-text (rather than leaving this null) keeps Default-theme output
+// visually identical (both resolve to #1b1b1b) while automatically flipping
+// to light text on dark presets (Carbon, Midnight) with zero preset-specific
+// patches. Still independently overridable via the dedicated hook.
+//
+// CONVENTION: any component background token that tracks color-base-100/
+// 200/300 should pair with a `$usx-<component>-text-color` token following
+// this same `usx-var($hook, $color-text)` pattern — don't rely on cascade,
+// since USWDS's compiled CSS often sets its own explicit (frozen) color.
+$usx-accordion-text-color-var: null !default;
+$usx-accordion-text-color: usx-var($usx-accordion-text-color-var, $color-text) !default;
+
 $usx-accordion-radius-var: null !default;
 $usx-accordion-border-radius: usx-var($usx-accordion-radius-var, $radius-none) !default;
 
@@ -539,51 +576,77 @@ $usx-tag-border-radius: usx-var($usx-tag-radius-var, $radius-selector) !default;
 // ── Component tokens: Checkbox ────────────────────────────────────────────────
 $usx-checkbox-radius-var: null !default;
 $usx-checkbox-border-radius: usx-var($usx-checkbox-radius-var, $radius-selector) !default;
+$usx-tile-radius-var: null !default;
+$usx-tile-border-radius: usx-var($usx-tile-radius-var, $radius-selector) !default;
+$usx-tile-border-color-var: null !default;
+$usx-tile-border-color: usx-var($usx-tile-border-color-var, $color-border) !default;
 
 // ── Component tokens: Banner ─────────────────────────────────────────────────
 // Matches USWDS defaults: background is "base-lightest" (a light gray bar),
 // text auto-contrasts to dark (left null so the ambient/base text color
 // shows through, same as USWDS's own set-text-from-bg auto-contrast), and
 // the "Here's how you know" action link/chevron use the default link color.
-$usx-banner-background-color:  $color-base-200 !default;
+$usx-banner-background-color:  null !default;
 $usx-banner-text-color:        null            !default;
-$usx-banner-action-color:      $color-primary  !default;
+$usx-banner-action-color:      null  !default;
 $usx-banner-after-color-var: null !default;
 $usx-banner-after-color: usx-var($usx-banner-after-color-var) !default;
 
 // ── Component tokens: Header / Nav ───────────────────────────────────────────
-$usx-header-background-color:       $color-dark-bg                                 !default;
-$usx-header-text-color:             $color-light-text                              !default;
+// USWDS itself doesn't style `.usa-header`/`.usa-nav` with an explicit
+// background or text color at all \u2014 it just inherits the page's ambient
+// surface/ink. Chaining to $color-base-100/$color-text (rather than the
+// fixed-dark $color-dark-bg/$color-light-text primitives) keeps the Default
+// theme visually identical to real USWDS, while still flipping dark
+// automatically for presets that redefine those shared surface tokens
+// (e.g. Carbon, Midnight) \u2014 no per-component preset patch required.
+$usx-header-background-color:       $color-base-100                                !default;
+$usx-header-text-color:             $color-text                                    !default;
+$usx-header-border-color-var: null !default;
+$usx-header-border-color: usx-var($usx-header-border-color-var, $color-border) !default;
 $usx-header-border-bottom:          null                                           !default;
-$usx-header-border-top:             $sm-border-light                               !default;
-$usx-header-secondary-link-color:   $color-light-text                              !default;
-$usx-header-secondary-link-hover:   $color-accent-cool-light                       !default;
+$usx-header-border-top:             usx-when($usx-header-border-color, $border-width-thin solid $usx-header-border-color) !default;
+$usx-header-secondary-link-color:   $color-text-base                               !default;
+$usx-header-secondary-link-hover:   $color-primary                                 !default;
 $usx-header-menu-btn-background-color: $color-primary                              !default;
-$usx-header-menu-btn-background-color-hover: $color-primary-hover                  !default;
-$usx-nav-border-bottom:             $md-border-light                               !default;
-$usx-nav-border-top:                $sm-border-light                               !default;
-$usx-nav-link-color:                $color-light-text                              !default;
+$usx-header-menu-btn-background-color-hover: $color-primary-darker                 !default;
+$usx-nav-border-bottom:             usx-when($usx-header-border-color, 2px solid $usx-header-border-color) !default;
+$usx-nav-border-top:                usx-when($usx-header-border-color, $border-width-thin solid $usx-header-border-color) !default;
+$usx-nav-link-color:                $color-text                                    !default;
+// USWDS's own dropdown/megamenu panel IS dark navy with white links by
+// default (verified in compiled CSS) \u2014 these two already matched reality.
 $usx-nav-link-bg-color:             $color-primary-darkest                         !default;
 $usx-nav-submenu-bg-color:          $usx-nav-link-bg-color                         !default;
-$usx-nav-link-hover-color:          $color-accent-cool-light                       !default;
-$usx-nav-background-color:          $color-dark-bg                                 !default;
+// USWDS doesn't change nav-link text color on hover (only adds a colored
+// underline indicator, handled separately in _header.scss) \u2014 off by default.
+$usx-nav-link-hover-color:          null                                           !default;
+$usx-nav-background-color:          $color-base-100                                !default;
 // null = invert only when a header/footer background is configured;
 // true/false forces it on/off.
 $usx-header-invert-logo:            null                                           !default;
 
 // ── Component tokens: Footer ────────────────────────────────────────────────
-$usx-footer-background-color:     $color-dark-bg                                    !default;
-$usx-footer-text-color:           $color-light-text                                 !default;
-$usx-footer-link-color:           $color-light-text                                 !default;
-$usx-footer-link-hover-color:     $color-accent-cool                                !default;
-$usx-footer-secondary-link-color:           $color-light-text                       !default;
-$usx-footer-secondary-link-hover-color:     $color-accent-cool                      !default;
-$usx-footer-heading-color:        $color-light-text                                 !default;
-$usx-footer-secondary-bg-color:   $color-dark-bg-darker                             !default;
-$usx-footer-primary-bg-color:     $color-dark-bg-lighter                            !default;
-$usx-footer-social-icon-filter:   brightness(0) invert(1)                        !default;
+// Same rationale as Header/Nav above: USWDS's real footer sections use
+// base-200/base-300 surfaces with ordinary ink/primary-link colors, not a
+// fixed dark brand color. Chaining to those shared tokens keeps Default
+// USWDS-accurate while still flipping dark under Carbon/Midnight.
+$usx-footer-background-color-var: null !default;
+$usx-footer-background-color:     usx-var($usx-footer-background-color-var)        !default;
+$usx-footer-text-color:           $color-text                                       !default;
+$usx-footer-link-color:           $color-primary                                    !default;
+$usx-footer-link-hover-color:     $color-primary-darker                              !default;
+$usx-footer-secondary-link-color:           $color-primary                          !default;
+$usx-footer-secondary-link-hover-color:     $color-primary-darker                    !default;
+$usx-footer-heading-color:        $color-text                                        !default;
+$usx-footer-secondary-bg-color:   $color-base-300                                    !default;
+$usx-footer-primary-bg-color:     $color-base-200                                    !default;
+// USWDS's own social icons carry their own brand colors by default \u2014 no
+// filter needed unless a consumer explicitly wants a monochrome treatment.
+$usx-footer-social-icon-filter-var: null !default;
+$usx-footer-social-icon-filter:   usx-var($usx-footer-social-icon-filter-var)        !default;
 $usx-footer-sign-up-button-color: $color-primary                                    !default;
-$usx-footer-social-hover-color:   $color-primary                                    !default;
+$usx-footer-social-hover-color-var: null !default;
+$usx-footer-social-hover-color:   usx-var($usx-footer-social-hover-color-var)        !default;
 $usx-footer-social-radius     :   $usx-button-border-radius                         !default;
 $usx-footer-invert-logo:          null                                              !default;
 // Using border shrinks the icon on hover, using outline does not. Both are included as options.
@@ -592,9 +655,12 @@ $usx-footer-invert-logo:          null                                          
 $usx-footer-social-hover-border:  null                                              !default;
 $usx-footer-social-hover-outline:  null                                             !default;
 // Footer borders
-$usx-footer-border-top:          $sm-border-light                                   !default;
-$usx-footer-primary-section-border-top:   $sm-border-light                          !default;
-$usx-footer-secondary-section-border-top: $sm-border-light                        !default;
+$usx-footer-border-color-var: null !default;
+$usx-footer-border-color: usx-var($usx-footer-border-color-var, $color-border) !default;
+$usx-footer-border-top:          usx-when($usx-footer-border-color, $border-width-thin solid $usx-footer-border-color) !default;
+$usx-footer-primary-section-border-top:   usx-when($usx-footer-border-color, $border-width-thin solid $usx-footer-border-color) !default;
+$usx-footer-secondary-section-border-top: usx-when($usx-footer-border-color, $border-width-thin solid $usx-footer-border-color) !default;
+
 
 // ── Component tokens: Carousel (custom; defaults baked in _carousel.scss) ───
 $usx-carousel-dot-color-var: null !default;
@@ -615,8 +681,15 @@ $usx-carousel-card-media-background-color: $color-base-200 !default;
 
 // ── Component tokens: SideNav ─────────────────────────────────────────────
 $usx-sidenav-current-color:       $color-primary                     !default;
-$usx-sidenav-link-color:          null                         !default;
+// USWDS's nav-list mixin sets non-current links to a fixed "base-dark" gray
+// at build time, which is low-contrast once a preset darkens the ambient
+// surface. Chain to $color-text (same convention as accordion above) so it
+// tracks the theme instead of staying frozen.
+$usx-sidenav-link-color-var:      null                         !default;
+$usx-sidenav-link-color:          usx-var($usx-sidenav-link-color-var, $color-text) !default;
 $usx-sidenav-link-hover-color:    $color-primary               !default;
+$usx-sidenav-border-color-var:    null                         !default;
+$usx-sidenav-border-color:        usx-var($usx-sidenav-border-color-var, $color-border) !default;
 
 // ── Component tokens: Step Indicator ──────────────────────────────────────────
 $usx-step-indicator-segment-complete-color: $color-primary-darkest !default;
@@ -633,12 +706,13 @@ $usx-table-hover-bg-var: null !default;
 $usx-table-hover-bg: usx-var($usx-table-hover-bg-var, $color-primary-lighter) !default;
 
 // ── Component tokens: Task List (custom; defaults baked in _task-list.scss) ──
-$usx-task-list-border-color: $color-base-300 !default;
+$usx-task-list-border-color-var: null !default;
+$usx-task-list-border-color: usx-var($usx-task-list-border-color-var, $color-border) !default;
 
 $usx-task-list-hover-background-color: $color-base-300 !default;
 
 $usx-task-list-link-color-var: null !default;
-$usx-task-list-link-color: usx-var($usx-task-list-link-color-var) !default;
+$usx-task-list-link-color: usx-var($usx-task-list-link-color-var, $usx-link-color) !default;
 
 // ── Component tokens: Attribution (custom; default baked in SCSS) ────────────
 $usx-attribution-secondary-color-var: null !default;

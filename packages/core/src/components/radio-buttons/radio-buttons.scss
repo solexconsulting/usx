@@ -10,6 +10,12 @@
     }
   }
 
+  @if $usx-tile-border-color != null {
+    .usa-radio__input--tile + .usa-radio__label {
+      border-color: $usx-tile-border-color;
+    }
+  }
+
   .usa-radio__input:checked:not(:disabled) {
     & + .usa-radio__label {
       @if $color-primary != null {

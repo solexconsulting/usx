@@ -6,7 +6,8 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
   id: string;
   name?: string;
   value?: string;
-  label: string;
+  label?: string;
+  ariaLabel?: string;
   checked?: boolean;
   disabled?: boolean;
   description?: string;
@@ -23,7 +24,8 @@ export default function Checkbox({
   id,
   name,
   value,
-  label,
+  label = '',
+  ariaLabel = '',
   checked = false,
   disabled = false,
   description = null,
@@ -60,6 +62,7 @@ export default function Checkbox({
           type="checkbox"
           name={name}
           value={value}
+          aria-label={ariaLabel}
           defaultChecked={checked}
           disabled={disabled}
           required={required}

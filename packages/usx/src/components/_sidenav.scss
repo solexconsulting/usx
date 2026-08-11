@@ -13,6 +13,12 @@
     top: 2rem;
   }
 
+  .usa-sidenav__item {
+    @if $usx-sidenav-border-color != null {
+      border-top-color: $usx-sidenav-border-color;
+    }
+  }
+
   a {
     &.usa-current {
       @if $usx-sidenav-current-color {
@@ -26,7 +32,7 @@
       }
     }
 
-    &:not(.usa-button, .usa-current) {
+    &:not(.usa-button):not(.usa-current) {
       @if $usx-sidenav-link-color {
         color: $usx-sidenav-link-color;
       }

@@ -5,7 +5,7 @@
   width: max-content;
   gap: .25rem;
 
-  &:not([class^="text-"]):not([class*=" text-"]):not(.usa-dark-background ~) {
+  &:not([class^="text-"]):not([class*=" text-"]) {
 
     @if $usx-link-color {
       color: $usx-link-color;
@@ -28,17 +28,8 @@
 
   &:not(.usx-no-visited) {
 
-    &:visited {
-      color: #54278f;
-
-      @if $usx-link-visited-color {
-        color: $usx-link-visited-color;
-      }
-    }
-
+    &:visited,
     &.usx-link--visited {
-      color: #54278f;
-
       @if $usx-link-visited-color {
         color: $usx-link-visited-color;
       }
@@ -48,6 +39,25 @@
   &:focus {
     @if $usx-input-focus-outline {
       color: $usx-input-focus-outline;
+    }
+  }
+}
+
+// On a dark background, USWDS swaps link/visited color to a light neutral
+// (matching the surrounding light text) instead of the blue/purple defaults.
+.usa-dark-background .usx-link {
+  &:not([class^="text-"]):not([class*=" text-"]) {
+    @if $usx-link-color-dark {
+      color: $usx-link-color-dark;
+    }
+  }
+
+  &:not(.usx-no-visited) {
+    &:visited,
+    &.usx-link--visited {
+      @if $usx-link-visited-color-dark {
+        color: $usx-link-visited-color-dark;
+      }
     }
   }
 }

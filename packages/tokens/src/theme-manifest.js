@@ -98,6 +98,10 @@ export const themeManifest = [
   c('color-base-100', '#ffffff'),
   c('color-base-200', '#f0f0f0', 'color-base-100'),
   c('color-base-300', '#dfe1e2', 'color-base-100'),
+  // Shared border color: checkbox/radio tiles, task-list item dividers,
+  // sidenav item dividers, and the default (overridable) for header/footer
+  // section dividers all chain to this via their own usx-*-border-color hook.
+  c('color-border', '#c9c9c9', 'color-base-lighter'),
   c('color-dark-bg', '#1b1b1b'),
   c('color-dark-bg-darker', '#000000', 'color-dark-bg'),
   c('color-dark-bg-lighter', '#3d4551', 'color-dark-bg'),
@@ -122,7 +126,7 @@ export const themeManifest = [
   // Semantic radii — components pick a radius by group (DaisyUI-style).
   scale('radius-box', '--usx-radius-box', '1rem', 'radius'),
   scale('radius-field', '--usx-radius-field', '0.5rem', 'radius'),
-  scale('radius-selector', '--usx-radius-selector', '0.5rem', 'radius'),
+  scale('radius-selector', '--usx-radius-selector', '2px', 'radius'),
   scale('radius-none', '--usx-radius-none', '0', 'radius'),
   // Primitives — reserved for utility classes.
   scale('r-sm', '--usx-radius-sm', '0.25rem', 'radius'),
@@ -143,7 +147,8 @@ export const themeManifest = [
   scale('usx-image-radius', '--usx-image-radius', 'var(--usx-radius-box)', 'radius-advanced'),
   scale('usx-tag-radius', '--usx-tag-radius', 'var(--usx-radius-selector)', 'radius-advanced'),
   scale('usx-checkbox-radius', '--usx-checkbox-radius', 'var(--usx-radius-selector)', 'radius-advanced'),
-  scale('usx-misc-banner-badge-radius', '--usx-misc-banner-badge-radius', 'var(--usx-radius-selector)', 'radius-advanced'),
+  scale('usx-tile-radius', '--usx-tile-radius', '0.25rem', 'radius-advanced'),
+  scale('usx-misc-banner-badge-radius', '--usx-misc-banner-badge-radius', '6px', 'radius-advanced'),
 
   // ── Border widths ─────────────────────────────────────────────────────────
   scale('border-width-thin', '--usx-border-width-thin', '1px', 'border'),
@@ -159,8 +164,19 @@ export const themeManifest = [
   scale('typography-lineHeightBase', '--usx-typography-line-height-base', '1.5', 'typography', 'number'),
 
   // ── Component tokens (hardcoded-hex promotions) ───────────────────────────
+  component('usx-link-color', '#005ea2', 'color-primary'),
   component('usx-link-visited-color', '#54278f'),
-  component('usx-summary-box-link-visited-color', '#c254ee'),
+  // USWDS swaps link/visited color to a light neutral on a dark background
+  // (`.usa-dark-background`) instead of the illegible blue/purple defaults;
+  // no existing primitive matches this exact shade, so it gets its own token.
+  component('usx-link-color-dark', '#e6e6e6'),
+  component('usx-link-visited-color-dark', '#e6e6e6'),
+  component('usx-summary-box-link-visited-color', '#54278f'),
+  // No existing color primitive matches USWDS's summary-box "info" tint, so
+  // these get their own dedicated defaults (kept in sync with real USWDS
+  // output) rather than being forced to a shared primitive.
+  component('usx-summary-box-background-color', '#e7f6f8'),
+  component('usx-summary-box-border-color', '#99deea'),
   component('usx-accordion-accent-color', '#f0f0f0', 'color-base-200'),
   component('usx-accordion-content-background', '#ffffff', 'color-base-100'),
   component('usx-banner-after-color', '#005ea2', 'color-primary'),
@@ -168,11 +184,20 @@ export const themeManifest = [
   component('usx-carousel-dot-color-hover', '#a0a0a0', 'usx-carousel-dot-color'),
   component('usx-carousel-dot-color-active', '#808080', 'usx-carousel-dot-color'),
   component('usx-carousel-focus-outline-color', '#2491ff'),
-  component('usx-task-list-link-color', '#005ea2'),
+  // Follows usx-link-color by default (a `var()` reference, like the
+  // radius-advanced tokens default to `var(--usx-radius-none)`) unless its
+  // own custom property is explicitly overridden.
+  component('usx-task-list-link-color', 'var(--usx-link-color)'),
   component('usx-attribution-secondary-color', '#757575'),
   component('usx-clickable-focus-outline-color', '#2491ff'),
   component('usx-clickable-hover-color', '#005ea2'),
   component('usx-misc-banner-focus-outline-color', '#9bdaf1'),
+  // Per-component overrides of the shared color-border token (see above).
+  component('usx-tile-border-color', 'var(--usx-color-border)'),
+  component('usx-task-list-border-color', 'var(--usx-color-border)'),
+  component('usx-sidenav-border-color', 'var(--usx-color-border)'),
+  component('usx-header-border-color', 'var(--usx-color-border)'),
+  component('usx-footer-border-color', 'var(--usx-color-border)'),
   { name: 'usx-table-selected-bg', cssVar: '--usx-table-selected-bg', defaultValue: '#e7f0fa', group: 'component', type: 'color' },
   { name: 'usx-table-hover-bg', cssVar: '--usx-table-hover-bg', defaultValue: '#73b3e7', group: 'component', type: 'color', derivedFrom: 'color-primary' }
 ];

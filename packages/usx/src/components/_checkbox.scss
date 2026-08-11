@@ -2,8 +2,23 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-checkbox {
-  .usa-checkbox__label::before {
-    border-radius: $usx-checkbox-border-radius;
+
+  @if $usx-tile-border-radius != null {
+    .usa-checkbox__input--tile + .usa-checkbox__label {
+      border-radius: $usx-tile-border-radius;
+    }
+  }
+
+  @if $usx-tile-border-color != null {
+    .usa-checkbox__input--tile + .usa-checkbox__label {
+      border-color: $usx-tile-border-color;
+    }
+  }
+
+  @if $usx-checkbox-border-radius != null {
+    .usa-checkbox__label::before {
+      border-radius: $usx-checkbox-border-radius;
+    }
   }
 
   .usa-checkbox__input:checked:not(:disabled) {

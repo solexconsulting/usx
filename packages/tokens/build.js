@@ -1,12 +1,21 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { themeManifest } from './src/theme-manifest.js';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const srcDir = path.join(__dirname, 'src');
 const primitivesDir = path.join(srcDir, 'primitives');
 const distDir = path.join(__dirname, 'dist');
+const manifestPath = path.join(srcDir, 'theme-manifest.js');
+
+// Re-imports theme-manifest.js with a cache-busting query so `--watch` picks
+// up edits (ESM's module cache would otherwise serve the first-loaded copy
+// forever within this long-lived process).
+async function loadThemeManifest() {
+  const url = `${pathToFileURL(manifestPath).href}?update=${Date.now()}`;
+  const mod = await import(url);
+  return mod.themeManifest;
+}
 
 const tokenFiles = [
   { key: 'color', file: 'color.json' },
@@ -44,7 +53,7 @@ function buildCss(tokens) {
 // so every manifest entry must be defined here. radius-advanced defaults are
 // themselves var(--usx-radius-<group>) references, preserving the
 // per-component → group fall-through.
-function buildThemeCss() {
+function buildThemeCss(themeManifest) {
   const lines = themeManifest
     .map((t) => `  ${t.cssVar}: ${t.defaultValue};`);
 
@@ -54,7 +63,7 @@ function buildThemeCss() {
 // _hooks.scss — loads the variables module with every CSS variable hook
 // enabled. Load this before any component styles to opt in to runtime
 // theming. Hook Sass names derive from cssVar: --usx-x → $usx-x-var.
-function buildHooksScss() {
+function buildHooksScss(themeManifest) {
   const lines = themeManifest.map(
     (t) => `  $${t.cssVar.slice(2)}-var: ${t.cssVar},`
   );
@@ -66,14 +75,15 @@ function buildJs(tokens) {
   return `module.exports = ${JSON.stringify(tokens, null, 2)};\n`;
 }
 
-function run() {
+async function build() {
+  const themeManifest = await loadThemeManifest();
   const tokens = loadTokens();
 
   fs.mkdirSync(distDir, { recursive: true });
 
   fs.writeFileSync(path.join(distDir, 'tokens.css'), buildCss(tokens), 'utf8');
-  fs.writeFileSync(path.join(distDir, 'theme.css'), buildThemeCss(), 'utf8');
-  fs.writeFileSync(path.join(distDir, '_hooks.scss'), buildHooksScss(), 'utf8');
+  fs.writeFileSync(path.join(distDir, 'theme.css'), buildThemeCss(themeManifest), 'utf8');
+  fs.writeFileSync(path.join(distDir, '_hooks.scss'), buildHooksScss(themeManifest), 'utf8');
   fs.writeFileSync(path.join(distDir, 'tokens.js'), buildJs(tokens), 'utf8');
   fs.writeFileSync(
     path.join(distDir, 'theme-manifest.json'),
@@ -81,7 +91,42 @@ function run() {
     'utf8'
   );
 
-  console.log('Built tokens to dist/ (tokens.css, theme.css, _hooks.scss, tokens.js, theme-manifest.json)');
+  console.log(`[${new Date().toLocaleTimeString()}] Built tokens to dist/ (tokens.css, theme.css, _hooks.scss, tokens.js, theme-manifest.json)`);
 }
 
-run();
+// `node build.js --watch` rebuilds on every change under src/ (primitives
+// JSON, theme-manifest.js, etc.) instead of exiting after one build — handy
+// alongside `storybook dev` so token edits show up without a manual rebuild.
+async function watch() {
+  await build().catch((err) => console.error(err));
+
+  let pending = false;
+  const rebuild = () => {
+    if (pending) return;
+    pending = true;
+    // Debounce: editors often emit several fs events per save.
+    setTimeout(async () => {
+      pending = false;
+      try {
+        await build();
+      } catch (err) {
+        console.error(err);
+      }
+    }, 100);
+  };
+
+  fs.watch(srcDir, { recursive: true }, (_event, filename) => {
+    if (filename) rebuild();
+  });
+
+  console.log(`Watching ${srcDir} for changes...`);
+}
+
+if (process.argv.includes('--watch')) {
+  watch();
+} else {
+  build().catch((err) => {
+    console.error(err);
+    process.exitCode = 1;
+  });
+}

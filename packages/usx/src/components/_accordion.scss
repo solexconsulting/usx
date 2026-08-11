@@ -1,5 +1,14 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
+// Minus/plus icons as inline data URIs (copied from USWDS's own
+// usa-icons/remove.svg and usa-icons/add.svg). USWDS bakes these in as
+// fixed-color `background-image`s at build time, so they can't track a
+// runtime text-color override. Embedding them here lets us repaint them via
+// `mask-image` + `background-color` instead \u2014 no bundler asset path
+// resolution needed, and it reuses the exact same icon artwork.
+$usx-accordion-icon-remove: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'%3E%3Cpath d=\'M19 13H5v-2h14v2z\'/%3E%3C/svg%3E';
+$usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'%3E%3Cpath d=\'M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z\'/%3E%3C/svg%3E';
+
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-accordion {
   .usa-accordion__button {
@@ -31,6 +40,38 @@
   @if $usx-accordion-content-background {
     .usa-accordion__content {
       background-color: $usx-accordion-content-background;
+    }
+  }
+
+  @if $usx-accordion-text-color {
+    .usa-accordion__button,
+    .usa-accordion__content {
+      color: $usx-accordion-text-color;
+    }
+
+    // Replace the frozen background-image icon with a mask painted in the
+    // same theme-aware color as the text above (mirrors the technique USWDS
+    // itself uses for forced-colors mode, just applied unconditionally).
+    .usa-accordion__button {
+      position: relative;
+      background-image: none;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 1.25rem;
+        height: 100%;
+        width: 1.5rem;
+        background-color: $usx-accordion-text-color;
+        mask: url("#{$usx-accordion-icon-remove}") center / 1.5rem no-repeat;
+        -webkit-mask: url("#{$usx-accordion-icon-remove}") center / 1.5rem no-repeat;
+      }
+
+      &[aria-expanded="false"]::before {
+        mask-image: url("#{$usx-accordion-icon-add}");
+        -webkit-mask-image: url("#{$usx-accordion-icon-add}");
+      }
     }
   }
 }

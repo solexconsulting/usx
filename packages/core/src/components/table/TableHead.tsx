@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { useTableContext } from './TableContext';
 import Icon from '../icon/Icon';
+import Checkbox from '../checkbox/Checkbox';
 
 import type { TableColumn } from './types';
 
@@ -59,6 +60,7 @@ export interface TableHeadProps extends React.HTMLAttributes<HTMLTableSectionEle
 
 const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...props }) => {
   const {
+    id,
     columns,
     sortState,
     handleSort,
@@ -113,15 +115,10 @@ const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...prop
               className="usx-table__cell usx-table__cell--selection"
             >
               {selectionMode === 'checkbox' && allowSelectAll && (
-                <input
-                  type="checkbox"
-                  className="usx-table__checkbox"
-                  aria-label="Select all rows"
-                  checked={isAllSelected}
-                  ref={(el: HTMLInputElement | null) => {
-                    if (el) el.indeterminate = isIndeterminate;
-                  }}
+                <Checkbox
+                  id={`${id}-select-all`}
                   onChange={handleSelectAll}
+                  ariaLabel="Select all rows"
                 />
               )}
             </th>
@@ -179,15 +176,10 @@ const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...prop
               className="usx-table__cell usx-table__cell--selection"
             >
               {selectionMode === 'checkbox' && allowSelectAll && (
-                <input
-                  type="checkbox"
-                  className="usx-table__checkbox"
-                  aria-label="Select all rows"
-                  checked={isAllSelected}
-                  ref={(el: HTMLInputElement | null) => {
-                    if (el) el.indeterminate = isIndeterminate;
-                  }}
+                <Checkbox
+                  id={`${id}-select-all`}
                   onChange={handleSelectAll}
+                  ariaLabel="Select all rows"
                 />
               )}
             </th>

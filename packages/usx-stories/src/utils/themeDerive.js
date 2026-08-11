@@ -103,9 +103,15 @@ export function getToken(name) {
   return byName.get(name);
 }
 
-// All manifest entries whose `derivedFrom` is `baseName`.
+// All manifest entries whose `derivedFrom` is `baseName`, restricted to the
+// same `group` as the base itself. `derivedFrom` is also used by "component"
+// tokens purely to auto-recompute when their underlying color changes (e.g.
+// usx-accordion-content-background → color-base-100); those aren't true
+// palette "shades" and must not be nested under the base's Colors-panel
+// control (they already get their own row under Component colors).
 export function shadesOf(baseName) {
-  return themeManifest.filter((t) => t.derivedFrom === baseName);
+  const base = byName.get(baseName);
+  return themeManifest.filter((t) => t.derivedFrom === baseName && (!base || t.group === base.group));
 }
 
 // Base (underived) color tokens — the primary playground controls.

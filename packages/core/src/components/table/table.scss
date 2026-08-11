@@ -17,11 +17,18 @@
   position: relative;
 
   // ── Caption ─────────────────────────────────────────────────────────────────
+  // Real USWDS's `body { color: #1b1b1b; }` is a static, non-themeable value
+  // the caption would otherwise just inherit — pin it to the theme's text
+  // color so it responds to overrides instead of staying stuck black.
   .usx-table__caption {
     text-align: left;
     font-style: italic;
     margin-bottom: 0.5rem;
     caption-side: top;
+
+    @if $color-text {
+      color: $color-text;
+    }
   }
 
   // ── Cells ────────────────────────────────────────────────────────────────────
@@ -108,12 +115,27 @@
   }
 
   // ── Checkboxes and radios ─────────────────────────────────────────────────────
+  // These cells hold a single checkbox/radio with no visible label text (the
+  // accessible name comes from aria-label on the input instead). USWDS's
+  // default `.usa-checkbox__label`/`.usa-radio__label` spacing is built for a
+  // label string following the box — margin-top pushes it down to align with
+  // surrounding form fields, and padding-left reserves room for that text.
+  // With no text at all the label's content box collapses to height: 0 (an
+  // empty inline-block has no line box to size itself against), so its
+  // baseline-anchored position lands near the *bottom* of the wrapper instead
+  // of the middle — which is what actually pushes the box out of alignment.
+  // Giving the label an explicit height (matching the box + its 2px margin)
+  // fixes the anchor point; `text-align: center` on the cell handles the rest.
   .usx-table__checkbox,
   .usx-table__radio {
-    width: 1.25rem;
-    height: 1.25rem;
-    cursor: pointer;
-    vertical-align: middle;
+    display: inline-block;
+
+    .usa-checkbox__label,
+    .usa-radio__label {
+      margin-top: 0;
+      padding-left: calc(1.25rem + 2px);
+      height: calc(1.25rem + 2px);
+    }
   }
 
   // ── Group rows ────────────────────────────────────────────────────────────────

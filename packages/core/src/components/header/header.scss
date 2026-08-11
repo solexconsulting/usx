@@ -99,7 +99,7 @@
     float: none;
 
     .usa-nav__secondary {
-      right: calc(((100% - 64em)/2) - .25rem);
+      right: 2rem;
     }
     
     &.usx-nav--sticky:not(.is-visible) {
@@ -115,7 +115,8 @@
       }
       margin-left: auto;
       margin-right: auto;
-      padding-left: 1rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
     }
 
     .usa-nav__secondary-item + .usa-nav__secondary-item {
