@@ -26,8 +26,8 @@
     margin-bottom: 0.5rem;
     caption-side: top;
 
-    @if $color-text {
-      color: $color-text;
+    @if $text {
+      color: $text;
     }
   }
 

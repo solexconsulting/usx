@@ -9,8 +9,8 @@
   --off-color: #9c9c9c;
   --track-bg: #e2e8f0;
 
-  @if $color-base-300 {
-    --track-bg: #{$color-base-300};
+  @if $surface-2 {
+    --track-bg: #{$surface-2};
   }
 
   position: relative;

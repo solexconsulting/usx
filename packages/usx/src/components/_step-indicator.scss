@@ -29,4 +29,10 @@
       color: $usx-step-indicator-segment-current-color;
     }
   }
+
+  .usa-step-indicator__segment-label {
+    @if $usx-step-indicator-segment-label-color {
+      color: $usx-step-indicator-segment-label-color;
+    }
+  }
 }

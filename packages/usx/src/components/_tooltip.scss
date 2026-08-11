@@ -1,5 +1,7 @@
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
 $usx-triangle-size: 5px;
 
 .usx-tooltip {
@@ -12,6 +14,21 @@ $usx-triangle-size: 5px;
     visibility: hidden;
     opacity: 0;
     margin: 0;
+
+    // Real USWDS bakes the background/font color as fixed values at build
+    // time (see _variables.scss's Tooltip section) — override them here so
+    // the tooltip follows the theme instead of staying a flat frozen black.
+    @if $usx-tooltip-background-color {
+      background-color: $usx-tooltip-background-color;
+
+      &::after {
+        border-right-color: $usx-tooltip-background-color;
+      }
+    }
+
+    @if $usx-tooltip-text-color {
+      color: $usx-tooltip-text-color;
+    }
 
     // Replace JS-injected inline positioning with CSS transforms
     &--top {

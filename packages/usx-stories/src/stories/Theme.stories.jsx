@@ -10,6 +10,7 @@ import {
   themeToCss,
   hslToHex
 } from '../utils/themeDerive.js';
+import { systemColors } from '@solexllc/usx-theme/system-colors';
 
 
 // Showcase components
@@ -64,7 +65,7 @@ const PRESETS = {
     'color-accent-cool': '#81c784',
     'color-accent-warm': '#ffb300',
     'color-dark-bg': '#0b1f0c',
-    'color-base-200': '#f4faf4'
+    'surface-3': '#f4faf4'
   },
   Sunset: {
     'color-primary': '#d84315',
@@ -72,7 +73,7 @@ const PRESETS = {
     'color-accent-cool': '#ff8a65',
     'color-accent-warm': '#ffd54f',
     'color-dark-bg': '#1f0d05',
-    'color-base-200': '#fdf6f1'
+    'surface-3': '#fdf6f1'
   },
   Ocean: {
     'color-primary': '#0891b2',
@@ -80,7 +81,7 @@ const PRESETS = {
     'color-accent-cool': '#67e8f9',
     'color-accent-warm': '#fb923c',
     'color-dark-bg': '#031f2b',
-    'color-base-200': '#f0f9fb'
+    'surface-3': '#f0f9fb'
   },
   // Dark themes: unlike the light presets above (which only nudge the page
   // background), these also flip the surface/border/text tokens so cards,
@@ -90,28 +91,32 @@ const PRESETS = {
     'color-secondary': '#a78bfa',
     'color-accent-cool': '#38bdf8',
     'color-accent-warm': '#fbbf24',
-    'color-base-100': '#1e293b',
-    'color-base-200': '#0f172a',
-    'color-base-300': '#334155',
-    'color-text': '#e2e8f0',
+    'surface-1': '#1e293b',
+    'surface-3': '#0f172a',
+    'surface-2': '#334155',
+    'text': '#e2e8f0',
     'color-dark-bg': '#020617',
     'usx-summary-box-background-color': '#0f1b2e',
     'usx-summary-box-border-color': '#60a5fa',
-    'usx-link-visited-color': '#b39ddb'
+    'usx-link-visited-color': '#b39ddb',
+    'usx-tooltip-background-color': '#e2e8f0',
+    'usx-tooltip-text-color': '#020617'
   },
   Carbon: {
     'color-primary': '#fb923c',
     'color-secondary': '#22d3ee',
     'color-accent-cool': '#38bdf8',
     'color-accent-warm': '#facc15',
-    'color-base-100': '#1c1c1e',
-    'color-base-200': '#121214',
-    'color-base-300': '#3a3a3d',
-    'color-text': '#e5e5e5',
+    'surface-1': '#1c1c1e',
+    'surface-3': '#121214',
+    'surface-2': '#3a3a3d',
+    'text': '#e5e5e5',
     'color-dark-bg': '#000000',
     'usx-summary-box-background-color': '#241a10',
     'usx-summary-box-border-color': '#fb923c',
-    'usx-link-visited-color': '#b39ddb'
+    'usx-link-visited-color': '#b39ddb',
+    'usx-tooltip-background-color': '#e5e5e5',
+    'usx-tooltip-text-color': '#000000'
   }
 };
 
@@ -127,31 +132,107 @@ const MAIN_COLORS = [
   'color-success',
   'color-error',
   'color-emergency',
-  'color-base-100',
+  'color-disabled',
+  'surface-1',
+  'surface-2',
+  'surface-3',
+  'text',
+  'text-subtle',
+  'text-inverse',
   'color-border',
   'color-dark-bg'
 ];
 
-const RANDOMIZED = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm', 'color-base-100'];
+const RANDOMIZED = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm'];
+const SURFACE_NAMES = ['surface-1', 'surface-2', 'surface-3'];
 
 function randomPalette() {
   const overrides = {};
-  let base100Lightness = 100;
   RANDOMIZED.forEach((name) => {
-    const l = Math.random() * 100;
-    if (name === 'color-base-100') base100Lightness = l;
-    overrides[name] = hslToHex({ h: Math.random() * 360, s: Math.random() * 100, l });
+    overrides[name] = hslToHex({ h: Math.random() * 360, s: Math.random() * 100, l: Math.random() * 100 });
   });
-  // Dark surface → the default dark ink (color-text) would be unreadable, so
+
+  // Decide light vs. dark ONCE, up front (~50/50), then generate all three
+  // surfaces together within a matching lightness band. Randomizing each
+  // surface's lightness independently (the old behavior) could mix a dark
+  // surface-1 with still-light surface-2/3, which not only looked broken
+  // but also meant a coherent "dark theme" only emerged by chance for
+  // whichever single surface got randomized.
+  const isDark = Math.random() < 0.5;
+  const hue = Math.random() * 360;
+  const saturation = Math.random() * 20;
+  SURFACE_NAMES.forEach((name) => {
+    const [min, max] = isDark ? [4, 20] : [86, 100];
+    const lightness = min + Math.random() * (max - min);
+    overrides[name] = hslToHex({ h: hue, s: saturation, l: lightness });
+  });
+
+  // A dark surface set → the default dark ink (text) would be unreadable, so
   // swap in a light color instead. Same reasoning for secondary/muted text
-  // (color-text-base) and visited links (usx-link-visited-color) — their
+  // (text-subtle) and visited links (usx-link-visited-color) — their
   // light-mode defaults are just as illegible against a dark surface.
-  if (base100Lightness < 50) {
-    overrides['color-text'] = '#ffffff';
-    overrides['color-text-base'] = '#b9b9bb';
+  // text-inverse must flip the other way (back to a dark ink) so it stays
+  // the opposite of text instead of also going light-on-light. The tooltip
+  // (whose own defaults are theme-invariant — always a dark chip with light
+  // text) then follows text/text-inverse here so it flips right along with
+  // the rest of the dark theme instead of staying a dark-on-dark chip.
+  if (isDark) {
+    overrides['text'] = '#ffffff';
+    overrides['text-subtle'] = '#b9b9bb';
+    overrides['text-inverse'] = '#1b1b1b';
     overrides['usx-link-visited-color'] = '#b39ddb';
+    overrides['usx-tooltip-background-color'] = overrides['text'];
+    overrides['usx-tooltip-text-color'] = overrides['text-inverse'];
   }
   return overrides;
+}
+
+// Same overrides shape as randomPalette(), but every hex value is sourced
+// from the real USWDS system-color table (system-colors.generated.js, via
+// the familyNames/gradesFor/lookupHex helpers below) instead of arbitrary
+// HSL math — so every "random" result is guaranteed to be an actual USWDS
+// family/grade combination, not just an arbitrary hex.
+const NEUTRAL_FAMILIES = ['gray', 'gray-cool', 'gray-warm'];
+
+function randomSystemPalette() {
+  const overrides = {};
+  // Family/grade/vivid selections for the RANDOMIZED tokens (all of which
+  // have a real systemDefault and render via FamilyGradeColorControl), so
+  // the playground's family/grade selects can be synced to match — not just
+  // the resulting hex.
+  const selections = {};
+  RANDOMIZED.forEach((name) => {
+    const family = familyNames[Math.floor(Math.random() * familyNames.length)];
+    const vivid = familyHasVivid(family) && Math.random() < 0.5;
+    const grades = gradesFor(family, vivid);
+    const grade = grades[Math.floor(Math.random() * grades.length)];
+    overrides[name] = lookupHex(family, grade, vivid);
+    selections[name] = { family, grade, vivid };
+  });
+
+  // Same "decide dark/light once, then keep the 3 surfaces cohesive"
+  // approach as randomPalette(), but sampling from one neutral gray
+  // family's real grade scale instead of a continuous HSL lightness ramp.
+  const isDark = Math.random() < 0.5;
+  const surfaceFamily = NEUTRAL_FAMILIES[Math.floor(Math.random() * NEUTRAL_FAMILIES.length)];
+  const surfaceGrades = gradesFor(surfaceFamily, false);
+  const pool = isDark ? surfaceGrades.slice(-6) : surfaceGrades.slice(0, 6);
+  SURFACE_NAMES.forEach((name) => {
+    const grade = pool[Math.floor(Math.random() * pool.length)];
+    overrides[name] = lookupHex(surfaceFamily, grade, false);
+  });
+
+  // See randomPalette() above for why text-inverse flips opposite of text
+  // and the tooltip follows both.
+  if (isDark) {
+    overrides['text'] = '#ffffff';
+    overrides['text-subtle'] = lookupHex('gray-cool', '30') || '#b9b9bb';
+    overrides['text-inverse'] = '#1b1b1b';
+    overrides['usx-link-visited-color'] = '#b39ddb';
+    overrides['usx-tooltip-background-color'] = overrides['text'];
+    overrides['usx-tooltip-text-color'] = overrides['text-inverse'];
+  }
+  return { overrides, selections };
 }
 
 // ── Small UI helpers (playground chrome only — intentionally not themed) ─────
@@ -175,8 +256,8 @@ const PLAYGROUND_CSS = `
 .usx-pg-section:last-child { border-bottom: none; }
 .usx-pg-summary {
   display: flex; align-items: center; justify-content: space-between; gap: .5rem;
-  list-style: none; cursor: pointer; user-select: none; padding: .7rem .1rem;
-  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  list-style: none; cursor: pointer; user-select: none; padding: .85rem .1rem;
+  font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
   color: #374151; transition: color .12s ease;
 }
 .usx-pg-summary::-webkit-details-marker { display: none; }
@@ -192,7 +273,7 @@ const PLAYGROUND_CSS = `
   color: var(--pg-muted); background: #f3f4f6; border-radius: 999px; padding: .1rem .45rem;
   margin-right: auto; margin-left: .4rem;
 }
-.usx-pg-row { display: flex; align-items: center; gap: .55rem; padding: .3rem .1rem; border-radius: 6px; transition: background .12s ease; }
+.usx-pg-row { display: flex; align-items: center; gap: .55rem; padding: .4rem .5rem; border-radius: 6px; transition: background .12s ease; }
 .usx-pg-row:hover { background: #f9fafb; }
 .usx-pg-row.is-overridden { background: var(--pg-accent-soft); }
 .usx-pg-row.is-overridden:hover { background: var(--pg-accent-soft); }
@@ -217,16 +298,48 @@ const PLAYGROUND_CSS = `
   background: transparent; color: var(--pg-muted); transition: all .12s ease;
 }
 .usx-pg-reset:hover { background: #fee2e2; color: #dc2626; }
-.usx-pg-shades-toggle { cursor: pointer; font-size: .7rem; color: var(--pg-accent); opacity: .85; margin: .15rem 0 .3rem 2.3rem; }
+.usx-pg-shades-toggle { cursor: pointer; font-size: .7rem; color: var(--pg-accent); opacity: .85; margin: .15rem 0 .35rem 2.75rem; }
 .usx-pg-shades-toggle:hover { opacity: 1; text-decoration: underline; }
 .usx-pg-shades-toggle::-webkit-details-marker { display: none; }
+.usx-pg-row-fg {
+  flex-direction: column; align-items: stretch; flex-wrap: nowrap;
+  gap: .4rem; padding: .55rem .5rem; border: 1px solid transparent;
+}
+.usx-pg-row-fg:hover { border-color: var(--pg-line); }
+.usx-pg-row-fg.is-overridden { border-color: var(--pg-accent-soft); }
+.usx-pg-fg-top { display: flex; align-items: center; gap: .55rem; }
+.usx-pg-fg-details {
+  display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+  padding-left: 2.3rem;
+}
+.usx-pg-fg-hex { margin-left: auto; }
+.usx-pg-swatch-static {
+  display: inline-block; width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.15); flex-shrink: 0;
+}
+.usx-pg-select {
+  font: inherit; font-size: .72rem; padding: .25rem .35rem; border-radius: 6px;
+  border: 1px solid var(--pg-line); background: #fff; color: #1f2937;
+}
+.usx-pg-select-grade { width: 4rem; }
+.usx-pg-select, .usx-pg-select-grade { padding: .32rem .4rem; }
+.usx-pg-vivid-toggle {
+  display: inline-flex; align-items: center; gap: .2rem; font-size: .68rem;
+  color: var(--pg-muted); white-space: nowrap;
+}
+.usx-pg-mode-toggle {
+  font: inherit; font-size: .65rem; font-weight: 600; padding: .2rem .4rem; border-radius: 999px;
+  border: 1px solid var(--pg-line); background: #fff; color: var(--pg-muted); cursor: pointer;
+  text-transform: uppercase; letter-spacing: .03em; flex-shrink: 0;
+}
+.usx-pg-mode-toggle:hover { color: var(--pg-accent); border-color: var(--pg-accent); }
 .usx-pg-textarea {
   width: 100%; height: 9rem; font: .72rem/1.5 ui-monospace, Menlo, monospace; box-sizing: border-box;
   padding: .6rem; border-radius: 8px; border: 1px solid #2d3339; background: #1e2227; color: #d4d8de; resize: vertical;
 }
 .usx-pg-textarea:focus { outline: none; border-color: var(--pg-accent); }
 .usx-pg-container { display: flex; align-items: flex-start; }
-.usx-pg-sidebar { width: 21rem; flex-shrink: 0; height: 100vh; position: sticky; top: 0; }
+.usx-pg-sidebar { width: 24rem; flex-shrink: 0; height: 100vh; position: sticky; top: 0; }
 .usx-pg-sidebar-body { flex: 1; min-height: 0; overflow-y: auto; }
 .usx-pg-main { padding: 1.5rem; min-height: 100vh; }
 @media (max-width: 720px) {
@@ -261,8 +374,8 @@ const ui = {
   },
   chipRow: { display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0.35rem 0' },
   card: {
-    background: 'var(--usx-color-base-100, #ffffff)',
-    border: '1px solid var(--usx-color-base-300, #e2e8f0)',
+    background: 'var(--usx-surface-1, #ffffff)',
+    border: '1px solid var(--usx-surface-2, #e2e8f0)',
     borderRadius: '10px',
     padding: '1rem',
     display: 'flex',
@@ -303,6 +416,157 @@ function ColorControl({ token, value, isOverridden, onChange, onClear }) {
         <button type="button" className="usx-pg-reset" title="Reset to default" onClick={() => onClear(token.name)}>
           ×
         </button>
+      )}
+    </div>
+  );
+}
+
+// System palette helpers — pure lookups against the generated USWDS
+// system-color table (system-colors.generated.js). No hand-authored values.
+const familyNames = Object.keys(systemColors).sort();
+
+function familyHasVivid(family) {
+  return Object.keys(systemColors[family]?.vivid || {}).length > 0;
+}
+
+function gradesFor(family, vivid) {
+  const scale = vivid ? systemColors[family]?.vivid : systemColors[family]?.grades;
+  return Object.keys(scale || {}).sort((a, b) => Number(a) - Number(b));
+}
+
+function lookupHex(family, grade, vivid) {
+  const scale = vivid ? systemColors[family]?.vivid : systemColors[family]?.grades;
+  return (scale && scale[grade]) || null;
+}
+
+// Theme/state color tokens with a real USWDS counterpart (token.systemDefault)
+// get this control instead of a plain hex picker: family + grade selects
+// mirror how USWDS itself points `$theme-color-*` settings at the system
+// palette. A "hex" toggle escapes to the existing custom color input for
+// off-system branding.
+function FamilyGradeColorControl({ token, value, isOverridden, onChange, onClear, selection }) {
+  const def = token.systemDefault;
+  const [mode, setMode] = useState(isOverridden ? 'custom' : 'system');
+  const [family, setFamily] = useState(def.family);
+  const [grade, setGrade] = useState(def.grade);
+  const [vivid, setVivid] = useState(!!def.vivid);
+
+  // Re-sync the selector to the token's real default whenever its override
+  // is cleared externally (Reset all, switching presets, the row's own ×).
+  useEffect(() => {
+    if (!isOverridden) {
+      setMode('system');
+      setFamily(def.family);
+      setGrade(def.grade);
+      setVivid(!!def.vivid);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOverridden, token.name]);
+
+  // Sync to an externally-applied family/grade/vivid selection (e.g. the
+  // "Random (System)" button), rather than only reacting to the resulting
+  // hex value. Keyed on the `selection` object reference so it fires once
+  // per external assignment and doesn't fight later manual edits.
+  useEffect(() => {
+    if (selection) {
+      setMode('system');
+      setFamily(selection.family);
+      setGrade(selection.grade);
+      setVivid(!!selection.vivid);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selection]);
+
+  const applySystem = (nextFamily, nextGrade, nextVivid) => {
+    const hex = lookupHex(nextFamily, nextGrade, nextVivid);
+    if (hex) onChange(token.name, hex);
+  };
+
+  return (
+    <div className={`usx-pg-row usx-pg-row-fg${isOverridden ? ' is-overridden' : ''}`}>
+      <div className="usx-pg-fg-top">
+        {mode === 'system' ? (
+          <span className="usx-pg-swatch-static" style={{ background: value }} aria-hidden="true" />
+        ) : (
+          <input
+            type="color"
+            aria-label={token.name}
+            value={value}
+            onChange={(e) => onChange(token.name, e.target.value)}
+            className="usx-pg-swatch"
+          />
+        )}
+        <span className="usx-pg-label" title={token.cssVar}>
+          {token.name.replace(/^color-/, '')}
+        </span>
+        <code className="usx-pg-value usx-pg-fg-hex">{value}</code>
+        <button
+          type="button"
+          className="usx-pg-mode-toggle"
+          title={mode === 'system' ? 'Switch to a custom hex value' : 'Switch to family + grade'}
+          onClick={() => setMode(mode === 'system' ? 'custom' : 'system')}
+        >
+          {mode === 'system' ? 'hex' : 'sys'}
+        </button>
+        {isOverridden && (
+          <button type="button" className="usx-pg-reset" title="Reset to default" onClick={() => onClear(token.name)}>
+            ×
+          </button>
+        )}
+      </div>
+      {mode === 'system' && (
+        <div className="usx-pg-fg-details">
+          <select
+            aria-label={`${token.name} family`}
+            className="usx-pg-select"
+            value={family}
+            onChange={(e) => {
+              const nextFamily = e.target.value;
+              const nextVivid = familyHasVivid(nextFamily) ? vivid : false;
+              const grades = gradesFor(nextFamily, nextVivid);
+              const nextGrade = grades.includes(grade) ? grade : grades[0];
+              setFamily(nextFamily);
+              setVivid(nextVivid);
+              setGrade(nextGrade);
+              applySystem(nextFamily, nextGrade, nextVivid);
+            }}
+          >
+            {familyNames.map((f) => (
+              <option key={f} value={f}>{f}</option>
+            ))}
+          </select>
+          <select
+            aria-label={`${token.name} grade`}
+            className="usx-pg-select usx-pg-select-grade"
+            value={grade}
+            onChange={(e) => {
+              const nextGrade = e.target.value;
+              setGrade(nextGrade);
+              applySystem(family, nextGrade, vivid);
+            }}
+          >
+            {gradesFor(family, vivid).map((g) => (
+              <option key={g} value={g}>{g}</option>
+            ))}
+          </select>
+          {familyHasVivid(family) && (
+            <label className="usx-pg-vivid-toggle">
+              <input
+                type="checkbox"
+                checked={vivid}
+                onChange={(e) => {
+                  const nextVivid = e.target.checked;
+                  const grades = gradesFor(family, nextVivid);
+                  const nextGrade = grades.includes(grade) ? grade : grades[0];
+                  setVivid(nextVivid);
+                  setGrade(nextGrade);
+                  applySystem(family, nextGrade, nextVivid);
+                }}
+              />
+              vivid
+            </label>
+          )}
+        </div>
       )}
     </div>
   );
@@ -620,6 +884,10 @@ function Showcase() {
 
 function ThemePlayground() {
   const [overrides, setOverrides] = useState({});
+  // Family/grade/vivid selections applied by "Random (System)", keyed by
+  // token name — pushed into FamilyGradeColorControl so its selects reflect
+  // the chosen system swatch, not just the resulting hex.
+  const [systemSelections, setSystemSelections] = useState({});
   const [autoDerive, setAutoDerive] = useState(true);
   const [changedOnly, setChangedOnly] = useState(true);
   const [copied, setCopied] = useState(false);
@@ -651,19 +919,34 @@ function ThemePlayground() {
       delete next[name];
       return next;
     });
+    setSystemSelections((prev) => {
+      if (!(name in prev)) return prev;
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
   };
 
   const applyPreset = (preset) => {
     setActivePreset(preset);
     setOverrides({ ...PRESETS[preset] });
+    setSystemSelections({});
   };
   const applyRandom = () => {
     setActivePreset(null);
     setOverrides(randomPalette());
+    setSystemSelections({});
+  };
+  const applyRandomSystem = () => {
+    setActivePreset(null);
+    const { overrides: nextOverrides, selections } = randomSystemPalette();
+    setOverrides(nextOverrides);
+    setSystemSelections(selections);
   };
   const resetAll = () => {
     setActivePreset('Default');
     setOverrides({});
+    setSystemSelections({});
   };
 
   const overrideCount = Object.keys(overrides).length;
@@ -689,32 +972,40 @@ function ThemePlayground() {
   const moreColors = baseColorTokens().filter((t) => !MAIN_COLORS.includes(t.name));
   const componentColors = themeManifest.filter((t) => t.group === 'component');
 
-  const renderColor = (t) => (
-    <React.Fragment key={t.name}>
-      <ColorControl
-        token={t}
-        value={resolved[t.name]}
-        isOverridden={overrides[t.name] !== undefined}
-        onChange={setToken}
-        onClear={clearToken}
-      />
-      {shadesOf(t.name).filter((s) => !MAIN_COLORS.includes(s.name)).length > 0 && (
-        <details style={{ marginBottom: '0.25rem' }}>
-          <summary className="usx-pg-shades-toggle">shades</summary>
-          {shadesOf(t.name).filter((s) => !MAIN_COLORS.includes(s.name)).map((s) => (
-            <ColorControl
-              key={s.name}
-              token={s}
-              value={resolved[s.name]}
-              isOverridden={overrides[s.name] !== undefined}
-              onChange={setToken}
-              onClear={clearToken}
-            />
-          ))}
-        </details>
-      )}
-    </React.Fragment>
-  );
+  const renderColor = (t) => {
+    const Control = t.systemDefault ? FamilyGradeColorControl : ColorControl;
+    return (
+      <React.Fragment key={t.name}>
+        <Control
+          token={t}
+          value={resolved[t.name]}
+          isOverridden={overrides[t.name] !== undefined}
+          onChange={setToken}
+          onClear={clearToken}
+          selection={systemSelections[t.name]}
+        />
+        {shadesOf(t.name).filter((s) => !MAIN_COLORS.includes(s.name)).length > 0 && (
+          <details style={{ marginBottom: '0.25rem' }}>
+            <summary className="usx-pg-shades-toggle">shades</summary>
+            {shadesOf(t.name).filter((s) => !MAIN_COLORS.includes(s.name)).map((s) => {
+              const ShadeControl = s.systemDefault ? FamilyGradeColorControl : ColorControl;
+              return (
+                <ShadeControl
+                  key={s.name}
+                  token={s}
+                  value={resolved[s.name]}
+                  isOverridden={overrides[s.name] !== undefined}
+                  onChange={setToken}
+                  onClear={clearToken}
+                  selection={systemSelections[s.name]}
+                />
+              );
+            })}
+          </details>
+        )}
+      </React.Fragment>
+    );
+  };
 
   const renderText = (t) => (
     <TextControl
@@ -758,6 +1049,9 @@ function ThemePlayground() {
             ))}
             <button type="button" className="usx-pg-btn is-ghost" onClick={applyRandom}>
               🎲 Random
+            </button>
+            <button type="button" className="usx-pg-btn is-ghost" onClick={applyRandomSystem}>
+              🎨 Random (System)
             </button>
             <button type="button" className="usx-pg-btn is-ghost" onClick={resetAll}>
               ↺ Reset
@@ -827,8 +1121,8 @@ function ThemePlayground() {
         style={{
           flex: 1,
           minWidth: 0,
-          background: resolved['color-base-200'],
-          color: resolved['color-text'],
+          background: resolved['surface-3'],
+          color: resolved['text'],
           boxSizing: 'border-box'
         }}
       >

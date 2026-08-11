@@ -1,4 +1,7 @@
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
 .usx-icon-list {
   .usa-icon-list__item {
     align-items: flex-start;
@@ -6,6 +9,12 @@
 
   .usa-icon-list__icon {
     flex: 0 0 auto;
+
+    // Real USWDS only colors the icon via opt-in BEM modifier classes
+    // (.usa-icon-list--primary, etc.) — default it to our theme instead.
+    @if $usx-icon-list-icon-color {
+      color: $usx-icon-list-icon-color;
+    }
   }
 
   .usa-icon-list__content {

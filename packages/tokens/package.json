@@ -22,6 +22,9 @@
       "default": "./src/theme-manifest.js"
     },
     "./theme-manifest.json": "./dist/theme-manifest.json",
+    "./system-colors": {
+      "default": "./src/system-colors.generated.js"
+    },
     "./tokens.css": "./dist/tokens.css"
   },
   "files": [
@@ -30,6 +33,7 @@
     "build.js"
   ],
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "generate:system-colors": "node scripts/generate-system-colors.js"
   }
 }

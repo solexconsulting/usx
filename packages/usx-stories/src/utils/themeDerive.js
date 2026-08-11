@@ -106,7 +106,7 @@ export function getToken(name) {
 // All manifest entries whose `derivedFrom` is `baseName`, restricted to the
 // same `group` as the base itself. `derivedFrom` is also used by "component"
 // tokens purely to auto-recompute when their underlying color changes (e.g.
-// usx-accordion-content-background → color-base-100); those aren't true
+// usx-accordion-content-background → color-light); those aren't true
 // palette "shades" and must not be nested under the base's Colors-panel
 // control (they already get their own row under Component colors).
 export function shadesOf(baseName) {

@@ -106,7 +106,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: var(--usx-table-hover-bg, $color-primary-lighter) !important;
+        background-color: var(--usx-table-hover-bg, $color-primary-light) !important;
         .usx-table__cell {
           background-color: transparent; // Keep cells from layering on top of hover color
         }

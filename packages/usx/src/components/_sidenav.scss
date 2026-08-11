@@ -7,7 +7,7 @@
   }
 }
 
-.usx-sidenav {
+.usx-sidenav.usa-sidenav {
   &.usx-sidenav--sticky {
     position: sticky;
     top: 2rem;
@@ -41,6 +41,16 @@
         @if $usx-sidenav-link-hover-color {
           color: $usx-sidenav-link-hover-color;
         }
+
+        @if $usx-sidenav-hover-color {
+          background-color: $usx-sidenav-hover-color;
+        }
+      }
+    }
+
+    &:hover {
+      @if $usx-sidenav-hover-color {
+        background-color: $usx-sidenav-hover-color;
       }
     }
   }

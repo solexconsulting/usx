@@ -5,8 +5,8 @@
   background-color: #f8fafc;
   min-height: 100vh;
 
-  @if $color-base-200 {
-    background-color: $color-base-200;
+  @if $surface-3 {
+    background-color: $surface-3;
   }
 
   // ── Single column layout ──────────────────────────────────────────────────

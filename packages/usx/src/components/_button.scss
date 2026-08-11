@@ -27,8 +27,8 @@
 @mixin usx-button-inverse($hover-mix: 20%, $active-mix: 40%) {
   $inverse-color: white;
 
-  @if $color-light-text {
-    $inverse-color: $color-light-text;
+  @if $text-inverse {
+    $inverse-color: $text-inverse;
   }
 
   color: $inverse-color;

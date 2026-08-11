@@ -37,12 +37,12 @@
       display: none;
 
       &:visited {
-        color: $color-light-text;
+        color: white;
       }
 
       @media (width >= 64em) {
         display: inline-block;
-        color: $color-light-text;
+        color: white;
       }
     }
 
@@ -114,7 +114,7 @@
 
         .usx-misc-banner__link {
           display: inline-block;
-          color: $color-light-text;
+          color: $text-inverse;
         }
 
         ul {

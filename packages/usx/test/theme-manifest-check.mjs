@@ -33,10 +33,45 @@ const errors = [];
 // component CSS. Still themeable for downstream Sass consumers. If one of
 // these starts appearing in compiled CSS, remove it from this list.
 const UNCONSUMED = new Set([
-  '--usx-color-primary-lighter',
+  '--usx-color-primary-light',
+  '--usx-color-primary-vivid',
+  '--usx-color-secondary-lighter',
+  '--usx-color-secondary-light',
+  '--usx-color-secondary-vivid',
+  '--usx-color-secondary-dark',
+  '--usx-color-accent-cool-lighter',
+  '--usx-color-accent-cool-dark',
+  '--usx-color-accent-cool-darker',
+  '--usx-color-accent-warm-lighter',
+  '--usx-color-accent-warm-dark',
+  '--usx-color-accent-warm-darker',
+  '--usx-color-base-lightest',
+  '--usx-color-base-lighter',
+  '--usx-color-base-light',
+  '--usx-color-base-dark',
+  '--usx-color-base-darkest',
+  '--usx-color-base-ink',
   '--usx-color-base-hover',
   '--usx-color-base-active',
-  '--usx-color-base-100',
+  '--usx-color-info-light',
+  '--usx-color-info-dark',
+  '--usx-color-info-darker',
+  '--usx-color-warning-light',
+  '--usx-color-warning-dark',
+  '--usx-color-warning-darker',
+  '--usx-color-success-light',
+  '--usx-color-success-dark',
+  '--usx-color-success-darker',
+  '--usx-color-error-light',
+  '--usx-color-error-dark',
+  '--usx-color-error-darker',
+  '--usx-color-emergency-dark',
+  '--usx-color-disabled-lighter',
+  '--usx-color-disabled-light',
+  '--usx-color-disabled-dark',
+  '--usx-color-disabled-darker',
+  '--usx-color-dark-bg-darker',
+  '--usx-color-dark-bg-lighter',
   '--usx-spacing-sm',
   '--usx-typography-font-family-base',
   '--usx-typography-font-size-base',
@@ -55,7 +90,14 @@ const UNCONSUMED = new Set([
   // per-component hook only (e.g. --usx-tile-border-color); the group var
   // is consumed indirectly via theme.css's fallback chain
   // (--usx-tile-border-color: var(--usx-color-border)), never directly.
-  '--usx-color-border'
+  '--usx-color-border',
+  // Raw text-color primitives: every usx component now chains to the
+  // text/text-subtle/text-inverse abstraction instead (see _variables.scss),
+  // but these stay published for downstream Sass consumers (e.g.
+  // @solexllc/usx-react) that still reference them directly.
+  '--usx-color-text',
+  '--usx-color-light-text',
+  '--usx-color-text-base'
 ]);
 
 // Walk every var(--usx-*) occurrence, extracting the name (nested-paren safe).
