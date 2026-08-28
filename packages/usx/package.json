@@ -1,0 +1,33 @@
+{
+  "name": "@solexllc/usx",
+  "version": "0.1.0",
+  "private": true,
+  "sass": "src/index.scss",
+  "exports": {
+    ".": {
+      "sass": "./src/index.scss"
+    },
+    "./themed": {
+      "sass": "./src/themed.scss"
+    },
+    "./utilities": {
+      "sass": "./src/_utilities.scss"
+    },
+    "./typography": {
+      "sass": "./src/components/_typography.scss"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@solexllc/usx-theme": "workspace:*"
+  },
+  "scripts": {
+    "build": "sass --pkg-importer=node --no-source-map src/index.scss dist/usx.css && sass --pkg-importer=node --no-source-map src/themed.scss dist/usx-themed.css",
+    "test": "node test/theme-parity.mjs && node test/theme-manifest-check.mjs"
+  },
+  "devDependencies": {
+    "sass": "^1.98.0"
+  }
+}

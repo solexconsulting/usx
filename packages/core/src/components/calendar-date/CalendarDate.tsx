@@ -1,6 +1,5 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import './calendar-date.scss';
 
 export interface CalendarDateProps {
   datetime: string;

@@ -1,6 +1,5 @@
 import React, { ReactNode, HTMLAttributes, useId } from 'react';
 import Icon from '../icon/Icon';
-import './misc-banner.scss';
 
 export interface MiscBannerProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
@@ -23,11 +22,11 @@ export default function MiscBanner({
   tone = 'beta',
   badgeText = 'beta',
   message = 'Welcome to the beta website!',
-  casualLinkText = 'Learn more',
-  casualLinkHref = 'https://usx.solex.studio/',
+  casualLinkText,
+  casualLinkHref,
   showLearnMore = true,
-  importantLinkText = 'Return to Classic Site',
-  importantLinkHref = 'https://usx.solex.studio/',
+  importantLinkText,
+  importantLinkHref,
   importantLinkIcon = 'undo',
   showReturnLink = true,
   ...props

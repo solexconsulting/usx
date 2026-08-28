@@ -1,5 +1,4 @@
 import React from 'react';
-import './button.scss';
 import Icon from '../icon/Icon';
 import ClassNames from 'classnames';
 

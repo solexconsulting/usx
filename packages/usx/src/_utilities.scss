@@ -1,0 +1,146 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+@each $color-name, $color-value in $colors {
+  @if $color-value {
+    .bg-#{$color-name} {
+      background-color: $color-value !important;
+    }
+
+    .text-#{$color-name} {
+      color: $color-value !important;
+    }
+
+    .usx-border-#{$color-name} {
+      border-color: $color-value !important;
+    }
+
+    .before-bg-#{$color-name}::before {
+      background-color: $color-value !important;
+    }
+
+    .after-bg-#{$color-name}::after {
+      background-color: $color-value !important;
+    }
+  }
+}
+
+@each $color-name, $color-value in $text-colors {
+  @if $color-value {
+    .#{$color-name} {
+      color: $color-value !important;
+    }
+
+    .before-bg-#{$color-name}::before {
+      background-color: $color-value !important;
+    }
+
+    .after-bg-#{$color-name}::after {
+      background-color: $color-value !important;
+    }
+  }
+}
+
+@each $color-name, $color-value in $surface-colors {
+  @if $color-value {
+    .bg-#{$color-name} {
+      background-color: $color-value !important;
+    }
+
+    .before-bg-#{$color-name}::before {
+      background-color: $color-value !important;
+    }
+
+    .after-bg-#{$color-name}::after {
+      background-color: $color-value !important;
+    }
+  }
+}
+
+.usx-rounded-sm {
+  border-radius: $usx-radius-sm;
+  overflow: clip;
+}
+
+.usx-rounded-md {
+  border-radius: $usx-radius-md;
+  overflow: clip;
+}
+
+.usx-rounded-lg {
+  border-radius: $usx-radius-lg;
+  overflow: clip;
+}
+
+.usx-rounded-xl {
+  border-radius: $usx-radius-xl;
+  overflow: clip;
+}
+
+.usx-circle {
+  border-radius: $usx-radius-full;
+  overflow: clip;
+}
+
+.usx-ping {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: currentcolor;
+    animation: ping 2s cubic-bezier(0, 0, .2, 1) infinite;
+  }
+}
+
+.usx-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.usx-bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+$usx-sizes: (
+  min: min-content,
+  max: max-content,
+  fit: fit-content
+);
+
+@each $key, $value in $usx-sizes {
+  .usx-width-#{$key} {
+    width: $value;
+  }
+
+  .usx-height-#{$key} {
+    height: $value;
+  }
+}

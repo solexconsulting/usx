@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Icon from '../icon/Icon';
 import ClassNames from 'classnames';
-import './banner.scss';
 
 export interface BannerProps extends React.HTMLAttributes<HTMLElement> {
   id?: string;

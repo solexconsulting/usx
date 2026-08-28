@@ -1,0 +1,18 @@
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-icon--size-1 {
+  width: .75em;
+  height: .75em;
+}
+
+.usx-icon--mirror {
+  transform: scaleX(-1);
+}
+
+.usx-icon--flip {
+  transform: scaleY(-1);
+
+  &.usx-icon--mirror {
+    transform: rotate(180deg);
+  }
+}
+/* stylelint-enable selector-class-pattern */

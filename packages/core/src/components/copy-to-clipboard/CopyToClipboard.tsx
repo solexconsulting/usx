@@ -1,6 +1,5 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import './copy-to-clipboard.scss';
 
 export interface CopyToClipboardProps {
   copyText?: string;

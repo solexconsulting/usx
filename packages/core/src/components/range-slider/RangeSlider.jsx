@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './range-slider.scss';
 
 export default function RangeSlider({ children = null, className = '', ...props }) {
   const classes = ['usx-range-slider', className].filter(Boolean).join(' ');

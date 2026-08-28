@@ -1,0 +1,90 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+// Minus/plus icons as inline data URIs (copied from USWDS's own
+// usa-icons/remove.svg and usa-icons/add.svg). USWDS bakes these in as
+// fixed-color `background-image`s at build time, so they can't track a
+// runtime text-color override. Embedding them here lets us repaint them via
+// `mask-image` + `background-color` instead \u2014 no bundler asset path
+// resolution needed, and it reuses the exact same icon artwork.
+$usx-accordion-icon-remove: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'%3E%3Cpath d=\'M19 13H5v-2h14v2z\'/%3E%3C/svg%3E';
+$usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'%3E%3Cpath d=\'M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z\'/%3E%3C/svg%3E';
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-accordion {
+  .usa-accordion__button {
+    border-radius: $usx-accordion-radius;
+  }
+
+  .usa-accordion__button[aria-expanded="true"] {
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  &.usa-accordion--bordered {
+    .usa-accordion__content {
+      @if $usx-accordion-border-width {
+        border-width: $usx-accordion-border-width;
+      }
+    }
+  }
+
+  .usa-accordion__content {
+    border-end-start-radius: $usx-accordion-radius;
+    border-end-end-radius: $usx-accordion-radius;
+  }
+
+  @if $usx-accordion-bg {
+    .usa-accordion__button {
+      background-color: $usx-accordion-bg;
+    }
+
+    &.usa-accordion--bordered {
+      .usa-accordion__content {
+        border-color: $usx-accordion-bg;
+      }
+    }
+  }
+
+  @if $usx-accordion-content-bg {
+    .usa-accordion__content {
+      background-color: $usx-accordion-content-bg;
+    }
+  }
+
+  @if $usx-accordion-text {
+    .usa-accordion__button {
+      color: $usx-accordion-text;
+    }
+
+    // Replace the frozen background-image icon with a mask painted in the
+    // same theme-aware color as the text above (mirrors the technique USWDS
+    // itself uses for forced-colors mode, just applied unconditionally).
+    .usa-accordion__button {
+      position: relative;
+      background-image: none;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 1.25rem;
+        height: 100%;
+        width: 1.5rem;
+        background-color: $usx-accordion-text;
+        mask: url("#{$usx-accordion-icon-remove}") center / 1.5rem no-repeat;
+        -webkit-mask: url("#{$usx-accordion-icon-remove}") center / 1.5rem no-repeat;
+      }
+
+      &[aria-expanded="false"]::before {
+        mask-image: url("#{$usx-accordion-icon-add}");
+        -webkit-mask-image: url("#{$usx-accordion-icon-add}");
+      }
+    }
+  }
+
+  @if $usx-accordion-content-text {
+    .usa-accordion__content {
+      color: $usx-accordion-content-text;
+    }
+  }
+}

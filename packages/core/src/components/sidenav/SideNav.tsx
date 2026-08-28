@@ -1,6 +1,5 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import './sidenav.scss';
 
 export interface SideNavItemType {
   text: string;
@@ -62,8 +61,8 @@ const SideNav: React.FC<SideNavProps> = ({
   );
 
   return (
-    <nav className={classes} aria-label={ariaLabel} {...props}>
-      <ul className="usa-sidenav">
+    <nav aria-label={ariaLabel}>
+      <ul className={classes} {...props}>
         {items.map((item, i) => (
           <SideNavItem key={i} item={item} />
         ))}

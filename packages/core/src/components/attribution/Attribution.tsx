@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import Avatar from '../avatar/Avatar';
-import './attribution.scss';
 
 export interface AttributionAvatarProps {
   href?: string;

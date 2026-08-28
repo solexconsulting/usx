@@ -1,0 +1,30 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usa-banner.usx-banner {
+  @if $usx-banner-bg {
+    background-color: $usx-banner-bg;
+  }
+
+  @if $usx-banner-text {
+    color: $usx-banner-text;
+  }
+
+  .usa-banner__header-text, .usa-banner__content {
+    @if $usx-banner-text {
+      color: $usx-banner-text;
+    }
+  }
+
+  .usa-banner__button {
+    @if $usx-banner-button-text {
+      color: $usx-banner-button-text;
+    }
+  }
+
+  .usa-banner__button::after {
+    @if $usx-banner-chevron-text {
+      background-color: $usx-banner-chevron-text;
+    }
+  }
+}

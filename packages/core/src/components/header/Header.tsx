@@ -3,7 +3,6 @@ import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 import Search, { SearchProps } from '../search/Search';
 import Branding, { BrandingProps } from './Branding';
-import './header.scss';
 
 export interface HeaderNavLink {
   text: string;

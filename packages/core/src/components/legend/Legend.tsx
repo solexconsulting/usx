@@ -1,7 +1,6 @@
 import React, { ReactNode, HTMLAttributes } from 'react';
 import ClassNames from 'classnames';
 import Required from '../required/Required';
-import './legend.scss';
 
 export interface LegendProps extends HTMLAttributes<HTMLLegendElement> {
   text?: string | undefined;

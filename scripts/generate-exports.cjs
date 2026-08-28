@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+const path = require('path');
 
 /*
 HEY, ALEX!
@@ -103,7 +103,10 @@ while ((mex = manualExportRe.exec(manualConfigNoComments)) !== null) {
 const exportLines = dirs
   .filter((dir) => {
     const name = toPascal(dir);
-    return !excludes.has(name) && !manualNames.has(name);
+    const hasComponent = ['jsx', 'tsx'].some((extension) =>
+      fs.existsSync(path.join(componentsDir, dir, `${name}.${extension}`))
+    );
+    return hasComponent && !excludes.has(name) && !manualNames.has(name);
   })
   .map((dir) => {
     const name = toPascal(dir);
@@ -146,13 +149,15 @@ console.log('Updated', indexPath);
 
 for (const dir of dirs) {
   const name = toPascal(dir);
-  const componentFile = path.join(componentsDir, dir, `${name}.jsx`);
+  const componentFile = ['jsx', 'tsx']
+    .map((extension) => path.join(componentsDir, dir, `${name}.${extension}`))
+    .find((candidate) => fs.existsSync(candidate));
   const barrelPath = path.join(componentsDir, dir, 'index.js');
 
   // Only create/overwrite the barrel if the component file actually exists.
-  if (!fs.existsSync(componentFile)) continue;
+  if (!componentFile) continue;
 
-  const barrelContent = `// Auto-generated — do not edit by hand. Run: node scripts/generate-exports.cjs\nexport { default } from './${name}.jsx';\n`;
+  const barrelContent = `// Auto-generated — do not edit by hand. Run: node scripts/generate-exports.cjs\nexport { default } from './${path.basename(componentFile)}';\n`;
   fs.writeFileSync(barrelPath, barrelContent, 'utf8');
 }
 

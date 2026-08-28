@@ -3,7 +3,6 @@ import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 import Button from '../button/Button';
 import Input from '../input/Input';
-import './search.scss';
 
 import type { ButtonProps } from '../button/Button';
 

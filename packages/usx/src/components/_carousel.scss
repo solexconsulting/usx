@@ -1,0 +1,142 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+
+/* ============================= */
+
+/* Base Carousel                 */
+
+/* ============================= */
+
+.usx-carousel {
+  height: 100%;
+  display: block;
+  position: relative;
+}
+
+/* Viewport (scroll container) */
+.usx-carousel__viewport {
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  /* Improve UX */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+/* Track */
+.usx-carousel__track {
+  height: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+/* Slides */
+.usx-carousel__slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  overflow: clip;
+  outline: none;
+}
+
+.usx-carousel__slide:focus {
+  outline: .25rem solid #2491ff;
+  outline-offset: -.25rem;
+
+  @if $usx-carousel-focus {
+    outline-color: $usx-carousel-focus;
+  }
+}
+
+/* ============================= */
+
+/* Dots Navigation               */
+
+/* ============================= */
+
+.usx-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+
+  @if $usx-carousel-dot-gap {
+    gap: $usx-carousel-dot-gap;
+  }
+}
+
+.usx-carousel__dots a {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c0c0c0;
+  display: inline-block;
+  text-decoration: none;
+
+  @if $usx-carousel-dot-bg {
+    background: $usx-carousel-dot-bg;
+  }
+
+  &:hover {
+    background: #a0a0a0;
+
+    @if $usx-carousel-dot-bg-hover {
+      background: $usx-carousel-dot-bg-hover;
+    }
+  }
+
+  &:active {
+    background: #808080;
+
+    @if $usx-carousel-dot-bg-active {
+      background: $usx-carousel-dot-bg-active;
+    }
+  }
+}
+
+
+/* ============================= */
+
+/* Card Specifics                */
+
+/* ============================= */
+
+
+.usa-card__media {
+  .usx-card__carousel {
+    border-top-left-radius: calc(.5rem - 2px);
+    border-top-right-radius: calc(.5rem - 2px);
+    overflow: hidden;
+    background-color: #f8fafc;
+
+    @if $usx-carousel-card-media-bg {
+      background-color: $usx-carousel-card-media-bg;
+    }
+  }
+
+  &.usa-card__media--inset {
+    .usx-card__carousel {
+      border-radius: 0;
+    }
+  }
+}
+
+@media (width >= 40em) {
+  .usa-card--flag .usa-card__media:not(.usa-card__media--inset) {
+    .usx-card__carousel {
+      border-radius: 0;
+      border-top-left-radius: calc(.5rem - 2px);
+      border-bottom-left-radius: calc(.5rem - 2px);
+    }
+
+    .usa-card--media-right .usx-card__carousel {
+      border-radius: 0;
+      border-top-right-radius: calc(.5rem - 2px);
+      border-bottom-right-radius: calc(.5rem - 2px);
+    }
+  }
+}

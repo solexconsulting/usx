@@ -1,0 +1,74 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern, no-descending-specificity -- Public USX classes use BEM naming; intentional cascade order. */
+
+// Logo-image mode: .usx-image wrapper (<a> or <div>) produced by Image component.
+.usx-logo {
+  margin-left: 0;
+}
+
+@media (max-width: 64em) {
+  .usa-navbar .usx-logo {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+.usx-logo__image {
+  display: block;
+
+  img {
+    display: block;
+    height: auto;
+    max-height: 1.75rem;
+    width: auto;
+
+    @media (width >= 64em) {
+      max-height: 3rem;
+    }
+  }
+}
+
+// Symbol + title mode: flex row when a symbol is present alongside the title.
+.usa-logo__text:has(.usx-logo__symbol) {
+  display: flex;
+  align-items: center;
+
+  .usx-logo__symbol {
+    display: block;
+    flex-shrink: 0;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    width: auto;
+  }
+}
+
+.usa-header {
+  .usx-logo__title {
+    @if $usx-header-text {
+      color: $usx-header-text;
+    }
+  }
+
+  .usx-logo__image img,
+  .usx-logo__symbol {
+    @if $usx-header-invert-logo == true {
+      filter: invert(1);
+    }
+  }
+}
+
+.usa-footer {
+  .usx-logo__title {
+    @if $usx-footer-text {
+      color: $usx-footer-text;
+    }
+  }
+
+  .usx-logo__image img,
+  .usx-logo__symbol {
+    @if $usx-footer-invert-logo == true {
+      filter: invert(1);
+    }
+  }
+}

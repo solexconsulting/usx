@@ -1,0 +1,75 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+@use 'alert' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usa-site-alert.usx-site-alert {
+  display: block;
+  position: relative;
+
+  &.usa-site-alert--info {
+    @if $usx-site-alert-default-bg {
+      background-color: $usx-site-alert-default-bg;
+
+      .usa-alert.usx-alert {
+        background-color: transparent;
+      }
+    }
+
+    @if $usx-site-alert-default-border {
+      .usa-alert.usx-alert {
+        border-color: $usx-site-alert-default-border;
+      }
+    }
+  }
+
+  &.usa-site-alert--emergency {
+    @if $usx-site-alert-emergency-bg {
+      background-color: $usx-site-alert-emergency-bg;
+
+      .usa-alert {
+        border-color: $usx-site-alert-emergency-bg;
+        background-color: transparent;
+      }
+    }
+  }
+
+  &.usx-site-alert--maintenance, &.usx-site-alert--maintenance-warning {
+    background-color: #f0f0f0;
+
+    @if $usx-site-alert-maintenance-bg {
+      background-color: $usx-site-alert-maintenance-bg;
+    }
+
+    .usa-alert {
+      border: none;
+    }
+  }
+
+  &.usx-site-alert--maintenance {
+    border-top: 8px solid #b50909;
+
+    @if $usx-color-error {
+      border-color: $usx-color-error;
+    }
+
+		@if $usx-alert-border-width {
+			border-width: $usx-alert-border-width;
+		}
+  }
+
+  &.usx-site-alert--maintenance-warning {
+    border-top: 8px solid #ffbe2e;
+
+    @if $usx-color-warning {
+      border-color: $usx-color-warning;
+    }
+
+    @if $usx-alert-border-width {
+			border-width: $usx-alert-border-width;
+		}
+  }
+
+  .usa-alert.usx-alert .usa-alert__body {
+    background-color: transparent !important;
+  }
+}

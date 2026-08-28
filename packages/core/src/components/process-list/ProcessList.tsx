@@ -1,6 +1,5 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import './process-list.scss';
 
 export interface ProcessListItem {
   heading: string;

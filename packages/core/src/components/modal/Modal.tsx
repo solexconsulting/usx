@@ -1,5 +1,4 @@
 import { ReactNode, HTMLAttributes } from 'react';
-import './modal.scss';
 import classNames from 'classnames';
 import Icon from '../icon/Icon';
 import ButtonGroup, { ButtonGroupProps } from '../button-group/ButtonGroup';

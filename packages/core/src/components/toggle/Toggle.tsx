@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import Icon from '../icon/Icon';
-import './toggle.scss';
 
 export interface ToggleOption {
   value?: string | number;

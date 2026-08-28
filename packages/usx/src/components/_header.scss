@@ -1,0 +1,435 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern, no-descending-specificity -- Public USX classes use BEM naming; intentional cascade order. */
+.usx-header {
+  @if $usx-header-bg {
+    background-color: $usx-header-bg;
+  }
+
+  @if $usx-header-text {
+    color: $usx-header-text;
+  }
+
+  @if $usx-header-border-bottom {
+    border-bottom: $usx-header-border-bottom;
+  }
+
+  @if $usx-header-border-top {
+    border-top: $usx-header-border-top;
+  }
+
+  &::after {
+    display: none;
+  }
+
+  overflow: unset;
+  position: relative;
+
+  .usa-navbar {
+    .usa-menu-btn {
+      @if $usx-header-menu-btn-bg {
+        background-color: $usx-header-menu-btn-bg;
+      }
+
+      &:hover {
+        @if $usx-header-menu-btn-bg-hover {
+          background-color: $usx-header-menu-btn-bg-hover;
+        }
+      }
+    }
+  }
+
+}
+
+:has(> .usx-nav--sticky) {
+  overflow: unset;
+}
+
+:has(> .usa-header--extended) {
+  // Background is themeable at every width — unlike vendor (which paints no
+  // background at desktop and a hardcoded opaque white at mobile), USX lets a
+  // theme's configured nav color show through the mobile drawer too, so a
+  // dark theme's drawer doesn't revert to an unstyled white panel. Desktop
+  // and mobile can be themed independently since the drawer and the nav bar
+  // are visually distinct surfaces.
+  .usx-nav {
+    @media (width < 64em) {
+      @if $usx-header-nav-bg-mobile {
+        background-color: $usx-header-nav-bg-mobile;
+      }
+    }
+
+    @media (width >= 64em) {
+      @if $usx-header-nav-bg {
+        background-color: $usx-header-nav-bg;
+      }
+    }
+  }
+
+  // USWDS scopes all of its own .usa-header--extended .usa-nav(__inner) and
+  // hover/current-bar rules to this same desktop breakpoint (the nav is an
+  // off-canvas mobile drawer below it, styled by vendor's plain .usa-nav
+  // mobile rules instead) — mirror that scoping here, or this desktop-only
+  // border/spacing leaks into the mobile drawer (extra 2rem padding on top
+  // of the drawer's own).
+  @media (width >= 64em) {
+    .usx-nav {
+      @if $usx-header-nav-border-bottom {
+        border-bottom: $usx-header-nav-border-bottom;
+      }
+
+      @if $usx-header-nav-border-top {
+        border-top: $usx-header-nav-border-top;
+      } @else {
+        border-top: 1px solid #dfe1e2;
+      }
+
+      .usa-nav__inner {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: calc($max-layout-width + 4rem);
+          padding-left: 2rem;
+          padding-right: 2rem;
+          position: relative;
+      }
+
+      // USWDS's own .usa-header--extended .usa-nav__primary-item > .usa-nav__link:hover::after
+      // never matches here: our extended layout renders <header> and <nav> as
+      // siblings (see Header.tsx), not nested, so that descendant selector has
+      // nothing to match against. Reimplemented against our actual DOM shape;
+      // extended only differs from the basic default (below) by hover being
+      // restricted to top-level items and the bar sitting flush at bottom: 0
+      // instead of bottom: -0.25rem.
+      .usa-nav__primary-item > .usa-nav__link {
+        &:hover,
+        &.usa-current {
+          position: relative;
+
+          &::after {
+            background-color: $usx-color-primary;
+            border-radius: 0;
+            content: "";
+            display: block;
+            position: absolute;
+            height: 0.25rem;
+            left: 1rem;
+            right: 1rem;
+            bottom: 0;
+          }
+        }
+
+        // USWDS never shows the bar on a dropdown toggle button, hovered or not.
+        &[aria-expanded="true"]::after {
+          display: none;
+        }
+      }
+    }
+
+    .usa-nav__submenu.usa-megamenu {
+      left: 0;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: calc($max-layout-width + 4rem);
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+.usa-nav.usx-nav {
+  float: right;
+
+  @if $usx-header-nav-link-text-hover {
+    // Vendor's dark-background/white-text expanded look is desktop-only (see
+    // the aria-expanded background rule further below), so at mobile a hover
+    // on an already-open toggle should still track the theme like any other
+    // hover; only desktop needs the :not([aria-expanded="true"]) exclusion.
+    @media (width < 64em) {
+      .usa-nav__primary button:hover {
+        color: $usx-header-nav-link-text-hover-mobile;
+        // Vendor hardcodes this hover background at mobile only (and resets
+        // it to transparent again at desktop) — match that scoping.
+        @if $usx-header-nav-link-bg-hover {
+          background-color: $usx-header-nav-link-bg-hover;
+        }
+        &> span::after {
+          @if $usx-header-nav-link-text-hover-mobile {
+            background-color: $usx-header-nav-link-text-hover-mobile;
+          }
+        }
+      }
+    }
+
+    @media (width >= 64em) {
+      .usa-nav__primary button:not([aria-expanded="true"]):hover {
+        color: $usx-header-nav-link-text-hover;
+        &> span::after {
+          @if $usx-header-nav-link-text-hover {
+            background-color: $usx-header-nav-link-text-hover;
+          }
+        }
+      }
+    }
+
+    .usa-nav__primary > .usa-nav__primary-item > a:hover {
+      @media (width < 64em) {
+        color: $usx-header-nav-link-text-hover-mobile;
+
+        // Vendor hardcodes this hover background at mobile only; desktop
+        // links get no hover background at all.
+        @if $usx-header-nav-link-bg-hover {
+          background-color: $usx-header-nav-link-bg-hover;
+        }
+      }
+
+      @media (width >= 64em) {
+        color: $usx-header-nav-link-text-hover;
+      }
+    }
+  }
+
+  &::after {
+    clear: both;
+    content: "";
+    display: block;
+  }
+
+  .usa-nav__close {
+    // Only rendered inside the mobile off-canvas drawer, so it tracks the
+    // drawer link tokens, not the desktop primary-nav ones.
+    // .usa-icon fills via `currentColor`, so tint it with `color`, not
+    // `background-color` (which would draw a solid box behind the icon).
+    @if $usx-header-nav-link-text-mobile {
+      color: $usx-header-nav-link-text-mobile;
+    }
+
+    &:hover {
+      @if $usx-header-nav-link-text-hover-mobile {
+        color: $usx-header-nav-link-text-hover-mobile;
+      }
+    }
+  }
+
+  @media (min-width: 64em) {
+    width: 100%;
+    float: none;
+
+    &.usx-nav--sticky:not(.is-visible) {
+      display: block;
+      z-index: 200;
+      position: sticky;
+      top: 0;
+    }
+
+    .usa-nav__inner {
+      @if $max-layout-width {
+        max-width: calc($max-layout-width + 4rem);
+      }
+
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .usa-nav__secondary-item + .usa-nav__secondary-item {
+      // USWDS's own separator is a border color (#dfe1e2), not the link's
+      // text color — $usx-header-secondary-link-text was the wrong token.
+      @if $usx-header-nav-border-top {
+        border-left: $usx-header-nav-border-top;
+      } @else {
+        border-left: 1px solid #dfe1e2;
+      }
+    }
+  }
+
+  .usa-nav__link {
+    // Vendor only swaps the expanded toggle to white text at desktop (paired
+    // with the dark expanded background); at mobile it gets no special
+    // color at all, so it should still track the theme like every other
+    // link — excluding it unconditionally left it on the unthemed browser
+    // default whenever the drawer was open.
+    @media (width < 64em) {
+      &:not(
+        .usa-nav__primary button:hover,
+        .usa-nav__primary > .usa-nav__primary-item > a:hover,
+        .usa-current
+      ) {
+        @if $usx-header-nav-link-text-mobile {
+          color: $usx-header-nav-link-text-mobile;
+        }
+
+        &> span::after {
+          @if $usx-header-nav-link-text-mobile {
+            background-color: $usx-header-nav-link-text-mobile;
+          }
+        }
+      }
+    }
+
+    @media (width >= 64em) {
+      &:not(
+        .usa-nav__primary button[aria-expanded="true"],
+        .usa-nav__primary button:hover,
+        .usa-nav__primary > .usa-nav__primary-item > a:hover,
+        .usa-current
+      ) {
+        @if $usx-header-nav-link-text {
+          color: $usx-header-nav-link-text;
+        }
+
+        &> span::after {
+          @if $usx-header-nav-link-text {
+            background-color: $usx-header-nav-link-text;
+          }
+        }
+      }
+    }
+
+    // Desktop: current text stays the plain link color — only the bottom bar
+    // (above) marks state, matching vendor (no .usa-current color override
+    // exists in vendor's desktop rules).
+    @media (width >= 64em) {
+      &.usa-current {
+        @if $usx-header-nav-link-text {
+          color: $usx-header-nav-link-text;
+        }
+      }
+    }
+
+    // Mobile: vendor recolors + bolds the current link's text and swaps the
+    // bottom bar for a left-side pill indicator — it never reuses the
+    // desktop bottom-bar treatment at this width.
+    @media (width < 64em) {
+      &.usa-current {
+        @if $usx-header-nav-link-text-hover-mobile {
+          color: $usx-header-nav-link-text-hover-mobile;
+        }
+        font-weight: 700;
+        position: relative;
+
+        &::after {
+          @if $usx-header-nav-link-text-hover-mobile {
+            background-color: $usx-header-nav-link-text-hover-mobile;
+          }
+          border-radius: 99rem;
+          content: "";
+          display: block;
+          position: absolute;
+          bottom: 0.25rem;
+          top: 0.25rem;
+          width: 0.25rem;
+          left: 0.25rem;
+        }
+      }
+    }
+
+    // Current-page/hover indicator bar (basic header default — the extended
+    // header block above overrides the hover scope and bottom offset to
+    // match USWDS's own basic-vs-extended difference). USWDS only shows this
+    // horizontal bottom bar at desktop; at mobile widths it uses a different
+    // (left-side) current-page indicator instead, and never shows one on
+    // hover at all — showing this bar unconditionally put it on every mobile
+    // nav item (including dropdown toggles) on hover, which vendor never does.
+    @media (width >= 64em) {
+      &:hover,
+      &.usa-current {
+        position: relative;
+
+        &::after {
+          background-color: $usx-color-primary;
+          border-radius: 0;
+          content: "";
+          display: block;
+          position: absolute;
+          height: 0.25rem;
+          left: 1rem;
+          right: 1rem;
+          bottom: -0.25rem;
+        }
+      }
+
+      // USWDS never shows the bar on a dropdown toggle button, hovered or not.
+      &[aria-expanded="true"]::after {
+        display: none;
+      }
+    }
+
+    // Vendor only darkens the open toggle button/submenu at desktop
+    // (`.usa-nav__primary button[aria-expanded=true]{background-color:#162e51}`
+    // is itself wrapped in `min-width: 64em`); at mobile the drawer's own
+    // white background and border-top separators are the only styling, so
+    // applying this unconditionally painted a dark box (with the still-gray,
+    // unthemed link text from above) over the mobile accordion toggle/panel.
+    @media (width >= 64em) {
+      &[aria-expanded="true"] {
+        @if $usx-header-nav-link-bg {
+          background-color: $usx-header-nav-link-bg !important;
+        }
+
+        & + .usa-nav__submenu {
+          @if $usx-header-nav-submenu-bg {
+            background-color: $usx-header-nav-submenu-bg;
+          }
+
+          &::before, &::after {
+            @if $usx-header-nav-submenu-bg {
+              background-color: $usx-header-nav-submenu-bg;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .usa-nav__secondary-item > a {
+    @if $usx-header-secondary-link-text {
+      color: $usx-header-secondary-link-text;
+    }
+
+    &:hover {
+      @if $usx-header-secondary-link-text-hover {
+        color: $usx-header-secondary-link-text-hover;
+      }
+    }
+  }
+
+  @media (width < 64em) {
+    .usa-nav__primary-item, .usa-nav__submenu-item {
+      // USWDS's own default is a border color (#dfe1e2), not a text color —
+      // $usx-header-nav-link-text was the wrong token here.
+      @if $usx-header-nav-border-top {
+        border-top: $usx-header-nav-border-top;
+      } @else {
+        border-top: 1px solid #dfe1e2;
+      }
+    }
+
+    // Submenu links are plain <a> tags with no .usa-nav__link class (see
+    // Header.tsx), so the rule above never reaches them — left alone they
+    // fall back to vendor's hardcoded gray/blue instead of the active theme.
+    .usa-nav__submenu-item > a {
+      @if $usx-header-nav-link-text {
+        color: $usx-header-nav-link-text;
+      }
+
+      &:hover {
+        @if $usx-header-nav-link-text-hover {
+          color: $usx-header-nav-link-text-hover;
+        }
+
+        @if $usx-header-nav-link-bg-hover {
+          background-color: $usx-header-nav-link-bg-hover;
+        }
+      }
+
+      &.usa-current {
+        @if $usx-header-nav-link-text-hover {
+          color: $usx-header-nav-link-text-hover;
+        }
+        font-weight: 700;
+      }
+    }
+  }
+
+}

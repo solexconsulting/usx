@@ -1,7 +1,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import CalendarDate from '../calendar-date/CalendarDate';
-import './collection.scss';
 
 export interface CollectionMetaItem {
   text: string;

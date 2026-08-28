@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import Tag, { TagProps } from '../tag/Tag';
-import './tag-group.scss';
 
 export interface TagGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   tags?: TagProps[] | null;

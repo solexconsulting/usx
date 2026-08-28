@@ -1,6 +1,5 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import './code.scss';
 
 function usxCopy(text: string) {
   if (navigator.clipboard) {

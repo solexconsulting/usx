@@ -1,0 +1,246 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+
+/* ---------------------------------- */
+
+/* Base Enhancements (SAFE ONLY)      */
+
+/* ---------------------------------- */
+.usa-button.usx-button:not(.usa-button--unstyled) {
+  @if $usx-radius-button {
+    border-radius: $usx-radius-button;
+  }
+
+  &:not(.usa-button--outline) {
+    @if $usx-button-box-shadow {
+      box-shadow: $usx-button-box-shadow;
+    }
+  }
+}
+
+/* ---------------------------------- */
+
+/* Helper Mixin for Inverse Buttons   */
+
+/* ---------------------------------- */
+@mixin usx-button-inverse($hover-mix: 20%, $active-mix: 40%) {
+  $inverse-color: white;
+
+  @if $usx-text-inverse {
+    $inverse-color: $usx-text-inverse;
+  }
+
+  color: $inverse-color;
+
+  &.usa-button--hover,
+  &:hover {
+    color: color-mix(in srgb, $inverse-color, black $hover-mix);
+  }
+
+  &.usa-button--active,
+  &:active {
+    color: color-mix(in srgb, $inverse-color, black $active-mix);
+  }
+}
+
+/* ---------------------------------- */
+
+/* Variant Enhancer Mixin             */
+
+/* ---------------------------------- */
+@mixin usx-button-variant(
+  $selector,
+  $bg,
+  $bg-hover: null,
+  $bg-active: null,
+  $color: null,
+  $color-hover: null,
+  $color-active: null,
+  $box-shadow: null,
+  $is-outline: false
+) {
+  /* Non-disabled buttons only */
+  .usa-button.usx-button#{$selector}:not(:disabled):not([aria-disabled="true"]):not(.usx-button--ghost) {
+    @if $bg {
+      background-color: $bg;
+    }
+
+    @if $color {
+      color: $color;
+    }
+
+    @if $box-shadow {
+      box-shadow: $box-shadow;
+    }
+
+    /* Hover state */
+    &.usa-button--hover,
+    &:hover {
+      @if $bg-hover {
+        background-color: $bg-hover;
+      }
+
+      @if $color-hover {
+        color: $color-hover;
+      }
+    }
+
+    /* Active state */
+    &.usa-button--active,
+    &:active {
+      @if $bg-active {
+        background-color: $bg-active;
+      }
+
+      @if $color-active {
+        color: $color-active;
+      }
+    }
+
+    /* Inverse modifier */
+    &.usa-button--inverse {
+      @include usx-button-inverse;
+    }
+  }
+}
+
+/* ---------------------------------- */
+
+/* Enhance USWDS Variants             */
+
+/* ---------------------------------- */
+
+/* Primary */
+@include usx-button-variant(
+  ".usa-button--primary",
+  $usx-button-primary-bg,
+  $usx-button-primary-bg-hover,
+  $usx-button-primary-bg-active,
+  $usx-button-primary-text,
+  $usx-button-primary-text-hover,
+  $usx-button-primary-text-active,
+  $usx-button-primary-border
+);
+
+/* Secondary */
+@include usx-button-variant(
+  ".usa-button--secondary",
+  $usx-button-secondary-bg,
+  $usx-button-secondary-bg-hover,
+  $usx-button-secondary-bg-active,
+  $usx-button-secondary-text,
+  $usx-button-secondary-text-hover,
+  $usx-button-secondary-text-active,
+  $usx-button-secondary-border
+);
+
+/* Accent Cool */
+@include usx-button-variant(
+  ".usa-button--accent-cool",
+  $usx-button-accent-cool-bg,
+  $usx-button-accent-cool-bg-hover,
+  $usx-button-accent-cool-bg-active,
+  $usx-button-accent-cool-text,
+  $usx-button-accent-cool-text-hover,
+  $usx-button-accent-cool-text-active,
+  $usx-button-accent-cool-border
+);
+
+/* Accent Warm */
+@include usx-button-variant(
+  ".usa-button--accent-warm",
+  $usx-button-accent-warm-bg,
+  $usx-button-accent-warm-bg-hover,
+  $usx-button-accent-warm-bg-active,
+  $usx-button-accent-warm-text,
+  $usx-button-accent-warm-text-hover,
+  $usx-button-accent-warm-text-active,
+  $usx-button-accent-warm-border
+);
+
+/* Outline */
+@include usx-button-variant(
+  ".usa-button--outline",
+  $usx-button-outline-bg,
+  $usx-button-outline-bg-hover,
+  $usx-button-outline-bg-active,
+  $usx-button-outline-text,
+  $usx-button-outline-text-hover,
+  $usx-button-outline-text-active,
+  $usx-button-outline-box-shadow,
+  true
+);
+
+/* Unstyled */
+@include usx-button-variant(
+  ".usa-button--unstyled",
+  null,
+  null,
+  null,
+  $usx-color-primary,
+  $usx-color-primary-hover,
+  $usx-color-primary-active,
+  null
+);
+
+.usa-button.usx-button {
+  .usa-button--outline {
+    box-shadow: 0 0 0 2px currentcolor;
+
+    @if $usx-button-outline-border-width {
+      box-shadow: 0 0 0 $usx-button-outline-border-width currentcolor;
+    }
+  }
+
+  &.usx-button--ghost {
+    background-color: transparent;
+    color: currentcolor;
+
+    &:not([disabled], [aria-disabled="true"]) {
+      &.usa-button--primary {
+        @if $usx-color-primary {
+          color: $usx-color-primary;
+        }
+      }
+
+      &.usa-button--secondary {
+        @if $usx-color-secondary {
+          color: $usx-color-secondary;
+        }
+      }
+
+      &.usa-button--accent-cool {
+        @if $usx-color-accent-cool {
+          color: $usx-color-accent-cool;
+        }
+      }
+
+      &.usa-button--accent-warm {
+        @if $usx-color-accent-warm {
+          color: $usx-color-accent-warm;
+        }
+      }
+
+      &.usa-button--base {
+        @if $usx-color-base {
+          color: $usx-color-base;
+        }
+      }
+
+      &.usa-button--hover,
+      &:hover {
+        background-color: color-mix(in srgb, currentcolor 20%, transparent);
+      }
+
+      &.usa-button--active,
+      &:active {
+        background-color: color-mix(in srgb, currentcolor 35%, transparent);
+      }
+
+      &.usa-button--inverse {
+        color: white;
+      }
+    }
+  }
+}

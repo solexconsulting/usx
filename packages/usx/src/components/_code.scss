@@ -1,0 +1,68 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-mockup-code {
+  border-radius: $usx-code-radius;
+  overflow: auto hidden;
+  padding: 1.25rem 0;
+  position: relative;
+  font-size: $usx-code-font-size;
+  line-height: $usx-line-height-base;
+
+  &:not([class^="bg-"], [class*=" bg-"]) {
+    background-color: black;
+  }
+
+  &:not([class^="text-"], [class*=" text-"]) {
+    color: white;
+  }
+
+  &::before {
+    content: '';
+    color: white;
+    margin-bottom: 1rem;
+    display: block;
+    height: .75rem;
+    width: .75rem;
+    border-radius: 100%;
+    opacity: .3;
+    box-shadow: 1.4em 0, 2.8em 0, 4.2em 0;
+  }
+
+  pre {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+    &::before {
+      content: '';
+      margin-right: 2ch;
+    }
+
+    &[data-prefix] {
+      &::before {
+        content: attr(data-prefix);
+        display: inline-block;
+        width: 2rem;
+        text-align: right;
+        opacity: .6;
+      }
+    }
+
+    code {
+      padding-right: 1.25rem;
+    }
+  }
+
+  .usx-copy {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    opacity: .6;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Card, { CardProps } from '../card/Card';
-import './card-group.scss';
 
 export interface CardGroupProps extends React.HTMLAttributes<HTMLUListElement> {
   cards?: CardProps[];

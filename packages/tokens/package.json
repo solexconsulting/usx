@@ -1,14 +1,39 @@
 {
-  "name": "@agency-ui-platform/tokens",
+  "name": "@solexllc/usx-theme",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "main": "dist/tokens.js",
+  "style": "dist/tokens.css",
+  "exports": {
+    ".": {
+      "sass": "./src/tokens.scss",
+      "style": "./dist/tokens.css",
+      "default": "./dist/tokens.js"
+    },
+    "./variables": {
+      "sass": "./src/_variables.scss"
+    },
+    "./hooks": {
+      "sass": "./dist/_hooks.scss"
+    },
+    "./theme.css": "./dist/theme.css",
+    "./theme-manifest": {
+      "default": "./src/theme-manifest.js"
+    },
+    "./theme-manifest.json": "./dist/theme-manifest.json",
+    "./system-colors": {
+      "default": "./src/system-colors.generated.js"
+    },
+    "./tokens.css": "./dist/tokens.css"
+  },
   "files": [
     "dist",
     "src",
     "build.js"
   ],
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "generate:system-colors": "node scripts/generate-system-colors.js"
   }
 }

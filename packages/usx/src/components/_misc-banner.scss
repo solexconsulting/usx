@@ -1,0 +1,143 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+/* stylelint-disable no-descending-specificity -- Dropdown button rules intentionally follow the focus-state override. */
+.usx-misc-banner {
+  display: block;
+  position: relative;
+
+  .usx-misc-banner__content {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: $usx-misc-banner-font-size;
+    color: #fff;
+    background-color: inherit;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    line-height: 1.15;
+
+    .usx-misc-banner__badge {
+      background-color: white;
+      font-size: $usx-misc-banner-font-size;
+      font-weight: $usx-font-weight-bold;
+      text-transform: uppercase;
+      padding: 6px 11px;
+      border-radius: $usx-misc-banner-badge-radius;
+      margin-right: 1.25rem;
+    }
+
+    .usx-misc-banner__text {
+      margin: 0;
+      margin-right: .75rem;
+      max-width: 610px;
+    }
+
+    .usx-misc-banner__link {
+      display: none;
+
+      &:visited {
+        color: #fff;
+      }
+
+      @media (width >= 64em) {
+        display: inline-block;
+        color: #fff;
+      }
+    }
+
+    .usx-misc-banner__return-text {
+      margin: 0;
+      position: relative;
+      padding-left: 2rem;
+      display: none;
+      margin-left: auto;
+
+      @media (width >= 64em) {
+        display: inline-block;
+      }
+    }
+
+    .usx-misc-banner__dropdown {
+      display: inline-block;
+      margin: 0 0 0 auto;
+      background-color: inherit;
+
+      @media (width >= 64em) {
+        display: none;
+      }
+
+      .usx-misc-banner__dropdown-toggle {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .usx-misc-banner__dropdown-toggle:focus + .usx-misc-banner__dropdown-button {
+        outline: 0.25rem solid #9bdaf1;
+
+        @if $usx-misc-banner-focus {
+          outline-color: $usx-misc-banner-focus;
+        }
+      }
+
+      .usx-misc-banner__dropdown-button {
+        height: 3em;
+        width: 3em;
+        background: none;
+        border: none;
+        display: flex;
+        padding: 0;
+        margin: -.5rem;
+        margin-right: -1rem;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        user-select: none;
+
+        svg {
+          transition: transform 0.2s ease;
+        }
+      }
+
+      .usx-misc-banner__dropdown-toggle:checked + .usx-misc-banner__dropdown-button > svg {
+        transform: rotate(180deg);
+      }
+
+      .usx-misc-banner__dropdown-content {
+        display: none;
+        position: absolute;
+        z-index: 400;
+        background-color: inherit;
+        top: 100%;
+        right: 0;
+
+        .usx-misc-banner__link {
+          display: inline-block;
+          color: #fff;
+        }
+
+        ul {
+          line-height: 1.6;
+          margin: 0;
+          padding: .75rem 2rem .75rem 1.25rem;
+          list-style-type: none;
+          width: 20rem;
+
+          li {
+            margin-bottom: 0.75rem;
+
+            &:last-child {
+              margin-bottom: .25rem;
+            }
+          }
+        }
+      }
+
+      .usx-misc-banner__dropdown-toggle:checked ~ .usx-misc-banner__dropdown-content {
+        display: block;
+      }
+    }
+  }
+}

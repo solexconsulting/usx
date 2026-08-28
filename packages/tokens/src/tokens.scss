@@ -1,8 +1,3 @@
-// tokens.scss — convenience entry point.
-// Forwards both variables and utility classes.
-//
-// If you only need Sass variables (no CSS output), @use '_variables' instead:
-//   @use '@agency-ui-platform/tokens/src/_variables' as *;
+// Theme Sass entry point. This emits no component or utility selectors.
 
 @forward './_variables';
-@forward './_utilities';

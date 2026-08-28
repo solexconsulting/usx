@@ -1,5 +1,4 @@
 import React from 'react';
-import './swap.scss';
 
 export interface SwapProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   children?: React.ReactNode;

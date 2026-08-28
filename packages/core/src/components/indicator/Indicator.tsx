@@ -1,6 +1,5 @@
 import React, { ReactNode, CSSProperties, HTMLAttributes } from 'react';
 import ClassNames from 'classnames';
-import './indicator.scss';
 
 export interface IndicatorItem {
   className?: string;

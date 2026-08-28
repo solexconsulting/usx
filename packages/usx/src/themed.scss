@@ -1,0 +1,11 @@
+// themed.scss — runtime-themeable build of USX.
+//
+// Loads the generated hooks partial FIRST, which configures the shared
+// variables module with every --usx-* CSS variable hook enabled. The
+// component styles loaded afterwards then compile to
+// var(--usx-*, <static default>) instead of plain static values.
+//
+// Pair the output with @solexllc/usx-theme's theme.css (:root defaults) or
+// set --usx-* custom properties anywhere in the cascade.
+@use 'pkg:@solexllc/usx-theme/hooks';
+@use 'index';

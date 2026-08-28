@@ -35,10 +35,8 @@ export default function Alert({
     'usa-alert',
     'usx-alert',
     normalizedVariant ? `usa-alert--${normalizedVariant}` : '',
-    normalizedVariant ? `usx-alert--${normalizedVariant}` : '',
     slim ? 'usa-alert--slim' : '',
     noIcon ? 'usa-alert--no-icon' : '',
-    noIcon ? 'usx-alert--no-icon' : '',
     className
   );
 
@@ -64,9 +62,9 @@ export default function Alert({
 
   return (
     <div className={classes} {...accessibilityProps} {...props}>
-      <div className="usa-alert__body usx-alert__body">
-        {!slim && heading ? <h4 className="usa-alert__heading usx-alert__heading">{heading}</h4> : null}
-        <p className="usa-alert__text usx-alert__text">
+      <div className="usa-alert__body">
+        {!slim && heading ? <h4 className="usa-alert__heading">{heading}</h4> : null}
+        <p className="usa-alert__text">
           {text}
         </p>
         {onDismiss && (

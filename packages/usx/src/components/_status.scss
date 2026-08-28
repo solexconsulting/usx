@@ -1,0 +1,46 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-status {
+  display: inline-block;
+  border-radius: 100%;
+  aspect-ratio: 1 / 1;
+  width: .5rem;
+  height: .5rem;
+  alignment-baseline: middle;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  grid-area: 1 / 1;
+  background-color: currentcolor;
+  background-image: radial-gradient(circle at 35% 30%, oklch(100% 0 0deg / 50%), rgb(0 0 0 / 0%));
+  box-shadow: 0 2px 3px -1px color-mix(in oklab, currentColor 100%, #0000);
+
+  &.usx-status--xs {
+    width: .25rem;
+    height: .25rem;
+  }
+
+  &.usx-status--sm {
+    width: .375rem;
+    height: .375rem;
+  }
+
+  &.usx-status--md {
+    width: .5rem;
+    height: .5rem;
+  }
+
+  &.usx-status--lg {
+    width: .75rem;
+    height: .75rem;
+  }
+
+  &.usx-status--xl {
+    width: 1rem;
+    height: 1rem;
+  }
+}

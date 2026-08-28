@@ -1,0 +1,115 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-layout {
+  min-height: 100vh;
+
+  @if $usx-surface-1 {
+    background-color: $usx-surface-1;
+  }
+
+  // ── Single column layout ──────────────────────────────────────────────────
+  // Centers content with max-width and responsive gutters
+  // | gutter | content (max-width 960px) | gutter |
+
+  &__single-column {
+    max-width: $max-layout-width;
+    margin: 0 auto;
+    padding: 0 units(2.5);
+
+    @include at-media('tablet') {
+      padding: 0 units(4);
+    }
+
+    @include at-media('desktop') {
+      padding: 0;
+    }
+  }
+
+  // ── Multi-column grid layout ──────────────────────────────────────────────
+  // Supports left/right sidebars that appear on desktop
+  // | gutter | left sidebar | content | right sidebar | gutter |
+
+  &__grid-container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns:
+      [page-start] units(2) [left-sidebar-start] 0 [content-start] minmax(0, $max-layout-width) [content-end] 0 [right-sidebar-end] units(2) [page-end];
+
+    @include at-media('tablet') {
+      grid-template-columns:
+        [page-start] units(4) [left-sidebar-start] 0 [content-start] minmax(0, $max-layout-width) [content-end] 0 [right-sidebar-end] units(4) [page-end];
+    }
+
+    @include at-media('desktop') {
+      grid-template-columns:
+        [page-start] 1fr [left-sidebar-start] $max-sidebar-width [content-start] minmax(0, $max-layout-width) [content-end] $max-sidebar-width [right-sidebar-end] 1fr [page-end];
+    }
+  }
+
+  // ── Content areas ─────────────────────────────────────────────────────────
+
+  &__content {
+    grid-column: content-start / span content-end;
+    grid-row: 1;
+
+
+    // Content that leaves space for a left sidebar
+    // | gutter | left sidebar | content (width dynamic) | gutter |
+    &--right {
+      grid-column: content-start / span content-end;
+      grid-row: 1;
+
+      @include at-media('desktop') {
+        grid-column: content-start / span right-sidebar-end;
+        width: $dynamic-content-width;
+        margin: 0 units(4) 0 0;
+      }
+    }
+
+    // Content that leaves space for the right sidebar
+    // | gutter | content (width dynamic) | right sidebar | gutter |
+    &--left {
+      grid-column: content-start / span content-end;
+      grid-row: 1;
+
+      @include at-media('desktop') {
+        grid-column: left-sidebar-start / span content-end;
+        width: $dynamic-content-width;
+        margin: 0 0 0 units(4);
+        justify-self: flex-end;
+      }
+    }
+  }
+
+  // ── Sidebar areas ─────────────────────────────────────────────────────────
+
+  &__sidebar--left {
+    grid-column: left-sidebar-start / span content-start;
+    grid-row: 1;
+  }
+
+  &__sidebar--right {
+    grid-column: content-end / span right-sidebar-end;
+    grid-row: 1;
+  }
+
+  // Hide sidebars on mobile/tablet, show on desktop
+  &__sidebar--right,
+  &__sidebar--left {
+    display: none;
+    padding: 0 units(4);
+
+    @include at-media('desktop') {
+      display: block;
+    }
+  }
+
+  &__sidebar--right.usx-layout__sidebar--expanded {
+    padding-right: 0;
+  }
+
+  &__sidebar--left.usx-layout__sidebar--expanded {
+    padding-left: 0;
+  }
+}

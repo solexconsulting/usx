@@ -1,6 +1,5 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import './status.scss';
 
 export interface StatusProps extends React.HTMLAttributes<HTMLSpanElement> {
   color?: 'primary' | 'accent-cool' | 'accent-warm' | 'secondary' | 'success' | 'warning' | 'error';

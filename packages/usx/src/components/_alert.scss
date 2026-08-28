@@ -1,0 +1,156 @@
+@use "sass:string";
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern, no-descending-specificity -- Public USX classes use BEM naming; intentional cascade order. */
+
+// For alerts that aren't under usx-site-alert
+.usa-alert:not(.usx-site-alert *) {
+	&.usx-alert, .usa-alert__body {
+		position: relative;
+
+		@if $usx-alert-radius {
+			border-radius: $usx-alert-radius;
+		}
+
+		@if $usx-alert-box-shadow {
+			box-shadow: $usx-alert-box-shadow;
+		}
+	}
+}
+
+.usx-alert__dismiss {
+	padding: 6px;
+	width: 2.5rem;
+	height: 2.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	appearance: none;
+	border: none;
+	cursor: pointer;
+	background: transparent;
+	position: absolute;
+	color: currentcolor;
+	top: 0;
+	right: 0;
+	margin: 0;
+	z-index: 1;
+}
+
+@mixin usx-alert-variant($name, $bg, $color, $link-color, $border) {
+	$uswds-class-name: string.unquote("usa-alert--#{$name}");
+	$usa-class-name: string.unquote("usa-alert--#{$name}");
+
+	.#{$uswds-class-name}.#{$usa-class-name}:not(.usx-site-alert--maintenance *):not(.usx-site-alert--maintenance-warning *),
+	.#{$uswds-class-name}.#{$usa-class-name}:not(.usx-site-alert--maintenance *):not(.usx-site-alert--maintenance-warning *) .usa-alert__body {
+		@if $bg {
+			background-color: $bg;
+		}
+
+		@if $color {
+			color: $color;
+
+			::before {
+				background-color: $color;
+			}
+		}
+
+		@if $link-color {
+			.usa-link {
+				color: $link-color;
+			}
+		}
+
+		@if $border {
+			border-color: $border;
+		}
+
+		@if $usx-alert-border-width {
+			border-width: $usx-alert-border-width;
+		}
+	}
+}
+
+/* Info variant */
+@include usx-alert-variant("info",
+	$usx-alert-info-bg,
+	$usx-alert-info-text,
+	$usx-alert-info-link-text,
+	$usx-alert-info-border);
+
+/* Warning variant */
+@include usx-alert-variant("warning",
+	$usx-alert-warning-bg,
+	$usx-alert-warning-text,
+	$usx-alert-warning-link-text,
+	$usx-alert-warning-border);
+
+/* Success variant */
+@include usx-alert-variant("success",
+	$usx-alert-success-bg,
+	$usx-alert-success-text,
+	$usx-alert-success-link-text,
+	$usx-alert-success-border);
+
+/* Error variant */
+@include usx-alert-variant("error",
+	$usx-alert-error-bg,
+	$usx-alert-error-text,
+	$usx-alert-error-link-text,
+	$usx-alert-error-border);
+
+/* Emergency variant */
+@include usx-alert-variant("emergency",
+	$usx-alert-emergency-bg,
+	$usx-alert-emergency-text,
+	$usx-alert-emergency-link-text,
+	$usx-alert-emergency-border);
+
+
+.usx-alert {
+	.usa-alert--slim {
+		@if $usx-alert-slim-padding-block {
+			padding-block: $usx-alert-slim-padding-block;
+		}
+
+		@if $usx-alert-slim-padding-inline {
+			padding-inline: $usx-alert-slim-padding-inline;
+		}
+	}
+
+	.usa-alert--no-icon {
+		@if $usx-alert-no-icon-padding-inline-start {
+			padding-inline-start: $usx-alert-no-icon-padding-inline-start;
+		}
+	}
+
+	.usa-alert__body {
+		@if $usx-alert-body-gap {
+			gap: $usx-alert-body-gap;
+		}
+	}
+
+	.usa-alert__heading {
+		@if $usx-alert-heading-font-size {
+			font-size: $usx-alert-heading-font-size;
+		}
+
+		@if $usx-alert-heading-font-weight {
+			font-weight: $usx-alert-heading-font-weight;
+		}
+
+		@if $usx-alert-heading-margin-block-end {
+			margin-block-end: $usx-alert-heading-margin-block-end;
+		}
+	}
+
+	.usa-alert__text {
+		@if $usx-alert-text-font-size {
+			font-size: $usx-alert-text-font-size;
+		}
+
+		@if $usx-alert-text-line-height {
+			line-height: $usx-alert-text-line-height;
+		}
+	}
+}

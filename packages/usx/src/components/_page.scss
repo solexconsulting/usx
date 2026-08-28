@@ -1,0 +1,28 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-page {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+
+  @if $usx-page-bg {
+    background-color: $usx-page-bg;
+  }
+
+  @if $usx-page-text {
+    color: $usx-page-text;
+  }
+
+  .usx-page__title {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .usx-page__content {
+    display: block;
+
+    p {
+      max-width: 64ex;
+    }
+  }
+}

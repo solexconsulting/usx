@@ -1,5 +1,4 @@
 import React from 'react';
-import './spinner.scss';
 
 export interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {
   size?: 1 | 2 | 3 | 4 | 5;

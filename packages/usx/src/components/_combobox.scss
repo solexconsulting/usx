@@ -1,0 +1,32 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-combo-box {
+  &.usx-combo-box--error .usa-combo-box__input {
+    border-width: 0.25rem;
+    border-color: #b50909;
+    border-style: solid;
+    padding-top: calc(0.5rem - 0.25rem);
+    padding-bottom: calc(0.5rem - 0.25rem);
+
+    @if $usx-input-error-border-width {
+      border-width: $usx-input-error-border-width;
+    }
+
+    @if $usx-input-error-border {
+      border-color: $usx-input-error-border;
+    }
+
+    @if $usx-input-error-border-style {
+      border-style: $usx-input-error-border-style;
+    }
+
+    @if $usx-input-error-padding-top {
+      padding-top: $usx-input-error-padding-top;
+    }
+
+    @if $usx-input-error-padding-bottom {
+      padding-bottom: $usx-input-error-padding-bottom;
+    }
+  }
+}

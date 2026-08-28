@@ -1,0 +1,104 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+/* stylelint-disable no-descending-specificity -- Callout modifier intentionally follows base quote-icon rules. */
+.usx-block {
+  display: flex;
+  flex-direction: column;
+
+  .usx-block__quote-attribution {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .usx-block__content {
+    margin: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-width: 0 0 0 4px;
+    border-style: solid;
+    display: flex;
+    flex-direction: column;
+
+    @if $usx-block-border-width {
+      border-width: 0 0 0 $usx-block-border-width;
+    }
+  }
+
+  &.usx-block--callout {
+    border-width: 4px 0 0;
+    border-style: solid;
+    background-color: #e2e8f0;
+    padding: 1rem 1.25rem;
+
+    @if $usx-block-callout-bg {
+      background-color: $usx-block-callout-bg;
+    }
+    
+    @if $usx-block-border-width {
+      border-width: $usx-block-border-width 0 0;
+    }
+
+    .usx-block__content {
+      border-left: none;
+      padding: 0;
+    }
+
+    .usx-block__open-quote-icon {
+      margin-top: -0.3125rem;
+    }
+
+    .usx-block__close-quote-icon {
+      margin-top: -0.3125rem;
+    }
+
+    .usx-block__quote-attribution {
+      margin-top: 0.5rem;
+    }
+  }
+
+  .usx-block__open-quote-icon {
+    margin-left: -0.4375rem;
+    transform: rotate(180deg);
+  }
+
+  &.usx-block--dedent {
+    margin-left: -1.25rem;
+    z-index: 1;
+  }
+
+  &.usx-block--indent {
+    &-sm {
+      margin-left: 1.25rem;
+    }
+
+    &-md {
+      margin-left: 2.5rem;
+    }
+
+    &-lg {
+      margin-left: 3.75rem;
+    }
+
+    &-xl {
+      margin-left: 5rem;
+    }
+  }
+
+  &.usx-block--big {
+    .usx-block__content {
+      @if $usx-block-border-width {
+        border-left-width: calc(1.5 * $usx-block-border-width);
+      }
+      padding-left: 1.375rem;
+    }
+  }
+
+  &.usx-block--spill-left.usx-block--big {
+    margin-left: -1.375rem;
+  }
+
+  .usx-block__attribution {
+    margin-top: 1rem;
+  }
+}

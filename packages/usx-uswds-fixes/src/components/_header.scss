@@ -1,0 +1,15 @@
+/* stylelint-disable selector-class-pattern -- USWDS class names use their own BEM convention. */
+
+// Fix: USWDS's nav-list mixin gives primary-nav dropdown/megamenu links
+// (nested inside .usa-nav__submenu) a hover state on mobile widths
+// (.usa-nav__primary a:not(.usa-button):hover), but no equivalent rule
+// exists at desktop widths — only the top-level <a> links and the
+// dropdown-toggle <button>s get desktop hover feedback. Add the missing
+// desktop hover treatment for submenu links, matching the color USWDS
+// already uses for top-level anchor hover.
+@media (min-width: 64em) {
+  .usa-nav__submenu a:hover {
+    color: #005ea2;
+    text-decoration: none;
+  }
+}

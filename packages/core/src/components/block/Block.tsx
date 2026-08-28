@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import Icon from '../icon/Icon';
 import Attribution, { AttributionProps } from '../attribution/Attribution';
-import './block.scss';
 
 
 export type BlockProps =  {

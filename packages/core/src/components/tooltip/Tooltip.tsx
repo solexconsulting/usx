@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import './tooltip.scss';
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {
   label: string;

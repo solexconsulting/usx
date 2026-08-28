@@ -1,0 +1,300 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+// ─── USX Table ────────────────────────────────────────────────────────────────
+// Extends USWDS `usa-table` with USX-specific behaviour and enhancements.
+// USWDS classes (usa-table, usa-table--striped, etc.) still apply their own
+// styles; these rules layer custom USX overrides and additions on top.
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-table-container--scrollable {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+.usx-table {
+  width: 100%;
+  position: relative;
+
+  // ── Base surfaces/borders/text ───────────────────────────────────────────────
+  // Real USWDS bakes its own `.usa-table` base styling as fixed values at ITS
+  // OWN build time: ink (#1b1b1b) text/borders, white body cells,
+  // "base-lighter" header/footer cells, "base-lightest" striped rows. Since
+  // both `usa-table` and `usx-table` land on the same element, compounding
+  // the selector with `&.usa-table` (rather than a plain descendant
+  // selector) guarantees these overrides win on specificity regardless of
+  // stylesheet load order, so the whole table body tracks the active
+  // surface/border/text theme instead of just the hover/selected extras
+  // further down this file.
+  &.usa-table {
+    color: $usx-text;
+
+    td,
+    th {
+      border-color: $usx-table-border;
+    }
+
+    tfoot td,
+    th,
+    thead td {
+      background-color: $usx-table-header-bg;
+      color: $usx-text;
+    }
+
+    td {
+      background-color: $usx-table-bg;
+    }
+
+    thead th[aria-sort] {
+      background-color: $usx-table-sorted-column-bg;
+      color: $usx-table-sorted-column-text;
+    }
+  }
+
+  &.usa-table--striped tbody tr:nth-child(odd) td {
+    background-color: $usx-table-stripe-bg;
+    color: $usx-text;
+  }
+
+  // ── Caption ─────────────────────────────────────────────────────────────────
+  // Real USWDS's `body { color: #1b1b1b; }` is a static, non-themeable value
+  // the caption would otherwise just inherit — pin it to the theme's text
+  // color so it responds to overrides instead of staying stuck black.
+  .usx-table__caption {
+    text-align: left;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    caption-side: top;
+
+    @if $usx-text {
+      color: $usx-text;
+    }
+  }
+
+  // ── Cells ────────────────────────────────────────────────────────────────────
+  .usx-table__cell {
+    vertical-align: top;
+    word-break: break-word;
+    height: inherit;
+    background-clip: unset;
+
+    &--align-left   { text-align: left; }
+    &--align-center { text-align: center; }
+    &--align-right  { text-align: right; }
+
+    // Selection checkbox / radio column
+    &--selection {
+      width: 2.5rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    // Detail-toggle column
+    &--detail-toggle {
+      width: 3rem;
+      min-width: 2rem;
+      padding: 0;
+    }
+  }
+
+  // ── Head ─────────────────────────────────────────────────────────────────────
+  .usx-table__head {
+    th {
+      white-space: nowrap;
+    }
+  }
+
+  // ── Sort button ──────────────────────────────────────────────────────────────
+  .usx-table__sort-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    font-weight: $usx-font-weight-bold;
+    color: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // ── Rows ─────────────────────────────────────────────────────────────────────
+  .usx-table__row {
+    // Allows for content stretching to fill dynamic row height
+    height: 100%;
+    min-height: 1px;
+
+    &--selected {
+      background-color: $usx-table-selected-bg !important;
+    }
+
+    &--disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    &--clickable {
+      cursor: pointer;
+
+      &:hover {
+        background-color: $usx-table-bg-hover !important;
+
+        .usx-table__cell {
+          background-color: transparent; // Keep cells from layering on top of hover color
+        }
+      }
+    }
+  }
+
+  // ── Checkboxes and radios ─────────────────────────────────────────────────────
+  // These cells hold a single checkbox/radio with no visible label text (the
+  // accessible name comes from aria-label on the input instead). USWDS's
+  // default `.usa-checkbox__label`/`.usa-radio__label` spacing is built for a
+  // label string following the box — margin-top pushes it down to align with
+  // surrounding form fields, and padding-left reserves room for that text.
+  // With no text at all the label's content box collapses to height: 0 (an
+  // empty inline-block has no line box to size itself against), so its
+  // baseline-anchored position lands near the *bottom* of the wrapper instead
+  // of the middle — which is what actually pushes the box out of alignment.
+  // Giving the label an explicit height (matching the box + its 2px margin)
+  // fixes the anchor point; `text-align: center` on the cell handles the rest.
+  .usx-table__checkbox,
+  .usx-table__radio {
+    display: inline-block;
+
+    .usa-checkbox__label,
+    .usa-radio__label {
+      margin-top: 2px;
+      padding-left: calc(1.25rem + 4px);
+      height: 1.25rem;
+    }
+  }
+
+  // ── Group rows ────────────────────────────────────────────────────────────────
+  .usx-table__group-row {
+    .usx-table__group-cell {
+      padding: 0;
+    }
+  }
+
+  .usx-table__group-toggle {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: $usx-table-grouped-row-bg;
+    color: $usx-table-grouped-row-text;
+
+    &:focus {
+      outline-offset: -0.25rem;
+    }
+  }
+
+  // ── Expandable row details ────────────────────────────────────────────────────
+  .usx-table__detail-disclosure {
+    display: block;
+    height: 100%;
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::marker {
+      content: '';
+    }
+  }
+
+  .usx-table__detail-toggle {
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    list-style: none;
+
+    &:focus {
+      outline-offset: -0.125rem;
+    }
+  }
+
+  .usx-table__detail-cell {
+    padding: 1rem;
+  }
+
+  // ── Footer ────────────────────────────────────────────────────────────────────
+  .usx-table__foot {
+    font-weight: $usx-font-weight-bold;
+
+    @if $usx-table-border {
+      border-top: 2px solid $usx-table-border;
+    }
+  }
+
+  // ── Placeholder ───────────────────────────────────────────────────────────────
+  .usx-table__placeholder-cell {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-style: italic;
+
+    @if $usx-table-placeholder-text {
+      color: $usx-table-placeholder-text;
+    }
+  }
+
+  // ── Loading row (spinner while fetching next batch) ───────────────────────────
+  .usx-table__loading-cell {
+    text-align: center;
+    padding: 1rem;
+    border: none;
+  }
+
+  // ── Row detail toggle button (Django) ───────────────────────────────────────
+  .usx-table__detail-toggle .usx-table__detail-icon {
+    transition: transform 120ms ease-in-out;
+  }
+
+  .usx-table__detail-disclosure[open] .usx-table__detail-icon {
+    transform: rotate(180deg);
+  }
+
+  // No-JS row details: reveal the adjacent detail row when disclosure is open.
+  .usx-table__detail-row {
+    display: none;
+  }
+
+  .usx-table__row:has(.usx-table__detail-disclosure[open]) + .usx-table__detail-row {
+    display: table-row;
+  }
+
+  // ── Sentinel (IntersectionObserver anchor for onMore) ─────────────────────────
+  .usx-table__sentinel {
+    td {
+      padding: 0;
+      height: 1px;
+      border: none;
+    }
+  }
+
+  // ── Sticky header + sticky first column intersection cell ─────────────────────
+  &.usx-table--sticky-first-col {
+    th:first-child,
+    td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+
+      @if $usx-table-border {
+        box-shadow: 1px 0 0 0 $usx-table-border;
+      }
+    }
+
+    thead th:first-child {
+      z-index: 3;
+    }
+  }
+}

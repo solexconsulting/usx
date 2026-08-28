@@ -1,4 +1,5 @@
 export interface TableContextType {
+  id: string;
   columns: TableColumn[];
   sortState: { key: string | null; direction: 'asc' | 'desc' | null };
   handleSort: (key: string) => void;
@@ -33,6 +34,7 @@ export interface TableContextType {
 }
 
 export const TableContext = createContext<TableContextType>({
+  id: '',
   columns: [],
   sortState: { key: null, direction: null },
   handleSort: () => {},

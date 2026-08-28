@@ -1,0 +1,50 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-calendar-date {
+  // USWDS has margin-right: 1rem, but it's for the purposes of the collection component.
+  // USX sets this margin in usx-collection instead to allow the independent use of calendar-date without the margin.
+  margin: 0;
+
+  // Width only applies when used standalone (not inside a collection, which controls its own layout)
+  &:not(.usa-collection *) {
+    width: 4rem;
+  }
+
+  .usx-calendar-date-month {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    background-color: $usx-color-primary;
+    color: $usx-text-inverse;
+  }
+
+  .usx-calendar-date-day {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    color: $usx-color-primary;
+
+    @if $usx-color-primary {
+      border: 1px solid $usx-color-primary;
+    }
+  }
+
+  .usx-calendar-date-month, .usx-calendar-date-day {
+    font-size: $usx-calendar-date-font-size;
+    display: block;
+    font-weight: $usx-font-weight-bold;
+    padding: .25rem;
+    text-align: center;
+  }
+}
+
+@media (width >= 40em) {
+  .usx-calendar-date {
+    &:not(.usx-collection *) {
+      width: 5rem;
+    }
+
+    .usx-calendar-date-month, .usx-calendar-date-day {
+      padding: .5rem;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useId } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { useTableContext } from './TableContext';
@@ -6,6 +6,7 @@ import TableRow from './TableRow';
 import TableGroup from './TableGroup';
 import Icon from '../icon/Icon';
 import Spinner from '../spinner/Spinner';
+import Checkbox from '../checkbox/Checkbox';
 
 // ─── Infinite scroll sentinel ─────────────────────────────────────────────────
 
@@ -61,6 +62,7 @@ function DataRow({ row, rowIndex }) { // eslint-disable-line react/prop-types
     isRowExpanded,
   } = useTableContext();
 
+  const selectionUidPrefix = useId();
   const key = row[primaryKey];
   const selected = isSelected(key);
   const isDisabled = Array.isArray(disabledKeys) && disabledKeys.includes(key);
@@ -86,22 +88,46 @@ function DataRow({ row, rowIndex }) { // eslint-disable-line react/prop-types
     toggleRow(key);
   }
 
-  const inputProps = {
-    type: selectionMode === 'radio' ? 'radio' : 'checkbox',
-    className: selectionMode === 'radio' ? 'usx-table__radio' : 'usx-table__checkbox',
-    checked: selected,
-    disabled: isDisabled,
-    'aria-label': `Select row ${rowIndex + 1}`,
-    onChange: () => handleSelect(key),
-    onClick: (e) => e.stopPropagation(),
-  };
+  const isRadio = selectionMode === 'radio';
+  const selectionInputId = `${selectionUidPrefix}-select`;
 
+  // Real USWDS checkbox/radio visuals are drawn on the `<label>` (via ::before),
+  // not the input — use the actual `Checkbox` component (same as TableHead's
+  // "select all") so row checkboxes get identical, correctly-themed markup
+  // rather than a hand-rolled approximation. `Checkbox` is internally
+  // uncontrolled (`defaultChecked`), so key it on the selected state to force
+  // a remount whenever selection changes programmatically (e.g. "select all").
   const selectionCell = (
     <td
       key="__selection__"
       className="usx-table__cell usx-table__cell--selection"
     >
-      <input {...inputProps} />
+      {isRadio ? (
+        <div className="usa-radio usx-table__radio">
+          <input
+            type="radio"
+            id={selectionInputId}
+            className="usa-radio__input"
+            checked={selected}
+            disabled={isDisabled}
+            aria-label={`Select row ${rowIndex + 1}`}
+            onChange={() => handleSelect(key)}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <label className="usa-radio__label" htmlFor={selectionInputId} />
+        </div>
+      ) : (
+        <Checkbox
+          key={selected ? 'checked' : 'unchecked'}
+          id={selectionInputId}
+          checked={selected}
+          disabled={isDisabled}
+          ariaLabel={`Select row ${rowIndex + 1}`}
+          onChange={() => handleSelect(key)}
+          onClick={(e) => e.stopPropagation()}
+          className="usx-table__checkbox"
+        />
+      )}
     </td>
   );
 
@@ -137,7 +163,7 @@ function DataRow({ row, rowIndex }) { // eslint-disable-line react/prop-types
   ) : null;
 
   const dataCells = visibleCols.map((col, colIndex) => {
-    const isPrimary = col.primary || (colIndex === 0 && !columns.some((c) => c.primary));
+    const isPrimary = col.primary;
     const Tag = isPrimary ? 'th' : 'td';
     const cellClasses = classnames(
       'usx-table__cell',

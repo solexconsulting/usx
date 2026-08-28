@@ -1,7 +1,6 @@
 import React, { ReactNode, LabelHTMLAttributes } from 'react';
 import ClassNames from 'classnames';
 import Required from '../required/Required';
-import './label.scss';
 
 export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   htmlFor?: string;

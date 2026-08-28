@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import classNames from 'classnames';
-import './combobox.scss';
 
 export interface ComboboxOption {
   value: string;

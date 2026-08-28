@@ -1,0 +1,151 @@
+// Define variable to set time for swap transition
+$usx-swap-transition-time: 0.25s !default;
+
+/* stylelint-disable selector-class-pattern, no-descending-specificity -- Public BEM classes and state overrides are ordered by interaction state. */
+.usx-swap {
+  cursor: pointer;
+  vertical-align: middle;
+  place-content: center;
+  user-select: none;
+  display: inline-grid;
+  position: relative;
+
+  > * {
+    grid-row-start: 1;
+    grid-column-start: 1;
+  }
+
+  // A transition animates using whichever rule newly matches (the
+  // destination state), so each side needs its OWN declaration per
+  // direction: the element becoming hidden holds its size until the end
+  // (step-end) while the element becoming shown snaps to size immediately
+  // (step-start) — swapped compared to the other direction.
+  &.usx-swap--ease,
+  &.usx-swap--rotate,
+  &.usx-swap--flip {
+    // Unchecked (off shown, on hidden): off is *becoming* shown here.
+    .usx-swap-off {
+      transition: opacity $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  transform $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  max-height $usx-swap-transition-time step-start,
+                  max-width $usx-swap-transition-time step-start;
+    }
+
+    .usx-swap-on,
+    .usx-swap-indeterminate,
+    input:indeterminate ~ .usx-swap-on {
+      transition: opacity $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  transform $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  max-height $usx-swap-transition-time step-end,
+                  max-width $usx-swap-transition-time step-start;
+    }
+
+    // Checked (on shown, off hidden): higher specificity than the rules
+    // above, so these win once the checkbox is checked.
+    input:is(:checked, :indeterminate) ~ .usx-swap-off {
+      transition: opacity $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  transform $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  max-height $usx-swap-transition-time step-end,
+                  max-width $usx-swap-transition-time step-start;
+    }
+
+    input:checked ~ .usx-swap-on,
+    input:indeterminate ~ .usx-swap-indeterminate {
+      transition: opacity $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  transform $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  max-height $usx-swap-transition-time step-start,
+                  max-width $usx-swap-transition-time step-start;
+    }
+  }
+
+  input {
+    appearance: none;
+    border: none;
+
+    &:focus {
+      outline: none;
+      border: none;
+    }
+  }
+
+  .usx-swap-on,
+  .usx-swap-indeterminate,
+  input:indeterminate ~ .usx-swap-on {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  // Explicit shown-state size (rather than the initial "none") so hiding
+  // transitions between two real values and step-end can hold it until the end.
+  .usx-swap-off {
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  input:is(:checked, :indeterminate) ~ .usx-swap-off {
+    opacity: 0;
+    max-height: 0;
+    max-width: 0;
+    overflow: hidden;
+  }
+
+  input:checked ~ .usx-swap-on,
+  input:indeterminate ~ .usx-swap-indeterminate {
+    opacity: 1;
+    max-height: 100%;
+    backface-visibility: visible;
+  }
+}
+
+.usx-swap-active {
+  .usx-swap-off {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  .usx-swap-on {
+    opacity: 1;
+  }
+}
+
+.usx-swap--rotate {
+  .usx-swap-on,
+  input:indeterminate ~ .usx-swap-on {
+    transform: rotate(-45deg);
+  }
+
+  input:is(:checked, :indeterminate) ~ .usx-swap-on,
+  &.usx-swap-active .usx-swap-on {
+    transform: rotate(0deg);
+  }
+
+  input:is(:checked, :indeterminate) ~ .usx-swap-off,
+  &.usx-swap-active .usx-swap-off {
+    transform: rotate(45deg);
+  }
+}
+
+.usx-swap--flip {
+  transform-style: preserve-3d;
+  perspective: 20rem;
+
+  .usx-swap-on,
+  .usx-swap-indeterminate,
+  input:indeterminate ~ .usx-swap-on {
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+  }
+
+  input:is(:checked, :indeterminate) ~ .usx-swap-on,
+  &.usx-swap-active .usx-swap-on {
+    transform: rotateY(0deg);
+  }
+
+  input:is(:checked, :indeterminate) ~ .usx-swap-off,
+  &.usx-swap-active .usx-swap-off {
+    transform: rotateY(-180deg);
+    backface-visibility: hidden;
+    opacity: 1;
+  }
+}
+/* stylelint-enable selector-class-pattern, no-descending-specificity */

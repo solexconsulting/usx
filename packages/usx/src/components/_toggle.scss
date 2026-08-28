@@ -1,0 +1,34 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+/* stylelint-disable no-descending-specificity -- Intentional cascade order for toggle states. */
+.usx-toggle {
+  /* Radio input + label pattern for HTML-only example */
+  &__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
+  &__input:checked + .usa-button.usx-button {
+    .usx-toggle__label {
+      color: $usx-text-inverse;
+    }
+  }
+
+  &__input:checked + .usa-button.usx-button.usa-button--outline {
+    background: $usx-color-primary-active;
+
+    @if $usx-color-primary-active {
+      outline: 2px solid $usx-color-primary-active inset;
+    }
+  }
+
+  &__input:disabled + .usa-button.usx-button,
+  &__item--disabled .usa-button.usx-button {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

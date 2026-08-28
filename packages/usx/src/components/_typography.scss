@@ -1,0 +1,145 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+// Typography is a "component" like any other in this package: consumers
+// assembling a custom entry file can leave this @forward out entirely to
+// skip base/heading typography styling and rely on their own rules instead.
+//
+// Themeable via the `font-family-*`, `font-size-*`, `font-weight-*` and
+// `line-height-*` tokens in @solexllc/usx-theme.
+//
+// Defaults reproduce today's rendered output exactly (16px/400/1.5, matching
+// the implicit browser defaults already in effect) — this is additive
+// theming capability, not a visual change.
+body {
+  font-family: $usx-font-family;
+  font-size: $usx-font-size-base;
+  font-weight: $usx-font-weight-regular;
+  line-height: $usx-line-height-base;
+}
+
+.usa-prose {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $usx-font-family-heading;
+    font-weight: $usx-font-weight-bold;
+    line-height: $usx-line-height-heading;
+  }
+
+  h1 { font-size: $usx-font-size-h1; }
+  h2 { font-size: $usx-font-size-h2; }
+  h3 { font-size: $usx-font-size-h3; }
+  h4 { font-size: $usx-font-size-h4; }
+  h5 { font-size: $usx-font-size-h5; }
+  h6 { font-size: $usx-font-size-h6; }
+}
+
+// Native form controls (and USWDS's own wrapper classes around them) don't
+// inherit font-family from `body` by default — browsers give them their own
+// UA stylesheet font, and USWDS's compiled CSS explicitly resets them back
+// to its own hardcoded stack at equal specificity. Matching that same set
+// of selectors here (loaded after USWDS's CSS) is what lets these track
+// `font-family` instead of staying stuck on the untheemable default.
+button,
+input,
+optgroup,
+select,
+textarea,
+.usa-button,
+.usa-sidenav,
+.usa-label,
+.usa-checkbox__label,
+.usa-combo-box__input,
+.usa-combo-box__list,
+.usa-fieldset,
+.usa-hint,
+.usa-input,
+.usa-input-group,
+.usa-radio__label,
+.usa-range,
+.usa-range__value,
+.usa-select,
+.usa-textarea,
+.usa-prose,
+.usa-table caption {
+  font-family: $usx-font-family;
+}
+
+// ── Component-specific overrides ──────────────────────────────────────────
+// USWDS's compiled CSS also hardcodes font-family directly on several
+// component selectors below (rather than relying on inheritance from
+// `body`), each at its own specificity. Keeping every one of these
+// overrides centralized here — instead of scattered across each
+// component's own partial — means a custom entry file that omits this
+// `typography` component disables ALL font-family theming in one place,
+// leaving every component at USWDS's own default font stack.
+.usx-header {
+  font-family: $usx-font-family;
+}
+
+.usa-nav.usx-nav {
+  font-family: $usx-font-family;
+
+  .usa-accordion {
+    font-family: $usx-font-family;
+  }
+}
+
+.usx-footer {
+  font-family: $usx-font-family;
+}
+
+.usx-footer__contact .usa-footer__contact-heading {
+  font-family: $usx-font-family-heading;
+}
+
+.usx-alert .usa-alert__body {
+  font-family: $usx-font-family;
+}
+
+.usx-alert .usa-alert__heading {
+  font-family: $usx-font-family-heading;
+}
+
+// USWDS hardcodes font-family on `.usa-site-alert .usa-alert .usa-alert__body`/
+// `__heading` (0-3-0), which beats the plain `.usx-alert .usa-alert__body`/
+// `__heading` rule above (0-2-0) regardless of load order.
+.usa-site-alert.usx-site-alert .usa-alert.usx-alert {
+  .usa-alert__body {
+    font-family: $usx-font-family;
+  }
+
+  .usa-alert__heading {
+    font-family: $usx-font-family-heading;
+  }
+}
+
+.usx-table.usa-table {
+  font-family: $usx-font-family;
+}
+
+.usx-step-indicator {
+  font-family: $usx-font-family;
+
+  .usa-step-indicator__heading {
+    font-family: $usx-font-family-heading;
+  }
+}
+
+.usa-summary-box.usx-summary-box {
+  font-family: $usx-font-family;
+
+  .usa-summary-box__heading {
+    font-family: $usx-font-family-heading;
+  }
+}
+
+.usx-icon-list {
+  font-family: $usx-font-family;
+
+  .usa-icon-list__title {
+    font-family: $usx-font-family;
+  }
+}
+
+.usx-accordion {
+  font-family: $usx-font-family;
+}

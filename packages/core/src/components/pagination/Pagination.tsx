@@ -3,7 +3,6 @@ import PaginationNavigation from './navigation/PaginationNavigation';
 import PaginationStepOptions from './step-options/PaginationStepOptions';
 import PaginationSummary from './summary/PaginationSummary';
 import PaginationContainer from './container/PaginationContainer';
-import './pagination.scss';
 
 export interface PaginationProps {
   initialPage?: number;

@@ -1,0 +1,9 @@
+// @solexllc/usx-uswds-fixes
+// Generic corrections to upstream USWDS component styles (no USX branding).
+// Aggregated entry — @forward each fix module below.
+
+@forward './components/radio-buttons';
+@forward './components/checkbox';
+@forward './components/search';
+@forward './components/step-indicator';
+@forward './components/header';

@@ -1,5 +1,4 @@
 import React from 'react';
-import './skipnav.scss';
 import ClassNames from 'classnames';
 
 export type SkipnavProps = {

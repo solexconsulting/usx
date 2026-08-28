@@ -1,6 +1,5 @@
 import React, { ElementType, AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
 import classNames from 'classnames';
-import './clickable.scss';
 
 // ── Sub-component helpers ────────────────────────────────────────────────────
 

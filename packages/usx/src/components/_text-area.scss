@@ -1,0 +1,85 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+
+/* ---------------------------------- */
+
+/* Base Enhancements                  */
+
+/* ---------------------------------- */
+
+.usa-textarea.usx-textarea {
+  @if $usx-textarea-radius {
+    border-radius: $usx-textarea-radius;
+  }
+
+  @if $usx-textarea-padding {
+    padding: $usx-textarea-padding;
+  }
+}
+
+/* ---------------------------------- */
+
+/* State Enhancements                 */
+
+/* ---------------------------------- */
+
+.usa-textarea.usx-textarea:not(.usa-input--error, .usa-input--success) {
+  &:not(:disabled) {
+    @if $usx-textarea-bg {
+      background-color: $usx-textarea-bg;
+    }
+
+    @if $usx-textarea-text {
+      color: $usx-textarea-text;
+    }
+
+    @if $usx-textarea-border {
+      border-color: $usx-textarea-border;
+    }
+  }
+}
+
+.usa-textarea.usx-textarea.usa-input--error {
+  @if $usx-input-error-border-width {
+    border-width: $usx-input-error-border-width;
+  }
+
+  @if $usx-input-error-border {
+    border-color: $usx-input-error-border;
+  }
+
+  @if $usx-input-error-border-style {
+    border-style: $usx-input-error-border-style;
+  }
+
+  @if $usx-input-error-padding-top {
+    padding-top: $usx-input-error-padding-top;
+  }
+
+  @if $usx-input-error-padding-bottom {
+    padding-bottom: $usx-input-error-padding-bottom;
+  }
+}
+
+.usa-textarea.usx-textarea.usa-input--success {
+  @if $usx-input-success-border-width {
+    border-width: $usx-input-success-border-width;
+  }
+
+  @if $usx-input-success-border {
+    border-color: $usx-input-success-border;
+  }
+
+  @if $usx-input-success-border-style {
+    border-style: $usx-input-success-border-style;
+  }
+
+  @if $usx-input-success-padding-top {
+    padding-top: $usx-input-success-padding-top;
+  }
+
+  @if $usx-input-success-padding-bottom {
+    padding-bottom: $usx-input-success-padding-bottom;
+  }
+}

@@ -1,0 +1,26 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-modal {
+  &.usx-modal--lg-collapsed {
+    max-width: 55rem;
+    width: 100%;
+
+    .usa-modal__heading {
+      font-size: $usx-modal-heading-font-size;
+      margin-top: 0;
+      line-height: 1.34em;
+    }
+
+    .usa-modal__main {
+      padding: 2rem;
+      padding-top: 0;
+      width: 100%;
+      max-width: 100%;
+
+      .usa-prose {
+        min-height: 3rem;
+      }
+    }
+  }
+}

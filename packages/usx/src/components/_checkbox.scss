@@ -1,0 +1,58 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-checkbox {
+
+  @if $usx-checkable-tile-radius != null {
+    .usa-checkbox__input--tile + .usa-checkbox__label {
+      border-radius: $usx-checkable-tile-radius;
+    }
+  }
+
+  .usa-checkbox__input--tile + .usa-checkbox__label {
+    @if $usx-checkable-tile-border != null {
+      border-color: $usx-checkable-tile-border;
+    }
+
+    @if $usx-checkable-tile-border-width != null {
+      border-width: $usx-checkable-tile-border-width;
+    }
+  }
+
+  .usa-checkbox__label::before {
+
+    @if $usx-checkable-radius != null {
+      border-radius: $usx-checkable-radius;
+    }
+
+    @if $usx-checkable-bg != null {
+      background-color: $usx-checkable-bg;
+    }
+
+    @if $usx-checkable-border != null {
+      box-shadow: 0 0 0 2px $usx-checkable-border;
+    }
+  }
+
+  .usa-checkbox__input:checked:not(:disabled) {
+    & + .usa-checkbox__label {
+      @if $usx-color-primary {
+        &::before {
+          background-color: $usx-color-primary;
+          box-shadow: 0 0 0 2px $usx-color-primary;
+        }
+      }
+    }
+
+    &.usa-checkbox__input--tile + .usa-checkbox__label {
+      @if $usx-color-primary {
+        border-color: $usx-color-primary;
+      }
+    }
+  }
+}
+
+.usx-checkbox.usx-checkbox--small .usa-checkbox__label::before {
+  height: 1.125rem;
+  width: 1.125rem;
+}

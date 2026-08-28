@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames'
+import classnames from 'classnames';
 
 function AccordionItem({
     title,
@@ -117,6 +117,7 @@ export function Accordion({
 
     const accordionClasses = classnames(
         'usa-accordion',
+        'usx-accordion',
         bordered && 'usa-accordion--bordered',
         className
     )

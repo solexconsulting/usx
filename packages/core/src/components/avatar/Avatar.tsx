@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import Icon from '../icon/Icon.jsx';
-import './avatar.scss';
 
 const shapeClassMap = {
   circle: 'usx-circle',

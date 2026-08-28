@@ -1,5 +1,4 @@
 import React from 'react';
-import './switch.scss';
 import ClassNames from 'classnames';
 
 export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {

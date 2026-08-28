@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { useTableContext } from './TableContext';
 import Icon from '../icon/Icon';
+import Checkbox from '../checkbox/Checkbox';
 
 // ─── Multi-level header helpers ──────────────────────────────────────────────
 
@@ -77,6 +78,7 @@ function SortIcon({ direction }) { // eslint-disable-line react/prop-types
  */
 export default function TableHead({ className = '', children, ...props }) {
   const {
+    id,
     columns,
     sortState,
     handleSort,
@@ -140,15 +142,11 @@ export default function TableHead({ className = '', children, ...props }) {
               className="usx-table__cell usx-table__cell--selection"
             >
               {selectionMode === 'checkbox' && allowSelectAll && (
-                <input
-                  type="checkbox"
-                  className="usx-table__checkbox"
-                  aria-label="Select all rows"
-                  checked={isAllSelected}
-                  ref={(el) => {
-                    if (el) el.indeterminate = isIndeterminate;
-                  }}
+                <Checkbox
+                  id={`${id}-select-all`}
                   onChange={handleSelectAll}
+                  ariaLabel="Select all rows"
+                  className="usx-table__checkbox"
                 />
               )}
             </th>
@@ -181,7 +179,7 @@ export default function TableHead({ className = '', children, ...props }) {
                       ? 'ascending'
                       : sortDir === 'desc'
                       ? 'descending'
-                      : 'none'
+                      : undefined
                     : undefined
                 }
                 data-sortable={isSortable || undefined}
@@ -213,15 +211,10 @@ export default function TableHead({ className = '', children, ...props }) {
               className="usx-table__cell usx-table__cell--selection"
             >
               {selectionMode === 'checkbox' && allowSelectAll && (
-                <input
-                  type="checkbox"
-                  className="usx-table__checkbox"
-                  aria-label="Select all rows"
-                  checked={isAllSelected}
-                  ref={(el) => {
-                    if (el) el.indeterminate = isIndeterminate;
-                  }}
+                <Checkbox
+                  id={`${id}-select-all`}
                   onChange={handleSelectAll}
+                  ariaLabel="Select all rows"
                 />
               )}
             </th>

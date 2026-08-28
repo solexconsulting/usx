@@ -1,5 +1,4 @@
 import React from 'react';
-import './villain.scss';
 
 export interface VillainButton {
   href: string;

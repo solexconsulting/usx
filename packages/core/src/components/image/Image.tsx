@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import './image.scss';
 
 export interface ImageSource {
   srcSet: string;

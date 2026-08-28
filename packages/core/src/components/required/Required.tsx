@@ -1,5 +1,4 @@
 import React from 'react';
-import './required.scss';
 import ClassNames from 'classnames';
 
 export interface RequiredProps extends React.HTMLAttributes<HTMLElement> {

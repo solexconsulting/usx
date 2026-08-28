@@ -13,7 +13,15 @@
   {{ className }}
   "
 >
-  {% if icon %}{% icon name=icon size="3" %}{% endicon %}{% endif %}{{ children | default:value }}
+  {% if big %}
+    {% with iconSize=3 %}
+      {% if icon %}{% icon name=icon size=iconSize %}{% endicon %}{% endif %}{{ children | default:value }}
+    {% endwith %}
+  {% else %}
+    {% with iconSize=2 %}
+      {% if icon %}{% icon name=icon size=iconSize %}{% endicon %}{% endif %}{{ children | default:value }}
+    {% endwith %}
+  {% endif %}
   {% if dismissible %}
     <button
       type="button"
