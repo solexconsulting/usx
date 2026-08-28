@@ -978,6 +978,20 @@ $usx-footer-border-top:          usx-when($usx-footer-border, $usx-border-width-
 $usx-footer-primary-section-border-top:   usx-when($usx-footer-primary-section-border, $usx-border-width-sm solid $usx-footer-primary-section-border) !default;
 $usx-footer-secondary-section-border-top: usx-when($usx-footer-secondary-section-border, $usx-border-width-sm solid $usx-footer-secondary-section-border) !default;
 
+// ── Component tokens: Page / Section ──────────────────────────────────────────
+// No background of their own by default (the surrounding Layout already
+// paints $usx-surface-1) — but text is chained to $usx-text so headings and
+// copy inside .usx-page/.usx-section stay legible instead of getting stuck
+// on real USWDS's static, non-themeable body text color.
+$usx-page-bg-var: null !default;
+$usx-page-bg: usx-var($usx-page-bg-var) !default;
+$usx-page-text-var: null !default;
+$usx-page-text: usx-var($usx-page-text-var, $usx-text) !default;
+
+$usx-section-bg-var: null !default;
+$usx-section-bg: usx-var($usx-section-bg-var) !default;
+$usx-section-text-var: null !default;
+$usx-section-text: usx-var($usx-section-text-var, $usx-text) !default;
 
 // ── Component tokens: Carousel (custom; defaults baked in _carousel.scss) ───
 $usx-carousel-dot-bg-var: null !default;

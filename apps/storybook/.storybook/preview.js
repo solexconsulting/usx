@@ -1,11 +1,29 @@
+import React from 'react';
 import "@uswds/uswds/css/uswds.min.css";
 // Runtime theme values (:root custom properties) — required because the
 // themed usx build emits bare var(--usx-*) with no fallback.
 import "@solexllc/usx-theme/theme.css";
 import './styles.scss';
 import solexTheme from "./solexTheme";
+import { resolveTheme, themeToCss } from '../../../packages/usx-stories/src/utils/themeDerive.js';
+import { PRESETS } from '../../../packages/usx-stories/src/utils/themePresets.js';
+
+// Applies the toolbar-selected preset (see globalTypes.theme below) to every
+// story by overriding :root's --usx-* custom properties — the same
+// resolveTheme/themeToCss pipeline the Theme Playground uses for its presets.
+function withThemePreset(Story, context) {
+  const overrides = PRESETS[context.globals.theme] || {};
+  const css = themeToCss(resolveTheme(overrides), { changedOnly: true });
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement('style', null, css),
+    React.createElement(Story)
+  );
+}
 
 const preview = {
+  decorators: [withThemePreset],
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
@@ -30,7 +48,18 @@ const preview = {
       description: 'Which technology board to show',
       defaultValue: 'all',
     },
+    theme: {
+      name: 'Theme',
+      description: 'Preset theme applied globally across all stories',
+      defaultValue: 'Default',
+      toolbar: {
+        icon: 'paintbrush',
+        items: Object.keys(PRESETS).map((name) => ({ value: name, title: name })),
+        showName: true,
+      },
+    },
   },
 };
+
 
 export default preview;

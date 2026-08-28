@@ -34,24 +34,21 @@ export const Dashboard = {
         variant="grid"
         content={
           <Page id="dashboard-example" title="Dashboard">
-              <Section>
-                <div className="grid-row grid-gap flex-align-center">
-                  <div className="grid-col-fill" />
-                  <div className="grid-col-auto">
-                    <ButtonGroup items={[
-                      { children: 'Export Data', variant: 'secondary' },
+              <div className="grid-row">
+                  <ButtonGroup
+                    items={[
                       { children: 'New Item', variant: 'primary' },
-                    ]} />
-                  </div>
-                </div>
-              </Section>
+                      { children: 'Export Data', variant: 'secondary' },
+                    ]}
+                  />
+              </div>
 
               <Section title="Key Metrics">
                 <div className="grid-row grid-gap margin-4">
                   <div className="tablet:grid-col-3">
                     <div className="bg-primary-lighter padding-3 border border-primary border-1px">
                       <h3 className="margin-0 text-primary-dark">Total Users</h3>
-                      <div className="font-heading-xl margin-top-1">12,847</div>
+                      <div className="font-heading-xl text-ink margin-top-1">12,847</div>
                       <div className="text-success margin-top-1">
                         <Icon name="trending_up" size="sm" className="margin-right-1" />
                         +12.5% from last month
@@ -62,7 +59,7 @@ export const Dashboard = {
                   <div className="tablet:grid-col-3">
                     <div className="bg-success-lighter padding-3 border border-success border-1px">
                       <h3 className="margin-0 text-success-dark">Active Sessions</h3>
-                      <div className="font-heading-xl margin-top-1">3,429</div>
+                      <div className="font-heading-xl text-ink margin-top-1">3,429</div>
                       <div className="text-success margin-top-1">
                         <Icon name="trending_up" size="sm" className="margin-right-1" />
                         +8.2% from last month
@@ -73,7 +70,7 @@ export const Dashboard = {
                   <div className="tablet:grid-col-3">
                     <div className="bg-warning-lighter padding-3 border border-warning border-1px">
                       <h3 className="margin-0 text-warning-dark">Conversion Rate</h3>
-                      <div className="font-heading-xl margin-top-1">24.7%</div>
+                      <div className="font-heading-xl text-ink margin-top-1">24.7%</div>
                       <div className="text-error margin-top-1">
                         <Icon name="trending_down" size="sm" className="margin-right-1" />
                         -2.1% from last month
@@ -84,7 +81,7 @@ export const Dashboard = {
                   <div className="tablet:grid-col-3">
                     <div className="bg-accent-cool-lighter padding-3 border border-accent-cool border-1px">
                       <h3 className="margin-0 text-accent-cool-dark">Revenue</h3>
-                      <div className="font-heading-xl margin-top-1">$89,432</div>
+                      <div className="font-heading-xl text-ink margin-top-1">$89,432</div>
                       <div className="text-success margin-top-1">
                         <Icon name="trending_up" size="sm" className="margin-right-1" />
                         +15.3% from last month

@@ -106,10 +106,10 @@ export const BlogPost = {
             <>
               <Section title="Related Articles" className="border border-base-lighter border-1px padding-4 margin-bottom-3">
                 <ul className="usa-list usa-list--unstyled">
-                  <li><a className="usa-link" href="#">Cloud Migration Strategies</a></li>
-                  <li><a className="usa-link" href="#">AI in Modern Business</a></li>
-                  <li><a className="usa-link" href="#">Cybersecurity Best Practices</a></li>
-                  <li><a className="usa-link" href="#">Agile Development Methods</a></li>
+                  <li><a className="usa-link usx-link" href="#">Cloud Migration Strategies</a></li>
+                  <li><a className="usa-link usx-link" href="#">AI in Modern Business</a></li>
+                  <li><a className="usa-link usx-link" href="#">Cybersecurity Best Practices</a></li>
+                  <li><a className="usa-link usx-link" href="#">Agile Development Methods</a></li>
                 </ul>
               </Section>
 

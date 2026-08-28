@@ -412,6 +412,14 @@ export const themeManifest = [
   // color by default but can be overridden independently since they sit on
   // usx-footer-secondary-bg-color rather than usx-footer-primary-bg-color.
   component('usx-footer-heading-secondary-text', 'var(--usx-footer-heading-text)'),
+  // No background by default (the surrounding Layout already paints
+  // surface-1) — text chains live to usx-text so Page/Section headings and
+  // copy stay legible instead of getting stuck on real USWDS's static,
+  // non-themeable body text color.
+  component('usx-page-bg', 'transparent'),
+  component('usx-page-text', 'var(--usx-text)'),
+  component('usx-section-bg', 'transparent'),
+  component('usx-section-text', 'var(--usx-text)'),
   // Hover/selected row highlights alias the surface-2/surface-3 roles (like
   // usx-sidenav-hover-color above) instead of a color-primary blue tint, so
   // the table's aesthetic stays neutral and in step with the rest of the
