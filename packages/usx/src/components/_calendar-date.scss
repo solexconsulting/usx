@@ -14,24 +14,24 @@
   .usx-calendar-date-month {
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
-    background-color: $color-primary;
-    color: $text-inverse;
+    background-color: $usx-color-primary;
+    color: $usx-text-inverse;
   }
 
   .usx-calendar-date-day {
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
-    color: $color-primary;
+    color: $usx-color-primary;
 
-    @if $color-primary {
-      border: 1px solid $color-primary;
+    @if $usx-color-primary {
+      border: 1px solid $usx-color-primary;
     }
   }
 
   .usx-calendar-date-month, .usx-calendar-date-day {
     font-size: $usx-calendar-date-font-size;
     display: block;
-    font-weight: $font-weight-bold;
+    font-weight: $usx-font-weight-bold;
     padding: .25rem;
     text-align: center;
   }

@@ -2,6 +2,6 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-required {
-  color: $color-error;
+  color: $usx-color-error;
   text-decoration: none !important;
 }

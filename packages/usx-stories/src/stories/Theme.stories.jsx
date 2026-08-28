@@ -65,12 +65,12 @@ export default {
 // preset/randomized theme reads as one coherent divider color everywhere
 // instead of a mismatched set.
 const HEADER_FOOTER_BORDER_TOKENS = [
-  'usx-header-border-color',
-  'usx-header-nav-border-top-color',
-  'usx-header-nav-border-bottom-color',
-  'usx-footer-border-color',
-  'usx-footer-primary-section-border-color',
-  'usx-footer-secondary-section-border-color'
+  'usx-header-border',
+  'usx-header-nav-top-border',
+  'usx-header-nav-bottom-border',
+  'usx-footer-border',
+  'usx-footer-primary-section-border',
+  'usx-footer-secondary-section-border'
 ];
 
 function headerFooterBorderOverrides() {
@@ -88,8 +88,8 @@ function headerFooterBorderOverrides() {
 // the visibly distinct tone against that shared surface.
 function headerNavBackgroundOverrides() {
   return {
-    'usx-header-background-color': 'var(--usx-surface-3)',
-    'usx-nav-background-color': 'var(--usx-surface-3)'
+    'usx-header-bg': 'var(--usx-surface-3)',
+    'usx-header-nav-bg': 'var(--usx-surface-3)'
   };
 }
 
@@ -103,7 +103,7 @@ const PRESETS = {
     'color-accent-cool': '#81c784',
     'color-accent-warm': '#ffb300',
     'surface-3': '#f4faf4',
-    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-bg': 'var(--usx-surface-3)',
     'usx-summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides()
@@ -114,7 +114,7 @@ const PRESETS = {
     'color-accent-cool': '#ff8a65',
     'color-accent-warm': '#ffd54f',
     'surface-3': '#fdf6f1',
-    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-bg': 'var(--usx-surface-3)',
     'usx-summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides()
@@ -125,7 +125,7 @@ const PRESETS = {
     'color-accent-cool': '#67e8f9',
     'color-accent-warm': '#fb923c',
     'surface-3': '#f0f9fb',
-    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-bg': 'var(--usx-surface-3)',
     'usx-summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides()
@@ -145,10 +145,10 @@ const PRESETS = {
     'color-success': '#009ec1',
     'color-error': '#e52207',
     'color-emergency': '#5942d2',
-    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-bg': 'var(--usx-surface-3)',
     'usx-summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
-    ...headerNavBackgroundOverrides()
+    ...headerNavBackgroundOverrides(),
   },
   // Aurora's dark counterpart — same fixed state colors, but the theme hues
   // are brightened kin of Aurora's (rather than reused as-is) so they still
@@ -168,13 +168,14 @@ const PRESETS = {
     'color-success': '#009ec1',
     'color-error': '#e52207',
     'color-emergency': '#5942d2',
-    'usx-summary-box-background-color': '#101b33',
+    'usx-summary-box-bg': '#101b33',
     'usx-summary-box-border-color': '#5b7cfa',
-    'usx-link-visited-color': '#c9a8ff',
-    'usx-tooltip-background-color': '#e6e8f5',
-    'usx-tooltip-text-color': '#0b0e1c',
+    'usx-link-text-visited': '#c9a8ff',
+    'usx-tooltip-bg': '#e6e8f5',
+    'usx-tooltip-text': '#0b0e1c',
     ...headerFooterBorderOverrides(),
-    ...headerNavBackgroundOverrides()
+    ...headerNavBackgroundOverrides(),
+    'usx-header-nav-link-text': '#dcddff'
   },
   // Dark themes: unlike the light presets above (which only nudge the page
   // background), these also flip the surface/border/text tokens so cards,
@@ -188,13 +189,14 @@ const PRESETS = {
     'surface-3': '#0f172a',
     'surface-2': '#334155',
     'text': '#e2e8f0',
-    'usx-summary-box-background-color': '#0f1b2e',
+    'usx-summary-box-bg': '#0f1b2e',
     'usx-summary-box-border-color': '#60a5fa',
-    'usx-link-visited-color': '#b39ddb',
-    'usx-tooltip-background-color': '#e2e8f0',
-    'usx-tooltip-text-color': '#020617',
+    'usx-link-text-visited': '#b39ddb',
+    'usx-tooltip-bg': '#e2e8f0',
+    'usx-tooltip-text': '#020617',
     ...headerFooterBorderOverrides(),
-    ...headerNavBackgroundOverrides()
+    ...headerNavBackgroundOverrides(),
+    'usx-header-nav-link-text': '#c7c9da'
   },
   Carbon: {
     'color-primary': '#fa9441',
@@ -208,21 +210,21 @@ const PRESETS = {
     'text-muted': '#c0c0c0',
     'text-subtle': '#a3a3a3',
     'text-inverse': '#1c1c1e',
-    'usx-summary-box-background-color': '#241a10',
+    'usx-summary-box-bg': '#241a10',
     'usx-summary-box-border-color': '#fb923c',
-    'usx-link-visited-color': '#b39ddb',
-    'usx-tooltip-background-color': '#e5e5e5',
-    'usx-tooltip-text-color': '#000000',
+    'usx-link-text-visited': '#b39ddb',
+    'usx-tooltip-bg': '#e5e5e5',
+    'usx-tooltip-text': '#000000',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     // Carbon wants the desktop nav bar one tone lighter than the header
     // (surface-2), but the mobile drawer matching the header (surface-3).
-    'usx-nav-background-color': 'var(--usx-surface-2)',
-    'usx-nav-background-color-mobile': 'var(--usx-surface-3)',
+    'usx-header-nav-bg': 'var(--usx-surface-2)',
+    'usx-header-nav-bg-mobile': 'var(--usx-surface-3)',
     // Overrides banner's own surface-2 default — Carbon wants the banner to
     // match the header's surface-3 instead.
-    'usx-banner-background-color': 'var(--usx-surface-3)',
-    'usx-banner-action-color': 'var(--usx-text)'
+    'usx-banner-bg': 'var(--usx-surface-3)',
+    'usx-banner-button-text': 'var(--usx-text)'
   },
   // The three presets below are sourced from real design systems/sites
   // rather than invented palettes — VADS/GOVUK values come from each
@@ -255,20 +257,20 @@ const PRESETS = {
     ...headerNavBackgroundOverrides(),
     // gov.uk's real header/nav bar is filled with brand blue, not a neutral
     // surface — override past the shared surface-3 default to match.
-    'usx-header-background-color': 'var(--usx-color-primary)',
-    'usx-nav-background-color': 'var(--usx-color-primary)',
-    'usx-header-text-color': 'var(--usx-text-inverse)',
+    'usx-header-bg': 'var(--usx-color-primary)',
+    'usx-header-nav-bg': 'var(--usx-color-primary)',
+    'usx-header-text': 'var(--usx-text-inverse)',
     // text-subtle/text-muted are tuned for a light/neutral surface — real
     // gov.uk nav links are white against the blue bar (verified live), and
     // color-primary as a hover color would be invisible against the
     // color-primary background it now sits on.
-    'usx-nav-link-color': 'var(--usx-text-inverse)',
-    'usx-nav-link-hover-color': 'var(--usx-text-inverse)',
-    'usx-header-secondary-link-color': 'var(--usx-text)',
-    'usx-header-secondary-link-hover': 'var(--usx-text)',
-    'usx-nav-background-color-mobile': '#f4f8fb',
-    'usx-nav-link-color-mobile': '#1a65a6',
-    'usx-nav-link-hover-color-mobile': '#0f385c',
+    'usx-header-nav-link-text': 'var(--usx-text-inverse)',
+    'usx-header-nav-link-text-hover': 'var(--usx-text-inverse)',
+    'usx-header-secondary-link-text': 'var(--usx-text)',
+    'usx-header-secondary-link-text-hover': 'var(--usx-text)',
+    'usx-header-nav-bg-mobile': '#f4f8fb',
+    'usx-header-nav-link-text-mobile': '#1a65a6',
+    'usx-header-nav-link-text-hover-mobile': '#0f385c',
     // GOV.UK famously never rounds a corner (buttons, inputs, panels, tags,
     // checkboxes all render dead square — verified live on the design
     // system's own component pages). Overriding the three base radius
@@ -277,7 +279,7 @@ const PRESETS = {
     'radius-field': '0', // buttons/inputs/textarea
     'radius-box': '0', // summary box/alert/code/hero-callout/image
     'radius-selector': '0', // tags/checkboxes
-    'usx-tile-radius': '0',
+    'usx-checkable-tile-radius': '0',
     'usx-misc-banner-badge-radius': '0',
     // Real GOV.UK form inputs render with a thick 2px black border — one of
     // its most recognizable traits (verified on design-system.service.gov.uk).
@@ -293,9 +295,9 @@ const PRESETS = {
     'usx-accordion-content-text': '#0b0c0c',
     // Modeled on the real GOV.UK notification banner (a blue-bordered white
     // panel) as the closest analog to our summary box.
-    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-bg': 'var(--usx-surface-3)',
     'usx-summary-box-border-color': 'var(--usx-color-primary)',
-    'usx-summary-box-text-color': '#0b0c0c',
+    'usx-summary-box-text': '#0b0c0c',
   },
   NASA: {
     // nasa.gov's live site itself (not the unaffiliated/outdated NASAWDS
@@ -306,13 +308,13 @@ const PRESETS = {
     'color-accent-warm': '#f64137', // real "read more" arrow-icon accent
     'surface-3': '#000000', // real header background — solid black
     'color-border': '#b9b9bb', // real divider/border gray (light enough to read against the black header)
-    'usx-header-text-color': 'var(--usx-text-inverse)', // real header text is white against the black bar
+    'usx-header-text': 'var(--usx-text-inverse)', // real header text is white against the black bar
     // text-subtle/text-muted are tuned for a light/neutral surface — against
     // the solid black header/nav they'd be low-contrast, so match the real
     // white nav text instead. color-primary (red) already reads fine as the
     // hover color against black, so it's left on the default.
-    'usx-nav-link-color': 'var(--usx-text-inverse)',
-    'usx-header-secondary-link-color': 'var(--usx-text-inverse)',
+    'usx-header-nav-link-text': 'var(--usx-text-inverse)',
+    'usx-header-secondary-link-text': 'var(--usx-text-inverse)',
     'font-family': '"Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif', // real nasa.gov body font (same USWDS default stack)
     // The real CTA button (e.g. "Live Mission Coverage") measures a 4px
     // corner radius, not our default 0.5rem — verified via computed style
@@ -323,27 +325,27 @@ const PRESETS = {
     'radius-button': '4px',
     // nasa.gov's content cards (hds-content-card) render perfectly square —
     // verified live.
-    'usx-tile-radius': '0',
+    'usx-checkable-tile-radius': '0',
     // nasa.gov's nav literally renders stock USWDS usa-accordion markup, so
     // its button background is stock USWDS base-lightest rather than our
     // slightly darker surface-2 default.
     'usx-accordion-bg': 'var(--usx-surface-3)',
     'usx-accordion-text': 'var(--usx-text-inverse)',
-    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-bg': 'var(--usx-surface-3)',
     'usx-summary-box-border-color': 'var(--usx-color-primary)',
-    'usx-summary-box-text-color': 'var(--usx-text-inverse)',
+    'usx-summary-box-text': 'var(--usx-text-inverse)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     // Keep the mobile drawer the same black as the desktop header/nav bar.
-    'usx-nav-background-color-mobile': 'var(--usx-surface-3)',
+    'usx-header-nav-bg-mobile': 'var(--usx-surface-3)',
     // The footer's secondary section (logo + contact block) chains its
     // background to surface-3 too, so it's solid black here just like the
     // header — same text-color/heading-color-secondary fix as above.
     // Link colors are untouched since color-primary (red) already reads
     // fine against black.
-    'usx-footer-text-color': 'var(--usx-text-inverse)',
-    'usx-footer-heading-color-secondary': 'var(--usx-text-inverse)',
-    'usx-table-grouped-row-text-color': 'var(--usx-text-inverse)',
+    'usx-footer-text': 'var(--usx-text-inverse)',
+    'usx-footer-heading-secondary-text': 'var(--usx-text-inverse)',
+    'usx-table-grouped-row-text': 'var(--usx-text-inverse)',
   }
 };
 
@@ -420,8 +422,8 @@ function buildScaleRow(baseName, resolved) {
 // Tokens whose effect is conditional on markup/context the name alone
 // doesn't convey — surfaced as a tooltip on the control (see ColorControl).
 const TOKEN_NOTES = {
-  'usx-nav-background-color': 'only applies when the header uses the .usa-header--extended layout (desktop width)',
-  'usx-nav-background-color-mobile': 'only applies when the header uses the .usa-header--extended layout (mobile off-canvas drawer)'
+  'usx-header-nav-bg': 'only applies when the header uses the .usa-header--extended layout (desktop width)',
+  'usx-header-nav-bg-mobile': 'only applies when the header uses the .usa-header--extended layout (mobile off-canvas drawer)'
 };
 
 const COMPONENT_COLOR_GROUPS = [
@@ -434,10 +436,9 @@ const COMPONENT_COLOR_GROUPS = [
   { label: 'Step Indicator', prefix: 'usx-step-indicator-' },
   { label: 'Task List', prefix: 'usx-task-list-' },
   { label: 'Clickable', prefix: 'usx-clickable-' },
-  { label: 'Tile', prefix: 'usx-tile-' },
-  { label: 'Selector (Checkbox/Radio)', prefix: 'usx-selector-' },
+  { label: 'Checkable (Checkbox/Radio/Tile)', prefix: 'usx-checkable-' },
   { label: 'SideNav', prefix: 'usx-sidenav-' },
-  { label: 'Header', prefix: 'usx-header-', extra: ['usx-nav-background-color', 'usx-nav-background-color-mobile', 'usx-nav-link-hover-bg-color', 'usx-nav-link-color', 'usx-nav-link-color-mobile', 'usx-nav-link-hover-color', 'usx-nav-link-hover-color-mobile'] },
+  { label: 'Header', prefix: 'usx-header-', extra: ['usx-header-nav-bg', 'usx-header-nav-bg-mobile', 'usx-header-nav-link-bg-hover', 'usx-header-nav-link-text', 'usx-header-nav-link-text-mobile', 'usx-header-nav-link-text-hover', 'usx-header-nav-link-text-hover-mobile'] },
   { label: 'Footer', prefix: 'usx-footer-' },
   { label: 'Table', prefix: 'usx-table-' },
   { label: 'Tooltip', prefix: 'usx-tooltip-' },
@@ -478,12 +479,12 @@ function groupComponentColors(tokens) {
 // light. Pin all of these to their designed defaults; only its (unrelated)
 // radius token is left free to vary.
 const SUMMARY_BOX_PINNED_COLORS = [
-  'usx-summary-box-background-color',
+  'usx-summary-box-bg',
   'usx-summary-box-border-color',
-  'usx-summary-box-text-color',
-  'usx-summary-box-link-color',
-  'usx-summary-box-link-hover-color',
-  'usx-summary-box-link-visited-color'
+  'usx-summary-box-text',
+  'usx-summary-box-link-text',
+  'usx-summary-box-link-text-hover',
+  'usx-summary-box-link-text-visited'
 ];
 
 function pinSummaryBoxColors(overrides) {
@@ -553,9 +554,9 @@ function randomPalette() {
     overrides['text-muted'] = '#d1d1d6';
     overrides['text-subtle'] = '#b9b9bb';
     overrides['text-inverse'] = '#1b1b1b';
-    overrides['usx-link-visited-color'] = '#b39ddb';
-    overrides['usx-tooltip-background-color'] = overrides['text'];
-    overrides['usx-tooltip-text-color'] = overrides['text-inverse'];
+    overrides['usx-link-text-visited'] = '#b39ddb';
+    overrides['usx-tooltip-bg'] = overrides['text'];
+    overrides['usx-tooltip-text'] = overrides['text-inverse'];
   }
   pinSummaryBoxColors(overrides);
   return overrides;
@@ -620,9 +621,9 @@ function randomSystemPalette() {
     overrides['text-muted'] = lookupHex('gray-cool', '20') || '#d1d1d6';
     overrides['text-subtle'] = lookupHex('gray-cool', '30') || '#b9b9bb';
     overrides['text-inverse'] = '#1b1b1b';
-    overrides['usx-link-visited-color'] = '#b39ddb';
-    overrides['usx-tooltip-background-color'] = overrides['text'];
-    overrides['usx-tooltip-text-color'] = overrides['text-inverse'];
+    overrides['usx-link-text-visited'] = '#b39ddb';
+    overrides['usx-tooltip-bg'] = overrides['text'];
+    overrides['usx-tooltip-text'] = overrides['text-inverse'];
   }
   pinSummaryBoxColors(overrides);
   return { overrides, selections };

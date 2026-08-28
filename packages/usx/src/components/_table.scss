@@ -27,33 +27,33 @@
   // surface/border/text theme instead of just the hover/selected extras
   // further down this file.
   &.usa-table {
-    color: $text;
+    color: $usx-text;
 
     td,
     th {
-      border-color: $usx-table-border-color;
+      border-color: $usx-table-border;
     }
 
     tfoot td,
     th,
     thead td {
-      background-color: $usx-table-header-background-color;
-      color: $text;
+      background-color: $usx-table-header-bg;
+      color: $usx-text;
     }
 
     td {
-      background-color: $usx-table-background-color;
+      background-color: $usx-table-bg;
     }
 
     thead th[aria-sort] {
-      background-color: $usx-table-sort-active-color;
-      color: $usx-table-sort-active-text-color;
+      background-color: $usx-table-sorted-column-bg;
+      color: $usx-table-sorted-column-text;
     }
   }
 
   &.usa-table--striped tbody tr:nth-child(odd) td {
-    background-color: $usx-table-stripe-background-color;
-    color: $text;
+    background-color: $usx-table-stripe-bg;
+    color: $usx-text;
   }
 
   // ── Caption ─────────────────────────────────────────────────────────────────
@@ -66,8 +66,8 @@
     margin-bottom: 0.5rem;
     caption-side: top;
 
-    @if $text {
-      color: $text;
+    @if $usx-text {
+      color: $usx-text;
     }
   }
 
@@ -113,7 +113,7 @@
     border: none;
     padding: 0;
     font: inherit;
-    font-weight: $font-weight-bold;
+    font-weight: $usx-font-weight-bold;
     color: inherit;
     cursor: pointer;
     white-space: nowrap;
@@ -142,7 +142,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: $usx-table-hover-bg !important;
+        background-color: $usx-table-bg-hover !important;
 
         .usx-table__cell {
           background-color: transparent; // Keep cells from layering on top of hover color
@@ -185,8 +185,8 @@
   .usx-table__group-toggle {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    background-color: $usx-table-grouped-row-bg-color;
-    color: $usx-table-grouped-row-text-color;
+    background-color: $usx-table-grouped-row-bg;
+    color: $usx-table-grouped-row-text;
 
     &:focus {
       outline-offset: -0.25rem;
@@ -228,10 +228,10 @@
 
   // ── Footer ────────────────────────────────────────────────────────────────────
   .usx-table__foot {
-    font-weight: $font-weight-bold;
+    font-weight: $usx-font-weight-bold;
 
-    @if $usx-table-border-color {
-      border-top: 2px solid $usx-table-border-color;
+    @if $usx-table-border {
+      border-top: 2px solid $usx-table-border;
     }
   }
 
@@ -241,8 +241,8 @@
     padding: 2rem 1rem;
     font-style: italic;
 
-    @if $usx-table-placeholder-text-color {
-      color: $usx-table-placeholder-text-color;
+    @if $usx-table-placeholder-text {
+      color: $usx-table-placeholder-text;
     }
   }
 
@@ -288,8 +288,8 @@
       left: 0;
       z-index: 1;
 
-      @if $usx-table-border-color {
-        box-shadow: 1px 0 0 0 $usx-table-border-color;
+      @if $usx-table-border {
+        box-shadow: 1px 0 0 0 $usx-table-border;
       }
     }
 

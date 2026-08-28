@@ -36,8 +36,8 @@
   &:focus {
     background-color: color-mix(in oklab, #2491ff 20%, transparent);
 
-    @if $usx-clickable-focus-outline-color {
-      background-color: color-mix(in oklab, $usx-clickable-focus-outline-color 20%, transparent);
+    @if $usx-clickable-focus {
+      background-color: color-mix(in oklab, $usx-clickable-focus 20%, transparent);
     }
 
     .usx-clickable__link {
@@ -57,24 +57,24 @@
     .usx-clickable__color-on-hover {
       color: #005ea2;
 
-      @if $usx-clickable-hover-color {
-        color: $usx-clickable-hover-color;
+      @if $usx-clickable-text-hover {
+        color: $usx-clickable-text-hover;
       }
 
-      @if $color-primary {
-        color: $color-primary;
+      @if $usx-color-primary {
+        color: $usx-color-primary;
       }
     }
 
     .usx-clickable__bg-color-on-hover {
       background-color: #005ea2;
 
-      @if $usx-clickable-hover-color {
-        background-color: $usx-clickable-hover-color;
+      @if $usx-clickable-text-hover {
+        background-color: $usx-clickable-text-hover;
       }
 
-      @if $color-primary {
-        background-color: $color-primary;
+      @if $usx-color-primary {
+        background-color: $usx-color-primary;
       }
     }
   }

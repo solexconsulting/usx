@@ -71,7 +71,7 @@ const UNCONSUMED = new Set([
   '--usx-color-disabled-dark',
   '--usx-color-disabled-darker',
   // State colors only consumed indirectly, via theme.css's fallback chain
-  // (e.g. --usx-link-visited-color: var(--usx-color-visited)), never
+  // (e.g. --usx-link-text-visited: var(--usx-color-visited)), never
   // referenced directly in compiled component CSS — same as color-border.
   '--usx-color-focus',
   '--usx-color-visited',
@@ -90,9 +90,9 @@ const UNCONSUMED = new Set([
   '--usx-radius-selector',
   '--usx-radius-none',
   // Shared border-color group token: components reference their own
-  // per-component hook only (e.g. --usx-tile-border-color); the group var
+  // per-component hook only (e.g. --usx-checkable-tile-border); the group var
   // is consumed indirectly via theme.css's fallback chain
-  // (--usx-tile-border-color: var(--usx-color-border)), never directly.
+  // (--usx-checkable-tile-border: var(--usx-color-border)), never directly.
   '--usx-color-border',
   // Same reasoning as the radius groups above: components reference their
   // own per-component hook only (e.g. --usx-task-list-outer-border-width);

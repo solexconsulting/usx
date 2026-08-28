@@ -55,330 +55,324 @@ $breakpoint-desktop: 1024px !default;
 
 // ── Color — primitives ──────────────────────────────────────────────────────
 $usx-color-primary-var: null !default;
-$color-primary: usx-var($usx-color-primary-var) !default;
+$usx-color-primary: usx-var($usx-color-primary-var) !default;
 
 $usx-color-primary-lighter-var: null !default;
-$color-primary-lighter: usx-var($usx-color-primary-lighter-var) !default;
+$usx-color-primary-lighter: usx-var($usx-color-primary-lighter-var) !default;
 
 $usx-color-primary-light-var: null !default;
-$color-primary-light: usx-var($usx-color-primary-light-var) !default;
+$usx-color-primary-light: usx-var($usx-color-primary-light-var) !default;
 
 $usx-color-primary-vivid-var: null !default;
-$color-primary-vivid: usx-var($usx-color-primary-vivid-var) !default;
+$usx-color-primary-vivid: usx-var($usx-color-primary-vivid-var) !default;
 
 $usx-color-primary-dark-var: null !default;
-$color-primary-dark: usx-var($usx-color-primary-dark-var) !default;
+$usx-color-primary-dark: usx-var($usx-color-primary-dark-var) !default;
 
 $usx-color-primary-darker-var: null !default;
-$color-primary-darker: usx-var($usx-color-primary-darker-var) !default;
+$usx-color-primary-darker: usx-var($usx-color-primary-darker-var) !default;
 
 $usx-color-primary-hover-var: null !default;
-$color-primary-hover: usx-var($usx-color-primary-hover-var) !default;
+$usx-color-primary-hover: usx-var($usx-color-primary-hover-var) !default;
 
 $usx-color-primary-active-var: null !default;
-$color-primary-active: usx-var($usx-color-primary-active-var) !default;
+$usx-color-primary-active: usx-var($usx-color-primary-active-var) !default;
 
 $usx-color-secondary-var: null !default;
-$color-secondary: usx-var($usx-color-secondary-var) !default;
+$usx-color-secondary: usx-var($usx-color-secondary-var) !default;
 
 $usx-color-secondary-lighter-var: null !default;
-$color-secondary-lighter: usx-var($usx-color-secondary-lighter-var) !default;
+$usx-color-secondary-lighter: usx-var($usx-color-secondary-lighter-var) !default;
 
 $usx-color-secondary-light-var: null !default;
-$color-secondary-light: usx-var($usx-color-secondary-light-var) !default;
+$usx-color-secondary-light: usx-var($usx-color-secondary-light-var) !default;
 
 $usx-color-secondary-vivid-var: null !default;
-$color-secondary-vivid: usx-var($usx-color-secondary-vivid-var) !default;
+$usx-color-secondary-vivid: usx-var($usx-color-secondary-vivid-var) !default;
 
 $usx-color-secondary-dark-var: null !default;
-$color-secondary-dark: usx-var($usx-color-secondary-dark-var) !default;
+$usx-color-secondary-dark: usx-var($usx-color-secondary-dark-var) !default;
 
 $usx-color-secondary-darker-var: null !default;
-$color-secondary-darker: usx-var($usx-color-secondary-darker-var) !default;
+$usx-color-secondary-darker: usx-var($usx-color-secondary-darker-var) !default;
 
 $usx-color-secondary-hover-var: null !default;
-$color-secondary-hover: usx-var($usx-color-secondary-hover-var) !default;
+$usx-color-secondary-hover: usx-var($usx-color-secondary-hover-var) !default;
 
 $usx-color-secondary-active-var: null !default;
-$color-secondary-active: usx-var($usx-color-secondary-active-var) !default;
+$usx-color-secondary-active: usx-var($usx-color-secondary-active-var) !default;
 
 $usx-color-accent-cool-var: null !default;
-$color-accent-cool: usx-var($usx-color-accent-cool-var) !default;
+$usx-color-accent-cool: usx-var($usx-color-accent-cool-var) !default;
 
 $usx-color-accent-cool-lighter-var: null !default;
-$color-accent-cool-lighter: usx-var($usx-color-accent-cool-lighter-var) !default;
+$usx-color-accent-cool-lighter: usx-var($usx-color-accent-cool-lighter-var) !default;
 
 $usx-color-accent-cool-light-var: null !default;
-$color-accent-cool-light: usx-var($usx-color-accent-cool-light-var) !default;
+$usx-color-accent-cool-light: usx-var($usx-color-accent-cool-light-var) !default;
 
 $usx-color-accent-cool-dark-var: null !default;
-$color-accent-cool-dark: usx-var($usx-color-accent-cool-dark-var) !default;
+$usx-color-accent-cool-dark: usx-var($usx-color-accent-cool-dark-var) !default;
 
 $usx-color-accent-cool-darker-var: null !default;
-$color-accent-cool-darker: usx-var($usx-color-accent-cool-darker-var) !default;
+$usx-color-accent-cool-darker: usx-var($usx-color-accent-cool-darker-var) !default;
 
 $usx-color-accent-cool-hover-var: null !default;
-$color-accent-cool-hover: usx-var($usx-color-accent-cool-hover-var) !default;
+$usx-color-accent-cool-hover: usx-var($usx-color-accent-cool-hover-var) !default;
 
 $usx-color-accent-cool-active-var: null !default;
-$color-accent-cool-active: usx-var($usx-color-accent-cool-active-var) !default;
+$usx-color-accent-cool-active: usx-var($usx-color-accent-cool-active-var) !default;
 
 $usx-color-accent-warm-var: null !default;
-$color-accent-warm: usx-var($usx-color-accent-warm-var) !default;
+$usx-color-accent-warm: usx-var($usx-color-accent-warm-var) !default;
 
 $usx-color-accent-warm-lighter-var: null !default;
-$color-accent-warm-lighter: usx-var($usx-color-accent-warm-lighter-var) !default;
+$usx-color-accent-warm-lighter: usx-var($usx-color-accent-warm-lighter-var) !default;
 
 $usx-color-accent-warm-light-var: null !default;
-$color-accent-warm-light: usx-var($usx-color-accent-warm-light-var) !default;
+$usx-color-accent-warm-light: usx-var($usx-color-accent-warm-light-var) !default;
 
 $usx-color-accent-warm-dark-var: null !default;
-$color-accent-warm-dark: usx-var($usx-color-accent-warm-dark-var) !default;
+$usx-color-accent-warm-dark: usx-var($usx-color-accent-warm-dark-var) !default;
 
 $usx-color-accent-warm-darker-var: null !default;
-$color-accent-warm-darker: usx-var($usx-color-accent-warm-darker-var) !default;
+$usx-color-accent-warm-darker: usx-var($usx-color-accent-warm-darker-var) !default;
 
 $usx-color-accent-warm-hover-var: null !default;
-$color-accent-warm-hover: usx-var($usx-color-accent-warm-hover-var) !default;
+$usx-color-accent-warm-hover: usx-var($usx-color-accent-warm-hover-var) !default;
 
 $usx-color-accent-warm-active-var: null !default;
-$color-accent-warm-active: usx-var($usx-color-accent-warm-active-var) !default;
+$usx-color-accent-warm-active: usx-var($usx-color-accent-warm-active-var) !default;
 
 $usx-color-base-var: null !default;
-$color-base: usx-var($usx-color-base-var) !default;
+$usx-color-base: usx-var($usx-color-base-var) !default;
 
 $usx-color-base-lightest-var: null !default;
-$color-base-lightest: usx-var($usx-color-base-lightest-var) !default;
+$usx-color-base-lightest: usx-var($usx-color-base-lightest-var) !default;
 
 $usx-color-base-lighter-var: null !default;
-$color-base-lighter: usx-var($usx-color-base-lighter-var) !default;
+$usx-color-base-lighter: usx-var($usx-color-base-lighter-var) !default;
 
 $usx-color-base-light-var: null !default;
-$color-base-light: usx-var($usx-color-base-light-var) !default;
+$usx-color-base-light: usx-var($usx-color-base-light-var) !default;
 
 $usx-color-base-dark-var: null !default;
-$color-base-dark: usx-var($usx-color-base-dark-var) !default;
+$usx-color-base-dark: usx-var($usx-color-base-dark-var) !default;
 
 $usx-color-base-darker-var: null !default;
-$color-base-darker: usx-var($usx-color-base-darker-var) !default;
+$usx-color-base-darker: usx-var($usx-color-base-darker-var) !default;
 
 $usx-color-base-darkest-var: null !default;
-$color-base-darkest: usx-var($usx-color-base-darkest-var) !default;
+$usx-color-base-darkest: usx-var($usx-color-base-darkest-var) !default;
 
 $usx-color-base-ink-var: null !default;
-$color-base-ink: usx-var($usx-color-base-ink-var) !default;
+$usx-color-base-ink: usx-var($usx-color-base-ink-var) !default;
 
 $usx-color-base-hover-var: null !default;
-$color-base-hover: usx-var($usx-color-base-hover-var) !default;
+$usx-color-base-hover: usx-var($usx-color-base-hover-var) !default;
 
 $usx-color-base-active-var: null !default;
-$color-base-active: usx-var($usx-color-base-active-var) !default;
+$usx-color-base-active: usx-var($usx-color-base-active-var) !default;
 
 $usx-color-info-var: null !default;
-$color-info: usx-var($usx-color-info-var) !default;
+$usx-color-info: usx-var($usx-color-info-var) !default;
 
 $usx-color-info-lighter-var: null !default;
-$color-info-lighter: usx-var($usx-color-info-lighter-var) !default;
+$usx-color-info-lighter: usx-var($usx-color-info-lighter-var) !default;
 
 $usx-color-info-light-var: null !default;
-$color-info-light: usx-var($usx-color-info-light-var) !default;
+$usx-color-info-light: usx-var($usx-color-info-light-var) !default;
 
 $usx-color-info-dark-var: null !default;
-$color-info-dark: usx-var($usx-color-info-dark-var) !default;
+$usx-color-info-dark: usx-var($usx-color-info-dark-var) !default;
 
 $usx-color-info-darker-var: null !default;
-$color-info-darker: usx-var($usx-color-info-darker-var) !default;
+$usx-color-info-darker: usx-var($usx-color-info-darker-var) !default;
 
 $usx-color-warning-var: null !default;
-$color-warning: usx-var($usx-color-warning-var) !default;
+$usx-color-warning: usx-var($usx-color-warning-var) !default;
 
 $usx-color-warning-lighter-var: null !default;
-$color-warning-lighter: usx-var($usx-color-warning-lighter-var) !default;
+$usx-color-warning-lighter: usx-var($usx-color-warning-lighter-var) !default;
 
 $usx-color-warning-light-var: null !default;
-$color-warning-light: usx-var($usx-color-warning-light-var) !default;
+$usx-color-warning-light: usx-var($usx-color-warning-light-var) !default;
 
 $usx-color-warning-dark-var: null !default;
-$color-warning-dark: usx-var($usx-color-warning-dark-var) !default;
+$usx-color-warning-dark: usx-var($usx-color-warning-dark-var) !default;
 
 $usx-color-warning-darker-var: null !default;
-$color-warning-darker: usx-var($usx-color-warning-darker-var) !default;
+$usx-color-warning-darker: usx-var($usx-color-warning-darker-var) !default;
 
 $usx-color-success-var: null !default;
-$color-success: usx-var($usx-color-success-var) !default;
+$usx-color-success: usx-var($usx-color-success-var) !default;
 
 $usx-color-success-lighter-var: null !default;
-$color-success-lighter: usx-var($usx-color-success-lighter-var) !default;
+$usx-color-success-lighter: usx-var($usx-color-success-lighter-var) !default;
 
 $usx-color-success-light-var: null !default;
-$color-success-light: usx-var($usx-color-success-light-var) !default;
+$usx-color-success-light: usx-var($usx-color-success-light-var) !default;
 
 $usx-color-success-dark-var: null !default;
-$color-success-dark: usx-var($usx-color-success-dark-var) !default;
+$usx-color-success-dark: usx-var($usx-color-success-dark-var) !default;
 
 $usx-color-success-darker-var: null !default;
-$color-success-darker: usx-var($usx-color-success-darker-var) !default;
+$usx-color-success-darker: usx-var($usx-color-success-darker-var) !default;
 
 $usx-color-error-var: null !default;
-$color-error: usx-var($usx-color-error-var) !default;
+$usx-color-error: usx-var($usx-color-error-var) !default;
 
 $usx-color-error-lighter-var: null !default;
-$color-error-lighter: usx-var($usx-color-error-lighter-var) !default;
+$usx-color-error-lighter: usx-var($usx-color-error-lighter-var) !default;
 
 $usx-color-error-light-var: null !default;
-$color-error-light: usx-var($usx-color-error-light-var) !default;
+$usx-color-error-light: usx-var($usx-color-error-light-var) !default;
 
 $usx-color-error-dark-var: null !default;
-$color-error-dark: usx-var($usx-color-error-dark-var) !default;
+$usx-color-error-dark: usx-var($usx-color-error-dark-var) !default;
 
 $usx-color-error-darker-var: null !default;
-$color-error-darker: usx-var($usx-color-error-darker-var) !default;
+$usx-color-error-darker: usx-var($usx-color-error-darker-var) !default;
 
 $usx-color-emergency-var: null !default;
-$color-emergency: usx-var($usx-color-emergency-var) !default;
+$usx-color-emergency: usx-var($usx-color-emergency-var) !default;
 
 $usx-color-emergency-dark-var: null !default;
-$color-emergency-dark: usx-var($usx-color-emergency-dark-var) !default;
+$usx-color-emergency-dark: usx-var($usx-color-emergency-dark-var) !default;
 
 // USWDS state color with no prior USX theme role — see theme-manifest.js.
 $usx-color-disabled-var: null !default;
-$color-disabled: usx-var($usx-color-disabled-var) !default;
+$usx-color-disabled: usx-var($usx-color-disabled-var) !default;
 
 $usx-color-disabled-lighter-var: null !default;
-$color-disabled-lighter: usx-var($usx-color-disabled-lighter-var) !default;
+$usx-color-disabled-lighter: usx-var($usx-color-disabled-lighter-var) !default;
 
 $usx-color-disabled-light-var: null !default;
-$color-disabled-light: usx-var($usx-color-disabled-light-var) !default;
+$usx-color-disabled-light: usx-var($usx-color-disabled-light-var) !default;
 
 $usx-color-disabled-dark-var: null !default;
-$color-disabled-dark: usx-var($usx-color-disabled-dark-var) !default;
+$usx-color-disabled-dark: usx-var($usx-color-disabled-dark-var) !default;
 
 $usx-color-disabled-darker-var: null !default;
-$color-disabled-darker: usx-var($usx-color-disabled-darker-var) !default;
+$usx-color-disabled-darker: usx-var($usx-color-disabled-darker-var) !default;
 
 // USWDS's own default focus-outline color — see theme-manifest.js.
 $usx-color-focus-var: null !default;
-$color-focus: usx-var($usx-color-focus-var) !default;
+$usx-color-focus: usx-var($usx-color-focus-var) !default;
 
 // Was only a link-component token — see theme-manifest.js.
 $usx-color-visited-var: null !default;
-$color-visited: usx-var($usx-color-visited-var) !default;
+$usx-color-visited: usx-var($usx-color-visited-var) !default;
 
 // Surface abstraction: components below chain to these — not directly to
-// the raw USWDS base-family tiers ($color-base-lightest/$color-base-lighter)
+// the raw USWDS base-family tiers ($usx-color-base-lightest/$usx-color-base-lighter)
 // — so a dark theme can repoint each role independently without fighting
 // naming like "lightest" meaning the darkest surface.
-//   $surface-1 — white/chrome surfaces (header, nav)
-//   $surface-2 — small surfaces (footer secondary section, task-list hover,
+//   $usx-surface-1 — white/chrome surfaces (header, nav)
+//   $usx-surface-2 — small surfaces (footer secondary section, task-list hover,
 //                callouts)
-//   $surface-3 — page background (footer primary section, carousel media)
+//   $usx-surface-3 — page background (footer primary section, carousel media)
 $usx-surface-1-var: null !default;
-$surface-1: usx-var($usx-surface-1-var) !default;
+$usx-surface-1: usx-var($usx-surface-1-var) !default;
 
 $usx-surface-2-var: null !default;
-$surface-2: usx-var($usx-surface-2-var) !default;
+$usx-surface-2: usx-var($usx-surface-2-var) !default;
 
 $usx-surface-3-var: null !default;
-$surface-3: usx-var($usx-surface-3-var) !default;
+$usx-surface-3: usx-var($usx-surface-3-var) !default;
 
 // Shared border color: checkbox/radio tiles, task-list item dividers, sidenav
 // item dividers, and the default (overridable) for header/footer section
 // dividers all chain to this unless their own hook is set individually.
 $usx-color-border-var: null !default;
-$color-border: usx-var($usx-color-border-var) !default;
+$usx-color-border: usx-var($usx-color-border-var) !default;
 
 $usx-color-beta-var: null !default;
-$color-beta: usx-var($usx-color-beta-var) !default;
+$usx-color-beta: usx-var($usx-color-beta-var) !default;
 
 $usx-color-test-var: null !default;
-$color-test: usx-var($usx-color-test-var) !default;
+$usx-color-test: usx-var($usx-color-test-var) !default;
 
 $usx-color-dev-var: null !default;
-$color-dev: usx-var($usx-color-dev-var) !default;
+$usx-color-dev: usx-var($usx-color-dev-var) !default;
 
 // Text abstraction: components chain to these four roles — mirroring the
-// $surface-1/$surface-2/$surface-3 pattern above, so a dark theme can flip
+// $usx-surface-1/$usx-surface-2/$usx-surface-3 pattern above, so a dark theme can flip
 // ink colors without fighting a token literally named "light-text" when the
 // surface it sits on isn't necessarily light. Along with surface-1/2/3 and
 // the theme/state color families, these are the only tokens needed to build
 // background and text colors anywhere in USX — there is no separate raw
 // text-color primitive tier.
-//   $text          — primary body/ink color
-//   $text-muted    — real USWDS bakes several nav/stepper text colors to its
+//   $usx-text          — primary body/ink color
+//   $usx-text-muted    — real USWDS bakes several nav/stepper text colors to its
 //                    "base-dark" gray (#565c65) at build time — darker/more
-//                    pronounced than $text-subtle (nav primary links/buttons,
+//                    pronounced than $usx-text-subtle (nav primary links/buttons,
 //                    sidenav links, step-indicator pending labels & counter
 //                    numbers)
-//   $text-subtle   — secondary/muted text (secondary links, attributions,
+//   $usx-text-subtle   — secondary/muted text (secondary links, attributions,
 //                    eyebrows, etc.)
-//   $text-inverse  — text drawn on a surface that's the opposite polarity of
+//   $usx-text-inverse  — text drawn on a surface that's the opposite polarity of
 //                    the theme's main surfaces
 $usx-text-var: null !default;
-$text: usx-var($usx-text-var) !default;
+$usx-text: usx-var($usx-text-var) !default;
 
 $usx-text-muted-var: null !default;
-$text-muted: usx-var($usx-text-muted-var) !default;
+$usx-text-muted: usx-var($usx-text-muted-var) !default;
 
 $usx-text-subtle-var: null !default;
-$text-subtle: usx-var($usx-text-subtle-var) !default;
+$usx-text-subtle: usx-var($usx-text-subtle-var) !default;
 
 $usx-text-inverse-var: null !default;
-$text-inverse: usx-var($usx-text-inverse-var) !default;
-
-$color-info-text:      null !default;
-$color-warning-text:   null !default;
-$color-success-text:   null !default;
-$color-error-text:     null !default;
-$color-emergency-text: null !default;
+$usx-text-inverse: usx-var($usx-text-inverse-var) !default;
 
 // ── Color map (used by usx utilities; null entries emit no classes) ─────────
 $colors: (
-  'primary':        $color-primary,
-  'primary-dark':   $color-primary-dark,
-  'primary-darker': $color-primary-darker,
-  'secondary':      $color-secondary,
-  'accent-cool':    $color-accent-cool,
-  'accent-warm':    $color-accent-warm,
-  'base':           $color-base,
-  'info':           $color-info,
-  'warning':        $color-warning,
-  'success':        $color-success,
-  'error':          $color-error,
-  'emergency':      $color-emergency,
-  'disabled':       $color-disabled,
-  'beta':           $color-beta,
-  'dev':            $color-dev,
-  'test':           $color-test,
+  'primary':        $usx-color-primary,
+  'primary-dark':   $usx-color-primary-dark,
+  'primary-darker': $usx-color-primary-darker,
+  'secondary':      $usx-color-secondary,
+  'accent-cool':    $usx-color-accent-cool,
+  'accent-warm':    $usx-color-accent-warm,
+  'base':           $usx-color-base,
+  'info':           $usx-color-info,
+  'warning':        $usx-color-warning,
+  'success':        $usx-color-success,
+  'error':          $usx-color-error,
+  'emergency':      $usx-color-emergency,
+  'disabled':       $usx-color-disabled,
+  'beta':           $usx-color-beta,
+  'dev':            $usx-color-dev,
+  'test':           $usx-color-test,
 ) !default;
 
 $text-colors: (
-  'text':          $text,
-  'text-muted':    $text-muted,
-  'text-subtle':   $text-subtle,
-  'text-inverse':  $text-inverse,
+  'usx-text':          $usx-text,
+  'usx-text-muted':    $usx-text-muted,
+  'usx-text-subtle':   $usx-text-subtle,
+  'usx-text-inverse':  $usx-text-inverse,
 ) !default;
 
 $surface-colors: (
-  'surface-1': $surface-1,
-  'surface-2': $surface-2,
-  'surface-3': $surface-3,
+  'usx-surface-1': $usx-surface-1,
+  'usx-surface-2': $usx-surface-2,
+  'usx-surface-3': $usx-surface-3,
 ) !default;
 
 // ── Spacing ─────────────────────────────────────────────────────────────────
 $usx-spacing-xs-var: null !default;
-$spacing-xs: usx-var($usx-spacing-xs-var) !default;
+$usx-spacing-xs: usx-var($usx-spacing-xs-var) !default;
 
 $usx-spacing-sm-var: null !default;
-$spacing-sm: usx-var($usx-spacing-sm-var) !default;
+$usx-spacing-sm: usx-var($usx-spacing-sm-var) !default;
 
 $usx-spacing-md-var: null !default;
-$spacing-md: usx-var($usx-spacing-md-var) !default;
+$usx-spacing-md: usx-var($usx-spacing-md-var) !default;
 
 $usx-spacing-lg-var: null !default;
-$spacing-lg: usx-var($usx-spacing-lg-var) !default;
+$usx-spacing-lg: usx-var($usx-spacing-lg-var) !default;
 
 $usx-spacing-xl-var: null !default;
-$spacing-xl: usx-var($usx-spacing-xl-var) !default;
+$usx-spacing-xl: usx-var($usx-spacing-xl-var) !default;
 
 // ── Spacing function (compile-time only) ────────────────────────────────────
 @function units($value) {
@@ -420,47 +414,47 @@ $spacing-xl: usx-var($usx-spacing-xl-var) !default;
 // Fallback matches the family actually baked into the precompiled USWDS
 // bundle (Source Sans Pro Web) — zero drift vs. today's rendered output.
 $usx-font-family-var: null !default;
-$font-family: usx-var($usx-font-family-var,
+$usx-font-family: usx-var($usx-font-family-var,
   'Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif') !default;
 
 // Headings chain to the body font by default (most themes use one family
 // everywhere) but are their own hook, so a theme with a distinct display/
 // serif face for headings (e.g. VA.gov's Bitter) can override just this one.
 $usx-font-family-heading-var: null !default;
-$font-family-heading: usx-var($usx-font-family-heading-var, $font-family) !default;
+$usx-font-family-heading: usx-var($usx-font-family-heading-var, $usx-font-family) !default;
 
 $usx-font-size-base-var: null !default;
-$font-size-base: usx-var($usx-font-size-base-var, 1rem) !default;
+$usx-font-size-base: usx-var($usx-font-size-base-var, 1rem) !default;
 
 $usx-font-size-h1-var: null !default;
-$font-size-h1: usx-var($usx-font-size-h1-var, 2.5rem) !default;
+$usx-font-size-h1: usx-var($usx-font-size-h1-var, 2.5rem) !default;
 
 $usx-font-size-h2-var: null !default;
-$font-size-h2: usx-var($usx-font-size-h2-var, 2rem) !default;
+$usx-font-size-h2: usx-var($usx-font-size-h2-var, 2rem) !default;
 
 $usx-font-size-h3-var: null !default;
-$font-size-h3: usx-var($usx-font-size-h3-var, 1.75rem) !default;
+$usx-font-size-h3: usx-var($usx-font-size-h3-var, 1.75rem) !default;
 
 $usx-font-size-h4-var: null !default;
-$font-size-h4: usx-var($usx-font-size-h4-var, 1.5rem) !default;
+$usx-font-size-h4: usx-var($usx-font-size-h4-var, 1.5rem) !default;
 
 $usx-font-size-h5-var: null !default;
-$font-size-h5: usx-var($usx-font-size-h5-var, 1.25rem) !default;
+$usx-font-size-h5: usx-var($usx-font-size-h5-var, 1.25rem) !default;
 
 $usx-font-size-h6-var: null !default;
-$font-size-h6: usx-var($usx-font-size-h6-var, 1rem) !default;
+$usx-font-size-h6: usx-var($usx-font-size-h6-var, 1rem) !default;
 
 $usx-font-weight-regular-var: null !default;
-$font-weight-regular: usx-var($usx-font-weight-regular-var, 400) !default;
+$usx-font-weight-regular: usx-var($usx-font-weight-regular-var, 400) !default;
 
 $usx-font-weight-bold-var: null !default;
-$font-weight-bold: usx-var($usx-font-weight-bold-var, 700) !default;
+$usx-font-weight-bold: usx-var($usx-font-weight-bold-var, 700) !default;
 
 $usx-line-height-base-var: null !default;
-$line-height-base: usx-var($usx-line-height-base-var, 1.5) !default;
+$usx-line-height-base: usx-var($usx-line-height-base-var, 1.5) !default;
 
 $usx-line-height-heading-var: null !default;
-$line-height-heading: usx-var($usx-line-height-heading-var, 1.2) !default;
+$usx-line-height-heading: usx-var($usx-line-height-heading-var, 1.2) !default;
 
 // ── Typography — component overrides (hardcoded-value promotions) ──────────
 $usx-attribution-primary-font-weight-var: null !default;
@@ -501,214 +495,214 @@ $usx-task-list-link-font-size: usx-var($usx-task-list-link-font-size-var, 1.31re
 
 // ── Radius — primitives (reserved for utility classes) ──────────────────────
 $usx-radius-sm-var: null !default;
-$r-sm: usx-var($usx-radius-sm-var) !default;
+$usx-radius-sm: usx-var($usx-radius-sm-var) !default;
 
 $usx-radius-md-var: null !default;
-$r-md: usx-var($usx-radius-md-var) !default;
+$usx-radius-md: usx-var($usx-radius-md-var) !default;
 
 $usx-radius-lg-var: null !default;
-$r-lg: usx-var($usx-radius-lg-var) !default;
+$usx-radius-lg: usx-var($usx-radius-lg-var) !default;
 
 $usx-radius-xl-var: null !default;
-$r-xl: usx-var($usx-radius-xl-var) !default;
+$usx-radius-xl: usx-var($usx-radius-xl-var) !default;
 
 $usx-radius-full-var: null !default;
-$r-full: usx-var($usx-radius-full-var) !default;
+$usx-radius-full: usx-var($usx-radius-full-var) !default;
 
 // Semantic radii (DaisyUI-inspired): components pick a radius by group, so all
 // boxes, all fields, all selectors, and all square components are themed
 // independently with one variable each. Per-component "advanced" hooks
 // (--usx-<component>-radius) override the group.
 $usx-radius-box-var: null !default; // boxes: cards, code blocks, summary boxes, hero callouts, images
-$radius-box: usx-var($usx-radius-box-var) !default;
+$usx-radius-box: usx-var($usx-radius-box-var) !default;
 
 $usx-radius-field-var: null !default; // fields: buttons, inputs, selects, comboboxes, text areas
-$radius-field: usx-var($usx-radius-field-var) !default;
+$usx-radius-field: usx-var($usx-radius-field-var) !default;
 
 $usx-radius-selector-var: null !default; // selectors: checkboxes, badges/tags, small controls
-$radius-selector: usx-var($usx-radius-selector-var) !default;
+$usx-radius-selector: usx-var($usx-radius-selector-var) !default;
 
 $usx-radius-none-var: null !default; // square-by-default components: accordions, alerts
-$radius-none: usx-var($usx-radius-none-var) !default;
+$usx-radius-none: usx-var($usx-radius-none-var) !default;
 
 // ── Border ───────────────────────────────────────────────────────────────────
 $usx-border-width-sm-var: null !default;
-$border-width-sm: usx-var($usx-border-width-sm-var) !default;
+$usx-border-width-sm: usx-var($usx-border-width-sm-var) !default;
 $usx-border-width-md-var: null !default;
-$border-width-md: usx-var($usx-border-width-md-var) !default;
+$usx-border-width-md: usx-var($usx-border-width-md-var) !default;
 $usx-border-width-lg-var: null !default;
-$border-width-lg: usx-var($usx-border-width-lg-var) !default;
+$usx-border-width-lg: usx-var($usx-border-width-lg-var) !default;
 $usx-border-width-xl-var: null !default;
-$border-width-xl: usx-var($usx-border-width-xl-var) !default;
+$usx-border-width-xl: usx-var($usx-border-width-xl-var) !default;
 
 // ── Component tokens: Button ─────────────────────────────────────────────────
 $usx-radius-button-var: null !default;
-$usx-button-border-radius: usx-var($usx-radius-button-var, $radius-field) !default;
+$usx-radius-button: usx-var($usx-radius-button-var, $usx-radius-field) !default;
 $usx-button-outline-border-width-var: null !default;
-$usx-button-outline-border-width: usx-var($usx-button-outline-border-width-var, $border-width-md) !default;
+$usx-button-outline-border-width: usx-var($usx-button-outline-border-width-var, $usx-border-width-md) !default;
 $usx-button-box-shadow: null !default;
-$usx-button-primary-background-color: $color-primary !default;
-$usx-button-primary-background-color-hover: $color-primary-hover !default;
-$usx-button-primary-background-color-active: $color-primary-active !default;
-$usx-button-primary-color: null !default;
-$usx-button-primary-color-hover: null !default;
-$usx-button-primary-color-active: null !default;
-$usx-button-primary-border-color: null !default;
-$usx-button-secondary-background-color: $color-secondary !default;
-$usx-button-secondary-background-color-hover: $color-secondary-hover !default;
-$usx-button-secondary-background-color-active: $color-secondary-active !default;
-$usx-button-secondary-color: null !default;
-$usx-button-secondary-color-hover: null !default;
-$usx-button-secondary-color-active: null !default;
-$usx-button-secondary-border-color: null !default;
-$usx-button-accent-cool-background-color: $color-accent-cool !default;
-$usx-button-accent-cool-background-color-hover: $color-accent-cool-hover !default;
-$usx-button-accent-cool-background-color-active: $color-accent-cool-active !default;
-$usx-button-accent-cool-color: null !default;
-$usx-button-accent-cool-color-hover: null !default;
-$usx-button-accent-cool-color-active: null !default;
-$usx-button-accent-cool-border-color: null !default;
-$usx-button-accent-warm-background-color: $color-accent-warm !default;
-$usx-button-accent-warm-background-color-hover: $color-accent-warm-hover !default;
-$usx-button-accent-warm-background-color-active: $color-accent-warm-active !default;
-$usx-button-accent-warm-color: null !default;
-$usx-button-accent-warm-color-hover: null !default;
-$usx-button-accent-warm-color-active: null !default;
-$usx-button-accent-warm-border-color: null !default;
-$usx-button-base-background-color: $color-base !default;
-$usx-button-base-background-color-hover: $color-base-hover !default;
-$usx-button-base-background-color-active: $color-base-active !default;
-$usx-button-base-color: null !default;
-$usx-button-base-color-hover: null !default;
-$usx-button-base-color-active: null !default;
-$usx-button-base-border-color: null !default;
-$usx-button-outline-background-color: null !default;
-$usx-button-outline-background-color-hover: null !default;
-$usx-button-outline-background-color-active: null !default;
-$usx-button-outline-color: $color-primary !default;
-$usx-button-outline-color-hover: $color-primary-hover !default;
-$usx-button-outline-color-active: $color-primary-active !default;
+$usx-button-primary-bg: $usx-color-primary !default;
+$usx-button-primary-bg-hover: $usx-color-primary-hover !default;
+$usx-button-primary-bg-active: $usx-color-primary-active !default;
+$usx-button-primary-text: null !default;
+$usx-button-primary-text-hover: null !default;
+$usx-button-primary-text-active: null !default;
+$usx-button-primary-border: null !default;
+$usx-button-secondary-bg: $usx-color-secondary !default;
+$usx-button-secondary-bg-hover: $usx-color-secondary-hover !default;
+$usx-button-secondary-bg-active: $usx-color-secondary-active !default;
+$usx-button-secondary-text: null !default;
+$usx-button-secondary-text-hover: null !default;
+$usx-button-secondary-text-active: null !default;
+$usx-button-secondary-border: null !default;
+$usx-button-accent-cool-bg: $usx-color-accent-cool !default;
+$usx-button-accent-cool-bg-hover: $usx-color-accent-cool-hover !default;
+$usx-button-accent-cool-bg-active: $usx-color-accent-cool-active !default;
+$usx-button-accent-cool-text: null !default;
+$usx-button-accent-cool-text-hover: null !default;
+$usx-button-accent-cool-text-active: null !default;
+$usx-button-accent-cool-border: null !default;
+$usx-button-accent-warm-bg: $usx-color-accent-warm !default;
+$usx-button-accent-warm-bg-hover: $usx-color-accent-warm-hover !default;
+$usx-button-accent-warm-bg-active: $usx-color-accent-warm-active !default;
+$usx-button-accent-warm-text: null !default;
+$usx-button-accent-warm-text-hover: null !default;
+$usx-button-accent-warm-text-active: null !default;
+$usx-button-accent-warm-border: null !default;
+$usx-button-base-bg: $usx-color-base !default;
+$usx-button-base-bg-hover: $usx-color-base-hover !default;
+$usx-button-base-bg-active: $usx-color-base-active !default;
+$usx-button-base-text: null !default;
+$usx-button-base-text-hover: null !default;
+$usx-button-base-text-active: null !default;
+$usx-button-base-border: null !default;
+$usx-button-outline-bg: null !default;
+$usx-button-outline-bg-hover: null !default;
+$usx-button-outline-bg-active: null !default;
+$usx-button-outline-text: $usx-color-primary !default;
+$usx-button-outline-text-hover: $usx-color-primary-hover !default;
+$usx-button-outline-text-active: $usx-color-primary-active !default;
 $usx-button-outline-box-shadow: 0 0 0 $usx-button-outline-border-width currentColor inset !default;
 
 // ── Component tokens: Avatar Group (custom; defaults baked in SCSS) ─────────
 $usx-avatar-group-overlap-size: null !default;
-$usx-avatar-group-overlap-box-shadow: usx-when($color-accent-cool-lighter, 0 0 0 2px $color-accent-cool-lighter) !default;
+$usx-avatar-group-overlap-box-shadow: usx-when($usx-color-accent-cool-lighter, 0 0 0 2px $usx-color-accent-cool-lighter) !default;
 
 // ── Component tokens: Button Group ───────────────────────────────────────────
-$usx-button-group-segmented-divider-primary:     usx-when($color-primary-dark, 1px solid $color-primary-dark) !default;
-$usx-button-group-segmented-divider-secondary:   usx-when($color-secondary-darker, 1px solid $color-secondary-darker) !default;
-$usx-button-group-segmented-divider-accent-cool: usx-when($color-accent-cool-light, 1px solid $color-accent-cool-light) !default;
-$usx-button-group-segmented-divider-accent-warm: usx-when($color-accent-warm-light, 1px solid $color-accent-warm-light) !default;
-$usx-button-group-segmented-divider-base:        usx-when($color-base-darker, 1px solid $color-base-darker) !default;
+$usx-button-group-segmented-divider-primary:     usx-when($usx-color-primary-dark, 1px solid $usx-color-primary-dark) !default;
+$usx-button-group-segmented-divider-secondary:   usx-when($usx-color-secondary-darker, 1px solid $usx-color-secondary-darker) !default;
+$usx-button-group-segmented-divider-accent-cool: usx-when($usx-color-accent-cool-light, 1px solid $usx-color-accent-cool-light) !default;
+$usx-button-group-segmented-divider-accent-warm: usx-when($usx-color-accent-warm-light, 1px solid $usx-color-accent-warm-light) !default;
+$usx-button-group-segmented-divider-base:        usx-when($usx-color-base-darker, 1px solid $usx-color-base-darker) !default;
 
 // ── Component tokens: Alert ───────────────────────────────────────────────────
-$usx-alert-background-color: null !default;
-$usx-alert-text-color: null !default;
-$usx-alert-border-color: null !default;
+$usx-alert-bg: null !default;
+$usx-alert-text: null !default;
+$usx-alert-border: null !default;
 $usx-alert-border-width-var: null !default;
-$usx-alert-border-width: usx-var($usx-alert-border-width-var, $border-width-xl) !default;
+$usx-alert-border-width: usx-var($usx-alert-border-width-var, $usx-border-width-xl) !default;
 $usx-alert-radius-var: null !default;
-$usx-alert-border-radius: usx-var($usx-alert-radius-var, $radius-none) !default;
+$usx-alert-radius: usx-var($usx-alert-radius-var, $usx-radius-none) !default;
 $usx-alert-box-shadow: null !default;
-$usx-alert-info-background-color: $color-info-lighter !default;
-$usx-alert-info-text-color: null !default;
-$usx-alert-info-link-color: null !default;
-$usx-alert-info-border-color: $color-info !default;
-$usx-alert-warning-background-color: $color-warning-lighter !default;
-$usx-alert-warning-text-color: null !default;
-$usx-alert-warning-link-color: null !default;
-$usx-alert-warning-border-color: $color-warning !default;
-$usx-alert-success-background-color: $color-success-lighter !default;
-$usx-alert-success-text-color: null !default;
-$usx-alert-success-link-color: null !default;
-$usx-alert-success-border-color: $color-success !default;
-$usx-alert-error-background-color: $color-error-lighter !default;
-$usx-alert-error-text-color: null !default;
-$usx-alert-error-link-color: null !default;
-$usx-alert-error-border-color: $color-error !default;
-$usx-alert-emergency-background-color: $color-emergency !default;
-$usx-alert-emergency-text-color: $text-inverse !default;
-$usx-alert-emergency-link-color: null !default;
-$usx-alert-emergency-border-color: $color-emergency !default;
+$usx-alert-info-bg: $usx-color-info-lighter !default;
+$usx-alert-info-text: null !default;
+$usx-alert-info-link-text: null !default;
+$usx-alert-info-border: $usx-color-info !default;
+$usx-alert-warning-bg: $usx-color-warning-lighter !default;
+$usx-alert-warning-text: null !default;
+$usx-alert-warning-link-text: null !default;
+$usx-alert-warning-border: $usx-color-warning !default;
+$usx-alert-success-bg: $usx-color-success-lighter !default;
+$usx-alert-success-text: null !default;
+$usx-alert-success-link-text: null !default;
+$usx-alert-success-border: $usx-color-success !default;
+$usx-alert-error-bg: $usx-color-error-lighter !default;
+$usx-alert-error-text: null !default;
+$usx-alert-error-link-text: null !default;
+$usx-alert-error-border: $usx-color-error !default;
+$usx-alert-emergency-bg: $usx-color-emergency !default;
+$usx-alert-emergency-text: $usx-text-inverse !default;
+$usx-alert-emergency-link-text: null !default;
+$usx-alert-emergency-border: $usx-color-emergency !default;
 $usx-alert-slim-padding-block: null !default;
 $usx-alert-slim-padding-inline: null !default;
 $usx-alert-no-icon-padding-inline-start: null !default;
 $usx-alert-body-gap: null !default;
 $usx-alert-heading-font-size: null !default;
-$usx-alert-heading-font-weight: $font-weight-bold !default;
+$usx-alert-heading-font-weight: $usx-font-weight-bold !default;
 $usx-alert-heading-margin-block-end: null !default;
 $usx-alert-text-font-size: null !default;
 $usx-alert-text-line-height: null !default;
 
 // ── Component tokens: Hero (custom; defaults baked in _hero.scss) ───────────
-// Neutral dark box regardless of theme polarity: $text flips to a light
+// Neutral dark box regardless of theme polarity: $usx-text flips to a light
 // value under dark presets (Midnight/Carbon), so Hero can't chain to it the
-// way Header/Footer do. Defaults to $color-base-darkest instead — the same
-// theme-invariant neutral used by Tooltip — paired with $text-inverse for
+// way Header/Footer do. Defaults to $usx-color-base-darkest instead — the same
+// theme-invariant neutral used by Tooltip — paired with $usx-text-inverse for
 // legible light text on it.
 $usx-hero-min-height:        null !default;
-$usx-hero-bg-color:          $color-base-darkest !default;
-$usx-hero-text-color-var:    null !default;
-$usx-hero-text-color:        usx-var($usx-hero-text-color-var, #fff) !default;
-$usx-hero-overlay-color:     null !default;
+$usx-hero-bg:          $usx-color-base-darkest !default;
+$usx-hero-text-var:    null !default;
+$usx-hero-text:        usx-var($usx-hero-text-var, #fff) !default;
+$usx-hero-overlay-bg:     null !default;
 $usx-hero-padding-block:     null !default;
-$usx-hero-padding-inline:    $spacing-lg !default;
+$usx-hero-padding-inline:    $usx-spacing-lg !default;
 $usx-hero-callout-bg:        null !default;
 $usx-hero-callout-max-width: null !default;
-$usx-hero-callout-padding:   $spacing-xl !default;
+$usx-hero-callout-padding:   $usx-spacing-xl !default;
 $usx-hero-callout-radius-var: null !default;
-$usx-hero-callout-radius:    usx-var($usx-hero-callout-radius-var, $radius-box) !default;
+$usx-hero-callout-radius:    usx-var($usx-hero-callout-radius-var, $usx-radius-box) !default;
 $usx-hero-heading-size:      null !default;
-$usx-hero-heading-weight:    $font-weight-bold !default;
+$usx-hero-heading-font-weight:    $usx-font-weight-bold !default;
 $usx-hero-alt-size:          null !default;
-$usx-hero-alt-color:         $color-accent-cool !default;
+$usx-hero-alt-text:         $usx-color-accent-cool !default;
 $usx-hero-paragraph-size:    null !default;
 
 // ── Component tokens: Link ─────────────────────────────────────────────
-$usx-link-color-var: null !default;
-$usx-link-color: usx-var($usx-link-color-var, $color-primary) !default;
-$usx-link-hover-color: $color-primary-hover !default;
-$usx-link-active-color: $color-primary-active !default;
-$usx-link-visited-color-var: null !default;
-$usx-link-visited-color: usx-var($usx-link-visited-color-var) !default;
+$usx-link-text-var: null !default;
+$usx-link-text: usx-var($usx-link-text-var, $usx-color-primary) !default;
+$usx-link-text-hover: $usx-color-primary-hover !default;
+$usx-link-text-active: $usx-color-primary-active !default;
+$usx-link-text-visited-var: null !default;
+$usx-link-text-visited: usx-var($usx-link-text-visited-var) !default;
 // On a dark background (`.usa-dark-background`), USWDS swaps link/visited
 // color to a light neutral matching the surrounding text, instead of the
 // (illegible) blue/purple defaults above.
-$usx-link-color-dark-var: null !default;
-$usx-link-color-dark: usx-var($usx-link-color-dark-var) !default;
-$usx-link-visited-color-dark-var: null !default;
-$usx-link-visited-color-dark: usx-var($usx-link-visited-color-dark-var) !default;
+$usx-link-text-dark-var: null !default;
+$usx-link-text-dark: usx-var($usx-link-text-dark-var) !default;
+$usx-link-text-visited-dark-var: null !default;
+$usx-link-text-visited-dark: usx-var($usx-link-text-visited-dark-var) !default;
 
 // ── Component tokens: Site Alert ─────────────────────────────────────────────
-$usx-site-alert-default-bg-color: null !default;
-$usx-site-alert-default-border-color: null !default;
-$usx-site-alert-emergency-bg-color: null !default;
-$usx-site-alert-maintenance-bg-color: null !default;
+$usx-site-alert-default-bg: null !default;
+$usx-site-alert-default-border: null !default;
+$usx-site-alert-emergency-bg: null !default;
+$usx-site-alert-maintenance-bg: null !default;
 
 // ── Component tokens: Summary Box ────────────────────────────────────────────
 // Real USWDS's `.usa-summary-box` ships an accurate light "info" tint
 // (background "info-lighter"/cyan-5, border "info-light"/cyan-20), which
 // matches our own color-info-lighter/color-info-light primitives exactly —
-// chain to those (same pattern as $usx-alert-info-background-color below)
+// chain to those (same pattern as $usx-alert-info-bg below)
 // so a theme that repoints the info family carries the summary box along
 // with it. Text/link colors match existing primitives too, so they chain
 // to those instead.
 $usx-summary-box-border-color-var: null !default;
-$usx-summary-box-border-color: usx-var($usx-summary-box-border-color-var, $color-info-light) !default;
-$usx-summary-box-border: usx-when($usx-summary-box-border-color, $border-width-sm solid $usx-summary-box-border-color) !default;
+$usx-summary-box-border-color: usx-var($usx-summary-box-border-color-var, $usx-color-info-light) !default;
+$usx-summary-box-border: usx-when($usx-summary-box-border-color, $usx-border-width-sm solid $usx-summary-box-border-color) !default;
 $usx-summary-box-radius-var: null !default;
-$usx-summary-box-border-radius: usx-var($usx-summary-box-radius-var, $radius-box) !default;
+$usx-summary-box-radius: usx-var($usx-summary-box-radius-var, $usx-radius-box) !default;
 $usx-summary-box-padding: null !default;
-$usx-summary-box-background-color-var: null !default;
-$usx-summary-box-background-color: usx-var($usx-summary-box-background-color-var, $color-info-lighter) !default;
-$usx-summary-box-text-color-var: null !default;
-$usx-summary-box-text-color: usx-var($usx-summary-box-text-color-var, $text) !default;
-$usx-summary-box-link-color-var: null !default;
-$usx-summary-box-link-color: usx-var($usx-summary-box-link-color-var, $color-primary) !default;
-$usx-summary-box-link-hover-color-var: null !default;
-$usx-summary-box-link-hover-color: usx-var($usx-summary-box-link-hover-color-var, $color-primary-dark) !default;
-$usx-summary-box-link-visited-color-var: null !default;
-$usx-summary-box-link-visited-color: usx-var($usx-summary-box-link-visited-color-var) !default;
+$usx-summary-box-bg-var: null !default;
+$usx-summary-box-bg: usx-var($usx-summary-box-bg-var, $usx-color-info-lighter) !default;
+$usx-summary-box-text-var: null !default;
+$usx-summary-box-text: usx-var($usx-summary-box-text-var, $usx-text) !default;
+$usx-summary-box-link-text-var: null !default;
+$usx-summary-box-link-text: usx-var($usx-summary-box-link-text-var, $usx-color-primary) !default;
+$usx-summary-box-link-text-hover-var: null !default;
+$usx-summary-box-link-text-hover: usx-var($usx-summary-box-link-text-hover-var, $usx-color-primary-dark) !default;
+$usx-summary-box-link-text-visited-var: null !default;
+$usx-summary-box-link-text-visited: usx-var($usx-summary-box-link-text-visited-var) !default;
 
 // ── Component tokens: Toggle ───────────────────────────────────────────
 /*
@@ -719,46 +713,46 @@ Active-state defaults are baked in _toggle.scss.
 */
 
 $usx-border-width-inputs-var: null !default;
-$usx-border-width-inputs: usx-var($usx-border-width-inputs-var, $border-width-sm) !default;
+$usx-border-width-inputs: usx-var($usx-border-width-inputs-var, $usx-border-width-sm) !default;
 
 // ── Component tokens: Input / Textarea ───────────────────────────────────────
 $usx-input-radius-var: null !default;
-$usx-input-border-radius: usx-var($usx-input-radius-var, $radius-field) !default;
-$usx-input-background-color: null !default;
-$usx-input-text-color: null !default;
-$usx-input-border-color: null !default;
+$usx-input-radius: usx-var($usx-input-radius-var, $usx-radius-field) !default;
+$usx-input-bg: null !default;
+$usx-input-text: null !default;
+$usx-input-border: null !default;
 $usx-input-padding: null !default;
-$usx-input-error-border-width: $border-width-lg !default;
-$usx-input-error-border-color: $color-error !default;
+$usx-input-error-border-width: $usx-border-width-lg !default;
+$usx-input-error-border: $usx-color-error !default;
 $usx-input-error-border-style: null !default;
 $usx-input-error-padding-top: null !default;
 $usx-input-error-padding-bottom: null !default;
-$usx-input-success-border-width: $border-width-lg !default;
-$usx-input-success-border-color: $color-success !default;
+$usx-input-success-border-width: $usx-border-width-lg !default;
+$usx-input-success-border: $usx-color-success !default;
 $usx-input-success-border-style: null !default;
 $usx-input-success-padding-top: null !default;
 $usx-input-success-padding-bottom: null !default;
 $usx-input-focus-outline: null !default;
 $usx-input-focus-outline-offset: null !default;
 $usx-textarea-radius-var: null !default;
-$usx-textarea-border-radius: usx-var($usx-textarea-radius-var, $radius-field) !default;
-$usx-textarea-background-color: null !default;
-$usx-textarea-text-color: null !default;
-$usx-textarea-border-color: null !default;
+$usx-textarea-radius: usx-var($usx-textarea-radius-var, $usx-radius-field) !default;
+$usx-textarea-bg: null !default;
+$usx-textarea-text: null !default;
+$usx-textarea-border: null !default;
 $usx-textarea-padding: null !default;
 
 // ── Component tokens: Switch ──────────────────────────────────────────────
 // Default border width matches the width of checkboxes and radio buttons
 $usx-switch-border-width-var: null !default;
 $usx-switch-border-width: usx-var($usx-switch-border-width-var, 2px) !default;
-$usx-switch-off-color-var: null !default;
-$usx-switch-off-color: usx-var($usx-switch-off-color-var, $text) !default;
-$usx-switch-track-color-var: null !default;
-$usx-switch-track-color: usx-var($usx-switch-track-color-var, $surface-2) !default;
+$usx-switch-border-off-var: null !default;
+$usx-switch-border-off: usx-var($usx-switch-border-off-var, $usx-text) !default;
+$usx-switch-track-bg-var: null !default;
+$usx-switch-track-bg: usx-var($usx-switch-track-bg-var, $usx-surface-2) !default;
 
 // ── Component tokens: Form group ─────────────────────────────────────────────
-$usx-form-group-error-color:            $color-error        !default;
-$usx-form-group-error-border-thickness: $border-width-lg !default;
+$usx-form-group-error-text:            $usx-color-error        !default;
+$usx-form-group-error-border-width: $usx-border-width-lg !default;
 
 // ── Component tokens: Accordion ──────────────────────────────────────────────
 // Chain to surface-2/surface-1 (not the raw color-base-lighter/color-light
@@ -772,14 +766,14 @@ $usx-form-group-error-border-thickness: $border-width-lg !default;
 // tokens use a bare `-text` suffix — "color" is redundant once the role
 // (bg/text) is already in the name.
 $usx-accordion-bg-var: null !default;
-$usx-accordion-bg: usx-var($usx-accordion-bg-var, $surface-2) !default;
+$usx-accordion-bg: usx-var($usx-accordion-bg-var, $usx-surface-2) !default;
 
 $usx-accordion-content-bg-var: null !default;
-$usx-accordion-content-bg: usx-var($usx-accordion-content-bg-var, $surface-1) !default;
+$usx-accordion-content-bg: usx-var($usx-accordion-content-bg-var, $usx-surface-1) !default;
 
 // Real USWDS CSS bakes button/content text as a fixed dark "ink" color at
 // build time (computed against USWDS's own light default background), so it
-// never follows our runtime background overrides above. Chaining to $text
+// never follows our runtime background overrides above. Chaining to $usx-text
 // (rather than leaving this null) keeps Default-theme output visually
 // identical (both resolve to #1b1b1b) while automatically flipping to
 // light text on dark presets (Carbon, Midnight) with zero preset-specific
@@ -791,73 +785,73 @@ $usx-accordion-content-bg: usx-var($usx-accordion-content-bg-var, $surface-1) !d
 //
 // CONVENTION: any component background token that tracks surface-1/
 // surface-2/surface-3 should pair with a `$usx-<component>-text`
-// token following this same `usx-var($hook, $text)` pattern — don't rely on
+// token following this same `usx-var($hook, $usx-text)` pattern — don't rely on
 // cascade, since USWDS's compiled CSS often sets its own explicit (frozen)
 // color.
 $usx-accordion-text-var: null !default;
-$usx-accordion-text: usx-var($usx-accordion-text-var, $text) !default;
+$usx-accordion-text: usx-var($usx-accordion-text-var, $usx-text) !default;
 
 $usx-accordion-content-text-var: null !default;
-$usx-accordion-content-text: usx-var($usx-accordion-content-text-var, $text) !default;
+$usx-accordion-content-text: usx-var($usx-accordion-content-text-var, $usx-text) !default;
 
 $usx-accordion-radius-var: null !default;
-$usx-accordion-border-radius: usx-var($usx-accordion-radius-var, $radius-none) !default;
+$usx-accordion-radius: usx-var($usx-accordion-radius-var, $usx-radius-none) !default;
 
 $usx-accordion-border-width-var: null !default;
-$usx-accordion-border-width: usx-var($usx-accordion-border-width-var, $border-width-lg) !default;
+$usx-accordion-border-width: usx-var($usx-accordion-border-width-var, $usx-border-width-lg) !default;
 
 // ── Component tokens: Image (custom modifier; default baked in _image.scss) ──
 $usx-image-object-fit-type: null !default;
 $usx-image-radius-var: null !default;
-$usx-image-rounded-border-radius: usx-var($usx-image-radius-var, $radius-box) !default;
+$usx-image-radius: usx-var($usx-image-radius-var, $usx-radius-box) !default;
 
 // ── Component tokens: Code (custom; default baked in _code.scss) ─────────────
 $usx-code-radius-var: null !default;
-$usx-code-border-radius: usx-var($usx-code-radius-var, $radius-box) !default;
+$usx-code-radius: usx-var($usx-code-radius-var, $usx-radius-box) !default;
 
 // ── Component tokens: Tag ─────────────────────────────────────────────────────
 $usx-tag-radius-var: null !default;
-$usx-tag-border-radius: usx-var($usx-tag-radius-var, $radius-selector) !default;
+$usx-tag-radius: usx-var($usx-tag-radius-var, $usx-radius-selector) !default;
 
 // ── Component tokens: Checkbox & Radio (Selector) ─────────────────────────────
-$usx-checkbox-radius-var: null !default;
-$usx-checkbox-border-radius: usx-var($usx-checkbox-radius-var, $radius-selector) !default;
-$usx-tile-radius-var: null !default;
-$usx-tile-border-radius: usx-var($usx-tile-radius-var, $radius-selector) !default;
-$usx-tile-border-color-var: null !default;
-$usx-tile-border-color: usx-var($usx-tile-border-color-var, $color-border) !default;
-$usx-tile-border-width-var: null !default;
-$usx-tile-border-width: usx-var($usx-tile-border-width-var, $border-width-sm) !default;
+$usx-checkable-radius-var: null !default;
+$usx-checkable-radius: usx-var($usx-checkable-radius-var, $usx-radius-selector) !default;
+$usx-checkable-tile-radius-var: null !default;
+$usx-checkable-tile-radius: usx-var($usx-checkable-tile-radius-var, $usx-radius-selector) !default;
+$usx-checkable-tile-border-var: null !default;
+$usx-checkable-tile-border: usx-var($usx-checkable-tile-border-var, $usx-color-border) !default;
+$usx-checkable-tile-border-width-var: null !default;
+$usx-checkable-tile-border-width: usx-var($usx-checkable-tile-border-width-var, $usx-border-width-sm) !default;
 
 // "Selector" covers both checkbox and radio unchecked ::before styling.
 // Background chains to surface-1 (white, matching USWDS's default input
-// background); border chains to the shared $color-border token (same as
+// background); border chains to the shared $usx-color-border token (same as
 // the tile variants above).
-$usx-selector-background-color-var: null !default;
-$usx-selector-background-color: usx-var($usx-selector-background-color-var, $surface-1) !default;
+$usx-checkable-bg-var: null !default;
+$usx-checkable-bg: usx-var($usx-checkable-bg-var, $usx-surface-1) !default;
 
-$usx-selector-border-color-var: null !default;
-$usx-selector-border-color: usx-var($usx-selector-border-color-var, $text) !default;
+$usx-checkable-border-var: null !default;
+$usx-checkable-border: usx-var($usx-checkable-border-var, $usx-text) !default;
 
 // ── Component tokens: Banner ─────────────────────────────────────────────────
 // Real USWDS's background is actually "base-lightest" (surface-3's hex),
 // but banner groups with table headers/accordion/callouts/footer-primary
 // under surface-2 for a consistent shared tone — see the surface-1/2/3
-// mapping note in theme-manifest.js. Text chains to $text (USWDS
-// auto-contrasts to dark ink against the light default background; $text
+// mapping note in theme-manifest.js. Text chains to $usx-text (USWDS
+// auto-contrasts to dark ink against the light default background; $usx-text
 // gives the same result while staying overridable/theme-aware). The
 // "Here's how you know" action link/chevron follow the shared link color.
-$usx-banner-background-color-var: null !default;
-$usx-banner-background-color: usx-var($usx-banner-background-color-var, $surface-2) !default;
+$usx-banner-bg-var: null !default;
+$usx-banner-bg: usx-var($usx-banner-bg-var, $usx-surface-2) !default;
 
-$usx-banner-text-color-var: null !default;
-$usx-banner-text-color: usx-var($usx-banner-text-color-var, $text) !default;
+$usx-banner-text-var: null !default;
+$usx-banner-text: usx-var($usx-banner-text-var, $usx-text) !default;
 
-$usx-banner-action-color-var: null !default;
-$usx-banner-action-color: usx-var($usx-banner-action-color-var, $usx-link-color) !default;
+$usx-banner-button-text-var: null !default;
+$usx-banner-button-text: usx-var($usx-banner-button-text-var, $usx-link-text) !default;
 
-$usx-banner-after-color-var: null !default;
-$usx-banner-after-color: usx-var($usx-banner-after-color-var) !default;
+$usx-banner-chevron-text-var: null !default;
+$usx-banner-chevron-text: usx-var($usx-banner-chevron-text-var) !default;
 
 // ── Component tokens: Header / Nav ───────────────────────────────────────────
 // USWDS itself doesn't style `.usa-header`/`.usa-nav` with an explicit
@@ -865,61 +859,61 @@ $usx-banner-after-color: usx-var($usx-banner-after-color-var) !default;
 // surface/ink, so these two default to empty (see theme-manifest.js, which
 // defaults the hooks below to transparent) rather than forcing a surface
 // color on unthemed output; the surface-3 fallback only kicks in once a
-// consumer/preset opts into a themed shell. $usx-header-text-color chains
-// to $text by default (matching the ambient ink color) but, unlike the
+// consumer/preset opts into a themed shell. $usx-header-text chains
+// to $usx-text by default (matching the ambient ink color) but, unlike the
 // other tokens here, is its own hook — so a theme with a dark/colored
-// header (surface-3) can flip it to $text-inverse independently of body text.
-$usx-header-background-color-var: null !default;
-$usx-header-background-color:     usx-var($usx-header-background-color-var, $surface-3) !default;
-$usx-header-text-color-var: null !default;
-$usx-header-text-color: usx-var($usx-header-text-color-var, $text) !default;
-$usx-header-border-color-var: null !default;
-$usx-header-border-color: usx-var($usx-header-border-color-var, $color-border) !default;
+// header (surface-3) can flip it to $usx-text-inverse independently of body text.
+$usx-header-bg-var: null !default;
+$usx-header-bg:     usx-var($usx-header-bg-var, $usx-surface-3) !default;
+$usx-header-text-var: null !default;
+$usx-header-text: usx-var($usx-header-text-var, $usx-text) !default;
+$usx-header-border-var: null !default;
+$usx-header-border: usx-var($usx-header-border-var, $usx-color-border) !default;
 $usx-header-border-bottom:          null                                           !default;
-$usx-header-border-top:             usx-when($usx-header-border-color, $border-width-sm inset $usx-header-border-color) !default;
+$usx-header-border-top:             usx-when($usx-header-border, $usx-border-width-sm inset $usx-header-border) !default;
 // Own hooks (not just a Sass fallback) so a theme whose header surface is
 // drastically different from the rest of the document (e.g. a dark/branded
 // header) can override these independently of the ambient text-subtle role.
-$usx-header-secondary-link-color-var: null !default;
-$usx-header-secondary-link-color:   usx-var($usx-header-secondary-link-color-var, $text-subtle) !default;
-$usx-header-secondary-link-hover-var: null !default;
-$usx-header-secondary-link-hover:   usx-var($usx-header-secondary-link-hover-var, $color-primary) !default;
-$usx-header-menu-btn-background-color: $color-primary                              !default;
-$usx-header-menu-btn-background-color-hover: $color-primary-dark                    !default;
-$usx-header-nav-border-top-color-var: null !default;
-$usx-header-nav-border-top-color: usx-var($usx-header-nav-border-top-color-var, $color-border) !default;
-$usx-header-nav-border-bottom-color-var: null !default;
-$usx-header-nav-border-bottom-color: usx-var($usx-header-nav-border-bottom-color-var, $color-border) !default;
-$usx-nav-border-bottom:             usx-when($usx-header-nav-border-bottom-color, 2px solid $usx-header-nav-border-bottom-color) !default;
-$usx-nav-border-top:                usx-when($usx-header-nav-border-top-color, $border-width-sm solid $usx-header-nav-border-top-color) !default;
-$usx-nav-link-color-var: null !default;
-$usx-nav-link-color:                usx-var($usx-nav-link-color-var, $text-muted) !default;
-$usx-nav-link-color-mobile-var: null !default;
-$usx-nav-link-color-mobile:         usx-var($usx-nav-link-color-mobile-var, $usx-nav-link-color) !default;
+$usx-header-secondary-link-text-var: null !default;
+$usx-header-secondary-link-text:   usx-var($usx-header-secondary-link-text-var, $usx-text-subtle) !default;
+$usx-header-secondary-link-text-hover-var: null !default;
+$usx-header-secondary-link-text-hover:   usx-var($usx-header-secondary-link-text-hover-var, $usx-color-primary) !default;
+$usx-header-menu-btn-bg: $usx-color-primary                              !default;
+$usx-header-menu-btn-bg-hover: $usx-color-primary-dark                    !default;
+$usx-header-nav-top-border-var: null !default;
+$usx-header-nav-top-border: usx-var($usx-header-nav-top-border-var, $usx-color-border) !default;
+$usx-header-nav-bottom-border-var: null !default;
+$usx-header-nav-bottom-border: usx-var($usx-header-nav-bottom-border-var, $usx-color-border) !default;
+$usx-header-nav-border-bottom:             usx-when($usx-header-nav-bottom-border, 2px solid $usx-header-nav-bottom-border) !default;
+$usx-header-nav-border-top:                usx-when($usx-header-nav-top-border, $usx-border-width-sm solid $usx-header-nav-top-border) !default;
+$usx-header-nav-link-text-var: null !default;
+$usx-header-nav-link-text:                usx-var($usx-header-nav-link-text-var, $usx-text-muted) !default;
+$usx-header-nav-link-text-mobile-var: null !default;
+$usx-header-nav-link-text-mobile:         usx-var($usx-header-nav-link-text-mobile-var, $usx-header-nav-link-text) !default;
 // USWDS's own dropdown/megamenu panel IS dark navy with white links by
 // default (verified in compiled CSS) \u2014 these two already matched reality.
-$usx-nav-link-bg-color:             $color-primary-darker                          !default;
-$usx-nav-submenu-bg-color:          $usx-nav-link-bg-color                         !default;
+$usx-header-nav-link-bg:             $usx-color-primary-darker                          !default;
+$usx-header-nav-submenu-bg:          $usx-header-nav-link-bg                         !default;
 // USWDS doesn't change nav-link text color on hover (only adds a colored
 // underline indicator, handled separately in _header.scss) \u2014 off by default.
-$usx-nav-link-hover-color-var: null !default;
-$usx-nav-link-hover-color:          usx-var($usx-nav-link-hover-color-var, $color-primary) !default;
-$usx-nav-link-hover-color-mobile-var: null !default;
-$usx-nav-link-hover-color-mobile:   usx-var($usx-nav-link-hover-color-mobile-var, $usx-nav-link-hover-color) !default;
-// Same reasoning as $usx-header-background-color above: empty by default,
+$usx-header-nav-link-text-hover-var: null !default;
+$usx-header-nav-link-text-hover:          usx-var($usx-header-nav-link-text-hover-var, $usx-color-primary) !default;
+$usx-header-nav-link-text-hover-mobile-var: null !default;
+$usx-header-nav-link-text-hover-mobile:   usx-var($usx-header-nav-link-text-hover-mobile-var, $usx-header-nav-link-text-hover) !default;
+// Same reasoning as $usx-header-bg above: empty by default,
 // surface-3 once a theme opts in.
-$usx-nav-background-color-var: null !default;
-$usx-nav-background-color:     usx-var($usx-nav-background-color-var, $surface-3) !default;
+$usx-header-nav-bg-var: null !default;
+$usx-header-nav-bg:     usx-var($usx-header-nav-bg-var, $usx-surface-3) !default;
 // Independent mobile override — the off-canvas drawer is a visually distinct
 // surface from the desktop nav bar, so themes may want a different tone at
 // each breakpoint. Chains to the desktop value by default (no change unless
 // a theme opts in).
-$usx-nav-background-color-mobile-var: null !default;
-$usx-nav-background-color-mobile: usx-var($usx-nav-background-color-mobile-var, $usx-nav-background-color) !default;
+$usx-header-nav-bg-mobile-var: null !default;
+$usx-header-nav-bg-mobile: usx-var($usx-header-nav-bg-mobile-var, $usx-header-nav-bg) !default;
 // Vendor hardcodes #f0f0f0 (mobile-only) for nav link/button hover — chain to
 // surface-2 so it stays a visibly distinct tone from the surface-3 drawer.
-$usx-nav-link-hover-bg-color-var: null !default;
-$usx-nav-link-hover-bg-color:  usx-var($usx-nav-link-hover-bg-color-var, $surface-2) !default;
+$usx-header-nav-link-bg-hover-var: null !default;
+$usx-header-nav-link-bg-hover:  usx-var($usx-header-nav-link-bg-hover-var, $usx-surface-2) !default;
 // null = invert only when a header/footer background is configured;
 // true/false forces it on/off.
 $usx-header-invert-logo:            null                                           !default;
@@ -927,97 +921,97 @@ $usx-header-invert-logo:            null                                        
 // ── Component tokens: Footer ────────────────────────────────────────────────
 // Same rationale as Header/Nav above: USWDS's real footer sections use
 // light-gray surfaces with ordinary ink/primary-link colors, not a fixed
-// dark brand color. Chaining to the shared $surface-2/$surface-3/$text
+// dark brand color. Chaining to the shared $usx-surface-2/$usx-surface-3/$usx-text
 // roles (rather than the raw USWDS base-family tiers) keeps Default
 // USWDS-accurate while still flipping dark under Carbon/Midnight.
-$usx-footer-background-color-var: null !default;
-$usx-footer-background-color:     usx-var($usx-footer-background-color-var)        !default;
-// Own hooks (like usx-header-text-color) so a theme whose footer surface is
+$usx-footer-bg-var: null !default;
+$usx-footer-bg:     usx-var($usx-footer-bg-var)        !default;
+// Own hooks (like usx-header-text) so a theme whose footer surface is
 // drastically different (e.g. NASA's black secondary section, chained from
 // surface-3) can override these independently of the ambient text role.
-$usx-footer-text-color-var: null !default;
-$usx-footer-text-color:           usx-var($usx-footer-text-color-var, $text)       !default;
-$usx-footer-link-color-var: null !default;
-$usx-footer-link-color:           usx-var($usx-footer-link-color-var, $color-primary) !default;
-$usx-footer-link-hover-color-var: null !default;
-$usx-footer-link-hover-color:     usx-var($usx-footer-link-hover-color-var, $color-primary-dark) !default;
-$usx-footer-secondary-link-color-var: null !default;
-$usx-footer-secondary-link-color:           usx-var($usx-footer-secondary-link-color-var, $color-primary) !default;
-$usx-footer-secondary-link-hover-color-var: null !default;
-$usx-footer-secondary-link-hover-color:     usx-var($usx-footer-secondary-link-hover-color-var, $color-primary-dark) !default;
-$usx-footer-heading-color-var: null !default;
-$usx-footer-heading-color:        usx-var($usx-footer-heading-color-var, $text)    !default;
+$usx-footer-text-var: null !default;
+$usx-footer-text:           usx-var($usx-footer-text-var, $usx-text)       !default;
+$usx-footer-link-text-var: null !default;
+$usx-footer-link-text:           usx-var($usx-footer-link-text-var, $usx-color-primary) !default;
+$usx-footer-link-text-hover-var: null !default;
+$usx-footer-link-text-hover:     usx-var($usx-footer-link-text-hover-var, $usx-color-primary-dark) !default;
+$usx-footer-secondary-link-text-var: null !default;
+$usx-footer-secondary-link-text:           usx-var($usx-footer-secondary-link-text-var, $usx-color-primary) !default;
+$usx-footer-secondary-link-text-hover-var: null !default;
+$usx-footer-secondary-link-text-hover:     usx-var($usx-footer-secondary-link-text-hover-var, $usx-color-primary-dark) !default;
+$usx-footer-heading-text-var: null !default;
+$usx-footer-heading-text:        usx-var($usx-footer-heading-text-var, $usx-text)    !default;
 // Independent override for the secondary-section headings (logo/contact) —
-// that section sits on $usx-footer-secondary-bg-color (chained from
+// that section sits on $usx-footer-secondary-bg (chained from
 // surface-3), a visually distinct surface from the primary section's
 // surface-2 that the nav-column/sign-up headings above sit on. Chains to
 // the primary heading color by default.
-$usx-footer-heading-color-secondary-var: null !default;
-$usx-footer-heading-color-secondary: usx-var($usx-footer-heading-color-secondary-var, $usx-footer-heading-color) !default;
+$usx-footer-heading-secondary-text-var: null !default;
+$usx-footer-heading-secondary-text: usx-var($usx-footer-heading-secondary-text-var, $usx-footer-heading-text) !default;
 // Primary/secondary sections intentionally use opposite surface tiers from
 // the header/table-grouped-rows/footer-secondary-border grouping — see the
 // surface-1/2/3 mapping note in theme-manifest.js.
-$usx-footer-secondary-bg-color:   $surface-3                                         !default;
-$usx-footer-primary-bg-color:     $surface-2                                         !default;
+$usx-footer-secondary-bg:   $usx-surface-3                                         !default;
+$usx-footer-primary-bg:     $usx-surface-2                                         !default;
 // USWDS's own social icons carry their own brand colors by default \u2014 no
 // filter needed unless a consumer explicitly wants a monochrome treatment.
 $usx-footer-social-icon-filter-var: null !default;
 $usx-footer-social-icon-filter:   usx-var($usx-footer-social-icon-filter-var)        !default;
-$usx-footer-sign-up-button-color: $color-primary                                    !default;
-$usx-footer-social-hover-color-var: null !default;
-$usx-footer-social-hover-color:   usx-var($usx-footer-social-hover-color-var)        !default;
-$usx-footer-social-radius     :   $usx-button-border-radius                         !default;
+$usx-footer-sign-up-button-bg: $usx-color-primary                                    !default;
+$usx-footer-social-bg-hover-var: null !default;
+$usx-footer-social-bg-hover:   usx-var($usx-footer-social-bg-hover-var)        !default;
+$usx-footer-social-radius     :   $usx-radius-button                         !default;
 $usx-footer-invert-logo:          null                                              !default;
 // Using border shrinks the icon on hover, using outline does not. Both are included as options.
 // Neither are required.
-// E.g. 2px solid $color-primary;
+// E.g. 2px solid $usx-color-primary;
 $usx-footer-social-hover-border:  null                                              !default;
 $usx-footer-social-hover-outline:  null                                             !default;
 // Footer borders
-$usx-footer-border-color-var: null !default;
-$usx-footer-border-color: usx-var($usx-footer-border-color-var, $color-border) !default;
-$usx-footer-primary-section-border-color-var: null !default;
-$usx-footer-primary-section-border-color: usx-var($usx-footer-primary-section-border-color-var, $color-border) !default;
-$usx-footer-secondary-section-border-color-var: null !default;
-$usx-footer-secondary-section-border-color: usx-var($usx-footer-secondary-section-border-color-var, $color-border) !default;
-$usx-footer-border-top:          usx-when($usx-footer-border-color, $border-width-sm solid $usx-footer-border-color) !default;
-$usx-footer-primary-section-border-top:   usx-when($usx-footer-primary-section-border-color, $border-width-sm solid $usx-footer-primary-section-border-color) !default;
-$usx-footer-secondary-section-border-top: usx-when($usx-footer-secondary-section-border-color, $border-width-sm solid $usx-footer-secondary-section-border-color) !default;
+$usx-footer-border-var: null !default;
+$usx-footer-border: usx-var($usx-footer-border-var, $usx-color-border) !default;
+$usx-footer-primary-section-border-var: null !default;
+$usx-footer-primary-section-border: usx-var($usx-footer-primary-section-border-var, $usx-color-border) !default;
+$usx-footer-secondary-section-border-var: null !default;
+$usx-footer-secondary-section-border: usx-var($usx-footer-secondary-section-border-var, $usx-color-border) !default;
+$usx-footer-border-top:          usx-when($usx-footer-border, $usx-border-width-sm solid $usx-footer-border) !default;
+$usx-footer-primary-section-border-top:   usx-when($usx-footer-primary-section-border, $usx-border-width-sm solid $usx-footer-primary-section-border) !default;
+$usx-footer-secondary-section-border-top: usx-when($usx-footer-secondary-section-border, $usx-border-width-sm solid $usx-footer-secondary-section-border) !default;
 
 
 // ── Component tokens: Carousel (custom; defaults baked in _carousel.scss) ───
-$usx-carousel-dot-color-var: null !default;
-$usx-carousel-dot-color: usx-var($usx-carousel-dot-color-var) !default;
+$usx-carousel-dot-bg-var: null !default;
+$usx-carousel-dot-bg: usx-var($usx-carousel-dot-bg-var) !default;
 
-$usx-carousel-dot-color-hover-var: null !default;
-$usx-carousel-dot-color-hover: usx-var($usx-carousel-dot-color-hover-var) !default;
+$usx-carousel-dot-bg-hover-var: null !default;
+$usx-carousel-dot-bg-hover: usx-var($usx-carousel-dot-bg-hover-var) !default;
 
-$usx-carousel-dot-color-active-var: null !default;
-$usx-carousel-dot-color-active: usx-var($usx-carousel-dot-color-active-var) !default;
+$usx-carousel-dot-bg-active-var: null !default;
+$usx-carousel-dot-bg-active: usx-var($usx-carousel-dot-bg-active-var) !default;
 
 $usx-carousel-dot-gap: null !default;
 
-$usx-carousel-focus-outline-color-var: null !default;
-$usx-carousel-focus-outline-color: usx-var($usx-carousel-focus-outline-color-var) !default;
+$usx-carousel-focus-var: null !default;
+$usx-carousel-focus: usx-var($usx-carousel-focus-var) !default;
 
-$usx-carousel-card-media-background-color: $surface-3 !default;
+$usx-carousel-card-media-bg: $usx-surface-3 !default;
 
 // ── Component tokens: SideNav ─────────────────────────────────────────────
-$usx-sidenav-current-color:       $color-primary                     !default;
+$usx-sidenav-current:       $usx-color-primary                     !default;
 // USWDS's nav-list mixin sets non-current links to a fixed "base-dark" gray
 // at build time, which is low-contrast once a preset darkens the ambient
-// surface. Chain to $text-muted (same "base-dark" role used by nav-link and
+// surface. Chain to $usx-text-muted (same "base-dark" role used by nav-link and
 // step-indicator labels below) so it tracks the theme instead of staying
 // frozen.
-$usx-sidenav-link-color-var:      null                         !default;
-$usx-sidenav-link-color:          usx-var($usx-sidenav-link-color-var, $text-muted) !default;
-$usx-sidenav-link-hover-color:    $color-primary               !default;
-$usx-sidenav-hover-color-var:     null                         !default;
-$usx-sidenav-hover-color:         usx-var($usx-sidenav-hover-color-var, $surface-2) !default;
-$usx-sidenav-border-color-var:    null                         !default;
-$usx-sidenav-border-color:        usx-var($usx-sidenav-border-color-var, $color-border) !default;
+$usx-sidenav-link-text-var:      null                         !default;
+$usx-sidenav-link-text:          usx-var($usx-sidenav-link-text-var, $usx-text-muted) !default;
+$usx-sidenav-link-text-hover:    $usx-color-primary               !default;
+$usx-sidenav-bg-hover-var:     null                         !default;
+$usx-sidenav-bg-hover:         usx-var($usx-sidenav-bg-hover-var, $usx-surface-2) !default;
+$usx-sidenav-border-var:    null                         !default;
+$usx-sidenav-border:        usx-var($usx-sidenav-border-var, $usx-color-border) !default;
 $usx-sidenav-border-width-var:    null                         !default;
-$usx-sidenav-border-width:        usx-var($usx-sidenav-border-width-var, $border-width-sm) !default;
+$usx-sidenav-border-width:        usx-var($usx-sidenav-border-width-var, $usx-border-width-sm) !default;
 
 // ── Component tokens: Step Indicator ──────────────────────────────────────────
 // Real USWDS ships this component's CSS precompiled (see usa-step-indicator's
@@ -1027,31 +1021,31 @@ $usx-sidenav-border-width:        usx-var($usx-sidenav-border-width-var, $border
 // complete) across both the plain segment-bar layout and the --counters
 // circle variant, not just the two segment fill colors, so labels,
 // headings, and counter rings all track the theme too.
-$usx-step-indicator-background-color-var: null !default;
-$usx-step-indicator-background-color: usx-var($usx-step-indicator-background-color-var, $surface-1) !default;
+$usx-step-indicator-bg-var: null !default;
+$usx-step-indicator-bg: usx-var($usx-step-indicator-bg-var, $usx-surface-1) !default;
 
-$usx-step-indicator-segment-pending-color-var: null !default;
-$usx-step-indicator-segment-pending-color: usx-var($usx-step-indicator-segment-pending-color-var, $color-base-light) !default;
+$usx-step-indicator-segment-pending-border-var: null !default;
+$usx-step-indicator-segment-pending-border: usx-var($usx-step-indicator-segment-pending-border-var, $usx-color-base-light) !default;
 
-$usx-step-indicator-segment-complete-color: $color-primary-darker !default;
-$usx-step-indicator-segment-current-color: $color-primary-dark !default;
+$usx-step-indicator-segment-complete: $usx-color-primary-darker !default;
+$usx-step-indicator-segment-current: $usx-color-primary-dark !default;
 
-$usx-step-indicator-segment-bar-thickness-var: null !default;
-$usx-step-indicator-segment-bar-thickness: usx-var($usx-step-indicator-segment-bar-thickness-var, $border-width-xl) !default;
+$usx-step-indicator-segment-bar-width-var: null !default;
+$usx-step-indicator-segment-bar-width: usx-var($usx-step-indicator-segment-bar-width-var, $usx-border-width-xl) !default;
 
 // USWDS's own pending-label/pending-counter-number color is a fixed
-// "base-dark" gray (#565c65) at build time; chain to $text-muted (same role
-// as nav-link/sidenav-link above) instead of $text-subtle (#71767a is too
+// "base-dark" gray (#565c65) at build time; chain to $usx-text-muted (same role
+// as nav-link/sidenav-link above) instead of $usx-text-subtle (#71767a is too
 // light a match) so it tracks the theme's muted-text role.
-$usx-step-indicator-segment-label-color: $text-muted !default;
+$usx-step-indicator-segment-label-text: $usx-text-muted !default;
 
 // Text drawn on filled (complete/current) counter circles — contrasts
-// against $usx-step-indicator-segment-complete-color/-current-color, not
-// against $usx-step-indicator-background-color, so the number stays
+// against $usx-step-indicator-segment-complete/-current-color, not
+// against $usx-step-indicator-bg, so the number stays
 // legible even if a preset darkens the ambient surface.
-$usx-step-indicator-counter-text-color: $text-inverse !default;
+$usx-step-indicator-counter-text: $usx-text-inverse !default;
 
-$usx-step-indicator-heading-color: $text !default;
+$usx-step-indicator-heading-text: $usx-text !default;
 
 // ── Component tokens: Table (custom; defaults baked in _table.scss) ─────────
 // Real USWDS bakes the table's base cell background (white), header/footer
@@ -1060,103 +1054,103 @@ $usx-step-indicator-heading-color: $text !default;
 // the surface-1/2/3 roles so the whole table body, not just the
 // USX-invented hover/selected/grouped extras below, tracks the active
 // theme instead of staying stuck on real USWDS's static light-mode colors.
-$usx-table-background-color-var: null !default;
-$usx-table-background-color: usx-var($usx-table-background-color-var, $surface-1) !default;
+$usx-table-bg-var: null !default;
+$usx-table-bg: usx-var($usx-table-bg-var, $usx-surface-1) !default;
 
-$usx-table-header-background-color-var: null !default;
-$usx-table-header-background-color: usx-var($usx-table-header-background-color-var, $surface-2) !default;
+$usx-table-header-bg-var: null !default;
+$usx-table-header-bg: usx-var($usx-table-header-bg-var, $usx-surface-2) !default;
 
-$usx-table-stripe-background-color-var: null !default;
-$usx-table-stripe-background-color: usx-var($usx-table-stripe-background-color-var, $surface-3) !default;
+$usx-table-stripe-bg-var: null !default;
+$usx-table-stripe-bg: usx-var($usx-table-stripe-bg-var, $usx-surface-3) !default;
 
-$usx-table-grouped-row-bg-color-var: null !default;
-$usx-table-grouped-row-bg-color: usx-var($usx-table-grouped-row-bg-color-var, $color-primary-lighter) !default;
-$usx-table-grouped-row-text-color-var: null !default;
-$usx-table-grouped-row-text-color: usx-var($usx-table-grouped-row-text-color-var, $text) !default;
+$usx-table-grouped-row-bg-var: null !default;
+$usx-table-grouped-row-bg: usx-var($usx-table-grouped-row-bg-var, $usx-color-primary-lighter) !default;
+$usx-table-grouped-row-text-var: null !default;
+$usx-table-grouped-row-text: usx-var($usx-table-grouped-row-text-var, $usx-text) !default;
 
 // Hover/selected row highlights alias the surface-2/surface-3 roles (like
-// $usx-sidenav-hover-color and $usx-task-list-hover-background-color) rather
+// $usx-sidenav-bg-hover and $usx-task-list-bg-hover) rather
 // than a color-primary blue tint, so the table's aesthetic stays neutral and
 // in step with the rest of the surface system instead of an unrelated
 // brand-accent highlight.
 $usx-table-selected-bg-var: null !default;
-$usx-table-selected-bg: usx-var($usx-table-selected-bg-var, $surface-3) !default;
+$usx-table-selected-bg: usx-var($usx-table-selected-bg-var, $usx-surface-3) !default;
 
-$usx-table-hover-bg-var: null !default;
-$usx-table-hover-bg: usx-var($usx-table-hover-bg-var, $surface-2) !default;
+$usx-table-bg-hover-var: null !default;
+$usx-table-bg-hover: usx-var($usx-table-bg-hover-var, $usx-surface-2) !default;
 
 // Divider border (footer rule, sticky-first-column shadow line) — same
-// shared $color-border role used by the header/footer/sidenav/tile dividers.
-$usx-table-border-color-var: null !default;
-$usx-table-border-color: usx-var($usx-table-border-color-var, $color-border) !default;
+// shared $usx-color-border role used by the header/footer/sidenav/tile dividers.
+$usx-table-border-var: null !default;
+$usx-table-border: usx-var($usx-table-border-var, $usx-color-border) !default;
 
 // Muted placeholder/empty-state text.
-$usx-table-placeholder-text-color-var: null !default;
-$usx-table-placeholder-text-color: usx-var($usx-table-placeholder-text-color-var, $text-subtle) !default;
+$usx-table-placeholder-text-var: null !default;
+$usx-table-placeholder-text: usx-var($usx-table-placeholder-text-var, $usx-text-subtle) !default;
 
 // Active sort-button accent (indicates the currently sorted column).
-$usx-table-sort-active-color-var: null !default;
-$usx-table-sort-active-color: usx-var($usx-table-sort-active-color-var, $color-primary-dark) !default;
-$usx-table-sort-active-text-color-var: null !default;
-$usx-table-sort-active-text-color: usx-var($usx-table-sort-active-text-color-var, $text) !default;
+$usx-table-sorted-column-bg-var: null !default;
+$usx-table-sorted-column-bg: usx-var($usx-table-sorted-column-bg-var, $usx-color-primary-dark) !default;
+$usx-table-sorted-column-text-var: null !default;
+$usx-table-sorted-column-text: usx-var($usx-table-sorted-column-text-var, $usx-text) !default;
 
 // ── Component tokens: Task List (custom; defaults baked in _task-list.scss) ──
-$usx-task-list-border-color-var: null !default;
-$usx-task-list-border-color: usx-var($usx-task-list-border-color-var, $color-border) !default;
+$usx-task-list-border-var: null !default;
+$usx-task-list-border: usx-var($usx-task-list-border-var, $usx-color-border) !default;
 $usx-task-list-inner-border-width-var: null !default;
-$usx-task-list-inner-border-width: usx-var($usx-task-list-inner-border-width-var, $border-width-sm) !default;
+$usx-task-list-inner-border-width: usx-var($usx-task-list-inner-border-width-var, $usx-border-width-sm) !default;
 $usx-task-list-outer-border-width-var: null !default;
-$usx-task-list-outer-border-width: usx-var($usx-task-list-outer-border-width-var, $border-width-md) !default;
-$usx-task-list-hover-background-color-var: null !default;
-$usx-task-list-hover-background-color: usx-var($usx-task-list-hover-background-color-var, $surface-2) !default;
+$usx-task-list-outer-border-width: usx-var($usx-task-list-outer-border-width-var, $usx-border-width-md) !default;
+$usx-task-list-bg-hover-var: null !default;
+$usx-task-list-bg-hover: usx-var($usx-task-list-bg-hover-var, $usx-surface-2) !default;
 
-$usx-task-list-link-color-var: null !default;
-$usx-task-list-link-color: usx-var($usx-task-list-link-color-var, $usx-link-color) !default;
+$usx-task-list-link-text-var: null !default;
+$usx-task-list-link-text: usx-var($usx-task-list-link-text-var, $usx-link-text) !default;
 
 // ── Component tokens: Attribution (custom; default baked in SCSS) ────────────
-$usx-attribution-secondary-color-var: null !default;
-$usx-attribution-secondary-color: usx-var($usx-attribution-secondary-color-var, $text-subtle) !default;
+$usx-attribution-secondary-text-var: null !default;
+$usx-attribution-secondary-text: usx-var($usx-attribution-secondary-text-var, $usx-text-subtle) !default;
 
 // ── Component tokens: Block (custom; default baked in _block.scss) ───────────
-$usx-block-callout-background-color-var: null !default;
-$usx-block-callout-background-color: usx-var($usx-block-callout-background-color-var, $surface-2) !default;
+$usx-block-callout-bg-var: null !default;
+$usx-block-callout-bg: usx-var($usx-block-callout-bg-var, $usx-surface-2) !default;
 $usx-block-border-width-var: null !default;
-$usx-block-border-width: usx-var($usx-block-border-width-var, $border-width-lg) !default;
-$usx-block-border-color-var: null !default;
+$usx-block-border-width: usx-var($usx-block-border-width-var, $usx-border-width-lg) !default;
+$usx-block-border-var: null !default;
 
 // ── Component tokens: Clickable (custom; defaults baked in SCSS) ─────────────
-$usx-clickable-focus-outline-color-var: null !default;
-$usx-clickable-focus-outline-color: usx-var($usx-clickable-focus-outline-color-var) !default;
+$usx-clickable-focus-var: null !default;
+$usx-clickable-focus: usx-var($usx-clickable-focus-var) !default;
 
-$usx-clickable-hover-color-var: null !default;
-$usx-clickable-hover-color: usx-var($usx-clickable-hover-color-var) !default;
+$usx-clickable-text-hover-var: null !default;
+$usx-clickable-text-hover: usx-var($usx-clickable-text-hover-var) !default;
 
 // ── Component tokens: Misc Banner (custom; defaults baked in SCSS) ───────────
-$usx-misc-banner-focus-outline-color-var: null !default;
-$usx-misc-banner-focus-outline-color: usx-var($usx-misc-banner-focus-outline-color-var) !default;
+$usx-misc-banner-focus-var: null !default;
+$usx-misc-banner-focus: usx-var($usx-misc-banner-focus-var) !default;
 
 $usx-misc-banner-badge-radius-var: null !default;
-$usx-misc-banner-badge-radius: usx-var($usx-misc-banner-badge-radius-var, $radius-selector) !default;
+$usx-misc-banner-badge-radius: usx-var($usx-misc-banner-badge-radius-var, $usx-radius-selector) !default;
 
 // ── Component tokens: Tooltip ─────────────────────────────────────────────
 // Real USWDS CSS bakes the tooltip's background/font color as fixed values
 // computed from $theme-tooltip-background-color/$theme-tooltip-font-color
 // at build time, so it never follows our runtime overrides and stays a flat
-// "ink" black in every theme. Defaults to $color-base-darkest (a stable,
+// "ink" black in every theme. Defaults to $usx-color-base-darkest (a stable,
 // theme-invariant neutral that stays dark under both light and dark presets,
-// unlike $text) so the tooltip stays a consistent dark chip; pair with
-// $text-inverse for legible light text on it.
-$usx-tooltip-background-color-var: null !default;
-$usx-tooltip-background-color: usx-var($usx-tooltip-background-color-var, $color-base-darkest) !default;
+// unlike $usx-text) so the tooltip stays a consistent dark chip; pair with
+// $usx-text-inverse for legible light text on it.
+$usx-tooltip-bg-var: null !default;
+$usx-tooltip-bg: usx-var($usx-tooltip-bg-var, $usx-color-base-darkest) !default;
 
-$usx-tooltip-text-color-var: null !default;
-$usx-tooltip-text-color: usx-var($usx-tooltip-text-color-var, $text-inverse) !default;
+$usx-tooltip-text-var: null !default;
+$usx-tooltip-text: usx-var($usx-tooltip-text-var, $usx-text-inverse) !default;
 
 // ── Component tokens: Icon List (custom; default baked in _icon-list.scss) ───
 // Real USWDS only colors `.usa-icon-list__icon` via opt-in BEM modifier
 // classes (`.usa-icon-list--primary`, etc.) — with no modifier, the icon
 // just inherits ambient ink. Give it a themeable default instead so icons
 // read as branded (primary) without requiring a modifier class.
-$usx-icon-list-icon-color-var: null !default;
-$usx-icon-list-icon-color: usx-var($usx-icon-list-icon-color-var, $color-primary) !default;
+$usx-icon-list-icon-text-var: null !default;
+$usx-icon-list-icon-text: usx-var($usx-icon-list-icon-text-var, $usx-color-primary) !default;
 

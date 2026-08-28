@@ -11,8 +11,8 @@
 /* ---------------------------------- */
 
 .usa-input.usx-input, .usa-select.usx-select, .usa-combo-box__input {
-  @if $usx-input-border-radius {
-    border-radius: $usx-input-border-radius;
+  @if $usx-input-radius {
+    border-radius: $usx-input-radius;
   }
 
   @if $usx-input-padding {
@@ -29,16 +29,16 @@
 .usa-input.usx-input, .usa-select.usx-select {
   &:not(.usa-input--error, .usa-input--success) {
     &:not(:disabled) {
-      @if $usx-input-background-color {
-        background-color: $usx-input-background-color;
+      @if $usx-input-bg {
+        background-color: $usx-input-bg;
       }
 
-      @if $usx-input-text-color {
-        color: $usx-input-text-color;
+      @if $usx-input-text {
+        color: $usx-input-text;
       }
 
-      @if $usx-input-border-color {
-        border-color: $usx-input-border-color;
+      @if $usx-input-border {
+        border-color: $usx-input-border;
       }
     }
   }
@@ -50,8 +50,8 @@
       border-width: $usx-input-error-border-width;
     }
 
-    @if $usx-input-error-border-color {
-      border-color: $usx-input-error-border-color;
+    @if $usx-input-error-border {
+      border-color: $usx-input-error-border;
     }
 
     @if $usx-input-error-border-style {
@@ -74,8 +74,8 @@
       border-width: $usx-input-success-border-width;
     }
 
-    @if $usx-input-success-border-color {
-      border-color: $usx-input-success-border-color;
+    @if $usx-input-success-border {
+      border-color: $usx-input-success-border;
     }
 
     @if $usx-input-success-border-style {
@@ -116,9 +116,9 @@
 
 /* ---------------------------------- */
 
-@if $color-border {
+@if $usx-color-border {
   .usa-combo-box__input, .usa-input, .usa-input-group, .usa-select, .usa-textarea, .usx-switch {
-    border-color: $color-border;
+    border-color: $usx-color-border;
   }
 }
 

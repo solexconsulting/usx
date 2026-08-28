@@ -11,25 +11,25 @@
 // the implicit browser defaults already in effect) — this is additive
 // theming capability, not a visual change.
 body {
-  font-family: $font-family;
-  font-size: $font-size-base;
-  font-weight: $font-weight-regular;
-  line-height: $line-height-base;
+  font-family: $usx-font-family;
+  font-size: $usx-font-size-base;
+  font-weight: $usx-font-weight-regular;
+  line-height: $usx-line-height-base;
 }
 
 .usa-prose {
   h1, h2, h3, h4, h5, h6 {
-    font-family: $font-family-heading;
-    font-weight: $font-weight-bold;
-    line-height: $line-height-heading;
+    font-family: $usx-font-family-heading;
+    font-weight: $usx-font-weight-bold;
+    line-height: $usx-line-height-heading;
   }
 
-  h1 { font-size: $font-size-h1; }
-  h2 { font-size: $font-size-h2; }
-  h3 { font-size: $font-size-h3; }
-  h4 { font-size: $font-size-h4; }
-  h5 { font-size: $font-size-h5; }
-  h6 { font-size: $font-size-h6; }
+  h1 { font-size: $usx-font-size-h1; }
+  h2 { font-size: $usx-font-size-h2; }
+  h3 { font-size: $usx-font-size-h3; }
+  h4 { font-size: $usx-font-size-h4; }
+  h5 { font-size: $usx-font-size-h5; }
+  h6 { font-size: $usx-font-size-h6; }
 }
 
 // Native form controls (and USWDS's own wrapper classes around them) don't
@@ -60,7 +60,7 @@ textarea,
 .usa-textarea,
 .usa-prose,
 .usa-table caption {
-  font-family: $font-family;
+  font-family: $usx-font-family;
 }
 
 // ── Component-specific overrides ──────────────────────────────────────────
@@ -72,31 +72,31 @@ textarea,
 // `typography` component disables ALL font-family theming in one place,
 // leaving every component at USWDS's own default font stack.
 .usx-header {
-  font-family: $font-family;
+  font-family: $usx-font-family;
 }
 
 .usa-nav.usx-nav {
-  font-family: $font-family;
+  font-family: $usx-font-family;
 
   .usa-accordion {
-    font-family: $font-family;
+    font-family: $usx-font-family;
   }
 }
 
 .usx-footer {
-  font-family: $font-family;
+  font-family: $usx-font-family;
 }
 
 .usx-footer__contact .usa-footer__contact-heading {
-  font-family: $font-family-heading;
+  font-family: $usx-font-family-heading;
 }
 
 .usx-alert .usa-alert__body {
-  font-family: $font-family;
+  font-family: $usx-font-family;
 }
 
 .usx-alert .usa-alert__heading {
-  font-family: $font-family-heading;
+  font-family: $usx-font-family-heading;
 }
 
 // USWDS hardcodes font-family on `.usa-site-alert .usa-alert .usa-alert__body`/
@@ -104,42 +104,42 @@ textarea,
 // `__heading` rule above (0-2-0) regardless of load order.
 .usa-site-alert.usx-site-alert .usa-alert.usx-alert {
   .usa-alert__body {
-    font-family: $font-family;
+    font-family: $usx-font-family;
   }
 
   .usa-alert__heading {
-    font-family: $font-family-heading;
+    font-family: $usx-font-family-heading;
   }
 }
 
 .usx-table.usa-table {
-  font-family: $font-family;
+  font-family: $usx-font-family;
 }
 
 .usx-step-indicator {
-  font-family: $font-family;
+  font-family: $usx-font-family;
 
   .usa-step-indicator__heading {
-    font-family: $font-family-heading;
+    font-family: $usx-font-family-heading;
   }
 }
 
 .usa-summary-box.usx-summary-box {
-  font-family: $font-family;
+  font-family: $usx-font-family;
 
   .usa-summary-box__heading {
-    font-family: $font-family-heading;
+    font-family: $usx-font-family-heading;
   }
 }
 
 .usx-icon-list {
-  font-family: $font-family;
+  font-family: $usx-font-family;
 
   .usa-icon-list__title {
-    font-family: $font-family;
+    font-family: $usx-font-family;
   }
 }
 
 .usx-accordion {
-  font-family: $font-family;
+  font-family: $usx-font-family;
 }

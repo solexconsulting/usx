@@ -2,76 +2,76 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-step-indicator {
-  @if $usx-step-indicator-background-color {
-    background-color: $usx-step-indicator-background-color;
+  @if $usx-step-indicator-bg {
+    background-color: $usx-step-indicator-bg;
   }
 
   .usa-step-indicator__heading {
-    @if $usx-step-indicator-heading-color {
-      color: $usx-step-indicator-heading-color;
+    @if $usx-step-indicator-heading-text {
+      color: $usx-step-indicator-heading-text;
     }
   }
 
   .usa-step-indicator__segment--complete {
     &::before, &::after {
-      @if $usx-step-indicator-segment-complete-color {
-        background-color: $usx-step-indicator-segment-complete-color;
+      @if $usx-step-indicator-segment-complete {
+        background-color: $usx-step-indicator-segment-complete;
       }
     }
 
     .usa-step-indicator__segment-label {
-      @if $usx-step-indicator-segment-complete-color {
-        color: $usx-step-indicator-segment-complete-color;
+      @if $usx-step-indicator-segment-complete {
+        color: $usx-step-indicator-segment-complete;
       }
     }
   }
 
   .usa-step-indicator__segment--current {
     &::before, &::after {
-      @if $usx-step-indicator-segment-current-color {
-        background-color: $usx-step-indicator-segment-current-color;
+      @if $usx-step-indicator-segment-current {
+        background-color: $usx-step-indicator-segment-current;
       }
     }
 
     .usa-step-indicator__segment-label {
-      @if $usx-step-indicator-segment-current-color {
-        color: $usx-step-indicator-segment-current-color;
+      @if $usx-step-indicator-segment-current {
+        color: $usx-step-indicator-segment-current;
       }
     }
   }
 
   .usa-step-indicator__current-step {
-    @if $usx-step-indicator-segment-current-color {
-      background-color: $usx-step-indicator-segment-current-color;
+    @if $usx-step-indicator-segment-current {
+      background-color: $usx-step-indicator-segment-current;
     }
 
-    @if $usx-step-indicator-counter-text-color {
-      color: $usx-step-indicator-counter-text-color;
+    @if $usx-step-indicator-counter-text {
+      color: $usx-step-indicator-counter-text;
     }
   }
 
   .usa-step-indicator__total-steps {
-    @if $usx-step-indicator-segment-current-color {
-      color: $usx-step-indicator-segment-current-color;
+    @if $usx-step-indicator-segment-current {
+      color: $usx-step-indicator-segment-current;
     }
   }
 
   .usa-step-indicator__segment-label {
-    @if $usx-step-indicator-segment-label-color {
-      color: $usx-step-indicator-segment-label-color;
+    @if $usx-step-indicator-segment-label-text {
+      color: $usx-step-indicator-segment-label-text;
     }
   }
 
   .usa-step-indicator__segment::after {
-    @if $usx-step-indicator-segment-bar-thickness {
-      height: $usx-step-indicator-segment-bar-thickness;
+    @if $usx-step-indicator-segment-bar-width {
+      height: $usx-step-indicator-segment-bar-width;
       // Normal height is 0.5rem and top is normally 0
       // Center by offsetting by half the difference between the normal height and the new height
       // Note: the bare "0" must be a length (0rem), not a unitless number —
-      // once $usx-step-indicator-segment-bar-thickness is a var(), Sass can't
+      // once $usx-step-indicator-segment-bar-width is a var(), Sass can't
       // fold this at build time, and calc(0 - <length>) is invalid CSS,
       // which silently falls back to `top: auto` (bar drops to the bottom).
-      top: calc(0rem - ($usx-step-indicator-segment-bar-thickness - 0.5rem) / 2);
+      top: calc(0rem - ($usx-step-indicator-segment-bar-width - 0.5rem) / 2);
     }
   }
 
@@ -83,46 +83,46 @@
   // compiled default exactly — only the colors are themed.
   &.usa-step-indicator--counters, &.usa-step-indicator--counters-sm {
     .usa-step-indicator__segment::before {
-      @if $usx-step-indicator-background-color {
-        background-color: $usx-step-indicator-background-color;
+      @if $usx-step-indicator-bg {
+        background-color: $usx-step-indicator-bg;
       }
 
-      @if $usx-step-indicator-segment-pending-color and $usx-step-indicator-background-color {
+      @if $usx-step-indicator-segment-pending-border and $usx-step-indicator-bg {
         box-shadow:
-          inset 0 0 0 .25rem $usx-step-indicator-segment-pending-color,
-          0 0 0 .25rem $usx-step-indicator-background-color;
+          inset 0 0 0 .25rem $usx-step-indicator-segment-pending-border,
+          0 0 0 .25rem $usx-step-indicator-bg;
       }
 
-      @if $usx-step-indicator-segment-label-color {
-        color: $usx-step-indicator-segment-label-color;
+      @if $usx-step-indicator-segment-label-text {
+        color: $usx-step-indicator-segment-label-text;
       }
     }
 
     .usa-step-indicator__segment--complete::before {
-      @if $usx-step-indicator-segment-complete-color {
-        background-color: $usx-step-indicator-segment-complete-color;
+      @if $usx-step-indicator-segment-complete {
+        background-color: $usx-step-indicator-segment-complete;
       }
 
-      @if $usx-step-indicator-background-color {
-        box-shadow: 0 0 0 .25rem $usx-step-indicator-background-color;
+      @if $usx-step-indicator-bg {
+        box-shadow: 0 0 0 .25rem $usx-step-indicator-bg;
       }
 
-      @if $usx-step-indicator-counter-text-color {
-        color: $usx-step-indicator-counter-text-color;
+      @if $usx-step-indicator-counter-text {
+        color: $usx-step-indicator-counter-text;
       }
     }
 
     .usa-step-indicator__segment--current::before {
-      @if $usx-step-indicator-segment-current-color {
-        background-color: $usx-step-indicator-segment-current-color;
+      @if $usx-step-indicator-segment-current {
+        background-color: $usx-step-indicator-segment-current;
       }
 
-      @if $usx-step-indicator-background-color {
-        box-shadow: 0 0 0 .25rem $usx-step-indicator-background-color;
+      @if $usx-step-indicator-bg {
+        box-shadow: 0 0 0 .25rem $usx-step-indicator-bg;
       }
 
-      @if $usx-step-indicator-counter-text-color {
-        color: $usx-step-indicator-counter-text-color;
+      @if $usx-step-indicator-counter-text {
+        color: $usx-step-indicator-counter-text;
       }
     }
   }

@@ -10,8 +10,8 @@
     align-items: start;
     gap: 1rem;
 
-    @if $color-base {
-      border-top: 1px solid $color-base;
+    @if $usx-color-base {
+      border-top: 1px solid $usx-color-base;
     }
 
     @media (width >= #{$breakpoint-desktop}) {
@@ -61,7 +61,7 @@
     margin: 0;
 
     .usa-pagination__link--disabled {
-      color: $color-base;
+      color: $usx-color-base;
       cursor: not-allowed;
       pointer-events: none;
       opacity: 0.4;
@@ -71,8 +71,8 @@
 
   // ── Summary ─────────────────────────────────────────────────────────────
   .usx-pagination__summary {
-    font-size: $font-size-base;
-    color: $text;
+    font-size: $usx-font-size-base;
+    color: $usx-text;
     margin: 0;
   }
 
@@ -83,9 +83,9 @@
     gap: 0.5rem;
 
     .usx-label {
-      font-size: $font-size-base;
+      font-size: $usx-font-size-base;
       white-space: nowrap;
-      color: $text;
+      color: $usx-text;
       margin: 0;
     }
 

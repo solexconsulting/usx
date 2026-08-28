@@ -4,8 +4,8 @@
 // overrides), so they're folded directly into the declarations below
 // instead of round-tripping through custom properties that never change.
 $switch-border: if($usx-switch-border-width != null, $usx-switch-border-width, 2px);
-$switch-off-color: if($usx-switch-off-color != null, $usx-switch-off-color, black);
-$switch-track-bg: if($usx-switch-track-color != null, $usx-switch-track-color, #e2e8f0);
+$switch-off-color: if($usx-switch-border-off != null, $usx-switch-border-off, black);
+$switch-track-bg: if($usx-switch-track-bg != null, $usx-switch-track-bg, #e2e8f0);
 
 .usx-switch {
   --size: calc(var(--size-selector, 0.25rem) * 6);

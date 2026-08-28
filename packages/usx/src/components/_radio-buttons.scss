@@ -9,45 +9,45 @@
     }
   }
 
-  @if $usx-tile-border-radius != null {
+  @if $usx-checkable-tile-radius != null {
     .usa-radio__input--tile + .usa-radio__label {
-      border-radius: $usx-tile-border-radius;
+      border-radius: $usx-checkable-tile-radius;
     }
   }
 
   .usa-radio__input--tile + .usa-radio__label {
-    @if $usx-tile-border-color != null {
-      border-color: $usx-tile-border-color;
+    @if $usx-checkable-tile-border != null {
+      border-color: $usx-checkable-tile-border;
     }
 
-    @if $usx-tile-border-width != null {
-      border-width: $usx-tile-border-width;
+    @if $usx-checkable-tile-border-width != null {
+      border-width: $usx-checkable-tile-border-width;
     }
   }
 
   .usa-radio__label::before {
-    @if $usx-selector-background-color != null {
-      background-color: $usx-selector-background-color;
+    @if $usx-checkable-bg != null {
+      background-color: $usx-checkable-bg;
     }
 
-    @if $usx-selector-border-color != null {
-      box-shadow: 0 0 0 2px $usx-selector-border-color;
+    @if $usx-checkable-border != null {
+      box-shadow: 0 0 0 2px $usx-checkable-border;
     }
   }
 
   .usa-radio__input:checked:not(:disabled) {
     & + .usa-radio__label {
-      @if $color-primary {
+      @if $usx-color-primary {
         &::before {
-          background-color: $color-primary;
-          box-shadow: 0 0 0 2px $color-primary, inset 0 0 0 2px #fff;
+          background-color: $usx-color-primary;
+          box-shadow: 0 0 0 2px $usx-color-primary, inset 0 0 0 2px #fff;
         }
       }
     }
 
     &.usa-radio__input--tile + .usa-radio__label {
-      @if $color-primary {
-        border-color: $color-primary;
+      @if $usx-color-primary {
+        border-color: $usx-color-primary;
       }
     }
   }

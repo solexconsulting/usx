@@ -219,11 +219,11 @@ export const themeManifest = [
 
   // ── Radius ────────────────────────────────────────────────────────────────
   // Primitives — reserved for utility classes.
-  scale('r-sm', '--usx-radius-sm', '0.25rem', 'radius'),
-  scale('r-md', '--usx-radius-md', '0.5rem', 'radius'),
-  scale('r-lg', '--usx-radius-lg', '1rem', 'radius'),
-  scale('r-xl', '--usx-radius-xl', '2rem', 'radius'),
-  scale('r-full', '--usx-radius-full', '100%', 'radius'),
+  scale('radius-sm', '--usx-radius-sm', '0.25rem', 'radius'),
+  scale('radius-md', '--usx-radius-md', '0.5rem', 'radius'),
+  scale('radius-lg', '--usx-radius-lg', '1rem', 'radius'),
+  scale('radius-xl', '--usx-radius-xl', '2rem', 'radius'),
+  scale('radius-full', '--usx-radius-full', '100%', 'radius'),
 
   // Semantic radii — components pick a radius by group (DaisyUI-style).
   scale('radius-box', '--usx-radius-box', '1rem', 'radius'),
@@ -242,8 +242,8 @@ export const themeManifest = [
   scale('usx-hero-callout-radius', '--usx-hero-callout-radius', 'var(--usx-radius-box)', 'radius-advanced'),
   scale('usx-image-radius', '--usx-image-radius', 'var(--usx-radius-box)', 'radius-advanced'),
   scale('usx-tag-radius', '--usx-tag-radius', 'var(--usx-radius-selector)', 'radius-advanced'),
-  scale('usx-checkbox-radius', '--usx-checkbox-radius', 'var(--usx-radius-selector)', 'radius-advanced'),
-  scale('usx-tile-radius', '--usx-tile-radius', '0.25rem', 'radius-advanced'),
+  scale('usx-checkable-radius', '--usx-checkable-radius', 'var(--usx-radius-selector)', 'radius-advanced'),
+  scale('usx-checkable-tile-radius', '--usx-checkable-tile-radius', '0.25rem', 'radius-advanced'),
   scale('usx-misc-banner-badge-radius', '--usx-misc-banner-badge-radius', '6px', 'radius-advanced'),
 
   // ── Border widths ─────────────────────────────────────────────────────────
@@ -256,7 +256,7 @@ export const themeManifest = [
   // ── Advanced border — per-component overrides, defaulting to a shared width ─
   scale('usx-task-list-inner-border-width', '--usx-task-list-inner-border-width', 'var(--usx-border-width-sm)', 'border-advanced'),
   scale('usx-task-list-outer-border-width', '--usx-task-list-outer-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
-  scale('usx-step-indicator-segment-bar-thickness', '--usx-step-indicator-segment-bar-thickness', 'var(--usx-border-width-xl)', 'border-advanced'),
+  scale('usx-step-indicator-segment-bar-width', '--usx-step-indicator-segment-bar-width', 'var(--usx-border-width-xl)', 'border-advanced'),
   scale('usx-accordion-border-width', '--usx-accordion-border-width', 'var(--usx-border-width-lg)', 'border-advanced'),
   scale('usx-button-outline-border-width', '--usx-button-outline-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
   scale('usx-switch-border-width', '--usx-switch-border-width', '2px', 'border-advanced'),
@@ -301,147 +301,147 @@ export const themeManifest = [
   scale('usx-task-list-link-font-size', '--usx-task-list-link-font-size', '1.31rem', 'typography-advanced'),
 
   // ── Component tokens (hardcoded-hex promotions) ───────────────────────────
-  component('usx-link-color', '#005ea2', 'color-primary'),
-  component('usx-link-visited-color', 'var(--usx-color-visited)'),
+  component('usx-link-text', '#005ea2', 'color-primary'),
+  component('usx-link-text-visited', 'var(--usx-color-visited)'),
   // USWDS swaps link/visited color to a light neutral on a dark background
   // (`.usa-dark-background`) instead of the illegible blue/purple defaults;
   // no existing primitive matches this exact shade, so it gets its own token.
-  component('usx-link-color-dark', '#e6e6e6'),
-  component('usx-link-visited-color-dark', '#e6e6e6'),
-  component('usx-summary-box-link-visited-color', 'var(--usx-color-visited)'),
+  component('usx-link-text-dark', '#e6e6e6'),
+  component('usx-link-text-visited-dark', '#e6e6e6'),
+  component('usx-summary-box-link-text-visited', 'var(--usx-color-visited)'),
   // USWDS's summary-box "info" tint (background "info-lighter"/cyan-5,
   // border "info-light"/cyan-20) matches our color-info-lighter/
   // color-info-light primitives exactly, so chain to those (like
   // usx-alert-info-background-color does) instead of a standalone duplicate.
-  component('usx-summary-box-background-color', '#e7f6f8', 'color-info-lighter'),
+  component('usx-summary-box-bg', '#e7f6f8', 'color-info-lighter'),
   component('usx-summary-box-border-color', '#99deea', 'color-info-light'),
-  component('usx-summary-box-text-color', '#1b1b1b', 'text'),
-  component('usx-summary-box-link-color', '#005ea2', 'color-primary'),
-  component('usx-summary-box-link-hover-color', '#1a4480', 'color-primary-dark'),
+  component('usx-summary-box-text', '#1b1b1b', 'text'),
+  component('usx-summary-box-link-text', '#005ea2', 'color-primary'),
+  component('usx-summary-box-link-text-hover', '#1a4480', 'color-primary-dark'),
   component('usx-accordion-bg', '#dfe1e2', 'surface-2'),
   component('usx-accordion-content-bg', '#ffffff', 'surface-1'),
   component('usx-accordion-text', 'var(--usx-text)'),
   component('usx-accordion-content-text', 'var(--usx-text)'),
   // USWDS defaults: background "base-lightest" (-> surface-2), auto-contrast
   // text (-> text), action link/chevron following the shared link color.
-  component('usx-banner-background-color', '#dfe1e2', 'surface-2'),
-  component('usx-banner-text-color', '#1b1b1b', 'text'),
-  component('usx-banner-action-color', '#005ea2', 'usx-link-color'),
-  component('usx-banner-after-color', '#005ea2', 'color-primary'),
-  component('usx-carousel-dot-color', '#c0c0c0'),
-  component('usx-carousel-dot-color-hover', '#a0a0a0', 'usx-carousel-dot-color'),
-  component('usx-carousel-dot-color-active', '#808080', 'usx-carousel-dot-color'),
-  component('usx-carousel-focus-outline-color', 'var(--usx-color-focus)'),
+  component('usx-banner-bg', '#dfe1e2', 'surface-2'),
+  component('usx-banner-text', '#1b1b1b', 'text'),
+  component('usx-banner-button-text', '#005ea2', 'usx-link-text'),
+  component('usx-banner-chevron-text', '#005ea2', 'color-primary'),
+  component('usx-carousel-dot-bg', '#c0c0c0'),
+  component('usx-carousel-dot-bg-hover', '#a0a0a0', 'usx-carousel-dot-bg'),
+  component('usx-carousel-dot-bg-active', '#808080', 'usx-carousel-dot-bg'),
+  component('usx-carousel-focus', 'var(--usx-color-focus)'),
   // Real USWDS ships the step-indicator's CSS precompiled — these two get
   // their own hooks (unlike the plain $color-primary-dark/-darker aliases
   // in _variables.scss) so the --counters variant's ring/gap colors are
   // independently overridable from the general surface/border roles.
-  component('usx-step-indicator-background-color', 'var(--usx-surface-1)'),
-  component('usx-step-indicator-segment-pending-color', 'var(--usx-color-base-light)'),
+  component('usx-step-indicator-bg', 'var(--usx-surface-1)'),
+  component('usx-step-indicator-segment-pending-border', 'var(--usx-color-base-light)'),
   // Follows usx-link-color by default (a `var()` reference, like the
   // radius-advanced tokens default to `var(--usx-radius-none)`) unless its
   // own custom property is explicitly overridden.
-  component('usx-task-list-link-color', 'var(--usx-link-color)'),
-  component('usx-clickable-focus-outline-color', 'var(--usx-color-focus)'),
-  component('usx-clickable-hover-color', '#005ea2'),
-  component('usx-misc-banner-focus-outline-color', '#9bdaf1'),
+  component('usx-task-list-link-text', 'var(--usx-link-text)'),
+  component('usx-clickable-focus', 'var(--usx-color-focus)'),
+  component('usx-clickable-text-hover', '#005ea2'),
+  component('usx-misc-banner-focus', '#9bdaf1'),
   // Per-component overrides of the shared color-border token (see above).
-  component('usx-tile-border-color', 'var(--usx-color-border)'),
-  component('usx-task-list-border-color', 'var(--usx-color-border)'),
-  component('usx-task-list-hover-background-color', 'var(--usx-surface-2)'),
+  component('usx-checkable-tile-border', 'var(--usx-color-border)'),
+  component('usx-task-list-border', 'var(--usx-color-border)'),
+  component('usx-task-list-bg-hover', 'var(--usx-surface-2)'),
   // Shared by both checkbox and radio unchecked ::before styling.
-  component('usx-selector-background-color', 'var(--usx-surface-1)'),
-  component('usx-selector-border-color', 'var(--usx-text)'),
-  component('usx-sidenav-hover-color', 'var(--usx-surface-2)'),
-  component('usx-sidenav-border-color', 'var(--usx-color-border)'),
+  component('usx-checkable-bg', 'var(--usx-surface-1)'),
+  component('usx-checkable-border', 'var(--usx-text)'),
+  component('usx-sidenav-bg-hover', 'var(--usx-surface-2)'),
+  component('usx-sidenav-border', 'var(--usx-color-border)'),
   // Unlike tile/selector/sidenav (which have a visible border in USWDS by
   // default), real USWDS renders .usa-header/.usa-footer with NO border at
   // all by default, so these must stay invisible until a consumer opts in,
   // rather than chaining to color-border's visible gray.
-  component('usx-header-border-color', 'transparent'),
+  component('usx-header-border', 'transparent'),
   // Same reasoning as the borders above: real USWDS renders .usa-header
   // with no explicit background at all (just the ambient page background),
   // so this stays transparent by default; the Sass fallback chains to
   // surface-3 for consumers/presets that opt into a themed shell.
-  component('usx-header-background-color', 'transparent'),
+  component('usx-header-bg', 'transparent'),
   // Chains to $text at the Sass level (see _variables.scss), so unthemed
   // output just inherits the ambient ink color; a theme with a dark/colored
   // header can override this independently to var(--usx-text-inverse).
-  component('usx-header-text-color', 'var(--usx-text)'),
+  component('usx-header-text', 'var(--usx-text)'),
   // Unlike the header, real USWDS's mobile nav IS an opaque white off-canvas
   // drawer (not "no background") — default to that explicitly rather than
   // transparent, or the drawer becomes see-through until a theme opts in.
-  component('usx-nav-background-color', '#ffffff'),
+  component('usx-header-nav-bg', '#ffffff'),
   // Independent mobile-drawer override; defaults the same as desktop so
   // Default's mobile drawer stays opaque white unless a theme opts in.
-  component('usx-nav-background-color-mobile', '#ffffff'),
+  component('usx-header-nav-bg-mobile', '#ffffff'),
   // Chains to $text-muted at the Sass level, matching real USWDS's baked-in
   // nav/link gray; own hook so a theme with a dark/branded nav surface can
-  // override it independently (see usx-header-text-color above).
-  component('usx-nav-link-color', 'var(--usx-text-muted)'),
+  // override it independently (see usx-header-text above).
+  component('usx-header-nav-link-text', 'var(--usx-text-muted)'),
   // Independent drawer override — the off-canvas mobile menu is a visually
   // distinct surface from the desktop nav bar.
-  component('usx-nav-link-color-mobile', 'var(--usx-nav-link-color)'),
-  component('usx-nav-link-hover-color', 'var(--usx-color-primary)'),
-  component('usx-nav-link-hover-color-mobile', 'var(--usx-nav-link-hover-color)'),
+  component('usx-header-nav-link-text-mobile', 'var(--usx-header-nav-link-text)'),
+  component('usx-header-nav-link-text-hover', 'var(--usx-color-primary)'),
+  component('usx-header-nav-link-text-hover-mobile', 'var(--usx-header-nav-link-text-hover)'),
   // Chains to $text-subtle at the Sass level; own hook for the same reason
   // as usx-nav-link-color above.
-  component('usx-header-secondary-link-color', 'var(--usx-text-subtle)'),
-  component('usx-header-secondary-link-hover', 'var(--usx-color-primary)'),
+  component('usx-header-secondary-link-text', 'var(--usx-text-subtle)'),
+  component('usx-header-secondary-link-text-hover', 'var(--usx-color-primary)'),
   // Vendor hardcodes #f0f0f0 for nav link/button hover (mobile only) — track
   // surface-2 so it stays distinct from the surface-3 drawer/header once a
   // theme is active.
-  component('usx-nav-link-hover-bg-color', 'var(--usx-surface-2)'),
-  component('usx-header-nav-border-top-color', 'var(--usx-color-border)'),
-  component('usx-header-nav-border-bottom-color', 'transparent'),
-  component('usx-footer-border-color', 'transparent'),
-  component('usx-footer-primary-section-border-color', 'transparent'),
-  component('usx-footer-secondary-section-border-color', 'transparent'),
+  component('usx-header-nav-link-bg-hover', 'var(--usx-surface-2)'),
+  component('usx-header-nav-top-border', 'var(--usx-color-border)'),
+  component('usx-header-nav-bottom-border', 'transparent'),
+  component('usx-footer-border', 'transparent'),
+  component('usx-footer-primary-section-border', 'transparent'),
+  component('usx-footer-secondary-section-border', 'transparent'),
   // Independent footer text/link/heading hooks — same rationale as the
   // header text/nav-link hooks above: a theme whose footer secondary
   // section sits on a drastically different surface (e.g. NASA's black
   // surface-3) needs to override these without affecting the ambient
   // text/color-primary roles used elsewhere.
-  component('usx-footer-text-color', 'var(--usx-text)'),
-  component('usx-footer-link-color', 'var(--usx-color-primary)'),
-  component('usx-footer-link-hover-color', 'var(--usx-color-primary-dark)'),
-  component('usx-footer-secondary-link-color', 'var(--usx-color-primary)'),
-  component('usx-footer-secondary-link-hover-color', 'var(--usx-color-primary-dark)'),
-  component('usx-footer-heading-color', 'var(--usx-text)'),
+  component('usx-footer-text', 'var(--usx-text)'),
+  component('usx-footer-link-text', 'var(--usx-color-primary)'),
+  component('usx-footer-link-text-hover', 'var(--usx-color-primary-dark)'),
+  component('usx-footer-secondary-link-text', 'var(--usx-color-primary)'),
+  component('usx-footer-secondary-link-text-hover', 'var(--usx-color-primary-dark)'),
+  component('usx-footer-heading-text', 'var(--usx-text)'),
   // Secondary-section headings (logo/contact) chain to the primary heading
   // color by default but can be overridden independently since they sit on
   // usx-footer-secondary-bg-color rather than usx-footer-primary-bg-color.
-  component('usx-footer-heading-color-secondary', 'var(--usx-footer-heading-color)'),
+  component('usx-footer-heading-secondary-text', 'var(--usx-footer-heading-text)'),
   // Hover/selected row highlights alias the surface-2/surface-3 roles (like
   // usx-sidenav-hover-color above) instead of a color-primary blue tint, so
   // the table's aesthetic stays neutral and in step with the rest of the
   // surface system rather than an unrelated brand-accent highlight.
-  component('usx-table-hover-bg', 'var(--usx-surface-2)'),
+  component('usx-table-bg-hover', 'var(--usx-surface-2)'),
   component('usx-table-selected-bg', 'var(--usx-surface-3)'),
   // The table's own base cell/header/stripe backgrounds (real USWDS bakes
   // these as static white/base-lighter/base-lightest), aliased to the same
   // surface-1/2/3 roles so the whole table adapts to the theme, not just
   // the hover/selected highlights above.
-  component('usx-table-background-color', 'var(--usx-surface-1)'),
-  component('usx-table-header-background-color', 'var(--usx-surface-2)'),
-  component('usx-table-stripe-background-color', 'var(--usx-surface-3)'),
+  component('usx-table-bg', 'var(--usx-surface-1)'),
+  component('usx-table-header-bg', 'var(--usx-surface-2)'),
+  component('usx-table-stripe-bg', 'var(--usx-surface-3)'),
   // Divider border (footer rule, sticky-first-column shadow line) — same
   // shared color-border role used by header/footer/sidenav/tile dividers.
-  component('usx-table-border-color', 'var(--usx-color-border)'),
-  component('usx-table-placeholder-text-color', 'var(--usx-text-subtle)'),
-  component('usx-table-sort-active-color', 'var(--usx-color-accent-cool)'),
-  component('usx-table-grouped-row-bg-color', 'var(--usx-surface-3)'),
-  component('usx-table-grouped-row-text-color', 'var(--usx-text)'),
+  component('usx-table-border', 'var(--usx-color-border)'),
+  component('usx-table-placeholder-text', 'var(--usx-text-subtle)'),
+  component('usx-table-sorted-column-bg', 'var(--usx-color-accent-cool)'),
+  component('usx-table-grouped-row-bg', 'var(--usx-surface-3)'),
+  component('usx-table-grouped-row-text', 'var(--usx-text)'),
   // Real USWDS bakes the tooltip's background/font color as fixed values at
   // its own build time, so it never followed our theme. Defaults mirror
   // color-base-darkest/text-inverse (see _variables.scss) — a stable,
   // theme-invariant dark neutral (not the per-preset brand-tinted
   // color-dark-bg used by hero/banner) with light text on it.
-  component('usx-tooltip-background-color', '#1b1b1b', 'color-base-darkest'),
-  component('usx-tooltip-text-color', '#ffffff', 'text-inverse'),
+  component('usx-tooltip-bg', '#1b1b1b', 'color-base-darkest'),
+  component('usx-tooltip-text', '#ffffff', 'text-inverse'),
   // Real USWDS only colors icon-list icons via opt-in BEM modifier classes;
   // give it a themeable default (color-primary) instead.
-  component('usx-icon-list-icon-color', '#005ea2', 'color-primary')
+  component('usx-icon-list-icon-text', '#005ea2', 'color-primary')
 ];
 
 export default themeManifest;

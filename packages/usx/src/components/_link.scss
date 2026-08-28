@@ -7,19 +7,19 @@
   gap: 0.25rem;
 
   &:not([class^="text-"]):not([class*=" text-"]) {
-    @if $usx-link-color {
-      color: $usx-link-color;
+    @if $usx-link-text {
+      color: $usx-link-text;
     }
 
     &:hover {
-      @if $usx-link-hover-color {
-        color: $usx-link-hover-color;
+      @if $usx-link-text-hover {
+        color: $usx-link-text-hover;
       }
     }
 
     &:active {
-      @if $usx-link-active-color {
-        color: $usx-link-active-color;
+      @if $usx-link-text-active {
+        color: $usx-link-text-active;
       }
     }
   }
@@ -27,8 +27,8 @@
   &:not(.usx-no-visited) {
     &:visited,
     &.usx-link--visited {
-      @if $usx-link-visited-color {
-        color: $usx-link-visited-color;
+      @if $usx-link-text-visited {
+        color: $usx-link-text-visited;
       }
     }
   }
@@ -44,16 +44,16 @@
 // (matching the surrounding light text) instead of the blue/purple defaults.
 .usa-dark-background .usx-link {
   &:not([class^="text-"]):not([class*=" text-"]) {
-    @if $usx-link-color-dark {
-      color: $usx-link-color-dark;
+    @if $usx-link-text-dark {
+      color: $usx-link-text-dark;
     }
   }
 
   &:not(.usx-no-visited) {
     &:visited,
     &.usx-link--visited {
-      @if $usx-link-visited-color-dark {
-        color: $usx-link-visited-color-dark;
+      @if $usx-link-text-visited-dark {
+        color: $usx-link-text-visited-dark;
       }
     }
   }

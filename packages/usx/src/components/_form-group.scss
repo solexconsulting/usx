@@ -2,17 +2,17 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-form-group.usa-form-group--error {
-  @if $usx-form-group-error-color {
-    border-color: $usx-form-group-error-color;
+  @if $usx-form-group-error-text {
+    border-color: $usx-form-group-error-text;
   }
 
-  @if $usx-form-group-error-border-thickness {
-    border-width: $usx-form-group-error-border-thickness;
+  @if $usx-form-group-error-border-width {
+    border-width: $usx-form-group-error-border-width;
   }
 }
 
 .usa-error-message {
-    @if $color-error {
-        color: $color-error;
+    @if $usx-color-error {
+        color: $usx-color-error;
     }
 }

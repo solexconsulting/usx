@@ -21,7 +21,7 @@
     .usx-misc-banner__badge {
       background-color: white;
       font-size: $usx-misc-banner-font-size;
-      font-weight: $font-weight-bold;
+      font-weight: $usx-font-weight-bold;
       text-transform: uppercase;
       padding: 6px 11px;
       border-radius: $usx-misc-banner-badge-radius;
@@ -77,8 +77,8 @@
       .usx-misc-banner__dropdown-toggle:focus + .usx-misc-banner__dropdown-button {
         outline: 0.25rem solid #9bdaf1;
 
-        @if $usx-misc-banner-focus-outline-color {
-          outline-color: $usx-misc-banner-focus-outline-color;
+        @if $usx-misc-banner-focus {
+          outline-color: $usx-misc-banner-focus;
         }
       }
 

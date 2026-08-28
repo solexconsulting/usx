@@ -9,8 +9,8 @@
 /* ---------------------------------- */
 
 .usa-textarea.usx-textarea {
-  @if $usx-textarea-border-radius {
-    border-radius: $usx-textarea-border-radius;
+  @if $usx-textarea-radius {
+    border-radius: $usx-textarea-radius;
   }
 
   @if $usx-textarea-padding {
@@ -26,16 +26,16 @@
 
 .usa-textarea.usx-textarea:not(.usa-input--error, .usa-input--success) {
   &:not(:disabled) {
-    @if $usx-textarea-background-color {
-      background-color: $usx-textarea-background-color;
+    @if $usx-textarea-bg {
+      background-color: $usx-textarea-bg;
     }
 
-    @if $usx-textarea-text-color {
-      color: $usx-textarea-text-color;
+    @if $usx-textarea-text {
+      color: $usx-textarea-text;
     }
 
-    @if $usx-textarea-border-color {
-      border-color: $usx-textarea-border-color;
+    @if $usx-textarea-border {
+      border-color: $usx-textarea-border;
     }
   }
 }
@@ -45,8 +45,8 @@
     border-width: $usx-input-error-border-width;
   }
 
-  @if $usx-input-error-border-color {
-    border-color: $usx-input-error-border-color;
+  @if $usx-input-error-border {
+    border-color: $usx-input-error-border;
   }
 
   @if $usx-input-error-border-style {
@@ -67,8 +67,8 @@
     border-width: $usx-input-success-border-width;
   }
 
-  @if $usx-input-success-border-color {
-    border-color: $usx-input-success-border-color;
+  @if $usx-input-success-border {
+    border-color: $usx-input-success-border;
   }
 
   @if $usx-input-success-border-style {

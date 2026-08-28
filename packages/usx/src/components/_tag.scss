@@ -7,7 +7,7 @@
   align-items: center;
   line-height: $usx-tag-line-height;
   gap: .25rem;
-  border-radius: $usx-tag-border-radius;
+  border-radius: $usx-tag-radius;
 
   &.usx-tag--outline {
     background-color: transparent;
@@ -36,7 +36,7 @@
     }
 
     &:hover {
-      color: $color-primary-lighter;
+      color: $usx-color-primary-lighter;
     }
 
     &:focus {

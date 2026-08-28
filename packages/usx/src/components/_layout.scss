@@ -4,8 +4,8 @@
 .usx-layout {
   min-height: 100vh;
 
-  @if $surface-1 {
-    background-color: $surface-1;
+  @if $usx-surface-1 {
+    background-color: $usx-surface-1;
   }
 
   // ── Single column layout ──────────────────────────────────────────────────

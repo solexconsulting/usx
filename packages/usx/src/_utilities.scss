@@ -57,27 +57,27 @@
 }
 
 .usx-rounded-sm {
-  border-radius: $r-sm;
+  border-radius: $usx-radius-sm;
   overflow: clip;
 }
 
 .usx-rounded-md {
-  border-radius: $r-md;
+  border-radius: $usx-radius-md;
   overflow: clip;
 }
 
 .usx-rounded-lg {
-  border-radius: $r-lg;
+  border-radius: $usx-radius-lg;
   overflow: clip;
 }
 
 .usx-rounded-xl {
-  border-radius: $r-xl;
+  border-radius: $usx-radius-xl;
   overflow: clip;
 }
 
 .usx-circle {
-  border-radius: $r-full;
+  border-radius: $usx-radius-full;
   overflow: clip;
 }
 

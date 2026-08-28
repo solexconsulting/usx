@@ -29,7 +29,7 @@ Every themeable Sass token in `src/_variables.scss` is a **triple**:
 ```scss
 $color-primary-static: #2563eb !default;                 // plain value — the only thing Sass math may consume
 $usx-color-primary-var: --usx-color-primary !default;    // CSS custom property hook (null to opt out)
-$color-primary: usx-var($usx-color-primary-var, $color-primary-static) !default;  // published token
+$usx-color-primary: usx-var($usx-color-primary-var, $color-primary-static) !default;  // published token
 ```
 
 The published token (what component SCSS consumes by name) resolves to

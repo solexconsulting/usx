@@ -12,7 +12,7 @@ $usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/20
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-accordion {
   .usa-accordion__button {
-    border-radius: $usx-accordion-border-radius;
+    border-radius: $usx-accordion-radius;
   }
 
   .usa-accordion__button[aria-expanded="true"] {
@@ -29,8 +29,8 @@ $usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/20
   }
 
   .usa-accordion__content {
-    border-end-start-radius: $usx-accordion-border-radius;
-    border-end-end-radius: $usx-accordion-border-radius;
+    border-end-start-radius: $usx-accordion-radius;
+    border-end-end-radius: $usx-accordion-radius;
   }
 
   @if $usx-accordion-bg {

@@ -6,37 +6,37 @@
     border: $usx-summary-box-border;
   }
 
-  @if $usx-summary-box-border-radius {
-    border-radius: $usx-summary-box-border-radius;
+  @if $usx-summary-box-radius {
+    border-radius: $usx-summary-box-radius;
   }
 
   @if $usx-summary-box-padding {
     padding: $usx-summary-box-padding;
   }
 
-  @if $usx-summary-box-background-color {
-    background-color: $usx-summary-box-background-color;
+  @if $usx-summary-box-bg {
+    background-color: $usx-summary-box-bg;
   }
 
-  @if $usx-summary-box-text-color {
-    color: $usx-summary-box-text-color;
+  @if $usx-summary-box-text {
+    color: $usx-summary-box-text;
   }
 
-  @if $usx-summary-box-link-color {
+  @if $usx-summary-box-link-text {
     .usa-summary-box__link:not(:visited, :hover) {
-      color: $usx-summary-box-link-color;
+      color: $usx-summary-box-link-text;
     }
   }
 
-  @if $usx-summary-box-link-hover-color {
+  @if $usx-summary-box-link-text-hover {
     .usa-summary-box__link:hover {
-      color: $usx-summary-box-link-hover-color;
+      color: $usx-summary-box-link-text-hover;
     }
   }
 
-  @if $usx-summary-box-link-visited-color {
+  @if $usx-summary-box-link-text-visited {
     .usa-summary-box__link:visited {
-      color: $usx-summary-box-link-visited-color;
+      color: $usx-summary-box-link-text-visited;
     }
   }
 }

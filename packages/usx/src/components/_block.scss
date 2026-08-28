@@ -31,8 +31,8 @@
     background-color: #e2e8f0;
     padding: 1rem 1.25rem;
 
-    @if $usx-block-callout-background-color {
-      background-color: $usx-block-callout-background-color;
+    @if $usx-block-callout-bg {
+      background-color: $usx-block-callout-bg;
     }
     
     @if $usx-block-border-width {
@@ -87,7 +87,9 @@
 
   &.usx-block--big {
     .usx-block__content {
-      border-left-width: calc(1.5 * $usx-block-border-width);
+      @if $usx-block-border-width {
+        border-left-width: calc(1.5 * $usx-block-border-width);
+      }
       padding-left: 1.375rem;
     }
   }

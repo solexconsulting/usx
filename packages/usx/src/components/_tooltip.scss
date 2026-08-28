@@ -18,16 +18,16 @@ $usx-triangle-size: 5px;
     // Real USWDS bakes the background/font color as fixed values at build
     // time (see _variables.scss's Tooltip section) — override them here so
     // the tooltip follows the theme instead of staying a flat frozen black.
-    @if $usx-tooltip-background-color {
-      background-color: $usx-tooltip-background-color;
+    @if $usx-tooltip-bg {
+      background-color: $usx-tooltip-bg;
 
       &::after {
-        border-right-color: $usx-tooltip-background-color;
+        border-right-color: $usx-tooltip-bg;
       }
     }
 
-    @if $usx-tooltip-text-color {
-      color: $usx-tooltip-text-color;
+    @if $usx-tooltip-text {
+      color: $usx-tooltip-text;
     }
 
     // Replace JS-injected inline positioning with CSS transforms

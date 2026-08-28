@@ -7,27 +7,27 @@
   position: relative;
 
   &.usa-site-alert--info {
-    @if $usx-site-alert-default-bg-color {
-      background-color: $usx-site-alert-default-bg-color;
+    @if $usx-site-alert-default-bg {
+      background-color: $usx-site-alert-default-bg;
 
       .usa-alert.usx-alert {
         background-color: transparent;
       }
     }
 
-    @if $usx-site-alert-default-border-color {
+    @if $usx-site-alert-default-border {
       .usa-alert.usx-alert {
-        border-color: $usx-site-alert-default-border-color;
+        border-color: $usx-site-alert-default-border;
       }
     }
   }
 
   &.usa-site-alert--emergency {
-    @if $usx-site-alert-emergency-bg-color {
-      background-color: $usx-site-alert-emergency-bg-color;
+    @if $usx-site-alert-emergency-bg {
+      background-color: $usx-site-alert-emergency-bg;
 
       .usa-alert {
-        border-color: $usx-site-alert-emergency-bg-color;
+        border-color: $usx-site-alert-emergency-bg;
         background-color: transparent;
       }
     }
@@ -36,8 +36,8 @@
   &.usx-site-alert--maintenance, &.usx-site-alert--maintenance-warning {
     background-color: #f0f0f0;
 
-    @if $usx-site-alert-maintenance-bg-color {
-      background-color: $usx-site-alert-maintenance-bg-color;
+    @if $usx-site-alert-maintenance-bg {
+      background-color: $usx-site-alert-maintenance-bg;
     }
 
     .usa-alert {
@@ -48,8 +48,8 @@
   &.usx-site-alert--maintenance {
     border-top: 8px solid #b50909;
 
-    @if $color-error {
-      border-color: $color-error;
+    @if $usx-color-error {
+      border-color: $usx-color-error;
     }
 
 		@if $usx-alert-border-width {
@@ -60,8 +60,8 @@
   &.usx-site-alert--maintenance-warning {
     border-top: 8px solid #ffbe2e;
 
-    @if $color-warning {
-      border-color: $color-warning;
+    @if $usx-color-warning {
+      border-color: $usx-color-warning;
     }
 
     @if $usx-alert-border-width {

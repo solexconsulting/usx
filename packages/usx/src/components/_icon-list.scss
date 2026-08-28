@@ -12,8 +12,8 @@
 
     // Real USWDS only colors the icon via opt-in BEM modifier classes
     // (.usa-icon-list--primary, etc.) — default it to our theme instead.
-    @if $usx-icon-list-icon-color {
-      color: $usx-icon-list-icon-color;
+    @if $usx-icon-list-icon-text {
+      color: $usx-icon-list-icon-text;
     }
   }
 

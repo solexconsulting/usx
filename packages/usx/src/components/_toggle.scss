@@ -14,15 +14,15 @@
 
   &__input:checked + .usa-button.usx-button {
     .usx-toggle__label {
-      color: $text-inverse;
+      color: $usx-text-inverse;
     }
   }
 
   &__input:checked + .usa-button.usx-button.usa-button--outline {
-    background: $color-primary-active;
+    background: $usx-color-primary-active;
 
-    @if $color-primary-active {
-      outline: 2px solid $color-primary-active inset;
+    @if $usx-color-primary-active {
+      outline: 2px solid $usx-color-primary-active inset;
     }
   }
 

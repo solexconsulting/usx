@@ -45,8 +45,8 @@
   outline: .25rem solid #2491ff;
   outline-offset: -.25rem;
 
-  @if $usx-carousel-focus-outline-color {
-    outline-color: $usx-carousel-focus-outline-color;
+  @if $usx-carousel-focus {
+    outline-color: $usx-carousel-focus;
   }
 }
 
@@ -77,23 +77,23 @@
   display: inline-block;
   text-decoration: none;
 
-  @if $usx-carousel-dot-color {
-    background: $usx-carousel-dot-color;
+  @if $usx-carousel-dot-bg {
+    background: $usx-carousel-dot-bg;
   }
 
   &:hover {
     background: #a0a0a0;
 
-    @if $usx-carousel-dot-color-hover {
-      background: $usx-carousel-dot-color-hover;
+    @if $usx-carousel-dot-bg-hover {
+      background: $usx-carousel-dot-bg-hover;
     }
   }
 
   &:active {
     background: #808080;
 
-    @if $usx-carousel-dot-color-active {
-      background: $usx-carousel-dot-color-active;
+    @if $usx-carousel-dot-bg-active {
+      background: $usx-carousel-dot-bg-active;
     }
   }
 }
@@ -113,8 +113,8 @@
     overflow: hidden;
     background-color: #f8fafc;
 
-    @if $usx-carousel-card-media-background-color {
-      background-color: $usx-carousel-card-media-background-color;
+    @if $usx-carousel-card-media-bg {
+      background-color: $usx-carousel-card-media-bg;
     }
   }
 

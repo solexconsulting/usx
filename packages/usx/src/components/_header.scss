@@ -2,12 +2,12 @@
 
 /* stylelint-disable selector-class-pattern, no-descending-specificity -- Public USX classes use BEM naming; intentional cascade order. */
 .usx-header {
-  @if $usx-header-background-color {
-    background-color: $usx-header-background-color;
+  @if $usx-header-bg {
+    background-color: $usx-header-bg;
   }
 
-  @if $usx-header-text-color {
-    color: $usx-header-text-color;
+  @if $usx-header-text {
+    color: $usx-header-text;
   }
 
   @if $usx-header-border-bottom {
@@ -27,13 +27,13 @@
 
   .usa-navbar {
     .usa-menu-btn {
-      @if $usx-header-menu-btn-background-color {
-        background-color: $usx-header-menu-btn-background-color;
+      @if $usx-header-menu-btn-bg {
+        background-color: $usx-header-menu-btn-bg;
       }
 
       &:hover {
-        @if $usx-header-menu-btn-background-color-hover {
-          background-color: $usx-header-menu-btn-background-color-hover;
+        @if $usx-header-menu-btn-bg-hover {
+          background-color: $usx-header-menu-btn-bg-hover;
         }
       }
     }
@@ -54,14 +54,14 @@
   // are visually distinct surfaces.
   .usx-nav {
     @media (width < 64em) {
-      @if $usx-nav-background-color-mobile {
-        background-color: $usx-nav-background-color-mobile;
+      @if $usx-header-nav-bg-mobile {
+        background-color: $usx-header-nav-bg-mobile;
       }
     }
 
     @media (width >= 64em) {
-      @if $usx-nav-background-color {
-        background-color: $usx-nav-background-color;
+      @if $usx-header-nav-bg {
+        background-color: $usx-header-nav-bg;
       }
     }
   }
@@ -74,12 +74,12 @@
   // of the drawer's own).
   @media (width >= 64em) {
     .usx-nav {
-      @if $usx-nav-border-bottom {
-        border-bottom: $usx-nav-border-bottom;
+      @if $usx-header-nav-border-bottom {
+        border-bottom: $usx-header-nav-border-bottom;
       }
 
-      @if $usx-nav-border-top {
-        border-top: $usx-nav-border-top;
+      @if $usx-header-nav-border-top {
+        border-top: $usx-header-nav-border-top;
       } @else {
         border-top: 1px solid #dfe1e2;
       }
@@ -106,7 +106,7 @@
           position: relative;
 
           &::after {
-            background-color: $color-primary;
+            background-color: $usx-color-primary;
             border-radius: 0;
             content: "";
             display: block;
@@ -139,22 +139,22 @@
 .usa-nav.usx-nav {
   float: right;
 
-  @if $usx-nav-link-hover-color {
+  @if $usx-header-nav-link-text-hover {
     // Vendor's dark-background/white-text expanded look is desktop-only (see
     // the aria-expanded background rule further below), so at mobile a hover
     // on an already-open toggle should still track the theme like any other
     // hover; only desktop needs the :not([aria-expanded="true"]) exclusion.
     @media (width < 64em) {
       .usa-nav__primary button:hover {
-        color: $usx-nav-link-hover-color-mobile;
+        color: $usx-header-nav-link-text-hover-mobile;
         // Vendor hardcodes this hover background at mobile only (and resets
         // it to transparent again at desktop) — match that scoping.
-        @if $usx-nav-link-hover-bg-color {
-          background-color: $usx-nav-link-hover-bg-color;
+        @if $usx-header-nav-link-bg-hover {
+          background-color: $usx-header-nav-link-bg-hover;
         }
         &> span::after {
-          @if $usx-nav-link-hover-color-mobile {
-            background-color: $usx-nav-link-hover-color-mobile;
+          @if $usx-header-nav-link-text-hover-mobile {
+            background-color: $usx-header-nav-link-text-hover-mobile;
           }
         }
       }
@@ -162,10 +162,10 @@
 
     @media (width >= 64em) {
       .usa-nav__primary button:not([aria-expanded="true"]):hover {
-        color: $usx-nav-link-hover-color;
+        color: $usx-header-nav-link-text-hover;
         &> span::after {
-          @if $usx-nav-link-hover-color {
-            background-color: $usx-nav-link-hover-color;
+          @if $usx-header-nav-link-text-hover {
+            background-color: $usx-header-nav-link-text-hover;
           }
         }
       }
@@ -173,17 +173,17 @@
 
     .usa-nav__primary > .usa-nav__primary-item > a:hover {
       @media (width < 64em) {
-        color: $usx-nav-link-hover-color-mobile;
+        color: $usx-header-nav-link-text-hover-mobile;
 
         // Vendor hardcodes this hover background at mobile only; desktop
         // links get no hover background at all.
-        @if $usx-nav-link-hover-bg-color {
-          background-color: $usx-nav-link-hover-bg-color;
+        @if $usx-header-nav-link-bg-hover {
+          background-color: $usx-header-nav-link-bg-hover;
         }
       }
 
       @media (width >= 64em) {
-        color: $usx-nav-link-hover-color;
+        color: $usx-header-nav-link-text-hover;
       }
     }
   }
@@ -199,13 +199,13 @@
     // drawer link tokens, not the desktop primary-nav ones.
     // .usa-icon fills via `currentColor`, so tint it with `color`, not
     // `background-color` (which would draw a solid box behind the icon).
-    @if $usx-nav-link-color-mobile {
-      color: $usx-nav-link-color-mobile;
+    @if $usx-header-nav-link-text-mobile {
+      color: $usx-header-nav-link-text-mobile;
     }
 
     &:hover {
-      @if $usx-nav-link-hover-color-mobile {
-        color: $usx-nav-link-hover-color-mobile;
+      @if $usx-header-nav-link-text-hover-mobile {
+        color: $usx-header-nav-link-text-hover-mobile;
       }
     }
   }
@@ -234,9 +234,9 @@
 
     .usa-nav__secondary-item + .usa-nav__secondary-item {
       // USWDS's own separator is a border color (#dfe1e2), not the link's
-      // text color — $usx-header-secondary-link-color was the wrong token.
-      @if $usx-nav-border-top {
-        border-left: $usx-nav-border-top;
+      // text color — $usx-header-secondary-link-text was the wrong token.
+      @if $usx-header-nav-border-top {
+        border-left: $usx-header-nav-border-top;
       } @else {
         border-left: 1px solid #dfe1e2;
       }
@@ -255,13 +255,13 @@
         .usa-nav__primary > .usa-nav__primary-item > a:hover,
         .usa-current
       ) {
-        @if $usx-nav-link-color-mobile {
-          color: $usx-nav-link-color-mobile;
+        @if $usx-header-nav-link-text-mobile {
+          color: $usx-header-nav-link-text-mobile;
         }
 
         &> span::after {
-          @if $usx-nav-link-color-mobile {
-            background-color: $usx-nav-link-color-mobile;
+          @if $usx-header-nav-link-text-mobile {
+            background-color: $usx-header-nav-link-text-mobile;
           }
         }
       }
@@ -274,13 +274,13 @@
         .usa-nav__primary > .usa-nav__primary-item > a:hover,
         .usa-current
       ) {
-        @if $usx-nav-link-color {
-          color: $usx-nav-link-color;
+        @if $usx-header-nav-link-text {
+          color: $usx-header-nav-link-text;
         }
 
         &> span::after {
-          @if $usx-nav-link-color {
-            background-color: $usx-nav-link-color;
+          @if $usx-header-nav-link-text {
+            background-color: $usx-header-nav-link-text;
           }
         }
       }
@@ -291,8 +291,8 @@
     // exists in vendor's desktop rules).
     @media (width >= 64em) {
       &.usa-current {
-        @if $usx-nav-link-color {
-          color: $usx-nav-link-color;
+        @if $usx-header-nav-link-text {
+          color: $usx-header-nav-link-text;
         }
       }
     }
@@ -302,15 +302,15 @@
     // desktop bottom-bar treatment at this width.
     @media (width < 64em) {
       &.usa-current {
-        @if $usx-nav-link-hover-color-mobile {
-          color: $usx-nav-link-hover-color-mobile;
+        @if $usx-header-nav-link-text-hover-mobile {
+          color: $usx-header-nav-link-text-hover-mobile;
         }
         font-weight: 700;
         position: relative;
 
         &::after {
-          @if $usx-nav-link-hover-color-mobile {
-            background-color: $usx-nav-link-hover-color-mobile;
+          @if $usx-header-nav-link-text-hover-mobile {
+            background-color: $usx-header-nav-link-text-hover-mobile;
           }
           border-radius: 99rem;
           content: "";
@@ -337,7 +337,7 @@
         position: relative;
 
         &::after {
-          background-color: $color-primary;
+          background-color: $usx-color-primary;
           border-radius: 0;
           content: "";
           display: block;
@@ -363,18 +363,18 @@
     // unthemed link text from above) over the mobile accordion toggle/panel.
     @media (width >= 64em) {
       &[aria-expanded="true"] {
-        @if $usx-nav-link-bg-color {
-          background-color: $usx-nav-link-bg-color !important;
+        @if $usx-header-nav-link-bg {
+          background-color: $usx-header-nav-link-bg !important;
         }
 
         & + .usa-nav__submenu {
-          @if $usx-nav-submenu-bg-color {
-            background-color: $usx-nav-submenu-bg-color;
+          @if $usx-header-nav-submenu-bg {
+            background-color: $usx-header-nav-submenu-bg;
           }
 
           &::before, &::after {
-            @if $usx-nav-submenu-bg-color {
-              background-color: $usx-nav-submenu-bg-color;
+            @if $usx-header-nav-submenu-bg {
+              background-color: $usx-header-nav-submenu-bg;
             }
           }
         }
@@ -383,13 +383,13 @@
   }
 
   .usa-nav__secondary-item > a {
-    @if $usx-header-secondary-link-color {
-      color: $usx-header-secondary-link-color;
+    @if $usx-header-secondary-link-text {
+      color: $usx-header-secondary-link-text;
     }
 
     &:hover {
-      @if $usx-header-secondary-link-hover {
-        color: $usx-header-secondary-link-hover;
+      @if $usx-header-secondary-link-text-hover {
+        color: $usx-header-secondary-link-text-hover;
       }
     }
   }
@@ -397,9 +397,9 @@
   @media (width < 64em) {
     .usa-nav__primary-item, .usa-nav__submenu-item {
       // USWDS's own default is a border color (#dfe1e2), not a text color —
-      // $usx-nav-link-color was the wrong token here.
-      @if $usx-nav-border-top {
-        border-top: $usx-nav-border-top;
+      // $usx-header-nav-link-text was the wrong token here.
+      @if $usx-header-nav-border-top {
+        border-top: $usx-header-nav-border-top;
       } @else {
         border-top: 1px solid #dfe1e2;
       }
@@ -409,23 +409,23 @@
     // Header.tsx), so the rule above never reaches them — left alone they
     // fall back to vendor's hardcoded gray/blue instead of the active theme.
     .usa-nav__submenu-item > a {
-      @if $usx-nav-link-color {
-        color: $usx-nav-link-color;
+      @if $usx-header-nav-link-text {
+        color: $usx-header-nav-link-text;
       }
 
       &:hover {
-        @if $usx-nav-link-hover-color {
-          color: $usx-nav-link-hover-color;
+        @if $usx-header-nav-link-text-hover {
+          color: $usx-header-nav-link-text-hover;
         }
 
-        @if $usx-nav-link-hover-bg-color {
-          background-color: $usx-nav-link-hover-bg-color;
+        @if $usx-header-nav-link-bg-hover {
+          background-color: $usx-header-nav-link-bg-hover;
         }
       }
 
       &.usa-current {
-        @if $usx-nav-link-hover-color {
-          color: $usx-nav-link-hover-color;
+        @if $usx-header-nav-link-text-hover {
+          color: $usx-header-nav-link-text-hover;
         }
         font-weight: 700;
       }

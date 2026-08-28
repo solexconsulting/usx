@@ -13,8 +13,8 @@
       border-width: $usx-input-error-border-width;
     }
 
-    @if $usx-input-error-border-color {
-      border-color: $usx-input-error-border-color;
+    @if $usx-input-error-border {
+      border-color: $usx-input-error-border;
     }
 
     @if $usx-input-error-border-style {

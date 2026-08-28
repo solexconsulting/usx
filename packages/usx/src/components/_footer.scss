@@ -2,40 +2,40 @@
 
 /* stylelint-disable selector-class-pattern, no-descending-specificity -- Public USX classes use BEM naming; intentional cascade order. */
 .usx-footer {
-  @if $usx-footer-background-color {
-    background-color: $usx-footer-background-color;
+  @if $usx-footer-bg {
+    background-color: $usx-footer-bg;
   }
 
   @if $usx-footer-border-top {
     border-top: $usx-footer-border-top;
   }
 
-  @if $usx-footer-text-color {
-    color: $usx-footer-text-color;
+  @if $usx-footer-text {
+    color: $usx-footer-text;
   }
 
   // ── Nav columns (big footer) ──────────────────────────────────────────────
   &__nav-column {
     .usa-footer__primary-link {
-      @if $usx-footer-heading-color {
-        color: $usx-footer-heading-color;
+      @if $usx-footer-heading-text {
+        color: $usx-footer-heading-text;
       }
 
       &.usa-footer__primary-link--button {
-        @if $usx-footer-background-color {
-          background-color: $usx-footer-background-color;
+        @if $usx-footer-bg {
+          background-color: $usx-footer-bg;
         }
       }
     }
 
     .usa-footer__secondary-link a {
-      @if $usx-footer-secondary-link-color {
-        color: $usx-footer-secondary-link-color;
+      @if $usx-footer-secondary-link-text {
+        color: $usx-footer-secondary-link-text;
       }
 
       &:hover {
-        @if $usx-footer-secondary-link-hover-color {
-          color: $usx-footer-secondary-link-hover-color;
+        @if $usx-footer-secondary-link-text-hover {
+          color: $usx-footer-secondary-link-text-hover;
         }
       }
     }
@@ -44,14 +44,14 @@
   // ── Sign-up form ─────────────────────────────────────────────────────────
   &__sign-up {
     .usa-sign-up__heading {
-      @if $usx-footer-heading-color {
-        color: $usx-footer-heading-color;
+      @if $usx-footer-heading-text {
+        color: $usx-footer-heading-text;
       }
     }
 
     .usa-button {
-      @if $usx-footer-sign-up-button-color {
-        background-color: $usx-footer-sign-up-button-color;
+      @if $usx-footer-sign-up-button-bg {
+        background-color: $usx-footer-sign-up-button-bg;
       }
     }
   }
@@ -60,8 +60,8 @@
   &__logo {
     .usa-footer__logo-heading,
     a.usa-footer__logo-heading {
-      @if $usx-footer-heading-color-secondary {
-        color: $usx-footer-heading-color-secondary;
+      @if $usx-footer-heading-secondary-text {
+        color: $usx-footer-heading-secondary-text;
       }
 
       text-decoration: none;
@@ -70,8 +70,8 @@
 
   // ── Social links ─────────────────────────────────────────────────────────
   .usa-social-link {
-    @if $usx-footer-link-color {
-      color: $usx-footer-link-color;
+    @if $usx-footer-link-text {
+      color: $usx-footer-link-text;
     }
 
     @if $usx-footer-social-radius {
@@ -79,8 +79,8 @@
     }
 
     &:hover {
-      @if $usx-footer-social-hover-color {
-        background-color: $usx-footer-social-hover-color;
+      @if $usx-footer-social-bg-hover {
+        background-color: $usx-footer-social-bg-hover;
       }
 
       @if $usx-footer-social-hover-border {
@@ -108,19 +108,19 @@
     }
 
     .usa-footer__contact-heading {
-      @if $usx-footer-heading-color-secondary {
-        color: $usx-footer-heading-color-secondary;
+      @if $usx-footer-heading-secondary-text {
+        color: $usx-footer-heading-secondary-text;
       }
     }
 
     a {
-      @if $usx-footer-link-color {
-        color: $usx-footer-link-color;
+      @if $usx-footer-link-text {
+        color: $usx-footer-link-text;
       }
 
       &:hover {
-        @if $usx-footer-link-hover-color {
-          color: $usx-footer-link-hover-color;
+        @if $usx-footer-link-text-hover {
+          color: $usx-footer-link-text-hover;
         }
       }
     }
@@ -128,8 +128,8 @@
 
   // ── Secondary section background ─────────────────────────────────────────
   .usa-footer__secondary-section {
-    @if $usx-footer-secondary-bg-color {
-      background-color: $usx-footer-secondary-bg-color;
+    @if $usx-footer-secondary-bg {
+      background-color: $usx-footer-secondary-bg;
     }
 
     @if $usx-footer-secondary-section-border-top {
@@ -138,8 +138,8 @@
   }
 
   .usa-footer__primary-section {
-    @if $usx-footer-primary-bg-color {
-      background-color: $usx-footer-primary-bg-color;
+    @if $usx-footer-primary-bg {
+      background-color: $usx-footer-primary-bg;
     }
 
     @if $usx-footer-primary-section-border-top {
@@ -150,13 +150,13 @@
   // ── Primary-section nav links ────────────────────────────────────────────
   .usa-footer__nav {
     a.usa-footer__primary-link {
-      @if $usx-footer-link-color {
-        color: $usx-footer-link-color;
+      @if $usx-footer-link-text {
+        color: $usx-footer-link-text;
       }
 
       &:hover {
-        @if $usx-footer-link-hover-color {
-          color: $usx-footer-link-hover-color;
+        @if $usx-footer-link-text-hover {
+          color: $usx-footer-link-text-hover;
         }
       }
     }
@@ -172,8 +172,8 @@
   width: max-content;
   gap: 0.2rem;
 
-  @if $usx-footer-link-color {
-    color: $usx-footer-link-color !important;
+  @if $usx-footer-link-text {
+    color: $usx-footer-link-text !important;
   }
 
   &:visited {
@@ -181,8 +181,8 @@
   }
 
   &:hover {
-    @if $usx-footer-link-hover-color {
-      color: $usx-footer-link-hover-color !important;
+    @if $usx-footer-link-text-hover {
+      color: $usx-footer-link-text-hover !important;
     }
   }
 }

@@ -78,6 +78,12 @@ importers:
 
   apps/storybook:
     devDependencies:
+      '@solexllc/usx':
+        specifier: workspace:*
+        version: link:../../packages/usx
+      '@solexllc/usx-theme':
+        specifier: workspace:*
+        version: link:../../packages/tokens
       '@uswds/uswds':
         specifier: ^3.13.0
         version: 3.13.0
@@ -87,6 +93,15 @@ importers:
 
   packages/core:
     dependencies:
+      '@solexllc/usx':
+        specifier: workspace:*
+        version: link:../usx
+      '@solexllc/usx-theme':
+        specifier: workspace:*
+        version: link:../tokens
+      '@solexllc/usx-uswds-fixes':
+        specifier: workspace:*
+        version: link:../usx-uswds-fixes
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -103,11 +118,55 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      sass:
+        specifier: ^1.98.0
+        version: 1.98.0
       vite:
         specifier: ^6.4.1
         version: 6.4.1(@types/node@25.7.0)(sass@1.98.0)(terser@5.47.1)
 
   packages/tokens: {}
+
+  packages/usx:
+    dependencies:
+      '@solexllc/usx-theme':
+        specifier: workspace:*
+        version: link:../tokens
+    devDependencies:
+      sass:
+        specifier: ^1.98.0
+        version: 1.98.0
+
+  packages/usx-stories:
+    dependencies:
+      '@solexllc/usx-theme':
+        specifier: workspace:*
+        version: link:../tokens
+      '@uswds/uswds':
+        specifier: ^3.13.0
+        version: 3.13.0
+      prop-types:
+        specifier: ^15.8.1
+        version: 15.8.1
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+      storybook:
+        specifier: ^10.3.6
+        version: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
+  packages/usx-uswds-fixes:
+    dependencies:
+      '@solexllc/usx-theme':
+        specifier: workspace:*
+        version: link:../tokens
+    devDependencies:
+      sass:
+        specifier: ^1.98.0
+        version: 1.98.0
 
 packages:
 

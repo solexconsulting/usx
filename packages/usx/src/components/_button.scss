@@ -8,8 +8,8 @@
 
 /* ---------------------------------- */
 .usa-button.usx-button:not(.usa-button--unstyled) {
-  @if $usx-button-border-radius {
-    border-radius: $usx-button-border-radius;
+  @if $usx-radius-button {
+    border-radius: $usx-radius-button;
   }
 
   &:not(.usa-button--outline) {
@@ -27,8 +27,8 @@
 @mixin usx-button-inverse($hover-mix: 20%, $active-mix: 40%) {
   $inverse-color: white;
 
-  @if $text-inverse {
-    $inverse-color: $text-inverse;
+  @if $usx-text-inverse {
+    $inverse-color: $usx-text-inverse;
   }
 
   color: $inverse-color;
@@ -114,60 +114,60 @@
 /* Primary */
 @include usx-button-variant(
   ".usa-button--primary",
-  $usx-button-primary-background-color,
-  $usx-button-primary-background-color-hover,
-  $usx-button-primary-background-color-active,
-  $usx-button-primary-color,
-  $usx-button-primary-color-hover,
-  $usx-button-primary-color-active,
-  $usx-button-primary-border-color
+  $usx-button-primary-bg,
+  $usx-button-primary-bg-hover,
+  $usx-button-primary-bg-active,
+  $usx-button-primary-text,
+  $usx-button-primary-text-hover,
+  $usx-button-primary-text-active,
+  $usx-button-primary-border
 );
 
 /* Secondary */
 @include usx-button-variant(
   ".usa-button--secondary",
-  $usx-button-secondary-background-color,
-  $usx-button-secondary-background-color-hover,
-  $usx-button-secondary-background-color-active,
-  $usx-button-secondary-color,
-  $usx-button-secondary-color-hover,
-  $usx-button-secondary-color-active,
-  $usx-button-secondary-border-color
+  $usx-button-secondary-bg,
+  $usx-button-secondary-bg-hover,
+  $usx-button-secondary-bg-active,
+  $usx-button-secondary-text,
+  $usx-button-secondary-text-hover,
+  $usx-button-secondary-text-active,
+  $usx-button-secondary-border
 );
 
 /* Accent Cool */
 @include usx-button-variant(
   ".usa-button--accent-cool",
-  $usx-button-accent-cool-background-color,
-  $usx-button-accent-cool-background-color-hover,
-  $usx-button-accent-cool-background-color-active,
-  $usx-button-accent-cool-color,
-  $usx-button-accent-cool-color-hover,
-  $usx-button-accent-cool-color-active,
-  $usx-button-accent-cool-border-color
+  $usx-button-accent-cool-bg,
+  $usx-button-accent-cool-bg-hover,
+  $usx-button-accent-cool-bg-active,
+  $usx-button-accent-cool-text,
+  $usx-button-accent-cool-text-hover,
+  $usx-button-accent-cool-text-active,
+  $usx-button-accent-cool-border
 );
 
 /* Accent Warm */
 @include usx-button-variant(
   ".usa-button--accent-warm",
-  $usx-button-accent-warm-background-color,
-  $usx-button-accent-warm-background-color-hover,
-  $usx-button-accent-warm-background-color-active,
-  $usx-button-accent-warm-color,
-  $usx-button-accent-warm-color-hover,
-  $usx-button-accent-warm-color-active,
-  $usx-button-accent-warm-border-color
+  $usx-button-accent-warm-bg,
+  $usx-button-accent-warm-bg-hover,
+  $usx-button-accent-warm-bg-active,
+  $usx-button-accent-warm-text,
+  $usx-button-accent-warm-text-hover,
+  $usx-button-accent-warm-text-active,
+  $usx-button-accent-warm-border
 );
 
 /* Outline */
 @include usx-button-variant(
   ".usa-button--outline",
-  $usx-button-outline-background-color,
-  $usx-button-outline-background-color-hover,
-  $usx-button-outline-background-color-active,
-  $usx-button-outline-color,
-  $usx-button-outline-color-hover,
-  $usx-button-outline-color-active,
+  $usx-button-outline-bg,
+  $usx-button-outline-bg-hover,
+  $usx-button-outline-bg-active,
+  $usx-button-outline-text,
+  $usx-button-outline-text-hover,
+  $usx-button-outline-text-active,
   $usx-button-outline-box-shadow,
   true
 );
@@ -178,9 +178,9 @@
   null,
   null,
   null,
-  $color-primary,
-  $color-primary-hover,
-  $color-primary-active,
+  $usx-color-primary,
+  $usx-color-primary-hover,
+  $usx-color-primary-active,
   null
 );
 
@@ -199,32 +199,32 @@
 
     &:not([disabled], [aria-disabled="true"]) {
       &.usa-button--primary {
-        @if $color-primary {
-          color: $color-primary;
+        @if $usx-color-primary {
+          color: $usx-color-primary;
         }
       }
 
       &.usa-button--secondary {
-        @if $color-secondary {
-          color: $color-secondary;
+        @if $usx-color-secondary {
+          color: $usx-color-secondary;
         }
       }
 
       &.usa-button--accent-cool {
-        @if $color-accent-cool {
-          color: $color-accent-cool;
+        @if $usx-color-accent-cool {
+          color: $usx-color-accent-cool;
         }
       }
 
       &.usa-button--accent-warm {
-        @if $color-accent-warm {
-          color: $color-accent-warm;
+        @if $usx-color-accent-warm {
+          color: $usx-color-accent-warm;
         }
       }
 
       &.usa-button--base {
-        @if $color-base {
-          color: $color-base;
+        @if $usx-color-base {
+          color: $usx-color-base;
         }
       }
 

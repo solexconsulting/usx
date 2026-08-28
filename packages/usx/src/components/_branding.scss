@@ -38,8 +38,8 @@
 
 .usa-header {
   .usx-logo__title {
-    @if $usx-header-text-color {
-      color: $usx-header-text-color;
+    @if $usx-header-text {
+      color: $usx-header-text;
     }
   }
 
@@ -53,8 +53,8 @@
 
 .usa-footer {
   .usx-logo__title {
-    @if $usx-footer-text-color {
-      color: $usx-footer-text-color;
+    @if $usx-footer-text {
+      color: $usx-footer-text;
     }
   }
 

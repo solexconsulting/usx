@@ -8,8 +8,8 @@
 }
 
 .usx-sidenav.usa-sidenav {
-  @if $usx-sidenav-border-color != null {
-    border-bottom-color: $usx-sidenav-border-color;
+  @if $usx-sidenav-border != null {
+    border-bottom-color: $usx-sidenav-border;
   }
 
   @if $usx-sidenav-border-width != null {
@@ -22,8 +22,8 @@
   }
 
   .usa-sidenav__item {
-    @if $usx-sidenav-border-color != null {
-      border-top-color: $usx-sidenav-border-color;
+    @if $usx-sidenav-border != null {
+      border-top-color: $usx-sidenav-border;
     }
 
     @if $usx-sidenav-border-width != null {
@@ -33,36 +33,36 @@
 
   a {
     &.usa-current {
-      @if $usx-sidenav-current-color {
-        color: $usx-sidenav-current-color;
+      @if $usx-sidenav-current {
+        color: $usx-sidenav-current;
       }
 
       &::after {
-        @if $usx-sidenav-current-color {
-          background-color: $usx-sidenav-current-color;
+        @if $usx-sidenav-current {
+          background-color: $usx-sidenav-current;
         }
       }
     }
 
     &:not(.usa-button):not(.usa-current) {
-      @if $usx-sidenav-link-color {
-        color: $usx-sidenav-link-color;
+      @if $usx-sidenav-link-text {
+        color: $usx-sidenav-link-text;
       }
 
       &:hover {
-        @if $usx-sidenav-link-hover-color {
-          color: $usx-sidenav-link-hover-color;
+        @if $usx-sidenav-link-text-hover {
+          color: $usx-sidenav-link-text-hover;
         }
 
-        @if $usx-sidenav-hover-color {
-          background-color: $usx-sidenav-hover-color;
+        @if $usx-sidenav-bg-hover {
+          background-color: $usx-sidenav-bg-hover;
         }
       }
     }
 
     &:hover {
-      @if $usx-sidenav-hover-color {
-        background-color: $usx-sidenav-hover-color;
+      @if $usx-sidenav-bg-hover {
+        background-color: $usx-sidenav-bg-hover;
       }
     }
   }

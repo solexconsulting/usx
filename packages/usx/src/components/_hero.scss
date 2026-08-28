@@ -20,12 +20,12 @@
     min-height: $usx-hero-min-height;
   }
 
-  @if $usx-hero-bg-color {
-    background-color: $usx-hero-bg-color;
+  @if $usx-hero-bg {
+    background-color: $usx-hero-bg;
   }
 
-  @if $usx-hero-text-color {
-    color: $usx-hero-text-color;
+  @if $usx-hero-text {
+    color: $usx-hero-text;
   }
 
   &--has-overlay::before {
@@ -35,8 +35,8 @@
     background-color: rgba(0, 0, 0, 0.55);
     pointer-events: none;
 
-    @if $usx-hero-overlay-color {
-      background-color: $usx-hero-overlay-color;
+    @if $usx-hero-overlay-bg {
+      background-color: $usx-hero-overlay-bg;
     }
   }
 
@@ -80,10 +80,10 @@
   }
 
   &__heading {
-    font-family: $font-family-heading;
-    font-size: $font-size-h1;
-    font-weight: $font-weight-bold;
-    line-height: $line-height-heading;
+    font-family: $usx-font-family-heading;
+    font-size: $usx-font-size-h1;
+    font-weight: $usx-font-weight-bold;
+    line-height: $usx-line-height-heading;
     margin-top: 0;
     margin-bottom: 1rem;
     color: #ffffff;
@@ -92,22 +92,22 @@
       font-size: $usx-hero-heading-size;
     }
 
-    @if $usx-hero-heading-weight {
-      font-weight: $usx-hero-heading-weight;
+    @if $usx-hero-heading-font-weight {
+      font-weight: $usx-hero-heading-font-weight;
     }
 
-    @if $spacing-md {
-      margin-bottom: $spacing-md;
+    @if $usx-spacing-md {
+      margin-bottom: $usx-spacing-md;
     }
 
-    @if $usx-hero-text-color {
-      color: $usx-hero-text-color;
+    @if $usx-hero-text {
+      color: $usx-hero-text;
     }
 
     &--alt {
       display: block;
       font-size: 1.125rem;
-      font-weight: $font-weight-regular;
+      font-weight: $usx-font-weight-regular;
       margin-bottom: 0.25rem;
       color: #66b5ee;
 
@@ -115,12 +115,12 @@
         font-size: $usx-hero-alt-size;
       }
 
-      @if $spacing-xs {
-        margin-bottom: $spacing-xs;
+      @if $usx-spacing-xs {
+        margin-bottom: $usx-spacing-xs;
       }
 
-      @if $usx-hero-alt-color {
-        color: $usx-hero-alt-color;
+      @if $usx-hero-alt-text {
+        color: $usx-hero-alt-text;
       }
     }
   }
@@ -136,12 +136,12 @@
       font-size: $usx-hero-paragraph-size;
     }
 
-    @if $spacing-lg {
-      margin-bottom: $spacing-lg;
+    @if $usx-spacing-lg {
+      margin-bottom: $usx-spacing-lg;
     }
 
-    @if $usx-hero-text-color {
-      color: $usx-hero-text-color;
+    @if $usx-hero-text {
+      color: $usx-hero-text;
     }
   }
 }

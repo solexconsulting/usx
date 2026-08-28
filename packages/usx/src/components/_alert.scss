@@ -8,8 +8,8 @@
 	&.usx-alert, .usa-alert__body {
 		position: relative;
 
-		@if $usx-alert-border-radius {
-			border-radius: $usx-alert-border-radius;
+		@if $usx-alert-radius {
+			border-radius: $usx-alert-radius;
 		}
 
 		@if $usx-alert-box-shadow {
@@ -73,38 +73,38 @@
 
 /* Info variant */
 @include usx-alert-variant("info",
-	$usx-alert-info-background-color,
-	$usx-alert-info-text-color,
-	$usx-alert-info-link-color,
-	$usx-alert-info-border-color);
+	$usx-alert-info-bg,
+	$usx-alert-info-text,
+	$usx-alert-info-link-text,
+	$usx-alert-info-border);
 
 /* Warning variant */
 @include usx-alert-variant("warning",
-	$usx-alert-warning-background-color,
-	$usx-alert-warning-text-color,
-	$usx-alert-warning-link-color,
-	$usx-alert-warning-border-color);
+	$usx-alert-warning-bg,
+	$usx-alert-warning-text,
+	$usx-alert-warning-link-text,
+	$usx-alert-warning-border);
 
 /* Success variant */
 @include usx-alert-variant("success",
-	$usx-alert-success-background-color,
-	$usx-alert-success-text-color,
-	$usx-alert-success-link-color,
-	$usx-alert-success-border-color);
+	$usx-alert-success-bg,
+	$usx-alert-success-text,
+	$usx-alert-success-link-text,
+	$usx-alert-success-border);
 
 /* Error variant */
 @include usx-alert-variant("error",
-	$usx-alert-error-background-color,
-	$usx-alert-error-text-color,
-	$usx-alert-error-link-color,
-	$usx-alert-error-border-color);
+	$usx-alert-error-bg,
+	$usx-alert-error-text,
+	$usx-alert-error-link-text,
+	$usx-alert-error-border);
 
 /* Emergency variant */
 @include usx-alert-variant("emergency",
-	$usx-alert-emergency-background-color,
-	$usx-alert-emergency-text-color,
-	$usx-alert-emergency-link-color,
-	$usx-alert-emergency-border-color);
+	$usx-alert-emergency-bg,
+	$usx-alert-emergency-text,
+	$usx-alert-emergency-link-text,
+	$usx-alert-emergency-border);
 
 
 .usx-alert {
