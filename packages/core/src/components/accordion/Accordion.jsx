@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
@@ -86,9 +86,7 @@ AccordionItem.propTypes = {
 Accordion.propTypes = {
     id: PropTypes.string,
     bordered: PropTypes.bool,
-    items: PropTypes.arrayOf(
-        AccordionItem.propTypes
-    ),
+    items: PropTypes.arrayOf(PropTypes.shape(AccordionItem.propTypes)),
     multiselectable: PropTypes.bool,
     headingLevel: PropTypes.string,
     className: PropTypes.string,
@@ -108,12 +106,19 @@ export function Accordion({
     )
 
     const [prevItems, setPrevItems] = useState(items)
-    if (items !== prevItems) {
-        setPrevItems(items)
+    useEffect(() => {
+        if (items !== prevItems) {
+            setPrevItems(items)
+        }
+    }, [items, prevItems])
+
+    useEffect(() => {
+        if (items !== prevItems) {
         setSavedExpansions((prevExpansions) =>
             buildExpansions(items, multiselectable, prevExpansions)
         )
-    }
+        }
+    }, [items, multiselectable, prevItems])
 
     const accordionClasses = classnames(
         'usa-accordion',

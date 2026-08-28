@@ -9,6 +9,7 @@ export interface BreadcrumbItem {
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
   items?: BreadcrumbItem[] | null;
   wrap?: boolean;
+  truncate?: boolean;
   rdfa?: boolean;
   ariaLabel?: string;
   className?: string;
@@ -18,6 +19,7 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
 export default function Breadcrumb({
   items = null,
   wrap = false,
+  truncate = false,
   rdfa = false,
   ariaLabel = 'Breadcrumbs',
   className = '',
@@ -33,7 +35,7 @@ export default function Breadcrumb({
     );
   }
 
-  const navClasses = ['usa-breadcrumb', 'usx-breadcrumb', wrap ? 'usa-breadcrumb--wrap' : null, className]
+  const navClasses = ['usa-breadcrumb', 'usx-breadcrumb', truncate ? 'usa-breadcrumb--truncate' : null, className]
     .filter(Boolean)
     .join(' ');
 

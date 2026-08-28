@@ -12,6 +12,13 @@ export default {
     tags: ['USWDS', 'autodocs'],
     argTypes: generatedArgTypes,
     excludeStories: ['storyDefs'],
+    parameters: {
+      docs: {
+        description: {
+          component: 'USWDS defaults the accordion icon to the start side. Set $theme-accordion-icon-position to "start" or "end" in Sass for a global choice, or use usa-accordion--icon-start / usa-accordion--icon-end for one accordion.'
+        }
+      }
+    }
 };
 
 const items1 = [
@@ -58,6 +65,16 @@ export const storyDefs = {
     bordered: true,
     multiselectable: true,
     headingLevel: 'h4'
+  },
+  IconStart: {
+    id: 'accordion-icon-start',
+    items: items1,
+    className: 'usa-accordion--icon-start'
+  },
+  IconEnd: {
+    id: 'accordion-icon-end',
+    items: items1,
+    className: 'usa-accordion--icon-end'
   }
 };
 
@@ -89,4 +106,12 @@ export const CustomHeadingLevel = {
 
 export const BorderedMultiSelectableH4 = {
     args: storyDefs.BorderedMultiSelectableH4
+}
+
+export const IconStart = {
+  args: storyDefs.IconStart
+}
+
+export const IconEnd = {
+  args: storyDefs.IconEnd
 }

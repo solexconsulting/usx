@@ -25,6 +25,7 @@
   },
   "scripts": {
     "build": "sass --pkg-importer=node --no-source-map src/index.scss dist/usx.css && sass --pkg-importer=node --no-source-map src/themed.scss dist/usx-themed.css",
+    "dev": "node scripts/watch.mjs",
     "test": "node test/theme-parity.mjs && node test/theme-manifest-check.mjs"
   },
   "devDependencies": {

@@ -768,6 +768,9 @@ $usx-form-group-error-border-width: $usx-border-width-lg !default;
 $usx-accordion-bg-var: null !default;
 $usx-accordion-bg: usx-var($usx-accordion-bg-var, $usx-surface-2) !default;
 
+$usx-accordion-bg-hover-var: null !default;
+$usx-accordion-bg-hover: usx-var($usx-accordion-bg-hover-var, #e6e6e6) !default;
+
 $usx-accordion-content-bg-var: null !default;
 $usx-accordion-content-bg: usx-var($usx-accordion-content-bg-var, $usx-surface-1) !default;
 
@@ -799,6 +802,15 @@ $usx-accordion-radius: usx-var($usx-accordion-radius-var, $usx-radius-none) !def
 
 $usx-accordion-border-width-var: null !default;
 $usx-accordion-border-width: usx-var($usx-accordion-border-width-var, $usx-border-width-lg) !default;
+
+// Live equivalent of USWDS's $theme-accordion-icon-position setting.
+// Values are logical inset pairs: 1.25rem auto = start, auto 1.25rem = end.
+$usx-accordion-icon-position-var: null !default;
+$usx-accordion-icon-position: usx-var($usx-accordion-icon-position-var, 1.25rem auto) !default;
+$usx-accordion-icon-padding-start-var: null !default;
+$usx-accordion-icon-padding-start: usx-var($usx-accordion-icon-padding-start-var, 3.5rem) !default;
+$usx-accordion-icon-padding-end-var: null !default;
+$usx-accordion-icon-padding-end: usx-var($usx-accordion-icon-padding-end-var, 1.25rem) !default;
 
 // ── Component tokens: Image (custom modifier; default baked in _image.scss) ──
 $usx-image-object-fit-type: null !default;
