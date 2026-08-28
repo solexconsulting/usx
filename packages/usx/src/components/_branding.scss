@@ -4,7 +4,14 @@
 
 // Logo-image mode: .usx-image wrapper (<a> or <div>) produced by Image component.
 .usx-logo {
-  margin-right: 1rem;
+  margin-left: 0;
+}
+
+@media (max-width: 64em) {
+  .usa-navbar .usx-logo {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
 }
 
 .usx-logo__image {

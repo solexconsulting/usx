@@ -128,9 +128,7 @@
 
   // ── Secondary section background ─────────────────────────────────────────
   .usa-footer__secondary-section {
-    @if $usx-footer-secondary-bg {
-      background-color: $usx-footer-secondary-bg;
-    }
+    background-color: unset;
 
     @if $usx-footer-secondary-section-border-top {
       border-top: $usx-footer-secondary-section-border-top;

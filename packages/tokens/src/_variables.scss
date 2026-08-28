@@ -925,7 +925,7 @@ $usx-header-invert-logo:            null                                        
 // roles (rather than the raw USWDS base-family tiers) keeps Default
 // USWDS-accurate while still flipping dark under Carbon/Midnight.
 $usx-footer-bg-var: null !default;
-$usx-footer-bg:     usx-var($usx-footer-bg-var)        !default;
+$usx-footer-bg:     usx-var($usx-footer-bg-var, $usx-surface-3)        !default;
 // Own hooks (like usx-header-text) so a theme whose footer surface is
 // drastically different (e.g. NASA's black secondary section, chained from
 // surface-3) can override these independently of the ambient text role.
