@@ -109,6 +109,8 @@ export const PRESETS = {
     'surface-3': '#0b0e1c',
     'surface-2': '#232849',
     'text': '#e6e8f5',
+    'text-muted': '#dcddff',
+    'text-subtle': '#aeafc9',
     'color-info': '#58b4ff',
     'color-warning': '#fdb8ae',
     'color-success': '#009ec1',
@@ -120,8 +122,7 @@ export const PRESETS = {
     'usx-tooltip-bg': '#e6e8f5',
     'usx-tooltip-text': '#0b0e1c',
     ...headerFooterBorderOverrides(),
-    ...headerNavBackgroundOverrides(),
-    'usx-header-nav-link-text': '#dcddff'
+    ...headerNavBackgroundOverrides()
   },
   // Dark themes: unlike the light presets above (which only nudge the page
   // background), these also flip the surface/border/text tokens so cards,
@@ -135,6 +136,8 @@ export const PRESETS = {
     'surface-3': '#0f172a',
     'surface-2': '#334155',
     'text': '#e2e8f0',
+    'text-muted': '#c7c9da',
+    'text-subtle': '#aeafc9',
     'usx-summary-box-bg': '#0f1b2e',
     'usx-summary-box-border-color': '#60a5fa',
     'usx-link-text-visited': '#b39ddb',
@@ -142,7 +145,6 @@ export const PRESETS = {
     'usx-tooltip-text': '#020617',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
-    'usx-header-nav-link-text': '#c7c9da'
   },
   Carbon: {
     'color-primary': '#fa9441',
