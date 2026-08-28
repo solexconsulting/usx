@@ -979,12 +979,16 @@ $usx-footer-primary-section-border-top:   usx-when($usx-footer-primary-section-b
 $usx-footer-secondary-section-border-top: usx-when($usx-footer-secondary-section-border, $usx-border-width-sm solid $usx-footer-secondary-section-border) !default;
 
 // ── Component tokens: Page / Section ──────────────────────────────────────────
-// No background of their own by default (the surrounding Layout already
-// paints $usx-surface-1) — but text is chained to $usx-text so headings and
-// copy inside .usx-page/.usx-section stay legible instead of getting stuck
-// on real USWDS's static, non-themeable body text color.
+// Page chains its own background to $usx-surface-1 — several patterns
+// (e.g. ContactForm, ProductShowcase) render <Page> without a <Layout>
+// ancestor to paint that surface, so Page must be able to paint it itself.
+// Section has no ancestor of its own to fall back on that way, so it stays
+// transparent by default (it's always nested in a Page or Layout already
+// painting the surface). Text on both is chained to $usx-text so headings
+// and copy stay legible instead of getting stuck on real USWDS's static,
+// non-themeable body text color.
 $usx-page-bg-var: null !default;
-$usx-page-bg: usx-var($usx-page-bg-var) !default;
+$usx-page-bg: usx-var($usx-page-bg-var, $usx-surface-1) !default;
 $usx-page-text-var: null !default;
 $usx-page-text: usx-var($usx-page-text-var, $usx-text) !default;
 

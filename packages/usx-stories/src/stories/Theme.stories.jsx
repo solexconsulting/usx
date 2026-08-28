@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import { useGlobals } from 'storybook/preview-api';
 
 import {
   themeManifest,
@@ -1313,8 +1314,14 @@ function Showcase({ resolved }) {
 
 // ── Playground ───────────────────────────────────────────────────────────────
 
-function ThemePlayground() {
-  const [overrides, setOverrides] = useState({});
+function ThemePlayground({ initialTheme } = {}) {
+  // Seeds the editor from whichever theme is currently active in the
+  // Storybook toolbar (see apps/storybook/.storybook/preview.js), so opening
+  // the Playground matches the rest of the site instead of always starting
+  // from Default. One-time seed only — the toolbar and the Playground's own
+  // preset/override controls are independent after that.
+  const initialPreset = PRESETS[initialTheme] ? initialTheme : 'Default';
+  const [overrides, setOverrides] = useState(() => ({ ...PRESETS[initialPreset] }));
   // Family/grade/vivid selections applied by "Random (System)", keyed by
   // token name — pushed into FamilyGradeColorControl so its selects reflect
   // the chosen system swatch, not just the resulting hex.
@@ -1322,7 +1329,7 @@ function ThemePlayground() {
   const [autoDerive, setAutoDerive] = useState(true);
   const [changedOnly, setChangedOnly] = useState(true);
   const [copied, setCopied] = useState(false);
-  const [activePreset, setActivePreset] = useState('Default');
+  const [activePreset, setActivePreset] = useState(initialPreset);
   // Which single color group row (Theme/State colors — each a base color
   // with its own derived shades) is currently expanded — only one may be
   // open across the whole panel at a time, so opening a new one collapses
@@ -1744,5 +1751,10 @@ function ThemePlayground() {
 }
 
 export const Playground = {
-  render: () => <ThemePlayground />
+  render: () => {
+    // useGlobals is a Storybook preview hook — only callable here, in the
+    // story's own render function, not inside a nested component.
+    const [globals] = useGlobals();
+    return <ThemePlayground initialTheme={globals?.theme} />;
+  }
 };

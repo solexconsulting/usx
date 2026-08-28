@@ -11,7 +11,17 @@ import { PRESETS } from '../../../packages/usx-stories/src/utils/themePresets.js
 // Applies the toolbar-selected preset (see globalTypes.theme below) to every
 // story by overriding :root's --usx-* custom properties — the same
 // resolveTheme/themeToCss pipeline the Theme Playground uses for its presets.
+//
+// The Playground has its own preset picker and injects its own :root
+// overrides (see ThemePlayground's `liveThemeCss`) from its independent,
+// in-page state. Since that override only emits *changed* tokens, any token
+// the toolbar's global theme changes but the Playground's own selection
+// doesn't would otherwise leak through from this decorator underneath it —
+// so skip applying the global override entirely while on that story.
 function withThemePreset(Story, context) {
+  if (context.id === 'foundations-theme--playground') {
+    return React.createElement(Story);
+  }
   const overrides = PRESETS[context.globals.theme] || {};
   const css = themeToCss(resolveTheme(overrides), { changedOnly: true });
   return React.createElement(
