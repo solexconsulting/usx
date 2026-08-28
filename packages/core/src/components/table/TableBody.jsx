@@ -163,7 +163,7 @@ function DataRow({ row, rowIndex }) { // eslint-disable-line react/prop-types
   ) : null;
 
   const dataCells = visibleCols.map((col, colIndex) => {
-    const isPrimary = col.primary || (colIndex === 0 && !columns.some((c) => c.primary));
+    const isPrimary = col.primary;
     const Tag = isPrimary ? 'th' : 'td';
     const cellClasses = classnames(
       'usx-table__cell',

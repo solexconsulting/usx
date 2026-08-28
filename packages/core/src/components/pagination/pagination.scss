@@ -69,8 +69,8 @@
 
   // ── Summary ─────────────────────────────────────────────────────────────
   .usx-pagination__summary {
-    font-size: 1rem;
-    color: $color-text;
+    font-size: $font-size-base;
+    color: $text;
     margin: 0;
   }
 
@@ -81,9 +81,9 @@
     gap: 0.5rem;
 
     .usx-label {
-      font-size: 1rem;
+      font-size: $font-size-base;
       white-space: nowrap;
-      color: $color-text;
+      color: $text;
       margin: 0;
     }
 

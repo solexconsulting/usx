@@ -9,15 +9,28 @@
     }
   }
 
-  @if $usx-tile-border-color != null {
-    .usa-checkbox__input--tile + .usa-checkbox__label {
+  .usa-checkbox__input--tile + .usa-checkbox__label {
+    @if $usx-tile-border-color != null {
       border-color: $usx-tile-border-color;
+    }
+
+    @if $usx-tile-border-width != null {
+      border-width: $usx-tile-border-width;
     }
   }
 
-  @if $usx-checkbox-border-radius != null {
-    .usa-checkbox__label::before {
+  .usa-checkbox__label::before {
+
+    @if $usx-checkbox-border-radius != null {
       border-radius: $usx-checkbox-border-radius;
+    }
+
+    @if $usx-selector-background-color != null {
+      background-color: $usx-selector-background-color;
+    }
+
+    @if $usx-selector-border-color != null {
+      box-shadow: 0 0 0 2px $usx-selector-border-color;
     }
   }
 

@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "pnpm -r build",
-    "storybook": "pnpm --filter @agency-ui-platform/storybook run dev",
+    "storybook": "pnpm --parallel --filter @solexllc/usx-theme --filter @agency-ui-platform/storybook run dev",
     "storybook:build": "pnpm --filter @agency-ui-platform/storybook run build",
     "dev": "pnpm -r --parallel dev",
     "new-component": "node scripts/new-component.js",

@@ -21,15 +21,15 @@
   .usx-attribution__primary,
   .usx-attribution__secondary {
     margin: 0;
-    line-height: 1.2;
+    line-height: $line-height-heading;
   }
 
   .usx-attribution__primary {
-    font-weight: 600;
+    font-weight: $usx-attribution-primary-font-weight;
   }
 
   .usx-attribution__secondary {
-    font-size: 0.875rem;
+    font-size: $usx-attribution-secondary-font-size;
     color: #757575;
   }
 }

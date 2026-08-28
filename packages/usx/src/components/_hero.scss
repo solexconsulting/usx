@@ -80,9 +80,10 @@
   }
 
   &__heading {
-    font-size: 2.5rem;
-    font-weight: 700;
-    line-height: 1.2;
+    font-family: $font-family-heading;
+    font-size: $font-size-h1;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-heading;
     margin-top: 0;
     margin-bottom: 1rem;
     color: #ffffff;
@@ -106,7 +107,7 @@
     &--alt {
       display: block;
       font-size: 1.125rem;
-      font-weight: 400;
+      font-weight: $font-weight-regular;
       margin-bottom: 0.25rem;
       color: #66b5ee;
 

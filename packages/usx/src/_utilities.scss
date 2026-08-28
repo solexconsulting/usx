@@ -3,15 +3,55 @@
 @each $color-name, $color-value in $colors {
   @if $color-value {
     .bg-#{$color-name} {
-      background-color: $color-value;
+      background-color: $color-value !important;
     }
 
     .text-#{$color-name} {
-      color: $color-value;
+      color: $color-value !important;
     }
 
     .usx-border-#{$color-name} {
-      border-color: $color-value;
+      border-color: $color-value !important;
+    }
+
+    .before-bg-#{$color-name}::before {
+      background-color: $color-value !important;
+    }
+
+    .after-bg-#{$color-name}::after {
+      background-color: $color-value !important;
+    }
+  }
+}
+
+@each $color-name, $color-value in $text-colors {
+  @if $color-value {
+    .#{$color-name} {
+      color: $color-value !important;
+    }
+
+    .before-bg-#{$color-name}::before {
+      background-color: $color-value !important;
+    }
+
+    .after-bg-#{$color-name}::after {
+      background-color: $color-value !important;
+    }
+  }
+}
+
+@each $color-name, $color-value in $surface-colors {
+  @if $color-value {
+    .bg-#{$color-name} {
+      background-color: $color-value !important;
+    }
+
+    .before-bg-#{$color-name}::before {
+      background-color: $color-value !important;
+    }
+
+    .after-bg-#{$color-name}::after {
+      background-color: $color-value !important;
     }
   }
 }

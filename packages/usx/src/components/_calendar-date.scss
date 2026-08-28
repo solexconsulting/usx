@@ -29,9 +29,9 @@
   }
 
   .usx-calendar-date-month, .usx-calendar-date-day {
-    font-size: 1.13rem;
+    font-size: $usx-calendar-date-font-size;
     display: block;
-    font-weight: 700;
+    font-weight: $font-weight-bold;
     padding: .25rem;
     text-align: center;
   }

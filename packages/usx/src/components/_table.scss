@@ -16,6 +16,46 @@
   width: 100%;
   position: relative;
 
+  // ── Base surfaces/borders/text ───────────────────────────────────────────────
+  // Real USWDS bakes its own `.usa-table` base styling as fixed values at ITS
+  // OWN build time: ink (#1b1b1b) text/borders, white body cells,
+  // "base-lighter" header/footer cells, "base-lightest" striped rows. Since
+  // both `usa-table` and `usx-table` land on the same element, compounding
+  // the selector with `&.usa-table` (rather than a plain descendant
+  // selector) guarantees these overrides win on specificity regardless of
+  // stylesheet load order, so the whole table body tracks the active
+  // surface/border/text theme instead of just the hover/selected extras
+  // further down this file.
+  &.usa-table {
+    color: $text;
+
+    td,
+    th {
+      border-color: $usx-table-border-color;
+    }
+
+    tfoot td,
+    th,
+    thead td {
+      background-color: $usx-table-header-background-color;
+      color: $text;
+    }
+
+    td {
+      background-color: $usx-table-background-color;
+    }
+
+    thead th[aria-sort] {
+      background-color: $usx-table-sort-active-color;
+      color: $usx-table-sort-active-text-color;
+    }
+  }
+
+  &.usa-table--striped tbody tr:nth-child(odd) td {
+    background-color: $usx-table-stripe-background-color;
+    color: $text;
+  }
+
   // ── Caption ─────────────────────────────────────────────────────────────────
   // Real USWDS's `body { color: #1b1b1b; }` is a static, non-themeable value
   // the caption would otherwise just inherit — pin it to the theme's text
@@ -73,17 +113,13 @@
     border: none;
     padding: 0;
     font: inherit;
-    font-weight: bold;
+    font-weight: $font-weight-bold;
     color: inherit;
     cursor: pointer;
     white-space: nowrap;
 
     &:hover {
       text-decoration: underline;
-    }
-
-    &--active {
-      color: #1a4480;
     }
   }
 
@@ -192,16 +228,22 @@
 
   // ── Footer ────────────────────────────────────────────────────────────────────
   .usx-table__foot {
-    font-weight: bold;
-    border-top: 2px solid #1b1b1b;
+    font-weight: $font-weight-bold;
+
+    @if $usx-table-border-color {
+      border-top: 2px solid $usx-table-border-color;
+    }
   }
 
   // ── Placeholder ───────────────────────────────────────────────────────────────
   .usx-table__placeholder-cell {
     text-align: center;
     padding: 2rem 1rem;
-    color: #71767a;
     font-style: italic;
+
+    @if $usx-table-placeholder-text-color {
+      color: $usx-table-placeholder-text-color;
+    }
   }
 
   // ── Loading row (spinner while fetching next batch) ───────────────────────────
@@ -245,7 +287,10 @@
       position: sticky;
       left: 0;
       z-index: 1;
-      box-shadow: 1px 0 0 0 #1b1b1b;
+
+      @if $usx-table-border-color {
+        box-shadow: 1px 0 0 0 $usx-table-border-color;
+      }
     }
 
     thead th:first-child {

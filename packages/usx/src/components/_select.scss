@@ -10,6 +10,14 @@
 /* ---------------------------------- */
 
 .usa-select.usx-select {
+  // USWDS sets a fixed height: 2.5rem (border-box). A thick
+  // $usx-border-width-inputs eats into that fixed box until the content
+  // area is shorter than the text's line-height, and unlike <input> (which
+  // overflows its box visibly), <select> clips the value at the box edge —
+  // so let the box grow past 2.5rem instead of clipping.
+  height: auto;
+  min-height: 2.5rem;
+
   @if $usx-input-border-radius {
     border-radius: $usx-input-border-radius;
   }

@@ -1,3 +1,5 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 /* stylelint-disable no-descending-specificity -- Size modifiers intentionally precede the base content rule. */
 .usx-avatar {
@@ -11,7 +13,7 @@
     height: 2.5rem;
 
     .usx-avatar__content {
-      font-size: 0.875rem;
+      font-size: $usx-avatar-font-size-sm;
     }
   }
 
@@ -25,7 +27,7 @@
     height: 4rem;
 
     .usx-avatar__content {
-      font-size: 1.25rem;
+      font-size: $usx-avatar-font-size-lg;
     }
   }
 
@@ -34,7 +36,7 @@
     height: 5rem;
 
     .usx-avatar__content {
-      font-size: 1.5rem;
+      font-size: $usx-avatar-font-size-xl;
     }
   }
 
@@ -50,7 +52,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
+    font-weight: $usx-avatar-content-font-weight;
     line-height: 1;
 
     .usa-icon {

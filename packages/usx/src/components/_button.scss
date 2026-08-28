@@ -187,6 +187,10 @@
 .usa-button.usx-button {
   .usa-button--outline {
     box-shadow: 0 0 0 2px currentcolor;
+
+    @if $usx-button-outline-border-width {
+      box-shadow: 0 0 0 $usx-button-outline-border-width currentcolor;
+    }
   }
 
   &.usx-button--ghost {

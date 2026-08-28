@@ -1,0 +1,24 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+// Global focus-ring override: USWDS hardcodes `outline: .25rem solid #2491ff`
+// directly on these native/interactive selectors, so re-declaring the same
+// rule here (guarded by $color-focus) is the only way to theme it.
+@if $color-focus != null {
+  button:not([disabled]):focus,
+  input:not([disabled]):focus,
+  select:not([disabled]):focus,
+  textarea:not([disabled]):focus,
+  .usa-footer__return-to-top a:focus,
+  [contentEditable="true"]:focus,
+  [href]:focus, [tabindex]:focus,
+  iframe:focus {
+    outline: .25rem solid $color-focus;
+    outline-offset: 0;
+  }
+
+  .usa-checkbox__input:focus + [class*="__label"]::before,
+  .usa-radio__input:focus + [class*="__label"]::before {
+    outline: .25rem solid $color-focus;
+    outline-offset: 0.25rem;
+  }
+}

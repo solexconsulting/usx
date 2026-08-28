@@ -146,7 +146,7 @@ const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...prop
                       ? 'ascending'
                       : sortDir === 'desc'
                       ? 'descending'
-                      : 'none'
+                      : undefined
                     : undefined
                 }
                 data-sortable={isSortable || undefined}

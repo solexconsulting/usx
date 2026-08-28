@@ -70,8 +70,11 @@ const UNCONSUMED = new Set([
   '--usx-color-disabled-light',
   '--usx-color-disabled-dark',
   '--usx-color-disabled-darker',
-  '--usx-color-dark-bg-darker',
-  '--usx-color-dark-bg-lighter',
+  // State colors only consumed indirectly, via theme.css's fallback chain
+  // (e.g. --usx-link-visited-color: var(--usx-color-visited)), never
+  // referenced directly in compiled component CSS — same as color-border.
+  '--usx-color-focus',
+  '--usx-color-visited',
   '--usx-spacing-sm',
   '--usx-typography-font-family-base',
   '--usx-typography-font-size-base',
@@ -79,8 +82,8 @@ const UNCONSUMED = new Set([
   '--usx-typography-font-weight-bold',
   '--usx-typography-line-height-base',
   // Semantic radius groups: components reference their own per-component
-  // hook only (e.g. --usx-button-radius); the group var is consumed
-  // indirectly via theme.css's fallback chain (--usx-button-radius:
+  // hook only (e.g. --usx-radius-button); the group var is consumed
+  // indirectly via theme.css's fallback chain (--usx-radius-button:
   // var(--usx-radius-field)), never directly in compiled component CSS.
   '--usx-radius-box',
   '--usx-radius-field',
@@ -91,13 +94,11 @@ const UNCONSUMED = new Set([
   // is consumed indirectly via theme.css's fallback chain
   // (--usx-tile-border-color: var(--usx-color-border)), never directly.
   '--usx-color-border',
-  // Raw text-color primitives: every usx component now chains to the
-  // text/text-subtle/text-inverse abstraction instead (see _variables.scss),
-  // but these stay published for downstream Sass consumers (e.g.
-  // @solexllc/usx-react) that still reference them directly.
-  '--usx-color-text',
-  '--usx-color-light-text',
-  '--usx-color-text-base'
+  // Same reasoning as the radius groups above: components reference their
+  // own per-component hook only (e.g. --usx-task-list-outer-border-width);
+  // the group var is consumed indirectly via theme.css's fallback chain,
+  // never directly in compiled component CSS.
+  '--usx-border-width-md'
 ]);
 
 // Walk every var(--usx-*) occurrence, extracting the name (nested-paren safe).

@@ -1,3 +1,5 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-modal {
   &.usx-modal--lg-collapsed {
@@ -5,7 +7,7 @@
     width: 100%;
 
     .usa-modal__heading {
-      font-size: 1.34rem;
+      font-size: $usx-modal-heading-font-size;
       margin-top: 0;
       line-height: 1.34em;
     }

@@ -1,3 +1,6 @@
+// Define variable to set time for swap transition
+$usx-swap-transition-time: 0.25s !default;
+
 /* stylelint-disable selector-class-pattern, no-descending-specificity -- Public BEM classes and state overrides are ordered by interaction state. */
 .usx-swap {
   cursor: pointer;
@@ -12,24 +15,46 @@
     grid-column-start: 1;
   }
 
+  // A transition animates using whichever rule newly matches (the
+  // destination state), so each side needs its OWN declaration per
+  // direction: the element becoming hidden holds its size until the end
+  // (step-end) while the element becoming shown snaps to size immediately
+  // (step-start) — swapped compared to the other direction.
+  &.usx-swap--ease,
   &.usx-swap--rotate,
   &.usx-swap--flip {
+    // Unchecked (off shown, on hidden): off is *becoming* shown here.
     .usx-swap-off {
-      transition: transform 0.25s cubic-bezier(0, 0, .25, 1), max-height 0.25s step-end;
+      transition: opacity $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  transform $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  max-height $usx-swap-transition-time step-start,
+                  max-width $usx-swap-transition-time step-start;
     }
 
-    .usx-swap-on {
-      transition: transform 0.25s cubic-bezier(0, 0, .25, 1), max-height 0.25s step-start;
+    .usx-swap-on,
+    .usx-swap-indeterminate,
+    input:indeterminate ~ .usx-swap-on {
+      transition: opacity $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  transform $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  max-height $usx-swap-transition-time step-end,
+                  max-width $usx-swap-transition-time step-start;
     }
-  }
 
-  &.usx-swap--ease {
-    .usx-swap-off {
-      transition: opacity 0.25s cubic-bezier(0, 0, .25, 1), transform 0.25s cubic-bezier(0, 0, .25, 1), max-height 0.25s step-end;
+    // Checked (on shown, off hidden): higher specificity than the rules
+    // above, so these win once the checkbox is checked.
+    input:is(:checked, :indeterminate) ~ .usx-swap-off {
+      transition: opacity $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  transform $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  max-height $usx-swap-transition-time step-end,
+                  max-width $usx-swap-transition-time step-start;
     }
 
-    .usx-swap-on {
-      transition: opacity 0.25s cubic-bezier(0, 0, .25, 1), transform 0.25s cubic-bezier(0, 0, .25, 1), max-height 0.25s step-start;
+    input:checked ~ .usx-swap-on,
+    input:indeterminate ~ .usx-swap-indeterminate {
+      transition: opacity $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  transform $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
+                  max-height $usx-swap-transition-time step-start,
+                  max-width $usx-swap-transition-time step-start;
     }
   }
 
@@ -48,13 +73,20 @@
   input:indeterminate ~ .usx-swap-on {
     opacity: 0;
     max-height: 0;
-    pointer-events: none;
+  }
+
+  // Explicit shown-state size (rather than the initial "none") so hiding
+  // transitions between two real values and step-end can hold it until the end.
+  .usx-swap-off {
+    max-height: 100%;
+    max-width: 100%;
   }
 
   input:is(:checked, :indeterminate) ~ .usx-swap-off {
     opacity: 0;
     max-height: 0;
-    pointer-events: none;
+    max-width: 0;
+    overflow: hidden;
   }
 
   input:checked ~ .usx-swap-on,
@@ -69,7 +101,6 @@
   .usx-swap-off {
     opacity: 0;
     max-height: 0;
-    pointer-events: none;
   }
 
   .usx-swap-on {

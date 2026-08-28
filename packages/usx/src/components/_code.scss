@@ -6,8 +6,8 @@
   overflow: auto hidden;
   padding: 1.25rem 0;
   position: relative;
-  font-size: .875rem;
-  line-height: 1.5;
+  font-size: $usx-code-font-size;
+  line-height: $line-height-base;
 
   &:not([class^="bg-"], [class*=" bg-"]) {
     background-color: black;

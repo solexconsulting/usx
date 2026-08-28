@@ -12,6 +12,9 @@
     },
     "./utilities": {
       "sass": "./src/_utilities.scss"
+    },
+    "./typography": {
+      "sass": "./src/components/_typography.scss"
     }
   },
   "files": [

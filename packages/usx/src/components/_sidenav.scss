@@ -8,6 +8,14 @@
 }
 
 .usx-sidenav.usa-sidenav {
+  @if $usx-sidenav-border-color != null {
+    border-bottom-color: $usx-sidenav-border-color;
+  }
+
+  @if $usx-sidenav-border-width != null {
+    border-bottom-width: $usx-sidenav-border-width;
+  }
+
   &.usx-sidenav--sticky {
     position: sticky;
     top: 2rem;
@@ -16,6 +24,10 @@
   .usa-sidenav__item {
     @if $usx-sidenav-border-color != null {
       border-top-color: $usx-sidenav-border-color;
+    }
+
+    @if $usx-sidenav-border-width != null {
+      border-top-width: $usx-sidenav-border-width;
     }
   }
 

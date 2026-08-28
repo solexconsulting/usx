@@ -47,7 +47,7 @@ const TableGroup: React.FC<TableGroupProps> = ({
           colSpan={colSpan || totalCols || 1}
           className="usx-table__group-cell"
         >
-          <div className="usa-accordion">
+          <div className="usx-accordion usa-accordion">
             <h4 className="usa-accordion__heading">
               <button
                 className="usa-accordion__button usx-table__group-toggle"

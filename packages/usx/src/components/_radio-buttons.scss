@@ -15,9 +15,23 @@
     }
   }
 
-  @if $usx-tile-border-color != null {
-    .usa-radio__input--tile + .usa-radio__label {
+  .usa-radio__input--tile + .usa-radio__label {
+    @if $usx-tile-border-color != null {
       border-color: $usx-tile-border-color;
+    }
+
+    @if $usx-tile-border-width != null {
+      border-width: $usx-tile-border-width;
+    }
+  }
+
+  .usa-radio__label::before {
+    @if $usx-selector-background-color != null {
+      background-color: $usx-selector-background-color;
+    }
+
+    @if $usx-selector-border-color != null {
+      box-shadow: 0 0 0 2px $usx-selector-border-color;
     }
   }
 

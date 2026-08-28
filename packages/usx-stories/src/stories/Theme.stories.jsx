@@ -1,14 +1,14 @@
 import React, { useMemo, useState, useEffect } from 'react';
 
-import navigation from "@uswds/uswds/js/usa-header";
-import accordion from "@uswds/uswds/js/usa-accordion";
 import {
   themeManifest,
   baseColorTokens,
   shadesOf,
   resolveTheme,
   themeToCss,
-  hslToHex
+  hslToHex,
+  hexToRgb,
+  getToken
 } from '../utils/themeDerive.js';
 import { systemColors } from '@solexllc/usx-theme/system-colors';
 
@@ -33,6 +33,7 @@ import IconList from '../../../core/src/components/icon-list/IconList.tsx';
 import Input from '../../../core/src/components/input/Input.tsx';
 import Link from '../../../core/src/components/link/Link.tsx';
 import MiscBanner from '../../../core/src/components/misc-banner/MiscBanner.tsx';
+import Prose from '../../../core/src/components/prose/Prose.tsx';
 import RadioButtons from '../../../core/src/components/radio-buttons/RadioButtons.tsx';
 import Search from '../../../core/src/components/search/Search.tsx';
 import Select from '../../../core/src/components/select/Select.tsx';
@@ -52,36 +53,128 @@ import TextArea from '../../../core/src/components/text-area/TextArea.tsx';
 export default {
   title: 'Foundations/Theme',
   tags: ['USX'],
-  parameters: { layout: 'fullscreen' }
+  parameters: { layout: 'fullscreen' },
 };
 
 // ── Presets ──────────────────────────────────────────────────────────────────
 
+// The header/footer border-color tokens are each individually configurable
+// (see COMPONENT_COLOR_GROUPS' Header/Footer entries), but every preset and
+// the randomize buttons treat them as one unit, all pointing at whatever
+// color-border landed on — rather than 6 separately-varying colors — so a
+// preset/randomized theme reads as one coherent divider color everywhere
+// instead of a mismatched set.
+const HEADER_FOOTER_BORDER_TOKENS = [
+  'usx-header-border-color',
+  'usx-header-nav-border-top-color',
+  'usx-header-nav-border-bottom-color',
+  'usx-footer-border-color',
+  'usx-footer-primary-section-border-color',
+  'usx-footer-secondary-section-border-color'
+];
+
+function headerFooterBorderOverrides() {
+  return HEADER_FOOTER_BORDER_TOKENS.reduce((acc, name) => {
+    acc[name] = 'var(--usx-color-border)';
+    return acc;
+  }, {});
+}
+
+// Header background now defaults to transparent (real USWDS renders no
+// explicit background there either), so any theme that wants a filled
+// header/nav shell — i.e. every preset/randomize below except Default —
+// must opt in explicitly. Nav now matches the header (surface-3); the
+// hover-state background (usx-nav-link-hover-bg-color) is what provides
+// the visibly distinct tone against that shared surface.
+function headerNavBackgroundOverrides() {
+  return {
+    'usx-header-background-color': 'var(--usx-surface-3)',
+    'usx-nav-background-color': 'var(--usx-surface-3)'
+  };
+}
+
 const PRESETS = {
+  // Left with no overrides at all — including the header/footer borders,
+  // which are transparent by default (real USWDS renders no border there).
   Default: {},
   Forest: {
     'color-primary': '#2e7d32',
     'color-secondary': '#00695c',
     'color-accent-cool': '#81c784',
     'color-accent-warm': '#ffb300',
-    'color-dark-bg': '#0b1f0c',
-    'surface-3': '#f4faf4'
+    'surface-3': '#f4faf4',
+    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-border-color': 'var(--usx-color-primary)',
+    ...headerFooterBorderOverrides(),
+    ...headerNavBackgroundOverrides()
   },
   Sunset: {
     'color-primary': '#d84315',
     'color-secondary': '#6a1b9a',
     'color-accent-cool': '#ff8a65',
     'color-accent-warm': '#ffd54f',
-    'color-dark-bg': '#1f0d05',
-    'surface-3': '#fdf6f1'
+    'surface-3': '#fdf6f1',
+    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-border-color': 'var(--usx-color-primary)',
+    ...headerFooterBorderOverrides(),
+    ...headerNavBackgroundOverrides()
   },
   Ocean: {
     'color-primary': '#0891b2',
     'color-secondary': '#4338ca',
     'color-accent-cool': '#67e8f9',
     'color-accent-warm': '#fb923c',
-    'color-dark-bg': '#031f2b',
-    'surface-3': '#f0f9fb'
+    'surface-3': '#f0f9fb',
+    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-border-color': 'var(--usx-color-primary)',
+    ...headerFooterBorderOverrides(),
+    ...headerNavBackgroundOverrides()
+  },
+  // Built around a fixed, given set of state colors (sky blue / peach /
+  // teal / red-orange / violet) rather than starting from a theme palette
+  // and leaving the states at their defaults like the presets above — the
+  // theme colors here are chosen to echo those five hues instead.
+  Aurora: {
+    'color-primary': '#3457d5', // echoes the info blue as the brand anchor
+    'color-secondary': '#7c4dff', // brighter kin of the emergency violet
+    'color-accent-cool': '#00b8d9', // echoes the success teal
+    'color-accent-warm': '#ff8f6b', // saturated kin of the warning peach
+    'surface-3': '#f5f7fc',
+    'color-info': '#58b4ff',
+    'color-warning': '#fdb8ae',
+    'color-success': '#009ec1',
+    'color-error': '#e52207',
+    'color-emergency': '#5942d2',
+    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-border-color': 'var(--usx-color-primary)',
+    ...headerFooterBorderOverrides(),
+    ...headerNavBackgroundOverrides()
+  },
+  // Aurora's dark counterpart — same fixed state colors, but the theme hues
+  // are brightened kin of Aurora's (rather than reused as-is) so they still
+  // read clearly against the near-black surfaces, and surface/border/text
+  // are flipped the same way Midnight/Carbon do below.
+  Borealis: {
+    'color-primary': '#5b7cfa',
+    'color-secondary': '#b98cff',
+    'color-accent-cool': '#2dd4bf',
+    'color-accent-warm': '#ffab91',
+    'surface-1': '#161a2e',
+    'surface-3': '#0b0e1c',
+    'surface-2': '#232849',
+    'text': '#e6e8f5',
+    'color-info': '#58b4ff',
+    'color-warning': '#fdb8ae',
+    'color-success': '#009ec1',
+    'color-error': '#e52207',
+    'color-emergency': '#5942d2',
+    'usx-summary-box-background-color': '#101b33',
+    'usx-summary-box-border-color': '#5b7cfa',
+    'usx-link-visited-color': '#c9a8ff',
+    'usx-tooltip-background-color': '#e6e8f5',
+    'usx-tooltip-text-color': '#0b0e1c',
+    ...headerFooterBorderOverrides(),
+    ...headerNavBackgroundOverrides()
   },
   // Dark themes: unlike the light presets above (which only nudge the page
   // background), these also flip the surface/border/text tokens so cards,
@@ -95,15 +188,16 @@ const PRESETS = {
     'surface-3': '#0f172a',
     'surface-2': '#334155',
     'text': '#e2e8f0',
-    'color-dark-bg': '#020617',
     'usx-summary-box-background-color': '#0f1b2e',
     'usx-summary-box-border-color': '#60a5fa',
     'usx-link-visited-color': '#b39ddb',
     'usx-tooltip-background-color': '#e2e8f0',
-    'usx-tooltip-text-color': '#020617'
+    'usx-tooltip-text-color': '#020617',
+    ...headerFooterBorderOverrides(),
+    ...headerNavBackgroundOverrides()
   },
   Carbon: {
-    'color-primary': '#fb923c',
+    'color-primary': '#fa9441',
     'color-secondary': '#22d3ee',
     'color-accent-cool': '#38bdf8',
     'color-accent-warm': '#facc15',
@@ -111,40 +205,292 @@ const PRESETS = {
     'surface-3': '#121214',
     'surface-2': '#3a3a3d',
     'text': '#e5e5e5',
-    'color-dark-bg': '#000000',
+    'text-muted': '#c0c0c0',
+    'text-subtle': '#a3a3a3',
+    'text-inverse': '#1c1c1e',
     'usx-summary-box-background-color': '#241a10',
     'usx-summary-box-border-color': '#fb923c',
     'usx-link-visited-color': '#b39ddb',
     'usx-tooltip-background-color': '#e5e5e5',
-    'usx-tooltip-text-color': '#000000'
+    'usx-tooltip-text-color': '#000000',
+    ...headerFooterBorderOverrides(),
+    ...headerNavBackgroundOverrides(),
+    // Carbon wants the desktop nav bar one tone lighter than the header
+    // (surface-2), but the mobile drawer matching the header (surface-3).
+    'usx-nav-background-color': 'var(--usx-surface-2)',
+    'usx-nav-background-color-mobile': 'var(--usx-surface-3)',
+    // Overrides banner's own surface-2 default — Carbon wants the banner to
+    // match the header's surface-3 instead.
+    'usx-banner-background-color': 'var(--usx-surface-3)',
+    'usx-banner-action-color': 'var(--usx-text)'
+  },
+  // The three presets below are sourced from real design systems/sites
+  // rather than invented palettes — VADS/GOVUK values come from each
+  // system's own documented color tokens; NASA's are pulled directly from
+  // nasa.gov's live rendered CSS (see that preset's own comment).
+  VADS: {
+    // VA.gov Design System (design.va.gov) semantic color tokens.
+    'color-primary': '#005ea2', // vads-color-primary (USWDS blue-vivid-60)
+    'color-secondary': '#00bde3', // vads-color-primary-alt (cyan-vivid-30)
+    'color-accent-cool': '#97d4ea', // vads-color-primary-alt-light
+    'color-accent-warm': '#bd5727', // vads-color-hub-careers (orange-warm-50)
+    'surface-3': '#f0f0f0', // vads-color-background-muted
+    'font-family': '"Source Sans Pro Web", "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif', // real va.gov body font
+    'font-family-heading': 'Bitter, Georgia, Cambria, "Times New Roman", Times, serif', // real va.gov heading font — a distinct serif face
+    ...headerFooterBorderOverrides(),
+    ...headerNavBackgroundOverrides()
+  },
+  "GOV.UK": {
+    // GOV.UK Design System (design-system.service.gov.uk) web palette +
+    // functional colours.
+    'color-primary': '#1d70b8', // govuk-colour('blue') / functional brand
+    'color-secondary': '#0f7a52', // govuk-colour('green') — the "Start now" button
+    'color-accent-cool': '#8eb8dc', // govuk-colour('blue', $variant: 'tint-50')
+    'color-accent-warm': '#f47738', // govuk-colour('orange')
+    'surface-3': '#f4f8fb', // functional template-background
+    'color-border': '#cecece', // functional border
+    'color-focus': '#ffdd00', // functional focus — GOV.UK's signature yellow focus state
+    'font-family': '"GDS Transport", arial, sans-serif', // real gov.uk body/heading font
+    ...headerFooterBorderOverrides(),
+    ...headerNavBackgroundOverrides(),
+    // gov.uk's real header/nav bar is filled with brand blue, not a neutral
+    // surface — override past the shared surface-3 default to match.
+    'usx-header-background-color': 'var(--usx-color-primary)',
+    'usx-nav-background-color': 'var(--usx-color-primary)',
+    'usx-header-text-color': 'var(--usx-text-inverse)',
+    // text-subtle/text-muted are tuned for a light/neutral surface — real
+    // gov.uk nav links are white against the blue bar (verified live), and
+    // color-primary as a hover color would be invisible against the
+    // color-primary background it now sits on.
+    'usx-nav-link-color': 'var(--usx-text-inverse)',
+    'usx-nav-link-hover-color': 'var(--usx-text-inverse)',
+    'usx-header-secondary-link-color': 'var(--usx-text)',
+    'usx-header-secondary-link-hover': 'var(--usx-text)',
+    'usx-nav-background-color-mobile': '#f4f8fb',
+    'usx-nav-link-color-mobile': '#1a65a6',
+    'usx-nav-link-hover-color-mobile': '#0f385c',
+    // GOV.UK famously never rounds a corner (buttons, inputs, panels, tags,
+    // checkboxes all render dead square — verified live on the design
+    // system's own component pages). Overriding the three base radius
+    // scales cascades to every component that chains to them; tile/badge
+    // are independent literals so need their own overrides.
+    'radius-field': '0', // buttons/inputs/textarea
+    'radius-box': '0', // summary box/alert/code/hero-callout/image
+    'radius-selector': '0', // tags/checkboxes
+    'usx-tile-radius': '0',
+    'usx-misc-banner-badge-radius': '0',
+    // Real GOV.UK form inputs render with a thick 2px black border — one of
+    // its most recognizable traits (verified on design-system.service.gov.uk).
+    'border-width-inputs': '2px',
+    // Real GOV.UK accordion sections are divided by a thin 1px rule (not a
+    // heavy border) with a light-grey button background (#f3f3f3) and
+    // near-black text — verified live on the design system's accordion
+    // example page.
+    'usx-accordion-border-width': '1px',
+    'usx-accordion-bg': '#f3f3f3',
+    'usx-accordion-content-bg': '#ffffff',
+    'usx-accordion-text': '#0b0c0c',
+    'usx-accordion-content-text': '#0b0c0c',
+    // Modeled on the real GOV.UK notification banner (a blue-bordered white
+    // panel) as the closest analog to our summary box.
+    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-border-color': 'var(--usx-color-primary)',
+    'usx-summary-box-text-color': '#0b0c0c',
+  },
+  NASA: {
+    // nasa.gov's live site itself (not the unaffiliated/outdated NASAWDS
+    // template) — colors pulled from its actual rendered CSS.
+    'color-primary': '#d83933', // real CTA button background (e.g. "Live Mission Coverage")
+    'color-secondary': '#1c67e3', // real accent blue (download-link icon)
+    'color-accent-cool': '#959599', // real neutral gray used across icons/labels
+    'color-accent-warm': '#f64137', // real "read more" arrow-icon accent
+    'surface-3': '#000000', // real header background — solid black
+    'color-border': '#b9b9bb', // real divider/border gray (light enough to read against the black header)
+    'usx-header-text-color': 'var(--usx-text-inverse)', // real header text is white against the black bar
+    // text-subtle/text-muted are tuned for a light/neutral surface — against
+    // the solid black header/nav they'd be low-contrast, so match the real
+    // white nav text instead. color-primary (red) already reads fine as the
+    // hover color against black, so it's left on the default.
+    'usx-nav-link-color': 'var(--usx-text-inverse)',
+    'usx-header-secondary-link-color': 'var(--usx-text-inverse)',
+    'font-family': '"Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif', // real nasa.gov body font (same USWDS default stack)
+    // The real CTA button (e.g. "Live Mission Coverage") measures a 4px
+    // corner radius, not our default 0.5rem — verified via computed style
+    // on the live site.
+    'radius-box': '0',
+    'radius-field': '0',
+    'radius-selector': '2px',
+    'radius-button': '4px',
+    // nasa.gov's content cards (hds-content-card) render perfectly square —
+    // verified live.
+    'usx-tile-radius': '0',
+    // nasa.gov's nav literally renders stock USWDS usa-accordion markup, so
+    // its button background is stock USWDS base-lightest rather than our
+    // slightly darker surface-2 default.
+    'usx-accordion-bg': 'var(--usx-surface-3)',
+    'usx-accordion-text': 'var(--usx-text-inverse)',
+    'usx-summary-box-background-color': 'var(--usx-surface-3)',
+    'usx-summary-box-border-color': 'var(--usx-color-primary)',
+    'usx-summary-box-text-color': 'var(--usx-text-inverse)',
+    ...headerFooterBorderOverrides(),
+    ...headerNavBackgroundOverrides(),
+    // Keep the mobile drawer the same black as the desktop header/nav bar.
+    'usx-nav-background-color-mobile': 'var(--usx-surface-3)',
+    // The footer's secondary section (logo + contact block) chains its
+    // background to surface-3 too, so it's solid black here just like the
+    // header — same text-color/heading-color-secondary fix as above.
+    // Link colors are untouched since color-primary (red) already reads
+    // fine against black.
+    'usx-footer-text-color': 'var(--usx-text-inverse)',
+    'usx-footer-heading-color-secondary': 'var(--usx-text-inverse)',
+    'usx-table-grouped-row-text-color': 'var(--usx-text-inverse)',
   }
 };
 
-// Main palette shown as prominent swatches; the rest live in "More colors".
-const MAIN_COLORS = [
-  'color-primary',
-  'color-secondary',
-  'color-accent-cool',
-  'color-accent-warm',
-  'color-base',
-  'color-info',
-  'color-warning',
-  'color-success',
-  'color-error',
-  'color-emergency',
-  'color-disabled',
-  'surface-1',
-  'surface-2',
-  'surface-3',
-  'text',
-  'text-subtle',
-  'text-inverse',
-  'color-border',
-  'color-dark-bg'
+// Base color tokens shown in the playground, split into the same groups the
+// USWDS design token docs use — plus one USX-specific "Environment colors"
+// group (beta/test/dev banner tones) and a "Surface & text colors" group for
+// the neutral surface/border/ink roles that don't fit either theme or state.
+// Each entry gets its own collapsed row (see ColorGroupRow) that expands to
+// reveal the base color's control and all of its derived shades together.
+const THEME_COLOR_NAMES = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm', 'color-base'];
+const STATE_COLOR_NAMES = ['color-info', 'color-warning', 'color-error', 'color-success', 'color-emergency', 'color-disabled', 'color-focus', 'color-visited'];
+const ENVIRONMENT_COLOR_NAMES = ['color-beta', 'color-test', 'color-dev'];
+// The former single "Surface & text colors" flat list, split into 3
+// component-style groups (see SURFACE_TEXT_GROUPS below) — surfaces,
+// borders (currently just color-border, but may gain more later) and text
+// — since these are sibling tokens rather than a base-color-plus-shades
+// relationship.
+const SURFACE_COLOR_NAMES = ['surface-1', 'surface-2', 'surface-3'];
+const BORDER_COLOR_NAMES = ['color-border'];
+const TEXT_COLOR_NAMES = ['text', 'text-muted', 'text-subtle', 'text-inverse'];
+const SURFACE_TEXT_COLOR_NAMES = [...SURFACE_COLOR_NAMES, ...BORDER_COLOR_NAMES, ...TEXT_COLOR_NAMES];
+const SURFACE_TEXT_GROUPS = [
+  { label: 'Surfaces', names: SURFACE_COLOR_NAMES },
+  { label: 'Borders', names: BORDER_COLOR_NAMES },
+  { label: 'Text', names: TEXT_COLOR_NAMES }
+];
+const GROUPED_COLOR_NAMES = [
+  ...THEME_COLOR_NAMES,
+  ...STATE_COLOR_NAMES,
+  ...ENVIRONMENT_COLOR_NAMES,
+  ...SURFACE_TEXT_COLOR_NAMES
 ];
 
 const RANDOMIZED = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm'];
 const SURFACE_NAMES = ['surface-1', 'surface-2', 'surface-3'];
+
+// Fixed x-axis columns for the lightest-\u2192darkest color-scale grid, in
+// lightness order. Every row (theme/state color) is laid out against these
+// SAME named columns — 'default' matches the base token itself (no
+// suffix) — so a cell's position is always identified by a color name (y)
+// + one of these labels (x), rather than a per-row computed sort. Colors
+// that don't have a given rung (e.g. only color-base has lightest/darkest;
+// only primary/secondary have a real vivid) just render a blank cell.
+const LIGHTNESS_LADDER_STEPS = [
+  { key: 'lightest', label: 'Lightest' },
+  { key: 'lighter', label: 'Lighter' },
+  { key: 'light', label: 'Light' },
+  { key: 'default', label: 'Default' },
+  { key: 'dark', label: 'Dark' },
+  { key: 'darker', label: 'Darker' },
+  { key: 'darkest', label: 'Darkest' }
+];
+
+// Builds one row of the color-scale grid: one cell per LIGHTNESS_LADDER_STEPS
+// entry, populated only if that shade actually exists in the manifest for
+// this base color — otherwise the cell comes back blank (name/hex both
+// null) instead of being skipped, so column position stays aligned across
+// every row.
+function buildScaleRow(baseName, resolved) {
+  return LIGHTNESS_LADDER_STEPS.map(({ key }) => {
+    const name = key === 'default' ? baseName : `${baseName}-${key}`;
+    const token = getToken(name);
+    return token ? { name, hex: resolved[name] } : { name: null, hex: null };
+  });
+}
+
+
+// Component-scoped tokens (the "hardcoded-hex promotions" in theme-manifest.js)
+// grouped by the component they belong to, matched by name prefix. Order here
+// is the display order in the "Component colors" section. Any manifest entry
+// with group 'component' that doesn't match one of these prefixes still shows
+// up, bucketed into a trailing "Other" group, so a newly-added token is never
+// silently dropped from the playground.
+// Tokens whose effect is conditional on markup/context the name alone
+// doesn't convey — surfaced as a tooltip on the control (see ColorControl).
+const TOKEN_NOTES = {
+  'usx-nav-background-color': 'only applies when the header uses the .usa-header--extended layout (desktop width)',
+  'usx-nav-background-color-mobile': 'only applies when the header uses the .usa-header--extended layout (mobile off-canvas drawer)'
+};
+
+const COMPONENT_COLOR_GROUPS = [
+  { label: 'Link', prefix: 'usx-link-' },
+  { label: 'Summary Box', prefix: 'usx-summary-box-' },
+  { label: 'Accordion', prefix: 'usx-accordion-' },
+  { label: 'Banner', prefix: 'usx-banner-' },
+  { label: 'Misc Banner', prefix: 'usx-misc-banner-' },
+  { label: 'Carousel', prefix: 'usx-carousel-' },
+  { label: 'Step Indicator', prefix: 'usx-step-indicator-' },
+  { label: 'Task List', prefix: 'usx-task-list-' },
+  { label: 'Clickable', prefix: 'usx-clickable-' },
+  { label: 'Tile', prefix: 'usx-tile-' },
+  { label: 'Selector (Checkbox/Radio)', prefix: 'usx-selector-' },
+  { label: 'SideNav', prefix: 'usx-sidenav-' },
+  { label: 'Header', prefix: 'usx-header-', extra: ['usx-nav-background-color', 'usx-nav-background-color-mobile', 'usx-nav-link-hover-bg-color', 'usx-nav-link-color', 'usx-nav-link-color-mobile', 'usx-nav-link-hover-color', 'usx-nav-link-hover-color-mobile'] },
+  { label: 'Footer', prefix: 'usx-footer-' },
+  { label: 'Table', prefix: 'usx-table-' },
+  { label: 'Tooltip', prefix: 'usx-tooltip-' },
+  { label: 'Icon List', prefix: 'usx-icon-list-' }
+];
+
+// Splits a flat list of component-group tokens into the ordered groups
+// above. A token whose `derivedFrom` points at another token already in the
+// same group (e.g. usx-carousel-dot-color-hover -> usx-carousel-dot-color)
+// is left out of the group's own list here — renderColor() already surfaces
+// it as a nested "shades" entry under its base, so listing it again at the
+// top level would just show it twice.
+function groupComponentColors(tokens) {
+  const used = new Set();
+  const groups = COMPONENT_COLOR_GROUPS.map(({ label, prefix, extra }) => {
+    const members = tokens.filter((t) => t.name.startsWith(prefix) || (extra && extra.includes(t.name)));
+    members.forEach((t) => used.add(t.name));
+    const names = new Set(members.map((t) => t.name));
+    const topLevel = members.filter((t) => !(t.derivedFrom && names.has(t.derivedFrom)));
+    return { label, tokens: topLevel };
+  }).filter((g) => g.tokens.length > 0);
+
+  const leftover = tokens.filter((t) => !used.has(t.name));
+  if (leftover.length > 0) {
+    const names = new Set(leftover.map((t) => t.name));
+    const topLevel = leftover.filter((t) => !(t.derivedFrom && names.has(t.derivedFrom)));
+    groups.push({ label: 'Other', tokens: topLevel });
+  }
+  return groups;
+}
+
+
+// The summary box sits on its own fixed "info" tint (cyan-5/cyan-20) rather
+// than the main surface/text system, so its background never follows a
+// randomized dark theme — but its text/link colors DO `derivedFrom` the
+// randomized 'text'/'color-primary' bases and would otherwise cascade via
+// resolveTheme(), e.g. flipping to white text on a background that stays
+// light. Pin all of these to their designed defaults; only its (unrelated)
+// radius token is left free to vary.
+const SUMMARY_BOX_PINNED_COLORS = [
+  'usx-summary-box-background-color',
+  'usx-summary-box-border-color',
+  'usx-summary-box-text-color',
+  'usx-summary-box-link-color',
+  'usx-summary-box-link-hover-color',
+  'usx-summary-box-link-visited-color'
+];
+
+function pinSummaryBoxColors(overrides) {
+  SUMMARY_BOX_PINNED_COLORS.forEach((name) => {
+    overrides[name] = getToken(name).defaultValue;
+  });
+}
 
 function randomPalette() {
   const overrides = {};
@@ -158,14 +504,40 @@ function randomPalette() {
   // surface-1 with still-light surface-2/3, which not only looked broken
   // but also meant a coherent "dark theme" only emerged by chance for
   // whichever single surface got randomized.
+  //
+  // The three lightness picks are then sorted and assigned in the SAME
+  // relative order as the defaults (surface-2 darkest, surface-3 middle,
+  // surface-1 lightest — see the surface-1/2/3 role comment above their
+  // manifest entries) instead of handed out to whichever surface name came
+  // up first. Without this, three independent random draws could just as
+  // easily invert that order (e.g. a lighter surface-2 than surface-1), and
+  // any component placing them side by side — like the table's
+  // header/stripe/body backgrounds — would end up with an arbitrary,
+  // incoherent-looking hierarchy instead of a consistent one.
   const isDark = Math.random() < 0.5;
   const hue = Math.random() * 360;
   const saturation = Math.random() * 20;
-  SURFACE_NAMES.forEach((name) => {
-    const [min, max] = isDark ? [4, 20] : [86, 100];
+  const [surfMin, surfMax] = isDark ? [4, 20] : [86, 100];
+  const surfaceLightnesses = [0, 0, 0]
+    .map(() => surfMin + Math.random() * (surfMax - surfMin))
+    .sort((a, b) => a - b);
+  overrides['surface-2'] = hslToHex({ h: hue, s: saturation, l: surfaceLightnesses[0] });
+  overrides['surface-3'] = hslToHex({ h: hue, s: saturation, l: surfaceLightnesses[1] });
+  overrides['surface-1'] = hslToHex({ h: hue, s: saturation, l: surfaceLightnesses[2] });
+
+  // Dividers/borders (table footer rule, sticky-column shadow, header/
+  // footer/sidenav/tile rules) live in the same neutral family as the
+  // surfaces, one lightness band further in from the extreme — a bit darker
+  // than the light surfaces, a bit lighter than the dark ones — so they stay
+  // a visible divider against whichever surface tone the theme lands on
+  // instead of blending in or vanishing. color-border isn't itself one of
+  // the SURFACE_NAMES, so it needs its own explicit override here.
+  {
+    const [min, max] = isDark ? [22, 38] : [68, 84];
     const lightness = min + Math.random() * (max - min);
-    overrides[name] = hslToHex({ h: hue, s: saturation, l: lightness });
-  });
+    overrides['color-border'] = hslToHex({ h: hue, s: saturation, l: lightness });
+  }
+  Object.assign(overrides, headerFooterBorderOverrides(), headerNavBackgroundOverrides());
 
   // A dark surface set → the default dark ink (text) would be unreadable, so
   // swap in a light color instead. Same reasoning for secondary/muted text
@@ -178,12 +550,14 @@ function randomPalette() {
   // the rest of the dark theme instead of staying a dark-on-dark chip.
   if (isDark) {
     overrides['text'] = '#ffffff';
+    overrides['text-muted'] = '#d1d1d6';
     overrides['text-subtle'] = '#b9b9bb';
     overrides['text-inverse'] = '#1b1b1b';
     overrides['usx-link-visited-color'] = '#b39ddb';
     overrides['usx-tooltip-background-color'] = overrides['text'];
     overrides['usx-tooltip-text-color'] = overrides['text-inverse'];
   }
+  pinSummaryBoxColors(overrides);
   return overrides;
 }
 
@@ -213,25 +587,44 @@ function randomSystemPalette() {
   // Same "decide dark/light once, then keep the 3 surfaces cohesive"
   // approach as randomPalette(), but sampling from one neutral gray
   // family's real grade scale instead of a continuous HSL lightness ramp.
+  // Same reasoning as randomPalette() above for the sort-then-assign step:
+  // it keeps surface-2 the darkest of the three, surface-3 the middle, and
+  // surface-1 the lightest, regardless of which grades get picked, so the
+  // relative hierarchy never inverts.
   const isDark = Math.random() < 0.5;
   const surfaceFamily = NEUTRAL_FAMILIES[Math.floor(Math.random() * NEUTRAL_FAMILIES.length)];
   const surfaceGrades = gradesFor(surfaceFamily, false);
   const pool = isDark ? surfaceGrades.slice(-6) : surfaceGrades.slice(0, 6);
-  SURFACE_NAMES.forEach((name) => {
-    const grade = pool[Math.floor(Math.random() * pool.length)];
-    overrides[name] = lookupHex(surfaceFamily, grade, false);
-  });
+  const surfacePicks = [0, 0, 0]
+    .map(() => pool[Math.floor(Math.random() * pool.length)])
+    .sort((a, b) => Number(a) - Number(b));
+  overrides['surface-2'] = lookupHex(surfaceFamily, surfacePicks[2], false);
+  overrides['surface-3'] = lookupHex(surfaceFamily, surfacePicks[1], false);
+  overrides['surface-1'] = lookupHex(surfaceFamily, surfacePicks[0], false);
+
+  // Same reasoning as randomPalette() above: a border/divider grade from the
+  // same neutral family, one band further in from the surface pool's extreme
+  // so it stays a visible divider against whichever surface grade the theme
+  // lands on. Falls back to the surface pool itself if the family's scale is
+  // too short to have a distinct further-in band.
+  const borderPool = (isDark ? surfaceGrades.slice(-12, -6) : surfaceGrades.slice(6, 12)) || [];
+  const borderGrades = borderPool.length ? borderPool : pool;
+  const borderGrade = borderGrades[Math.floor(Math.random() * borderGrades.length)];
+  overrides['color-border'] = lookupHex(surfaceFamily, borderGrade, false);
+  Object.assign(overrides, headerFooterBorderOverrides(), headerNavBackgroundOverrides());
 
   // See randomPalette() above for why text-inverse flips opposite of text
   // and the tooltip follows both.
   if (isDark) {
     overrides['text'] = '#ffffff';
+    overrides['text-muted'] = lookupHex('gray-cool', '20') || '#d1d1d6';
     overrides['text-subtle'] = lookupHex('gray-cool', '30') || '#b9b9bb';
     overrides['text-inverse'] = '#1b1b1b';
     overrides['usx-link-visited-color'] = '#b39ddb';
     overrides['usx-tooltip-background-color'] = overrides['text'];
     overrides['usx-tooltip-text-color'] = overrides['text-inverse'];
   }
+  pinSummaryBoxColors(overrides);
   return { overrides, selections };
 }
 
@@ -301,6 +694,22 @@ const PLAYGROUND_CSS = `
 .usx-pg-shades-toggle { cursor: pointer; font-size: .7rem; color: var(--pg-accent); opacity: .85; margin: .15rem 0 .35rem 2.75rem; }
 .usx-pg-shades-toggle:hover { opacity: 1; text-decoration: underline; }
 .usx-pg-shades-toggle::-webkit-details-marker { display: none; }
+.usx-pg-color-group { border-radius: 6px; margin-bottom: .05rem; }
+.usx-pg-color-header {
+  display: flex; align-items: center; gap: .55rem; width: 100%;
+  padding: .4rem .5rem; border: none; border-radius: 6px; background: none;
+  font: inherit; text-align: left; cursor: pointer; transition: background .12s ease;
+}
+.usx-pg-color-header:hover { background: #f9fafb; }
+.usx-pg-color-header.is-overridden { background: var(--pg-accent-soft); }
+.usx-pg-color-header.is-overridden:hover { background: var(--pg-accent-soft); }
+.usx-pg-color-chevron {
+  width: .5rem; height: .5rem; flex-shrink: 0;
+  border-right: 2px solid #9ca3af; border-bottom: 2px solid #9ca3af;
+  transform: rotate(-45deg); transition: transform .15s ease;
+}
+.usx-pg-color-group.is-expanded .usx-pg-color-chevron { transform: rotate(45deg); }
+.usx-pg-color-body { padding: .1rem .25rem .35rem 1.85rem; display: flex; flex-direction: column; gap: .1rem; }
 .usx-pg-row-fg {
   flex-direction: column; align-items: stretch; flex-wrap: nowrap;
   gap: .4rem; padding: .55rem .5rem; border: 1px solid transparent;
@@ -339,17 +748,58 @@ const PLAYGROUND_CSS = `
 }
 .usx-pg-textarea:focus { outline: none; border-color: var(--pg-accent); }
 .usx-pg-container { display: flex; align-items: flex-start; }
-.usx-pg-sidebar { width: 24rem; flex-shrink: 0; height: 100vh; position: sticky; top: 0; }
+.usx-pg-sidebar {
+  width: 24rem; flex-shrink: 0; height: 100vh; position: sticky; top: 0;
+  display: flex; flex-direction: column;
+}
 .usx-pg-sidebar-body { flex: 1; min-height: 0; overflow-y: auto; }
-.usx-pg-main { padding: 1.5rem; min-height: 100vh; }
+.usx-pg-main { min-height: 100vh; }
+.usx-pg-drawer-handle, .usx-pg-drawer-backdrop, .usx-pg-fab, .usx-pg-drawer-close { display: none; }
 @media (max-width: 720px) {
-  .usx-pg-container { flex-direction: column; }
+  /* align-items: flex-start (set above for the desktop row layout) becomes
+     a cross-axis rule once flex-direction flips to column here, so it stops
+     items stretching to full width — shrinking .usx-pg-main to its content's
+     preferred width and letting the header/nav render (and get clipped) at
+     that wider, desktop-intended size instead of the viewport width. */
+  .usx-pg-container { flex-direction: column; align-items: stretch; }
+  /* Sidebar becomes a bottom-sheet drawer: fixed/off-canvas by default,
+     slid into view over the showcase instead of pushing it down the page. */
   .usx-pg-sidebar {
-    width: 100%; height: auto; position: static; top: auto;
-    border-right: none; border-bottom: 1px solid var(--pg-line);
+    position: fixed; top: auto; right: 0; bottom: 0; left: 0;
+    width: 100%; height: 82vh; max-height: 82vh;
+    border-right: none; border-top: 1px solid var(--pg-line);
+    border-radius: 1rem 1rem 0 0;
+    box-shadow: 0 -8px 28px rgba(15, 23, 42, 0.22);
+    z-index: 60;
+    transform: translateY(100%);
+    transition: transform 0.25s ease;
   }
-  .usx-pg-sidebar-body { flex: none; overflow-y: visible; }
-  .usx-pg-main { padding: 1rem; min-height: 0; }
+  .usx-pg-sidebar.is-open { transform: translateY(0); }
+  .usx-pg-sidebar-body { flex: 1; overflow-y: auto; }
+  .usx-pg-main { min-height: 0; padding-bottom: 4.5rem; }
+  .usx-pg-drawer-handle {
+    display: block; width: 2.5rem; height: 0.3rem; border-radius: 999px;
+    background: var(--pg-line); margin: 0.6rem auto 0.1rem; flex-shrink: 0;
+  }
+  .usx-pg-drawer-close {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.9rem; height: 1.9rem; border-radius: 50%; border: none;
+    background: #f3f4f6; color: #374151; font-size: 1rem; cursor: pointer; flex-shrink: 0;
+  }
+  .usx-pg-drawer-backdrop {
+    display: block; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45);
+    z-index: 50; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+  }
+  .usx-pg-drawer-backdrop.is-open { opacity: 1; pointer-events: auto; }
+  .usx-pg-fab {
+    display: flex; align-items: center; gap: 0.4rem; position: fixed; right: 1rem; bottom: 1rem;
+    z-index: 55; padding: 0.75rem 1.15rem; border-radius: 999px; border: none;
+    background: #111827; color: #fff; font: inherit; font-size: 0.8rem; font-weight: 600;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28); cursor: pointer;
+  }
+  .usx-pg-fab-count {
+    background: rgba(255, 255, 255, 0.2); border-radius: 999px; padding: 0.05rem 0.45rem; font-size: 0.72rem;
+  }
 }
 `;
 
@@ -374,10 +824,10 @@ const ui = {
   },
   chipRow: { display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0.35rem 0' },
   card: {
-    background: 'var(--usx-surface-1, #ffffff)',
-    border: '1px solid var(--usx-surface-2, #e2e8f0)',
+    border: '1px solid var(--usx-border, #e2e8f0)',
     borderRadius: '10px',
     padding: '1rem',
+    margin: '1rem',
     display: 'flex',
     flexDirection: 'column',
     gap: '0.75rem',
@@ -399,6 +849,7 @@ function Section({ title, children, open = false, count }) {
 }
 
 function ColorControl({ token, value, isOverridden, onChange, onClear }) {
+  const note = TOKEN_NOTES[token.name];
   return (
     <div className={`usx-pg-row${isOverridden ? ' is-overridden' : ''}`}>
       <input
@@ -408,7 +859,7 @@ function ColorControl({ token, value, isOverridden, onChange, onClear }) {
         onChange={(e) => onChange(token.name, e.target.value)}
         className="usx-pg-swatch"
       />
-      <span className="usx-pg-label" title={token.cssVar}>
+      <span className="usx-pg-label" title={note ? `${token.cssVar} \u2014 ${note}` : token.cssVar}>
         {token.name.replace(/^color-|^usx-/, '')}
       </span>
       <code className="usx-pg-value">{value}</code>
@@ -437,6 +888,46 @@ function gradesFor(family, vivid) {
 function lookupHex(family, grade, vivid) {
   const scale = vivid ? systemColors[family]?.vivid : systemColors[family]?.grades;
   return (scale && scale[grade]) || null;
+}
+
+// Finds the closest real system-palette entry (any grade, vivid or not)
+// within `family` to `hex` — used to keep a derived shade a genuine system
+// color (matching its base's chosen family) instead of an arbitrary
+// HSL-derived hex belonging to no real swatch.
+function nearestSystemColor(hex, family) {
+  const target = hexToRgb(hex);
+  let best = null;
+  const consider = (grade, vivid) => {
+    const candidateHex = lookupHex(family, grade, vivid);
+    if (!candidateHex) return;
+    const rgb = hexToRgb(candidateHex);
+    const dist = (rgb.r - target.r) ** 2 + (rgb.g - target.g) ** 2 + (rgb.b - target.b) ** 2;
+    if (!best || dist < best.dist) best = { grade, vivid, hex: candidateHex, dist };
+  };
+  gradesFor(family, false).forEach((g) => consider(g, false));
+  if (familyHasVivid(family)) gradesFor(family, true).forEach((g) => consider(g, true));
+  return best;
+}
+
+// Reverse lookup: does `hex` exactly equal a real system swatch (in any
+// family)? Lets a plain hex override — from a preset, a pasted value, an
+// imported CSS block — be recognized and displayed as a system color
+// instead of always falling back to "custom" just because it wasn't picked
+// via the family/grade selects this session.
+function findSystemColorMatch(hex) {
+  const target = hex?.toLowerCase();
+  if (!target) return null;
+  for (const family of familyNames) {
+    for (const grade of gradesFor(family, false)) {
+      if (lookupHex(family, grade, false)?.toLowerCase() === target) return { family, grade, vivid: false };
+    }
+    if (familyHasVivid(family)) {
+      for (const grade of gradesFor(family, true)) {
+        if (lookupHex(family, grade, true)?.toLowerCase() === target) return { family, grade, vivid: true };
+      }
+    }
+  }
+  return null;
 }
 
 // Theme/state color tokens with a real USWDS counterpart (token.systemDefault)
@@ -479,7 +970,7 @@ function FamilyGradeColorControl({ token, value, isOverridden, onChange, onClear
 
   const applySystem = (nextFamily, nextGrade, nextVivid) => {
     const hex = lookupHex(nextFamily, nextGrade, nextVivid);
-    if (hex) onChange(token.name, hex);
+    if (hex) onChange(token.name, hex, { family: nextFamily, grade: nextGrade, vivid: nextVivid });
   };
 
   return (
@@ -504,7 +995,13 @@ function FamilyGradeColorControl({ token, value, isOverridden, onChange, onClear
           type="button"
           className="usx-pg-mode-toggle"
           title={mode === 'system' ? 'Switch to a custom hex value' : 'Switch to family + grade'}
-          onClick={() => setMode(mode === 'system' ? 'custom' : 'system')}
+          onClick={() => {
+            const next = mode === 'system' ? 'custom' : 'system';
+            setMode(next);
+            // Leaving system mode: drop the recorded family/grade so any
+            // dependent shade stops treating this as a system color.
+            if (next === 'custom') onChange(token.name, value);
+          }}
         >
           {mode === 'system' ? 'hex' : 'sys'}
         </button>
@@ -572,6 +1069,89 @@ function FamilyGradeColorControl({ token, value, isOverridden, onChange, onClear
   );
 }
 
+// A single collapsed color row within a group (Theme/State/Environment/
+// Surface & text colors). Collapsed by default, showing only a swatch +
+// name; expanding it reveals the base color's own control plus all of its
+// derived shades together, so there's no separate nested "shades" toggle to
+// dig through. `expanded`/`onToggleExpand` are lifted to the playground so
+// only one color across the whole panel can be open at a time.
+function ColorGroupRow({ token, resolved, overrides, systemSelections, onChange, onClear, expanded, onToggleExpand }) {
+  const shades = shadesOf(token.name).filter((s) => !GROUPED_COLOR_NAMES.includes(s.name));
+  const isOverridden = overrides[token.name] !== undefined || shades.some((s) => overrides[s.name] !== undefined);
+  const Control = token.systemDefault ? FamilyGradeColorControl : ColorControl;
+
+  return (
+    <div className={`usx-pg-color-group${expanded ? ' is-expanded' : ''}`}>
+      <button
+        type="button"
+        className={`usx-pg-color-header${isOverridden ? ' is-overridden' : ''}`}
+        aria-expanded={expanded}
+        onClick={onToggleExpand}
+      >
+        <span className="usx-pg-swatch-static" style={{ background: resolved[token.name] }} aria-hidden="true" />
+        <span className="usx-pg-label">{token.name.replace(/^color-/, '')}</span>
+        <span className="usx-pg-color-chevron" aria-hidden="true" />
+      </button>
+      {expanded && (
+        <div className="usx-pg-color-body">
+          <Control
+            token={token}
+            value={resolved[token.name]}
+            isOverridden={overrides[token.name] !== undefined}
+            onChange={onChange}
+            onClear={onClear}
+            selection={systemSelections[token.name]}
+          />
+          {shades.map((s) => {
+            const ShadeControl = s.systemDefault ? FamilyGradeColorControl : ColorControl;
+            return (
+              <ShadeControl
+                key={s.name}
+                token={s}
+                value={resolved[s.name]}
+                isOverridden={overrides[s.name] !== undefined}
+                onChange={onChange}
+                onClear={onClear}
+                selection={systemSelections[s.name]}
+              />
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// A collapsed group of MULTIPLE distinct color tokens that belong together
+// (a component's colors — Link, Accordion, Table, etc. — or, since this
+// task, a base-color umbrella like Surfaces/Borders/Text) rather than one
+// base color and its derived shades. Deliberately has NO swatch preview in
+// the collapsed header — unlike ColorGroupRow, a single swatch can't stand
+// in for several unrelated colors (surface-1/2/3, text/text-subtle/
+// text-inverse, etc.), so showing one would be misleading. Expanding it
+// reveals every member token at once, each rendered via the playground's
+// own renderColor (so derived shades, if any, still nest under their own
+// base token).
+function TokenColorGroup({ label, tokens, overrides, expanded, onToggleExpand, renderColor }) {
+  const isOverridden = tokens.some((t) => overrides[t.name] !== undefined);
+
+  return (
+    <div className={`usx-pg-color-group${expanded ? ' is-expanded' : ''}`}>
+      <button
+        type="button"
+        className={`usx-pg-color-header${isOverridden ? ' is-overridden' : ''}`}
+        aria-expanded={expanded}
+        onClick={onToggleExpand}
+      >
+        <span className="usx-pg-label">{label}</span>
+        <span className="usx-pg-count">{tokens.length}</span>
+        <span className="usx-pg-color-chevron" aria-hidden="true" />
+      </button>
+      {expanded && <div className="usx-pg-color-body">{tokens.map(renderColor)}</div>}
+    </div>
+  );
+}
+
 function TextControl({ token, value, isOverridden, onChange, onClear }) {
   return (
     <div className={`usx-pg-row${isOverridden ? ' is-overridden' : ''}`}>
@@ -583,6 +1163,65 @@ function TextControl({ token, value, isOverridden, onChange, onClear }) {
         onChange={(e) => onChange(token.name, e.target.value)}
         className="usx-pg-input"
       />
+      {isOverridden && (
+        <button type="button" className="usx-pg-reset" title="Reset to default" onClick={() => onClear(token.name)}>
+          ×
+        </button>
+      )}
+    </div>
+  );
+}
+
+// Curated set of common font-family stacks offered in the dropdown for any
+// `type: 'font-family'` token. "Other…" always falls back to a free-text
+// input so any custom stack can still be entered.
+const FONT_FAMILY_OPTIONS = [
+  { label: 'Source Sans Pro (USWDS default)', value: 'Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif' },
+  { label: 'Public Sans', value: 'Public Sans Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif' },
+  { label: 'Merriweather (serif)', value: 'Merriweather Web, Georgia, Cambria, "Times New Roman", Times, serif' },
+  { label: 'Georgia (serif)', value: 'Georgia, Cambria, "Times New Roman", Times, serif' },
+  { label: 'System UI', value: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' }
+];
+const FONT_FAMILY_OTHER = '__other__';
+
+function FontFamilyControl({ token, value, isOverridden, onChange, onClear }) {
+  const matchedOption = FONT_FAMILY_OPTIONS.find((o) => o.value === value);
+  const [customMode, setCustomMode] = useState(!matchedOption);
+
+  const selectValue = customMode ? FONT_FAMILY_OTHER : (matchedOption ? matchedOption.value : FONT_FAMILY_OTHER);
+
+  return (
+    <div className={`usx-pg-row${isOverridden ? ' is-overridden' : ''}`}>
+      <span className="usx-pg-label" title={token.cssVar}>{token.name}</span>
+      <select
+        aria-label={`${token.name} preset`}
+        className="usx-pg-select"
+        value={selectValue}
+        onChange={(e) => {
+          const next = e.target.value;
+          if (next === FONT_FAMILY_OTHER) {
+            setCustomMode(true);
+          } else {
+            setCustomMode(false);
+            onChange(token.name, next);
+          }
+        }}
+      >
+        {FONT_FAMILY_OPTIONS.map((o) => (
+          <option key={o.value} value={o.value}>{o.label}</option>
+        ))}
+        <option value={FONT_FAMILY_OTHER}>Other…</option>
+      </select>
+      {customMode && (
+        <input
+          type="text"
+          aria-label={`${token.name} custom value`}
+          value={value}
+          onChange={(e) => onChange(token.name, e.target.value)}
+          className="usx-pg-input"
+          placeholder="Enter a custom font-family stack"
+        />
+      )}
       {isOverridden && (
         <button type="button" className="usx-pg-reset" title="Reset to default" onClick={() => onClear(token.name)}>
           ×
@@ -635,7 +1274,7 @@ const codeLines = [
 ];
 
 const tableColumns = [
-  { key: 'name', header: 'Document', primary: true, sortable: true },
+  { key: 'name', header: 'Document', sortable: true },
   { key: 'year', header: 'Year', align: 'right', sortable: true },
   { key: 'status', header: 'Status', sortable: true }
 ];
@@ -649,30 +1288,86 @@ const tableData = [
   { id: 6, name: '19th Amendment', year: 1920, status: 'Ratified', era: 'Modern' }
 ];
 
-function Showcase() {
+// A quick lightest-→darkest reference for every theme + state base color, so
+// a preset/override's whole ramp can be eyeballed at once instead of digging
+// through each color's own collapsed shades. Laid out as a real x/y grid —
+// x = LIGHTNESS_LADDER_STEPS (fixed column per row), y = color name — so any
+// swatch can be located by name + column label; a color missing a given
+// rung (e.g. only color-base has lightest/darkest) just leaves that cell
+// blank rather than shifting the columns after it. Rows react live to
+// `resolved` (theme overrides), same as the rest of the Showcase.
+function ColorScaleGrid({ resolved }) {
+  const rows = useMemo(
+    () =>
+      [...THEME_COLOR_NAMES, ...STATE_COLOR_NAMES].map((name) => ({
+        name,
+        cells: buildScaleRow(name, resolved)
+      })),
+    [resolved]
+  );
+
+  return (
+    <div style={{ ...ui.card, breakInside: 'avoid', columnSpan: 'all', marginTop: '1rem' }}>
+      <h3 style={ui.cardTitle}>Color scale — lightest to darkest</h3>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: `9rem repeat(${LIGHTNESS_LADDER_STEPS.length}, 1fr)`,
+          gap: '0.4rem 0.5rem',
+          alignItems: 'center'
+        }}
+      >
+        <span />
+        {LIGHTNESS_LADDER_STEPS.map((step) => (
+          <span
+            key={step.key}
+            style={{ fontSize: '0.68rem', fontWeight: 600, textAlign: 'center' }}
+          >
+            {step.label}
+          </span>
+        ))}
+
+        {rows.map((row) => (
+          <React.Fragment key={row.name}>
+            <span style={{ fontSize: '0.72rem', fontWeight: 600 }}>
+              {row.name.replace(/^color-/, '').replace(/-/g, ' ')}
+            </span>
+            {row.cells.map((cell, i) => (
+              <div
+                key={`${row.name}-${LIGHTNESS_LADDER_STEPS[i].key}`}
+                title={cell.name ? `${cell.name}: ${cell.hex}` : undefined}
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.15rem' }}
+              >
+                <div
+                  style={{
+                    width: '2.75rem',
+                    height: '2.75rem',
+                    borderRadius: '6px',
+                    background: cell.hex || 'transparent',
+                    border: cell.hex ? '1px solid rgba(0,0,0,.08)' : '1px dashed rgba(0,0,0,.15)'
+                  }}
+                />
+                {cell.hex && <code style={{ fontSize: '0.58rem', opacity: 0.6 }}>{cell.hex}</code>}
+              </div>
+            ))}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+function Showcase({ resolved }) {
   // Pre-select a row so `usx-table-selected-bg` is visible without user
   // interaction; `groupBy` + `onClickRow` exercise the grouped-row and
   // hover-row color tokens too.
   const [tableSelection, setTableSelection] = useState([2]);
 
-  useEffect(() => {
-    accordion.off();
-    navigation.off();
-    // Turn on USWDS enhanced components using <component>.on()
-    accordion.on();
-    navigation.on();
-
-    return () => {
-      // Clean up USWDS components when the component unmounts
-      accordion.off();
-      navigation.off();
-    }
-  }, []);
-
   return (
     <div style={{ columnWidth: '22rem', columnGap: '1rem' }}>
 
-      <div style={{ ...ui.card, gap: 0, padding: 0, overflow: 'visible', breakInside: 'avoid', columnSpan: 'all', marginBottom: '1rem' }}>
+      <div style={{ columnSpan: 'all', marginBottom: '1rem' }}>
         <Banner tld=".gov" />
         <MiscBanner tone="test" badgeText="test" message="You are viewing a test site." importantLinkText="Production site" importantLinkHref="https://www.google.com" />
         <MiscBanner tone="dev" badgeText="dev" message="You are viewing a dev site." importantLinkText="Production site" importantLinkHref="https://www.google.com" />
@@ -695,6 +1390,22 @@ function Showcase() {
           button={{ href: '#', text: 'Call to action' }}
           overlay
         />
+      </div>
+
+      <div style={{ ...ui.card, breakInside: 'avoid', columnSpan: 'all', marginBottom: '1rem' }}>
+        <h3 style={ui.cardTitle}>Table</h3>
+        <div style={{ overflowX: 'auto' }}>
+          <Table
+            columns={tableColumns}
+            data={tableData}
+            groupBy="era"
+            selectionMode="checkbox"
+            select={tableSelection}
+            onSelect={setTableSelection}
+            onClickRow={() => {}}
+            caption="Founding documents — grouped, sortable, selectable rows"
+          />
+        </div>
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
@@ -724,23 +1435,6 @@ function Showcase() {
         <Alert variant="success" slim text="The task completed successfully." />
         <Alert variant="error" slim text="Something went wrong." />
         <Alert variant="emergency" slim text="Urgent: immediate action required." />
-      </div>
-
-      <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
-        <h3 style={ui.cardTitle}>Table</h3>
-        <div style={{ overflowX: 'auto' }}>
-          <Table
-            columns={tableColumns}
-            data={tableData}
-            striped
-            groupBy="era"
-            selectionMode="checkbox"
-            select={tableSelection}
-            onSelect={setTableSelection}
-            onClickRow={() => {}}
-            caption="Founding documents — grouped, sortable, selectable rows"
-          />
-        </div>
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
@@ -853,6 +1547,28 @@ function Showcase() {
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
+        <h3 style={ui.cardTitle}>Prose</h3>
+        <Prose>
+          <h2>A prose heading</h2>
+          <p>
+            Body copy rendered through <em>Prose</em> exercises the shared typography tokens
+            (font family, heading scale, line height) alongside{' '}
+            <Link href="javascript:void(0);">a standard link</Link> and a{' '}
+            <Link href="javascript:void(0);" visited>visited link</Link> inline.
+          </p>
+          <h3>A subheading</h3>
+          <ul>
+            <li>Unordered list item one</li>
+            <li>Unordered list item two</li>
+            <ol>
+              <li>Ordered list item one</li>
+              <li>Ordered list item two</li>
+            </ol>
+          </ul>
+        </Prose>
+      </div>
+
+      <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
         <h3 style={ui.cardTitle}>Tasks &amp; utility</h3>
         <TaskList tasks={taskListTasks} />
         <Attribution primary="George Washington" secondary="First President" />
@@ -866,7 +1582,7 @@ function Showcase() {
         </Clickable>
       </div>
 
-      <div style={{ ...ui.card, gap: 0, padding: 0, overflow: 'hidden', breakInside: 'avoid', columnSpan: 'all' }}>
+      <div style={{ marginTop: '2rem', columnSpan: 'all' }}>
         <Footer
           variant="medium"
           navLinks={footerNavLinks}
@@ -876,6 +1592,8 @@ function Showcase() {
           contactEmail="info@example.gov"
         />
       </div>
+
+      <ColorScaleGrid resolved={resolved} />
     </div>
   );
 }
@@ -892,6 +1610,33 @@ function ThemePlayground() {
   const [changedOnly, setChangedOnly] = useState(true);
   const [copied, setCopied] = useState(false);
   const [activePreset, setActivePreset] = useState('Default');
+  // Which single color group row (Theme/State colors — each a base color
+  // with its own derived shades) is currently expanded — only one may be
+  // open across the whole panel at a time, so opening a new one collapses
+  // whichever was previously open. Environment colors don't use this (no
+  // shades to reveal, so they're rendered flat — see renderColor below) and
+  // Surface & text / Component colors use their own group-level state
+  // (expandedSurfaceGroup / expandedComponentGroup) since those group
+  // several distinct tokens together rather than a base + its shades.
+  const [expandedColor, setExpandedColor] = useState(null);
+  const toggleColorExpand = (name) => setExpandedColor((prev) => (prev === name ? null : name));
+  // Same single-open-at-a-time behavior as expandedColor above, but scoped
+  // to the component-color groups (Link, Accordion, Table, etc.) — a
+  // separate axis from the base/state/environment/surface colors, so
+  // opening a component group doesn't collapse an open theme color and
+  // vice versa.
+  const [expandedComponentGroup, setExpandedComponentGroup] = useState(null);
+  const toggleComponentGroupExpand = (label) =>
+    setExpandedComponentGroup((prev) => (prev === label ? null : label));
+  // Same pattern again, scoped to the Surfaces/Borders/Text groups under
+  // "Surface & text colors" — its own independent single-open axis.
+  const [expandedSurfaceGroup, setExpandedSurfaceGroup] = useState(null);
+  const toggleSurfaceGroupExpand = (label) =>
+    setExpandedSurfaceGroup((prev) => (prev === label ? null : label));
+  // Below the 720px breakpoint the sidebar becomes an off-canvas drawer
+  // (see .usx-pg-sidebar in PLAYGROUND_CSS) toggled by a floating button, so
+  // editing tokens doesn't require scrolling back up past the showcase.
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
   const autoDeriveMap = useMemo(() => {
     const map = {};
@@ -899,18 +1644,81 @@ function ThemePlayground() {
     return map;
   }, [autoDerive]);
 
-  const resolved = useMemo(() => resolveTheme(overrides, autoDeriveMap), [overrides, autoDeriveMap]);
+  const rawResolved = useMemo(() => resolveTheme(overrides, autoDeriveMap), [overrides, autoDeriveMap]);
+
+  // Recognizes an overridden hex as a system color even when it wasn't
+  // picked via the family/grade selects this session (e.g. it came from a
+  // preset, was typed/pasted, or was re-imported from exported CSS).
+  const detectedSelections = useMemo(() => {
+    const found = {};
+    for (const t of themeManifest) {
+      if (!t.systemDefault || systemSelections[t.name]) continue;
+      const match = findSystemColorMatch(overrides[t.name]);
+      if (match) found[t.name] = match;
+    }
+    return found;
+  }, [overrides, systemSelections]);
+
+  // Explicit picks win over auto-detected ones (same token can't really
+  // disagree, but this keeps intent unambiguous).
+  const baseSelections = useMemo(
+    () => ({ ...detectedSelections, ...systemSelections }),
+    [detectedSelections, systemSelections]
+  );
+
+  // When a base color was picked via the family/grade control (tracked in
+  // baseSelections), its derived shades should also be real system colors
+  // from that SAME family — not the shade's own stale default family, and
+  // not an arbitrary off-palette hex from the HSL-delta math alone. Snap
+  // each non-overridden, system-capable shade to the closest real swatch in
+  // the base's chosen family, and record that match so the shade's own
+  // family/grade selects can reflect it too.
+  const systemShades = useMemo(() => {
+    const values = {};
+    const selections = {};
+    for (const t of themeManifest) {
+      if (!t.derivedFrom || !t.systemDefault) continue;
+      if (overrides[t.name] !== undefined) continue;
+      const base = getToken(t.derivedFrom);
+      if (!base || !(autoDeriveMap[base.name] ?? true)) continue;
+      const baseSelection = baseSelections[base.name];
+      if (!baseSelection) continue;
+      const match = nearestSystemColor(rawResolved[t.name], baseSelection.family);
+      if (!match) continue;
+      values[t.name] = match.hex;
+      selections[t.name] = { family: baseSelection.family, grade: match.grade, vivid: match.vivid };
+    }
+    return { values, selections };
+  }, [overrides, baseSelections, autoDeriveMap, rawResolved]);
+
+  const resolved = useMemo(
+    () => ({ ...rawResolved, ...systemShades.values }),
+    [rawResolved, systemShades]
+  );
+  // Selections passed down to controls: derived system matches and
+  // auto-detected/explicit base picks (explicit wins on conflict).
+  const effectiveSelections = useMemo(
+    () => ({ ...systemShades.selections, ...baseSelections }),
+    [systemShades, baseSelections]
+  );
   // Applied as a `:root` rule (not inline styles on a descendant) so that
-  // chained custom properties (e.g. `--usx-button-radius: var(--usx-radius-field)`)
+  // chained custom properties (e.g. `--usx-radius-button: var(--usx-radius-field)`)
   // re-resolve correctly — CSS substitutes var() chains at the declaring
   // element, so overriding a base token from a descendant element would
   // never reach dependents declared on `:root` in theme.css.
   const liveThemeCss = useMemo(() => themeToCss(resolved, { changedOnly: true }), [resolved]);
   const exportCss = useMemo(() => themeToCss(resolved, { changedOnly }), [resolved, changedOnly]);
 
-  const setToken = (name, value) => {
+  const setToken = (name, value, selection) => {
     setActivePreset(null);
     setOverrides((prev) => ({ ...prev, [name]: value }));
+    setSystemSelections((prev) => {
+      if (selection) return { ...prev, [name]: selection };
+      if (!(name in prev)) return prev;
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
   };
   const clearToken = (name) => {
     setActivePreset(null);
@@ -968,9 +1776,30 @@ function ThemePlayground() {
   };
 
   const colorTokensByName = useMemo(() => new Map(themeManifest.map((t) => [t.name, t])), []);
-  const mainColors = MAIN_COLORS.map((n) => colorTokensByName.get(n));
-  const moreColors = baseColorTokens().filter((t) => !MAIN_COLORS.includes(t.name));
   const componentColors = themeManifest.filter((t) => t.group === 'component');
+  const componentColorGroups = groupComponentColors(componentColors);
+  const surfaceTextGroups = SURFACE_TEXT_GROUPS.map((g) => ({
+    label: g.label,
+    tokens: g.names.map((n) => colorTokensByName.get(n)).filter(Boolean)
+  }));
+
+  const renderColorGroup = (name) => {
+    const t = colorTokensByName.get(name);
+    if (!t) return null;
+    return (
+      <ColorGroupRow
+        key={name}
+        token={t}
+        resolved={resolved}
+        overrides={overrides}
+        systemSelections={effectiveSelections}
+        onChange={setToken}
+        onClear={clearToken}
+        expanded={expandedColor === name}
+        onToggleExpand={() => toggleColorExpand(name)}
+      />
+    );
+  };
 
   const renderColor = (t) => {
     const Control = t.systemDefault ? FamilyGradeColorControl : ColorControl;
@@ -982,12 +1811,12 @@ function ThemePlayground() {
           isOverridden={overrides[t.name] !== undefined}
           onChange={setToken}
           onClear={clearToken}
-          selection={systemSelections[t.name]}
+          selection={effectiveSelections[t.name]}
         />
-        {shadesOf(t.name).filter((s) => !MAIN_COLORS.includes(s.name)).length > 0 && (
+        {shadesOf(t.name).filter((s) => !GROUPED_COLOR_NAMES.includes(s.name)).length > 0 && (
           <details style={{ marginBottom: '0.25rem' }}>
             <summary className="usx-pg-shades-toggle">shades</summary>
-            {shadesOf(t.name).filter((s) => !MAIN_COLORS.includes(s.name)).map((s) => {
+            {shadesOf(t.name).filter((s) => !GROUPED_COLOR_NAMES.includes(s.name)).map((s) => {
               const ShadeControl = s.systemDefault ? FamilyGradeColorControl : ColorControl;
               return (
                 <ShadeControl
@@ -997,7 +1826,7 @@ function ThemePlayground() {
                   isOverridden={overrides[s.name] !== undefined}
                   onChange={setToken}
                   onClear={clearToken}
-                  selection={systemSelections[s.name]}
+                  selection={effectiveSelections[s.name]}
                 />
               );
             })}
@@ -1007,30 +1836,50 @@ function ThemePlayground() {
     );
   };
 
-  const renderText = (t) => (
-    <TextControl
-      key={t.name}
-      token={t}
-      value={resolved[t.name]}
-      isOverridden={overrides[t.name] !== undefined}
-      onChange={setToken}
-      onClear={clearToken}
-    />
-  );
+  const renderText = (t) => {
+    const Control = t.type === 'font-family' ? FontFamilyControl : TextControl;
+    return (
+      <Control
+        key={t.name}
+        token={t}
+        value={resolved[t.name]}
+        isOverridden={overrides[t.name] !== undefined}
+        onChange={setToken}
+        onClear={clearToken}
+      />
+    );
+  };
 
   const radiusGroup = themeManifest.filter((t) => t.group === 'radius' && t.name.startsWith('radius-'));
   const radiusAdvanced = themeManifest.filter((t) => t.group === 'radius-advanced');
   const radiusUtility = themeManifest.filter((t) => t.group === 'radius' && t.name.startsWith('r-'));
   const spacingTokens = themeManifest.filter((t) => t.group === 'spacing');
   const borderTokens = themeManifest.filter((t) => t.group === 'border');
+  const borderAdvanced = themeManifest.filter((t) => t.group === 'border-advanced');
   const typographyTokens = themeManifest.filter((t) => t.group === 'typography');
+  const typographyAdvanced = themeManifest.filter((t) => t.group === 'typography-advanced');
 
   return (
     <div className="usx-pg usx-pg-container">
       <style>{PLAYGROUND_CSS}</style>
-      <aside className="usx-pg-sidebar" style={ui.sidebar}>
+      <div
+        className={`usx-pg-drawer-backdrop${mobileDrawerOpen ? ' is-open' : ''}`}
+        onClick={() => setMobileDrawerOpen(false)}
+      />
+      <aside className={`usx-pg-sidebar${mobileDrawerOpen ? ' is-open' : ''}`} style={ui.sidebar}>
+        <div className="usx-pg-drawer-handle" />
         <div style={ui.sidebarHeader}>
-          <h2 style={{ margin: '0 0 0.2rem', fontSize: '1.05rem' }}>Theme generator</h2>
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem' }}>
+            <h2 style={{ margin: '0 0 0.2rem', fontSize: '1.05rem' }}>Theme generator</h2>
+            <button
+              type="button"
+              className="usx-pg-drawer-close"
+              aria-label="Close theme controls"
+              onClick={() => setMobileDrawerOpen(false)}
+            >
+              ×
+            </button>
+          </div>
           <p style={{ margin: '0 0 0.85rem', fontSize: '0.75rem', color: '#6b7280' }}>
             Live-edit tokens and export the resulting CSS.
             {overrideCount > 0 && ` · ${overrideCount} changed`}
@@ -1065,11 +1914,31 @@ function ThemePlayground() {
         </div>
 
         <div className="usx-pg-sidebar-body" style={ui.sidebarBody}>
-          <Section title="Colors" open count={mainColors.length}>
-            {mainColors.map(renderColor)}
+          <Section title="Theme colors" open count={THEME_COLOR_NAMES.length}>
+            {THEME_COLOR_NAMES.map(renderColorGroup)}
           </Section>
 
-          <Section title="More colors" count={moreColors.length}>{moreColors.map(renderColor)}</Section>
+          <Section title="State colors" count={STATE_COLOR_NAMES.length}>
+            {STATE_COLOR_NAMES.map(renderColorGroup)}
+          </Section>
+
+          <Section title="Environment colors" count={ENVIRONMENT_COLOR_NAMES.length}>
+            {ENVIRONMENT_COLOR_NAMES.map((name) => renderColor(colorTokensByName.get(name)))}
+          </Section>
+
+          <Section title="Surface & text colors" count={SURFACE_TEXT_COLOR_NAMES.length}>
+            {surfaceTextGroups.map((g) => (
+              <TokenColorGroup
+                key={g.label}
+                label={g.label}
+                tokens={g.tokens}
+                overrides={overrides}
+                expanded={expandedSurfaceGroup === g.label}
+                onToggleExpand={() => toggleSurfaceGroupExpand(g.label)}
+                renderColor={renderColor}
+              />
+            ))}
+          </Section>
 
           <Section title="Radius" count={radiusGroup.length}>
             {radiusGroup.map(renderText)}
@@ -1091,11 +1960,31 @@ function ThemePlayground() {
             {borderTokens.map(renderText)}
           </Section>
 
+          <Section title="Advanced border" count={borderAdvanced.length}>
+            {borderAdvanced.map(renderText)}
+          </Section>
+
           <Section title="Typography" count={typographyTokens.length}>
             {typographyTokens.map(renderText)}
           </Section>
 
-          <Section title="Component colors" count={componentColors.length}>{componentColors.map(renderColor)}</Section>
+          <Section title="Component typography" count={typographyAdvanced.length}>
+            {typographyAdvanced.map(renderText)}
+          </Section>
+
+          <Section title="Component colors" count={componentColors.length}>
+            {componentColorGroups.map((g) => (
+              <TokenColorGroup
+                key={g.label}
+                label={g.label}
+                tokens={g.tokens}
+                overrides={overrides}
+                expanded={expandedComponentGroup === g.label}
+                onToggleExpand={() => toggleComponentGroupExpand(g.label)}
+                renderColor={renderColor}
+              />
+            ))}
+          </Section>
 
           <Section title="CSS export" open>
             <label style={{ ...ui.chipRow, cursor: 'pointer' }}>
@@ -1121,13 +2010,22 @@ function ThemePlayground() {
         style={{
           flex: 1,
           minWidth: 0,
-          background: resolved['surface-3'],
+          background: resolved['surface-1'],
           color: resolved['text'],
           boxSizing: 'border-box'
         }}
       >
-        <Showcase />
+        <Showcase resolved={resolved} />
       </main>
+
+      <button
+        type="button"
+        className="usx-pg-fab"
+        onClick={() => setMobileDrawerOpen((prev) => !prev)}
+      >
+        {mobileDrawerOpen ? '✕ Close' : '⚙ Customize'}
+        {!mobileDrawerOpen && overrideCount > 0 && <span className="usx-pg-fab-count">{overrideCount}</span>}
+      </button>
     </div>
   );
 }

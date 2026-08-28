@@ -2,11 +2,10 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-layout {
-  background-color: #f8fafc;
   min-height: 100vh;
 
-  @if $surface-3 {
-    background-color: $surface-3;
+  @if $surface-1 {
+    background-color: $surface-1;
   }
 
   // ── Single column layout ──────────────────────────────────────────────────

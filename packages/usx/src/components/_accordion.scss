@@ -20,33 +20,40 @@ $usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/20
     border-end-end-radius: 0;
   }
 
+  &.usa-accordion--bordered {
+    .usa-accordion__content {
+      @if $usx-accordion-border-width {
+        border-width: $usx-accordion-border-width;
+      }
+    }
+  }
+
   .usa-accordion__content {
     border-end-start-radius: $usx-accordion-border-radius;
     border-end-end-radius: $usx-accordion-border-radius;
   }
 
-  @if $usx-accordion-accent-color {
+  @if $usx-accordion-bg {
     .usa-accordion__button {
-      background-color: $usx-accordion-accent-color;
+      background-color: $usx-accordion-bg;
     }
 
     &.usa-accordion--bordered {
       .usa-accordion__content {
-        border-color: $usx-accordion-accent-color;
+        border-color: $usx-accordion-bg;
       }
     }
   }
 
-  @if $usx-accordion-content-background {
+  @if $usx-accordion-content-bg {
     .usa-accordion__content {
-      background-color: $usx-accordion-content-background;
+      background-color: $usx-accordion-content-bg;
     }
   }
 
-  @if $usx-accordion-text-color {
-    .usa-accordion__button,
-    .usa-accordion__content {
-      color: $usx-accordion-text-color;
+  @if $usx-accordion-text {
+    .usa-accordion__button {
+      color: $usx-accordion-text;
     }
 
     // Replace the frozen background-image icon with a mask painted in the
@@ -63,7 +70,7 @@ $usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/20
         right: 1.25rem;
         height: 100%;
         width: 1.5rem;
-        background-color: $usx-accordion-text-color;
+        background-color: $usx-accordion-text;
         mask: url("#{$usx-accordion-icon-remove}") center / 1.5rem no-repeat;
         -webkit-mask: url("#{$usx-accordion-icon-remove}") center / 1.5rem no-repeat;
       }
@@ -72,6 +79,12 @@ $usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/20
         mask-image: url("#{$usx-accordion-icon-add}");
         -webkit-mask-image: url("#{$usx-accordion-icon-add}");
       }
+    }
+  }
+
+  @if $usx-accordion-content-text {
+    .usa-accordion__content {
+      color: $usx-accordion-content-text;
     }
   }
 }

@@ -29,12 +29,12 @@
     }
 
     .usa-footer__secondary-link a {
-      @if $usx-footer-link-color {
+      @if $usx-footer-secondary-link-color {
         color: $usx-footer-secondary-link-color;
       }
 
       &:hover {
-        @if $usx-footer-link-hover-color {
+        @if $usx-footer-secondary-link-hover-color {
           color: $usx-footer-secondary-link-hover-color;
         }
       }
@@ -60,8 +60,8 @@
   &__logo {
     .usa-footer__logo-heading,
     a.usa-footer__logo-heading {
-      @if $usx-footer-heading-color {
-        color: $usx-footer-heading-color;
+      @if $usx-footer-heading-color-secondary {
+        color: $usx-footer-heading-color-secondary;
       }
 
       text-decoration: none;
@@ -108,8 +108,8 @@
     }
 
     .usa-footer__contact-heading {
-      @if $usx-footer-heading-color {
-        color: $usx-footer-heading-color;
+      @if $usx-footer-heading-color-secondary {
+        color: $usx-footer-heading-color-secondary;
       }
     }
 

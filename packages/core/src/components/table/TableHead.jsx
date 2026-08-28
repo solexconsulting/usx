@@ -179,7 +179,7 @@ export default function TableHead({ className = '', children, ...props }) {
                       ? 'ascending'
                       : sortDir === 'desc'
                       ? 'descending'
-                      : 'none'
+                      : undefined
                     : undefined
                 }
                 data-sortable={isSortable || undefined}

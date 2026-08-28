@@ -51,6 +51,10 @@
     @if $color-error {
       border-color: $color-error;
     }
+
+		@if $usx-alert-border-width {
+			border-width: $usx-alert-border-width;
+		}
   }
 
   &.usx-site-alert--maintenance-warning {
@@ -59,6 +63,10 @@
     @if $color-warning {
       border-color: $color-warning;
     }
+
+    @if $usx-alert-border-width {
+			border-width: $usx-alert-border-width;
+		}
   }
 
   .usa-alert.usx-alert .usa-alert__body {

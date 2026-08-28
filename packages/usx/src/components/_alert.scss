@@ -64,6 +64,10 @@
 		@if $border {
 			border-color: $border;
 		}
+
+		@if $usx-alert-border-width {
+			border-width: $usx-alert-border-width;
+		}
 	}
 }
 

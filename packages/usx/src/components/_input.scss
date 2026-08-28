@@ -109,3 +109,25 @@
     }
   }
 }
+
+/* ---------------------------------- */
+
+/* Theme Corrections                     */
+
+/* ---------------------------------- */
+
+@if $color-border {
+  .usa-combo-box__input, .usa-input, .usa-input-group, .usa-select, .usa-textarea, .usx-switch {
+    border-color: $color-border;
+  }
+}
+
+@if $usx-border-width-inputs {
+  // .usx-switch is excluded here: it manages its own border-width via
+  // $usx-switch-border-width (chained to this same token by default) so it
+  // can fold the resolved value into its knob/spacing math too, instead of
+  // only the border property.
+  .usa-combo-box__input, .usa-input, .usa-input-group, .usa-select, .usa-textarea {
+    border-width: $usx-border-width-inputs;
+  }
+}
