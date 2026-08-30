@@ -335,6 +335,10 @@ export const themeManifest = [
   setting('usx-accordion-icon-position', '1.25rem auto'),
   setting('usx-accordion-icon-padding-start', '3.5rem', true),
   setting('usx-accordion-icon-padding-end', '1.25rem', true),
+  // Branding logo swap. A CSS variable can't rewrite an <img> src, so the
+  // theme toggles which of the two supplied variants is displayed instead.
+  setting('usx-logo-display', 'block'),
+  setting('usx-logo-inverse-display', 'none', true),
   // USWDS defaults: background "base-lightest" (-> surface-2), auto-contrast
   // text (-> text), action link/chevron following the shared link color.
   component('usx-banner-bg', '#dfe1e2', 'surface-2'),

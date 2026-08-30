@@ -69,22 +69,37 @@ export default {
         const usxDistDir = fileURLToPath(new URL('../../../packages/usx/dist', import.meta.url));
         const coreSrcDir = fileURLToPath(new URL('../../../packages/core/src', import.meta.url));
         const storiesSrcDir = fileURLToPath(new URL('../../../packages/usx-stories/src', import.meta.url));
+        // Same `pkg:` NodePackageImporter blind spot as usx/tokens above —
+        // core.scss `@use`s this package too, so it needs the same treatment.
+        const uswdsFixesSrcDir = fileURLToPath(new URL('../../../packages/usx-uswds-fixes/src', import.meta.url));
         server.watcher.add(tokensSrcDir);
         server.watcher.add(tokensDistDir);
         server.watcher.add(usxSrcDir);
         server.watcher.add(usxDistDir);
         server.watcher.add(coreSrcDir);
         server.watcher.add(storiesSrcDir);
+        server.watcher.add(uswdsFixesSrcDir);
 
         // Only reload after the USX watcher has written its compiled CSS. This
         // avoids reloading between the token rebuild and the dependent Sass
         // rebuild, which otherwise leaves Storybook showing stale theme CSS.
         let pendingReload = false;
         let debounceTimer = null;
+        // Drop only the cached style transforms. Invalidating the whole module
+        // graph re-transforms every dependency (including the USWDS bundle) on
+        // each save, which stalls the server in this workspace.
+        const invalidateStyleModules = () => {
+          for (const mod of server.moduleGraph.idToModuleMap.values()) {
+            if (mod.id && /\.(scss|sass|css)(\?|$)/.test(mod.id)) {
+              server.moduleGraph.invalidateModule(mod);
+            }
+          }
+        };
+
         const reload = (file) => {
           clearTimeout(debounceTimer);
           debounceTimer = setTimeout(() => {
-            server.moduleGraph.invalidateAll();
+            invalidateStyleModules();
             server.config.logger.info(`[usx-watch-reload] ${file} changed, reloading preview...`, { timestamp: true });
             server.ws.send({ type: 'full-reload', path: '*' });
           }, 400);
@@ -92,7 +107,9 @@ export default {
         server.watcher.on('change', (file) => {
           const isBuildInput = file.startsWith(tokensSrcDir) || file.startsWith(tokensDistDir) || file.startsWith(usxSrcDir);
           const isBuildOutput = file.startsWith(usxDistDir);
-          const isStorybookSource = file.startsWith(coreSrcDir) || file.startsWith(storiesSrcDir);
+          // usx-uswds-fixes has no separate dist rebuild step to wait on —
+          // Storybook resolves it straight from src, so reload immediately.
+          const isStorybookSource = file.startsWith(coreSrcDir) || file.startsWith(storiesSrcDir) || file.startsWith(uswdsFixesSrcDir);
           const isWatched = isBuildInput || isBuildOutput || isStorybookSource;
           if (!isWatched) return;
           if (isBuildOutput) {

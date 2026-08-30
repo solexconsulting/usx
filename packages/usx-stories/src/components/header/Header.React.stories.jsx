@@ -17,22 +17,45 @@ const lotsOfLinks = Array.from({ length: 30 }, (_, i) => ({
   ariaLabel: `Link ${i + 1}`
 }));
 
+const simpleBranding = {
+  logo: `${window.usxBaseUrl}linear.svg`,
+  logoInverse: `${window.usxBaseUrl}white_linear.png`,
+  title: 'Agency Name',
+}
+
 const responsiveBranding = {
   logo: {
-    fallback: `${window.usxBaseUrl}/symbol-only.svg`,
+    fallback: `${window.usxBaseUrl}symbol-only.svg`,
     sources: [
-      { media: '(min-width: 64em)', srcSet: `${window.usxBaseUrl}/stacked-w-symbol_left.svg` },
-      { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}/linear.svg` },
-      { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}/solex-only.svg` },
+      { media: '(min-width: 64em)', srcSet: `${window.usxBaseUrl}stacked-w-symbol_left.svg` },
+      { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}linear.svg` },
+      { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}solex-only.svg` },
+    ],
+  },
+  logoInverse: {
+    fallback: `${window.usxBaseUrl}white_symbol-only.png`,
+    sources: [
+      { media: '(min-width: 64em)', srcSet: `${window.usxBaseUrl}white_stacked-w-symbol_left.png` },
+      { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}white_linear.png` },
+      { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}white_solex-only.png` },
     ],
   },
   title: 'Agency Name',
 };
 
 const standardBranding = {
-  symbol: `${window.usxBaseUrl}/symbol-only.svg`,
+  symbol: `${window.usxBaseUrl}symbol-only.svg`,
+  symbolInverse: `${window.usxBaseUrl}white_symbol-only.png`,
   title: 'Agency Name',
 }
+
+// Same responsive source set in both polarities; the active theme decides
+// which one renders (toolbar theme → Borealis/Midnight/Carbon/NASA).
+const themeResponsiveBranding = {
+  logo: responsiveBranding.logo,
+  logoInverse: responsiveBranding.logoInverse,
+  title: 'Agency Name',
+};
 
 const navSections = [
   {
@@ -89,7 +112,7 @@ const fullArgs = {
 export const storyDefs = {
   TextOnly: { ...baseArgs, id: 'header-text-only', branding: { title: 'Agency Name' } },
   SymbolAndText: { ...baseArgs, id: 'header-symbol-text', branding: standardBranding },
-  SingleLogo: { ...baseArgs, id: 'header-single-logo', branding: { logo: '/linear.svg', title: 'Agency Name' } },
+  SingleLogo: { ...baseArgs, id: 'header-single-logo', branding: simpleBranding },
   ResponsiveLogo: {
     ...baseArgs,
     id: 'header-responsive-logo',
@@ -99,6 +122,12 @@ export const storyDefs = {
     ...baseArgs,
     id: 'header-responsive-logo-extended',
     branding: responsiveBranding,
+    extended: true,
+  },
+  ThemeResponsiveLogo: {
+    ...baseArgs,
+    id: 'header-theme-responsive-logo',
+    branding: themeResponsiveBranding,
     extended: true,
   },
   Default: { ...fullArgs, id: 'header-default', extended: true, megamenu: true, useMenuIcon: true },
@@ -141,6 +170,16 @@ export const SymbolAndText = { args: storyDefs.SymbolAndText };
 export const SingleLogo = { args: storyDefs.SingleLogo };
 export const ResponsiveLogo = { args: storyDefs.ResponsiveLogo };
 export const ResponsiveLogoExtended = { args: storyDefs.ResponsiveLogoExtended };
+export const ThemeResponsiveLogo = {
+  args: storyDefs.ThemeResponsiveLogo,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Supply `logo` and `logoInverse` to switch artwork with the theme. Resize the viewport to see each variant\'s own responsive sources, and switch the toolbar theme to a dark preset to see the white artwork.'
+      }
+    }
+  }
+};
 
 // ─── Layout variants ─────────────────────────────────────────────────────────
 

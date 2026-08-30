@@ -23,3 +23,5 @@ export const TextOnly = createStory(storyDefs.TextOnly);
 export const SymbolAndText = createStory(storyDefs.SymbolAndText);
 export const SingleLogo = createStory(storyDefs.SingleLogo);
 export const ResponsiveLogo = createStory(storyDefs.ResponsiveLogo);
+export const ResponsiveLogoExtended = createStory(storyDefs.ResponsiveLogoExtended);
+export const ThemeResponsiveLogo = createStory(storyDefs.ThemeResponsiveLogo);

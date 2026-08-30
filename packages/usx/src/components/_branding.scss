@@ -49,13 +49,6 @@
       color: $usx-header-text;
     }
   }
-
-  .usx-logo__image img,
-  .usx-logo__symbol {
-    @if $usx-header-invert-logo == true {
-      filter: invert(1);
-    }
-  }
 }
 
 .usa-footer {
@@ -64,11 +57,33 @@
       color: $usx-footer-text;
     }
   }
+}
 
-  .usx-logo__image img,
+// Theme-responsive artwork: both variants are in the DOM and the active theme
+// picks one. Only applied when an inverse variant was actually supplied, so
+// single-logo branding never disappears under a dark theme.
+.usx-logo__image .usx-logo__variant {
+  display: block;
+}
+
+// :has() detects the inverse variant directly, so no marker class is needed
+// to gate the swap only when branding actually supplied one.
+.usx-logo__image:has(.usx-logo__variant--inverse) {
+  .usx-logo__variant {
+    display: $usx-logo-display;
+  }
+
+  .usx-logo__variant--inverse {
+    display: $usx-logo-inverse-display;
+  }
+}
+
+.usa-logo__text:has(.usx-logo__symbol.usx-logo__variant--inverse) {
   .usx-logo__symbol {
-    @if $usx-footer-invert-logo == true {
-      filter: invert(1);
-    }
+    display: $usx-logo-display;
+  }
+
+  .usx-logo__symbol.usx-logo__variant--inverse {
+    display: $usx-logo-inverse-display;
   }
 }
