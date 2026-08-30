@@ -14,7 +14,7 @@
         }
       }
     },
-    "wrap": { "type": "boolean", "default": false, "description": "Use wrapping breadcrumb style (adds usa-breadcrumb--wrap)" },
+    "truncate": { "type": "boolean", "default": false, "description": "Use legacy single-line breadcrumb truncation (adds usa-breadcrumb--truncate)" },
     "rdfa": { "type": "boolean", "default": false, "description": "Include RDFa metadata attributes for Search engines" },
     "ariaLabel": { "type": "string", "default": "Breadcrumbs", "description": "Custom aria-label for the nav element" },
     "className": { "type": "string", "description": "Additional CSS classes to add to the nav element" }

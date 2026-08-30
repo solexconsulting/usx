@@ -768,6 +768,9 @@ $usx-form-group-error-border-width: $usx-border-width-lg !default;
 $usx-accordion-bg-var: null !default;
 $usx-accordion-bg: usx-var($usx-accordion-bg-var, $usx-surface-2) !default;
 
+$usx-accordion-bg-hover-var: null !default;
+$usx-accordion-bg-hover: usx-var($usx-accordion-bg-hover-var, #e6e6e6) !default;
+
 $usx-accordion-content-bg-var: null !default;
 $usx-accordion-content-bg: usx-var($usx-accordion-content-bg-var, $usx-surface-1) !default;
 
@@ -799,6 +802,28 @@ $usx-accordion-radius: usx-var($usx-accordion-radius-var, $usx-radius-none) !def
 
 $usx-accordion-border-width-var: null !default;
 $usx-accordion-border-width: usx-var($usx-accordion-border-width-var, $usx-border-width-lg) !default;
+
+// Live equivalent of USWDS's $theme-accordion-icon-position setting.
+// Values are logical inset pairs: 1.25rem auto = start, auto 1.25rem = end.
+$usx-accordion-icon-position-var: null !default;
+$usx-accordion-icon-position: usx-var($usx-accordion-icon-position-var, 1.25rem auto) !default;
+$usx-accordion-icon-padding-start-var: null !default;
+$usx-accordion-icon-padding-start: usx-var($usx-accordion-icon-padding-start-var, 3.5rem) !default;
+$usx-accordion-icon-padding-end-var: null !default;
+$usx-accordion-icon-padding-end: usx-var($usx-accordion-icon-padding-end-var, 1.25rem) !default;
+
+// ── Component tokens: Branding / Logo ────────────────────────────────────────
+// Themes ship light and dark logo artwork as separate image files, and CSS
+// can't rewrite an <img> src at runtime. Both variants are rendered and these
+// two tokens (`display` keywords, deliberately not booleans) decide which one
+// is visible, so a theme swap needs nothing but a custom-property change.
+// Each variant keeps its own <picture> sources, so screen-size responsiveness
+// is unaffected by the theme swap.
+$usx-logo-display-var: null !default;
+$usx-logo-display: usx-var($usx-logo-display-var, block) !default;
+
+$usx-logo-inverse-display-var: null !default;
+$usx-logo-inverse-display: usx-var($usx-logo-inverse-display-var, none) !default;
 
 // ── Component tokens: Image (custom modifier; default baked in _image.scss) ──
 $usx-image-object-fit-type: null !default;
@@ -914,9 +939,6 @@ $usx-header-nav-bg-mobile: usx-var($usx-header-nav-bg-mobile-var, $usx-header-na
 // surface-2 so it stays a visibly distinct tone from the surface-3 drawer.
 $usx-header-nav-link-bg-hover-var: null !default;
 $usx-header-nav-link-bg-hover:  usx-var($usx-header-nav-link-bg-hover-var, $usx-surface-2) !default;
-// null = invert only when a header/footer background is configured;
-// true/false forces it on/off.
-$usx-header-invert-logo:            null                                           !default;
 
 // ── Component tokens: Footer ────────────────────────────────────────────────
 // Same rationale as Header/Nav above: USWDS's real footer sections use
@@ -958,10 +980,10 @@ $usx-footer-primary-bg:     $usx-surface-2                                      
 $usx-footer-social-icon-filter-var: null !default;
 $usx-footer-social-icon-filter:   usx-var($usx-footer-social-icon-filter-var)        !default;
 $usx-footer-sign-up-button-bg: $usx-color-primary                                    !default;
-$usx-footer-social-bg-hover-var: null !default;
-$usx-footer-social-bg-hover:   usx-var($usx-footer-social-bg-hover-var)        !default;
-$usx-footer-social-radius     :   $usx-radius-button                         !default;
-$usx-footer-invert-logo:          null                                              !default;
+$usx-footer-social-bg-hover-var: null                                                !default;
+$usx-footer-social-bg-hover:   usx-var($usx-footer-social-bg-hover-var)              !default;
+$usx-footer-social-radius :   $usx-radius-button                                     !default;
+
 // Using border shrinks the icon on hover, using outline does not. Both are included as options.
 // Neither are required.
 // E.g. 2px solid $usx-color-primary;

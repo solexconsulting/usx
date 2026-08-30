@@ -3,7 +3,7 @@
   "template": "header/header.django.html",
   "props": {
     "id": { "type": "string", "default": "header", "description": "Unique identifier for the header component" },
-    "branding": { "type": "object", "description": "Branding config. Flat: { title?, symbol?, logo?, alt? }. Responsive: { responsive: { base: {...}, lg: {...} } }" },
+    "branding": { "type": "object", "description": "Branding config. Flat: { title?, symbol?, logo?, alt? }. Responsive: { responsive: { base: {...}, lg: {...} } }. Theme-responsive: add symbolInverse/logoInverse to supply dark-shell artwork the theme swaps to." },
     "projectUrl": { "type": "string", "default": "/", "description": "URL for the branding link" },
     "navSections": { "type": "object", "description": "Array of menu section objects with 'title', and mutually exclusive 'links' or 'href' properties" },
     "secondaryLinks": { "type": "object", "description": "Array of secondary link objects with 'href' and 'text' properties" },

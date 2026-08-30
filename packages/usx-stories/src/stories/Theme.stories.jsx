@@ -155,7 +155,8 @@ const COMPONENT_COLOR_GROUPS = [
   { label: 'Footer', prefix: 'usx-footer-' },
   { label: 'Table', prefix: 'usx-table-' },
   { label: 'Tooltip', prefix: 'usx-tooltip-' },
-  { label: 'Icon List', prefix: 'usx-icon-list-' }
+  { label: 'Icon List', prefix: 'usx-icon-list-' },
+  { label: 'Logo', prefix: 'usx-logo-' }
 ];
 
 // Splits a flat list of component-group tokens into the ordered groups
@@ -577,6 +578,81 @@ function ColorControl({ token, value, isOverridden, onChange, onClear }) {
         {token.name.replace(/^color-|^usx-/, '')}
       </span>
       <code className="usx-pg-value">{value}</code>
+      {isOverridden && (
+        <button type="button" className="usx-pg-reset" title="Reset to default" onClick={() => onClear(token.name)}>
+          ×
+        </button>
+      )}
+    </div>
+  );
+}
+
+const ACCORDION_ICON_POSITION_VALUES = {
+  start: {
+    position: '1.25rem auto',
+    paddingStart: '3.5rem',
+    paddingEnd: '1.25rem'
+  },
+  end: {
+    position: 'auto 1.25rem',
+    paddingStart: '1.25rem',
+    paddingEnd: '2.5rem'
+  }
+};
+
+function AccordionIconPositionControl({ token, value, isOverridden, onChange, onClear }) {
+  const selected = value === ACCORDION_ICON_POSITION_VALUES.end.position ? 'end' : 'start';
+  return (
+    <div className={`usx-pg-row${isOverridden ? ' is-overridden' : ''}`}>
+      <span className="usx-pg-label" title={token.cssVar}>Accordion icon position</span>
+      <select
+        aria-label={token.name}
+        className="usx-pg-select"
+        value={selected}
+        onChange={(e) => {
+          const next = ACCORDION_ICON_POSITION_VALUES[e.target.value];
+          onChange(token.name, next.position);
+          onChange('usx-accordion-icon-padding-start', next.paddingStart);
+          onChange('usx-accordion-icon-padding-end', next.paddingEnd);
+        }}
+      >
+        <option value="start">Start</option>
+        <option value="end">End</option>
+      </select>
+      <code className="usx-pg-value">{selected}</code>
+      {isOverridden && (
+        <button type="button" className="usx-pg-reset" title="Reset to default" onClick={() => onClear(token.name)}>
+          ×
+        </button>
+      )}
+    </div>
+  );
+}
+
+const LOGO_VARIANT_VALUES = {
+  default: { display: 'block', inverse: 'none' },
+  inverse: { display: 'none', inverse: 'block' }
+};
+
+function LogoVariantControl({ token, value, isOverridden, onChange, onClear }) {
+  const selected = value === LOGO_VARIANT_VALUES.inverse.display ? 'inverse' : 'default';
+  return (
+    <div className={`usx-pg-row${isOverridden ? ' is-overridden' : ''}`}>
+      <span className="usx-pg-label" title={token.cssVar}>Logo variant</span>
+      <select
+        aria-label={token.name}
+        className="usx-pg-select"
+        value={selected}
+        onChange={(e) => {
+          const next = LOGO_VARIANT_VALUES[e.target.value];
+          onChange(token.name, next.display);
+          onChange('usx-logo-inverse-display', next.inverse);
+        }}
+      >
+        <option value="default">Default</option>
+        <option value="inverse">Inverse (white)</option>
+      </select>
+      <code className="usx-pg-value">{selected}</code>
       {isOverridden && (
         <button type="button" className="usx-pg-reset" title="Reset to default" onClick={() => onClear(token.name)}>
           ×
@@ -1442,9 +1518,14 @@ function ThemePlayground({ initialTheme } = {}) {
   };
   const clearToken = (name) => {
     setActivePreset(null);
+    const names = name === 'usx-accordion-icon-position'
+      ? [name, 'usx-accordion-icon-padding-start', 'usx-accordion-icon-padding-end']
+      : name === 'usx-logo-display'
+        ? [name, 'usx-logo-inverse-display']
+        : [name];
     setOverrides((prev) => {
       const next = { ...prev };
-      delete next[name];
+      names.forEach((tokenName) => delete next[tokenName]);
       return next;
     });
     setSystemSelections((prev) => {
@@ -1496,7 +1577,7 @@ function ThemePlayground({ initialTheme } = {}) {
   };
 
   const colorTokensByName = useMemo(() => new Map(themeManifest.map((t) => [t.name, t])), []);
-  const componentColors = themeManifest.filter((t) => t.group === 'component');
+  const componentColors = themeManifest.filter((t) => t.group === 'component' && !t.internal);
   const componentColorGroups = groupComponentColors(componentColors);
   const surfaceTextGroups = SURFACE_TEXT_GROUPS.map((g) => ({
     label: g.label,
@@ -1522,6 +1603,30 @@ function ThemePlayground({ initialTheme } = {}) {
   };
 
   const renderColor = (t) => {
+    if (t.name === 'usx-accordion-icon-position') {
+      return (
+        <AccordionIconPositionControl
+          key={t.name}
+          token={t}
+          value={resolved[t.name]}
+          isOverridden={overrides[t.name] !== undefined}
+          onChange={setToken}
+          onClear={clearToken}
+        />
+      );
+    }
+    if (t.name === 'usx-logo-display') {
+      return (
+        <LogoVariantControl
+          key={t.name}
+          token={t}
+          value={resolved[t.name]}
+          isOverridden={overrides[t.name] !== undefined}
+          onChange={setToken}
+          onClear={clearToken}
+        />
+      );
+    }
     const Control = t.systemDefault ? FamilyGradeColorControl : ColorControl;
     return (
       <React.Fragment key={t.name}>

@@ -20,3 +20,5 @@ export const Bordered = createStory(toDjangoArgs(storyDefs.Bordered));
 export const MultiSelectable = createStory(toDjangoArgs(storyDefs.MultiSelectable));
 export const CustomHeadingLevel = createStory(toDjangoArgs(storyDefs.CustomHeadingLevel));
 export const BorderedMultiSelectableH4 = createStory(toDjangoArgs(storyDefs.BorderedMultiSelectableH4));
+export const IconStart = createStory(toDjangoArgs(storyDefs.IconStart));
+export const IconEnd = createStory(toDjangoArgs(storyDefs.IconEnd));

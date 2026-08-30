@@ -42,7 +42,7 @@
     },
     "branding": {
       "type": "object",
-      "description": "Branding config (same shape as Header branding): { title?, symbol?, logo?, alt? }. Use 'symbol' + 'title' to show a decorative image beside agency name text. Use 'logo' for a full standalone logo image (title used as alt text)."
+      "description": "Branding config (same shape as Header branding): { title?, symbol?, logo?, alt? }. Use 'symbol' + 'title' to show a decorative image beside agency name text. Use 'logo' for a full standalone logo image (title used as alt text). Add 'symbolInverse'/'logoInverse' to supply dark-shell artwork the theme swaps to."
     },
     "brandingUrl": {
       "type": "string",

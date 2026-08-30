@@ -34,6 +34,7 @@
   ],
   "scripts": {
     "build": "node build.js",
+    "dev": "node build.js --watch",
     "generate:system-colors": "node scripts/generate-system-colors.js"
   }
 }

@@ -15,21 +15,40 @@
     <div class="usa-logo usx-logo">
       {% if branding.logo %}
         <a href="{{ projectUrl|default:'/' }}" class="usx-image usx-logo__image">
-          {% if branding.logo.fallback %}
-            <picture>
-              {% for source in branding.logo.sources %}
-                <source srcset="{{ source.srcSet }}"{% if source.media %} media="{{ source.media }}"{% endif %}{% if source.type %} type="{{ source.type }}"{% endif %}{% if source.sizes %} sizes="{{ source.sizes }}"{% endif %} />
-              {% endfor %}
-              <img src="{{ branding.logo.fallback }}" alt="{{ branding.title }}" />
-            </picture>
-          {% else %}
-            <img src="{{ branding.logo }}" alt="{{ branding.title }}" />
+          <div class="usx-image usx-logo__variant">
+            {% if branding.logo.fallback %}
+              <picture>
+                {% for source in branding.logo.sources %}
+                  <source srcset="{{ source.srcSet }}"{% if source.media %} media="{{ source.media }}"{% endif %}{% if source.type %} type="{{ source.type }}"{% endif %}{% if source.sizes %} sizes="{{ source.sizes }}"{% endif %} />
+                {% endfor %}
+                <img src="{{ branding.logo.fallback }}" alt="{{ branding.title }}" />
+              </picture>
+            {% else %}
+              <img src="{{ branding.logo }}" alt="{{ branding.title }}" />
+            {% endif %}
+          </div>
+          {% if branding.logoInverse %}
+            <div class="usx-image usx-logo__variant usx-logo__variant--inverse">
+              {% if branding.logoInverse.fallback %}
+                <picture>
+                  {% for source in branding.logoInverse.sources %}
+                    <source srcset="{{ source.srcSet }}"{% if source.media %} media="{{ source.media }}"{% endif %}{% if source.type %} type="{{ source.type }}"{% endif %}{% if source.sizes %} sizes="{{ source.sizes }}"{% endif %} />
+                  {% endfor %}
+                  <img src="{{ branding.logoInverse.fallback }}" alt="{{ branding.title }}" />
+                </picture>
+              {% else %}
+                <img src="{{ branding.logoInverse }}" alt="{{ branding.title }}" />
+              {% endif %}
+            </div>
           {% endif %}
         </a>
-      {% elif branding.symbol or branding.title %}
+      {% elif branding.symbol or branding.symbolInverse or branding.title %}
         <em class="usa-logo__text">
           {% if branding.symbol %}
-            <img src="{{ branding.symbol }}" alt="" aria-hidden="true" class="usx-logo__symbol" />
+            <img src="{{ branding.symbol }}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant" />
+          {% endif %}
+          {% if branding.symbolInverse %}
+            <img src="{{ branding.symbolInverse }}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse" />
           {% endif %}
           {% if branding.title %}
             <a href="{{ projectUrl|default:'/' }}" class="usx-logo__title">{{ branding.title }}</a>

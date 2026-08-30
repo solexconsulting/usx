@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "pnpm -r build",
-    "storybook": "pnpm --parallel --filter @solexllc/usx-theme --filter @agency-ui-platform/storybook run dev",
+    "storybook": "node scripts/storybook-dev.mjs",
     "storybook:build": "pnpm --filter @agency-ui-platform/storybook run build",
     "dev": "pnpm -r --parallel dev",
     "new-component": "node scripts/new-component.js",
@@ -18,7 +18,7 @@
     "lint": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-pattern '**/node_modules/**' --ignore-pattern '**/venv/**' --ignore-pattern '**/storybook-static/**' && stylelint '**/*.{css,scss}' --ignore-path .gitignore --ignore-pattern '**/venv/**'",
     "format": "prettier --write .",
     "test": "pnpm -r test",
-    "tokens:build": "pnpm --filter @agency-ui-platform/tokens run build"
+    "tokens:build": "pnpm --filter @solexllc/usx-theme run build"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^10.3.6",
@@ -28,7 +28,7 @@
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.60.0",
     "@typescript-eslint/parser": "^8.60.0",
-    "@uswds/uswds": "^3.13.0",
+    "@uswds/uswds": "^3.14.0",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",

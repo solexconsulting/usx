@@ -155,12 +155,16 @@
         <div class="usa-logo usx-logo usa-footer__logo grid-row grid-gap-2 usx-footer__logo">
           {% if branding.logo %}
             {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-logo__image">{% endif %}
-            <img src="{{ branding.logo }}" alt="{{ branding.alt|default:branding.title|default:'' }}" />
+            <img src="{{ branding.logo }}" alt="{{ branding.alt|default:branding.title|default:'' }}" class="usx-logo__variant" />
+            {% if branding.logoInverse %}<img src="{{ branding.logoInverse }}" alt="{{ branding.alt|default:branding.title|default:'' }}" class="usx-logo__variant usx-logo__variant--inverse" />{% endif %}
             {% if brandingUrl %}</a>{% endif %}
           {% else %}
           <em class="usa-logo__text">
             {% if branding.symbol %}
-              <img src="{{ branding.symbol }}" alt="" aria-hidden="true" class="usx-logo__symbol" />
+              <img src="{{ branding.symbol }}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant" />
+            {% endif %}
+            {% if branding.symbolInverse %}
+              <img src="{{ branding.symbolInverse }}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse" />
             {% endif %}
             {% if branding.title %}
               {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-logo__title">{{ branding.title }}</a>
@@ -178,12 +182,16 @@
           <div class="usa-logo usx-logo usa-footer__logo grid-row mobile-lg:grid-col-6 mobile-lg:grid-gap-2 usx-footer__logo">
             {% if branding.logo %}
               {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-logo__image">{% endif %}
-              <img src="{{ branding.logo }}" alt="{{ branding.alt|default:branding.title|default:'' }}" />
+              <img src="{{ branding.logo }}" alt="{{ branding.alt|default:branding.title|default:'' }}" class="usx-logo__variant" />
+              {% if branding.logoInverse %}<img src="{{ branding.logoInverse }}" alt="{{ branding.alt|default:branding.title|default:'' }}" class="usx-logo__variant usx-logo__variant--inverse" />{% endif %}
               {% if brandingUrl %}</a>{% endif %}
             {% else %}
             <em class="usa-logo__text">
               {% if branding.symbol %}
-                <img src="{{ branding.symbol }}" alt="" aria-hidden="true" class="usx-logo__symbol" />
+                <img src="{{ branding.symbol }}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant" />
+              {% endif %}
+              {% if branding.symbolInverse %}
+                <img src="{{ branding.symbolInverse }}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse" />
               {% endif %}
               {% if branding.title %}
                 {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-logo__title">{{ branding.title }}</a>

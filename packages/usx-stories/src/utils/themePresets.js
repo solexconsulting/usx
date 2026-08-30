@@ -39,6 +39,16 @@ export function headerNavBackgroundOverrides() {
   };
 }
 
+// Themes with dark header/footer shells ship white logo artwork. Branding
+// renders both variants and these tokens pick the one that reads against the
+// shell — only used by presets whose header AND footer are both dark.
+export function inverseLogoOverrides() {
+  return {
+    'usx-logo-display': 'none',
+    'usx-logo-inverse-display': 'block'
+  };
+}
+
 export const PRESETS = {
   // Left with no overrides at all — including the header/footer borders,
   // which are transparent by default (real USWDS renders no border there).
@@ -91,6 +101,10 @@ export const PRESETS = {
     'color-success': '#009ec1',
     'color-error': '#e52207',
     'color-emergency': '#5942d2',
+    'usx-accordion-icon-position': 'auto 1.25rem',
+    'usx-accordion-icon-padding-start': '1.25rem',
+    'usx-accordion-icon-padding-end': '3.5rem',
+    'usx-accordion-bg-hover': 'var(--usx-surface-3)',
     'usx-summary-box-bg': 'var(--usx-surface-3)',
     'usx-summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
@@ -116,13 +130,18 @@ export const PRESETS = {
     'color-success': '#009ec1',
     'color-error': '#e52207',
     'color-emergency': '#5942d2',
+    'usx-accordion-icon-position': 'auto 1.25rem',
+    'usx-accordion-icon-padding-start': '1.25rem',
+    'usx-accordion-icon-padding-end': '3.5rem',
+    'usx-accordion-bg-hover': 'var(--usx-surface-3)',
     'usx-summary-box-bg': '#101b33',
     'usx-summary-box-border-color': '#5b7cfa',
     'usx-link-text-visited': '#c9a8ff',
     'usx-tooltip-bg': '#e6e8f5',
     'usx-tooltip-text': '#0b0e1c',
     ...headerFooterBorderOverrides(),
-    ...headerNavBackgroundOverrides()
+    ...headerNavBackgroundOverrides(),
+    ...inverseLogoOverrides()
   },
   // Dark themes: unlike the light presets above (which only nudge the page
   // background), these also flip the surface/border/text tokens so cards,
@@ -145,6 +164,7 @@ export const PRESETS = {
     'usx-tooltip-text': '#020617',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
+    ...inverseLogoOverrides(),
   },
   Carbon: {
     'color-primary': '#fa9441',
@@ -172,7 +192,8 @@ export const PRESETS = {
     // Overrides banner's own surface-2 default — Carbon wants the banner to
     // match the header's surface-3 instead.
     'usx-banner-bg': 'var(--usx-surface-3)',
-    'usx-banner-button-text': 'var(--usx-text)'
+    'usx-banner-button-text': 'var(--usx-text)',
+    ...inverseLogoOverrides()
   },
   // The three presets below are sourced from real design systems/sites
   // rather than invented palettes — VADS/GOVUK values come from each
@@ -278,6 +299,7 @@ export const PRESETS = {
     // its button background is stock USWDS base-lightest rather than our
     // slightly darker surface-2 default.
     'usx-accordion-bg': 'var(--usx-surface-3)',
+    'usx-accordion-bg-hover': 'var(--usx-color-primary)',
     'usx-accordion-text': 'var(--usx-text-inverse)',
     'usx-summary-box-bg': 'var(--usx-surface-3)',
     'usx-summary-box-border-color': 'var(--usx-color-primary)',
@@ -294,5 +316,6 @@ export const PRESETS = {
     'usx-footer-text': 'var(--usx-text-inverse)',
     'usx-footer-heading-secondary-text': 'var(--usx-text-inverse)',
     'usx-table-grouped-row-text': 'var(--usx-text-inverse)',
+    ...inverseLogoOverrides(),
   }
 };

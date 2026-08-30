@@ -17,8 +17,10 @@ export interface BrandingLogo {
 export interface BrandingConfig {
   title?: string;
   symbol?: string;
+  symbolInverse?: string;
   alt?: string;
   logo?: string | BrandingLogo;
+  logoInverse?: string | BrandingLogo;
 }
 
 export interface BrandingProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -28,23 +30,41 @@ export interface BrandingProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function BrandingContent({ config, projectUrl }: { config: BrandingConfig; projectUrl?: string }) {
-  const { title, symbol, logo, alt } = config;
+  const { title, symbol, symbolInverse, logo, logoInverse, alt } = config;
+  const label = alt ?? title ?? '';
 
   if (logo) {
+    const Wrapper: React.ElementType = projectUrl ? 'a' : 'div';
+
     return (
-      <Image
-        src={logo}
-        alt={alt ?? title ?? ''}
-        href={projectUrl}
-        className="usx-logo__image"
-      />
+      <Wrapper
+        {...(projectUrl ? { href: projectUrl } : {})}
+        className="usx-image usx-logo__image"
+      >
+        <Image src={logo} alt={label} className="usx-logo__variant" />
+        {logoInverse && (
+          <Image
+            src={logoInverse}
+            alt={label}
+            className="usx-logo__variant usx-logo__variant--inverse"
+          />
+        )}
+      </Wrapper>
     );
   }
 
   return (
     <em className="usa-logo__text">
       {symbol && (
-        <img src={symbol} alt="" aria-hidden="true" className="usx-logo__symbol" />
+        <img src={symbol} alt="" aria-hidden="true" className="usx-logo__symbol usx-logo__variant" />
+      )}
+      {symbolInverse && (
+        <img
+          src={symbolInverse}
+          alt=""
+          aria-hidden="true"
+          className="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        />
       )}
       {title && (
         projectUrl
@@ -74,6 +94,8 @@ export default function Branding({ branding, projectUrl = '/', className = '', .
 export const brandingShape = {
   title: 'string',
   symbol: 'string',
+  symbolInverse: 'string',
   alt: 'string',
   logo: 'string|object',
+  logoInverse: 'string|object',
 };

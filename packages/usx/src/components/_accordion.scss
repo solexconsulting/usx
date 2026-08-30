@@ -38,6 +38,12 @@ $usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/20
       background-color: $usx-accordion-bg;
     }
 
+    @if $usx-accordion-bg-hover {
+      .usa-accordion__button:hover {
+        background-color: $usx-accordion-bg-hover !important;
+      }
+    }
+
     &.usa-accordion--bordered {
       .usa-accordion__content {
         border-color: $usx-accordion-bg;
@@ -61,13 +67,15 @@ $usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/20
     // itself uses for forced-colors mode, just applied unconditionally).
     .usa-accordion__button {
       position: relative;
-      background-image: none;
+      background-image: none !important;
+      padding-inline-start: $usx-accordion-icon-padding-start;
+      padding-inline-end: $usx-accordion-icon-padding-end;
 
       &::before {
         content: '';
         position: absolute;
         top: 0;
-        right: 1.25rem;
+        inset-inline: $usx-accordion-icon-position;
         height: 100%;
         width: 1.5rem;
         background-color: $usx-accordion-text;
@@ -79,6 +87,24 @@ $usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/20
         mask-image: url("#{$usx-accordion-icon-add}");
         -webkit-mask-image: url("#{$usx-accordion-icon-add}");
       }
+
+      &:hover {
+        background-image: none !important;
+      }
+
+      &:hover::before {
+        background-color: $usx-accordion-text !important;
+      }
+    }
+
+    &.usa-accordion--icon-start .usa-accordion__button::before {
+      inset-inline-start: 1.25rem;
+      inset-inline-end: auto;
+    }
+
+    &.usa-accordion--icon-end .usa-accordion__button::before {
+      inset-inline-start: auto;
+      inset-inline-end: 1.25rem;
     }
   }
 

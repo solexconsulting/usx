@@ -24,7 +24,7 @@
         "className": {
             "type": "string",
             "default": "",
-            "description": "Additional CSS classes to apply to the accordion."
+            "description": "Additional CSS classes to apply to the accordion. Use usa-accordion--icon-start or usa-accordion--icon-end to set icon position for this accordion. For live global theming, set --usx-accordion-icon-position to 1.25rem auto (start) or auto 1.25rem (end)."
         }
     }
 }

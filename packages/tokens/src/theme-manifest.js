@@ -56,6 +56,15 @@ const scale = (name, cssVar, defaultValue, group, type = 'length') => ({
   type
 });
 
+const setting = (name, defaultValue, internal = false) => ({
+  name,
+  cssVar: `--${name}`,
+  defaultValue,
+  group: 'component',
+  type: 'string',
+  ...(internal ? { internal: true } : {})
+});
+
 // Default values below mirror the USWDS default theme color tokens
 // (https://designsystem.digital.gov/design-tokens/color/theme-tokens/ and
 // .../state-tokens/) so the "Default" theme matches USWDS out of the box.
@@ -172,7 +181,7 @@ export const themeManifest = [
   // Default values match the real USWDS base-family tiers they replace, so
   // the Default theme is pixel-identical to plain USWDS.
   c('surface-1', '#ffffff'),
-  c('surface-2', '#dfe1e2'),
+  c('surface-2', '#e6e6e6'),
   c('surface-3', '#f0f0f0'),
 
   // Shared border color: checkbox/radio tiles, task-list item dividers,
@@ -318,10 +327,18 @@ export const themeManifest = [
   component('usx-summary-box-text', '#1b1b1b', 'text'),
   component('usx-summary-box-link-text', '#005ea2', 'color-primary'),
   component('usx-summary-box-link-text-hover', '#1a4480', 'color-primary-dark'),
-  component('usx-accordion-bg', '#dfe1e2', 'surface-2'),
+  component('usx-accordion-bg', '#f0f0f0', 'surface-2'),
+  component('usx-accordion-bg-hover', '#e6e6e6', 'surface-3'),
   component('usx-accordion-content-bg', '#ffffff', 'surface-1'),
   component('usx-accordion-text', 'var(--usx-text)'),
   component('usx-accordion-content-text', 'var(--usx-text)'),
+  setting('usx-accordion-icon-position', '1.25rem auto'),
+  setting('usx-accordion-icon-padding-start', '3.5rem', true),
+  setting('usx-accordion-icon-padding-end', '1.25rem', true),
+  // Branding logo swap. A CSS variable can't rewrite an <img> src, so the
+  // theme toggles which of the two supplied variants is displayed instead.
+  setting('usx-logo-display', 'block'),
+  setting('usx-logo-inverse-display', 'none', true),
   // USWDS defaults: background "base-lightest" (-> surface-2), auto-contrast
   // text (-> text), action link/chevron following the shared link color.
   component('usx-banner-bg', '#dfe1e2', 'surface-2'),
