@@ -139,6 +139,7 @@ export const PRESETS = {
     'usx-link-text-visited': '#c9a8ff',
     'usx-tooltip-bg': '#e6e8f5',
     'usx-tooltip-text': '#0b0e1c',
+    'usx-banner-button-text': 'var(--usx-text)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     ...inverseLogoOverrides()
@@ -162,6 +163,7 @@ export const PRESETS = {
     'usx-link-text-visited': '#b39ddb',
     'usx-tooltip-bg': '#e2e8f0',
     'usx-tooltip-text': '#020617',
+    'usx-banner-button-text': 'var(--usx-text)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     ...inverseLogoOverrides(),

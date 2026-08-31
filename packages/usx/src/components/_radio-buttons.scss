@@ -1,6 +1,18 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usa-radio__label {
+  @if $usx-text {
+    color: $usx-text;
+  }
+}
+
+.usa-radio__input--tile + .usa-radio__label {
+  @if $usx-surface-1 {
+    background-color: $usx-surface-1;
+  }
+}
+
 .usa-radio.usx-radio {
   &.usx-radio--small {
     .usa-radio__input + .usa-radio__label::before {

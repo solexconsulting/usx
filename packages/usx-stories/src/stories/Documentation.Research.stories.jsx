@@ -1,11 +1,11 @@
 import React from 'react';
 
 export default {
-    title: 'Foundations/Research',
+    title: 'Documentation/Research',
     tags: ['autodocs']
 };
 
-export const TypeScale = {
+export const Index = {
     render: () => (
         <div className="usa-prose">
             <h1>Research Index</h1>

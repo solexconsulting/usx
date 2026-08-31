@@ -53,7 +53,7 @@ import TaskList from '../../../core/src/components/task-list/TaskList.tsx';
 import TextArea from '../../../core/src/components/text-area/TextArea.tsx';
 
 export default {
-  title: 'Foundations/Theme',
+  title: 'Documentation/Theme/Playground',
   tags: ['USX'],
   parameters: { layout: 'fullscreen' },
 };

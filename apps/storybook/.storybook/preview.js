@@ -19,7 +19,7 @@ import { PRESETS } from '../../../packages/usx-stories/src/utils/themePresets.js
 // doesn't would otherwise leak through from this decorator underneath it —
 // so skip applying the global override entirely while on that story.
 function withThemePreset(Story, context) {
-  if (context.id === 'foundations-theme--playground') {
+  if (context.id === 'documentation-theme-playground--playground') {
     return React.createElement(Story);
   }
   const overrides = PRESETS[context.globals.theme] || {};

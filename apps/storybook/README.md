@@ -10,7 +10,7 @@ Local stories document components from `packages/core`, including:
 ## Story hierarchy
 
 - `Admin/*`: library overview and usage guidance
-- `Foundations/*`: tokens, color, spacing, and typography
+- `Documentation/*`: theme playground, tokens, colors, spacing, typography, and per-package guides
 - `Components/*`: one story file per component (`Button`, `Input`, `Alert`) with technology-focused stories:
 	- `React`
 	- `HTML`

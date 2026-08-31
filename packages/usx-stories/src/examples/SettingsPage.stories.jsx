@@ -15,10 +15,10 @@ import Page from '../../../core/src/components/page/Page.jsx';
 import Select from '../../../core/src/components/select/Select.tsx';
 import Section from '../../../core/src/components/section/Section.tsx';
 import SideNav from '../../../core/src/components/sidenav/SideNav.tsx';
-import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from '../../../core/src/components/example-pages/commonArgs.js';
+import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './commonArgs.js';
 
 export default {
-    title: 'Patterns/Data Collection',
+    title: 'Examples/Data Collection',
 };
 
 export const SettingsPage = {
@@ -36,9 +36,10 @@ export const SettingsPage = {
             />
             <Layout
                 variant="grid"
+                expandLeftSidebar={true}
                 content={
                     <Page id="settings-page-example" title="Settings">
-                        <Section title="Profile Settings" className="margin-top-3">
+                        <Section title="Profile Settings">
                             <Alert
                                 variant="success"
                                 heading="Settings Updated"
@@ -46,8 +47,8 @@ export const SettingsPage = {
                                 className="margin-bottom-4"
                             />
 
-                            <form>
-                                <div className="usa-form">
+                            <form className="usa-form maxw-full">
+                                <Fieldset legend="Personal Information" largeLegend={true}>
                                     <Input
                                         id="display-name"
                                         name="displayName"
@@ -97,43 +98,42 @@ export const SettingsPage = {
                                         />
                                     </div>
 
-                                    <div className="margin-bottom-4">
-                                        <Fieldset legend="Notification Preferences">
-                                            <Checkbox
-                                                id="email-notifications"
-                                                name="emailNotifications"
-                                                label="Email notifications"
-                                                tile={true}
-                                                description="Receive important updates via email"
-                                                checked
-                                            />
-                                            <Checkbox
-                                                id="marketing-emails"
-                                                name="marketingEmails"
-                                                label="Marketing emails"
-                                                tile={true}
-                                                description="Receive promotional content and newsletters"
-                                            />
-                                            <Checkbox
-                                                id="security-alerts"
-                                                name="securityAlerts"
-                                                label="Security alerts"
-                                                tile={true}
-                                                description="Get notified about security-related events"
-                                                checked
-                                            />
-                                        </Fieldset>
+                                    <Fieldset legend="Notification Preferences">
+                                        <Checkbox
+                                            id="email-notifications"
+                                            name="emailNotifications"
+                                            label="Email notifications"
+                                            tile={true}
+                                            description="Receive important updates via email"
+                                            checked
+                                        />
+                                        <Checkbox
+                                            id="marketing-emails"
+                                            name="marketingEmails"
+                                            label="Marketing emails"
+                                            tile={true}
+                                            description="Receive promotional content and newsletters"
+                                        />
+                                        <Checkbox
+                                            id="security-alerts"
+                                            name="securityAlerts"
+                                            label="Security alerts"
+                                            tile={true}
+                                            description="Get notified about security-related events"
+                                            checked
+                                        />
+                                    </Fieldset>
+
+                                    <div className="margin-top-4">
+                                        <ButtonGroup
+                                            items={[
+                                                { children: 'Save Changes', variant: 'primary' },
+                                                { children: 'Cancel', variant: 'secondary' },
+                                                { children: 'Reset to Defaults', variant: 'secondary' },
+                                            ]}
+                                        />
                                     </div>
-
-
-                                </div>
-                                <ButtonGroup
-                                    items={[
-                                        { children: 'Save Changes', variant: 'primary' },
-                                        { children: 'Cancel', variant: 'secondary' },
-                                        { children: 'Reset to Defaults', variant: 'secondary' },
-                                    ]}
-                                />
+                                </Fieldset>
                             </form>
                         </Section>
                     </Page>

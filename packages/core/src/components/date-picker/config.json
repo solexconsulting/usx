@@ -1,11 +1,24 @@
 {
-  "name": "date-picker",
-  "template": "date-picker/date-picker.django.html",
-  "default": {
-    "children": "NOT IMPLEMENTED: DatePicker"
-  },
-  "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
-  }
+    "name": "date-picker",
+    "template": "date-picker/date-picker.django.html",
+    "props": {
+        "id": { "type": "string", "default": "appointment-date", "description": "id for the input. Label and hint ids are derived from this." },
+        "name": { "type": "string", "description": "name attribute for the input. Defaults to id." },
+        "label": { "type": "string", "description": "Label text for the field." },
+        "hint": { "type": "string", "default": "mm/dd/yyyy", "description": "Hint text displayed below the label." },
+        "error": { "type": "string", "description": "Error message. Renders aria-describedby and error styling." },
+        "disabled": { "type": "boolean", "default": false, "description": "Disables the input." },
+        "required": { "type": "boolean", "default": false, "description": "Marks the field as required." },
+        "defaultValue": { "type": "string", "description": "Initial date (yyyy-mm-dd). Sets data-default-value on the usa-date-picker wrapper." },
+        "minDate": { "type": "string", "description": "Earliest selectable date (yyyy-mm-dd). Sets data-min-date on the wrapper." },
+        "maxDate": { "type": "string", "description": "Latest selectable date (yyyy-mm-dd). Sets data-max-date on the wrapper." },
+        "rangeDate": { "type": "string", "description": "Companion date (yyyy-mm-dd) used to highlight a range on the calendar. Sets data-range-date on the wrapper." },
+        "className": { "type": "string", "default": "", "description": "Additional classes for the usa-date-picker wrapper." }
+    },
+    "default": {
+        "id": "appointment-date",
+        "name": "appointment-date",
+        "label": "Appointment date",
+        "hint": "mm/dd/yyyy"
+    }
 }
