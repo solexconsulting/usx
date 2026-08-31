@@ -18,6 +18,6 @@
       "@core/*": ["components/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx", "../usx-stories/src/examples/commonArgs.js"],
   "exclude": ["node_modules", "dist"]
 }

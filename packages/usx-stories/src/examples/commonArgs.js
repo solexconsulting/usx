@@ -6,7 +6,7 @@ const searchArgs = {
   label: 'Search',
   icon: 'search',
   iconOnly: true,
-  buttonVariant: 'secondary',
+  buttonVariant: 'primary',
   big: false,
   action: 'https://www.google.com/search',
   placeholder: 'Search...',

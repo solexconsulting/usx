@@ -12,7 +12,7 @@ import {
  * Instead of re-rendering a single story, this switches the ENTIRE board
  * between the React / Django / HTML story trees:
  *  - The sidebar is filtered to show only the active technology's components
- *    (Foundations and Patterns are technology-agnostic and always shown).
+ *    (Documentation and Patterns are technology-agnostic and always shown).
  *  - Toggling navigates the current story to the equivalent story in the target
  *    technology (same component + story name). If that specific story does not
  *    exist, it falls back to the component's Docs page, then to the first story
@@ -72,7 +72,7 @@ function firstOfTech(index, tech) {
 function computeTarget(index, current, newTech) {
   const entries = entriesOf(index);
   if (!Object.keys(entries).length) return null;
-  if (!current || !isTechId(current.id)) return null; // on Foundations/Patterns: stay put
+  if (!current || !isTechId(current.id)) return null; // on Documentation/Patterns: stay put
 
   const currentTech = techOf(current.id);
   if (currentTech === newTech) return null;

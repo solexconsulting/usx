@@ -12,6 +12,36 @@
   position: relative;
 }
 
+.usa-table {
+  color: $usx-text;
+
+  td,
+  th {
+    border-color: $usx-table-border;
+  }
+
+  tfoot td,
+  th,
+  thead td {
+    background-color: $usx-table-header-bg;
+    color: $usx-text;
+  }
+
+  td {
+    background-color: $usx-table-bg;
+  }
+
+  thead th[aria-sort] {
+    background-color: $usx-table-sorted-column-bg;
+    color: $usx-table-sorted-column-text;
+  }
+}
+
+.usa-table--striped tbody tr:nth-child(odd) td {
+  background-color: $usx-table-stripe-bg;
+  color: $usx-text;
+}
+
 .usx-table {
   width: 100%;
   position: relative;

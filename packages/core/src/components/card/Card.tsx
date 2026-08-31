@@ -118,7 +118,7 @@ export default function Card({
                 </div>
               )}
               {description && (
-                  <p>{description}</p>
+                typeof description === 'string' ? <p>{description}</p> : description
               )}
             </div>
 

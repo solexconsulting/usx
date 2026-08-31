@@ -1,6 +1,18 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usa-checkbox__label {
+  @if $usx-text {
+    color: $usx-text;
+  }
+}
+
+.usa-checkbox__input--tile + .usa-checkbox__label {
+  @if $usx-surface-1 {
+    background-color: $usx-surface-1;
+  }
+}
+
 .usx-checkbox {
 
   @if $usx-checkable-tile-radius != null {

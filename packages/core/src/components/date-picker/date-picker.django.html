@@ -1,4 +1,34 @@
 {# Django template for DatePicker #}
-<div class="usx-date-picker">
-  <div class="date-picker__content">DatePicker</div>
+<div class="usa-form-group usx-form-group{% if error %} usa-form-group--error{% endif %}">
+  {% if label %}
+  <label class="usa-label usx-label" id="{{ id }}-label" for="{{ id }}">
+    {% if required %}<abbr title="required" class="usx-required">*</abbr>{% endif %}{{ label }}
+  </label>
+  {% endif %}
+
+  {% if hint %}
+  <div class="usa-hint usx-hint" id="{{ id }}-hint">{{ hint }}</div>
+  {% endif %}
+
+  {% if error %}
+  <span class="usa-error-message usx-error-message" id="{{ id }}-error" role="alert">{{ error }}</span>
+  {% endif %}
+
+  <div
+    class="usa-date-picker usx-date-picker{% if className %} {{ className }}{% endif %}"
+    {% if defaultValue %} data-default-value="{{ defaultValue }}"{% endif %}
+    {% if minDate %} data-min-date="{{ minDate }}"{% endif %}
+    {% if maxDate %} data-max-date="{{ maxDate }}"{% endif %}
+    {% if rangeDate %} data-range-date="{{ rangeDate }}"{% endif %}
+  >
+    <input
+      class="usa-input usx-input"
+      id="{{ id }}"
+      name="{{ name|default:id }}"
+      {% if label %} aria-labelledby="{{ id }}-label"{% endif %}
+      {% if hint or error %} aria-describedby="{% if hint %}{{ id }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ id }}-error{% endif %}"{% endif %}
+      {% if disabled %} disabled{% endif %}
+      {% if required %} required{% endif %}
+    />
+  </div>
 </div>

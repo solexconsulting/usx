@@ -15,7 +15,7 @@ All design tokens come from `@solexllc/usx-theme` and are runtime-themeable via
 `--usx-*` CSS custom properties (with compiled-in fallbacks), compile-time
 configurable via `with (...)`, or fully static via the `$usx-css-vars: false`
 master switch. See `packages/tokens/README.md` for the full theming guide, and
-the Storybook **Foundations → Theme** playground to generate a theme visually.
+the Storybook **Documentation → Theme → Playground** to generate a theme visually.
 
 ## Tests
 

@@ -1,6 +1,20 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usa-label,
+.usa-legend,
+.usa-fieldset > legend {
+  @if $usx-text {
+    color: $usx-text;
+  }
+}
+
+.usa-hint {
+  @if $usx-text-subtle {
+    color: $usx-text-subtle;
+  }
+}
+
 .usx-form-group.usa-form-group--error {
   @if $usx-form-group-error-text {
     border-color: $usx-form-group-error-text;

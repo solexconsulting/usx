@@ -79,7 +79,7 @@ Individual tokens can also opt out by nulling their hook
 
 ### Theme playground
 
-The Storybook page **Foundations → Theme** renders the component showcase with
+The Storybook page **Documentation → Theme → Playground** renders the component showcase with
 live controls for every manifest token, auto-derives shades when a base color
 changes, and exports a ready-to-use `:root { --usx-*: ... }` block
 (copy/download).
