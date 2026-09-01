@@ -48,7 +48,7 @@ export default {
                     <Alert
                         variant="info"
                         slim={true}
-                        text={"This component is decorated with a background color and theme/state color boxes for demonstration purposes."}
+                        text={"This story is decorated with a background color and theme/state color boxes for demonstration purposes."}
                         className="margin-bottom-2"
                     />
                     <Story />
