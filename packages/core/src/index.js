@@ -87,11 +87,13 @@ export { default as Tag } from './components/tag';
 export { default as TagGroup } from './components/tag-group';
 export { default as TaskList } from './components/task-list';
 export { default as TextArea } from './components/text-area';
+export { default as ThemePicker } from './components/theme-picker';
 export { default as TimePicker } from './components/time-picker';
 export { default as Toggle } from './components/toggle';
 export { default as Tooltip } from './components/tooltip';
 export { default as Villain } from './components/villain';
 // AUTO-GENERATED-EXPORTS END
+
 
 
 

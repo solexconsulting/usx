@@ -1,0 +1,13 @@
+{
+  "name": "theme-picker",
+  "template": "theme-picker/theme-picker.django.html",
+  "props": {
+    "id": { "type": "string", "description": "Element id for the select" },
+    "name": { "type": "string", "description": "Form field name" },
+    "label": { "type": "string", "default": "Theme", "description": "Label displayed above the select" },
+    "themes": { "type": "array", "description": "Array of { value, label } theme options." },
+    "defaultValue": { "type": "string", "description": "Initial selected value for uncontrolled usage" },
+    "onChange": { "type": "string", "description": "JavaScript function to call when the selected theme changes — applying the theme (CSS variables, stylesheets, persistence, etc.) is the caller's responsibility" },
+    "className": { "type": "string", "description": "Additional CSS classes" }
+  }
+}

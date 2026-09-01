@@ -1,0 +1,32 @@
+{% load components %}
+<div class="usx-theme-picker{% if className %} {{ className }}{% endif %}">
+  <button
+    type="button"
+    class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
+    aria-label="{{ label|default:'Theme' }}"
+    onclick="this.closest('.usx-theme-picker').classList.add('usx-theme-picker--open');"
+  >
+    <svg class="usa-icon usx-icon usx-theme-picker__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+  </button>
+  <div class="usx-theme-picker__panel">
+    {% label for="theme-picker-1" className="usa-sr-only" %}Select a theme{% endlabel %}
+    <select
+      class="usa-select usx-select"
+      {% if id %}id="{{ id }}"{% endif %}
+      {% if name %}name="{{ name }}"{% endif %}
+      {% if onChange %}onchange="{{ onChange }}"{% endif %}
+    >
+      {% for theme in themes %}
+      <option value="{{ theme.value }}" {% if theme.value == defaultValue %}selected{% endif %}>{{ theme.label }}</option>
+      {% endfor %}
+    </select>
+    <button
+      type="button"
+      class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
+      aria-label="Confirm theme"
+      onclick="this.closest('.usx-theme-picker').classList.remove('usx-theme-picker--open')"
+    >
+      {% icon name="close" className="usx-theme-picker__icon" %}{% endicon %}
+    </button>
+  </div>
+</div>

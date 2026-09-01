@@ -1172,6 +1172,10 @@ $usx-misc-banner-focus: usx-var($usx-misc-banner-focus-var) !default;
 $usx-misc-banner-badge-radius-var: null !default;
 $usx-misc-banner-badge-radius: usx-var($usx-misc-banner-badge-radius-var, $usx-radius-selector) !default;
 
+// ── Component tokens: Theme Picker (custom; defaults baked in SCSS) ─────────
+$usx-theme-picker-trigger-text-var: null !default;
+$usx-theme-picker-trigger-text: usx-var($usx-theme-picker-trigger-text-var, $usx-text) !default;
+
 // ── Component tokens: Tooltip ─────────────────────────────────────────────
 // Real USWDS CSS bakes the tooltip's background/font color as fixed values
 // computed from $theme-tooltip-background-color/$theme-tooltip-font-color
