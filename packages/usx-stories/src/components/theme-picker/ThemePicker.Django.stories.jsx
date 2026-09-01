@@ -16,29 +16,27 @@ export default {
             // this story's ThemePicker selection actually changes the colors.
             const [globals] = useGlobals();
             return (
-                <div data-usx-theme={globals.theme}>
-                    <div style={{ width: '100%', height: '100%', padding: '1rem', backgroundColor: 'var(--usx-surface-1)' }}>
-                        <Alert
-                            variant="info"
-                            slim={true}
-                            text={"This component is decorated with a background color and theme/state color boxes for demonstration purposes."}
-                            className="margin-bottom-2"
-                        />
-                        <Story />
-                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
-                            <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-primary)' }} />
-                            <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-secondary)' }} />
-                            <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-accent-cool)' }} />
-                            <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-accent-warm)' }} />
-                            <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-info)' }} />
-                            <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-success)' }} />
-                            <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-warning)' }} />
-                            <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-error)' }} />
-                            <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-surface-2)' }} />
-                            <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-surface-3)' }} />
-                        </div>
+                <>
+                    <Alert
+                        variant="info"
+                        slim={true}
+                        text={"This component is decorated with a background color and theme/state color boxes for demonstration purposes."}
+                        className="margin-bottom-2"
+                    />
+                    <Story />
+                    <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
+                        <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-primary)' }} />
+                        <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-secondary)' }} />
+                        <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-accent-cool)' }} />
+                        <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-accent-warm)' }} />
+                        <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-info)' }} />
+                        <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-success)' }} />
+                        <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-warning)' }} />
+                        <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-color-error)' }} />
+                        <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-surface-2)' }} />
+                        <div style={{ height: '1rem', width: '2rem', backgroundColor: 'var(--usx-surface-3)' }} />
                     </div>
-                </div>
+                </>
             );
         }
     ]

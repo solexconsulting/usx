@@ -32,6 +32,7 @@ function withThemePreset(Story, context) {
   );
 }
 
+
 const preview = {
   decorators: [withThemePreset],
   parameters: {

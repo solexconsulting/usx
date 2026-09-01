@@ -11,5 +11,5 @@
 @forward "../../../packages/core/src/styles/core.scss";
 
 .docs-story {
-    background-color: white;
+    background-color: var(--usx-surface-1, white);
 }
