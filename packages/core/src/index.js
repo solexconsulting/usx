@@ -41,6 +41,7 @@ export { default as Collection } from './components/collection';
 export { default as Combobox } from './components/combobox';
 export { default as CopyToClipboard } from './components/copy-to-clipboard';
 export { default as DatePicker } from './components/date-picker';
+export { default as DateRangePicker } from './components/date-range-picker';
 export { default as Eyebrow } from './components/eyebrow';
 export { default as Fieldset } from './components/fieldset';
 export { default as FileInput } from './components/file-input';
@@ -93,6 +94,7 @@ export { default as Toggle } from './components/toggle';
 export { default as Tooltip } from './components/tooltip';
 export { default as Villain } from './components/villain';
 // AUTO-GENERATED-EXPORTS END
+
 
 
 

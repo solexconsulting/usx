@@ -1198,3 +1198,13 @@ $usx-tooltip-text: usx-var($usx-tooltip-text-var, $usx-text-inverse) !default;
 $usx-icon-list-icon-text-var: null !default;
 $usx-icon-list-icon-text: usx-var($usx-icon-list-icon-text-var, $usx-color-primary) !default;
 
+// ── Component tokens: Date Picker (custom; defaults baked in SCSS) ───────────
+// Real USWDS bakes the toggle button's calendar icon as a fixed-color
+// background-image at build time, so it never follows a runtime text-color
+// override.
+$usx-date-picker-button-icon-color-var: null !default;
+$usx-date-picker-button-icon-color: usx-var($usx-date-picker-button-icon-color-var, $usx-text) !default;
+
+$usx-date-picker-button-hover-active-bg-var: null !default;
+$usx-date-picker-button-hover-active-bg: usx-var($usx-date-picker-button-hover-active-bg-var, $usx-color-base-light) !default;
+

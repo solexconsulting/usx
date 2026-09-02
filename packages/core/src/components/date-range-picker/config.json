@@ -1,0 +1,32 @@
+{
+    "name": "date-range-picker",
+    "template": "date-range-picker/date-range-picker.django.html",
+    "props": {
+        "startId": { "type": "string", "default": "event-date-start", "description": "id for the start date input. Label and hint ids are derived from this." },
+        "endId": { "type": "string", "default": "event-date-end", "description": "id for the end date input. Label and hint ids are derived from this." },
+        "startName": { "type": "string", "description": "name attribute for the start date input. Defaults to startId." },
+        "endName": { "type": "string", "description": "name attribute for the end date input. Defaults to endId." },
+        "startLabel": { "type": "string", "default": "Event start date", "description": "Label text for the start date field." },
+        "endLabel": { "type": "string", "default": "Event end date", "description": "Label text for the end date field." },
+        "startHint": { "type": "string", "default": "mm/dd/yyyy", "description": "Hint text displayed below the start date label." },
+        "endHint": { "type": "string", "default": "mm/dd/yyyy", "description": "Hint text displayed below the end date label." },
+        "startError": { "type": "string", "description": "Error message for the start date field." },
+        "endError": { "type": "string", "description": "Error message for the end date field." },
+        "disabled": { "type": "boolean", "default": false, "description": "Disables both inputs." },
+        "required": { "type": "boolean", "default": false, "description": "Marks both fields as required." },
+        "defaultStartDate": { "type": "string", "description": "Initial start date (yyyy-mm-dd). Sets data-default-value on the start usa-date-picker wrapper." },
+        "defaultEndDate": { "type": "string", "description": "Initial end date (yyyy-mm-dd). Sets data-default-value on the end usa-date-picker wrapper." },
+        "minDate": { "type": "string", "description": "Earliest selectable date (yyyy-mm-dd). Sets data-min-date on the usa-date-range-picker wrapper." },
+        "maxDate": { "type": "string", "description": "Latest selectable date (yyyy-mm-dd). Sets data-max-date on the usa-date-range-picker wrapper." },
+        "className": { "type": "string", "default": "", "description": "Additional classes for the usa-date-range-picker wrapper." }
+    },
+    "default": {
+        "startId": "event-date-start",
+        "endId": "event-date-end",
+        "startLabel": "Event start date",
+        "endLabel": "Event end date",
+        "startHint": "mm/dd/yyyy",
+        "endHint": "mm/dd/yyyy"
+    }
+}
+

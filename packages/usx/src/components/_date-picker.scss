@@ -1,0 +1,36 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+// Calendar icon as an inline data URI (copied from USWDS's own
+// usa-icons/calendar_today.svg). USWDS bakes this in as a fixed-color
+// background-image at build time, so it can't track a runtime text-color
+// override. Painting it on a pseudo-element via mask-image + background-color
+// instead keeps it independent of the button's own background-color, which
+// is used for the hover/active surface states below.
+$usx-date-picker-button-icon: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'%3E%3Cpath d=\'M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z\'/%3E%3C/svg%3E';
+
+/* stylelint-disable selector-class-pattern -- Real USWDS classes, not USX BEM. */
+.usa-date-picker__button {
+  @if $usx-date-picker-button-icon-color {
+    position: relative;
+    background-image: none !important;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      height: 1.5rem;
+      width: 1.5rem;
+      background-color: $usx-date-picker-button-icon-color;
+      mask: url("#{$usx-date-picker-button-icon}") center / 1.5rem no-repeat;
+      -webkit-mask: url("#{$usx-date-picker-button-icon}") center / 1.5rem no-repeat;
+    }
+  }
+
+  @if $usx-date-picker-button-hover-active-bg {
+    &:not([disabled]):hover,
+    &:not([disabled]):active {
+      background-color: $usx-date-picker-button-hover-active-bg;
+    }
+  }
+}

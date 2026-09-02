@@ -1,0 +1,69 @@
+{# Django template for DateRangePicker #}
+<div
+  class="usa-date-range-picker usx-date-range-picker{% if className %} {{ className }}{% endif %}"
+  {% if minDate %} data-min-date="{{ minDate }}"{% endif %}
+  {% if maxDate %} data-max-date="{{ maxDate }}"{% endif %}
+>
+  <div class="usa-form-group usx-form-group{% if startError %} usa-form-group--error{% endif %}">
+    {% if startLabel %}
+    <label class="usa-label usx-label" id="{{ startId }}-label" for="{{ startId }}">
+      {% if required %}<abbr title="required" class="usx-required">*</abbr>{% endif %}{{ startLabel }}
+    </label>
+    {% endif %}
+
+    {% if startHint %}
+    <div class="usa-hint usx-hint" id="{{ startId }}-hint">{{ startHint }}</div>
+    {% endif %}
+
+    {% if startError %}
+    <span class="usa-error-message usx-error-message" id="{{ startId }}-error" role="alert">{{ startError }}</span>
+    {% endif %}
+
+    <div
+      class="usa-date-picker usx-date-picker"
+      {% if defaultStartDate %} data-default-value="{{ defaultStartDate }}"{% endif %}
+    >
+      <input
+        class="usa-input usx-input"
+        id="{{ startId }}"
+        name="{{ startName|default:startId }}"
+        {% if startLabel %} aria-labelledby="{{ startId }}-label"{% endif %}
+        {% if startHint or startError %} aria-describedby="{% if startHint %}{{ startId }}-hint{% endif %}{% if startHint and startError %} {% endif %}{% if startError %}{{ startId }}-error{% endif %}"{% endif %}
+        {% if disabled %} disabled{% endif %}
+        {% if required %} required{% endif %}
+      />
+    </div>
+  </div>
+
+  <div class="usa-form-group usx-form-group{% if endError %} usa-form-group--error{% endif %}">
+    {% if endLabel %}
+    <label class="usa-label usx-label" id="{{ endId }}-label" for="{{ endId }}">
+      {% if required %}<abbr title="required" class="usx-required">*</abbr>{% endif %}{{ endLabel }}
+    </label>
+    {% endif %}
+
+    {% if endHint %}
+    <div class="usa-hint usx-hint" id="{{ endId }}-hint">{{ endHint }}</div>
+    {% endif %}
+
+    {% if endError %}
+    <span class="usa-error-message usx-error-message" id="{{ endId }}-error" role="alert">{{ endError }}</span>
+    {% endif %}
+
+    <div
+      class="usa-date-picker usx-date-picker"
+      {% if defaultEndDate %} data-default-value="{{ defaultEndDate }}"{% endif %}
+    >
+      <input
+        class="usa-input usx-input"
+        id="{{ endId }}"
+        name="{{ endName|default:endId }}"
+        {% if endLabel %} aria-labelledby="{{ endId }}-label"{% endif %}
+        {% if endHint or endError %} aria-describedby="{% if endHint %}{{ endId }}-hint{% endif %}{% if endHint and endError %} {% endif %}{% if endError %}{{ endId }}-error{% endif %}"{% endif %}
+        {% if disabled %} disabled{% endif %}
+        {% if required %} required{% endif %}
+      />
+    </div>
+  </div>
+</div>
+

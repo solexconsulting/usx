@@ -468,7 +468,16 @@ export const themeManifest = [
   component('usx-tooltip-text', '#ffffff', 'text-inverse'),
   // Real USWDS only colors icon-list icons via opt-in BEM modifier classes;
   // give it a themeable default (color-primary) instead.
-  component('usx-icon-list-icon-text', '#005ea2', 'color-primary')
+  component('usx-icon-list-icon-text', '#005ea2', 'color-primary'),
+
+  // Real USWDS bakes the date-picker toggle button's calendar icon as a
+  // fixed-color background-image at build time, so it never follows the
+  // theme; repainted via mask-image instead (see _date-picker.scss).
+  component('usx-date-picker-button-icon-color', 'var(--usx-text)'),
+  // Hover and active share one token/color by design (see themePresets.js's
+  // Midnight/Carbon/Borealis overrides for why dark presets need their own
+  // hardcoded value here instead of just chaining to color-base-light).
+  component('usx-date-picker-button-hover-active-bg', '#a9aeb1', 'color-base-light')
 ];
 
 export default themeManifest;

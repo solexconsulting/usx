@@ -21,12 +21,15 @@ import Alert from '../../../core/src/components/alert/Alert.tsx';
 import Attribution from '../../../core/src/components/attribution/Attribution.tsx';
 import Banner from '../../../core/src/components/banner/Banner.tsx';
 import Block from '../../../core/src/components/block/Block.tsx';
+import Breadcrumb from '../../../core/src/components/breadcrumb/Breadcrumb.tsx';
 import Button from '../../../core/src/components/button/Button.tsx';
 import ButtonGroup from '../../../core/src/components/button-group/ButtonGroup.tsx';
 import Checkbox from '../../../core/src/components/checkbox/Checkbox.tsx';
 import Clickable from '../../../core/src/components/clickable/Clickable.tsx';
 import Code from '../../../core/src/components/code/Code.tsx';
+import Collection from '../../../core/src/components/collection/Collection.tsx';
 import CopyToClipboard from '../../../core/src/components/copy-to-clipboard/CopyToClipboard.tsx';
+import DatePicker from '../../../core/src/components/date-picker/DatePicker.jsx';
 import Eyebrow from '../../../core/src/components/eyebrow/Eyebrow.tsx';
 import Footer from '../../../core/src/components/footer/Footer.tsx';
 import Header from '../../../core/src/components/header/Header.tsx';
@@ -34,7 +37,10 @@ import Hero from '../../../core/src/components/hero/Hero.tsx';
 import IconList from '../../../core/src/components/icon-list/IconList.tsx';
 import Input from '../../../core/src/components/input/Input.tsx';
 import Link from '../../../core/src/components/link/Link.tsx';
+import List from '../../../core/src/components/list/List.tsx';
 import MiscBanner from '../../../core/src/components/misc-banner/MiscBanner.tsx';
+import Pagination from '../../../core/src/components/pagination/Pagination.tsx';
+import ProcessList from '../../../core/src/components/process-list/ProcessList.tsx';
 import Prose from '../../../core/src/components/prose/Prose.tsx';
 import RadioButtons from '../../../core/src/components/radio-buttons/RadioButtons.tsx';
 import Search from '../../../core/src/components/search/Search.tsx';
@@ -51,6 +57,7 @@ import Table from '../../../core/src/components/table/Table.jsx';
 import Tag from '../../../core/src/components/tag/Tag.tsx';
 import TaskList from '../../../core/src/components/task-list/TaskList.tsx';
 import TextArea from '../../../core/src/components/text-area/TextArea.tsx';
+import datePicker from '@uswds/uswds/js/usa-date-picker';
 
 export default {
   title: 'Documentation/Theme/Playground',
@@ -271,6 +278,10 @@ function randomPalette() {
     overrides['usx-link-text-visited'] = '#b39ddb';
     overrides['usx-tooltip-bg'] = overrides['text'];
     overrides['usx-tooltip-text'] = overrides['text-inverse'];
+    // Same reasoning as the Midnight/Carbon/Borealis presets in
+    // themePresets.js: color-base-light is too close to a light 'text' for
+    // the calendar icon to stay visible on hover/active.
+    overrides['usx-date-picker-button-hover-active-bg'] = '#565c65';
   }
   pinSummaryBoxColors(overrides);
   return overrides;
@@ -338,6 +349,9 @@ function randomSystemPalette() {
     overrides['usx-link-text-visited'] = '#b39ddb';
     overrides['usx-tooltip-bg'] = overrides['text'];
     overrides['usx-tooltip-text'] = overrides['text-inverse'];
+    // See randomPalette() above for why this can't just chain to
+    // color-base-light.
+    overrides['usx-date-picker-button-hover-active-bg'] = '#565c65';
   }
   pinSummaryBoxColors(overrides);
   return { overrides, selections };
@@ -1063,6 +1077,76 @@ const codeLines = [
   { code: 'Done!', prefix: '>', className: 'text-success' }
 ];
 
+const breadcrumbItems = [
+  { label: 'Home', href: '#' },
+  { label: 'Section', href: '#' },
+  { label: 'Current page', current: true }
+];
+
+const processListItems = [
+  { heading: 'Create an account', body: 'Fill out the sign-up form to get started.' },
+  { heading: 'Confirm your email', body: 'Click the link we send you to verify your address.' },
+  { heading: 'Complete your profile', body: 'Add any remaining details to finish setup.' }
+];
+
+const listItems = [
+  'Unordered list item one',
+  'Unordered list item two',
+  'Unordered list item three'
+];
+
+const collectionItems = [
+  {
+    href: '#',
+    heading: 'Notice of funding opportunity',
+    description: 'A short summary describing this collection item.',
+    meta: [{ text: 'Jan 1, 2024', datetime: '2024-01-01' }],
+    tags: ['Funding']
+  },
+  {
+    href: '#',
+    heading: 'Public comment period open',
+    description: 'Another short summary describing this collection item.',
+    meta: [{ text: 'Feb 1, 2024', datetime: '2024-02-01' }],
+    tags: ['Notice']
+  }
+];
+
+// Collapsed by default (see collectionAccordionItems below) so these bigger
+// showcase blocks don't dominate the page on first load.
+const listComponentsAccordionItems = [
+  {
+    id: 'theme-list-components',
+    title: 'List components',
+    expanded: false,
+    content: (
+      <>
+        <h4 style={{ marginTop: 0 }}>Process list</h4>
+        <ProcessList items={processListItems} />
+        <h4>Icon list</h4>
+        <IconList
+          primary
+          items={[
+            { iconName: 'thumb_up_alt', content: 'No wait times' },
+            { iconName: 'verified', content: 'Trusted information' }
+          ]}
+        />
+        <h4>List</h4>
+        <List items={listItems} />
+      </>
+    )
+  }
+];
+
+const collectionAccordionItems = [
+  {
+    id: 'theme-collection',
+    title: 'Collection',
+    expanded: false,
+    content: <Collection items={collectionItems} />
+  }
+];
+
 const tableColumns = [
   { key: 'name', header: 'Document', sortable: true },
   { key: 'year', header: 'Year', align: 'right', sortable: true },
@@ -1154,6 +1238,14 @@ function Showcase({ resolved }) {
   // hover-row color tokens too.
   const [tableSelection, setTableSelection] = useState([2]);
 
+  // DatePicker's calendar toggle button/panel are injected by USWDS's own JS
+  // enhancement, not the static React markup, so it needs the same init/
+  // cleanup as the component's own stories (see DatePicker.React.stories.jsx).
+  useEffect(() => {
+    datePicker.init();
+    return () => datePicker.off();
+  }, []);
+
   return (
     <div style={{ columnWidth: '22rem', columnGap: '1rem' }}>
 
@@ -1219,15 +1311,6 @@ function Showcase({ resolved }) {
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
-        <h3 style={ui.cardTitle}>Alerts</h3>
-        <Alert variant="info" slim text="An informative status update." />
-        <Alert variant="warning" slim text="Something needs your attention." />
-        <Alert variant="success" slim text="The task completed successfully." />
-        <Alert variant="error" slim text="Something went wrong." />
-        <Alert variant="emergency" slim text="Urgent: immediate action required." />
-      </div>
-
-      <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
         <h3 style={ui.cardTitle}>Forms</h3>
         <Input id="theme-input" label="Text input" placeholder="Type something…" />
         <Input id="theme-input-err" label="With error" error="This field is required" />
@@ -1274,19 +1357,16 @@ function Showcase({ resolved }) {
           defaultValue='r1'
         />
         <Search id="theme-search" placeholder="Search…" />
+        <DatePicker id="theme-date-picker" label="Date picker" hint="mm/dd/yyyy" />
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
-        <h3 style={ui.cardTitle}>Navigation</h3>
-        <SideNav items={sideNavItems} />
-        <StepIndicator
-          steps={[{ label: 'Personal info' }, { label: 'Documents' }, { label: 'Review' }]}
-          currentStep={2}
-          variant="counters"
-        />
-        <p>
-          <Link href="javascript:void(0);">A standard link</Link> and a <Link href="javascript:void(0);" visited>visited link</Link>.
-        </p>
+        <h3 style={ui.cardTitle}>Alerts</h3>
+        <Alert variant="info" slim text="An informative status update." />
+        <Alert variant="warning" slim text="Something needs your attention." />
+        <Alert variant="success" slim text="The task completed successfully." />
+        <Alert variant="error" slim text="Something went wrong." />
+        <Alert variant="emergency" slim text="Urgent: immediate action required." />
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
@@ -1314,6 +1394,18 @@ function Showcase({ resolved }) {
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
+        <h3 style={ui.cardTitle}>Navigation</h3>
+        <Breadcrumb items={breadcrumbItems} />
+        <SideNav items={sideNavItems} />
+        <StepIndicator
+          steps={[{ label: 'Personal info' }, { label: 'Documents' }, { label: 'Review' }]}
+          currentStep={2}
+          variant="counters"
+        />
+        <Pagination totalItems={120} initialPageSize={10} />
+      </div>
+
+      <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
         <h3 style={ui.cardTitle}>Content</h3>
         <Accordion
           bordered={true}
@@ -1327,12 +1419,19 @@ function Showcase({ resolved }) {
         <Block variant="callout" color="primary">
           A callout block with themed accents.
         </Block>
-        <IconList
-          primary
-          items={[
-            { iconName: 'thumb_up_alt', content: 'No wait times' },
-            { iconName: 'verified', content: 'Trusted information' }
-          ]}
+      </div>
+
+      <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
+        <Accordion
+          bordered={true}
+          items={listComponentsAccordionItems}
+        />
+      </div>
+
+      <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
+        <Accordion
+          bordered={true}
+          items={collectionAccordionItems}
         />
       </div>
 
@@ -1342,9 +1441,11 @@ function Showcase({ resolved }) {
           <h2>A prose heading</h2>
           <p>
             Body copy rendered through <em>Prose</em> exercises the shared typography tokens
-            (font family, heading scale, line height) alongside{' '}
-            <Link href="javascript:void(0);">a standard link</Link> and a{' '}
+            (font family, heading scale, line height) alongside a{' '}
+            <Link href="javascript:void(0);">standard link</Link> and a{' '}
             <Link href="javascript:void(0);" visited>visited link</Link> inline.
+            Alternatively, an <Link href="javascript:void(0);" external>external
+            link</Link> has an icon to visually indicate it points to a different site.
           </p>
           <h3>A subheading</h3>
           <ul>

@@ -140,6 +140,11 @@ export const PRESETS = {
     'usx-tooltip-bg': '#e6e8f5',
     'usx-tooltip-text': '#0b0e1c',
     'usx-banner-button-text': 'var(--usx-text)',
+    // The date-picker toggle button's hover/active background defaults to
+    // color-base-light (#a9aeb1) — too close to this preset's light 'text'
+    // color for the calendar icon to stay visible. color-base-dark (#565c65)
+    // is the mirrored mid-gray on the dark side of the same scale.
+    'usx-date-picker-button-hover-active-bg': '#565c65',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     ...inverseLogoOverrides()
@@ -164,6 +169,9 @@ export const PRESETS = {
     'usx-tooltip-bg': '#e2e8f0',
     'usx-tooltip-text': '#020617',
     'usx-banner-button-text': 'var(--usx-text)',
+    // See Borealis's comment above for why this can't just chain to
+    // color-base-light.
+    'usx-date-picker-button-hover-active-bg': '#565c65',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     ...inverseLogoOverrides(),
@@ -185,6 +193,9 @@ export const PRESETS = {
     'usx-link-text-visited': '#b39ddb',
     'usx-tooltip-bg': '#e5e5e5',
     'usx-tooltip-text': '#000000',
+    // See Borealis's comment above for why this can't just chain to
+    // color-base-light.
+    'usx-date-picker-button-hover-active-bg': '#565c65',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     // Carbon wants the desktop nav bar one tone lighter than the header

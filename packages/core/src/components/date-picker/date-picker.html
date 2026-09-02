@@ -1,3 +1,4 @@
+<h3 class="site-preview-heading">Default</h3>
 <div class="usa-form-group usx-form-group">
   <label class="usa-label usx-label" id="appointment-date-label" for="appointment-date"
     >Appointment date</label
@@ -10,6 +11,94 @@
       name="appointment-date"
       aria-labelledby="appointment-date-label"
       aria-describedby="appointment-date-hint"
+    />
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Disabled</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" id="appointment-date-disabled-label" for="appointment-date-disabled"
+    >Appointment date</label
+  >
+  <div class="usa-hint usx-hint" id="appointment-date-disabled-hint">mm/dd/yyyy</div>
+  <div class="usa-date-picker usx-date-picker">
+    <input
+      class="usa-input usx-input"
+      id="appointment-date-disabled"
+      name="appointment-date-disabled"
+      aria-labelledby="appointment-date-disabled-label"
+      aria-describedby="appointment-date-disabled-hint"
+      disabled
+    />
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Required</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" id="appointment-date-required-label" for="appointment-date-required">
+    <abbr title="required" class="usx-required">*</abbr>Appointment date
+  </label>
+  <div class="usa-hint usx-hint" id="appointment-date-required-hint">mm/dd/yyyy</div>
+  <div class="usa-date-picker usx-date-picker">
+    <input
+      class="usa-input usx-input"
+      id="appointment-date-required"
+      name="appointment-date-required"
+      aria-labelledby="appointment-date-required-label"
+      aria-describedby="appointment-date-required-hint"
+      required
+    />
+  </div>
+</div>
+
+<h3 class="site-preview-heading">With default value</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" id="appointment-date-default-value-label" for="appointment-date-default-value"
+    >Appointment date</label
+  >
+  <div class="usa-hint usx-hint" id="appointment-date-default-value-hint">mm/dd/yyyy</div>
+  <div class="usa-date-picker usx-date-picker" data-default-value="2020-05-22">
+    <input
+      class="usa-input usx-input"
+      id="appointment-date-default-value"
+      name="appointment-date-default-value"
+      aria-labelledby="appointment-date-default-value-label"
+      aria-describedby="appointment-date-default-value-hint"
+    />
+  </div>
+</div>
+
+<h3 class="site-preview-heading">With error</h3>
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label class="usa-label usx-label" id="appointment-date-error-label" for="appointment-date-error"
+    >Appointment date</label
+  >
+  <div class="usa-hint usx-hint" id="appointment-date-error-hint">mm/dd/yyyy</div>
+  <span class="usa-error-message usx-error-message" id="appointment-date-error-error" role="alert">Enter a valid date in mm/dd/yyyy format.</span>
+  <div class="usa-date-picker usx-date-picker">
+    <input
+      class="usa-input usx-input"
+      id="appointment-date-error"
+      name="appointment-date-error"
+      aria-labelledby="appointment-date-error-label"
+      aria-describedby="appointment-date-error-hint appointment-date-error-error"
+    />
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Min/max date</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" id="appointment-date-min-max-label" for="appointment-date-min-max"
+    >Appointment date</label
+  >
+  <div class="usa-hint usx-hint" id="appointment-date-min-max-hint">mm/dd/yyyy</div>
+  <div class="usa-date-picker usx-date-picker" data-min-date="2020-05-22" data-max-date="2021-06-20">
+    <input
+      class="usa-input usx-input"
+      id="appointment-date-min-max"
+      name="appointment-date-min-max"
+      aria-labelledby="appointment-date-min-max-label"
+      aria-describedby="appointment-date-min-max-hint"
     />
   </div>
 </div>

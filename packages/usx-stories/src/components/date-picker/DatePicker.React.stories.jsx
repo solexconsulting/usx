@@ -68,13 +68,6 @@ export const storyDefs = {
     minDate: '2020-05-22',
     maxDate: '2021-06-20',
   },
-  RangeDate: {
-    id: 'appointment-date-range',
-    name: 'appointment-date-range',
-    label: 'Appointment date',
-    hint: 'mm/dd/yyyy',
-    rangeDate: '2020-05-22',
-  },
 };
 
 export const Default = { args: storyDefs.Default };
@@ -83,4 +76,3 @@ export const Required = { args: storyDefs.Required };
 export const WithDefaultValue = { args: storyDefs.WithDefaultValue };
 export const WithError = { args: storyDefs.WithError };
 export const MinMaxDate = { args: storyDefs.MinMaxDate };
-export const RangeDate = { args: storyDefs.RangeDate };
