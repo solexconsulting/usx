@@ -1,14 +1,13 @@
-import React from 'react';
-import config from './config.json';
-import { buildArgTypes, createDjangoStory } from '../../../helper';
+import config from '../../../../core/src/components/{{kebab}}/config.json';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './{{Name}}.React.stories.jsx';
 
 export default {
-  title: 'Django/{{Name}}',
-  tags: ['autodocs'],
+  title: 'Django/USX/{{Name}}',
+  tags: ['USX', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
 };
 
-const createStory = createDjangoStory('{{kebab}}');
+const createStory = createDjangoStory({ componentName: '{{kebab}}' });
 
 export const Default = createStory(storyDefs.Default);

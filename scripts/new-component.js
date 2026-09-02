@@ -29,6 +29,9 @@ const kebab = toKebab(rawName);
 const repoRoot = "./";
 const templatesDir = path.join(repoRoot, 'scripts', 'templates', 'component');
 const targetDir = path.join(repoRoot, 'packages', 'core', 'src', 'components', kebab);
+const usxScssDir = path.join(repoRoot, 'packages', 'usx', 'src', 'components');
+const storiesDir = path.join(repoRoot, 'packages', 'usx-stories', 'src', 'components', kebab);
+const usxIndexScssPath = path.join(repoRoot, 'packages', 'usx', 'src', 'index.scss');
 
 if (fs.existsSync(targetDir)) {
   const existingFiles = fs.readdirSync(targetDir).filter((f) => f !== '.' && f !== '..');
@@ -45,8 +48,10 @@ fs.mkdirSync(targetDir, { recursive: true });
 
 const files = fs.readdirSync(templatesDir);
 files.forEach((file) => {
-  // Do not copy story templates into the component folder; those are written to the stories dir separately
-  if (file.endsWith('.stories.jsx')) return;
+  // Story templates go to packages/usx-stories (see below) — Storybook only
+  // scans that package. SCSS goes to packages/usx (see below) — that's the
+  // package every real component's runtime-themeable styles live in.
+  if (file.endsWith('.stories.jsx') || file.endsWith('.scss')) return;
   const src = path.join(templatesDir, file);
   let destName = file.replace('component', kebab).replace('Component', Name);;
   const dest = path.join(targetDir, destName);
@@ -59,6 +64,31 @@ files.forEach((file) => {
   fs.writeFileSync(dest, contents, 'utf8');
   console.log('Created', dest);
 });
+
+// Create the per-component SCSS partial in packages/usx (the package every
+// real component's theme-aware styles live in) and forward it from
+// packages/usx/src/index.scss so it's actually included in the build.
+const scssTemplatePath = path.join(templatesDir, 'component.scss');
+if (fs.existsSync(scssTemplatePath)) {
+  fs.mkdirSync(usxScssDir, { recursive: true });
+  const scssDest = path.join(usxScssDir, `_${kebab}.scss`);
+  if (fs.existsSync(scssDest)) {
+    console.log('Skipping existing file', scssDest);
+  } else {
+    let scssContents = fs.readFileSync(scssTemplatePath, 'utf8');
+    scssContents = scssContents.replace(/{{Name}}/g, Name).replace(/{{kebab}}/g, kebab);
+    fs.writeFileSync(scssDest, scssContents, 'utf8');
+    console.log('Created', scssDest);
+  }
+
+  const forwardLine = `@forward './components/${kebab}';`;
+  const existingIndexScss = fs.existsSync(usxIndexScssPath) ? fs.readFileSync(usxIndexScssPath, 'utf8') : '';
+  if (!existingIndexScss.includes(forwardLine)) {
+    const updatedIndexScss = existingIndexScss.replace(/\n?$/, '') + `\n${forwardLine}\n`;
+    fs.writeFileSync(usxIndexScssPath, updatedIndexScss, 'utf8');
+    console.log('Added', forwardLine, 'to', usxIndexScssPath);
+  }
+}
 
 // Validate generated config.json against schema using AJV if available
 const generatedConfigPath = path.join(targetDir, 'config.json');
@@ -109,17 +139,19 @@ try {
   console.warn('Failed to regenerate core exports automatically:', e.message);
 }
 
-// Create colocated story files in the component folder using templates
+// Create story files in packages/usx-stories — the only package Storybook's
+// `stories` glob (apps/storybook/.storybook/main.js) actually scans.
 const templateFiles = fs.readdirSync(templatesDir).filter((f) => f.endsWith('.stories.jsx'));
 if (templateFiles.length === 0) {
   console.warn('No story templates found in', templatesDir);
 } else {
+  fs.mkdirSync(storiesDir, { recursive: true });
   templateFiles.forEach((file) => {
     const src = path.join(templatesDir, file);
     let contents = fs.readFileSync(src, 'utf8');
     contents = contents.replace(/{{Name}}/g, Name).replace(/{{kebab}}/g, kebab);
     const destFile = file.replace('component', Name);
-    const dest = path.join(targetDir, destFile);
+    const dest = path.join(storiesDir, destFile);
     if (fs.existsSync(dest)) {
       console.log('Skipping existing story', dest);
       return;

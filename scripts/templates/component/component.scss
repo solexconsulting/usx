@@ -1,6 +1,10 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-{{kebab}} {
   display: block;
-  .{{kebab}}__content {
+
+  &__content {
     padding: 1rem;
   }
 }

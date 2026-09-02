@@ -1,9 +1,9 @@
 import React from 'react';
-import html from './{{kebab}}.html?raw';
+import html from '../../../../core/src/components/{{kebab}}/{{kebab}}.html?raw';
 
 export default {
-  title: 'HTML/{{Name}}',
-  tags: ['autodocs'],
+  title: 'HTML/USX/{{Name}}',
+  tags: ['USX', 'autodocs'],
 };
 
 export const AllVariants = {
