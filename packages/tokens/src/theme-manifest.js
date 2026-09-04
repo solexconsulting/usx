@@ -269,6 +269,8 @@ export const themeManifest = [
   scale('usx-accordion-border-width', '--usx-accordion-border-width', 'var(--usx-border-width-lg)', 'border-advanced'),
   scale('usx-button-outline-border-width', '--usx-button-outline-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
   scale('usx-switch-border-width', '--usx-switch-border-width', '2px', 'border-advanced'),
+  scale('usx-file-input-border-width', '--usx-file-input-border-width', 'var(--usx-border-width-inputs)', 'border-advanced'),
+  scale('usx-file-input-item-border-width', '--usx-file-input-item-border-width', 'var(--usx-border-width-sm)', 'border-advanced'),
 
   // ── Typography ────────────────────────────────────────────────────────────
   // Font stack matches the actual family baked into the precompiled USWDS
@@ -365,6 +367,14 @@ export const themeManifest = [
   // Per-component overrides of the shared color-border token (see above).
   component('usx-checkable-tile-border', 'var(--usx-color-border)'),
   component('usx-task-list-border', 'var(--usx-color-border)'),
+  component('usx-file-input-border', 'var(--usx-color-border)'),
+  component('usx-file-input-item-border', 'var(--usx-color-border)'),
+  // USWDS bakes the "N files selected" heading and each preview row to a
+  // fixed "primary-lighter" callout background (with default body text),
+  // regardless of theme — same callout role as usx-accordion-bg/
+  // usx-banner-bg, so it chains to the same surface-2/text roles.
+  component('usx-file-input-preview-bg', '#d9e8f6', 'surface-2'),
+  component('usx-file-input-preview-text', '#1b1b1b', 'text'),
   component('usx-task-list-bg-hover', 'var(--usx-surface-2)'),
   // Shared by both checkbox and radio unchecked ::before styling.
   component('usx-checkable-bg', 'var(--usx-surface-1)'),

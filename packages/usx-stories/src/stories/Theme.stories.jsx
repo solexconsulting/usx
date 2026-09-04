@@ -31,6 +31,7 @@ import Collection from '../../../core/src/components/collection/Collection.tsx';
 import CopyToClipboard from '../../../core/src/components/copy-to-clipboard/CopyToClipboard.tsx';
 import DatePicker from '../../../core/src/components/date-picker/DatePicker.jsx';
 import Eyebrow from '../../../core/src/components/eyebrow/Eyebrow.tsx';
+import FileInput from '../../../core/src/components/file-input/FileInput.jsx';
 import Footer from '../../../core/src/components/footer/Footer.tsx';
 import Header from '../../../core/src/components/header/Header.tsx';
 import Hero from '../../../core/src/components/hero/Hero.tsx';
@@ -58,6 +59,7 @@ import Tag from '../../../core/src/components/tag/Tag.tsx';
 import TaskList from '../../../core/src/components/task-list/TaskList.tsx';
 import TextArea from '../../../core/src/components/text-area/TextArea.tsx';
 import datePicker from '@uswds/uswds/js/usa-date-picker';
+import fileInput from '@uswds/uswds/js/usa-file-input';
 
 export default {
   title: 'Documentation/Theme/Playground',
@@ -1238,12 +1240,17 @@ function Showcase({ resolved }) {
   // hover-row color tokens too.
   const [tableSelection, setTableSelection] = useState([2]);
 
-  // DatePicker's calendar toggle button/panel are injected by USWDS's own JS
-  // enhancement, not the static React markup, so it needs the same init/
-  // cleanup as the component's own stories (see DatePicker.React.stories.jsx).
+  // DatePicker's calendar toggle button/panel and FileInput's drag-and-drop
+  // target are both injected by USWDS's own JS enhancement, not the static
+  // React markup, so they need the same init/cleanup as their own stories
+  // (see DatePicker.React.stories.jsx / FileInput.React.stories.jsx).
   useEffect(() => {
     datePicker.init();
-    return () => datePicker.off();
+    fileInput.init();
+    return () => {
+      datePicker.off();
+      fileInput.off();
+    };
   }, []);
 
   return (
@@ -1358,6 +1365,7 @@ function Showcase({ resolved }) {
         />
         <Search id="theme-search" placeholder="Search…" />
         <DatePicker id="theme-date-picker" label="Date picker" hint="mm/dd/yyyy" />
+        <FileInput id="theme-file-input" label="File upload" hint="Select one or more files" multiple />
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>

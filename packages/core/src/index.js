@@ -45,6 +45,7 @@ export { default as DateRangePicker } from './components/date-range-picker';
 export { default as Eyebrow } from './components/eyebrow';
 export { default as Fieldset } from './components/fieldset';
 export { default as FileInput } from './components/file-input';
+export { default as FileList } from './components/file-list';
 export { default as Footer } from './components/footer';
 export { default as FormGroup } from './components/form-group';
 export { default as Header } from './components/header';
@@ -94,6 +95,7 @@ export { default as Toggle } from './components/toggle';
 export { default as Tooltip } from './components/tooltip';
 export { default as Villain } from './components/villain';
 // AUTO-GENERATED-EXPORTS END
+
 
 
 

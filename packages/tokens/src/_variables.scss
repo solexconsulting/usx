@@ -741,6 +741,28 @@ $usx-textarea-text: null !default;
 $usx-textarea-border: null !default;
 $usx-textarea-padding: null !default;
 
+// ── Component tokens: File Input ─────────────────────────────────────────────
+// Own hooks for the dropzone target and the managed-multiple file-item rows
+// (see FileInput.jsx) so either can be overridden independently — both
+// chain to the shared border role/width by default, same as other
+// components' advanced border overrides above.
+$usx-file-input-border-var: null !default;
+$usx-file-input-border: usx-var($usx-file-input-border-var, $usx-color-border) !default;
+$usx-file-input-border-width-var: null !default;
+$usx-file-input-border-width: usx-var($usx-file-input-border-width-var, $usx-border-width-inputs) !default;
+$usx-file-input-item-border-var: null !default;
+$usx-file-input-item-border: usx-var($usx-file-input-item-border-var, $usx-color-border) !default;
+$usx-file-input-item-border-width-var: null !default;
+$usx-file-input-item-border-width: usx-var($usx-file-input-item-border-width-var, $usx-border-width-sm) !default;
+// USWDS bakes the "N files selected" heading/preview rows to a fixed
+// "primary-lighter" callout background regardless of theme — chain to the
+// same surface-2/text roles as other callout-style components (accordion,
+// banner) rather than introducing an unrelated standalone token.
+$usx-file-input-preview-bg-var: null !default;
+$usx-file-input-preview-bg: usx-var($usx-file-input-preview-bg-var, $usx-surface-2) !default;
+$usx-file-input-preview-text-var: null !default;
+$usx-file-input-preview-text: usx-var($usx-file-input-preview-text-var, $usx-text) !default;
+
 // ── Component tokens: Switch ──────────────────────────────────────────────
 // Default border width matches the width of checkboxes and radio buttons
 $usx-switch-border-width-var: null !default;

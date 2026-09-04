@@ -1,0 +1,30 @@
+{# Django template for FileList (static preview — Delete buttons aren't wired up; the interactive managed list lives in FileInput's React mode) #}
+{% load components %}
+
+<div class="usx-file-input__list margin-top-1{% if className %} {{ className }}{% endif %}">
+  {% if hint %}
+  <span class="usa-hint usx-hint usx-file-input__list-heading">{{ hint }}</span>
+  {% endif %}
+  <ul class="usx-file-input__file-list">
+    {% for file in files %}
+    <li class="usx-file-input__file-item">
+      <div class="usx-file-input__file-info">
+        {% if file.url %}
+        <a class="usa-link usx-link usa-link--external usx-file-input__file-name" rel="noreferrer noopener" target="_blank" href="{{ file.url }}">{{ file.name }}</a>
+        {% else %}
+        <span class="usx-file-input__file-name">{{ file.name }}</span>
+        {% endif %}
+        {% if file.size %}
+        <span class="usx-file-input__file-size">{% with ext=file.name|file_extension %}{% if ext %}{{ ext }}, {% endif %}{% endwith %}{{ file.size }}</span>
+        {% endif %}
+      </div>
+      {% if not disabled %}
+      <button type="button" class="usa-button usx-button usa-button--secondary usx-file-input__delete-button">
+        {% icon name='delete' size=3 className='usx-file-input__delete-icon' %}{% endicon %}
+        <span class="usx-file-input__delete-label">Delete</span>
+      </button>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>

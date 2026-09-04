@@ -130,6 +130,17 @@ def default_bool(value: Any, default_value: bool) -> bool:
     return default_value
 
 
+@register.filter()
+def file_extension(value: str) -> str:
+    """
+    Returns a filename's extension, uppercased (e.g. "report.pdf" -> "PDF").
+    Used to show a file's type alongside its size in FileList rows.
+    """
+    if not value or "." not in value:
+        return ""
+    return value.rsplit(".", 1)[-1].upper()
+
+
 class FragmentNode(template.Node):
     def __init__(self, nodelist: Any, target_var: str) -> None:
         self.nodelist = nodelist

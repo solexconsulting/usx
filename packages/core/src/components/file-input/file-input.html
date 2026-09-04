@@ -1,4 +1,223 @@
-<div class="usx-file-input">
-  <!-- Canonical HTML for FileInput -->
-  <div class="file-input__content">NOT IMPLEMENTED</div>
+<!-- Default -->
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="file-input-single">Input accepts a single file</label>
+  <input class="usa-file-input usx-file-input" id="file-input-single" type="file" name="file-input-single" />
 </div>
+
+<!-- AcceptSpecificTypes -->
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="file-input-specific">Input accepts only specific file types</label>
+  <span class="usa-hint usx-hint" id="file-input-specific-hint">Select PDF or TXT files</span>
+  <input
+    class="usa-file-input usx-file-input"
+    id="file-input-specific"
+    type="file"
+    name="file-input-specific"
+    aria-describedby="file-input-specific-hint"
+    accept=".pdf,.txt"
+    data-errormessage="Only PDF or TXT files are accepted."
+  />
+</div>
+
+<!-- AcceptImages -->
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="file-input-images">Input accepts any kind of image</label>
+  <span class="usa-hint usx-hint" id="file-input-images-hint">Select any type of image format</span>
+  <input
+    class="usa-file-input usx-file-input"
+    id="file-input-images"
+    type="file"
+    name="file-input-images"
+    aria-describedby="file-input-images-hint"
+    accept="image/*"
+  />
+</div>
+
+<!-- Multiple -->
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="file-input-multiple">Input accepts multiple files</label>
+  <span class="usa-hint usx-hint" id="file-input-multiple-hint">Select one or more files</span>
+  <input
+    class="usa-file-input usx-file-input"
+    id="file-input-multiple"
+    type="file"
+    name="file-input-multiple"
+    aria-describedby="file-input-multiple-hint"
+    multiple
+  />
+</div>
+
+<!-- WithError -->
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label class="usa-label usx-label" for="file-input-error">Input has an error</label>
+  <span class="usa-hint usx-hint" id="file-input-error-hint">Select any valid file</span>
+  <span class="usa-error-message usx-error-message" id="file-input-error-error" role="alert">Display a helpful error message</span>
+  <input
+    class="usa-file-input usx-file-input"
+    id="file-input-error"
+    type="file"
+    name="file-input-error"
+    aria-describedby="file-input-error-hint file-input-error-error"
+  />
+</div>
+
+<!-- Disabled -->
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="file-input-disabled">Disabled input</label>
+  <input class="usa-file-input usx-file-input" id="file-input-disabled" type="file" name="file-input-disabled" disabled />
+</div>
+
+<!-- ManagedMultiple (static snapshot; interactive Delete requires React) -->
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="file-input-managed">Upload supporting documents</label>
+  <span class="usa-hint usx-hint" id="file-input-managed-hint">Select one or more files</span>
+  <div class="usx-file-input__add-only">
+    <input
+      class="usa-file-input usx-file-input"
+      id="file-input-managed"
+      type="file"
+      name="file-input-managed"
+      aria-describedby="file-input-managed-hint"
+      multiple
+    />
+  </div>
+  <div class="usx-file-input__list">
+    <p class="usa-hint usx-hint usx-file-input__list-heading">Selected files</p>
+    <ul class="usx-file-input__file-list">
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <span class="usx-file-input__file-name">test1.jpg</span>
+          <span class="usx-file-input__file-size">JPG, 7 KB</span>
+        </div>
+        <button type="button" class="usa-button usa-button--secondary">Delete</button>
+      </li>
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <span class="usx-file-input__file-name">test2.jpg</span>
+          <span class="usx-file-input__file-size">JPG, 7 KB</span>
+        </div>
+        <button type="button" class="usa-button usa-button--secondary">Delete</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- PreloadedDownloadable (static snapshot; interactive Delete requires React) -->
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="file-input-preloaded-downloadable">Supporting documents</label>
+  <span class="usa-hint usx-hint" id="file-input-preloaded-downloadable-hint">Select one or more files</span>
+  <div class="usx-file-input__add-only">
+    <input
+      class="usa-file-input usx-file-input"
+      id="file-input-preloaded-downloadable"
+      type="file"
+      name="file-input-preloaded-downloadable"
+      aria-describedby="file-input-preloaded-downloadable-hint"
+      multiple
+    />
+  </div>
+  <div class="usx-file-input__list">
+    <p class="usa-hint usx-hint usx-file-input__list-heading">Selected files</p>
+    <ul class="usx-file-input__file-list">
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <a class="usa-link usx-link usa-link--external usx-file-input__file-name" rel="noreferrer noopener" target="_blank" href="#">w2-2023.pdf</a>
+          <span class="usx-file-input__file-size">PDF, 240 KB</span>
+        </div>
+        <button type="button" class="usa-button usa-button--secondary">Delete</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- PreloadedDisabled (static snapshot; fully locked, read-only record of already-submitted files) -->
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="file-input-preloaded-disabled">Supporting documents</label>
+  <span class="usa-hint usx-hint" id="file-input-preloaded-disabled-hint">These files were submitted with your application</span>
+  <div class="usx-file-input__add-only">
+    <input
+      class="usa-file-input usx-file-input"
+      id="file-input-preloaded-disabled"
+      type="file"
+      name="file-input-preloaded-disabled"
+      aria-describedby="file-input-preloaded-disabled-hint"
+      multiple
+      disabled
+    />
+  </div>
+  <div class="usx-file-input__list">
+    <p class="usa-hint usx-hint usx-file-input__list-heading">Selected files</p>
+    <ul class="usx-file-input__file-list">
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <a class="usa-link usx-link usa-link--external usx-file-input__file-name" rel="noreferrer noopener" target="_blank" href="#">w2-2023.pdf</a>
+          <span class="usx-file-input__file-size">PDF, 240 KB</span>
+        </div>
+        <button type="button" class="usa-button usa-button--secondary" disabled>Delete</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- PreloadedNameOnly (static snapshot; a filename with no size or download link) -->
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="file-input-preloaded-name-only">Supporting documents</label>
+  <span class="usa-hint usx-hint" id="file-input-preloaded-name-only-hint">Select one or more files</span>
+  <div class="usx-file-input__add-only">
+    <input
+      class="usa-file-input usx-file-input"
+      id="file-input-preloaded-name-only"
+      type="file"
+      name="file-input-preloaded-name-only"
+      aria-describedby="file-input-preloaded-name-only-hint"
+      multiple
+    />
+  </div>
+  <div class="usx-file-input__list">
+    <p class="usa-hint usx-hint usx-file-input__list-heading">Selected files</p>
+    <ul class="usx-file-input__file-list">
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <span class="usx-file-input__file-name">government-id.jpg</span>
+        </div>
+        <button type="button" class="usa-button usa-button--secondary">Delete</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- LongFileName (static snapshot; long filenames should wrap, not overflow, and never push the Delete button out of view — check on both desktop and mobile) -->
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="file-input-long-file-name">Upload supporting documents</label>
+  <span class="usa-hint usx-hint" id="file-input-long-file-name-hint">Select one or more files</span>
+  <div class="usx-file-input__add-only">
+    <input
+      class="usa-file-input usx-file-input"
+      id="file-input-long-file-name"
+      type="file"
+      name="file-input-long-file-name"
+      aria-describedby="file-input-long-file-name-hint"
+      multiple
+    />
+  </div>
+  <div class="usx-file-input__list">
+    <p class="usa-hint usx-hint usx-file-input__list-heading">Selected files</p>
+    <ul class="usx-file-input__file-list">
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <span class="usx-file-input__file-name">this-is-an-unusually-long-supporting-document-filename-used-to-verify-wrapping-behavior.pdf</span>
+          <span class="usx-file-input__file-size">PDF, 1.8 MB</span>
+        </div>
+        <button type="button" class="usa-button usa-button--secondary">Delete</button>
+      </li>
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <a class="usa-link usx-link usa-link--external usx-file-input__file-name" rel="noreferrer noopener" target="_blank" href="#">another-extremely-long-filename-for-a-downloadable-preloaded-file-to-check-the-download-icon-and-link-wrapping.pdf</a>
+          <span class="usx-file-input__file-size">PDF, 500 KB</span>
+        </div>
+        <button type="button" class="usa-button usa-button--secondary">Delete</button>
+      </li>
+    </ul>
+  </div>
+</div>
+

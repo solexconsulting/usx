@@ -1,0 +1,249 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Real USWDS classes, not USX BEM. */
+
+/* ---------------------------------- */
+
+/* Base Enhancements                  */
+
+/* ---------------------------------- */
+
+.usa-file-input__target {
+  @if $usx-input-radius {
+    border-radius: $usx-input-radius;
+  }
+}
+
+/* ---------------------------------- */
+
+/* State Enhancements                 */
+
+/* ---------------------------------- */
+
+.usa-file-input__target {
+  @if $usx-input-border {
+    border-color: $usx-input-border;
+  }
+}
+
+.usa-form-group--error .usa-file-input__target {
+    @if $usx-input-error-border {
+        border-color: $usx-input-error-border;
+    }
+    @if $usx-file-input-border-width {
+        border-width: $usx-file-input-border-width;
+    }
+}
+
+.usa-file-input__target.has-invalid-file {
+  // For some reason, they use accent warm here. Very odd.
+  @if $usx-color-accent-warm {
+    border-color: $usx-color-accent-warm;
+  }
+}
+
+// USWDS bakes this message to a fixed "secondary-dark" red (#b50909)
+// regardless of theme — reuse the same error color as .usa-error-message.
+.has-invalid-file .usa-file-input__accepted-files-message {
+  @if $usx-color-error {
+    color: $usx-color-error;
+  }
+}
+
+/* ---------------------------------- */
+
+/* Theme Corrections                     */
+
+/* ---------------------------------- */
+
+@if $usx-file-input-border {
+  .usa-file-input__target {
+    border-color: $usx-file-input-border;
+  }
+}
+
+@if $usx-file-input-border-width {
+  .usa-file-input__target {
+    border-width: $usx-file-input-border-width;
+  }
+}
+
+// USWDS bakes the dropzone's idle background and instructions text to fixed
+// light-mode colors (#fff / #454545), so a white box otherwise shows through
+// on dark themes regardless of surrounding surface/text tokens.
+@if $usx-surface-2 {
+  .usa-file-input__box {
+    background-color: $usx-surface-2;
+  }
+}
+
+@if $usx-text {
+  .usa-file-input__instructions {
+    color: $usx-text;
+  }
+}
+
+// USWDS bakes the "N files selected" heading and each preview row to a
+// fixed "primary-lighter" background with default body text, regardless of
+// theme — same callout role as the accordion button/banner backgrounds.
+@if $usx-file-input-preview-bg {
+  .usa-file-input__preview-heading,
+  .usa-file-input__preview {
+    background-color: $usx-file-input-preview-bg;
+  }
+}
+
+@if $usx-file-input-preview-text {
+  .usa-file-input__preview-heading,
+  .usa-file-input__preview {
+    color: $usx-file-input-preview-text;
+  }
+}
+
+// USWDS bakes the "choose from folder" text to a fixed link-blue (#005ea2),
+// so it doesn't track a themed link color otherwise — reuse the same
+// usx-link variables/states rather than introducing a separate token.
+.usa-file-input__choose {
+  @if $usx-link-text {
+    color: $usx-link-text;
+  }
+
+  &:hover {
+    @if $usx-link-text-hover {
+      color: $usx-link-text-hover;
+    }
+  }
+
+  &:active {
+    @if $usx-link-text-active {
+      color: $usx-link-text-active;
+    }
+  }
+
+  &:visited {
+    @if $usx-link-text-visited {
+      color: $usx-link-text-visited;
+    }
+  }
+}
+
+/* ---------------------------------- */
+
+/* Managed-multiple file list         */
+/* (VA.gov-style per-file delete rows, see FileInput.jsx) */
+
+/* ---------------------------------- */
+
+.usx-file-input__file-list {
+  list-style: none;
+  margin: 0.5rem 0 1rem 0;
+  padding: 0;
+  max-width: 30rem;
+}
+
+.usx-file-input__file-item {
+  align-items: center;
+  border-style: solid;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+
+  @if $usx-input-radius {
+    border-radius: $usx-input-radius;
+  }
+
+  @if $usx-file-input-item-border {
+    border-color: $usx-file-input-item-border;
+  }
+
+  @if $usx-file-input-item-border-width {
+    border-width: $usx-file-input-item-border-width;
+  }
+}
+
+// Info stays on the left and shrinks (long names wrap) so the Delete button
+// on the right is never pushed out of view, even on small screens.
+.usx-file-input__file-info {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.usx-file-input__file-name {
+  // A downloadable file's name renders as a Link (.usx-link), which sets
+  // `width: max-content` so it never stretches to fill a container — but
+  // that also stops it from ever wrapping, so a long name just overflows
+  // this row instead. `fit-content` still shrinks to wrap when needed,
+  // without stretching the link's clickable area for short names the way
+  // `auto` does.
+  width: fit-content;
+}
+
+.usx-file-input__file-size {
+  @if $usx-color-base {
+    color: $usx-color-base;
+  }
+}
+
+.usx-file-input__delete-button {
+  align-items: center;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 0.5rem;
+  margin-right: 0;
+  // USWDS's base .usa-button is width:100% below its own tablet breakpoint
+  // (only reset to auto at tablet+) — override so this button always sizes
+  // to its content and never crowds out the file info next to it.
+  width: auto;
+}
+
+.usx-file-input__delete-icon {
+  display: none;
+}
+
+// Below tablet width the Delete button becomes icon-only (label is still
+// present for assistive tech, just visually hidden) so it never crowds out
+// the file name/size on narrow screens.
+@include at-media('mobile') {
+  .usx-file-input__delete-button {
+    padding: 0.5rem;
+  }
+
+  .usx-file-input__delete-icon {
+    display: block;
+  }
+
+  .usx-file-input__delete-label {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+}
+
+// The managed-multiple input is reset after every selection so it always
+// looks empty/ready — but USWDS still builds its own preview UI (filename,
+// thumbnail, "N files selected" heading) asynchronously, so it's suppressed
+// here rather than relying on a reliably-timed reset.
+.usx-file-input__add-only {
+  .usa-file-input__preview,
+  .usa-file-input__preview-heading,
+  .usa-file-input__accepted-files-message {
+    display: none !important;
+  }
+
+  .usa-file-input__instructions {
+    display: block !important;
+  }
+}
+

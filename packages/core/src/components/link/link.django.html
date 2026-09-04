@@ -1,4 +1,6 @@
 {# Django template for Link #}
+{% load components %}
+
 <a
   href="{{ href|default:'javascript:void(0);' }}"
   class="usa-link usx-link{% if visited %} usx-link--visited{% endif %}{% if external %} usa-link--external{% endif %}{% if alt %} usa-link--alt{% endif %}{% if className %} {{ className }}{% endif %}"
