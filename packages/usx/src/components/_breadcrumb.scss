@@ -1,0 +1,35 @@
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+// Real USWDS hardcodes breadcrumb background/text to fixed #fff/#1b1b1b —
+// give it a themeable default instead (nav/wayfinding element).
+.usx-breadcrumb {
+  @if $usx-breadcrumb-bg {
+    background-color: $usx-breadcrumb-bg;
+  }
+
+  @if $usx-breadcrumb-text {
+    color: $usx-breadcrumb-text;
+  }
+
+  .usa-breadcrumb__link {
+    @if $usx-breadcrumb-link-text {
+      color: $usx-breadcrumb-link-text;
+    }
+
+    &:hover {
+      @if $usx-breadcrumb-link-text-hover {
+        color: $usx-breadcrumb-link-text-hover;
+      }
+    }
+  }
+
+  .usa-breadcrumb__list-item {
+    &.usa-current {
+      @if $usx-breadcrumb-current-text {
+        color: $usx-breadcrumb-current-text;
+      }
+    }
+  }
+}

@@ -1287,3 +1287,80 @@ $usx-in-page-nav-current-text: usx-var($usx-in-page-nav-current-text-var, $usx-t
 $usx-in-page-nav-bar-var: null !default;
 $usx-in-page-nav-bar: usx-var($usx-in-page-nav-bar-var, $usx-color-primary) !default;
 
+// ── Component tokens: Breadcrumb (custom; defaults baked in SCSS) ──────────
+// Real USWDS hardcodes breadcrumb text/background to fixed #1b1b1b/#fff
+// regardless of theme. It's a nav/wayfinding element (like in-page-nav
+// above), so it should track the theme instead of staying static.
+$usx-breadcrumb-bg-var: null !default;
+$usx-breadcrumb-bg: usx-var($usx-breadcrumb-bg-var, transparent) !default;
+
+$usx-breadcrumb-text-var: null !default;
+$usx-breadcrumb-text: usx-var($usx-breadcrumb-text-var, $usx-text) !default;
+
+$usx-breadcrumb-link-text-var: null !default;
+$usx-breadcrumb-link-text: usx-var($usx-breadcrumb-link-text-var, $usx-link-text) !default;
+
+$usx-breadcrumb-link-text-hover-var: null !default;
+$usx-breadcrumb-link-text-hover: usx-var($usx-breadcrumb-link-text-hover-var, $usx-link-text-hover) !default;
+
+$usx-breadcrumb-current-text-var: null !default;
+$usx-breadcrumb-current-text: usx-var($usx-breadcrumb-current-text-var, $usx-text) !default;
+
+// ── Component tokens: Process List (custom; defaults baked in SCSS) ────────
+// Real USWDS hardcodes heading/number-circle text to #1b1b1b and the
+// connecting line + circle border to fixed light-blue/gray-cool literals,
+// none of which track a runtime theme override.
+$usx-process-list-heading-text-var: null !default;
+$usx-process-list-heading-text: usx-var($usx-process-list-heading-text-var, $usx-text) !default;
+
+$usx-process-list-border-var: null !default;
+$usx-process-list-border: usx-var($usx-process-list-border-var, $usx-color-primary) !default;
+
+$usx-process-list-counter-text-var: null !default;
+$usx-process-list-counter-text: usx-var($usx-process-list-counter-text-var, $usx-text) !default;
+
+$usx-process-list-counter-border-var: null !default;
+$usx-process-list-counter-border: usx-var($usx-process-list-counter-border-var, $usx-text) !default;
+
+$usx-process-list-counter-ring-var: null !default;
+$usx-process-list-counter-ring: usx-var($usx-process-list-counter-ring-var, $usx-surface-1) !default;
+
+// ── Component tokens: Collection (custom; defaults baked in SCSS) ──────────
+// Real USWDS never sets a color on collection meta/description — they
+// inherit ambient text (the heading link is already themed via .usx-link).
+$usx-collection-meta-text-var: null !default;
+$usx-collection-meta-text: usx-var($usx-collection-meta-text-var, $usx-text-subtle) !default;
+
+$usx-collection-description-text-var: null !default;
+$usx-collection-description-text: usx-var($usx-collection-description-text-var, $usx-text) !default;
+
+// ── Component tokens: Pagination (custom; defaults baked in SCSS) ──────────
+// Real USWDS's compiled CSS hardcodes pagination link/button text and the
+// current-page underline to literal `color("primary")`/`color("primary-
+// vivid")` — nav/wayfinding element, should track the theme.
+$usx-pagination-link-text-var: null !default;
+$usx-pagination-link-text: usx-var($usx-pagination-link-text-var, $usx-link-text) !default;
+
+$usx-pagination-link-text-hover-var: null !default;
+$usx-pagination-link-text-hover: usx-var($usx-pagination-link-text-hover-var, $usx-link-text-hover) !default;
+
+$usx-pagination-current-bg-var: null !default;
+$usx-pagination-current-bg: usx-var($usx-pagination-current-bg-var, $usx-color-primary) !default;
+
+$usx-pagination-current-text-var: null !default;
+$usx-pagination-current-text: usx-var($usx-pagination-current-text-var, $usx-text-inverse) !default;
+
+// Real USWDS also hardcodes the `.usa-pagination` nav itself to a static
+// white bg / #1b1b1b text, which floats as an opaque box over a themed
+// (e.g. dark) page background instead of blending into it.
+$usx-pagination-bg-var: null !default;
+$usx-pagination-bg: usx-var($usx-pagination-bg-var, transparent) !default;
+
+$usx-pagination-text-var: null !default;
+$usx-pagination-text: usx-var($usx-pagination-text-var, $usx-text) !default;
+
+// Real USWDS hardcodes the button border to rgba(27,27,27,.2), a black-based
+// translucent border that's drowned out on dark surfaces.
+$usx-pagination-button-border-var: null !default;
+$usx-pagination-button-border: usx-var($usx-pagination-button-border-var, $usx-color-border) !default;
+

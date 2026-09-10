@@ -1,6 +1,27 @@
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
 .usx-collection {
   .usx-calendar-date {
     margin-right: 1rem;
+  }
+
+  // Real USWDS never sets a color on meta/description — they just inherit
+  // ambient text, which doesn't reliably flip with a themed surface (the
+  // heading link is already themed separately via .usx-link). Excludes
+  // .usa-tag: tag meta items carry their own opaque bg/text pairing
+  // (self-contained badge, same class applied directly to the <li>) and
+  // must not inherit this muted text color over their own background.
+  .usa-collection__meta-item:not(.usa-tag) {
+    @if $usx-collection-meta-text {
+      color: $usx-collection-meta-text;
+    }
+  }
+
+  .usa-collection__description {
+    @if $usx-collection-description-text {
+      color: $usx-collection-description-text;
+    }
   }
 }

@@ -524,7 +524,48 @@ export const themeManifest = [
   component('usx-in-page-nav-link-text', 'var(--usx-link-text)'),
   component('usx-in-page-nav-link-text-hover', 'var(--usx-link-text-hover)'),
   component('usx-in-page-nav-current-text', 'var(--usx-text)'),
-  component('usx-in-page-nav-bar', 'var(--usx-color-primary)')
+  component('usx-in-page-nav-bar', 'var(--usx-color-primary)'),
+
+  // Real USWDS hardcodes breadcrumb text/background to fixed
+  // #1b1b1b/#fff regardless of theme (nav/wayfinding element — should
+  // theme dynamically, unlike static form controls). Background defaults
+  // transparent so it inherits whatever surface it's placed on; text/link
+  // chain to the shared text/link tokens.
+  component('usx-breadcrumb-bg', 'transparent'),
+  component('usx-breadcrumb-text', 'var(--usx-text)'),
+  component('usx-breadcrumb-link-text', 'var(--usx-link-text)'),
+  component('usx-breadcrumb-link-text-hover', 'var(--usx-link-text-hover)'),
+  component('usx-breadcrumb-current-text', 'var(--usx-text)'),
+
+  // Real USWDS hardcodes process-list heading/number-circle text to
+  // #1b1b1b and the connecting line + circle border to fixed light-blue/
+  // gray-cool literals, none of which follow a runtime theme override.
+  component('usx-process-list-heading-text', 'var(--usx-text)'),
+  component('usx-process-list-border', '#d9e8f6', 'color-primary'),
+  component('usx-process-list-counter-text', 'var(--usx-text)'),
+  component('usx-process-list-counter-border', 'var(--usx-text)'),
+  component('usx-process-list-counter-ring', 'var(--usx-surface-1)'),
+
+  // Real USWDS never sets a color on collection meta/description — they
+  // inherit ambient text (the heading link is already themed via .usx-link).
+  component('usx-collection-meta-text', 'var(--usx-text-subtle)'),
+  component('usx-collection-description-text', 'var(--usx-text)'),
+
+  // Real USWDS's compiled CSS hardcodes pagination link/button text and the
+  // current-page underline to literal `color("primary")`/`color("primary-
+  // vivid")` — nav/wayfinding element, should track the theme.
+  component('usx-pagination-link-text', 'var(--usx-link-text)'),
+  component('usx-pagination-link-text-hover', 'var(--usx-link-text-hover)'),
+  component('usx-pagination-current-bg', 'var(--usx-color-primary)'),
+  component('usx-pagination-current-text', '#ffffff', 'text-inverse'),
+  // Real USWDS also hardcodes the `.usa-pagination` nav itself to a static
+  // white bg / #1b1b1b text, which floats as an opaque box over a themed
+  // (e.g. dark) page background instead of blending into it.
+  component('usx-pagination-bg', 'transparent'),
+  component('usx-pagination-text', 'var(--usx-text)'),
+  // Real USWDS hardcodes the button border to rgba(27,27,27,.2), a black-
+  // based translucent border that's drowned out on dark surfaces.
+  component('usx-pagination-button-border', 'var(--usx-color-border)')
 ];
 
 export default themeManifest;
