@@ -1,4 +1,91 @@
 {# Django template for MemorableDate #}
-<div class="usx-memorable-date">
-  <div class="memorable-date__content">MemorableDate</div>
-</div>
+{% load components %}
+
+{% with base_id=id|default:"memorable-date" %}
+{% with month_id=base_id|add:"-month" day_id=base_id|add:"-day" year_id=base_id|add:"-year" %}
+{% with month_hint_id=month_id|add:"-hint" day_hint_id=day_id|add:"-hint" year_hint_id=year_id|add:"-hint" error_id=base_id|add:"-error" %}
+{% form_group error=error %}
+{% fieldset legend=legend required=required className=className %}
+  {% if groupHint %}
+  <span class="usa-hint" aria-hidden="true" id="{{ base_id }}-hint">{{ groupHint|default:"Select a month. Enter 1 or 2 digits for the day and 4 digits for the year." }}</span>
+  {% endif %}
+  <div class="usa-memorable-date usx-memorable-date">
+    {% form_group className="usa-form-group--month usa-form-group--select" %}
+      {% label htmlFor=month_id required=required %}{{ monthLabel|default:"Month" }}{% endlabel %}
+      <select
+        class="usa-select usx-select{% if error %} usa-input--error{% endif %}"
+        id="{{ month_id }}"
+        name="{{ monthName|default:month_id }}"
+        aria-describedby="{{ month_hint_id }}{% if error %} {{ error_id }}{% endif %}"
+        {% if error %}aria-invalid="true"{% endif %}
+        {% if disabled %}disabled{% elif ariaDisabled %}aria-disabled="true"{% endif %}
+        {% if required %}required{% endif %}
+      >
+        <option value="">- Select -</option>
+        <option value="1" {% if defaultMonth == "1" %}selected{% endif %}>January</option>
+        <option value="2" {% if defaultMonth == "2" %}selected{% endif %}>February</option>
+        <option value="3" {% if defaultMonth == "3" %}selected{% endif %}>March</option>
+        <option value="4" {% if defaultMonth == "4" %}selected{% endif %}>April</option>
+        <option value="5" {% if defaultMonth == "5" %}selected{% endif %}>May</option>
+        <option value="6" {% if defaultMonth == "6" %}selected{% endif %}>June</option>
+        <option value="7" {% if defaultMonth == "7" %}selected{% endif %}>July</option>
+        <option value="8" {% if defaultMonth == "8" %}selected{% endif %}>August</option>
+        <option value="9" {% if defaultMonth == "9" %}selected{% endif %}>September</option>
+        <option value="10" {% if defaultMonth == "10" %}selected{% endif %}>October</option>
+        <option value="11" {% if defaultMonth == "11" %}selected{% endif %}>November</option>
+        <option value="12" {% if defaultMonth == "12" %}selected{% endif %}>December</option>
+      </select>
+      {% if monthHint %}
+      <span class="usa-hint usa-sr-only" id="{{ month_hint_id }}">{{ monthHint|default:"Select a month from the dropdown." }}</span>
+      {% endif %}
+    {% endform_group %}
+
+    {% form_group className="usa-form-group--day" %}
+      {% label htmlFor=day_id required=required %}{{ dayLabel|default:"Day" }}{% endlabel %}
+      <input
+        class="usa-input usx-input{% if error %} usa-input--error{% endif %}"
+        id="{{ day_id }}"
+        name="{{ dayName|default:day_id }}"
+        value="{{ defaultDay|default:'' }}"
+        maxlength="2"
+        pattern="[0-9]*"
+        inputmode="numeric"
+        aria-describedby="{{ day_hint_id }}{% if error %} {{ error_id }}{% endif %}"
+        {% if error %}aria-invalid="true"{% endif %}
+        {% if disabled %}disabled{% elif ariaDisabled %}aria-disabled="true"{% endif %}
+        {% if required %}required{% endif %}
+      />
+      {% if dayHint %}
+      <span class="usa-hint usa-sr-only" id="{{ day_hint_id }}">{{ dayHint|default:"Enter 1 or 2 digits for the day." }}</span>
+      {% endif %}
+    {% endform_group %}
+
+    {% form_group className="usa-form-group--year" %}
+      {% label htmlFor=year_id required=required %}{{ yearLabel|default:"Year" }}{% endlabel %}
+      <input
+        class="usa-input usx-input{% if error %} usa-input--error{% endif %}"
+        id="{{ year_id }}"
+        name="{{ yearName|default:year_id }}"
+        value="{{ defaultYear|default:'' }}"
+        minlength="4"
+        maxlength="4"
+        pattern="[0-9]*"
+        inputmode="numeric"
+        aria-describedby="{{ year_hint_id }}{% if error %} {{ error_id }}{% endif %}"
+        {% if error %}aria-invalid="true"{% endif %}
+        {% if disabled %}disabled{% elif ariaDisabled %}aria-disabled="true"{% endif %}
+        {% if required %}required{% endif %}
+      />
+      {% if yearHint %}
+      <span class="usa-hint usa-sr-only" id="{{ year_hint_id }}">{{ yearHint|default:"Enter 4 digits for the year." }}</span>
+      {% endif %}
+    {% endform_group %}
+  </div>
+  {% if error %}
+  <span class="usa-error-message" id="{{ error_id }}" role="alert">{{ error }}</span>
+  {% endif %}
+{% endfieldset %}
+{% endform_group %}
+{% endwith %}
+{% endwith %}
+{% endwith %}

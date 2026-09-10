@@ -1,6 +1,32 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+
+// Real USWDS's compiled CSS only pins a hardcoded ink color on
+// `.usa-combo-box__input` (via the shared %block-input-styles placeholder);
+// the dropdown list/options never get their own `color`, relying on the
+// assumption that inherited/ambient text color is always dark. That holds in
+// real USWDS (no runtime theme switching) but breaks under our dark presets,
+// which flip ambient text to a light color while the list keeps its
+// permanently-white background (same "form controls don't flip surfaces"
+// convention as $usx-input-bg/-text/-border, both always null) — making
+// options illegible. Pin the same ink color the input already gets so list
+// text stays legible under every preset.
+.usa-combo-box__list {
+  color: #1b1b1b;
+}
+
+// Real USWDS's compiled CSS hardcodes the selected-option highlight to a
+// literal `color("primary")`, so it stayed USWDS default blue under every
+// preset even though it's just the ordinary brand primary color (not a fixed
+// system gray) — chain it to the theme instead.
+.usa-combo-box__list-option--selected {
+  @if $usx-combo-box-selected-bg {
+    background-color: $usx-combo-box-selected-bg;
+    border-color: $usx-combo-box-selected-bg;
+  }
+}
+
 .usx-combo-box {
   &.usx-combo-box--error .usa-combo-box__input {
     border-width: 0.25rem;

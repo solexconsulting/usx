@@ -1,4 +1,27 @@
-{# Django template for InPageNav #}
-<div class="usx-in-page-nav">
-  <div class="in-page-nav__content">InPageNav</div>
+{# ─── USX InPageNav ──────────────────────────────────────────────────────── #}
+{# Props: id, headingElements, mainContentSelector, titleHeadingLevel,       #}
+{#        titleText, scrollOffset, rootMargin, threshold,                   #}
+{#        minimumHeadingCount, content, className, contentClassName         #}
+{# The <aside> below is left empty — usa-in-page-navigation's JS builds the #}
+{# <nav>/<ul> list into it after scanning the content container for        #}
+{# headings. Call inPageNavigation.on()/.off() around the rendered markup.  #}
+{# ─────────────────────────────────────────────────────────────────────── #}
+{% with content_id=id|default:"in-page-nav"|add:"-content" %}
+<div class="usa-in-page-nav-container usx-in-page-nav-container">
+  <aside
+    id="{{ id|default:'in-page-nav' }}"
+    class="usa-in-page-nav usx-in-page-nav{% if className %} {{ className }}{% endif %}"
+    data-heading-elements="{{ headingElements|default:'h2 h3' }}"
+    data-main-content-selector="{% if mainContentSelector %}{{ mainContentSelector }}{% else %}#{{ content_id }}{% endif %}"
+    data-title-heading-level="{{ titleHeadingLevel|default:'h4' }}"
+    data-title-text="{{ titleText|default:'On this page' }}"
+    data-scroll-offset="{{ scrollOffset|default:0 }}"
+    data-root-margin="{{ rootMargin|default:'0px 0px 0px 0px' }}"
+    data-threshold="{{ threshold|default:1 }}"
+    data-minimum-heading-count="{{ minimumHeadingCount|default:2 }}"
+  ></aside>
+  <div id="{{ content_id }}" class="usx-in-page-nav__content usa-prose{% if contentClassName %} {{ contentClassName }}{% endif %}">
+    {{ content|safe }}
+  </div>
 </div>
+{% endwith %}

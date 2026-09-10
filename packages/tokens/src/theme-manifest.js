@@ -271,6 +271,7 @@ export const themeManifest = [
   scale('usx-switch-border-width', '--usx-switch-border-width', '2px', 'border-advanced'),
   scale('usx-file-input-border-width', '--usx-file-input-border-width', 'var(--usx-border-width-inputs)', 'border-advanced'),
   scale('usx-file-input-item-border-width', '--usx-file-input-item-border-width', 'var(--usx-border-width-sm)', 'border-advanced'),
+  scale('usx-range-slider-border-width', '--usx-range-slider-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
 
   // ── Typography ────────────────────────────────────────────────────────────
   // Font stack matches the actual family baked into the precompiled USWDS
@@ -487,7 +488,43 @@ export const themeManifest = [
   // Hover and active share one token/color by design (see themePresets.js's
   // Midnight/Carbon/Borealis overrides for why dark presets need their own
   // hardcoded value here instead of just chaining to color-base-light).
-  component('usx-date-picker-button-hover-active-bg', '#a9aeb1', 'color-base-light')
+  component('usx-date-picker-button-hover-active-bg', '#a9aeb1', 'color-base-light'),
+
+  // Real USWDS's compiled CSS hardcodes the combo-box list's selected-option
+  // highlight to a literal `color("primary")` (never a runtime var), so it
+  // stayed USWDS default blue under every preset. Unlike the range
+  // slider/date-picker-icon below, this one IS just the ordinary brand
+  // primary color (not a fixed system gray), so it should track the theme —
+  // chain it to color-primary instead of leaving it static.
+  component('usx-combo-box-selected-bg', '#005ea2', 'color-primary'),
+
+  // Real USWDS bakes the range slider's track/thumb to fixed "base-lightest"/
+  // "base-darker" grays regardless of theme. Unlike most components, this
+  // one intentionally stays that way — text inputs/selects/textareas also
+  // keep a static white surface + gray border under every preset (see
+  // $usx-input-bg/-text/-border in _variables.scss, always null), so the
+  // range slider matches that same "form controls don't flip surfaces"
+  // convention instead of chasing the surface-1/2/3 abstraction.
+  component('usx-range-slider-track-bg', '#f0f0f0'),
+  component('usx-range-slider-track-border', '#3d4551'),
+  component('usx-range-slider-thumb-bg', '#f0f0f0'),
+  component('usx-range-slider-thumb-border', '#3d4551'),
+  component('usx-range-slider-focus', 'var(--usx-color-focus)'),
+
+  // Real USWDS resolves the in-page-nav card's background/text/link/current/
+  // bar colors from compile-time $theme-in-page-nav-* settings (all
+  // "default"), so none of them follow a runtime theme override on their
+  // own. Chain each role to the same shared tokens already used elsewhere
+  // (text, link-text, border, primary) — see _in-page-nav.scss. Background
+  // defaults transparent (opts back into a filled surface-2 card only on
+  // presets with a dark shell — see themePresets.js/Theme.stories.jsx).
+  component('usx-in-page-nav-bg', 'transparent'),
+  component('usx-in-page-nav-text', 'var(--usx-text)'),
+  component('usx-in-page-nav-border', 'var(--usx-color-border)'),
+  component('usx-in-page-nav-link-text', 'var(--usx-link-text)'),
+  component('usx-in-page-nav-link-text-hover', 'var(--usx-link-text-hover)'),
+  component('usx-in-page-nav-current-text', 'var(--usx-text)'),
+  component('usx-in-page-nav-bar', 'var(--usx-color-primary)')
 ];
 
 export default themeManifest;

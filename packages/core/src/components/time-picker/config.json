@@ -2,10 +2,25 @@
   "name": "time-picker",
   "template": "time-picker/time-picker.django.html",
   "default": {
-    "children": "NOT IMPLEMENTED: TimePicker"
+    "id": "appointment-time",
+    "name": "appointment-time",
+    "label": "Appointment time",
+    "hint": "Select a time from the dropdown. Type into the input to filter options."
   },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "id": { "type": "string", "default": "appointment-time", "description": "id for the input. Label and hint ids are derived from this." },
+    "name": { "type": "string", "description": "name attribute for the input. Defaults to id." },
+    "label": { "type": "string", "description": "Label text for the field." },
+    "hint": { "type": "string", "default": "Select a time from the dropdown. Type into the input to filter options.", "description": "Hint text displayed below the label." },
+    "error": { "type": "string", "description": "Error message. Renders aria-describedby and error styling." },
+    "disabled": { "type": "boolean", "default": false, "description": "Disables the time picker." },
+    "ariaDisabled": { "type": "boolean", "default": false, "description": "Marks the time picker aria-disabled without preventing interaction." },
+    "required": { "type": "boolean", "default": false, "description": "Marks the field as required." },
+    "defaultValue": { "type": "string", "description": "Initial value shown in the time picker (e.g. \"1:00pm\"). Sets the value attribute on the input." },
+    "minTime": { "type": "string", "description": "Earliest time option in hh:mm 24-hour format. Sets data-min-time on the wrapper. USWDS default: 00:00." },
+    "maxTime": { "type": "string", "description": "Latest time option in hh:mm 24-hour format. Sets data-max-time on the wrapper. USWDS default: 23:59." },
+    "step": { "type": "string", "description": "Number of minutes between options (minimum 1). Sets data-step on the wrapper. USWDS default: 30." },
+    "className": { "type": "string", "default": "", "description": "Additional classes for the usa-time-picker wrapper." }
   }
 }
+

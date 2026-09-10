@@ -1,6 +1,6 @@
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from '../../../../core/src/components/memorable-date/config.json';
-import { buildArgTypes, componentTag } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { storyDefs } from './MemorableDate.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -10,14 +10,11 @@ export default {
   argTypes: generatedArgTypes,
 };
 
-export const Default = {
-  args: config.default || {},
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'memorable-date', props: config.default || {} })
-      }
-    }
-  },
-  render: djangoComponent({ componentName: 'memorable-date' })
-};
+const createStory = createDjangoStory({ componentName: 'memorable-date' });
+
+export const Default = createStory(storyDefs.Default);
+export const Disabled = createStory(storyDefs.Disabled);
+export const AriaDisabled = createStory(storyDefs.AriaDisabled);
+export const Required = createStory(storyDefs.Required);
+export const WithDefaultValues = createStory(storyDefs.WithDefaultValues);
+export const WithError = createStory(storyDefs.WithError);

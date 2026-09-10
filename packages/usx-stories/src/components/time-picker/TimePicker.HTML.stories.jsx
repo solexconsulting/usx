@@ -1,9 +1,21 @@
 import React from 'react';
 import html from '../../../../core/src/components/time-picker/time-picker.html?raw';
+import timePicker from "@uswds/uswds/js/usa-time-picker";
 
 export default {
   title: 'HTML/USWDS/TimePicker',
   tags: ['USWDS', 'autodocs'],
+  decorators: [
+    (Story) => {
+      // Ensure USWDS JS is initialized for the story
+      React.useEffect(() => {
+        timePicker.init();
+        return () => timePicker.off();
+      }, []);
+
+      return <Story />;
+    }
+  ]
 };
 
 export const AllVariants = {

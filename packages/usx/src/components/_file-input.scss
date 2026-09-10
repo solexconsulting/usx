@@ -139,6 +139,10 @@
   margin: 0.5rem 0 1rem 0;
   padding: 0;
   max-width: 30rem;
+
+  .usx-file-input__file-name.usx-link {
+    display: inline-block;
+  }
 }
 
 .usx-file-input__file-item {

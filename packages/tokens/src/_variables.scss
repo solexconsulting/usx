@@ -715,6 +715,10 @@ Active-state defaults are baked in _toggle.scss.
 $usx-border-width-inputs-var: null !default;
 $usx-border-width-inputs: usx-var($usx-border-width-inputs-var, $usx-border-width-sm) !default;
 
+// ── Component tokens: Combo Box ──────────────────────────────────────────────
+$usx-combo-box-selected-bg-var: null !default;
+$usx-combo-box-selected-bg: usx-var($usx-combo-box-selected-bg-var, $usx-color-primary) !default;
+
 // ── Component tokens: Input / Textarea ───────────────────────────────────────
 $usx-input-radius-var: null !default;
 $usx-input-radius: usx-var($usx-input-radius-var, $usx-radius-field) !default;
@@ -754,6 +758,8 @@ $usx-file-input-item-border-var: null !default;
 $usx-file-input-item-border: usx-var($usx-file-input-item-border-var, $usx-color-border) !default;
 $usx-file-input-item-border-width-var: null !default;
 $usx-file-input-item-border-width: usx-var($usx-file-input-item-border-width-var, $usx-border-width-sm) !default;
+$usx-range-slider-border-width-var: null !default;
+$usx-range-slider-border-width: usx-var($usx-range-slider-border-width-var, $usx-border-width-md) !default;
 // USWDS bakes the "N files selected" heading/preview rows to a fixed
 // "primary-lighter" callout background regardless of theme — chain to the
 // same surface-2/text roles as other callout-style components (accordion,
@@ -1229,4 +1235,55 @@ $usx-date-picker-button-icon-color: usx-var($usx-date-picker-button-icon-color-v
 
 $usx-date-picker-button-hover-active-bg-var: null !default;
 $usx-date-picker-button-hover-active-bg: usx-var($usx-date-picker-button-hover-active-bg-var, $usx-color-base-light) !default;
+
+// ── Component tokens: Range Slider (custom; defaults baked in SCSS) ─────────
+// Real USWDS bakes the track/thumb to fixed "base-lightest"/"base-darker"
+// grays and the thumb's focus ring to a compile-time Sass setting. Kept
+// static here on purpose (matches $usx-input-bg/-border below, always
+// null) rather than chained to surface-3 — form controls keep one fixed
+// white-ish surface + gray border across every preset.
+$usx-range-slider-track-bg-var: null !default;
+$usx-range-slider-track-bg: usx-var($usx-range-slider-track-bg-var, $usx-color-base-lightest) !default;
+
+$usx-range-slider-track-border-var: null !default;
+$usx-range-slider-track-border: usx-var($usx-range-slider-track-border-var, $usx-color-base-darker) !default;
+
+$usx-range-slider-thumb-bg-var: null !default;
+$usx-range-slider-thumb-bg: usx-var($usx-range-slider-thumb-bg-var, $usx-color-base-lightest) !default;
+
+$usx-range-slider-thumb-border-var: null !default;
+$usx-range-slider-thumb-border: usx-var($usx-range-slider-thumb-border-var, $usx-color-base-darker) !default;
+
+$usx-range-slider-focus-var: null !default;
+$usx-range-slider-focus: usx-var($usx-range-slider-focus-var, $usx-color-focus) !default;
+
+// ── Component tokens: In-page Navigation (custom; defaults baked in SCSS) ───
+// Real USWDS resolves the nav card's background/text/link/current/bar colors
+// from compile-time $theme-in-page-nav-* Sass settings (all "default", i.e.
+// computed against the page background at build time), so none of them track
+// a runtime theme override on their own. Chain each role to the same shared
+// tokens the rest of the system already uses (text, link-text, color-border,
+// color-primary) instead of freezing fixed hex values. Background defaults
+// to transparent (nav card just inherits the ambient page surface); presets
+// with a dark shell opt back into a filled surface-2 card explicitly.
+$usx-in-page-nav-bg-var: null !default;
+$usx-in-page-nav-bg: usx-var($usx-in-page-nav-bg-var, transparent) !default;
+
+$usx-in-page-nav-text-var: null !default;
+$usx-in-page-nav-text: usx-var($usx-in-page-nav-text-var, $usx-text) !default;
+
+$usx-in-page-nav-border-var: null !default;
+$usx-in-page-nav-border: usx-var($usx-in-page-nav-border-var, $usx-color-border) !default;
+
+$usx-in-page-nav-link-text-var: null !default;
+$usx-in-page-nav-link-text: usx-var($usx-in-page-nav-link-text-var, $usx-link-text) !default;
+
+$usx-in-page-nav-link-text-hover-var: null !default;
+$usx-in-page-nav-link-text-hover: usx-var($usx-in-page-nav-link-text-hover-var, $usx-link-text-hover) !default;
+
+$usx-in-page-nav-current-text-var: null !default;
+$usx-in-page-nav-current-text: usx-var($usx-in-page-nav-current-text-var, $usx-text) !default;
+
+$usx-in-page-nav-bar-var: null !default;
+$usx-in-page-nav-bar: usx-var($usx-in-page-nav-bar-var, $usx-color-primary) !default;
 

@@ -1,16 +1,76 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-export default function InPageNav({ children = null, className = '', ...props }) {
-  const classes = ['usx-in-page-nav', className].filter(Boolean).join(' ');
+// USWDS's own JS (usa-in-page-navigation) builds the <nav>/<ul> list into
+// the empty <aside> below by reading headings out of the element matched by
+// data-main-content-selector — it does not render anything itself. Call
+// `.on()`/`.off()` around this component the same way other JS-enhanced
+// components (DatePicker, FileInput, RangeSlider) do; see the story
+// decorators.
+export default function InPageNav({
+  id = 'in-page-nav',
+  headingElements = 'h2 h3',
+  mainContentSelector = null,
+  titleHeadingLevel = 'h4',
+  titleText = 'On this page',
+  scrollOffset = 0,
+  rootMargin = '0px 0px 0px 0px',
+  threshold = 1,
+  minimumHeadingCount = 2,
+  content = '',
+  children = null,
+  className = '',
+  contentClassName = '',
+  ...props
+}) {
+  const contentId = `${id}-content`;
+  // Real USWDS points data-main-content-selector at a real <main> landmark,
+  // but that only works for a single instance per page — Storybook (and any
+  // page rendering more than one InPageNav, e.g. the Theme Playground) can
+  // have several on screen at once, and document.querySelector('main')
+  // would only ever find the first. Defaulting to this instance's own id
+  // keeps every instance independently observable.
+  const resolvedSelector = mainContentSelector || `#${contentId}`;
+
   return (
-    <div className={classes} {...props}>
-      {children || 'InPageNav'}
+    <div className="usa-in-page-nav-container usx-in-page-nav-container">
+      <aside
+        id={id}
+        className={classNames('usa-in-page-nav', 'usx-in-page-nav', className)}
+        data-heading-elements={headingElements}
+        data-main-content-selector={resolvedSelector}
+        data-title-heading-level={titleHeadingLevel}
+        data-title-text={titleText}
+        data-scroll-offset={scrollOffset}
+        data-root-margin={rootMargin}
+        data-threshold={threshold}
+        data-minimum-heading-count={minimumHeadingCount}
+        {...props}
+      />
+      <div
+        id={contentId}
+        className={classNames('usx-in-page-nav__content', 'usa-prose', contentClassName)}
+        {...(children ? {} : { dangerouslySetInnerHTML: { __html: content } })}
+      >
+        {children || null}
+      </div>
     </div>
   );
 }
 
 InPageNav.propTypes = {
+  id: PropTypes.string,
+  headingElements: PropTypes.string,
+  mainContentSelector: PropTypes.string,
+  titleHeadingLevel: PropTypes.string,
+  titleText: PropTypes.string,
+  scrollOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  rootMargin: PropTypes.string,
+  threshold: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  minimumHeadingCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  content: PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string,
+  contentClassName: PropTypes.string,
 };

@@ -1,0 +1,117 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Real USWDS classes, not USX BEM. */
+
+/* ---------------------------------- */
+
+/* Theme Corrections                  */
+
+/* ---------------------------------- */
+
+// The shared text-input placeholder (%block-input-general/%block-input-styles)
+// bakes a white background onto every <input>, including this one — but only
+// the track/thumb pseudo-elements below are meant to be visible. Left alone,
+// that white fill shows through as a solid box around the track on any
+// non-white surface (the input's own padding-box is taller than the track).
+.usa-range {
+  background-color: transparent;
+}
+
+// USWDS bakes the track to a fixed "base-lightest" bg / "base-darker" border
+// regardless of theme.
+//
+// IMPORTANT: each vendor-prefixed pseudo-element below must stay in its own
+// rule (never comma-combined, unlike normal classes elsewhere in this file).
+// A selector list containing a pseudo-element a browser doesn't recognize
+// (e.g. Chrome sees ::-moz-range-track) invalidates the ENTIRE rule, so
+// combining them silently drops the whole override. USWDS's own source
+// (_usa-range.scss) writes them the same way for this exact reason.
+@if $usx-range-slider-track-bg {
+  .usa-range::-webkit-slider-runnable-track {
+    background-color: $usx-range-slider-track-bg;
+  }
+
+  .usa-range::-moz-range-track {
+    background-color: $usx-range-slider-track-bg;
+  }
+
+  .usa-range::-ms-track {
+    background-color: $usx-range-slider-track-bg;
+  }
+}
+
+@if $usx-range-slider-track-border {
+  .usa-range::-webkit-slider-runnable-track {
+    border-color: $usx-range-slider-track-border;
+  }
+
+  .usa-range::-moz-range-track {
+    border-color: $usx-range-slider-track-border;
+  }
+
+  .usa-range::-ms-track {
+    border-color: $usx-range-slider-track-border;
+  }
+}
+
+@if $usx-range-slider-border-width {
+  .usa-range::-webkit-slider-runnable-track {
+    border-width: $usx-range-slider-border-width;
+  }
+
+  .usa-range::-moz-range-track {
+    border-width: $usx-range-slider-border-width;
+  }
+
+  .usa-range::-ms-track {
+    border-width: $usx-range-slider-border-width;
+  }
+}
+
+// USWDS bakes the thumb to the same fixed "base-lightest" bg / "base-darker"
+// outline (drawn as a box-shadow so the thumb stays circular) regardless of
+// theme.
+@if $usx-range-slider-thumb-bg {
+  .usa-range::-webkit-slider-thumb {
+    background-color: $usx-range-slider-thumb-bg;
+  }
+
+  .usa-range::-moz-range-thumb {
+    background-color: $usx-range-slider-thumb-bg;
+  }
+
+  .usa-range::-ms-thumb {
+    background-color: $usx-range-slider-thumb-bg;
+  }
+}
+
+@if $usx-range-slider-thumb-border and $usx-range-slider-border-width {
+  .usa-range::-webkit-slider-thumb {
+    box-shadow: 0 0 0 $usx-range-slider-border-width $usx-range-slider-thumb-border;
+  }
+
+  .usa-range::-moz-range-thumb {
+    box-shadow: 0 0 0 $usx-range-slider-border-width $usx-range-slider-thumb-border;
+  }
+
+  .usa-range::-ms-thumb {
+    box-shadow: 0 0 0 $usx-range-slider-border-width $usx-range-slider-thumb-border;
+  }
+}
+
+// USWDS's own focus mixin bakes the thumb's focus ring to a compile-time
+// Sass setting ($theme-focus-color), not a runtime CSS var — reuse the same
+// focus token the rest of the library themes with instead.
+@if $usx-range-slider-focus and $usx-range-slider-border-width {
+  .usa-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 $usx-range-slider-border-width $usx-range-slider-focus;
+  }
+
+  .usa-range:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 $usx-range-slider-border-width $usx-range-slider-focus;
+  }
+
+  .usa-range:focus::-ms-thumb {
+    box-shadow: 0 0 0 $usx-range-slider-border-width $usx-range-slider-focus;
+  }
+}

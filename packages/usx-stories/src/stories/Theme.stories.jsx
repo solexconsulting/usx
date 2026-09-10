@@ -37,6 +37,7 @@ import Header from '../../../core/src/components/header/Header.tsx';
 import Hero from '../../../core/src/components/hero/Hero.tsx';
 import IconList from '../../../core/src/components/icon-list/IconList.tsx';
 import Input from '../../../core/src/components/input/Input.tsx';
+import InPageNav from '../../../core/src/components/in-page-nav/InPageNav.jsx';
 import Link from '../../../core/src/components/link/Link.tsx';
 import List from '../../../core/src/components/list/List.tsx';
 import MiscBanner from '../../../core/src/components/misc-banner/MiscBanner.tsx';
@@ -44,6 +45,7 @@ import Pagination from '../../../core/src/components/pagination/Pagination.tsx';
 import ProcessList from '../../../core/src/components/process-list/ProcessList.tsx';
 import Prose from '../../../core/src/components/prose/Prose.tsx';
 import RadioButtons from '../../../core/src/components/radio-buttons/RadioButtons.tsx';
+import RangeSlider from '../../../core/src/components/range-slider/RangeSlider.jsx';
 import Search from '../../../core/src/components/search/Search.tsx';
 import Select from '../../../core/src/components/select/Select.tsx';
 import SideNav from '../../../core/src/components/sidenav/SideNav.tsx';
@@ -60,6 +62,8 @@ import TaskList from '../../../core/src/components/task-list/TaskList.tsx';
 import TextArea from '../../../core/src/components/text-area/TextArea.tsx';
 import datePicker from '@uswds/uswds/js/usa-date-picker';
 import fileInput from '@uswds/uswds/js/usa-file-input';
+import range from '@uswds/uswds/js/usa-range';
+import inPageNavigation from '@uswds/uswds/js/usa-in-page-navigation';
 
 export default {
   title: 'Documentation/Theme/Playground',
@@ -165,7 +169,9 @@ const COMPONENT_COLOR_GROUPS = [
   { label: 'Table', prefix: 'usx-table-' },
   { label: 'Tooltip', prefix: 'usx-tooltip-' },
   { label: 'Icon List', prefix: 'usx-icon-list-' },
-  { label: 'Logo', prefix: 'usx-logo-' }
+  { label: 'Logo', prefix: 'usx-logo-' },
+  { label: 'Range Slider', prefix: 'usx-range-slider-' },
+  { label: 'In-page Navigation', prefix: 'usx-in-page-nav-' }
 ];
 
 // Splits a flat list of component-group tokens into the ordered groups
@@ -284,6 +290,9 @@ function randomPalette() {
     // themePresets.js: color-base-light is too close to a light 'text' for
     // the calendar icon to stay visible on hover/active.
     overrides['usx-date-picker-button-hover-active-bg'] = '#565c65';
+    // Nav background defaults transparent; fill it with a surface once we've
+    // committed to a dark page, same as the prebuilt dark presets.
+    overrides['usx-in-page-nav-bg'] = 'var(--usx-surface-2)';
   }
   pinSummaryBoxColors(overrides);
   return overrides;
@@ -354,6 +363,7 @@ function randomSystemPalette() {
     // See randomPalette() above for why this can't just chain to
     // color-base-light.
     overrides['usx-date-picker-button-hover-active-bg'] = '#565c65';
+    overrides['usx-in-page-nav-bg'] = 'var(--usx-surface-2)';
   }
   pinSummaryBoxColors(overrides);
   return { overrides, selections };
@@ -1247,9 +1257,13 @@ function Showcase({ resolved }) {
   useEffect(() => {
     datePicker.init();
     fileInput.init();
+    range.on();
+    inPageNavigation.on();
     return () => {
       datePicker.off();
       fileInput.off();
+      range.off();
+      inPageNavigation.off();
     };
   }, []);
 
@@ -1366,6 +1380,7 @@ function Showcase({ resolved }) {
         <Search id="theme-search" placeholder="Search…" />
         <DatePicker id="theme-date-picker" label="Date picker" hint="mm/dd/yyyy" />
         <FileInput id="theme-file-input" label="File upload" hint="Select one or more files" multiple />
+        <RangeSlider id="theme-range-slider" label="Range slider" hint="Move the slider to change the value" />
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
@@ -1445,7 +1460,7 @@ function Showcase({ resolved }) {
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
         <h3 style={ui.cardTitle}>Prose</h3>
-        <Prose>
+        <Prose id="theme-prose-content">
           <h2>A prose heading</h2>
           <p>
             Body copy rendered through <em>Prose</em> exercises the shared typography tokens
@@ -1464,7 +1479,17 @@ function Showcase({ resolved }) {
               <li>Ordered list item two</li>
             </ol>
           </ul>
+          <h2>Another heading</h2>
         </Prose>
+      </div>
+
+      <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
+        <h3 style={ui.cardTitle}>In-page Navigation</h3>
+        <p style={{ marginTop: 0, fontSize: '0.85rem', opacity: 0.75 }}>
+          Observes the headings in the Prose card above (via <code>mainContentSelector</code>)
+          rather than duplicating content here.
+        </p>
+        <InPageNav id="theme-in-page-nav" mainContentSelector="#theme-prose-content" />
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>

@@ -1,0 +1,74 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Real USWDS classes, not USX BEM. */
+
+// Real USWDS resolves the in-page-nav card's background/text/link/current/
+// bar colors from compile-time $theme-in-page-nav-* Sass settings (all
+// "default", i.e. computed against the page background at build time), so
+// none of them follow a runtime theme override on their own. Chain each
+// role below to the shared $usx-in-page-nav-* tokens (see _variables.scss)
+// instead of leaving the compiled defaults frozen.
+
+.usa-in-page-nav-container {
+  main,
+  .usx-in-page-nav__content {
+    max-width: 100%;
+  }
+}
+
+.usa-in-page-nav__nav {
+  @if $usx-in-page-nav-bg != null {
+    background-color: $usx-in-page-nav-bg;
+  }
+
+  @if $usx-in-page-nav-text != null {
+    color: $usx-in-page-nav-text;
+  }
+}
+
+.usa-in-page-nav__heading {
+  @if $usx-in-page-nav-text != null {
+    color: $usx-in-page-nav-text;
+  }
+}
+
+.usa-in-page-nav__list {
+  @if $usx-in-page-nav-border != null {
+    border-left-color: $usx-in-page-nav-border;
+  }
+
+  a:not(.usa-button) {
+    &:not(.usa-current) {
+      @if $usx-in-page-nav-link-text != null {
+        color: $usx-in-page-nav-link-text;
+      }
+
+      &:hover {
+        @if $usx-in-page-nav-link-text-hover != null {
+          color: $usx-in-page-nav-link-text-hover;
+        }
+      }
+
+      // Matches real USWDS's own compiled selector
+      // (a:not(.usa-button):not(.usa-current):visited) class-for-class so
+      // this wins the cascade instead of losing to it on specificity.
+      &:visited {
+        @if $usx-in-page-nav-link-text != null {
+          color: $usx-in-page-nav-link-text;
+        }
+      }
+    }
+
+    &.usa-current {
+      @if $usx-in-page-nav-current-text != null {
+        color: $usx-in-page-nav-current-text;
+      }
+
+      &::after {
+        @if $usx-in-page-nav-bar != null {
+          background-color: $usx-in-page-nav-bar;
+        }
+      }
+    }
+  }
+}

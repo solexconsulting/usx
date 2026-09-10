@@ -145,6 +145,9 @@ export const PRESETS = {
     // color for the calendar icon to stay visible. color-base-dark (#565c65)
     // is the mirrored mid-gray on the dark side of the same scale.
     'usx-date-picker-button-hover-active-bg': '#565c65',
+    // Nav background defaults transparent; a filled card reads better
+    // against this preset's dark page background.
+    'usx-in-page-nav-bg': 'var(--usx-surface-2)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     ...inverseLogoOverrides()
@@ -172,6 +175,7 @@ export const PRESETS = {
     // See Borealis's comment above for why this can't just chain to
     // color-base-light.
     'usx-date-picker-button-hover-active-bg': '#565c65',
+    'usx-in-page-nav-bg': 'var(--usx-surface-2)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     ...inverseLogoOverrides(),
@@ -196,6 +200,7 @@ export const PRESETS = {
     // See Borealis's comment above for why this can't just chain to
     // color-base-light.
     'usx-date-picker-button-hover-active-bg': '#565c65',
+    'usx-in-page-nav-bg': 'var(--usx-surface-2)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     // Carbon wants the desktop nav bar one tone lighter than the header
@@ -314,6 +319,10 @@ export const PRESETS = {
     'usx-accordion-bg': 'var(--usx-surface-3)',
     'usx-accordion-bg-hover': 'var(--usx-color-primary)',
     'usx-accordion-text': 'var(--usx-text-inverse)',
+    'usx-range-slider-track-bg': 'var(--usx-surface-1)',
+    'usx-range-slider-thumb-bg': 'var(--usx-surface-1)',
+    'usx-range-slider-track-border': '#000000',
+    'usx-range-slider-thumb-border': '#000000',
     'usx-summary-box-bg': 'var(--usx-surface-3)',
     'usx-summary-box-border-color': 'var(--usx-color-primary)',
     'usx-summary-box-text': 'var(--usx-text-inverse)',

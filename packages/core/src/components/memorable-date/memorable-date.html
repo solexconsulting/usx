@@ -1,4 +1,275 @@
-<div class="usx-memorable-date">
-  <!-- Canonical HTML for MemorableDate -->
-  <div class="memorable-date__content">NOT IMPLEMENTED</div>
+<h3 class="site-preview-heading">Default</h3>
+<fieldset class="usa-fieldset usx-fieldset">
+  <legend class="usa-legend usx-legend">Date of Birth</legend>
+  <span class="usa-hint" aria-hidden="true" id="memorable-date-hint">
+    Select a month. Enter 1 or 2 digits for the day and 4 digits for the year.
+  </span>
+  <div class="usa-memorable-date usx-memorable-date">
+    <div class="usa-form-group usx-form-group usa-form-group--month usa-form-group--select">
+      <label class="usa-label usx-label" for="memorable-date-month">Month</label>
+      <select class="usa-select usx-select" id="memorable-date-month" name="memorable-date-month"
+        aria-describedby="memorable-date-month-hint">
+        <option value="">- Select -</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <span class="usa-hint usa-sr-only" id="memorable-date-month-hint">Select a month from the dropdown.</span>
+    </div>
+    <div class="usa-form-group usx-form-group usa-form-group--day">
+      <label class="usa-label usx-label" for="memorable-date-day">Day</label>
+      <input class="usa-input usx-input" id="memorable-date-day" name="memorable-date-day" maxlength="2"
+        pattern="[0-9]*" inputmode="numeric" value="" aria-describedby="memorable-date-day-hint" />
+      <span class="usa-hint usa-sr-only" id="memorable-date-day-hint">Enter 1 or 2 digits for the day.</span>
+    </div>
+    <div class="usa-form-group usx-form-group usa-form-group--year">
+      <label class="usa-label usx-label" for="memorable-date-year">Year</label>
+      <input class="usa-input usx-input" id="memorable-date-year" name="memorable-date-year" minlength="4" maxlength="4"
+        pattern="[0-9]*" inputmode="numeric" value="" aria-describedby="memorable-date-year-hint" />
+      <span class="usa-hint usa-sr-only" id="memorable-date-year-hint">Enter 4 digits for the year.</span>
+    </div>
+  </div>
+</fieldset>
+
+<h3 class="site-preview-heading">Disabled</h3>
+<fieldset class="usa-fieldset usx-fieldset">
+  <legend class="usa-legend usx-legend">Date of Birth</legend>
+  <span class="usa-hint" aria-hidden="true" id="memorable-date-disabled-hint">
+    Select a month. Enter 1 or 2 digits for the day and 4 digits for the year.
+  </span>
+  <div class="usa-memorable-date usx-memorable-date">
+    <div class="usa-form-group usx-form-group usa-form-group--month usa-form-group--select">
+      <label class="usa-label usx-label" for="memorable-date-disabled-month">Month</label>
+      <select class="usa-select usx-select" id="memorable-date-disabled-month" name="memorable-date-disabled-month"
+        aria-describedby="memorable-date-disabled-month-hint" disabled>
+        <option value="">- Select -</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <span class="usa-hint usa-sr-only" id="memorable-date-disabled-month-hint">Select a month from the
+        dropdown.</span>
+    </div>
+    <div class="usa-form-group usx-form-group usa-form-group--day">
+      <label class="usa-label usx-label" for="memorable-date-disabled-day">Day</label>
+      <input class="usa-input usx-input" id="memorable-date-disabled-day" name="memorable-date-disabled-day"
+        maxlength="2" pattern="[0-9]*" inputmode="numeric" value="" aria-describedby="memorable-date-disabled-day-hint"
+        disabled />
+      <span class="usa-hint usa-sr-only" id="memorable-date-disabled-day-hint">Enter 1 or 2 digits for the day.</span>
+    </div>
+    <div class="usa-form-group usx-form-group usa-form-group--year">
+      <label class="usa-label usx-label" for="memorable-date-disabled-year">Year</label>
+      <input class="usa-input usx-input" id="memorable-date-disabled-year" name="memorable-date-disabled-year"
+        minlength="4" maxlength="4" pattern="[0-9]*" inputmode="numeric" value=""
+        aria-describedby="memorable-date-disabled-year-hint" disabled />
+      <span class="usa-hint usa-sr-only" id="memorable-date-disabled-year-hint">Enter 4 digits for the year.</span>
+    </div>
+  </div>
+</fieldset>
+
+<h3 class="site-preview-heading">Aria Disabled</h3>
+<fieldset class="usa-fieldset usx-fieldset">
+  <legend class="usa-legend usx-legend">Date of Birth</legend>
+  <span class="usa-hint" aria-hidden="true" id="memorable-date-aria-disabled-hint">
+    Select a month. Enter 1 or 2 digits for the day and 4 digits for the year.
+  </span>
+  <div class="usa-memorable-date usx-memorable-date">
+    <div class="usa-form-group usx-form-group usa-form-group--month usa-form-group--select">
+      <label class="usa-label usx-label" for="memorable-date-aria-disabled-month">Month</label>
+      <select class="usa-select usx-select" id="memorable-date-aria-disabled-month"
+        name="memorable-date-aria-disabled-month" aria-describedby="memorable-date-aria-disabled-month-hint"
+        aria-disabled="true">
+        <option value="">- Select -</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <span class="usa-hint usa-sr-only" id="memorable-date-aria-disabled-month-hint">Select a month from the
+        dropdown.</span>
+    </div>
+    <div class="usa-form-group usx-form-group usa-form-group--day">
+      <label class="usa-label usx-label" for="memorable-date-aria-disabled-day">Day</label>
+      <input class="usa-input usx-input" id="memorable-date-aria-disabled-day" name="memorable-date-aria-disabled-day"
+        maxlength="2" pattern="[0-9]*" inputmode="numeric" value=""
+        aria-describedby="memorable-date-aria-disabled-day-hint" aria-disabled="true" />
+      <span class="usa-hint usa-sr-only" id="memorable-date-aria-disabled-day-hint">Enter 1 or 2 digits for the
+        day.</span>
+    </div>
+    <div class="usa-form-group usx-form-group usa-form-group--year">
+      <label class="usa-label usx-label" for="memorable-date-aria-disabled-year">Year</label>
+      <input class="usa-input usx-input" id="memorable-date-aria-disabled-year" name="memorable-date-aria-disabled-year"
+        minlength="4" maxlength="4" pattern="[0-9]*" inputmode="numeric" value=""
+        aria-describedby="memorable-date-aria-disabled-year-hint" aria-disabled="true" />
+      <span class="usa-hint usa-sr-only" id="memorable-date-aria-disabled-year-hint">Enter 4 digits for the year.</span>
+    </div>
+  </div>
+</fieldset>
+
+<h3 class="site-preview-heading">Required</h3>
+<fieldset class="usa-fieldset usx-fieldset">
+  <legend class="usa-legend usx-legend"><abbr title="required" class="usx-required">*</abbr>Date of Birth</legend>
+  <span class="usa-hint" aria-hidden="true" id="memorable-date-required-hint">
+    Select a month. Enter 1 or 2 digits for the day and 4 digits for the year.
+  </span>
+  <div class="usa-memorable-date usx-memorable-date">
+    <div class="usa-form-group usx-form-group usa-form-group--month usa-form-group--select">
+      <label class="usa-label usx-label" for="memorable-date-required-month"><abbr title="required"
+          class="usx-required">*</abbr>Month</label>
+      <select class="usa-select usx-select" id="memorable-date-required-month" name="memorable-date-required-month"
+        aria-describedby="memorable-date-required-month-hint" required>
+        <option value="">- Select -</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <span class="usa-hint usa-sr-only" id="memorable-date-required-month-hint">Select a month from the
+        dropdown.</span>
+    </div>
+    <div class="usa-form-group usx-form-group usa-form-group--day">
+      <label class="usa-label usx-label" for="memorable-date-required-day"><abbr title="required"
+          class="usx-required">*</abbr>Day</label>
+      <input class="usa-input usx-input" id="memorable-date-required-day" name="memorable-date-required-day"
+        maxlength="2" pattern="[0-9]*" inputmode="numeric" value="" aria-describedby="memorable-date-required-day-hint"
+        required />
+      <span class="usa-hint usa-sr-only" id="memorable-date-required-day-hint">Enter 1 or 2 digits for the day.</span>
+    </div>
+    <div class="usa-form-group usx-form-group usa-form-group--year">
+      <label class="usa-label usx-label" for="memorable-date-required-year"><abbr title="required"
+          class="usx-required">*</abbr>Year</label>
+      <input class="usa-input usx-input" id="memorable-date-required-year" name="memorable-date-required-year"
+        minlength="4" maxlength="4" pattern="[0-9]*" inputmode="numeric" value=""
+        aria-describedby="memorable-date-required-year-hint" required />
+      <span class="usa-hint usa-sr-only" id="memorable-date-required-year-hint">Enter 4 digits for the year.</span>
+    </div>
+  </div>
+</fieldset>
+
+<h3 class="site-preview-heading">With Default Values</h3>
+<fieldset class="usa-fieldset usx-fieldset">
+  <legend class="usa-legend usx-legend">Date of Birth</legend>
+  <span class="usa-hint" aria-hidden="true" id="memorable-date-default-value-hint">
+    Select a month. Enter 1 or 2 digits for the day and 4 digits for the year.
+  </span>
+  <div class="usa-memorable-date usx-memorable-date">
+    <div class="usa-form-group usx-form-group usa-form-group--month usa-form-group--select">
+      <label class="usa-label usx-label" for="memorable-date-default-value-month">Month</label>
+      <select class="usa-select usx-select" id="memorable-date-default-value-month"
+        name="memorable-date-default-value-month" aria-describedby="memorable-date-default-value-month-hint">
+        <option value="">- Select -</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5" selected>May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+      <span class="usa-hint usa-sr-only" id="memorable-date-default-value-month-hint">Select a month from the
+        dropdown.</span>
+    </div>
+    <div class="usa-form-group usx-form-group usa-form-group--day">
+      <label class="usa-label usx-label" for="memorable-date-default-value-day">Day</label>
+      <input class="usa-input usx-input" id="memorable-date-default-value-day" name="memorable-date-default-value-day"
+        maxlength="2" pattern="[0-9]*" inputmode="numeric" value="22"
+        aria-describedby="memorable-date-default-value-day-hint" />
+      <span class="usa-hint usa-sr-only" id="memorable-date-default-value-day-hint">Enter 1 or 2 digits for the
+        day.</span>
+    </div>
+    <div class="usa-form-group usx-form-group usa-form-group--year">
+      <label class="usa-label usx-label" for="memorable-date-default-value-year">Year</label>
+      <input class="usa-input usx-input" id="memorable-date-default-value-year" name="memorable-date-default-value-year"
+        minlength="4" maxlength="4" pattern="[0-9]*" inputmode="numeric" value="1990"
+        aria-describedby="memorable-date-default-value-year-hint" />
+      <span class="usa-hint usa-sr-only" id="memorable-date-default-value-year-hint">Enter 4 digits for the year.</span>
+    </div>
+  </div>
+</fieldset>
+
+<h3 class="site-preview-heading">With Error</h3>
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <fieldset class="usa-fieldset usx-fieldset">
+    <legend class="usa-legend usx-legend">Date of Birth</legend>
+    <span class="usa-hint" aria-hidden="true" id="memorable-date-error-hint">
+      Select a month. Enter 1 or 2 digits for the day and 4 digits for the year.
+    </span>
+    <div class="usa-memorable-date usx-memorable-date">
+      <div class="usa-form-group usx-form-group usa-form-group--month usa-form-group--select">
+        <label class="usa-label usx-label" for="memorable-date-error-month">Month</label>
+        <select class="usa-select usx-select usa-input--error" id="memorable-date-error-month"
+          name="memorable-date-error-month"
+          aria-describedby="memorable-date-error-month-hint memorable-date-error-error" aria-invalid="true">
+          <option value="">- Select -</option>
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+        <span class="usa-hint usa-sr-only" id="memorable-date-error-month-hint">Select a month from the dropdown.</span>
+      </div>
+      <div class="usa-form-group usx-form-group usa-form-group--day">
+        <label class="usa-label usx-label" for="memorable-date-error-day">Day</label>
+        <input class="usa-input usx-input usa-input--error" id="memorable-date-error-day"
+          name="memorable-date-error-day" maxlength="2" pattern="[0-9]*" inputmode="numeric" value="32"
+          aria-describedby="memorable-date-error-day-hint memorable-date-error-error" aria-invalid="true" />
+        <span class="usa-hint usa-sr-only" id="memorable-date-error-day-hint">Enter 1 or 2 digits for the day.</span>
+      </div>
+      <div class="usa-form-group usx-form-group usa-form-group--year">
+        <label class="usa-label usx-label" for="memorable-date-error-year">Year</label>
+        <input class="usa-input usx-input usa-input--error" id="memorable-date-error-year"
+          name="memorable-date-error-year" minlength="4" maxlength="4" pattern="[0-9]*" inputmode="numeric" value="1990"
+          aria-describedby="memorable-date-error-year-hint memorable-date-error-error" aria-invalid="true" />
+        <span class="usa-hint usa-sr-only" id="memorable-date-error-year-hint">Enter 4 digits for the year.</span>
+      </div>
+    </div>
+    <span class="usa-error-message" id="memorable-date-error-error" role="alert">Enter a valid date of birth.</span>
+  </fieldset>
 </div>
