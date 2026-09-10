@@ -5,7 +5,7 @@
         "id": {
             "type": "string",
             "default": null,
-            "description": "ID for the input/textarea field. Used to wire label, hint, info, and error/success spans."
+            "description": "ID for the input/textarea field. Used to wire label, hint, message, and error/success spans."
         },
         "label": {
             "type": "string",
@@ -15,12 +15,7 @@
         "max": {
             "type": "number",
             "default": null,
-            "description": "Maximum number of characters allowed. Sets the limit used in the info message and validation."
-        },
-        "hardLimit": {
-            "type": "boolean",
-            "default": false,
-            "description": "When true, sets maxlength on the field to physically prevent input beyond the limit. When false (default), the user may exceed the limit and the component enters an error state automatically."
+            "description": "Maximum number of characters allowed. Rendered as the field's maxlength attribute and referenced in the fallback message; USWDS JS moves it to data-maxlength and manages the live count/over-limit state at runtime."
         },
         "hint": {
             "type": "string",

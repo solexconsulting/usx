@@ -1,8 +1,12 @@
 {% load components %}
 
+{# Plain (unenhanced) usa-character-count markup — relies on #}
+{# @uswds/uswds/js/usa-character-count at runtime (call characterCount.on()/ #}
+{# .off()) to move `maxlength` to `data-maxlength`, hide the fallback #}
+{# message below, and manage the live count/over-limit state itself. #}
 {% with id|default:"character-count" as field_id %}
-<div class="usa-character-count usx-character-count{% if className %} {{ className }}{% endif %}" data-maxlength="{{ max }}">
-  <div class="usa-form-group usx-form-group{% if error %} usa-form-group--error{% elif success %} usa-form-group--success{% endif %}">
+<div class="usa-character-count usx-character-count{% if className %} {{ className }}{% endif %}">
+  <div class="usa-form-group usx-form-group{% if error %} usa-form-group--error{% endif %}">
     {% if label %}
       {% if error %}
         {% label htmlFor=field_id screenReaderOnly=screenReaderOnlyLabel required=required className="usa-label--error" only %}{{ label }}{% endlabel %}
@@ -17,7 +21,7 @@
       <textarea
         class="usa-textarea usx-textarea usa-character-count__field{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}"
         id="{{ field_id }}"
-        {% if hardLimit %}maxlength="{{ max }}"{% endif %}
+        maxlength="{{ max }}"
         placeholder="{{ placeholder|default:'' }}"
         aria-describedby="{{ field_id }}-info{% if hint %} {{ field_id }}-hint{% endif %}{% if error %} {{ field_id }}-error{% elif success %} {{ field_id }}-success{% endif %}"
         {% if error %}aria-invalid="true" {% endif %}
@@ -28,7 +32,7 @@
       <input
         class="usa-input usx-input usa-character-count__field{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}"
         id="{{ field_id }}"
-        {% if hardLimit %}maxlength="{{ max }}"{% endif %}
+        maxlength="{{ max }}"
         placeholder="{{ placeholder|default:'' }}"
         aria-describedby="{{ field_id }}-info{% if hint %} {{ field_id }}-hint{% endif %}{% if error %} {{ field_id }}-error{% elif success %} {{ field_id }}-success{% endif %}"
         {% if error %}aria-invalid="true" {% endif %}
@@ -42,7 +46,7 @@
       <span id="{{ field_id }}-success" class="usa-success-message" role="status">{{ success }}</span>
     {% endif %}
   </div>
-  <span id="{{ field_id }}-info" class="usa-character-count__message usa-sr-only">
+  <span id="{{ field_id }}-info" class="usa-character-count__message">
     You can enter up to {{ max }} characters
   </span>
 </div>
