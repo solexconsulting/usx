@@ -1364,3 +1364,12 @@ $usx-pagination-text: usx-var($usx-pagination-text-var, $usx-text) !default;
 $usx-pagination-button-border-var: null !default;
 $usx-pagination-button-border: usx-var($usx-pagination-button-border-var, $usx-color-border) !default;
 
+// ── Component tokens: Language Selector (custom; defaults baked in SCSS) ──
+// Real USWDS hardcodes the language-menu dropdown to color("primary-darker")
+// bg / white text — chained here to the theme's primary-darker shade.
+$usx-language-selector-menu-bg-var: null !default;
+$usx-language-selector-menu-bg: usx-var($usx-language-selector-menu-bg-var, $usx-color-primary-darker) !default;
+
+$usx-language-selector-menu-text-var: null !default;
+$usx-language-selector-menu-text: usx-var($usx-language-selector-menu-text-var, $usx-text-inverse) !default;
+

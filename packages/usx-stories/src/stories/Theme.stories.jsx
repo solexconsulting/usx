@@ -22,6 +22,7 @@ import Attribution from '../../../core/src/components/attribution/Attribution.ts
 import Banner from '../../../core/src/components/banner/Banner.tsx';
 import Block from '../../../core/src/components/block/Block.tsx';
 import Breadcrumb from '../../../core/src/components/breadcrumb/Breadcrumb.tsx';
+import LanguageSelector from '../../../core/src/components/language-selector/LanguageSelector.jsx';
 import Button from '../../../core/src/components/button/Button.tsx';
 import ButtonGroup from '../../../core/src/components/button-group/ButtonGroup.tsx';
 import Checkbox from '../../../core/src/components/checkbox/Checkbox.tsx';
@@ -1095,6 +1096,12 @@ const breadcrumbItems = [
   { label: 'Current page', current: true }
 ];
 
+const languageSelectorLanguages = [
+  { code: 'en', label: 'English', current: true },
+  { code: 'es', label: 'Español', description: 'Spanish' },
+  { code: 'vi', label: 'Tiếng Việt', description: 'Vietnamese' }
+];
+
 const processListItems = [
   { heading: 'Create an account', body: 'Fill out the sign-up form to get started.' },
   { heading: 'Confirm your email', body: 'Click the link we send you to verify your address.' },
@@ -1419,6 +1426,7 @@ function Showcase({ resolved }) {
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>
         <h3 style={ui.cardTitle}>Navigation</h3>
         <Breadcrumb items={breadcrumbItems} />
+        <LanguageSelector languages={languageSelectorLanguages} />
         <SideNav items={sideNavItems} />
         <StepIndicator
           steps={[{ label: 'Personal info' }, { label: 'Documents' }, { label: 'Review' }]}

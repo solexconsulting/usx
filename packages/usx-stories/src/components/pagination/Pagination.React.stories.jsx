@@ -331,4 +331,3 @@ export const SummarySubcomponent = {
     <PaginationSummary currentPage={3} pageSize={10} totalItems={100} />
   ),
 };
-

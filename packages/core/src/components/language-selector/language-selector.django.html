@@ -1,4 +1,40 @@
 {# Django template for LanguageSelector #}
-<div class="usx-language-selector">
-  <div class="language-selector__content">LanguageSelector</div>
-</div>
+{# Props: languages (array of {code,label,description,href,current,plain}), variant ('two'|'menu'), unstyled (bool), small (bool), label (string), id (string), navAriaLabel (string), className (string) #}
+{# For variant="two", mark exactly one language `current: true` — the other renders as the switch target. #}
+<nav aria-label="{{ navAriaLabel|default:'Language selection' }}"{% if className %} class="{{ className }}"{% endif %}>
+  {% if variant == 'menu' %}
+    <div class="usa-language-container usx-language-selector{% if small %} usa-language--small{% endif %}">
+      <ul class="usa-language__primary usa-accordion">
+        <li class="usa-language__primary-item">
+          <button
+            type="button"
+            class="usa-button usx-button{% if unstyled %} usa-button--unstyled{% else %} usa-button--primary{% endif %} usa-language__link"
+            aria-expanded="false"
+            aria-controls="{{ id|default:'language-options' }}"
+          >
+            {{ label|default:'Languages' }}
+          </button>
+          <ul id="{{ id|default:'language-options' }}" class="usa-language__submenu" hidden>
+            {% for lang in languages %}
+              <li class="usa-language__submenu-item">
+                <a href="{{ lang.href|default:'javascript:void(0);' }}"{% if lang.current %} aria-current="true"{% endif %}>
+                  {% if lang.plain %}{{ lang.label }}{% else %}<span lang="{{ lang.code }}" xml:lang="{{ lang.code }}"><strong>{{ lang.label }}</strong>{% if lang.description %} ({{ lang.description }}){% endif %}</span>{% endif %}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+    </div>
+  {% else %}
+    <div class="usa-language-container usx-language-selector">
+      {% for lang in languages %}{% if not lang.current %}
+        {% if lang.href %}
+          <a href="{{ lang.href }}" class="usa-button usx-button usa-button--primary"><span lang="{{ lang.code }}" xml:lang="{{ lang.code }}"><strong>{{ lang.label }}</strong></span></a>
+        {% else %}
+          <button type="button" class="usa-button usx-button usa-button--primary"><span lang="{{ lang.code }}" xml:lang="{{ lang.code }}"><strong>{{ lang.label }}</strong></span></button>
+        {% endif %}
+      {% endif %}{% endfor %}
+    </div>
+  {% endif %}
+</nav>

@@ -1,4 +1,85 @@
-<div class="usx-language-selector">
-  <!-- Canonical HTML for LanguageSelector -->
-  <div class="language-selector__content">NOT IMPLEMENTED</div>
-</div>
+<h3 class="site-preview-heading">Two languages</h3>
+<nav aria-label="Language selection">
+  <div class="usa-language-container usx-language-selector">
+    <button type="button" class="usa-button usx-button usa-button--primary">
+      <span lang="es" xml:lang="es"><strong>Español</strong></span>
+    </button>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Three or more languages</h3>
+<nav aria-label="Language selection">
+  <div class="usa-language-container usx-language-selector">
+    <ul class="usa-language__primary usa-accordion">
+      <li class="usa-language__primary-item">
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--primary usa-language__link"
+          aria-expanded="false"
+          aria-controls="language-options"
+        >
+          Languages
+        </button>
+        <ul id="language-options" class="usa-language__submenu" hidden>
+          <li class="usa-language__submenu-item">
+            <a href="javascript:void(0);"><span lang="en" xml:lang="en"><strong>English</strong></span></a>
+          </li>
+          <li class="usa-language__submenu-item">
+            <a href="javascript:void(0);"
+              ><span lang="es" xml:lang="es"
+                ><strong>Español</strong> (Spanish)</span
+              ></a
+            >
+          </li>
+          <li class="usa-language__submenu-item">
+            <a href="javascript:void(0);"
+              ><span lang="vi" xml:lang="vi"
+                ><strong>Tiếng Việt</strong> (Vietnamese)</span
+              ></a
+            >
+          </li>
+          <li class="usa-language__submenu-item">
+            <a href="javascript:void(0);"
+              ><span lang="zh" xml:lang="zh"
+                ><strong>简体字</strong> (Chinese – Simplified)</span
+              ></a
+            >
+          </li>
+          <li class="usa-language__submenu-item">
+            <a href="javascript:void(0);">Selected content in additional languages</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Unstyled</h3>
+<nav aria-label="Language selection">
+  <div class="usa-language-container usx-language-selector">
+    <ul class="usa-language__primary usa-accordion">
+      <li class="usa-language__primary-item">
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--unstyled usa-language__link"
+          aria-expanded="false"
+          aria-controls="language-options-unstyled"
+        >
+          Languages
+        </button>
+        <ul id="language-options-unstyled" class="usa-language__submenu" hidden>
+          <li class="usa-language__submenu-item">
+            <a href="javascript:void(0);"><span lang="en" xml:lang="en"><strong>English</strong></span></a>
+          </li>
+          <li class="usa-language__submenu-item">
+            <a href="javascript:void(0);"
+              ><span lang="es" xml:lang="es"
+                ><strong>Español</strong> (Spanish)</span
+              ></a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

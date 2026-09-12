@@ -565,7 +565,14 @@ export const themeManifest = [
   component('usx-pagination-text', 'var(--usx-text)'),
   // Real USWDS hardcodes the button border to rgba(27,27,27,.2), a black-
   // based translucent border that's drowned out on dark surfaces.
-  component('usx-pagination-button-border', 'var(--usx-color-border)')
+  component('usx-pagination-button-border', 'var(--usx-color-border)'),
+
+  // ── Component tokens: Language Selector (custom; defaults baked in SCSS) ──
+  // Real USWDS hardcodes the language-menu dropdown to color("primary-darker")
+  // bg / white text — a fixed dark nav-dropdown treatment, chained here to the
+  // theme's primary-darker shade instead of a static hex.
+  component('usx-language-selector-menu-bg', 'var(--usx-color-primary-darker)'),
+  component('usx-language-selector-menu-text', '#ffffff', 'text-inverse')
 ];
 
 export default themeManifest;
