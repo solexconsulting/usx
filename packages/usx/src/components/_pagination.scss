@@ -18,7 +18,7 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      gap: .5rem;
+      flex-wrap: wrap;
     }
   }
 
@@ -41,18 +41,18 @@
     @media (width >= #{$breakpoint-tablet}) {
       width: 100%;
       flex-direction: row;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: .5rem;
     }
 
     @media (width >= #{$breakpoint-desktop}) {
       width: auto;
       flex: 0 1 auto;
       flex-direction: row;
-      justify-content: end;
+      flex-wrap: wrap;
       align-items: center;
-      gap: .5rem;
+      justify-content: end;
     }
   }
 
@@ -68,6 +68,14 @@
 
     @if $usx-pagination-text {
       color: $usx-pagination-text;
+    }
+
+    .usa-pagination__list {
+      gap: 0.5rem;
+
+      .usa-pagination__item {
+        margin: 0;
+      }
     }
 
     // Real USWDS's compiled CSS hardcodes pagination link/button text and

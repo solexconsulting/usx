@@ -102,7 +102,7 @@ export default function PaginationNavigation({
     if (!isLastPage) onPageChange((prev) => unbounded ? prev + 1 : Math.min(prev + 1, totalPages!));
   };
 
-  const classes = ClassNames(
+  const navClasses = ClassNames(
     'usa-pagination',
     'usx-pagination__nav',
     { 'usx-pagination__arrows-only': arrowsOnly },
@@ -110,25 +110,40 @@ export default function PaginationNavigation({
   );
 
   return (
-    <nav aria-label={ariaLabel} className={classes}>
+    <nav aria-label={ariaLabel} className={navClasses}>
       <ul className="usa-pagination__list">
         {/* Previous arrow */}
-        <li className="usa-pagination__item usa-pagination__arrow">
+        <li
+          className={
+            ClassNames(
+              'usa-pagination__item',
+              'usa-pagination__arrow',
+            )
+          }
+        >
           <a
             href="#"
-            className={[
-              'usa-pagination__link',
-              'usa-pagination__previous-page',
-              isFirstPage && 'display-none',
-              hideLinkText && 'padding-1 margin-0'
-            ].filter(Boolean).join(' ')}
+            className={
+              ClassNames(
+                'usa-pagination__link',
+                'usa-pagination__previous-page',
+                isFirstPage && 'display-none',
+                hideLinkText && 'padding-1 margin-0'
+              )
+            }
             aria-label={`${prevLabel} page`}
             aria-disabled={isFirstPage ? 'true' : undefined}
             tabIndex={isFirstPage ? -1 : undefined}
             onClick={isFirstPage ? (e) => e.preventDefault() : handlePrev}
           >
             <Icon name="navigate_before" />
-            <span className={['usa-pagination__link-text', hideLinkText && 'usa-sr-only'].filter(Boolean).join(' ')}>{prevLabel}</span>
+            <span
+              className={
+                ClassNames(
+                  'usa-pagination__link-text', hideLinkText && 'usa-sr-only'
+                )
+              }
+            >{prevLabel}</span>
           </a>
         </li>
         {/* Page number / ellipsis items */}
@@ -149,7 +164,12 @@ export default function PaginationNavigation({
             <li key={item.page} className="usa-pagination__item usa-pagination__page-no">
               <a
                 href="#"
-                className={['usa-pagination__button', isCurrent && 'usa-current'].filter(Boolean).join(' ')}
+                className={
+                  ClassNames(
+                    'usa-pagination__button',
+                    isCurrent && 'usa-current'
+                  )
+                }
                 aria-label={`Page ${item.page}`}
                 aria-current={isCurrent ? 'page' : undefined}
                 onClick={handlePage(item.page)}
@@ -160,21 +180,36 @@ export default function PaginationNavigation({
           );
         })}
         {/* Next arrow */}
-        <li className="usa-pagination__item usa-pagination__arrow">
+        <li
+          className={
+            ClassNames(
+              'usa-pagination__item',
+              'usa-pagination__arrow',
+            )
+          }
+        >
           <a
             href="#"
-            className={[
-              'usa-pagination__link',
-              'usa-pagination__next-page',
-              isLastPage && 'display-none',
-              hideLinkText && 'padding-1 margin-0'
-            ].filter(Boolean).join(' ')}
+            className={
+              ClassNames(
+                'usa-pagination__link',
+                'usa-pagination__next-page',
+                isLastPage && 'display-none',
+                hideLinkText && 'padding-1 margin-0'
+              )
+            }
             aria-label={`${nextLabel} page`}
             aria-disabled={isLastPage ? 'true' : undefined}
             tabIndex={isLastPage ? -1 : undefined}
             onClick={isLastPage ? (e) => e.preventDefault() : handleNext}
           >
-            <span className={['usa-pagination__link-text', hideLinkText && 'usa-sr-only'].filter(Boolean).join(' ')}>{nextLabel}</span>
+            <span
+              className={
+                ClassNames(
+                  'usa-pagination__link-text', hideLinkText && 'usa-sr-only'
+                )
+              }
+            >{nextLabel}</span>
             <Icon name="navigate_next" />
           </a>
         </li>
