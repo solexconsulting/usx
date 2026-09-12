@@ -327,6 +327,8 @@ export const StepOptionsSubcomponent = {
 
 export const SummarySubcomponent = {
   name: 'Sub: Summary',
-  render: () => <PaginationSummary currentPage={3} pageSize={10} totalItems={100} />,
+  render: () => (
+    <PaginationSummary currentPage={3} pageSize={10} totalItems={100} />
+  ),
 };
 
