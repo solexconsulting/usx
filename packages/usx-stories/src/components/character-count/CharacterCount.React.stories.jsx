@@ -11,6 +11,7 @@ export const storyDefs = {
   WithTextArea: { id: 'cc-4', label: 'Text area', max: 50, textArea: true },
   Required: { id: 'cc-6', label: 'Required field', max: 25, required: true },
   SuccessState: { id: 'cc-7', label: 'Success state', max: 25, success: 'Looks good!' },
+  ErrorState: { id: 'cc-9', label: 'Error state', max: 25, error: 'This field has an error.' },
   Disabled: { id: 'cc-8', label: 'Disabled field', max: 25, disabled: true },
 };
 
@@ -39,5 +40,6 @@ export const WithHint = { args: storyDefs.WithHint };
 export const WithTextArea = { args: storyDefs.WithTextArea };
 export const Required = { args: storyDefs.Required };
 export const SuccessState = { args: storyDefs.SuccessState };
+export const ErrorState = { args: storyDefs.ErrorState };
 export const Disabled = { args: storyDefs.Disabled };
 

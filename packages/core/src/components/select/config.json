@@ -63,6 +63,11 @@
       "default": false,
       "description": "Whether the select input is disabled"
     },
+    "formGroup": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group."
+    },
     "className": {
       "type": "string",
       "description": "Additional classes"

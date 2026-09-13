@@ -1,5 +1,8 @@
 
+import React from 'react';
 import Checkbox from '../../../../core/src/components/checkbox/Checkbox.tsx';
+import Fieldset from '../../../../core/src/components/fieldset/Fieldset.tsx';
+import FormGroup from '../../../../core/src/components/form-group/FormGroup.tsx';
 import config from '../../../../core/src/components/checkbox/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
@@ -137,4 +140,17 @@ export const WithOnChange = { args: storyDefs.WithOnChange };
 export const Required = { args: storyDefs.Required };
 export const Error = { args: storyDefs.Error };
 export const Success = { args: storyDefs.Success };
+
+// Demonstrates the usa-form-group--error wrapper USWDS applies around a
+// fieldset of checkboxes when the group as a whole is invalid.
+export const GroupError = {
+  render: () => (
+    <FormGroup error>
+      <Fieldset legend="Select any historical figure" error="Select at least one option.">
+        <Checkbox id="group-error-truth" name="group-error-figures" value="sojourner-truth" label="Sojourner Truth" />
+        <Checkbox id="group-error-douglass" name="group-error-figures" value="frederick-douglass" label="Frederick Douglass" />
+      </Fieldset>
+    </FormGroup>
+  ),
+};
 

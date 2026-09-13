@@ -47,6 +47,11 @@
             "default": false,
             "description": "A boolean that indicates whether the input field is required, meaning that the user must provide a value before submitting the form."
         },
+        "formGroup": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group."
+        },
         "className": {
             "type": "string",
             "default": "",

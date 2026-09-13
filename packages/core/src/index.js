@@ -35,6 +35,7 @@ export { default as CardGroup } from './components/card-group';
 export { default as Carousel } from './components/carousel';
 export { default as CharacterCount } from './components/character-count';
 export { default as Checkbox } from './components/checkbox';
+export { default as CheckboxGroup } from './components/checkbox-group';
 export { default as Clickable } from './components/clickable';
 export { default as Code } from './components/code';
 export { default as Collection } from './components/collection';
@@ -42,6 +43,7 @@ export { default as Combobox } from './components/combobox';
 export { default as CopyToClipboard } from './components/copy-to-clipboard';
 export { default as DatePicker } from './components/date-picker';
 export { default as DateRangePicker } from './components/date-range-picker';
+export { default as ErrorMessage } from './components/error-message';
 export { default as Eyebrow } from './components/eyebrow';
 export { default as Fieldset } from './components/fieldset';
 export { default as FileInput } from './components/file-input';
@@ -50,6 +52,7 @@ export { default as Footer } from './components/footer';
 export { default as FormGroup } from './components/form-group';
 export { default as Header } from './components/header';
 export { default as Hero } from './components/hero';
+export { default as Hint } from './components/hint';
 export { default as Icon } from './components/icon';
 export { default as IconList } from './components/icon-list';
 export { default as Identifier } from './components/identifier';
@@ -95,6 +98,8 @@ export { default as Toggle } from './components/toggle';
 export { default as Tooltip } from './components/tooltip';
 export { default as Villain } from './components/villain';
 // AUTO-GENERATED-EXPORTS END
+
+
 
 
 

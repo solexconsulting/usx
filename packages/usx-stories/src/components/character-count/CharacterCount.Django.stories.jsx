@@ -33,5 +33,6 @@ export const WithHint = createStory(storyDefs.WithHint);
 export const WithTextArea = createStory(storyDefs.WithTextArea);
 export const Required = createStory(storyDefs.Required);
 export const SuccessState = createStory(storyDefs.SuccessState);
+export const ErrorState = createStory(storyDefs.ErrorState);
 export const Disabled = createStory(storyDefs.Disabled);
 

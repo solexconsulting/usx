@@ -16,6 +16,7 @@
     "defaultValue": { "type": "number", "description": "Initial value for uncontrolled usage. Also used as the static value shown in the Django/HTML templates." },
     "textUnit": { "type": "string", "description": "Optional unit appended to the screen-reader value callout, e.g. \"percent\"." },
     "textPreposition": { "type": "string", "default": "of", "description": "Preposition used in the screen-reader value callout (\"of\", \"de\", etc.)." },
+    "formGroup": { "type": "boolean", "default": true, "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group." },
     "className": { "type": "string", "default": "", "description": "Additional classes for the usa-range input." }
   },
   "default": {

@@ -2,6 +2,9 @@
 import { SelectHTMLAttributes } from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
+import Hint from '../hint/Hint';
+import ErrorMessage from '../error-message/ErrorMessage';
+import FormGroup from '../form-group/FormGroup';
 
 export interface SelectOption {
   value: string;
@@ -20,6 +23,7 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
   hint?: string;
   disabled?: boolean;
   required?: boolean;
+  formGroup?: boolean;
   className?: string;
 }
 
@@ -35,18 +39,17 @@ export default function Select({
   hint,
   disabled = false,
   required = false,
+  formGroup = true,
   className = '',
   ...props
 }: SelectProps) {
   const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`;
   const hintId = hint ? `${selectId}-hint` : undefined;
-  const ariaDescribedBy = hintId || undefined;
+  const errorId = `${selectId}-error`;
 
   const hasError = !!error;
   const hasSuccess = !!success;
 
-  const formGroupClasses = 'usa-form-group usx-form-group';
-  const formGroupErrorClasses = 'usa-form-group--error';
   const selectClasses = 'usa-select usx-select';
   const selectErrorClasses = 'usa-input--error';
   const selectSuccessClasses = 'usa-input--success';
@@ -58,10 +61,9 @@ export default function Select({
     className,
   );
 
-  const combinedFormGroupClasses = ClassNames(
-    formGroupClasses,
-    hasError && formGroupErrorClasses,
-  );
+  const describedByParts: string[] = [];
+  if (hintId) describedByParts.push(hintId);
+  if (hasError) describedByParts.push(errorId);
 
   const selectProps = {
     id: selectId,
@@ -69,7 +71,8 @@ export default function Select({
     className: combinedSelectClasses,
     disabled,
     defaultValue,
-    'aria-describedby': ariaDescribedBy,
+    'aria-describedby': describedByParts.length ? describedByParts.join(' ') : undefined,
+    'aria-invalid': hasError ? true : undefined,
     ...props,
   };
 
@@ -78,11 +81,8 @@ export default function Select({
       <Label htmlFor={selectId} required={required}>
         {label}
       </Label>
-      {hint && (
-        <span id={hintId} className="usa-hint">
-          {hint}
-        </span>
-      )}
+      {hint && <Hint id={hintId}>{hint}</Hint>}
+      {hasError && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
       <select {...selectProps}>
         <option value="">{placeholder}</option>
         {options.map((option, index) => (
@@ -91,11 +91,6 @@ export default function Select({
           </option>
         ))}
       </select>
-      {hasError && (
-        <span className="usa-error-message">
-          {error}
-        </span>
-      )}
       {hasSuccess && (
         <span className="usa-success-message">
           {success}
@@ -104,13 +99,9 @@ export default function Select({
     </>
   );
 
-  if (hasError) {
-    return (
-      <div className={combinedFormGroupClasses}>
-        {content}
-      </div>
-    );
-  }
-
-  return content;
+  return formGroup ? (
+    <FormGroup error={hasError}>{content}</FormGroup>
+  ) : (
+    content
+  );
 }

@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Required from '../required/Required';
+import FormGroup from '../form-group/FormGroup';
+import Hint from '../hint/Hint';
+import ErrorMessage from '../error-message/ErrorMessage';
 
 // Enhanced by @uswds/uswds/js/usa-range at runtime (call range.on() in the
 // consuming app) — that script builds the value display span and keeps the
 // aria-valuetext screen-reader callout in sync, so React doesn't reimplement
-// either here. No form-group wrapper — wrap this in FormGroup yourself if
-// you want one.
+// either here.
 export default function RangeSlider({
   id = 'range-slider',
   name,
@@ -22,6 +24,7 @@ export default function RangeSlider({
   defaultValue,
   textUnit = null,
   textPreposition = null,
+  formGroup = true,
   className = '',
   ...props
 }) {
@@ -29,7 +32,7 @@ export default function RangeSlider({
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
 
-  return (
+  const content = (
     <>
       {label && (
         <label className="usa-label usx-label" htmlFor={id}>
@@ -37,16 +40,8 @@ export default function RangeSlider({
           {label}
         </label>
       )}
-      {hint && (
-        <span className="usa-hint usx-hint" id={hintId}>
-          {hint}
-        </span>
-      )}
-      {error && (
-        <span className="usa-error-message usx-error-message" id={errorId} role="alert">
-          {error}
-        </span>
-      )}
+      {hint && <Hint id={hintId}>{hint}</Hint>}
+      {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
       <input
         className={['usa-range', 'usx-range-slider', className].filter(Boolean).join(' ')}
         id={id}
@@ -66,6 +61,8 @@ export default function RangeSlider({
       />
     </>
   );
+
+  return formGroup ? <FormGroup error={!!error}>{content}</FormGroup> : content;
 }
 
 RangeSlider.propTypes = {
@@ -83,5 +80,6 @@ RangeSlider.propTypes = {
   defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   textUnit: PropTypes.string,
   textPreposition: PropTypes.string,
+  formGroup: PropTypes.bool,
   className: PropTypes.string,
 };

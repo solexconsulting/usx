@@ -20,6 +20,7 @@
     "minTime": { "type": "string", "description": "Earliest time option in hh:mm 24-hour format. Sets data-min-time on the wrapper. USWDS default: 00:00." },
     "maxTime": { "type": "string", "description": "Latest time option in hh:mm 24-hour format. Sets data-max-time on the wrapper. USWDS default: 23:59." },
     "step": { "type": "string", "description": "Number of minutes between options (minimum 1). Sets data-step on the wrapper. USWDS default: 30." },
+    "formGroup": { "type": "boolean", "default": true, "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group." },
     "className": { "type": "string", "default": "", "description": "Additional classes for the usa-time-picker wrapper." }
   }
 }

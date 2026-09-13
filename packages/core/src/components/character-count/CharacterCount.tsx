@@ -59,6 +59,7 @@ export default function CharacterCount({
     error: error ?? undefined,
     success: error ? undefined : (success ?? undefined),
     maxLength: max,
+    formGroup: false,
     className: 'usa-character-count__field',
     'aria-describedby': [infoId, hintId, errorId, successId].filter(Boolean).join(' '),
     ...props,

@@ -1,0 +1,12 @@
+{# Django template for CheckboxGroup #}
+{% load components %}
+
+{% form_group error=error %}
+{% fieldset legend=legend required=required hint=hint error=error className="usa-checkbox-group usx-checkbox-group" %}
+  {% for opt in options %}
+    {% with optionId=id|add:"-"|add:opt.value %}
+    {% checkbox id=optionId name=name|default:"checkbox-group" value=opt.value label=opt.label description=opt.description checked=opt.checked disabled=opt.disabled tile=tile small=small %}{% endcheckbox %}
+    {% endwith %}
+  {% endfor %}
+{% endfieldset %}
+{% endform_group %}

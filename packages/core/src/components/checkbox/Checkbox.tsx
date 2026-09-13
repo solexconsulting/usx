@@ -1,6 +1,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
+import ErrorMessage from '../error-message/ErrorMessage';
 
 export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -78,9 +79,7 @@ export default function Checkbox({
         </Label>
       </div>
       {hasError ? (
-        <span className="usa-error-message" role="alert">
-          {error}
-        </span>
+        <ErrorMessage>{error}</ErrorMessage>
       ) : hasSuccess ? (
         <span className="usa-success-message text-success" role="status">
           {success}

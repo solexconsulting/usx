@@ -10,7 +10,7 @@
   {% endlabel %}
 </div>
 {% if error %}
-<span class="usa-error-message" role="alert">{{ error }}</span>
+{% error_message %}{{ error }}{% enderror_message %}
 {% elif success %}
 <span class="usa-success-message text-success" role="status">{{ success }}</span>
 {% endif %}

@@ -1,12 +1,17 @@
 {% load components %}
 
 {% with id|default:"input" as field_id %}
+{% with formGroup|default_if_none:True as wrap_group %}
 
+{% if wrap_group %}{% form_group error=error %}{% endif %}
 {% if label %}
   {% label htmlFor=field_id screenReaderOnly=screenReaderOnlyLabel required=required only %}{{ label }}{% endlabel %}
 {% endif %}
 {% if hint %}
-  <span id="{{ field_id }}-hint" class="usa-hint">{{ hint }}</span>
+  {% hint id=field_id|add:"-hint" %}{{ hint }}{% endhint %}
+{% endif %}
+{% if error %}
+  {% error_message id=field_id|add:"-error" %}{{ error }}{% enderror_message %}
 {% endif %}
 <input
   class="usa-input usx-input{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
@@ -22,10 +27,10 @@
   {% if disabled %}disabled {% endif %}
   {% if required %}required{% endif %}
 />
-{% if error %}
-  <span id="{{ field_id }}-error" class="usa-error-message" role="alert">{{ error }}</span>
-{% elif success %}
+{% if success %}
   <span id="{{ field_id }}-success" class="usa-success-message" role="status">{{ success }}</span>
 {% endif %}
+{% if wrap_group %}{% endform_group %}{% endif %}
 
+{% endwith %}
 {% endwith %}

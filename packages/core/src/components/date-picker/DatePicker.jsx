@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Required from '../required/Required';
+import Label from '../label/Label';
+import Hint from '../hint/Hint';
+import ErrorMessage from '../error-message/ErrorMessage';
+import FormGroup from '../form-group/FormGroup';
 
 export default function DatePicker({
   id = 'date-picker',
@@ -15,6 +18,7 @@ export default function DatePicker({
   minDate = null,
   maxDate = null,
   rangeDate = null,
+  formGroup = true,
   className = '',
   ...props
 }) {
@@ -23,24 +27,15 @@ export default function DatePicker({
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
 
-  return (
-    <div className={classNames('usa-form-group', 'usx-form-group', { 'usa-form-group--error': !!error })}>
+  const content = (
+    <>
       {label && (
-        <label className="usa-label usx-label" id={labelId} htmlFor={id}>
-          {required && <Required />}
+        <Label id={labelId} htmlFor={id} required={required}>
           {label}
-        </label>
+        </Label>
       )}
-      {hint && (
-        <div className="usa-hint usx-hint" id={hintId}>
-          {hint}
-        </div>
-      )}
-      {error && (
-        <span className="usa-error-message usx-error-message" id={errorId} role="alert">
-          {error}
-        </span>
-      )}
+      {hint && <Hint id={hintId}>{hint}</Hint>}
+      {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
       <div
         className={classNames('usa-date-picker', 'usx-date-picker', className)}
         {...(defaultValue ? { 'data-default-value': defaultValue } : {})}
@@ -59,8 +54,10 @@ export default function DatePicker({
           {...props}
         />
       </div>
-    </div>
+    </>
   );
+
+  return formGroup ? <FormGroup error={!!error}>{content}</FormGroup> : content;
 }
 
 DatePicker.propTypes = {
@@ -75,5 +72,6 @@ DatePicker.propTypes = {
   minDate: PropTypes.string,
   maxDate: PropTypes.string,
   rangeDate: PropTypes.string,
+  formGroup: PropTypes.bool,
   className: PropTypes.string,
 };

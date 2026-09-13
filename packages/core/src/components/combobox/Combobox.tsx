@@ -1,5 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import classNames from 'classnames';
+import Label from '../label/Label';
+import Hint from '../hint/Hint';
+import ErrorMessage from '../error-message/ErrorMessage';
+import FormGroup from '../form-group/FormGroup';
 
 export interface ComboboxOption {
   value: string;
@@ -20,6 +24,7 @@ export interface ComboboxProps extends React.HTMLAttributes<HTMLDivElement> {
   options?: ComboboxOption[];
   onSearch?: (value: string | null | undefined) => void;
   onSelect?: (value: string | null | undefined) => void;
+  formGroup?: boolean;
   className?: string;
 }
 
@@ -37,6 +42,7 @@ export default function Combobox({
   options = [],
   onSearch = null,
   onSelect = null,
+  formGroup = true,
   className = '',
   ...props
 }: ComboboxProps) {
@@ -165,15 +171,14 @@ export default function Combobox({
     'usx-combo-box--error': !!error,
   }, className);
 
-  return (
+  const content = (
     <>
-      <label className="usa-label usx-label" id={labelId} htmlFor={id}>
-        {required && <abbr title="required" className="usx-required">*</abbr>}
+      <Label id={labelId} htmlFor={id} required={required}>
         {label}
-      </label>
+      </Label>
 
-      {hint && <span className="usa-hint usx-hint" id={hintId}>{hint}</span>}
-      {error && <span className="usa-error-message usx-error-message" id={errorId}>{error}</span>}
+      {hint && <Hint id={hintId}>{hint}</Hint>}
+      {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
 
       <div ref={wrapperRef} className={wrapperClasses} data-enhanced="true">
         <select
@@ -288,4 +293,6 @@ export default function Combobox({
       </div>
     </>
   );
+
+  return formGroup ? <FormGroup error={!!error}>{content}</FormGroup> : content;
 }

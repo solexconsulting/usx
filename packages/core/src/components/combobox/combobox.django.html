@@ -1,15 +1,15 @@
 {# Django template for Combobox #}
 {% load components %}
-<label class="usa-label usx-label" for="{{ id }}">
-  {% if required %}<abbr title="required" class="usx-required">*</abbr>{% endif %}{{ label }}
-</label>
+{% with formGroup|default_if_none:True as wrap_group %}
+{% if wrap_group %}{% form_group error=error %}{% endif %}
+{% label htmlFor=id required=required %}{{ label }}{% endlabel %}
 
 {% if hint %}
-<span class="usa-hint usx-hint" id="{{ id }}-hint">{{ hint }}</span>
+{% hint id=id|add:"-hint" %}{{ hint }}{% endhint %}
 {% endif %}
 
 {% if error %}
-<span class="usa-error-message usx-error-message" id="{{ id }}-error">{{ error }}</span>
+{% error_message id=id|add:"-error" %}{{ error }}{% enderror_message %}
 {% endif %}
 
 <div class="usa-combo-box usx-combo-box{% if error %} usx-combo-box--error{% endif %}{% if className %} {{ className }}{% endif %}"{% if placeholder %} data-placeholder="{{ placeholder }}"{% endif %}{% if defaultValue %} data-default-value="{{ defaultValue }}"{% endif %}>
@@ -28,3 +28,5 @@
     {% endfor %}
   </select>
 </div>
+{% if wrap_group %}{% endform_group %}{% endif %}
+{% endwith %}

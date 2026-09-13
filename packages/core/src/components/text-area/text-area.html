@@ -1,41 +1,59 @@
 <!-- Default -->
-<label class="usa-label usx-label" for="textarea-1">Text area label</label>
-<textarea class="usa-textarea usx-textarea" id="textarea-1" placeholder="Type here"></textarea>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="textarea-1">Text area label</label>
+  <textarea class="usa-textarea usx-textarea" id="textarea-1" placeholder="Type here"></textarea>
+</div>
 
 <!-- WithHint -->
-<label class="usa-label usx-label" for="textarea-2">Text area with hint</label>
-<span id="textarea-2-hint" class="usa-hint">Enter a detailed description.</span>
-<textarea class="usa-textarea usx-textarea" id="textarea-2" aria-describedby="textarea-2-hint"></textarea>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="textarea-2">Text area with hint</label>
+  <span id="textarea-2-hint" class="usa-hint usx-hint">Enter a detailed description.</span>
+  <textarea class="usa-textarea usx-textarea" id="textarea-2" aria-describedby="textarea-2-hint"></textarea>
+</div>
 
 <!-- Required -->
-<label class="usa-label usx-label" for="textarea-3">
-  <abbr title="required" class="usx-required">*</abbr>Required text area
-</label>
-<textarea class="usa-textarea usx-textarea" id="textarea-3" required></textarea>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="textarea-3">
+    <abbr title="required" class="usx-required">*</abbr>Required text area
+  </label>
+  <textarea class="usa-textarea usx-textarea" id="textarea-3" required></textarea>
+</div>
 
 <!-- ScreenReaderOnlyLabel -->
  <br/><br/>
-<label class="usa-label usx-label usa-sr-only" for="textarea-4">Visually hidden label</label>
-<textarea class="usa-textarea usx-textarea" id="textarea-4" placeholder="Label is screen reader only"></textarea>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label usa-sr-only" for="textarea-4">Visually hidden label</label>
+  <textarea class="usa-textarea usx-textarea" id="textarea-4" placeholder="Label is screen reader only"></textarea>
+</div>
 
 <!-- ErrorState -->
-<label class="usa-label usx-label" for="textarea-5">Error state text area</label>
-<textarea class="usa-textarea usx-textarea usa-input--error" id="textarea-5" aria-describedby="textarea-5-error" aria-invalid="true"></textarea>
-<span id="textarea-5-error" class="usa-error-message" role="alert">Enter at least 10 characters.</span>
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label class="usa-label usx-label" for="textarea-5">Error state text area</label>
+  <span id="textarea-5-error" class="usa-error-message usx-error-message" role="alert">Enter at least 10 characters.</span>
+  <textarea class="usa-textarea usx-textarea usa-input--error" id="textarea-5" aria-describedby="textarea-5-error" aria-invalid="true"></textarea>
+</div>
 
 <!-- ErrorStateNoMessage -->
-<label class="usa-label usx-label" for="textarea-6">Error state (no message)</label>
-<textarea class="usa-textarea usx-textarea usa-input--error" id="textarea-6" aria-invalid="true"></textarea>
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label class="usa-label usx-label" for="textarea-6">Error state (no message)</label>
+  <textarea class="usa-textarea usx-textarea usa-input--error" id="textarea-6" aria-invalid="true"></textarea>
+</div>
 
 <!-- SuccessState -->
-<label class="usa-label usx-label" for="textarea-7">Success state text area</label>
-<textarea class="usa-textarea usx-textarea usa-input--success" id="textarea-7" aria-describedby="textarea-7-success"></textarea>
-<span id="textarea-7-success" class="usa-success-message" role="status">Your message has been accepted.</span>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="textarea-7">Success state text area</label>
+  <textarea class="usa-textarea usx-textarea usa-input--success" id="textarea-7" aria-describedby="textarea-7-success"></textarea>
+  <span id="textarea-7-success" class="usa-success-message" role="status">Your message has been accepted.</span>
+</div>
 
 <!-- SuccessStateNoMessage -->
-<label class="usa-label usx-label" for="textarea-8">Success state (no message)</label>
-<textarea class="usa-textarea usx-textarea usa-input--success" id="textarea-8"></textarea>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="textarea-8">Success state (no message)</label>
+  <textarea class="usa-textarea usx-textarea usa-input--success" id="textarea-8"></textarea>
+</div>
 
 <!-- Disabled -->
-<label class="usa-label usx-label" for="textarea-9">Disabled text area</label>
-<textarea class="usa-textarea usx-textarea" id="textarea-9" disabled></textarea>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="textarea-9">Disabled text area</label>
+  <textarea class="usa-textarea usx-textarea" id="textarea-9" disabled></textarea>
+</div>

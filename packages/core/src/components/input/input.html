@@ -1,41 +1,59 @@
 <!-- Default -->
-<label class="usa-label usx-label" for="input-1">Text input label</label>
-<input class="usa-input usx-input" id="input-1" placeholder="Type here" />
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="input-1">Text input label</label>
+  <input class="usa-input usx-input" id="input-1" placeholder="Type here" />
+</div>
 
 <!-- WithHint -->
-<label class="usa-label usx-label" for="input-2">Input with hint</label>
-<span id="input-2-hint" class="usa-hint">Enter your full legal name.</span>
-<input class="usa-input usx-input" id="input-2" placeholder="Type here" aria-describedby="input-2-hint" />
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="input-2">Input with hint</label>
+  <span id="input-2-hint" class="usa-hint usx-hint">Enter your full legal name.</span>
+  <input class="usa-input usx-input" id="input-2" placeholder="Type here" aria-describedby="input-2-hint" />
+</div>
 
 <!-- Required -->
-<label class="usa-label usx-label" for="input-3">
-  <abbr title="required" class="usx-required">*</abbr>Required input
-</label>
-<input class="usa-input usx-input" id="input-3" placeholder="Type here" required />
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="input-3">
+    <abbr title="required" class="usx-required">*</abbr>Required input
+  </label>
+  <input class="usa-input usx-input" id="input-3" placeholder="Type here" required />
+</div>
 
 <!-- ScreenReaderOnlyLabel -->
 <br/><br/>
-<label class="usa-label usx-label usa-sr-only" for="input-4">Visually hidden label</label>
-<input class="usa-input usx-input" id="input-4" placeholder="Label is screen reader only" />
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label usa-sr-only" for="input-4">Visually hidden label</label>
+  <input class="usa-input usx-input" id="input-4" placeholder="Label is screen reader only" />
+</div>
 
 <!-- ErrorState -->
-<label class="usa-label usx-label" for="input-5">Error state input</label>
-<input class="usa-input usx-input usa-input--error" id="input-5" placeholder="Type here" aria-describedby="input-5-error" aria-invalid="true" />
-<span id="input-5-error" class="usa-error-message" role="alert">Enter a valid email address.</span>
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label class="usa-label usx-label" for="input-5">Error state input</label>
+  <span id="input-5-error" class="usa-error-message usx-error-message" role="alert">Enter a valid email address.</span>
+  <input class="usa-input usx-input usa-input--error" id="input-5" placeholder="Type here" aria-describedby="input-5-error" aria-invalid="true" />
+</div>
 
 <!-- ErrorStateNoMessage -->
-<label class="usa-label usx-label" for="input-6">Error state (no message)</label>
-<input class="usa-input usx-input usa-input--error" id="input-6" placeholder="Type here" aria-invalid="true" />
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label class="usa-label usx-label" for="input-6">Error state (no message)</label>
+  <input class="usa-input usx-input usa-input--error" id="input-6" placeholder="Type here" aria-invalid="true" />
+</div>
 
 <!-- SuccessState -->
-<label class="usa-label usx-label" for="input-7">Success state input</label>
-<input class="usa-input usx-input usa-input--success" id="input-7" placeholder="Type here" aria-describedby="input-7-success" />
-<span id="input-7-success" class="usa-success-message" role="status">Your email address has been accepted.</span>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="input-7">Success state input</label>
+  <input class="usa-input usx-input usa-input--success" id="input-7" placeholder="Type here" aria-describedby="input-7-success" />
+  <span id="input-7-success" class="usa-success-message" role="status">Your email address has been accepted.</span>
+</div>
 
 <!-- SuccessStateNoMessage -->
-<label class="usa-label usx-label" for="input-8">Success state (no message)</label>
-<input class="usa-input usx-input usa-input--success" id="input-8" placeholder="Type here" />
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="input-8">Success state (no message)</label>
+  <input class="usa-input usx-input usa-input--success" id="input-8" placeholder="Type here" />
+</div>
 
 <!-- Disabled -->
-<label class="usa-label usx-label" for="input-9">Disabled input</label>
-<input class="usa-input usx-input" id="input-9" placeholder="Type here" disabled />
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="input-9">Disabled input</label>
+  <input class="usa-input usx-input" id="input-9" placeholder="Type here" disabled />
+</div>

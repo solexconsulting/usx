@@ -80,6 +80,7 @@ export default function Search({
           defaultValue={defaultValue}
           type="search"
           name={searchKey}
+          formGroup={false}
         />
         <Button variant={buttonVariant} type="submit">
           {!iconOnly && <span className="usa-search__submit-text">{label}</span>}

@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Required from '../required/Required';
+import Label from '../label/Label';
+import Hint from '../hint/Hint';
+import ErrorMessage from '../error-message/ErrorMessage';
+import FormGroup from '../form-group/FormGroup';
 
 export default function DateRangePicker({
   startId = 'event-date-start',
@@ -38,23 +41,14 @@ export default function DateRangePicker({
       {...(minDate ? { 'data-min-date': minDate } : {})}
       {...(maxDate ? { 'data-max-date': maxDate } : {})}
     >
-      <div className={classNames('usa-form-group', 'usx-form-group', { 'usa-form-group--error': !!startError })}>
+      <FormGroup error={!!startError}>
         {startLabel && (
-          <label className="usa-label usx-label" id={startLabelId} htmlFor={startId}>
-            {required && <Required />}
+          <Label id={startLabelId} htmlFor={startId} required={required}>
             {startLabel}
-          </label>
+          </Label>
         )}
-        {startHint && (
-          <div className="usa-hint usx-hint" id={startHintId}>
-            {startHint}
-          </div>
-        )}
-        {startError && (
-          <span className="usa-error-message usx-error-message" id={startErrorId} role="alert">
-            {startError}
-          </span>
-        )}
+        {startHint && <Hint id={startHintId}>{startHint}</Hint>}
+        {startError && <ErrorMessage id={startErrorId}>{startError}</ErrorMessage>}
         <div
           className="usa-date-picker usx-date-picker"
           {...(defaultStartDate ? { 'data-default-value': defaultStartDate } : {})}
@@ -69,25 +63,16 @@ export default function DateRangePicker({
             required={required}
           />
         </div>
-      </div>
+      </FormGroup>
 
-      <div className={classNames('usa-form-group', 'usx-form-group', { 'usa-form-group--error': !!endError })}>
+      <FormGroup error={!!endError}>
         {endLabel && (
-          <label className="usa-label usx-label" id={endLabelId} htmlFor={endId}>
-            {required && <Required />}
+          <Label id={endLabelId} htmlFor={endId} required={required}>
             {endLabel}
-          </label>
+          </Label>
         )}
-        {endHint && (
-          <div className="usa-hint usx-hint" id={endHintId}>
-            {endHint}
-          </div>
-        )}
-        {endError && (
-          <span className="usa-error-message usx-error-message" id={endErrorId} role="alert">
-            {endError}
-          </span>
-        )}
+        {endHint && <Hint id={endHintId}>{endHint}</Hint>}
+        {endError && <ErrorMessage id={endErrorId}>{endError}</ErrorMessage>}
         <div
           className="usa-date-picker usx-date-picker"
           {...(defaultEndDate ? { 'data-default-value': defaultEndDate } : {})}
@@ -102,7 +87,7 @@ export default function DateRangePicker({
             required={required}
           />
         </div>
-      </div>
+      </FormGroup>
     </div>
   );
 }

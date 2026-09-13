@@ -13,6 +13,7 @@
         "minDate": { "type": "string", "description": "Earliest selectable date (yyyy-mm-dd). Sets data-min-date on the wrapper." },
         "maxDate": { "type": "string", "description": "Latest selectable date (yyyy-mm-dd). Sets data-max-date on the wrapper." },
         "rangeDate": { "type": "string", "description": "Companion date (yyyy-mm-dd) used to highlight a range on the calendar. Sets data-range-date on the wrapper." },
+        "formGroup": { "type": "boolean", "default": true, "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group." },
         "className": { "type": "string", "default": "", "description": "Additional classes for the usa-date-picker wrapper." }
     },
     "default": {

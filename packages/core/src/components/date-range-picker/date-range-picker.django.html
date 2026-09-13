@@ -1,22 +1,21 @@
 {# Django template for DateRangePicker #}
+{% load components %}
 <div
   class="usa-date-range-picker usx-date-range-picker{% if className %} {{ className }}{% endif %}"
   {% if minDate %} data-min-date="{{ minDate }}"{% endif %}
   {% if maxDate %} data-max-date="{{ maxDate }}"{% endif %}
 >
-  <div class="usa-form-group usx-form-group{% if startError %} usa-form-group--error{% endif %}">
+  {% form_group error=startError %}
     {% if startLabel %}
-    <label class="usa-label usx-label" id="{{ startId }}-label" for="{{ startId }}">
-      {% if required %}<abbr title="required" class="usx-required">*</abbr>{% endif %}{{ startLabel }}
-    </label>
+    {% label id=startId|add:"-label" htmlFor=startId required=required %}{{ startLabel }}{% endlabel %}
     {% endif %}
 
     {% if startHint %}
-    <div class="usa-hint usx-hint" id="{{ startId }}-hint">{{ startHint }}</div>
+    {% hint id=startId|add:"-hint" %}{{ startHint }}{% endhint %}
     {% endif %}
 
     {% if startError %}
-    <span class="usa-error-message usx-error-message" id="{{ startId }}-error" role="alert">{{ startError }}</span>
+    {% error_message id=startId|add:"-error" %}{{ startError }}{% enderror_message %}
     {% endif %}
 
     <div
@@ -33,21 +32,19 @@
         {% if required %} required{% endif %}
       />
     </div>
-  </div>
+  {% endform_group %}
 
-  <div class="usa-form-group usx-form-group{% if endError %} usa-form-group--error{% endif %}">
+  {% form_group error=endError %}
     {% if endLabel %}
-    <label class="usa-label usx-label" id="{{ endId }}-label" for="{{ endId }}">
-      {% if required %}<abbr title="required" class="usx-required">*</abbr>{% endif %}{{ endLabel }}
-    </label>
+    {% label id=endId|add:"-label" htmlFor=endId required=required %}{{ endLabel }}{% endlabel %}
     {% endif %}
 
     {% if endHint %}
-    <div class="usa-hint usx-hint" id="{{ endId }}-hint">{{ endHint }}</div>
+    {% hint id=endId|add:"-hint" %}{{ endHint }}{% endhint %}
     {% endif %}
 
     {% if endError %}
-    <span class="usa-error-message usx-error-message" id="{{ endId }}-error" role="alert">{{ endError }}</span>
+    {% error_message id=endId|add:"-error" %}{{ endError }}{% enderror_message %}
     {% endif %}
 
     <div
@@ -64,6 +61,6 @@
         {% if required %} required{% endif %}
       />
     </div>
-  </div>
+  {% endform_group %}
 </div>
 

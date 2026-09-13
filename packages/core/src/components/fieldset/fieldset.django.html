@@ -7,14 +7,16 @@
 >
   {% if legend %}
     {% if required and largeLegend %}
-      {% legend required="true" large="true" text=legend %}{% endlegend %}
+      {% legend required="true" large="true" text=legend className=error|yesno:"usa-label--error," %}{% endlegend %}
     {% elif required %}
-      {% legend required="true" text=legend %}{% endlegend %}
+      {% legend required="true" text=legend className=error|yesno:"usa-label--error," %}{% endlegend %}
     {% elif largeLegend %}
-      {% legend large="true" text=legend %}{% endlegend %}
+      {% legend large="true" text=legend className=error|yesno:"usa-label--error," %}{% endlegend %}
     {% else %}
-      {% legend text=legend %}{% endlegend %}
+      {% legend text=legend className=error|yesno:"usa-label--error," %}{% endlegend %}
     {% endif %}
   {% endif %}
+  {% if hint %}{% hint id=hintId %}{{ hint }}{% endhint %}{% endif %}
+  {% if error %}{% error_message id=errorId %}{{ error }}{% enderror_message %}{% endif %}
   {{ children|safe }}
 </fieldset>

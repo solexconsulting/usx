@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Required from '../required/Required';
+import Label from '../label/Label';
+import Hint from '../hint/Hint';
+import ErrorMessage from '../error-message/ErrorMessage';
+import FormGroup from '../form-group/FormGroup';
 
 export default function TimePicker({
   id = 'appointment-time',
@@ -16,6 +19,7 @@ export default function TimePicker({
   minTime = null,
   maxTime = null,
   step = null,
+  formGroup = true,
   className = '',
   ...props
 }) {
@@ -24,24 +28,15 @@ export default function TimePicker({
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [label ? labelId : undefined, hintId, errorId].filter(Boolean).join(' ') || undefined;
 
-  return (
-    <div className={classNames('usa-form-group', 'usx-form-group', { 'usa-form-group--error': !!error })}>
+  const content = (
+    <>
       {label && (
-        <label className="usa-label usx-label" id={labelId} htmlFor={id}>
-          {required && <Required />}
+        <Label id={labelId} htmlFor={id} required={required}>
           {label}
-        </label>
+        </Label>
       )}
-      {hint && (
-        <div className="usa-hint usx-hint" id={hintId}>
-          {hint}
-        </div>
-      )}
-      {error && (
-        <span className="usa-error-message usx-error-message" id={errorId} role="alert">
-          {error}
-        </span>
-      )}
+      {hint && <Hint id={hintId}>{hint}</Hint>}
+      {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
       <div
         className={classNames('usa-time-picker', 'usx-time-picker', className)}
         {...(minTime ? { 'data-min-time': minTime } : {})}
@@ -61,8 +56,10 @@ export default function TimePicker({
           {...props}
         />
       </div>
-    </div>
+    </>
   );
+
+  return formGroup ? <FormGroup error={!!error}>{content}</FormGroup> : content;
 }
 
 TimePicker.propTypes = {
@@ -78,5 +75,6 @@ TimePicker.propTypes = {
   minTime: PropTypes.string,
   maxTime: PropTypes.string,
   step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  formGroup: PropTypes.bool,
   className: PropTypes.string,
 };

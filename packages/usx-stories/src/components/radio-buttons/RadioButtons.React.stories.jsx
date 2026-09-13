@@ -99,6 +99,18 @@ export const storyDefs = {
     tile: true,
     className: 'maxw-mobile font-heading-xl',
   },
+  WithHint: {
+    id: 'historical-figures-hint',
+    name: 'historical-figures-hint',
+    hint: 'Choose the person you find most inspiring.',
+    options,
+  },
+  WithError: {
+    id: 'historical-figures-error',
+    name: 'historical-figures-error',
+    error: 'Select an option to continue.',
+    options,
+  },
 };
 
 
@@ -136,4 +148,12 @@ export const SmallTileWithDescriptions = {
 
 export const WithAdditionalClass = {
   args: storyDefs.WithAdditionalClass,
+};
+
+export const WithHint = {
+  args: storyDefs.WithHint,
+};
+
+export const WithError = {
+  args: storyDefs.WithError,
 };

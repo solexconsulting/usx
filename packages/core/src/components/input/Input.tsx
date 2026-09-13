@@ -1,6 +1,9 @@
 import React, { InputHTMLAttributes, ReactNode } from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
+import Hint from '../hint/Hint';
+import ErrorMessage from '../error-message/ErrorMessage';
+import FormGroup from '../form-group/FormGroup';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label: string | ReactNode;
@@ -12,6 +15,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   hint?: string;
   required?: boolean;
   screenReaderOnlyLabel?: boolean;
+  formGroup?: boolean;
   className?: string;
 }
 
@@ -25,6 +29,7 @@ export default function Input({
   hint = '',
   required = false,
   screenReaderOnlyLabel = false,
+  formGroup = true,
   className = '',
   ...props
 }: InputProps) {
@@ -60,27 +65,27 @@ export default function Input({
     ...props,
   };
 
-  return (
+  const content = (
     <>
       <Label htmlFor={inputId} screenReaderOnly={screenReaderOnlyLabel} required={required} >
         {label}
       </Label>
-      {hint && (
-        <span id={hintId} className="usa-hint">
-          {hint}
-        </span>
+      {hint && <Hint id={hintId}>{hint}</Hint>}
+      {hasError && typeof error === 'string' && (
+        <ErrorMessage id={`${inputId}-error`}>{error}</ErrorMessage>
       )}
       <input {...inputProps} />
-      {hasError && typeof error === 'string' && (
-        <span id={`${inputId}-error`} className="usa-error-message" role="alert">
-          {error}
-        </span>
-      )}
       {hasSuccess && typeof success === 'string' && (
         <span id={`${inputId}-success`} className="usa-success-message" role="status">
           {success}
         </span>
       )}
     </>
+  );
+
+  return formGroup ? (
+    <FormGroup error={hasError}>{content}</FormGroup>
+  ) : (
+    content
   );
 }

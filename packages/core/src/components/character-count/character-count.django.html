@@ -6,7 +6,7 @@
 {# message below, and manage the live count/over-limit state itself. #}
 {% with id|default:"character-count" as field_id %}
 <div class="usa-character-count usx-character-count{% if className %} {{ className }}{% endif %}">
-  <div class="usa-form-group usx-form-group{% if error %} usa-form-group--error{% endif %}">
+  {% form_group error=error %}
     {% if label %}
       {% if error %}
         {% label htmlFor=field_id screenReaderOnly=screenReaderOnlyLabel required=required className="usa-label--error" only %}{{ label }}{% endlabel %}
@@ -15,7 +15,10 @@
       {% endif %}
     {% endif %}
     {% if hint %}
-      <span id="{{ field_id }}-hint" class="usa-hint">{{ hint }}</span>
+      {% hint id=field_id|add:"-hint" %}{{ hint }}{% endhint %}
+    {% endif %}
+    {% if error %}
+      {% error_message id=field_id|add:"-error" %}{{ error }}{% enderror_message %}
     {% endif %}
     {% if textArea %}
       <textarea
@@ -40,12 +43,10 @@
         {% if required %}required{% endif %}
       />
     {% endif %}
-    {% if error %}
-      <span id="{{ field_id }}-error" class="usa-error-message" role="alert">{{ error }}</span>
-    {% elif success %}
+    {% if success and not error %}
       <span id="{{ field_id }}-success" class="usa-success-message" role="status">{{ success }}</span>
     {% endif %}
-  </div>
+  {% endform_group %}
   <span id="{{ field_id }}-info" class="usa-character-count__message">
     You can enter up to {{ max }} characters
   </span>

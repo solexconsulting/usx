@@ -1,17 +1,17 @@
 {# Django template for TimePicker #}
-<div class="usa-form-group usx-form-group{% if error %} usa-form-group--error{% endif %}">
+{% load components %}
+{% with formGroup|default_if_none:True as wrap_group %}
+{% if wrap_group %}{% form_group error=error %}{% endif %}
   {% if label %}
-  <label class="usa-label usx-label" id="{{ id }}-label" for="{{ id }}">
-    {% if required %}<abbr title="required" class="usx-required">*</abbr>{% endif %}{{ label }}
-  </label>
+  {% label id=id|add:"-label" htmlFor=id required=required %}{{ label }}{% endlabel %}
   {% endif %}
 
   {% if hint %}
-  <div class="usa-hint usx-hint" id="{{ id }}-hint">{{ hint }}</div>
+  {% hint id=id|add:"-hint" %}{{ hint }}{% endhint %}
   {% endif %}
 
   {% if error %}
-  <span class="usa-error-message usx-error-message" id="{{ id }}-error" role="alert">{{ error }}</span>
+  {% error_message id=id|add:"-error" %}{{ error }}{% enderror_message %}
   {% endif %}
 
   <div
@@ -31,4 +31,5 @@
       {% if required %} required{% endif %}
     />
   </div>
-</div>
+{% if wrap_group %}{% endform_group %}{% endif %}
+{% endwith %}

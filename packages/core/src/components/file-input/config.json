@@ -14,6 +14,7 @@
         "multiple": { "type": "boolean", "default": false, "description": "Allows selecting more than one file." },
         "manageIndividualFiles": { "type": "boolean", "default": false, "description": "When multiple is true, selects files one at a time into a managed list where each file has its own Delete action (VA.gov file-input-multiple pattern). React only." },
         "invalidFileTypeMessage": { "type": "string", "description": "Custom error message shown when a selected file doesn't match `accept`. Sets data-errormessage." },
+        "formGroup": { "type": "boolean", "default": true, "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group." },
         "className": { "type": "string", "default": "", "description": "Additional classes for the usa-file-input." },
         "defaultFiles": { "type": "array", "description": "When manageIndividualFiles is true, seeds the managed file list with files that already exist on the server (no browser File object). Each entry is { name, size?, url? } — omit size to show no size, provide url to render the name as a download link. React only." }
     },

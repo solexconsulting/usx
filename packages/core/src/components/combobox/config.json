@@ -14,6 +14,7 @@
     "options": { "type": "array", "description": "Array of { value, label } option objects" },
     "onSearch": { "type": "func", "description": "Called on every keystroke in the text input; receives (value: string)" },
     "onSelect": { "type": "func", "description": "Called when an option is selected or cleared; receives (value: string, option: object|null)" },
+    "formGroup": { "type": "boolean", "default": true, "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group." },
     "className": { "type": "string", "description": "Additional classes" }
   }
 }

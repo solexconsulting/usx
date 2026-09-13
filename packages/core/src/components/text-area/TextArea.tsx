@@ -1,6 +1,9 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
+import Hint from '../hint/Hint';
+import ErrorMessage from '../error-message/ErrorMessage';
+import FormGroup from '../form-group/FormGroup';
 
 export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: React.ReactNode;
@@ -13,6 +16,7 @@ export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextArea
   screenReaderOnlyLabel?: boolean;
   error?: React.ReactNode;
   success?: React.ReactNode;
+  formGroup?: boolean;
   className?: string;
 }
 
@@ -27,6 +31,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   screenReaderOnlyLabel = false,
   error = null,
   success = null,
+  formGroup = true,
   className = '',
   ...props
 }) => {
@@ -43,17 +48,16 @@ const TextArea: React.FC<TextAreaProps> = ({
   if (hintId) describedByParts.push(hintId);
   if (hasError && typeof error === 'string') describedByParts.push(`${textAreaId}-error`);
   if (hasSuccess && typeof success === 'string') describedByParts.push(`${textAreaId}-success`);
-  return (
+  const content = (
     <>
       {label && (
         <Label htmlFor={textAreaId} required={required} screenReaderOnly={screenReaderOnlyLabel}>
           {label}
         </Label>
       )}
-      {hint && (
-        <span id={hintId} className="usa-hint">
-          {hint}
-        </span>
+      {hint && <Hint id={hintId}>{hint}</Hint>}
+      {hasError && typeof error === 'string' && (
+        <ErrorMessage id={`${textAreaId}-error`}>{error}</ErrorMessage>
       )}
       <textarea
         id={textAreaId}
@@ -66,11 +70,6 @@ const TextArea: React.FC<TextAreaProps> = ({
         aria-invalid={hasError ? 'true' : undefined}
         {...props}
       />
-      {hasError && typeof error === 'string' && (
-        <span id={`${textAreaId}-error`} className="usa-error-message" role="alert">
-          {error}
-        </span>
-      )}
       {hasSuccess && typeof success === 'string' && (
         <span id={`${textAreaId}-success`} className="usa-success-message" role="status">
           {success}
@@ -78,6 +77,7 @@ const TextArea: React.FC<TextAreaProps> = ({
       )}
     </>
   );
+  return formGroup ? <FormGroup error={hasError}>{content}</FormGroup> : content;
 };
 
 export default TextArea;

@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import Required from '../required/Required';
+import Label from '../label/Label';
+import Hint from '../hint/Hint';
+import ErrorMessage from '../error-message/ErrorMessage';
 import FormGroup from '../form-group/FormGroup';
 import FileList from '../file-list/FileList';
 
@@ -33,6 +35,7 @@ export default function FileInput({
   className = '',
   onFilesChange = null,
   defaultFiles = [],
+  formGroup = true,
   ...props
 }) {
   const hintId = hint ? `${id}-hint` : undefined;
@@ -84,27 +87,18 @@ export default function FileInput({
   };
 
   const commonLabel = label && (
-    <label className="usa-label usx-label" htmlFor={id}>
-      {required && <Required />}
+    <Label htmlFor={id} required={required}>
       {label}
-    </label>
+    </Label>
   );
 
-  const commonHint = hint && (
-    <span className="usa-hint usx-hint" id={hintId}>
-      {hint}
-    </span>
-  );
+  const commonHint = hint && <Hint id={hintId}>{hint}</Hint>;
 
-  const commonError = error && (
-    <span className="usa-error-message usx-error-message" id={errorId} role="alert">
-      {error}
-    </span>
-  );
+  const commonError = error && <ErrorMessage id={errorId}>{error}</ErrorMessage>;
 
   if (!isManagedMultiple) {
-    return (
-      <FormGroup error={!!error}>
+    const content = (
+      <>
         {commonLabel}
         {commonHint}
         {commonError}
@@ -121,12 +115,13 @@ export default function FileInput({
           {...(invalidFileTypeMessage ? { 'data-errormessage': invalidFileTypeMessage } : {})}
           {...props}
         />
-      </FormGroup>
+      </>
     );
+    return formGroup ? <FormGroup error={!!error}>{content}</FormGroup> : content;
   }
 
-  return (
-    <FormGroup error={!!error}>
+  const content = (
+    <>
       {commonLabel}
       {commonHint}
       {commonError}
@@ -147,8 +142,10 @@ export default function FileInput({
         />
       </div>
       <FileList files={managedFiles} hint={fileListHint} onRemove={removeFile} disabled={disabled} />
-    </FormGroup>
+    </>
   );
+
+  return formGroup ? <FormGroup error={!!error}>{content}</FormGroup> : content;
 }
 
 FileInput.propTypes = {
@@ -173,4 +170,5 @@ FileInput.propTypes = {
       url: PropTypes.string,
     }),
   ),
+  formGroup: PropTypes.bool,
 };

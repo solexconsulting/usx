@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import Label from '../label/Label';
 import Fieldset from '../fieldset/Fieldset';
+import FormGroup from '../form-group/FormGroup';
 
 export interface RadioOption {
   id?: string;
@@ -17,6 +18,8 @@ export interface RadioButtonsProps extends React.HTMLAttributes<HTMLFieldSetElem
   small?: boolean;
   legend?: string;
   required?: boolean;
+  hint?: React.ReactNode;
+  error?: React.ReactNode;
   name?: string;
   options: RadioOption[];
   defaultValue?: string;
@@ -28,6 +31,8 @@ const RadioButtons: React.FC<RadioButtonsProps> = ({
   small = false,
   legend = 'Select one option',
   required = false,
+  hint = null,
+  error = null,
   name = 'radio-group',
   options = [],
   defaultValue = undefined,
@@ -47,28 +52,30 @@ const RadioButtons: React.FC<RadioButtonsProps> = ({
   );
 
   return (
-    <Fieldset legend={legend} required={required} {...props}>
-      {options.map((opt, idx) => {
-        const id = opt.id || `${name}-${idx}`;
-        return (
-          <div className={classes} key={id}>
-            <input
-              className={inputClasses}
-              id={id}
-              type="radio"
-              name={name}
-              value={opt.value}
-              defaultChecked={defaultValue === opt.value || !!opt.checked}
-              disabled={!!opt.disabled}
-            />
-            <Label className="usa-radio__label" classOverride={true} htmlFor={id}>
-              {opt.label}
-              {opt.description ? <span className="usa-checkbox__label-description">{opt.description}</span> : null}
-            </Label>
-          </div>
-        );
-      })}
-    </Fieldset>
+    <FormGroup error={!!error}>
+      <Fieldset legend={legend} required={required} hint={hint} error={error} {...props}>
+        {options.map((opt, idx) => {
+          const id = opt.id || `${name}-${idx}`;
+          return (
+            <div className={classes} key={id}>
+              <input
+                className={inputClasses}
+                id={id}
+                type="radio"
+                name={name}
+                value={opt.value}
+                defaultChecked={defaultValue === opt.value || !!opt.checked}
+                disabled={!!opt.disabled}
+              />
+              <Label className="usa-radio__label" classOverride={true} htmlFor={id}>
+                {opt.label}
+                {opt.description ? <span className="usa-checkbox__label-description">{opt.description}</span> : null}
+              </Label>
+            </div>
+          );
+        })}
+      </Fieldset>
+    </FormGroup>
   );
 };
 

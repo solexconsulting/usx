@@ -316,6 +316,9 @@ class CharacterCountBlock(BlockInclusionNode):
 class CheckboxBlock(BlockInclusionNode):
     template = "checkbox/checkbox.django.html"
 
+class CheckboxGroupBlock(BlockInclusionNode):
+    template = "checkbox-group/checkbox-group.django.html"
+
 class CollectionBlock(BlockInclusionNode):
     template = "collection/collection.django.html"
 
@@ -336,6 +339,12 @@ class FooterBlock(BlockInclusionNode):
 
 class FormGroupBlock(BlockInclusionNode):
     template = "form-group/form-group.django.html"
+
+class HintBlock(BlockInclusionNode):
+    template = "hint/hint.django.html"
+
+class ErrorMessageBlock(BlockInclusionNode):
+    template = "error-message/error-message.django.html"
 
 class HeaderBlock(BlockInclusionNode):
     template = "header/header.django.html"
@@ -486,6 +495,7 @@ register.tag('card_group', CardGroupBlock.handle)
 register.tag('carousel', CarouselBlock.handle)
 register.tag('character_count', CharacterCountBlock.handle)
 register.tag('checkbox', CheckboxBlock.handle)
+register.tag('checkbox_group', CheckboxGroupBlock.handle)
 register.tag('collection', CollectionBlock.handle)
 register.tag('combobox', ComboboxBlock.handle)
 register.tag('date_picker', DatePickerBlock.handle)
@@ -493,6 +503,8 @@ register.tag('fieldset', FieldsetBlock.handle)
 register.tag('file_input', FileInputBlock.handle)
 register.tag('footer', FooterBlock.handle)
 register.tag('form_group', FormGroupBlock.handle)
+register.tag('hint', HintBlock.handle)
+register.tag('error_message', ErrorMessageBlock.handle)
 register.tag('header', HeaderBlock.handle)
 register.tag('hero', HeroBlock.handle)
 register.tag('icon', IconBlock.handle)

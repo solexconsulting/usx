@@ -1,7 +1,8 @@
 {# Django template for RadioButtons #}
 {% load components %}
 
-{% fieldset legend=legend required=required %}
+{% form_group error=error %}
+{% fieldset legend=legend required=required hint=hint error=error %}
   {% for opt in options %}
     {% with optionId=id|add:"-"|add:opt.value %}
     <div class="usa-radio usx-radio {% if small %}usx-radio--small{% endif %} {{ className }}">
@@ -23,4 +24,5 @@
     {% endwith %}
   {% endfor %}
 {% endfieldset %}
+{% endform_group %}
 

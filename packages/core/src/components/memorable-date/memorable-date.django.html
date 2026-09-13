@@ -6,8 +6,9 @@
 {% with month_hint_id=month_id|add:"-hint" day_hint_id=day_id|add:"-hint" year_hint_id=year_id|add:"-hint" error_id=base_id|add:"-error" %}
 {% form_group error=error %}
 {% fieldset legend=legend required=required className=className %}
-  {% if groupHint %}
-  <span class="usa-hint" aria-hidden="true" id="{{ base_id }}-hint">{{ groupHint|default:"Select a month. Enter 1 or 2 digits for the day and 4 digits for the year." }}</span>
+  <span class="usa-hint usx-hint" aria-hidden="true" id="{{ base_id }}-hint">{{ groupHint|default:"Select a month. Enter 1 or 2 digits for the day and 4 digits for the year." }}</span>
+  {% if error %}
+  {% error_message id=error_id %}{{ error }}{% enderror_message %}
   {% endif %}
   <div class="usa-memorable-date usx-memorable-date">
     {% form_group className="usa-form-group--month usa-form-group--select" %}
@@ -81,9 +82,6 @@
       {% endif %}
     {% endform_group %}
   </div>
-  {% if error %}
-  <span class="usa-error-message" id="{{ error_id }}" role="alert">{{ error }}</span>
-  {% endif %}
 {% endfieldset %}
 {% endform_group %}
 {% endwith %}
