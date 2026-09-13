@@ -13,7 +13,7 @@
 }
 
 .usa-table {
-  color: $usx-text;
+  color: $usx-text-ink;
 
   td,
   th {
@@ -24,7 +24,7 @@
   th,
   thead td {
     background-color: $usx-table-header-bg;
-    color: $usx-text;
+    color: $usx-text-ink;
   }
 
   td {
@@ -39,7 +39,7 @@
 
 .usa-table--striped tbody tr:nth-child(odd) td {
   background-color: $usx-table-stripe-bg;
-  color: $usx-text;
+  color: $usx-text-ink;
 }
 
 .usx-table {
@@ -57,7 +57,7 @@
   // surface/border/text theme instead of just the hover/selected extras
   // further down this file.
   &.usa-table {
-    color: $usx-text;
+    color: $usx-text-ink;
 
     td,
     th {
@@ -68,7 +68,7 @@
     th,
     thead td {
       background-color: $usx-table-header-bg;
-      color: $usx-text;
+      color: $usx-text-ink;
     }
 
     td {
@@ -83,7 +83,7 @@
 
   &.usa-table--striped tbody tr:nth-child(odd) td {
     background-color: $usx-table-stripe-bg;
-    color: $usx-text;
+    color: $usx-text-ink;
   }
 
   // ── Caption ─────────────────────────────────────────────────────────────────
@@ -96,8 +96,8 @@
     margin-bottom: 0.5rem;
     caption-side: top;
 
-    @if $usx-text {
-      color: $usx-text;
+    @if $usx-text-ink {
+      color: $usx-text-ink;
     }
   }
 

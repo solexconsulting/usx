@@ -122,7 +122,7 @@ export const PRESETS = {
     'surface-1': '#161a2e',
     'surface-3': '#0b0e1c',
     'surface-2': '#232849',
-    'text': '#e6e8f5',
+    'text-ink': '#e6e8f5',
     'text-muted': '#dcddff',
     'text-subtle': '#aeafc9',
     'color-info': '#58b4ff',
@@ -139,9 +139,9 @@ export const PRESETS = {
     'usx-link-text-visited': '#c9a8ff',
     'usx-tooltip-bg': '#e6e8f5',
     'usx-tooltip-text': '#0b0e1c',
-    'usx-banner-button-text': 'var(--usx-text)',
+    'usx-banner-button-text': 'var(--usx-text-ink)',
     // The date-picker toggle button's hover/active background defaults to
-    // color-base-light (#a9aeb1) — too close to this preset's light 'text'
+    // color-base-light (#a9aeb1) — too close to this preset's light 'text-ink'
     // color for the calendar icon to stay visible. color-base-dark (#565c65)
     // is the mirrored mid-gray on the dark side of the same scale.
     'usx-date-picker-button-hover-active-bg': '#565c65',
@@ -163,7 +163,7 @@ export const PRESETS = {
     'surface-1': '#1e293b',
     'surface-3': '#0f172a',
     'surface-2': '#334155',
-    'text': '#e2e8f0',
+    'text-ink': '#e2e8f0',
     'text-muted': '#c7c9da',
     'text-subtle': '#aeafc9',
     'usx-summary-box-bg': '#0f1b2e',
@@ -171,7 +171,7 @@ export const PRESETS = {
     'usx-link-text-visited': '#b39ddb',
     'usx-tooltip-bg': '#e2e8f0',
     'usx-tooltip-text': '#020617',
-    'usx-banner-button-text': 'var(--usx-text)',
+    'usx-banner-button-text': 'var(--usx-text-ink)',
     // See Borealis's comment above for why this can't just chain to
     // color-base-light.
     'usx-date-picker-button-hover-active-bg': '#565c65',
@@ -188,7 +188,7 @@ export const PRESETS = {
     'surface-1': '#1c1c1e',
     'surface-3': '#121214',
     'surface-2': '#3a3a3d',
-    'text': '#e5e5e5',
+    'text-ink': '#e5e5e5',
     'text-muted': '#c0c0c0',
     'text-subtle': '#a3a3a3',
     'text-inverse': '#1c1c1e',
@@ -210,7 +210,7 @@ export const PRESETS = {
     // Overrides banner's own surface-2 default — Carbon wants the banner to
     // match the header's surface-3 instead.
     'usx-banner-bg': 'var(--usx-surface-3)',
-    'usx-banner-button-text': 'var(--usx-text)',
+    'usx-banner-button-text': 'var(--usx-text-ink)',
     ...inverseLogoOverrides()
   },
   // The three presets below are sourced from real design systems/sites
@@ -253,8 +253,8 @@ export const PRESETS = {
     // color-primary background it now sits on.
     'usx-header-nav-link-text': 'var(--usx-text-inverse)',
     'usx-header-nav-link-text-hover': 'var(--usx-text-inverse)',
-    'usx-header-secondary-link-text': 'var(--usx-text)',
-    'usx-header-secondary-link-text-hover': 'var(--usx-text)',
+    'usx-header-secondary-link-text': 'var(--usx-text-ink)',
+    'usx-header-secondary-link-text-hover': 'var(--usx-text-ink)',
     'usx-header-nav-bg-mobile': '#f4f8fb',
     'usx-header-nav-link-text-mobile': '#1a65a6',
     'usx-header-nav-link-text-hover-mobile': '#0f385c',

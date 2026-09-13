@@ -52,7 +52,7 @@ export const Dashboard = {
                 <div className="tablet:grid-col-3 margin-bottom-2">
                   <div className="bg-usx-surface-2 border-left-05 usx-border-primary padding-3 usx-rounded-md">
                     <h3 className="margin-0 text-primary font-sans-sm">Total Users</h3>
-                    <div className="font-heading-xl usx-text margin-y-1">12,847</div>
+                    <div className="font-heading-xl text-ink margin-y-1">12,847</div>
                     <div className="text-success font-sans-xs display-flex flex-align-center">
                       <Icon name="trending_up" size="sm" className="margin-right-05" />
                       +12.5% from last month
@@ -63,7 +63,7 @@ export const Dashboard = {
                 <div className="tablet:grid-col-3 margin-bottom-2">
                   <div className="bg-usx-surface-2 border-left-05 usx-border-success padding-3 usx-rounded-md">
                     <h3 className="margin-0 text-success font-sans-sm">Active Sessions</h3>
-                    <div className="font-heading-xl usx-text margin-y-1">3,429</div>
+                    <div className="font-heading-xl text-ink margin-y-1">3,429</div>
                     <div className="text-success font-sans-xs display-flex flex-align-center">
                       <Icon name="trending_up" size="sm" className="margin-right-05" />
                       +8.2% from last month
@@ -74,7 +74,7 @@ export const Dashboard = {
                 <div className="tablet:grid-col-3 margin-bottom-2">
                   <div className="bg-usx-surface-2 border-left-05 usx-border-warning padding-3 usx-rounded-md">
                     <h3 className="margin-0 text-warning font-sans-sm">Conversion Rate</h3>
-                    <div className="font-heading-xl usx-text margin-y-1">24.7%</div>
+                    <div className="font-heading-xl text-ink margin-y-1">24.7%</div>
                     <div className="text-error font-sans-xs display-flex flex-align-center">
                       <Icon name="trending_down" size="sm" className="margin-right-05" />
                       -2.1% from last month
@@ -85,7 +85,7 @@ export const Dashboard = {
                 <div className="tablet:grid-col-3 margin-bottom-2">
                   <div className="bg-usx-surface-2 border-left-05 usx-border-accent-cool padding-3 usx-rounded-md">
                     <h3 className="margin-0 text-accent-cool font-sans-sm">Revenue</h3>
-                    <div className="font-heading-xl usx-text margin-y-1">$89,432</div>
+                    <div className="font-heading-xl text-ink margin-y-1">$89,432</div>
                     <div className="text-success font-sans-xs display-flex flex-align-center">
                       <Icon name="trending_up" size="sm" className="margin-right-05" />
                       +15.3% from last month
@@ -137,7 +137,7 @@ export const Dashboard = {
         rightSidebar={
           <div className="display-flex flex-column margin-top-3 gap-3">
             <div>
-              <h3 className="usx-text margin-top-0 margin-bottom-15">Quick Actions</h3>
+              <h3 className="text-ink margin-top-0 margin-bottom-15">Quick Actions</h3>
               <div className="display-flex flex-column gap-1">
                 <Button variant="primary" className="width-full" leftIcon={{ name: 'add', size: 'sm' }}>
                   Add New User
@@ -155,12 +155,12 @@ export const Dashboard = {
             </div>
 
             <div>
-              <h3 className="usx-text margin-top-0 margin-bottom-15">System Status</h3>
+              <h3 className="text-ink margin-top-0 margin-bottom-15">System Status</h3>
               <div className="display-flex flex-column gap-2">
                 <div className="display-flex flex-align-center gap-1">
                   <Status label="Operational" variant="active" size="md" />
                   <div>
-                    <div className="text-bold font-sans-xs usx-text">API Status</div>
+                    <div className="text-bold font-sans-xs text-ink">API Status</div>
                     <div className="text-base usx-text-muted font-sans-3xs">All systems operational</div>
                   </div>
                 </div>
@@ -168,7 +168,7 @@ export const Dashboard = {
                 <div className="display-flex flex-align-center gap-1">
                   <Status label="Operational" variant="active" size="md" />
                   <div>
-                    <div className="text-bold font-sans-xs usx-text">Database</div>
+                    <div className="text-bold font-sans-xs text-ink">Database</div>
                     <div className="text-base usx-text-muted font-sans-3xs">99.9% uptime</div>
                   </div>
                 </div>
@@ -176,7 +176,7 @@ export const Dashboard = {
                 <div className="display-flex flex-align-center gap-1">
                   <Status label="Scheduled" variant="warning" size="md" />
                   <div>
-                    <div className="text-bold font-sans-xs usx-text">Maintenance</div>
+                    <div className="text-bold font-sans-xs text-ink">Maintenance</div>
                     <div className="text-base usx-text-muted font-sans-3xs">March 20, 2:00 AM - 4:00 AM</div>
                   </div>
                 </div>

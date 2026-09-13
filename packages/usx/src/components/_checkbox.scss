@@ -2,8 +2,8 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usa-checkbox__label {
-  @if $usx-text {
-    color: $usx-text;
+  @if $usx-text-ink {
+    color: $usx-text-ink;
   }
 }
 

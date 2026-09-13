@@ -203,7 +203,7 @@ export const themeManifest = [
   // the theme/state color families, these are the only tokens needed to
   // build background and text colors anywhere in USX — there is no separate
   // raw text-color primitive tier.
-  //   text          — primary body/ink color
+  //   text-ink      — primary body/ink color
   //   text-muted    — real USWDS bakes several nav/stepper text colors to
   //                   its "base-dark" gray (#565c65) at build time — darker
   //                   than text-subtle (nav primary links/buttons, sidenav
@@ -214,7 +214,7 @@ export const themeManifest = [
   //                   of the theme's main surfaces (e.g. a colored button,
   //                   or a banner/dropdown panel that stays dark even under
   //                   a light theme)
-  c('text', '#1b1b1b'),
+  c('text-ink', '#1b1b1b'),
   c('text-muted', '#565c65'),
   c('text-subtle', '#71767a'),
   c('text-inverse', '#ffffff'),
@@ -327,14 +327,14 @@ export const themeManifest = [
   // usx-alert-info-background-color does) instead of a standalone duplicate.
   component('usx-summary-box-bg', '#e7f6f8', 'color-info-lighter'),
   component('usx-summary-box-border-color', '#99deea', 'color-info-light'),
-  component('usx-summary-box-text', '#1b1b1b', 'text'),
+  component('usx-summary-box-text', '#1b1b1b', 'text-ink'),
   component('usx-summary-box-link-text', '#005ea2', 'color-primary'),
   component('usx-summary-box-link-text-hover', '#1a4480', 'color-primary-dark'),
   component('usx-accordion-bg', '#f0f0f0', 'surface-2'),
   component('usx-accordion-bg-hover', '#e6e6e6', 'surface-3'),
   component('usx-accordion-content-bg', '#ffffff', 'surface-1'),
-  component('usx-accordion-text', 'var(--usx-text)'),
-  component('usx-accordion-content-text', 'var(--usx-text)'),
+  component('usx-accordion-text', 'var(--usx-text-ink)'),
+  component('usx-accordion-content-text', 'var(--usx-text-ink)'),
   setting('usx-accordion-icon-position', '1.25rem auto'),
   setting('usx-accordion-icon-padding-start', '3.5rem', true),
   setting('usx-accordion-icon-padding-end', '1.25rem', true),
@@ -345,7 +345,7 @@ export const themeManifest = [
   // USWDS defaults: background "base-lightest" (-> surface-2), auto-contrast
   // text (-> text), action link/chevron following the shared link color.
   component('usx-banner-bg', '#dfe1e2', 'surface-2'),
-  component('usx-banner-text', '#1b1b1b', 'text'),
+  component('usx-banner-text', '#1b1b1b', 'text-ink'),
   component('usx-banner-button-text', '#005ea2', 'usx-link-text'),
   component('usx-banner-chevron-text', '#005ea2', 'color-primary'),
   component('usx-carousel-dot-bg', '#c0c0c0'),
@@ -375,11 +375,11 @@ export const themeManifest = [
   // regardless of theme — same callout role as usx-accordion-bg/
   // usx-banner-bg, so it chains to the same surface-2/text roles.
   component('usx-file-input-preview-bg', '#d9e8f6', 'surface-2'),
-  component('usx-file-input-preview-text', '#1b1b1b', 'text'),
+  component('usx-file-input-preview-text', '#1b1b1b', 'text-ink'),
   component('usx-task-list-bg-hover', 'var(--usx-surface-2)'),
   // Shared by both checkbox and radio unchecked ::before styling.
   component('usx-checkable-bg', 'var(--usx-surface-1)'),
-  component('usx-checkable-border', 'var(--usx-text)'),
+  component('usx-checkable-border', 'var(--usx-text-ink)'),
   component('usx-sidenav-bg-hover', 'var(--usx-surface-2)'),
   component('usx-sidenav-border', 'var(--usx-color-border)'),
   // Unlike tile/selector/sidenav (which have a visible border in USWDS by
@@ -395,7 +395,7 @@ export const themeManifest = [
   // Chains to $text at the Sass level (see _variables.scss), so unthemed
   // output just inherits the ambient ink color; a theme with a dark/colored
   // header can override this independently to var(--usx-text-inverse).
-  component('usx-header-text', 'var(--usx-text)'),
+  component('usx-header-text', 'var(--usx-text-ink)'),
   // Unlike the header, real USWDS's mobile nav IS an opaque white off-canvas
   // drawer (not "no background") — default to that explicitly rather than
   // transparent, or the drawer becomes see-through until a theme opts in.
@@ -430,12 +430,12 @@ export const themeManifest = [
   // section sits on a drastically different surface (e.g. NASA's black
   // surface-3) needs to override these without affecting the ambient
   // text/color-primary roles used elsewhere.
-  component('usx-footer-text', 'var(--usx-text)'),
+  component('usx-footer-text', 'var(--usx-text-ink)'),
   component('usx-footer-link-text', 'var(--usx-color-primary)'),
   component('usx-footer-link-text-hover', 'var(--usx-color-primary-dark)'),
   component('usx-footer-secondary-link-text', 'var(--usx-color-primary)'),
   component('usx-footer-secondary-link-text-hover', 'var(--usx-color-primary-dark)'),
-  component('usx-footer-heading-text', 'var(--usx-text)'),
+  component('usx-footer-heading-text', 'var(--usx-text-ink)'),
   // Secondary-section headings (logo/contact) chain to the primary heading
   // color by default but can be overridden independently since they sit on
   // usx-footer-secondary-bg-color rather than usx-footer-primary-bg-color.
@@ -447,9 +447,9 @@ export const themeManifest = [
   // so headings/copy stay legible instead of getting stuck on real USWDS's
   // static, non-themeable body text color.
   component('usx-page-bg', 'var(--usx-surface-1)'),
-  component('usx-page-text', 'var(--usx-text)'),
+  component('usx-page-text', 'var(--usx-text-ink)'),
   component('usx-section-bg', 'transparent'),
-  component('usx-section-text', 'var(--usx-text)'),
+  component('usx-section-text', 'var(--usx-text-ink)'),
   // Hover/selected row highlights alias the surface-2/surface-3 roles (like
   // usx-sidenav-hover-color above) instead of a color-primary blue tint, so
   // the table's aesthetic stays neutral and in step with the rest of the
@@ -469,7 +469,7 @@ export const themeManifest = [
   component('usx-table-placeholder-text', 'var(--usx-text-subtle)'),
   component('usx-table-sorted-column-bg', 'var(--usx-color-accent-cool)'),
   component('usx-table-grouped-row-bg', 'var(--usx-surface-3)'),
-  component('usx-table-grouped-row-text', 'var(--usx-text)'),
+  component('usx-table-grouped-row-text', 'var(--usx-text-ink)'),
   // Real USWDS bakes the tooltip's background/font color as fixed values at
   // its own build time, so it never followed our theme. Defaults mirror
   // color-base-darkest/text-inverse (see _variables.scss) — a stable,
@@ -484,7 +484,7 @@ export const themeManifest = [
   // Real USWDS bakes the date-picker toggle button's calendar icon as a
   // fixed-color background-image at build time, so it never follows the
   // theme; repainted via mask-image instead (see _date-picker.scss).
-  component('usx-date-picker-button-icon-color', 'var(--usx-text)'),
+  component('usx-date-picker-button-icon-color', 'var(--usx-text-ink)'),
   // Hover and active share one token/color by design (see themePresets.js's
   // Midnight/Carbon/Borealis overrides for why dark presets need their own
   // hardcoded value here instead of just chaining to color-base-light).
@@ -519,11 +519,11 @@ export const themeManifest = [
   // defaults transparent (opts back into a filled surface-2 card only on
   // presets with a dark shell — see themePresets.js/Theme.stories.jsx).
   component('usx-in-page-nav-bg', 'transparent'),
-  component('usx-in-page-nav-text', 'var(--usx-text)'),
+  component('usx-in-page-nav-text', 'var(--usx-text-ink)'),
   component('usx-in-page-nav-border', 'var(--usx-color-border)'),
   component('usx-in-page-nav-link-text', 'var(--usx-link-text)'),
   component('usx-in-page-nav-link-text-hover', 'var(--usx-link-text-hover)'),
-  component('usx-in-page-nav-current-text', 'var(--usx-text)'),
+  component('usx-in-page-nav-current-text', 'var(--usx-text-ink)'),
   component('usx-in-page-nav-bar', 'var(--usx-color-primary)'),
 
   // Real USWDS hardcodes breadcrumb text/background to fixed
@@ -532,24 +532,24 @@ export const themeManifest = [
   // transparent so it inherits whatever surface it's placed on; text/link
   // chain to the shared text/link tokens.
   component('usx-breadcrumb-bg', 'transparent'),
-  component('usx-breadcrumb-text', 'var(--usx-text)'),
+  component('usx-breadcrumb-text', 'var(--usx-text-ink)'),
   component('usx-breadcrumb-link-text', 'var(--usx-link-text)'),
   component('usx-breadcrumb-link-text-hover', 'var(--usx-link-text-hover)'),
-  component('usx-breadcrumb-current-text', 'var(--usx-text)'),
+  component('usx-breadcrumb-current-text', 'var(--usx-text-ink)'),
 
   // Real USWDS hardcodes process-list heading/number-circle text to
   // #1b1b1b and the connecting line + circle border to fixed light-blue/
   // gray-cool literals, none of which follow a runtime theme override.
-  component('usx-process-list-heading-text', 'var(--usx-text)'),
+  component('usx-process-list-heading-text', 'var(--usx-text-ink)'),
   component('usx-process-list-border', '#d9e8f6', 'color-primary'),
-  component('usx-process-list-counter-text', 'var(--usx-text)'),
-  component('usx-process-list-counter-border', 'var(--usx-text)'),
+  component('usx-process-list-counter-text', 'var(--usx-text-ink)'),
+  component('usx-process-list-counter-border', 'var(--usx-text-ink)'),
   component('usx-process-list-counter-ring', 'var(--usx-surface-1)'),
 
   // Real USWDS never sets a color on collection meta/description — they
   // inherit ambient text (the heading link is already themed via .usx-link).
   component('usx-collection-meta-text', 'var(--usx-text-subtle)'),
-  component('usx-collection-description-text', 'var(--usx-text)'),
+  component('usx-collection-description-text', 'var(--usx-text-ink)'),
 
   // Real USWDS's compiled CSS hardcodes pagination link/button text and the
   // current-page underline to literal `color("primary")`/`color("primary-
@@ -562,7 +562,7 @@ export const themeManifest = [
   // white bg / #1b1b1b text, which floats as an opaque box over a themed
   // (e.g. dark) page background instead of blending into it.
   component('usx-pagination-bg', 'transparent'),
-  component('usx-pagination-text', 'var(--usx-text)'),
+  component('usx-pagination-text', 'var(--usx-text-ink)'),
   // Real USWDS hardcodes the button border to rgba(27,27,27,.2), a black-
   // based translucent border that's drowned out on dark surfaces.
   component('usx-pagination-button-border', 'var(--usx-color-border)'),

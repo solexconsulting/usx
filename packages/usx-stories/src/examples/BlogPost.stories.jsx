@@ -109,7 +109,7 @@ export const BlogPost = {
         }
         rightSidebar={
           <div className="display-flex flex-column margin-top-3 margin-right-1 gap-2">
-            <h3 className="usx-text margin-bottom-1">Related Articles</h3>
+            <h3 className="text-ink margin-bottom-1">Related Articles</h3>
             <ul className="usa-list usa-list--unstyled">
               <li className="margin-bottom-1"><a className="usa-link usx-link" href="#">Cloud Migration Strategies</a></li>
               <li className="margin-bottom-1"><a className="usa-link usx-link" href="#">AI in Modern Business</a></li>
@@ -117,7 +117,7 @@ export const BlogPost = {
               <li><a className="usa-link usx-link" href="#">Agile Development Methods</a></li>
             </ul>
 
-            <h3 className="usx-text margin-bottom-1">Tags</h3>
+            <h3 className="text-ink margin-bottom-1">Tags</h3>
             <TagGroup
               tags={[
                 { value: 'Digital Transformation', color: 'primary' },

@@ -77,9 +77,9 @@
   }
 }
 
-@if $usx-text {
+@if $usx-text-ink {
   .usa-file-input__instructions {
-    color: $usx-text;
+    color: $usx-text-ink;
   }
 }
 

@@ -122,7 +122,7 @@ export const SearchResults = {
         }
         leftSidebar={
           <div className="display-flex flex-column margin-top-3 gap-2">
-            <h3 className="usx-text margin-top-0 margin-bottom-15">Filter Results</h3>
+            <h3 className="text-ink margin-top-0 margin-bottom-15">Filter Results</h3>
             <div>
               <Select
                 id="category-filter"

@@ -4,8 +4,8 @@
 .usa-label,
 .usa-legend,
 .usa-fieldset > legend {
-  @if $usx-text {
-    color: $usx-text;
+  @if $usx-text-ink {
+    color: $usx-text-ink;
   }
 }
 

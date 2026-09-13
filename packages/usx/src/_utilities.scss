@@ -26,7 +26,7 @@
 
 @each $color-name, $color-value in $text-colors {
   @if $color-value {
-    .#{$color-name} {
+    .text-#{$color-name} {
       color: $color-value !important;
     }
 

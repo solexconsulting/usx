@@ -10,7 +10,7 @@ const COLOR_NAMES = [
   'accent-warm', 'base', 'info', 'warning', 'success', 'error', 'emergency',
   'disabled', 'beta', 'dev', 'test'
 ];
-const TEXT_COLOR_NAMES = ['usx-text', 'usx-text-muted', 'usx-text-subtle', 'usx-text-inverse'];
+const TEXT_COLOR_NAMES = ['text-ink', 'usx-text-muted', 'usx-text-subtle', 'usx-text-inverse'];
 const SURFACE_COLOR_NAMES = ['usx-surface-1', 'usx-surface-2', 'usx-surface-3'];
 
 function Swatch({ label, style }) {
@@ -165,14 +165,14 @@ export const Utilities = {
         ))}
       </div>
 
-      <h3>Text-Role Utilities (<code>.usx-text*</code>)</h3>
+      <h3>Text-Role Utilities (<code>.text-ink</code>, <code>.usx-text*</code>)</h3>
       <p>
         Generated from the <code>$text-colors</code> map. Class names use the bare token role (no <code>text-</code> prefix):
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
         <div style={{ border: '1px solid #dfe1e2', borderRadius: '6px', padding: '0.75rem', background: '#ffffff' }}>
-          <div className="usx-text" style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>Primary body ink</div>
-          <code style={{ fontSize: '0.8rem' }}>.usx-text</code>
+          <div className="text-ink" style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>Primary body ink</div>
+          <code style={{ fontSize: '0.8rem' }}>.text-ink</code>
         </div>
         <div style={{ border: '1px solid #dfe1e2', borderRadius: '6px', padding: '0.75rem', background: '#ffffff' }}>
           <div className="usx-text-muted" style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>Nav &amp; pending ink</div>

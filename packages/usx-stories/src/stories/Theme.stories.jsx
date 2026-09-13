@@ -92,7 +92,7 @@ const ENVIRONMENT_COLOR_NAMES = ['color-beta', 'color-test', 'color-dev'];
 // relationship.
 const SURFACE_COLOR_NAMES = ['surface-1', 'surface-2', 'surface-3'];
 const BORDER_COLOR_NAMES = ['color-border'];
-const TEXT_COLOR_NAMES = ['text', 'text-muted', 'text-subtle', 'text-inverse'];
+const TEXT_COLOR_NAMES = ['text-ink', 'text-muted', 'text-subtle', 'text-inverse'];
 const SURFACE_TEXT_COLOR_NAMES = [...SURFACE_COLOR_NAMES, ...BORDER_COLOR_NAMES, ...TEXT_COLOR_NAMES];
 const SURFACE_TEXT_GROUPS = [
   { label: 'Surfaces', names: SURFACE_COLOR_NAMES },
@@ -204,7 +204,7 @@ function groupComponentColors(tokens) {
 // The summary box sits on its own fixed "info" tint (cyan-5/cyan-20) rather
 // than the main surface/text system, so its background never follows a
 // randomized dark theme — but its text/link colors DO `derivedFrom` the
-// randomized 'text'/'color-primary' bases and would otherwise cascade via
+// randomized 'text-ink'/'color-primary' bases and would otherwise cascade via
 // resolveTheme(), e.g. flipping to white text on a background that stays
 // light. Pin all of these to their designed defaults; only its (unrelated)
 // radius token is left free to vary.
@@ -280,15 +280,15 @@ function randomPalette() {
   // text) then follows text/text-inverse here so it flips right along with
   // the rest of the dark theme instead of staying a dark-on-dark chip.
   if (isDark) {
-    overrides['text'] = '#ffffff';
+    overrides['text-ink'] = '#ffffff';
     overrides['text-muted'] = '#d1d1d6';
     overrides['text-subtle'] = '#b9b9bb';
     overrides['text-inverse'] = '#1b1b1b';
     overrides['usx-link-text-visited'] = '#b39ddb';
-    overrides['usx-tooltip-bg'] = overrides['text'];
+    overrides['usx-tooltip-bg'] = overrides['text-ink'];
     overrides['usx-tooltip-text'] = overrides['text-inverse'];
     // Same reasoning as the Midnight/Carbon/Borealis presets in
-    // themePresets.js: color-base-light is too close to a light 'text' for
+    // themePresets.js: color-base-light is too close to a light 'text-ink' for
     // the calendar icon to stay visible on hover/active.
     overrides['usx-date-picker-button-hover-active-bg'] = '#565c65';
     // Nav background defaults transparent; fill it with a surface once we've
@@ -354,12 +354,12 @@ function randomSystemPalette() {
   // See randomPalette() above for why text-inverse flips opposite of text
   // and the tooltip follows both.
   if (isDark) {
-    overrides['text'] = '#ffffff';
+    overrides['text-ink'] = '#ffffff';
     overrides['text-muted'] = lookupHex('gray-cool', '20') || '#d1d1d6';
     overrides['text-subtle'] = lookupHex('gray-cool', '30') || '#b9b9bb';
     overrides['text-inverse'] = '#1b1b1b';
     overrides['usx-link-text-visited'] = '#b39ddb';
-    overrides['usx-tooltip-bg'] = overrides['text'];
+    overrides['usx-tooltip-bg'] = overrides['text-ink'];
     overrides['usx-tooltip-text'] = overrides['text-inverse'];
     // See randomPalette() above for why this can't just chain to
     // color-base-light.
@@ -489,6 +489,24 @@ const PLAYGROUND_CSS = `
   padding: .6rem; border-radius: 8px; border: 1px solid #2d3339; background: #1e2227; color: #d4d8de; resize: vertical;
 }
 .usx-pg-textarea:focus { outline: none; border-color: var(--pg-accent); }
+.usx-pg-scale-header {
+  display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.usx-pg-scale-header span { font-size: 0.68rem; font-weight: 600; text-align: center; }
+.usx-pg-scale-row { margin-bottom: 0.85rem; }
+.usx-pg-scale-row:last-child { margin-bottom: 0; }
+.usx-pg-scale-row-label {
+  font-size: 0.72rem; font-weight: 600; text-align: center; text-transform: capitalize;
+  margin-bottom: 0.3rem;
+}
+.usx-pg-scale-cells { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.5rem; }
+.usx-pg-scale-cell { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; min-width: 0; }
+.usx-pg-scale-swatch { width: 100%; height: 2.75rem; border-radius: 6px; }
+.usx-pg-scale-hex {
+  font-size: 0.58rem; opacity: .6; max-width: 100%; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap;
+}
 .usx-pg-container { display: flex; align-items: flex-start; }
 .usx-pg-sidebar {
   width: 24rem; flex-shrink: 0; height: 100vh; position: sticky; top: 0;
@@ -542,6 +560,14 @@ const PLAYGROUND_CSS = `
   .usx-pg-fab-count {
     background: rgba(255, 255, 255, 0.2); border-radius: 999px; padding: 0.05rem 0.45rem; font-size: 0.72rem;
   }
+  /* Shorter, wider swatches fit more rows in view without horizontal
+     scrolling — the 7-column grid above already shrinks column width
+     fluidly, this just cuts each cell's height and drops the per-swatch
+     hex label (still available via the cell's title attribute on tap). */
+  .usx-pg-scale-header, .usx-pg-scale-cells { gap: 0.25rem; }
+  .usx-pg-scale-header span { font-size: 0.6rem; }
+  .usx-pg-scale-swatch { height: 1.35rem; border-radius: 4px; }
+  .usx-pg-scale-hex { display: none; }
 }
 `;
 
@@ -1202,50 +1228,35 @@ function ColorScaleGrid({ resolved }) {
   return (
     <div style={{ ...ui.card, breakInside: 'avoid', columnSpan: 'all', marginTop: '1rem' }}>
       <h3 style={ui.cardTitle}>Color scale — lightest to darkest</h3>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: `9rem repeat(${LIGHTNESS_LADDER_STEPS.length}, 1fr)`,
-          gap: '0.4rem 0.5rem',
-          alignItems: 'center'
-        }}
-      >
-        <span />
+      <div className="usx-pg-scale-header">
         {LIGHTNESS_LADDER_STEPS.map((step) => (
-          <span
-            key={step.key}
-            style={{ fontSize: '0.68rem', fontWeight: 600, textAlign: 'center' }}
-          >
-            {step.label}
-          </span>
+          <span key={step.key}>{step.label}</span>
         ))}
+      </div>
 
-        {rows.map((row) => (
-          <React.Fragment key={row.name}>
-            <span style={{ fontSize: '0.72rem', fontWeight: 600 }}>
-              {row.name.replace(/^color-/, '').replace(/-/g, ' ')}
-            </span>
+      {rows.map((row) => (
+        <div key={row.name} className="usx-pg-scale-row">
+          <div className="usx-pg-scale-row-label">{row.name.replace(/^color-/, '').replace(/-/g, ' ')}</div>
+          <div className="usx-pg-scale-cells">
             {row.cells.map((cell, i) => (
               <div
                 key={`${row.name}-${LIGHTNESS_LADDER_STEPS[i].key}`}
                 title={cell.name ? `${cell.name}: ${cell.hex}` : undefined}
-                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.15rem' }}
+                className="usx-pg-scale-cell"
               >
                 <div
+                  className="usx-pg-scale-swatch"
                   style={{
-                    width: '2.75rem',
-                    height: '2.75rem',
-                    borderRadius: '6px',
                     background: cell.hex || 'transparent',
                     border: cell.hex ? '1px solid rgba(0,0,0,.08)' : '1px dashed rgba(0,0,0,.15)'
                   }}
                 />
-                {cell.hex && <code style={{ fontSize: '0.58rem', opacity: 0.6 }}>{cell.hex}</code>}
+                {cell.hex && <code className="usx-pg-scale-hex">{cell.hex}</code>}
               </div>
             ))}
-          </React.Fragment>
-        ))}
-      </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -1978,7 +1989,7 @@ function ThemePlayground({ initialTheme } = {}) {
           flex: 1,
           minWidth: 0,
           background: resolved['surface-1'],
-          color: resolved['text'],
+          color: resolved['text-ink'],
           boxSizing: 'border-box'
         }}
       >

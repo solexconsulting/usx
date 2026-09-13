@@ -303,7 +303,7 @@ $usx-color-dev: usx-var($usx-color-dev-var) !default;
 // the theme/state color families, these are the only tokens needed to build
 // background and text colors anywhere in USX — there is no separate raw
 // text-color primitive tier.
-//   $usx-text          — primary body/ink color
+//   $usx-text-ink      — primary body/ink color
 //   $usx-text-muted    — real USWDS bakes several nav/stepper text colors to its
 //                    "base-dark" gray (#565c65) at build time — darker/more
 //                    pronounced than $usx-text-subtle (nav primary links/buttons,
@@ -313,8 +313,8 @@ $usx-color-dev: usx-var($usx-color-dev-var) !default;
 //                    eyebrows, etc.)
 //   $usx-text-inverse  — text drawn on a surface that's the opposite polarity of
 //                    the theme's main surfaces
-$usx-text-var: null !default;
-$usx-text: usx-var($usx-text-var) !default;
+$usx-text-ink-var: null !default;
+$usx-text-ink: usx-var($usx-text-ink-var) !default;
 
 $usx-text-muted-var: null !default;
 $usx-text-muted: usx-var($usx-text-muted-var) !default;
@@ -346,10 +346,10 @@ $colors: (
 ) !default;
 
 $text-colors: (
-  'usx-text':          $usx-text,
-  'usx-text-muted':    $usx-text-muted,
-  'usx-text-subtle':   $usx-text-subtle,
-  'usx-text-inverse':  $usx-text-inverse,
+  'ink':      $usx-text-ink,
+  'muted':    $usx-text-muted,
+  'subtle':   $usx-text-subtle,
+  'inverse':  $usx-text-inverse,
 ) !default;
 
 $surface-colors: (
@@ -635,7 +635,7 @@ $usx-alert-text-font-size: null !default;
 $usx-alert-text-line-height: null !default;
 
 // ── Component tokens: Hero (custom; defaults baked in _hero.scss) ───────────
-// Neutral dark box regardless of theme polarity: $usx-text flips to a light
+// Neutral dark box regardless of theme polarity: $usx-text-ink flips to a light
 // value under dark presets (Midnight/Carbon), so Hero can't chain to it the
 // way Header/Footer do. Defaults to $usx-color-base-darkest instead — the same
 // theme-invariant neutral used by Tooltip — paired with $usx-text-inverse for
@@ -696,7 +696,7 @@ $usx-summary-box-padding: null !default;
 $usx-summary-box-bg-var: null !default;
 $usx-summary-box-bg: usx-var($usx-summary-box-bg-var, $usx-color-info-lighter) !default;
 $usx-summary-box-text-var: null !default;
-$usx-summary-box-text: usx-var($usx-summary-box-text-var, $usx-text) !default;
+$usx-summary-box-text: usx-var($usx-summary-box-text-var, $usx-text-ink) !default;
 $usx-summary-box-link-text-var: null !default;
 $usx-summary-box-link-text: usx-var($usx-summary-box-link-text-var, $usx-color-primary) !default;
 $usx-summary-box-link-text-hover-var: null !default;
@@ -767,14 +767,14 @@ $usx-range-slider-border-width: usx-var($usx-range-slider-border-width-var, $usx
 $usx-file-input-preview-bg-var: null !default;
 $usx-file-input-preview-bg: usx-var($usx-file-input-preview-bg-var, $usx-surface-2) !default;
 $usx-file-input-preview-text-var: null !default;
-$usx-file-input-preview-text: usx-var($usx-file-input-preview-text-var, $usx-text) !default;
+$usx-file-input-preview-text: usx-var($usx-file-input-preview-text-var, $usx-text-ink) !default;
 
 // ── Component tokens: Switch ──────────────────────────────────────────────
 // Default border width matches the width of checkboxes and radio buttons
 $usx-switch-border-width-var: null !default;
 $usx-switch-border-width: usx-var($usx-switch-border-width-var, 2px) !default;
 $usx-switch-border-off-var: null !default;
-$usx-switch-border-off: usx-var($usx-switch-border-off-var, $usx-text) !default;
+$usx-switch-border-off: usx-var($usx-switch-border-off-var, $usx-text-ink) !default;
 $usx-switch-track-bg-var: null !default;
 $usx-switch-track-bg: usx-var($usx-switch-track-bg-var, $usx-surface-2) !default;
 
@@ -804,7 +804,7 @@ $usx-accordion-content-bg: usx-var($usx-accordion-content-bg-var, $usx-surface-1
 
 // Real USWDS CSS bakes button/content text as a fixed dark "ink" color at
 // build time (computed against USWDS's own light default background), so it
-// never follows our runtime background overrides above. Chaining to $usx-text
+// never follows our runtime background overrides above. Chaining to $usx-text-ink
 // (rather than leaving this null) keeps Default-theme output visually
 // identical (both resolve to #1b1b1b) while automatically flipping to
 // light text on dark presets (Carbon, Midnight) with zero preset-specific
@@ -816,14 +816,14 @@ $usx-accordion-content-bg: usx-var($usx-accordion-content-bg-var, $usx-surface-1
 //
 // CONVENTION: any component background token that tracks surface-1/
 // surface-2/surface-3 should pair with a `$usx-<component>-text`
-// token following this same `usx-var($hook, $usx-text)` pattern — don't rely on
+// token following this same `usx-var($hook, $usx-text-ink)` pattern — don't rely on
 // cascade, since USWDS's compiled CSS often sets its own explicit (frozen)
 // color.
 $usx-accordion-text-var: null !default;
-$usx-accordion-text: usx-var($usx-accordion-text-var, $usx-text) !default;
+$usx-accordion-text: usx-var($usx-accordion-text-var, $usx-text-ink) !default;
 
 $usx-accordion-content-text-var: null !default;
-$usx-accordion-content-text: usx-var($usx-accordion-content-text-var, $usx-text) !default;
+$usx-accordion-content-text: usx-var($usx-accordion-content-text-var, $usx-text-ink) !default;
 
 $usx-accordion-radius-var: null !default;
 $usx-accordion-radius: usx-var($usx-accordion-radius-var, $usx-radius-none) !default;
@@ -884,21 +884,21 @@ $usx-checkable-bg-var: null !default;
 $usx-checkable-bg: usx-var($usx-checkable-bg-var, $usx-surface-1) !default;
 
 $usx-checkable-border-var: null !default;
-$usx-checkable-border: usx-var($usx-checkable-border-var, $usx-text) !default;
+$usx-checkable-border: usx-var($usx-checkable-border-var, $usx-text-ink) !default;
 
 // ── Component tokens: Banner ─────────────────────────────────────────────────
 // Real USWDS's background is actually "base-lightest" (surface-3's hex),
 // but banner groups with table headers/accordion/callouts/footer-primary
 // under surface-2 for a consistent shared tone — see the surface-1/2/3
-// mapping note in theme-manifest.js. Text chains to $usx-text (USWDS
-// auto-contrasts to dark ink against the light default background; $usx-text
+// mapping note in theme-manifest.js. Text chains to $usx-text-ink (USWDS
+// auto-contrasts to dark ink against the light default background; $usx-text-ink
 // gives the same result while staying overridable/theme-aware). The
 // "Here's how you know" action link/chevron follow the shared link color.
 $usx-banner-bg-var: null !default;
 $usx-banner-bg: usx-var($usx-banner-bg-var, $usx-surface-2) !default;
 
 $usx-banner-text-var: null !default;
-$usx-banner-text: usx-var($usx-banner-text-var, $usx-text) !default;
+$usx-banner-text: usx-var($usx-banner-text-var, $usx-text-ink) !default;
 
 $usx-banner-button-text-var: null !default;
 $usx-banner-button-text: usx-var($usx-banner-button-text-var, $usx-link-text) !default;
@@ -913,13 +913,13 @@ $usx-banner-chevron-text: usx-var($usx-banner-chevron-text-var) !default;
 // defaults the hooks below to transparent) rather than forcing a surface
 // color on unthemed output; the surface-3 fallback only kicks in once a
 // consumer/preset opts into a themed shell. $usx-header-text chains
-// to $usx-text by default (matching the ambient ink color) but, unlike the
+// to $usx-text-ink by default (matching the ambient ink color) but, unlike the
 // other tokens here, is its own hook — so a theme with a dark/colored
 // header (surface-3) can flip it to $usx-text-inverse independently of body text.
 $usx-header-bg-var: null !default;
 $usx-header-bg:     usx-var($usx-header-bg-var, $usx-surface-3) !default;
 $usx-header-text-var: null !default;
-$usx-header-text: usx-var($usx-header-text-var, $usx-text) !default;
+$usx-header-text: usx-var($usx-header-text-var, $usx-text-ink) !default;
 $usx-header-border-var: null !default;
 $usx-header-border: usx-var($usx-header-border-var, $usx-color-border) !default;
 $usx-header-border-bottom:          null                                           !default;
@@ -971,7 +971,7 @@ $usx-header-nav-link-bg-hover:  usx-var($usx-header-nav-link-bg-hover-var, $usx-
 // ── Component tokens: Footer ────────────────────────────────────────────────
 // Same rationale as Header/Nav above: USWDS's real footer sections use
 // light-gray surfaces with ordinary ink/primary-link colors, not a fixed
-// dark brand color. Chaining to the shared $usx-surface-2/$usx-surface-3/$usx-text
+// dark brand color. Chaining to the shared $usx-surface-2/$usx-surface-3/$usx-text-ink
 // roles (rather than the raw USWDS base-family tiers) keeps Default
 // USWDS-accurate while still flipping dark under Carbon/Midnight.
 $usx-footer-bg-var: null !default;
@@ -980,7 +980,7 @@ $usx-footer-bg:     usx-var($usx-footer-bg-var, $usx-surface-3)        !default;
 // drastically different (e.g. NASA's black secondary section, chained from
 // surface-3) can override these independently of the ambient text role.
 $usx-footer-text-var: null !default;
-$usx-footer-text:           usx-var($usx-footer-text-var, $usx-text)       !default;
+$usx-footer-text:           usx-var($usx-footer-text-var, $usx-text-ink)       !default;
 $usx-footer-link-text-var: null !default;
 $usx-footer-link-text:           usx-var($usx-footer-link-text-var, $usx-color-primary) !default;
 $usx-footer-link-text-hover-var: null !default;
@@ -990,7 +990,7 @@ $usx-footer-secondary-link-text:           usx-var($usx-footer-secondary-link-te
 $usx-footer-secondary-link-text-hover-var: null !default;
 $usx-footer-secondary-link-text-hover:     usx-var($usx-footer-secondary-link-text-hover-var, $usx-color-primary-dark) !default;
 $usx-footer-heading-text-var: null !default;
-$usx-footer-heading-text:        usx-var($usx-footer-heading-text-var, $usx-text)    !default;
+$usx-footer-heading-text:        usx-var($usx-footer-heading-text-var, $usx-text-ink)    !default;
 // Independent override for the secondary-section headings (logo/contact) —
 // that section sits on $usx-footer-secondary-bg (chained from
 // surface-3), a visually distinct surface from the primary section's
@@ -1034,18 +1034,18 @@ $usx-footer-secondary-section-border-top: usx-when($usx-footer-secondary-section
 // ancestor to paint that surface, so Page must be able to paint it itself.
 // Section has no ancestor of its own to fall back on that way, so it stays
 // transparent by default (it's always nested in a Page or Layout already
-// painting the surface). Text on both is chained to $usx-text so headings
+// painting the surface). Text on both is chained to $usx-text-ink so headings
 // and copy stay legible instead of getting stuck on real USWDS's static,
 // non-themeable body text color.
 $usx-page-bg-var: null !default;
 $usx-page-bg: usx-var($usx-page-bg-var, $usx-surface-1) !default;
 $usx-page-text-var: null !default;
-$usx-page-text: usx-var($usx-page-text-var, $usx-text) !default;
+$usx-page-text: usx-var($usx-page-text-var, $usx-text-ink) !default;
 
 $usx-section-bg-var: null !default;
 $usx-section-bg: usx-var($usx-section-bg-var) !default;
 $usx-section-text-var: null !default;
-$usx-section-text: usx-var($usx-section-text-var, $usx-text) !default;
+$usx-section-text: usx-var($usx-section-text-var, $usx-text-ink) !default;
 
 // ── Component tokens: Carousel (custom; defaults baked in _carousel.scss) ───
 $usx-carousel-dot-bg-var: null !default;
@@ -1113,7 +1113,7 @@ $usx-step-indicator-segment-label-text: $usx-text-muted !default;
 // legible even if a preset darkens the ambient surface.
 $usx-step-indicator-counter-text: $usx-text-inverse !default;
 
-$usx-step-indicator-heading-text: $usx-text !default;
+$usx-step-indicator-heading-text: $usx-text-ink !default;
 
 // ── Component tokens: Table (custom; defaults baked in _table.scss) ─────────
 // Real USWDS bakes the table's base cell background (white), header/footer
@@ -1134,7 +1134,7 @@ $usx-table-stripe-bg: usx-var($usx-table-stripe-bg-var, $usx-surface-3) !default
 $usx-table-grouped-row-bg-var: null !default;
 $usx-table-grouped-row-bg: usx-var($usx-table-grouped-row-bg-var, $usx-color-primary-lighter) !default;
 $usx-table-grouped-row-text-var: null !default;
-$usx-table-grouped-row-text: usx-var($usx-table-grouped-row-text-var, $usx-text) !default;
+$usx-table-grouped-row-text: usx-var($usx-table-grouped-row-text-var, $usx-text-ink) !default;
 
 // Hover/selected row highlights alias the surface-2/surface-3 roles (like
 // $usx-sidenav-bg-hover and $usx-task-list-bg-hover) rather
@@ -1160,7 +1160,7 @@ $usx-table-placeholder-text: usx-var($usx-table-placeholder-text-var, $usx-text-
 $usx-table-sorted-column-bg-var: null !default;
 $usx-table-sorted-column-bg: usx-var($usx-table-sorted-column-bg-var, $usx-color-primary-dark) !default;
 $usx-table-sorted-column-text-var: null !default;
-$usx-table-sorted-column-text: usx-var($usx-table-sorted-column-text-var, $usx-text) !default;
+$usx-table-sorted-column-text: usx-var($usx-table-sorted-column-text-var, $usx-text-ink) !default;
 
 // ── Component tokens: Task List (custom; defaults baked in _task-list.scss) ──
 $usx-task-list-border-var: null !default;
@@ -1202,7 +1202,7 @@ $usx-misc-banner-badge-radius: usx-var($usx-misc-banner-badge-radius-var, $usx-r
 
 // ── Component tokens: Theme Picker (custom; defaults baked in SCSS) ─────────
 $usx-theme-picker-trigger-text-var: null !default;
-$usx-theme-picker-trigger-text: usx-var($usx-theme-picker-trigger-text-var, $usx-text) !default;
+$usx-theme-picker-trigger-text: usx-var($usx-theme-picker-trigger-text-var, $usx-text-ink) !default;
 
 // ── Component tokens: Tooltip ─────────────────────────────────────────────
 // Real USWDS CSS bakes the tooltip's background/font color as fixed values
@@ -1210,7 +1210,7 @@ $usx-theme-picker-trigger-text: usx-var($usx-theme-picker-trigger-text-var, $usx
 // at build time, so it never follows our runtime overrides and stays a flat
 // "ink" black in every theme. Defaults to $usx-color-base-darkest (a stable,
 // theme-invariant neutral that stays dark under both light and dark presets,
-// unlike $usx-text) so the tooltip stays a consistent dark chip; pair with
+// unlike $usx-text-ink) so the tooltip stays a consistent dark chip; pair with
 // $usx-text-inverse for legible light text on it.
 $usx-tooltip-bg-var: null !default;
 $usx-tooltip-bg: usx-var($usx-tooltip-bg-var, $usx-color-base-darkest) !default;
@@ -1231,7 +1231,7 @@ $usx-icon-list-icon-text: usx-var($usx-icon-list-icon-text-var, $usx-color-prima
 // background-image at build time, so it never follows a runtime text-color
 // override.
 $usx-date-picker-button-icon-color-var: null !default;
-$usx-date-picker-button-icon-color: usx-var($usx-date-picker-button-icon-color-var, $usx-text) !default;
+$usx-date-picker-button-icon-color: usx-var($usx-date-picker-button-icon-color-var, $usx-text-ink) !default;
 
 $usx-date-picker-button-hover-active-bg-var: null !default;
 $usx-date-picker-button-hover-active-bg: usx-var($usx-date-picker-button-hover-active-bg-var, $usx-color-base-light) !default;
@@ -1270,7 +1270,7 @@ $usx-in-page-nav-bg-var: null !default;
 $usx-in-page-nav-bg: usx-var($usx-in-page-nav-bg-var, transparent) !default;
 
 $usx-in-page-nav-text-var: null !default;
-$usx-in-page-nav-text: usx-var($usx-in-page-nav-text-var, $usx-text) !default;
+$usx-in-page-nav-text: usx-var($usx-in-page-nav-text-var, $usx-text-ink) !default;
 
 $usx-in-page-nav-border-var: null !default;
 $usx-in-page-nav-border: usx-var($usx-in-page-nav-border-var, $usx-color-border) !default;
@@ -1282,7 +1282,7 @@ $usx-in-page-nav-link-text-hover-var: null !default;
 $usx-in-page-nav-link-text-hover: usx-var($usx-in-page-nav-link-text-hover-var, $usx-link-text-hover) !default;
 
 $usx-in-page-nav-current-text-var: null !default;
-$usx-in-page-nav-current-text: usx-var($usx-in-page-nav-current-text-var, $usx-text) !default;
+$usx-in-page-nav-current-text: usx-var($usx-in-page-nav-current-text-var, $usx-text-ink) !default;
 
 $usx-in-page-nav-bar-var: null !default;
 $usx-in-page-nav-bar: usx-var($usx-in-page-nav-bar-var, $usx-color-primary) !default;
@@ -1295,7 +1295,7 @@ $usx-breadcrumb-bg-var: null !default;
 $usx-breadcrumb-bg: usx-var($usx-breadcrumb-bg-var, transparent) !default;
 
 $usx-breadcrumb-text-var: null !default;
-$usx-breadcrumb-text: usx-var($usx-breadcrumb-text-var, $usx-text) !default;
+$usx-breadcrumb-text: usx-var($usx-breadcrumb-text-var, $usx-text-ink) !default;
 
 $usx-breadcrumb-link-text-var: null !default;
 $usx-breadcrumb-link-text: usx-var($usx-breadcrumb-link-text-var, $usx-link-text) !default;
@@ -1304,23 +1304,23 @@ $usx-breadcrumb-link-text-hover-var: null !default;
 $usx-breadcrumb-link-text-hover: usx-var($usx-breadcrumb-link-text-hover-var, $usx-link-text-hover) !default;
 
 $usx-breadcrumb-current-text-var: null !default;
-$usx-breadcrumb-current-text: usx-var($usx-breadcrumb-current-text-var, $usx-text) !default;
+$usx-breadcrumb-current-text: usx-var($usx-breadcrumb-current-text-var, $usx-text-ink) !default;
 
 // ── Component tokens: Process List (custom; defaults baked in SCSS) ────────
 // Real USWDS hardcodes heading/number-circle text to #1b1b1b and the
 // connecting line + circle border to fixed light-blue/gray-cool literals,
 // none of which track a runtime theme override.
 $usx-process-list-heading-text-var: null !default;
-$usx-process-list-heading-text: usx-var($usx-process-list-heading-text-var, $usx-text) !default;
+$usx-process-list-heading-text: usx-var($usx-process-list-heading-text-var, $usx-text-ink) !default;
 
 $usx-process-list-border-var: null !default;
 $usx-process-list-border: usx-var($usx-process-list-border-var, $usx-color-primary) !default;
 
 $usx-process-list-counter-text-var: null !default;
-$usx-process-list-counter-text: usx-var($usx-process-list-counter-text-var, $usx-text) !default;
+$usx-process-list-counter-text: usx-var($usx-process-list-counter-text-var, $usx-text-ink) !default;
 
 $usx-process-list-counter-border-var: null !default;
-$usx-process-list-counter-border: usx-var($usx-process-list-counter-border-var, $usx-text) !default;
+$usx-process-list-counter-border: usx-var($usx-process-list-counter-border-var, $usx-text-ink) !default;
 
 $usx-process-list-counter-ring-var: null !default;
 $usx-process-list-counter-ring: usx-var($usx-process-list-counter-ring-var, $usx-surface-1) !default;
@@ -1332,7 +1332,7 @@ $usx-collection-meta-text-var: null !default;
 $usx-collection-meta-text: usx-var($usx-collection-meta-text-var, $usx-text-subtle) !default;
 
 $usx-collection-description-text-var: null !default;
-$usx-collection-description-text: usx-var($usx-collection-description-text-var, $usx-text) !default;
+$usx-collection-description-text: usx-var($usx-collection-description-text-var, $usx-text-ink) !default;
 
 // ── Component tokens: Pagination (custom; defaults baked in SCSS) ──────────
 // Real USWDS's compiled CSS hardcodes pagination link/button text and the
@@ -1357,7 +1357,7 @@ $usx-pagination-bg-var: null !default;
 $usx-pagination-bg: usx-var($usx-pagination-bg-var, transparent) !default;
 
 $usx-pagination-text-var: null !default;
-$usx-pagination-text: usx-var($usx-pagination-text-var, $usx-text) !default;
+$usx-pagination-text: usx-var($usx-pagination-text-var, $usx-text-ink) !default;
 
 // Real USWDS hardcodes the button border to rgba(27,27,27,.2), a black-based
 // translucent border that's drowned out on dark surfaces.

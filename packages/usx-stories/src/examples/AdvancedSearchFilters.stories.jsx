@@ -50,7 +50,7 @@ export const AdvancedSearchFiltersPattern = {
 
               <div className="margin-y-3 display-flex flex-wrap flex-align-center justify-between gap-2">
                 <div className="display-flex flex-align-center gap-1">
-                  <span className="text-bold font-sans-xs usx-text">Active Filters:</span>
+                  <span className="text-bold font-sans-xs text-ink">Active Filters:</span>
                   <TagGroup
                     tags={[
                       { value: 'Category: Healthcare', color: 'primary', dismissible: true },
@@ -107,7 +107,7 @@ export const AdvancedSearchFiltersPattern = {
         }
         leftSidebar={
           <div className="display-flex flex-column margin-top-3 gap-3">
-            <h3 className="usx-text margin-top-0 margin-bottom-15">Refine Search</h3>
+            <h3 className="text-ink margin-top-0 margin-bottom-15">Refine Search</h3>
             <Fieldset legend="Program Category">
               <Checkbox id="cat-health" name="cat" label="Healthcare (14)" checked />
               <Checkbox id="cat-env" name="cat" label="Environment (8)" />

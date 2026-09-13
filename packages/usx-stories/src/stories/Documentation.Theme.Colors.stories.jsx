@@ -32,7 +32,7 @@ function Grid({ tokens, live }) {
 
 const THEME_BASE_NAMES = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm', 'color-base'];
 const STATE_BASE_NAMES = ['color-info', 'color-warning', 'color-success', 'color-error', 'color-emergency', 'color-disabled', 'color-focus', 'color-visited'];
-const SURFACE_TEXT_NAMES = ['surface-1', 'surface-2', 'surface-3', 'text', 'text-muted', 'text-subtle', 'text-inverse', 'color-border'];
+const SURFACE_TEXT_NAMES = ['surface-1', 'surface-2', 'surface-3', 'text-ink', 'text-muted', 'text-subtle', 'text-inverse', 'color-border'];
 const ENVIRONMENT_NAMES = ['color-beta', 'color-test', 'color-dev'];
 
 export const Palette = {

@@ -41,7 +41,7 @@ export const ProfileInfoPattern = {
                   />
                   <div className="flex-1">
                     <div className="display-flex flex-align-center gap-2 flex-wrap">
-                      <h2 className="margin-0 usx-text">Alex Morgan</h2>
+                      <h2 className="margin-0 text-ink">Alex Morgan</h2>
                       <Status label="Active" variant="active" size="md" />
                     </div>
                     <p className="text-base usx-text-muted margin-y-1">Senior Digital Systems Architect &bull; Office of Technology</p>
@@ -105,7 +105,7 @@ export const ProfileInfoPattern = {
                     <div className="display-flex flex-align-center gap-2 padding-bottom-2 border-bottom border-base-lighter">
                       <Icon name="check_circle" size="md" className="text-success" />
                       <div className="flex-1">
-                        <div className="text-bold usx-text">Approved Security Compliance Audit</div>
+                        <div className="text-bold text-ink">Approved Security Compliance Audit</div>
                         <div className="text-base usx-text-muted font-sans-3xs">Quarterly review for USX Design System components</div>
                       </div>
                       <div className="text-base usx-text-muted font-sans-3xs">Today, 10:14 AM</div>
@@ -114,7 +114,7 @@ export const ProfileInfoPattern = {
                     <div className="display-flex flex-align-center gap-2 padding-bottom-2 border-bottom border-base-lighter">
                       <Icon name="update" size="md" className="text-primary" />
                       <div className="flex-1">
-                        <div className="text-bold usx-text">Updated System Tokens</div>
+                        <div className="text-bold text-ink">Updated System Tokens</div>
                         <div className="text-base usx-text-muted font-sans-3xs">Synchronized USWDS 3.14.0 token manifest package</div>
                       </div>
                       <div className="text-base usx-text-muted font-sans-3xs">Yesterday, 3:45 PM</div>
@@ -127,18 +127,18 @@ export const ProfileInfoPattern = {
         }
         rightSidebar={
           <div className="display-flex flex-column margin-top-3 gap-2">
-            <h3 className="usx-text margin-top-0 margin-bottom-15">Quick Info</h3>
+            <h3 className="text-ink margin-top-0 margin-bottom-15">Quick Info</h3>
             <div className="display-flex flex-column gap-2">
               <div>
-                <div className="text-bold font-sans-xs usx-text">Direct Supervisor</div>
+                <div className="text-bold font-sans-xs text-ink">Direct Supervisor</div>
                 <div className="text-base usx-text-muted font-sans-3xs">Jane Doe (Director of Tech)</div>
               </div>
               <div>
-                <div className="text-bold font-sans-xs usx-text">Primary Location</div>
+                <div className="text-bold font-sans-xs text-ink">Primary Location</div>
                 <div className="text-base usx-text-muted font-sans-3xs">HQ Building - East Wing</div>
               </div>
               <div>
-                <div className="text-bold font-sans-xs usx-text">Timezone</div>
+                <div className="text-bold font-sans-xs text-ink">Timezone</div>
                 <div className="text-base usx-text-muted font-sans-3xs">Eastern Standard Time (EST)</div>
               </div>
             </div>

@@ -20,19 +20,19 @@ export const storyDefs = {
     items: [
       {
         iconName: 'check_circle',
-        iconColor: 'ink',
+        iconColor: 'primary',
         title: 'Donate cash when possible.',
         content: '<p>Financial contributions to recognized disaster relief organizations are the fastest, most flexible and most effective method of donating. Organizations on the ground know what items and quantities are needed, often buy in bulk with discounts and, if possible, purchase through businesses local to the disaster, which supports economic recovery.</p>',
       },
       {
-        iconName: 'check_circle',
-        iconColor: 'ink',
+        iconName: 'radio_button_unchecked',
+        iconColor: 'secondary',
         title: 'Confirm what donations are needed.',
         content: '<p>Unneeded and unsolicited goods burden local organizations’ ability to meet survivors’ confirmed needs, drawing away valuable volunteer labor, transportation and warehouse space.</p>',
       },
       {
-        iconName: 'check_circle',
-        iconColor: 'ink',
+        iconName: 'radio_button_unchecked',
+        iconColor: 'subtle',
         title: 'Talk to trusted organizations about volunteering.',
         content: '<p>Financial contributions to recognized disaster relief organizations are the fastest, most flexible and most effective method of donating. Organizations on the ground know what items and quantities are needed, often buy in bulk with discounts and, if possible, purchase through businesses local to the disaster, which supports economic recovery.</p>',
       },
