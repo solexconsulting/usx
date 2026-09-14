@@ -1,10 +1,12 @@
 {# Django template for Code #}
 <div class="usx-mockup-code{% if className %} {{ className }}{% endif %}">
+  <div class="usx-mockup-code__content">
   {% for line in lines %}
   <pre
     {% if line.prefix %} data-prefix="{{ line.prefix }}"{% endif %}{% if line.className %} class="{{ line.className }}"{% endif %}
   ><code>{{ line.code|safe }}</code></pre>
   {% endfor %}
+  </div>
   {% if copyText %}
   <button class="usa-button usx-button usx-button--ghost usx-copy"
     onclick="navigator.clipboard.writeText('{{ copyText|escapejs }}')">

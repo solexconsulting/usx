@@ -31,6 +31,7 @@ export interface CodeProps {
 export default function Code({ lines = [], copyText = null, className = '' }: CodeProps) {
   return (
     <div className={ClassNames('usx-mockup-code', className)}>
+      <div className="usx-mockup-code__content">
       {lines.map((line, i) => (
         <pre
           key={i}
@@ -40,6 +41,7 @@ export default function Code({ lines = [], copyText = null, className = '' }: Co
           <code dangerouslySetInnerHTML={{ __html: line.code }} />
         </pre>
       ))}
+      </div>
       {copyText && (
         <button
           className="usa-button usx-button usx-button--ghost usx-copy"
