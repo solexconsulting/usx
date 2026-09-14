@@ -3,11 +3,10 @@
 {# at runtime to build the value display and screen-reader callout. #}
 {% load components %}
 {% with formGroup|default_if_none:True as wrap_group %}
-{% if wrap_group %}{% form_group error=error %}{% endif %}
+{% if wrap_group %}
+{% form_group error=error %}
 {% if label %}
-<label class="usa-label usx-label" for="{{ id }}">
-  {% if required %}<abbr title="required" class="usx-required">*</abbr>{% endif %}{{ label }}
-</label>
+{% label htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
 {% endif %}
 
 {% if hint %}
@@ -26,12 +25,41 @@
   min="{{ min|default:0 }}"
   max="{{ max|default:100 }}"
   step="{{ step|default:1 }}"
-  value="{{ value|default:defaultValue|default:0 }}"
+  value="{% firstof value defaultValue 0 %}"
   {% if textUnit %} data-text-unit="{{ textUnit }}"{% endif %}
   {% if textPreposition %} data-text-preposition="{{ textPreposition }}"{% endif %}
   {% if hint or error %} aria-describedby="{% if hint %}{{ id }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ id }}-error{% endif %}"{% endif %}
   {% if disabled %} disabled{% endif %}
   {% if required %} required{% endif %}
 />
-{% if wrap_group %}{% endform_group %}{% endif %}
+{% endform_group %}
+{% else %}
+{% if label %}
+{% label htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
+{% endif %}
+
+{% if hint %}
+{% hint id=id|add:"-hint" %}{{ hint }}{% endhint %}
+{% endif %}
+
+{% if error %}
+{% error_message id=id|add:"-error" %}{{ error }}{% enderror_message %}
+{% endif %}
+
+<input
+  class="usa-range usx-range-slider{% if className %} {{ className }}{% endif %}"
+  id="{{ id }}"
+  type="range"
+  name="{{ name|default:id }}"
+  min="{{ min|default:0 }}"
+  max="{{ max|default:100 }}"
+  step="{{ step|default:1 }}"
+  value="{% firstof value defaultValue 0 %}"
+  {% if textUnit %} data-text-unit="{{ textUnit }}"{% endif %}
+  {% if textPreposition %} data-text-preposition="{{ textPreposition }}"{% endif %}
+  {% if hint or error %} aria-describedby="{% if hint %}{{ id }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ id }}-error{% endif %}"{% endif %}
+  {% if disabled %} disabled{% endif %}
+  {% if required %} required{% endif %}
+/>
+{% endif %}
 {% endwith %}

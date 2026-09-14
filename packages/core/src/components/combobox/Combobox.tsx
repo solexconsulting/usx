@@ -173,7 +173,7 @@ export default function Combobox({
 
   const content = (
     <>
-      <Label id={labelId} htmlFor={id} required={required}>
+      <Label id={labelId} htmlFor={id} required={required} error={!!error}>
         {label}
       </Label>
 

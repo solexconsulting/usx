@@ -3,9 +3,10 @@
 {% with id|default:"text-area" as field_id %}
 {% with formGroup|default_if_none:True as wrap_group %}
 
-{% if wrap_group %}{% form_group error=error %}{% endif %}
+{% if wrap_group %}
+{% form_group error=error %}
 {% if label %}
-  {% label htmlFor=field_id screenReaderOnly=screenReaderOnlyLabel required=required only %}{{ label }}{% endlabel %}
+  {% label htmlFor=field_id screenReaderOnly=screenReaderOnlyLabel required=required error=error only %}{{ label }}{% endlabel %}
 {% endif %}
 {% if hint %}
   {% hint id=field_id|add:"-hint" %}{{ hint }}{% endhint %}
@@ -30,7 +31,35 @@
 {% if success and success != "true" and success != True and success != "false" %}
   <span id="{{ field_id }}-success" class="usa-success-message" role="status">{{ success }}</span>
 {% endif %}
-{% if wrap_group %}{% endform_group %}{% endif %}
+{% endform_group %}
+{% else %}
+{% if label %}
+  {% label htmlFor=field_id screenReaderOnly=screenReaderOnlyLabel required=required error=error only %}{{ label }}{% endlabel %}
+{% endif %}
+{% if hint %}
+  {% hint id=field_id|add:"-hint" %}{{ hint }}{% endhint %}
+{% endif %}
+{% if error and error != "true" and error != True and error != "false" %}
+  {% error_message id=field_id|add:"-error" %}{{ error }}{% enderror_message %}
+{% endif %}
+<textarea
+  class="usa-textarea usx-textarea{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
+  id="{{ field_id }}"
+  placeholder="{{ placeholder|default:'' }}"
+  {% if hint and error %}aria-describedby="{{ field_id }}-hint {{ field_id }}-error"
+  {% elif hint and success %}aria-describedby="{{ field_id }}-hint {{ field_id }}-success"
+  {% elif hint %}aria-describedby="{{ field_id }}-hint"
+  {% elif error %}aria-describedby="{{ field_id }}-error"
+  {% elif success %}aria-describedby="{{ field_id }}-success"
+  {% endif %}
+  {% if error and error != "false" %}aria-invalid="true" {% endif %}
+  {% if disabled %}disabled {% endif %}
+  {% if required %}required{% endif %}
+>{{ defaultValue|default:'' }}</textarea>
+{% if success and success != "true" and success != True and success != "false" %}
+  <span id="{{ field_id }}-success" class="usa-success-message" role="status">{{ success }}</span>
+{% endif %}
+{% endif %}
 
 {% endwith %}
 {% endwith %}

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Fieldset from '../fieldset/Fieldset';
 import FormGroup from '../form-group/FormGroup';
 import Hint from '../hint/Hint';
-import ErrorMessage from '../error-message/ErrorMessage';
 import Select from '../select/Select';
 import Input from '../input/Input';
 
@@ -65,13 +64,12 @@ export default function MemorableDate({
 
   return (
     <FormGroup error={hasError}>
-      <Fieldset legend={legend} required={required} className={className}>
+      <Fieldset legend={legend} required={required} className={className} error={error} errorId={errorId}>
         {groupHint && (
           <Hint aria-hidden="true" id={groupHintId}>
             {groupHint}
           </Hint>
         )}
-        {hasError && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
         <div className="usa-memorable-date usx-memorable-date">
           <FormGroup className="usa-form-group--month usa-form-group--select">
             <Select

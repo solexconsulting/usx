@@ -1,7 +1,8 @@
 {% load components %}
 {% with formGroup|default_if_none:True as wrap_group %}
-{% if wrap_group %}{% form_group error=error %}{% endif %}
-  {% label htmlFor=id label=label required=required|default:False %}{% endlabel %}
+{% if wrap_group %}
+{% form_group error=error %}
+  {% label htmlFor=id label=label required=required|default:False error=error %}{% endlabel %}
   {% if hint %}
   {% hint id=id|add:"-hint" %}{{ hint }}{% endhint %}
   {% endif %}
@@ -30,5 +31,36 @@
   {% if success %}
   <span class="usa-success-message">{{ success }}</span>
   {% endif %}
-{% if wrap_group %}{% endform_group %}{% endif %}
+{% endform_group %}
+{% else %}
+  {% label htmlFor=id label=label required=required|default:False error=error %}{% endlabel %}
+  {% if hint %}
+  {% hint id=id|add:"-hint" %}{{ hint }}{% endhint %}
+  {% endif %}
+  {% if error %}
+  {% error_message id=id|add:"-error" %}{{ error }}{% enderror_message %}
+  {% endif %}
+  <select
+    class="usa-select usx-select{% if error %} usa-input--error{% endif %}{% if success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
+    {% if id %} id="{{ id }}"{% endif %}
+    {% if name %} name="{{ name }}"{% endif %}
+    {% if disabled %} disabled{% endif %}
+    {% if required %}required{% endif %}
+    {% if hint and error %}aria-describedby="{{ id }}-hint {{ id }}-error"
+    {% elif hint %}aria-describedby="{{ id }}-hint"
+    {% elif error %}aria-describedby="{{ id }}-error"
+    {% endif %}
+    {% if error %}aria-invalid="true"{% endif %}
+  >
+    <option value="">{{ placeholder|default:'Select an option' }}</option>
+    {% for option in options %}
+    {% with optionValue=option.value|default:option optionLabel=option.label|default:option %}
+    <option value="{{ optionValue }}" {% if optionValue == defaultValue %}selected{% endif %}>{{ optionLabel }}</option>
+    {% endwith %}
+    {% endfor %}
+  </select>
+  {% if success %}
+  <span class="usa-success-message">{{ success }}</span>
+  {% endif %}
+{% endif %}
 {% endwith %}

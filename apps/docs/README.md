@@ -1,3 +1,3 @@
-Documentation site for the design system.
+Documentation site for the design system (planned — not yet built).
 
-Contains guides, API references, contribution docs, and design guidelines for designers and engineers.
+Will contain guides, API references, contribution docs, and design guidelines for designers and engineers.

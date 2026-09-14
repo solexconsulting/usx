@@ -1,3 +1,3 @@
-A minimal React demo app using the `react` package.
+A minimal React demo app using the `@solexllc/usx-react` package (planned — not yet built).
 
-Demonstrates component usage, theming, and token consumption in a small, runnable app.
+Will demonstrate component usage, theming, and token consumption in a small, runnable app.

@@ -31,7 +31,7 @@ export default function TimePicker({
   const content = (
     <>
       {label && (
-        <Label id={labelId} htmlFor={id} required={required}>
+        <Label id={labelId} htmlFor={id} required={required} error={!!error}>
           {label}
         </Label>
       )}

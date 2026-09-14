@@ -1,4 +1,5 @@
 import React from 'react';
+import Code from '../../../core/src/components/code/Code';
 
 export default {
   title: 'Documentation/Theme/Getting Started',
@@ -19,9 +20,13 @@ export const GettingStarted = {
 
       <h2>1. Install</h2>
       <p>Both packages are published together; install whichever you don't already have:</p>
-      <pre style={{ padding: '0.75rem', background: '#f0f0f0', overflowX: 'auto' }}>
-{`pnpm add @solexllc/usx @solexllc/usx-theme`}
-      </pre>
+      <Code
+        lines={[
+          {
+            code: "pnpm add @solexllc/usx @solexllc/usx-theme",
+          },
+        ]}
+      />
 
       <h2>2. Load the runtime defaults</h2>
       <p>
@@ -31,10 +36,16 @@ export const GettingStarted = {
         emits bare <code>var(--usx-*)</code> references with no fallback, so this file
         must be loaded for the themed build to render anything.
       </p>
-      <pre style={{ padding: '0.75rem', background: '#f0f0f0', overflowX: 'auto' }}>
-{`// once, at your app's entry point
-import '@solexllc/usx-theme/theme.css';`}
-      </pre>
+      <Code
+        lines={[
+          {
+            code: "// once, at your app's entry point",
+          },
+          {
+            code: "import '@solexllc/usx-theme/theme.css';",
+          },
+        ]}
+      />
 
       <h2>3. Compile the themed entry point</h2>
       <p>
@@ -65,10 +76,16 @@ import '@solexllc/usx-theme/theme.css';`}
           </tr>
         </tbody>
       </table>
-      <pre style={{ padding: '0.75rem', background: '#f0f0f0', overflowX: 'auto' }}>
-{`// your application's Sass entry point
-@use 'pkg:@solexllc/usx/themed';`}
-      </pre>
+      <Code
+        lines={[
+          {
+            code: "// your application's Sass entry point",
+          },
+          {
+            code: "@use 'pkg:@solexllc/usx/themed';",
+          },
+        ]}
+      />
       <p>
         The themed entry point internally loads <code>@solexllc/usx-theme/hooks</code> — a
         generated partial that turns on every CSS-variable hook — before compiling
@@ -77,13 +94,25 @@ import '@solexllc/usx-theme/theme.css';`}
 
       <h2>Overriding tokens</h2>
       <p>Once the themed build is in place, override any token by setting its custom property anywhere in the cascade:</p>
-      <pre style={{ padding: '0.75rem', background: '#f0f0f0', overflowX: 'auto' }}>
-{`:root {
-  --usx-color-primary: #b00020;
-  --usx-color-primary-hover: #8a0018;
-  --usx-color-primary-active: #6c0013;
-}`}
-      </pre>
+      <Code
+        lines={[
+          {
+            code: ":root {",
+          },
+          {
+            code: "  --usx-color-primary: #b00020;",
+          },
+          {
+            code: "  --usx-color-primary-hover: #8a0018;",
+          },
+          {
+            code: "  --usx-color-primary-active: #6c0013;",
+          },
+          {
+            code: "}",
+          },
+        ]}
+      />
       <p>
         The fastest way to build that block is the <strong>Documentation/Theme →
         Playground</strong> page: it renders every component live against your
@@ -113,12 +142,22 @@ import '@solexllc/usx-theme/theme.css';`}
         configure tokens at build time via Sass module configuration instead —
         the output contains zero <code>var()</code> references:
       </p>
-      <pre style={{ padding: '0.75rem', background: '#f0f0f0', overflowX: 'auto' }}>
-{`@use 'pkg:@solexllc/usx-theme/variables' with (
-  $usx-color-primary-var: null,   // opt this one token out of runtime theming
-);
-@use 'pkg:@solexllc/usx';`}
-      </pre>
+      <Code
+        lines={[
+          {
+            code: "@use 'pkg:@solexllc/usx-theme/variables' with (",
+          },
+          {
+            code: "  $usx-color-primary-var: null,   // opt this one token out of runtime theming",
+          },
+          {
+            code: ");",
+          },
+          {
+            code: "@use 'pkg:@solexllc/usx';",
+          },
+        ]}
+      />
 
       <h2>Where tokens live</h2>
       <p>

@@ -51,7 +51,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   const content = (
     <>
       {label && (
-        <Label htmlFor={textAreaId} required={required} screenReaderOnly={screenReaderOnlyLabel}>
+        <Label htmlFor={textAreaId} required={required} screenReaderOnly={screenReaderOnlyLabel} error={hasError}>
           {label}
         </Label>
       )}

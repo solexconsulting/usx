@@ -1,9 +1,10 @@
 {# Django template for DatePicker #}
 {% load components %}
 {% with formGroup|default_if_none:True as wrap_group %}
-{% if wrap_group %}{% form_group error=error %}{% endif %}
+{% if wrap_group %}
+{% form_group error=error %}
   {% if label %}
-  {% label id=id|add:"-label" htmlFor=id required=required %}{{ label }}{% endlabel %}
+  {% label id=id|add:"-label" htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
   {% endif %}
 
   {% if hint %}
@@ -31,5 +32,36 @@
       {% if required %} required{% endif %}
     />
   </div>
-{% if wrap_group %}{% endform_group %}{% endif %}
+{% endform_group %}
+{% else %}
+  {% if label %}
+  {% label id=id|add:"-label" htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
+  {% endif %}
+
+  {% if hint %}
+  {% hint id=id|add:"-hint" %}{{ hint }}{% endhint %}
+  {% endif %}
+
+  {% if error %}
+  {% error_message id=id|add:"-error" %}{{ error }}{% enderror_message %}
+  {% endif %}
+
+  <div
+    class="usa-date-picker usx-date-picker{% if className %} {{ className }}{% endif %}"
+    {% if defaultValue %} data-default-value="{{ defaultValue }}"{% endif %}
+    {% if minDate %} data-min-date="{{ minDate }}"{% endif %}
+    {% if maxDate %} data-max-date="{{ maxDate }}"{% endif %}
+    {% if rangeDate %} data-range-date="{{ rangeDate }}"{% endif %}
+  >
+    <input
+      class="usa-input usx-input"
+      id="{{ id }}"
+      name="{{ name|default:id }}"
+      {% if label %} aria-labelledby="{{ id }}-label"{% endif %}
+      {% if hint or error %} aria-describedby="{% if hint %}{{ id }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ id }}-error{% endif %}"{% endif %}
+      {% if disabled %} disabled{% endif %}
+      {% if required %} required{% endif %}
+    />
+  </div>
+{% endif %}
 {% endwith %}

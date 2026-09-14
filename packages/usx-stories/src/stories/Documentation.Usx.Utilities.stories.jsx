@@ -1,4 +1,5 @@
 import React from 'react';
+import Code from '../../../core/src/components/code/Code';
 
 export default {
   title: 'Documentation/USX/Utilities',
@@ -72,16 +73,18 @@ export const Utilities = {
           <tr><td><code>'desktop'</code></td><td><code>(min-width: 1024px)</code></td><td>Desktop displays and monitors</td></tr>
         </tbody>
       </table>
-      <pre style={{ background: '#f0f4f8', padding: '1rem', borderRadius: '6px' }}>
-        <code>{`// SCSS Usage Example:
-.my-custom-card {
-  padding: units(1.5);
-
-  @include at-media('desktop') {
-    padding: units(3);
-  }
-}`}</code>
-      </pre>
+      <Code
+        lines={[
+          { code: '// SCSS Usage Example:' },
+          { code: '.my-custom-card {' },
+          { code: '  padding: units(1.5);' },
+          { code: '' },
+          { code: "  @include at-media('desktop') {" },
+          { code: '    padding: units(3);' },
+          { code: '  }' },
+          { code: '}' },
+        ]}
+      />
 
       <h3>Theming &amp; Utility Functions</h3>
       <table className="usa-table usa-table--borderless" style={{ width: '100%' }}>

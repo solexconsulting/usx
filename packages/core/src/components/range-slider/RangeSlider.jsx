@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Required from '../required/Required';
+import Label from '../label/Label';
 import FormGroup from '../form-group/FormGroup';
 import Hint from '../hint/Hint';
 import ErrorMessage from '../error-message/ErrorMessage';
@@ -35,10 +35,9 @@ export default function RangeSlider({
   const content = (
     <>
       {label && (
-        <label className="usa-label usx-label" htmlFor={id}>
-          {required && <Required />}
+        <Label htmlFor={id} required={required} error={!!error}>
           {label}
-        </label>
+        </Label>
       )}
       {hint && <Hint id={hintId}>{hint}</Hint>}
       {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}

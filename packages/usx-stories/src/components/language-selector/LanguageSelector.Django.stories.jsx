@@ -18,17 +18,7 @@ export default {
         return () => languageSelector.off();
       }, []);
 
-      return (
-        <>
-          <Alert
-            heading="Performance Issues"
-            variant="warning"
-            text="This <em>language-selector</em> component has known performance issues we are working on resolving."
-            className="margin-bottom-3"
-          />
-          <Story />
-        </>
-      );
+      return <Story />;
     }
   ],
 };

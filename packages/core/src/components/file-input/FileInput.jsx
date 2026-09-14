@@ -87,7 +87,7 @@ export default function FileInput({
   };
 
   const commonLabel = label && (
-    <Label htmlFor={id} required={required}>
+    <Label htmlFor={id} required={required} error={!!error}>
       {label}
     </Label>
   );

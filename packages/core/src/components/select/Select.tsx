@@ -78,7 +78,7 @@ export default function Select({
 
   const content = (
     <>
-      <Label htmlFor={selectId} required={required}>
+      <Label htmlFor={selectId} required={required} error={hasError}>
         {label}
       </Label>
       {hint && <Hint id={hintId}>{hint}</Hint>}

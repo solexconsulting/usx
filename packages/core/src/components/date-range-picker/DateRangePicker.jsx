@@ -43,7 +43,7 @@ export default function DateRangePicker({
     >
       <FormGroup error={!!startError}>
         {startLabel && (
-          <Label id={startLabelId} htmlFor={startId} required={required}>
+          <Label id={startLabelId} htmlFor={startId} required={required} error={!!startError}>
             {startLabel}
           </Label>
         )}
@@ -67,7 +67,7 @@ export default function DateRangePicker({
 
       <FormGroup error={!!endError}>
         {endLabel && (
-          <Label id={endLabelId} htmlFor={endId} required={required}>
+          <Label id={endLabelId} htmlFor={endId} required={required} error={!!endError}>
             {endLabel}
           </Label>
         )}

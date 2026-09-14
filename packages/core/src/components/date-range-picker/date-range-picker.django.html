@@ -7,7 +7,7 @@
 >
   {% form_group error=startError %}
     {% if startLabel %}
-    {% label id=startId|add:"-label" htmlFor=startId required=required %}{{ startLabel }}{% endlabel %}
+    {% label id=startId|add:"-label" htmlFor=startId required=required error=startError %}{{ startLabel }}{% endlabel %}
     {% endif %}
 
     {% if startHint %}
@@ -36,7 +36,7 @@
 
   {% form_group error=endError %}
     {% if endLabel %}
-    {% label id=endId|add:"-label" htmlFor=endId required=required %}{{ endLabel }}{% endlabel %}
+    {% label id=endId|add:"-label" htmlFor=endId required=required error=endError %}{{ endLabel }}{% endlabel %}
     {% endif %}
 
     {% if endHint %}

@@ -38,6 +38,10 @@ export const storyDefs = {
     className: 'usa-checkbox__label',
     classOverride: true,
   },
+  Error: {
+    children: 'Label Text',
+    error: true,
+  },
 };
 
 export const Default = { args: storyDefs.Default };
@@ -46,3 +50,4 @@ export const ScreenReaderOnly = { args: storyDefs.ScreenReaderOnly };
 export const WithCustomClass = { args: storyDefs.WithCustomClass };
 export const WithClassOverride1 = { name: 'With Class Override (radio button)', args: storyDefs.WithClassOverride1 };
 export const WithClassOverride2 = { name: 'With Class Override (checkbox)', args: storyDefs.WithClassOverride2 };
+export const Error = { args: storyDefs.Error };

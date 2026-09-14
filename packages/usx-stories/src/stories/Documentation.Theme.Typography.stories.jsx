@@ -1,6 +1,7 @@
 import React from 'react';
 import { themeManifest } from '@solexllc/usx-theme/theme-manifest';
 import { useLiveTokenValues, getLiveValue } from '../utils/useLiveTokenValues.js';
+import Code from '../../../core/src/components/code/Code';
 
 export default {
   title: 'Documentation/Theme/Typography',
@@ -68,29 +69,35 @@ export const Typography = {
         <ol>
           <li>
             <strong>Self-hosted / <code>@font-face</code>:</strong>
-            <pre style={{ padding: '0.75rem', background: '#f0f0f0', overflowX: 'auto' }}>
-{`@font-face {
-  font-family: "Acme Sans";
-  src: url("/fonts/acme-sans.woff2") format("woff2");
-  font-weight: 400;
-  font-display: swap;
-}
-
-:root {
-  --usx-font-family: "Acme Sans", Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-}`}
-            </pre>
+            <Code
+              lines={[
+                { code: '@font-face {' },
+                { code: '  font-family: "Acme Sans";' },
+                { code: '  src: url("/fonts/acme-sans.woff2") format("woff2");' },
+                { code: '  font-weight: 400;' },
+                { code: '  font-display: swap;' },
+                { code: '}' },
+                { code: '' },
+                { code: ':root {' },
+                { code: '  --usx-font-family: "Acme Sans", Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;' },
+                { code: '}' },
+              ]}
+            />
           </li>
           <li>
             <strong>Hosted (e.g. Google Fonts) — link the stylesheet, then point the token at it:</strong>
-            <pre style={{ padding: '0.75rem', background: '#f0f0f0', overflowX: 'auto' }}>
-{`<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">`}
-            </pre>
-            <pre style={{ padding: '0.75rem', background: '#f0f0f0', overflowX: 'auto' }}>
-{`:root {
-  --usx-font-family: Inter, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-}`}
-            </pre>
+            <Code
+              lines={[
+                { code: '&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap"&gt;' },
+              ]}
+            />
+            <Code
+              lines={[
+                { code: ':root {' },
+                { code: '  --usx-font-family: Inter, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;' },
+                { code: '}' },
+              ]}
+            />
           </li>
         </ol>
         <p>
@@ -107,11 +114,13 @@ export const Typography = {
           face for headings only (e.g. a serif paired with a sans body font) can
           override just this one:
         </p>
-        <pre style={{ padding: '0.75rem', background: '#f0f0f0', overflowX: 'auto' }}>
-{`:root {
-  --usx-font-family-heading: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
-}`}
-        </pre>
+        <Code
+          lines={[
+            { code: ':root {' },
+            { code: '  --usx-font-family-heading: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;' },
+            { code: '}' },
+          ]}
+        />
 
         <h3>Try it live</h3>
         <p>

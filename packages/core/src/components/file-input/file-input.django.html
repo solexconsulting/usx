@@ -1,9 +1,10 @@
 {# Django template for FileInput #}
 {% load components %}
 {% with formGroup|default_if_none:True as wrap_group %}
-{% if wrap_group %}{% form_group error=error %}{% endif %}
+{% if wrap_group %}
+{% form_group error=error %}
   {% if label %}
-  {% label htmlFor=id required=required %}{{ label }}{% endlabel %}
+  {% label htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
   {% endif %}
 
   {% if hint %}
@@ -26,5 +27,31 @@
     {% if disabled %} disabled{% endif %}
     {% if required %} required{% endif %}
   />
-{% if wrap_group %}{% endform_group %}{% endif %}
+{% endform_group %}
+{% else %}
+  {% if label %}
+  {% label htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
+  {% endif %}
+
+  {% if hint %}
+  {% hint id=id|add:"-hint" %}{{ hint }}{% endhint %}
+  {% endif %}
+
+  {% if error %}
+  {% error_message id=id|add:"-error" %}{{ error }}{% enderror_message %}
+  {% endif %}
+
+  <input
+    class="usa-file-input usx-file-input{% if className %} {{ className }}{% endif %}"
+    id="{{ id }}"
+    type="file"
+    name="{{ name|default:id }}"
+    {% if hint or error %} aria-describedby="{% if hint %}{{ id }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ id }}-error{% endif %}"{% endif %}
+    {% if accept %} accept="{{ accept }}"{% endif %}
+    {% if multiple %} multiple{% endif %}
+    {% if invalidFileTypeMessage %} data-errormessage="{{ invalidFileTypeMessage }}"{% endif %}
+    {% if disabled %} disabled{% endif %}
+    {% if required %} required{% endif %}
+  />
+{% endif %}
 {% endwith %}

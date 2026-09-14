@@ -1,9 +1,10 @@
 {# Django template for TimePicker #}
 {% load components %}
 {% with formGroup|default_if_none:True as wrap_group %}
-{% if wrap_group %}{% form_group error=error %}{% endif %}
+{% if wrap_group %}
+{% form_group error=error %}
   {% if label %}
-  {% label id=id|add:"-label" htmlFor=id required=required %}{{ label }}{% endlabel %}
+  {% label id=id|add:"-label" htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
   {% endif %}
 
   {% if hint %}
@@ -31,5 +32,36 @@
       {% if required %} required{% endif %}
     />
   </div>
-{% if wrap_group %}{% endform_group %}{% endif %}
+{% endform_group %}
+{% else %}
+  {% if label %}
+  {% label id=id|add:"-label" htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
+  {% endif %}
+
+  {% if hint %}
+  {% hint id=id|add:"-hint" %}{{ hint }}{% endhint %}
+  {% endif %}
+
+  {% if error %}
+  {% error_message id=id|add:"-error" %}{{ error }}{% enderror_message %}
+  {% endif %}
+
+  <div
+    class="usa-time-picker usx-time-picker{% if className %} {{ className }}{% endif %}"
+    {% if minTime %} data-min-time="{{ minTime }}"{% endif %}
+    {% if maxTime %} data-max-time="{{ maxTime }}"{% endif %}
+    {% if step %} data-step="{{ step }}"{% endif %}
+  >
+    <input
+      class="usa-input usx-input"
+      id="{{ id }}"
+      name="{{ name|default:id }}"
+      type="text"
+      {% if label or hint or error %} aria-describedby="{% if label %}{{ id }}-label{% endif %}{% if label and hint %} {% endif %}{% if hint %}{{ id }}-hint{% endif %}{% if hint and error %} {% endif %}{% if not hint and label and error %} {% endif %}{% if error %}{{ id }}-error{% endif %}"{% endif %}
+      {% if defaultValue %} value="{{ defaultValue }}"{% endif %}
+      {% if disabled %} disabled{% elif ariaDisabled %} aria-disabled="true"{% endif %}
+      {% if required %} required{% endif %}
+    />
+  </div>
+{% endif %}
 {% endwith %}

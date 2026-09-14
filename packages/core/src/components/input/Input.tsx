@@ -67,7 +67,7 @@ export default function Input({
 
   const content = (
     <>
-      <Label htmlFor={inputId} screenReaderOnly={screenReaderOnlyLabel} required={required} >
+      <Label htmlFor={inputId} screenReaderOnly={screenReaderOnlyLabel} required={required} error={hasError}>
         {label}
       </Label>
       {hint && <Hint id={hintId}>{hint}</Hint>}

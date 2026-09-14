@@ -19,3 +19,4 @@ export const ScreenReaderOnly = createStory(storyDefs.ScreenReaderOnly);
 export const WithCustomClass = createStory(storyDefs.WithCustomClass);
 export const WithClassOverride1 = { name: 'With Class Override (radio button)', ...createStory(storyDefs.WithClassOverride1) };
 export const WithClassOverride2 = { name: 'With Class Override (checkbox)', ...createStory(storyDefs.WithClassOverride2) };
+export const Error = createStory(storyDefs.Error);

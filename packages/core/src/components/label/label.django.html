@@ -10,6 +10,9 @@
     {% if screenReaderOnly %}
       usa-sr-only
     {% endif %}
+    {% if error %}
+      usa-label--error
+    {% endif %}
   {% endif %}
   "
   {% if htmlFor %}

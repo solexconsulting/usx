@@ -12,6 +12,11 @@
             "default": null,
             "description": "A unique identifier for the input field, which can be used to associate the label with the input element and for accessibility purposes."
         },
+        "name": {
+            "type": "string",
+            "default": null,
+            "description": "name attribute for the input. Defaults to id."
+        },
         "placeholder": {
             "type": "string",
             "default": "Type here",

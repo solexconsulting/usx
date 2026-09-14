@@ -12,6 +12,11 @@
             "default": null,
             "description": "A unique identifier for the textarea, used to associate the label and for accessibility."
         },
+        "name": {
+            "type": "string",
+            "default": null,
+            "description": "name attribute for the textarea. Defaults to id."
+        },
         "placeholder": {
             "type": "string",
             "default": "",

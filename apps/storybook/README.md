@@ -1,58 +1,66 @@
 Storybook app for documenting agency-ui-platform components.
 
-This app is the Storybook host. It can render local stories and compose other Storybook instances for framework-specific implementations.
+This is a single Storybook host (no composed/remote Storybooks) that renders
+stories from `packages/usx-stories/src/**`. Each component in `packages/core`
+can have up to three story files, one per rendering technology:
 
-Local stories document components from `packages/core`, including:
+- `<Name>.React.stories.jsx` — imports and renders the React component directly
+- `<Name>.HTML.stories.jsx` — renders the component's canonical static
+  `<component>.html` file via `?raw` import (no args/controls — it's a fixed
+  reference snippet)
+- `<Name>.Django.stories.jsx` — fetches server-rendered HTML from the Django
+  app in `apps/storybook-django` (see below) and injects it into the page
 
-- React wrappers in each component folder (`react.jsx`)
-- Canonical raw HTML markup examples (`*.html`)
+React and Django stories share the same `storyDefs` (arg presets) defined in
+the `.React.stories.jsx` file, so most components only need one set of props
+maintained in one place.
 
 ## Story hierarchy
 
-- `Admin/*`: library overview and usage guidance
-- `Documentation/*`: theme playground, tokens, colors, spacing, typography, and per-package guides
-- `Components/*`: one story file per component (`Button`, `Input`, `Alert`) with technology-focused stories:
-	- `React`
-	- `HTML`
-	- `JS`
-	- `DjangoTemplateTag`
-	- `DjangoRenderedEquivalent`
+- `React/USWDS/*`, `Django/USWDS/*`, `HTML/USWDS/*`: one story tree per
+  technology, mirroring the same component list
+- `React/USWDS-Inspired/*`, `React/USX/*` (and Django/HTML equivalents):
+  components that extend or go beyond upstream USWDS
+- `Foundations/*` / `Documentation/*`: theme playground, tokens, colors,
+  spacing, typography
+- `Patterns/*`: composite, multi-component example pages
 
-## Storybook Composition
+A "Filter by technology" toolbar control (`.storybook/technologyToggle.jsx`)
+lets you switch the sidebar between React/Django/HTML/All without losing your
+place, by jumping to the matching story in the target technology when one
+exists.
 
-The host is configured with `refs` in `.storybook/main.js` and expects external Storybooks at:
+> Collapsing the React/Django/HTML trees into a single per-component node with
+> the technology as a per-story toggle (rather than a separate top-level tree)
+> is a larger, not-yet-implemented restructuring — see
+> [plan-storybookArchitecture.md](../../plan-storybookArchitecture.md).
 
-- React: `http://localhost:7007`
-- HTML: `http://localhost:7008`
-- JavaScript: `http://localhost:7009`
-- Django: `http://localhost:7010`
+## Running the Django-rendered stories
 
-Remote app locations in this monorepo:
+Django stories require the companion Django app to be running:
 
-- `apps/storybook-react`
-- `apps/storybook-html`
-- `apps/storybook-js`
-- `apps/storybook-django`
+```bash
+cd apps/storybook-django
+source venv/bin/activate   # or create one: python -m venv venv && pip install -r requirements.txt
+python manage.py runserver 9090
+```
 
-Override each URL with environment variables:
-
-- `STORYBOOK_REACT_URL`
-- `STORYBOOK_HTML_URL`
-- `STORYBOOK_JS_URL`
-- `STORYBOOK_DJANGO_URL`
+Storybook resolves the Django server URL from `window.USX_DJANGO_URL` (set via
+`env-config.js` at container/deploy time) or falls back to
+`http://<current-hostname>:9090`. React and HTML stories work without the
+Django server running.
 
 ## Run
 
 From this directory:
 
-- `npm install`
-- `npm run dev`
+- `npm install` (or `pnpm install` from the repo root)
+- `npm run dev` — starts Storybook on port 6006
 
-For composition, start the framework-specific Storybooks on their ports first, then run the host.
+From the repository root:
 
-From repository root, you can launch host + remotes together with:
-
-- `pnpm dev:storybook:all`
+- `pnpm storybook` — starts this app together with the `tokens`/`usx` Sass
+  watchers, so SCSS changes recompile live
 
 Build static Storybook:
 
