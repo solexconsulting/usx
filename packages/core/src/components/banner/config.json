@@ -1,6 +1,7 @@
 {
   "name": "banner",
   "template": "banner/banner.django.html",
+  "version": 1,
   "props": {
     "id": {
       "type": "string",

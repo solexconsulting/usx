@@ -6,7 +6,7 @@ import Tag, { type TagProps } from '../tag/Tag';
 export interface Task {
     name: string;
     href: string;
-    tag?: TagProps;
+    tagProps?: TagProps;
     hint?: string;
 }
 
@@ -30,7 +30,7 @@ export default function TaskList({ tasks = [], className }: TaskListProps) {
                             ) : (
                                 <Clickable.Link className="usx-task-list__link">{task.name}</Clickable.Link>
                             )}
-                            {task.tag && <Tag {...task.tag} />}
+                            {task.tagProps && <Tag {...task.tagProps} />}
                         </Clickable>
                     </li>
                 );

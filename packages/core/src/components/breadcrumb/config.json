@@ -1,30 +1,69 @@
 {
   "name": "breadcrumb",
   "template": "breadcrumb/breadcrumb.django.html",
+  "version": 1,
+  "default": {
+    "items": [
+      {
+        "href": "#",
+        "label": "Home"
+      },
+      {
+        "href": "#",
+        "label": "Federal Contracting"
+      },
+      {
+        "href": "#",
+        "label": "Contracting assistance programs"
+      },
+      {
+        "href": "#",
+        "label": "Economically disadvantaged women-owned small business federal contracting program",
+        "current": true
+      }
+    ]
+  },
   "props": {
     "items": {
       "type": "array",
       "description": "Array of breadcrumb items",
       "items": {
         "type": "object",
+        "description": "Breadcrumb item.",
         "properties": {
-          "href": { "type": "string", "description": "URL for the breadcrumb link" },
-          "label": { "type": "string", "description": "Text label for the breadcrumb item" },
-          "current": { "type": "boolean", "description": "Whether this item is the current page" }
+          "href": {
+            "type": "string",
+            "description": "URL for the breadcrumb link"
+          },
+          "label": {
+            "type": "string",
+            "description": "Text label for the breadcrumb item"
+          },
+          "current": {
+            "type": "boolean",
+            "description": "Whether this item is the current page"
+          }
         }
       }
     },
-    "truncate": { "type": "boolean", "default": false, "description": "Use legacy single-line breadcrumb truncation (adds usa-breadcrumb--truncate)" },
-    "rdfa": { "type": "boolean", "default": false, "description": "Include RDFa metadata attributes for Search engines" },
-    "ariaLabel": { "type": "string", "default": "Breadcrumbs", "description": "Custom aria-label for the nav element" },
-    "className": { "type": "string", "description": "Additional CSS classes to add to the nav element" }
-  },
-  "default": {
-    "items": [
-      { "href": "#", "label": "Home" },
-      { "href": "#", "label": "Federal Contracting" },
-      { "href": "#", "label": "Contracting assistance programs" },
-      { "href": "#", "label": "Economically disadvantaged women-owned small business federal contracting program", "current": true }
-    ]
+    "truncate": {
+      "type": "boolean",
+      "default": false,
+      "description": "Use legacy single-line breadcrumb truncation (adds usa-breadcrumb--truncate)"
+    },
+    "rdfa": {
+      "type": "boolean",
+      "default": false,
+      "description": "Include RDFa metadata attributes for Search engines"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "default": "Breadcrumbs",
+      "description": "Custom aria-label for the nav element"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes to add to the nav element"
+    }
   }
 }

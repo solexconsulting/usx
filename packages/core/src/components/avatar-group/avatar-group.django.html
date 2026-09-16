@@ -2,7 +2,7 @@
 {% load components %}
 
 <div class="usx-avatar-group{% if stacked %} usa-avatar-group--stacked{% endif %}{% if overlap %} usa-avatar-group--overlap{% endif %}{% if className %} {{ className }}{% endif %}">
-  {% for avatar in avatars %}
+  {% for avatar in avatarProps %}
     {% avatar href=avatar.href src=avatar.src alt=avatar.alt initials=avatar.initials shape=avatar.shape tooltip=avatar.tooltip className=avatar.className imageClassName=avatar.imageClassName initialsClassName=avatar.initialsClassName %}{% endavatar %}
   {% endfor %}
 </div>

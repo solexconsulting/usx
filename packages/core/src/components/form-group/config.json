@@ -1,21 +1,22 @@
 {
-    "name": "form-group",
-    "template": "form-group/form-group.django.html",
-    "props": {
-        "children": {
-            "type": "string",
-            "default": null,
-            "description": "Inner HTML content of the form group."
-        },
-        "error": {
-            "type": "boolean",
-            "default": false,
-            "description": "Applies the error modifier class to the form group wrapper."
-        },
-        "className": {
-            "type": "string",
-            "default": "",
-            "description": "Additional CSS classes to apply to the form group wrapper."
-        }
+  "name": "form-group",
+  "template": "form-group/form-group.django.html",
+  "version": 1,
+  "props": {
+    "children": {
+      "type": "string",
+      "default": null,
+      "description": "Inner HTML content of the form group."
+    },
+    "error": {
+      "type": "boolean",
+      "default": false,
+      "description": "Applies the error modifier class to the form group wrapper."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes to apply to the form group wrapper."
     }
+  }
 }

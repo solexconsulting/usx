@@ -1,10 +1,15 @@
 {
   "name": "footer",
   "template": "footer/footer.django.html",
+  "version": 1,
   "props": {
     "variant": {
       "type": "select",
-      "options": ["big", "medium", "slim"],
+      "options": [
+        "big",
+        "medium",
+        "slim"
+      ],
       "default": "medium",
       "description": "Footer layout variant. 'big' includes collapsible nav columns and an optional sign-up form. 'medium' shows flat primary links. 'slim' puts contact info in the primary bar."
     },
@@ -76,4 +81,3 @@
     }
   }
 }
-

@@ -14,7 +14,7 @@ export default {
 };
 
 const story0Args = {
-  items: [
+  buttonProps: [
     { label: 'Map', variant: 'primary' },
     { label: 'Hybrid', variant: 'outline' },
     { label: 'Satellite', variant: 'outline' }
@@ -22,26 +22,26 @@ const story0Args = {
 }
 
 const story1Args = {
-  items: [
-    { label: '', variant: 'outline', leftIcon: { name: 'navigate_far_before'} },
-    { label: '', variant: 'primary', leftIcon: { name: 'navigate_before' } },
-    { label: '', variant: 'primary', leftIcon: { name: 'navigate_next' } },
-    { label: '', variant: 'outline', leftIcon: { name: 'navigate_far_next'} }
+  buttonProps: [
+    { label: '', variant: 'outline', iconProps: [{ name: 'navigate_far_before'}] },
+    { label: '', variant: 'primary', iconProps: [{ name: 'navigate_before' }] },
+    { label: '', variant: 'primary', iconProps: [{ name: 'navigate_next' }] },
+    { label: '', variant: 'outline', iconProps: [{ name: 'navigate_far_next'}] }
   ]
 }
 
 const story2Args = {
-  items: [
-    { label: '', variant: 'outline', leftIcon: { name: 'navigate_far_before'} },
-    { label: '', variant: 'primary', leftIcon: { name: 'navigate_before' } },
-    { label: '', variant: 'primary', leftIcon: { name: 'navigate_next' } },
-    { label: '', variant: 'outline', leftIcon: { name: 'navigate_far_next'} }
+  buttonProps: [
+    { label: '', variant: 'outline', iconProps: [{ name: 'navigate_far_before'}] },
+    { label: '', variant: 'primary', iconProps: [{ name: 'navigate_before' }] },
+    { label: '', variant: 'primary', iconProps: [{ name: 'navigate_next' }] },
+    { label: '', variant: 'outline', iconProps: [{ name: 'navigate_far_next'}] }
   ],
   segmented: true
 }
 
 const story3Args = {
-  items: [
+  buttonProps: [
     { label: 'Map', variant: 'secondary' },
     { label: 'Hybrid', variant: 'secondary' },
     { label: 'Satellite', variant: 'secondary' }
@@ -50,7 +50,7 @@ const story3Args = {
 }
 
 const story4Args = {
-  items: [
+  buttonProps: [
     { label: 'Map', variant: 'accent-cool' },
     { label: 'Hybrid', variant: 'accent-cool' },
     { label: 'Satellite', variant: 'accent-cool' }
@@ -59,7 +59,7 @@ const story4Args = {
 }
 
 const story5Args = {
-  items: [
+  buttonProps: [
     { label: 'Map', variant: 'accent-warm' },
     { label: 'Hybrid', variant: 'accent-warm' },
     { label: 'Satellite', variant: 'accent-warm' }

@@ -1,8 +1,21 @@
 {
   "name": "card-group",
   "template": "card-group/card-group.django.html",
+  "version": 1,
   "props": {
-    "cards": { "type": "array", "description": "Array of card prop objects" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "cardProps": {
+      "type": "array",
+      "description": "Array of cards rendered by the group.",
+      "items": {
+        "type": "object",
+        "description": "Card item.",
+        "component": "card",
+        "omit": ["tag"]
+      }
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

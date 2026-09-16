@@ -1,9 +1,25 @@
 {
   "name": "button-group",
   "template": "button-group/button-group.django.html",
+  "version": 1,
   "props": {
-    "items": { "type": "array", "description": "Array of button items" },
-    "segmented": { "type": "boolean", "description": "Whether the button group is segmented" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "buttonProps": {
+      "type": "array",
+      "description": "Array of buttons rendered by the group.",
+      "items": {
+        "type": "object",
+        "description": "Button item.",
+        "component": "button"
+      }
+    },
+    "segmented": {
+      "type": "boolean",
+      "description": "Whether the button group is segmented",
+      "default": false
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

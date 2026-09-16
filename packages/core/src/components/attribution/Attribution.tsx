@@ -1,22 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import Avatar from '../avatar/Avatar';
-
-export interface AttributionAvatarProps {
-  href?: string;
-  src?: string;
-  alt?: string;
-  variant?: 'image' | 'initials' | 'icon';
-  value?: string;
-  shape?: null | 'circle' | 'rounded-sm' | 'rounded-md' | 'rounded-lg' | 'rounded-xl';
-  tooltip?: string;
-  className?: string;
-  imageClassName?: string;
-  contentClassName?: string;
-}
+import Avatar, { AvatarProps } from '../avatar/Avatar';
 
 export interface AttributionProps extends React.HTMLAttributes<HTMLDivElement> {
-  avatar?: AttributionAvatarProps | null;
+  avatarProps?: AvatarProps | null;
   media?: React.ReactNode | null;
   primary?: React.ReactNode;
   secondary?: React.ReactNode;
@@ -25,7 +12,7 @@ export interface AttributionProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Attribution({
-  avatar = null,
+  avatarProps = null,
   media = null,
   primary,
   secondary,
@@ -34,7 +21,7 @@ export default function Attribution({
   ...props
 }: AttributionProps) {
   const classes = classNames('usx-attribution', className);
-  const mediaContent = avatar ? <Avatar {...avatar} /> : media;
+  const mediaContent = avatarProps ? <Avatar {...avatarProps} /> : media;
   const content = children ?? (
     <>
       {mediaContent && <span className="usx-attribution__media">{mediaContent}</span>}

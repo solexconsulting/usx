@@ -1,19 +1,69 @@
 {
   "name": "search",
   "template": "search/search.django.html",
+  "version": 1,
   "props": {
-    "id": { "type": "string", "description": "Unique identifier for the search input, used for accessibility and form submission" },
-    "ariaLabel": { "type": "string", "description": "ARIA label for the search input, used for accessibility" },
-    "searchKey": { "type": "string", "default": "q", "description": "Name of the query parameter to use for the search input value on form submission, defaults to 'q'" },
-    "label": { "type": "string", "default": "Search", "description": "Label for the search input, used for accessibility" },
-    "icon": { "type": "string", "default": "search", "description": "Name of the icon to display in the search button" },
-    "iconOnly": { "type": "boolean", "default": false, "description": "Forces the icon to display even on large screens" },
-    "buttonVariant": { "type": "string", "default": "primary", "description": "Variant for the search button (e.g., 'primary', 'secondary', 'outline', etc.)" },
-    "big": { "type": "boolean", "default": false, "description": "Whether to use the big search style with larger input and button" },
-    "action": { "type": "string", "default": "/search", "description": "URL to submit the search query to" },
-    "placeholder": { "type": "string", "default": "", "description": "Placeholder text for the search input" },
-    "defaultValue": { "type": "string", "description": "Default value for the search input" },
-    "onSubmit": { "type": "string", "default": "", "description": "JavaScript function to call on search submit, receives the search query as an argument" },
-    "className": { "type": "string", "default": "", "description": "Additional classes" }
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the search input, used for accessibility and form submission"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "description": "ARIA label for the search input, used for accessibility"
+    },
+    "searchKey": {
+      "type": "string",
+      "default": "q",
+      "description": "Name of the query parameter to use for the search input value on form submission, defaults to 'q'"
+    },
+    "label": {
+      "type": "string",
+      "default": "Search",
+      "description": "Label for the search input, used for accessibility"
+    },
+    "icon": {
+      "type": "string",
+      "default": "search",
+      "description": "Name of the icon to display in the search button"
+    },
+    "iconOnly": {
+      "type": "boolean",
+      "default": false,
+      "description": "Forces the icon to display even on large screens"
+    },
+    "buttonVariant": {
+      "type": "string",
+      "default": "primary",
+      "description": "Variant for the search button (e.g., 'primary', 'secondary', 'outline', etc.)"
+    },
+    "big": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to use the big search style with larger input and button"
+    },
+    "action": {
+      "type": "string",
+      "default": "/search",
+      "description": "URL to submit the search query to"
+    },
+    "placeholder": {
+      "type": "string",
+      "default": "",
+      "description": "Placeholder text for the search input"
+    },
+    "defaultValue": {
+      "type": "string",
+      "description": "Default value for the search input"
+    },
+    "onSubmit": {
+      "type": "string",
+      "default": "",
+      "description": "JavaScript function to call on search submit, receives the search query as an argument"
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional classes"
+    }
   }
 }

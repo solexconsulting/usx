@@ -1,6 +1,7 @@
 {
   "name": "calendar-date",
   "template": "calendar-date/calendar-date.django.html",
+  "version": 1,
   "props": {
     "datetime": {
       "type": "string",

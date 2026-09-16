@@ -1,11 +1,50 @@
 {
   "name": "collection",
   "template": "collection/collection.django.html",
+  "version": 1,
   "props": {
     "items": {
-      "type": "object",
+      "type": "array",
       "default": [],
-      "description": "Array of collection item objects. Each item: { href, heading, description?, imgSrc?, imgAlt?, calendarDate?: { datetime, month, day }, meta?: [{ text, datetime? }], tags?: [{ label, isNew? }] }"
+      "description": "Array of collection item objects. Each item: { href, heading, description?, imgSrc?, imgAlt?, calendarDate?: { datetime, month, day }, meta?: [{ text, datetime? }], tags?: [{ label, isNew? }] }",
+      "items": {
+        "type": "object",
+        "description": "Collection item.",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "Item link URL."
+          },
+          "heading": {
+            "type": "string",
+            "description": "Item heading text."
+          },
+          "description": {
+            "type": "string",
+            "description": "Item description text."
+          },
+          "imgSrc": {
+            "type": "string",
+            "description": "Optional thumbnail image URL."
+          },
+          "imgAlt": {
+            "type": "string",
+            "description": "Alt text for the thumbnail image."
+          },
+          "calendarDate": {
+            "type": "object",
+            "description": "Optional { datetime, month, day } calendar date badge."
+          },
+          "meta": {
+            "type": "array",
+            "description": "Optional meta list: [{ text, datetime? }]."
+          },
+          "tags": {
+            "type": "array",
+            "description": "Optional tag list: [{ label, isNew? }]."
+          }
+        }
+      }
     },
     "condensed": {
       "type": "boolean",

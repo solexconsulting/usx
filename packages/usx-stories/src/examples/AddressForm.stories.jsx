@@ -136,7 +136,7 @@ export const AddressFormPattern = {
 
                   <div className="margin-top-4">
                     <ButtonGroup
-                      items={[
+                      buttonProps={[
                         { children: 'Save Address', variant: 'primary' },
                         { children: 'Cancel', variant: 'secondary' },
                       ]}

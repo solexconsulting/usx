@@ -10,18 +10,18 @@ const taskTags = {
 };
 
 const allTasks = [
-  { name: 'Review application', href: '#', tag: taskTags.done },
-  { name: 'Submit supporting documents', href: '#', tag: taskTags.done },
-  { name: 'Schedule interview', href: '#', tag: taskTags.done, hint: 'Due tomorrow' },
-  { name: 'Complete background check', href: '#', tag: taskTags.done },
+  { name: 'Review application', href: '#', tagProps: taskTags.done },
+  { name: 'Submit supporting documents', href: '#', tagProps: taskTags.done },
+  { name: 'Schedule interview', href: '#', tagProps: taskTags.done, hint: 'Due tomorrow' },
+  { name: 'Complete background check', href: '#', tagProps: taskTags.done },
 ];
 
 export const storyDefs = {
   Default: {
     tasks: [
-      { name: 'Task 1', href: '#', tag: taskTags.done },
-      { name: 'Task 2', href: '#', tag: taskTags.doing },
-      { name: 'Task 3', href: '#', tag: taskTags.todo, hint: 'Due tomorrow' },
+      { name: 'Task 1', href: '#', tagProps: taskTags.done },
+      { name: 'Task 2', href: '#', tagProps: taskTags.doing },
+      { name: 'Task 3', href: '#', tagProps: taskTags.todo, hint: 'Due tomorrow' },
     ]
   },
   NoStatus: {
@@ -33,28 +33,28 @@ export const storyDefs = {
   },
   AllComplete: {
     tasks: [
-      { name: 'Step 1', href: '#', tag: taskTags.done },
-      { name: 'Step 2', href: '#', tag: taskTags.done },
-      { name: 'Step 3', href: '#', tag: taskTags.done },
+      { name: 'Step 1', href: '#', tagProps: taskTags.done },
+      { name: 'Step 2', href: '#', tagProps: taskTags.done },
+      { name: 'Step 3', href: '#', tagProps: taskTags.done },
     ],
   },
   AllIncomplete: {
     tasks: [
-      { name: 'Step 1', href: '#', tag: taskTags.todo },
-      { name: 'Step 2', href: '#', tag: taskTags.todo },
-      { name: 'Step 3', href: '#', tag: taskTags.todo },
+      { name: 'Step 1', href: '#', tagProps: taskTags.todo },
+      { name: 'Step 2', href: '#', tagProps: taskTags.todo },
+      { name: 'Step 3', href: '#', tagProps: taskTags.todo },
     ],
   },
   WithHints: {
     tasks: [
-      { name: 'Review application', href: '#', tag: taskTags.done },
-      { name: 'Schedule interview', href: '#', tag: taskTags.todo, hint: 'Due tomorrow' },
-      { name: 'Complete background check', href: '#', tag: taskTags.todo, hint: 'Due in 3 days' },
+      { name: 'Review application', href: '#', tagProps: taskTags.done },
+      { name: 'Schedule interview', href: '#', tagProps: taskTags.todo, hint: 'Due tomorrow' },
+      { name: 'Complete background check', href: '#', tagProps: taskTags.todo, hint: 'Due in 3 days' },
     ],
   },
   Mixed: { tasks: allTasks },
   SingleItem: {
-    tasks: [{ name: 'Only task', href: '#', tag: taskTags.todo }],
+    tasks: [{ name: 'Only task', href: '#', tagProps: taskTags.todo }],
   },
   Empty: { tasks: [] },
 };

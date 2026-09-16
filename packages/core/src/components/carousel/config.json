@@ -1,13 +1,38 @@
 {
   "name": "carousel",
   "template": "carousel/carousel.django.html",
+  "version": 1,
   "props": {
-    "id": { "type": "string", "default": "carousel-1", "description": "Base id for slides and anchors" },
-    "slides": { "type": "array", "description": "Array of slide objects {content: string|node}" },
-    "children": { "type": "string", "description": "Optional raw slide markup rendered directly inside the track." },
-    "slideIds": { "type": "array", "description": "Anchor targets used for dot navigation when children are provided." },
-    "ariaLabel": { "type": "string", "default": "Featured content", "description": "Aria label for the carousel region" },
-    "showDots": { "type": "boolean", "default": true, "description": "Whether to render navigation dots" },
-    "className": { "type": "string", "description": "Additional classes to add to the carousel" }
+    "id": {
+      "type": "string",
+      "default": "carousel-1",
+      "description": "Base id for slides and anchors"
+    },
+    "slides": {
+      "type": "array",
+      "description": "Array of slide objects {content: string|node}"
+    },
+    "children": {
+      "type": "string",
+      "description": "Optional raw slide markup rendered directly inside the track."
+    },
+    "slideIds": {
+      "type": "array",
+      "description": "Anchor targets used for dot navigation when children are provided."
+    },
+    "ariaLabel": {
+      "type": "string",
+      "default": "Featured content",
+      "description": "Aria label for the carousel region"
+    },
+    "showDots": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to render navigation dots"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes to add to the carousel"
+    }
   }
 }

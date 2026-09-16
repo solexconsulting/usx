@@ -1,10 +1,37 @@
 {
   "name": "task-list",
   "template": "task-list/task-list.django.html",
+  "version": 1,
+  "required": [
+    "tasks"
+  ],
   "props": {
     "tasks": {
       "type": "array",
-      "description": "Array of task objects: { name: string, href: string, status: 'complete' | 'incomplete', hint?: string }"
+      "description": "Array of task objects.",
+      "items": {
+        "type": "object",
+        "description": "Task item.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Task name/label."
+          },
+          "href": {
+            "type": "string",
+            "description": "Link URL for the task."
+          },
+          "hint": {
+            "type": "string",
+            "description": "Optional helper text shown below the task name."
+          },
+          "tagProps": {
+            "type": "object",
+            "description": "Optional status tag displayed alongside the task.",
+            "component": "tag"
+          }
+        }
+      }
     },
     "className": {
       "type": "string",

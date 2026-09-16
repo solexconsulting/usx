@@ -1,66 +1,73 @@
 {
-    "name": "input",
-    "template": "input/input.django.html",
-    "props": {
-        "label": {
-            "type": "string",
-            "default": null,
-            "description": "The label for the input field. If provided, it will render a label element associated with the control."
-        },
-        "id": {
-            "type": "string",
-            "default": null,
-            "description": "A unique identifier for the input field, which can be used to associate the label with the input element and for accessibility purposes."
-        },
-        "name": {
-            "type": "string",
-            "default": null,
-            "description": "name attribute for the input. Defaults to id."
-        },
-        "placeholder": {
-            "type": "string",
-            "default": "Type here",
-            "description": "Text displayed inside the input field when it is empty, providing a hint to the user about the expected input."
-        },
-        "error": {
-            "type": ["string", "boolean"],
-            "default": null,
-            "description": "An error message (string) to display when invalid, or `true` to mark the control as errored without a message."
-        },
-        "success": {
-            "type": ["string", "boolean"],
-            "default": null,
-            "description": "A success message (string) to display when valid, or `true` to mark the control as successful without a message."
-        },
-        "disabled": {
-            "type": "boolean",
-            "default": false,
-            "description": "A boolean that determines whether the input field is disabled, preventing user interaction and indicating that the field is not currently available for input."
-        },
-        "hint": {
-            "type": "string",
-            "default": null,
-            "description": "Hint text to provide additional guidance. Rendered as an element and referenced by `aria-describedby`."
-        },
-        "screenReaderOnlyLabel": {
-            "type": "boolean",
-            "default": false,
-            "description": "A boolean that indicates whether the label for the input field should be visually hidden but still accessible to screen readers, providing an accessible experience for users who rely on assistive technologies."
-        },
-        "required": {
-            "type": "boolean",
-            "default": false,
-            "description": "A boolean that indicates whether the input field is required, meaning that the user must provide a value before submitting the form."
-        },
-        "formGroup": {
-            "type": "boolean",
-            "default": true,
-            "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group."
-        },
-        "className": {
-            "type": "string",
-            "default": "",
-            "description": "Additional CSS classes to apply to the input field."
-        }
+  "name": "input",
+  "template": "input/input.django.html",
+  "version": 1,
+  "props": {
+    "label": {
+      "type": "string",
+      "default": null,
+      "description": "The label for the input field. If provided, it will render a label element associated with the control."
+    },
+    "id": {
+      "type": "string",
+      "default": null,
+      "description": "A unique identifier for the input field, which can be used to associate the label with the input element and for accessibility purposes."
+    },
+    "name": {
+      "type": "string",
+      "default": null,
+      "description": "name attribute for the input. Defaults to id."
+    },
+    "placeholder": {
+      "type": "string",
+      "default": "Type here",
+      "description": "Text displayed inside the input field when it is empty, providing a hint to the user about the expected input."
+    },
+    "error": {
+      "type": [
+        "string",
+        "boolean"
+      ],
+      "default": null,
+      "description": "An error message (string) to display when invalid, or `true` to mark the control as errored without a message."
+    },
+    "success": {
+      "type": [
+        "string",
+        "boolean"
+      ],
+      "default": null,
+      "description": "A success message (string) to display when valid, or `true` to mark the control as successful without a message."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "A boolean that determines whether the input field is disabled, preventing user interaction and indicating that the field is not currently available for input."
+    },
+    "hint": {
+      "type": "string",
+      "default": null,
+      "description": "Hint text to provide additional guidance. Rendered as an element and referenced by `aria-describedby`."
+    },
+    "screenReaderOnlyLabel": {
+      "type": "boolean",
+      "default": false,
+      "description": "A boolean that indicates whether the label for the input field should be visually hidden but still accessible to screen readers, providing an accessible experience for users who rely on assistive technologies."
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "A boolean that indicates whether the input field is required, meaning that the user must provide a value before submitting the form."
+    },
+    "formGroup": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes to apply to the input field."
     }
+  }
 }

@@ -1,8 +1,9 @@
 {
   "name": "avatar-group",
   "template": "avatar-group/avatar-group.django.html",
+  "version": 1,
   "default": {
-    "avatars": [
+    "avatarProps": [
       {
         "href": "https://google.com/search?q=George+Washington",
         "src": "./george_washington.png",
@@ -21,9 +22,39 @@
     ]
   },
   "props": {
-    "avatars": { "type": "object", "description": "Array of avatar objects. Each supports: href, src, alt, initials, shape, tooltip, className, imageClassName, initialsClassName." },
-    "overlap": { "type": "boolean", "description": "When true, avatars overlap each other in the group." },
-    "stacked": { "type": "boolean", "description": "When true, avatars are stacked vertically." },
-    "className": { "type": "string", "description": "Additional classes" }
+    "avatarProps": {
+      "type": "array",
+      "description": "Array of avatars rendered by the group.",
+      "items": {
+        "type": "object",
+        "description": "Avatar item. Mirrors the avatar component's props, using initials/initialsClassName in place of value/contentClassName, with no variant (auto-detected).",
+        "component": "avatar",
+        "omit": ["variant", "value", "contentClassName"],
+        "properties": {
+          "initials": {
+            "type": "string",
+            "description": "Initials text for non-image avatars (passed as the avatar's value prop)."
+          },
+          "initialsClassName": {
+            "type": "string",
+            "description": "Additional classes for the non-image avatar content container (passed as the avatar's contentClassName prop)."
+          }
+        }
+      }
+    },
+    "overlap": {
+      "type": "boolean",
+      "description": "When true, avatars overlap each other in the group.",
+      "default": false
+    },
+    "stacked": {
+      "type": "boolean",
+      "description": "When true, avatars are stacked vertically.",
+      "default": false
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

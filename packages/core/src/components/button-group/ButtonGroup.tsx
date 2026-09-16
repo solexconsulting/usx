@@ -3,13 +3,13 @@ import ClassNames from 'classnames';
 import Button from '../button/Button';
 import type { ButtonProps } from '../button/Button';
 export interface ButtonGroupProps extends React.HTMLAttributes<HTMLUListElement> {
-  items?: ButtonProps[];
+  buttonProps?: ButtonProps[];
   segmented?: boolean;
   className?: string;
 }
 
 export default function ButtonGroup({
-  items = [],
+  buttonProps = [],
   segmented = false,
   className = '',
   ...props
@@ -21,7 +21,7 @@ export default function ButtonGroup({
   );
   return (
     <ul className={classes} {...props}>
-      {items.map((item, index) => (
+      {buttonProps.map((item, index) => (
         <li key={index} className="usa-button-group__item">
           <Button {...item}>
             {item.children}

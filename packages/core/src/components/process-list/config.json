@@ -1,6 +1,7 @@
 {
   "name": "process-list",
   "template": "process-list/process-list.django.html",
+  "version": 1,
   "props": {
     "items": {
       "type": "object",

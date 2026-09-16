@@ -1,20 +1,59 @@
 {
   "name": "avatar",
   "template": "avatar/avatar.django.html",
+  "version": 1,
   "props": {
-    "href": { "type": "string", "description": "Link target for the avatar image." },
-    "src": { "type": "string", "description": "Image source URL for the avatar image variant." },
-    "alt": { "type": "string", "description": "Accessible label for the avatar. Used as image alt text or non-image avatar aria-label." },
-    "variant": { "type": "select", "options": ["image", "initials", "icon"], "description": "Avatar content mode." },
-    "value": { "type": "string", "description": "Value for non-image avatars. Initials text when variant='initials', icon name when variant='icon'." },
+    "href": {
+      "type": "string",
+      "description": "Link target for the avatar image."
+    },
+    "src": {
+      "type": "string",
+      "description": "Image source URL for the avatar image variant."
+    },
+    "alt": {
+      "type": "string",
+      "description": "Accessible label for the avatar. Used as image alt text or non-image avatar aria-label."
+    },
+    "variant": {
+      "type": "select",
+      "options": [
+        "image",
+        "initials",
+        "icon"
+      ],
+      "description": "Avatar content mode."
+    },
+    "value": {
+      "type": "string",
+      "description": "Value for non-image avatars. Initials text when variant='initials', icon name when variant='icon'."
+    },
     "shape": {
       "type": "select",
-      "options": ["circle", "rounded-sm", "rounded-md", "rounded-lg", "rounded-xl"],
+      "options": [
+        "circle",
+        "rounded-sm",
+        "rounded-md",
+        "rounded-lg",
+        "rounded-xl"
+      ],
       "description": "Optional shape utility for avatar image or initials."
     },
-    "tooltip": { "type": "string", "description": "Optional tooltip text displayed on hover." },
-    "className": { "type": "string", "description": "Additional classes for the avatar link element." },
-    "imageClassName": { "type": "string", "description": "Additional classes for the avatar image element." },
-    "contentClassName": { "type": "string", "description": "Additional classes for the non-image avatar content container." }
+    "tooltip": {
+      "type": "string",
+      "description": "Optional tooltip text displayed on hover."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes for the avatar link element."
+    },
+    "imageClassName": {
+      "type": "string",
+      "description": "Additional classes for the avatar image element."
+    },
+    "contentClassName": {
+      "type": "string",
+      "description": "Additional classes for the non-image avatar content container."
+    }
   }
 }

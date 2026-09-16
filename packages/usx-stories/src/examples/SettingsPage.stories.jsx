@@ -126,7 +126,7 @@ export const SettingsPage = {
 
                                     <div className="margin-top-4">
                                         <ButtonGroup
-                                            items={[
+                                            buttonProps={[
                                                 { children: 'Save Changes', variant: 'primary' },
                                                 { children: 'Cancel', variant: 'secondary' },
                                                 { children: 'Reset to Defaults', variant: 'secondary' },

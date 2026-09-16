@@ -9,7 +9,7 @@ export const storyDefs = {
     secondary: 'First President of the United States',
   },
   WithAvatar: {
-    avatar: {
+    avatarProps: {
       href: '#',
       src: './george_washington.png',
       alt: 'George Washington',
@@ -19,7 +19,7 @@ export const storyDefs = {
     secondary: 'First President of the United States',
   },
   WithInitials: {
-    avatar: {
+    avatarProps: {
       href: '#',
       variant: 'initials',
       value: 'AB',
@@ -30,7 +30,7 @@ export const storyDefs = {
     secondary: 'Case manager',
   },
   WithPersonIcon: {
-    avatar: {
+    avatarProps: {
       href: '#',
       variant: 'icon',
       value: 'person',

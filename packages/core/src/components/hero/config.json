@@ -1,6 +1,7 @@
 {
   "name": "hero",
   "template": "hero/hero.django.html",
+  "version": 1,
   "default": {
     "title": "The hero heading",
     "callout": "A callout heading",
@@ -29,22 +30,24 @@
       "type": "object",
       "description": "Optional call-to-action button. Mutually exclusive with search.",
       "properties": {
-        "href": { "type": "string", "description": "Button link URL" },
-        "text": { "type": "string", "description": "Button label text" },
-        "onClick": { "type": "function", "description": "Optional click handler for the button" }
+        "href": {
+          "type": "string",
+          "description": "Button link URL"
+        },
+        "text": {
+          "type": "string",
+          "description": "Button label text"
+        },
+        "onClick": {
+          "type": "function",
+          "description": "Optional click handler for the button"
+        }
       }
     },
-    "search": {
+    "searchProps": {
       "type": "object",
       "description": "Optional search form. When provided, renders a Search component instead of the button.",
-      "properties": {
-        "id": { "type": "string", "description": "Input/form ID" },
-        "label": { "type": "string", "description": "Search label and button text" },
-        "placeholder": { "type": "string", "description": "Input placeholder text" },
-        "action": { "type": "string", "description": "Form action URL" },
-        "big": { "type": "boolean", "description": "Use the big search variant" },
-        "buttonVariant": { "type": "string", "description": "Button variant override" }
-      }
+      "component": "search"
     },
     "backgroundImage": {
       "type": "string",

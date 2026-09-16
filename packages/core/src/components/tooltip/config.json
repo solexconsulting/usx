@@ -1,6 +1,7 @@
 {
   "name": "tooltip",
   "template": "tooltip/tooltip.django.html",
+  "version": 1,
   "props": {
     "label": {
       "type": "string",
@@ -9,7 +10,12 @@
     },
     "position": {
       "type": "select",
-      "options": ["top", "bottom", "left", "right"],
+      "options": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ],
       "default": "top",
       "description": "The direction the tooltip appears relative to its trigger."
     },

@@ -1,6 +1,7 @@
 {
   "name": "modal",
   "template": "modal/modal.django.html",
+  "version": 1,
   "props": {
     "id": {
       "type": "string",
@@ -17,14 +18,23 @@
       "default": "You have unsaved changes that will be lost.",
       "description": "The body text displayed inside the modal. Overridden by children if provided."
     },
-    "actions": {
+    "actionProps": {
       "type": "array",
       "default": [],
-      "description": "Array of button prop objects rendered as the modal footer actions. Each item maps directly onto Button props (children, variant, onClick, href, etc.)."
+      "description": "Array of buttons rendered as the modal footer actions.",
+      "items": {
+        "type": "object",
+        "description": "Button item.",
+        "component": "button"
+      }
     },
     "size": {
       "type": "select",
-      "options": ["default", "lg", "lg-collapsed"],
+      "options": [
+        "default",
+        "lg",
+        "lg-collapsed"
+      ],
       "default": "default",
       "description": "The size variant of the modal. 'lg' renders a large modal, 'lg-collapsed' renders a large modal that collapses at smaller breakpoints."
     },

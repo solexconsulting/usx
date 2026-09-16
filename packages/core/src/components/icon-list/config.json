@@ -1,6 +1,7 @@
 {
   "name": "icon-list",
   "template": "icon-list/icon-list.django.html",
+  "version": 1,
   "default": {
     "items": [
       {
@@ -22,8 +23,46 @@
   },
   "props": {
     "items": {
-      "type": "object",
-      "description": "Array of icon list item objects. Each item supports iconName, iconColor, iconSize, title, content, and optional class names."
+      "type": "array",
+      "description": "Array of icon list items.",
+      "items": {
+        "type": "object",
+        "description": "Icon list item.",
+        "properties": {
+          "iconName": {
+            "type": "string",
+            "description": "Name of the icon to display, from the USWDS sprite (passed as the icon's name prop)."
+          },
+          "iconColor": {
+            "type": "string",
+            "description": "Color of the icon (passed as the icon's color prop)."
+          },
+          "iconSize": {
+            "type": "number",
+            "description": "Size of the icon (passed as the icon's size prop)."
+          },
+          "iconClassName": {
+            "type": "string",
+            "description": "Additional classes for the icon."
+          },
+          "title": {
+            "type": "string",
+            "description": "Optional heading text for the item."
+          },
+          "content": {
+            "type": ["string", "slot"],
+            "description": "Item text or rich content."
+          },
+          "itemClassName": {
+            "type": "string",
+            "description": "Additional classes for the list item element."
+          },
+          "contentClassName": {
+            "type": "string",
+            "description": "Additional classes for the item's content container."
+          }
+        }
+      }
     },
     "primary": {
       "type": "boolean",
@@ -32,10 +71,16 @@
     },
     "size": {
       "type": "select",
-      "options": [null, "lg"],
+      "options": [
+        null,
+        "lg"
+      ],
       "default": null,
       "description": "Optional list size modifier. Use lg for usa-icon-list--size-lg."
     },
-    "className": { "type": "string", "description": "Additional classes" }
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

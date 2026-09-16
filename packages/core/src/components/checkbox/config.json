@@ -1,20 +1,71 @@
 {
   "name": "checkbox",
   "template": "checkbox/checkbox.django.html",
+  "version": 1,
   "props": {
-    "id": { "type": "string", "description": "Unique identifier for the checkbox input" },
-    "name": { "type": "string", "description": "Name attribute for the checkbox input, used for form submission" },
-    "value": { "type": "string", "description": "Value attribute for the checkbox input" },
-    "label": { "type": "string", "description": "Label text for the checkbox" },
-    "checked": { "type": "boolean", "default": false, "description": "Whether the checkbox is checked" },
-    "disabled": { "type": "boolean", "default": false, "description": "Whether the checkbox is disabled" },
-    "description": { "type": "string", "default": null, "description": "Optional description text that provides additional information about the checkbox" },
-    "tile": { "type": "boolean", "default": false, "description": "Whether to use the tile checkbox style" },
-    "small": { "type": "boolean", "default": false, "description": "Whether to use the small checkbox style" },
-    "error": { "type": "string", "default": null, "description": "Error message to display when the checkbox is in an error state" },
-    "success": { "type": "string", "default": null, "description": "Success message to display when the checkbox is in a success state" },
-    "className": { "type": "string", "description": "Additional classes to add to the checkbox container" },
-    "onChange": { "type": "function", "description": "Function called when the checkbox value changes (React) or JavaScript code string for onchange attribute (Django)" },
-    "required": { "type": "boolean", "default": false, "description": "Whether the checkbox is required, adds asterisk to label and required attribute to input" }
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the checkbox input"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name attribute for the checkbox input, used for form submission"
+    },
+    "value": {
+      "type": "string",
+      "description": "Value attribute for the checkbox input"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label text for the checkbox"
+    },
+    "checked": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the checkbox is checked"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the checkbox is disabled"
+    },
+    "description": {
+      "type": "string",
+      "default": null,
+      "description": "Optional description text that provides additional information about the checkbox"
+    },
+    "tile": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to use the tile checkbox style"
+    },
+    "small": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to use the small checkbox style"
+    },
+    "error": {
+      "type": "string",
+      "default": null,
+      "description": "Error message to display when the checkbox is in an error state"
+    },
+    "success": {
+      "type": "string",
+      "default": null,
+      "description": "Success message to display when the checkbox is in a success state"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes to add to the checkbox container"
+    },
+    "onChange": {
+      "type": "function",
+      "description": "Function called when the checkbox value changes (React) or JavaScript code string for onchange attribute (Django)"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the checkbox is required, adds asterisk to label and required attribute to input"
+    }
   }
 }

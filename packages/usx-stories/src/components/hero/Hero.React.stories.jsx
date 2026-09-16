@@ -52,7 +52,7 @@ export const storyDefs = {
     paragraph: defaultParagraph,
     backgroundImage: defaultImage,
     overlay: true,
-    search: {
+    searchProps: {
       id: 'hero-search',
       label: 'Search',
       placeholder: 'Search...',

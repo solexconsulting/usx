@@ -1,18 +1,57 @@
 {
   "name": "misc-banner",
   "template": "misc-banner/misc-banner.django.html",
+  "version": 1,
   "props": {
-    "children": { "type": "string", "description": "Advanced override for custom inner markup" },
-    "className": { "type": "string", "description": "Additional classes for the root banner" },
-    "tone": { "type": "string", "description": "Banner tone and style: beta, dev, or test" },
-    "badgeText": { "type": "string", "description": "Badge label text" },
-    "message": { "type": "string", "description": "Main banner message" },
-    "casualLinkText": { "type": "string", "description": "Learn more link text" },
-    "casualLinkHref": { "type": "string", "description": "Learn more link destination" },
-    "showLearnMore": { "type": "boolean", "description": "Show learn more link" },
-    "importantLinkText": { "type": "string", "description": "Secondary return link text" },
-    "importantLinkHref": { "type": "string", "description": "Secondary return link destination" },
-    "importantLinkIcon": { "type": "string", "description": "Icon name used before return text" },
-    "showReturnLink": { "type": "boolean", "description": "Show return link section" }
+    "children": {
+      "type": "string",
+      "description": "Advanced override for custom inner markup"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes for the root banner"
+    },
+    "tone": {
+      "type": "string",
+      "description": "Banner tone and style: beta, dev, or test"
+    },
+    "badgeText": {
+      "type": "string",
+      "description": "Badge label text"
+    },
+    "message": {
+      "type": "string",
+      "description": "Main banner message"
+    },
+    "casualLinkText": {
+      "type": "string",
+      "description": "Learn more link text"
+    },
+    "casualLinkHref": {
+      "type": "string",
+      "description": "Learn more link destination"
+    },
+    "showLearnMore": {
+      "type": "boolean",
+      "description": "Show learn more link",
+      "default": false
+    },
+    "importantLinkText": {
+      "type": "string",
+      "description": "Secondary return link text"
+    },
+    "importantLinkHref": {
+      "type": "string",
+      "description": "Secondary return link destination"
+    },
+    "importantLinkIcon": {
+      "type": "string",
+      "description": "Icon name used before return text"
+    },
+    "showReturnLink": {
+      "type": "boolean",
+      "description": "Show return link section",
+      "default": false
+    }
   }
 }

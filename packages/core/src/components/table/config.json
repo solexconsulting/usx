@@ -1,6 +1,11 @@
 {
   "name": "table",
   "template": "table/table.django.html",
+  "version": 1,
+  "required": [
+    "columns",
+    "data"
+  ],
   "default": {},
   "props": {
     "id": {
@@ -9,7 +14,74 @@
     },
     "columns": {
       "type": "array",
-      "description": "Column definitions. Each item: { key, header, render, align, sortable, width, pin, primary, hidden, aggregate, footer, className, headerClassName }."
+      "description": "Column definitions. Each item: { key, header, render, align, sortable, width, pin, primary, hidden, aggregate, footer, className, headerClassName }.",
+      "items": {
+        "type": "object",
+        "description": "Column definition.",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Row data property to read."
+          },
+          "header": {
+            "type": "string",
+            "description": "Column header text."
+          },
+          "render": {
+            "type": "function",
+            "description": "Custom cell renderer: (value, row) => node."
+          },
+          "align": {
+            "type": "select",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ],
+            "description": "Cell text alignment."
+          },
+          "sortable": {
+            "type": "boolean",
+            "description": "Allow sorting by this column."
+          },
+          "width": {
+            "type": "string",
+            "description": "CSS width for the column."
+          },
+          "pin": {
+            "type": "select",
+            "options": [
+              "left",
+              "right"
+            ],
+            "description": "Pin the column on horizontal scroll."
+          },
+          "primary": {
+            "type": "boolean",
+            "description": "Marks the primary column shown in stacked/responsive mode."
+          },
+          "hidden": {
+            "type": "boolean",
+            "description": "Hide the column."
+          },
+          "aggregate": {
+            "type": "function",
+            "description": "Footer aggregate function: (data) => value."
+          },
+          "footer": {
+            "type": "string",
+            "description": "Static footer cell content."
+          },
+          "className": {
+            "type": "string",
+            "description": "Additional cell classes."
+          },
+          "headerClassName": {
+            "type": "string",
+            "description": "Additional header cell classes."
+          }
+        }
+      }
     },
     "data": {
       "type": "array",
@@ -50,7 +122,11 @@
     },
     "responsive": {
       "type": "select",
-      "options": ["false", "stack", "stack-header"],
+      "options": [
+        "false",
+        "stack",
+        "stack-header"
+      ],
       "default": "false",
       "description": "Responsive mode: 'stack' or 'stack-header' for mobile stacking behaviour."
     },
@@ -79,13 +155,20 @@
     },
     "selectionMode": {
       "type": "select",
-      "options": ["null", "checkbox", "radio"],
+      "options": [
+        "null",
+        "checkbox",
+        "radio"
+      ],
       "default": "null",
       "description": "Row selection mode. 'checkbox' enables multi-select; 'radio' enables single-select."
     },
     "selectionPosition": {
       "type": "select",
-      "options": ["left", "right"],
+      "options": [
+        "left",
+        "right"
+      ],
       "default": "left",
       "description": "Position of the selection column."
     },

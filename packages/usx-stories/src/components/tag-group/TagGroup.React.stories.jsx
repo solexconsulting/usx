@@ -17,10 +17,10 @@ const bigTags = defaultTags.map((t) => ({ ...t, big: true }));
 
 export const storyDefs = {
   Default: {
-    tags: defaultTags,
+    tagProps: defaultTags,
   },
   Big: {
-    tags: bigTags,
+    tagProps: bigTags,
   },
 };
 

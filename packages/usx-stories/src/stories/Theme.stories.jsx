@@ -1300,7 +1300,7 @@ function Showcase({ resolved }) {
           megamenu={true}
           extended={true}
           secondaryLinks={[{ text: 'Secondary Link', href: '#' }]}
-          searchConfig={{ id: 'theme-header-search' }}
+          searchProps={{ id: 'theme-header-search' }}
         />
         <SiteAlert variant="info" alertHeading="Site-wide notice" alertText="Bringing something to your attention politely." />
         <Hero
@@ -1341,7 +1341,7 @@ function Showcase({ resolved }) {
         </div>
         <ButtonGroup
           segmented
-          items={[
+          buttonProps={[
             { label: 'Map', variant: 'primary' },
             { label: 'Satellite', variant: 'primary' },
             { label: 'Hybrid', variant: 'primary' }

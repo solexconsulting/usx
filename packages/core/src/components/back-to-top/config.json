@@ -1,6 +1,7 @@
 {
   "name": "back-to-top",
   "template": "back-to-top/back-to-top.django.html",
+  "version": 1,
   "props": {
     "label": {
       "type": "string",
@@ -12,17 +13,27 @@
     },
     "variant": {
       "type": "select",
-      "options": ["", "primary"],
+      "options": [
+        "",
+        "primary"
+      ],
       "description": "Visual style for the button variant. Use 'primary' to add the primary color scheme."
     },
     "iconPosition": {
       "type": "select",
-      "options": ["right", "left"],
+      "options": [
+        "right",
+        "left"
+      ],
       "description": "Position of the arrow icon relative to the label text. Defaults to 'right'."
     },
     "iconSize": {
       "type": "select",
-      "options": ["2", "3", "4"],
+      "options": [
+        "2",
+        "3",
+        "4"
+      ],
       "description": "Size of the arrow icon. Corresponds to USWDS icon size utilities. Defaults to '2'."
     },
     "className": {

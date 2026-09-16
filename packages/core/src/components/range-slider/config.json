@@ -1,24 +1,7 @@
 {
   "name": "range-slider",
   "template": "range-slider/range-slider.django.html",
-  "props": {
-    "id": { "type": "string", "default": "range-slider", "description": "id for the input. Label/hint/error ids are derived from this." },
-    "name": { "type": "string", "description": "name attribute for the input. Defaults to id." },
-    "label": { "type": "string", "description": "Label text for the field." },
-    "hint": { "type": "string", "description": "Hint text displayed below the label." },
-    "error": { "type": "string", "description": "Error message. Renders aria-describedby and error styling." },
-    "disabled": { "type": "boolean", "default": false, "description": "Disables the input." },
-    "required": { "type": "boolean", "default": false, "description": "Marks the field as required." },
-    "min": { "type": "number", "default": 0, "description": "Minimum value." },
-    "max": { "type": "number", "default": 100, "description": "Maximum value." },
-    "step": { "type": "number", "default": 1, "description": "Step increment." },
-    "value": { "type": "number", "description": "Current value (controlled). React only." },
-    "defaultValue": { "type": "number", "description": "Initial value for uncontrolled usage. Also used as the static value shown in the Django/HTML templates." },
-    "textUnit": { "type": "string", "description": "Optional unit appended to the screen-reader value callout, e.g. \"percent\"." },
-    "textPreposition": { "type": "string", "default": "of", "description": "Preposition used in the screen-reader value callout (\"of\", \"de\", etc.)." },
-    "formGroup": { "type": "boolean", "default": true, "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group." },
-    "className": { "type": "string", "default": "", "description": "Additional classes for the usa-range input." }
-  },
+  "version": 1,
   "default": {
     "id": "range-slider-default",
     "label": "Range slider",
@@ -27,6 +10,80 @@
     "max": 100,
     "step": 10,
     "defaultValue": 20
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "default": "range-slider",
+      "description": "id for the input. Label/hint/error ids are derived from this."
+    },
+    "name": {
+      "type": "string",
+      "description": "name attribute for the input. Defaults to id."
+    },
+    "label": {
+      "type": "string",
+      "description": "Label text for the field."
+    },
+    "hint": {
+      "type": "string",
+      "description": "Hint text displayed below the label."
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message. Renders aria-describedby and error styling."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disables the input."
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks the field as required."
+    },
+    "min": {
+      "type": "number",
+      "default": 0,
+      "description": "Minimum value."
+    },
+    "max": {
+      "type": "number",
+      "default": 100,
+      "description": "Maximum value."
+    },
+    "step": {
+      "type": "number",
+      "default": 1,
+      "description": "Step increment."
+    },
+    "value": {
+      "type": "number",
+      "description": "Current value (controlled). React only."
+    },
+    "defaultValue": {
+      "type": "number",
+      "description": "Initial value for uncontrolled usage. Also used as the static value shown in the Django/HTML templates."
+    },
+    "textUnit": {
+      "type": "string",
+      "description": "Optional unit appended to the screen-reader value callout, e.g. \"percent\"."
+    },
+    "textPreposition": {
+      "type": "string",
+      "default": "of",
+      "description": "Preposition used in the screen-reader value callout (\"of\", \"de\", etc.)."
+    },
+    "formGroup": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional classes for the usa-range input."
+    }
   }
 }
-

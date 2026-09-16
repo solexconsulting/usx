@@ -1,6 +1,7 @@
 {
   "name": "list",
   "template": "list/list.django.html",
+  "version": 1,
   "props": {
     "items": {
       "type": "object",
@@ -16,6 +17,9 @@
       "default": false,
       "description": "Remove default list styling with usa-list--unstyled."
     },
-    "className": { "type": "string", "description": "Additional classes" }
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

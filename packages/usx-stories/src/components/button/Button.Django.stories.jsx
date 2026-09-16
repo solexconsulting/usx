@@ -86,3 +86,7 @@ export const GhostInverse = {
 export const GhostDisabled = createStory(toDjangoArgs(storyDefs.GhostDisabled));
 export const GhostAriaDisabled = createStory(toDjangoArgs(storyDefs.GhostAriaDisabled));
 export const GhostWithIcon = createStory(toDjangoArgs(storyDefs.GhostWithIcon));
+
+export const MultipleIcons = createStory(toDjangoArgs(storyDefs.MultipleIcons));
+export const Loading = createStory(toDjangoArgs(storyDefs.Loading));
+export const LoadingDisabled = createStory(toDjangoArgs(storyDefs.LoadingDisabled));

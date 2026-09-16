@@ -1,6 +1,7 @@
 {
   "name": "skipnav",
   "template": "skipnav/skipnav.django.html",
+  "version": 1,
   "props": {
     "target": {
       "type": "string",
@@ -17,7 +18,7 @@
       "description": "Text content for the skipnav link"
     },
     "children": {
-      "type": "node",
+      "type": "slot",
       "description": "Custom content for the skipnav link. If provided, this will override the `content` prop."
     },
     "className": {

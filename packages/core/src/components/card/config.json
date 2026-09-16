@@ -1,6 +1,7 @@
 {
   "name": "card",
   "template": "card/card.django.html",
+  "version": 1,
   "props": {
     "title": {
       "type": "string",
@@ -15,9 +16,16 @@
       "description": "Array of tag objects with value and color properties",
       "items": {
         "type": "object",
+        "description": "Card tag.",
         "properties": {
-          "value": { "type": "string", "description": "Tag text" },
-          "color": { "type": "string", "description": "Tag color variant" }
+          "value": {
+            "type": "string",
+            "description": "Tag text"
+          },
+          "color": {
+            "type": "string",
+            "description": "Tag color variant"
+          }
         }
       }
     },
@@ -26,10 +34,20 @@
       "description": "Array of action button objects",
       "items": {
         "type": "object",
+        "description": "Card action button.",
         "properties": {
-          "children": { "type": "string", "description": "Button text" },
-          "variant": { "type": "string", "description": "Button variant" },
-          "onClick": { "type": "function", "description": "Click handler" }
+          "children": {
+            "type": "string",
+            "description": "Button text"
+          },
+          "variant": {
+            "type": "string",
+            "description": "Button variant"
+          },
+          "onClick": {
+            "type": "function",
+            "description": "Click handler"
+          }
         }
       }
     },
@@ -38,9 +56,16 @@
       "description": "Array of image objects (currently uses first image)",
       "items": {
         "type": "object",
+        "description": "Card image.",
         "properties": {
-          "src": { "type": "string", "description": "Image source URL" },
-          "alt": { "type": "string", "description": "Alt text for the image" }
+          "src": {
+            "type": "string",
+            "description": "Image source URL"
+          },
+          "alt": {
+            "type": "string",
+            "description": "Alt text for the image"
+          }
         }
       }
     },
@@ -75,7 +100,7 @@
       "description": "Whether to show navigation dots when multiple images are provided"
     },
     "children": {
-      "type": "node",
+      "type": "slot",
       "description": "Inner HTML or text content (alternative to structured props)"
     },
     "className": {

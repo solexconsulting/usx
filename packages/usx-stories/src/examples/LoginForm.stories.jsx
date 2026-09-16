@@ -75,7 +75,7 @@ export const LoginPattern = {
                         <p className="text-base font-sans-xs color-base-dark margin-bottom-2">Or continue with single sign-on:</p>
                         <ButtonGroup
                           direction="vertical"
-                          items={[
+                          buttonProps={[
                             { children: 'Sign in with Login.gov', variant: 'secondary' },
                             { children: 'Sign in with PIV / CAC Card', variant: 'secondary' },
                           ]}

@@ -1,12 +1,11 @@
 import React from 'react';
-import Icon from '../icon/Icon';
+import Icon, { IconProps } from '../icon/Icon';
+import Spinner from '../spinner/Spinner';
 import ClassNames from 'classnames';
 
-export interface ButtonIcon {
-  name: string;
-  color?: string;
-  size?: number | string;
-  staticUrlPrefix?: string;
+export interface ButtonIcon extends IconProps {
+  /** Which side of the label to render this icon on. Defaults to 'left'. */
+  position?: 'left' | 'right';
 }
 
 type ButtonBaseProps = {
@@ -20,8 +19,8 @@ type ButtonBaseProps = {
   big?: boolean;
   inverse?: boolean;
   ghost?: boolean;
-  leftIcon?: ButtonIcon;
-  rightIcon?: ButtonIcon;
+  loading?: boolean;
+  iconProps?: ButtonIcon[];
   className?: string;
   style?: React.CSSProperties;
   children?: React.ReactNode;
@@ -43,13 +42,21 @@ export default function Button({
   big = false,
   inverse = false,
   ghost = false,
-  leftIcon,
-  rightIcon,
+  loading = false,
+  iconProps = [],
   className = '',
   children = '',
   extraAttributes = {},
   ...props
 }: ButtonProps) {
+  const leftIcons = iconProps.filter((icon) => (icon.position ?? 'left') === 'left');
+  const rightIcons = iconProps.filter((icon) => icon.position === 'right');
+  const renderIcon = (icon: ButtonIcon, index: number) => {
+    const { position, ...iconRest } = icon;
+    return <Icon key={index} {...iconRest} />;
+  };
+  const spinner = loading && <Spinner size={2} />;
+
   const variantClasses: Record<string, string> = {
     primary: 'usa-button--primary',
     secondary: 'usa-button--secondary',
@@ -84,21 +91,10 @@ export default function Button({
         {...anchorProps}
         {...extraAttributes}
       >
-        {leftIcon && (
-          <Icon
-            name={leftIcon.name}
-            size={typeof leftIcon.size === 'string' ? parseInt(leftIcon.size, 10) || 2 : leftIcon.size}
-            color={leftIcon.color ?? undefined}
-          />
-        )}
+        {spinner}
+        {leftIcons.map(renderIcon)}
         {children || label}
-        {rightIcon && (
-          <Icon
-            name={rightIcon.name}
-            size={typeof rightIcon.size === 'string' ? parseInt(rightIcon.size, 10) || 2 : rightIcon.size}
-            color={rightIcon.color ?? undefined}
-          />
-        )}
+        {rightIcons.map(renderIcon)}
       </a>
     );
   }
@@ -116,21 +112,10 @@ export default function Button({
       {...buttonProps}
       {...extraAttributes}
     >
-      {leftIcon && (
-        <Icon
-          name={leftIcon.name}
-          size={typeof leftIcon.size === 'string' ? parseInt(leftIcon.size, 10) || 2 : leftIcon.size}
-          color={leftIcon.color ?? undefined}
-        />
-      )}
+      {spinner}
+      {leftIcons.map(renderIcon)}
       {children || label}
-      {rightIcon && (
-        <Icon
-          name={rightIcon.name}
-          size={typeof rightIcon.size === 'string' ? parseInt(rightIcon.size, 10) || 2 : rightIcon.size}
-          color={rightIcon.color ?? undefined}
-        />
-      )}
+      {rightIcons.map(renderIcon)}
     </button>
   );
 }

@@ -1,6 +1,5 @@
 {% load components %}
-{% with formGroup|default_if_none:True as wrap_group %}
-{% if wrap_group %}
+{% if formGroup|default_if_none:True == True %}
 {% form_group error=error %}
   {% label htmlFor=id label=label required=required|default:False error=error %}{% endlabel %}
   {% if hint %}
@@ -63,4 +62,3 @@
   <span class="usa-success-message">{{ success }}</span>
   {% endif %}
 {% endif %}
-{% endwith %}

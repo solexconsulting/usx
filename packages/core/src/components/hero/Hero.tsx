@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../button/Button';
-import Search from '../search/Search';
+import Search, { SearchProps } from '../search/Search';
 
 export interface HeroButtonProps {
   href?: string;
@@ -8,22 +8,12 @@ export interface HeroButtonProps {
   onClick?: React.MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>;
 }
 
-export interface HeroSearchProps {
-  id?: string;
-  label?: string;
-  placeholder?: string;
-  action?: string;
-  big?: boolean;
-  buttonVariant?: string;
-  onSubmit?: React.FormEventHandler<HTMLFormElement>;
-}
-
 export interface HeroProps extends React.HTMLAttributes<HTMLElement> {
   title?: string;
   callout?: string;
   paragraph?: string;
   button?: HeroButtonProps | null;
-  search?: HeroSearchProps | null;
+  searchProps?: SearchProps | null;
   backgroundImage?: string;
   overlay?: boolean;
   ariaLabel?: string;
@@ -35,7 +25,7 @@ export default function Hero({
   callout = '',
   paragraph = '',
   button = null,
-  search = null,
+  searchProps = null,
   backgroundImage = '',
   overlay = true,
   ariaLabel = 'Introduction',
@@ -61,8 +51,8 @@ export default function Hero({
             {title}
           </h1>
           {paragraph && <p className="usx-hero__paragraph">{paragraph}</p>}
-          {search && <Search {...search} />}
-          {!search && button && (
+          {searchProps && <Search {...searchProps} />}
+          {!searchProps && button && (
             <Button variant="primary" href={button.href} onClick={button.onClick}>
               {button.text}
             </Button>

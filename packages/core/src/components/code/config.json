@@ -1,10 +1,32 @@
 {
   "name": "code",
   "template": "code/code.django.html",
+  "version": 1,
+  "required": [
+    "lines"
+  ],
   "props": {
     "lines": {
-      "type": "object",
-      "description": "Array of line objects. Each supports: code (string), prefix (string, omit for no data-prefix attribute), className (string)."
+      "type": "array",
+      "description": "Array of line objects. Each supports: code (string), prefix (string, omit for no data-prefix attribute), className (string).",
+      "items": {
+        "type": "object",
+        "description": "Terminal line.",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Line content."
+          },
+          "prefix": {
+            "type": "string",
+            "description": "data-prefix attribute; omit for no prefix."
+          },
+          "className": {
+            "type": "string",
+            "description": "Additional classes."
+          }
+        }
+      }
     },
     "copyText": {
       "type": "string",

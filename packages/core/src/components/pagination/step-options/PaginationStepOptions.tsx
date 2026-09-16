@@ -35,6 +35,7 @@ export default function PaginationStepOptions({
         label={label}
         value={pageSize}
         onChange={handleChange}
+        formGroup={false}
         options={pageSizeOptions.map((size) => ({ value: String(size), label: String(size) }))}
       />
     </div>

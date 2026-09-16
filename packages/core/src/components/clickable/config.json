@@ -1,11 +1,14 @@
 {
   "name": "clickable",
   "template": "clickable/clickable.django.html",
+  "version": 1,
+  "required": [
+    "href"
+  ],
   "props": {
     "href": {
       "type": "string",
-      "description": "URL the clickable navigates to.",
-      "required": true
+      "description": "URL the clickable navigates to."
     },
     "className": {
       "type": "string",

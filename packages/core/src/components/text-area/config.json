@@ -1,71 +1,78 @@
 {
-    "name": "text-area",
-    "template": "text-area/text-area.django.html",
-    "props": {
-        "label": {
-            "type": "string",
-            "default": null,
-            "description": "The label for the textarea. If provided, renders a label element associated with the control."
-        },
-        "id": {
-            "type": "string",
-            "default": null,
-            "description": "A unique identifier for the textarea, used to associate the label and for accessibility."
-        },
-        "name": {
-            "type": "string",
-            "default": null,
-            "description": "name attribute for the textarea. Defaults to id."
-        },
-        "placeholder": {
-            "type": "string",
-            "default": "",
-            "description": "Placeholder text displayed inside the textarea when empty."
-        },
-        "defaultValue": {
-            "type": "string",
-            "default": "",
-            "description": "Initial value of the textarea."
-        },
-        "error": {
-            "type": ["string", "boolean"],
-            "default": null,
-            "description": "An error message (string) to display when invalid, or `true` to mark the control as errored without a message."
-        },
-        "success": {
-            "type": ["string", "boolean"],
-            "default": null,
-            "description": "A success message (string) to display when valid, or `true` to mark the control as successful without a message."
-        },
-        "disabled": {
-            "type": "boolean",
-            "default": false,
-            "description": "Disables the textarea, preventing user interaction."
-        },
-        "hint": {
-            "type": "string",
-            "default": null,
-            "description": "Hint text for additional guidance. Rendered as a span and referenced by `aria-describedby`."
-        },
-        "required": {
-            "type": "boolean",
-            "default": false,
-            "description": "Marks the textarea as required."
-        },
-        "screenReaderOnlyLabel": {
-            "type": "boolean",
-            "default": false,
-            "description": "Visually hides the label while keeping it accessible to screen readers."
-        },
-        "formGroup": {
-            "type": "boolean",
-            "default": true,
-            "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group."
-        },
-        "className": {
-            "type": "string",
-            "default": "",
-            "description": "Additional CSS classes to apply to the textarea."
-        }
+  "name": "text-area",
+  "template": "text-area/text-area.django.html",
+  "version": 1,
+  "props": {
+    "label": {
+      "type": "string",
+      "default": null,
+      "description": "The label for the textarea. If provided, renders a label element associated with the control."
+    },
+    "id": {
+      "type": "string",
+      "default": null,
+      "description": "A unique identifier for the textarea, used to associate the label and for accessibility."
+    },
+    "name": {
+      "type": "string",
+      "default": null,
+      "description": "name attribute for the textarea. Defaults to id."
+    },
+    "placeholder": {
+      "type": "string",
+      "default": "",
+      "description": "Placeholder text displayed inside the textarea when empty."
+    },
+    "defaultValue": {
+      "type": "string",
+      "default": "",
+      "description": "Initial value of the textarea."
+    },
+    "error": {
+      "type": [
+        "string",
+        "boolean"
+      ],
+      "default": null,
+      "description": "An error message (string) to display when invalid, or `true` to mark the control as errored without a message."
+    },
+    "success": {
+      "type": [
+        "string",
+        "boolean"
+      ],
+      "default": null,
+      "description": "A success message (string) to display when valid, or `true` to mark the control as successful without a message."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disables the textarea, preventing user interaction."
+    },
+    "hint": {
+      "type": "string",
+      "default": null,
+      "description": "Hint text for additional guidance. Rendered as a span and referenced by `aria-describedby`."
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks the textarea as required."
+    },
+    "screenReaderOnlyLabel": {
+      "type": "boolean",
+      "default": false,
+      "description": "Visually hides the label while keeping it accessible to screen readers."
+    },
+    "formGroup": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to wrap the label/hint/error/control in a `.usa-form-group`. Set to `false` when composing inside another form group."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes to apply to the textarea."
     }
+  }
 }

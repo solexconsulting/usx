@@ -57,7 +57,7 @@ export const SearchResults = {
               <p className="text-base usx-text-muted margin-bottom-3">Showing 24 results for &quot;getting started&quot;</p>
 
               <CardGroup
-                cards={[
+                cardProps={[
                   {
                     title: 'Quick Start Guide',
                     description: 'Get up and running in under 5 minutes with our comprehensive quick start guide.',
@@ -156,7 +156,7 @@ export const SearchResults = {
             </div>
 
             <ButtonGroup
-              items={[
+              buttonProps={[
                 { children: 'Apply Filters', variant: 'primary' },
                 { children: 'Clear All', variant: 'secondary' },
               ]}

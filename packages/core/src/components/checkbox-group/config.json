@@ -1,16 +1,50 @@
 {
   "name": "checkbox-group",
   "template": "checkbox-group/checkbox-group.django.html",
+  "version": 1,
   "props": {
-    "id": { "type": "string", "description": "Base ID for the checkbox group. Each checkbox's ID will be this base plus the option's value or index." },
-    "tile": { "type": "boolean", "description": "Render each checkbox as a tile when true" },
-    "small": { "type": "boolean", "description": "Render compact/small checkboxes when true" },
-    "legend": { "type": "string", "description": "Legend text for the fieldset" },
-    "required": { "type": "boolean", "description": "Whether the fieldset is required" },
-    "hint": { "type": "string", "description": "Group-level hint text, rendered after the legend" },
-    "error": { "type": "string", "description": "Group-level error message, rendered after the hint" },
-    "name": { "type": "string", "description": "Name attribute shared by the checkbox inputs" },
-    "options": { "type": "array", "description": "Array of option objects: {id, value, label, description, checked, disabled}" },
-    "className": { "type": "string", "description": "Additional classes to apply to the wrapper" }
+    "id": {
+      "type": "string",
+      "description": "Base ID for the checkbox group. Each checkbox's ID will be this base plus the option's value or index."
+    },
+    "tile": {
+      "type": "boolean",
+      "description": "Render each checkbox as a tile when true",
+      "default": false
+    },
+    "small": {
+      "type": "boolean",
+      "description": "Render compact/small checkboxes when true",
+      "default": false
+    },
+    "legend": {
+      "type": "string",
+      "description": "Legend text for the fieldset"
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Whether the fieldset is required",
+      "default": false
+    },
+    "hint": {
+      "type": "string",
+      "description": "Group-level hint text, rendered after the legend"
+    },
+    "error": {
+      "type": "string",
+      "description": "Group-level error message, rendered after the hint"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name attribute shared by the checkbox inputs"
+    },
+    "options": {
+      "type": "array",
+      "description": "Array of option objects: {id, value, label, description, checked, disabled}"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes to apply to the wrapper"
+    }
   }
 }

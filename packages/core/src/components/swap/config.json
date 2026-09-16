@@ -1,6 +1,7 @@
 {
   "name": "swap",
   "template": "swap/swap.django.html",
+  "version": 1,
   "default": {
     "onContent": "ON",
     "offContent": "OFF",
@@ -8,17 +9,53 @@
     "includeInput": true
   },
   "props": {
-    "children": { "type": "string", "description": "Advanced override for full inner HTML" },
-    "onContent": { "type": "string", "description": "Markup or text shown when swap is on" },
-    "offContent": { "type": "string", "description": "Markup or text shown when swap is off" },
-    "includeInput": { "type": "boolean", "description": "Render default checkbox input control" },
-    "inputId": { "type": "string", "description": "ID applied to the generated checkbox" },
-    "inputClassName": { "type": "string", "description": "Classes applied to the generated checkbox" },
-    "inputChecked": { "type": "boolean", "description": "Whether generated checkbox is initially checked" },
-    "inputProps": { "type": "object", "description": "Additional attributes applied to the generated checkbox" },
-    "onClassName": { "type": "string", "description": "Additional classes on on-state wrapper" },
-    "offClassName": { "type": "string", "description": "Additional classes on off-state wrapper" },
-    "className": { "type": "string", "description": "Additional CSS classes" },
-    "variant": { "type": "string", "description": "Animation variant: 'default', 'active', 'rotate', or 'flip'" }
+    "children": {
+      "type": "string",
+      "description": "Advanced override for full inner HTML"
+    },
+    "onContent": {
+      "type": "string",
+      "description": "Markup or text shown when swap is on"
+    },
+    "offContent": {
+      "type": "string",
+      "description": "Markup or text shown when swap is off"
+    },
+    "includeInput": {
+      "type": "boolean",
+      "description": "Render default checkbox input control"
+    },
+    "inputId": {
+      "type": "string",
+      "description": "ID applied to the generated checkbox"
+    },
+    "inputClassName": {
+      "type": "string",
+      "description": "Classes applied to the generated checkbox"
+    },
+    "inputChecked": {
+      "type": "boolean",
+      "description": "Whether generated checkbox is initially checked"
+    },
+    "inputProps": {
+      "type": "object",
+      "description": "Additional attributes applied to the generated checkbox"
+    },
+    "onClassName": {
+      "type": "string",
+      "description": "Additional classes on on-state wrapper"
+    },
+    "offClassName": {
+      "type": "string",
+      "description": "Additional classes on off-state wrapper"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    },
+    "variant": {
+      "type": "string",
+      "description": "Animation variant: 'default', 'active', 'rotate', or 'flip'"
+    }
   }
 }

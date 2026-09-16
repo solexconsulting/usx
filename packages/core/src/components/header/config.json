@@ -1,17 +1,58 @@
 {
   "name": "header",
   "template": "header/header.django.html",
+  "version": 1,
   "props": {
-    "id": { "type": "string", "default": "header", "description": "Unique identifier for the header component" },
-    "branding": { "type": "object", "description": "Branding config. Flat: { title?, symbol?, logo?, alt? }. Responsive: { responsive: { base: {...}, lg: {...} } }. Theme-responsive: add symbolInverse/logoInverse to supply dark-shell artwork the theme swaps to." },
-    "projectUrl": { "type": "string", "default": "/", "description": "URL for the branding link" },
-    "navSections": { "type": "object", "description": "Array of menu section objects with 'title', and mutually exclusive 'links' or 'href' properties" },
-    "secondaryLinks": { "type": "object", "description": "Array of secondary link objects with 'href' and 'text' properties" },
-    "searchConfig": { "type": "object", "description": "(OPTIONAL) Configuration object for the search component" },
-    "extended": { "type": "boolean", "default": false, "description": "Whether to use the extended header style" },
-    "megamenu": { "type": "boolean", "default": false, "description": "Whether to use the megamenu style for navigation sections" },
-    "useMenuIcon": { "type": "boolean", "default": false, "description": "Whether to use a menu icon instead of the word 'Menu'" },
-    "stickyNav": { "type": "boolean", "default": false, "description": "Whether the navigation should become sticky when scrolling" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "id": {
+      "type": "string",
+      "default": "header",
+      "description": "Unique identifier for the header component"
+    },
+    "branding": {
+      "type": "object",
+      "description": "Branding config. Flat: { title?, symbol?, logo?, alt? }. Responsive: { responsive: { base: {...}, lg: {...} } }. Theme-responsive: add symbolInverse/logoInverse to supply dark-shell artwork the theme swaps to."
+    },
+    "projectUrl": {
+      "type": "string",
+      "default": "/",
+      "description": "URL for the branding link"
+    },
+    "navSections": {
+      "type": "object",
+      "description": "Array of menu section objects with 'title', and mutually exclusive 'links' or 'href' properties"
+    },
+    "secondaryLinks": {
+      "type": "object",
+      "description": "Array of secondary link objects with 'href' and 'text' properties"
+    },
+    "searchProps": {
+      "type": "object",
+      "description": "(OPTIONAL) Configuration object for the search component",
+      "component": "search"
+    },
+    "extended": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to use the extended header style"
+    },
+    "megamenu": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to use the megamenu style for navigation sections"
+    },
+    "useMenuIcon": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to use a menu icon instead of the word 'Menu'"
+    },
+    "stickyNav": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the navigation should become sticky when scrolling"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

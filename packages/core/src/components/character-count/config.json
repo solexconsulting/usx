@@ -1,66 +1,73 @@
 {
-    "name": "character-count",
-    "template": "character-count/character-count.django.html",
-    "props": {
-        "id": {
-            "type": "string",
-            "default": null,
-            "description": "ID for the input/textarea field. Used to wire label, hint, message, and error/success spans."
-        },
-        "label": {
-            "type": "string",
-            "default": null,
-            "description": "Label text for the field."
-        },
-        "max": {
-            "type": "number",
-            "default": null,
-            "description": "Maximum number of characters allowed. Rendered as the field's maxlength attribute and referenced in the fallback message; USWDS JS moves it to data-maxlength and manages the live count/over-limit state at runtime."
-        },
-        "hint": {
-            "type": "string",
-            "default": null,
-            "description": "Hint text displayed below the label, referenced by aria-describedby."
-        },
-        "error": {
-            "type": ["string", "boolean"],
-            "default": null,
-            "description": "Error message (string) or true to mark the field as invalid without a message."
-        },
-        "success": {
-            "type": ["string", "boolean"],
-            "default": null,
-            "description": "Success message (string) or true to mark the field as valid without a message."
-        },
-        "disabled": {
-            "type": "boolean",
-            "default": false,
-            "description": "Disables the field."
-        },
-        "required": {
-            "type": "boolean",
-            "default": false,
-            "description": "Marks the field as required."
-        },
-        "screenReaderOnlyLabel": {
-            "type": "boolean",
-            "default": false,
-            "description": "Visually hides the label while keeping it screen-reader accessible."
-        },
-        "placeholder": {
-            "type": "string",
-            "default": "",
-            "description": "Placeholder text for the field."
-        },
-        "textArea": {
-            "type": "boolean",
-            "default": false,
-            "description": "Renders a textarea instead of an input."
-        },
-        "className": {
-            "type": "string",
-            "default": "",
-            "description": "Additional CSS classes for the outer character-count wrapper."
-        }
+  "name": "character-count",
+  "template": "character-count/character-count.django.html",
+  "version": 1,
+  "props": {
+    "id": {
+      "type": "string",
+      "default": null,
+      "description": "ID for the input/textarea field. Used to wire label, hint, message, and error/success spans."
+    },
+    "label": {
+      "type": "string",
+      "default": null,
+      "description": "Label text for the field."
+    },
+    "max": {
+      "type": "number",
+      "default": null,
+      "description": "Maximum number of characters allowed. Rendered as the field's maxlength attribute and referenced in the fallback message; USWDS JS moves it to data-maxlength and manages the live count/over-limit state at runtime."
+    },
+    "hint": {
+      "type": "string",
+      "default": null,
+      "description": "Hint text displayed below the label, referenced by aria-describedby."
+    },
+    "error": {
+      "type": [
+        "string",
+        "boolean"
+      ],
+      "default": null,
+      "description": "Error message (string) or true to mark the field as invalid without a message."
+    },
+    "success": {
+      "type": [
+        "string",
+        "boolean"
+      ],
+      "default": null,
+      "description": "Success message (string) or true to mark the field as valid without a message."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disables the field."
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks the field as required."
+    },
+    "screenReaderOnlyLabel": {
+      "type": "boolean",
+      "default": false,
+      "description": "Visually hides the label while keeping it screen-reader accessible."
+    },
+    "placeholder": {
+      "type": "string",
+      "default": "",
+      "description": "Placeholder text for the field."
+    },
+    "textArea": {
+      "type": "boolean",
+      "default": false,
+      "description": "Renders a textarea instead of an input."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes for the outer character-count wrapper."
     }
+  }
 }

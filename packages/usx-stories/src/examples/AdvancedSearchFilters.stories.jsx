@@ -52,7 +52,7 @@ export const AdvancedSearchFiltersPattern = {
                 <div className="display-flex flex-align-center gap-1">
                   <span className="text-bold font-sans-xs text-ink">Active Filters:</span>
                   <TagGroup
-                    tags={[
+                    tagProps={[
                       { value: 'Category: Healthcare', color: 'primary', dismissible: true },
                       { value: 'Status: Open Grants', color: 'info', dismissible: true },
                       { value: 'Min Funding: $50k', color: 'success', dismissible: true },
@@ -73,7 +73,7 @@ export const AdvancedSearchFiltersPattern = {
               </div>
 
               <CardGroup
-                cards={[
+                cardProps={[
                   {
                     title: 'Rural Community Healthcare Development Grant',
                     description: 'Funding to expand telehealth infrastructure and rural clinic capacity across eligible counties.',
@@ -139,7 +139,7 @@ export const AdvancedSearchFiltersPattern = {
             />
 
             <ButtonGroup
-              items={[
+              buttonProps={[
                 { children: 'Apply Filters', variant: 'primary' },
                 { children: 'Reset All', variant: 'secondary' },
               ]}

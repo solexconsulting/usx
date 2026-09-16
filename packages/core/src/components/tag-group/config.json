@@ -1,9 +1,24 @@
 {
   "name": "tag-group",
   "template": "tag-group/tag-group.django.html",
+  "version": 1,
   "props": {
-    "tags": { "type": "array", "description": "Array of tag objects {content: string|node}" },
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "tagProps": {
+      "type": "array",
+      "description": "Array of tags rendered by the group.",
+      "items": {
+        "type": "object",
+        "description": "Tag item.",
+        "component": "tag"
+      }
+    },
+    "children": {
+      "type": "string",
+      "description": "Inner HTML or text"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

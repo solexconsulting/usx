@@ -6,9 +6,9 @@
     aria-label="{% if language == 'es' %}Identificador de la agencia,{% else %}Agency identifier,{% endif %}"
   >
     <div class="usa-identifier__container">
-      {% if logos %}
+      {% if logoProps %}
       <div class="usa-identifier__logos usx-avatar-group{% if overlapAvatars %} usa-avatar-group--overlap{% endif %}">
-        {% for logo in logos %}
+        {% for logo in logoProps %}
           <a href="{{ logo.href|default:'' }}" class="usa-identifier__logo usx-avatar">
             <img
               class="usa-identifier__logo-img{% if logo.shape == 'circle' or logoShape == 'circle' and not logo.shape %} usx-circle{% elif logo.shape == 'rounded-sm' or logoShape == 'rounded-sm' and not logo.shape %} usx-rounded-sm{% elif logo.shape == 'rounded-md' or logoShape == 'rounded-md' and not logo.shape %} usx-rounded-md{% elif logo.shape == 'rounded-lg' or logoShape == 'rounded-lg' and not logo.shape %} usx-rounded-lg{% elif logo.shape == 'rounded-xl' or logoShape == 'rounded-xl' and not logo.shape %} usx-rounded-xl{% endif %}{% if logo.imageClassName %} {{ logo.imageClassName }}{% endif %}"

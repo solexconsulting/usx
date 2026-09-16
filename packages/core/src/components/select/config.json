@@ -1,6 +1,10 @@
 {
   "name": "select",
   "template": "select/select.django.html",
+  "version": 1,
+  "required": [
+    "options"
+  ],
   "props": {
     "id": {
       "type": "string",

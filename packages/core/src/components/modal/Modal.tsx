@@ -7,7 +7,7 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   id?: string;
   heading?: string;
   description?: string;
-  actions?: ButtonGroupProps['items'];
+  actionProps?: ButtonGroupProps['buttonProps'];
   size?: 'default' | 'lg' | 'lg-collapsed';
   forceAction?: boolean;
   className?: string;
@@ -18,7 +18,7 @@ export default function Modal({
   id = 'usx-modal',
   heading,
   description,
-  actions = [
+  actionProps = [
     { children: 'Continue', variant: 'primary', extraAttributes: { 'data-close-modal': true } },
     { children: 'Go back', variant: 'unstyled', className: 'padding-105 text-center', extraAttributes: { 'data-close-modal': true } },
   ],
@@ -51,7 +51,7 @@ export default function Modal({
             <p id={`${id}-description`}>{children ?? description}</p>
           </div>
           <div className="usa-modal__footer">
-            <ButtonGroup items={actions} />
+            <ButtonGroup buttonProps={actionProps} />
           </div>
         </div>
         {!forceAction && (

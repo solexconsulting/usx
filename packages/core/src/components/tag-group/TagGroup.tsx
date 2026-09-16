@@ -3,13 +3,13 @@ import classNames from 'classnames';
 import Tag, { TagProps } from '../tag/Tag';
 
 export interface TagGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  tags?: TagProps[] | null;
+  tagProps?: TagProps[] | null;
   children?: React.ReactNode;
   className?: string;
 }
 
 const TagGroup: React.FC<TagGroupProps> = ({
-  tags = null,
+  tagProps = null,
   children = null,
   className = '',
   ...props
@@ -20,8 +20,8 @@ const TagGroup: React.FC<TagGroupProps> = ({
   );
   const content = children
     ? children
-    : Array.isArray(tags)
-    ? tags.map((t, i) => (
+    : Array.isArray(tagProps)
+    ? tagProps.map((t, i) => (
         <Tag key={t.id || t.value || i} {...t} />
       ))
     : null;

@@ -106,7 +106,7 @@ const fullArgs = {
   ...baseArgs,
   branding: standardBranding,
   secondaryLinks,
-  searchConfig: searchArgs,
+  searchProps: searchArgs,
 };
 
 export const storyDefs = {

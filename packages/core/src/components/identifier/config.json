@@ -1,6 +1,7 @@
 {
   "name": "identifier",
   "template": "identifier/identifier.django.html",
+  "version": 1,
   "default": {
     "domain": "domain.gov",
     "language": "en",
@@ -10,7 +11,7 @@
         "href": ""
       }
     ],
-    "logos": [
+    "logoProps": [
       {
         "href": "",
         "src": "./lady_liberty.png",
@@ -18,35 +19,91 @@
       }
     ],
     "requiredLinks": [
-      { "href": "", "label": "About <Parent shortname>" },
-      { "href": "", "label": "Accessibility statement" },
-      { "href": "", "label": "FOIA requests" },
-      { "href": "", "label": "No FEAR Act data" },
-      { "href": "", "label": "Office of the Inspector General" },
-      { "href": "", "label": "Performance reports" },
-      { "href": "", "label": "Privacy policy" }
+      {
+        "href": "",
+        "label": "About <Parent shortname>"
+      },
+      {
+        "href": "",
+        "label": "Accessibility statement"
+      },
+      {
+        "href": "",
+        "label": "FOIA requests"
+      },
+      {
+        "href": "",
+        "label": "No FEAR Act data"
+      },
+      {
+        "href": "",
+        "label": "Office of the Inspector General"
+      },
+      {
+        "href": "",
+        "label": "Performance reports"
+      },
+      {
+        "href": "",
+        "label": "Privacy policy"
+      }
     ],
     "taxpayerDisclaimer": false,
     "overlapAvatars": false
   },
   "props": {
-    "domain": { "type": "string", "description": "Agency domain displayed in the identifier." },
+    "domain": {
+      "type": "string",
+      "description": "Agency domain displayed in the identifier."
+    },
     "language": {
       "type": "select",
-      "options": ["en", "es"],
+      "options": [
+        "en",
+        "es"
+      ],
       "description": "Language for labels and helper text."
     },
     "parentAgencies": {
-      "type": "object",
-      "description": "Array of parent agency links used in the disclaimer."
+      "type": "array",
+      "description": "Array of parent agency links used in the disclaimer.",
+      "items": {
+        "type": "object",
+        "description": "Parent agency.",
+        "properties": {
+          "name": { "type": "string", "description": "Agency name." },
+          "href": { "type": "string", "description": "Link to the agency's site." }
+        }
+      }
     },
-    "logos": {
-      "type": "object",
-      "description": "Array of avatar-style logos. Each item supports: src, alt, href, shape ('circle'|'rounded-sm'|'rounded-md'|'rounded-lg'|'rounded-xl'), and imageClassName."
+    "logoProps": {
+      "type": "array",
+      "description": "Array of avatar-style logos.",
+      "items": {
+        "type": "object",
+        "description": "Logo item. Mirrors the avatar component's props, restricted to the image variant.",
+        "component": "avatar",
+        "omit": ["variant", "value", "tooltip", "className", "contentClassName"],
+        "properties": {
+          "shape": {
+            "type": "select",
+            "options": [null, "circle", "rounded-sm", "rounded-md", "rounded-lg", "rounded-xl"],
+            "description": "Shape utility for the logo image, overriding logoShape for this item."
+          }
+        }
+      }
     },
     "requiredLinks": {
-      "type": "object",
-      "description": "Array of required footer links."
+      "type": "array",
+      "description": "Array of required footer links.",
+      "items": {
+        "type": ["string", "object"],
+        "description": "A link label string (uses the default href for that label), or a { href, label } object.",
+        "properties": {
+          "href": { "type": "string", "description": "Link URL." },
+          "label": { "type": "string", "description": "Link text." }
+        }
+      }
     },
     "taxpayerDisclaimer": {
       "type": "boolean",
@@ -58,9 +115,19 @@
     },
     "logoShape": {
       "type": "select",
-      "options": [null, "circle", "rounded-sm", "rounded-md", "rounded-lg", "rounded-xl"],
+      "options": [
+        null,
+        "circle",
+        "rounded-sm",
+        "rounded-md",
+        "rounded-lg",
+        "rounded-xl"
+      ],
       "description": "Default shape applied to all logos. Per-logo shape field takes precedence."
     },
-    "className": { "type": "string", "description": "Additional classes" }
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

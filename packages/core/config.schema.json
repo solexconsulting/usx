@@ -1,12 +1,74 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "required": ["name", "template"],
+  "required": ["name", "template", "version"],
   "properties": {
     "name": { "type": "string" },
     "template": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
     "default": { "type": "object" },
-    "props": { "type": "object" }
+    "required": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Prop names that must be supplied by a consumer (e.g. a CMS) for the component to render meaningfully."
+    },
+    "props": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/definitions/prop" }
+    }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "definitions": {
+    "propType": {
+      "enum": ["string", "number", "boolean", "select", "array", "object", "function", "slot"]
+    },
+    "prop": {
+      "type": "object",
+      "required": ["type", "description"],
+      "properties": {
+        "type": {
+          "oneOf": [
+            { "$ref": "#/definitions/propType" },
+            {
+              "type": "array",
+              "items": { "$ref": "#/definitions/propType" },
+              "minItems": 2,
+              "description": "Union type, e.g. [\"string\", \"boolean\"] for a prop that accepts either a message or a flag."
+            }
+          ]
+        },
+        "description": { "type": "string" },
+        "default": {},
+        "options": {
+          "type": "array",
+          "description": "Either an enum of selectable values (type: \"select\") or a list of data option objects (e.g. { value, label })."
+        },
+        "items": {
+          "$ref": "#/definitions/prop",
+          "description": "Shape of each entry, when type is \"array\"."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/definitions/prop" },
+          "description": "Named sub-fields, when type is \"object\". When \"component\" is also set, these are overrides/additions applied on top of the referenced component's own props (looked up by name), not a full copy of its shape."
+        },
+        "component": {
+          "type": "string",
+          "description": "Name of another component whose top-level contract entry defines this prop's shape (or each array item's shape, when type is \"array\"). This is a reference only — resolve it by looking up that component's own entry elsewhere in the manifest; it is not inlined here, to avoid duplication and circular-reference expansion. Combine with \"omit\"/\"properties\" to exclude or override individual fields on the referenced shape."
+        },
+        "omit": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Prop names to exclude from the referenced component's props. Only meaningful when \"component\" is set."
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "select" } } },
+          "then": { "required": ["options"] }
+        }
+      ]
+    }
+  }
 }

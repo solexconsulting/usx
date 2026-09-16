@@ -2,20 +2,25 @@
   "name": "@solexllc/usx-react",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./contracts": {
+      "default": "./src/contracts.js"
+    },
+    "./contracts.json": "./dist/component-contracts.json"
   },
   "files": [
     "src",
     "dist"
   ],
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && node scripts/build-contracts.mjs",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --ignore-pattern '**/*.stories.jsx' || true",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx src --ignore-pattern '**/*.stories.jsx' --fix || true"
   },

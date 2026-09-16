@@ -1,12 +1,34 @@
 {
   "name": "page",
   "template": "page/page.django.html",
+  "version": 1,
+  "required": [
+    "title"
+  ],
   "props": {
-    "id": { "type": "string", "description": "Optional id attribute applied to the root main element." },
-    "title": { "type": "string", "description": "Required page title rendered as an h1." },
-    "eyebrow": { "type": "string", "description": "Optional eyebrow text rendered above the page title inside the h1." },
-    "content": { "type": "string", "description": "Body content rendered below the title. Supports HTML in Django stories." },
-    "children": { "type": "string", "description": "Body content for React usage." },
-    "className": { "type": "string", "description": "Additional classes" }
+    "id": {
+      "type": "string",
+      "description": "Optional id attribute applied to the root main element."
+    },
+    "title": {
+      "type": "string",
+      "description": "Required page title rendered as an h1."
+    },
+    "eyebrow": {
+      "type": "string",
+      "description": "Optional eyebrow text rendered above the page title inside the h1."
+    },
+    "content": {
+      "type": "string",
+      "description": "Body content rendered below the title. Supports HTML in Django stories."
+    },
+    "children": {
+      "type": "string",
+      "description": "Body content for React usage."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

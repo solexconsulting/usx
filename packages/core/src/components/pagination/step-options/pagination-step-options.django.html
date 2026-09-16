@@ -3,5 +3,5 @@
 {# Sub-template: pagination step options (items-per-page selector) #}
 {# Props: pageSize, pageSizeOptions (list of ints or {value,label}), stepOptionsLabel, stepOptionsId #}
 <div class="usx-pagination__step-options">
-  {% select id=stepOptionsId|default:'pagination-step-options' label=stepOptionsLabel|default:'Items per page' options=pageSizeOptions defaultValue=pageSize %}{% endselect %}
+  {% select id=stepOptionsId|default:'pagination-step-options' formGroup=False label=stepOptionsLabel|default:'Items per page' options=pageSizeOptions defaultValue=pageSize %}{% endselect %}
 </div>

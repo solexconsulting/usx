@@ -1,22 +1,28 @@
 {
-    "name": "prose",
-    "template": "prose/prose.django.html",
-    "props": {
-        "containerElement": {
-            "type": "select",
-            "options": ["div", "article", "section", "main"],
-            "default": "div",
-            "description": "The HTML element to use as the container for the prose content"
-        },
-        "content": {
-            "type": "string",
-            "default": "",
-            "description": "The HTML content to be rendered inside the prose component"
-        },
-        "className": {
-            "type": "string",
-            "default": "",
-            "description": "Additional CSS classes to apply to the prose component"
-        }
+  "name": "prose",
+  "template": "prose/prose.django.html",
+  "version": 1,
+  "props": {
+    "containerElement": {
+      "type": "select",
+      "options": [
+        "div",
+        "article",
+        "section",
+        "main"
+      ],
+      "default": "div",
+      "description": "The HTML element to use as the container for the prose content"
+    },
+    "content": {
+      "type": "string",
+      "default": "",
+      "description": "The HTML content to be rendered inside the prose component"
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes to apply to the prose component"
     }
+  }
 }

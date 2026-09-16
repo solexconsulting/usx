@@ -1,9 +1,9 @@
 {% load components %}
 {# Django template for ButtonGroup #}
 <ul class="usa-button-group usx-button-group {% if segmented %}usa-button-group--segmented{% endif %} {{ className }}">
-  {% for item in items %}
+  {% for item in buttonProps %}
     <li class="usa-button-group__item">
-      {% button label=item.label variant=item.variant type=item.type disabled=item.disabled onClick=item.onClick href=item.href isExternal=item.isExternal big=item.big inverse=item.inverse leftIcon=item.leftIcon rightIcon=item.rightIcon className=item.className style=item.style extraAttributes=item.extraAttributes %}{{ item.children }}{% endbutton %}
+      {% button label=item.label variant=item.variant type=item.type disabled=item.disabled onClick=item.onClick href=item.href isExternal=item.isExternal big=item.big inverse=item.inverse loading=item.loading iconProps=item.iconProps className=item.className style=item.style extraAttributes=item.extraAttributes %}{{ item.children }}{% endbutton %}
     </li>
   {% endfor %}
 </ul>

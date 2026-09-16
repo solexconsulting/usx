@@ -32,15 +32,24 @@
         {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{{ value }}"{% endfor %}{% endif %}
     >
 {% endif %}
-    {% if leftIcon and leftIcon.name %}
-        {% icon name=leftIcon.name color=leftIcon.color size=leftIcon.size %}{% endicon %}
+    {% if loading %}
+        {% spinner size=2 %}{% endspinner %}
     {% endif %}
+    {% for i in iconProps %}
+        {% if i.name %}
+            {% if not i.position or i.position == 'left' %}
+                {% icon name=i.name color=i.color size=i.size className=i.className alt=i.alt staticUrlPrefix=i.staticUrlPrefix %}{% endicon %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
 
     {% if children %}{{ children }}{% elif label %}{{ label }}{% endif %}
 
-    {% if rightIcon and rightIcon.name %}
-        {% icon name=rightIcon.name color=rightIcon.color size=rightIcon.size %}{% endicon %}
-    {% endif %}
+    {% for i in iconProps %}
+        {% if i.name and i.position == 'right' %}
+            {% icon name=i.name color=i.color size=i.size className=i.className alt=i.alt staticUrlPrefix=i.staticUrlPrefix %}{% endicon %}
+        {% endif %}
+    {% endfor %}
 
 {% if href %}
     </a>

@@ -39,7 +39,7 @@ export const storyDefs = {
     id: 'example-modal-4',
     heading: 'Are you sure you want to continue?',
     description: 'You have unsaved changes that will be lost.',
-    actions: defaultActions,
+    actionProps: defaultActions,
     triggerLabel: 'Open modal',
   },
   Large: {
@@ -47,7 +47,7 @@ export const storyDefs = {
     heading: 'Are you sure you want to continue?',
     description: 'You have unsaved changes that will be lost.',
     size: 'lg',
-    actions: defaultActions,
+    actionProps: defaultActions,
     triggerLabel: 'Open large modal',
   },
   LargeCollapsed: {
@@ -55,7 +55,7 @@ export const storyDefs = {
     heading: 'Are you sure you want to continue?',
     description: 'You have unsaved changes that will be lost.',
     size: 'lg-collapsed',
-    actions: defaultActions,
+    actionProps: defaultActions,
     triggerLabel: 'Open large collapsed modal',
   },
   ForceAction: {
@@ -63,7 +63,7 @@ export const storyDefs = {
     heading: 'Your session will end soon.',
     description: "You've been inactive for too long. Please choose to stay signed in or sign out. Otherwise, you'll be signed out automatically in 5 minutes.",
     forceAction: true,
-    actions: forceActions,
+    actionProps: forceActions,
     triggerLabel: 'Open modal with forced action',
   },
 };

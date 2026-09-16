@@ -1,17 +1,62 @@
 {
   "name": "site-alert",
   "template": "site-alert/site-alert.django.html",
+  "version": 1,
   "props": {
-    "className": { "type": "string", "description": "Additional classes" },
-    "variant": { "type": "select", "options": ["info", "emergency", "maintenance", "maintenance-warning"], "description": "Site alert variant" },
-    "slim": { "type": "boolean", "description": "Slim alert variant" },
-    "noIcon": { "type": "boolean", "description": "Hide the alert icon" },
-    "onDismiss": { "type": "function", "description": "Optional callback fired when the dismiss button is clicked. When provided, a dismiss button is rendered inside the alert body." },
-    "role": { "type": "select", "options": ["", "alert", "status"], "description": "Optional ARIA role for the site alert section" },
-    "alertHeading": { "type": "string", "description": "Alert heading text" },
-    "alertText": { "type": "string", "description": "Alert text content" },
-    "alertContent": { "type": "object", "description": "Alert rich content (React node / HTML string)" },
-    "ariaLabel": { "type": "string", "description": "Aria label for section" },
-    "ariaLabelledby": { "type": "string", "description": "Aria-labelledby target for section (preferred over ariaLabel)" }
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    },
+    "variant": {
+      "type": "select",
+      "options": [
+        "info",
+        "emergency",
+        "maintenance",
+        "maintenance-warning"
+      ],
+      "description": "Site alert variant"
+    },
+    "slim": {
+      "type": "boolean",
+      "description": "Slim alert variant"
+    },
+    "noIcon": {
+      "type": "boolean",
+      "description": "Hide the alert icon"
+    },
+    "onDismiss": {
+      "type": "function",
+      "description": "Optional callback fired when the dismiss button is clicked. When provided, a dismiss button is rendered inside the alert body."
+    },
+    "role": {
+      "type": "select",
+      "options": [
+        "",
+        "alert",
+        "status"
+      ],
+      "description": "Optional ARIA role for the site alert section"
+    },
+    "alertHeading": {
+      "type": "string",
+      "description": "Alert heading text"
+    },
+    "alertText": {
+      "type": "string",
+      "description": "Alert text content"
+    },
+    "alertContent": {
+      "type": "slot",
+      "description": "Alert rich content (React node / HTML string)"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "description": "Aria label for section"
+    },
+    "ariaLabelledby": {
+      "type": "string",
+      "description": "Aria-labelledby target for section (preferred over ariaLabel)"
+    }
   }
 }

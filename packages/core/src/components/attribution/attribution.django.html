@@ -4,10 +4,10 @@
   {% if children %}
     {{ children|safe }}
   {% else %}
-    {% if avatar or media %}
+    {% if avatarProps or media %}
       <span class="usx-attribution__media">
-        {% if avatar %}
-          {% avatar href=avatar.href src=avatar.src alt=avatar.alt variant=avatar.variant value=avatar.value shape=avatar.shape tooltip=avatar.tooltip className=avatar.className imageClassName=avatar.imageClassName contentClassName=avatar.contentClassName %}{% endavatar %}
+        {% if avatarProps %}
+          {% avatar href=avatarProps.href src=avatarProps.src alt=avatarProps.alt variant=avatarProps.variant value=avatarProps.value shape=avatarProps.shape tooltip=avatarProps.tooltip className=avatarProps.className imageClassName=avatarProps.imageClassName contentClassName=avatarProps.contentClassName %}{% endavatar %}
         {% else %}
           {{ media|safe }}
         {% endif %}

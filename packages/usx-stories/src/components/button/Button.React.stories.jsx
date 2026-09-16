@@ -552,7 +552,37 @@ export const GhostWithIcon = {
     label: 'Ghost with icon',
     variant: 'primary',
     ghost: true,
-    leftIcon: { name: 'arrow_back', size: 2 }
+    iconProps: [{ name: 'arrow_back', size: 2 }]
+  }
+};
+
+export const MultipleIcons = {
+  args: {
+    label: 'Multiple icons',
+    variant: 'primary',
+    iconProps: [
+      { name: 'star', position: 'left' },
+      { name: 'arrow_back', position: 'left' },
+      { name: 'arrow_forward', position: 'right' },
+      { name: 'file_download', position: 'right' }
+    ]
+  }
+};
+
+export const Loading = {
+  args: {
+    label: 'Loading',
+    variant: 'primary',
+    loading: true
+  }
+};
+
+export const LoadingDisabled = {
+  args: {
+    label: 'Loading',
+    variant: 'primary',
+    loading: true,
+    disabled: true
   }
 };
 
@@ -621,4 +651,8 @@ export const storyDefs = {
   GhostDisabled: GhostDisabled.args,
   GhostAriaDisabled: GhostAriaDisabled.args,
   GhostWithIcon: GhostWithIcon.args,
+
+  MultipleIcons: MultipleIcons.args,
+  Loading: Loading.args,
+  LoadingDisabled: LoadingDisabled.args,
 };

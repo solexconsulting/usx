@@ -1,9 +1,19 @@
 {
   "name": "hint",
   "template": "hint/hint.django.html",
+  "version": 1,
   "props": {
-    "id": { "type": "string", "description": "Element id, referenced by the associated field's aria-describedby" },
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "id": {
+      "type": "string",
+      "description": "Element id, referenced by the associated field's aria-describedby"
+    },
+    "children": {
+      "type": "string",
+      "description": "Inner HTML or text"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

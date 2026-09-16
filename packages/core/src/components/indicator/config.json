@@ -1,6 +1,7 @@
 {
   "name": "indicator",
   "template": "indicator/indicator.django.html",
+  "version": 1,
   "props": {
     "items": {
       "type": "object",

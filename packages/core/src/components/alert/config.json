@@ -1,56 +1,70 @@
 {
-    "name": "alert",
-    "template": "alert/alert.django.html",
-    "props": {
-        "heading": {
-            "type": "string",
-            "description": "The heading of the alert, which provides a brief summary of the alert's content."
-        },
-        "text": {
-            "type": "string",
-            "description": "The main content of the alert, providing detailed information about the alert."
-        },
-        "variant": {
-            "type": "select",
-            "options": ["info", "success", "warning", "error", "emergency"],
-            "description": "The visual style of the alert, indicating the type of message being conveyed."
-        },
-        "slim": {
-            "type": "boolean",
-            "description": "A boolean that determines whether the alert should be displayed in a more compact, slim style."
-        },
-        "noIcon": {
-            "type": "boolean",
-            "description": "A boolean that determines whether the alert should be displayed without an icon."
-        },
-        "className": {
-            "type": "string",
-            "description": "Additional CSS classes to apply to the alert component."
-        },
-        "style": {
-            "type": "string",
-            "description": "Inline styles to apply to the alert component."
-        },
-        "role": {
-            "type": "select",
-            "options": ["", "alert", "status", "region"],
-            "description": "Optional ARIA role override. Defaults by variant: error/emergency -> alert, success -> status, info/warning -> region."
-        },
-        "ariaLabel": {
-            "type": "string",
-            "description": "Accessible label used when needed (especially for role=region)."
-        },
-        "ariaLabelledby": {
-            "type": "string",
-            "description": "ID reference to a labeling element. Takes precedence over ariaLabel."
-        },
-        "onDismiss": {
-            "type": "function",
-            "description": "Optional callback function that, if provided, makes the alert dismissible and is called when the alert is dismissed."
-        },
-        "children": {
-            "type": "object",
-            "description": "Alert rich content (React node / HTML string). If provided, this content will be rendered instead of the `heading` and `text` props."
-        }
+  "name": "alert",
+  "template": "alert/alert.django.html",
+  "version": 1,
+  "props": {
+    "heading": {
+      "type": "string",
+      "description": "The heading of the alert, which provides a brief summary of the alert's content."
+    },
+    "text": {
+      "type": "string",
+      "description": "The main content of the alert, providing detailed information about the alert."
+    },
+    "variant": {
+      "type": "select",
+      "options": [
+        "info",
+        "success",
+        "warning",
+        "error",
+        "emergency"
+      ],
+      "description": "The visual style of the alert, indicating the type of message being conveyed."
+    },
+    "slim": {
+      "type": "boolean",
+      "description": "A boolean that determines whether the alert should be displayed in a more compact, slim style.",
+      "default": false
+    },
+    "noIcon": {
+      "type": "boolean",
+      "description": "A boolean that determines whether the alert should be displayed without an icon.",
+      "default": false
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes to apply to the alert component."
+    },
+    "style": {
+      "type": "string",
+      "description": "Inline styles to apply to the alert component."
+    },
+    "role": {
+      "type": "select",
+      "options": [
+        "",
+        "alert",
+        "status",
+        "region"
+      ],
+      "description": "Optional ARIA role override. Defaults by variant: error/emergency -> alert, success -> status, info/warning -> region."
+    },
+    "ariaLabel": {
+      "type": "string",
+      "description": "Accessible label used when needed (especially for role=region)."
+    },
+    "ariaLabelledby": {
+      "type": "string",
+      "description": "ID reference to a labeling element. Takes precedence over ariaLabel."
+    },
+    "onDismiss": {
+      "type": "function",
+      "description": "Optional callback function that, if provided, makes the alert dismissible and is called when the alert is dismissed."
+    },
+    "children": {
+      "type": "slot",
+      "description": "Alert rich content (React node / HTML string). If provided, this content will be rendered instead of the `heading` and `text` props."
     }
+  }
 }

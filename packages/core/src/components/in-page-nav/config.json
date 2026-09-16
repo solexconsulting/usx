@@ -1,22 +1,69 @@
 {
   "name": "in-page-nav",
   "template": "in-page-nav/in-page-nav.django.html",
-  "props": {
-    "id": { "type": "string", "default": "in-page-nav", "description": "id for the aside element. The observed content container id is derived from this (<id>-content) unless mainContentSelector is set." },
-    "headingElements": { "type": "string", "default": "h2 h3", "description": "Space-separated heading levels to include in the link list. Sets data-heading-elements." },
-    "mainContentSelector": { "type": "string", "description": "CSS selector for the element the component pulls headings from. Defaults to this instance's own generated content container (#<id>-content). Sets data-main-content-selector." },
-    "titleHeadingLevel": { "type": "string", "default": "h4", "description": "Heading level of the nav's own title. Sets data-title-heading-level." },
-    "titleText": { "type": "string", "default": "On this page", "description": "Text of the nav's title heading. Sets data-title-text." },
-    "scrollOffset": { "type": "number", "default": 0, "description": "Pixels to offset scroll from the top of the parent element. Sets data-scroll-offset." },
-    "rootMargin": { "type": "string", "default": "0px 0px 0px 0px", "description": "Observable margin around the root used to calculate the active section. Sets data-root-margin." },
-    "threshold": { "type": "number", "default": 1, "description": "Percentage (0-1) of a section that must be visible before it's marked current. Sets data-threshold." },
-    "minimumHeadingCount": { "type": "number", "default": 2, "description": "Minimum number of matching headings required for the component to initialize. Sets data-minimum-heading-count." },
-    "content": { "type": "string", "description": "HTML content (with headings) to render inside the observed content container. Ignored if children are provided (React only)." },
-    "className": { "type": "string", "default": "", "description": "Additional classes for the usa-in-page-nav aside." },
-    "contentClassName": { "type": "string", "default": "", "description": "Additional classes for the observed content container." }
-  },
+  "version": 1,
   "default": {
     "id": "in-page-nav-default",
     "content": "<h2>Introduction</h2><p>This page walks through setting up and using the example project.</p><p>It's also meant to demonstrate how the in-page navigation component tracks scroll position and highlights whichever section is currently in view. Scroll down through each section below to see the link list on the side update automatically.</p><p>None of the copy on this page is meant to be read closely — it exists purely to give the navigation something substantial enough to observe.</p><h2>Getting started</h2><p>Before you begin, make sure the prerequisites below are met.</p><p>Getting started with any new project usually means working through a short checklist before the real work begins. The sections below cover what you'll need and how to get everything installed.</p><h3>Prerequisites</h3><p>A recent browser and a working internet connection.</p><p>You'll also want a modern code editor and enough disk space for the dependencies. Nothing here is unusual — most standard front-end tooling already satisfies these requirements.</p><p>If you already have Node.js and a package manager installed, you can skip ahead to the installation section below.</p><h3>Installation</h3><p>Download the package and follow the setup instructions.</p><p>Installation typically takes just a few minutes. Run the installer, accept the default options, and confirm that the command-line tool reports a successful install before moving on.</p><p>If you run into trouble, double-check that your environment matches the prerequisites listed above before trying again.</p><h2>Advanced usage</h2><p>Once installed, explore the configuration options to fit your workflow.</p><p>Advanced users can customize almost every aspect of the setup, from heading detection to scroll offsets and intersection thresholds — all of which this component exposes as simple data attributes.</p><p>Most projects never need to touch these settings, but they're available for the cases that do.</p><h2>Conclusion</h2><p>You should now be ready to explore the rest of the documentation.</p><p>Thanks for reading through this example. Scroll back up and watch the navigation list highlight each section as it passes by — that's the entire behavior this component provides.</p>"
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "default": "in-page-nav",
+      "description": "id for the aside element. The observed content container id is derived from this (<id>-content) unless mainContentSelector is set."
+    },
+    "headingElements": {
+      "type": "string",
+      "default": "h2 h3",
+      "description": "Space-separated heading levels to include in the link list. Sets data-heading-elements."
+    },
+    "mainContentSelector": {
+      "type": "string",
+      "description": "CSS selector for the element the component pulls headings from. Defaults to this instance's own generated content container (#<id>-content). Sets data-main-content-selector."
+    },
+    "titleHeadingLevel": {
+      "type": "string",
+      "default": "h4",
+      "description": "Heading level of the nav's own title. Sets data-title-heading-level."
+    },
+    "titleText": {
+      "type": "string",
+      "default": "On this page",
+      "description": "Text of the nav's title heading. Sets data-title-text."
+    },
+    "scrollOffset": {
+      "type": "number",
+      "default": 0,
+      "description": "Pixels to offset scroll from the top of the parent element. Sets data-scroll-offset."
+    },
+    "rootMargin": {
+      "type": "string",
+      "default": "0px 0px 0px 0px",
+      "description": "Observable margin around the root used to calculate the active section. Sets data-root-margin."
+    },
+    "threshold": {
+      "type": "number",
+      "default": 1,
+      "description": "Percentage (0-1) of a section that must be visible before it's marked current. Sets data-threshold."
+    },
+    "minimumHeadingCount": {
+      "type": "number",
+      "default": 2,
+      "description": "Minimum number of matching headings required for the component to initialize. Sets data-minimum-heading-count."
+    },
+    "content": {
+      "type": "string",
+      "description": "HTML content (with headings) to render inside the observed content container. Ignored if children are provided (React only)."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional classes for the usa-in-page-nav aside."
+    },
+    "contentClassName": {
+      "type": "string",
+      "default": "",
+      "description": "Additional classes for the observed content container."
+    }
   }
 }

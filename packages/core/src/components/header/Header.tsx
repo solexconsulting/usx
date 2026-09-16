@@ -22,7 +22,7 @@ interface PrimaryNavProps {
   megamenu: boolean;
   showSecondary?: boolean;
   secondaryLinks?: HeaderNavLink[];
-  searchConfig?: SearchProps | null;
+  searchProps?: SearchProps | null;
   headerId?: string;
   renderSearchDirectly?: boolean;
 }
@@ -32,7 +32,7 @@ function PrimaryNav({
   megamenu,
   showSecondary = false,
   secondaryLinks = [],
-  searchConfig = null,
+  searchProps = null,
   headerId = 'header',
   renderSearchDirectly = false,
 }: PrimaryNavProps) {
@@ -119,7 +119,7 @@ function PrimaryNav({
           </ul>
         </div>
       )}
-      {renderSearchDirectly && searchConfig && <Search {...searchConfig} />}
+      {renderSearchDirectly && searchProps && <Search {...searchProps} />}
     </>
   );
 }
@@ -130,7 +130,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   projectUrl?: string;
   navSections?: HeaderNavSection[];
   secondaryLinks?: HeaderNavLink[];
-  searchConfig?: SearchProps | null;
+  searchProps?: SearchProps | null;
   extended?: boolean;
   megamenu?: boolean;
   useMenuIcon?: boolean;
@@ -144,7 +144,7 @@ export default function Header({
   projectUrl = '/',
   navSections = [],
   secondaryLinks = [],
-  searchConfig = null,
+  searchProps = null,
   extended = false,
   megamenu = false,
   useMenuIcon = false,
@@ -200,7 +200,7 @@ export default function Header({
                   </li>
                 ))}
               </ul>
-              {searchConfig && <Search {...searchConfig} />}
+              {searchProps && <Search {...searchProps} />}
             </div>
           </div>
         </nav>
@@ -218,7 +218,7 @@ export default function Header({
             megamenu={megamenu}
             showSecondary={false}
             secondaryLinks={secondaryLinks}
-            searchConfig={searchConfig}
+            searchProps={searchProps}
             headerId={id}
             renderSearchDirectly={true}
           />

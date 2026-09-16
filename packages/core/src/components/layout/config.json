@@ -1,10 +1,14 @@
 {
   "name": "layout",
   "template": "layout/layout.django.html",
+  "version": 1,
   "props": {
     "variant": {
       "type": "select",
-      "options": ["single-column", "grid"],
+      "options": [
+        "single-column",
+        "grid"
+      ],
       "default": "single-column",
       "description": "Layout variant: single-column centers content, grid supports sidebars"
     },

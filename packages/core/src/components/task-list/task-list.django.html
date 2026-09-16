@@ -12,8 +12,8 @@
       {% else %}
       <span class="usx-clickable__link usx-task-list__link">{{ task.name }}</span>
       {% endif %}
-      {% if task.tag %}
-        {% tag big=task.tag.big value=task.tag.value color=task.tag.color outline=task.tag.outline icon=task.tag.icon className=task.tag.className|default:'' %}{% endtag %}
+      {% if task.tagProps %}
+        {% tag id=task.tagProps.id big=task.tagProps.big value=task.tagProps.value color=task.tagProps.color outline=task.tagProps.outline icon=task.tagProps.icon dismissible=task.tagProps.dismissible onDismiss=task.tagProps.onDismiss className=task.tagProps.className|default:'' %}{% endtag %}
       {% endif %}
     </a>
   </li>

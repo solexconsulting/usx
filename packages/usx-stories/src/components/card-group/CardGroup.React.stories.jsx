@@ -52,20 +52,20 @@ export default {
 
 export const storyDefs = {
   Default: {
-    cards: [
+    cardProps: [
       baseCardArgs,
       { ...baseCardArgs, ...images, title: 'Card with Media' },
       { ...baseCardArgs, ...images, title: 'Media with header first', headerFirst: true },
     ],
   },
   FlagLayout: {
-    cards: [
+    cardProps: [
       { ...baseCardArgs, ...images, flag: true, title: 'Default flag', className: 'flex-1' },
       { ...baseCardArgs, ...images, flag: true, mediaRight: true, title: 'Flag media right', className: 'flex-1' },
     ],
   },
   WithTags: {
-    cards: [
+    cardProps: [
       { ...baseCardArgs, ...images, ...tagsArgs, className: 'tablet:grid-col-6 widescreen:grid-col-4' },
       { ...baseCardArgs, ...images, ...tagsArgs, className: 'tablet:grid-col-6 widescreen:grid-col-4' },
     ],

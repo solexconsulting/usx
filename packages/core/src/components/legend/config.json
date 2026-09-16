@@ -1,11 +1,27 @@
 {
   "name": "legend",
   "template": "legend/legend.django.html",
+  "version": 1,
   "props": {
-    "text": { "type": "string", "description": "Text for the legend" },
-    "required": { "type": "boolean", "description": "Whether to indicate the field is required (adds an asterisk)" },
-    "large": { "type": "boolean", "description": "Whether to use the larger legend style (adds class `usa-legend--large`)" },
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "text": {
+      "type": "string",
+      "description": "Text for the legend"
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Whether to indicate the field is required (adds an asterisk)"
+    },
+    "large": {
+      "type": "boolean",
+      "description": "Whether to use the larger legend style (adds class `usa-legend--large`)"
+    },
+    "children": {
+      "type": "string",
+      "description": "Inner HTML or text"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

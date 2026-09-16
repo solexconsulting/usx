@@ -1,6 +1,8 @@
 {
   "name": "{{kebab}}",
   "template": "{{kebab}}/{{kebab}}.django.html",
+  "version": 1,
+  "required": [],
   "default": {
     "children": "NOT IMPLEMENTED: {{Name}}"
   },

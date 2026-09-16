@@ -92,7 +92,7 @@ export const ProductShowcase = {
         content={
           <Page id="product-showcase-example" title="Featured Packages">
             <Section id="packages">
-              <CardGroup cards={productShowcaseCardArgs} />
+              <CardGroup cardProps={productShowcaseCardArgs} />
             </Section>
 
             <Section title="Why Choose USX Platform?" className="margin-top-4">

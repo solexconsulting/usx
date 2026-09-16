@@ -1,6 +1,7 @@
 {
   "name": "pagination",
   "template": "pagination/pagination.django.html",
+  "version": 1,
   "props": {
     "currentPage": {
       "type": "number",
@@ -12,9 +13,27 @@
       "description": "Total page count — omit for unbounded mode"
     },
     "pages": {
-      "type": "json",
+      "type": "array",
       "default": [],
-      "description": "Pre-computed list of page items: [{type: 'page', page: N} | {type: 'ellipsis'}]. Compute server-side with Django's Paginator."
+      "description": "Pre-computed list of page items: [{type: 'page', page: N} | {type: 'ellipsis'}]. Compute server-side with Django's Paginator.",
+      "items": {
+        "type": "object",
+        "description": "Page item — { type: 'page', page } or { type: 'ellipsis' }.",
+        "properties": {
+          "type": {
+            "type": "select",
+            "options": [
+              "page",
+              "ellipsis"
+            ],
+            "description": "Item kind."
+          },
+          "page": {
+            "type": "number",
+            "description": "Page number (present when type is \"page\")."
+          }
+        }
+      }
     },
     "unbounded": {
       "type": "boolean",
@@ -84,9 +103,18 @@
       "description": "Currently selected page size"
     },
     "pageSizeOptions": {
-      "type": "json",
-      "default": [10, 25, 50, 100],
-      "description": "Available page size choices"
+      "type": "array",
+      "default": [
+        10,
+        25,
+        50,
+        100
+      ],
+      "description": "Available page size choices",
+      "items": {
+        "type": "number",
+        "description": "Selectable page size."
+      }
     },
     "stepOptionsLabel": {
       "type": "string",

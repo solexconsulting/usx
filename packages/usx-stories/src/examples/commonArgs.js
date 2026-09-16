@@ -61,7 +61,7 @@ export const headerArgs = {
     { text: 'Secondary Link 1', href: 'https://example.com/secondary1', ariaLabel: 'Secondary Link 1' },
     { text: 'Secondary Link 2', href: 'https://example.com/secondary2', ariaLabel: 'Secondary Link 2' },
   ],
-  searchConfig: searchArgs,
+  searchProps: searchArgs,
   extended: true,
   megamenu: true,
   useMenuIcon: true,
@@ -143,7 +143,7 @@ export const identifierArgs = {
   parentAgencies: [
     { name: 'SOLEX Consulting', href: 'https://google.com' },
   ],
-  logos: [
+  logoProps: [
     {
       href: 'https://google.com',
       src: `./white_symbol-only.png`,

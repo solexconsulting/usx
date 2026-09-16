@@ -1,19 +1,54 @@
 {
   "name": "step-indicator",
   "template": "step-indicator/step-indicator.django.html",
+  "version": 1,
+  "required": [
+    "steps"
+  ],
   "props": {
-    "steps": { "type": "object", "description": "Array of step objects with a label property" },
-    "currentStep": { "type": "string", "description": "1-based index of the active step" },
+    "steps": {
+      "type": "array",
+      "description": "Array of step objects with a label property",
+      "items": {
+        "type": "object",
+        "description": "Step.",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Step label text."
+          }
+        }
+      }
+    },
+    "currentStep": {
+      "type": "string",
+      "description": "1-based index of the active step"
+    },
     "variant": {
       "type": "select",
-      "options": ["", "no-labels", "center", "counters", "counters-sm"],
+      "options": [
+        "",
+        "no-labels",
+        "center",
+        "counters",
+        "counters-sm"
+      ],
       "description": "Visual variant modifier"
     },
     "headingTag": {
       "type": "select",
-      "options": ["h2", "h3", "h4", "h5", "h6"],
+      "options": [
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ],
       "description": "Heading element for the step counter header"
     },
-    "className": { "type": "string", "description": "Additional CSS classes" }
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
   }
 }

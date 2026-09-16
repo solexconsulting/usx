@@ -1,30 +1,31 @@
 {
-    "name": "accordion",
-    "template": "accordion/accordion.django.html",
-    "props": {
-        "id": {
-            "type": "string",
-            "description": "Base ID for the accordion. Each item's ID will be this base plus the item's index."
-        },
-        "bordered": {
-            "type": "boolean",
-            "default": false,
-            "description": "Whether the accordion has borders."
-        },
-        "items": {
-            "type": "array",
-            "default": [],
-            "description": "An array of accordion items."
-        },
-        "multiselectable": {
-            "type": "boolean",
-            "default": false,
-            "description": "Whether multiple accordion items can be expanded at the same time."
-        },
-        "className": {
-            "type": "string",
-            "default": "",
-            "description": "Additional CSS classes to apply to the accordion. Use usa-accordion--icon-start or usa-accordion--icon-end to set icon position for this accordion. For live global theming, set --usx-accordion-icon-position to 1.25rem auto (start) or auto 1.25rem (end)."
-        }
+  "name": "accordion",
+  "template": "accordion/accordion.django.html",
+  "version": 1,
+  "props": {
+    "id": {
+      "type": "string",
+      "description": "Base ID for the accordion. Each item's ID will be this base plus the item's index."
+    },
+    "bordered": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the accordion has borders."
+    },
+    "items": {
+      "type": "array",
+      "default": [],
+      "description": "An array of accordion items."
+    },
+    "multiselectable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether multiple accordion items can be expanded at the same time."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes to apply to the accordion. Use usa-accordion--icon-start or usa-accordion--icon-end to set icon position for this accordion. For live global theming, set --usx-accordion-icon-position to 1.25rem auto (start) or auto 1.25rem (end)."
     }
+  }
 }

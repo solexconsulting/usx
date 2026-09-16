@@ -1,12 +1,32 @@
 {
   "name": "attribution",
   "template": "attribution/attribution.django.html",
+  "version": 1,
   "props": {
-    "avatar": { "type": "object", "description": "Avatar component props object. When provided, Attribution renders the Avatar component in the media slot." },
-    "media": { "type": "string", "description": "HTML for the left media area (avatar image or initials badge)." },
-    "primary": { "type": "string", "description": "Primary text shown in the top-right cell." },
-    "secondary": { "type": "string", "description": "Secondary text shown in the bottom-right cell." },
-    "children": { "type": "string", "description": "Optional full custom markup. When provided, it overrides media/primary/secondary." },
-    "className": { "type": "string", "description": "Additional classes" }
+    "avatarProps": {
+      "type": "object",
+      "description": "Avatar component props object. When provided, Attribution renders the Avatar component in the media slot.",
+      "component": "avatar"
+    },
+    "media": {
+      "type": "string",
+      "description": "HTML for the left media area (avatar image or initials badge)."
+    },
+    "primary": {
+      "type": "string",
+      "description": "Primary text shown in the top-right cell."
+    },
+    "secondary": {
+      "type": "string",
+      "description": "Secondary text shown in the bottom-right cell."
+    },
+    "children": {
+      "type": "string",
+      "description": "Optional full custom markup. When provided, it overrides media/primary/secondary."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

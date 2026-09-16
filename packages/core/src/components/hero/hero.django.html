@@ -12,8 +12,8 @@
         {{ title }}
       </h1>
       {% if paragraph %}<p class="usx-hero__paragraph">{{ paragraph }}</p>{% endif %}
-      {% if search %}
-        {% search id=search.id label=search.label placeholder=search.placeholder action=search.action big=search.big buttonVariant=search.buttonVariant %}{% endsearch %}
+      {% if searchProps %}
+        {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps.defaultValue onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
       {% elif button %}
         {% button variant="primary" href=button.href %}{{ button.text }}{% endbutton %}
       {% endif %}

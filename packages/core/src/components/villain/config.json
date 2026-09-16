@@ -1,6 +1,10 @@
 {
   "name": "villain",
   "template": "villain/villain.django.html",
+  "version": 1,
+  "required": [
+    "title"
+  ],
   "props": {
     "title": {
       "type": "string",
@@ -18,8 +22,14 @@
       "type": "object",
       "description": "Optional call-to-action button",
       "properties": {
-        "href": { "type": "string", "description": "Button link URL" },
-        "text": { "type": "string", "description": "Button label text" }
+        "href": {
+          "type": "string",
+          "description": "Button link URL"
+        },
+        "text": {
+          "type": "string",
+          "description": "Button label text"
+        }
       }
     },
     "ariaLabel": {

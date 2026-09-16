@@ -8,13 +8,13 @@ export interface AvatarGroupAvatar extends Omit<AvatarProps, 'variant'> {
 }
 
 export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-  avatars?: AvatarGroupAvatar[];
+  avatarProps?: AvatarGroupAvatar[];
   overlap?: boolean;
   stacked?: boolean;
   className?: string;
 }
 
-export default function AvatarGroup({ avatars = [], overlap = false, stacked = false, className = '', ...props }: AvatarGroupProps) {
+export default function AvatarGroup({ avatarProps = [], overlap = false, stacked = false, className = '', ...props }: AvatarGroupProps) {
   const classes = classNames(
     'usx-avatar-group',
     overlap && 'usa-avatar-group--overlap',
@@ -24,7 +24,7 @@ export default function AvatarGroup({ avatars = [], overlap = false, stacked = f
 
   return (
     <div className={classes} {...props}>
-      {avatars.map((avatar, index) => (
+      {avatarProps.map((avatar, index) => (
         <Avatar
           key={`${avatar.src || avatar.initials || 'avatar'}-${index}`}
           href={avatar.href}

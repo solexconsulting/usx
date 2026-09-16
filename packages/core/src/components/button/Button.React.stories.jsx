@@ -552,7 +552,7 @@ export const GhostWithIcon = {
     label: 'Ghost with icon',
     variant: 'primary',
     ghost: true,
-    leftIcon: { name: 'arrow_back', size: 2 }
+    iconProps: [{ name: 'arrow_back', size: 2 }]
   }
 };
 

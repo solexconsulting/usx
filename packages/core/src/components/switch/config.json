@@ -1,17 +1,55 @@
 {
   "name": "switch",
   "template": "switch/switch.django.html",
+  "version": 1,
   "props": {
-    "id": { "type": "string", "description": "Element id" },
-    "name": { "type": "string", "description": "Form input name" },
-    "checked": { "type": "boolean", "description": "Controlled checked state" },
-    "defaultChecked": { "type": "boolean", "description": "Initial checked state for uncontrolled usage" },
-    "disabled": { "type": "boolean", "description": "Disable the control" },
-    "size": { "type": "string", "description": "Size variant: xs, sm, md, lg, xl" },
-    "variant": { "type": "string", "description": "Color variant (primary, success, warning, etc.)" },
-    "label": { "type": "string", "description": "Optional label text to display next to the switch" },
-    "indeterminate": { "type": "boolean", "description": "Set the switch to an indeterminate state (visual only)" },
-    "ariaChecked": { "type": "string", "description": "ARIA attribute to indicate the checked state (true, false, mixed)" },
-    "className": { "type": "string", "description": "Additional CSS classes" }
+    "id": {
+      "type": "string",
+      "description": "Element id"
+    },
+    "name": {
+      "type": "string",
+      "description": "Form input name"
+    },
+    "checked": {
+      "type": "boolean",
+      "description": "Controlled checked state",
+      "default": false
+    },
+    "defaultChecked": {
+      "type": "boolean",
+      "description": "Initial checked state for uncontrolled usage",
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Disable the control",
+      "default": false
+    },
+    "size": {
+      "type": "string",
+      "description": "Size variant: xs, sm, md, lg, xl"
+    },
+    "variant": {
+      "type": "string",
+      "description": "Color variant (primary, success, warning, etc.)"
+    },
+    "label": {
+      "type": "string",
+      "description": "Optional label text to display next to the switch"
+    },
+    "indeterminate": {
+      "type": "boolean",
+      "description": "Set the switch to an indeterminate state (visual only)",
+      "default": false
+    },
+    "ariaChecked": {
+      "type": "string",
+      "description": "ARIA attribute to indicate the checked state (true, false, mixed)"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional CSS classes"
+    }
   }
 }

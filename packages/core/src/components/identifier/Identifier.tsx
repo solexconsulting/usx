@@ -33,7 +33,7 @@ export interface IdentifierProps {
   domain?: string;
   language?: 'en' | 'es';
   parentAgencies?: Agency[];
-  logos?: Logo[];
+  logoProps?: Logo[];
   logoShape?: null | 'circle' | 'rounded-sm' | 'rounded-md' | 'rounded-lg' | 'rounded-xl';
   requiredLinks?: RequiredLinks;
   taxpayerDisclaimer?: boolean;
@@ -111,7 +111,7 @@ export default function Identifier({
   domain = 'domain.gov',
   language = 'en',
   parentAgencies = [],
-  logos = [],
+  logoProps = [],
   logoShape = null,
   requiredLinks,
   taxpayerDisclaimer = false,
@@ -133,7 +133,7 @@ export default function Identifier({
     <div className={classes}>
       <section className="usa-identifier__section usa-identifier__section--masthead" aria-label={labels.masthead}>
         <div className="usa-identifier__container">
-          {logos.length > 0 ? (
+          {logoProps.length > 0 ? (
             <div
               className={classNames(
                 'usa-identifier__logos',
@@ -141,7 +141,7 @@ export default function Identifier({
                 overlapAvatars && 'usa-avatar-group--overlap',
               )}
             >
-              {logos.map((logo, index) => (
+              {logoProps.map((logo, index) => (
                 <a href={logo.href || ''} className="usa-identifier__logo usx-avatar" key={`${logo.alt}-${index}`}>
                   <img
                     className={classNames(

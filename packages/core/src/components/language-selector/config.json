@@ -1,42 +1,107 @@
 {
   "name": "language-selector",
   "template": "language-selector/language-selector.django.html",
+  "version": 1,
+  "default": {
+    "variant": "menu",
+    "languages": [
+      {
+        "code": "en",
+        "label": "English",
+        "current": true
+      },
+      {
+        "code": "es",
+        "label": "Español",
+        "description": "Spanish"
+      },
+      {
+        "code": "vi",
+        "label": "Tiếng Việt",
+        "description": "Vietnamese"
+      },
+      {
+        "code": "zh",
+        "label": "简体字",
+        "description": "Chinese – Simplified"
+      },
+      {
+        "label": "Selected content in additional languages",
+        "plain": true
+      }
+    ]
+  },
   "props": {
     "languages": {
       "type": "array",
       "description": "Array of language options",
       "items": {
         "type": "object",
+        "description": "Language option.",
         "properties": {
-          "code": { "type": "string", "description": "ISO language code, used for the lang/xml:lang attribute" },
-          "label": { "type": "string", "description": "Native-language name of the language (e.g. Español)" },
-          "description": { "type": "string", "description": "English gloss shown in parens (e.g. Spanish); omit for English itself" },
-          "href": { "type": "string", "description": "URL for this language's version of the page" },
-          "current": { "type": "boolean", "description": "Whether this is the page's current language" },
-          "plain": { "type": "boolean", "description": "Render as a plain link with no lang span (e.g. \"Selected content in additional languages\")" }
+          "code": {
+            "type": "string",
+            "description": "ISO language code, used for the lang/xml:lang attribute"
+          },
+          "label": {
+            "type": "string",
+            "description": "Native-language name of the language (e.g. Español)"
+          },
+          "description": {
+            "type": "string",
+            "description": "English gloss shown in parens (e.g. Spanish); omit for English itself"
+          },
+          "href": {
+            "type": "string",
+            "description": "URL for this language's version of the page"
+          },
+          "current": {
+            "type": "boolean",
+            "description": "Whether this is the page's current language"
+          },
+          "plain": {
+            "type": "boolean",
+            "description": "Render as a plain link with no lang span (e.g. \"Selected content in additional languages\")"
+          }
         }
       }
     },
     "variant": {
       "type": "select",
-      "options": ["two", "menu"],
+      "options": [
+        "two",
+        "menu"
+      ],
       "description": "Two-language button vs. three-or-more-language dropdown menu. Auto-inferred from languages.length when omitted."
     },
-    "unstyled": { "type": "boolean", "default": false, "description": "Render the menu variant's trigger as an unstyled button (usa-button--unstyled)" },
-    "small": { "type": "boolean", "default": false, "description": "Compact sizing for the menu variant (usa-language--small), e.g. inside a header" },
-    "label": { "type": "string", "default": "Languages", "description": "Menu variant trigger button text" },
-    "id": { "type": "string", "default": "language-options", "description": "id of the submenu, referenced by the trigger's aria-controls" },
-    "navAriaLabel": { "type": "string", "default": "Language selection", "description": "aria-label for the wrapping <nav> landmark" },
-    "className": { "type": "string", "description": "Additional classes to apply" }
-  },
-  "default": {
-    "variant": "menu",
-    "languages": [
-      { "code": "en", "label": "English", "current": true },
-      { "code": "es", "label": "Español", "description": "Spanish" },
-      { "code": "vi", "label": "Tiếng Việt", "description": "Vietnamese" },
-      { "code": "zh", "label": "简体字", "description": "Chinese – Simplified" },
-      { "label": "Selected content in additional languages", "plain": true }
-    ]
+    "unstyled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Render the menu variant's trigger as an unstyled button (usa-button--unstyled)"
+    },
+    "small": {
+      "type": "boolean",
+      "default": false,
+      "description": "Compact sizing for the menu variant (usa-language--small), e.g. inside a header"
+    },
+    "label": {
+      "type": "string",
+      "default": "Languages",
+      "description": "Menu variant trigger button text"
+    },
+    "id": {
+      "type": "string",
+      "default": "language-options",
+      "description": "id of the submenu, referenced by the trigger's aria-controls"
+    },
+    "navAriaLabel": {
+      "type": "string",
+      "default": "Language selection",
+      "description": "aria-label for the wrapping <nav> landmark"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes to apply"
+    }
   }
 }

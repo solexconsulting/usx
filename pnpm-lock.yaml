@@ -139,6 +139,9 @@ importers:
 
   packages/usx-stories:
     dependencies:
+      '@solexllc/usx-react':
+        specifier: workspace:*
+        version: link:../core
       '@solexllc/usx-theme':
         specifier: workspace:*
         version: link:../tokens

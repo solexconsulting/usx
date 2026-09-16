@@ -3,40 +3,40 @@ import AvatarGroup from '../../../../core/src/components/avatar-group/AvatarGrou
 import config from '../../../../core/src/components/avatar-group/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
-const baseAvatars = (config.default && config.default.avatars) || [];
+const baseAvatars = (config.default && config.default.avatarProps) || [];
 const roundedAvatars = baseAvatars.map((avatar) => ({ ...avatar, shape: 'rounded-md' }));
 const circleAvatars = baseAvatars.map((avatar) => ({ ...avatar, shape: 'circle' }));
 const tooltipAvatars = circleAvatars.map((avatar) => ({ ...avatar, tooltip: avatar.alt }));
 
 export const storyDefs = {
   BasicAvatarGroup: {
-    avatars: baseAvatars,
+    avatarProps: baseAvatars,
   },
   RoundedAvatarGroup: {
-    avatars: roundedAvatars,
+    avatarProps: roundedAvatars,
   },
   CircleAvatarGroup: {
-    avatars: circleAvatars,
+    avatarProps: circleAvatars,
   },
   OverlappingAvatars: {
-    avatars: circleAvatars,
+    avatarProps: circleAvatars,
     overlap: true,
   },
   StackedAvatars: {
-    avatars: circleAvatars,
+    avatarProps: circleAvatars,
     stacked: true,
   },
   OverlappingStackedAvatars: {
-    avatars: circleAvatars,
+    avatarProps: circleAvatars,
     overlap: true,
     stacked: true,
   },
   OverlappingRoundedAvatars: {
-    avatars: roundedAvatars,
+    avatarProps: roundedAvatars,
     overlap: true,
   },
   AvatarGroupWithTooltips: {
-    avatars: tooltipAvatars,
+    avatarProps: tooltipAvatars,
     overlap: true,
   },
 };

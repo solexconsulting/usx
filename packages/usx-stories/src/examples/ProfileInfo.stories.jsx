@@ -46,7 +46,7 @@ export const ProfileInfoPattern = {
                     </div>
                     <p className="text-base usx-text-muted margin-y-1">Senior Digital Systems Architect &bull; Office of Technology</p>
                     <TagGroup
-                      tags={[
+                      tagProps={[
                         { value: 'Administrator', color: 'primary' },
                         { value: 'Security Lead', color: 'info' },
                         { value: 'USX Specialist', color: 'success' },
@@ -54,9 +54,9 @@ export const ProfileInfoPattern = {
                     />
                   </div>
                   <ButtonGroup
-                    items={[
-                      { children: 'Edit Profile', variant: 'primary', leftIcon: { name: 'edit', size: 'sm' } },
-                      { children: 'Message', variant: 'secondary', leftIcon: { name: 'email', size: 'sm' } },
+                    buttonProps={[
+                      { children: 'Edit Profile', variant: 'primary', iconProps: [{ name: 'edit' }] },
+                      { children: 'Message', variant: 'secondary', iconProps: [{ name: 'email' }] },
                     ]}
                   />
                 </div>

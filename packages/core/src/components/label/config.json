@@ -1,14 +1,39 @@
 {
   "name": "label",
   "template": "label/label.django.html",
+  "version": 1,
   "props": {
-    "htmlFor": { "type": "string", "description": "ID of the form element this label is associated with" },
-    "required": { "type": "boolean", "description": "Whether to show the required field indicator" },
-    "error": { "type": "boolean", "description": "Whether the associated field has an error (applies the `usa-label--error` modifier class)" },
-    "screenReaderOnly": { "type": "boolean", "description": "Whether to visually hide the label but keep it accessible to screen readers" },
-    "classOverride": { "type": "boolean", "description": "Whether to override default classes" },
-    "label": { "type": "string", "description": "Label text content" },
-    "children": { "type": "string", "description": "Inner HTML or text" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "htmlFor": {
+      "type": "string",
+      "description": "ID of the form element this label is associated with"
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Whether to show the required field indicator"
+    },
+    "error": {
+      "type": "boolean",
+      "description": "Whether the associated field has an error (applies the `usa-label--error` modifier class)"
+    },
+    "screenReaderOnly": {
+      "type": "boolean",
+      "description": "Whether to visually hide the label but keep it accessible to screen readers"
+    },
+    "classOverride": {
+      "type": "boolean",
+      "description": "Whether to override default classes"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label text content"
+    },
+    "children": {
+      "type": "string",
+      "description": "Inner HTML or text"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

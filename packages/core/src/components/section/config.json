@@ -1,14 +1,27 @@
 {
   "name": "section",
   "template": "section/section.django.html",
+  "version": 1,
   "default": {
     "title": "",
     "content": "Use section to group related page content with consistent spacing."
   },
   "props": {
-    "title": { "type": "string", "description": "Optional section heading rendered as an h2." },
-    "content": { "type": "string", "description": "Section body content. Supports HTML in Django stories." },
-    "children": { "type": "string", "description": "Section body content for React usage." },
-    "className": { "type": "string", "description": "Additional classes" }
+    "title": {
+      "type": "string",
+      "description": "Optional section heading rendered as an h2."
+    },
+    "content": {
+      "type": "string",
+      "description": "Section body content. Supports HTML in Django stories."
+    },
+    "children": {
+      "type": "string",
+      "description": "Section body content for React usage."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

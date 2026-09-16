@@ -1,31 +1,104 @@
 {
   "name": "memorable-date",
   "template": "memorable-date/memorable-date.django.html",
+  "version": 1,
   "default": {
     "id": "memorable-date",
     "legend": "Date of Birth"
   },
   "props": {
-    "id": { "type": "string", "default": "memorable-date", "description": "Base id for the component. Month/day/year field ids and hint ids are derived from this." },
-    "legend": { "type": "string", "default": "Date of Birth", "description": "Legend text for the fieldset." },
-    "groupHint": { "type": "string", "default": "Select a month. Enter 1 or 2 digits for the day and 4 digits for the year.", "description": "Visible hint shown once for the whole group. Hidden from screen readers (aria-hidden) since each field has its own hint." },
-    "monthLabel": { "type": "string", "default": "Month", "description": "Label text for the month select." },
-    "dayLabel": { "type": "string", "default": "Day", "description": "Label text for the day input." },
-    "yearLabel": { "type": "string", "default": "Year", "description": "Label text for the year input." },
-    "monthHint": { "type": "string", "default": "Select a month from the dropdown.", "description": "Screen-reader-only hint for the month field." },
-    "dayHint": { "type": "string", "default": "Enter 1 or 2 digits for the day.", "description": "Screen-reader-only hint for the day field." },
-    "yearHint": { "type": "string", "default": "Enter 4 digits for the year.", "description": "Screen-reader-only hint for the year field." },
-    "monthName": { "type": "string", "description": "name attribute for the month select. Defaults to <id>-month." },
-    "dayName": { "type": "string", "description": "name attribute for the day input. Defaults to <id>-day." },
-    "yearName": { "type": "string", "description": "name attribute for the year input. Defaults to <id>-year." },
-    "defaultMonth": { "type": "string", "description": "Initial selected month value (\"1\"-\"12\")." },
-    "defaultDay": { "type": "string", "description": "Initial day value." },
-    "defaultYear": { "type": "string", "description": "Initial year value." },
-    "disabled": { "type": "boolean", "default": false, "description": "Disables all three fields." },
-    "ariaDisabled": { "type": "boolean", "default": false, "description": "Marks all three fields aria-disabled without preventing interaction, matching USWDS's aria-disabled variant." },
-    "required": { "type": "boolean", "default": false, "description": "Marks the fieldset and all three fields as required." },
-    "error": { "type": "string", "description": "Error message shown once below the fields, referenced by all three fields' aria-describedby." },
-    "className": { "type": "string", "default": "", "description": "Additional classes for the usa-fieldset wrapper." }
+    "id": {
+      "type": "string",
+      "default": "memorable-date",
+      "description": "Base id for the component. Month/day/year field ids and hint ids are derived from this."
+    },
+    "legend": {
+      "type": "string",
+      "default": "Date of Birth",
+      "description": "Legend text for the fieldset."
+    },
+    "groupHint": {
+      "type": "string",
+      "default": "Select a month. Enter 1 or 2 digits for the day and 4 digits for the year.",
+      "description": "Visible hint shown once for the whole group. Hidden from screen readers (aria-hidden) since each field has its own hint."
+    },
+    "monthLabel": {
+      "type": "string",
+      "default": "Month",
+      "description": "Label text for the month select."
+    },
+    "dayLabel": {
+      "type": "string",
+      "default": "Day",
+      "description": "Label text for the day input."
+    },
+    "yearLabel": {
+      "type": "string",
+      "default": "Year",
+      "description": "Label text for the year input."
+    },
+    "monthHint": {
+      "type": "string",
+      "default": "Select a month from the dropdown.",
+      "description": "Screen-reader-only hint for the month field."
+    },
+    "dayHint": {
+      "type": "string",
+      "default": "Enter 1 or 2 digits for the day.",
+      "description": "Screen-reader-only hint for the day field."
+    },
+    "yearHint": {
+      "type": "string",
+      "default": "Enter 4 digits for the year.",
+      "description": "Screen-reader-only hint for the year field."
+    },
+    "monthName": {
+      "type": "string",
+      "description": "name attribute for the month select. Defaults to <id>-month."
+    },
+    "dayName": {
+      "type": "string",
+      "description": "name attribute for the day input. Defaults to <id>-day."
+    },
+    "yearName": {
+      "type": "string",
+      "description": "name attribute for the year input. Defaults to <id>-year."
+    },
+    "defaultMonth": {
+      "type": "string",
+      "description": "Initial selected month value (\"1\"-\"12\")."
+    },
+    "defaultDay": {
+      "type": "string",
+      "description": "Initial day value."
+    },
+    "defaultYear": {
+      "type": "string",
+      "description": "Initial year value."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disables all three fields."
+    },
+    "ariaDisabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks all three fields aria-disabled without preventing interaction, matching USWDS's aria-disabled variant."
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marks the fieldset and all three fields as required."
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message shown once below the fields, referenced by all three fields' aria-describedby."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional classes for the usa-fieldset wrapper."
+    }
   }
 }
-

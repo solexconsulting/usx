@@ -40,9 +40,9 @@ export const Dashboard = {
             <div className="margin-bottom-3 display-flex flex-wrap flex-align-center justify-between gap-2">
               <p className="text-intro margin-0">Overview of system analytics, user registrations, and live status.</p>
               <ButtonGroup
-                items={[
-                  { children: 'New Item', variant: 'primary', leftIcon: { name: 'add', size: 'sm' } },
-                  { children: 'Export Data', variant: 'secondary', leftIcon: { name: 'file_download', size: 'sm' } },
+                buttonProps={[
+                  { children: 'New Item', variant: 'primary', iconProps: [{ name: 'add' }] },
+                  { children: 'Export Data', variant: 'secondary', iconProps: [{ name: 'file_download' }] },
                 ]}
               />
             </div>
@@ -139,16 +139,16 @@ export const Dashboard = {
             <div>
               <h3 className="text-ink margin-top-0 margin-bottom-15">Quick Actions</h3>
               <div className="display-flex flex-column gap-1">
-                <Button variant="primary" className="width-full" leftIcon={{ name: 'add', size: 'sm' }}>
+                <Button variant="primary" className="width-full" iconProps={[{ name: 'add' }]}>
                   Add New User
                 </Button>
-                <Button variant="primary" className="width-full" leftIcon={{ name: 'file_upload', size: 'sm' }}>
+                <Button variant="primary" className="width-full" iconProps={[{ name: 'file_upload' }]}>
                   Import Data
                 </Button>
-                <Button variant="primary" className="width-full" leftIcon={{ name: 'settings', size: 'sm' }}>
+                <Button variant="primary" className="width-full" iconProps={[{ name: 'settings' }]}>
                   System Settings
                 </Button>
-                <Button variant="secondary" className="width-full" leftIcon={{ name: 'help', size: 'sm' }}>
+                <Button variant="secondary" className="width-full" iconProps={[{ name: 'help' }]}>
                   Help & Support
                 </Button>
               </div>

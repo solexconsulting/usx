@@ -48,7 +48,7 @@ export const BlogPost = {
                   <span className="margin-left-2">5 min read</span>
                 </p>
                 <TagGroup
-                  tags={[
+                  tagProps={[
                     { value: 'Technology', color: 'info' },
                     { value: 'Innovation', color: 'success' },
                   ]}
@@ -119,7 +119,7 @@ export const BlogPost = {
 
             <h3 className="text-ink margin-bottom-1">Tags</h3>
             <TagGroup
-              tags={[
+              tagProps={[
                 { value: 'Digital Transformation', color: 'primary' },
                 { value: 'Technology', color: 'info' },
                 { value: 'Innovation', color: 'success' },

@@ -1,11 +1,30 @@
 {
   "name": "summary-box",
   "template": "summary-box/summary-box.django.html",
+  "version": 1,
+  "required": [
+    "heading"
+  ],
   "props": {
-    "id": { "type": "string", "description": "Heading id used by aria-labelledby" },
-    "heading": { "type": "string", "description": "Required summary heading" },
-    "content": { "type": "string", "description": "HTML/text summary content" },
-    "children": { "type": "string", "description": "Inner HTML or text (takes priority over content)" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "id": {
+      "type": "string",
+      "description": "Heading id used by aria-labelledby"
+    },
+    "heading": {
+      "type": "string",
+      "description": "Required summary heading"
+    },
+    "content": {
+      "type": "string",
+      "description": "HTML/text summary content"
+    },
+    "children": {
+      "type": "string",
+      "description": "Inner HTML or text (takes priority over content)"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

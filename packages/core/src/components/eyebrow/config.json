@@ -1,8 +1,15 @@
 {
   "name": "eyebrow",
   "template": "eyebrow/eyebrow.django.html",
+  "version": 1,
   "props": {
-    "children": { "type": "string", "description": "Eyebrow text content" },
-    "className": { "type": "string", "description": "Additional classes" }
+    "children": {
+      "type": "string",
+      "description": "Eyebrow text content"
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes"
+    }
   }
 }

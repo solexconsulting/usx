@@ -1,17 +1,43 @@
 {
-    "name": "file-list",
-    "template": "file-list/file-list.django.html",
-    "props": {
-        "files": { "type": "array", "description": "Files to render as rows. Each entry is { key, file?, name?, size?, url?, onRemove? } — key uniquely identifies the row; file is a browser File (name/size read from it); name/size describe entries with no File object (e.g. files already on the server); url renders the name as a download link; onRemove overrides the onRemove prop for just this row. React only." },
-        "hint": { "type": "string", "default": "Selected files", "description": "Heading/hint text shown above the file list." },
-        "onRemove": { "type": "function", "description": "Called with the removed entry when its Delete button is clicked. Applies to every row unless that row provides its own onRemove, which takes priority. Omit both to hide every Delete button. React only." },
-        "disabled": { "type": "boolean", "default": false, "description": "Hides every row's Delete button." },
-        "className": { "type": "string", "description": "Additional classes for the outer wrapper." }
+  "name": "file-list",
+  "template": "file-list/file-list.django.html",
+  "version": 1,
+  "default": {
+    "files": [
+      {
+        "key": 1,
+        "name": "test1.jpg",
+        "size": 7000
+      },
+      {
+        "key": 2,
+        "name": "test2.jpg",
+        "size": 7200
+      }
+    ]
+  },
+  "props": {
+    "files": {
+      "type": "array",
+      "description": "Files to render as rows. Each entry is { key, file?, name?, size?, url?, onRemove? } — key uniquely identifies the row; file is a browser File (name/size read from it); name/size describe entries with no File object (e.g. files already on the server); url renders the name as a download link; onRemove overrides the onRemove prop for just this row. React only."
     },
-    "default": {
-        "files": [
-            { "key": 1, "name": "test1.jpg", "size": 7000 },
-            { "key": 2, "name": "test2.jpg", "size": 7200 }
-        ]
+    "hint": {
+      "type": "string",
+      "default": "Selected files",
+      "description": "Heading/hint text shown above the file list."
+    },
+    "onRemove": {
+      "type": "function",
+      "description": "Called with the removed entry when its Delete button is clicked. Applies to every row unless that row provides its own onRemove, which takes priority. Omit both to hide every Delete button. React only."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Hides every row's Delete button."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes for the outer wrapper."
     }
+  }
 }
