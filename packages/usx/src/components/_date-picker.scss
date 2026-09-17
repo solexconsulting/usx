@@ -1,7 +1,6 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
 .usx-date-picker {
-
     &:has(
         .usa-date-picker__button:hover,
         .usa-date-picker__button:active,
@@ -50,7 +49,6 @@
         }
 
         @if $usx-date-picker-button-hover-active-bg {
-
             &:not([disabled]):hover,
             &:not([disabled]):active {
                 background-color: $usx-date-picker-button-hover-active-bg;

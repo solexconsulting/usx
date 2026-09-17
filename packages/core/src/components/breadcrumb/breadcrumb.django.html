@@ -1,6 +1,6 @@
 {# Django template for Breadcrumb #}
 {# Props: items (array of {href,label,current}), wrap (bool), rdfa (bool), ariaLabel (string), className (string) #}
-<nav class="usa-breadcrumb usx-breadcrumb{% if truncate %} usa-breadcrumb--truncate{% endif %}{% if className %} {{ className }}{% endif %}" aria-label="{{ ariaLabel|default:'Breadcrumbs' }}">
+<nav class="usa-breadcrumb usx-breadcrumb{% if wrap %} usa-breadcrumb--wrap{% endif %}{% if truncate %} usa-breadcrumb--truncate{% endif %}{% if className %} {{ className }}{% endif %}" aria-label="{{ ariaLabel|default:'Breadcrumbs' }}">
   <ol class="usa-breadcrumb__list"{% if rdfa %} vocab="http://schema.org/" typeof="BreadcrumbList"{% endif %}>
     {% if items %}
       {% for item in items %}

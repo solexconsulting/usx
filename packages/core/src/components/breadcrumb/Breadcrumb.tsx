@@ -35,7 +35,13 @@ export default function Breadcrumb({
     );
   }
 
-  const navClasses = ['usa-breadcrumb', 'usx-breadcrumb', truncate ? 'usa-breadcrumb--truncate' : null, className]
+  const navClasses = [
+    'usa-breadcrumb',
+    'usx-breadcrumb',
+    wrap ? 'usa-breadcrumb--wrap' : null,
+    truncate ? 'usa-breadcrumb--truncate' : null,
+    className,
+  ]
     .filter(Boolean)
     .join(' ');
 

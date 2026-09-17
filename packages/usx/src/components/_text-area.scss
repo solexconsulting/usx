@@ -24,7 +24,7 @@
 
 /* ---------------------------------- */
 
-.usa-textarea.usx-textarea:not(.usa-input--error, .usa-input--success) {
+.usa-textarea.usx-textarea:not(.usa-input--error):not(.usa-input--success) {
   &:not(:disabled) {
     @if $usx-textarea-bg {
       background-color: $usx-textarea-bg;

@@ -2,6 +2,27 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-modal {
+  @if $usx-modal-bg {
+    background: $usx-modal-bg;
+  }
+
+  @if $usx-modal-text {
+    color: $usx-modal-text;
+  }
+
+  .usa-modal__close {
+    @if $usx-modal-close-text {
+      color: $usx-modal-close-text;
+    }
+
+    &:hover,
+    &:active {
+      @if $usx-modal-close-text-hover {
+        color: $usx-modal-close-text-hover;
+      }
+    }
+  }
+
   &.usx-modal--lg-collapsed {
     max-width: 55rem;
     width: 100%;

@@ -23,7 +23,7 @@ const GROUP_ORDER = Object.keys(GROUP_LABELS);
 
 function TokenTable({ tokens, live }) {
   return (
-    <table className="usa-table usa-table--borderless" style={{ width: '100%' }}>
+    <table className="usa-table usx-table usa-table--borderless" style={{ width: '100%' }}>
       <thead>
         <tr>
           <th>Token</th>
@@ -78,7 +78,7 @@ export const AllTokens = {
     })).filter((g) => g.tokens.length > 0);
 
     return (
-      <div className="usa-prose" style={{ maxWidth: '960px' }}>
+      <div className="usa-prose usx-prose" style={{ maxWidth: '960px' }}>
         <h1>Theme tokens</h1>
         <p>
           Generated directly from <code>@solexllc/usx-theme</code>'s theme

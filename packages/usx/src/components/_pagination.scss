@@ -13,10 +13,9 @@
   }
 
   @media (width >=#{$breakpoint-desktop}) {
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
   }
 }
 
@@ -38,8 +37,7 @@
 
   @media (width >=#{$breakpoint-tablet}) {
     width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: space-between;
   }
@@ -47,8 +45,7 @@
   @media (width >=#{$breakpoint-desktop}) {
     width: auto;
     flex: 0 1 auto;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: end;
   }

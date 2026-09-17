@@ -20,8 +20,6 @@ const branding = {
 };
 const brandingUrl = '/';
 
-console.log("Base USX URL:", window.usxBaseUrl);
-
 const socialLinks = [
   { icon: `${window.usxBaseUrl}img/usa-icons/facebook.svg`,  href: 'javascript:void(0);', alt: 'Facebook' },
   { icon: `${window.usxBaseUrl}img/usa-icons/twitter.svg`,   href: 'javascript:void(0);', alt: 'Twitter' },

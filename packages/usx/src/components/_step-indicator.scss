@@ -65,6 +65,7 @@
   .usa-step-indicator__segment::after {
     @if $usx-step-indicator-segment-bar-width {
       height: $usx-step-indicator-segment-bar-width;
+
       // Normal height is 0.5rem and top is normally 0
       // Center by offsetting by half the difference between the normal height and the new height
       // Note: the bare "0" must be a length (0rem), not a unitless number —

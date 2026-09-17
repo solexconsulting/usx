@@ -17,6 +17,10 @@ export default {
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
+        setTimeout(() => {
+          modal.on();
+        }, 200);
+
         return () => modal.off();
       }, []);
 

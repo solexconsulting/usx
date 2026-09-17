@@ -3,7 +3,7 @@
 // Global focus-ring override: USWDS hardcodes `outline: .25rem solid #2491ff`
 // directly on these native/interactive selectors, so re-declaring the same
 // rule here (guarded by $usx-color-focus) is the only way to theme it.
-@if $usx-color-focus != null {
+@if $usx-color-focus {
   button:not([disabled]):focus,
   input:not([disabled]):focus,
   select:not([disabled]):focus,

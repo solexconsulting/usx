@@ -1,6 +1,7 @@
 import { ReactNode, HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import Icon from '../icon/Icon';
+import Prose from '../prose/Prose';
 import ButtonGroup, { ButtonGroupProps } from '../button-group/ButtonGroup';
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
@@ -47,9 +48,9 @@ export default function Modal({
           <h2 className="usa-modal__heading" id={`${id}-heading`}>
             {heading}
           </h2>
-          <div className="usa-prose">
+          <Prose>
             <p id={`${id}-description`}>{children ?? description}</p>
-          </div>
+          </Prose>
           <div className="usa-modal__footer">
             <ButtonGroup buttonProps={actionProps} />
           </div>

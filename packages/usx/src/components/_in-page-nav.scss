@@ -17,34 +17,34 @@
 }
 
 .usa-in-page-nav__nav {
-  @if $usx-in-page-nav-bg != null {
+  @if $usx-in-page-nav-bg {
     background-color: $usx-in-page-nav-bg;
   }
 
-  @if $usx-in-page-nav-text != null {
+  @if $usx-in-page-nav-text {
     color: $usx-in-page-nav-text;
   }
 }
 
 .usa-in-page-nav__heading {
-  @if $usx-in-page-nav-text != null {
+  @if $usx-in-page-nav-text {
     color: $usx-in-page-nav-text;
   }
 }
 
 .usa-in-page-nav__list {
-  @if $usx-in-page-nav-border != null {
+  @if $usx-in-page-nav-border {
     border-left-color: $usx-in-page-nav-border;
   }
 
   a:not(.usa-button) {
     &:not(.usa-current) {
-      @if $usx-in-page-nav-link-text != null {
+      @if $usx-in-page-nav-link-text {
         color: $usx-in-page-nav-link-text;
       }
 
       &:hover {
-        @if $usx-in-page-nav-link-text-hover != null {
+        @if $usx-in-page-nav-link-text-hover {
           color: $usx-in-page-nav-link-text-hover;
         }
       }
@@ -53,19 +53,19 @@
       // (a:not(.usa-button):not(.usa-current):visited) class-for-class so
       // this wins the cascade instead of losing to it on specificity.
       &:visited {
-        @if $usx-in-page-nav-link-text != null {
+        @if $usx-in-page-nav-link-text {
           color: $usx-in-page-nav-link-text;
         }
       }
     }
 
     &.usa-current {
-      @if $usx-in-page-nav-current-text != null {
+      @if $usx-in-page-nav-current-text {
         color: $usx-in-page-nav-current-text;
       }
 
       &::after {
-        @if $usx-in-page-nav-bar != null {
+        @if $usx-in-page-nav-bar {
           background-color: $usx-in-page-nav-bar;
         }
       }

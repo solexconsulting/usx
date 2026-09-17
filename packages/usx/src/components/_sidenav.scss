@@ -8,11 +8,11 @@
 }
 
 .usx-sidenav.usa-sidenav {
-  @if $usx-sidenav-border != null {
+  @if $usx-sidenav-border {
     border-bottom-color: $usx-sidenav-border;
   }
 
-  @if $usx-sidenav-border-width != null {
+  @if $usx-sidenav-border-width {
     border-bottom-width: $usx-sidenav-border-width;
   }
 
@@ -22,11 +22,11 @@
   }
 
   .usa-sidenav__item {
-    @if $usx-sidenav-border != null {
+    @if $usx-sidenav-border {
       border-top-color: $usx-sidenav-border;
     }
 
-    @if $usx-sidenav-border-width != null {
+    @if $usx-sidenav-border-width {
       border-top-width: $usx-sidenav-border-width;
     }
   }

@@ -5,7 +5,6 @@ import MiscBanner from '../../../core/src/components/misc-banner/MiscBanner.tsx'
 import Header from '../../../core/src/components/header/Header.tsx';
 import Footer from '../../../core/src/components/footer/Footer.tsx';
 import ButtonGroup from '../../../core/src/components/button-group/ButtonGroup.tsx';
-import Card from '../../../core/src/components/card/Card.tsx';
 import CardGroup from '../../../core/src/components/card-group/CardGroup.tsx';
 import Identifier from '../../../core/src/components/identifier/Identifier.tsx';
 import Layout from '../../../core/src/components/layout/Layout.tsx';

@@ -23,7 +23,7 @@
   }
 
   @if $usx-summary-box-link-text {
-    .usa-summary-box__link:not(:visited, :hover) {
+    .usa-summary-box__link:not(:visited):not(:hover) {
       color: $usx-summary-box-link-text;
     }
   }

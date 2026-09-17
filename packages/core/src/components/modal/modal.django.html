@@ -13,7 +13,7 @@
         <h2 class="usa-modal__heading" id="{{ id }}-heading">
           {{ heading|default:"Are you sure you want to continue?" }}
         </h2>
-        <div class="usa-prose">
+        {% prose %}
           <p id="{{ id }}-description">
             {% if children %}
               {{ children|safe }}
@@ -21,7 +21,7 @@
               {{ description|default:"You have unsaved changes that will be lost." }}
             {% endif %}
           </p>
-        </div>
+        {% endprose %}
         <div class="usa-modal__footer">
           {% button_group buttonProps=actionProps %}{% endbutton_group %}
         </div>

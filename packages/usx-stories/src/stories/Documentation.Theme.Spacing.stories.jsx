@@ -13,7 +13,7 @@ export const Scale = {
     const spacingTokens = themeManifest.filter((t) => t.group === 'spacing');
 
     return (
-      <div className="usa-prose" style={{ maxWidth: '840px' }}>
+      <div className="usa-prose usx-prose" style={{ maxWidth: '840px' }}>
         <h1>Spacing tokens</h1>
         <p>
           Five runtime-themeable steps, used for padding/margin/gap values

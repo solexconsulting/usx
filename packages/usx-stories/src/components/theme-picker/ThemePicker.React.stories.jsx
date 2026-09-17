@@ -4,7 +4,6 @@ import ThemePicker from '../../../../core/src/components/theme-picker/ThemePicke
 import config from '../../../../core/src/components/theme-picker/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 import { PRESETS } from '../../utils/themePresets.js';
-import { resolveTheme, themeToCssVars } from '../../utils/themeDerive.js';
 import Alert from '../../../../core/src/components/alert/Alert.tsx';
 
 const PRESET_NAMES = Object.keys(PRESETS);
@@ -40,9 +39,9 @@ export default {
     excludeStories: ['storyDefs'],
     decorators: [
         (Story) => {
-            // Ensure the Storybook toolbar's global theme decorator is applied, so
-            // this story's ThemePicker selection actually changes the colors.
-            const [globals] = useGlobals();
+            // Subscribe to Storybook globals so the toolbar theme decorator re-applies
+            // when this story's ThemePicker changes the selection.
+            useGlobals();
             return (
                 <>
                     <Alert

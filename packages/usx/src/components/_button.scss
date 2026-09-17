@@ -197,7 +197,7 @@
     background-color: transparent;
     color: currentcolor;
 
-    &:not([disabled], [aria-disabled="true"]) {
+    &:not([disabled]):not([aria-disabled="true"]) {
       &.usa-button--primary {
         @if $usx-color-primary {
           color: $usx-color-primary;
@@ -240,6 +240,10 @@
 
       &.usa-button--inverse {
         color: white;
+
+        @if $usx-surface-1 {
+          color: $usx-surface-1;
+        }
       }
     }
   }

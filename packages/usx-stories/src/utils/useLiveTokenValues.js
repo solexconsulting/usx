@@ -38,11 +38,13 @@ function readRawValues() {
             }
           }
         }
-      } catch (e) {
+      } catch {
         // Skip cross-origin stylesheets if inaccessible
       }
     }
-  } catch (e) {}
+  } catch {
+    // document.styleSheets can throw in non-browser environments
+  }
 
   const computed = getComputedStyle(document.documentElement);
   const raw = new Map();

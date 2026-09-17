@@ -5,7 +5,6 @@ import Header from '../../../core/src/components/header/Header.tsx';
 import Footer from '../../../core/src/components/footer/Footer.tsx';
 import Identifier from '../../../core/src/components/identifier/Identifier.tsx';
 import ButtonGroup from '../../../core/src/components/button-group/ButtonGroup.tsx';
-import Card from '../../../core/src/components/card/Card.tsx';
 import Checkbox from '../../../core/src/components/checkbox/Checkbox.tsx';
 import DatePicker from '../../../core/src/components/date-picker/DatePicker.jsx';
 import Fieldset from '../../../core/src/components/fieldset/Fieldset.tsx';

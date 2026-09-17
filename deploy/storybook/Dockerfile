@@ -8,10 +8,14 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 
 # ── Install dependencies ───────────────────────────────────────────────────
+# Every workspace manifest must be present for --frozen-lockfile to resolve.
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
-COPY packages/core/package.json   packages/core/
-COPY packages/tokens/package.json packages/tokens/
-COPY apps/storybook/package.json  apps/storybook/
+COPY packages/core/package.json            packages/core/
+COPY packages/tokens/package.json          packages/tokens/
+COPY packages/usx/package.json             packages/usx/
+COPY packages/usx-stories/package.json     packages/usx-stories/
+COPY packages/usx-uswds-fixes/package.json packages/usx-uswds-fixes/
+COPY apps/storybook/package.json           apps/storybook/
 
 RUN pnpm install --frozen-lockfile
 
@@ -19,7 +23,7 @@ RUN pnpm install --frozen-lockfile
 COPY packages/ packages/
 COPY apps/storybook/ apps/storybook/
 
-# ── Build static Storybook ─────────────────────────────────────────────────
+# ── Build static Storybook (builds tokens first) ───────────────────────────
 RUN pnpm storybook:build
 
 # ── Serve with nginx ─────────────────────────────────────────────────────

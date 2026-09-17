@@ -16,11 +16,18 @@ This package stores platform-agnostic tokens in JSON source files and compiles t
 
 ## Build
 
-Run:
+```sh
+pnpm build   # node build.js → dist/
+pnpm dev     # node build.js --watch (used by the root `pnpm dev`)
+```
 
-`pnpm build`
+`src/system-colors.generated.js` (the USWDS system-color palette used by the
+Theme Playground) is generated from `@uswds/uswds`'s own token JSON and is
+committed. Regenerate it only after bumping `@uswds/uswds`:
 
-from this package directory to compile source tokens into `dist/`.
+```sh
+pnpm generate:system-colors
+```
 
 ## Theming
 

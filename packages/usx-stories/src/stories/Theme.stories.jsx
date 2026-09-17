@@ -57,7 +57,7 @@ import StepIndicator from '../../../core/src/components/step-indicator/StepIndic
 import SummaryBox from '../../../core/src/components/summary-box/SummaryBox.tsx';
 import Swap from '../../../core/src/components/swap/Swap.tsx';
 import Switch from '../../../core/src/components/switch/Switch.tsx';
-import Table from '../../../core/src/components/table/Table.jsx';
+import Table from '../../../core/src/components/table/Table.tsx';
 import Tag from '../../../core/src/components/tag/Tag.tsx';
 import TaskList from '../../../core/src/components/task-list/TaskList.tsx';
 import TextArea from '../../../core/src/components/text-area/TextArea.tsx';
@@ -107,7 +107,6 @@ const GROUPED_COLOR_NAMES = [
 ];
 
 const RANDOMIZED = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm'];
-const SURFACE_NAMES = ['surface-1', 'surface-2', 'surface-3'];
 
 // Fixed x-axis columns for the lightest-\u2192darkest color-scale grid, in
 // lightness order. Every row (theme/state color) is laid out against these
@@ -262,7 +261,7 @@ function randomPalette() {
   // than the light surfaces, a bit lighter than the dark ones — so they stay
   // a visible divider against whichever surface tone the theme lands on
   // instead of blending in or vanishing. color-border isn't itself one of
-  // the SURFACE_NAMES, so it needs its own explicit override here.
+  // the surface tokens, so it needs its own explicit override here.
   {
     const [min, max] = isDark ? [22, 38] : [68, 84];
     const lightness = min + Math.random() * (max - min);

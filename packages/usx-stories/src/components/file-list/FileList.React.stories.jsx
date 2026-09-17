@@ -89,7 +89,9 @@ function PerFileOverrideRender(args) {
         ? {
             ...entry,
             onRemove: (removed) => {
-              console.log(`Custom delete for "${removed.name}" — e.g. call a delete API here.`);
+              // Demo of a per-file override; a real app would call a delete API here.
+              // eslint-disable-next-line no-console
+              console.log(`Custom delete for "${removed.name}"`);
               setFiles((prev) => prev.filter((f) => f.key !== entry.key));
             },
           }

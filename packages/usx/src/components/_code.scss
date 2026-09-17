@@ -4,16 +4,16 @@
 .usx-mockup-code {
   border-radius: $usx-code-radius;
   overflow: hidden;
-  padding: 2.5rem 0 0.75rem 0;
+  padding: 2.5rem 0 0.75rem;
   position: relative;
   font-size: $usx-code-font-size;
   line-height: $usx-line-height-base;
 
-  &:not([class^="bg-"], [class*=" bg-"]) {
+  &:not([class^="bg-"]):not([class*=" bg-"]) {
     background-color: black;
   }
 
-  &:not([class^="text-"], [class*=" text-"]) {
+  &:not([class^="text-"]):not([class*=" text-"]) {
     color: white;
   }
 

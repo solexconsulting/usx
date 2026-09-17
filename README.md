@@ -34,39 +34,42 @@ Reference implementations that demonstrate integration patterns (currently stubs
 Docker artifacts (Dockerfiles, nginx/gunicorn config, `docker-compose.yml`) for running the Storybook and Django apps in containers.
 
 ### `scripts/`
-Repo-wide tooling: component scaffolding (`new-component.js`), export/registry generation (`generate-exports.cjs`), and `config.json` validation (`validate-configs.js`).
+Repo-wide tooling: component scaffolding (`new-component.js`), the `packages/core` export barrel and CMS contract generators (`generate-exports.js`, `generate-contracts.js`), and the metadata validator (`validate-configs.js`). All share `scripts/lib/component-configs.js`.
 
 ## Run commands from root
 
 ```bash
 pnpm install
-pnpm build          # build every package (pnpm -r build)
-pnpm dev             # run every package's dev script in parallel
-pnpm test            # run every package's test script (pnpm -r test)
+pnpm dev             # tokens watcher + Storybook dev server (http://localhost:6006)
+pnpm build           # build every package (pnpm -r build)
+pnpm test            # validate component metadata, then run every package's tests
 pnpm lint            # eslint + stylelint across the repo
 pnpm format          # prettier --write .
-pnpm storybook       # start the Storybook host (see apps/storybook/README.md)
+pnpm storybook:build # static Storybook build (used by deploy/storybook/Dockerfile)
 ```
 
-Other useful scripts:
+Component tooling:
 
 ```bash
-pnpm new-component        # scaffold a new component under packages/core/src/components
-pnpm generate-exports      # regenerate packages/core/src/index.js barrel exports
-pnpm validate:configs      # validate every component's config.json against the schema
-pnpm tokens:build          # build packages/tokens only
+pnpm new-component <Name>   # scaffold a component across core, usx and usx-stories
+pnpm generate:exports       # regenerate packages/core/src/index.js
+pnpm generate:contracts     # regenerate packages/core/src/contracts.js (also runs on core build)
+pnpm validate:configs       # schema + cross-ref + file-presence + generated-file freshness
 ```
+
+`generate:exports` and `generate:contracts` write committed files; `validate:configs`
+(and therefore `pnpm test`) fails if either is out of date.
 
 ## Local development
 
 ```bash
 pnpm install
-pnpm storybook
+pnpm dev
 ```
 
-`pnpm storybook` runs the `tokens`/`usx` Sass watchers alongside the Storybook
-dev server, so SCSS changes recompile live. The Django-rendered stories in
-Storybook additionally require the Django dev server from
-`apps/storybook-django` to be running separately (see that app's
-`requirements.txt` for setup) — React and HTML stories work without it.
+`pnpm dev` runs the `tokens` build watcher alongside the Storybook dev server;
+Storybook compiles the USX Sass itself and reloads on any change under
+`packages/*/src`. The Django-rendered stories additionally require the Django
+dev server from `apps/storybook-django` to be running separately (see that
+app's `requirements.txt` for setup) — React and HTML stories work without it.
 

@@ -16,6 +16,11 @@ deploy/.env
 # Python / Django
 __pycache__/
 *.pyc
+venv/
+.venv/
+
+# Logs
+*.log
 
 # Storybook
 apps/storybook/storybook-static/

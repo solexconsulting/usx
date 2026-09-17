@@ -74,7 +74,7 @@ export const AllVariants = {
       <Button label="aria-disabled" variant="outline" aria-disabled="true" />{" "}
       <Button label="Unstyled button" variant="unstyled" />
       <h3>Outline Inverse</h3>
-      <div style={{ backgroundColor: '#0f172a', padding: '1rem', marginLeft: '-1rem', width: 'fit-content' }}>
+      <div className="bg-surface-inverse padding-1" style={{ marginLeft: '-1rem', width: 'fit-content' }}>
         <Button label="Default" variant="outline" inverse />{" "}
         <Button label="Hover" variant="outline" inverse className="usa-button--hover" />{" "}
         <Button label="Active" variant="outline" inverse className="usa-button--active" />{" "}
@@ -389,7 +389,7 @@ export const OutlineAriaDisabled = {
 
 export const OutlineInverse = {
   render: () => (
-    <div style={{backgroundColor: '#0f172a', padding: '1rem'}}>
+    <div class="bg-surface-inverse padding-1">
       <Button label="Default" variant="outline" inverse />
     </div>
   )
@@ -397,7 +397,7 @@ export const OutlineInverse = {
 
 export const OutlineInverseHover = {
   render: () => (
-    <div style={{backgroundColor: '#0f172a', padding: '1rem'}}>
+    <div class="bg-surface-inverse padding-1">
       <Button label="Hover" variant="outline" inverse className="usa-button--hover" />
     </div>
   )
@@ -405,7 +405,7 @@ export const OutlineInverseHover = {
 
 export const OutlineInverseActive = {
   render: () => (
-    <div style={{backgroundColor: '#0f172a', padding: '1rem'}}>
+    <div class="bg-surface-inverse padding-1">
       <Button label="Active" variant="outline" inverse className="usa-button--active" />
     </div>
   )
@@ -413,7 +413,7 @@ export const OutlineInverseActive = {
 
 export const OutlineInverseFocus = {
   render: () => (
-    <div style={{backgroundColor: '#0f172a', padding: '1rem'}}>
+    <div class="bg-surface-inverse padding-1">
       <Button label="Focus" variant="outline" inverse className="usa-focus" />
     </div>
   )
@@ -425,7 +425,12 @@ export const OutlineInverseDisabled = {
     variant: 'outline',
     inverse: true,
     disabled: true
-  }
+  },
+  render: (args) => (
+    <div class="bg-surface-inverse padding-1">
+      <Button {...args} />
+    </div>
+  )
 };
 
 export const OutlineInverseAriaDisabled = {
@@ -434,7 +439,12 @@ export const OutlineInverseAriaDisabled = {
     variant: 'outline',
     inverse: true,
     'aria-disabled': true
-  }
+  },
+  render: (args) => (
+    <div class="bg-surface-inverse padding-1">
+      <Button {...args} />
+    </div>
+  )
 };
 
 // Big button
@@ -469,11 +479,25 @@ export const BigUnstyled = {
   }
 };
 
+export const MultipleIcons = {
+  args: {
+    label: 'Multiple icons',
+    variant: 'primary',
+    iconProps: [
+      { name: 'star', position: 'left' },
+      { name: 'arrow_back', position: 'left' },
+      { name: 'arrow_forward', position: 'right' },
+      { name: 'file_download', position: 'right' }
+    ]
+  },
+};
+
 export const Ghost = {
   args: {
     label: 'Ghost',
     ghost: true
-  }
+  },
+  tags: ['USX'],
 };
 
 export const GhostPrimary = {
@@ -481,7 +505,8 @@ export const GhostPrimary = {
     label: 'Primary Ghost',
     variant: 'primary',
     ghost: true,
-  }
+  },
+  tags: ['USX'],
 };
 
 export const GhostSecondary = {
@@ -489,7 +514,8 @@ export const GhostSecondary = {
     label: 'Secondary Ghost',
     variant: 'secondary',
     ghost: true,
-  }
+  },
+  tags: ['USX'],
 };
 
 export const GhostAccentCool = {
@@ -497,7 +523,8 @@ export const GhostAccentCool = {
     label: 'Accent Cool Ghost',
     variant: 'accent-cool',
     ghost: true,
-  }
+  },
+  tags: ['USX'],
 };
 
 export const GhostAccentWarm = {
@@ -505,7 +532,8 @@ export const GhostAccentWarm = {
     label: 'Accent Warm Ghost',
     variant: 'accent-warm',
     ghost: true,
-  }
+  },
+  tags: ['USX'],
 };
 
 export const GhostBase = {
@@ -513,7 +541,8 @@ export const GhostBase = {
     label: 'Base Ghost',
     variant: 'base',
     ghost: true,
-  }
+  },
+  tags: ['USX'],
 };
 
 export const GhostInverse = {
@@ -522,8 +551,9 @@ export const GhostInverse = {
     inverse: true,
     ghost: true,
   },
+  tags: ['USX'],
   render: (args) => (
-    <div style={{backgroundColor: '#333', padding: '1rem'}}>
+    <div className="bg-surface-inverse padding-1">
       <Button {...args} />
     </div>
   )
@@ -535,7 +565,8 @@ export const GhostDisabled = {
     variant: 'primary',
     ghost: true,
     disabled: true
-  }
+  },
+  tags: ['USX'],
 };
 
 export const GhostAriaDisabled = {
@@ -544,7 +575,8 @@ export const GhostAriaDisabled = {
     variant: 'primary',
     ghost: true,
     'aria-disabled': true
-  }
+  },
+  tags: ['USX'],
 };
 
 export const GhostWithIcon = {
@@ -553,20 +585,8 @@ export const GhostWithIcon = {
     variant: 'primary',
     ghost: true,
     iconProps: [{ name: 'arrow_back', size: 2 }]
-  }
-};
-
-export const MultipleIcons = {
-  args: {
-    label: 'Multiple icons',
-    variant: 'primary',
-    iconProps: [
-      { name: 'star', position: 'left' },
-      { name: 'arrow_back', position: 'left' },
-      { name: 'arrow_forward', position: 'right' },
-      { name: 'file_download', position: 'right' }
-    ]
-  }
+  },
+  tags: ['USX'],
 };
 
 export const Loading = {
@@ -574,7 +594,8 @@ export const Loading = {
     label: 'Loading',
     variant: 'primary',
     loading: true
-  }
+  },
+  tags: ['USX'],
 };
 
 export const LoadingDisabled = {
@@ -583,7 +604,8 @@ export const LoadingDisabled = {
     variant: 'primary',
     loading: true,
     disabled: true
-  }
+  },
+  tags: ['USX'],
 };
 
 export const storyDefs = {

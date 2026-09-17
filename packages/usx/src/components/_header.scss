@@ -147,11 +147,13 @@
     @media (width < 64em) {
       .usa-nav__primary button:hover {
         color: $usx-header-nav-link-text-hover-mobile;
+
         // Vendor hardcodes this hover background at mobile only (and resets
         // it to transparent again at desktop) — match that scoping.
         @if $usx-header-nav-link-bg-hover {
           background-color: $usx-header-nav-link-bg-hover;
         }
+
         &> span::after {
           @if $usx-header-nav-link-text-hover-mobile {
             background-color: $usx-header-nav-link-text-hover-mobile;
@@ -163,6 +165,7 @@
     @media (width >= 64em) {
       .usa-nav__primary button:not([aria-expanded="true"]):hover {
         color: $usx-header-nav-link-text-hover;
+
         &> span::after {
           @if $usx-header-nav-link-text-hover {
             background-color: $usx-header-nav-link-text-hover;
@@ -210,7 +213,7 @@
     }
   }
 
-  @media (min-width: 64em) {
+  @media (width >= 64em) {
     width: 100%;
     float: none;
 
@@ -305,6 +308,7 @@
         @if $usx-header-nav-link-text-hover-mobile {
           color: $usx-header-nav-link-text-hover-mobile;
         }
+
         font-weight: 700;
         position: relative;
 
@@ -312,6 +316,7 @@
           @if $usx-header-nav-link-text-hover-mobile {
             background-color: $usx-header-nav-link-text-hover-mobile;
           }
+
           border-radius: 99rem;
           content: "";
           display: block;
@@ -427,6 +432,7 @@
         @if $usx-header-nav-link-text-hover {
           color: $usx-header-nav-link-text-hover;
         }
+
         font-weight: 700;
       }
     }

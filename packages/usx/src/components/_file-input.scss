@@ -12,6 +12,10 @@
   @if $usx-input-radius {
     border-radius: $usx-input-radius;
   }
+
+  @if $usx-input-border {
+    border-color: $usx-input-border;
+  }
 }
 
 /* ---------------------------------- */
@@ -20,16 +24,11 @@
 
 /* ---------------------------------- */
 
-.usa-file-input__target {
-  @if $usx-input-border {
-    border-color: $usx-input-border;
-  }
-}
-
 .usa-form-group--error .usa-file-input__target {
     @if $usx-input-error-border {
         border-color: $usx-input-error-border;
     }
+
     @if $usx-file-input-border-width {
         border-width: $usx-file-input-border-width;
     }
@@ -130,13 +129,14 @@
 /* ---------------------------------- */
 
 /* Managed-multiple file list         */
+
 /* (VA.gov-style per-file delete rows, see FileInput.jsx) */
 
 /* ---------------------------------- */
 
 .usx-file-input__file-list {
   list-style: none;
-  margin: 0.5rem 0 1rem 0;
+  margin: 0.5rem 0 1rem;
   padding: 0;
   max-width: 30rem;
 
@@ -200,6 +200,7 @@
   flex-shrink: 0;
   gap: 0.5rem;
   margin-right: 0;
+
   // USWDS's base .usa-button is width:100% below its own tablet breakpoint
   // (only reset to auto at tablet+) — override so this button always sizes
   // to its content and never crowds out the file info next to it.

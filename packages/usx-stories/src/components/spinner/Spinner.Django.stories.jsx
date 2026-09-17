@@ -81,6 +81,7 @@ export const OmittedLabel = createStory(omittedLabelProps);
 const SpinnerWithTooltip = (args) => {
   const [spinnerHtml, setSpinnerHtml] = useState('');
   const [tooltipHtml, setTooltipHtml] = useState('');
+  // Keyed on the serialized args so a new-but-equal args object doesn't refetch.
   const argsKey = JSON.stringify(args);
 
   useEffect(() => {
@@ -90,7 +91,7 @@ const SpinnerWithTooltip = (args) => {
   useEffect(() => {
     if (!spinnerHtml) return;
     setTooltipHtml('');
-    getComponentHtml('tooltip', { ...args, children: spinnerHtml }).then(setTooltipHtml);
+    getComponentHtml('tooltip', { ...JSON.parse(argsKey), children: spinnerHtml }).then(setTooltipHtml);
   }, [spinnerHtml, argsKey]);
 
   if (!tooltipHtml) return null;

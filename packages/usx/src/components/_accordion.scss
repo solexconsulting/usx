@@ -58,18 +58,14 @@ $usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/20
   }
 
   @if $usx-accordion-text {
-    .usa-accordion__button {
-      color: $usx-accordion-text;
-    }
-
     // Replace the frozen background-image icon with a mask painted in the
-    // same theme-aware color as the text above (mirrors the technique USWDS
+    // same theme-aware color as the text (mirrors the technique USWDS
     // itself uses for forced-colors mode, just applied unconditionally).
     .usa-accordion__button {
+      color: $usx-accordion-text;
       position: relative;
       background-image: none !important;
-      padding-inline-start: $usx-accordion-icon-padding-start;
-      padding-inline-end: $usx-accordion-icon-padding-end;
+      padding-inline: $usx-accordion-icon-padding-start $usx-accordion-icon-padding-end;
 
       &::before {
         content: '';
@@ -98,13 +94,11 @@ $usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/20
     }
 
     &.usa-accordion--icon-start .usa-accordion__button::before {
-      inset-inline-start: 1.25rem;
-      inset-inline-end: auto;
+      inset-inline: 1.25rem auto;
     }
 
     &.usa-accordion--icon-end .usa-accordion__button::before {
-      inset-inline-start: auto;
-      inset-inline-end: 1.25rem;
+      inset-inline: auto 1.25rem;
     }
   }
 

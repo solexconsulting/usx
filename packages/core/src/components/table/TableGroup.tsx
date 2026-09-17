@@ -2,17 +2,22 @@ import React from 'react';
 import classnames from 'classnames';
 import { useTableContext } from './TableContext';
 
-export interface TableGroupProps extends React.HTMLAttributes<HTMLTableRowElement> {
+// `onToggle` exists on HTMLAttributes as a DOM event; the group API redefines it.
+export interface TableGroupProps extends Omit<React.HTMLAttributes<HTMLTableRowElement>, 'onToggle'> {
+  /** Display label for the group header. */
   label: React.ReactNode;
-  groupKey?: string;
+  /** Unique key identifying this group (used for context-managed expand state). */
+  groupKey: string;
+  /** Controlled expanded state; omit to use the table's own group state. */
   expanded?: boolean;
-  onToggle?: (key: string) => void;
+  /** Controlled toggle handler. */
+  onToggle?: (groupKey: string) => void;
+  /** colSpan for the group header cell. Defaults to totalCols from context. */
   colSpan?: number;
-  className?: string;
-  children?: React.ReactNode;
 }
 
-const TableGroup: React.FC<TableGroupProps> = ({
+/** Expandable group subheader row inside `<tbody>`. */
+export default function TableGroup({
   label,
   groupKey,
   expanded: expandedProp,
@@ -21,35 +26,32 @@ const TableGroup: React.FC<TableGroupProps> = ({
   className = '',
   children,
   ...props
-}) => {
+}: TableGroupProps) {
   const { toggleGroup, isGroupExpanded, totalCols } = useTableContext();
-  const isExpanded =
-    expandedProp !== undefined ? expandedProp : (groupKey ? isGroupExpanded(groupKey) : true);
-  const handleToggle = (e: React.MouseEvent | React.KeyboardEvent) => {
+
+  const isExpanded = expandedProp !== undefined ? expandedProp : isGroupExpanded(groupKey);
+
+  const handleToggle = (e: React.SyntheticEvent) => {
     e.stopPropagation();
-    if (onToggleProp && groupKey) {
-      onToggleProp(groupKey);
-    } else if (groupKey) {
-      toggleGroup(groupKey);
-    }
+    if (onToggleProp) onToggleProp(groupKey);
+    else toggleGroup(groupKey);
   };
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       handleToggle(e);
     }
   };
-  const classes = classnames('usx-table__group-row', className);
+
   return (
     <>
-      <tr className={classes} {...props}>
-        <td
-          colSpan={colSpan || totalCols || 1}
-          className="usx-table__group-cell"
-        >
+      <tr className={classnames('usx-table__group-row', className)} {...props}>
+        <td colSpan={colSpan || totalCols || 1} className="usx-table__group-cell">
           <div className="usx-accordion usa-accordion">
             <h4 className="usa-accordion__heading">
               <button
+                type="button"
                 className="usa-accordion__button usx-table__group-toggle"
                 aria-expanded={isExpanded}
                 onClick={handleToggle}
@@ -64,6 +66,4 @@ const TableGroup: React.FC<TableGroupProps> = ({
       {isExpanded && children}
     </>
   );
-};
-
-export default TableGroup;
+}

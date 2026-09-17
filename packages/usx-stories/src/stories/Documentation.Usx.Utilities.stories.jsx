@@ -1,5 +1,7 @@
 import React from 'react';
 import Code from '../../../core/src/components/code/Code';
+import Status from '../../../core/src/components/status/Status';
+import Tag from '../../../core/src/components/tag/Tag';
 
 export default {
   title: 'Documentation/USX/Utilities',
@@ -11,28 +13,17 @@ const COLOR_NAMES = [
   'accent-warm', 'base', 'info', 'warning', 'success', 'error', 'emergency',
   'disabled', 'beta', 'dev', 'test'
 ];
-const TEXT_COLOR_NAMES = ['text-ink', 'usx-text-muted', 'usx-text-subtle', 'usx-text-inverse'];
-const SURFACE_COLOR_NAMES = ['usx-surface-1', 'usx-surface-2', 'usx-surface-3'];
-
-function Swatch({ label, style }) {
-  return (
-    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', margin: '0.25rem 0.75rem 0.25rem 0', padding: '0.4rem 0.6rem', border: '1px solid #dfe1e2', borderRadius: '4px' }}>
-      <span style={{ width: '1.25rem', height: '1.25rem', borderRadius: '3px', ...style }} />
-      <code style={{ fontSize: '0.8rem' }}>{label}</code>
-    </div>
-  );
-}
 
 export const Utilities = {
   render: () => (
-    <div className="usa-prose" style={{ maxWidth: '960px' }}>
+    <div className="usa-prose maxw-desktop">
       <h1>Utilities &amp; SCSS Helpers</h1>
       <p>
         <code>@solexllc/usx</code> provides both compile-time SCSS helpers (functions, mixins, and layout variables in <code>_variables.scss</code>)
         and runtime-themeable CSS utility classes (in <code>_utilities.scss</code>, importable standalone via <code>@solexllc/usx/utilities</code>).
       </p>
 
-      <hr style={{ margin: '2rem 0' }} />
+      <hr className="margin-y-4" />
 
       <h2>1. SCSS Helpers &amp; Functions (<code>_variables.scss</code>)</h2>
       <p>
@@ -43,7 +34,7 @@ export const Utilities = {
       <p>
         Calculates pixel values based on an 8px grid multiplier (<code>$value * 8px</code>). Ensures spacing values remain consistent across component SCSS.
       </p>
-      <table className="usa-table usa-table--borderless" style={{ width: '100%' }}>
+      <table className="usa-table usx-table usa-table--borderless width-full">
         <thead>
           <tr><th>Input (units)</th><th>Calculated Value</th><th>Example SCSS Usage</th></tr>
         </thead>
@@ -63,7 +54,7 @@ export const Utilities = {
       <p>
         Generates standard media queries matching USX's breakpoint definitions.
       </p>
-      <table className="usa-table usa-table--borderless" style={{ width: '100%' }}>
+      <table className="usa-table usx-table usa-table--borderless width-full">
         <thead>
           <tr><th>Breakpoint Name</th><th>Media Query Condition</th><th>Target Display Device</th></tr>
         </thead>
@@ -87,7 +78,7 @@ export const Utilities = {
       />
 
       <h3>Theming &amp; Utility Functions</h3>
-      <table className="usa-table usa-table--borderless" style={{ width: '100%' }}>
+      <table className="usa-table usx-table usa-table--borderless width-full">
         <thead>
           <tr><th>Function</th><th>Signature</th><th>Description</th></tr>
         </thead>
@@ -111,7 +102,7 @@ export const Utilities = {
       </table>
 
       <h3>Layout &amp; Breakpoint SCSS Variables</h3>
-      <table className="usa-table usa-table--borderless" style={{ width: '100%' }}>
+      <table className="usa-table usx-table usa-table--borderless width-full">
         <thead>
           <tr><th>Variable</th><th>Default Value</th><th>Purpose</th></tr>
         </thead>
@@ -125,7 +116,7 @@ export const Utilities = {
         </tbody>
       </table>
 
-      <hr style={{ margin: '2.5rem 0' }} />
+      <hr className="margin-y-5" />
 
       <h2>2. CSS Utility Classes (<code>_utilities.scss</code>)</h2>
       <p>
@@ -145,25 +136,25 @@ export const Utilities = {
       </ul>
       
       <h4>Background Utilities (<code>.bg-*</code>)</h4>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }} className="margin-bottom-3">
         {COLOR_NAMES.map((name) => (
-          <div key={name} style={{ border: '1px solid #dfe1e2', borderRadius: '6px', overflow: 'hidden' }}>
-            <div style={{ height: '40px', background: `var(--usx-color-${name})` }} />
-            <div style={{ padding: '0.4rem 0.6rem' }}>
-              <code style={{ fontSize: '0.8rem' }}>.bg-{name}</code>
+          <div key={name} className="border usx-rounded-md">
+            <div className={`bg-${name} height-5`} />
+            <div className="padding-y-05 padding-x-1">
+              <code className="font-mono-2xs">.bg-{name}</code>
             </div>
           </div>
         ))}
       </div>
 
       <h4>Text Color Utilities (<code>.text-*</code>)</h4>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem', marginBottom: '1.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }} className="margin-bottom-3">
         {COLOR_NAMES.map((name) => (
-          <div key={name} style={{ border: '1px solid #dfe1e2', borderRadius: '6px', padding: '0.6rem', background: '#f8f9fa' }}>
-            <span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: `var(--usx-color-${name})` }}>
+          <div key={name} className={`${name === "inverse" ? "bg-surface-inverse" : ""} border padding-1 usx-rounded-md`}>
+            <span className={`text-${name} font-sans-md text-bold`}>
               Sample Text
             </span>
-            <div><code style={{ fontSize: '0.8rem' }}>.text-{name}</code></div>
+            <div><code className="font-mono-xs">.text-{name}</code></div>
           </div>
         ))}
       </div>
@@ -172,89 +163,94 @@ export const Utilities = {
       <p>
         Generated from the <code>$text-colors</code> map. Class names use the bare token role (no <code>text-</code> prefix):
       </p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
-        <div style={{ border: '1px solid #dfe1e2', borderRadius: '6px', padding: '0.75rem', background: '#ffffff' }}>
-          <div className="text-ink" style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>Primary body ink</div>
-          <code style={{ fontSize: '0.8rem' }}>.text-ink</code>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem' }} className="margin-bottom-3">
+        <div className="border usx-rounded-md padding-1">
+          <div className="text-ink font-sans-md text-bold">Primary body ink</div>
+          <code className="font-mono-2xs">.text-ink</code>
         </div>
-        <div style={{ border: '1px solid #dfe1e2', borderRadius: '6px', padding: '0.75rem', background: '#ffffff' }}>
-          <div className="usx-text-muted" style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>Nav &amp; pending ink</div>
-          <code style={{ fontSize: '0.8rem' }}>.usx-text-muted</code>
+        <div className="border usx-rounded-md padding-1">
+          <div className="text-muted font-sans-md text-bold">Nav &amp; pending ink</div>
+          <code className="font-mono-2xs">.text-muted</code>
         </div>
-        <div style={{ border: '1px solid #dfe1e2', borderRadius: '6px', padding: '0.75rem', background: '#ffffff' }}>
-          <div className="usx-text-subtle" style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>Secondary/eyebrow ink</div>
-          <code style={{ fontSize: '0.8rem' }}>.usx-text-subtle</code>
+        <div className="border usx-rounded-md padding-1">
+          <div className="text-subtle font-sans-md text-bold">Secondary/eyebrow ink</div>
+          <code className="font-mono-2xs">.text-subtle</code>
         </div>
-        <div style={{ border: '1px solid #dfe1e2', borderRadius: '6px', padding: '0.75rem', background: '#1b1b1b' }}>
-          <div className="usx-text-inverse" style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>Dark surface ink</div>
-          <code style={{ fontSize: '0.8rem', color: '#dfe1e2' }}>.usx-text-inverse</code>
+        <div className="bg-surface-inverse text-inverse border usx-rounded-md padding-1">
+          <div className="font-sans-md text-bold">Inverted surface ink</div>
+          <code className="font-mono-2xs">.text-inverse</code>
         </div>
       </div>
 
-      <h3>Surface Utilities (<code>.bg-usx-surface*</code>)</h3>
+      <h3>Surface Utilities (<code>.bg-surface*</code>)</h3>
       <p>Generated from the <code>$surface-colors</code> map:</p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
-        <div style={{ border: '1px solid #dfe1e2', borderRadius: '6px', padding: '1rem', background: 'var(--usx-surface-1)' }}>
-          <code style={{ fontSize: '0.85rem' }}>.bg-usx-surface-1</code>
-          <div style={{ fontSize: '0.75rem', color: '#565c65', marginTop: '0.25rem' }}>Primary page surface / main background</div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }} className="margin-bottom-3">
+        <div className="border usx-rounded-md padding-1 bg-surface-1">
+          <code className="font-mono-md">.bg-surface-1</code>
+          <div className="font-sans-2xs margin-top-05">Primary page surface / main background</div>
         </div>
-        <div style={{ border: '1px solid #dfe1e2', borderRadius: '6px', padding: '1rem', background: 'var(--usx-surface-2)' }}>
-          <code style={{ fontSize: '0.85rem' }}>.bg-usx-surface-2</code>
-          <div style={{ fontSize: '0.75rem', color: '#565c65', marginTop: '0.25rem' }}>Card, accordion header &amp; callout surface</div>
+        <div className="border usx-rounded-md padding-1 bg-surface-2">
+          <code className="font-mono-md">.bg-surface-2</code>
+          <div className="font-sans-2xs margin-top-05">Card, accordion header &amp; callout surface</div>
         </div>
-        <div style={{ border: '1px solid #dfe1e2', borderRadius: '6px', padding: '1rem', background: 'var(--usx-surface-3)' }}>
-          <code style={{ fontSize: '0.85rem' }}>.bg-usx-surface-3</code>
-          <div style={{ fontSize: '0.75rem', color: '#565c65', marginTop: '0.25rem' }}>Header bar, footer &amp; carousel media background</div>
+        <div className="border usx-rounded-md padding-1 bg-surface-3">
+          <code className="font-mono-md">.bg-surface-3</code>
+          <div className="font-sans-2xs margin-top-05">Header bar, footer &amp; carousel media background</div>
+        </div>
+        <div className="border usx-rounded-md padding-1 bg-surface-inverse text-inverse">
+          <code className="font-mono-md">.bg-surface-inverse</code>
+          <div className="font-sans-2xs margin-top-05">Inverse surface</div>
         </div>
       </div>
 
       <h3>Border Radius Utilities</h3>
       <p>Classes set <code>border-radius</code> and clip overflowing content.</p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem', margin: '1rem 0 2rem 0' }}>
-        <div style={{ padding: '1rem', border: '2px solid #005ea2', background: '#f0f4f8' }} className="usx-rounded-sm">
-          <code>.usx-rounded-sm</code>
-          <div style={{ fontSize: '0.75rem', color: '#565c65' }}>$usx-radius-sm (0.25rem)</div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem' }} className="margin-top-2 margin-bottom-4">
+        <div  className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-1 padding-y-2 border usx-border-accent-cool usx-rounded-sm">
+          <code className="font-mono-md">.usx-rounded-sm</code>
+          <div className="font-mono-2xs">$usx-radius-sm (0.25rem)</div>
         </div>
-        <div style={{ padding: '1rem', border: '2px solid #005ea2', background: '#f0f4f8' }} className="usx-rounded-md">
-          <code>.usx-rounded-md</code>
-          <div style={{ fontSize: '0.75rem', color: '#565c65' }}>$usx-radius-md (0.5rem)</div>
+        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-1 padding-y-2 border usx-border-accent-cool usx-rounded-md">
+          <code className="font-mono-md">.usx-rounded-md</code>
+          <div className="font-mono-2xs">$usx-radius-md (0.5rem)</div>
         </div>
-        <div style={{ padding: '1rem', border: '2px solid #005ea2', background: '#f0f4f8' }} className="usx-rounded-lg">
-          <code>.usx-rounded-lg</code>
-          <div style={{ fontSize: '0.75rem', color: '#565c65' }}>$usx-radius-lg (1rem)</div>
+        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-1 padding-y-2 border usx-border-accent-cool usx-rounded-lg">
+          <code className="font-mono-md">.usx-rounded-lg</code>
+          <div className="font-mono-2xs">$usx-radius-lg (1rem)</div>
         </div>
-        <div style={{ padding: '1rem', border: '2px solid #005ea2', background: '#f0f4f8' }} className="usx-rounded-xl">
-          <code>.usx-rounded-xl</code>
-          <div style={{ fontSize: '0.75rem', color: '#565c65' }}>$usx-radius-xl (2rem)</div>
+        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-1 padding-y-2 border usx-border-accent-cool usx-rounded-xl">
+          <code className="font-mono-md">.usx-rounded-xl</code>
+          <div className="font-mono-2xs">$usx-radius-xl (2rem)</div>
         </div>
-        <div style={{ padding: '1rem', border: '2px solid #005ea2', background: '#f0f4f8', width: '100px', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }} className="usx-circle">
-          <code>.usx-circle</code>
+        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-circle">
+          <code className="font-mono-md">.usx-circle</code>
+          <div className="font-mono-2xs">$usx-radius-circle (50%)</div>
         </div>
       </div>
 
       <h3>Simple Animations</h3>
       <p>CSS animations for status indicators and attention-grabbing elements:</p>
-      <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', margin: '1.5rem 0' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#00a91c', display: 'inline-block' }} className="usx-ping" />
-          <code>.usx-ping</code> (Live status ring)
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1rem' }} className="margin-top-2">
+        <div className="bg-surface-2 border usx-rounded-md padding-2 display-flex flex-column flex-align-center flex-justify-center">
+          <Status color="success" size="lg" animation="ping" />
+          <code className="font-mono-2xs margin-top-1">.usx-ping</code>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <span style={{ padding: '0.25rem 0.5rem', background: '#005ea2', color: '#fff', borderRadius: '4px', fontSize: '0.85rem' }} className="usx-pulse">
-            Pulsing Badge
-          </span>
-          <code>.usx-pulse</code>
+        <div className="bg-surface-2 border usx-rounded-md padding-2 display-flex flex-column flex-align-center flex-justify-center">
+          <Tag color="info" className="usx-pulse">
+            Pulsing Tag
+          </Tag>
+          <code className="font-mono-2xs margin-top-1">.usx-pulse</code>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <span style={{ padding: '0.25rem 0.5rem', background: '#d83933', color: '#fff', borderRadius: '4px', fontSize: '0.85rem' }} className="usx-bounce">
-            Bouncing Alert
-          </span>
-          <code>.usx-bounce</code>
+        <div className="bg-surface-2 border usx-rounded-md padding-2 display-flex flex-column flex-align-center flex-justify-center">
+          <Tag color="error" className="usx-bounce">
+            Bouncing Tag
+          </Tag>
+          <code className="font-mono-2xs margin-top-1">.usx-bounce</code>
         </div>
       </div>
 
       <h3>Sizing Utilities</h3>
-      <table className="usa-table usa-table--borderless" style={{ width: '100%' }}>
+      <table className="usa-table usx-table usa-table--borderless width-full">
         <thead>
           <tr><th>Class</th><th>CSS Declaration</th><th>Description</th></tr>
         </thead>

@@ -14,7 +14,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: #ffffff;
+  color: #fff;
 
   @if $usx-hero-min-height {
     min-height: $usx-hero-min-height;
@@ -32,7 +32,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.55);
+    background-color: rgb(0 0 0 / 55%);
     pointer-events: none;
 
     @if $usx-hero-overlay-bg {
@@ -61,7 +61,8 @@
   &__callout {
     max-width: 40rem;
     padding: 2rem;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgb(0 0 0 / 60%);
+
     // Radius follows the app-wide radius-box group (null/square by default,
     // like every other radius-box consumer: image, code, summary-box).
     border-radius: $usx-hero-callout-radius;
@@ -86,7 +87,7 @@
     line-height: $usx-line-height-heading;
     margin-top: 0;
     margin-bottom: 1rem;
-    color: #ffffff;
+    color: #fff;
 
     @if $usx-hero-heading-size {
       font-size: $usx-hero-heading-size;
@@ -130,7 +131,7 @@
     line-height: 1.6;
     margin-top: 0;
     margin-bottom: 1.5rem;
-    color: #ffffff;
+    color: #fff;
 
     @if $usx-hero-paragraph-size {
       font-size: $usx-hero-paragraph-size;
@@ -145,5 +146,4 @@
     }
   }
 }
-/* stylelint-enable selector-class-pattern */
 /* stylelint-enable selector-class-pattern */

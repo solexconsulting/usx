@@ -71,14 +71,14 @@ export default function Combobox({
       const defaultLabel = options.find(o => !!o.value && o.value === defaultValue)?.label;
       if (defaultLabel) setInputValue(defaultLabel);
     }
-  }, [defaultValue, options]);
+  }, [defaultValue, options, usedDefaultValue]);
 
   useEffect(() => {
     if (value === undefined) return;
     const label = options.find((option) => option.value === value)?.label;
     if (label) setInputValue(label);
     else setInputValue('');
-  }, [value]);
+  }, [value, options]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {

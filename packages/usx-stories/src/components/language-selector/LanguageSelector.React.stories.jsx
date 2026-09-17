@@ -1,9 +1,7 @@
 import React from 'react';
 import LanguageSelector from '../../../../core/src/components/language-selector/LanguageSelector.jsx';
-import Alert from '../../../../core/src/components/alert/Alert.jsx';
 import config from '../../../../core/src/components/language-selector/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
-import { expect } from 'storybook/test';
 import languageSelector from '@uswds/uswds/js/usa-language-selector';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

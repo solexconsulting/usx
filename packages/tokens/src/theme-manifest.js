@@ -567,6 +567,15 @@ export const themeManifest = [
   // based translucent border that's drowned out on dark surfaces.
   component('usx-pagination-button-border', 'var(--usx-color-border)'),
 
+  // Real USWDS hardcodes the modal surface to a static white background
+  // with auto-contrast (effectively text-ink) body text, and the close
+  // button to color("base") / color("ink") on hover — none of which follow
+  // a runtime theme override.
+  component('usx-modal-bg', '#ffffff', 'surface-1'),
+  component('usx-modal-text', '#1b1b1b', 'text-ink'),
+  component('usx-modal-close-text', '#71767a', 'text-subtle'),
+  component('usx-modal-close-text-hover', '#1b1b1b', 'text-ink'),
+
   // ── Component tokens: Language Selector (custom; defaults baked in SCSS) ──
   // Real USWDS hardcodes the language-menu dropdown to color("primary-darker")
   // bg / white text — a fixed dark nav-dropdown treatment, chained here to the

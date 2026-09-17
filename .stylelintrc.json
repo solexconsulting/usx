@@ -1,0 +1,14 @@
+{
+  "extends": ["stylelint-config-standard-scss"],
+  "ignoreFiles": ["scripts/templates/**"],
+  "rules": {
+    "scss/dollar-variable-pattern": null,
+    "scss/at-rule-no-unknown": null,
+    "scss/dollar-variable-empty-line-before": null,
+    "scss/comment-no-empty": null,
+    "selector-class-pattern": null,
+    "no-descending-specificity": null,
+    "selector-not-notation": null,
+    "property-no-vendor-prefix": [true, { "ignoreProperties": ["mask", "mask-image"] }]
+  }
+}

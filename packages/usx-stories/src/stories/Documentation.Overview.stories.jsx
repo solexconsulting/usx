@@ -7,7 +7,7 @@ export default {
 
 export const Overview = {
   render: () => (
-    <div className="usa-prose" style={{ maxWidth: '840px' }}>
+    <div className="usa-prose usx-prose" style={{ maxWidth: '840px' }}>
       <h1>USX</h1>
       <p>
         USX is a token-driven layer on top of the{' '}
@@ -22,7 +22,7 @@ export const Overview = {
 
       <h2>Packages</h2>
       <p>This repository (<code>agency-ui-platform</code>) publishes four scoped packages:</p>
-      <table className="usa-table usa-table--borderless" style={{ width: '100%' }}>
+      <table className="usa-table usx-table usa-table--borderless" style={{ width: '100%' }}>
         <thead>
           <tr>
             <th>Package</th>

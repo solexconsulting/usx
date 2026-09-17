@@ -12,7 +12,7 @@ import Layout from '../../../core/src/components/layout/Layout.tsx';
 import Page from '../../../core/src/components/page/Page.jsx';
 import Section from '../../../core/src/components/section/Section.tsx';
 import Status from '../../../core/src/components/status/Status.tsx';
-import Table from '../../../core/src/components/table/Table.jsx';
+import Table from '../../../core/src/components/table/Table.tsx';
 import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './commonArgs.js';
 
 export default {
@@ -50,7 +50,7 @@ export const Dashboard = {
             <Section title="Key Metrics">
               <div className="grid-row grid-gap">
                 <div className="tablet:grid-col-3 margin-bottom-2">
-                  <div className="bg-usx-surface-2 border-left-05 usx-border-primary padding-3 usx-rounded-md">
+                  <div className="bg-surface-2 border-left-05 usx-border-primary padding-3 usx-rounded-md">
                     <h3 className="margin-0 text-primary font-sans-sm">Total Users</h3>
                     <div className="font-heading-xl text-ink margin-y-1">12,847</div>
                     <div className="text-success font-sans-xs display-flex flex-align-center">
@@ -61,7 +61,7 @@ export const Dashboard = {
                 </div>
 
                 <div className="tablet:grid-col-3 margin-bottom-2">
-                  <div className="bg-usx-surface-2 border-left-05 usx-border-success padding-3 usx-rounded-md">
+                  <div className="bg-surface-2 border-left-05 usx-border-success padding-3 usx-rounded-md">
                     <h3 className="margin-0 text-success font-sans-sm">Active Sessions</h3>
                     <div className="font-heading-xl text-ink margin-y-1">3,429</div>
                     <div className="text-success font-sans-xs display-flex flex-align-center">
@@ -72,7 +72,7 @@ export const Dashboard = {
                 </div>
 
                 <div className="tablet:grid-col-3 margin-bottom-2">
-                  <div className="bg-usx-surface-2 border-left-05 usx-border-warning padding-3 usx-rounded-md">
+                  <div className="bg-surface-2 border-left-05 usx-border-warning padding-3 usx-rounded-md">
                     <h3 className="margin-0 text-warning font-sans-sm">Conversion Rate</h3>
                     <div className="font-heading-xl text-ink margin-y-1">24.7%</div>
                     <div className="text-error font-sans-xs display-flex flex-align-center">
@@ -83,7 +83,7 @@ export const Dashboard = {
                 </div>
 
                 <div className="tablet:grid-col-3 margin-bottom-2">
-                  <div className="bg-usx-surface-2 border-left-05 usx-border-accent-cool padding-3 usx-rounded-md">
+                  <div className="bg-surface-2 border-left-05 usx-border-accent-cool padding-3 usx-rounded-md">
                     <h3 className="margin-0 text-accent-cool font-sans-sm">Revenue</h3>
                     <div className="font-heading-xl text-ink margin-y-1">$89,432</div>
                     <div className="text-success font-sans-xs display-flex flex-align-center">

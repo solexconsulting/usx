@@ -7,7 +7,7 @@ export default {
 
 export const Overview = {
   render: () => (
-    <div className="usa-prose" style={{ maxWidth: '840px' }}>
+    <div className="usa-prose usx-prose" style={{ maxWidth: '840px' }}>
       <h1>@solexllc/usx</h1>
       <p>
         <code>@solexllc/usx</code> is the Sass/CSS layer of USX — a set of{' '}
@@ -77,7 +77,7 @@ export const Overview = {
       </p>
 
       <h2>Build entry points</h2>
-      <table className="usa-table usa-table--borderless" style={{ width: '100%' }}>
+      <table className="usa-table usx-table usa-table--borderless" style={{ width: '100%' }}>
         <thead>
           <tr>
             <th>Import</th>

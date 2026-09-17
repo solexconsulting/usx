@@ -8,7 +8,7 @@ export default {
 
 export const GettingStarted = {
   render: () => (
-    <div className="usa-prose" style={{ maxWidth: '840px' }}>
+    <div className="usa-prose usx-prose" style={{ maxWidth: '840px' }}>
       <h1>Getting started with @solexllc/usx-theme</h1>
       <p>
         <code>@solexllc/usx-theme</code> is the design-token and runtime-theming
@@ -52,7 +52,7 @@ export const GettingStarted = {
         <code>@solexllc/usx</code> ships two Sass entry points. Pick one — they are
         not meant to be combined:
       </p>
-      <table className="usa-table usa-table--borderless" style={{ width: '100%' }}>
+      <table className="usa-table usx-table usa-table--borderless" style={{ width: '100%' }}>
         <thead>
           <tr>
             <th>Entry point</th>

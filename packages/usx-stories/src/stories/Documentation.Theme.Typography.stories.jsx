@@ -14,12 +14,12 @@ export const Typography = {
     const typographyTokens = themeManifest.filter((t) => t.group === 'typography');
 
     return (
-      <div className="usa-prose" style={{ maxWidth: '840px' }}>
+      <div className="usa-prose usx-prose" style={{ maxWidth: '840px' }}>
         <h1>Typography</h1>
 
         <h2>Tokens</h2>
         <p>The <strong>Current</strong> column reflects whichever theme is active in the toolbar above.</p>
-        <table className="usa-table usa-table--borderless" style={{ width: '100%' }}>
+        <table className="usa-table usx-table usa-table--borderless" style={{ width: '100%' }}>
           <thead>
             <tr>
               <th>Token</th>
@@ -82,6 +82,7 @@ export const Typography = {
                 { code: '  --usx-font-family: "Acme Sans", Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;' },
                 { code: '}' },
               ]}
+              className="margin-y-2"
             />
           </li>
           <li>
@@ -90,6 +91,7 @@ export const Typography = {
               lines={[
                 { code: '&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap"&gt;' },
               ]}
+              className="margin-y-2"
             />
             <Code
               lines={[

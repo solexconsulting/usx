@@ -1,5 +1,5 @@
 import React from 'react';
-import {{Name}} from '../../../../core/src/components/{{kebab}}/{{Name}}.jsx';
+import {{Name}} from '../../../../core/src/components/{{kebab}}/{{Name}}.tsx';
 import config from '../../../../core/src/components/{{kebab}}/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 

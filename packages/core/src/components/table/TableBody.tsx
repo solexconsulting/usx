@@ -1,47 +1,54 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useId } from 'react';
 import classnames from 'classnames';
 import { useTableContext } from './TableContext';
 import TableRow from './TableRow';
 import TableGroup from './TableGroup';
 import Icon from '../icon/Icon';
 import Spinner from '../spinner/Spinner';
-import { TableColumn } from './types';
+import Checkbox from '../checkbox/Checkbox';
+import type { RowKey, TableColumn, TableRowData } from './types';
 
-// Helper to get data label for responsive tables
-function getDataLabel(col: TableColumn) {
-  if (typeof col.header === 'string') return col.header;
-  return col.stackLabel || null;
+// ─── Infinite scroll sentinel ─────────────────────────────────────────────────
+
+function OnMoreSentinel({ onMore }: { onMore: () => void }) {
+  const sentinelRef = useRef<HTMLTableRowElement>(null);
+  useEffect(() => {
+    if (!sentinelRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) onMore();
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(sentinelRef.current);
+    return () => observer.disconnect();
+  }, [onMore]);
+  return (
+    <tr ref={sentinelRef} className="usx-table__sentinel" aria-hidden="true">
+      <td />
+    </tr>
+  );
 }
 
-// Helper to flatten columns
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+function getDataLabel(col: TableColumn): string | undefined {
+  if (typeof col.header === 'string') return col.header;
+  return col.stackLabel;
+}
+
+// Parent/group columns exist only in the header; body cells render for leaves only.
 function getLeafCols(cols: TableColumn[]): TableColumn[] {
-  return cols.reduce((acc: TableColumn[], col: TableColumn) => {
+  return cols.reduce<TableColumn[]>((acc, col) => {
     if (col.hidden) return acc;
     if (col.columns?.length) return acc.concat(getLeafCols(col.columns));
     return acc.concat(col);
   }, []);
 }
 
-function OnMoreSentinel({ onMore }: { onMore: () => void }) {
-  const sentinelRef = useRef<HTMLTableRowElement>(null);
-  useEffect(() => {
-    if (!onMore || !sentinelRef.current) return;
-    const observer = new IntersectionObserver(
-      (entries) => { if (entries[0].isIntersecting) onMore(); },
-      { threshold: 0.1 }
-    );
-    observer.observe(sentinelRef.current);
-    return () => observer.disconnect();
-  }, [onMore]);
-  return <tr ref={sentinelRef} className="usx-table__sentinel" aria-hidden="true"><td /></tr>;
-}
+// ─── Single data row ─────────────────────────────────────────────────────────
 
-interface DataRowProps {
-  row: Record<string, unknown>;
-  rowIndex: number;
-}
-
-function DataRow({ row, rowIndex }: DataRowProps) {
+function DataRow({ row, rowIndex }: { row: TableRowData; rowIndex: number }) {
   const {
     columns,
     primaryKey,
@@ -56,124 +63,120 @@ function DataRow({ row, rowIndex }: DataRowProps) {
     isRowExpanded,
   } = useTableContext();
 
-  // Calculate key for the row
-  let key: string | number = rowIndex;
-  if (primaryKey && typeof primaryKey === 'string' && Object.prototype.hasOwnProperty.call(row, primaryKey)) {
-    const candidate = row[primaryKey as keyof typeof row];
-    if (typeof candidate === 'string' || typeof candidate === 'number') {
-      key = candidate;
-    }
-  }
+  const selectionUidPrefix = useId();
+  const key = row[primaryKey] as RowKey;
   const selected = isSelected(key);
   const isDisabled = Array.isArray(disabledKeys) && disabledKeys.includes(key);
-  const visibleCols = getLeafCols(columns as TableColumn[]);
+  const visibleCols = getLeafCols(columns);
   const hasRowDetails = !!rowDetails;
   const isExpanded = isRowExpanded(key);
-  const renderDetail =
-    typeof rowDetails === 'function'
-      ? rowDetails
-      : rowDetails?.render || null;
-  const totalCols =
-    visibleCols.length +
-    (selectionMode ? 1 : 0) +
-    (hasRowDetails ? 1 : 0);
+
+  const renderDetail = typeof rowDetails === 'function' ? rowDetails : rowDetails?.render || null;
+  const expandLabel = rowDetails && typeof rowDetails === 'object' ? rowDetails.expandLabel : undefined;
+
+  const totalCols = visibleCols.length + (selectionMode ? 1 : 0) + (hasRowDetails ? 1 : 0);
+
   function handleToggleDetail(e: React.MouseEvent) {
     e.stopPropagation();
     toggleRow(key);
   }
-  const inputProps = {
-    type: selectionMode === 'radio' ? 'radio' : 'checkbox',
-    className: selectionMode === 'radio' ? 'usx-table__radio' : 'usx-table__checkbox',
-    checked: selected,
-    disabled: isDisabled,
-    'aria-label': `Select row ${rowIndex + 1}`,
-    onChange: () => handleSelect(key),
-    onClick: (e: React.MouseEvent) => e.stopPropagation(),
-  };
+
+  const isRadio = selectionMode === 'radio';
+  const selectionInputId = `${selectionUidPrefix}-select`;
+
+  // Real USWDS checkbox visuals are drawn on the <label> (::before), so use the
+  // Checkbox component for identical themed markup. It is internally
+  // uncontrolled (defaultChecked), so key it on the selected state to force a
+  // remount whenever selection changes programmatically (e.g. "select all").
   const selectionCell = (
-    <td
-      key="__selection__"
-      className="usx-table__cell usx-table__cell--selection"
-    >
-      <input {...inputProps} />
+    <td key="__selection__" className="usx-table__cell usx-table__cell--selection">
+      {isRadio ? (
+        <div className="usa-radio usx-table__radio">
+          <input
+            type="radio"
+            id={selectionInputId}
+            className="usa-radio__input"
+            checked={selected}
+            disabled={isDisabled}
+            aria-label={`Select row ${rowIndex + 1}`}
+            onChange={() => handleSelect(key)}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <label className="usa-radio__label" htmlFor={selectionInputId} />
+        </div>
+      ) : (
+        <Checkbox
+          key={selected ? 'checked' : 'unchecked'}
+          id={selectionInputId}
+          checked={selected}
+          disabled={isDisabled}
+          ariaLabel={`Select row ${rowIndex + 1}`}
+          onChange={() => handleSelect(key)}
+          onClick={(e) => e.stopPropagation()}
+          className="usx-table__checkbox"
+        />
+      )}
     </td>
   );
+
   const detailToggleCell = hasRowDetails ? (
-    <td
-      key="__detail-toggle__" className="usx-table__cell usx-table__cell--detail-toggle"
-      onClick={handleToggleDetail}
-    >
+    <td key="__detail-toggle__" className="usx-table__cell usx-table__cell--detail-toggle" onClick={handleToggleDetail}>
       <button
         type="button"
         className={classnames(
           'usa-button usa-button--unstyled',
           'usx-table__detail-toggle',
           'width-full',
-          isExpanded && 'usx-table__detail-toggle--expanded',
+          isExpanded && 'usx-table__detail-toggle--expanded'
         )}
         aria-expanded={isExpanded}
         aria-label={
-          rowDetails?.expandLabel
-            ? (typeof rowDetails.expandLabel === 'function'
-                ? rowDetails.expandLabel(row)
-                : rowDetails.expandLabel)
+          expandLabel
+            ? typeof expandLabel === 'function'
+              ? expandLabel(row)
+              : expandLabel
             : `${isExpanded ? 'Collapse' : 'Expand'} row details`
         }
       >
-        <Icon
-          name={isExpanded ? 'expand_less' : 'expand_more'}
-          aria-hidden="true"
-        />
+        <Icon name={isExpanded ? 'expand_less' : 'expand_more'} aria-hidden="true" />
       </button>
     </td>
   ) : null;
-  const dataCells = visibleCols.map((col: TableColumn, colIndex: number) => {
-    const isPrimary = col.primary || (colIndex === 0 && !(columns as TableColumn[]).some((c) => c.primary));
-    const Tag = isPrimary ? 'th' : 'td';
-    const cellClasses = classnames(
-      'usx-table__cell',
-      col.align && `usx-table__cell--align-${col.align}`,
-      col.className,
-    );
-    let content = col.render ? col.render(row, rowIndex) : row[col.key as keyof typeof row];
-    // Ensure content is a valid ReactNode
-    if (content === undefined || content === null) content = '--';
-    if (typeof content === 'object' && !React.isValidElement(content)) content = JSON.stringify(content);
-    const dataLabel = (responsive === 'stack' || responsive === 'stack-header')
-      ? getDataLabel(col)
-      : null;
+
+  const dataCells = visibleCols.map((col) => {
+    const Tag = col.primary ? 'th' : 'td';
+    const cellClasses = classnames('usx-table__cell', col.align && `usx-table__cell--align-${col.align}`, col.className);
+    const dataLabel = responsive === 'stack' || responsive === 'stack-header' ? getDataLabel(col) : undefined;
+    const content = col.render ? col.render(row, rowIndex) : (row[col.key] as React.ReactNode);
+
     return (
       <Tag
         key={col.key}
         className={cellClasses}
-        scope={isPrimary ? 'row' : undefined}
-        data-label={dataLabel || undefined}
+        scope={col.primary ? 'row' : undefined}
+        data-label={dataLabel}
         style={col.width ? { width: col.width } : undefined}
       >
-        {content as React.ReactNode}
+        {content ?? '--'}
       </Tag>
     );
   });
-  const cells = [] as React.ReactNode[];
-  if (hasRowDetails) cells.push(detailToggleCell);
+
+  const cells: React.ReactNode[] = [];
+  if (detailToggleCell) cells.push(detailToggleCell);
   if (selectionMode && selectionPosition === 'left') cells.push(selectionCell);
   cells.push(...dataCells);
   if (selectionMode && selectionPosition === 'right') cells.push(selectionCell);
+
   return (
     <>
-      <TableRow
-        rowData={row}
-        selected={selected}
-        disabled={isDisabled}
-      >
+      <TableRow rowData={row} selected={selected} disabled={isDisabled}>
         {cells}
       </TableRow>
+
       {hasRowDetails && isExpanded && renderDetail && (
         <tr className="usx-table__detail-row">
-          <td
-            className="usx-table__detail-cell"
-            colSpan={totalCols}
-          >
+          <td className="usx-table__detail-cell" colSpan={totalCols}>
             {renderDetail(row)}
           </td>
         </tr>
@@ -182,9 +185,37 @@ function DataRow({ row, rowIndex }: DataRowProps) {
   );
 }
 
-const TableBody: React.FC<React.HTMLAttributes<HTMLTableSectionElement>> = ({ className = '', children, ...props }) => {
+// ─── TableBody ───────────────────────────────────────────────────────────────
+
+export type TableBodyProps = React.HTMLAttributes<HTMLTableSectionElement>;
+
+/**
+ * Renders `<tbody>`. Compound mode: pass children directly. Data-driven mode:
+ * renders rows from the table's data, respecting groups.
+ */
+export default function TableBody({ className = '', children, ...props }: TableBodyProps) {
   const { data, primaryKey, groupBy, groups, placeholder, totalCols, onMore, loading } = useTableContext();
+  const bodyClass = classnames('usx-table__body', className);
+
+  if (children) {
+    return (
+      <tbody className={bodyClass} {...props}>
+        {children}
+      </tbody>
+    );
+  }
+
+  const placeholderRow =
+    data.length === 0 && placeholder ? (
+      <tr className="usx-table__placeholder-row">
+        <td className="usx-table__placeholder-cell" colSpan={totalCols}>
+          {placeholder}
+        </td>
+      </tr>
+    ) : null;
+
   const sentinel = onMore ? <OnMoreSentinel onMore={onMore} /> : null;
+
   const loadingRow = loading ? (
     <tr className="usx-table__loading-row" aria-live="polite">
       <td className="usx-table__loading-cell" colSpan={totalCols}>
@@ -192,60 +223,31 @@ const TableBody: React.FC<React.HTMLAttributes<HTMLTableSectionElement>> = ({ cl
       </td>
     </tr>
   ) : null;
-  if (children) {
-    return (
-      <tbody className={classnames('usx-table__body', className)} {...props}>
-        {children}
-      </tbody>
-    );
-  }
-  const placeholderRow =
-    data && data.length === 0 && placeholder ? (
-      <tr className="usx-table__placeholder-row">
-        <td className="usx-table__placeholder-cell" colSpan={totalCols}>
-          {placeholder}
-        </td>
-      </tr>
-    ) : null;
+
+  const renderRows = (rows: TableRowData[]) =>
+    rows.map((row, rowIndex) => <DataRow key={(row[primaryKey] as RowKey) ?? rowIndex} row={row} rowIndex={rowIndex} />);
+
   if (!groupBy) {
     return (
-      <tbody className={classnames('usx-table__body', className)} {...props}>
+      <tbody className={bodyClass} {...props}>
         {placeholderRow}
-        {(Array.isArray(data) ? data : []).map((row: Record<string, unknown>, rowIndex: number) => {
-          let rowKey: string | number = rowIndex;
-          if (primaryKey && typeof primaryKey === 'string' && Object.prototype.hasOwnProperty.call(row, primaryKey)) {
-            const candidate = row[primaryKey as keyof typeof row];
-            if (typeof candidate === 'string' || typeof candidate === 'number') {
-              rowKey = candidate;
-            }
-          }
-          return <DataRow key={rowKey} row={row} rowIndex={rowIndex} />;
-        })}
+        {renderRows(data)}
         {loadingRow}
         {sentinel}
       </tbody>
     );
   }
+
   return (
-    <tbody className={classnames('usx-table__body', className)} {...props}>
+    <tbody className={bodyClass} {...props}>
       {placeholderRow}
-      {(groups || []).map(({ key: groupKey, rows }: { key: string; rows: Record<string, unknown>[] }) => (
-        <TableGroup key={String(groupKey)} groupKey={String(groupKey)} label={groupKey}>
-          {rows.map((row: Record<string, unknown>, rowIndex: number) => {
-            let rowKey: string | number = rowIndex;
-            if (primaryKey && typeof primaryKey === 'string' && Object.prototype.hasOwnProperty.call(row, primaryKey)) {
-              const candidate = row[primaryKey as keyof typeof row];
-              if (typeof candidate === 'string' || typeof candidate === 'number') {
-                rowKey = candidate;
-              }
-            }
-            return <DataRow key={rowKey} row={row} rowIndex={rowIndex} />;
-          })}
+      {(groups || []).map(({ key, rows }) => (
+        <TableGroup key={key} groupKey={key} label={key}>
+          {renderRows(rows)}
         </TableGroup>
       ))}
       {loadingRow}
       {sentinel}
     </tbody>
   );
-};
-export default TableBody;
+}

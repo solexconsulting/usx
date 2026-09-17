@@ -27,7 +27,7 @@
 /* ---------------------------------- */
 
 .usa-input.usx-input, .usa-select.usx-select {
-  &:not(.usa-input--error, .usa-input--success) {
+  &:not(.usa-input--error):not(.usa-input--success) {
     &:not(:disabled) {
       @if $usx-input-bg {
         background-color: $usx-input-bg;

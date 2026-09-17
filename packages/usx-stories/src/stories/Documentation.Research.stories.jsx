@@ -7,7 +7,7 @@ export default {
 
 export const Index = {
     render: () => (
-        <div className="usa-prose">
+        <div className="usa-prose usx-prose">
             <h1>Research Index</h1>
             <p>
                 This page serves as an index of research findings related to a variety

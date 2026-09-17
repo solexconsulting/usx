@@ -1,7 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import languageSelector from '@uswds/uswds/js/usa-language-selector';
 
 /**
  * Renders a single language link/submenu-item's accessible label.

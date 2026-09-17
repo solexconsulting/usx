@@ -15,7 +15,10 @@ export default {
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
-        modal.on();
+        setTimeout(() => {
+          modal.on();
+        }, 30);
+
         return () => modal.off();
       }, []);
 
@@ -36,14 +39,14 @@ const forceActions = [
 
 export const storyDefs = {
   Default: {
-    id: 'example-modal-4',
+    id: 'example-modal-default',
     heading: 'Are you sure you want to continue?',
     description: 'You have unsaved changes that will be lost.',
     actionProps: defaultActions,
     triggerLabel: 'Open modal',
   },
   Large: {
-    id: 'example-modal-large',
+    id: 'example-modal-lg',
     heading: 'Are you sure you want to continue?',
     description: 'You have unsaved changes that will be lost.',
     size: 'lg',
@@ -110,6 +113,7 @@ export const Large = {
 
 export const LargeCollapsed = {
   args: storyDefs.LargeCollapsed,
+  tags: ['USX'],
   render: (args) => {
     const { triggerLabel, ...modalArgs } = args;
     return (

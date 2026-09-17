@@ -4,11 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Storybook stories and story helpers for USX components (development infrastructure, not a runtime package).",
-  "scripts": {
-    "test": "node test/theme-derive-check.mjs && node test/contract-check.mjs"
-  },
   "dependencies": {
-    "@solexllc/usx-react": "workspace:*",
     "@solexllc/usx-theme": "workspace:*",
     "@uswds/uswds": "^3.14.0",
     "prop-types": "^15.8.1",

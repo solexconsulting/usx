@@ -1,0 +1,12 @@
+# Keep image builds hermetic: never copy host-installed deps or host-built output.
+node_modules
+**/node_modules
+**/dist
+apps/storybook/storybook-static
+**/venv
+**/.venv
+**/__pycache__
+*.log
+.git
+.vscode
+deploy/.env

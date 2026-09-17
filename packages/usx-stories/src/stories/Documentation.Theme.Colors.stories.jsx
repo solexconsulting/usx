@@ -51,7 +51,7 @@ export const Palette = {
     const derivedState = colorTokens.filter((t) => t.derivedFrom && STATE_BASE_NAMES.includes(t.derivedFrom));
 
     return (
-      <div className="usa-prose" style={{ maxWidth: '960px' }}>
+      <div className="usa-prose usx-prose" style={{ maxWidth: '960px' }}>
         <h1>Color tokens</h1>
         <p>
           USX color tokens are structured into semantic categories so themes can swap identities seamlessly

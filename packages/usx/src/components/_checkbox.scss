@@ -14,34 +14,32 @@
 }
 
 .usx-checkbox {
-
-  @if $usx-checkable-tile-radius != null {
+  @if $usx-checkable-tile-radius {
     .usa-checkbox__input--tile + .usa-checkbox__label {
       border-radius: $usx-checkable-tile-radius;
     }
   }
 
   .usa-checkbox__input--tile + .usa-checkbox__label {
-    @if $usx-checkable-tile-border != null {
+    @if $usx-checkable-tile-border {
       border-color: $usx-checkable-tile-border;
     }
 
-    @if $usx-checkable-tile-border-width != null {
+    @if $usx-checkable-tile-border-width {
       border-width: $usx-checkable-tile-border-width;
     }
   }
 
   .usa-checkbox__label::before {
-
-    @if $usx-checkable-radius != null {
+    @if $usx-checkable-radius {
       border-radius: $usx-checkable-radius;
     }
 
-    @if $usx-checkable-bg != null {
+    @if $usx-checkable-bg {
       background-color: $usx-checkable-bg;
     }
 
-    @if $usx-checkable-border != null {
+    @if $usx-checkable-border {
       box-shadow: 0 0 0 2px $usx-checkable-border;
     }
   }

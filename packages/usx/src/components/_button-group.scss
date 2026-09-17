@@ -12,7 +12,7 @@
           }
         }
 
-        &:where(:not(:first-child, :last-child)) {
+        &:where(:not(:first-child):not(:last-child)) {
           .usa-button {
             border-radius: 0;
           }

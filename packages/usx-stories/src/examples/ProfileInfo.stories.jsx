@@ -32,7 +32,7 @@ export const ProfileInfoPattern = {
         content={
           <Page id="profile-info-example" title="User Profile">
             <Section>
-              <div className="padding-3 border usx-border-border usx-rounded-lg bg-usx-surface-1 margin-bottom-3">
+              <div className="padding-3 border usx-border-border usx-rounded-lg bg-surface-1 margin-bottom-3">
                 <div className="display-flex flex-wrap flex-align-center gap-3">
                   <Avatar
                     size="xl"

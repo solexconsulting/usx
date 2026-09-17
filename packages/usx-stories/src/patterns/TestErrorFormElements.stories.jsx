@@ -16,7 +16,6 @@ import combobox from "@uswds/uswds/js/usa-combo-box";
 import fileInput from "@uswds/uswds/js/usa-file-input";
 import timePicker from "@uswds/uswds/js/usa-time-picker";
 import datePicker from "@uswds/uswds/js/usa-date-picker";
-import { useEffect } from 'react';
 import { useDjangoRenderedHtml } from '../utils/djangoComponent.js';
 
 const ERROR_MESSAGE = 'Helpful error message';

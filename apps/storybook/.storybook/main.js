@@ -53,38 +53,26 @@ export default {
     // `packages/tokens/dist/*` (_hooks.scss, theme.css, theme-manifest.json)
     // has the exact same problem — it's what `pkg:@solexllc/usx-theme/hooks`
     // actually resolves to (regenerated from src by the tokens package's own
-    // build/watch process), so it needs the same treatment.
-    // `packages/usx/src/*` (_select.scss, _input.scss, etc.) is reached the
-    // same way — core.scss's `@use 'pkg:@solexllc/usx/themed'` — so it has
-    // the exact same blind spot and needs watching too.
-    // Explicitly watch generated Sass inputs and request a browser reload after
-    // the USX watcher has rebuilt its output.
+    // build/watch process). `packages/usx/src/*` and
+    // `packages/usx-uswds-fixes/src/*` are reached the same way via
+    // core.scss's `@use 'pkg:...'`, so they share the blind spot.
+    // Explicitly watch all of them and, on change, drop the cached style
+    // transforms and request a full preview reload.
     config.plugins ??= [];
     config.plugins.push({
-      name: 'usx-tokens-watch-reload',
+      name: 'usx-sass-watch-reload',
       configureServer(server) {
-        const tokensSrcDir = fileURLToPath(new URL('../../../packages/tokens/src', import.meta.url));
-        const tokensDistDir = fileURLToPath(new URL('../../../packages/tokens/dist', import.meta.url));
-        const usxSrcDir = fileURLToPath(new URL('../../../packages/usx/src', import.meta.url));
-        const usxDistDir = fileURLToPath(new URL('../../../packages/usx/dist', import.meta.url));
-        const coreSrcDir = fileURLToPath(new URL('../../../packages/core/src', import.meta.url));
-        const storiesSrcDir = fileURLToPath(new URL('../../../packages/usx-stories/src', import.meta.url));
-        // Same `pkg:` NodePackageImporter blind spot as usx/tokens above —
-        // core.scss `@use`s this package too, so it needs the same treatment.
-        const uswdsFixesSrcDir = fileURLToPath(new URL('../../../packages/usx-uswds-fixes/src', import.meta.url));
-        server.watcher.add(tokensSrcDir);
-        server.watcher.add(tokensDistDir);
-        server.watcher.add(usxSrcDir);
-        server.watcher.add(usxDistDir);
-        server.watcher.add(coreSrcDir);
-        server.watcher.add(storiesSrcDir);
-        server.watcher.add(uswdsFixesSrcDir);
+        const watchDirs = [
+          '../../../packages/tokens/dist',
+          '../../../packages/usx/src',
+          '../../../packages/usx-uswds-fixes/src',
+          '../../../packages/core/src',
+          '../../../packages/usx-stories/src',
+        ].map((p) => fileURLToPath(new URL(p, import.meta.url)));
+        // tokens/src changes are picked up by the tokens watcher (`pnpm dev`),
+        // which rewrites tokens/dist — that write is what triggers the reload.
+        for (const dir of watchDirs) server.watcher.add(dir);
 
-        // Only reload after the USX watcher has written its compiled CSS. This
-        // avoids reloading between the token rebuild and the dependent Sass
-        // rebuild, which otherwise leaves Storybook showing stale theme CSS.
-        let pendingReload = false;
-        let debounceTimer = null;
         // Drop only the cached style transforms. Invalidating the whole module
         // graph re-transforms every dependency (including the USWDS bundle) on
         // each save, which stalls the server in this workspace.
@@ -96,30 +84,15 @@ export default {
           }
         };
 
-        const reload = (file) => {
+        let debounceTimer = null;
+        server.watcher.on('change', (file) => {
+          if (!watchDirs.some((dir) => file.startsWith(dir))) return;
           clearTimeout(debounceTimer);
           debounceTimer = setTimeout(() => {
             invalidateStyleModules();
-            server.config.logger.info(`[usx-watch-reload] ${file} changed, reloading preview...`, { timestamp: true });
+            server.config.logger.info(`[usx-sass-watch-reload] ${file} changed, reloading preview...`, { timestamp: true });
             server.ws.send({ type: 'full-reload', path: '*' });
           }, 400);
-        };
-        server.watcher.on('change', (file) => {
-          const isBuildInput = file.startsWith(tokensSrcDir) || file.startsWith(tokensDistDir) || file.startsWith(usxSrcDir);
-          const isBuildOutput = file.startsWith(usxDistDir);
-          // usx-uswds-fixes has no separate dist rebuild step to wait on —
-          // Storybook resolves it straight from src, so reload immediately.
-          const isStorybookSource = file.startsWith(coreSrcDir) || file.startsWith(storiesSrcDir) || file.startsWith(uswdsFixesSrcDir);
-          const isWatched = isBuildInput || isBuildOutput || isStorybookSource;
-          if (!isWatched) return;
-          if (isBuildOutput) {
-            pendingReload = false;
-            reload(file);
-          } else if (isBuildInput) {
-            pendingReload = true;
-            return;
-          }
-          else if (isStorybookSource) reload(file);
         });
       },
     });

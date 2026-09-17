@@ -1,7 +1,0 @@
-{
-  "extends": ["stylelint-config-standard-scss"],
-  "rules": {
-    "scss/dollar-variable-pattern": null,
-    "scss/at-rule-no-unknown": null
-  }
-}

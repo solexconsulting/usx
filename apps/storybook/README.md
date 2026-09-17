@@ -52,16 +52,11 @@ Django server running.
 
 ## Run
 
-From this directory:
-
-- `npm install` (or `pnpm install` from the repo root)
-- `npm run dev` — starts Storybook on port 6006
-
 From the repository root:
 
-- `pnpm storybook` — starts this app together with the `tokens`/`usx` Sass
-  watchers, so SCSS changes recompile live
+- `pnpm dev` — starts the `tokens` watcher and this app's Storybook dev server
+  on port 6006; Sass under `packages/*/src` recompiles and reloads live
+- `pnpm storybook:build` — static build into `storybook-static/`
 
-Build static Storybook:
-
-- `npm run build`
+Both of this app's own scripts (`dev`, `build`) build `packages/tokens` first so
+`theme.css` exists before Storybook starts.

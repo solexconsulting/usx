@@ -1,31 +1,25 @@
 # @solexllc/usx
 
 Branded USX component styles (`.usx-*`) layered on top of USWDS, compiled with
-Dart Sass.
-
-## Build
-
-```sh
-pnpm build   # sass src/index.scss → dist/usx.css
-```
+Dart Sass. This package ships Sass source only (`exports` → `src/*.scss`);
+consumers compile it with the `pkg:` importer, so there is no build step.
 
 ## Theming
 
 All design tokens come from `@solexllc/usx-theme` and are runtime-themeable via
-`--usx-*` CSS custom properties (with compiled-in fallbacks), compile-time
-configurable via `with (...)`, or fully static via the `$usx-css-vars: false`
-master switch. See `packages/tokens/README.md` for the full theming guide, and
-the Storybook **Documentation → Theme → Playground** to generate a theme visually.
+`--usx-*` CSS custom properties. Compile `src/index.scss` for a fully static
+build (no `var()` references), or `src/themed.scss` to enable every hook.
+See `packages/tokens/README.md` for the full theming guide, and the Storybook
+**Documentation → Theme → Playground** to generate a theme visually.
 
 ## Tests
 
 ```sh
-pnpm test
+pnpm test   # node test/theme-check.mjs
 ```
 
-- `test/theme-parity.mjs` — asserts the opt-out build (`$usx-css-vars: false`)
-  contains zero `var()` references and is byte-identical to the default build
-  after substituting every `var(--usx-*, fallback)` with its fallback.
-- `test/theme-manifest-check.mjs` — asserts the theme manifest
-  (`@solexllc/usx-theme/theme-manifest`) stays in sync with compiled CSS:
-  every `var(--usx-*)` fallback matches its manifest default.
+`test/theme-check.mjs` compiles both entry points and asserts: the default
+build has zero `var(--usx-*)` references; the themed build uses only bare
+`var(--usx-*)` references (no fallbacks) that all exist in the theme manifest;
+every manifest entry is consumed (or explicitly listed as unconsumed); no
+literal `null` leaks into CSS; every `derivedFrom` names a real token.

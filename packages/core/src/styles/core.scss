@@ -1,8 +1,7 @@
-// AUTO-GENERATED-SCSS START
-
-// AUTO-GENERATED-SCSS END
-
+// Sass entry for the core package: theme variables, the themed USX component
+// styles and the USWDS fix-ups. Component styles live in packages/usx.
 @use 'pkg:@solexllc/usx-theme/variables' as *;
+
 // Themed entry = runtime theming opt-in (loads usx-theme's hooks before the
 // component styles). Swap to 'pkg:@solexllc/usx' for a fully static build.
 // NOTE: the hooks must be loaded from within the usx package — in a pnpm

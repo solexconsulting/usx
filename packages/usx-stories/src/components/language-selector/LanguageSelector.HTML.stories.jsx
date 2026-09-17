@@ -1,6 +1,5 @@
 import React from 'react';
 import html from '../../../../core/src/components/language-selector/language-selector.html?raw';
-import Alert from '../../../../core/src/components/alert/Alert.jsx';
 import languageSelector from '@uswds/uswds/js/usa-language-selector';
 
 export default {

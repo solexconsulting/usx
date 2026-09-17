@@ -1,19 +1,18 @@
 import React from 'react';
-import type { ReactNode } from 'react';
-
 import classnames from 'classnames';
 import { useTableContext } from './TableContext';
+import type { TableRowData } from './types';
 
-export interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
-  rowData?: Record<string, unknown>;
+export interface TableRowProps extends Omit<React.HTMLAttributes<HTMLTableRowElement>, 'onClick'> {
+  /** The data object for this row (passed to the table-level onClickRow). */
+  rowData?: TableRowData | null;
   selected?: boolean;
   disabled?: boolean;
-  className?: string;
-  onClick?: (e: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void;
-  children?: ReactNode;
+  onClick?: (e: React.MouseEvent<HTMLTableRowElement> | React.KeyboardEvent<HTMLTableRowElement>) => void;
 }
 
-const TableRow: React.FC<TableRowProps> = ({
+/** Renders a `<tr>`; created internally in data-driven mode, or directly by compound consumers. */
+export default function TableRow({
   rowData = null,
   selected = false,
   disabled = false,
@@ -21,42 +20,37 @@ const TableRow: React.FC<TableRowProps> = ({
   onClick,
   children,
   ...props
-}) => {
+}: TableRowProps) {
   const { onClickRow } = useTableContext();
+
   const isClickable = !!(onClick || onClickRow);
   const classes = classnames(
     'usx-table__row',
     selected && 'usx-table__row--selected',
     disabled && 'usx-table__row--disabled',
     isClickable && !disabled && 'usx-table__row--clickable',
-    className,
+    className
   );
-  function handleClick(e: React.MouseEvent<HTMLTableRowElement, MouseEvent>) {
+
+  function handleClick(e: React.MouseEvent<HTMLTableRowElement> | React.KeyboardEvent<HTMLTableRowElement>) {
     if (disabled) return;
-    if (onClick) onClick(e);
+    onClick?.(e);
     if (onClickRow && rowData) onClickRow(rowData, e);
   }
+
   function handleKeyDown(e: React.KeyboardEvent<HTMLTableRowElement>) {
     if (disabled) return;
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      // Synthesize a MouseEvent-like object for handleClick
-      handleClick(e as unknown as React.MouseEvent<HTMLTableRowElement, MouseEvent>);
+      handleClick(e);
     }
   }
-  const interactiveProps =
-    isClickable && !disabled
-      ? {
-          tabIndex: 0,
-          onClick: handleClick,
-          onKeyDown: handleKeyDown,
-        }
-      : {};
+
+  const interactiveProps = isClickable && !disabled ? { tabIndex: 0, onClick: handleClick, onKeyDown: handleKeyDown } : {};
+
   return (
     <tr className={classes} {...interactiveProps} {...props}>
       {children}
     </tr>
   );
-};
-
-export default TableRow;
+}

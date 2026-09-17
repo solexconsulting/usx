@@ -8,9 +8,9 @@ export default {
     tags: ['USX', 'autodocs'],
     decorators: [
         (Story) => {
-            // Ensure the Storybook toolbar's global theme decorator is applied, so
-            // this story's ThemePicker selection actually changes the colors.
-            const [globals] = useGlobals();
+            // Subscribe to Storybook globals so the toolbar theme decorator re-applies
+            // when this story's ThemePicker changes the selection.
+            useGlobals();
             return (
                 <>
                     <Alert

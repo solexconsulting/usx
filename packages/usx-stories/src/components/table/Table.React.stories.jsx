@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Table from '../../../../core/src/components/table/Table.jsx';
+import Table from '../../../../core/src/components/table/Table.tsx';
 import config from '../../../../core/src/components/table/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 

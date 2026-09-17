@@ -189,8 +189,8 @@ export const useDjangoRenderedHtml = (componentName, props) => {
   const [html, setHtml] = useState('');
   const [error, setError] = useState(null);
 
-  const requestProps = serializePropsForDjango(props);
-  const requestKey = JSON.stringify(requestProps);
+  // Keyed on the serialized props so a new-but-equal props object doesn't refetch.
+  const requestKey = JSON.stringify(serializePropsForDjango(props));
 
   useEffect(() => {
     let active = true;
@@ -199,7 +199,7 @@ export const useDjangoRenderedHtml = (componentName, props) => {
       setError(null);
 
       try {
-        const nextHtml = await fetchComponentHtml(componentName, requestProps);
+        const nextHtml = await fetchComponentHtml(componentName, JSON.parse(requestKey));
         if (active) {
           setHtml(nextHtml);
         }

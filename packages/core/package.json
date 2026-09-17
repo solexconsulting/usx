@@ -20,9 +20,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build && node scripts/build-contracts.mjs",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src --ignore-pattern '**/*.stories.jsx' || true",
-    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx src --ignore-pattern '**/*.stories.jsx' --fix || true"
+    "build": "node ../../scripts/generate-contracts.js && vite build && node scripts/build-contracts.mjs"
   },
   "dependencies": {
     "@solexllc/usx": "workspace:*",

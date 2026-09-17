@@ -1,6 +1,7 @@
 {
   "name": "agency-ui-platform",
   "private": true,
+  "type": "module",
   "packageManager": "pnpm@10.32.1",
   "workspaces": [
     "packages/*",
@@ -9,17 +10,15 @@
   ],
   "scripts": {
     "build": "pnpm -r build",
-    "storybook": "node scripts/storybook-dev.mjs",
-    "storybook:build": "pnpm --filter @agency-ui-platform/storybook run build",
     "dev": "pnpm -r --parallel dev",
-    "new-component": "node scripts/new-component.js",
-    "generate-exports": "node scripts/generate-exports.cjs",
-    "generate:contracts": "node scripts/generate-contracts.cjs",
-    "validate:configs": "node scripts/validate-configs.js",
-    "lint": "eslint '**/*.{js,jsx,ts,tsx}' --ignore-pattern '**/node_modules/**' --ignore-pattern '**/venv/**' --ignore-pattern '**/storybook-static/**' && stylelint '**/*.{css,scss}' --ignore-path .gitignore --ignore-pattern '**/venv/**'",
+    "storybook:build": "pnpm --filter @agency-ui-platform/storybook run build",
+    "test": "node scripts/validate-configs.js && pnpm -r test",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore && stylelint '**/*.{css,scss}' --ignore-path .gitignore",
     "format": "prettier --write .",
-    "test": "pnpm -r test",
-    "tokens:build": "pnpm --filter @solexllc/usx-theme run build"
+    "new-component": "node scripts/new-component.js",
+    "generate:exports": "node scripts/generate-exports.js",
+    "generate:contracts": "node scripts/generate-contracts.js",
+    "validate:configs": "node scripts/validate-configs.js"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^10.3.6",
@@ -34,6 +33,7 @@
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-storybook": "10.3.6",
     "prettier": "^3.8.1",
     "react": "^18.3.1",

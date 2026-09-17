@@ -3,75 +3,57 @@ import classnames from 'classnames';
 import { useTableContext } from './TableContext';
 import Icon from '../icon/Icon';
 import Checkbox from '../checkbox/Checkbox';
+import type { SortDirection, TableColumn } from './types';
 
-import type { TableColumn } from './types';
+// ─── Multi-level header helpers ──────────────────────────────────────────────
 
 function getDepth(columns: TableColumn[]): number {
   let max = 1;
-  columns.forEach((col) => {
-    if (col.columns?.length) {
-      const d = 1 + getDepth(col.columns);
-      if (d > max) max = d;
-    }
-  });
+  for (const col of columns) {
+    if (col.columns?.length) max = Math.max(max, 1 + getDepth(col.columns));
+  }
   return max;
 }
 
 function getLeafCount(col: TableColumn): number {
   if (!col.columns?.length) return 1;
-  return col.columns.reduce((sum: number, c: TableColumn) => sum + getLeafCount(c), 0);
+  return col.columns.reduce((sum, c) => sum + getLeafCount(c), 0);
 }
 
-type HeaderCell = { col: TableColumn; rowSpan: number; colSpan: number };
-function buildHeaderRows(columns: TableColumn[], totalDepth: number) {
+interface HeaderCell {
+  col: TableColumn;
+  rowSpan: number;
+  colSpan: number;
+}
+
+// One array of cells per header level; leaf columns span down to the last level.
+function buildHeaderRows(columns: TableColumn[], totalDepth: number): HeaderCell[][] {
   const rows: HeaderCell[][] = Array.from({ length: totalDepth }, () => []);
   function traverse(cols: TableColumn[], level: number) {
-    cols.forEach((col) => {
+    for (const col of cols) {
       const isLeaf = !col.columns?.length;
-      const rowSpan = isLeaf ? totalDepth - level : 1;
-      const colSpan = isLeaf ? 1 : getLeafCount(col);
-      rows[level].push({ col, rowSpan, colSpan });
-      if (!isLeaf) {
-        traverse(col.columns, level + 1);
-      }
-    });
+      rows[level].push({ col, rowSpan: isLeaf ? totalDepth - level : 1, colSpan: isLeaf ? 1 : getLeafCount(col) });
+      if (!isLeaf) traverse(col.columns!, level + 1);
+    }
   }
   traverse(columns, 0);
   return rows;
 }
 
-function SortIcon({ direction }: { direction: 'asc' | 'desc' | null }) {
-  return (
-    <Icon
-      name={
-        direction === 'asc' ? 'arrow_upward' :
-        direction === 'desc' ? 'arrow_downward' :
-        'sort_arrow'
-      }
-      aria-hidden="true"
-    />
-  );
+function SortIcon({ direction }: { direction: SortDirection }) {
+  const name = direction === 'asc' ? 'arrow_upward' : direction === 'desc' ? 'arrow_downward' : 'sort_arrow';
+  return <Icon name={name} aria-hidden="true" />;
 }
 
-export interface TableHeadProps extends React.HTMLAttributes<HTMLTableSectionElement> {
-  className?: string;
-  children?: React.ReactNode;
-}
+export type TableHeadProps = React.HTMLAttributes<HTMLTableSectionElement>;
 
-const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...props }) => {
-  const {
-    id,
-    columns,
-    sortState,
-    handleSort,
-    selectionMode,
-    selectionPosition,
-    isAllSelected,
-    isIndeterminate,
-    handleSelectAll,
-    allowSelectAll,
-    rowDetails,
-  } = useTableContext();
+/**
+ * Renders `<thead>`. Compound mode: wrap your own `<tr>`/`<th>` children.
+ * Data-driven mode: pass no children; renders from the table's columns.
+ */
+export default function TableHead({ className = '', children, ...props }: TableHeadProps) {
+  const { id, columns, sortState, handleSort, selectionMode, selectionPosition, handleSelectAll, allowSelectAll, rowDetails } =
+    useTableContext();
 
   if (children) {
     return (
@@ -81,57 +63,47 @@ const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...prop
     );
   }
 
-  const visibleCols = columns.filter((c: TableColumn) => !c.hidden);
+  const visibleCols = columns.filter((c) => !c.hidden);
   const totalDepth = getDepth(visibleCols);
   const headerRows = buildHeaderRows(visibleCols, totalDepth);
   const hasRowDetails = !!rowDetails;
   const hasSelection = !!selectionMode;
 
+  const selectAllCell = (
+    <th scope="col" rowSpan={totalDepth} className="usx-table__cell usx-table__cell--selection">
+      {selectionMode === 'checkbox' && allowSelectAll && (
+        <Checkbox id={`${id}-select-all`} onChange={handleSelectAll} ariaLabel="Select all rows" className="usx-table__checkbox" />
+      )}
+    </th>
+  );
+
   return (
     <thead className={classnames('usx-table__head', className)} {...props}>
+      {/* Sort announcement region for screen readers */}
       <tr hidden aria-hidden="true">
         <td>
-          <span
-            className="usa-sr-only usa-table__announcement-region"
-            aria-live="polite"
-            id="usx-table-sort-announcement"
-          />
+          <span className="usa-sr-only usa-table__announcement-region" aria-live="polite" id={`${id}-sort-announcement`} />
         </td>
       </tr>
-      {headerRows.map((row: HeaderCell[], rowIndex: number) => (
+
+      {headerRows.map((row, rowIndex) => (
         <tr key={rowIndex} className="usx-table__head-row">
           {hasRowDetails && rowIndex === 0 && (
-            <th
-              scope="col"
-              rowSpan={totalDepth}
-              className="usx-table__cell usx-table__cell--detail-toggle"
-              aria-label="Row details"
-            />
+            <th scope="col" rowSpan={totalDepth} className="usx-table__cell usx-table__cell--detail-toggle" aria-label="Row details" />
           )}
-          {hasSelection && selectionPosition === 'left' && rowIndex === 0 && (
-            <th
-              scope="col"
-              rowSpan={totalDepth}
-              className="usx-table__cell usx-table__cell--selection"
-            >
-              {selectionMode === 'checkbox' && allowSelectAll && (
-                <Checkbox
-                  id={`${id}-select-all`}
-                  onChange={handleSelectAll}
-                  ariaLabel="Select all rows"
-                />
-              )}
-            </th>
-          )}
-          {row.map(({ col, rowSpan, colSpan }: HeaderCell) => {
-            const isSortable = col.sortable !== false && (col.sortable || false);
+          {hasSelection && selectionPosition === 'left' && rowIndex === 0 && selectAllCell}
+
+          {row.map(({ col, rowSpan, colSpan }) => {
+            const isSortable = col.sortable === true;
             const sortDir = sortState.key === col.key ? sortState.direction : null;
             const cellClasses = classnames(
               'usx-table__cell',
               col.headerAlign && `usx-table__cell--align-${col.headerAlign}`,
               !col.headerAlign && col.align && `usx-table__cell--align-${col.align}`,
-              col.headerClassName,
+              col.headerClassName
             );
+            const ariaSort = !isSortable ? undefined : sortDir === 'asc' ? 'ascending' : sortDir === 'desc' ? 'descending' : undefined;
+
             return (
               <th
                 key={col.key}
@@ -140,24 +112,13 @@ const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...prop
                 rowSpan={rowSpan > 1 ? rowSpan : undefined}
                 colSpan={colSpan > 1 ? colSpan : undefined}
                 style={col.width ? { width: col.width } : undefined}
-                aria-sort={
-                  isSortable
-                    ? sortDir === 'asc'
-                      ? 'ascending'
-                      : sortDir === 'desc'
-                      ? 'descending'
-                      : undefined
-                    : undefined
-                }
+                aria-sort={ariaSort}
                 data-sortable={isSortable || undefined}
               >
                 {isSortable ? (
                   <button
                     type="button"
-                    className={classnames(
-                      'usx-table__sort-button',
-                      sortDir && 'usx-table__sort-button--active',
-                    )}
+                    className={classnames('usx-table__sort-button', sortDir && 'usx-table__sort-button--active')}
                     onClick={() => handleSort(col.key)}
                   >
                     {col.header}
@@ -169,25 +130,10 @@ const TableHead: React.FC<TableHeadProps> = ({ className = '', children, ...prop
               </th>
             );
           })}
-          {hasSelection && selectionPosition === 'right' && rowIndex === 0 && (
-            <th
-              scope="col"
-              rowSpan={totalDepth}
-              className="usx-table__cell usx-table__cell--selection"
-            >
-              {selectionMode === 'checkbox' && allowSelectAll && (
-                <Checkbox
-                  id={`${id}-select-all`}
-                  onChange={handleSelectAll}
-                  ariaLabel="Select all rows"
-                />
-              )}
-            </th>
-          )}
+
+          {hasSelection && selectionPosition === 'right' && rowIndex === 0 && selectAllCell}
         </tr>
       ))}
     </thead>
   );
-};
-
-export default TableHead;
+}

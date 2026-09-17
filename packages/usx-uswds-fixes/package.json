@@ -13,11 +13,5 @@
   ],
   "dependencies": {
     "@solexllc/usx-theme": "workspace:*"
-  },
-  "scripts": {
-    "build": "sass --pkg-importer=node --no-source-map src/index.scss dist/usx-uswds-fixes.css"
-  },
-  "devDependencies": {
-    "sass": "^1.98.0"
   }
 }

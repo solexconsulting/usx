@@ -1,5 +1,4 @@
 import React from 'react';
-import Alert from '../../../../core/src/components/alert/Alert.jsx';
 import languageSelector from '@uswds/uswds/js/usa-language-selector';
 import config from '../../../../core/src/components/language-selector/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';

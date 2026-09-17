@@ -46,6 +46,11 @@
         }
       }
     },
+    "wrap": {
+      "type": "boolean",
+      "default": false,
+      "description": "Allow the breadcrumb to wrap onto multiple lines (adds usa-breadcrumb--wrap)"
+    },
     "truncate": {
       "type": "boolean",
       "default": false,
