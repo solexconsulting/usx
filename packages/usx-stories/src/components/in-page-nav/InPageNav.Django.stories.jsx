@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '../../../../core/src/components/in-page-nav/config.json';
-import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './InPageNav.React.stories.jsx';
 import inPageNavigation from '@uswds/uswds/js/usa-in-page-navigation';
 
@@ -10,17 +10,23 @@ export default {
   title: 'Django/USWDS/InPageNav',
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`inPageNavigation.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
         // Set a delay because the Django markup renders asynchronously
         const timeout = setTimeout(() => {
-          inPageNavigation.on();
+          inPageNavigation.init();
         }, 400);
         return () => {
           clearTimeout(timeout);
-          inPageNavigation.off();
         };
       }, []);
 

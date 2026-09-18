@@ -1,16 +1,23 @@
 import React from 'react';
 import html from '../../../../core/src/components/file-input/file-input.html?raw';
 import fileInput from '@uswds/uswds/js/usa-file-input';
+import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'HTML/USWDS/FileInput',
   tags: ['USWDS', 'autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`fileInput.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
-        fileInput.on();
-        return () => fileInput.off();
+        fileInput.init();
       }, []);
 
       return <Story />;

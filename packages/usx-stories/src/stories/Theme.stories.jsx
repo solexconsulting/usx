@@ -1274,14 +1274,8 @@ function Showcase({ resolved }) {
   useEffect(() => {
     datePicker.init();
     fileInput.init();
-    range.on();
-    inPageNavigation.on();
-    return () => {
-      datePicker.off();
-      fileInput.off();
-      range.off();
-      inPageNavigation.off();
-    };
+    range.init();
+    inPageNavigation.init();
   }, []);
 
   return (

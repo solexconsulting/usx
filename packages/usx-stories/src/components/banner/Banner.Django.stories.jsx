@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '../../../../core/src/components/banner/config.json';
-import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Banner.React.stories.jsx';
 import accordion from "@uswds/uswds/js/usa-accordion";
 
@@ -11,14 +11,23 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
   excludeStories: [],
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`accordion.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure the banner component is initialized for Django stories
       React.useEffect(() => {
-        accordion.on();
+        const timeout = setTimeout(() => {
+          accordion.init();
+        }, 200);
 
         return () => {
-          accordion.off();
+          clearTimeout(timeout);
         }
       }, []);
       return <Story />;

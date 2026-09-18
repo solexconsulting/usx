@@ -4,10 +4,10 @@ import classNames from 'classnames';
 
 // USWDS's own JS (usa-in-page-navigation) builds the <nav>/<ul> list into
 // the empty <aside> below by reading headings out of the element matched by
-// data-main-content-selector — it does not render anything itself. Call
-// `.on()`/`.off()` around this component the same way other JS-enhanced
-// components (DatePicker, FileInput, RangeSlider) do; see the story
-// decorators.
+// data-main-content-selector — it does not render anything itself. Call ONLY
+// `.init()` around this component the same way other JS-enhanced components
+// (DatePicker, FileInput, RangeSlider) do — never `.on()`/`.off()`; see the
+// story decorators and Combobox.tsx for why.
 export default function InPageNav({
   id = 'in-page-nav',
   headingElements = 'h2 h3',

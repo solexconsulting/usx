@@ -10,7 +10,13 @@
 //@forward "./node_modules/@uswds/uswds/packages/uswds/_index.scss";
 @forward "../../../packages/core/src/styles/core.scss";
 
-.docs-story {
+.docs-story,
+html,
+.sb-show-main {
     background-color: var(--usx-surface-1, white);
     color: var(--usx-text-ink, black);
+}
+
+.sb-show-main.sb-main-padded {
+    padding-left: 2rem;
 }

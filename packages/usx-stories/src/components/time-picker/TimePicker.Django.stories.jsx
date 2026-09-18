@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '../../../../core/src/components/time-picker/config.json';
-import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './TimePicker.React.stories.jsx';
 import timePicker from "@uswds/uswds/js/usa-time-picker";
 
@@ -10,6 +10,13 @@ export default {
   title: 'Django/USWDS/TimePicker',
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`timePicker.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
@@ -20,7 +27,6 @@ export default {
         }, 400);
         return () => {
           clearTimeout(timeout);
-          timePicker.off();
         };
       }, []);
 

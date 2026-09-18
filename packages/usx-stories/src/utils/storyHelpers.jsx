@@ -10,6 +10,19 @@ export const getComponentHtml = async (componentName, props) => {
     return fetchComponentHtml(componentName, props);
 };
 
+// Appended to (or used as) a story's docs.description.component for any
+// component whose decorator calls USWDS's `.init()` — tells consumers they
+// own that same call in their own app. `calls` is the init call(s) this
+// story's decorator makes, e.g. '`comboBox.init()`'.
+export const uswdsInitNote = (calls) =>
+    `This story's decorator calls ${calls} to enhance the USWDS markup above. ` +
+    "Your application is responsible for doing the same wherever this component's " +
+    "markup mounts or updates. See **Documentation/USX React → USWDS JS " +
+    "Initialization** for the full picture — in most apps (and in this " +
+    "Storybook) something has already called `.on()` globally, so `.init()` " +
+    "is all you need; you only own calling `.on()` yourself if you're not " +
+    "using that global setup.";
+
 export const getFormattedProps = (props) => {
     return Object.entries(props)
         .filter(([key, value]) =>
@@ -121,7 +134,6 @@ const getSnakeCase = (str) => {
  */
 export const createDjangoStory = ({
     componentName,
-    postRender = null,
     wrapper = null,
     renderOptions = null,
 }) => {
@@ -130,7 +142,7 @@ export const createDjangoStory = ({
     }
 
     const baseRender = !wrapper
-        ? djangoComponent({ componentName, postRender, renderOptions })
+        ? djangoComponent({ componentName, renderOptions })
         : null;
 
     const applyWrapperForSource = (baseCode, args) => {
@@ -150,7 +162,7 @@ export const createDjangoStory = ({
         const { html, error } = useDjangoRenderedHtml(componentName, storyArgs);
 
         if (error) {
-            return <div style={{ color: 'red' }}>Error rendering component: {error}</div>;
+            return <div className="usa-error-message usx-error-message">Error rendering component: {error}</div>;
         }
 
         return applyWrapperForRender(html, storyArgs);
@@ -190,9 +202,9 @@ export const createDjangoStory = ({
     });
 };
 
-export const createBulkDjangoStory = (componentName, storyDefs, postRender = null, wrapper = null) => {
+export const createBulkDjangoStory = (componentName, storyDefs, wrapper = null) => {
 
-    const createStory = createDjangoStory({ componentName, postRender });
+    const createStory = createDjangoStory({ componentName });
 
     const Wrapper = ({ children }) => {
         if (wrapper) {

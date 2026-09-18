@@ -1,7 +1,7 @@
 import React from 'react';
 import DateRangePicker from '../../../../core/src/components/date-range-picker/DateRangePicker.jsx';
 import config from '../../../../core/src/components/date-range-picker/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import datePicker from "@uswds/uswds/js/usa-date-picker";
 import dateRangePicker from "@uswds/uswds/js/usa-date-range-picker";
 
@@ -13,16 +13,19 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
   excludeStories: ['storyDefs'],
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`datePicker.init()` and `dateRangePicker.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
         datePicker.init();
         dateRangePicker.init();
-        return () => {
-          dateRangePicker.off();
-          datePicker.off();
-        };
       }, []);
 
       return <Story />;

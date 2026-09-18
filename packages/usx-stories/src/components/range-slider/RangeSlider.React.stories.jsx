@@ -1,7 +1,7 @@
 import React from 'react';
 import RangeSlider from '../../../../core/src/components/range-slider/RangeSlider.jsx';
 import config from '../../../../core/src/components/range-slider/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import range from '@uswds/uswds/js/usa-range';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
@@ -80,12 +80,18 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
   excludeStories: ['storyDefs'],
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`range.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
-        range.on();
-        return () => range.off();
+        range.init();
       }, []);
 
       return <Story />;

@@ -1,52 +1,16 @@
 {% load components %}
 
-{# Plain (unenhanced) usa-character-count markup — relies on #}
-{# @uswds/uswds/js/usa-character-count at runtime (call characterCount.on()/ #}
-{# .off()) to move `maxlength` to `data-maxlength`, hide the fallback #}
-{# message below, and manage the live count/over-limit state itself. #}
+{# Enhanced by @uswds/uswds/js/usa-character-count at runtime (call ONLY #}
+{# characterCount.init(), never .on()/.off()) — that script moves the field's #}
+{# maxlength attribute to data-maxlength, hides the fallback message below, #}
+{# and manages the live count/over-limit state itself. #}
 {% with id|default:"character-count" as field_id %}
 <div class="usa-character-count usx-character-count{% if className %} {{ className }}{% endif %}">
-  {% form_group error=error %}
-    {% if label %}
-      {% if error %}
-        {% label htmlFor=field_id screenReaderOnly=screenReaderOnlyLabel required=required className="usa-label--error" only %}{{ label }}{% endlabel %}
-      {% else %}
-        {% label htmlFor=field_id screenReaderOnly=screenReaderOnlyLabel required=required only %}{{ label }}{% endlabel %}
-      {% endif %}
-    {% endif %}
-    {% if hint %}
-      {% hint id=field_id|add:"-hint" %}{{ hint }}{% endhint %}
-    {% endif %}
-    {% if error %}
-      {% error_message id=field_id|add:"-error" %}{{ error }}{% enderror_message %}
-    {% endif %}
-    {% if textArea %}
-      <textarea
-        class="usa-textarea usx-textarea usa-character-count__field{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}"
-        id="{{ field_id }}"
-        maxlength="{{ max }}"
-        placeholder="{{ placeholder|default:'' }}"
-        aria-describedby="{{ field_id }}-info{% if hint %} {{ field_id }}-hint{% endif %}{% if error %} {{ field_id }}-error{% elif success %} {{ field_id }}-success{% endif %}"
-        {% if error %}aria-invalid="true" {% endif %}
-        {% if disabled %}disabled {% endif %}
-        {% if required %}required{% endif %}
-      ></textarea>
-    {% else %}
-      <input
-        class="usa-input usx-input usa-character-count__field{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}"
-        id="{{ field_id }}"
-        maxlength="{{ max }}"
-        placeholder="{{ placeholder|default:'' }}"
-        aria-describedby="{{ field_id }}-info{% if hint %} {{ field_id }}-hint{% endif %}{% if error %} {{ field_id }}-error{% elif success %} {{ field_id }}-success{% endif %}"
-        {% if error %}aria-invalid="true" {% endif %}
-        {% if disabled %}disabled {% endif %}
-        {% if required %}required{% endif %}
-      />
-    {% endif %}
-    {% if success and not error %}
-      <span id="{{ field_id }}-success" class="usa-success-message" role="status">{{ success }}</span>
-    {% endif %}
-  {% endform_group %}
+  {% if textArea %}
+    {% text_area id=field_id formGroup=True label=label hint=hint error=error success=success disabled=disabled required=required screenReaderOnlyLabel=screenReaderOnlyLabel placeholder=placeholder defaultValue=defaultValue maxlength=max describedBy=field_id|add:"-info" className="usa-character-count__field" %}{% endtext_area %}
+  {% else %}
+    {% input id=field_id formGroup=True label=label hint=hint error=error success=success disabled=disabled required=required screenReaderOnlyLabel=screenReaderOnlyLabel placeholder=placeholder value=defaultValue maxlength=max describedBy=field_id|add:"-info" className="usa-character-count__field" %}{% endinput %}
+  {% endif %}
   <span id="{{ field_id }}-info" class="usa-character-count__message">
     You can enter up to {{ max }} characters
   </span>

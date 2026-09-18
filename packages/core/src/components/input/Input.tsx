@@ -52,7 +52,6 @@ export default function Input({
   const describedByParts: string[] = [];
   if (hintId) describedByParts.push(hintId);
   if (hasError && typeof error === 'string') describedByParts.push(`${inputId}-error`);
-  if (hasSuccess && typeof success === 'string') describedByParts.push(`${inputId}-success`);
 
   const inputProps = {
     id: inputId,
@@ -75,11 +74,6 @@ export default function Input({
         <ErrorMessage id={`${inputId}-error`}>{error}</ErrorMessage>
       )}
       <input {...inputProps} />
-      {hasSuccess && typeof success === 'string' && (
-        <span id={`${inputId}-success`} className="usa-success-message" role="status">
-          {success}
-        </span>
-      )}
     </>
   );
 

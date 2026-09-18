@@ -18,19 +18,13 @@
   class="usa-textarea usx-textarea{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
   id="{{ field_id }}"
   placeholder="{{ placeholder|default:'' }}"
-  {% if hint and error %}aria-describedby="{{ field_id }}-hint {{ field_id }}-error"
-  {% elif hint and success %}aria-describedby="{{ field_id }}-hint {{ field_id }}-success"
-  {% elif hint %}aria-describedby="{{ field_id }}-hint"
-  {% elif error %}aria-describedby="{{ field_id }}-error"
-  {% elif success %}aria-describedby="{{ field_id }}-success"
+  {% if maxlength %}maxlength="{{ maxlength }}" {% endif %}
+  {% if hint or error or success or describedBy %}aria-describedby="{% if describedBy %}{{ describedBy }} {% endif %}{% if hint %}{{ field_id }}-hint {% endif %}{% if error %}{{ field_id }}-error {% elif success %}{{ field_id }}-success {% endif %}"
   {% endif %}
   {% if error and error != "false" %}aria-invalid="true" {% endif %}
   {% if disabled %}disabled {% endif %}
   {% if required %}required{% endif %}
 >{{ defaultValue|default:'' }}</textarea>
-{% if success and success != "true" and success != True and success != "false" %}
-  <span id="{{ field_id }}-success" class="usa-success-message" role="status">{{ success }}</span>
-{% endif %}
 {% endform_group %}
 {% else %}
 {% if label %}
@@ -46,19 +40,13 @@
   class="usa-textarea usx-textarea{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
   id="{{ field_id }}"
   placeholder="{{ placeholder|default:'' }}"
-  {% if hint and error %}aria-describedby="{{ field_id }}-hint {{ field_id }}-error"
-  {% elif hint and success %}aria-describedby="{{ field_id }}-hint {{ field_id }}-success"
-  {% elif hint %}aria-describedby="{{ field_id }}-hint"
-  {% elif error %}aria-describedby="{{ field_id }}-error"
-  {% elif success %}aria-describedby="{{ field_id }}-success"
+  {% if maxlength %}maxlength="{{ maxlength }}" {% endif %}
+  {% if hint or error or success or describedBy %}aria-describedby="{% if describedBy %}{{ describedBy }} {% endif %}{% if hint %}{{ field_id }}-hint {% endif %}{% if error %}{{ field_id }}-error {% elif success %}{{ field_id }}-success {% endif %}"
   {% endif %}
   {% if error and error != "false" %}aria-invalid="true" {% endif %}
   {% if disabled %}disabled {% endif %}
   {% if required %}required{% endif %}
 >{{ defaultValue|default:'' }}</textarea>
-{% if success and success != "true" and success != True and success != "false" %}
-  <span id="{{ field_id }}-success" class="usa-success-message" role="status">{{ success }}</span>
-{% endif %}
 {% endif %}
 
 {% endwith %}

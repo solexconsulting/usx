@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '../../../core/src/components/button/Button.tsx';
 import CharacterCount from '../../../core/src/components/character-count/CharacterCount.tsx';
 import CheckboxGroup from '../../../core/src/components/checkbox-group/CheckboxGroup.tsx';
 import RadioButtons from '../../../core/src/components/radio-buttons/RadioButtons.tsx';
@@ -16,7 +17,8 @@ import combobox from "@uswds/uswds/js/usa-combo-box";
 import fileInput from "@uswds/uswds/js/usa-file-input";
 import timePicker from "@uswds/uswds/js/usa-time-picker";
 import datePicker from "@uswds/uswds/js/usa-date-picker";
-import { useDjangoRenderedHtml } from '../utils/djangoComponent.js';
+import characterCount from "@uswds/uswds/js/usa-character-count";
+import { useDjangoRenderedFields } from '../utils/djangoComponent.js';
 
 const ERROR_MESSAGE = 'Helpful error message';
 
@@ -53,12 +55,7 @@ export default {
         timePicker.init();
         datePicker.init();
         combobox.init();
-        return () => {
-          combobox.off();
-          fileInput.off();
-          timePicker.off();
-          datePicker.off();
-        };
+        characterCount.init();
       }, []);
 
       return <Story />;
@@ -180,185 +177,192 @@ export const FormComponents = {
         />
 
         <div className="margin-top-4">
-          <button type="submit" className="usa-button">Submit button</button>
-          <button type="button" className="usa-button usa-button--outline">Submit button - outline</button>
+          <Button
+            type="submit"
+            label="Submit button"
+            variant="primary"
+          />
+          <Button
+            type="button"
+            label="Submit button - outline"
+            variant="outline"
+          />
         </div>
       </form>
     );
   },
 };
 
-// Renders one Django component template via the storybook-django render endpoint.
-function DjangoField({ componentName, args }) {
-  const { html, error } = useDjangoRenderedHtml(componentName, args);
-
-  if (error) {
-    return <div style={{ color: 'red' }}>Error rendering component: {error}</div>;
-  }
-
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
-}
-
-DjangoField.propTypes = {
-  componentName: PropTypes.string.isRequired,
-  args: PropTypes.object.isRequired,
-};
-
 function DjangoFormComponents({ error_state }) {
   const error = error_state ? ERROR_MESSAGE : undefined;
 
+  const fields = [
+    {
+      componentName: 'character-count',
+      args: {
+        id: 'tefe-django-character-count',
+        label: 'Character count',
+        hint: 'This is an input with a character counter.',
+        max: 25,
+        error,
+      },
+    },
+    {
+      componentName: 'checkbox-group',
+      args: {
+        legend: 'Checkbox',
+        hint: 'Select one or more historical figures.',
+        name: 'tefe-django-checkbox-group',
+        options: historicalFigures,
+        error,
+      },
+    },
+    {
+      componentName: 'radio-buttons',
+      args: {
+        legend: 'Radio',
+        hint: 'Select one historical figure.',
+        name: 'tefe-django-radio-group',
+        options: historicalFigures,
+        error,
+      },
+    },
+    {
+      componentName: 'combobox',
+      args: {
+        id: 'tefe-django-combobox',
+        name: 'tefe-django-combobox',
+        label: 'Combo box',
+        hint: 'Select a color from the list.',
+        options: colorOptions,
+        error,
+      },
+    },
+    {
+      componentName: 'date-picker',
+      args: {
+        id: 'tefe-django-date-picker',
+        name: 'tefe-django-date-picker',
+        label: 'Date picker',
+        hint: 'mm/dd/yyyy',
+        error,
+      },
+    },
+    {
+      componentName: 'file-input',
+      args: {
+        id: 'tefe-django-file-input',
+        name: 'tefe-django-file-input',
+        label: 'File input',
+        hint: 'Upload a file.',
+        error,
+      },
+    },
+    {
+      componentName: 'input',
+      args: {
+        id: 'tefe-django-input-mask',
+        name: 'tefe-django-input-mask',
+        label: 'Input mask',
+        hint: 'Enter your input following the specified mask.',
+        placeholder: 'For example, 123 45 6789',
+        error,
+      },
+    },
+    {
+      componentName: 'memorable-date',
+      args: {
+        id: 'tefe-django-memorable-date',
+        legend: 'This is a memorable date.',
+        groupHint: 'Enter a memorable date.',
+        error,
+      },
+    },
+    {
+      componentName: 'range-slider',
+      args: {
+        id: 'tefe-django-range-slider',
+        name: 'tefe-django-range-slider',
+        label: 'Range slider',
+        hint: 'Select a value using the range slider.',
+        error,
+      },
+    },
+    {
+      componentName: 'select',
+      args: {
+        id: 'tefe-django-select',
+        name: 'tefe-django-select',
+        label: 'Select',
+        hint: 'Select a color from the list.',
+        options: colorOptions,
+        error,
+      },
+    },
+    {
+      componentName: 'input',
+      args: {
+        id: 'tefe-django-text-input',
+        name: 'tefe-django-text-input',
+        label: 'Text input',
+        hint: 'Enter text into the input field.',
+        error,
+      },
+    },
+    {
+      componentName: 'text-area',
+      args: {
+        id: 'tefe-django-text-area',
+        name: 'tefe-django-text-area',
+        label: 'Text area',
+        hint: 'Enter text into the text area.',
+        error,
+      },
+    },
+    {
+      componentName: 'time-picker',
+      args: {
+        id: 'tefe-django-time-picker',
+        name: 'tefe-django-time-picker',
+        label: 'Time picker',
+        hint: 'Select a time using the time picker.',
+        error,
+      },
+    },
+  ];
+
+  const buttonFields = [
+    { componentName: 'button', args: { type: 'submit', variant: 'primary', label: 'Submit button' } },
+    { componentName: 'button', args: { type: 'button', variant: 'outline', label: 'Submit button - outline' } },
+  ];
+
+  const { html, errors } = useDjangoRenderedFields(fields);
+  const { html: buttonsHtml, errors: buttonErrors } = useDjangoRenderedFields(buttonFields);
+  const allErrors = [...errors, ...buttonErrors];
+
+  // All fields' HTML lands in the DOM together (one dangerouslySetInnerHTML per
+  // group below), so enhancement only needs to run once per html change.
+  React.useEffect(() => {
+    if (!html) return;
+    fileInput.init();
+    timePicker.init();
+    datePicker.init();
+    combobox.init();
+    characterCount.init();
+  }, [html]);
+
   return (
-    <form className="usa-form maxw-tablet margin-left-2">
-      <DjangoField
-        componentName="character-count"
-        args={{
-          id: 'tefe-django-character-count',
-          label: 'Character count',
-          hint: 'This is an input with a character counter.',
-          max: 25,
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="checkbox-group"
-        args={{
-          legend: 'Checkbox',
-          hint: 'Select one or more historical figures.',
-          name: 'tefe-django-checkbox-group',
-          options: historicalFigures,
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="radio-buttons"
-        args={{
-          legend: 'Radio',
-          hint: 'Select one historical figure.',
-          name: 'tefe-django-radio-group',
-          options: historicalFigures,
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="combobox"
-        args={{
-          id: 'tefe-django-combobox',
-          name: 'tefe-django-combobox',
-          label: 'Combo box',
-          hint: 'Select a color from the list.',
-          options: colorOptions,
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="date-picker"
-        args={{
-          id: 'tefe-django-date-picker',
-          name: 'tefe-django-date-picker',
-          label: 'Date picker',
-          hint: 'mm/dd/yyyy',
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="file-input"
-        args={{
-          id: 'tefe-django-file-input',
-          name: 'tefe-django-file-input',
-          label: 'File input',
-          hint: 'Upload a file.',
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="input"
-        args={{
-          id: 'tefe-django-input-mask',
-          name: 'tefe-django-input-mask',
-          label: 'Input mask',
-          hint: 'Enter your input following the specified mask.',
-          placeholder: 'For example, 123 45 6789',
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="memorable-date"
-        args={{
-          id: 'tefe-django-memorable-date',
-          legend: 'This is a memorable date.',
-          groupHint: 'Enter a memorable date.',
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="range-slider"
-        args={{
-          id: 'tefe-django-range-slider',
-          name: 'tefe-django-range-slider',
-          label: 'Range slider',
-          hint: 'Select a value using the range slider.',
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="select"
-        args={{
-          id: 'tefe-django-select',
-          name: 'tefe-django-select',
-          label: 'Select',
-          hint: 'Select a color from the list.',
-          options: colorOptions,
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="input"
-        args={{
-          id: 'tefe-django-text-input',
-          name: 'tefe-django-text-input',
-          label: 'Text input',
-          hint: 'Enter text into the input field.',
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="text-area"
-        args={{
-          id: 'tefe-django-text-area',
-          name: 'tefe-django-text-area',
-          label: 'Text area',
-          hint: 'Enter text into the text area.',
-          error,
-        }}
-      />
-
-      <DjangoField
-        componentName="time-picker"
-        args={{
-          id: 'tefe-django-time-picker',
-          name: 'tefe-django-time-picker',
-          label: 'Time picker',
-          hint: 'Select a time using the time picker.',
-          error,
-        }}
-      />
-
-      <div className="margin-top-4">
-        <button type="submit" className="usa-button">Submit button</button>
-        <button type="button" className="usa-button usa-button--outline">Submit button - outline</button>
-      </div>
-    </form>
+    <>
+      {allErrors.map(({ componentName, error: fieldError }, index) => (
+        <div key={`${componentName}-${index}`} style={{ color: 'red' }}>
+          Error rendering {componentName}: {fieldError}
+        </div>
+      ))}
+      <form className="usa-form maxw-tablet margin-left-2">
+        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <div className="margin-top-4" dangerouslySetInnerHTML={{ __html: buttonsHtml }} />
+      </form>
+    </>
   );
 }
 

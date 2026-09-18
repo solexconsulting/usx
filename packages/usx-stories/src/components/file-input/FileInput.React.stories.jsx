@@ -1,7 +1,7 @@
 import React from 'react';
 import FileInput from '../../../../core/src/components/file-input/FileInput.jsx';
 import config from '../../../../core/src/components/file-input/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import fileInput from '@uswds/uswds/js/usa-file-input';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
@@ -36,12 +36,18 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
   excludeStories: ['storyDefs'],
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`fileInput.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
-        fileInput.on();
-        return () => fileInput.off();
+        fileInput.init();
       }, []);
 
       return <Story />;

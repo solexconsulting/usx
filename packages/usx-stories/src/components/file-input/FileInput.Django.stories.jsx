@@ -13,6 +13,7 @@ import {
   LongFileName as LongFileNameReactStory,
 } from './FileInput.React.stories.jsx';
 import fileInput from '@uswds/uswds/js/usa-file-input';
+import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -20,17 +21,23 @@ export default {
   title: 'Django/USWDS/FileInput',
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`fileInput.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
         // Set a delay because it's struggling
         const timeout = setTimeout(() => {
-          fileInput.on();
+          fileInput.init();
         }, 400);
         return () => {
           clearTimeout(timeout);
-          fileInput.off();
         };
       }, []);
 
@@ -71,7 +78,7 @@ function ManagedFileInputPreview({ inputArgs, listArgs, hasFiles }) {
 
   const error = inputError || (hasFiles ? listError : null);
   if (error) {
-    return <div style={{ color: 'red' }}>Error rendering component: {error}</div>;
+    return <div className="usa-error-message usx-error-message">Error rendering component: {error}</div>;
   }
 
   return (

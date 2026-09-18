@@ -73,7 +73,7 @@ const GroupErrorRender = () => {
   }, []);
 
   if (error) {
-    return <div style={{ color: 'red' }}>Error rendering component: {error}</div>;
+    return <div className="usa-error-message usx-error-message">Error rendering component: {error}</div>;
   }
 
   return <div dangerouslySetInnerHTML={{ __html: html }} />;

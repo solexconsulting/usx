@@ -23,7 +23,7 @@
     {% if rangeDate %} data-range-date="{{ rangeDate }}"{% endif %}
   >
     <input
-      class="usa-input usx-input"
+      class="usa-input usx-input{% if error %} usa-input--error{% endif %}"
       id="{{ id }}"
       name="{{ name|default:id }}"
       {% if label %} aria-labelledby="{{ id }}-label"{% endif %}

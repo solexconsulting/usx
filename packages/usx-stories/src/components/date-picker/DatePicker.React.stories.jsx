@@ -1,7 +1,7 @@
 import React from 'react';
 import DatePicker from '../../../../core/src/components/date-picker/DatePicker.jsx';
 import config from '../../../../core/src/components/date-picker/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import datePicker from "@uswds/uswds/js/usa-date-picker";
 
 const generatedArgTypes = buildArgTypes(config.props || {});
@@ -12,12 +12,18 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
   excludeStories: ['storyDefs'],
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`datePicker.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
         datePicker.init();
-        return () => datePicker.off();
       }, []);
 
       return <Story />;

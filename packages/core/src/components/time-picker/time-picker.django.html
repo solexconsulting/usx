@@ -16,7 +16,7 @@
   {% endif %}
 
   <div
-    class="usa-time-picker usx-time-picker{% if className %} {{ className }}{% endif %}"
+    class="usa-time-picker usx-time-picker{% if error %} usx-combo-box--error{% endif %}{% if className %} {{ className }}{% endif %}"
     {% if minTime %} data-min-time="{{ minTime }}"{% endif %}
     {% if maxTime %} data-max-time="{{ maxTime }}"{% endif %}
     {% if step %} data-step="{{ step }}"{% endif %}

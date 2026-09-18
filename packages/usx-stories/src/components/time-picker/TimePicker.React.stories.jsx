@@ -1,7 +1,7 @@
 import React from 'react';
 import TimePicker from '../../../../core/src/components/time-picker/TimePicker.jsx';
 import config from '../../../../core/src/components/time-picker/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import timePicker from "@uswds/uswds/js/usa-time-picker";
 
 const generatedArgTypes = buildArgTypes(config.props || {});
@@ -12,12 +12,18 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
   excludeStories: ['storyDefs'],
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`timePicker.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
         timePicker.init();
-        return () => timePicker.off();
       }, []);
 
       return <Story />;

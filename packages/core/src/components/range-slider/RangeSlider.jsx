@@ -5,10 +5,10 @@ import FormGroup from '../form-group/FormGroup';
 import Hint from '../hint/Hint';
 import ErrorMessage from '../error-message/ErrorMessage';
 
-// Enhanced by @uswds/uswds/js/usa-range at runtime (call range.on() in the
-// consuming app) — that script builds the value display span and keeps the
-// aria-valuetext screen-reader callout in sync, so React doesn't reimplement
-// either here.
+// Enhanced by @uswds/uswds/js/usa-range at runtime (call ONLY range.init() in
+// the consuming app, never .on()/.off() — see Combobox.tsx for why) — that
+// script builds the value display span and keeps the aria-valuetext
+// screen-reader callout in sync, so React doesn't reimplement either here.
 export default function RangeSlider({
   id = 'range-slider',
   name,

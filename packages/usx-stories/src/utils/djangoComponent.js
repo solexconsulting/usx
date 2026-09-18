@@ -221,16 +221,74 @@ export const useDjangoRenderedHtml = (componentName, props) => {
 };
 
 /**
+ * Fetches and concatenates the rendered HTML for several Django components into a
+ * single string, so callers can insert them all with one `dangerouslySetInnerHTML`
+ * instead of wrapping each field in its own extra container element.
+ *
+ * @param {Array<{componentName: string, args: object}>} fields
+ * @return {{ html: string, errors: Array<{componentName: string, error: string}> }}
+ */
+export const useDjangoRenderedFields = (fields) => {
+  const [html, setHtml] = useState('');
+  const [errors, setErrors] = useState([]);
+
+  // Keyed on the serialized fields so equal-but-new arrays/objects don't refetch.
+  const requestKey = JSON.stringify(
+    fields.map(({ componentName, args }) => ({
+      componentName,
+      props: serializePropsForDjango(args),
+    })),
+  );
+
+  useEffect(() => {
+    let active = true;
+    const parsedFields = JSON.parse(requestKey);
+
+    const fetchAll = async () => {
+      const results = await Promise.allSettled(
+        parsedFields.map(({ componentName, props }) => fetchComponentHtml(componentName, props)),
+      );
+
+      if (!active) {
+        return;
+      }
+
+      const nextErrors = [];
+      const combinedHtml = results
+        .map((result, index) => {
+          if (result.status === 'rejected') {
+            const message = getErrorMessage(result.reason);
+            nextErrors.push({ componentName: parsedFields[index].componentName, error: message });
+            return `<div className="usa-error-message usx-error-message">Error rendering component: ${message}</div>`;
+          }
+          return result.value;
+        })
+        .join('\n');
+
+      setHtml(combinedHtml);
+      setErrors(nextErrors);
+    };
+
+    fetchAll();
+
+    return () => {
+      active = false;
+    };
+  }, [requestKey]);
+
+  return { html, errors };
+};
+
+/**
  * Create a Storybook render component for a Django component.
  *
  * This function returns a React component that fetches the rendered HTML
  * from the Django endpoint and displays it.
  *
  * @param {string} componentName - The name of the Django component (e.g., 'usx/button').
- * @param {Function|null} postRender - Optional callback after HTML insertion.
  * @returns {Function} A React component that takes props and renders the HTML.
  */
-const createDjangoRenderedComponent = (componentName, postRender, renderOptions) => {
+const createDjangoRenderedComponent = (componentName, renderOptions) => {
   return function DjangoRenderedComponent(props) {
     const { html, error } = useDjangoRenderedHtml(componentName, props);
     const containerRef = useRef(null);
@@ -239,10 +297,6 @@ const createDjangoRenderedComponent = (componentName, postRender, renderOptions)
       let cleanup;
       if (html && containerRef.current) {
         simulateLoading(containerRef.current, html, renderOptions);
-
-        if (postRender) {
-          cleanup = postRender(containerRef.current);
-        }
       }
       return () => {
         if (typeof cleanup === 'function') {
@@ -252,7 +306,7 @@ const createDjangoRenderedComponent = (componentName, postRender, renderOptions)
     }, [html]);
 
     if (error) {
-      return React.createElement('div', { style: { color: 'red' } }, `Error rendering component: ${error}`);
+      return React.createElement('div', { className: 'usa-error-message usx-error-message' }, `Error rendering component: ${error}`);
     }
 
     return React.createElement('div', { ref: containerRef });
@@ -262,15 +316,14 @@ const createDjangoRenderedComponent = (componentName, postRender, renderOptions)
 /**
  * @param {{
  *   componentName: string,
- *   postRender?: Function|null,
  *   renderOptions?: {executeScripts?: boolean, replayGlobalEvents?: boolean}|null
  * }} options
  */
-export function djangoComponent({ componentName, postRender = null, renderOptions = null }) {
+export function djangoComponent({ componentName, renderOptions = null }) {
   if (!componentName) {
     throw new Error('djangoComponent requires an options object with componentName');
   }
 
   const normalizedRenderOptions = normalizeRenderOptions(renderOptions);
-  return createDjangoRenderedComponent(componentName, postRender, normalizedRenderOptions);
+  return createDjangoRenderedComponent(componentName, normalizedRenderOptions);
 }

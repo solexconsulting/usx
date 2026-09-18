@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from '../../../../core/src/components/modal/Modal.tsx';
 import Button from '../../../../core/src/components/button/Button.tsx';
 import config from '../../../../core/src/components/modal/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import modal from "@uswds/uswds/js/usa-modal";
 
 export default {
@@ -11,15 +11,24 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
   excludeStories: ['storyDefs'],
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`modal.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
-        setTimeout(() => {
-          modal.on();
+        const timeout = setTimeout(() => {
+          modal.init();
         }, 30);
 
-        return () => modal.off();
+        return () => {
+          clearTimeout(timeout);
+        };
       }, []);
 
       return <Story />;

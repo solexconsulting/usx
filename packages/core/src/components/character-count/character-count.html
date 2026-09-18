@@ -1,7 +1,8 @@
 <!-- Plain (unenhanced) usa-character-count markup — relies on -->
-<!-- @uswds/uswds/js/usa-character-count at runtime (call characterCount.on()/ -->
-<!-- .off()) to move `maxlength` to `data-maxlength`, hide the fallback -->
-<!-- message below, and manage the live count/over-limit state itself. -->
+<!-- @uswds/uswds/js/usa-character-count at runtime (call ONLY -->
+<!-- characterCount.init(), never .on()/.off()) to move `maxlength` to -->
+<!-- `data-maxlength`, hide the fallback message below, and manage the live -->
+<!-- count/over-limit state itself. -->
 
 <!-- Default -->
 <div class="usa-character-count usx-character-count">
@@ -91,4 +92,19 @@
     />
   </div>
   <span id="cc-8-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- DefaultValueOverLimit -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-10">Pre-filled, already over the limit</label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-10"
+      maxlength="25"
+      aria-describedby="cc-10-info"
+      value="This default value is already way too long for the limit."
+    />
+  </div>
+  <span id="cc-10-info" class="usa-character-count__message">You can enter up to 25 characters</span>
 </div>

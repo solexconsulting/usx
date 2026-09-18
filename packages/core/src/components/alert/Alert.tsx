@@ -12,6 +12,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   ariaLabel?: string;
   ariaLabelledby?: string;
   onDismiss?: () => void;
+  children?: React.ReactNode;
 }
 
 export default function Alert({
@@ -25,6 +26,7 @@ export default function Alert({
   ariaLabel,
   ariaLabelledby,
   onDismiss = undefined,
+  children = null,
   ...props
 }: AlertProps) {
   const normalizedVariant = variant && ['info', 'warning', 'success', 'error', 'emergency'].includes(variant)
@@ -64,9 +66,15 @@ export default function Alert({
     <div className={classes} {...accessibilityProps} {...props}>
       <div className="usa-alert__body">
         {!slim && heading ? <h4 className="usa-alert__heading">{heading}</h4> : null}
-        <p className="usa-alert__text">
-          {text}
-        </p>
+        {children ? (
+          <div className="usa-alert__text">
+            {children}
+          </div>
+        ) : (
+          <p className="usa-alert__text">
+            {text}
+          </p>
+        )}
         {onDismiss && (
           <button className="usx-alert__dismiss" aria-label="Dismiss alert" onClick={onDismiss}>
             <svg className="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">

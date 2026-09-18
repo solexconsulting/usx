@@ -27,7 +27,8 @@
   }
 }
 
-.usx-combo-box {
+.usx-combo-box,
+.usx-time-picker {
   &.usx-combo-box--error .usa-combo-box__input {
     border-width: 0.25rem;
     border-color: #b50909;

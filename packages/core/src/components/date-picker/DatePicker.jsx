@@ -44,7 +44,13 @@ export default function DatePicker({
         {...(rangeDate ? { 'data-range-date': rangeDate } : {})}
       >
         <input
-          className="usa-input usx-input"
+          className={
+            classNames(
+              'usa-input',
+              'usx-input',
+              {'usa-input--error': !!error},
+            )
+          }
           id={id}
           name={name || id}
           aria-labelledby={label ? labelId : undefined}

@@ -38,13 +38,20 @@ export default function TimePicker({
       {hint && <Hint id={hintId}>{hint}</Hint>}
       {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
       <div
-        className={classNames('usa-time-picker', 'usx-time-picker', className)}
+        className={
+          classNames(
+            'usa-time-picker',
+            'usx-time-picker',
+            {'usx-combo-box--error': !!error},
+            className
+          )
+        }
         {...(minTime ? { 'data-min-time': minTime } : {})}
         {...(maxTime ? { 'data-max-time': maxTime } : {})}
         {...(step ? { 'data-step': step } : {})}
       >
         <input
-          className="usa-input usx-input"
+          className={`usa-input usx-input${error ? ' usa-input--error' : ''}`}
           id={id}
           name={name || id}
           type="text"

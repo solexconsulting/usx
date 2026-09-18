@@ -4,7 +4,8 @@
 {#        minimumHeadingCount, content, className, contentClassName         #}
 {# The <aside> below is left empty — usa-in-page-navigation's JS builds the #}
 {# <nav>/<ul> list into it after scanning the content container for        #}
-{# headings. Call inPageNavigation.on()/.off() around the rendered markup.  #}
+{# headings. Call ONLY inPageNavigation.init() around the rendered markup,  #}
+{# never .on()/.off().                                                     #}
 {# ─────────────────────────────────────────────────────────────────────── #}
 {% with content_id=id|default:"in-page-nav"|add:"-content" %}
 <div class="usa-in-page-nav-container usx-in-page-nav-container">

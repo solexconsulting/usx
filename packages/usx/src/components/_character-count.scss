@@ -1,0 +1,12 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+// Character count mostly inherits styles from the components it's composed of
+// (form-group, input/textarea, hint). The one USWDS style it doesn't inherit
+// is the invalid-count status message, so that's the only override here.
+.usx-character-count {
+  .usa-character-count__status.usa-character-count__status--invalid {
+    color: $usx-color-error;
+    font-weight: $usx-font-weight-bold;
+  }
+}

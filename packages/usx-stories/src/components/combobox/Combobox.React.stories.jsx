@@ -1,8 +1,8 @@
-
+import React from 'react';
 import Combobox from '../../../../core/src/components/combobox/Combobox.tsx';
 import config from '../../../../core/src/components/combobox/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
-
+import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import combobox from '@uswds/uswds/js/usa-combo-box';
 
 const fruitOptions = [
   { value: '', label: 'Select a fruit' },
@@ -143,6 +143,22 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
   excludeStories: ['storyDefs'],
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`comboBox.init()`')
+      }
+    }
+  },
+  decorators: [
+    (Story) => {
+      React.useEffect(() => {
+        combobox.init();
+      }, []);
+
+      return <Story />;
+    }
+  ]
 };
 
 export const Default = { args: storyDefs.Default };

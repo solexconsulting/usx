@@ -35,7 +35,13 @@ export default function Banner({
 }: BannerProps) {
   const [expanded, setExpanded] = useState(false);
 
-  const toggleExpanded = () => {
+  const toggleExpanded = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // USWDS's own usa-banner behavior also delegates clicks on this same
+    // aria-controls button (see @uswds/uswds's usa-banner/src/index.js) —
+    // stop it from also firing so the two toggles don't cancel each other
+    // out, the same guard Accordion uses.
+    e.preventDefault();
+    e.stopPropagation();
     setExpanded(!expanded);
   };
 
@@ -70,13 +76,15 @@ export default function Banner({
               type="button"
               className="usa-accordion__button usa-banner__button"
               aria-expanded={expanded}
-              onClick={toggleExpanded}
+              aria-controls={`${id}-content`}
+              onClickCapture={toggleExpanded}
             >
               <span className="usa-banner__button-text">{bannerActionText}</span>
             </button>
           </div>
         </header>
         <div
+          id={`${id}-content`}
           className="usa-banner__content usa-accordion__content"
           hidden={!expanded}
         >

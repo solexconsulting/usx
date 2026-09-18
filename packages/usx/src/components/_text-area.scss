@@ -62,7 +62,9 @@
   }
 }
 
-.usa-textarea.usx-textarea.usa-input--success {
+// Error can be toggled dynamically (e.g. character-count) on top of a
+// statically-applied success class, so error must win when both are present.
+.usa-textarea.usx-textarea.usa-input--success:not(.usa-input--error) {
   @if $usx-input-success-border-width {
     border-width: $usx-input-success-border-width;
   }

@@ -55,20 +55,23 @@ export const Overview = {
 
       <h2>Enhanced (JS-driven) USWDS components</h2>
       <p>
-        A few USWDS components (Accordion, Combobox, Date Picker, and others)
-        rely on USWDS's own vanilla-JS behavior to become interactive — expand/
-        collapse, filtering, calendar popovers, etc. <code>@solexllc/usx-react</code>{' '}
-        components either reimplement that behavior directly in React (e.g.
-        Combobox), or render static markup that USWDS's own JS enhances once
-        initialized (<code>@uswds/uswds/js/usa-*</code>) — check an individual
-        component's story source to see which applies. Either way, the
-        rendered HTML/class structure never diverges from the Django/HTML
-        reference version.
+        A few USWDS components (Accordion, Banner, and others) reimplement
+        their expand/collapse interaction directly in React state rather than
+        relying on USWDS's own vanilla-JS behavior, since the DOM structure is
+        simple enough to own outright. Most others (Combobox, Date Picker,
+        File Input, Time Picker, and more) render only the static markup
+        USWDS's own JS enhances once initialized (<code>@uswds/uswds/js/usa-*</code>)
+        — check an individual component's story source to see which applies.
+        Either way, the rendered HTML/class structure never diverges from the
+        Django/HTML reference version. See{' '}
+        <strong>Documentation/USX React → USWDS JS Initialization</strong> for
+        how and why your app is responsible for initializing that JS.
       </p>
 
       <h2>Where to go next</h2>
       <ul>
         <li><strong>Components/*</strong> — every implemented component, with its React, Django, and HTML variants.</li>
+        <li><strong>Documentation/USX React → USWDS JS Initialization</strong> — calling <code>.init()</code> for JS-enhanced components.</li>
         <li><strong>Documentation/USX → Overview</strong> — the class/token architecture these components render.</li>
         <li><strong>Documentation/Theme → Getting Started</strong> — wiring up runtime theming.</li>
       </ul>

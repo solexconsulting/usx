@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '../../../../core/src/components/date-range-picker/config.json';
-import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './DateRangePicker.React.stories.jsx';
 import datePicker from "@uswds/uswds/js/usa-date-picker";
 import dateRangePicker from "@uswds/uswds/js/usa-date-range-picker";
@@ -11,6 +11,13 @@ export default {
   title: 'Django/USWDS/DateRangePicker',
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`datePicker.init()` and `dateRangePicker.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
@@ -22,8 +29,6 @@ export default {
         }, 400);
         return () => {
           clearTimeout(timeout);
-          dateRangePicker.off();
-          datePicker.off();
         };
       }, []);
 

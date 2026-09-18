@@ -1,7 +1,7 @@
 import React from 'react';
 import InPageNav from '../../../../core/src/components/in-page-nav/InPageNav.jsx';
 import config from '../../../../core/src/components/in-page-nav/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import inPageNavigation from '@uswds/uswds/js/usa-in-page-navigation';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
@@ -125,12 +125,18 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
   excludeStories: ['storyDefs'],
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`inPageNavigation.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // Ensure USWDS JS is initialized for the story
       React.useEffect(() => {
-        inPageNavigation.on();
-        return () => inPageNavigation.off();
+        inPageNavigation.init();
       }, []);
 
       return <Story />;

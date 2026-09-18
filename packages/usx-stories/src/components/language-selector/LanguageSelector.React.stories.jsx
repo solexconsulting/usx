@@ -1,7 +1,7 @@
 import React from 'react';
 import LanguageSelector from '../../../../core/src/components/language-selector/LanguageSelector.jsx';
 import config from '../../../../core/src/components/language-selector/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import languageSelector from '@uswds/uswds/js/usa-language-selector';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
@@ -17,8 +17,7 @@ export default {
       // The usa-language__primary menu reuses accordion show/hide behavior;
       // initialize the real USWDS JS for the story, same as the HTML story.
       React.useEffect(() => {
-        languageSelector.on();
-        return () => languageSelector.off();
+        languageSelector.init();
       }, []);
 
       return <Story />;
@@ -27,7 +26,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'USWDS `usa-language-selector` with the USX treatment. Renders a two-language button (`variant="two"`) or a three-or-more-language dropdown menu (`variant="menu"`, optionally `unstyled`); auto-inferred from `languages.length` when `variant` is omitted. Always wrapped in a `<nav>` landmark for assistive-tech discoverability.'
+        component: 'USWDS `usa-language-selector` with the USX treatment. Renders a two-language button (`variant="two"`) or a three-or-more-language dropdown menu (`variant="menu"`, optionally `unstyled`); auto-inferred from `languages.length` when `variant` is omitted. Always wrapped in a `<nav>` landmark for assistive-tech discoverability. ' + uswdsInitNote('`languageSelector.init()`')
       }
     }
   }

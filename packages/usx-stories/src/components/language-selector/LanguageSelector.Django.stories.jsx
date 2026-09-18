@@ -1,20 +1,33 @@
 import React from 'react';
 import languageSelector from '@uswds/uswds/js/usa-language-selector';
 import config from '../../../../core/src/components/language-selector/config.json';
-import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './LanguageSelector.React.stories.jsx';
 
 export default {
   title: 'Django/USWDS/LanguageSelector',
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
+  parameters: {
+    docs: {
+      description: {
+        component: uswdsInitNote('`languageSelector.init()`')
+      }
+    }
+  },
   decorators: [
     (Story) => {
       // The usa-language__primary menu reuses accordion show/hide behavior;
       // initialize the real USWDS JS for the story, same as the HTML story.
+      // Delayed since the Django markup is fetched asynchronously and may not
+      // be mounted yet on the first effect run.
       React.useEffect(() => {
-        languageSelector.on();
-        return () => languageSelector.off();
+        const timeout = setTimeout(() => {
+          languageSelector.init();
+        }, 400);
+        return () => {
+          clearTimeout(timeout);
+        };
       }, []);
 
       return <Story />;

@@ -47,7 +47,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   const describedByParts: string[] = [];
   if (hintId) describedByParts.push(hintId);
   if (hasError && typeof error === 'string') describedByParts.push(`${textAreaId}-error`);
-  if (hasSuccess && typeof success === 'string') describedByParts.push(`${textAreaId}-success`);
+
   const content = (
     <>
       {label && (
@@ -70,11 +70,6 @@ const TextArea: React.FC<TextAreaProps> = ({
         aria-invalid={hasError ? 'true' : undefined}
         {...props}
       />
-      {hasSuccess && typeof success === 'string' && (
-        <span id={`${textAreaId}-success`} className="usa-success-message" role="status">
-          {success}
-        </span>
-      )}
     </>
   );
   return formGroup ? <FormGroup error={hasError}>{content}</FormGroup> : content;
