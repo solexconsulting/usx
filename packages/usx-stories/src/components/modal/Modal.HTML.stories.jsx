@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/modal/modal.html?raw';
+import html from '../../../../usx-react/src/components/modal/modal.html?raw';
 
 import modal from "@uswds/uswds/js/usa-modal";
 import { uswdsInitNote } from '../../utils/storyHelpers.jsx';

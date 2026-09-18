@@ -1,5 +1,5 @@
 import React from 'react';
-import buttonHtml from '../../../../core/src/components/button/button.html?raw';
+import buttonHtml from '../../../../usx-react/src/components/button/button.html?raw';
 
 export default {
   title: 'HTML/USWDS/Button',

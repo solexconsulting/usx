@@ -1,4 +1,4 @@
-import iconConfig from '../../../../core/src/components/icon/config.json';
+import iconConfig from '../../../../usx-react/src/components/icon/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Icon.React.stories.jsx';
 

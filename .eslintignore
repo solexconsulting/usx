@@ -7,7 +7,7 @@ scripts/templates/
 *.cjs
 *.config.js
 *.config.cjs
-!packages/core/src/**/*.js
-!packages/core/src/**/*.jsx
-!packages/core/src/**/*.ts
-!packages/core/src/**/*.tsx
+!packages/usx-react/src/**/*.js
+!packages/usx-react/src/**/*.jsx
+!packages/usx-react/src/**/*.ts
+!packages/usx-react/src/**/*.tsx

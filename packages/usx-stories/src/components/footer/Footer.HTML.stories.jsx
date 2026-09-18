@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/footer/footer.html?raw';
+import html from '../../../../usx-react/src/components/footer/footer.html?raw';
 
 export default {
   title: 'HTML/USWDS/Footer',

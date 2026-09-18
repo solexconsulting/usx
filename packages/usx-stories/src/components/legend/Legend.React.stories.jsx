@@ -1,5 +1,5 @@
-import Legend from '../../../../core/src/components/legend/Legend.tsx';
-import config from '../../../../core/src/components/legend/config.json';
+import Legend from '../../../../usx-react/src/components/legend/Legend.tsx';
+import config from '../../../../usx-react/src/components/legend/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

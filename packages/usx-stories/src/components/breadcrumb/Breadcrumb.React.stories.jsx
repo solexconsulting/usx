@@ -1,6 +1,6 @@
 
-import Breadcrumb from '../../../../core/src/components/breadcrumb/Breadcrumb.tsx';
-import config from '../../../../core/src/components/breadcrumb/config.json';
+import Breadcrumb from '../../../../usx-react/src/components/breadcrumb/Breadcrumb.tsx';
+import config from '../../../../usx-react/src/components/breadcrumb/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

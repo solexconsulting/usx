@@ -1,6 +1,6 @@
 import React from 'react';
-import Page from '../../../../core/src/components/page/Page.jsx';
-import config from '../../../../core/src/components/page/config.json';
+import Page from '../../../../usx-react/src/components/page/Page.jsx';
+import config from '../../../../usx-react/src/components/page/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {

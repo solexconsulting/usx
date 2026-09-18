@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/{{kebab}}/config.json';
+import config from '../../../../usx-react/src/components/{{kebab}}/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './{{Name}}.React.stories.jsx';
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Table from '../../../../core/src/components/table/Table.tsx';
-import config from '../../../../core/src/components/table/config.json';
+import Table from '../../../../usx-react/src/components/table/Table.tsx';
+import config from '../../../../usx-react/src/components/table/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

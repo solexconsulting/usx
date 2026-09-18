@@ -86,7 +86,7 @@ importers:
         version: link:../../packages/usx
       '@solexllc/usx-theme':
         specifier: workspace:*
-        version: link:../../packages/tokens
+        version: link:../../packages/usx-theme
       '@uswds/uswds':
         specifier: ^3.14.0
         version: 3.14.0
@@ -94,14 +94,14 @@ importers:
         specifier: ^1.98.0
         version: 1.98.0
 
-  packages/core:
+  packages/usx-react:
     dependencies:
       '@solexllc/usx':
         specifier: workspace:*
         version: link:../usx
       '@solexllc/usx-theme':
         specifier: workspace:*
-        version: link:../tokens
+        version: link:../usx-theme
       '@solexllc/usx-uswds-fixes':
         specifier: workspace:*
         version: link:../usx-uswds-fixes
@@ -128,13 +128,13 @@ importers:
         specifier: ^6.4.1
         version: 6.4.1(@types/node@25.7.0)(sass@1.98.0)(terser@5.47.1)
 
-  packages/tokens: {}
+  packages/usx-theme: {}
 
   packages/usx:
     dependencies:
       '@solexllc/usx-theme':
         specifier: workspace:*
-        version: link:../tokens
+        version: link:../usx-theme
     devDependencies:
       sass:
         specifier: ^1.98.0
@@ -144,7 +144,7 @@ importers:
     dependencies:
       '@solexllc/usx-theme':
         specifier: workspace:*
-        version: link:../tokens
+        version: link:../usx-theme
       '@uswds/uswds':
         specifier: ^3.14.0
         version: 3.14.0
@@ -165,7 +165,7 @@ importers:
     dependencies:
       '@solexllc/usx-theme':
         specifier: workspace:*
-        version: link:../tokens
+        version: link:../usx-theme
 
 packages:
 

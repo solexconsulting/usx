@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/indicator/config.json';
+import config from '../../../../usx-react/src/components/indicator/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Indicator.React.stories.jsx';
 

@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/search/config.json';
+import config from '../../../../usx-react/src/components/search/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Search.React.stories.jsx';
 

@@ -1,6 +1,6 @@
 
-import CardGroup from '../../../../core/src/components/card-group/CardGroup.tsx';
-import config from '../../../../core/src/components/card-group/config.json';
+import CardGroup from '../../../../usx-react/src/components/card-group/CardGroup.tsx';
+import config from '../../../../usx-react/src/components/card-group/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

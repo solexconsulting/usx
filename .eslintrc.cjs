@@ -39,7 +39,7 @@ module.exports = {
   overrides: [
     {
       // Build/generator scripts legitimately log to the console.
-      files: ['scripts/**', 'packages/*/scripts/**', 'packages/*/test/**', 'packages/tokens/build.js'],
+      files: ['scripts/**', 'packages/*/scripts/**', 'packages/*/test/**', 'packages/usx-theme/build.js'],
       rules: { 'no-console': 'off' },
     },
   ],

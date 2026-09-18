@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/card/card.html?raw';
+import html from '../../../../usx-react/src/components/card/card.html?raw';
 
 export default {
   title: 'HTML/USWDS/Card',

@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/layout/config.json';
+import config from '../../../../usx-react/src/components/layout/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Layout.React.stories.jsx';
 

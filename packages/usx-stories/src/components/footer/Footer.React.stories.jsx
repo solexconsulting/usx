@@ -1,7 +1,7 @@
 import React from 'react';
-import Footer from '../../../../core/src/components/footer/Footer.tsx';
-import Branding from '../../../../core/src/components/header/Branding.tsx';
-import config from '../../../../core/src/components/footer/config.json';
+import Footer from '../../../../usx-react/src/components/footer/Footer.tsx';
+import Branding from '../../../../usx-react/src/components/header/Branding.tsx';
+import config from '../../../../usx-react/src/components/footer/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export default {

@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/switch/switch.html?raw';
+import html from '../../../../usx-react/src/components/switch/switch.html?raw';
 
 export default {
   title: 'HTML/USX/Switch',

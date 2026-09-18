@@ -1,8 +1,8 @@
 import React from 'react';
-import Swap from '../../../../core/src/components/swap/Swap.tsx';
-import config from '../../../../core/src/components/swap/config.json';
+import Swap from '../../../../usx-react/src/components/swap/Swap.tsx';
+import config from '../../../../usx-react/src/components/swap/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
-import Icon from '../../../../core/src/components/icon/Icon.tsx';
+import Icon from '../../../../usx-react/src/components/icon/Icon.tsx';
 
 const commonArgs = {
   className: '',

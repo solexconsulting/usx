@@ -868,6 +868,11 @@ export const componentContracts = {
           "default": "",
           "description": "Placeholder text for the field."
         },
+        "defaultValue": {
+          "type": "string",
+          "default": "",
+          "description": "Initial value of the field."
+        },
         "textArea": {
           "type": "boolean",
           "default": false,

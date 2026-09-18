@@ -43,14 +43,14 @@ export default {
     config.server.watch.usePolling = true;
     config.server.watch.interval = 300;
 
-    // `packages/tokens/src/*` (_variables.scss, theme-manifest.js,
+    // `packages/usx-theme/src/*` (_variables.scss, theme-manifest.js,
     // system-colors.generated.js) is only ever reached indirectly through
     // Sass's `pkg:@solexllc/usx-theme/...` NodePackageImporter resolution.
     // Vite's CSS dependency graph can't see through that custom importer,
     // so it never knows any *.scss that `@use`s these files needs to be
     // recompiled when they change — even `devSourcemap` and a full browser
     // reload aren't enough, since the stale transform is cached server-side.
-    // `packages/tokens/dist/*` (_hooks.scss, theme.css, theme-manifest.json)
+    // `packages/usx-theme/dist/*` (_hooks.scss, theme.css, theme-manifest.json)
     // has the exact same problem — it's what `pkg:@solexllc/usx-theme/hooks`
     // actually resolves to (regenerated from src by the tokens package's own
     // build/watch process). `packages/usx/src/*` and
@@ -63,13 +63,13 @@ export default {
       name: 'usx-sass-watch-reload',
       configureServer(server) {
         const watchDirs = [
-          '../../../packages/tokens/dist',
+          '../../../packages/usx-theme/dist',
           '../../../packages/usx/src',
           '../../../packages/usx-uswds-fixes/src',
-          '../../../packages/core/src',
+          '../../../packages/usx-react/src',
           '../../../packages/usx-stories/src',
         ].map((p) => fileURLToPath(new URL(p, import.meta.url)));
-        // tokens/src changes are picked up by the tokens watcher (`pnpm dev`),
+        // usx-theme/src changes are picked up by the tokens watcher (`pnpm dev`),
         // which rewrites tokens/dist — that write is what triggers the reload.
         for (const dir of watchDirs) server.watcher.add(dir);
 

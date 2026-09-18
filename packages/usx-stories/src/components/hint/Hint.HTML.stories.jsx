@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/hint/hint.html?raw';
+import html from '../../../../usx-react/src/components/hint/hint.html?raw';
 
 export default {
   title: 'HTML/USWDS/Hint',

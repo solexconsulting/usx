@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/hint/config.json';
+import config from '../../../../usx-react/src/components/hint/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Hint.React.stories.jsx';
 

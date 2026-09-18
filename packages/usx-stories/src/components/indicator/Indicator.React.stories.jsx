@@ -1,6 +1,6 @@
 import React from 'react';
-import Indicator from '../../../../core/src/components/indicator/Indicator.tsx';
-import config from '../../../../core/src/components/indicator/config.json';
+import Indicator from '../../../../usx-react/src/components/indicator/Indicator.tsx';
+import config from '../../../../usx-react/src/components/indicator/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export default {

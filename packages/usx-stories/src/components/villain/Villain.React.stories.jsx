@@ -1,6 +1,6 @@
 // import React from 'react';
-import Villain from '../../../../core/src/components/villain/Villain.tsx';
-import config from '../../../../core/src/components/villain/config.json';
+import Villain from '../../../../usx-react/src/components/villain/Villain.tsx';
+import config from '../../../../usx-react/src/components/villain/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

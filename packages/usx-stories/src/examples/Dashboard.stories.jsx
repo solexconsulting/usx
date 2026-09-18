@@ -1,18 +1,18 @@
 import React from 'react';
-import Skipnav from '../../../core/src/components/skipnav/Skipnav.tsx';
-import Banner from '../../../core/src/components/banner/Banner.tsx';
-import MiscBanner from '../../../core/src/components/misc-banner/MiscBanner.tsx';
-import Header from '../../../core/src/components/header/Header.tsx';
-import Footer from '../../../core/src/components/footer/Footer.tsx';
-import Button from '../../../core/src/components/button/Button.tsx';
-import ButtonGroup from '../../../core/src/components/button-group/ButtonGroup.tsx';
-import Icon from '../../../core/src/components/icon/Icon.tsx';
-import Identifier from '../../../core/src/components/identifier/Identifier.tsx';
-import Layout from '../../../core/src/components/layout/Layout.tsx';
-import Page from '../../../core/src/components/page/Page.jsx';
-import Section from '../../../core/src/components/section/Section.tsx';
-import Status from '../../../core/src/components/status/Status.tsx';
-import Table from '../../../core/src/components/table/Table.tsx';
+import Skipnav from '../../../usx-react/src/components/skipnav/Skipnav.tsx';
+import Banner from '../../../usx-react/src/components/banner/Banner.tsx';
+import MiscBanner from '../../../usx-react/src/components/misc-banner/MiscBanner.tsx';
+import Header from '../../../usx-react/src/components/header/Header.tsx';
+import Footer from '../../../usx-react/src/components/footer/Footer.tsx';
+import Button from '../../../usx-react/src/components/button/Button.tsx';
+import ButtonGroup from '../../../usx-react/src/components/button-group/ButtonGroup.tsx';
+import Icon from '../../../usx-react/src/components/icon/Icon.tsx';
+import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
+import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
+import Page from '../../../usx-react/src/components/page/Page.jsx';
+import Section from '../../../usx-react/src/components/section/Section.tsx';
+import Status from '../../../usx-react/src/components/status/Status.tsx';
+import Table from '../../../usx-react/src/components/table/Table.tsx';
 import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './commonArgs.js';
 
 export default {

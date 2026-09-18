@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/label/label.html?raw';
+import html from '../../../../usx-react/src/components/label/label.html?raw';
 
 export default {
   title: 'HTML/USWDS/Label',

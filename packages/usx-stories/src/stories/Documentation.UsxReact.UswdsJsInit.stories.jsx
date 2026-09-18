@@ -1,5 +1,5 @@
 import React from 'react';
-import Code from '../../../core/src/components/code/Code';
+import Code from '../../../usx-react/src/components/code/Code';
 
 export default {
   title: 'Documentation/USX React/USWDS JS Initialization',

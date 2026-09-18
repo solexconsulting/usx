@@ -1,6 +1,6 @@
 import React from 'react';
-import ProcessList from '../../../../core/src/components/process-list/ProcessList.tsx';
-import config from '../../../../core/src/components/process-list/config.json';
+import ProcessList from '../../../../usx-react/src/components/process-list/ProcessList.tsx';
+import config from '../../../../usx-react/src/components/process-list/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export default {

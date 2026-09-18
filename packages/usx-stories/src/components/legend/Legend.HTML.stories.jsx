@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/legend/legend.html?raw';
+import html from '../../../../usx-react/src/components/legend/legend.html?raw';
 
 export default {
   title: 'HTML/USWDS/Legend',

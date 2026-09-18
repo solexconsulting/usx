@@ -1,5 +1,5 @@
-import Label from '../../../../core/src/components/label/Label.tsx';
-import config from '../../../../core/src/components/label/config.json';
+import Label from '../../../../usx-react/src/components/label/Label.tsx';
+import config from '../../../../usx-react/src/components/label/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

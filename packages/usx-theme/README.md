@@ -1,4 +1,4 @@
-Design tokens package for agency-ui-platform.
+Design tokens package for USX.
 
 This package stores platform-agnostic tokens in JSON source files and compiles them for CSS and JavaScript consumers.
 

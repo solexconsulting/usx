@@ -1,5 +1,5 @@
-import Hero from '../../../../core/src/components/hero/Hero.tsx';
-import config from '../../../../core/src/components/hero/config.json';
+import Hero from '../../../../usx-react/src/components/hero/Hero.tsx';
+import config from '../../../../usx-react/src/components/hero/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

@@ -1,6 +1,6 @@
 import React from 'react';
-import TimePicker from '../../../../core/src/components/time-picker/TimePicker.jsx';
-import config from '../../../../core/src/components/time-picker/config.json';
+import TimePicker from '../../../../usx-react/src/components/time-picker/TimePicker.jsx';
+import config from '../../../../usx-react/src/components/time-picker/config.json';
 import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import timePicker from "@uswds/uswds/js/usa-time-picker";
 

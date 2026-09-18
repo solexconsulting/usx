@@ -1,4 +1,4 @@
-import proseConfig from '../../../../core/src/components/prose/config.json';
+import proseConfig from '../../../../usx-react/src/components/prose/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Prose.React.stories.jsx';
 

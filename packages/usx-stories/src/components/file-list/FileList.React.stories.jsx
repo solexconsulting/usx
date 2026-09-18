@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import FileList from '../../../../core/src/components/file-list/FileList.jsx';
-import config from '../../../../core/src/components/file-list/config.json';
+import FileList from '../../../../usx-react/src/components/file-list/FileList.jsx';
+import config from '../../../../usx-react/src/components/file-list/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

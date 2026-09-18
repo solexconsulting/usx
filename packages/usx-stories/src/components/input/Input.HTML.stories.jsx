@@ -1,5 +1,5 @@
 import React from 'react';
-import inputHtml from '../../../../core/src/components/input/input.html?raw';
+import inputHtml from '../../../../usx-react/src/components/input/input.html?raw';
 
 export default {
   title: 'HTML/USWDS/Input',

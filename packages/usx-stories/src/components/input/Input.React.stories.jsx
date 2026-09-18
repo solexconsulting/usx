@@ -1,5 +1,5 @@
-import Input from '../../../../core/src/components/input/Input.tsx';
-import inputConfig from '../../../../core/src/components/input/config.json';
+import Input from '../../../../usx-react/src/components/input/Input.tsx';
+import inputConfig from '../../../../usx-react/src/components/input/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(inputConfig.props || {});

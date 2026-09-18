@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/radio-buttons/radio-buttons.html?raw';
+import html from '../../../../usx-react/src/components/radio-buttons/radio-buttons.html?raw';
 
 export default {
   title: 'HTML/USWDS/RadioButtons',

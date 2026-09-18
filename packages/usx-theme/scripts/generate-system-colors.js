@@ -7,7 +7,7 @@
 // hand-edits these values — this script is the only thing that should ever
 // write src/system-colors.generated.js. Re-run it after bumping @uswds/uswds.
 //
-// Usage: node packages/tokens/scripts/generate-system-colors.js
+// Usage: node packages/usx-theme/scripts/generate-system-colors.js
 
 import fs from 'fs';
 import path from 'path';

@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/site-alert/site-alert.html?raw';
+import html from '../../../../usx-react/src/components/site-alert/site-alert.html?raw';
 
 export default {
   title: 'HTML/USWDS/SiteAlert',

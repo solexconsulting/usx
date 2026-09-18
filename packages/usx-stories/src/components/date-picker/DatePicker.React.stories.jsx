@@ -1,6 +1,6 @@
 import React from 'react';
-import DatePicker from '../../../../core/src/components/date-picker/DatePicker.jsx';
-import config from '../../../../core/src/components/date-picker/config.json';
+import DatePicker from '../../../../usx-react/src/components/date-picker/DatePicker.jsx';
+import config from '../../../../usx-react/src/components/date-picker/config.json';
 import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import datePicker from "@uswds/uswds/js/usa-date-picker";
 

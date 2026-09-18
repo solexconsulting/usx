@@ -1,7 +1,7 @@
 import React from 'react';
 import { themeManifest } from '@solexllc/usx-theme/theme-manifest';
 import { useLiveTokenValues, getLiveValue } from '../utils/useLiveTokenValues.js';
-import Code from '../../../core/src/components/code/Code';
+import Code from '../../../usx-react/src/components/code/Code';
 
 export default {
   title: 'Documentation/Theme/Typography',

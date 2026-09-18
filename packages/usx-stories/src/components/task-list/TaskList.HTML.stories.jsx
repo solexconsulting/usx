@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/task-list/task-list.html?raw';
+import html from '../../../../usx-react/src/components/task-list/task-list.html?raw';
 
 export default {
   title: 'HTML/USX/TaskList',

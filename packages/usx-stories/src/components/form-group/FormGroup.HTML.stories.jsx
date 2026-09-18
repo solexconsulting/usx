@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/form-group/form-group.html?raw';
+import html from '../../../../usx-react/src/components/form-group/form-group.html?raw';
 
 export default {
   title: 'HTML/USWDS/FormGroup',

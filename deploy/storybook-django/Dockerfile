@@ -8,8 +8,8 @@ WORKDIR /app
 COPY apps/storybook-django/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the full monorepo so Django can resolve templates in packages/core.
-COPY packages/core/src/components packages/core/src/components
+# Copy the full monorepo so Django can resolve templates in packages/usx-react.
+COPY packages/usx-react/src/components packages/usx-react/src/components
 COPY apps/storybook-django apps/storybook-django
 # Copy Gunicorn config.
 COPY deploy/storybook-django/gunicorn.conf.py /app/gunicorn.conf.py

@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/clickable/config.json';
+import config from '../../../../usx-react/src/components/clickable/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {

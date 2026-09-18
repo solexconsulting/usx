@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import config from '../../../../core/src/components/file-input/config.json';
+import config from '../../../../usx-react/src/components/file-input/config.json';
 import { buildArgTypes, createDjangoStory, componentTag } from '../../utils/storyHelpers.jsx';
 import { useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
 import {

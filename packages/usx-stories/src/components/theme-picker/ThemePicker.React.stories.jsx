@@ -1,10 +1,10 @@
 import React from 'react';
 import { useGlobals } from 'storybook/preview-api';
-import ThemePicker from '../../../../core/src/components/theme-picker/ThemePicker.tsx';
-import config from '../../../../core/src/components/theme-picker/config.json';
+import ThemePicker from '../../../../usx-react/src/components/theme-picker/ThemePicker.tsx';
+import config from '../../../../usx-react/src/components/theme-picker/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 import { PRESETS } from '../../utils/themePresets.js';
-import Alert from '../../../../core/src/components/alert/Alert.tsx';
+import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
 const PRESET_NAMES = Object.keys(PRESETS);
 // Same theme names as the toolbar. ThemePicker itself only renders the

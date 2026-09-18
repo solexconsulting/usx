@@ -1,6 +1,6 @@
 import React from 'react';
-import CopyToClipboard from '../../../../core/src/components/copy-to-clipboard/CopyToClipboard.tsx';
-import config from '../../../../core/src/components/copy-to-clipboard/config.json';
+import CopyToClipboard from '../../../../usx-react/src/components/copy-to-clipboard/CopyToClipboard.tsx';
+import config from '../../../../usx-react/src/components/copy-to-clipboard/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export default {

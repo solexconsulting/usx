@@ -1,8 +1,8 @@
 import React from 'react';
-import FormGroup from '../../../../core/src/components/form-group/FormGroup.tsx';
-import config from '../../../../core/src/components/form-group/config.json';
+import FormGroup from '../../../../usx-react/src/components/form-group/FormGroup.tsx';
+import config from '../../../../usx-react/src/components/form-group/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
-import Input from '../../../../core/src/components/input/Input.tsx';
+import Input from '../../../../usx-react/src/components/input/Input.tsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 

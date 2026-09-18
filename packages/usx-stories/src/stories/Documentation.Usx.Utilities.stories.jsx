@@ -1,7 +1,7 @@
 import React from 'react';
-import Code from '../../../core/src/components/code/Code';
-import Status from '../../../core/src/components/status/Status';
-import Tag from '../../../core/src/components/tag/Tag';
+import Code from '../../../usx-react/src/components/code/Code';
+import Status from '../../../usx-react/src/components/status/Status';
+import Tag from '../../../usx-react/src/components/tag/Tag';
 
 export default {
   title: 'Documentation/USX/Utilities',

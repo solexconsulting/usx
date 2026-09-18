@@ -1,5 +1,5 @@
 // import React from 'react';
-import SideNav from '../../../../core/src/components/sidenav/SideNav.tsx';
+import SideNav from '../../../../usx-react/src/components/sidenav/SideNav.tsx';
 
 export default {
   title: 'React/USWDS/SideNav',

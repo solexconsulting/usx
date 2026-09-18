@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import Ajv from 'ajv';
 
 export const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
-export const CORE_DIR = path.join(REPO_ROOT, 'packages', 'core');
+export const CORE_DIR = path.join(REPO_ROOT, 'packages', 'usx-react');
 export const COMPONENTS_DIR = path.join(CORE_DIR, 'src', 'components');
 export const SCHEMA_PATH = path.join(CORE_DIR, 'config.schema.json');
 export const CONTRACTS_PATH = path.join(CORE_DIR, 'src', 'contracts.js');
@@ -60,7 +60,7 @@ export function findComponentFile(dir) {
   return { file: loose, exportName: loose.replace(/\.(tsx|jsx)$/, '') };
 }
 
-// Source text of packages/core/src/index.js: one export per component dir
+// Source text of packages/usx-react/src/index.js: one export per component dir
 // that has a React entry file.
 export function buildIndexSource() {
   const lines = [];

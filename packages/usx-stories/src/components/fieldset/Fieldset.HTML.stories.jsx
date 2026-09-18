@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/fieldset/fieldset.html?raw';
+import html from '../../../../usx-react/src/components/fieldset/fieldset.html?raw';
 
 export default {
   title: 'HTML/USWDS/Fieldset',

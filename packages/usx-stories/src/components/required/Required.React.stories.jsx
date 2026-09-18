@@ -1,5 +1,5 @@
-import Required from '../../../../core/src/components/required/Required.tsx';
-import config from '../../../../core/src/components/required/config.json';
+import Required from '../../../../usx-react/src/components/required/Required.tsx';
+import config from '../../../../usx-react/src/components/required/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

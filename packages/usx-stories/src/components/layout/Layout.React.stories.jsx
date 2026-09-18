@@ -1,6 +1,6 @@
 import React from 'react';
-import Layout from '../../../../core/src/components/layout/Layout.tsx';
-import SideNav from '../../../../core/src/components/sidenav/SideNav.tsx';
+import Layout from '../../../../usx-react/src/components/layout/Layout.tsx';
+import SideNav from '../../../../usx-react/src/components/sidenav/SideNav.tsx';
 
 export default {
   title: 'React/USX/Layout',

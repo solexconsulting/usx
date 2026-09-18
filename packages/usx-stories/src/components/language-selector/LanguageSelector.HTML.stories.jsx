@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/language-selector/language-selector.html?raw';
+import html from '../../../../usx-react/src/components/language-selector/language-selector.html?raw';
 import languageSelector from '@uswds/uswds/js/usa-language-selector';
 import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
 

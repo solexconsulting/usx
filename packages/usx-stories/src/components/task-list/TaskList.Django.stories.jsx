@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/task-list/config.json';
+import config from '../../../../usx-react/src/components/task-list/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './TaskList.React.stories.jsx';
 

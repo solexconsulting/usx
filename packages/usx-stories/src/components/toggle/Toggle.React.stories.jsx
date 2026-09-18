@@ -1,6 +1,6 @@
 // import React from 'react';
-import Toggle from '../../../../core/src/components/toggle/Toggle.tsx';
-import config from '../../../../core/src/components/toggle/config.json';
+import Toggle from '../../../../usx-react/src/components/toggle/Toggle.tsx';
+import config from '../../../../usx-react/src/components/toggle/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 

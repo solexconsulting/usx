@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Regenerates packages/core/src/index.js — the barrel that exports every
+// Regenerates packages/usx-react/src/index.js — the barrel that exports every
 // React component (and the entry point for the core package's Vite build).
 // Run: pnpm generate:exports
 import fs from 'node:fs';

@@ -1,5 +1,5 @@
-import TaskList from '../../../../core/src/components/task-list/TaskList.tsx';
-import config from '../../../../core/src/components/task-list/config.json';
+import TaskList from '../../../../usx-react/src/components/task-list/TaskList.tsx';
+import config from '../../../../usx-react/src/components/task-list/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const taskTags = {

@@ -1,5 +1,5 @@
 
-import config from '../../../../core/src/components/header/config.json';
+import config from '../../../../usx-react/src/components/header/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Header.React.stories.jsx';
 

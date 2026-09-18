@@ -1,7 +1,7 @@
 import React from 'react';
 import { themeManifest } from '@solexllc/usx-theme/theme-manifest';
 import { useLiveTokenValues, getLiveValue } from '../utils/useLiveTokenValues.js';
-import Alert from '../../../core/src/components/alert/Alert.tsx';
+import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
 
 export default {
   title: 'Documentation/Theme/Colors',

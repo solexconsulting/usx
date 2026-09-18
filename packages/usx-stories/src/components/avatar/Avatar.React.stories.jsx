@@ -1,6 +1,6 @@
 // import React from 'react';
-import Avatar from '../../../../core/src/components/avatar/Avatar.tsx';
-import config from '../../../../core/src/components/avatar/config.json';
+import Avatar from '../../../../usx-react/src/components/avatar/Avatar.tsx';
+import config from '../../../../usx-react/src/components/avatar/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const baseArgs = {

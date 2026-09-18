@@ -1,4 +1,4 @@
-Core component library for agency-ui-platform.
+React component library for USX.
 
 This package uses a self-contained component structure where each component owns its canonical HTML, Django template, styling, and React wrapper.
 
@@ -36,7 +36,7 @@ Component `.scss` files consume design token variables published by
 `@solexllc/usx-theme` (for example `$usx-color-primary`, `$usx-spacing-md`,
 `$usx-radius-md`). These compile to `var(--usx-*, <default>)` by default, so
 every token is runtime-themeable — see
-[packages/tokens/README.md](../tokens/README.md) for the full theming guide.
+[packages/usx-theme/README.md](../usx-theme/README.md) for the full theming guide.
 
 Load `@solexllc/usx`'s compiled CSS (or `src/index.scss`, per that package's
 build) so tokens and component styles are available together.

@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/error-message/error-message.html?raw';
+import html from '../../../../usx-react/src/components/error-message/error-message.html?raw';
 
 export default {
   title: 'HTML/USWDS/ErrorMessage',

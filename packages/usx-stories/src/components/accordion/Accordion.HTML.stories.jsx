@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/accordion/accordion.html?raw';
+import html from '../../../../usx-react/src/components/accordion/accordion.html?raw';
 import accordion from "@uswds/uswds/js/usa-accordion";
 import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
 

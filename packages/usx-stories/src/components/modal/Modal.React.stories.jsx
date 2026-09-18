@@ -1,7 +1,7 @@
 import React from 'react';
-import Modal from '../../../../core/src/components/modal/Modal.tsx';
-import Button from '../../../../core/src/components/button/Button.tsx';
-import config from '../../../../core/src/components/modal/config.json';
+import Modal from '../../../../usx-react/src/components/modal/Modal.tsx';
+import Button from '../../../../usx-react/src/components/button/Button.tsx';
+import config from '../../../../usx-react/src/components/modal/config.json';
 import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import modal from "@uswds/uswds/js/usa-modal";
 

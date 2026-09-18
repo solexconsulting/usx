@@ -1,6 +1,6 @@
 import React from 'react';
-import Skipnav from '../../../../core/src/components/skipnav/Skipnav.tsx';
-import config from '../../../../core/src/components/skipnav/config.json';
+import Skipnav from '../../../../usx-react/src/components/skipnav/Skipnav.tsx';
+import config from '../../../../usx-react/src/components/skipnav/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

@@ -1,6 +1,6 @@
 // import React from 'react';
-import TextArea from '../../../../core/src/components/text-area/TextArea.tsx';
-import config from '../../../../core/src/components/text-area/config.json';
+import TextArea from '../../../../usx-react/src/components/text-area/TextArea.tsx';
+import config from '../../../../usx-react/src/components/text-area/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

@@ -1,6 +1,6 @@
 
-import Identifier from '../../../../core/src/components/identifier/Identifier.tsx';
-import config from '../../../../core/src/components/identifier/config.json';
+import Identifier from '../../../../usx-react/src/components/identifier/Identifier.tsx';
+import config from '../../../../usx-react/src/components/identifier/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const linksEn = [

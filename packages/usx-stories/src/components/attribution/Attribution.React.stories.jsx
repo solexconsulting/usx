@@ -1,6 +1,6 @@
 
-import Attribution from '../../../../core/src/components/attribution/Attribution.tsx';
-import config from '../../../../core/src/components/attribution/config.json';
+import Attribution from '../../../../usx-react/src/components/attribution/Attribution.tsx';
+import config from '../../../../usx-react/src/components/attribution/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {

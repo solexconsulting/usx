@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/site-alert/config.json';
+import config from '../../../../usx-react/src/components/site-alert/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './SiteAlert.React.stories.jsx';
 

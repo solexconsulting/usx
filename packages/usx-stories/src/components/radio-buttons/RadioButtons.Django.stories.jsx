@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/radio-buttons/config.json';
+import config from '../../../../usx-react/src/components/radio-buttons/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './RadioButtons.React.stories.jsx';
 

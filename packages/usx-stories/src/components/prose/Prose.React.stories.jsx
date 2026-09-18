@@ -1,5 +1,5 @@
-import Prose from '../../../../core/src/components/prose/Prose.tsx';
-import config from '../../../../core/src/components/prose/config.json';
+import Prose from '../../../../usx-react/src/components/prose/Prose.tsx';
+import config from '../../../../usx-react/src/components/prose/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

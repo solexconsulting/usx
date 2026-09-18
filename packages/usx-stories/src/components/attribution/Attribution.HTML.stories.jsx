@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/attribution/attribution.html?raw';
+import html from '../../../../usx-react/src/components/attribution/attribution.html?raw';
 
 export default {
   title: 'HTML/USX/Attribution',

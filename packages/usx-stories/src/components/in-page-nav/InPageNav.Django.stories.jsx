@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../../../../core/src/components/in-page-nav/config.json';
+import config from '../../../../usx-react/src/components/in-page-nav/config.json';
 import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './InPageNav.React.stories.jsx';
 import inPageNavigation from '@uswds/uswds/js/usa-in-page-navigation';

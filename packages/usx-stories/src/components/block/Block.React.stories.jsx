@@ -1,6 +1,6 @@
 import React from 'react';
-import Block from '../../../../core/src/components/block/Block.tsx';
-import config from '../../../../core/src/components/block/config.json';
+import Block from '../../../../usx-react/src/components/block/Block.tsx';
+import config from '../../../../usx-react/src/components/block/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../../../../core/src/components/button/config.json';
+import config from '../../../../usx-react/src/components/button/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Button.React.stories.jsx';
 

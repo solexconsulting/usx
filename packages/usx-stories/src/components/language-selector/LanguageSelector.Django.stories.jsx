@@ -1,6 +1,6 @@
 import React from 'react';
 import languageSelector from '@uswds/uswds/js/usa-language-selector';
-import config from '../../../../core/src/components/language-selector/config.json';
+import config from '../../../../usx-react/src/components/language-selector/config.json';
 import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './LanguageSelector.React.stories.jsx';
 

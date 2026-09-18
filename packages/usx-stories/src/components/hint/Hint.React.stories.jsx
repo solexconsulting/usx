@@ -1,5 +1,5 @@
-import Hint from '../../../../core/src/components/hint/Hint.tsx';
-import config from '../../../../core/src/components/hint/config.json';
+import Hint from '../../../../usx-react/src/components/hint/Hint.tsx';
+import config from '../../../../usx-react/src/components/hint/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/date-picker/date-picker.html?raw';
+import html from '../../../../usx-react/src/components/date-picker/date-picker.html?raw';
 import datePicker from "@uswds/uswds/js/usa-date-picker";
 import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
 

@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/block/config.json';
+import config from '../../../../usx-react/src/components/block/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Block.React.stories.jsx';
 

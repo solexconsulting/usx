@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/calendar-date/calendar-date.html?raw';
+import html from '../../../../usx-react/src/components/calendar-date/calendar-date.html?raw';
 
 export default {
   title: 'HTML/USWDS/CalendarDate',

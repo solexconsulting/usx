@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/copy-to-clipboard/copy-to-clipboard.html?raw';
+import html from '../../../../usx-react/src/components/copy-to-clipboard/copy-to-clipboard.html?raw';
 
 export default {
   title: 'HTML/USX/CopyToClipboard',

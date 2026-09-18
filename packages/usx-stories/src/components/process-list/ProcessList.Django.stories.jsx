@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/process-list/config.json';
+import config from '../../../../usx-react/src/components/process-list/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './ProcessList.React.stories.jsx';
 

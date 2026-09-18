@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import config from '../../../../core/src/components/spinner/config.json';
+import config from '../../../../usx-react/src/components/spinner/config.json';
 import { buildArgTypes, createDjangoStory, createBulkDjangoStory, getComponentHtml, componentTag } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Spinner.React.stories.jsx';
 

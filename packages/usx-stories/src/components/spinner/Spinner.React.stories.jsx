@@ -1,7 +1,7 @@
 import React from 'react';
-import Spinner from '../../../../core/src/components/spinner/Spinner.tsx';
-import config from '../../../../core/src/components/spinner/config.json';
-import Tooltip from '../../../../core/src/components/tooltip/Tooltip.tsx';
+import Spinner from '../../../../usx-react/src/components/spinner/Spinner.tsx';
+import config from '../../../../usx-react/src/components/spinner/config.json';
+import Tooltip from '../../../../usx-react/src/components/tooltip/Tooltip.tsx';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {

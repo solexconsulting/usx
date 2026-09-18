@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Pagination from '../../../../core/src/components/pagination/Pagination.tsx';
-import PaginationNavigation from '../../../../core/src/components/pagination/navigation/PaginationNavigation.tsx';
-import PaginationStepOptions from '../../../../core/src/components/pagination/step-options/PaginationStepOptions.tsx';
-import PaginationSummary from '../../../../core/src/components/pagination/summary/PaginationSummary.tsx';
+import Pagination from '../../../../usx-react/src/components/pagination/Pagination.tsx';
+import PaginationNavigation from '../../../../usx-react/src/components/pagination/navigation/PaginationNavigation.tsx';
+import PaginationStepOptions from '../../../../usx-react/src/components/pagination/step-options/PaginationStepOptions.tsx';
+import PaginationSummary from '../../../../usx-react/src/components/pagination/summary/PaginationSummary.tsx';
 
 export default {
   title: 'React/USWDS/Pagination',

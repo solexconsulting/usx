@@ -21,7 +21,7 @@ export const Overview = {
       </p>
 
       <h2>Packages</h2>
-      <p>This repository (<code>agency-ui-platform</code>) publishes four scoped packages:</p>
+      <p>This repository (<code>USX</code>) publishes four scoped packages:</p>
       <table className="usa-table usx-table usa-table--borderless" style={{ width: '100%' }}>
         <thead>
           <tr>

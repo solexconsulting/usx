@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/section/section.html?raw';
+import html from '../../../../usx-react/src/components/section/section.html?raw';
 
 export default {
   title: 'HTML/USX/Section',

@@ -1,9 +1,9 @@
 import React from 'react';
-import SummaryBox from '../../../../core/src/components/summary-box/SummaryBox.tsx';
-import config from '../../../../core/src/components/summary-box/config.json';
+import SummaryBox from '../../../../usx-react/src/components/summary-box/SummaryBox.tsx';
+import config from '../../../../usx-react/src/components/summary-box/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
-import List from '../../../../core/src/components/list/List.tsx';
-import IconList from '../../../../core/src/components/icon-list/IconList.tsx';
+import List from '../../../../usx-react/src/components/list/List.tsx';
+import IconList from '../../../../usx-react/src/components/icon-list/IconList.tsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 

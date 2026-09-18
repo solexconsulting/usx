@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/tooltip/tooltip.html?raw';
+import html from '../../../../usx-react/src/components/tooltip/tooltip.html?raw';
 
 export default {
   title: 'HTML/USWDS-Inspired/Tooltip (CSS-only)',

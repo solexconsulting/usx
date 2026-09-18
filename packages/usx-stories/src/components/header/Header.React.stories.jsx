@@ -1,6 +1,6 @@
 
-import Header from '../../../../core/src/components/header/Header.tsx';
-import config from '../../../../core/src/components/header/config.json';
+import Header from '../../../../usx-react/src/components/header/Header.tsx';
+import config from '../../../../usx-react/src/components/header/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export default {

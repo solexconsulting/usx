@@ -1,9 +1,9 @@
 import React from 'react';
 import { storyDefs } from './ThemePicker.React.stories.jsx';
-import config from '../../../../core/src/components/theme-picker/config.json';
+import config from '../../../../usx-react/src/components/theme-picker/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { useGlobals } from 'storybook/preview-api';
-import Alert from '../../../../core/src/components/alert/Alert.tsx';
+import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
 
 export default {

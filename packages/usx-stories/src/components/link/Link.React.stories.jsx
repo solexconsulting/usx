@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from '../../../../core/src/components/link/Link.tsx';
-import config from '../../../../core/src/components/link/config.json';
+import Link from '../../../../usx-react/src/components/link/Link.tsx';
+import config from '../../../../usx-react/src/components/link/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {

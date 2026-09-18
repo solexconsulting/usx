@@ -1,5 +1,5 @@
 // import React from 'react';
-import config from '../../../../core/src/components/footer/config.json';
+import config from '../../../../usx-react/src/components/footer/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Footer.React.stories.jsx';
 

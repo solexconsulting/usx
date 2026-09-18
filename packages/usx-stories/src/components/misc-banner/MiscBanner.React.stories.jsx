@@ -1,5 +1,5 @@
-import MiscBanner from '../../../../core/src/components/misc-banner/MiscBanner.tsx';
-import config from '../../../../core/src/components/misc-banner/config.json';
+import MiscBanner from '../../../../usx-react/src/components/misc-banner/MiscBanner.tsx';
+import config from '../../../../usx-react/src/components/misc-banner/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {

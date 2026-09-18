@@ -1,6 +1,6 @@
 import React from 'react';
-import IconList from '../../../../core/src/components/icon-list/IconList.tsx';
-import config from '../../../../core/src/components/icon-list/config.json';
+import IconList from '../../../../usx-react/src/components/icon-list/IconList.tsx';
+import config from '../../../../usx-react/src/components/icon-list/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

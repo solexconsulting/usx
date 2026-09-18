@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/breadcrumb/config.json';
+import config from '../../../../usx-react/src/components/breadcrumb/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Breadcrumb.React.stories.jsx';
 

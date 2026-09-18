@@ -1,6 +1,6 @@
 // import React from 'react';
-import AvatarGroup from '../../../../core/src/components/avatar-group/AvatarGroup.tsx';
-import config from '../../../../core/src/components/avatar-group/config.json';
+import AvatarGroup from '../../../../usx-react/src/components/avatar-group/AvatarGroup.tsx';
+import config from '../../../../usx-react/src/components/avatar-group/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const baseAvatars = (config.default && config.default.avatarProps) || [];

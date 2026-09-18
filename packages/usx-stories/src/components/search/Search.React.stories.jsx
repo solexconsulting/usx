@@ -1,6 +1,6 @@
 import React from 'react';
-import Search from '../../../../core/src/components/search/Search.tsx';
-import config from '../../../../core/src/components/search/config.json';
+import Search from '../../../../usx-react/src/components/search/Search.tsx';
+import config from '../../../../usx-react/src/components/search/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

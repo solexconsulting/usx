@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/memorable-date/config.json';
+import config from '../../../../usx-react/src/components/memorable-date/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './MemorableDate.React.stories.jsx';
 

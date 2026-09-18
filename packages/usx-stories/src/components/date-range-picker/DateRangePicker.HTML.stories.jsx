@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/date-range-picker/date-range-picker.html?raw';
+import html from '../../../../usx-react/src/components/date-range-picker/date-range-picker.html?raw';
 import datePicker from "@uswds/uswds/js/usa-date-picker";
 import dateRangePicker from "@uswds/uswds/js/usa-date-range-picker";
 import { uswdsInitNote } from '../../utils/storyHelpers.jsx';

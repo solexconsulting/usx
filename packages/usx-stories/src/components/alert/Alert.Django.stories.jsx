@@ -1,5 +1,5 @@
 // import React from 'react';
-import alertConfig from '../../../../core/src/components/alert/config.json';
+import alertConfig from '../../../../usx-react/src/components/alert/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Alert.React.stories.jsx';
 
@@ -16,6 +16,7 @@ const toDjangoArgs = (args) => Object.fromEntries(
 );
 
 export const Default = createStory(storyDefs.Default);
+export const Info = createStory(storyDefs.Info);
 export const Warning = createStory(storyDefs.Warning);
 export const Success = createStory(storyDefs.Success);
 export const Error = createStory(storyDefs.Error);

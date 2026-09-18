@@ -1,9 +1,9 @@
 
 import React from 'react';
-import Checkbox from '../../../../core/src/components/checkbox/Checkbox.tsx';
-import Fieldset from '../../../../core/src/components/fieldset/Fieldset.tsx';
-import FormGroup from '../../../../core/src/components/form-group/FormGroup.tsx';
-import config from '../../../../core/src/components/checkbox/config.json';
+import Checkbox from '../../../../usx-react/src/components/checkbox/Checkbox.tsx';
+import Fieldset from '../../../../usx-react/src/components/fieldset/Fieldset.tsx';
+import FormGroup from '../../../../usx-react/src/components/form-group/FormGroup.tsx';
+import config from '../../../../usx-react/src/components/checkbox/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

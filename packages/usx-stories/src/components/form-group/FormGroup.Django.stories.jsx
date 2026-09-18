@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/form-group/config.json';
+import config from '../../../../usx-react/src/components/form-group/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './FormGroup.React.stories.jsx';
 

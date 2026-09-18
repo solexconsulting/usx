@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/combobox/config.json';
+import config from '../../../../usx-react/src/components/combobox/config.json';
 import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Combobox.React.stories.jsx';
 import React from 'react';

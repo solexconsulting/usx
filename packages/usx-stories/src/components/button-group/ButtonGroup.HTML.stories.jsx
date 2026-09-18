@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/button-group/button-group.html?raw';
+import html from '../../../../usx-react/src/components/button-group/button-group.html?raw';
 
 export default {
   title: 'HTML/USWDS/ButtonGroup',

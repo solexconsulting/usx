@@ -1,6 +1,6 @@
 
-import Collection from '../../../../core/src/components/collection/Collection.tsx';
-import config from '../../../../core/src/components/collection/config.json';
+import Collection from '../../../../usx-react/src/components/collection/Collection.tsx';
+import config from '../../../../usx-react/src/components/collection/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const ITEMS_DEFAULT = [

@@ -1,6 +1,6 @@
 
-import Code from '../../../../core/src/components/code/Code.tsx';
-import config from '../../../../core/src/components/code/config.json';
+import Code from '../../../../usx-react/src/components/code/Code.tsx';
+import config from '../../../../usx-react/src/components/code/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const defaultLines = [

@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/header/header.html?raw';
+import html from '../../../../usx-react/src/components/header/header.html?raw';
 
 export default {
   title: 'HTML/USWDS/Header',

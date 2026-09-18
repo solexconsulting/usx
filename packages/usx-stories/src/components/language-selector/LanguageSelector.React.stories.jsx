@@ -1,6 +1,6 @@
 import React from 'react';
-import LanguageSelector from '../../../../core/src/components/language-selector/LanguageSelector.jsx';
-import config from '../../../../core/src/components/language-selector/config.json';
+import LanguageSelector from '../../../../usx-react/src/components/language-selector/LanguageSelector.jsx';
+import config from '../../../../usx-react/src/components/language-selector/config.json';
 import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import languageSelector from '@uswds/uswds/js/usa-language-selector';
 

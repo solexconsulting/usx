@@ -1,5 +1,5 @@
-import Select from '../../../../core/src/components/select/Select.tsx';
-import config from '../../../../core/src/components/select/config.json';
+import Select from '../../../../usx-react/src/components/select/Select.tsx';
+import config from '../../../../usx-react/src/components/select/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/file-input/file-input.html?raw';
+import html from '../../../../usx-react/src/components/file-input/file-input.html?raw';
 import fileInput from '@uswds/uswds/js/usa-file-input';
 import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
 

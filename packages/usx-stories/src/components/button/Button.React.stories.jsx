@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '../../../../core/src/components/button/Button.tsx';
-import buttonConfig from '../../../../core/src/components/button/config.json';
+import Button from '../../../../usx-react/src/components/button/Button.tsx';
+import buttonConfig from '../../../../usx-react/src/components/button/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(buttonConfig.props || {});

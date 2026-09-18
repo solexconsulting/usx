@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/status/status.html?raw';
+import html from '../../../../usx-react/src/components/status/status.html?raw';
 
 export default {
   title: 'HTML/USX/Status',

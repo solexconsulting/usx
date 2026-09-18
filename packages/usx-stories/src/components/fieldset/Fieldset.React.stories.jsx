@@ -1,7 +1,7 @@
 import React from 'react';
-import Fieldset from '../../../../core/src/components/fieldset/Fieldset.tsx';
-import config from '../../../../core/src/components/fieldset/config.json';
-import Input from '../../../../core/src/components/input/Input.tsx';
+import Fieldset from '../../../../usx-react/src/components/fieldset/Fieldset.tsx';
+import config from '../../../../usx-react/src/components/fieldset/config.json';
+import Input from '../../../../usx-react/src/components/input/Input.tsx';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

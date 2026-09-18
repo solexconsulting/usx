@@ -1,5 +1,5 @@
-import MemorableDate from '../../../../core/src/components/memorable-date/MemorableDate.jsx';
-import config from '../../../../core/src/components/memorable-date/config.json';
+import MemorableDate from '../../../../usx-react/src/components/memorable-date/MemorableDate.jsx';
+import config from '../../../../usx-react/src/components/memorable-date/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

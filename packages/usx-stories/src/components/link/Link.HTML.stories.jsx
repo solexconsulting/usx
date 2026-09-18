@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/link/link.html?raw';
+import html from '../../../../usx-react/src/components/link/link.html?raw';
 
 export default {
   title: 'HTML/USWDS/Link',

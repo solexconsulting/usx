@@ -1,7 +1,7 @@
 import React from 'react';
-import html from '../../../../core/src/components/theme-picker/theme-picker.html?raw';
+import html from '../../../../usx-react/src/components/theme-picker/theme-picker.html?raw';
 import { useGlobals } from 'storybook/preview-api';
-import Alert from '../../../../core/src/components/alert/Alert.tsx';
+import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
 export default {
     title: 'HTML/USX/ThemePicker',

@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/combobox/combobox.html?raw';
+import html from '../../../../usx-react/src/components/combobox/combobox.html?raw';
 import combobox from "@uswds/uswds/js/usa-combo-box";
 import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { djangoComponent } from '../../utils/djangoComponent.js';
-import config from '../../../../core/src/components/modal/config.json';
+import config from '../../../../usx-react/src/components/modal/config.json';
 import { buildArgTypes, componentTag, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Modal.React.stories.jsx';
-import Button from '../../../../core/src/components/button/Button.tsx';
+import Button from '../../../../usx-react/src/components/button/Button.tsx';
 import modal from "@uswds/uswds/js/usa-modal";
 
 const generatedArgTypes = buildArgTypes(config.props || {});

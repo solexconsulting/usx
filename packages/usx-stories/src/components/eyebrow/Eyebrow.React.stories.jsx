@@ -1,6 +1,6 @@
 import React from 'react';
-import Eyebrow from '../../../../core/src/components/eyebrow/Eyebrow.tsx';
-import config from '../../../../core/src/components/eyebrow/config.json';
+import Eyebrow from '../../../../usx-react/src/components/eyebrow/Eyebrow.tsx';
+import config from '../../../../usx-react/src/components/eyebrow/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {

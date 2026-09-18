@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Scaffolds a new component across the workspace from scripts/templates/component:
-//   packages/core/src/components/<kebab>/   React entry, Django + HTML templates, config.json
+//   packages/usx-react/src/components/<kebab>/   React entry, Django + HTML templates, config.json
 //   packages/usx/src/components/_<kebab>.scss (+ @forward from packages/usx/src/index.scss)
 //   packages/usx-stories/src/components/<kebab>/  React/Django/HTML stories
 // then regenerates index.js and contracts.js. Run: pnpm new-component <ComponentName>

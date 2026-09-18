@@ -1,6 +1,6 @@
 import React from 'react';
-import BackToTop from '../../../../core/src/components/back-to-top/BackToTop.tsx';
-import config from '../../../../core/src/components/back-to-top/config.json';
+import BackToTop from '../../../../usx-react/src/components/back-to-top/BackToTop.tsx';
+import config from '../../../../usx-react/src/components/back-to-top/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

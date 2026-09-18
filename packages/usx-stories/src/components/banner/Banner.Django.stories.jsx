@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../../../../core/src/components/banner/config.json';
+import config from '../../../../usx-react/src/components/banner/config.json';
 import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Banner.React.stories.jsx';
 import accordion from "@uswds/uswds/js/usa-accordion";

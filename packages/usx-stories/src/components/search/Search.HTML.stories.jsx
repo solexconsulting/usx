@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/search/search.html?raw';
+import html from '../../../../usx-react/src/components/search/search.html?raw';
 
 export default {
   title: 'HTML/USWDS/Search',

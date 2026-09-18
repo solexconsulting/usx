@@ -1,6 +1,6 @@
 
-import { Accordion } from '../../../../core/src/components/accordion/Accordion.jsx';
-import config from '../../../../core/src/components/accordion/config.json';
+import { Accordion } from '../../../../usx-react/src/components/accordion/Accordion.jsx';
+import config from '../../../../usx-react/src/components/accordion/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 import { expect } from 'storybook/test';
 

@@ -40,7 +40,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'project' / 'components',
-            BASE_DIR / '../../packages/core/src/components',
+            BASE_DIR / '../../packages/usx-react/src/components',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -85,5 +85,5 @@ STATIC_URL = '../'
 
 # USX integration — filesystem paths to search for components/templates.
 USX_COMPONENT_PATHS = [
-    BASE_DIR / '..' / '..' / 'packages' / 'core' / 'src' / 'components',
+    BASE_DIR / '..' / '..' / 'packages' / 'usx-react' / 'src' / 'components',
 ]

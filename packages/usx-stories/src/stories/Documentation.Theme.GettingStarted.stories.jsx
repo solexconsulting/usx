@@ -1,5 +1,5 @@
 import React from 'react';
-import Code from '../../../core/src/components/code/Code';
+import Code from '../../../usx-react/src/components/code/Code';
 
 export default {
   title: 'Documentation/Theme/Getting Started',
@@ -162,8 +162,8 @@ export const GettingStarted = {
       <h2>Where tokens live</h2>
       <p>
         Every token is declared once in{' '}
-        <code>packages/tokens/src/_variables.scss</code> (the Sass side) and mirrored
-        in <code>packages/tokens/src/theme-manifest.js</code> (name, CSS variable,
+        <code>packages/usx-theme/src/_variables.scss</code> (the Sass side) and mirrored
+        in <code>packages/usx-theme/src/theme-manifest.js</code> (name, CSS variable,
         default value, and grouping — the single source of truth for the
         generated <code>theme.css</code>, <code>_hooks.scss</code>, and the
         Playground's controls). See <strong>Documentation/Theme → Tokens</strong>{' '}

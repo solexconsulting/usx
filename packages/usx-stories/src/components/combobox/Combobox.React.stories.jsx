@@ -1,6 +1,6 @@
 import React from 'react';
-import Combobox from '../../../../core/src/components/combobox/Combobox.tsx';
-import config from '../../../../core/src/components/combobox/config.json';
+import Combobox from '../../../../usx-react/src/components/combobox/Combobox.tsx';
+import config from '../../../../usx-react/src/components/combobox/config.json';
 import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import combobox from '@uswds/uswds/js/usa-combo-box';
 

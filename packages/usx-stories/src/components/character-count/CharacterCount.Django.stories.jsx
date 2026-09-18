@@ -1,9 +1,9 @@
 import React from 'react';
-import config from '../../../../core/src/components/character-count/config.json';
+import config from '../../../../usx-react/src/components/character-count/config.json';
 import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './CharacterCount.React.stories.jsx';
 import characterCount from "@uswds/uswds/js/usa-character-count";
-import Alert from '../../../../core/src/components/alert/Alert';
+import Alert from '../../../../usx-react/src/components/alert/Alert';
 
 export default {
   title: 'Django/USWDS/CharacterCount',

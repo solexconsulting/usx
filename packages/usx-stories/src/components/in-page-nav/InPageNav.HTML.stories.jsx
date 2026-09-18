@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/in-page-nav/in-page-nav.html?raw';
+import html from '../../../../usx-react/src/components/in-page-nav/in-page-nav.html?raw';
 import inPageNavigation from '@uswds/uswds/js/usa-in-page-navigation';
 import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
 

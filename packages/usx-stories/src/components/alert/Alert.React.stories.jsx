@@ -1,6 +1,6 @@
 import React from 'react';
-import Alert from '../../../../core/src/components/alert/Alert.tsx';
-import alertConfig from '../../../../core/src/components/alert/config.json';
+import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
+import alertConfig from '../../../../usx-react/src/components/alert/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(alertConfig.props || {});
@@ -16,8 +16,15 @@ export default {
 
 export const storyDefs = {
   Default: {
-    heading: 'Informative status',
+    heading: 'Default alert',
     text: 'System status and notification updates appear here.',
+  },
+  Info: {
+    variant: 'info',
+    heading: 'Informative status',
+    text: 'This is an informational message.',
+    slim: false,
+    noIcon: false
   },
   Warning: {
     variant: 'warning',
@@ -118,6 +125,7 @@ export const storyDefs = {
 };
 
 export const Default = { args: storyDefs.Default };
+export const Info = { args: storyDefs.Info };
 export const Warning = { args: storyDefs.Warning };
 export const Success = { args: storyDefs.Success };
 export const Error = { args: storyDefs.Error };

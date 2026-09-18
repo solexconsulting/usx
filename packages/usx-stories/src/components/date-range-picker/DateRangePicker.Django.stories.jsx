@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../../../../core/src/components/date-range-picker/config.json';
+import config from '../../../../usx-react/src/components/date-range-picker/config.json';
 import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './DateRangePicker.React.stories.jsx';
 import datePicker from "@uswds/uswds/js/usa-date-picker";

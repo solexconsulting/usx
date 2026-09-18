@@ -1,6 +1,6 @@
 // import React from 'react';
-import StepIndicator from '../../../../core/src/components/step-indicator/StepIndicator.tsx';
-import config from '../../../../core/src/components/step-indicator/config.json';
+import StepIndicator from '../../../../usx-react/src/components/step-indicator/StepIndicator.tsx';
+import config from '../../../../usx-react/src/components/step-indicator/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export default {

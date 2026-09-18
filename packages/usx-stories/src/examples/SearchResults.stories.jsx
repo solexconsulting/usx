@@ -1,18 +1,18 @@
 import React from 'react';
-import Skipnav from '../../../core/src/components/skipnav/Skipnav.tsx';
-import Banner from '../../../core/src/components/banner/Banner.tsx';
-import MiscBanner from '../../../core/src/components/misc-banner/MiscBanner.tsx';
-import Header from '../../../core/src/components/header/Header.tsx';
-import Footer from '../../../core/src/components/footer/Footer.tsx';
-import ButtonGroup from '../../../core/src/components/button-group/ButtonGroup.tsx';
-import CardGroup from '../../../core/src/components/card-group/CardGroup.tsx';
-import Identifier from '../../../core/src/components/identifier/Identifier.tsx';
-import Layout from '../../../core/src/components/layout/Layout.tsx';
-import Page from '../../../core/src/components/page/Page.jsx';
-import Pagination from '../../../core/src/components/pagination/Pagination.tsx';
-import Search from '../../../core/src/components/search/Search.tsx';
-import Section from '../../../core/src/components/section/Section.tsx';
-import Select from '../../../core/src/components/select/Select.tsx';
+import Skipnav from '../../../usx-react/src/components/skipnav/Skipnav.tsx';
+import Banner from '../../../usx-react/src/components/banner/Banner.tsx';
+import MiscBanner from '../../../usx-react/src/components/misc-banner/MiscBanner.tsx';
+import Header from '../../../usx-react/src/components/header/Header.tsx';
+import Footer from '../../../usx-react/src/components/footer/Footer.tsx';
+import ButtonGroup from '../../../usx-react/src/components/button-group/ButtonGroup.tsx';
+import CardGroup from '../../../usx-react/src/components/card-group/CardGroup.tsx';
+import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
+import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
+import Page from '../../../usx-react/src/components/page/Page.jsx';
+import Pagination from '../../../usx-react/src/components/pagination/Pagination.tsx';
+import Search from '../../../usx-react/src/components/search/Search.tsx';
+import Section from '../../../usx-react/src/components/section/Section.tsx';
+import Select from '../../../usx-react/src/components/select/Select.tsx';
 import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './commonArgs.js';
 
 export default {

@@ -1,5 +1,5 @@
 import React from 'react';
-import iconHtml from '../../../../core/src/components/icon/icon.html?raw';
+import iconHtml from '../../../../usx-react/src/components/icon/icon.html?raw';
 
 export default {
   title: 'HTML/USWDS/Icon',

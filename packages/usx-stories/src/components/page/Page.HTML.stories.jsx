@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/page/page.html?raw';
+import html from '../../../../usx-react/src/components/page/page.html?raw';
 
 export default {
   title: 'HTML/USX/Page',

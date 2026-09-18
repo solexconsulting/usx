@@ -1,7 +1,7 @@
 import React from 'react';
-import Tooltip from '../../../../core/src/components/tooltip/Tooltip.tsx';
-import Button from '../../../../core/src/components/button/Button.tsx';
-import config from '../../../../core/src/components/tooltip/config.json';
+import Tooltip from '../../../../usx-react/src/components/tooltip/Tooltip.tsx';
+import Button from '../../../../usx-react/src/components/button/Button.tsx';
+import config from '../../../../usx-react/src/components/tooltip/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

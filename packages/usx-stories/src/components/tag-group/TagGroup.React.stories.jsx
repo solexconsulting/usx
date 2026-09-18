@@ -1,6 +1,6 @@
 // import React from 'react';
-import TagGroup from '../../../../core/src/components/tag-group/TagGroup.tsx';
-import config from '../../../../core/src/components/tag-group/config.json';
+import TagGroup from '../../../../usx-react/src/components/tag-group/TagGroup.tsx';
+import config from '../../../../usx-react/src/components/tag-group/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

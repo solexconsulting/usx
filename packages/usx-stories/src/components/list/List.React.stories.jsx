@@ -1,6 +1,6 @@
 import React from 'react';
-import List from '../../../../core/src/components/list/List.tsx';
-import config from '../../../../core/src/components/list/config.json';
+import List from '../../../../usx-react/src/components/list/List.tsx';
+import config from '../../../../usx-react/src/components/list/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/sidenav/sidenav.html?raw';
+import html from '../../../../usx-react/src/components/sidenav/sidenav.html?raw';
 
 export default {
   title: 'HTML/USWDS/SideNav',

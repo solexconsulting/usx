@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../../../../core/src/components/time-picker/config.json';
+import config from '../../../../usx-react/src/components/time-picker/config.json';
 import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './TimePicker.React.stories.jsx';
 import timePicker from "@uswds/uswds/js/usa-time-picker";

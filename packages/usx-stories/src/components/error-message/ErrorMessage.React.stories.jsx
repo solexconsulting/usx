@@ -1,5 +1,5 @@
-import ErrorMessage from '../../../../core/src/components/error-message/ErrorMessage.tsx';
-import config from '../../../../core/src/components/error-message/config.json';
+import ErrorMessage from '../../../../usx-react/src/components/error-message/ErrorMessage.tsx';
+import config from '../../../../usx-react/src/components/error-message/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

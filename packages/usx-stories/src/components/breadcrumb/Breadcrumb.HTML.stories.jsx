@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/breadcrumb/breadcrumb.html?raw';
+import html from '../../../../usx-react/src/components/breadcrumb/breadcrumb.html?raw';
 
 export default {
   title: 'HTML/USWDS/Breadcrumb',

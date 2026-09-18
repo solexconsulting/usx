@@ -1,6 +1,6 @@
 import React from 'react';
-import Clickable from '../../../../core/src/components/clickable/Clickable.tsx';
-import config from '../../../../core/src/components/clickable/config.json';
+import Clickable from '../../../../usx-react/src/components/clickable/Clickable.tsx';
+import config from '../../../../usx-react/src/components/clickable/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const spriteHref = (iconName) => {

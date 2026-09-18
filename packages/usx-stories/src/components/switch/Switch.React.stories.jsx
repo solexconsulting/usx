@@ -1,6 +1,6 @@
 import React from 'react';
-import Switch from '../../../../core/src/components/switch/Switch.tsx';
-import config from '../../../../core/src/components/switch/config.json';
+import Switch from '../../../../usx-react/src/components/switch/Switch.tsx';
+import config from '../../../../usx-react/src/components/switch/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 

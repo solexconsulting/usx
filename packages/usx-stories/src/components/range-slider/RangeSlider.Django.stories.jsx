@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../../../../core/src/components/range-slider/config.json';
+import config from '../../../../usx-react/src/components/range-slider/config.json';
 import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './RangeSlider.React.stories.jsx';
 import range from '@uswds/uswds/js/usa-range';

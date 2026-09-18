@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/select/select.html?raw';
+import html from '../../../../usx-react/src/components/select/select.html?raw';
 
 export default {
   title: 'HTML/USWDS/Select',

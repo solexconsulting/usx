@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/skipnav/skipnav.html?raw';
+import html from '../../../../usx-react/src/components/skipnav/skipnav.html?raw';
 
 export default {
   title: 'HTML/USWDS/Skipnav',

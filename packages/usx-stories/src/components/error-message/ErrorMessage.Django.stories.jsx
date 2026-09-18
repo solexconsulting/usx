@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/error-message/config.json';
+import config from '../../../../usx-react/src/components/error-message/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './ErrorMessage.React.stories.jsx';
 

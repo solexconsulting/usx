@@ -9,7 +9,7 @@ consumers compile it with the `pkg:` importer, so there is no build step.
 All design tokens come from `@solexllc/usx-theme` and are runtime-themeable via
 `--usx-*` CSS custom properties. Compile `src/index.scss` for a fully static
 build (no `var()` references), or `src/themed.scss` to enable every hook.
-See `packages/tokens/README.md` for the full theming guide, and the Storybook
+See `packages/usx-theme/README.md` for the full theming guide, and the Storybook
 **Documentation → Theme → Playground** to generate a theme visually.
 
 ## Tests

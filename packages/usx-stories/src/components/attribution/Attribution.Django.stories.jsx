@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/attribution/config.json';
+import config from '../../../../usx-react/src/components/attribution/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Attribution.React.stories.jsx';
 

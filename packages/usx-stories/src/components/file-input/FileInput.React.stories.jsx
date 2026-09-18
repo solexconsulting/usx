@@ -1,6 +1,6 @@
 import React from 'react';
-import FileInput from '../../../../core/src/components/file-input/FileInput.jsx';
-import config from '../../../../core/src/components/file-input/config.json';
+import FileInput from '../../../../usx-react/src/components/file-input/FileInput.jsx';
+import config from '../../../../usx-react/src/components/file-input/config.json';
 import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import fileInput from '@uswds/uswds/js/usa-file-input';
 

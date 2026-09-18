@@ -35,12 +35,12 @@ _table_helper = None
 
 def _load_table_helper():
     """
-    Locate and import table_helper.py from packages/core/src/components/table/.
+    Locate and import table_helper.py from packages/usx-react/src/components/table/.
     Walks parent directories looking for the repo root (pnpm-workspace.yaml).
     """
     here = Path(__file__).resolve()
     for parent in here.parents:
-        candidate = parent / "packages" / "core" / "src" / "components" / "table" / "table_helper.py"
+        candidate = parent / "packages" / "usx-react" / "src" / "components" / "table" / "table_helper.py"
         if candidate.exists():
             spec = importlib.util.spec_from_file_location("usx_table_helper", str(candidate))
             mod = importlib.util.module_from_spec(spec)
@@ -48,7 +48,7 @@ def _load_table_helper():
             return mod
     raise ImportError(
         "Could not locate table_helper.py. Expected at "
-        "packages/core/src/components/table/table_helper.py relative to the repo root."
+        "packages/usx-react/src/components/table/table_helper.py relative to the repo root."
     )
 
 

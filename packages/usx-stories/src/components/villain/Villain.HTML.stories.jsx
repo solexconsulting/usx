@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/villain/villain.html?raw';
+import html from '../../../../usx-react/src/components/villain/villain.html?raw';
 
 export default {
   title: 'HTML/USWDS/Villain',

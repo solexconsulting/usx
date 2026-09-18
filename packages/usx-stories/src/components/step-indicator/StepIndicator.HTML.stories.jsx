@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/step-indicator/step-indicator.html?raw';
+import html from '../../../../usx-react/src/components/step-indicator/step-indicator.html?raw';
 
 export default {
   title: 'HTML/USWDS/StepIndicator',

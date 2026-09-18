@@ -1,6 +1,6 @@
 
-import CalendarDate from '../../../../core/src/components/calendar-date/CalendarDate.tsx';
-import config from '../../../../core/src/components/calendar-date/config.json';
+import CalendarDate from '../../../../usx-react/src/components/calendar-date/CalendarDate.tsx';
+import config from '../../../../usx-react/src/components/calendar-date/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/banner/banner.html?raw';
+import html from '../../../../usx-react/src/components/banner/banner.html?raw';
 
 export default {
   title: 'HTML/USWDS/Banner',

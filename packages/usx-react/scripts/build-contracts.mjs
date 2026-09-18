@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Compiles src/contracts.js (the canonical CMS contract manifest) into a
 // plain dist/component-contracts.json for non-JS consumers (e.g. the SOLEX
-// CMS). Mirrors packages/tokens/build.js's theme-manifest.json emission.
+// CMS). Mirrors packages/usx-theme/build.js's theme-manifest.json emission.
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';

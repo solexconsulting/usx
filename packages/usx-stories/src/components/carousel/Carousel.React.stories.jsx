@@ -1,7 +1,7 @@
 import React from 'react';
-import Carousel, { Slide } from '../../../../core/src/components/carousel/Carousel.tsx';
-import config from '../../../../core/src/components/carousel/config.json';
-import Image from '../../../../core/src/components/image/Image.tsx';
+import Carousel, { Slide } from '../../../../usx-react/src/components/carousel/Carousel.tsx';
+import config from '../../../../usx-react/src/components/carousel/config.json';
+import Image from '../../../../usx-react/src/components/image/Image.tsx';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

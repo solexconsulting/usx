@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/tag/tag.html?raw';
+import html from '../../../../usx-react/src/components/tag/tag.html?raw';
 
 export default {
   title: 'HTML/USWDS/Tag',

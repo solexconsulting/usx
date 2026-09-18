@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/avatar-group/avatar-group.html?raw';
+import html from '../../../../usx-react/src/components/avatar-group/avatar-group.html?raw';
 
 export default {
   title: 'HTML/USX/AvatarGroup',

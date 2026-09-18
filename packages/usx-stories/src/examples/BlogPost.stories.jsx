@@ -1,17 +1,17 @@
 import React from 'react';
-import Skipnav from '../../../core/src/components/skipnav/Skipnav.tsx';
-import Banner from '../../../core/src/components/banner/Banner.tsx';
-import MiscBanner from '../../../core/src/components/misc-banner/MiscBanner.tsx';
-import Header from '../../../core/src/components/header/Header.tsx';
-import Footer from '../../../core/src/components/footer/Footer.tsx';
-import Block from '../../../core/src/components/block/Block.tsx';
-import Image from '../../../core/src/components/image/Image.tsx';
-import Identifier from '../../../core/src/components/identifier/Identifier.tsx';
-import Layout from '../../../core/src/components/layout/Layout.tsx';
-import Page from '../../../core/src/components/page/Page.jsx';
-import Prose from '../../../core/src/components/prose/Prose.tsx';
-import SideNav from '../../../core/src/components/sidenav/SideNav.tsx';
-import TagGroup from '../../../core/src/components/tag-group/TagGroup.tsx';
+import Skipnav from '../../../usx-react/src/components/skipnav/Skipnav.tsx';
+import Banner from '../../../usx-react/src/components/banner/Banner.tsx';
+import MiscBanner from '../../../usx-react/src/components/misc-banner/MiscBanner.tsx';
+import Header from '../../../usx-react/src/components/header/Header.tsx';
+import Footer from '../../../usx-react/src/components/footer/Footer.tsx';
+import Block from '../../../usx-react/src/components/block/Block.tsx';
+import Image from '../../../usx-react/src/components/image/Image.tsx';
+import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
+import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
+import Page from '../../../usx-react/src/components/page/Page.jsx';
+import Prose from '../../../usx-react/src/components/prose/Prose.tsx';
+import SideNav from '../../../usx-react/src/components/sidenav/SideNav.tsx';
+import TagGroup from '../../../usx-react/src/components/tag-group/TagGroup.tsx';
 import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './commonArgs.js';
 
 export default {

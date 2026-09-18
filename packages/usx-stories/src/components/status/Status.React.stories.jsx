@@ -1,6 +1,6 @@
 import React from 'react';
-import Status from '../../../../core/src/components/status/Status.tsx';
-import config from '../../../../core/src/components/status/config.json';
+import Status from '../../../../usx-react/src/components/status/Status.tsx';
+import config from '../../../../usx-react/src/components/status/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export default {

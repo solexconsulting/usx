@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/button-group/config.json';
+import config from '../../../../usx-react/src/components/button-group/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './ButtonGroup.React.stories.jsx';
 

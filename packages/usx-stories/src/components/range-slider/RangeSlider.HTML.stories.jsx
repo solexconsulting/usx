@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/range-slider/range-slider.html?raw';
+import html from '../../../../usx-react/src/components/range-slider/range-slider.html?raw';
 import range from '@uswds/uswds/js/usa-range';
 import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
 

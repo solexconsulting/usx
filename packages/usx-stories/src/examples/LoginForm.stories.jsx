@@ -1,18 +1,18 @@
 import React from 'react';
-import Skipnav from '../../../core/src/components/skipnav/Skipnav.tsx';
-import Banner from '../../../core/src/components/banner/Banner.tsx';
-import Header from '../../../core/src/components/header/Header.tsx';
-import Footer from '../../../core/src/components/footer/Footer.tsx';
-import Identifier from '../../../core/src/components/identifier/Identifier.tsx';
-import Alert from '../../../core/src/components/alert/Alert.tsx';
-import Button from '../../../core/src/components/button/Button.tsx';
-import ButtonGroup from '../../../core/src/components/button-group/ButtonGroup.tsx';
-import Card from '../../../core/src/components/card/Card.tsx';
-import Checkbox from '../../../core/src/components/checkbox/Checkbox.tsx';
-import Input from '../../../core/src/components/input/Input.tsx';
-import Layout from '../../../core/src/components/layout/Layout.tsx';
-import Link from '../../../core/src/components/link/Link.tsx';
-import Page from '../../../core/src/components/page/Page.jsx';
+import Skipnav from '../../../usx-react/src/components/skipnav/Skipnav.tsx';
+import Banner from '../../../usx-react/src/components/banner/Banner.tsx';
+import Header from '../../../usx-react/src/components/header/Header.tsx';
+import Footer from '../../../usx-react/src/components/footer/Footer.tsx';
+import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
+import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
+import Button from '../../../usx-react/src/components/button/Button.tsx';
+import ButtonGroup from '../../../usx-react/src/components/button-group/ButtonGroup.tsx';
+import Card from '../../../usx-react/src/components/card/Card.tsx';
+import Checkbox from '../../../usx-react/src/components/checkbox/Checkbox.tsx';
+import Input from '../../../usx-react/src/components/input/Input.tsx';
+import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
+import Link from '../../../usx-react/src/components/link/Link.tsx';
+import Page from '../../../usx-react/src/components/page/Page.jsx';
 import { headerArgs, footerArgs, identifierArgs } from './commonArgs.js';
 
 export default {

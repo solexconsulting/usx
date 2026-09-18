@@ -1,7 +1,7 @@
-Storybook app for documenting agency-ui-platform components.
+Storybook app for documenting USX components.
 
 This is a single Storybook host (no composed/remote Storybooks) that renders
-stories from `packages/usx-stories/src/**`. Each component in `packages/core`
+stories from `packages/usx-stories/src/**`. Each component in `packages/usx-react`
 can have up to three story files, one per rendering technology:
 
 - `<Name>.React.stories.jsx` — imports and renders the React component directly
@@ -58,5 +58,5 @@ From the repository root:
   on port 6006; Sass under `packages/*/src` recompiles and reloads live
 - `pnpm storybook:build` — static build into `storybook-static/`
 
-Both of this app's own scripts (`dev`, `build`) build `packages/tokens` first so
+Both of this app's own scripts (`dev`, `build`) build `packages/usx-theme` first so
 `theme.css` exists before Storybook starts.

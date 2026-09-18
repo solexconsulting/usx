@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/toggle/config.json';
+import config from '../../../../usx-react/src/components/toggle/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Toggle.React.stories.jsx';
 

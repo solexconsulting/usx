@@ -174,16 +174,16 @@ def _find_repo_component_default_paths() -> List[str]:
     """Attempt to locate repository-level component folders to include by default.
 
     This searches ancestors of this file for a sentinel file (pnpm-workspace.yaml)
-    and then yields the conventional `packages/core/src/components` path if it exists.
+    and then yields the conventional `packages/usx-react/src/components` path if it exists.
     """
     here = Path(__file__).resolve()
     for parent in here.parents:
         if (parent / "pnpm-workspace.yaml").exists() or (parent / "package.json").exists():
-            candidate = parent / "packages" / "core" / "src" / "components"
+            candidate = parent / "packages" / "usx-react" / "src" / "components"
             if candidate.exists() and candidate.is_dir():
                 return [str(candidate)]
-            # fallback: packages/core/components
-            candidate2 = parent / "packages" / "core" / "components"
+            # fallback: packages/usx-react/components
+            candidate2 = parent / "packages" / "usx-react" / "components"
             if candidate2.exists() and candidate2.is_dir():
                 return [str(candidate2)]
             break

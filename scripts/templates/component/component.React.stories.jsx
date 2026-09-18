@@ -1,6 +1,6 @@
 import React from 'react';
-import {{Name}} from '../../../../core/src/components/{{kebab}}/{{Name}}.tsx';
-import config from '../../../../core/src/components/{{kebab}}/config.json';
+import {{Name}} from '../../../../usx-react/src/components/{{kebab}}/{{Name}}.tsx';
+import config from '../../../../usx-react/src/components/{{kebab}}/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {

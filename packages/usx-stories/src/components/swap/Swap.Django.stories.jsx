@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/swap/config.json';
+import config from '../../../../usx-react/src/components/swap/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Swap.React.stories.jsx';
 

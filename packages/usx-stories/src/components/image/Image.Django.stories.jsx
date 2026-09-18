@@ -1,4 +1,4 @@
-import config from '../../../../core/src/components/image/config.json';
+import config from '../../../../usx-react/src/components/image/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Image.React.stories.jsx';
 

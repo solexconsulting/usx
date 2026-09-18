@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/indicator/indicator.html?raw';
+import html from '../../../../usx-react/src/components/indicator/indicator.html?raw';
 
 export default {
   title: 'HTML/USX/Indicator',

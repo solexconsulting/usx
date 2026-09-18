@@ -1,6 +1,6 @@
 import React from 'react';
-import SiteAlert from '../../../../core/src/components/site-alert/SiteAlert.tsx';
-import config from '../../../../core/src/components/site-alert/config.json';
+import SiteAlert from '../../../../usx-react/src/components/site-alert/SiteAlert.tsx';
+import config from '../../../../usx-react/src/components/site-alert/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

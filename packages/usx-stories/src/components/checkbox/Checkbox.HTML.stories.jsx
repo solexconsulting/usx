@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/checkbox/checkbox.html?raw';
+import html from '../../../../usx-react/src/components/checkbox/checkbox.html?raw';
 
 export default {
   title: 'HTML/USWDS/Checkbox',

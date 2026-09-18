@@ -1,10 +1,10 @@
 
 import React from 'react';
-import CharacterCount from '../../../../core/src/components/character-count/CharacterCount.tsx';
-import config from '../../../../core/src/components/character-count/config.json';
+import CharacterCount from '../../../../usx-react/src/components/character-count/CharacterCount.tsx';
+import config from '../../../../usx-react/src/components/character-count/config.json';
 import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import characterCount from "@uswds/uswds/js/usa-character-count";
-import Alert from '../../../../core/src/components/alert/Alert.tsx';
+import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
 export const storyDefs = {
   Default: { id: 'cc-1', label: 'Text input', max: 25 },

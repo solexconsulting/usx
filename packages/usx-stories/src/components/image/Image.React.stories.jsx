@@ -1,6 +1,6 @@
 import React from 'react';
-import Image from '../../../../core/src/components/image/Image.tsx';
-import config from '../../../../core/src/components/image/config.json';
+import Image from '../../../../usx-react/src/components/image/Image.tsx';
+import config from '../../../../usx-react/src/components/image/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const shortCaption = 'This is a caption describing the image above.';

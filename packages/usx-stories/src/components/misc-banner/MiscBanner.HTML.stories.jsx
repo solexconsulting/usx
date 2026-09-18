@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/misc-banner/misc-banner.html?raw';
+import html from '../../../../usx-react/src/components/misc-banner/misc-banner.html?raw';
 
 export default {
   title: 'HTML/USX/MiscBanner',

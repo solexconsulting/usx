@@ -1,5 +1,5 @@
-import RadioButtons from '../../../../core/src/components/radio-buttons/RadioButtons.tsx';
-import config from '../../../../core/src/components/radio-buttons/config.json';
+import RadioButtons from '../../../../usx-react/src/components/radio-buttons/RadioButtons.tsx';
+import config from '../../../../usx-react/src/components/radio-buttons/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

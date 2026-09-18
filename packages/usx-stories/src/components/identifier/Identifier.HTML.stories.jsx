@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../core/src/components/identifier/identifier.html?raw';
+import html from '../../../../usx-react/src/components/identifier/identifier.html?raw';
 
 export default {
   title: 'HTML/USWDS/Identifier',

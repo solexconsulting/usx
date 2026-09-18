@@ -1,5 +1,5 @@
 import React from 'react';
-import config from '../../../../core/src/components/copy-to-clipboard/config.json';
+import config from '../../../../usx-react/src/components/copy-to-clipboard/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './CopyToClipboard.React.stories.jsx';
 
