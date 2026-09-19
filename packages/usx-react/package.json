@@ -1,7 +1,16 @@
 {
   "name": "@solexllc/usx-react",
   "version": "0.1.0",
-  "private": true,
+  "description": "React component library for USX.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solexconsulting/usx.git",
+    "directory": "packages/usx-react"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -9,18 +18,14 @@
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    },
-    "./contracts": {
-      "default": "./src/contracts.js"
-    },
-    "./contracts.json": "./dist/component-contracts.json"
+    }
   },
   "files": [
     "src",
     "dist"
   ],
   "scripts": {
-    "build": "node ../../scripts/generate-contracts.js && vite build && node scripts/build-contracts.mjs"
+    "build": "vite build"
   },
   "dependencies": {
     "@solexllc/usx": "workspace:*",

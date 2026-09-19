@@ -1,7 +1,16 @@
 {
   "name": "@solexllc/usx-theme",
   "version": "0.1.0",
-  "private": true,
+  "description": "Design tokens package for USX.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solexconsulting/usx.git",
+    "directory": "packages/usx-theme"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "main": "dist/tokens.js",
   "style": "dist/tokens.css",

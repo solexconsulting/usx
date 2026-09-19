@@ -15,6 +15,7 @@ Reusable libraries that power the platform:
 - `usx/` (`@solexllc/usx`): compiled USWDS-based component styles (`.usx-*`), themeable via `usx-theme`
 - `usx-uswds-fixes/` (`@solexllc/usx-uswds-fixes`): small SCSS patches/overrides layered on top of upstream USWDS
 - `usx-react/` (`@solexllc/usx-react`): React component wrappers, each co-located with its Django template, canonical static HTML, and `config.json` prop schema — see [packages/usx-react/README.md](packages/usx-react/README.md)
+- `usx-contracts/` (`@solexllc/usx-contracts`): generated CMS contract manifest aggregated from every component's `config.json` — see [packages/usx-contracts/README.md](packages/usx-contracts/README.md)
 - `usx-stories/` (`@solexllc/usx-stories`): Storybook stories and story-rendering helpers (dev-infra only, not published)
 
 ### `apps/`
@@ -51,9 +52,9 @@ pnpm storybook:build # static Storybook build (used by deploy/storybook/Dockerfi
 Component tooling:
 
 ```bash
-pnpm new-component <Name>   # scaffold a component across core, usx and usx-stories
+pnpm new-component <Name>   # scaffold a component across usx-react, usx and usx-stories
 pnpm generate:exports       # regenerate packages/usx-react/src/index.js
-pnpm generate:contracts     # regenerate packages/usx-react/src/contracts.js (also runs on core build)
+pnpm generate:contracts     # regenerate packages/usx-contracts/src/contracts.js
 pnpm validate:configs       # schema + cross-ref + file-presence + generated-file freshness
 ```
 
@@ -67,7 +68,7 @@ pnpm install
 pnpm dev
 ```
 
-`pnpm dev` runs the `tokens` build watcher alongside the Storybook dev server;
+`pnpm dev` runs the `usx-theme` build watcher alongside the Storybook dev server;
 Storybook compiles the USX Sass itself and reloads on any change under
 `packages/*/src`. The Django-rendered stories additionally require the Django
 dev server from `apps/storybook-django` to be running separately (see that

@@ -1,7 +1,16 @@
 {
   "name": "@solexllc/usx",
   "version": "0.1.0",
-  "private": true,
+  "description": "Compiled USWDS-based component styles for USX.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solexconsulting/usx.git",
+    "directory": "packages/usx"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "sass": "src/index.scss",
   "exports": {
     ".": {
@@ -25,9 +34,6 @@
   },
   "scripts": {
     "test": "node test/theme-check.mjs"
-  },
-  "devDependencies": {
-    "sass": "^1.98.0"
   },
   "devDependencies": {
     "sass": "^1.98.0"

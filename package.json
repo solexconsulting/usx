@@ -18,9 +18,14 @@
     "new-component": "node scripts/new-component.js",
     "generate:exports": "node scripts/generate-exports.js",
     "generate:contracts": "node scripts/generate-contracts.js",
-    "validate:configs": "node scripts/validate-configs.js"
+    "validate:configs": "node scripts/validate-configs.js",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^3.0.3",
     "@storybook/addon-docs": "^10.3.6",
     "@storybook/html": "^10.3.6",
     "@storybook/react-vite": "^10.3.6",

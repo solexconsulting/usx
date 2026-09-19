@@ -1,0 +1,29 @@
+{
+  "name": "@solexllc/usx-contracts",
+  "version": "0.1.0",
+  "description": "Generated CMS contract manifest for USX components.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solexconsulting/usx.git",
+    "directory": "packages/usx-contracts"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "src/contracts.js",
+  "exports": {
+    ".": {
+      "default": "./src/contracts.js"
+    },
+    "./contracts.json": "./dist/component-contracts.json"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "node ../../scripts/generate-contracts.js && node scripts/build-contracts.mjs"
+  }
+}

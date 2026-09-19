@@ -3,7 +3,7 @@
 //   1. every config.json passes the schema + cross-reference checks
 //   2. every component folder has its React entry, Django template, static
 //      HTML template and config.json
-//   3. the committed contracts.js and index.js are up to date with config.json
+//   3. the committed packages/usx-contracts/src/contracts.js and index.js are up to date with config.json
 // Exit 1 on any error. Run: pnpm validate:configs (also part of `pnpm test`).
 import fs from 'node:fs';
 import path from 'node:path';

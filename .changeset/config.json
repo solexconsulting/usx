@@ -1,0 +1,20 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@4.0.1/schema.json",
+  "baseBranch": "main",
+  "access": "public",
+  "format": "auto",
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "solexconsulting/usx"
+    }
+  ],
+  "commit": false,
+  "ignore": [
+    "@solexllc/usx-stories",
+    "@solexllc/storybook"
+  ],
+  "fixed": [],
+  "linked": [],
+  "updateInternalDependencies": "patch"
+}

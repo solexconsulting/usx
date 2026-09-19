@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Regenerates packages/usx-react/src/contracts.js — the canonical CMS contract
+// Regenerates packages/usx-contracts/src/contracts.js — the canonical CMS contract
 // manifest aggregated from every component's config.json.
 // Run: pnpm generate:contracts
 import fs from 'node:fs';

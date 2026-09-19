@@ -3,7 +3,7 @@
 //   packages/usx-react/src/components/<kebab>/   React entry, Django + HTML templates, config.json
 //   packages/usx/src/components/_<kebab>.scss (+ @forward from packages/usx/src/index.scss)
 //   packages/usx-stories/src/components/<kebab>/  React/Django/HTML stories
-// then regenerates index.js and contracts.js. Run: pnpm new-component <ComponentName>
+// then regenerates index.js and packages/usx-contracts/src/contracts.js. Run: pnpm new-component <ComponentName>
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
