@@ -1,0 +1,5 @@
+{
+  "items": [
+    { "name": "spinner", "meta": "loading spin progress busy wait" }
+  ]
+}

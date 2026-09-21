@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <!-- Track: full circle at low opacity -->
+  <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.2" />
+  <!-- Head: 90° arc at full opacity -->
+  <circle
+    cx="12" cy="12" r="10"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-dasharray="15.71 47.12"
+    stroke-linecap="round"
+    transform="rotate(-90 12 12)"
+  />
+</svg>

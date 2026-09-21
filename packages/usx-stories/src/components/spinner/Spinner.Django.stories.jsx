@@ -47,9 +47,9 @@ export const DifferentSizesOnDarkBackground = createBulkDjangoStory('spinner', [
   { storyName: 'size 7', props: { size: 7, color: 'white' } },
   { storyName: 'size 8', props: { size: 8, color: 'white' } },
   { storyName: 'size 9', props: { size: 9, color: 'white' } }
-], null, ({children}) => (
+], ({children}) => (
   <div
-    className="bg-ink padding-3 display-flex flex-row flex-wrap grid-gap-lg flex-align-center text-white"
+    className="bg-surface-inverse padding-3 display-flex flex-row flex-wrap grid-gap-lg flex-align-center text-white"
     style={{ gap: '1rem' }}
   >
     {children}
@@ -61,9 +61,9 @@ export const DifferentColorsOnDarkBackground = createBulkDjangoStory('spinner', 
   { props: { size: 4, color: 'primary-light' } },
   { props: { size: 4, color: 'secondary-light' } },
   { props: { size: 4, color: 'accent-cool-light' } }
-], null, ({children}) => (
+], ({children}) => (
   <div
-    className="bg-ink padding-3 display-flex flex-row flex-wrap grid-gap-lg flex-align-center text-white"
+    className="bg-surface-inverse padding-3 display-flex flex-row flex-wrap grid-gap-lg flex-align-center text-white"
     style={{ gap: '1rem' }}
   >
     {children}

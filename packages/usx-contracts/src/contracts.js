@@ -1824,6 +1824,15 @@ export const componentContracts = {
           "default": "accessibility_new",
           "description": "The name of the icon to be displayed, which corresponds to the icon's identifier in the sprite sheet or icon library being used."
         },
+        "source": {
+          "type": "select",
+          "options": [
+            "uswds",
+            "usx"
+          ],
+          "default": "uswds",
+          "description": "Which icon sprite to look up `name` in: USWDS's own icon set, or USX's custom icon set (for icons USWDS doesn't ship, e.g. spinner)."
+        },
         "size": {
           "type": "select",
           "options": [

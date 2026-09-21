@@ -37,13 +37,8 @@ exists.
 
 ## Running the Django-rendered stories
 
-Django stories require the companion Django app to be running:
-
-```bash
-cd apps/storybook-django
-source venv/bin/activate   # or create one: python -m venv venv && pip install -r requirements.txt
-python manage.py runserver 9090
-```
+Django stories require the companion Django app to be running — see
+[../storybook-django/README.md](../storybook-django/README.md) for setup.
 
 Storybook resolves the Django server URL from `window.USX_DJANGO_URL` (set via
 `env-config.js` at container/deploy time) or falls back to

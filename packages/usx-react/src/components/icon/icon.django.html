@@ -18,5 +18,9 @@
     focusable="false"
     role="img"
 >
+    {% if source == 'usx' %}
+    <use href="{% static 'img/usx-sprite.svg' %}#{{ name }}"></use>
+    {% else %}
     <use href="{% static 'img/sprite.svg' %}#{{ name }}"></use>
+    {% endif %}
 </svg>

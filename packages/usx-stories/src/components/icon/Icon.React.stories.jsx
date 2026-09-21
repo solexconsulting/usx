@@ -18,10 +18,20 @@ export const storyDefs = {
     name: 'accessibility_new',
     size: 2,
   },
+  UsxSource: {
+    name: 'spinner',
+    source: 'usx',
+    size: 3,
+  },
 };
 
 export const Default = {
   args: storyDefs.Default,
+};
+
+export const UsxSource = {
+  name: 'USX Source',
+  args: storyDefs.UsxSource,
 };
 
 export const DifferentSizes = {

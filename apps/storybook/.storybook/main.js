@@ -13,6 +13,7 @@ export default {
 
   staticDirs: [
     '../../../node_modules/@uswds/uswds/dist',
+    { from: '../../../packages/usx/src/img', to: '/img' },
     '../static',
   ],
 

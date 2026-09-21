@@ -24,7 +24,9 @@
     },
     "./typography": {
       "sass": "./src/components/_typography.scss"
-    }
+    },
+    "./img/usx-sprite.svg": "./src/img/usx-sprite.svg",
+    "./img/usx-icons.json": "./src/img/usx-icons.json"
   },
   "files": [
     "src"
@@ -33,6 +35,8 @@
     "@solexllc/usx-theme": "workspace:*"
   },
   "scripts": {
+    "build": "node scripts/build-sprite.mjs",
+    "dev": "node scripts/build-sprite.mjs --watch",
     "test": "node test/theme-check.mjs"
   },
   "devDependencies": {
