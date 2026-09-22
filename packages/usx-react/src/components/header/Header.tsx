@@ -4,10 +4,18 @@ import Icon from '../icon/Icon';
 import Search, { SearchProps } from '../search/Search';
 import Branding, { BrandingProps } from './Branding';
 
+const externalIndicator = (
+  <>
+    <span className="usa-sr-only">External.</span>
+    <Icon name="launch" size={1} className="margin-left-05" />
+  </>
+);
+
 export interface HeaderNavLink {
   text: string;
   href: string;
   ariaLabel?: string;
+  external?: boolean;
 }
 
 export interface HeaderNavSection {
@@ -15,6 +23,7 @@ export interface HeaderNavSection {
   links?: HeaderNavLink[];
   href?: string;
   ariaLabel?: string;
+  external?: boolean;
 }
 
 interface PrimaryNavProps {
@@ -47,8 +56,13 @@ function PrimaryNav({
         {navSections.map((section, index) => (
           <li key={index} className="usa-nav__primary-item">
             {section.href ? (
-              <a href={section.href} className="usa-nav__link" aria-label={section.ariaLabel}>
+              <a
+                href={section.href}
+                className="usa-nav__link"
+                aria-label={section.ariaLabel}
+              >
                 <span>{section.title}</span>
+                {section.external && externalIndicator}
               </a>
             ) : (
               <>
@@ -77,8 +91,12 @@ function PrimaryNav({
                                 <ul className="usa-nav__submenu-list">
                                   {columnLinks.map((link, linkIndex) => (
                                     <li key={linkIndex} className="usa-nav__submenu-item">
-                                      <a href={link.href} aria-label={link.ariaLabel}>
+                                      <a
+                                        href={link.href}
+                                        aria-label={link.ariaLabel}
+                                      >
                                         {link.text}
+                                        {link.external && externalIndicator}
                                       </a>
                                     </li>
                                   ))}
@@ -93,8 +111,12 @@ function PrimaryNav({
                     <ul id={`${headerId}-nav-section-${index}`} className="usa-nav__submenu" hidden={true}>
                       {section.links!.map((link, linkIndex) => (
                         <li key={linkIndex} className="usa-nav__submenu-item">
-                          <a href={link.href} aria-label={link.ariaLabel}>
+                          <a
+                            href={link.href}
+                            aria-label={link.ariaLabel}
+                          >
                             <span>{link.text}</span>
+                            {link.external && externalIndicator}
                           </a>
                         </li>
                       ))}
@@ -111,8 +133,12 @@ function PrimaryNav({
           <ul className="usa-nav__secondary-links">
             {secondaryLinks.map((link, index) => (
               <li key={index} className="usa-nav__secondary-item">
-                <a href={link.href} aria-label={link.ariaLabel}>
+                <a
+                  href={link.href}
+                  aria-label={link.ariaLabel}
+                >
                   <span>{link.text}</span>
+                  {link.external && externalIndicator}
                 </a>
               </li>
             ))}
@@ -194,8 +220,12 @@ export default function Header({
               <ul className="usa-nav__secondary-links">
                 {secondaryLinks.map((link, index) => (
                   <li key={index} className="usa-nav__secondary-item">
-                    <a href={link.href} aria-label={link.ariaLabel}>
+                    <a
+                      href={link.href}
+                      aria-label={link.ariaLabel}
+                    >
                       <span>{link.text}</span>
+                      {link.external && externalIndicator}
                     </a>
                   </li>
                 ))}

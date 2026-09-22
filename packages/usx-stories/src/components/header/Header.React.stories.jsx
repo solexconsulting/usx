@@ -96,6 +96,28 @@ const secondaryLinks = [
   { text: 'Secondary Link 2', href: 'https://example.com/secondary2', ariaLabel: 'Secondary Link 2' },
 ];
 
+const externalNavSections = [
+  {
+    title: 'External Section',
+    href: 'https://example.com/section-external',
+    ariaLabel: 'External Section',
+    external: true,
+  },
+  {
+    title: 'Section With Links',
+    links: [
+      { text: 'External Link A', href: 'https://example.com/linkA', ariaLabel: 'External Link A', external: true },
+      { text: 'External Link B', href: 'https://example.com/linkB', ariaLabel: 'External Link B', external: true },
+      { text: 'External Link C', href: 'https://example.com/linkC', ariaLabel: 'External Link C', external: true },
+    ],
+  },
+];
+
+const externalSecondaryLinks = [
+  { text: 'Secondary External 1', href: 'https://example.com/secondary1', ariaLabel: 'Secondary External 1', external: true },
+  { text: 'Secondary External 2', href: 'https://example.com/secondary2', ariaLabel: 'Secondary External 2', external: true },
+];
+
 const baseArgs = {
   projectUrl: 'https://example.com',
   useMenuIcon: true,
@@ -144,6 +166,15 @@ export const storyDefs = {
       { title: 'About', href: '/about' },
     ],
   },
+  ExternalLinks: {
+    id: 'header-external-links',
+    projectUrl: 'https://example.com',
+    useMenuIcon: true,
+    extended: true,
+    branding: standardBranding,
+    navSections: externalNavSections,
+    secondaryLinks: externalSecondaryLinks,
+  },
   Maximal: {
     id: 'header-maximal',
     ...fullArgs,
@@ -191,3 +222,4 @@ export const ExtendedWithMegamenu = { args: storyDefs.ExtendedWithMegamenu };
 export const WithMenuIcon = { args: storyDefs.WithMenuIcon };
 export const Minimal = { args: storyDefs.Minimal };
 export const Maximal = { args: storyDefs.Maximal };
+export const ExternalLinks = { args: storyDefs.ExternalLinks };
