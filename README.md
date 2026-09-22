@@ -74,3 +74,40 @@ Storybook compiles the USX Sass itself and reloads on any change under
 dev server from `apps/storybook-django` to be running separately (see that
 app's `requirements.txt` for setup) — React and HTML stories work without it.
 
+## Releasing packages
+
+Publishing to npm is automated with [Changesets](https://github.com/changesets/changesets)
+(`.github/workflows/release.yml`) and is a two-step, PR-gated process — a plain
+commit or push never publishes anything on its own.
+
+1. **Describe your change.** After making a change to a publishable package
+   (`usx`, `usx-contracts`, `usx-react`, `usx-theme`, or `usx-uswds-fixes`), run:
+
+   ```bash
+   pnpm changeset
+   ```
+
+   Select the affected package(s), pick a semver bump (patch/minor/major), and
+   write a short summary. Commit the generated `.changeset/*.md` file along
+   with your code change and push to `main`.
+
+2. **CI opens a "Version Packages" PR.** Seeing a pending changeset file, the
+   release workflow bumps the affected `package.json` versions, writes/updates
+   each package's `CHANGELOG.md`, deletes the consumed changeset file, and
+   opens (or updates) a PR titled **Version Packages** on the
+   `changeset-release/main` branch. This step makes no npm changes yet.
+
+3. **Merge that PR when you're ready to release.** Merging it is itself a push
+   to `main`. With no changesets left pending, the workflow instead runs
+   `changeset publish`, which publishes only the packages whose version isn't
+   already on the npm registry (via OIDC trusted publishing — no npm token
+   needed) and creates matching GitHub Releases.
+
+Because publishing only happens for versions that don't already exist on the
+registry, and ordinary pushes without a changeset file are a no-op for both
+steps, this pipeline can't accidentally re-publish or overwrite a released
+version. Published changelogs are rendered in Storybook under
+**Documentation / Release Notes** — restart the Storybook dev server after
+pulling a release merge, since its `CHANGELOG.md` lookup is resolved at
+server start.
+
