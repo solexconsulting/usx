@@ -9,7 +9,7 @@ WORKDIR /app
 
 # ── Install dependencies ───────────────────────────────────────────────────
 # Every workspace manifest must be present for --frozen-lockfile to resolve.
-COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml tsconfig.json ./
 COPY packages/usx-react/package.json            packages/usx-react/
 COPY packages/usx-theme/package.json          packages/usx-theme/
 COPY packages/usx/package.json             packages/usx/
