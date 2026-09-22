@@ -27,14 +27,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.14.0
+          node-version-file: .nvmrc
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Node 22.14.0 bundles npm 10.x; trusted publishing (OIDC) requires npm >=11.5.1.
+      # Trusted publishing (OIDC) requires npm >=11.5.1.
       - name: Upgrade npm for OIDC trusted publishing
         run: npm install -g npm@latest
 
