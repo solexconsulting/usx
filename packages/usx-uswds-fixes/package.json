@@ -1,6 +1,6 @@
 {
   "name": "@solexllc/usx-uswds-fixes",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SCSS corrections and overrides layered on top of upstream USWDS.",
   "license": "MIT",
   "repository": {
