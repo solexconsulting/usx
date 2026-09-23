@@ -56,7 +56,7 @@
         </em>
       {% endif %}
     </div>
-    <button type="button" class="usa-menu-btn">
+    <button type="button" class="usa-menu-btn align-center">
       {% if useMenuIcon %}
         {% icon name='menu' size=3 %}{% endicon %}
       {% else %}
@@ -65,130 +65,144 @@
     </button>
   </div>
 
-  {% if extended %}
-    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
-      <div class="usa-nav__inner">
-        <button type="button" class="usa-nav__close">
-          {% icon name='close' %}{% endicon %}
-        </button>
-        <ul class="usa-nav__primary usa-accordion">
-          {% for section in navSections %}
-            <li class="usa-nav__primary-item">
-              {% if section.href %}
-                <a href="{{ section.href }}" class="usa-nav__link" {% if section.ariaLabel %}aria-label="{{ section.ariaLabel }}"{% endif %}>
-                  <span>{{ section.title }}</span>
-                </a>
-              {% else %}
-                <button type="button" class="usa-accordion__button usa-nav__link" aria-expanded="false" aria-controls="{{ id }}-nav-section-{{ forloop.counter0 }}">
-                  <span>{{ section.title }}</span>
-                </button>
-                {% if section.links %}
-                  {% if megamenu %}
-                    <div id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu usa-megamenu" hidden="hidden">
-                      <div class="grid-row grid-gap-4">
-                        <div class="usa-col">
-                          <ul class="usa-nav__submenu-list">
-                            {% for link in section.links %}
-                              <li class="usa-nav__submenu-item">
-                                <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
-                                  {{ link.text }}
-                                </a>
-                              </li>
-                            {% endfor %}
-                          </ul>
-                        </div>
+  {% if not extended %}
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav{% if stickyNav %} usx-nav--sticky{% endif %}">
+      <button type="button" class="usa-nav__close">
+        {% icon name='close' %}{% endicon %}
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        {% for section in navSections %}
+          <li class="usa-nav__primary-item">
+            {% if section.href %}
+              <a href="{{ section.href }}" class="usa-nav__link" {% if section.ariaLabel %}aria-label="{{ section.ariaLabel }}"{% endif %}>
+                <span>{{ section.title }}</span>
+                {% if section.external %}<span class="usa-sr-only">External.</span>{% icon name='launch' size=1 className='margin-left-05' %}{% endicon %}{% endif %}
+              </a>
+            {% else %}
+              <button type="button" class="usa-accordion__button usa-nav__link" aria-expanded="false" aria-controls="{{ id }}-nav-section-{{ forloop.counter0 }}">
+                <span>{{ section.title }}</span>
+              </button>
+              {% if section.links %}
+                {% if megamenu %}
+                  <div id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu usa-megamenu" hidden="hidden">
+                    <div class="grid-row grid-gap-4">
+                      <div class="usa-col">
+                        <ul class="usa-nav__submenu-list">
+                          {% for link in section.links %}
+                            <li class="usa-nav__submenu-item">
+                              <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
+                                {{ link.text }}
+                                {% if link.external %}<span class="usa-sr-only">External.</span>{% icon name='launch' size=1 className='margin-left-05' %}{% endicon %}{% endif %}
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
                       </div>
                     </div>
-                  {% else %}
-                    <ul id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu" hidden="hidden">
-                      {% for link in section.links %}
-                        <li class="usa-nav__submenu-item">
-                          <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
-                            <span>{{ link.text }}</span>
-                          </a>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
+                  </div>
+                {% else %}
+                  <ul id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu" hidden="hidden">
+                    {% for link in section.links %}
+                      <li class="usa-nav__submenu-item">
+                        <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
+                          <span>{{ link.text }}</span>
+                          {% if link.external %}<span class="usa-sr-only">External.</span>{% icon name='launch' size=1 className='margin-left-05' %}{% endicon %}{% endif %}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
                 {% endif %}
               {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-        <div class="usa-nav__secondary">
-          <ul class="usa-nav__secondary-links">
-            {% for link in secondaryLinks %}
-              <li class="usa-nav__secondary-item">
-                <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
-                  <span>{{ link.text }}</span>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+      {% if utilityContent or searchProps %}
+        <div class="usx-nav__utility">
+          {% if utilityContent %}{{ utilityContent|safe }}{% endif %}
           {% if searchProps %}
             {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps.defaultValue onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
           {% endif %}
         </div>
-      </div>
+      {% endif %}
     </nav>
-  {% else %}
-    
-      <nav aria-label="Primary navigation" class="usa-nav usx-nav">
-        <button type="button" class="usa-nav__close">
-          {% icon name='close' %}{% endicon %}
-        </button>
-        <ul class="usa-nav__primary usa-accordion">
-          {% for section in navSections %}
-            <li class="usa-nav__primary-item">
-              {% if section.href %}
-                <a href="{{ section.href }}" class="usa-nav__link" {% if section.ariaLabel %}aria-label="{{ section.ariaLabel }}"{% endif %}>
-                  <span>{{ section.title }}</span>
-                </a>
-              {% else %}
-                <button type="button" class="usa-accordion__button usa-nav__link" aria-expanded="false" aria-controls="{{ id }}-nav-section-{{ forloop.counter0 }}">
-                  <span>{{ section.title }}</span>
-                </button>
-                {% if section.links %}
-                  {% if megamenu %}
-                    <div id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu usa-megamenu" hidden="hidden">
-                      <div class="grid-row grid-gap-4">
-                        <div class="usa-col">
-                          <ul class="usa-nav__submenu-list">
-                            {% for link in section.links %}
-                              <li class="usa-nav__submenu-item">
-                                <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
-                                  {{ link.text }}
-                                </a>
-                              </li>
-                            {% endfor %}
-                          </ul>
-                        </div>
+  {% endif %}
+  {% if not extended %}</div>{% endif %}
+</header>
+{% if extended %}
+  <nav aria-label="Primary navigation" class="usa-nav usx-nav{% if stickyNav %} usx-nav--sticky{% endif %}">
+    <div class="usa-nav__inner">
+      <button type="button" class="usa-nav__close">
+        {% icon name='close' %}{% endicon %}
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        {% for section in navSections %}
+          <li class="usa-nav__primary-item">
+            {% if section.href %}
+              <a href="{{ section.href }}" class="usa-nav__link" {% if section.ariaLabel %}aria-label="{{ section.ariaLabel }}"{% endif %}>
+                <span>{{ section.title }}</span>
+                {% if section.external %}<span class="usa-sr-only">External.</span>{% icon name='launch' size=1 className='margin-left-05' %}{% endicon %}{% endif %}
+              </a>
+            {% else %}
+              <button type="button" class="usa-accordion__button usa-nav__link" aria-expanded="false" aria-controls="{{ id }}-nav-section-{{ forloop.counter0 }}">
+                <span>{{ section.title }}</span>
+              </button>
+              {% if section.links %}
+                {% if megamenu %}
+                  <div id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu usa-megamenu" hidden="hidden">
+                    <div class="grid-row grid-gap-4">
+                      <div class="usa-col">
+                        <ul class="usa-nav__submenu-list">
+                          {% for link in section.links %}
+                            <li class="usa-nav__submenu-item">
+                              <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
+                                {{ link.text }}
+                                {% if link.external %}<span class="usa-sr-only">External.</span>{% icon name='launch' size=1 className='margin-left-05' %}{% endicon %}{% endif %}
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
                       </div>
                     </div>
-                  {% else %}
-                    <ul id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu" hidden="hidden">
-                      {% for link in section.links %}
-                        <li class="usa-nav__submenu-item">
-                          <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
-                            <span>{{ link.text }}</span>
-                          </a>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
+                  </div>
+                {% else %}
+                  <ul id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu" hidden="hidden">
+                    {% for link in section.links %}
+                      <li class="usa-nav__submenu-item">
+                        <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
+                          <span>{{ link.text }}</span>
+                          {% if link.external %}<span class="usa-sr-only">External.</span>{% icon name='launch' size=1 className='margin-left-05' %}{% endicon %}{% endif %}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
                 {% endif %}
               {% endif %}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+      <div class="usa-nav__secondary">
+        <ul class="usa-nav__secondary-links">
+          {% for link in secondaryLinks %}
+            <li class="usa-nav__secondary-item">
+              <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
+                <span>{{ link.text }}</span>
+                {% if link.external %}<span class="usa-sr-only">External.</span>{% icon name='launch' size=1 className='margin-left-05' %}{% endicon %}{% endif %}
+              </a>
             </li>
           {% endfor %}
         </ul>
-        {% if searchProps %}
-          {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps.defaultValue onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
+        {% if utilityContent or searchProps %}
+          <div class="usx-nav__utility">
+            {% if utilityContent %}{{ utilityContent|safe }}{% endif %}
+            {% if searchProps %}
+              {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps.defaultValue onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
+            {% endif %}
+          </div>
         {% endif %}
-      </nav>
+      </div>
+      {% if navEndContent %}<div class="usx-nav__end-slot">{{ navEndContent|safe }}</div>{% endif %}
     </div>
-  {% endif %}
-
-  {% if not extended %}
-  </div>
-  {% endif %}
-</header>
+  </nav>
+{% endif %}

@@ -1,6 +1,16 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
 /* stylelint-disable selector-class-pattern, no-descending-specificity -- Public USX classes use BEM naming; intentional cascade order. */
+
+// Keeps utilityContent and the search box on one row regardless of the
+// parent's own flex-direction (USWDS's .usa-nav__secondary stacks its
+// children in a column at desktop).
+.usx-nav__utility {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+}
+
 .usx-header {
   @if $usx-header-bg {
     background-color: $usx-header-bg;
@@ -91,6 +101,19 @@
           padding-left: 2rem;
           padding-right: 2rem;
           position: relative;
+
+          // .usa-nav__close (mobile-only) is hidden at this width, and
+          // .usa-nav__secondary is taken out of flow via its own absolute
+          // positioning — so .usa-nav__primary and .usx-nav__end-slot are the
+          // only two participants in this row, letting margin-left: auto push
+          // the slot flush right, vertically centered with the nav links.
+          display: flex;
+          align-items: center;
+      }
+
+      .usx-nav__end-slot {
+        flex-shrink: 0;
+        margin-left: auto;
       }
 
       // USWDS's own .usa-header--extended .usa-nav__primary-item > .usa-nav__link:hover::after

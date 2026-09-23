@@ -32,6 +32,7 @@ interface PrimaryNavProps {
   showSecondary?: boolean;
   secondaryLinks?: HeaderNavLink[];
   searchProps?: SearchProps | null;
+  utilityContent?: React.ReactNode;
   headerId?: string;
   renderSearchDirectly?: boolean;
 }
@@ -42,6 +43,7 @@ function PrimaryNav({
   showSecondary = false,
   secondaryLinks = [],
   searchProps = null,
+  utilityContent = null,
   headerId = 'header',
   renderSearchDirectly = false,
 }: PrimaryNavProps) {
@@ -145,7 +147,12 @@ function PrimaryNav({
           </ul>
         </div>
       )}
-      {renderSearchDirectly && searchProps && <Search {...searchProps} />}
+      {renderSearchDirectly && (utilityContent || searchProps) && (
+        <div className="usx-nav__utility">
+          {utilityContent}
+          {searchProps && <Search {...searchProps} />}
+        </div>
+      )}
     </>
   );
 }
@@ -162,6 +169,10 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   useMenuIcon?: boolean;
   stickyNav?: boolean;
   className?: string;
+  /** Rendered inline, to the left of the search box (in both header variants). */
+  utilityContent?: React.ReactNode;
+  /** Rendered right-justified, in line with the primary nav links (extended header only). */
+  navEndContent?: React.ReactNode;
 }
 
 export default function Header({
@@ -176,6 +187,8 @@ export default function Header({
   useMenuIcon = false,
   stickyNav = false,
   className = '',
+  utilityContent = null,
+  navEndContent = null,
   ...props
 }: HeaderProps) {
   const headerClasses = ClassNames(
@@ -230,8 +243,14 @@ export default function Header({
                   </li>
                 ))}
               </ul>
-              {searchProps && <Search {...searchProps} />}
+              {(utilityContent || searchProps) && (
+                <div className="usx-nav__utility">
+                  {utilityContent}
+                  {searchProps && <Search {...searchProps} />}
+                </div>
+              )}
             </div>
+            {navEndContent && <div className="usx-nav__end-slot">{navEndContent}</div>}
           </div>
         </nav>
       </>
@@ -249,6 +268,7 @@ export default function Header({
             showSecondary={false}
             secondaryLinks={secondaryLinks}
             searchProps={searchProps}
+            utilityContent={utilityContent}
             headerId={id}
             renderSearchDirectly={true}
           />

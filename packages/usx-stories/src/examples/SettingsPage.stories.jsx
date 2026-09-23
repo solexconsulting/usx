@@ -36,7 +36,6 @@ export const SettingsPage = {
             />
             <Layout
                 variant="grid"
-                expandLeftSidebar={true}
                 content={
                     <Page id="settings-page-example" title="Settings">
                         <Section title="Profile Settings">

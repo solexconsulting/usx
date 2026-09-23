@@ -31,7 +31,6 @@ export const AdvancedSearchFiltersPattern = {
       <Header id="adv-search-header" {...headerArgs} />
       <Layout
         variant="grid"
-        expandLeftSidebar={true}
         content={
           <Page id="adv-search-example" title="Advanced Program Search">
             <Section>
@@ -98,9 +97,8 @@ export const AdvancedSearchFiltersPattern = {
                 ]}
               />
 
-              <div className="margin-top-4 display-flex justify-center">
-                <Pagination totalPages={6} currentPage={1} pathname="#" />
-              </div>
+              <Pagination totalPages={6} currentPage={1} pathname="#" />
+
             </Section>
           </Page>
         }

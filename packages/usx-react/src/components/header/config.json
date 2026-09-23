@@ -53,6 +53,14 @@
     "className": {
       "type": "string",
       "description": "Additional classes"
+    },
+    "utilityContent": {
+      "type": "slot",
+      "description": "Rendered inline, to the left of the search box (in both header variants)."
+    },
+    "navEndContent": {
+      "type": "slot",
+      "description": "Rendered right-justified, in line with the primary nav links (extended header only)."
     }
   }
 }

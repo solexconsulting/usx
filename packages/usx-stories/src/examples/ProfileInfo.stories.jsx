@@ -28,7 +28,6 @@ export const ProfileInfoPattern = {
       <Header id="profile-header" {...headerArgs} />
       <Layout
         variant="grid"
-        expandRightSidebar={true}
         content={
           <Page id="profile-info-example" title="User Profile">
             <Section>

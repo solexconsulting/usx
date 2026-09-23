@@ -10,9 +10,24 @@
 // instead of leaving the compiled defaults frozen.
 
 .usa-in-page-nav-container {
+  // Lets the sticky <aside> inside stick across its ancestor's full height
+  // (e.g. Layout's right sidebar, which stretches via CSS grid) instead of
+  // being bounded by this container's own (much shorter) content height.
+  height: 100%;
+
   main,
   .usx-in-page-nav__content {
     max-width: 100%;
+  }
+}
+
+.usx-layout__sidebar--right {
+
+  .usa-in-page-nav-container {
+
+    .usa-in-page-nav.usx-in-page-nav {
+      margin: 0;
+    }
   }
 }
 

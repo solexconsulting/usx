@@ -34,7 +34,6 @@ export const SearchResults = {
       />
       <Layout
         variant="grid"
-        expandLeftSidebar={true}
         content={
           <Page id="search-results-example" title="Search Documentation">
             <Section>

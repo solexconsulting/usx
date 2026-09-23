@@ -13,17 +13,9 @@
   // | gutter | content (max-width 960px) | gutter |
 
   &__single-column {
-    max-width: $max-layout-width;
+    max-width: calc($max-layout-width + units(4));
     margin: 0 auto;
-    padding: 0 units(2.5);
-
-    @include at-media('tablet') {
-      padding: 0 units(4);
-    }
-
-    @include at-media('desktop') {
-      padding: 0;
-    }
+    padding: 0 units(2);
   }
 
   // ── Multi-column grid layout ──────────────────────────────────────────────
@@ -52,6 +44,7 @@
   &__content {
     grid-column: content-start / span content-end;
     grid-row: 1;
+    max-width: calc($max-layout-width + units(4));
 
 
     // Content that leaves space for a left sidebar
@@ -62,8 +55,7 @@
 
       @include at-media('desktop') {
         grid-column: content-start / span right-sidebar-end;
-        width: $dynamic-content-width;
-        margin: 0 units(4) 0 0;
+        padding-right: units(4);
       }
     }
 
@@ -75,9 +67,8 @@
 
       @include at-media('desktop') {
         grid-column: left-sidebar-start / span content-end;
-        width: $dynamic-content-width;
-        margin: 0 0 0 units(4);
         justify-self: flex-end;
+        padding-left: units(4);
       }
     }
   }
@@ -87,11 +78,13 @@
   &__sidebar--left {
     grid-column: left-sidebar-start / span content-start;
     grid-row: 1;
+    height: 100%;
   }
 
   &__sidebar--right {
     grid-column: content-end / span right-sidebar-end;
     grid-row: 1;
+    height: 100%;
   }
 
   // Hide sidebars on mobile/tablet, show on desktop

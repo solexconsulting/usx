@@ -14,7 +14,7 @@ export default {
     docs: {
       description: {
         component: uswdsInitNote('`inPageNavigation.init()`')
-      }
+      },
     }
   },
   decorators: [

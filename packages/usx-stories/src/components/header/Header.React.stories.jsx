@@ -1,7 +1,17 @@
 
+import React from 'react';
 import Header from '../../../../usx-react/src/components/header/Header.tsx';
 import config from '../../../../usx-react/src/components/header/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+
+import { useGlobals } from 'storybook/preview-api';
+import ThemePicker from '../../../../usx-react/src/components/theme-picker/ThemePicker.tsx';
+import Button from '../../../../usx-react/src/components/button/Button.tsx';
+
+const LIGHTDARKTHEMES = [
+    { value: 'Aurora', label: 'Light' },
+    { value: 'Borealis', label: 'Dark' },
+]
 
 export default {
   title: 'React/USWDS/Header',
@@ -85,7 +95,7 @@ const searchArgs = {
   label: 'Search',
   icon: 'search',
   iconOnly: true,
-  buttonVariant: 'secondary',
+  buttonVariant: 'primary',
   big: false,
   action: 'https://www.google.com/search',
   placeholder: 'Search...',
@@ -118,6 +128,17 @@ const externalSecondaryLinks = [
   { text: 'Secondary External 2', href: 'https://example.com/secondary2', ariaLabel: 'Secondary External 2', external: true },
 ];
 
+const utilityContentExample = (
+  <Button
+    variant="primary"
+    ghost={true}
+    href="https://example.com/sign-in"
+    className="margin-right-0"
+  >
+    Sign In
+  </Button>
+);
+
 const baseArgs = {
   projectUrl: 'https://example.com',
   useMenuIcon: true,
@@ -129,6 +150,12 @@ const fullArgs = {
   branding: standardBranding,
   secondaryLinks,
   searchProps: searchArgs,
+};
+
+const fullArgsNoSearch = {
+  ...baseArgs,
+  branding: standardBranding,
+  secondaryLinks,
 };
 
 export const storyDefs = {
@@ -174,6 +201,12 @@ export const storyDefs = {
     branding: standardBranding,
     navSections: externalNavSections,
     secondaryLinks: externalSecondaryLinks,
+  },
+  ExtensibilitySlots: {
+    ...fullArgsNoSearch,
+    id: 'header-extensibility-slots',
+    extended: true,
+    utilityContent: utilityContentExample,
   },
   Maximal: {
     id: 'header-maximal',
@@ -223,3 +256,28 @@ export const WithMenuIcon = { args: storyDefs.WithMenuIcon };
 export const Minimal = { args: storyDefs.Minimal };
 export const Maximal = { args: storyDefs.Maximal };
 export const ExternalLinks = { args: storyDefs.ExternalLinks };
+export const ExtensibilitySlots = {
+  args: storyDefs.ExtensibilitySlots,
+  parameters: {
+    docs: {
+      description: {
+        story: '`utilityContent` renders inline to the left of search; `navEndContent` renders right-justified in line with the primary nav links (extended header only). Here `utilityContent` is a live `ThemePicker` wired to the toolbar theme global.'
+      }
+    }
+  },
+  render: (args) => {
+    const [globals, updateGlobals] = useGlobals();
+    return (
+      <Header
+        {...args}
+        navEndContent={
+          <ThemePicker
+            themes={LIGHTDARKTHEMES}
+            value={globals.theme}
+            onChange={(theme) => updateGlobals({ theme })}
+          />
+        }
+      />
+    );
+  }
+};

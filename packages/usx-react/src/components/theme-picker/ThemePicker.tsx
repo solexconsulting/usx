@@ -86,7 +86,7 @@ export default function ThemePicker({
       ) : (
         <button
           type="button"
-          className="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
+          className="usa-button usx-button usx-button--ghost text-muted usx-theme-picker__trigger"
           aria-label={label}
           onClick={() => setOpen(true)}
         >

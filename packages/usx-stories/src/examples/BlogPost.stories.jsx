@@ -33,8 +33,6 @@ export const BlogPost = {
       />
       <Layout
         variant="grid"
-        expandLeftSidebar={true}
-        expandRightSidebar={true}
         content={
           <Page id="blog-post-example" title="The Future of Digital Transformation">
             <article>

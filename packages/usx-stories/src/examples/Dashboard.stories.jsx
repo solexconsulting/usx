@@ -34,7 +34,6 @@ export const Dashboard = {
       />
       <Layout
         variant="grid"
-        expandRightSidebar={true}
         content={
           <Page id="dashboard-example" title="Dashboard">
             <div className="margin-bottom-3 display-flex flex-wrap flex-align-center justify-between gap-2">
