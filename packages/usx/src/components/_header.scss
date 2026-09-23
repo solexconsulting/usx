@@ -2,15 +2,6 @@
 
 /* stylelint-disable selector-class-pattern, no-descending-specificity -- Public USX classes use BEM naming; intentional cascade order. */
 
-// Keeps utilityContent and the search box on one row regardless of the
-// parent's own flex-direction (USWDS's .usa-nav__secondary stacks its
-// children in a column at desktop).
-.usx-nav__utility {
-  align-items: center;
-  display: flex;
-  gap: 0.5rem;
-}
-
 .usx-header {
   @if $usx-header-bg {
     background-color: $usx-header-bg;
@@ -49,10 +40,33 @@
     }
   }
 
-}
+  :has(> .usx-nav--sticky) {
+    overflow: unset;
+  }
 
-:has(> .usx-nav--sticky) {
-  overflow: unset;
+  .usx-nav {
+    @media (width < 64em) {
+      @if $usx-header-nav-bg-mobile {
+        background-color: $usx-header-nav-bg-mobile;
+      }
+    }
+
+    @media (width >=64em) {
+      @if $usx-header-nav-bg {
+        background-color: $usx-header-nav-bg;
+      }
+    }
+  }
+
+  // Keeps utilityContent and the search box on one row regardless of the
+  // parent's own flex-direction (USWDS's .usa-nav__secondary stacks its
+  // children in a column at desktop).
+  .usx-nav__utility {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+  }
+
 }
 
 :has(> .usa-header--extended) {
@@ -62,19 +76,7 @@
   // dark theme's drawer doesn't revert to an unstyled white panel. Desktop
   // and mobile can be themed independently since the drawer and the nav bar
   // are visually distinct surfaces.
-  .usx-nav {
-    @media (width < 64em) {
-      @if $usx-header-nav-bg-mobile {
-        background-color: $usx-header-nav-bg-mobile;
-      }
-    }
 
-    @media (width >= 64em) {
-      @if $usx-header-nav-bg {
-        background-color: $usx-header-nav-bg;
-      }
-    }
-  }
 
   // USWDS scopes all of its own .usa-header--extended .usa-nav(__inner) and
   // hover/current-bar rules to this same desktop breakpoint (the nav is an
@@ -82,7 +84,7 @@
   // mobile rules instead) — mirror that scoping here, or this desktop-only
   // border/spacing leaks into the mobile drawer (extra 2rem padding on top
   // of the drawer's own).
-  @media (width >= 64em) {
+  @media (width >=64em) {
     .usx-nav {
       @if $usx-header-nav-border-bottom {
         border-bottom: $usx-header-nav-border-bottom;
@@ -90,25 +92,27 @@
 
       @if $usx-header-nav-border-top {
         border-top: $usx-header-nav-border-top;
-      } @else {
+      }
+
+      @else {
         border-top: 1px solid #dfe1e2;
       }
 
       .usa-nav__inner {
-          margin-left: auto;
-          margin-right: auto;
-          max-width: calc($max-layout-width + 4rem);
-          padding-left: 2rem;
-          padding-right: 2rem;
-          position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: calc($max-layout-width + 4rem);
+        padding-left: 2rem;
+        padding-right: 2rem;
+        position: relative;
 
-          // .usa-nav__close (mobile-only) is hidden at this width, and
-          // .usa-nav__secondary is taken out of flow via its own absolute
-          // positioning — so .usa-nav__primary and .usx-nav__end-slot are the
-          // only two participants in this row, letting margin-left: auto push
-          // the slot flush right, vertically centered with the nav links.
-          display: flex;
-          align-items: center;
+        // .usa-nav__close (mobile-only) is hidden at this width, and
+        // .usa-nav__secondary is taken out of flow via its own absolute
+        // positioning — so .usa-nav__primary and .usx-nav__end-slot are the
+        // only two participants in this row, letting margin-left: auto push
+        // the slot flush right, vertically centered with the nav links.
+        display: flex;
+        align-items: center;
       }
 
       .usx-nav__end-slot {
@@ -123,7 +127,8 @@
       // extended only differs from the basic default (below) by hover being
       // restricted to top-level items and the bar sitting flush at bottom: 0
       // instead of bottom: -0.25rem.
-      .usa-nav__primary-item > .usa-nav__link {
+      .usa-nav__primary-item>.usa-nav__link {
+
         &:hover,
         &.usa-current {
           position: relative;
@@ -163,6 +168,7 @@
   float: right;
 
   @if $usx-header-nav-link-text-hover {
+
     // Vendor's dark-background/white-text expanded look is desktop-only (see
     // the aria-expanded background rule further below), so at mobile a hover
     // on an already-open toggle should still track the theme like any other
@@ -177,7 +183,7 @@
           background-color: $usx-header-nav-link-bg-hover;
         }
 
-        &> span::after {
+        &>span::after {
           @if $usx-header-nav-link-text-hover-mobile {
             background-color: $usx-header-nav-link-text-hover-mobile;
           }
@@ -185,11 +191,11 @@
       }
     }
 
-    @media (width >= 64em) {
+    @media (width >=64em) {
       .usa-nav__primary button:not([aria-expanded="true"]):hover {
         color: $usx-header-nav-link-text-hover;
 
-        &> span::after {
+        &>span::after {
           @if $usx-header-nav-link-text-hover {
             background-color: $usx-header-nav-link-text-hover;
           }
@@ -197,7 +203,7 @@
       }
     }
 
-    .usa-nav__primary > .usa-nav__primary-item > a:hover {
+    .usa-nav__primary>.usa-nav__primary-item>a:hover {
       @media (width < 64em) {
         color: $usx-header-nav-link-text-hover-mobile;
 
@@ -208,7 +214,7 @@
         }
       }
 
-      @media (width >= 64em) {
+      @media (width >=64em) {
         color: $usx-header-nav-link-text-hover;
       }
     }
@@ -221,6 +227,7 @@
   }
 
   .usa-nav__close {
+
     // Only rendered inside the mobile off-canvas drawer, so it tracks the
     // drawer link tokens, not the desktop primary-nav ones.
     // .usa-icon fills via `currentColor`, so tint it with `color`, not
@@ -236,7 +243,7 @@
     }
   }
 
-  @media (width >= 64em) {
+  @media (width >=64em) {
     width: 100%;
     float: none;
 
@@ -258,34 +265,37 @@
       padding-right: 1rem;
     }
 
-    .usa-nav__secondary-item + .usa-nav__secondary-item {
+    .usa-nav__secondary-item+.usa-nav__secondary-item {
+
       // USWDS's own separator is a border color (#dfe1e2), not the link's
       // text color — $usx-header-secondary-link-text was the wrong token.
       @if $usx-header-nav-border-top {
         border-left: $usx-header-nav-border-top;
-      } @else {
+      }
+
+      @else {
         border-left: 1px solid #dfe1e2;
       }
     }
   }
 
   .usa-nav__link {
+
     // Vendor only swaps the expanded toggle to white text at desktop (paired
     // with the dark expanded background); at mobile it gets no special
     // color at all, so it should still track the theme like every other
     // link — excluding it unconditionally left it on the unthemed browser
     // default whenever the drawer was open.
     @media (width < 64em) {
-      &:not(
-        .usa-nav__primary button:hover,
+
+      &:not(.usa-nav__primary button:hover,
         .usa-nav__primary > .usa-nav__primary-item > a:hover,
-        .usa-current
-      ) {
+        .usa-current) {
         @if $usx-header-nav-link-text-mobile {
           color: $usx-header-nav-link-text-mobile;
         }
 
-        &> span::after {
+        &>span::after {
           @if $usx-header-nav-link-text-mobile {
             background-color: $usx-header-nav-link-text-mobile;
           }
@@ -293,18 +303,17 @@
       }
     }
 
-    @media (width >= 64em) {
-      &:not(
-        .usa-nav__primary button[aria-expanded="true"],
+    @media (width >=64em) {
+
+      &:not(.usa-nav__primary button[aria-expanded="true"],
         .usa-nav__primary button:hover,
         .usa-nav__primary > .usa-nav__primary-item > a:hover,
-        .usa-current
-      ) {
+        .usa-current) {
         @if $usx-header-nav-link-text {
           color: $usx-header-nav-link-text;
         }
 
-        &> span::after {
+        &>span::after {
           @if $usx-header-nav-link-text {
             background-color: $usx-header-nav-link-text;
           }
@@ -315,7 +324,7 @@
     // Desktop: current text stays the plain link color — only the bottom bar
     // (above) marks state, matching vendor (no .usa-current color override
     // exists in vendor's desktop rules).
-    @media (width >= 64em) {
+    @media (width >=64em) {
       &.usa-current {
         @if $usx-header-nav-link-text {
           color: $usx-header-nav-link-text;
@@ -359,7 +368,8 @@
     // (left-side) current-page indicator instead, and never shows one on
     // hover at all — showing this bar unconditionally put it on every mobile
     // nav item (including dropdown toggles) on hover, which vendor never does.
-    @media (width >= 64em) {
+    @media (width >=64em) {
+
       &:hover,
       &.usa-current {
         position: relative;
@@ -389,18 +399,19 @@
     // white background and border-top separators are the only styling, so
     // applying this unconditionally painted a dark box (with the still-gray,
     // unthemed link text from above) over the mobile accordion toggle/panel.
-    @media (width >= 64em) {
+    @media (width >=64em) {
       &[aria-expanded="true"] {
         @if $usx-header-nav-link-bg {
           background-color: $usx-header-nav-link-bg !important;
         }
 
-        & + .usa-nav__submenu {
+        &+.usa-nav__submenu {
           @if $usx-header-nav-submenu-bg {
             background-color: $usx-header-nav-submenu-bg;
           }
 
-          &::before, &::after {
+          &::before,
+          &::after {
             @if $usx-header-nav-submenu-bg {
               background-color: $usx-header-nav-submenu-bg;
             }
@@ -410,7 +421,7 @@
     }
   }
 
-  .usa-nav__secondary-item > a {
+  .usa-nav__secondary-item>a {
     @if $usx-header-secondary-link-text {
       color: $usx-header-secondary-link-text;
     }
@@ -423,12 +434,17 @@
   }
 
   @media (width < 64em) {
-    .usa-nav__primary-item, .usa-nav__submenu-item {
+
+    .usa-nav__primary-item,
+    .usa-nav__submenu-item {
+
       // USWDS's own default is a border color (#dfe1e2), not a text color —
       // $usx-header-nav-link-text was the wrong token here.
       @if $usx-header-nav-border-top {
         border-top: $usx-header-nav-border-top;
-      } @else {
+      }
+
+      @else {
         border-top: 1px solid #dfe1e2;
       }
     }
@@ -436,7 +452,7 @@
     // Submenu links are plain <a> tags with no .usa-nav__link class (see
     // Header.tsx), so the rule above never reaches them — left alone they
     // fall back to vendor's hardcoded gray/blue instead of the active theme.
-    .usa-nav__submenu-item > a {
+    .usa-nav__submenu-item>a {
       @if $usx-header-nav-link-text {
         color: $usx-header-nav-link-text;
       }

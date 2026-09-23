@@ -35,7 +35,8 @@ export function headerFooterBorderOverrides() {
 export function headerNavBackgroundOverrides() {
   return {
     'usx-header-bg': 'var(--usx-surface-3)',
-    'usx-header-nav-bg': 'var(--usx-surface-3)'
+    'usx-header-nav-bg': 'var(--usx-surface-3)',
+    'usx-header-nav-bg-mobile': 'var(--usx-surface-3)'
   };
 }
 

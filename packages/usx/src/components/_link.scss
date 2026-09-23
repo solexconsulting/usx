@@ -2,7 +2,7 @@
 
 /* stylelint-disable selector-class-pattern, selector-not-notation, no-descending-specificity -- Public USX classes use BEM naming; preserve original :not() specificity and cascade order. */
 .usx-link,
-.usx-prose a {
+.usx-prose a:not(.usa-button) {
   display: inline-flex;
   align-items: center;
   width: max-content;
