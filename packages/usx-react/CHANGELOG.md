@@ -1,5 +1,13 @@
 # @solexllc/usx-react
 
+## 0.1.2
+
+### Patch Changes
+
+- [`bb42da7`](https://github.com/solexconsulting/usx/commit/bb42da71a5bbb838fcb68cdf3f4b197180801c72) Thanks [@olsonap](https://github.com/olsonap)! - Bug fixes for layout, in-page-nav, and header to facilitate intended layout options
+- Updated dependencies [[`bb42da7`](https://github.com/solexconsulting/usx/commit/bb42da71a5bbb838fcb68cdf3f4b197180801c72)]:
+  - @solexllc/usx@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes
