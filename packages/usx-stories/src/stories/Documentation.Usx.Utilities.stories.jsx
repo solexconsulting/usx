@@ -109,7 +109,6 @@ export const Utilities = {
         <tbody>
           <tr><td><code>$max-layout-width</code></td><td><code>60rem</code> (960px)</td><td>Maximum width container for content layouts</td></tr>
           <tr><td><code>$max-sidebar-width</code></td><td><code>16rem</code> (256px)</td><td>Standard layout sidebar width</td></tr>
-          <tr><td><code>$dynamic-content-width</code></td><td><code>calc(50% + 22rem)</code></td><td>Fluid content region offset width</td></tr>
           <tr><td><code>$breakpoint-mobile</code></td><td><code>640px</code></td><td>Mobile breakpoint threshold</td></tr>
           <tr><td><code>$breakpoint-tablet</code></td><td><code>640px</code></td><td>Tablet breakpoint threshold</td></tr>
           <tr><td><code>$breakpoint-desktop</code></td><td><code>1024px</code></td><td>Desktop breakpoint threshold</td></tr>

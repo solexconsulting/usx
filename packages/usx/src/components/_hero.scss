@@ -32,7 +32,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-color: rgb(0 0 0 / 55%);
+    background-color: rgb(0 0 0 / 35%);
     pointer-events: none;
 
     @if $usx-hero-overlay-bg {
@@ -61,7 +61,7 @@
   &__callout {
     max-width: 40rem;
     padding: 2rem;
-    background-color: rgb(0 0 0 / 60%);
+    background-color: rgb(0 0 0 / 90%);
 
     // Radius follows the app-wide radius-box group (null/square by default,
     // like every other radius-box consumer: image, code, summary-box).
