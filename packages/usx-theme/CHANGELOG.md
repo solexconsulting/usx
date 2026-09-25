@@ -1,5 +1,11 @@
 # @solexllc/usx-theme
 
+## 0.2.1
+
+### Patch Changes
+
+- [`2e35021`](https://github.com/solexconsulting/usx/commit/2e35021e06902ff79d2379a09feb490c52610f31) Thanks [@olsonap](https://github.com/olsonap)! - Fix `@use 'pkg:@solexllc/usx-theme/themes'` failing with "Unable to determine which of multiple potential resolutions" under Sass's `NodePackageImporter`. Sass probes `themes.css` when resolving that subpath, and the sibling `./themes.css` export made the Sass module ambiguous. The all-themes stylesheet moved to `@solexllc/usx-theme/themes/all.css`; the `./themes.css` subpath is gone.
+
 ## 0.2.0
 
 ### Minor Changes
