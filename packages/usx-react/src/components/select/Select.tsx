@@ -1,5 +1,5 @@
 // import React from 'react';
-import { SelectHTMLAttributes } from 'react';
+import { ReactNode, SelectHTMLAttributes } from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
 import Hint from '../hint/Hint';
@@ -12,7 +12,7 @@ export interface SelectOption {
 }
 
 export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
-  label: string;
+  label: ReactNode;
   id?: string;
   name?: string;
   options?: SelectOption[];

@@ -10,7 +10,7 @@ import Card from '../../../usx-react/src/components/card/Card.tsx';
 import Icon from '../../../usx-react/src/components/icon/Icon.tsx';
 import IconList from '../../../usx-react/src/components/icon-list/IconList.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
-import Page from '../../../usx-react/src/components/page/Page.jsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
 import Section from '../../../usx-react/src/components/section/Section.tsx';
 import Status from '../../../usx-react/src/components/status/Status.tsx';
 import TagGroup from '../../../usx-react/src/components/tag-group/TagGroup.tsx';

@@ -1,4 +1,4 @@
-import MemorableDate from '../../../../usx-react/src/components/memorable-date/MemorableDate.jsx';
+import MemorableDate from '../../../../usx-react/src/components/memorable-date/MemorableDate.tsx';
 import config from '../../../../usx-react/src/components/memorable-date/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 

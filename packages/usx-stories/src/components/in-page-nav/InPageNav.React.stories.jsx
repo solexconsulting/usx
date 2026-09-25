@@ -1,5 +1,5 @@
 import React from 'react';
-import InPageNav from '../../../../usx-react/src/components/in-page-nav/InPageNav.jsx';
+import InPageNav from '../../../../usx-react/src/components/in-page-nav/InPageNav.tsx';
 import config from '../../../../usx-react/src/components/in-page-nav/config.json';
 import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import inPageNavigation from '@uswds/uswds/js/usa-in-page-navigation';

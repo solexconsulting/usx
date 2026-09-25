@@ -25,7 +25,7 @@ import Attribution from '../../../usx-react/src/components/attribution/Attributi
 import Banner from '../../../usx-react/src/components/banner/Banner.tsx';
 import Block from '../../../usx-react/src/components/block/Block.tsx';
 import Breadcrumb from '../../../usx-react/src/components/breadcrumb/Breadcrumb.tsx';
-import LanguageSelector from '../../../usx-react/src/components/language-selector/LanguageSelector.jsx';
+import LanguageSelector from '../../../usx-react/src/components/language-selector/LanguageSelector.tsx';
 import Button from '../../../usx-react/src/components/button/Button.tsx';
 import ButtonGroup from '../../../usx-react/src/components/button-group/ButtonGroup.tsx';
 import Checkbox from '../../../usx-react/src/components/checkbox/Checkbox.tsx';
@@ -33,15 +33,15 @@ import Clickable from '../../../usx-react/src/components/clickable/Clickable.tsx
 import Code from '../../../usx-react/src/components/code/Code.tsx';
 import Collection from '../../../usx-react/src/components/collection/Collection.tsx';
 import CopyToClipboard from '../../../usx-react/src/components/copy-to-clipboard/CopyToClipboard.tsx';
-import DatePicker from '../../../usx-react/src/components/date-picker/DatePicker.jsx';
+import DatePicker from '../../../usx-react/src/components/date-picker/DatePicker.tsx';
 import Eyebrow from '../../../usx-react/src/components/eyebrow/Eyebrow.tsx';
-import FileInput from '../../../usx-react/src/components/file-input/FileInput.jsx';
+import FileInput from '../../../usx-react/src/components/file-input/FileInput.tsx';
 import Footer from '../../../usx-react/src/components/footer/Footer.tsx';
 import Header from '../../../usx-react/src/components/header/Header.tsx';
 import Hero from '../../../usx-react/src/components/hero/Hero.tsx';
 import IconList from '../../../usx-react/src/components/icon-list/IconList.tsx';
 import Input from '../../../usx-react/src/components/input/Input.tsx';
-import InPageNav from '../../../usx-react/src/components/in-page-nav/InPageNav.jsx';
+import InPageNav from '../../../usx-react/src/components/in-page-nav/InPageNav.tsx';
 import Link from '../../../usx-react/src/components/link/Link.tsx';
 import List from '../../../usx-react/src/components/list/List.tsx';
 import MiscBanner from '../../../usx-react/src/components/misc-banner/MiscBanner.tsx';
@@ -49,7 +49,7 @@ import Pagination from '../../../usx-react/src/components/pagination/Pagination.
 import ProcessList from '../../../usx-react/src/components/process-list/ProcessList.tsx';
 import Prose from '../../../usx-react/src/components/prose/Prose.tsx';
 import RadioButtons from '../../../usx-react/src/components/radio-buttons/RadioButtons.tsx';
-import RangeSlider from '../../../usx-react/src/components/range-slider/RangeSlider.jsx';
+import RangeSlider from '../../../usx-react/src/components/range-slider/RangeSlider.tsx';
 import Search from '../../../usx-react/src/components/search/Search.tsx';
 import Select from '../../../usx-react/src/components/select/Select.tsx';
 import SideNav from '../../../usx-react/src/components/sidenav/SideNav.tsx';

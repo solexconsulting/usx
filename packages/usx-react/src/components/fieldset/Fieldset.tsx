@@ -5,7 +5,7 @@ import Hint from '../hint/Hint';
 import ErrorMessage from '../error-message/ErrorMessage';
 
 export interface FieldsetProps extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
-  legend?: string | null;
+  legend?: React.ReactNode;
   largeLegend?: boolean;
   required?: boolean;
   disabled?: boolean;

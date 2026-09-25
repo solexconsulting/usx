@@ -1,11 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import Icon from '../icon/Icon';
 import Link from '../link/Link';
 import Button from '../button/Button';
 
+export type FileListEntry = {
+  key: React.Key;
+  url?: string;
+  onRemove?: (entry: FileListEntry) => void;
+} & (
+  | { file: File; name?: string; size?: number }
+  | { file?: null; name: string; size?: number }
+);
+
+export interface FileListProps {
+  files?: FileListEntry[] | null;
+  hint?: React.ReactNode;
+  onRemove?: ((entry: FileListEntry) => void) | null;
+  disabled?: boolean;
+  className?: string;
+}
+
 // Matches VA.gov's "X KB"/"X MB" display for selected-file rows.
-function formatFileSize(bytes) {
+function formatFileSize(bytes: number) {
   if (bytes < 1024) return `${bytes} B`;
   const kb = bytes / 1024;
   if (kb < 1024) return `${Math.round(kb)} KB`;
@@ -13,7 +30,7 @@ function formatFileSize(bytes) {
 }
 
 // e.g. "report.pdf" -> "PDF" — shown alongside the size, VA.gov-style.
-function getFileExtension(name) {
+function getFileExtension(name: string) {
   const match = /\.([^.]+)$/.exec(name);
   return match ? match[1].toUpperCase() : null;
 }
@@ -21,15 +38,15 @@ function getFileExtension(name) {
 // A row's display name/size can come from a real File (just added/changed in
 // this session) or from a preloaded entry describing a file already on the
 // server (no File object available) — normalize both shapes for rendering.
-function getEntryDisplay(entry) {
+function getEntryDisplay(entry: FileListEntry) {
   if (entry.file) return { name: entry.file.name, size: entry.file.size, url: entry.url };
   return { name: entry.name, size: entry.size, url: entry.url };
 }
 
 // A standalone list of files with a per-row Delete action — used by
-// FileInput's managed-multiple mode (see FileInput.jsx), but reusable
+// FileInput's managed-multiple mode (see FileInput.tsx), but reusable
 // anywhere a parent already owns the file array.
-export default function FileList({ files, hint = 'Selected files', onRemove = null, disabled = false, className = '' }) {
+export default function FileList({ files, hint = 'Selected files', onRemove = null, disabled = false, className = '' }: FileListProps) {
   if (!files || files.length === 0) return null;
 
   const lastEntry = getEntryDisplay(files[files.length - 1]);
@@ -69,7 +86,7 @@ export default function FileList({ files, hint = 'Selected files', onRemove = nu
                   type="button"
                   variant="secondary"
                   className="usx-file-input__delete-button"
-                  tooltip="Delete this file"
+                  extraAttributes={{ tooltip: 'Delete this file' }}
                   ghost={true}
                   disabled={disabled}
                   onClick={() => handleRemove(entry)}
@@ -86,20 +103,3 @@ export default function FileList({ files, hint = 'Selected files', onRemove = nu
     </div>
   );
 }
-
-FileList.propTypes = {
-  files: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      file: PropTypes.object,
-      name: PropTypes.string,
-      size: PropTypes.number,
-      url: PropTypes.string,
-      onRemove: PropTypes.func,
-    }),
-  ),
-  hint: PropTypes.node,
-  onRemove: PropTypes.func,
-  disabled: PropTypes.bool,
-  className: PropTypes.string,
-};

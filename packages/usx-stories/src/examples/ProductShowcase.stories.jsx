@@ -9,7 +9,7 @@ import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
 import CardGroup from '../../../usx-react/src/components/card-group/CardGroup.tsx';
 import Icon from '../../../usx-react/src/components/icon/Icon.tsx';
 import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
-import Page from '../../../usx-react/src/components/page/Page.jsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
 import Section from '../../../usx-react/src/components/section/Section.tsx';
 import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './commonArgs.js';
 

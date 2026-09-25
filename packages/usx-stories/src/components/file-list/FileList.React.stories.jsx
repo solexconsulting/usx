@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FileList from '../../../../usx-react/src/components/file-list/FileList.jsx';
+import FileList from '../../../../usx-react/src/components/file-list/FileList.tsx';
 import config from '../../../../usx-react/src/components/file-list/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 

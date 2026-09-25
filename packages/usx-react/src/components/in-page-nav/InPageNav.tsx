@@ -1,6 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import classNames from 'classnames';
+
+export interface InPageNavProps extends React.HTMLAttributes<HTMLElement> {
+  headingElements?: string;
+  mainContentSelector?: string | null;
+  titleHeadingLevel?: string;
+  titleText?: string;
+  scrollOffset?: string | number;
+  rootMargin?: string;
+  threshold?: string | number;
+  minimumHeadingCount?: string | number;
+  contentClassName?: string;
+}
 
 // USWDS's own JS (usa-in-page-navigation) builds the <nav>/<ul> list into
 // the empty <aside> below by reading headings out of the element matched by
@@ -23,7 +35,7 @@ export default function InPageNav({
   className = '',
   contentClassName = '',
   ...props
-}) {
+}: InPageNavProps) {
   const contentId = `${id}-content`;
   // Real USWDS points data-main-content-selector at a real <main> landmark,
   // but that only works for a single instance per page — Storybook (and any
@@ -58,19 +70,3 @@ export default function InPageNav({
     </div>
   );
 }
-
-InPageNav.propTypes = {
-  id: PropTypes.string,
-  headingElements: PropTypes.string,
-  mainContentSelector: PropTypes.string,
-  titleHeadingLevel: PropTypes.string,
-  titleText: PropTypes.string,
-  scrollOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  rootMargin: PropTypes.string,
-  threshold: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  minimumHeadingCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  content: PropTypes.string,
-  children: PropTypes.node,
-  className: PropTypes.string,
-  contentClassName: PropTypes.string,
-};

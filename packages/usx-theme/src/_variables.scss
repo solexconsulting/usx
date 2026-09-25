@@ -749,7 +749,7 @@ $usx-textarea-padding: null !default;
 
 // ── Component tokens: File Input ─────────────────────────────────────────────
 // Own hooks for the dropzone target and the managed-multiple file-item rows
-// (see FileInput.jsx) so either can be overridden independently — both
+// (see FileInput.tsx) so either can be overridden independently — both
 // chain to the shared border role/width by default, same as other
 // components' advanced border overrides above.
 $usx-file-input-border-var: null !default;

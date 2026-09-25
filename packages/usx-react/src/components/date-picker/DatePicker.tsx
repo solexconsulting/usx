@@ -1,10 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Label from '../label/Label';
 import Hint from '../hint/Hint';
 import ErrorMessage from '../error-message/ErrorMessage';
 import FormGroup from '../form-group/FormGroup';
+
+export interface DatePickerProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'defaultValue'> {
+  label?: React.ReactNode;
+  hint?: React.ReactNode;
+  error?: React.ReactNode;
+  defaultValue?: string | null;
+  minDate?: string | null;
+  maxDate?: string | null;
+  rangeDate?: string | null;
+  formGroup?: boolean;
+}
 
 export default function DatePicker({
   id = 'date-picker',
@@ -21,7 +31,7 @@ export default function DatePicker({
   formGroup = true,
   className = '',
   ...props
-}) {
+}: DatePickerProps) {
   const labelId = `${id}-label`;
   const hintId = hint ? `${id}-hint` : undefined;
   const errorId = error ? `${id}-error` : undefined;
@@ -66,18 +76,3 @@ export default function DatePicker({
   return formGroup ? <FormGroup error={!!error}>{content}</FormGroup> : content;
 }
 
-DatePicker.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  label: PropTypes.node,
-  hint: PropTypes.node,
-  error: PropTypes.node,
-  disabled: PropTypes.bool,
-  required: PropTypes.bool,
-  defaultValue: PropTypes.string,
-  minDate: PropTypes.string,
-  maxDate: PropTypes.string,
-  rangeDate: PropTypes.string,
-  formGroup: PropTypes.bool,
-  className: PropTypes.string,
-};

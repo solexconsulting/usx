@@ -57,7 +57,7 @@ export const Disabled = createStory(storyDefs.Disabled);
 
 // manageIndividualFiles/defaultFiles are React-only (see config.json), so the
 // Django preview composes the plain `file-input` template with a separate
-// `file-list` template, matching how FileInput.jsx renders the pair itself.
+// `file-list` template, matching how FileInput.tsx renders the pair itself.
 const inputPropNames = new Set(
   Object.keys(config.props || {}).filter(
     (key) => !['manageIndividualFiles', 'defaultFiles', 'fileListHint', 'onFilesChange'].includes(key)

@@ -1,5 +1,5 @@
 import React from 'react';
-import RangeSlider from '../../../../usx-react/src/components/range-slider/RangeSlider.jsx';
+import RangeSlider from '../../../../usx-react/src/components/range-slider/RangeSlider.tsx';
 import config from '../../../../usx-react/src/components/range-slider/config.json';
 import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import range from '@uswds/uswds/js/usa-range';

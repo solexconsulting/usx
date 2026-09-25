@@ -1,5 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
+export interface PageProps extends Omit<React.HTMLAttributes<HTMLElement>, 'title' | 'content'> {
+  title?: React.ReactNode;
+  eyebrow?: React.ReactNode;
+  content?: React.ReactNode;
+}
 
 export default function Page({
   id = undefined,
@@ -9,7 +14,7 @@ export default function Page({
   content = null,
   className = '',
   ...props
-}) {
+}: PageProps) {
   const classes = ['usx-page', className].filter(Boolean).join(' ');
   const pageContent = children || content;
 
@@ -23,12 +28,3 @@ export default function Page({
     </main>
   );
 }
-
-Page.propTypes = {
-  id: PropTypes.string,
-  title: PropTypes.string,
-  eyebrow: PropTypes.node,
-  children: PropTypes.node,
-  content: PropTypes.node,
-  className: PropTypes.string,
-};

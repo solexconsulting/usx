@@ -1,10 +1,32 @@
 import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+
 import Label from '../label/Label';
 import Hint from '../hint/Hint';
 import ErrorMessage from '../error-message/ErrorMessage';
 import FormGroup from '../form-group/FormGroup';
 import FileList from '../file-list/FileList';
+import type { FileListEntry } from '../file-list/FileList';
+
+export interface FileInputDefaultFile {
+  key?: React.Key;
+  name: string;
+  size?: number;
+  url?: string;
+  onRemove?: (entry: FileListEntry) => void;
+}
+
+export interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'accept'> {
+  label?: React.ReactNode;
+  hint?: React.ReactNode;
+  fileListHint?: React.ReactNode;
+  error?: React.ReactNode;
+  accept?: string | null;
+  manageIndividualFiles?: boolean;
+  invalidFileTypeMessage?: string | null;
+  onFilesChange?: ((files: File[]) => void) | null;
+  defaultFiles?: FileInputDefaultFile[];
+  formGroup?: boolean;
+}
 
 // Mirrors USWDS's own default aria-label text (see updateVisibleInstructions
 // in @uswds/uswds's usa-file-input source) so we can restore it after each
@@ -37,7 +59,7 @@ export default function FileInput({
   defaultFiles = [],
   formGroup = true,
   ...props
-}) {
+}: FileInputProps) {
   const hintId = hint ? `${id}-hint` : undefined;
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
@@ -52,16 +74,16 @@ export default function FileInput({
   // defaultFiles seeds rows for files that already exist on the server (no
   // File object) — e.g. previously-submitted uploads. Uncontrolled: only read
   // once, like defaultValue.
-  const [managedFiles, setManagedFiles] = useState(() =>
+  const [managedFiles, setManagedFiles] = useState<FileListEntry[]>(() =>
     defaultFiles.map((entry) => ({ key: nextFileId.current++, file: null, ...entry })),
   );
 
   // Only entries backed by a real File are reported — preloaded/server-side
   // entries are already stored and aren't meant to be resubmitted.
-  const notify = (files) => onFilesChange && onFilesChange(files.filter((entry) => entry.file).map((entry) => entry.file));
+  const notify = (files: FileListEntry[]) => onFilesChange && onFilesChange(files.filter((entry): entry is FileListEntry & { file: File } => !!entry.file).map((entry) => entry.file));
 
-  const addFiles = (e) => {
-    const files = Array.from(e.target.files || []);
+  const addFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
     if (files.length === 0) return;
     setManagedFiles((prev) => {
       const next = [...prev, ...files.map((file) => ({ key: nextFileId.current++, file }))];
@@ -74,11 +96,11 @@ export default function FileInput({
     // can't be reliably cleared from here). USWDS also permanently rewrites
     // aria-label to "Change file(s)" once any file is added and never resets
     // it, so restore it to its default text ourselves.
-    e.target.value = '';
-    e.target.setAttribute('aria-label', getDefaultFileInputAriaLabel());
+    event.target.value = '';
+    event.target.setAttribute('aria-label', getDefaultFileInputAriaLabel());
   };
 
-  const removeFile = (entry) => {
+  const removeFile = (entry: FileListEntry) => {
     setManagedFiles((prev) => {
       const next = prev.filter((e) => e.key !== entry.key);
       notify(next);
@@ -147,28 +169,3 @@ export default function FileInput({
 
   return formGroup ? <FormGroup error={!!error}>{content}</FormGroup> : content;
 }
-
-FileInput.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  label: PropTypes.node,
-  hint: PropTypes.node,
-  fileListHint: PropTypes.node,
-  error: PropTypes.node,
-  disabled: PropTypes.bool,
-  required: PropTypes.bool,
-  accept: PropTypes.string,
-  multiple: PropTypes.bool,
-  manageIndividualFiles: PropTypes.bool,
-  invalidFileTypeMessage: PropTypes.string,
-  className: PropTypes.string,
-  onFilesChange: PropTypes.func,
-  defaultFiles: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      size: PropTypes.number,
-      url: PropTypes.string,
-    }),
-  ),
-  formGroup: PropTypes.bool,
-};

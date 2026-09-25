@@ -1,10 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import classNames from 'classnames';
 import Label from '../label/Label';
 import Hint from '../hint/Hint';
 import ErrorMessage from '../error-message/ErrorMessage';
 import FormGroup from '../form-group/FormGroup';
+
+export interface TimePickerProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'step'> {
+  label?: React.ReactNode;
+  hint?: React.ReactNode;
+  error?: React.ReactNode;
+  ariaDisabled?: boolean;
+  defaultValue?: string | null;
+  minTime?: string | null;
+  maxTime?: string | null;
+  step?: string | number | null;
+  formGroup?: boolean;
+}
 
 export default function TimePicker({
   id = 'appointment-time',
@@ -22,7 +34,7 @@ export default function TimePicker({
   formGroup = true,
   className = '',
   ...props
-}) {
+}: TimePickerProps) {
   const labelId = `${id}-label`;
   const hintId = hint ? `${id}-hint` : undefined;
   const errorId = error ? `${id}-error` : undefined;
@@ -68,20 +80,3 @@ export default function TimePicker({
 
   return formGroup ? <FormGroup error={!!error}>{content}</FormGroup> : content;
 }
-
-TimePicker.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  label: PropTypes.node,
-  hint: PropTypes.node,
-  error: PropTypes.node,
-  disabled: PropTypes.bool,
-  ariaDisabled: PropTypes.bool,
-  required: PropTypes.bool,
-  defaultValue: PropTypes.string,
-  minTime: PropTypes.string,
-  maxTime: PropTypes.string,
-  step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  formGroup: PropTypes.bool,
-  className: PropTypes.string,
-};

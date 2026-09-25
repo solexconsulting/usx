@@ -8,7 +8,7 @@ import Block from '../../../usx-react/src/components/block/Block.tsx';
 import Image from '../../../usx-react/src/components/image/Image.tsx';
 import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
-import Page from '../../../usx-react/src/components/page/Page.jsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
 import Prose from '../../../usx-react/src/components/prose/Prose.tsx';
 import SideNav from '../../../usx-react/src/components/sidenav/SideNav.tsx';
 import TagGroup from '../../../usx-react/src/components/tag-group/TagGroup.tsx';

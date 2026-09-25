@@ -3,7 +3,7 @@ import ClassNames from 'classnames';
 import Required from '../required/Required';
 
 export interface LegendProps extends HTMLAttributes<HTMLLegendElement> {
-  text?: string | undefined;
+  text?: ReactNode;
   required?: boolean;
   large?: boolean;
   children?: ReactNode;

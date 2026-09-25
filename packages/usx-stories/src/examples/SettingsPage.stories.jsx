@@ -11,7 +11,7 @@ import Fieldset from '../../../usx-react/src/components/fieldset/Fieldset.tsx';
 import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
 import Input from '../../../usx-react/src/components/input/Input.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
-import Page from '../../../usx-react/src/components/page/Page.jsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
 import Select from '../../../usx-react/src/components/select/Select.tsx';
 import Section from '../../../usx-react/src/components/section/Section.tsx';
 import SideNav from '../../../usx-react/src/components/sidenav/SideNav.tsx';

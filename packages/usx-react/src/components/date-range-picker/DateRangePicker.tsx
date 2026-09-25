@@ -1,10 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Label from '../label/Label';
 import Hint from '../hint/Hint';
 import ErrorMessage from '../error-message/ErrorMessage';
 import FormGroup from '../form-group/FormGroup';
+
+export interface DateRangePickerProps {
+  startId?: string;
+  endId?: string;
+  startName?: string;
+  endName?: string;
+  startLabel?: React.ReactNode;
+  endLabel?: React.ReactNode;
+  startHint?: React.ReactNode;
+  endHint?: React.ReactNode;
+  startError?: React.ReactNode;
+  endError?: React.ReactNode;
+  disabled?: boolean;
+  required?: boolean;
+  defaultStartDate?: string | null;
+  defaultEndDate?: string | null;
+  minDate?: string | null;
+  maxDate?: string | null;
+  className?: string;
+}
 
 export default function DateRangePicker({
   startId = 'event-date-start',
@@ -24,7 +43,7 @@ export default function DateRangePicker({
   minDate = null,
   maxDate = null,
   className = '',
-}) {
+}: DateRangePickerProps) {
   const startLabelId = `${startId}-label`;
   const startHintId = startHint ? `${startId}-hint` : undefined;
   const startErrorId = startError ? `${startId}-error` : undefined;
@@ -92,22 +111,3 @@ export default function DateRangePicker({
   );
 }
 
-DateRangePicker.propTypes = {
-  startId: PropTypes.string,
-  endId: PropTypes.string,
-  startName: PropTypes.string,
-  endName: PropTypes.string,
-  startLabel: PropTypes.node,
-  endLabel: PropTypes.node,
-  startHint: PropTypes.node,
-  endHint: PropTypes.node,
-  startError: PropTypes.node,
-  endError: PropTypes.node,
-  disabled: PropTypes.bool,
-  required: PropTypes.bool,
-  defaultStartDate: PropTypes.string,
-  defaultEndDate: PropTypes.string,
-  minDate: PropTypes.string,
-  maxDate: PropTypes.string,
-  className: PropTypes.string,
-};

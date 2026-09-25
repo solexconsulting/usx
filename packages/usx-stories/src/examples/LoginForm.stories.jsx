@@ -12,7 +12,7 @@ import Checkbox from '../../../usx-react/src/components/checkbox/Checkbox.tsx';
 import Input from '../../../usx-react/src/components/input/Input.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
 import Link from '../../../usx-react/src/components/link/Link.tsx';
-import Page from '../../../usx-react/src/components/page/Page.jsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
 import { headerArgs, footerArgs, identifierArgs } from './commonArgs.js';
 
 export default {

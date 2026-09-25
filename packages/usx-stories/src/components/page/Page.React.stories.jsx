@@ -1,5 +1,5 @@
 import React from 'react';
-import Page from '../../../../usx-react/src/components/page/Page.jsx';
+import Page from '../../../../usx-react/src/components/page/Page.tsx';
 import config from '../../../../usx-react/src/components/page/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 

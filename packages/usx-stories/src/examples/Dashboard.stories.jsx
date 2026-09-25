@@ -9,7 +9,7 @@ import ButtonGroup from '../../../usx-react/src/components/button-group/ButtonGr
 import Icon from '../../../usx-react/src/components/icon/Icon.tsx';
 import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
-import Page from '../../../usx-react/src/components/page/Page.jsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
 import Section from '../../../usx-react/src/components/section/Section.tsx';
 import Status from '../../../usx-react/src/components/status/Status.tsx';
 import Table from '../../../usx-react/src/components/table/Table.tsx';

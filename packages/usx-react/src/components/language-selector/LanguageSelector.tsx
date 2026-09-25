@@ -1,6 +1,35 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import classnames from 'classnames';
+
+export interface LanguageOption {
+  code?: string;
+  label?: React.ReactNode;
+  description?: string;
+  href?: string;
+  current?: boolean;
+  plain?: boolean;
+}
+
+export interface LanguageSelectorProps {
+  languages?: LanguageOption[];
+  variant?: 'two' | 'menu' | null;
+  unstyled?: boolean;
+  small?: boolean;
+  label?: string;
+  id?: string;
+  navAriaLabel?: string;
+  className?: string;
+  onSelect?: ((language: LanguageOption, event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void) | null;
+}
+
+interface TwoLanguageSelectorProps extends Pick<LanguageSelectorProps, 'onSelect' | 'className' | 'navAriaLabel'> {
+  target: LanguageOption;
+}
+
+interface MenuLanguageSelectorProps extends Omit<LanguageSelectorProps, 'variant' | 'languages'> {
+  languages: LanguageOption[];
+}
 
 /**
  * Renders a single language link/submenu-item's accessible label.
@@ -9,35 +38,29 @@ import classnames from 'classnames';
  * whole thing carries `lang`/`xml:lang` so assistive tech announces it in
  * the correct language (WCAG H58).
  */
-function LanguageLabel({ code, label, description }) {
+function LanguageLabel({ code, label, description }: Pick<LanguageOption, 'code' | 'label' | 'description'>) {
   if (!code) {
     return <>{label}</>;
   }
 
   return (
-    <span lang={code} xmlLang={code}>
+    <span {...{ lang: code, xmlLang: code }}>
       <strong>{label}</strong>
       {description ? ` (${description})` : null}
     </span>
   );
 }
 
-LanguageLabel.propTypes = {
-  code: PropTypes.string,
-  label: PropTypes.node.isRequired,
-  description: PropTypes.string,
-};
-
-function TwoLanguageSelector({ target, onSelect, className, navAriaLabel }) {
-  const handleClick = (e) => {
-    if (onSelect) onSelect(target, e);
-    if (!target.href) e.preventDefault();
+function TwoLanguageSelector({ target, onSelect, className, navAriaLabel }: TwoLanguageSelectorProps) {
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+    if (onSelect) onSelect(target, event);
+    if (!target.href) event.preventDefault();
   };
 
   const Tag = target.href ? 'a' : 'button';
   const tagProps = target.href
     ? { href: target.href }
-    : { type: 'button' };
+    : { type: 'button' as const };
 
   return (
     <nav aria-label={navAriaLabel} className={className}>
@@ -50,17 +73,6 @@ function TwoLanguageSelector({ target, onSelect, className, navAriaLabel }) {
   );
 }
 
-TwoLanguageSelector.propTypes = {
-  target: PropTypes.shape({
-    code: PropTypes.string,
-    label: PropTypes.node,
-    href: PropTypes.string,
-  }).isRequired,
-  onSelect: PropTypes.func,
-  className: PropTypes.string,
-  navAriaLabel: PropTypes.string,
-};
-
 function MenuLanguageSelector({
   languages,
   unstyled,
@@ -70,7 +82,7 @@ function MenuLanguageSelector({
   onSelect,
   className,
   navAriaLabel,
-}) {
+}: MenuLanguageSelectorProps) {
   // Open/close (aria-expanded, hidden, outside-click, Escape, focusout) is
   // driven by USWDS's own JS, initialized via a decorator in the story/host
   // app — this component only renders the static USWDS markup.
@@ -101,7 +113,7 @@ function MenuLanguageSelector({
             </button>
             <ul id={id} className="usa-language__submenu" hidden>
               {languages.map((lang, idx) => (
-                <li className="usa-language__submenu-item" key={lang.code || lang.label || idx}>
+                <li className="usa-language__submenu-item" key={lang.code || (typeof lang.label === 'string' || typeof lang.label === 'number' ? lang.label : undefined) || idx}>
                   <a
                     href={lang.href || 'javascript:void(0);'}
                     aria-current={lang.current ? 'true' : undefined}
@@ -126,26 +138,6 @@ function MenuLanguageSelector({
   );
 }
 
-MenuLanguageSelector.propTypes = {
-  languages: PropTypes.arrayOf(
-    PropTypes.shape({
-      code: PropTypes.string,
-      label: PropTypes.node,
-      description: PropTypes.string,
-      href: PropTypes.string,
-      current: PropTypes.bool,
-      plain: PropTypes.bool,
-    })
-  ).isRequired,
-  unstyled: PropTypes.bool,
-  small: PropTypes.bool,
-  label: PropTypes.string,
-  id: PropTypes.string,
-  onSelect: PropTypes.func,
-  className: PropTypes.string,
-  navAriaLabel: PropTypes.string,
-};
-
 /**
  * LanguageSelector — USWDS `usa-language-selector` with the USX treatment.
  *
@@ -166,7 +158,7 @@ export default function LanguageSelector({
   className = '',
   onSelect = null,
   ...props
-}) {
+}: LanguageSelectorProps) {
   const resolvedVariant = variant || (languages.length > 2 ? 'menu' : 'two');
   const classes = classnames('usx-language-selector', className);
 
@@ -201,24 +193,3 @@ export default function LanguageSelector({
     />
   );
 }
-
-LanguageSelector.propTypes = {
-  languages: PropTypes.arrayOf(
-    PropTypes.shape({
-      code: PropTypes.string,
-      label: PropTypes.node,
-      description: PropTypes.string,
-      href: PropTypes.string,
-      current: PropTypes.bool,
-      plain: PropTypes.bool,
-    })
-  ),
-  variant: PropTypes.oneOf(['two', 'menu']),
-  unstyled: PropTypes.bool,
-  small: PropTypes.bool,
-  label: PropTypes.string,
-  id: PropTypes.string,
-  navAriaLabel: PropTypes.string,
-  className: PropTypes.string,
-  onSelect: PropTypes.func,
-};

@@ -1,5 +1,5 @@
 import React from 'react';
-import DateRangePicker from '../../../../usx-react/src/components/date-range-picker/DateRangePicker.jsx';
+import DateRangePicker from '../../../../usx-react/src/components/date-range-picker/DateRangePicker.tsx';
 import config from '../../../../usx-react/src/components/date-range-picker/config.json';
 import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import datePicker from "@uswds/uswds/js/usa-date-picker";

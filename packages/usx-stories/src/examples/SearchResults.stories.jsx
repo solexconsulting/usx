@@ -8,7 +8,7 @@ import ButtonGroup from '../../../usx-react/src/components/button-group/ButtonGr
 import CardGroup from '../../../usx-react/src/components/card-group/CardGroup.tsx';
 import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
-import Page from '../../../usx-react/src/components/page/Page.jsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
 import Pagination from '../../../usx-react/src/components/pagination/Pagination.tsx';
 import Search from '../../../usx-react/src/components/search/Search.tsx';
 import Section from '../../../usx-react/src/components/section/Section.tsx';

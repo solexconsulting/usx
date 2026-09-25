@@ -8,7 +8,7 @@ import Accordion from '../../../usx-react/src/components/accordion/Accordion.tsx
 import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
 import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
-import Page from '../../../usx-react/src/components/page/Page.jsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
 import Prose from '../../../usx-react/src/components/prose/Prose.tsx';
 import Search from '../../../usx-react/src/components/search/Search.tsx';
 import Section from '../../../usx-react/src/components/section/Section.tsx';

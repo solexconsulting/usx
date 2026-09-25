@@ -1,9 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import Label from '../label/Label';
 import FormGroup from '../form-group/FormGroup';
 import Hint from '../hint/Hint';
 import ErrorMessage from '../error-message/ErrorMessage';
+
+export interface RangeSliderProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue'> {
+  label?: React.ReactNode;
+  hint?: React.ReactNode;
+  error?: React.ReactNode;
+  value?: number | string;
+  defaultValue?: number | string;
+  textUnit?: string | null;
+  textPreposition?: string | null;
+  formGroup?: boolean;
+}
 
 // Enhanced by @uswds/uswds/js/usa-range at runtime (call ONLY range.init() in
 // the consuming app, never .on()/.off() — see Combobox.tsx for why) — that
@@ -27,7 +38,7 @@ export default function RangeSlider({
   formGroup = true,
   className = '',
   ...props
-}) {
+}: RangeSliderProps) {
   const hintId = hint ? `${id}-hint` : undefined;
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
@@ -63,22 +74,3 @@ export default function RangeSlider({
 
   return formGroup ? <FormGroup error={!!error}>{content}</FormGroup> : content;
 }
-
-RangeSlider.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  label: PropTypes.node,
-  hint: PropTypes.node,
-  error: PropTypes.node,
-  disabled: PropTypes.bool,
-  required: PropTypes.bool,
-  min: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  max: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  textUnit: PropTypes.string,
-  textPreposition: PropTypes.string,
-  formGroup: PropTypes.bool,
-  className: PropTypes.string,
-};

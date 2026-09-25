@@ -1,10 +1,33 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import Fieldset from '../fieldset/Fieldset';
 import FormGroup from '../form-group/FormGroup';
 import Hint from '../hint/Hint';
 import Select from '../select/Select';
 import Input from '../input/Input';
+
+export interface MemorableDateProps {
+  id?: string;
+  legend?: React.ReactNode;
+  groupHint?: React.ReactNode;
+  monthLabel?: React.ReactNode;
+  dayLabel?: React.ReactNode;
+  yearLabel?: React.ReactNode;
+  monthHint?: React.ReactNode;
+  dayHint?: React.ReactNode;
+  yearHint?: React.ReactNode;
+  monthName?: string;
+  dayName?: string;
+  yearName?: string;
+  defaultMonth?: string;
+  defaultDay?: string;
+  defaultYear?: string;
+  disabled?: boolean;
+  ariaDisabled?: boolean;
+  required?: boolean;
+  error?: string | null;
+  className?: string;
+}
 
 const MONTH_OPTIONS = [
   { value: '1', label: 'January' },
@@ -42,7 +65,7 @@ export default function MemorableDate({
   required = false,
   error = null,
   className = '',
-}) {
+}: MemorableDateProps) {
   const monthId = `${id}-month`;
   const dayId = `${id}-day`;
   const yearId = `${id}-year`;
@@ -53,10 +76,10 @@ export default function MemorableDate({
   const errorId = error ? `${id}-error` : undefined;
   const hasError = !!error;
 
-  const describedBy = (hintId) => [hintId, errorId].filter(Boolean).join(' ') || undefined;
+  const describedBy = (hintId: string) => [hintId, errorId].filter(Boolean).join(' ') || undefined;
 
   // Native disabled and aria-disabled are mutually exclusive, matching real USWDS's variants.
-  const stateProps = disabled
+  const stateProps: Pick<React.InputHTMLAttributes<HTMLInputElement>, 'disabled' | 'aria-disabled'> = disabled
     ? { disabled: true }
     : ariaDisabled
       ? { 'aria-disabled': 'true' }
@@ -142,26 +165,3 @@ export default function MemorableDate({
     </FormGroup>
   );
 }
-
-MemorableDate.propTypes = {
-  id: PropTypes.string,
-  legend: PropTypes.node,
-  groupHint: PropTypes.node,
-  monthLabel: PropTypes.node,
-  dayLabel: PropTypes.node,
-  yearLabel: PropTypes.node,
-  monthHint: PropTypes.node,
-  dayHint: PropTypes.node,
-  yearHint: PropTypes.node,
-  monthName: PropTypes.string,
-  dayName: PropTypes.string,
-  yearName: PropTypes.string,
-  defaultMonth: PropTypes.string,
-  defaultDay: PropTypes.string,
-  defaultYear: PropTypes.string,
-  disabled: PropTypes.bool,
-  ariaDisabled: PropTypes.bool,
-  required: PropTypes.bool,
-  error: PropTypes.string,
-  className: PropTypes.string,
-};
