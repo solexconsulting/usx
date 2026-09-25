@@ -44,20 +44,6 @@
     overflow: unset;
   }
 
-  .usx-nav {
-    @media (width < 64em) {
-      @if $usx-header-nav-bg-mobile {
-        background-color: $usx-header-nav-bg-mobile;
-      }
-    }
-
-    @media (width >=64em) {
-      @if $usx-header-nav-bg {
-        background-color: $usx-header-nav-bg;
-      }
-    }
-  }
-
   // Keeps utilityContent and the search box on one row regardless of the
   // parent's own flex-direction (USWDS's .usa-nav__secondary stacks its
   // children in a column at desktop).
@@ -69,16 +55,31 @@
 
 }
 
-:has(> .usa-header--extended) {
-  // Background is themeable at every width — unlike vendor (which paints no
-  // background at desktop and a hardcoded opaque white at mobile), USX lets a
-  // theme's configured nav color show through the mobile drawer too, so a
-  // dark theme's drawer doesn't revert to an unstyled white panel. Desktop
-  // and mobile can be themed independently since the drawer and the nav bar
-  // are visually distinct surfaces.
+// Extended layout only: its nav is a full-width bar under the header (desktop)
+// or an off-canvas drawer (mobile), so it's a distinct surface worth theming.
+// The basic layout's nav sits inline in the header bar and inherits its
+// background. Background is themeable at every width — unlike vendor (which
+// paints no background at desktop and a hardcoded opaque white at mobile),
+// USX lets a theme's configured nav color show through the mobile drawer
+// too, so a dark theme's drawer doesn't revert to an unstyled white panel.
+//
+// Note the extended layout renders <header> and <nav> as siblings (see
+// Header.tsx), so this can't be nested under .usx-header.
+:has(> .usa-header--extended) .usx-nav {
+  @media (width < 64em) {
+    @if $usx-header-nav-bg-mobile {
+      background-color: $usx-header-nav-bg-mobile;
+    }
+  }
 
+  @media (width >=64em) {
+    @if $usx-header-nav-bg {
+      background-color: $usx-header-nav-bg;
+    }
+  }
+}
 
-  // USWDS scopes all of its own .usa-header--extended .usa-nav(__inner) and
+:has(> .usa-header--extended) {  // USWDS scopes all of its own .usa-header--extended .usa-nav(__inner) and
   // hover/current-bar rules to this same desktop breakpoint (the nav is an
   // off-canvas mobile drawer below it, styled by vendor's plain .usa-nav
   // mobile rules instead) — mirror that scoping here, or this desktop-only

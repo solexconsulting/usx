@@ -17,7 +17,7 @@ This package stores platform-agnostic tokens in JSON source files and compiles t
 - `dist/tokens.js`: generated JS export
 - `dist/theme-manifest.json`: generated theme manifest
 - `dist/theme.css`: every `--usx-*` token at its default, on `:root`
-- `dist/themes/<slug>.css`, `dist/themes.css`: each prebuilt theme as a `[data-theme="<slug>"]` block (and all of them together)
+- `dist/themes/<slug>.css`, `dist/themes/all.css`: each prebuilt theme as a `[data-theme="<slug>"]` block (and all of them together)
 - `dist/_themes-registry.scss`: generated data behind `src/_themes.scss`
 
 ## Build
@@ -128,7 +128,7 @@ wiring in this form):
 
 ```js
 import '@solexllc/usx-theme/theme.css';
-import '@solexllc/usx-theme/themes/forest.css';   // or .../themes.css for all
+import '@solexllc/usx-theme/themes/forest.css';   // or .../themes/all.css for all
 ```
 
 ### Notes

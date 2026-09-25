@@ -96,7 +96,10 @@ function resolvePresets(themeManifest, derive, PRESETS) {
 
 // themes/<slug>.css — one `[data-theme="<slug>"]` block per prebuilt theme,
 // changed tokens only (theme.css's :root supplies the rest). "Default" has
-// nothing to change and is skipped.
+// nothing to change and is skipped. The bundle of all of them lives at
+// themes/all.css rather than themes.css: Sass's pkg: importer tries
+// `themes.css` when resolving `pkg:.../themes` and would find both it and the
+// Sass module, then fail as ambiguous.
 function buildThemeFileCss(theme) {
   const lines = [`  color-scheme: ${theme.colorScheme};`, ...theme.entries.map(([cssVar, value]) => `  ${cssVar}: ${value};`)];
   return `${GENERATED_CSS}[data-theme="${theme.slug}"] {\n${lines.join('\n')}\n}\n`;
@@ -131,7 +134,7 @@ function writeThemes(themeManifest, derive, PRESETS) {
     fs.writeFileSync(path.join(themesDistDir, `${theme.slug}.css`), css, 'utf8');
     return css.replace(GENERATED_CSS, '');
   });
-  fs.writeFileSync(path.join(distDir, 'themes.css'), GENERATED_CSS + files.join('\n'), 'utf8');
+  fs.writeFileSync(path.join(themesDistDir, 'all.css'), GENERATED_CSS + files.join('\n'), 'utf8');
   fs.writeFileSync(path.join(distDir, '_themes-registry.scss'), buildThemesRegistryScss(themeManifest, themes, derive), 'utf8');
   return withTokens.map((t) => t.slug);
 }
@@ -155,7 +158,7 @@ async function build() {
   );
   const slugs = writeThemes(themeManifest, derive, PRESETS);
 
-  console.log(`[${new Date().toLocaleTimeString()}] Built tokens to dist/ (tokens.css, theme.css, _hooks.scss, tokens.js, theme-manifest.json, themes.css, _themes-registry.scss, themes/{${slugs.join(',')}}.css)`);
+  console.log(`[${new Date().toLocaleTimeString()}] Built tokens to dist/ (tokens.css, theme.css, _hooks.scss, tokens.js, theme-manifest.json, _themes-registry.scss, themes/{all,${slugs.join(',')}}.css)`);
 }
 
 // `node build.js --watch` rebuilds on every change under src/ (primitives

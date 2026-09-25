@@ -1,14 +1,16 @@
 // themes-check.mjs — guardrail for the prebuilt-themes output.
 //
 //   1. every non-empty preset has a dist/themes/<slug>.css and appears in
-//      dist/themes.css, each token there is a manifest cssVar, and the
+//      dist/themes/all.css, each token there is a manifest cssVar, and the
 //      values match a fresh resolveTheme() of the preset.
 //   2. the Sass module (src/_themes.scss) compiles from a config fixture and
 //      emits: :root for $default, a prefers-color-scheme block for
 //      $prefersdark, one [data-theme] block per listed theme, user overrides
 //      applied, and the union fill (every block declares the same tokens).
 //   3. the Playground's Sass export round-trips through the module.
-//   4. Sass emits no warnings.
+//   4. `pkg:@solexllc/usx-theme/themes` resolves unambiguously through Sass's
+//      NodePackageImporter (a sibling `themes.css` export once broke this).
+//   5. Sass emits no warnings.
 //
 // Usage: node test/themes-check.mjs   (from packages/usx-theme; also `pnpm test`)
 
@@ -49,9 +51,11 @@ function parseBlocks(css) {
 }
 
 // ── 1. dist/themes ──────────────────────────────────────────────────────────
-const allThemesCss = fs.readFileSync(path.join(distDir, 'themes.css'), 'utf8');
+const allThemesCss = fs.readFileSync(path.join(distDir, 'themes', 'all.css'), 'utf8');
+if (fs.existsSync(path.join(distDir, 'themes.css'))) fail('dist/themes.css must not exist — it makes pkg:.../themes ambiguous (see build.js)');
 for (const [name, overrides] of Object.entries(PRESETS)) {
   const slug = themeSlug(name);
+  if (slug === 'all') fail(`${name}: slug "all" collides with dist/themes/all.css`);
   const expected = new Map(themeEntries(resolveTheme(overrides)));
   const file = path.join(distDir, 'themes', `${slug}.css`);
   if (expected.size === 0) {
@@ -73,7 +77,7 @@ for (const [name, overrides] of Object.entries(PRESETS)) {
   for (const cssVar of expected.keys()) {
     if (!block.decls.has(cssVar)) fail(`${slug}: ${cssVar} missing from dist/themes/${slug}.css`);
   }
-  if (!allThemesCss.includes(`[data-theme="${slug}"]`)) fail(`${slug}: missing from dist/themes.css`);
+  if (!allThemesCss.includes(`[data-theme="${slug}"]`)) fail(`${slug}: missing from dist/themes/all.css`);
 }
 
 // ── 2. Sass module ──────────────────────────────────────────────────────────
@@ -134,7 +138,22 @@ else {
   }
 }
 
-// ── 4. warnings ─────────────────────────────────────────────────────────────
+// ── 4. pkg: resolution from a consumer ──────────────────────────────────────
+// Self-reference doesn't resolve from inside the package, so resolve from a
+// sibling workspace package that depends on us (packages/usx).
+const consumerDir = path.join(path.dirname(pkgDir), 'usx');
+try {
+  const css = sass.compileString("@use 'pkg:@solexllc/usx-theme/themes' with ($themes: (forest,));", {
+    url: new URL('file://' + path.join(consumerDir, 'src', 'inline.scss')),
+    importers: [new sass.NodePackageImporter(consumerDir)],
+    logger: { warn: (message) => sassWarnings.push(message.split('\n')[0]) }
+  }).css;
+  if (!css.includes('[data-theme=forest]')) fail('pkg: import of themes compiled but emitted no forest block');
+} catch (e) {
+  fail(`pkg:@solexllc/usx-theme/themes failed to resolve: ${String(e.message).split('\n')[0]}`);
+}
+
+// ── 5. warnings ─────────────────────────────────────────────────────────────
 for (const w of sassWarnings) fail(`sass warning: ${w}`);
 
 if (failures.length) {

@@ -153,7 +153,7 @@ export const GettingStarted = {
       <p>
         Not using Sass for this? Each theme is also a plain stylesheet you can
         import individually (or all at once via{' '}
-        <code>@solexllc/usx-theme/themes.css</code>) and switch with{' '}
+        <code>@solexllc/usx-theme/themes/all.css</code>) and switch with{' '}
         <code>data-theme</code>; there's no default/prefers-dark wiring in that form.
       </p>
       <Code

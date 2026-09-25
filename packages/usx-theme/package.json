@@ -29,7 +29,7 @@
     "./themes": {
       "sass": "./src/_themes.scss"
     },
-    "./themes.css": "./dist/themes.css",
+    "./themes/all.css": "./dist/themes/all.css",
     "./themes/*.css": "./dist/themes/*.css",
     "./theme.css": "./dist/theme.css",
     "./theme-manifest": {

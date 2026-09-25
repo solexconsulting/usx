@@ -2,7 +2,7 @@
 //
 // Single source for: the Storybook toolbar theme toggle and Theme Playground
 // preset buttons, and build.js, which resolves each preset (derive.js) and
-// bakes it into dist/themes/<slug>.css, dist/themes.css and the Sass registry
+// bakes it into dist/themes/<slug>.css, dist/themes/all.css and the Sass registry
 // behind `pkg:@solexllc/usx-theme/themes`. Keys are manifest token names;
 // values are CSS values (hex, `var(--usx-*)`, lengths, keywords).
 
