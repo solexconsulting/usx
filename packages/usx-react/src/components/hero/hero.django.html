@@ -1,16 +1,16 @@
 {# Django template for Hero #}
 {% load components %}
 <section
-  class="usx-hero{% if overlay != False %} usx-hero--has-overlay{% endif %}{% if className %} {{ className }}{% endif %}"
+  class="usx-hero{% if overlay != False %} usx-hero--has-overlay{% endif %}{% if overlayOpacity or overlayOpacity == 0 %} usx-hero--custom-overlay{% endif %}{% if contentPosition == 'right' %} usx-hero--content-right{% elif contentPosition == 'center' %} usx-hero--content-center{% endif %}{% if boxed == False %} usx-hero--unboxed{% endif %}{% if secondaryContent %} usx-hero--split{% endif %}{% if className %} {{ className }}{% endif %}"
   aria-label="{% if ariaLabel %}{{ ariaLabel }}{% else %}Introduction{% endif %}"
-  {% if backgroundImage %}style="background-image: url('{{ backgroundImage }}')"{% endif %}
+  {% if backgroundImage or backgroundPosition or overlayOpacity or overlayOpacity == 0 %}style="{% if backgroundImage %}background-image: url('{{ backgroundImage }}');{% endif %}{% if backgroundPosition %}background-position: {{ backgroundPosition }};{% endif %}{% if overlayOpacity or overlayOpacity == 0 %}--hero-overlay-opacity: {{ overlayOpacity }};{% endif %}"{% endif %}
 >
   <div class="usx-hero__inner">
-    <div class="usx-hero__callout">
-      <h1 class="usx-hero__heading">
+    <div class="usx-hero__callout"{% if calloutMaxWidth %} style="max-width: {{ calloutMaxWidth }};"{% endif %}>
+      {% if headingLevel == 'h2' %}<h2 class="usx-hero__heading">{% elif headingLevel == 'h3' %}<h3 class="usx-hero__heading">{% elif headingLevel == 'h4' %}<h4 class="usx-hero__heading">{% elif headingLevel == 'h5' %}<h5 class="usx-hero__heading">{% else %}<h1 class="usx-hero__heading">{% endif %}
         {% if callout %}<span class="usx-hero__heading--alt">{{ callout }}</span>{% endif %}
         {{ title }}
-      </h1>
+      {% if headingLevel == 'h2' %}</h2>{% elif headingLevel == 'h3' %}</h3>{% elif headingLevel == 'h4' %}</h4>{% elif headingLevel == 'h5' %}</h5>{% else %}</h1>{% endif %}
       {% if paragraph %}<p class="usx-hero__paragraph">{{ paragraph }}</p>{% endif %}
       {% if searchProps %}
         {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps.defaultValue onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
@@ -18,5 +18,16 @@
         {% button variant="primary" href=button.href %}{{ button.text }}{% endbutton %}
       {% endif %}
     </div>
+    {% if secondaryContent %}
+      <div class="usx-hero__secondary">
+        {% if secondaryContent.title %}
+          {% if headingLevel == 'h2' %}<h3 class="usx-hero__secondary-heading">{% elif headingLevel == 'h3' %}<h4 class="usx-hero__secondary-heading">{% elif headingLevel == 'h4' %}<h5 class="usx-hero__secondary-heading">{% elif headingLevel == 'h5' %}<h6 class="usx-hero__secondary-heading">{% else %}<h2 class="usx-hero__secondary-heading">{% endif %}
+            {{ secondaryContent.title }}
+          {% if headingLevel == 'h2' %}</h3>{% elif headingLevel == 'h3' %}</h4>{% elif headingLevel == 'h4' %}</h5>{% elif headingLevel == 'h5' %}</h6>{% else %}</h2>{% endif %}
+        {% endif %}
+        {% if secondaryContent.paragraph %}<p class="usx-hero__paragraph">{{ secondaryContent.paragraph }}</p>{% endif %}
+        {% if secondaryContent.link %}<a class="usx-hero__secondary-link" href="{{ secondaryContent.link.href }}">{{ secondaryContent.link.text }}</a>{% endif %}
+      </div>
+    {% endif %}
   </div>
 </section>

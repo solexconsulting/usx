@@ -1800,10 +1800,77 @@ export const componentContracts = {
           "type": "string",
           "description": "URL of the background image applied via inline style"
         },
+        "contentPosition": {
+          "type": "select",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ],
+          "default": "left",
+          "description": "Main content position. Secondary content sits opposite on desktop for left/right layouts, and below for centered or mobile layouts. Reading order always starts with the main content."
+        },
+        "calloutMaxWidth": {
+          "type": "string",
+          "description": "Optional CSS maximum width for the main callout, such as 28rem or 50%. Overrides the theme width for this Hero only; omit to keep the theme default. Remains constrained by the available container width. Does not change split-layout column proportions."
+        },
+        "boxed": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the padded callout background. Disable for unboxed content directly over the hero background; ensure sufficient text contrast. Independent of overlay."
+        },
+        "backgroundPosition": {
+          "type": "string",
+          "description": "CSS background position for the image focal point, such as center, right center, or 70% 40%. Defaults to the stylesheet setting."
+        },
+        "headingLevel": {
+          "type": "select",
+          "options": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+          ],
+          "default": "h1",
+          "description": "Main heading element, independent of visual size. Secondary content uses the next heading level."
+        },
+        "secondaryContent": {
+          "type": "object",
+          "description": "Optional unboxed supporting content: title, paragraph, and link. Stacks after the main content on mobile; use overlay or a suitable background for readable contrast.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Supporting heading"
+            },
+            "paragraph": {
+              "type": "string",
+              "description": "Supporting description"
+            },
+            "link": {
+              "type": "object",
+              "description": "Optional secondary text link",
+              "properties": {
+                "href": {
+                  "type": "string",
+                  "description": "Destination URL"
+                },
+                "text": {
+                  "type": "string",
+                  "description": "Link text"
+                }
+              }
+            }
+          }
+        },
         "overlay": {
           "type": "boolean",
           "default": true,
           "description": "When true, adds a semi-transparent dark overlay over the background image to improve text legibility"
+        },
+        "overlayOpacity": {
+          "type": "number",
+          "description": "Optional black overlay opacity from 0 (transparent) to 1 (opaque), clamped to that range. Overrides the theme overlay color when set. Has no effect when overlay is false; omit to preserve the theme setting."
         },
         "ariaLabel": {
           "type": "string",
