@@ -81,6 +81,11 @@ export const buildArgTypes = (props = {}) => {
                 type: { name: 'boolean' },
                 control: { type: 'boolean' }
             };
+        } else if (type === 'array') {
+            argTypes[name] = {
+                type: { name: 'array', value: { name: 'other', value: 'unknown' } },
+                control: { type: 'object' }
+            };
         } else if (type === 'object') {
             argTypes[name] = {
                 type: { name: 'object' },

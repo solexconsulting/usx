@@ -19,7 +19,7 @@ import { systemColors } from '@solexllc/usx-theme/system-colors';
 
 
 // Showcase components
-import Accordion from '../../../usx-react/src/components/accordion/Accordion.jsx';
+import Accordion from '../../../usx-react/src/components/accordion/Accordion.tsx';
 import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
 import Attribution from '../../../usx-react/src/components/attribution/Attribution.tsx';
 import Banner from '../../../usx-react/src/components/banner/Banner.tsx';

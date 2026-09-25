@@ -1,8 +1,9 @@
-
-import { Accordion } from '../../../../usx-react/src/components/accordion/Accordion.jsx';
+import React from 'react';
+import accordion from '@uswds/uswds/js/usa-accordion';
+import { Accordion } from '../../../../usx-react/src/components/accordion/Accordion.tsx';
 import config from '../../../../usx-react/src/components/accordion/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
-import { expect } from 'storybook/test';
+import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { expect, fn, userEvent } from 'storybook/test';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -15,10 +16,19 @@ export default {
     parameters: {
       docs: {
         description: {
-          component: 'USWDS defaults the accordion icon to the start side. Set $theme-accordion-icon-position to "start" or "end" in Sass for a global choice, or use usa-accordion--icon-start / usa-accordion--icon-end for one accordion.'
+          component: uswdsInitNote('`accordion.init()`') + '\n\nSet iconPosition to "start" or "end" for one accordion. Leave it unset to use the global USWDS or theme setting ($theme-accordion-icon-position in Sass).'
         }
       }
-    }
+    },
+    decorators: [
+      (Story, context) => {
+        const root = React.useRef(null);
+        React.useEffect(() => {
+          accordion.init(root.current);
+        }, [context.args.items, context.args.multiselectable]);
+        return <div ref={root}><Story /></div>;
+      },
+    ],
 };
 
 const items1 = [
@@ -69,26 +79,43 @@ export const storyDefs = {
   IconStart: {
     id: 'accordion-icon-start',
     items: items1,
-    className: 'usa-accordion--icon-start'
+    iconPosition: 'start'
   },
   IconEnd: {
     id: 'accordion-icon-end',
     items: items1,
-    className: 'usa-accordion--icon-end'
+    iconPosition: 'end'
   }
 };
 
+for (const args of Object.values(storyDefs)) {
+  args.items = args.items.map(item => ({ ...item, id: `${args.id}-${item.id}` }));
+}
+
 export const Default = {
     args: storyDefs.Default,
-    play: async function({ canvas, userEvent }) {
+    play: async function({ canvas, canvasElement }) {
+    await expect(generatedArgTypes.items.control.type).toBe('object');
+    await expect(generatedArgTypes.items.type.name).toBe('array');
         const button = canvas.getByRole('button', { name: /accordion item 1/i });
         const content = canvas.getByText(/content for accordion item 1/i);
+      const secondButton = canvas.getByRole('button', { name: /accordion item 2/i });
+      const secondContent = canvas.getByText(/content for accordion item 2/i);
 
+      await expect(canvasElement.querySelector('.usx-accordion')).not.toHaveAttribute('data-allow-multiple');
         await expect(content).not.toBeVisible();
 
         await userEvent.click(button);
 
         await expect(content).toBeVisible();
+      await expect(button).toHaveAttribute('aria-expanded', 'true');
+      await userEvent.click(secondButton);
+      await expect(content).not.toBeVisible();
+      await expect(button).toHaveAttribute('aria-expanded', 'false');
+      await expect(secondContent).toBeVisible();
+      await userEvent.click(secondButton);
+      await expect(secondContent).not.toBeVisible();
+      await expect(secondButton).toHaveAttribute('aria-expanded', 'false');
     }
 }
 
@@ -96,8 +123,52 @@ export const Bordered = {
     args: storyDefs.Bordered
 }
 
+export const InitiallyExpanded = {
+  args: {
+    id: 'accordion-initially-expanded',
+    items: items1.map((item, index) => ({
+      ...item,
+      id: `accordion-initially-expanded-${item.id}`,
+      expanded: index === 0,
+      handleToggle: fn(),
+    })),
+  },
+  play: async function({ canvas, args }) {
+    const button = canvas.getByRole('button', { name: /accordion item 1/i });
+    const content = canvas.getByText(/content for accordion item 1/i);
+    await expect(button).toHaveAttribute('aria-expanded', 'true');
+    await expect(content).toBeVisible();
+    await userEvent.click(button);
+    await expect(args.items[0].handleToggle).toHaveBeenCalledTimes(1);
+    await expect(button).toHaveAttribute('aria-expanded', 'false');
+    await expect(content).not.toBeVisible();
+    button.focus();
+    await userEvent.keyboard('{Enter}');
+    await expect(button).toHaveAttribute('aria-expanded', 'true');
+    await expect(content).toBeVisible();
+  },
+};
+
 export const MultiSelectable = {
-    args: storyDefs.MultiSelectable
+  args: storyDefs.MultiSelectable,
+  play: async function({ canvas, canvasElement }) {
+    const firstButton = canvas.getByRole('button', { name: /accordion item 1/i });
+    const secondButton = canvas.getByRole('button', { name: /accordion item 2/i });
+    const firstContent = canvas.getByText(/content for accordion item 1/i);
+    const secondContent = canvas.getByText(/content for accordion item 2/i);
+
+    await expect(canvasElement.querySelector('.usx-accordion')).toHaveAttribute('data-allow-multiple');
+    await userEvent.click(firstButton);
+    await userEvent.click(secondButton);
+    await expect(firstContent).toBeVisible();
+    await expect(secondContent).toBeVisible();
+    await expect(firstButton).toHaveAttribute('aria-expanded', 'true');
+    await expect(secondButton).toHaveAttribute('aria-expanded', 'true');
+    await userEvent.click(firstButton);
+    await expect(firstContent).not.toBeVisible();
+    await expect(secondContent).toBeVisible();
+    await userEvent.click(secondButton);
+  }
 }
 
 export const CustomHeadingLevel = {
@@ -109,9 +180,21 @@ export const BorderedMultiSelectableH4 = {
 }
 
 export const IconStart = {
-  args: storyDefs.IconStart
+  args: storyDefs.IconStart,
+  play: async function({ canvasElement }) {
+    const root = canvasElement.querySelector('.usx-accordion');
+    await expect(root).toHaveClass('usa-accordion--icon-start');
+    await expect(root).not.toHaveClass('usa-accordion--icon-end');
+    await expect(root).not.toHaveAttribute('iconPosition');
+  },
 }
 
 export const IconEnd = {
-  args: storyDefs.IconEnd
+  args: storyDefs.IconEnd,
+  play: async function({ canvasElement }) {
+    const root = canvasElement.querySelector('.usx-accordion');
+    await expect(root).toHaveClass('usa-accordion--icon-end');
+    await expect(root).not.toHaveClass('usa-accordion--icon-start');
+    await expect(root).not.toHaveAttribute('iconPosition');
+  },
 }

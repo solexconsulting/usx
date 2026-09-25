@@ -1,6 +1,6 @@
 <div
     id="{{ id }}"
-    class="usa-accordion usx-accordion {% if bordered %}usa-accordion--bordered{% endif %} {{ className }}"
+    class="usa-accordion usx-accordion {% if bordered %}usa-accordion--bordered{% endif %} {% if iconPosition == 'start' %}usa-accordion--icon-start{% elif iconPosition == 'end' %}usa-accordion--icon-end{% endif %} {{ className }}"
     {% if multiselectable %}
     data-allow-multiple="true"
     {% endif %}

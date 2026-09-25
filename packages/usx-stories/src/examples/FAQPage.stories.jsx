@@ -4,7 +4,7 @@ import Banner from '../../../usx-react/src/components/banner/Banner.tsx';
 import MiscBanner from '../../../usx-react/src/components/misc-banner/MiscBanner.tsx';
 import Header from '../../../usx-react/src/components/header/Header.tsx';
 import Footer from '../../../usx-react/src/components/footer/Footer.tsx';
-import Accordion from '../../../usx-react/src/components/accordion/Accordion.jsx';
+import Accordion from '../../../usx-react/src/components/accordion/Accordion.tsx';
 import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
 import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';

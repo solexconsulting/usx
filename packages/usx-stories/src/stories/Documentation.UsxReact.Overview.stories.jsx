@@ -34,7 +34,7 @@ export const Overview = {
       <p>Use <code>@solexllc/usx-react</code> when:</p>
       <ul>
         <li>You're building a React application and want props/TypeScript types instead of raw class strings.</li>
-        <li>You want built-in behavior for components that need client-side state (e.g. Accordion's expand/collapse, Combobox's filtering).</li>
+        <li>You want React props and callbacks around USWDS markup, with USWDS JavaScript initialized by your application.</li>
       </ul>
       <p>Skip it when:</p>
       <ul>
@@ -55,15 +55,16 @@ export const Overview = {
 
       <h2>Enhanced (JS-driven) USWDS components</h2>
       <p>
-        A few USWDS components (Accordion, Banner, and others) reimplement
-        their expand/collapse interaction directly in React state rather than
-        relying on USWDS's own vanilla-JS behavior, since the DOM structure is
-        simple enough to own outright. Most others (Combobox, Date Picker,
-        File Input, Time Picker, and more) render only the static markup
-        USWDS's own JS enhances once initialized (<code>@uswds/uswds/js/usa-*</code>)
-        — check an individual component's story source to see which applies.
-        Either way, the rendered HTML/class structure never diverges from the
-        Django/HTML reference version. See{' '}
+        USWDS JavaScript should own standard USWDS interactions. Accordion, Banner,
+        Combobox, Date Picker, the standard File Input, and Time Picker render
+        markup that your application enhances by initializing the corresponding
+        <code> @uswds/uswds/js/usa-*</code> module.
+      </p>
+      <p>
+        Table still manages sorting through React hooks
+        rather than delegating that behavior to USWDS. Optional USX features,
+        such as File Input's individually managed file list, also use React state, but extend
+        rather than replace the underlying USWDS widget. See{' '}
         <strong>Documentation/USX React → USWDS JS Initialization</strong> for
         how and why your app is responsible for initializing that JS.
       </p>

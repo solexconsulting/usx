@@ -41,10 +41,18 @@ export const componentContracts = {
           "default": false,
           "description": "Whether multiple accordion items can be expanded at the same time."
         },
+        "iconPosition": {
+          "type": "select",
+          "options": [
+            "start",
+            "end"
+          ],
+          "description": "Position of the expand/collapse icon. Omit to use the global USWDS or theme setting."
+        },
         "className": {
           "type": "string",
           "default": "",
-          "description": "Additional CSS classes to apply to the accordion. Use usa-accordion--icon-start or usa-accordion--icon-end to set icon position for this accordion. For live global theming, set --usx-accordion-icon-position to 1.25rem auto (start) or auto 1.25rem (end)."
+          "description": "Additional CSS classes to apply to the accordion. Use iconPosition to set the icon position for this accordion. For live global theming, set --usx-accordion-icon-position to 1.25rem auto (start) or auto 1.25rem (end)."
         }
       }
     },
