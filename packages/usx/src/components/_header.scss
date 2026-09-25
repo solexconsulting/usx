@@ -55,23 +55,24 @@
 
 }
 
-// Extended layout only: its nav is a full-width bar under the header (desktop)
-// or an off-canvas drawer (mobile), so it's a distinct surface worth theming.
-// The basic layout's nav sits inline in the header bar and inherits its
-// background. Background is themeable at every width — unlike vendor (which
-// paints no background at desktop and a hardcoded opaque white at mobile),
-// USX lets a theme's configured nav color show through the mobile drawer
-// too, so a dark theme's drawer doesn't revert to an unstyled white panel.
+// .usx-nav is two different surfaces depending on width. Below 64em it is the
+// off-canvas drawer in EVERY layout — vendor paints it a hardcoded opaque
+// white, so a dark theme's drawer would otherwise revert to an unstyled white
+// panel. At desktop it's only a distinct surface in the extended layout (a
+// full-width bar under the header); the basic layout's nav sits inline in the
+// header bar and must inherit the header background instead.
 //
-// Note the extended layout renders <header> and <nav> as siblings (see
-// Header.tsx), so this can't be nested under .usx-header.
-:has(> .usa-header--extended) .usx-nav {
+// The extended layout renders <header> and <nav> as siblings (see
+// Header.tsx), so neither rule can be nested under .usx-header.
+.usx-nav {
   @media (width < 64em) {
     @if $usx-header-nav-bg-mobile {
       background-color: $usx-header-nav-bg-mobile;
     }
   }
+}
 
+:has(> .usa-header--extended) .usx-nav {
   @media (width >=64em) {
     @if $usx-header-nav-bg {
       background-color: $usx-header-nav-bg;
@@ -79,7 +80,8 @@
   }
 }
 
-:has(> .usa-header--extended) {  // USWDS scopes all of its own .usa-header--extended .usa-nav(__inner) and
+:has(> .usa-header--extended) {
+  // USWDS scopes all of its own .usa-header--extended .usa-nav(__inner) and
   // hover/current-bar rules to this same desktop breakpoint (the nav is an
   // off-canvas mobile drawer below it, styled by vendor's plain .usa-nav
   // mobile rules instead) — mirror that scoping here, or this desktop-only
