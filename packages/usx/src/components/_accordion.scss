@@ -22,9 +22,7 @@ $usx-accordion-icon-add: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/20
 
   &.usa-accordion--bordered {
     .usa-accordion__content {
-      @if $usx-accordion-border-width {
-        border-width: $usx-accordion-border-width;
-      }
+      border-width: usx-when($usx-accordion-border-width);
     }
   }
 

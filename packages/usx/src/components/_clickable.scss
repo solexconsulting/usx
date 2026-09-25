@@ -57,25 +57,17 @@
     .usx-clickable__color-on-hover {
       color: #005ea2;
 
-      @if $usx-clickable-text-hover {
-        color: $usx-clickable-text-hover;
-      }
+      color: usx-when($usx-clickable-text-hover);
 
-      @if $usx-color-primary {
-        color: $usx-color-primary;
-      }
+      color: usx-when($usx-color-primary);
     }
 
     .usx-clickable__bg-color-on-hover {
       background-color: #005ea2;
 
-      @if $usx-clickable-text-hover {
-        background-color: $usx-clickable-text-hover;
-      }
+      background-color: usx-when($usx-clickable-text-hover);
 
-      @if $usx-color-primary {
-        background-color: $usx-color-primary;
-      }
+      background-color: usx-when($usx-color-primary);
     }
   }
 }

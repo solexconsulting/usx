@@ -21,10 +21,8 @@
 // preset even though it's just the ordinary brand primary color (not a fixed
 // system gray) — chain it to the theme instead.
 .usa-combo-box__list-option--selected {
-  @if $usx-combo-box-selected-bg {
-    background-color: $usx-combo-box-selected-bg;
-    border-color: $usx-combo-box-selected-bg;
-  }
+  background-color: usx-when($usx-combo-box-selected-bg);
+  border-color: usx-when($usx-combo-box-selected-bg);
 }
 
 .usx-combo-box,
@@ -36,24 +34,14 @@
     padding-top: calc(0.5rem - 0.25rem);
     padding-bottom: calc(0.5rem - 0.25rem);
 
-    @if $usx-input-error-border-width {
-      border-width: $usx-input-error-border-width;
-    }
+    border-width: usx-when($usx-input-error-border-width);
 
-    @if $usx-input-error-border {
-      border-color: $usx-input-error-border;
-    }
+    border-color: usx-when($usx-input-error-border);
 
-    @if $usx-input-error-border-style {
-      border-style: $usx-input-error-border-style;
-    }
+    border-style: usx-when($usx-input-error-border-style);
 
-    @if $usx-input-error-padding-top {
-      padding-top: $usx-input-error-padding-top;
-    }
+    padding-top: usx-when($usx-input-error-padding-top);
 
-    @if $usx-input-error-padding-bottom {
-      padding-bottom: $usx-input-error-padding-bottom;
-    }
+    padding-bottom: usx-when($usx-input-error-padding-bottom);
   }
 }

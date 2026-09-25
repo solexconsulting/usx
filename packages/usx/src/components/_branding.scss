@@ -45,17 +45,13 @@
 
 .usa-header {
   .usx-logo__title {
-    @if $usx-header-text {
-      color: $usx-header-text;
-    }
+    color: usx-when($usx-header-text);
   }
 }
 
 .usa-footer {
   .usx-logo__title {
-    @if $usx-footer-text {
-      color: $usx-footer-text;
-    }
+    color: usx-when($usx-footer-text);
   }
 }
 

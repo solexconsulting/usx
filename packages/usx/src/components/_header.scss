@@ -3,21 +3,13 @@
 /* stylelint-disable selector-class-pattern, no-descending-specificity -- Public USX classes use BEM naming; intentional cascade order. */
 
 .usx-header {
-  @if $usx-header-bg {
-    background-color: $usx-header-bg;
-  }
+  background-color: usx-when($usx-header-bg);
 
-  @if $usx-header-text {
-    color: $usx-header-text;
-  }
+  color: usx-when($usx-header-text);
 
-  @if $usx-header-border-bottom {
-    border-bottom: $usx-header-border-bottom;
-  }
+  border-bottom: usx-when($usx-header-border-bottom);
 
-  @if $usx-header-border-top {
-    border-top: $usx-header-border-top;
-  }
+  border-top: usx-when($usx-header-border-top);
 
   &::after {
     display: none;
@@ -28,14 +20,10 @@
 
   .usa-navbar {
     .usa-menu-btn {
-      @if $usx-header-menu-btn-bg {
-        background-color: $usx-header-menu-btn-bg;
-      }
+      background-color: usx-when($usx-header-menu-btn-bg);
 
       &:hover {
-        @if $usx-header-menu-btn-bg-hover {
-          background-color: $usx-header-menu-btn-bg-hover;
-        }
+        background-color: usx-when($usx-header-menu-btn-bg-hover);
       }
     }
   }
@@ -66,17 +54,13 @@
 // Header.tsx), so neither rule can be nested under .usx-header.
 .usx-nav {
   @media (width < 64em) {
-    @if $usx-header-nav-bg-mobile {
-      background-color: $usx-header-nav-bg-mobile;
-    }
+    background-color: usx-when($usx-header-nav-bg-mobile);
   }
 }
 
 :has(> .usa-header--extended) .usx-nav {
   @media (width >=64em) {
-    @if $usx-header-nav-bg {
-      background-color: $usx-header-nav-bg;
-    }
+    background-color: usx-when($usx-header-nav-bg);
   }
 }
 
@@ -89,9 +73,7 @@
   // of the drawer's own).
   @media (width >=64em) {
     .usx-nav {
-      @if $usx-header-nav-border-bottom {
-        border-bottom: $usx-header-nav-border-bottom;
-      }
+      border-bottom: usx-when($usx-header-nav-border-bottom);
 
       @if $usx-header-nav-border-top {
         border-top: $usx-header-nav-border-top;
@@ -182,14 +164,10 @@
 
         // Vendor hardcodes this hover background at mobile only (and resets
         // it to transparent again at desktop) — match that scoping.
-        @if $usx-header-nav-link-bg-hover {
-          background-color: $usx-header-nav-link-bg-hover;
-        }
+        background-color: usx-when($usx-header-nav-link-bg-hover);
 
         &>span::after {
-          @if $usx-header-nav-link-text-hover-mobile {
-            background-color: $usx-header-nav-link-text-hover-mobile;
-          }
+          background-color: usx-when($usx-header-nav-link-text-hover-mobile);
         }
       }
     }
@@ -199,9 +177,7 @@
         color: $usx-header-nav-link-text-hover;
 
         &>span::after {
-          @if $usx-header-nav-link-text-hover {
-            background-color: $usx-header-nav-link-text-hover;
-          }
+          background-color: usx-when($usx-header-nav-link-text-hover);
         }
       }
     }
@@ -212,9 +188,7 @@
 
         // Vendor hardcodes this hover background at mobile only; desktop
         // links get no hover background at all.
-        @if $usx-header-nav-link-bg-hover {
-          background-color: $usx-header-nav-link-bg-hover;
-        }
+        background-color: usx-when($usx-header-nav-link-bg-hover);
       }
 
       @media (width >=64em) {
@@ -235,14 +209,10 @@
     // drawer link tokens, not the desktop primary-nav ones.
     // .usa-icon fills via `currentColor`, so tint it with `color`, not
     // `background-color` (which would draw a solid box behind the icon).
-    @if $usx-header-nav-link-text-mobile {
-      color: $usx-header-nav-link-text-mobile;
-    }
+    color: usx-when($usx-header-nav-link-text-mobile);
 
     &:hover {
-      @if $usx-header-nav-link-text-hover-mobile {
-        color: $usx-header-nav-link-text-hover-mobile;
-      }
+      color: usx-when($usx-header-nav-link-text-hover-mobile);
     }
   }
 
@@ -294,14 +264,10 @@
       &:not(.usa-nav__primary button:hover,
         .usa-nav__primary > .usa-nav__primary-item > a:hover,
         .usa-current) {
-        @if $usx-header-nav-link-text-mobile {
-          color: $usx-header-nav-link-text-mobile;
-        }
+        color: usx-when($usx-header-nav-link-text-mobile);
 
         &>span::after {
-          @if $usx-header-nav-link-text-mobile {
-            background-color: $usx-header-nav-link-text-mobile;
-          }
+          background-color: usx-when($usx-header-nav-link-text-mobile);
         }
       }
     }
@@ -312,14 +278,10 @@
         .usa-nav__primary button:hover,
         .usa-nav__primary > .usa-nav__primary-item > a:hover,
         .usa-current) {
-        @if $usx-header-nav-link-text {
-          color: $usx-header-nav-link-text;
-        }
+        color: usx-when($usx-header-nav-link-text);
 
         &>span::after {
-          @if $usx-header-nav-link-text {
-            background-color: $usx-header-nav-link-text;
-          }
+          background-color: usx-when($usx-header-nav-link-text);
         }
       }
     }
@@ -329,9 +291,7 @@
     // exists in vendor's desktop rules).
     @media (width >=64em) {
       &.usa-current {
-        @if $usx-header-nav-link-text {
-          color: $usx-header-nav-link-text;
-        }
+        color: usx-when($usx-header-nav-link-text);
       }
     }
 
@@ -340,17 +300,13 @@
     // desktop bottom-bar treatment at this width.
     @media (width < 64em) {
       &.usa-current {
-        @if $usx-header-nav-link-text-hover-mobile {
-          color: $usx-header-nav-link-text-hover-mobile;
-        }
+        color: usx-when($usx-header-nav-link-text-hover-mobile);
 
         font-weight: 700;
         position: relative;
 
         &::after {
-          @if $usx-header-nav-link-text-hover-mobile {
-            background-color: $usx-header-nav-link-text-hover-mobile;
-          }
+          background-color: usx-when($usx-header-nav-link-text-hover-mobile);
 
           border-radius: 99rem;
           content: "";
@@ -409,15 +365,11 @@
         }
 
         &+.usa-nav__submenu {
-          @if $usx-header-nav-submenu-bg {
-            background-color: $usx-header-nav-submenu-bg;
-          }
+          background-color: usx-when($usx-header-nav-submenu-bg);
 
           &::before,
           &::after {
-            @if $usx-header-nav-submenu-bg {
-              background-color: $usx-header-nav-submenu-bg;
-            }
+            background-color: usx-when($usx-header-nav-submenu-bg);
           }
         }
       }
@@ -425,14 +377,10 @@
   }
 
   .usa-nav__secondary-item>a {
-    @if $usx-header-secondary-link-text {
-      color: $usx-header-secondary-link-text;
-    }
+    color: usx-when($usx-header-secondary-link-text);
 
     &:hover {
-      @if $usx-header-secondary-link-text-hover {
-        color: $usx-header-secondary-link-text-hover;
-      }
+      color: usx-when($usx-header-secondary-link-text-hover);
     }
   }
 
@@ -456,24 +404,16 @@
     // Header.tsx), so the rule above never reaches them — left alone they
     // fall back to vendor's hardcoded gray/blue instead of the active theme.
     .usa-nav__submenu-item>a {
-      @if $usx-header-nav-link-text {
-        color: $usx-header-nav-link-text;
-      }
+      color: usx-when($usx-header-nav-link-text);
 
       &:hover {
-        @if $usx-header-nav-link-text-hover {
-          color: $usx-header-nav-link-text-hover;
-        }
+        color: usx-when($usx-header-nav-link-text-hover);
 
-        @if $usx-header-nav-link-bg-hover {
-          background-color: $usx-header-nav-link-bg-hover;
-        }
+        background-color: usx-when($usx-header-nav-link-bg-hover);
       }
 
       &.usa-current {
-        @if $usx-header-nav-link-text-hover {
-          color: $usx-header-nav-link-text-hover;
-        }
+        color: usx-when($usx-header-nav-link-text-hover);
 
         font-weight: 700;
       }

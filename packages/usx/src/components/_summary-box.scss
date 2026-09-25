@@ -2,25 +2,15 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usa-summary-box.usx-summary-box {
-  @if $usx-summary-box-border {
-    border: $usx-summary-box-border;
-  }
+  border: usx-when($usx-summary-box-border);
 
-  @if $usx-summary-box-radius {
-    border-radius: $usx-summary-box-radius;
-  }
+  border-radius: usx-when($usx-summary-box-radius);
 
-  @if $usx-summary-box-padding {
-    padding: $usx-summary-box-padding;
-  }
+  padding: usx-when($usx-summary-box-padding);
 
-  @if $usx-summary-box-bg {
-    background-color: $usx-summary-box-bg;
-  }
+  background-color: usx-when($usx-summary-box-bg);
 
-  @if $usx-summary-box-text {
-    color: $usx-summary-box-text;
-  }
+  color: usx-when($usx-summary-box-text);
 
   @if $usx-summary-box-link-text {
     .usa-summary-box__link:not(:visited):not(:hover) {

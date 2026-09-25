@@ -7,36 +7,26 @@
   width: max-content;
 
   &:not([class^="text-"]):not([class*=" text-"]) {
-    @if $usx-link-text {
-      color: $usx-link-text;
-    }
+    color: usx-when($usx-link-text);
 
     &:hover {
-      @if $usx-link-text-hover {
-        color: $usx-link-text-hover;
-      }
+      color: usx-when($usx-link-text-hover);
     }
 
     &:active {
-      @if $usx-link-text-active {
-        color: $usx-link-text-active;
-      }
+      color: usx-when($usx-link-text-active);
     }
   }
 
   &:not(.usx-no-visited) {
     &:visited,
     &.usx-link--visited {
-      @if $usx-link-text-visited {
-        color: $usx-link-text-visited;
-      }
+      color: usx-when($usx-link-text-visited);
     }
   }
 
   &:focus {
-    @if $usx-input-focus-outline {
-      color: $usx-input-focus-outline;
-    }
+    color: usx-when($usx-input-focus-outline);
   }
 }
 
@@ -45,17 +35,13 @@
 .usa-dark-background .usx-link,
 .usa-dark-background .usx-prose a {
   &:not([class^="text-"]):not([class*=" text-"]) {
-    @if $usx-link-text-dark {
-      color: $usx-link-text-dark;
-    }
+    color: usx-when($usx-link-text-dark);
   }
 
   &:not(.usx-no-visited) {
     &:visited,
     &.usx-link--visited {
-      @if $usx-link-text-visited-dark {
-        color: $usx-link-text-visited-dark;
-      }
+      color: usx-when($usx-link-text-visited-dark);
     }
   }
 }

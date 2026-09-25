@@ -16,17 +16,11 @@
   background-repeat: no-repeat;
   color: #fff;
 
-  @if $usx-hero-min-height {
-    min-height: $usx-hero-min-height;
-  }
+  min-height: usx-when($usx-hero-min-height);
 
-  @if $usx-hero-bg {
-    background-color: $usx-hero-bg;
-  }
+  background-color: usx-when($usx-hero-bg);
 
-  @if $usx-hero-text {
-    color: $usx-hero-text;
-  }
+  color: usx-when($usx-hero-text);
 
   &--has-overlay::before {
     content: '';
@@ -35,9 +29,7 @@
     background-color: rgb(0 0 0 / 35%);
     pointer-events: none;
 
-    @if $usx-hero-overlay-bg {
-      background-color: $usx-hero-overlay-bg;
-    }
+    background-color: usx-when($usx-hero-overlay-bg);
   }
 
   &__inner {
@@ -49,13 +41,9 @@
     padding-block: 4rem;
     padding-inline: 1.5rem;
 
-    @if $usx-hero-padding-block {
-      padding-block: $usx-hero-padding-block;
-    }
+    padding-block: usx-when($usx-hero-padding-block);
 
-    @if $usx-hero-padding-inline {
-      padding-inline: $usx-hero-padding-inline;
-    }
+    padding-inline: usx-when($usx-hero-padding-inline);
   }
 
   &__callout {
@@ -67,17 +55,11 @@
     // like every other radius-box consumer: image, code, summary-box).
     border-radius: $usx-hero-callout-radius;
 
-    @if $usx-hero-callout-max-width {
-      max-width: $usx-hero-callout-max-width;
-    }
+    max-width: usx-when($usx-hero-callout-max-width);
 
-    @if $usx-hero-callout-padding {
-      padding: $usx-hero-callout-padding;
-    }
+    padding: usx-when($usx-hero-callout-padding);
 
-    @if $usx-hero-callout-bg {
-      background-color: $usx-hero-callout-bg;
-    }
+    background-color: usx-when($usx-hero-callout-bg);
   }
 
   &__heading {
@@ -89,21 +71,13 @@
     margin-bottom: 1rem;
     color: #fff;
 
-    @if $usx-hero-heading-size {
-      font-size: $usx-hero-heading-size;
-    }
+    font-size: usx-when($usx-hero-heading-size);
 
-    @if $usx-hero-heading-font-weight {
-      font-weight: $usx-hero-heading-font-weight;
-    }
+    font-weight: usx-when($usx-hero-heading-font-weight);
 
-    @if $usx-spacing-md {
-      margin-bottom: $usx-spacing-md;
-    }
+    margin-bottom: usx-when($usx-spacing-md);
 
-    @if $usx-hero-text {
-      color: $usx-hero-text;
-    }
+    color: usx-when($usx-hero-text);
 
     &--alt {
       display: block;
@@ -112,17 +86,11 @@
       margin-bottom: 0.25rem;
       color: #66b5ee;
 
-      @if $usx-hero-alt-size {
-        font-size: $usx-hero-alt-size;
-      }
+      font-size: usx-when($usx-hero-alt-size);
 
-      @if $usx-spacing-xs {
-        margin-bottom: $usx-spacing-xs;
-      }
+      margin-bottom: usx-when($usx-spacing-xs);
 
-      @if $usx-hero-alt-text {
-        color: $usx-hero-alt-text;
-      }
+      color: usx-when($usx-hero-alt-text);
     }
   }
 
@@ -133,17 +101,11 @@
     margin-bottom: 1.5rem;
     color: #fff;
 
-    @if $usx-hero-paragraph-size {
-      font-size: $usx-hero-paragraph-size;
-    }
+    font-size: usx-when($usx-hero-paragraph-size);
 
-    @if $usx-spacing-lg {
-      margin-bottom: $usx-spacing-lg;
-    }
+    margin-bottom: usx-when($usx-spacing-lg);
 
-    @if $usx-hero-text {
-      color: $usx-hero-text;
-    }
+    color: usx-when($usx-hero-text);
   }
 }
 /* stylelint-enable selector-class-pattern */

@@ -2,41 +2,27 @@
 
 /* stylelint-disable selector-class-pattern, no-descending-specificity -- Public USX classes use BEM naming; intentional cascade order. */
 .usx-footer {
-  @if $usx-footer-bg {
-    background-color: $usx-footer-bg;
-  }
+  background-color: usx-when($usx-footer-bg);
 
-  @if $usx-footer-border-top {
-    border-top: $usx-footer-border-top;
-  }
+  border-top: usx-when($usx-footer-border-top);
 
-  @if $usx-footer-text {
-    color: $usx-footer-text;
-  }
+  color: usx-when($usx-footer-text);
 
   // ── Nav columns (big footer) ──────────────────────────────────────────────
   &__nav-column {
     .usa-footer__primary-link {
-      @if $usx-footer-heading-text {
-        color: $usx-footer-heading-text;
-      }
+      color: usx-when($usx-footer-heading-text);
 
       &.usa-footer__primary-link--button {
-        @if $usx-footer-bg {
-          background-color: $usx-footer-bg;
-        }
+        background-color: usx-when($usx-footer-bg);
       }
     }
 
     .usa-footer__secondary-link a {
-      @if $usx-footer-secondary-link-text {
-        color: $usx-footer-secondary-link-text;
-      }
+      color: usx-when($usx-footer-secondary-link-text);
 
       &:hover {
-        @if $usx-footer-secondary-link-text-hover {
-          color: $usx-footer-secondary-link-text-hover;
-        }
+        color: usx-when($usx-footer-secondary-link-text-hover);
       }
     }
   }
@@ -44,15 +30,11 @@
   // ── Sign-up form ─────────────────────────────────────────────────────────
   &__sign-up {
     .usa-sign-up__heading {
-      @if $usx-footer-heading-text {
-        color: $usx-footer-heading-text;
-      }
+      color: usx-when($usx-footer-heading-text);
     }
 
     .usa-button {
-      @if $usx-footer-sign-up-button-bg {
-        background-color: $usx-footer-sign-up-button-bg;
-      }
+      background-color: usx-when($usx-footer-sign-up-button-bg);
     }
   }
 
@@ -60,9 +42,7 @@
   &__logo {
     .usa-footer__logo-heading,
     a.usa-footer__logo-heading {
-      @if $usx-footer-heading-secondary-text {
-        color: $usx-footer-heading-secondary-text;
-      }
+      color: usx-when($usx-footer-heading-secondary-text);
 
       text-decoration: none;
     }
@@ -70,22 +50,14 @@
 
   // ── Social links ─────────────────────────────────────────────────────────
   .usa-social-link {
-    @if $usx-footer-link-text {
-      color: $usx-footer-link-text;
-    }
+    color: usx-when($usx-footer-link-text);
 
-    @if $usx-footer-social-radius {
-      border-radius: $usx-footer-social-radius;
-    }
+    border-radius: usx-when($usx-footer-social-radius);
 
     &:hover {
-      @if $usx-footer-social-bg-hover {
-        background-color: $usx-footer-social-bg-hover;
-      }
+      background-color: usx-when($usx-footer-social-bg-hover);
 
-      @if $usx-footer-social-hover-border {
-        border: $usx-footer-social-hover-border;
-      }
+      border: usx-when($usx-footer-social-hover-border);
 
       @if $usx-footer-social-hover-outline {
         outline: $usx-footer-social-hover-outline;
@@ -94,9 +66,7 @@
     }
 
     .usa-social-link__icon {
-      @if $usx-footer-social-icon-filter {
-        filter: $usx-footer-social-icon-filter;
-      }
+      filter: usx-when($usx-footer-social-icon-filter);
     }
   }
 
@@ -107,20 +77,14 @@
     }
 
     .usa-footer__contact-heading {
-      @if $usx-footer-heading-secondary-text {
-        color: $usx-footer-heading-secondary-text;
-      }
+      color: usx-when($usx-footer-heading-secondary-text);
     }
 
     a {
-      @if $usx-footer-link-text {
-        color: $usx-footer-link-text;
-      }
+      color: usx-when($usx-footer-link-text);
 
       &:hover {
-        @if $usx-footer-link-text-hover {
-          color: $usx-footer-link-text-hover;
-        }
+        color: usx-when($usx-footer-link-text-hover);
       }
     }
   }
@@ -129,32 +93,22 @@
   .usa-footer__secondary-section {
     background-color: unset;
 
-    @if $usx-footer-secondary-section-border-top {
-      border-top: $usx-footer-secondary-section-border-top;
-    }
+    border-top: usx-when($usx-footer-secondary-section-border-top);
   }
 
   .usa-footer__primary-section {
-    @if $usx-footer-primary-bg {
-      background-color: $usx-footer-primary-bg;
-    }
+    background-color: usx-when($usx-footer-primary-bg);
 
-    @if $usx-footer-primary-section-border-top {
-      border-top: $usx-footer-primary-section-border-top;
-    }
+    border-top: usx-when($usx-footer-primary-section-border-top);
   }
 
   // ── Primary-section nav links ────────────────────────────────────────────
   .usa-footer__nav {
     a.usa-footer__primary-link {
-      @if $usx-footer-link-text {
-        color: $usx-footer-link-text;
-      }
+      color: usx-when($usx-footer-link-text);
 
       &:hover {
-        @if $usx-footer-link-text-hover {
-          color: $usx-footer-link-text-hover;
-        }
+        color: usx-when($usx-footer-link-text-hover);
       }
     }
   }

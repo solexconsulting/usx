@@ -110,6 +110,26 @@ const errors = [];
 const byVar = new Map(themeManifest.map((t) => [t.cssVar, t]));
 const byName = new Map(themeManifest.map((t) => [t.name, t]));
 
+const compileGuard = (body) => sass.compileString(
+  `@use 'pkg:@solexllc/usx-theme/variables' as *; .probe { ${body} }`,
+  {
+    importers: [new sass.NodePackageImporter(pkgDir)],
+    logger: { warn: (message) => sassWarnings.push(message) },
+  }
+).css;
+
+for (const value of ['null', 'false', '0', 'true', '#123456', 'var(--test-token)', '(1px 2px)', '(Arial, sans-serif)', '""']) {
+  const guarded = compileGuard(`@if ${value} { color: ${value}; }`);
+  const shorthand = compileGuard(`color: usx-when(${value});`);
+  if (shorthand !== guarded) errors.push(`usx-when(${value}) differs from an explicit guard`);
+}
+
+for (const condition of ['null', 'false', '0', 'true']) {
+  const guarded = compileGuard(`@if ${condition} { border: 1px solid red; }`);
+  const composite = compileGuard(`border: usx-when(${condition}, 1px solid red);`);
+  if (composite !== guarded) errors.push(`usx-when(${condition}, composite) differs from an explicit guard`);
+}
+
 for (const w of sassWarnings) errors.push(`sass warning: ${w}`);
 
 if (usxVarRefs(defaultCss).length) {

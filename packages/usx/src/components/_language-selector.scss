@@ -7,19 +7,13 @@
 // the theme's primary-darker shade instead of a static hex.
 .usx-language-selector {
   .usa-language__submenu {
-    @if $usx-language-selector-menu-bg {
-      background-color: $usx-language-selector-menu-bg;
-    }
+    background-color: usx-when($usx-language-selector-menu-bg);
 
     .usa-language__submenu-item a {
-      @if $usx-language-selector-menu-text {
-        color: $usx-language-selector-menu-text;
-      }
+      color: usx-when($usx-language-selector-menu-text);
 
       &:hover {
-        @if $usx-language-selector-menu-text {
-          color: $usx-language-selector-menu-text;
-        }
+        color: usx-when($usx-language-selector-menu-text);
       }
     }
   }

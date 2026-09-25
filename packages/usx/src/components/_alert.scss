@@ -8,13 +8,9 @@
 	&.usx-alert, .usa-alert__body {
 		position: relative;
 
-		@if $usx-alert-radius {
-			border-radius: $usx-alert-radius;
-		}
+		border-radius: usx-when($usx-alert-radius);
 
-		@if $usx-alert-box-shadow {
-			box-shadow: $usx-alert-box-shadow;
-		}
+		box-shadow: usx-when($usx-alert-box-shadow);
 	}
 }
 
@@ -43,9 +39,7 @@
 
 	.#{$uswds-class-name}.#{$usa-class-name}:not(.usx-site-alert--maintenance *):not(.usx-site-alert--maintenance-warning *),
 	.#{$uswds-class-name}.#{$usa-class-name}:not(.usx-site-alert--maintenance *):not(.usx-site-alert--maintenance-warning *) .usa-alert__body {
-		@if $bg {
-			background-color: $bg;
-		}
+		background-color: usx-when($bg);
 
 		@if $color {
 			color: $color;
@@ -61,13 +55,9 @@
 			}
 		}
 
-		@if $border {
-			border-color: $border;
-		}
+		border-color: usx-when($border);
 
-		@if $usx-alert-border-width {
-			border-width: $usx-alert-border-width;
-		}
+		border-width: usx-when($usx-alert-border-width);
 	}
 }
 
@@ -109,48 +99,30 @@
 
 .usx-alert {
 	.usa-alert--slim {
-		@if $usx-alert-slim-padding-block {
-			padding-block: $usx-alert-slim-padding-block;
-		}
+		padding-block: usx-when($usx-alert-slim-padding-block);
 
-		@if $usx-alert-slim-padding-inline {
-			padding-inline: $usx-alert-slim-padding-inline;
-		}
+		padding-inline: usx-when($usx-alert-slim-padding-inline);
 	}
 
 	.usa-alert--no-icon {
-		@if $usx-alert-no-icon-padding-inline-start {
-			padding-inline-start: $usx-alert-no-icon-padding-inline-start;
-		}
+		padding-inline-start: usx-when($usx-alert-no-icon-padding-inline-start);
 	}
 
 	.usa-alert__body {
-		@if $usx-alert-body-gap {
-			gap: $usx-alert-body-gap;
-		}
+		gap: usx-when($usx-alert-body-gap);
 	}
 
 	.usa-alert__heading {
-		@if $usx-alert-heading-font-size {
-			font-size: $usx-alert-heading-font-size;
-		}
+		font-size: usx-when($usx-alert-heading-font-size);
 
-		@if $usx-alert-heading-font-weight {
-			font-weight: $usx-alert-heading-font-weight;
-		}
+		font-weight: usx-when($usx-alert-heading-font-weight);
 
-		@if $usx-alert-heading-margin-block-end {
-			margin-block-end: $usx-alert-heading-margin-block-end;
-		}
+		margin-block-end: usx-when($usx-alert-heading-margin-block-end);
 	}
 
 	.usa-alert__text {
-		@if $usx-alert-text-font-size {
-			font-size: $usx-alert-text-font-size;
-		}
+		font-size: usx-when($usx-alert-text-font-size);
 
-		@if $usx-alert-text-line-height {
-			line-height: $usx-alert-text-line-height;
-		}
+		line-height: usx-when($usx-alert-text-line-height);
 	}
 }

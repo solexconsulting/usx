@@ -31,9 +31,7 @@
     background-color: #e2e8f0;
     padding: 1rem 1.25rem;
 
-    @if $usx-block-callout-bg {
-      background-color: $usx-block-callout-bg;
-    }
+    background-color: usx-when($usx-block-callout-bg);
     
     @if $usx-block-border-width {
       border-width: $usx-block-border-width 0 0;

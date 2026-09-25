@@ -14,14 +14,10 @@
   // (self-contained badge, same class applied directly to the <li>) and
   // must not inherit this muted text color over their own background.
   .usa-collection__meta-item:not(.usa-tag) {
-    @if $usx-collection-meta-text {
-      color: $usx-collection-meta-text;
-    }
+    color: usx-when($usx-collection-meta-text);
   }
 
   .usa-collection__description {
-    @if $usx-collection-description-text {
-      color: $usx-collection-description-text;
-    }
+    color: usx-when($usx-collection-description-text);
   }
 }

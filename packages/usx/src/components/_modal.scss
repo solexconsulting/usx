@@ -2,24 +2,16 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-modal {
-  @if $usx-modal-bg {
-    background: $usx-modal-bg;
-  }
+  background: usx-when($usx-modal-bg);
 
-  @if $usx-modal-text {
-    color: $usx-modal-text;
-  }
+  color: usx-when($usx-modal-text);
 
   .usa-modal__close {
-    @if $usx-modal-close-text {
-      color: $usx-modal-close-text;
-    }
+    color: usx-when($usx-modal-close-text);
 
     &:hover,
     &:active {
-      @if $usx-modal-close-text-hover {
-        color: $usx-modal-close-text-hover;
-      }
+      color: usx-when($usx-modal-close-text-hover);
     }
   }
 

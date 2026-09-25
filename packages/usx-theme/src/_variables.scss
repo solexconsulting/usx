@@ -33,9 +33,9 @@
   @return $fallback;
 }
 
-// Guards composite values: returns $value only when $condition is non-null,
-// so partial composites like `1px solid null` never reach the CSS output.
-@function usx-when($condition, $value) {
+// Omits null/false values; an optional second argument guards composites
+// so partial values like `1px solid null` never reach the CSS output.
+@function usx-when($condition, $value: $condition) {
   @if not $condition {
     @return null;
   }

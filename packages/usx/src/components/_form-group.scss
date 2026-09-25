@@ -4,29 +4,19 @@
 .usa-label,
 .usa-legend,
 .usa-fieldset > legend {
-  @if $usx-text-ink {
-    color: $usx-text-ink;
-  }
+  color: usx-when($usx-text-ink);
 }
 
 .usa-hint {
-  @if $usx-text-subtle {
-    color: $usx-text-subtle;
-  }
+  color: usx-when($usx-text-subtle);
 }
 
 .usx-form-group.usa-form-group--error {
-  @if $usx-form-group-error-text {
-    border-color: $usx-form-group-error-text;
-  }
+  border-color: usx-when($usx-form-group-error-text);
 
-  @if $usx-form-group-error-border-width {
-    border-width: $usx-form-group-error-border-width;
-  }
+  border-width: usx-when($usx-form-group-error-border-width);
 }
 
 .usa-error-message {
-    @if $usx-color-error {
-        color: $usx-color-error;
-    }
+    color: usx-when($usx-color-error);
 }

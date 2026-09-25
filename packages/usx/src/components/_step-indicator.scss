@@ -2,64 +2,44 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-step-indicator {
-  @if $usx-step-indicator-bg {
-    background-color: $usx-step-indicator-bg;
-  }
+  background-color: usx-when($usx-step-indicator-bg);
 
   .usa-step-indicator__heading {
-    @if $usx-step-indicator-heading-text {
-      color: $usx-step-indicator-heading-text;
-    }
+    color: usx-when($usx-step-indicator-heading-text);
   }
 
   .usa-step-indicator__segment--complete {
     &::before, &::after {
-      @if $usx-step-indicator-segment-complete {
-        background-color: $usx-step-indicator-segment-complete;
-      }
+      background-color: usx-when($usx-step-indicator-segment-complete);
     }
 
     .usa-step-indicator__segment-label {
-      @if $usx-step-indicator-segment-complete {
-        color: $usx-step-indicator-segment-complete;
-      }
+      color: usx-when($usx-step-indicator-segment-complete);
     }
   }
 
   .usa-step-indicator__segment--current {
     &::before, &::after {
-      @if $usx-step-indicator-segment-current {
-        background-color: $usx-step-indicator-segment-current;
-      }
+      background-color: usx-when($usx-step-indicator-segment-current);
     }
 
     .usa-step-indicator__segment-label {
-      @if $usx-step-indicator-segment-current {
-        color: $usx-step-indicator-segment-current;
-      }
+      color: usx-when($usx-step-indicator-segment-current);
     }
   }
 
   .usa-step-indicator__current-step {
-    @if $usx-step-indicator-segment-current {
-      background-color: $usx-step-indicator-segment-current;
-    }
+    background-color: usx-when($usx-step-indicator-segment-current);
 
-    @if $usx-step-indicator-counter-text {
-      color: $usx-step-indicator-counter-text;
-    }
+    color: usx-when($usx-step-indicator-counter-text);
   }
 
   .usa-step-indicator__total-steps {
-    @if $usx-step-indicator-segment-current {
-      color: $usx-step-indicator-segment-current;
-    }
+    color: usx-when($usx-step-indicator-segment-current);
   }
 
   .usa-step-indicator__segment-label {
-    @if $usx-step-indicator-segment-label-text {
-      color: $usx-step-indicator-segment-label-text;
-    }
+    color: usx-when($usx-step-indicator-segment-label-text);
   }
 
   .usa-step-indicator__segment::after {
@@ -84,9 +64,7 @@
   // compiled default exactly — only the colors are themed.
   &.usa-step-indicator--counters, &.usa-step-indicator--counters-sm {
     .usa-step-indicator__segment::before {
-      @if $usx-step-indicator-bg {
-        background-color: $usx-step-indicator-bg;
-      }
+      background-color: usx-when($usx-step-indicator-bg);
 
       @if $usx-step-indicator-segment-pending-border and $usx-step-indicator-bg {
         box-shadow:
@@ -94,37 +72,27 @@
           0 0 0 .25rem $usx-step-indicator-bg;
       }
 
-      @if $usx-step-indicator-segment-label-text {
-        color: $usx-step-indicator-segment-label-text;
-      }
+      color: usx-when($usx-step-indicator-segment-label-text);
     }
 
     .usa-step-indicator__segment--complete::before {
-      @if $usx-step-indicator-segment-complete {
-        background-color: $usx-step-indicator-segment-complete;
-      }
+      background-color: usx-when($usx-step-indicator-segment-complete);
 
       @if $usx-step-indicator-bg {
         box-shadow: 0 0 0 .25rem $usx-step-indicator-bg;
       }
 
-      @if $usx-step-indicator-counter-text {
-        color: $usx-step-indicator-counter-text;
-      }
+      color: usx-when($usx-step-indicator-counter-text);
     }
 
     .usa-step-indicator__segment--current::before {
-      @if $usx-step-indicator-segment-current {
-        background-color: $usx-step-indicator-segment-current;
-      }
+      background-color: usx-when($usx-step-indicator-segment-current);
 
       @if $usx-step-indicator-bg {
         box-shadow: 0 0 0 .25rem $usx-step-indicator-bg;
       }
 
-      @if $usx-step-indicator-counter-text {
-        color: $usx-step-indicator-counter-text;
-      }
+      color: usx-when($usx-step-indicator-counter-text);
     }
   }
 }

@@ -7,24 +7,16 @@
 // themeable defaults instead.
 .usx-process-list {
   .usa-process-list__heading {
-    @if $usx-process-list-heading-text {
-      color: $usx-process-list-heading-text;
-    }
+    color: usx-when($usx-process-list-heading-text);
   }
 
   .usa-process-list__item {
-    @if $usx-process-list-border {
-      border-left-color: $usx-process-list-border;
-    }
+    border-left-color: usx-when($usx-process-list-border);
 
     &::before {
-      @if $usx-process-list-counter-text {
-        color: $usx-process-list-counter-text;
-      }
+      color: usx-when($usx-process-list-counter-text);
 
-      @if $usx-process-list-counter-border {
-        border-color: $usx-process-list-counter-border;
-      }
+      border-color: usx-when($usx-process-list-counter-border);
 
       @if $usx-process-list-counter-ring {
         background-color: $usx-process-list-counter-ring;

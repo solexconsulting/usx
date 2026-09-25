@@ -18,13 +18,9 @@
   height: auto;
   min-height: 2.5rem;
 
-  @if $usx-input-radius {
-    border-radius: $usx-input-radius;
-  }
+  border-radius: usx-when($usx-input-radius);
 
-  @if $usx-input-padding {
-    padding: $usx-input-padding;
-  }
+  padding: usx-when($usx-input-padding);
 }
 
 /* ---------------------------------- */
@@ -35,64 +31,38 @@
 
 .usa-select.usx-select:not(.usa-input--error):not(.usa-input--success) {
   &:not(:disabled) {
-    @if $usx-input-bg {
-      background-color: $usx-input-bg;
-    }
+    background-color: usx-when($usx-input-bg);
 
-    @if $usx-input-text {
-      color: $usx-input-text;
-    }
+    color: usx-when($usx-input-text);
 
-    @if $usx-input-border {
-      border-color: $usx-input-border;
-    }
+    border-color: usx-when($usx-input-border);
   }
 }
 
 .usa-select.usx-select.usa-input--error {
-  @if $usx-input-error-border-width {
-    border-width: $usx-input-error-border-width;
-  }
+  border-width: usx-when($usx-input-error-border-width);
 
-  @if $usx-input-error-border {
-    border-color: $usx-input-error-border;
-  }
+  border-color: usx-when($usx-input-error-border);
 
-  @if $usx-input-error-border-style {
-    border-style: $usx-input-error-border-style;
-  }
+  border-style: usx-when($usx-input-error-border-style);
 
-  @if $usx-input-error-padding-top {
-    padding-top: $usx-input-error-padding-top;
-  }
+  padding-top: usx-when($usx-input-error-padding-top);
 
-  @if $usx-input-error-padding-bottom {
-    padding-bottom: $usx-input-error-padding-bottom;
-  }
+  padding-bottom: usx-when($usx-input-error-padding-bottom);
 }
 
 // Error can be toggled dynamically (e.g. character-count) on top of a
 // statically-applied success class, so error must win when both are present.
 .usa-select.usx-select.usa-input--success:not(.usa-input--error) {
-  @if $usx-input-success-border-width {
-    border-width: $usx-input-success-border-width;
-  }
+  border-width: usx-when($usx-input-success-border-width);
 
-  @if $usx-input-success-border {
-    border-color: $usx-input-success-border;
-  }
+  border-color: usx-when($usx-input-success-border);
 
-  @if $usx-input-success-border-style {
-    border-style: $usx-input-success-border-style;
-  }
+  border-style: usx-when($usx-input-success-border-style);
 
-  @if $usx-input-success-padding-top {
-    padding-top: $usx-input-success-padding-top;
-  }
+  padding-top: usx-when($usx-input-success-padding-top);
 
-  @if $usx-input-success-padding-bottom {
-    padding-bottom: $usx-input-success-padding-bottom;
-  }
+  padding-bottom: usx-when($usx-input-success-padding-bottom);
 }
 
 /* ---------------------------------- */
@@ -102,11 +72,7 @@
 /* ---------------------------------- */
 
 .usa-select.usx-select:focus-visible {
-  @if $usx-input-focus-outline {
-    outline: $usx-input-focus-outline;
-  }
+  outline: usx-when($usx-input-focus-outline);
 
-  @if $usx-input-focus-outline-offset {
-    outline-offset: $usx-input-focus-outline-offset;
-  }
+  outline-offset: usx-when($usx-input-focus-outline-offset);
 }

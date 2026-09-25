@@ -4,9 +4,7 @@
 .usx-layout {
   min-height: 100vh;
 
-  @if $usx-surface-1 {
-    background-color: $usx-surface-1;
-  }
+  background-color: usx-when($usx-surface-1);
 
   // ── Single column layout ──────────────────────────────────────────────────
   // Centers content with max-width and responsive gutters

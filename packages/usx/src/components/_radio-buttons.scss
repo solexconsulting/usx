@@ -2,15 +2,11 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usa-radio__label {
-  @if $usx-text-ink {
-    color: $usx-text-ink;
-  }
+  color: usx-when($usx-text-ink);
 }
 
 .usa-radio__input--tile + .usa-radio__label {
-  @if $usx-surface-1 {
-    background-color: $usx-surface-1;
-  }
+  background-color: usx-when($usx-surface-1);
 }
 
 .usa-radio.usx-radio {
@@ -28,19 +24,13 @@
   }
 
   .usa-radio__input--tile + .usa-radio__label {
-    @if $usx-checkable-tile-border {
-      border-color: $usx-checkable-tile-border;
-    }
+    border-color: usx-when($usx-checkable-tile-border);
 
-    @if $usx-checkable-tile-border-width {
-      border-width: $usx-checkable-tile-border-width;
-    }
+    border-width: usx-when($usx-checkable-tile-border-width);
   }
 
   .usa-radio__label::before {
-    @if $usx-checkable-bg {
-      background-color: $usx-checkable-bg;
-    }
+    background-color: usx-when($usx-checkable-bg);
 
     @if $usx-checkable-border {
       box-shadow: 0 0 0 2px $usx-checkable-border;
@@ -58,9 +48,7 @@
     }
 
     &.usa-radio__input--tile + .usa-radio__label {
-      @if $usx-color-primary {
-        border-color: $usx-color-primary;
-      }
+      border-color: usx-when($usx-color-primary);
     }
   }
 }

@@ -7,9 +7,7 @@
     &.usa-button-group--segmented {
       .usa-button-group__item {
         &:where(:not(:last-child)) #{$selector}::before {
-          @if $divider {
-            border-right: $divider;
-          }
+          border-right: usx-when($divider);
         }
 
         &:where(:not(:first-child):not(:last-child)) {

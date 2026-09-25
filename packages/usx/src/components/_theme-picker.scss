@@ -5,9 +5,7 @@
     max-width: 20rem;
     color: #fff;
 
-    @if $usx-theme-picker-trigger-text {
-        color: $usx-theme-picker-trigger-text;
-    }
+    color: usx-when($usx-theme-picker-trigger-text);
 
     &__panel {
         display: none;
@@ -48,9 +46,7 @@
     &__trigger {
         color: #fff;
 
-        @if $usx-theme-picker-trigger-text {
-            color: $usx-theme-picker-trigger-text;
-        }
+        color: usx-when($usx-theme-picker-trigger-text);
     }
 
     &__icon {

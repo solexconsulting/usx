@@ -36,9 +36,7 @@
   &.usx-site-alert--maintenance, &.usx-site-alert--maintenance-warning {
     background-color: #f0f0f0;
 
-    @if $usx-site-alert-maintenance-bg {
-      background-color: $usx-site-alert-maintenance-bg;
-    }
+    background-color: usx-when($usx-site-alert-maintenance-bg);
 
     .usa-alert {
       border: none;
@@ -48,25 +46,17 @@
   &.usx-site-alert--maintenance {
     border-top: 8px solid #b50909;
 
-    @if $usx-color-error {
-      border-color: $usx-color-error;
-    }
+    border-color: usx-when($usx-color-error);
 
-		@if $usx-alert-border-width {
-			border-width: $usx-alert-border-width;
-		}
+		border-width: usx-when($usx-alert-border-width);
   }
 
   &.usx-site-alert--maintenance-warning {
     border-top: 8px solid #ffbe2e;
 
-    @if $usx-color-warning {
-      border-color: $usx-color-warning;
-    }
+    border-color: usx-when($usx-color-warning);
 
-    @if $usx-alert-border-width {
-			border-width: $usx-alert-border-width;
-		}
+    border-width: usx-when($usx-alert-border-width);
   }
 
   .usa-alert.usx-alert .usa-alert__body {

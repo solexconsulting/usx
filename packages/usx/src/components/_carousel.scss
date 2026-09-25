@@ -45,9 +45,7 @@
   outline: .25rem solid #2491ff;
   outline-offset: -.25rem;
 
-  @if $usx-carousel-focus {
-    outline-color: $usx-carousel-focus;
-  }
+  outline-color: usx-when($usx-carousel-focus);
 }
 
 /* ============================= */
@@ -64,9 +62,7 @@
   bottom: 10px;
   width: 100%;
 
-  @if $usx-carousel-dot-gap {
-    gap: $usx-carousel-dot-gap;
-  }
+  gap: usx-when($usx-carousel-dot-gap);
 }
 
 .usx-carousel__dots a {
@@ -77,24 +73,18 @@
   display: inline-block;
   text-decoration: none;
 
-  @if $usx-carousel-dot-bg {
-    background: $usx-carousel-dot-bg;
-  }
+  background: usx-when($usx-carousel-dot-bg);
 
   &:hover {
     background: #a0a0a0;
 
-    @if $usx-carousel-dot-bg-hover {
-      background: $usx-carousel-dot-bg-hover;
-    }
+    background: usx-when($usx-carousel-dot-bg-hover);
   }
 
   &:active {
     background: #808080;
 
-    @if $usx-carousel-dot-bg-active {
-      background: $usx-carousel-dot-bg-active;
-    }
+    background: usx-when($usx-carousel-dot-bg-active);
   }
 }
 
@@ -113,9 +103,7 @@
     overflow: hidden;
     background-color: #f8fafc;
 
-    @if $usx-carousel-card-media-bg {
-      background-color: $usx-carousel-card-media-bg;
-    }
+    background-color: usx-when($usx-carousel-card-media-bg);
   }
 
   &.usa-card__media--inset {

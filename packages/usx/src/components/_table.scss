@@ -96,9 +96,7 @@
     margin-bottom: 0.5rem;
     caption-side: top;
 
-    @if $usx-text-ink {
-      color: $usx-text-ink;
-    }
+    color: usx-when($usx-text-ink);
   }
 
   // ── Cells ────────────────────────────────────────────────────────────────────
@@ -271,9 +269,7 @@
     padding: 2rem 1rem;
     font-style: italic;
 
-    @if $usx-table-placeholder-text {
-      color: $usx-table-placeholder-text;
-    }
+    color: usx-when($usx-table-placeholder-text);
   }
 
   // ── Loading row (spinner while fetching next batch) ───────────────────────────

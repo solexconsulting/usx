@@ -57,13 +57,9 @@
 
   // Real USWDS hardcodes the `.usa-pagination` nav to a static white bg /
   // #1b1b1b text — floats as an opaque box over a themed page background.
-  @if $usx-pagination-bg {
-    background-color: $usx-pagination-bg;
-  }
+  background-color: usx-when($usx-pagination-bg);
 
-  @if $usx-pagination-text {
-    color: $usx-pagination-text;
-  }
+  color: usx-when($usx-pagination-text);
 
   .usa-pagination__list {
     gap: 0.5rem;
@@ -79,39 +75,27 @@
   // `.usx-pagination` so it doesn't affect unrelated `.usa-current` usages
   // elsewhere (header nav, in-page-nav, sidenav).
   .usa-pagination__link {
-    @if $usx-pagination-link-text {
-      color: $usx-pagination-link-text;
-    }
+    color: usx-when($usx-pagination-link-text);
 
     &:visited {
-      @if $usx-pagination-link-text {
-        color: $usx-pagination-link-text;
-      }
+      color: usx-when($usx-pagination-link-text);
     }
 
     &:hover {
-      @if $usx-pagination-link-text-hover {
-        color: $usx-pagination-link-text-hover;
-      }
+      color: usx-when($usx-pagination-link-text-hover);
     }
   }
 
   .usa-pagination__button {
-    @if $usx-pagination-link-text {
-      color: $usx-pagination-link-text;
-    }
+    color: usx-when($usx-pagination-link-text);
 
     &:not(.usa-current) {
-      @if $usx-pagination-button-border {
-        border-color: $usx-pagination-button-border;
-      }
+      border-color: usx-when($usx-pagination-button-border);
     }
 
     &:hover {
-      @if $usx-pagination-link-text-hover {
-        color: $usx-pagination-link-text-hover;
-        border-color: $usx-pagination-link-text-hover;
-      }
+      color: usx-when($usx-pagination-link-text-hover);
+      border-color: usx-when($usx-pagination-link-text-hover);
     }
 
     // Real USWDS hardcodes the filled current-page button to a static
@@ -119,24 +103,16 @@
     // specificity than the plain-link rule above so it wins instead of
     // inheriting the link color over its own filled background.
     &.usa-current {
-      @if $usx-pagination-current-bg {
-        background-color: $usx-pagination-current-bg;
-      }
+      background-color: usx-when($usx-pagination-current-bg);
 
-      @if $usx-pagination-current-text {
-        color: $usx-pagination-current-text;
-      }
+      color: usx-when($usx-pagination-current-text);
 
       &:hover,
       &:focus,
       &:active {
-        @if $usx-pagination-current-bg {
-          background-color: $usx-pagination-current-bg;
-        }
+        background-color: usx-when($usx-pagination-current-bg);
 
-        @if $usx-pagination-current-text {
-          color: $usx-pagination-current-text;
-        }
+        color: usx-when($usx-pagination-current-text);
       }
     }
   }

@@ -25,9 +25,7 @@
         img {
           box-shadow: 0 0 0 2px #00bde3;
 
-          @if $usx-avatar-group-overlap-box-shadow {
-            box-shadow: $usx-avatar-group-overlap-box-shadow;
-          }
+          box-shadow: usx-when($usx-avatar-group-overlap-box-shadow);
         }
       }
     }

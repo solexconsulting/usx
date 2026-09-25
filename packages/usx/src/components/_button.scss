@@ -8,14 +8,10 @@
 
 /* ---------------------------------- */
 .usa-button.usx-button:not(.usa-button--unstyled) {
-  @if $usx-radius-button {
-    border-radius: $usx-radius-button;
-  }
+  border-radius: usx-when($usx-radius-button);
 
   &:not(.usa-button--outline) {
-    @if $usx-button-box-shadow {
-      box-shadow: $usx-button-box-shadow;
-    }
+    box-shadow: usx-when($usx-button-box-shadow);
   }
 }
 
@@ -62,40 +58,26 @@
 ) {
   /* Non-disabled buttons only */
   .usa-button.usx-button#{$selector}:not(:disabled):not([aria-disabled="true"]):not(.usx-button--ghost) {
-    @if $bg {
-      background-color: $bg;
-    }
+    background-color: usx-when($bg);
 
-    @if $color {
-      color: $color;
-    }
+    color: usx-when($color);
 
-    @if $box-shadow {
-      box-shadow: $box-shadow;
-    }
+    box-shadow: usx-when($box-shadow);
 
     /* Hover state */
     &.usa-button--hover,
     &:hover {
-      @if $bg-hover {
-        background-color: $bg-hover;
-      }
+      background-color: usx-when($bg-hover);
 
-      @if $color-hover {
-        color: $color-hover;
-      }
+      color: usx-when($color-hover);
     }
 
     /* Active state */
     &.usa-button--active,
     &:active {
-      @if $bg-active {
-        background-color: $bg-active;
-      }
+      background-color: usx-when($bg-active);
 
-      @if $color-active {
-        color: $color-active;
-      }
+      color: usx-when($color-active);
     }
 
     /* Inverse modifier */
@@ -199,33 +181,23 @@
 
     &:not([disabled]):not([aria-disabled="true"]) {
       &.usa-button--primary {
-        @if $usx-color-primary {
-          color: $usx-color-primary;
-        }
+        color: usx-when($usx-color-primary);
       }
 
       &.usa-button--secondary {
-        @if $usx-color-secondary {
-          color: $usx-color-secondary;
-        }
+        color: usx-when($usx-color-secondary);
       }
 
       &.usa-button--accent-cool {
-        @if $usx-color-accent-cool {
-          color: $usx-color-accent-cool;
-        }
+        color: usx-when($usx-color-accent-cool);
       }
 
       &.usa-button--accent-warm {
-        @if $usx-color-accent-warm {
-          color: $usx-color-accent-warm;
-        }
+        color: usx-when($usx-color-accent-warm);
       }
 
       &.usa-button--base {
-        @if $usx-color-base {
-          color: $usx-color-base;
-        }
+        color: usx-when($usx-color-base);
       }
 
       &.usa-button--hover,
@@ -241,9 +213,7 @@
       &.usa-button--inverse {
         color: white;
 
-        @if $usx-surface-1 {
-          color: $usx-surface-1;
-        }
+        color: usx-when($usx-surface-1);
       }
     }
   }

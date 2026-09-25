@@ -8,13 +8,9 @@
 }
 
 .usx-sidenav.usa-sidenav {
-  @if $usx-sidenav-border {
-    border-bottom-color: $usx-sidenav-border;
-  }
+  border-bottom-color: usx-when($usx-sidenav-border);
 
-  @if $usx-sidenav-border-width {
-    border-bottom-width: $usx-sidenav-border-width;
-  }
+  border-bottom-width: usx-when($usx-sidenav-border-width);
 
   &.usx-sidenav--sticky {
     position: sticky;
@@ -22,48 +18,32 @@
   }
 
   .usa-sidenav__item {
-    @if $usx-sidenav-border {
-      border-top-color: $usx-sidenav-border;
-    }
+    border-top-color: usx-when($usx-sidenav-border);
 
-    @if $usx-sidenav-border-width {
-      border-top-width: $usx-sidenav-border-width;
-    }
+    border-top-width: usx-when($usx-sidenav-border-width);
   }
 
   a {
     &.usa-current {
-      @if $usx-sidenav-current {
-        color: $usx-sidenav-current;
-      }
+      color: usx-when($usx-sidenav-current);
 
       &::after {
-        @if $usx-sidenav-current {
-          background-color: $usx-sidenav-current;
-        }
+        background-color: usx-when($usx-sidenav-current);
       }
     }
 
     &:not(.usa-button):not(.usa-current) {
-      @if $usx-sidenav-link-text {
-        color: $usx-sidenav-link-text;
-      }
+      color: usx-when($usx-sidenav-link-text);
 
       &:hover {
-        @if $usx-sidenav-link-text-hover {
-          color: $usx-sidenav-link-text-hover;
-        }
+        color: usx-when($usx-sidenav-link-text-hover);
 
-        @if $usx-sidenav-bg-hover {
-          background-color: $usx-sidenav-bg-hover;
-        }
+        background-color: usx-when($usx-sidenav-bg-hover);
       }
     }
 
     &:hover {
-      @if $usx-sidenav-bg-hover {
-        background-color: $usx-sidenav-bg-hover;
-      }
+      background-color: usx-when($usx-sidenav-bg-hover);
     }
   }
 }

@@ -5,13 +5,9 @@
   margin-top: 2rem;
   margin-bottom: 4rem;
 
-  @if $usx-page-bg {
-    background-color: $usx-page-bg;
-  }
+  background-color: usx-when($usx-page-bg);
 
-  @if $usx-page-text {
-    color: $usx-page-text;
-  }
+  color: usx-when($usx-page-text);
 
   .usx-page__title {
     margin-top: 0;

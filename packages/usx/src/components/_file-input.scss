@@ -9,13 +9,9 @@
 /* ---------------------------------- */
 
 .usa-file-input__target {
-  @if $usx-input-radius {
-    border-radius: $usx-input-radius;
-  }
+  border-radius: usx-when($usx-input-radius);
 
-  @if $usx-input-border {
-    border-color: $usx-input-border;
-  }
+  border-color: usx-when($usx-input-border);
 }
 
 /* ---------------------------------- */
@@ -25,28 +21,20 @@
 /* ---------------------------------- */
 
 .usa-form-group--error .usa-file-input__target {
-    @if $usx-input-error-border {
-        border-color: $usx-input-error-border;
-    }
+    border-color: usx-when($usx-input-error-border);
 
-    @if $usx-file-input-border-width {
-        border-width: $usx-file-input-border-width;
-    }
+    border-width: usx-when($usx-file-input-border-width);
 }
 
 .usa-file-input__target.has-invalid-file {
   // For some reason, they use accent warm here. Very odd.
-  @if $usx-color-accent-warm {
-    border-color: $usx-color-accent-warm;
-  }
+  border-color: usx-when($usx-color-accent-warm);
 }
 
 // USWDS bakes this message to a fixed "secondary-dark" red (#b50909)
 // regardless of theme — reuse the same error color as .usa-error-message.
 .has-invalid-file .usa-file-input__accepted-files-message {
-  @if $usx-color-error {
-    color: $usx-color-error;
-  }
+  color: usx-when($usx-color-error);
 }
 
 /* ---------------------------------- */
@@ -103,26 +91,18 @@
 // so it doesn't track a themed link color otherwise — reuse the same
 // usx-link variables/states rather than introducing a separate token.
 .usa-file-input__choose {
-  @if $usx-link-text {
-    color: $usx-link-text;
-  }
+  color: usx-when($usx-link-text);
 
   &:hover {
-    @if $usx-link-text-hover {
-      color: $usx-link-text-hover;
-    }
+    color: usx-when($usx-link-text-hover);
   }
 
   &:active {
-    @if $usx-link-text-active {
-      color: $usx-link-text-active;
-    }
+    color: usx-when($usx-link-text-active);
   }
 
   &:visited {
-    @if $usx-link-text-visited {
-      color: $usx-link-text-visited;
-    }
+    color: usx-when($usx-link-text-visited);
   }
 }
 
@@ -154,17 +134,11 @@
   margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
 
-  @if $usx-input-radius {
-    border-radius: $usx-input-radius;
-  }
+  border-radius: usx-when($usx-input-radius);
 
-  @if $usx-file-input-item-border {
-    border-color: $usx-file-input-item-border;
-  }
+  border-color: usx-when($usx-file-input-item-border);
 
-  @if $usx-file-input-item-border-width {
-    border-width: $usx-file-input-item-border-width;
-  }
+  border-width: usx-when($usx-file-input-item-border-width);
 }
 
 // Info stays on the left and shrinks (long names wrap) so the Delete button
@@ -189,9 +163,7 @@
 }
 
 .usx-file-input__file-size {
-  @if $usx-color-base {
-    color: $usx-color-base;
-  }
+  color: usx-when($usx-color-base);
 }
 
 .usx-file-input__delete-button {

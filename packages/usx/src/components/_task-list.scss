@@ -9,25 +9,17 @@
   border-top: 2px solid #e2e8f0;
   border-bottom: 2px solid #e2e8f0;
 
-  @if $usx-task-list-border {
-    border-color: $usx-task-list-border;
-  }
+  border-color: usx-when($usx-task-list-border);
 
-  @if $usx-task-list-outer-border-width {
-    border-width: $usx-task-list-outer-border-width;
-  }
+  border-width: usx-when($usx-task-list-outer-border-width);
 
   li {
     &:not(:first-child) {
       border-top: 1px solid #e2e8f0;
 
-      @if $usx-task-list-border {
-        border-top-color: $usx-task-list-border;
-      }
+      border-top-color: usx-when($usx-task-list-border);
 
-      @if $usx-task-list-inner-border-width {
-        border-top-width: $usx-task-list-inner-border-width;
-      }
+      border-top-width: usx-when($usx-task-list-inner-border-width);
     }
   }
 
@@ -47,9 +39,7 @@
     &:hover {
       background-color: #e2e8f0;
 
-      @if $usx-task-list-bg-hover {
-        background-color: $usx-task-list-bg-hover;
-      }
+      background-color: usx-when($usx-task-list-bg-hover);
     }
   }
 
@@ -58,9 +48,7 @@
     font-size: $usx-task-list-link-font-size !important;
     line-height: 1;
 
-    @if $usx-task-list-link-text {
-      color: $usx-task-list-link-text;
-    }
+    color: usx-when($usx-task-list-link-text);
   }
 
   .usa-tag.usx-tag {

@@ -26,9 +26,7 @@ $usx-triangle-size: 5px;
       }
     }
 
-    @if $usx-tooltip-text {
-      color: $usx-tooltip-text;
-    }
+    color: usx-when($usx-tooltip-text);
 
     // Replace JS-injected inline positioning with CSS transforms
     &--top {
