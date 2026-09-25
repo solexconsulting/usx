@@ -1,5 +1,11 @@
 # @solexllc/usx
 
+## 0.1.5
+
+### Patch Changes
+
+- [`96a0918`](https://github.com/solexconsulting/usx/commit/96a0918ca56054481a4caa06a00bb996ba7d7eac) Thanks [@olsonap](https://github.com/olsonap)! - Addressed issue with header nav drawer in mobile
+
 ## 0.1.4
 
 ### Patch Changes
