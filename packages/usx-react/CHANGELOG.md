@@ -1,5 +1,12 @@
 # @solexllc/usx-react
 
+## 0.1.5
+
+### Patch Changes
+
+- Updated dependencies [[`96a0918`](https://github.com/solexconsulting/usx/commit/96a0918ca56054481a4caa06a00bb996ba7d7eac)]:
+  - @solexllc/usx@0.1.5
+
 ## 0.1.4
 
 ### Patch Changes
