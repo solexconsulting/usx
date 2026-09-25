@@ -311,6 +311,10 @@ export const componentContracts = {
           "type": "string",
           "description": "The custom aria label users can override."
         },
+        "flagSrc": {
+          "type": "string",
+          "description": "URL for the decorative banner flag image. Defaults to img/us_flag_small.png under the configured asset base."
+        },
         "tld": {
           "type": "string",
           "description": "The top level domain for the site. Defaults to `.gov`"

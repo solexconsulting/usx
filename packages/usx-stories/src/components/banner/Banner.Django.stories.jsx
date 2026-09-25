@@ -2,7 +2,7 @@ import React from 'react';
 import config from '../../../../usx-react/src/components/banner/config.json';
 import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Banner.React.stories.jsx';
-import accordion from "@uswds/uswds/js/usa-accordion";
+import banner from "@uswds/uswds/js/usa-banner";
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -14,7 +14,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: uswdsInitNote('`accordion.init()`')
+        component: uswdsInitNote('`banner.init()`')
       }
     }
   },
@@ -23,7 +23,7 @@ export default {
       // Ensure the banner component is initialized for Django stories
       React.useEffect(() => {
         const timeout = setTimeout(() => {
-          accordion.init();
+          banner.init();
         }, 200);
 
         return () => {
@@ -40,3 +40,4 @@ const createStory = createDjangoStory({ componentName: 'banner' });
 export const Default = createStory(storyDefs.Default);
 export const Mil = { name: '.mil TLD', ...createStory(storyDefs.Mil) };
 export const Custom = { name: 'Custom text and TLD', ...createStory(storyDefs.Custom) };
+export const CustomFlag = createStory(storyDefs.CustomFlag);

@@ -14,7 +14,7 @@
           <img
             aria-hidden="true"
             class="usa-banner__header-flag"
-            src="{% static 'img/us_flag_small.png' %}"
+            src="{% if flagSrc %}{{ flagSrc }}{% else %}{% static 'img/us_flag_small.png' %}{% endif %}"
             alt=""
           />
         </div>

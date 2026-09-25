@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Icon from '../icon/Icon';
 import ClassNames from 'classnames';
 
 export interface BannerProps extends React.HTMLAttributes<HTMLElement> {
   id?: string;
   ariaLabel?: string;
+  flagSrc?: string;
   tld?: string;
   bannerText?: string;
   bannerActionText?: string;
@@ -18,6 +19,7 @@ export interface BannerProps extends React.HTMLAttributes<HTMLElement> {
 export default function Banner({
   id = 'gov-banner',
   ariaLabel = 'Official government website',
+  flagSrc = ((typeof window !== 'undefined' && (window as { usxBaseUrl?: string }).usxBaseUrl) || '/') + 'img/us_flag_small.png',
   tld = '.gov',
   bannerText = 'An official website of the United States government',
   bannerActionText = "Here's how you know",
@@ -33,18 +35,7 @@ export default function Banner({
   className = '',
   ...props
 }: BannerProps) {
-  const [expanded, setExpanded] = useState(false);
-
-  const toggleExpanded = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // USWDS's own usa-banner behavior also delegates clicks on this same
-    // aria-controls button (see @uswds/uswds's usa-banner/src/index.js) —
-    // stop it from also firing so the two toggles don't cancel each other
-    // out, the same guard Accordion uses.
-    e.preventDefault();
-    e.stopPropagation();
-    setExpanded(!expanded);
-  };
-
+  const assetBaseUrl = (typeof window !== 'undefined' && (window as { usxBaseUrl?: string }).usxBaseUrl) || '/';
   const classes = ClassNames(
     'usa-banner',
     'usx-banner',
@@ -59,7 +50,7 @@ export default function Banner({
               <img
                 aria-hidden="true"
                 className="usa-banner__header-flag"
-                src={((typeof window !== 'undefined' && (window as { usxBaseUrl?: string }).usxBaseUrl) || '/') + 'img/us_flag_small.png'}
+                src={flagSrc}
                 alt=""
               />
             </div>
@@ -75,9 +66,8 @@ export default function Banner({
             <button
               type="button"
               className="usa-accordion__button usa-banner__button"
-              aria-expanded={expanded}
+              aria-expanded="false"
               aria-controls={`${id}-content`}
-              onClickCapture={toggleExpanded}
             >
               <span className="usa-banner__button-text">{bannerActionText}</span>
             </button>
@@ -86,22 +76,40 @@ export default function Banner({
         <div
           id={`${id}-content`}
           className="usa-banner__content usa-accordion__content"
-          hidden={!expanded}
+          hidden
         >
           <div className="grid-row grid-gap-lg">
             <div className="usa-banner__guidance tablet:grid-col-6">
-              <p>
-                <strong>{domainHeading}</strong>
-                <br />
-                {domainText}
-              </p>
+              <img
+                className="usa-banner__icon usa-media-block__img"
+                src={`${assetBaseUrl}img/icon-dot-gov.svg`}
+                role="img"
+                alt=""
+                aria-hidden="true"
+              />
+              <div className="usa-media-block__body">
+                <p>
+                  <strong>{domainHeading}</strong>
+                  <br />
+                  {domainText}
+                </p>
+              </div>
             </div>
             <div className="usa-banner__guidance tablet:grid-col-6">
-              <p>
-                <strong>{httpsHeading}</strong>
-                <br />
-                {httpsText}
-              </p>
+              <img
+                className="usa-banner__icon usa-media-block__img"
+                src={`${assetBaseUrl}img/icon-https.svg`}
+                role="img"
+                alt=""
+                aria-hidden="true"
+              />
+              <div className="usa-media-block__body">
+                <p>
+                  <strong>{httpsHeading}</strong>
+                  <br />
+                  {httpsText}
+                </p>
+              </div>
             </div>
           </div>
         </div>
