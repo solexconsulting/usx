@@ -16,7 +16,7 @@ const BigHTMLString = `
     <h1>Page Heading</h1>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor dui, sed efficitur
-        ligula. Donec a semper dui.
+        ligula. Donec a semper <a href="#">dui</a> lorem <a class="usx-no-visited" href="#somethingelse">another link</a>, and <a class="usa-link usx-link usa-link--external" href="https://google.com">a third link</a>.
     </p>
     <h2>Section Heading</h2>
     <h3>Section of the page</h3>

@@ -1,0 +1,16 @@
+// Downstream this is `@use 'pkg:@solexllc/usx-theme/themes' with (...)`.
+@use '../../src/themes' with (
+  $themes: (
+    forest: (),
+    carbon: (--usx-color-primary: #ff0000),
+    acme: (
+      color-scheme: light,
+      --usx-color-primary: #b00020,
+      --usx-font-family: ("Acme Sans", Helvetica, sans-serif),
+    ),
+  ),
+  $default: acme,
+  $prefersdark: carbon,
+);
+
+@include themes.theme((--usx-color-secondary: #123456), '.tenant-x');

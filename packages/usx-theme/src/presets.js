@@ -1,8 +1,10 @@
-// themePresets.js — shared preset palette definitions.
+// presets.js — the prebuilt theme palettes.
 //
-// Extracted from Theme.stories.jsx so the Storybook toolbar theme toggle
-// (apps/storybook/.storybook/preview.js) can apply the same presets globally
-// without importing the whole Playground story (and its component tree).
+// Single source for: the Storybook toolbar theme toggle and Theme Playground
+// preset buttons, and build.js, which resolves each preset (derive.js) and
+// bakes it into dist/themes/<slug>.css, dist/themes.css and the Sass registry
+// behind `pkg:@solexllc/usx-theme/themes`. Keys are manifest token names;
+// values are CSS values (hex, `var(--usx-*)`, lengths, keywords).
 
 // The header/footer border-color tokens are each individually configurable
 // (see COMPONENT_COLOR_GROUPS' Header/Footer entries), but every preset and

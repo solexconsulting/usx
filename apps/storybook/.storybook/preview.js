@@ -5,8 +5,8 @@ import "@uswds/uswds/css/uswds.min.css";
 import "@solexllc/usx-theme/theme.css";
 import './styles.scss';
 import solexTheme from "./solexTheme";
-import { resolveTheme, themeToCss } from '../../../packages/usx-stories/src/utils/themeDerive.js';
-import { PRESETS } from '../../../packages/usx-stories/src/utils/themePresets.js';
+import { resolveTheme, themeToCss } from '@solexllc/usx-theme/derive';
+import { PRESETS } from '@solexllc/usx-theme/presets';
 
 // Applies the toolbar-selected preset (see globalTypes.theme below) to every
 // story by overriding :root's --usx-* custom properties — the same

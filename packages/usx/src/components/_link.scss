@@ -4,9 +4,7 @@
 .usx-link,
 .usx-prose a:not(.usa-button) {
   display: inline-flex;
-  align-items: center;
   width: max-content;
-  gap: 0.25rem;
 
   &:not([class^="text-"]):not([class*=" text-"]) {
     @if $usx-link-text {

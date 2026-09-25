@@ -23,11 +23,20 @@ export default function BackToTop({
   ...props
 }: BackToTopProps) {
   const icon = (
-    <Icon name="arrow_upward" size={iconSize} />
+    <Icon name="arrow_upward" size={iconSize} className={
+      ClassNames(
+        iconPosition === 'left' ? 'margin-right-05' : 'margin-left-05'
+      )
+    } />
   );
 
   if (href) {
-    const linkClasses = ClassNames('usx-link', 'usx-no-visited', className);
+    const linkClasses = ClassNames(
+      'usx-link',
+      'usx-no-visited',
+      'flex-align-center',
+      className
+    );
     return (
       <a className={linkClasses} href={href} {...props}>
         {iconPosition === 'left' && icon}

@@ -1,4 +1,7 @@
-// themeDerive.js — pure JS color derivation for the Theme playground.
+// derive.js — pure JS color derivation + theme serialization.
+//
+// Shared by build.js (bakes the prebuilt themes in presets.js into
+// dist/themes*) and the Storybook Theme Playground (live controls + export).
 //
 // Derivation model: every derived shade in the manifest records its base token
 // (`derivedFrom`). When the user picks a new base color, each shade is
@@ -7,7 +10,7 @@
 // the default shade exactly (round-trip rounding aside) — see the derivation
 // parity test.
 
-import { themeManifest } from '@solexllc/usx-theme/theme-manifest';
+import { themeManifest } from './theme-manifest.js';
 
 export { themeManifest };
 
@@ -99,6 +102,19 @@ export function deriveShade(newBaseHex, defaultBaseHex, defaultShadeHex) {
 
 const byName = new Map(themeManifest.map((t) => [t.name, t]));
 
+// build.js --watch re-imports the manifest with a cache-busting query, so it
+// passes its own fresh copy in rather than relying on this module's import.
+const indexCache = new WeakMap();
+function indexOf(manifest) {
+  if (manifest === themeManifest) return byName;
+  let idx = indexCache.get(manifest);
+  if (!idx) {
+    idx = new Map(manifest.map((t) => [t.name, t]));
+    indexCache.set(manifest, idx);
+  }
+  return idx;
+}
+
 export function getToken(name) {
   return byName.get(name);
 }
@@ -128,14 +144,15 @@ export function baseColorTokens() {
 //             changed base are re-derived unless individually overridden.
 //
 // Returns { [tokenName]: effectiveValue }.
-export function resolveTheme(overrides = {}, autoDerive = {}) {
+export function resolveTheme(overrides = {}, autoDerive = {}, manifest = themeManifest) {
+  const index = indexOf(manifest);
   const out = {};
-  for (const t of themeManifest) {
+  for (const t of manifest) {
     if (overrides[t.name] !== undefined && overrides[t.name] !== '') {
       out[t.name] = overrides[t.name];
       continue;
     }
-    const base = t.derivedFrom && byName.get(t.derivedFrom);
+    const base = t.derivedFrom && index.get(t.derivedFrom);
     const baseOverride = base && overrides[base.name];
     if (base && baseOverride && (autoDerive[base.name] ?? true)) {
       out[t.name] = deriveShade(baseOverride, base.defaultValue, t.defaultValue);
@@ -160,16 +177,57 @@ export function themeToCssVars(resolved) {
   return vars;
 }
 
-// Generate an exportable `:root { ... }` CSS block.
-export function themeToCss(resolved, { changedOnly = true } = {}) {
-  const lines = [];
-  for (const t of themeManifest) {
+// Ordered [cssVar, value] pairs for a resolved theme (changed-only by default).
+export function themeEntries(resolved, { changedOnly = true, manifest = themeManifest } = {}) {
+  const entries = [];
+  for (const t of manifest) {
     const value = resolved[t.name] ?? t.defaultValue;
     const changed = String(value).toLowerCase() !== t.defaultValue.toLowerCase();
-    if (!changedOnly || changed) {
-      lines.push(`  ${t.cssVar}: ${value};`);
-    }
+    if (!changedOnly || changed) entries.push([t.cssVar, value]);
   }
-  if (!lines.length) return '/* No changes from the default theme. */\n';
-  return `:root {\n${lines.join('\n')}\n}\n`;
+  return entries;
+}
+
+// `data-theme` attribute value for a display name: "GOV.UK" → "gov-uk".
+export function themeSlug(name) {
+  return String(name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+// `color-scheme` hint for a resolved theme, judged by its page surface:
+// tells the browser to render native UI (scrollbars, form controls) to match.
+export function colorSchemeOf(resolved) {
+  const surface = resolved['surface-1'];
+  if (!/^#[0-9a-f]{3,8}$/i.test(surface || '')) return 'light';
+  return hexToHsl(surface).l < 50 ? 'dark' : 'light';
+}
+
+export function themeSelector(name) {
+  return `[data-theme="${themeSlug(name)}"]`;
+}
+
+// Generate an exportable CSS block. `selector` defaults to `:root`; pass a
+// theme name via `name` to target `[data-theme="<slug>"]` instead.
+export function themeToCss(resolved, { changedOnly = true, name, selector, colorScheme, manifest = themeManifest } = {}) {
+  const lines = themeEntries(resolved, { changedOnly, manifest }).map(([cssVar, value]) => `  ${cssVar}: ${value};`);
+  if (!lines.length && !name) return '/* No changes from the default theme. */\n';
+  if (colorScheme) lines.unshift(`  color-scheme: ${colorScheme};`);
+  return `${selector || (name ? themeSelector(name) : ':root')} {\n${lines.join('\n')}\n}\n`;
+}
+
+// A CSS value written so Sass parses it back to the same text: comma lists
+// (font stacks) must be parenthesized or Sass reads them as more map entries.
+export function toSassValue(value) {
+  const v = String(value);
+  return v.includes(',') ? `(${v})` : v;
+}
+
+// A `<slug>: ( ... )` map entry for the `$themes` config of
+// `pkg:@solexllc/usx-theme/themes` — the same shape the prebuilt registry
+// uses, so a Playground export pastes in alongside the built-in themes.
+export function themeToSass(resolved, { name = 'custom', changedOnly = true, colorScheme, manifest = themeManifest, indent = '' } = {}) {
+  const lines = [`${indent}  color-scheme: ${colorScheme || colorSchemeOf(resolved)},`];
+  for (const [cssVar, value] of themeEntries(resolved, { changedOnly, manifest })) {
+    lines.push(`${indent}  ${cssVar}: ${toSassValue(value)},`);
+  }
+  return `${indent}${themeSlug(name)}: (\n${lines.join('\n')}\n${indent}),\n`;
 }

@@ -325,7 +325,11 @@ importers:
         specifier: ^10.3.6
         version: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
-  packages/usx-theme: {}
+  packages/usx-theme:
+    devDependencies:
+      sass:
+        specifier: ^1.98.0
+        version: 1.98.0
 
   packages/usx-uswds-fixes:
     dependencies:

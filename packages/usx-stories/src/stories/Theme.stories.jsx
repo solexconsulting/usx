@@ -7,11 +7,14 @@ import {
   shadesOf,
   resolveTheme,
   themeToCss,
+  themeToSass,
+  colorSchemeOf,
+  themeSlug,
   hslToHex,
   hexToRgb,
   getToken
-} from '../utils/themeDerive.js';
-import { PRESETS, headerFooterBorderOverrides, headerNavBackgroundOverrides } from '../utils/themePresets.js';
+} from '@solexllc/usx-theme/derive';
+import { PRESETS, headerFooterBorderOverrides, headerNavBackgroundOverrides } from '@solexllc/usx-theme/presets';
 import { systemColors } from '@solexllc/usx-theme/system-colors';
 
 
@@ -73,8 +76,8 @@ export default {
 };
 
 // ── Presets ──────────────────────────────────────────────────────────────────
-// Preset palette definitions live in ../utils/themePresets.js (shared with
-// the Storybook toolbar theme toggle).
+// Preset palette definitions live in @solexllc/usx-theme/presets (shared with
+// the Storybook toolbar theme toggle and baked into dist/themes by build.js).
 
 // Base color tokens shown in the playground, split into the same groups the
 // USWDS design token docs use — plus one USX-specific "Environment colors"
@@ -107,6 +110,27 @@ const GROUPED_COLOR_NAMES = [
 ];
 
 const RANDOMIZED = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm'];
+
+// Export shapes offered by the Playground. `sass` and `data-theme` are the
+// two ways a custom theme plugs in next to the prebuilt ones from
+// @solexllc/usx-theme (see Documentation/Theme → Getting Started).
+const EXPORT_FORMATS = [
+  {
+    value: 'sass',
+    label: 'Sass theme entry',
+    hint: 'Paste into the $themes map of @use \'pkg:@solexllc/usx-theme/themes\' with (…), next to any prebuilt themes.'
+  },
+  {
+    value: 'data-theme',
+    label: 'CSS ([data-theme])',
+    hint: 'A standalone stylesheet in the same shape as @solexllc/usx-theme/themes/<name>.css; apply with <html data-theme="…">.'
+  },
+  {
+    value: 'root',
+    label: 'CSS (:root)',
+    hint: 'Overrides the defaults globally — no theme switching.'
+  }
+];
 
 // Fixed x-axis columns for the lightest-\u2192darkest color-scale grid, in
 // lightness order. Every row (theme/state color) is laid out against these
@@ -287,7 +311,7 @@ function randomPalette() {
     overrides['usx-tooltip-bg'] = overrides['text-ink'];
     overrides['usx-tooltip-text'] = overrides['text-inverse'];
     // Same reasoning as the Midnight/Carbon/Borealis presets in
-    // themePresets.js: color-base-light is too close to a light 'text-ink' for
+    // presets.js: color-base-light is too close to a light 'text-ink' for
     // the calendar icon to stay visible on hover/active.
     overrides['usx-date-picker-button-hover-active-bg'] = '#565c65';
     // Nav background defaults transparent; fill it with a surface once we've
@@ -1550,6 +1574,8 @@ function ThemePlayground({ initialTheme } = {}) {
   const [systemSelections, setSystemSelections] = useState({});
   const [autoDerive, setAutoDerive] = useState(true);
   const [changedOnly, setChangedOnly] = useState(true);
+  const [exportFormat, setExportFormat] = useState('sass');
+  const [themeName, setThemeName] = useState(initialPreset === 'Default' ? '' : initialPreset);
   const [copied, setCopied] = useState(false);
   const [activePreset, setActivePreset] = useState(initialPreset);
   // Which single color group row (Theme/State colors — each a base color
@@ -1649,7 +1675,14 @@ function ThemePlayground({ initialTheme } = {}) {
   // element, so overriding a base token from a descendant element would
   // never reach dependents declared on `:root` in theme.css.
   const liveThemeCss = useMemo(() => themeToCss(resolved, { changedOnly: true }), [resolved]);
-  const exportCss = useMemo(() => themeToCss(resolved, { changedOnly }), [resolved, changedOnly]);
+  // Named exports (`data-theme` CSS, Sass entry) slot in alongside the
+  // prebuilt themes from @solexllc/usx-theme — see EXPORT_FORMATS.
+  const exportName = themeSlug(themeName) || 'custom';
+  const exportText = useMemo(() => {
+    if (exportFormat === 'sass') return themeToSass(resolved, { name: exportName, changedOnly });
+    if (exportFormat === 'data-theme') return themeToCss(resolved, { name: exportName, changedOnly, colorScheme: colorSchemeOf(resolved) });
+    return themeToCss(resolved, { changedOnly });
+  }, [resolved, changedOnly, exportFormat, exportName]);
 
   const setToken = (name, value, selection) => {
     setActivePreset(null);
@@ -1684,6 +1717,7 @@ function ThemePlayground({ initialTheme } = {}) {
 
   const applyPreset = (preset) => {
     setActivePreset(preset);
+    setThemeName(preset === 'Default' ? '' : preset);
     setOverrides({ ...PRESETS[preset] });
     setSystemSelections({});
   };
@@ -1707,17 +1741,18 @@ function ThemePlayground({ initialTheme } = {}) {
   const overrideCount = Object.keys(overrides).length;
 
   const copyCss = async () => {
-    await navigator.clipboard.writeText(exportCss);
+    await navigator.clipboard.writeText(exportText);
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   };
 
   const downloadCss = () => {
-    const blob = new Blob([exportCss], { type: 'text/css' });
+    const isSass = exportFormat === 'sass';
+    const blob = new Blob([exportText], { type: isSass ? 'text/x-scss' : 'text/css' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'usx-theme.css';
+    a.download = isSass ? `_${exportName}.scss` : `${exportFormat === 'data-theme' ? exportName : 'usx-theme'}.css`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -1957,15 +1992,44 @@ function ThemePlayground({ initialTheme } = {}) {
             ))}
           </Section>
 
-          <Section title="CSS export" open>
+          <Section title="Export" open>
+            <div className="usx-pg-row" style={{ padding: '0.25rem 0' }}>
+              <label className="usx-pg-label" htmlFor="usx-pg-export-format">Format</label>
+              <select
+                id="usx-pg-export-format"
+                className="usx-pg-select"
+                value={exportFormat}
+                onChange={(e) => setExportFormat(e.target.value)}
+              >
+                {EXPORT_FORMATS.map((f) => (
+                  <option key={f.value} value={f.value}>{f.label}</option>
+                ))}
+              </select>
+            </div>
+            {exportFormat !== 'root' && (
+              <div className="usx-pg-row" style={{ padding: '0.25rem 0' }}>
+                <label className="usx-pg-label" htmlFor="usx-pg-export-name">Theme name</label>
+                <input
+                  id="usx-pg-export-name"
+                  type="text"
+                  className="usx-pg-input"
+                  value={themeName}
+                  placeholder="custom"
+                  onChange={(e) => setThemeName(e.target.value)}
+                />
+              </div>
+            )}
+            <p style={{ margin: '0.2rem 0 0.4rem', fontSize: '0.72rem', color: '#6b7280' }}>
+              {EXPORT_FORMATS.find((f) => f.value === exportFormat).hint}
+            </p>
             <label style={{ ...ui.chipRow, cursor: 'pointer' }}>
               <input type="checkbox" checked={changedOnly} onChange={(e) => setChangedOnly(e.target.checked)} />
               <span className="usx-pg-label">Changed values only</span>
             </label>
-            <textarea readOnly value={exportCss} className="usx-pg-textarea" />
+            <textarea readOnly value={exportText} className="usx-pg-textarea" />
             <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.5rem' }}>
               <button type="button" className="usx-pg-btn is-active" onClick={copyCss}>
-                {copied ? '✓ Copied!' : 'Copy CSS'}
+                {copied ? '✓ Copied!' : 'Copy'}
               </button>
               <button type="button" className="usx-pg-btn" onClick={downloadCss}>
                 Download

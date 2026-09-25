@@ -26,11 +26,22 @@
     "./hooks": {
       "sass": "./dist/_hooks.scss"
     },
+    "./themes": {
+      "sass": "./src/_themes.scss"
+    },
+    "./themes.css": "./dist/themes.css",
+    "./themes/*.css": "./dist/themes/*.css",
     "./theme.css": "./dist/theme.css",
     "./theme-manifest": {
       "default": "./src/theme-manifest.js"
     },
     "./theme-manifest.json": "./dist/theme-manifest.json",
+    "./derive": {
+      "default": "./src/derive.js"
+    },
+    "./presets": {
+      "default": "./src/presets.js"
+    },
     "./system-colors": {
       "default": "./src/system-colors.generated.js"
     },
@@ -44,6 +55,10 @@
   "scripts": {
     "build": "node build.js",
     "dev": "node build.js --watch",
+    "test": "node build.js && node test/themes-check.mjs",
     "generate:system-colors": "node scripts/generate-system-colors.js"
+  },
+  "devDependencies": {
+    "sass": "^1.98.0"
   }
 }

@@ -11,7 +11,7 @@ The repository is organized as a monorepo so teams can define design tokens once
 ### `packages/`
 Reusable libraries that power the platform:
 
-- `usx-theme/` (`@solexllc/usx-theme`): source design tokens (color, spacing, radius, typography) and compiled outputs (CSS variables, JS exports, theme manifest)
+- `usx-theme/` (`@solexllc/usx-theme`): source design tokens (color, spacing, radius, typography), compiled outputs (CSS variables, JS exports, theme manifest), and opt-in prebuilt themes (`@solexllc/usx-theme/themes`)
 - `usx/` (`@solexllc/usx`): compiled USWDS-based component styles (`.usx-*`), themeable via `usx-theme`
 - `usx-uswds-fixes/` (`@solexllc/usx-uswds-fixes`): small SCSS patches/overrides layered on top of upstream USWDS
 - `usx-react/` (`@solexllc/usx-react`): React component wrappers, each co-located with its Django template, canonical static HTML, and `config.json` prop schema — see [packages/usx-react/README.md](packages/usx-react/README.md)

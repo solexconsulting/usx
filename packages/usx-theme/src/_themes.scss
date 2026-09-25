@@ -1,0 +1,120 @@
+// _themes.scss — opt-in prebuilt (and custom) themes for the themed USX build.
+//
+// Only the themes you list are emitted, so unused presets never reach your
+// bundle. Themes apply via a `data-theme` attribute (`<html data-theme="forest">`);
+// `$default` also applies on `:root` with no attribute, and `$prefersdark`
+// applies on `:root` under `prefers-color-scheme: dark`. Pair with
+// `@solexllc/usx-theme/theme.css` (the :root defaults) as usual.
+//
+//   @use 'pkg:@solexllc/usx-theme/themes' with (
+//     $themes: (forest, carbon, ocean),
+//     $default: forest,
+//     $prefersdark: carbon,
+//   );
+//
+// `$themes` may also be a map to tweak a prebuilt theme or add your own —
+// the Theme Playground's "Sass" export produces a ready-to-paste entry:
+//
+//   $themes: (
+//     forest: (),
+//     acme: (
+//       color-scheme: light,
+//       --usx-color-primary: #b00020,
+//       --usx-color-primary-hover: #8a0018,
+//     ),
+//   )
+//
+// Every emitted theme sets the union of tokens across all emitted themes
+// (falling back to the :root default), so switching `data-theme` never leaks
+// a value from the previous theme — even for nested per-section theming.
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../dist/themes-registry' as registry;
+
+$themes: () !default;
+$default: null !default;
+$prefersdark: null !default;
+
+// Prebuilt theme names, for consumers that want to list/iterate them.
+$available: map.keys(registry.$themes);
+
+// Normalizes `$themes` (list of names, or name → overrides map) into
+// name → full token map, merging user overrides over the prebuilt entry.
+@function -resolve-themes($config) {
+  @if meta.type-of($config) != 'map' {
+    $as-map: ();
+    @each $name in $config {
+      $as-map: map.set($as-map, $name, ());
+    }
+    $config: $as-map;
+  }
+  @each $flagged in ($default, $prefersdark) {
+    @if $flagged and not map.has-key($config, $flagged) {
+      $config: map.set($config, $flagged, ());
+    }
+  }
+
+  $out: ();
+  @each $name, $overrides in $config {
+    $prebuilt: map.get(registry.$themes, $name);
+    @if not $prebuilt and list.length(map.keys(map.remove($overrides, color-scheme))) == 0 {
+      @error "usx-theme: unknown theme '#{$name}'. Prebuilt themes: #{$available}. To add a custom theme, give it a token map.";
+    }
+    $out: map.set($out, $name, map.merge($prebuilt or (), $overrides));
+  }
+  @return $out;
+}
+
+@function -token-union($themes) {
+  $keys: ();
+  @each $name, $tokens in $themes {
+    @each $key in map.keys(map.remove($tokens, color-scheme)) {
+      $keys: map.set($keys, $key, true);
+    }
+  }
+  @return map.keys($keys);
+}
+
+@mixin -declarations($tokens, $keys) {
+  color-scheme: map.get($tokens, color-scheme) or light;
+  @each $key in $keys {
+    $value: map.get($tokens, $key);
+    @if $value == null {
+      $value: map.get(registry.$defaults, $key);
+    }
+    @if $value == null {
+      @error "usx-theme: '#{$key}' is not a themeable token (see theme-manifest.js).";
+    }
+    #{$key}: #{meta.inspect($value)};
+  }
+}
+
+// Emits one theme under an arbitrary selector — for ad-hoc use outside the
+// `$themes` config (no union with other themes is applied).
+@mixin theme($tokens, $selector: ':root') {
+  #{$selector} {
+    @include -declarations($tokens, map.keys(map.remove($tokens, color-scheme)));
+  }
+}
+
+$-resolved: -resolve-themes($themes);
+$-keys: -token-union($-resolved);
+
+@if $default {
+  :root {
+    @include -declarations(map.get($-resolved, $default), $-keys);
+  }
+}
+@if $prefersdark {
+  @media (prefers-color-scheme: dark) {
+    :root {
+      @include -declarations(map.get($-resolved, $prefersdark), $-keys);
+    }
+  }
+}
+@each $name, $tokens in $-resolved {
+  [data-theme='#{$name}'] {
+    @include -declarations($tokens, $-keys);
+  }
+}

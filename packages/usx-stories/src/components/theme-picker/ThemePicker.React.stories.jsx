@@ -3,7 +3,7 @@ import { useGlobals } from 'storybook/preview-api';
 import ThemePicker from '../../../../usx-react/src/components/theme-picker/ThemePicker.tsx';
 import config from '../../../../usx-react/src/components/theme-picker/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
-import { PRESETS } from '../../utils/themePresets.js';
+import { PRESETS } from '@solexllc/usx-theme/presets';
 import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
 const PRESET_NAMES = Object.keys(PRESETS);

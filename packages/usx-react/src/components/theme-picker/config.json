@@ -29,7 +29,7 @@
     },
     "onChange": {
       "type": "string",
-      "description": "JavaScript function to call when the selected theme changes — applying the theme (CSS variables, stylesheets, persistence, etc.) is the caller's responsibility"
+      "description": "JavaScript function to call when the selected theme changes — applying the theme is the caller's responsibility. With @solexllc/usx-theme/themes, that's typically `document.documentElement.dataset.theme = value` (plus any persistence)."
     },
     "className": {
       "type": "string",

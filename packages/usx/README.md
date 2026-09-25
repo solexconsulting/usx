@@ -9,7 +9,8 @@ The only build step is regenerating the icon sprite (see **Icons** below).
 
 All design tokens come from `@solexllc/usx-theme` and are runtime-themeable via
 `--usx-*` CSS custom properties. Compile `src/index.scss` for a fully static
-build (no `var()` references), or `src/themed.scss` to enable every hook.
+build (no `var()` references), or `src/themed.scss` to enable every hook and
+pair it with `pkg:@solexllc/usx-theme/themes` for opt-in prebuilt themes.
 See `packages/usx-theme/README.md` for the full theming guide, and the Storybook
 **Documentation → Theme → Playground** to generate a theme visually.
 

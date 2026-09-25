@@ -10,15 +10,22 @@ This package stores platform-agnostic tokens in JSON source files and compiles t
 - `src/radius.json`: border radius tokens
 - `src/_variables.scss`: Sass design tokens (the theme layer consumed by `@solexllc/usx`)
 - `src/theme-manifest.js`: canonical manifest of themeable tokens (names, CSS variables, defaults, derivation)
+- `src/presets.js`: the prebuilt theme palettes (Forest, Carbon, GOV.UK, …)
+- `src/derive.js`: shade derivation + theme serialization (CSS / Sass export), shared by the build and the Playground
+- `src/_themes.scss`: the opt-in prebuilt/custom themes Sass module (`@solexllc/usx-theme/themes`)
 - `dist/tokens.css`: generated CSS variables
 - `dist/tokens.js`: generated JS export
 - `dist/theme-manifest.json`: generated theme manifest
+- `dist/theme.css`: every `--usx-*` token at its default, on `:root`
+- `dist/themes/<slug>.css`, `dist/themes.css`: each prebuilt theme as a `[data-theme="<slug>"]` block (and all of them together)
+- `dist/_themes-registry.scss`: generated data behind `src/_themes.scss`
 
 ## Build
 
 ```sh
 pnpm build   # node build.js → dist/
 pnpm dev     # node build.js --watch (used by the root `pnpm dev`)
+pnpm test    # rebuild + test/themes-check.mjs
 ```
 
 `src/system-colors.generated.js` (the USWDS system-color palette used by the
@@ -73,6 +80,57 @@ the output contains zero `var()` references:
 Individual tokens can also opt out by nulling their hook
 (e.g. `$usx-color-primary-var: null`).
 
+### Prebuilt themes
+
+The Playground's presets ship prebuilt. List the ones you want; nothing else
+reaches your bundle. Themes apply via `data-theme`; `$default` also applies
+with no attribute, `$prefersdark` under `prefers-color-scheme: dark`.
+
+```scss
+@use 'pkg:@solexllc/usx/themed';
+@use 'pkg:@solexllc/usx-theme/themes' with (
+  $themes: (forest, carbon, gov-uk),
+  $default: forest,
+  $prefersdark: carbon,
+);
+```
+
+```html
+<html data-theme="gov-uk">
+```
+
+`$themes` can also be a map, to tweak a prebuilt theme or add your own — the
+Playground's **Sass theme entry** export pastes straight in:
+
+```scss
+@use 'pkg:@solexllc/usx-theme/themes' with (
+  $themes: (
+    forest: (),
+    carbon: (--usx-color-primary: #ff7a00),
+    acme: (
+      color-scheme: light,
+      --usx-color-primary: #b00020,
+      --usx-color-primary-hover: #8a0018,
+    ),
+  ),
+  $default: acme,
+);
+```
+
+Every emitted theme declares the union of tokens across all emitted themes
+(falling back to the `:root` default), so switching `data-theme` — even on a
+nested element — never leaks a value from the previous theme.
+`themes.theme($tokens, $selector)` emits a one-off block outside that union,
+and `themes.$available` lists the prebuilt names.
+
+Without Sass, import the plain stylesheets instead (no default/prefers-dark
+wiring in this form):
+
+```js
+import '@solexllc/usx-theme/theme.css';
+import '@solexllc/usx-theme/themes/forest.css';   // or .../themes.css for all
+```
+
 ### Notes
 
 - **Derived shades are first-class tokens.** Overriding `--usx-color-primary`
@@ -88,5 +146,5 @@ Individual tokens can also opt out by nulling their hook
 
 The Storybook page **Documentation → Theme → Playground** renders the component showcase with
 live controls for every manifest token, auto-derives shades when a base color
-changes, and exports a ready-to-use `:root { --usx-*: ... }` block
-(copy/download).
+changes, and exports the result as a Sass `$themes` entry, a `[data-theme]`
+stylesheet, or a plain `:root { --usx-*: ... }` block (copy/download).

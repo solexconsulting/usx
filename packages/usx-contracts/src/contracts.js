@@ -1733,6 +1733,14 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        },
+        "utilityContent": {
+          "type": "slot",
+          "description": "Rendered inline, to the left of the search box (in both header variants)."
+        },
+        "navEndContent": {
+          "type": "slot",
+          "description": "Rendered right-justified, in line with the primary nav links (extended header only)."
         }
       }
     },
@@ -4213,7 +4221,7 @@ export const componentContracts = {
         },
         "onChange": {
           "type": "string",
-          "description": "JavaScript function to call when the selected theme changes — applying the theme (CSS variables, stylesheets, persistence, etc.) is the caller's responsibility"
+          "description": "JavaScript function to call when the selected theme changes — applying the theme is the caller's responsibility. With @solexllc/usx-theme/themes, that's typically `document.documentElement.dataset.theme = value` (plus any persistence)."
         },
         "className": {
           "type": "string",

@@ -485,7 +485,7 @@ export const themeManifest = [
   // fixed-color background-image at build time, so it never follows the
   // theme; repainted via mask-image instead (see _date-picker.scss).
   component('usx-date-picker-button-icon-color', 'var(--usx-text-ink)'),
-  // Hover and active share one token/color by design (see themePresets.js's
+  // Hover and active share one token/color by design (see presets.js's
   // Midnight/Carbon/Borealis overrides for why dark presets need their own
   // hardcoded value here instead of just chaining to color-base-light).
   component('usx-date-picker-button-hover-active-bg', '#a9aeb1', 'color-base-light'),
@@ -517,7 +517,7 @@ export const themeManifest = [
   // own. Chain each role to the same shared tokens already used elsewhere
   // (text, link-text, border, primary) — see _in-page-nav.scss. Background
   // defaults transparent (opts back into a filled surface-2 card only on
-  // presets with a dark shell — see themePresets.js/Theme.stories.jsx).
+  // presets with a dark shell — see presets.js/Theme.stories.jsx).
   component('usx-in-page-nav-bg', 'transparent'),
   component('usx-in-page-nav-text', 'var(--usx-text-ink)'),
   component('usx-in-page-nav-border', 'var(--usx-color-border)'),

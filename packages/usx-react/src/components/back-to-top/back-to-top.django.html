@@ -1,18 +1,18 @@
 {# Django template for BackToTop #}
 {% if href %}
 <a
-    class="usx-link usx-no-visited{% if className %} {{ className }}{% endif %}"
+    class="usx-link usx-no-visited flex-align-center{% if className %} {{ className }}{% endif %}"
     href="{{ href }}"
     {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
 >
   {% if iconPosition == 'left' or not iconPosition %}
-  <svg class="usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+  <svg class="margin-right-05usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
     <use href="./img/sprite.svg#arrow_upward"></use>
   </svg>
   {% endif %}
   {% if label %}{{ label }}{% endif %}
   {% if iconPosition == 'right' %}
-  <svg class="usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+  <svg class="margin-left-05 usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
     <use href="./img/sprite.svg#arrow_upward"></use>
   </svg>
   {% endif %}

@@ -116,8 +116,83 @@ export const GettingStarted = {
       <p>
         The fastest way to build that block is the <strong>Documentation/Theme →
         Playground</strong> page: it renders every component live against your
-        edits and exports a ready-to-paste <code>:root</code> block (changed
-        tokens only, or the full set).
+        edits and exports a ready-to-paste block (changed tokens only, or the
+        full set) in any of the formats below.
+      </p>
+
+      <h2>Prebuilt themes</h2>
+      <p>
+        The Playground's presets (Forest, Ocean, Carbon, GOV.UK, …) ship prebuilt.
+        List the ones you want in your Sass entry point — anything you don't list
+        stays out of your bundle. Themes apply via a <code>data-theme</code>{' '}
+        attribute; <code>$default</code> also applies with no attribute at all, and{' '}
+        <code>$prefersdark</code> under <code>prefers-color-scheme: dark</code>.
+      </p>
+      <Code
+        lines={[
+          { code: "// your application's Sass entry point" },
+          { code: "@use 'pkg:@solexllc/usx/themed';" },
+          { code: "@use 'pkg:@solexllc/usx-theme/themes' with (" },
+          { code: "  $themes: (forest, carbon, gov-uk)," },
+          { code: "  $default: forest," },
+          { code: "  $prefersdark: carbon," },
+          { code: ");" },
+        ]}
+      />
+      <Code
+        lines={[
+          { code: '<html data-theme="gov-uk">' },
+        ]}
+      />
+      <p>
+        Every theme block emits the union of tokens across the themes you
+        included (falling back to the <code>:root</code> default), so switching{' '}
+        <code>data-theme</code> — even on a nested element — never leaks a value
+        from the previous theme.
+      </p>
+      <p>
+        Not using Sass for this? Each theme is also a plain stylesheet you can
+        import individually (or all at once via{' '}
+        <code>@solexllc/usx-theme/themes.css</code>) and switch with{' '}
+        <code>data-theme</code>; there's no default/prefers-dark wiring in that form.
+      </p>
+      <Code
+        lines={[
+          { code: "import '@solexllc/usx-theme/theme.css';" },
+          { code: "import '@solexllc/usx-theme/themes/forest.css';" },
+          { code: "import '@solexllc/usx-theme/themes/carbon.css';" },
+        ]}
+      />
+
+      <h3>Adding your own theme</h3>
+      <p>
+        Build it in the Playground, give it a name, and copy the{' '}
+        <strong>Sass theme entry</strong> export. It pastes straight into the same{' '}
+        <code>$themes</code> map, alongside — or instead of — the prebuilt ones,
+        and can be your <code>$default</code> like any other:
+      </p>
+      <Code
+        lines={[
+          { code: "@use 'pkg:@solexllc/usx-theme/themes' with (" },
+          { code: "  $themes: (" },
+          { code: "    forest: ()," },
+          { code: "    acme: (" },
+          { code: "      color-scheme: light," },
+          { code: "      --usx-color-primary: #b00020," },
+          { code: "      --usx-color-primary-hover: #8a0018," },
+          { code: "      --usx-color-primary-active: #6c0013," },
+          { code: "      --usx-font-family: (\"Acme Sans\", Helvetica, sans-serif)," },
+          { code: "    )," },
+          { code: "  )," },
+          { code: "  $default: acme," },
+          { code: ");" },
+        ]}
+      />
+      <p>
+        A prebuilt theme can be tweaked the same way — give it a map of the tokens
+        to change instead of <code>()</code>. The Playground's{' '}
+        <strong>CSS ([data-theme])</strong> export is the equivalent for the
+        plain-stylesheet route.
       </p>
 
       <h3>Two important rules</h3>

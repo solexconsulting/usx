@@ -73,13 +73,13 @@ export const Overview = {
           Optionally add <code>@solexllc/usx-react</code> if you're building in React;
           otherwise use plain HTML/Django markup with the same <code>usx-*</code> classes.
         </li>
-        <li>Configure branding by setting <code>--usx-*</code> CSS custom properties, or leave everything at its USWDS-matching default.</li>
+        <li>Configure branding by listing prebuilt themes from <code>@solexllc/usx-theme/themes</code> (switched with <code>data-theme</code>), setting <code>--usx-*</code> CSS custom properties yourself, or leaving everything at its USWDS-matching default.</li>
       </ol>
 
       <h2>Where to go next</h2>
       <ul>
-        <li><strong>Documentation/Theme → Getting Started</strong> — installing and wiring up <code>@solexllc/usx-theme</code>.</li>
-        <li><strong>Documentation/Theme → Playground</strong> — a live theme editor that exports a ready-to-use CSS block.</li>
+        <li><strong>Documentation/Theme → Getting Started</strong> — installing and wiring up <code>@solexllc/usx-theme</code>, including the prebuilt themes.</li>
+        <li><strong>Documentation/Theme → Playground</strong> — a live theme editor that exports a theme ready to paste alongside the prebuilt ones.</li>
         <li><strong>Documentation/USX → Overview</strong> — the architecture and design principles behind the component layer.</li>
         <li><strong>Documentation/USX React → Overview</strong> — using the React wrappers.</li>
         <li><strong>Components/*</strong> — every component, with React, Django, and HTML story variants.</li>
