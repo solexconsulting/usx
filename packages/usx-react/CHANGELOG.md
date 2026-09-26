@@ -1,5 +1,17 @@
 # @solexllc/usx-react
 
+## 0.1.6
+
+### Patch Changes
+
+- [`c6480dc`](https://github.com/solexconsulting/usx/commit/c6480dcb10b22338a0d15641316067d4f289ef04) Thanks [@olsonap](https://github.com/olsonap)! - Expand Hero customization and improve component consistency.
+
+- [`f6c8b45`](https://github.com/solexconsulting/usx/commit/f6c8b45ec290c84f1a836c5e4592533af9300e2b) Thanks [@olsonap](https://github.com/olsonap)! - Banner now relies exclusively on USWDS JS instead of providing its own in react, while also enabling flagSrc param to configure icon in banner
+- Updated dependencies [[`c6480dc`](https://github.com/solexconsulting/usx/commit/c6480dcb10b22338a0d15641316067d4f289ef04)]:
+  - @solexllc/usx@0.1.6
+  - @solexllc/usx-theme@0.2.2
+  - @solexllc/usx-uswds-fixes@0.1.4
+
 ## 0.1.5
 
 ### Patch Changes
