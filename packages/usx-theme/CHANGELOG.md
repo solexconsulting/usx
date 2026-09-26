@@ -1,5 +1,11 @@
 # @solexllc/usx-theme
 
+## 0.2.2
+
+### Patch Changes
+
+- [`c6480dc`](https://github.com/solexconsulting/usx/commit/c6480dcb10b22338a0d15641316067d4f289ef04) Thanks [@olsonap](https://github.com/olsonap)! - Expand Hero customization and improve component consistency.
+
 ## 0.2.1
 
 ### Patch Changes
