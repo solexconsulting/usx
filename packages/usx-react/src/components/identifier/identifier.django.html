@@ -1,4 +1,5 @@
 {# Django template for Identifier #}
+{% load components %}
 
 <div class="usa-identifier usx-identifier{% if className %} {{ className }}{% endif %}">
   <section
@@ -6,17 +7,12 @@
     aria-label="{% if language == 'es' %}Identificador de la agencia,{% else %}Agency identifier,{% endif %}"
   >
     <div class="usa-identifier__container">
-      {% if logoProps %}
+      {% if avatarProps %}
       <div class="usa-identifier__logos usx-avatar-group{% if overlapAvatars %} usa-avatar-group--overlap{% endif %}">
-        {% for logo in logoProps %}
-          <a href="{{ logo.href|default:'' }}" class="usa-identifier__logo usx-avatar">
-            <img
-              class="usa-identifier__logo-img{% if logo.shape == 'circle' or logoShape == 'circle' and not logo.shape %} usx-circle{% elif logo.shape == 'rounded-sm' or logoShape == 'rounded-sm' and not logo.shape %} usx-rounded-sm{% elif logo.shape == 'rounded-md' or logoShape == 'rounded-md' and not logo.shape %} usx-rounded-md{% elif logo.shape == 'rounded-lg' or logoShape == 'rounded-lg' and not logo.shape %} usx-rounded-lg{% elif logo.shape == 'rounded-xl' or logoShape == 'rounded-xl' and not logo.shape %} usx-rounded-xl{% endif %}{% if logo.imageClassName %} {{ logo.imageClassName }}{% endif %}"
-              src="{{ logo.src }}"
-              alt="{{ logo.alt }}"
-              role="img"
-            />
-          </a>
+        {% for item in avatarProps %}
+          {% with avatarClass=item.className|default:'' imageClass=item.imageClassName|default:'' defaultShape=logoShape|default:'' %}
+            {% avatar href=item.href src=item.src alt=item.alt variant=item.variant|default:'image' value=item.value shape=item.shape|default:defaultShape tooltip=item.tooltip className='usa-identifier__logo '|add:avatarClass imageClassName='usa-identifier__logo-img '|add:imageClass contentClassName=item.contentClassName %}{% endavatar %}
+          {% endwith %}
         {% endfor %}
       </div>
       {% endif %}
@@ -35,10 +31,10 @@
             {% endfor %}
             {% if taxpayerDisclaimer %} . Producido y publicado con dinero de los contribuyentes de impuestos.{% endif %}
           {% else %}
-            <span aria-hidden="true">An </span>official website of the
+            <span aria-hidden="true">An </span>official website of
             {% for agency in parentAgencies %}
-              {% if not forloop.first %}{% if forloop.last %} and the{% else %}, the{% endif %}{% endif %}
-              <a href="{{ agency.href|default:'' }}">{{ agency.name }}</a>
+              {% if not forloop.first %}{% if forloop.last %} and{% else %},{% endif %}{% endif %}
+              {% if agency.useThe|default_bool:True %} the{% endif %} <a href="{{ agency.href|default:'' }}">{{ agency.name }}</a>
             {% endfor %}
             {% if taxpayerDisclaimer %} . Produced and published at taxpayer expense.{% endif %}
           {% endif %}

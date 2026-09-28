@@ -4,9 +4,10 @@
 /* stylelint-disable no-descending-specificity -- Size modifiers intentionally precede the base content rule. */
 .usx-avatar {
   text-decoration: none;
-  display: block;
+  display: flex;
   width: 3rem;
   height: 3rem;
+  align-items: center;
 
   &.usx-avatar--size-sm {
     width: 2.5rem;
@@ -41,9 +42,8 @@
   }
 
   .usx-avatar__img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+    height: auto;
+    width: auto;
   }
 
   .usx-avatar__content {

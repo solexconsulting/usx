@@ -2065,24 +2065,21 @@ export const componentContracts = {
               "href": {
                 "type": "string",
                 "description": "Link to the agency's site."
+              },
+              "useThe": {
+                "type": "boolean",
+                "description": "Whether \"the\" precedes the name in the English disclaimer, e.g. \"the Department of...\". Default true. Has no effect on the Spanish disclaimer."
               }
             }
           }
         },
-        "logoProps": {
+        "avatarProps": {
           "type": "array",
-          "description": "Array of avatar-style logos.",
+          "description": "Props for Avatar components rendered in the identifier masthead.",
           "items": {
             "type": "object",
-            "description": "Logo item. Mirrors the avatar component's props, restricted to the image variant.",
+            "description": "Avatar props, including image, initials, and icon variants.",
             "component": "avatar",
-            "omit": [
-              "variant",
-              "value",
-              "tooltip",
-              "className",
-              "contentClassName"
-            ],
             "properties": {
               "shape": {
                 "type": "select",

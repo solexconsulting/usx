@@ -1,25 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
-
-const shapeClassMap = {
-  circle: 'usx-circle',
-  'rounded-sm': 'usx-rounded-sm',
-  'rounded-md': 'usx-rounded-md',
-  'rounded-lg': 'usx-rounded-lg',
-  'rounded-xl': 'usx-rounded-xl',
-};
+import Avatar, { AvatarProps } from '../avatar/Avatar';
 
 interface Agency {
   name: string;
   href?: string;
-}
-
-interface Logo {
-  href?: string;
-  src: string;
-  alt: string;
-  shape?: null | 'circle' | 'rounded-sm' | 'rounded-md' | 'rounded-lg' | 'rounded-xl';
-  imageClassName?: string;
+  /** Whether "the" precedes the name in the English disclaimer, e.g. "the Department of...". Default true. */
+  useThe?: boolean;
 }
 
 interface RequiredLink {
@@ -33,8 +20,8 @@ export interface IdentifierProps {
   domain?: string;
   language?: 'en' | 'es';
   parentAgencies?: Agency[];
-  logoProps?: Logo[];
-  logoShape?: null | 'circle' | 'rounded-sm' | 'rounded-md' | 'rounded-lg' | 'rounded-xl';
+  avatarProps?: AvatarProps[];
+  logoShape?: AvatarProps['shape'];
   requiredLinks?: RequiredLinks;
   taxpayerDisclaimer?: boolean;
   overlapAvatars?: boolean;
@@ -95,13 +82,17 @@ function renderDisclaimer({ language, parentAgencies, taxpayerDisclaimer }: { la
   }
   return (
     <>
-      <span aria-hidden="true">An </span>official website of the{' '}
-      {parentAgencies.map((agency, index) => (
-        <React.Fragment key={`${agency.name}-${index}`}>
-          {index > 0 ? (index === parentAgencies.length - 1 ? ' and the ' : ', the ') : ''}
-          <a href={agency.href || ''}>{agency.name}</a>
-        </React.Fragment>
-      ))}
+      <span aria-hidden="true">An </span>official website of{' '}
+      {parentAgencies.map((agency, index) => {
+        const isLast = index === parentAgencies.length - 1;
+        const prefix = index === 0 ? '' : isLast ? ' and ' : ', ';
+        const article = agency.useThe === false ? '' : 'the ';
+        return (
+          <React.Fragment key={`${agency.name}-${index}`}>
+            {prefix}{article}<a href={agency.href || ''}>{agency.name}</a>
+          </React.Fragment>
+        );
+      })}
       {taxpayerDisclaimer ? '. Produced and published at taxpayer expense.' : ''}
     </>
   );
@@ -111,7 +102,7 @@ export default function Identifier({
   domain = 'domain.gov',
   language = 'en',
   parentAgencies = [],
-  logoProps = [],
+  avatarProps = [],
   logoShape = null,
   requiredLinks,
   taxpayerDisclaimer = false,
@@ -133,7 +124,7 @@ export default function Identifier({
     <div className={classes}>
       <section className="usa-identifier__section usa-identifier__section--masthead" aria-label={labels.masthead}>
         <div className="usa-identifier__container">
-          {logoProps.length > 0 ? (
+          {avatarProps.length > 0 ? (
             <div
               className={classNames(
                 'usa-identifier__logos',
@@ -141,19 +132,14 @@ export default function Identifier({
                 overlapAvatars && 'usa-avatar-group--overlap',
               )}
             >
-              {logoProps.map((logo, index) => (
-                <a href={logo.href || ''} className="usa-identifier__logo usx-avatar" key={`${logo.alt}-${index}`}>
-                  <img
-                    className={classNames(
-                      'usa-identifier__logo-img',
-                      shapeClassMap[logo.shape || logoShape || ''] || null,
-                      logo.imageClassName,
-                    )}
-                    src={logo.src}
-                    alt={logo.alt}
-                    role="img"
-                  />
-                </a>
+              {avatarProps.map((avatar, index) => (
+                <Avatar
+                  {...avatar}
+                  key={`${avatar.alt}-${index}`}
+                  shape={avatar.shape || logoShape}
+                  className={classNames('usa-identifier__logo', avatar.className)}
+                  imageClassName={classNames('usa-identifier__logo-img', avatar.imageClassName)}
+                />
               ))}
             </div>
           ) : null}

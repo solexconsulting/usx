@@ -143,7 +143,7 @@ export const identifierArgs = {
   parentAgencies: [
     { name: 'SOLEX Consulting', href: 'https://google.com' },
   ],
-  logoProps: [
+  avatarProps: [
     {
       href: 'https://google.com',
       src: `./white_symbol-only.png`,
