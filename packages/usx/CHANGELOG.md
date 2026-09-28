@@ -1,5 +1,13 @@
 # @solexllc/usx
 
+## 0.1.8
+
+### Patch Changes
+
+- [`f660bb4`](https://github.com/solexconsulting/usx/commit/f660bb4c4bf57f9a9dfc5aed64feee6d5c237b5f) Thanks [@olsonap](https://github.com/olsonap)! - Add expandable React and Django layouts with shared expand/contract icons, and fix sidebar alignment. Standardize layout widths and component spacing, add an optional `usx-when` fallback, and support a configurable Page element.
+- Updated dependencies [[`f660bb4`](https://github.com/solexconsulting/usx/commit/f660bb4c4bf57f9a9dfc5aed64feee6d5c237b5f)]:
+  - @solexllc/usx-theme@0.2.3
+
 ## 0.1.7
 
 ### Patch Changes
