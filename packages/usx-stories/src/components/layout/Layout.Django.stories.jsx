@@ -17,3 +17,7 @@ export const SingleColumn = createStory(storyDefs.SingleColumn);
 export const GridFullContent = createStory(storyDefs.GridFullContent);
 export const GridWithLeftSidebar = createStory(storyDefs.GridWithLeftSidebar);
 export const GridWithRightSidebar = createStory(storyDefs.GridWithRightSidebar);
+export const Expandable = createStory(storyDefs.Expandable);
+export const ExpandableGridFullContent = createStory(storyDefs.ExpandableGridFullContent);
+export const ExpandableGridWithLeftSidebar = createStory(storyDefs.ExpandableGridWithLeftSidebar);
+export const ExpandableGridWithRightSidebar = createStory(storyDefs.ExpandableGridWithRightSidebar);

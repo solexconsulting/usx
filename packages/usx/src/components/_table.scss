@@ -266,7 +266,7 @@
   // ── Placeholder ───────────────────────────────────────────────────────────────
   .usx-table__placeholder-cell {
     text-align: center;
-    padding: 2rem 1rem;
+    padding: units(4) units(2);
     font-style: italic;
 
     color: usx-when($usx-table-placeholder-text);

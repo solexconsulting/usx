@@ -166,12 +166,12 @@
     display: flex;
 
     .usa-pagination__link {
-      padding: .5rem;
+      padding: units(1);
       margin: 0;
 
       .usa-icon {
-        height: 2rem;
-        width: 2rem;
+        height: units(4);
+        width: units(4);
       }
     }
   }

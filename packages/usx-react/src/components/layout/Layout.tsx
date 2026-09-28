@@ -1,17 +1,22 @@
-import React, { ReactNode, HTMLAttributes } from 'react';
+import React, { useState, ReactNode, HTMLAttributes } from 'react';
 import ClassNames from 'classnames';
+import Icon from '../icon/Icon';
+import Button from '../button/Button';
+import Tooltip from '../tooltip/Tooltip';
 
 // ── Sub-components ──────────────────────────────────────────────────────────
 
 export interface SingleColumnLayoutProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
+  expandButton?: ReactNode;
   className?: string;
 }
 
-export function SingleColumnLayout({ children, className = '', ...props }: SingleColumnLayoutProps) {
+export function SingleColumnLayout({ children, expandButton = null, className = '', ...props }: SingleColumnLayoutProps) {
   const classes = ['usx-layout__single-column', className].filter(Boolean).join(' ');
   return (
     <div className={classes} {...props}>
+      {expandButton}
       {children}
     </div>
   );
@@ -22,6 +27,7 @@ export type GridLayoutProps = {
   rightSidebar?: ReactNode;
   expandLeftSidebar?: boolean;
   expandRightSidebar?: boolean;
+  expandButton?: ReactNode;
   children?: ReactNode;
   className?: string;
 } & HTMLAttributes<HTMLDivElement>;
@@ -31,14 +37,15 @@ export function GridLayout({
   rightSidebar,
   expandLeftSidebar,
   expandRightSidebar,
+  expandButton = null,
   children,
   className = '',
   ...props
 }: GridLayoutProps) {
   const contentModifier = (
     rightSidebar && !leftSidebar ? 'left'
-    : leftSidebar && !rightSidebar ? 'right'
-    : null
+      : leftSidebar && !rightSidebar ? 'right'
+        : null
   );
 
   const contentClasses = ClassNames(
@@ -70,7 +77,10 @@ export function GridLayout({
       {leftSidebar && (
         <aside className={leftSidebarClasses}>{leftSidebar}</aside>
       )}
-      <main className={contentClasses}>{children}</main>
+      <main className={contentClasses}>
+        {expandButton}
+        {children}
+      </main>
       {rightSidebar && (
         <aside className={rightSidebarClasses}>{rightSidebar}</aside>
       )}
@@ -89,6 +99,8 @@ export type LayoutProps = {
   rightSidebar?: ReactNode;
   expandLeftSidebar?: boolean;
   expandRightSidebar?: boolean;
+  /** Adds a toggle button that grows the layout to a wider max-width via the `usx-expanded` class. */
+  expandable?: boolean;
   className?: string;
 } & HTMLAttributes<HTMLDivElement>;
 
@@ -100,18 +112,35 @@ export default function Layout({
   rightSidebar,
   expandLeftSidebar,
   expandRightSidebar,
+  expandable = false,
   className = '',
   ...props
 }: LayoutProps) {
+  const [expanded, setExpanded] = useState(false);
   const classes = ClassNames(
     'usx-layout',
+    { 'usx-expanded': expandable && expanded },
     className,
   );
+
+  const expandButton = expandable ? (
+    
+      <Button
+        variant="primary"
+        ghost={true}
+        className="usx-layout__expand-button"
+        onClick={() => setExpanded((value) => !value)}
+      >
+      <Icon source="usx" name="expand" size={3} className="usx-layout__expand-icon usx-layout__expand-icon--expand" />
+      <Icon source="usx" name="contract" size={3} className="usx-layout__expand-icon usx-layout__expand-icon--contract" />
+    </Button>
+    
+  ) : null;
 
   return (
     <div className={classes} {...props}>
       {variant === 'single-column' ? (
-        <SingleColumnLayout>
+        <SingleColumnLayout expandButton={expandButton}>
           {children || content}
         </SingleColumnLayout>
       ) : variant === 'grid' ? (
@@ -120,11 +149,15 @@ export default function Layout({
           rightSidebar={rightSidebar}
           expandLeftSidebar={expandLeftSidebar}
           expandRightSidebar={expandRightSidebar}
+          expandButton={expandButton}
         >
           {children || content}
         </GridLayout>
       ) : (
-        children || content
+        <>
+          {expandButton}
+          {children || content}
+        </>
       )}
     </div>
   );

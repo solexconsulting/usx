@@ -2,7 +2,7 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-section {
-  margin: 2rem 0;
+  margin: units(4) 0;
 
   background-color: usx-when($usx-section-bg);
 

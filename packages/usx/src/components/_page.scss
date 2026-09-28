@@ -2,8 +2,8 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-page {
-  margin-top: 2rem;
-  margin-bottom: 4rem;
+  margin-top: units(4);
+  margin-bottom: units(8);
 
   background-color: usx-when($usx-page-bg);
 
@@ -18,7 +18,7 @@
     display: block;
 
     p {
-      max-width: 64ex;
+      max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
     }
   }
 }

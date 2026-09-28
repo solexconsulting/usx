@@ -36,14 +36,9 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: $max-layout-width;
+    max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
     margin-inline: auto;
-    padding-block: 4rem;
-    padding-inline: 1.5rem;
-
-    padding-block: usx-when($usx-hero-padding-block);
-
-    padding-inline: usx-when($usx-hero-padding-inline);
+    padding: 0 units(4);
   }
 
   &--has-overlay.usx-hero--custom-overlay::before {
@@ -54,7 +49,7 @@
     min-width: 0;
     overflow-wrap: anywhere;
     max-width: 40rem;
-    padding: 2rem;
+    padding: units(4);
     background-color: rgb(0 0 0 / 90%);
 
     // Radius follows the app-wide radius-box group (null/square by default,
@@ -85,7 +80,7 @@
 
   &__secondary {
     min-width: 0;
-    margin-top: 2rem;
+    margin-top: units(4);
     overflow-wrap: anywhere;
   }
 

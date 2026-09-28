@@ -1,5 +1,7 @@
 {
   "items": [
-    { "name": "spinner", "meta": "loading spin progress busy wait" }
+    { "name": "spinner", "meta": "loading spin progress busy wait" },
+    { "name": "expand", "meta": "expand enlarge widen maximize" },
+    { "name": "contract", "meta": "contract shrink narrow minimize collapse" }
   ]
 }

@@ -20,6 +20,11 @@ register = template.Library()
 
 
 @register.simple_tag()
+def html_attrs(**attributes: Any) -> Dict[str, Any]:
+    return {name.replace("_", "-"): value for name, value in attributes.items()}
+
+
+@register.simple_tag()
 def generate_uuid() -> str:
     """
     Generate a UUID string. Used to create unique HTML element id attributes

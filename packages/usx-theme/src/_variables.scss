@@ -35,16 +35,18 @@
 
 // Omits null/false values; an optional second argument guards composites
 // so partial values like `1px solid null` never reach the CSS output.
-@function usx-when($condition, $value: $condition) {
+// An optional third argument supplies a fallback for when $condition is
+// falsy, for compile-time constants that always have a usable value.
+@function usx-when($condition, $value: $condition, $fallback: null) {
   @if not $condition {
-    @return null;
+    @return $fallback;
   }
 
   @return $value;
 }
 
 // ── Layout (compile-time only) ───────────────────────────────────────────────
-$max-layout-width: 60rem !default;
+$max-layout-width: 64rem !default;
 $max-sidebar-width: 16rem !default;
 
 // ── Breakpoints (compile-time only) ─────────────────────────────────────────

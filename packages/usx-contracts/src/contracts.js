@@ -2510,6 +2510,10 @@ export const componentContracts = {
           "type": "string",
           "description": "Right sidebar content (grid variant only)"
         },
+        "expandable": {
+          "type": "boolean",
+          "description": "Adds a toggle button that grows the layout to a wider max-width via the usx-expanded class."
+        },
         "className": {
           "type": "string",
           "description": "Additional CSS classes"

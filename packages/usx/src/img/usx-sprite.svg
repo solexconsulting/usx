@@ -7,6 +7,12 @@
     search.
     Reference icons with: <use href="./img/usx-sprite.svg#icon-name" />
   -->
+  <symbol id="contract" viewBox="11.1664 10.5 24.0006 24.0039">
+    <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M20.9401 16.9421V10.5H17.6068V16.9421H11.1664V20.2754H20.9401V20.2716V16.9421ZM20.9401 28.0618V34.5039H17.6068V28.0618H11.1664V24.7285H20.9401V24.7323V28.0618ZM25.3933 10.5V16.9421V20.2716V20.2754H35.167V16.9421H28.7266V10.5H25.3933ZM25.3933 28.0618V34.5039H28.7266V28.0618H35.167V24.7285H25.3933V24.7323V28.0618Z" />
+  </symbol>
+  <symbol id="expand" viewBox="10.5 10.5 24 24">
+    <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M10.5 13.8333V20.2754H13.8333L13.8333 13.8333H20.2738V10.5H10.5V10.5038V13.8333ZM10.5 31.1706V24.7285H13.8333L13.8333 31.1706H20.2738V34.5039H10.5V34.5002V31.1706ZM34.5 20.2754V13.8333V10.5038V10.5H24.7262V13.8333H31.1667L31.1667 20.2754H34.5ZM34.5 31.1706V24.7285H31.1667L31.1667 31.1706H24.7262V34.5039H34.5V34.5002V31.1706Z" />
+  </symbol>
   <symbol id="spinner" viewBox="0 0 24 24">
     <!-- Track: full circle at low opacity -->
     <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.2" />

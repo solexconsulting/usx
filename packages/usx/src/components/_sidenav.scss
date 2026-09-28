@@ -3,7 +3,7 @@
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-layout {
   .usx-sidenav {
-    margin-top: 2rem;
+    margin-top: units(4);
   }
 }
 
@@ -14,7 +14,7 @@
 
   &.usx-sidenav--sticky {
     position: sticky;
-    top: 2rem;
+    top: units(4);
   }
 
   .usa-sidenav__item {

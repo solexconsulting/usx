@@ -2,18 +2,80 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-layout {
+  position: relative;
   min-height: 100vh;
 
   background-color: usx-when($usx-surface-1);
+
+  &.usx-expanded {
+    .usx-layout__single-column,
+    .usx-layout__content {
+      max-width: 1600px;
+    }
+
+    .usx-layout__grid-container {
+      grid-template-columns:
+        [page-start] units(2) [left-sidebar-start] 0 [content-start] minmax(0, 1600px) [content-end] 0 [right-sidebar-end] units(2) [page-end];
+
+      @include at-media('tablet') {
+        grid-template-columns:
+          [page-start] units(4) [left-sidebar-start] 0 [content-start] minmax(0, 1600px) [content-end] 0 [right-sidebar-end] units(4) [page-end];
+      }
+
+      @include at-media('desktop') {
+        grid-template-columns:
+          [page-start] 1fr [left-sidebar-start] $max-sidebar-width [content-start] minmax(0, 1600px) [content-end] $max-sidebar-width [right-sidebar-end] 1fr [page-end];
+      }
+    }
+  }
+
+  &__expand-button {
+    display: none;
+    position: absolute;
+    right: calc(0px - units(4));
+    top: 0;
+    width: units(5);
+    height: units(5);
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    color: usx-when($usx-color-primary, #005ea2);
+
+    // Below this width there's no room to grow into, so hide the toggle.
+    @include at-media('desktop') {
+      display: flex;
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+
+  &__expand-icon--contract {
+    display: none;
+  }
+
+  &.usx-expanded &__expand-icon--expand {
+    display: none;
+  }
+
+  &.usx-expanded &__expand-icon--contract {
+    display: block;
+  }
 
   // ── Single column layout ──────────────────────────────────────────────────
   // Centers content with max-width and responsive gutters
   // | gutter | content (max-width 960px) | gutter |
 
   &__single-column {
-    max-width: calc($max-layout-width + units(4));
+    max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
     margin: 0 auto;
-    padding: 0 units(2);
+    padding: 0 units(4);
+    position: relative;
   }
 
   // ── Multi-column grid layout ──────────────────────────────────────────────
@@ -21,28 +83,35 @@
   // | gutter | left sidebar | content | right sidebar | gutter |
 
   &__grid-container {
+    position: relative;
     display: grid;
     grid-template-rows: auto;
     grid-template-columns:
-      [page-start] units(2) [left-sidebar-start] 0 [content-start] minmax(0, $max-layout-width) [content-end] 0 [right-sidebar-end] units(2) [page-end];
+      [page-start] units(2) [left-sidebar-start] 0 [content-start] minmax(0, usx-when($max-layout-width, $max-layout-width, 64rem)) [content-end] 0 [right-sidebar-end] units(2) [page-end];
 
     @include at-media('tablet') {
       grid-template-columns:
-        [page-start] units(4) [left-sidebar-start] 0 [content-start] minmax(0, $max-layout-width) [content-end] 0 [right-sidebar-end] units(4) [page-end];
+        [page-start] units(4) [left-sidebar-start] 0 [content-start] minmax(0, usx-when($max-layout-width, $max-layout-width, 64rem)) [content-end] 0 [right-sidebar-end] units(4) [page-end];
     }
 
     @include at-media('desktop') {
       grid-template-columns:
-        [page-start] 1fr [left-sidebar-start] $max-sidebar-width [content-start] minmax(0, $max-layout-width) [content-end] $max-sidebar-width [right-sidebar-end] 1fr [page-end];
+        [page-start] 1fr [left-sidebar-start] $max-sidebar-width [content-start] minmax(0, usx-when($max-layout-width, $max-layout-width, 64rem)) [content-end] $max-sidebar-width [right-sidebar-end] 1fr [page-end];
     }
   }
 
   // ── Content areas ─────────────────────────────────────────────────────────
 
   &__content {
+    position: relative;
     grid-column: content-start / span content-end;
     grid-row: 1;
-    max-width: calc($max-layout-width + units(4));
+    max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
+    padding: 0 units(4);
+
+    .usx-layout__expand-button {
+      top: units(3);
+    }
 
 
     // Content that leaves space for a left sidebar
@@ -65,8 +134,15 @@
 
       @include at-media('desktop') {
         grid-column: left-sidebar-start / span content-end;
-        justify-self: flex-end;
+        width: 100%;
+        justify-self: end;
         padding-left: units(4);
+      }
+    }
+
+    &:not(&--right) {
+      .usx-layout__expand-button {
+        right: units(4);
       }
     }
   }
@@ -77,19 +153,20 @@
     grid-column: left-sidebar-start / span content-start;
     grid-row: 1;
     height: 100%;
+    padding: 0 0 0 units(4);
   }
 
   &__sidebar--right {
     grid-column: content-end / span right-sidebar-end;
     grid-row: 1;
     height: 100%;
+    padding: 0 units(4) 0 0;
   }
 
   // Hide sidebars on mobile/tablet, show on desktop
   &__sidebar--right,
   &__sidebar--left {
     display: none;
-    padding: 0 units(4);
 
     @include at-media('desktop') {
       display: block;

@@ -86,9 +86,9 @@
       .usa-nav__inner {
         margin-left: auto;
         margin-right: auto;
-        max-width: calc($max-layout-width + 4rem);
-        padding-left: 2rem;
-        padding-right: 2rem;
+        max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
+        padding-left: units(4);
+        padding-right: units(4);
         position: relative;
 
         // .usa-nav__close (mobile-only) is hidden at this width, and
@@ -140,9 +140,9 @@
 
     .usa-nav__submenu.usa-megamenu {
       left: 0;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      max-width: calc($max-layout-width + 4rem);
+      padding-left: units(4);
+      padding-right: units(4);
+      max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
       margin-left: auto;
       margin-right: auto;
     }
@@ -228,10 +228,7 @@
     }
 
     .usa-nav__inner {
-      @if $max-layout-width {
-        max-width: calc($max-layout-width + 4rem);
-      }
-
+      max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
       margin-left: auto;
       margin-right: auto;
       padding-left: 1rem;

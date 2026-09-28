@@ -1,9 +1,20 @@
+{% load components %}
 {# Django template for Layout #}
 {# Supports variant: 'single-column' (default), 'grid' #}
 {# For grid: content, leftSidebar, rightSidebar #}
+{% fragment as expandButton %}
+  {% if expandable %}
+    {% html_attrs aria_expanded="false" aria_label="Expand" onclick="const layout = this.closest('.usx-layout'); const expanded = layout.classList.toggle('usx-expanded'); this.setAttribute('aria-expanded', expanded); this.setAttribute('aria-label', expanded ? 'Contract' : 'Expand');" as expandAttributes %}
+    {% button variant="primary" ghost=True type="button" className="usx-layout__expand-button" extraAttributes=expandAttributes %}
+      {% icon source='usx' name='expand' size=3 className='usx-layout__expand-icon usx-layout__expand-icon--expand' %}{% endicon %}
+      {% icon source='usx' name='contract' size=3 className='usx-layout__expand-icon usx-layout__expand-icon--contract' %}{% endicon %}
+    {% endbutton %}
+  {% endif %}
+{% endfragment %}
 <div class="usx-layout{% if className %} {{ className }}{% endif %}">
   {% if variant == 'single-column' %}
     <div class="usx-layout__single-column">
+      {{ expandButton }}
       {% if children %}{{ children|safe }}{% else %}{{ content|safe }}{% endif %}
     </div>
   {% elif variant == 'grid' %}
@@ -14,6 +25,7 @@
       </aside>
       {% endif %}
       <main class="usx-layout__content{% if rightSidebar and not leftSidebar %} usx-layout__content--left{% elif leftSidebar and not rightSidebar %} usx-layout__content--right{% endif %}">
+        {{ expandButton }}
         {% if children %}{{ children|safe }}{% else %}{{ content|safe }}{% endif %}
       </main>
       {% if rightSidebar %}
@@ -23,6 +35,7 @@
       {% endif %}
     </div>
   {% else %}
+    {{ expandButton }}
     {% if children %}{{ children|safe }}{% else %}{{ content|safe }}{% endif %}
   {% endif %}
 </div>
