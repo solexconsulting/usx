@@ -33,6 +33,14 @@ export const headerArgs = {
         { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}solex-only.svg` },
       ],
     },
+    logoInverse: {
+      fallback: `${window.usxBaseUrl}white_symbol-only.png`,
+      sources: [
+        { media: '(min-width: 64em)', srcSet: `${window.usxBaseUrl}white_stacked-w-symbol_left.png` },
+        { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}white_linear.png` },
+        { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}white_solex-only.png` },
+      ],
+    },
     title: 'SOLEX Consulting',
   },
   projectUrl: 'https://google.com',
@@ -115,6 +123,12 @@ export const footerArgs = {
       fallback: `${window.usxBaseUrl}symbol-only.svg`,
       sources: [
         { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}linear.svg` },
+      ],
+    },
+    logoInverse: {
+      fallback: `${window.usxBaseUrl}white_symbol-only.png`,
+      sources: [
+        { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}white_linear.png` },
       ],
     },
     title: 'SOLEX Consulting',

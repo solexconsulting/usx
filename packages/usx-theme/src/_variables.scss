@@ -1058,6 +1058,8 @@ $usx-footer-primary-bg: $usx-surface-2                                         !
 $usx-footer-social-icon-filter-var: null !default;
 $usx-footer-social-icon-filter: usx-var($usx-footer-social-icon-filter-var)        !default;
 $usx-footer-sign-up-button-bg: $usx-color-primary                                    !default;
+$usx-footer-social-bg-var: null !default;
+$usx-footer-social-bg: usx-var($usx-footer-social-bg-var) !default;
 $usx-footer-social-bg-hover-var: null                                                !default;
 $usx-footer-social-bg-hover: usx-var($usx-footer-social-bg-hover-var)              !default;
 $usx-footer-social-radius: $usx-radius-button                                     !default;

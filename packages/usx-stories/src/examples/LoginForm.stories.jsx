@@ -9,6 +9,7 @@ import Input from '../../../usx-react/src/components/input/Input.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
 import Link from '../../../usx-react/src/components/link/Link.tsx';
 import Page from '../../../usx-react/src/components/page/Page.tsx';
+import { headerArgs, footerArgs } from './commonArgs.js';
 
 export default {
   title: 'Examples/Authentication',
@@ -37,7 +38,7 @@ function LoginExample() {
       <Banner />
       <Header
         id="login-header"
-        branding={{ logo: 'linear-w-symbol_left.svg', alt: 'SOLEX Consulting' }}
+        branding={headerArgs.branding}
         projectUrl="#login-pattern-example"
       />
 
@@ -121,7 +122,7 @@ function LoginExample() {
       <Footer
         variant="slim"
         returnToTop={false}
-        branding={{ title: 'SOLEX Consulting' }}
+        branding={footerArgs.branding}
         brandingUrl="#login-pattern-example"
       />
     </div>

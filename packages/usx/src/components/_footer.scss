@@ -50,6 +50,7 @@
 
   // ── Social links ─────────────────────────────────────────────────────────
   .usa-social-link {
+    background-color: usx-when($usx-footer-social-bg);
     color: usx-when($usx-footer-link-text);
 
     border-radius: usx-when($usx-footer-social-radius);
@@ -67,6 +68,17 @@
 
     .usa-social-link__icon {
       filter: usx-when($usx-footer-social-icon-filter);
+    }
+
+    @media (forced-colors: active) {
+      &,
+      &:hover {
+        background-color: lightgrey;
+      }
+
+      .usa-social-link__icon {
+        filter: none;
+      }
     }
   }
 

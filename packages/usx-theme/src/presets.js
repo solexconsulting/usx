@@ -118,6 +118,7 @@ export const PRESETS = {
   // read clearly against the near-black surfaces, and surface/border/text
   // are flipped the same way Midnight/Carbon do below.
   Borealis: {
+    'usx-footer-social-icon-filter': 'brightness(0) invert(1)',
     'color-primary': '#5b7cfa',
     'color-secondary': '#b98cff',
     'color-accent-cool': '#2dd4bf',
@@ -160,6 +161,7 @@ export const PRESETS = {
   // background), these also flip the surface/border/text tokens so cards,
   // dividers and copy stay legible against a dark page.
   Midnight: {
+    'usx-footer-social-icon-filter': 'brightness(0) invert(1)',
     'color-primary': '#60a5fa',
     'color-secondary': '#a78bfa',
     'color-accent-cool': '#38bdf8',
@@ -186,6 +188,7 @@ export const PRESETS = {
     ...inverseLogoOverrides(),
   },
   Carbon: {
+    'usx-footer-social-icon-filter': 'brightness(0) invert(1)',
     'color-primary': '#fa9441',
     'color-secondary': '#22d3ee',
     'color-accent-cool': '#38bdf8',

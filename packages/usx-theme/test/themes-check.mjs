@@ -29,6 +29,15 @@ const fail = (msg) => failures.push(msg);
 
 const cssVars = new Set(themeManifest.map((t) => t.cssVar));
 
+for (const [name, preset] of Object.entries(PRESETS)) {
+  const resolved = resolveTheme(preset);
+  const expectedFilter = ['Borealis', 'Midnight', 'Carbon'].includes(name)
+    ? 'brightness(0) invert(1)' : 'none';
+  if (resolved['usx-footer-social-icon-filter'] !== expectedFilter) fail(`${name}: footer social icon filter mismatch`);
+  if (resolved['usx-footer-social-bg'] !== 'var(--usx-surface-2)') fail(`${name}: footer social background must follow surface-2`);
+  if (resolved['usx-footer-social-bg-hover'] !== 'var(--usx-surface-1)') fail(`${name}: footer social hover must follow surface-1`);
+}
+
 // Parses `selector { decl; decl; }` blocks into [{ selector, decls: Map }].
 // The one nested rule we emit (`@media (prefers-color-scheme: dark) { :root
 // {…} }`) is flattened to a synthetic `@dark` selector first.

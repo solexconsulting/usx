@@ -15,7 +15,18 @@ export default {
 // ── Shared story data ──────────────────────────────────────────────────────
 
 const branding = {
-  logo: `${window.usxBaseUrl}linear-w-symbol_left.svg`,
+  logo: {
+    fallback: `${window.usxBaseUrl}symbol-only.svg`,
+    sources: [
+      { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}linear-w-symbol_left.svg` },
+    ],
+  },
+  logoInverse: {
+    fallback: `${window.usxBaseUrl}white_symbol-only.png`,
+    sources: [
+      { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}white_linear-w-symbol_left.png` },
+    ],
+  },
   title: 'Agency Name',
 };
 const brandingUrl = '/';

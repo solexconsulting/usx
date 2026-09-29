@@ -20,6 +20,35 @@ class RenderedElements(HTMLParser):
 
 
 class ReactParityTests(SimpleTestCase):
+    def test_footer_responsive_branding(self):
+        for variant in ('big', 'medium', 'slim'):
+            for branding_url in ('/', ''):
+                with self.subTest(variant=variant, branding_url=branding_url):
+                    html = render_component('footer', {
+                        'variant': variant,
+                        'brandingUrl': branding_url,
+                        'branding': {
+                            'title': 'Agency Name',
+                            'logo': {
+                                'fallback': '/symbol.svg',
+                                'sources': [{'media': '(min-width: 40em)', 'srcSet': '/linear.svg'}],
+                            },
+                            'logoInverse': {
+                                'fallback': '/white-symbol.png',
+                                'sources': [{'media': '(min-width: 40em)', 'srcSet': '/white-linear.png'}],
+                            },
+                        },
+                    })
+                    elements = RenderedElements(html)
+                    sources = [attrs for name, attrs in elements.elements if name == 'source']
+                    self.assertEqual([source['srcset'] for source in sources], ['/linear.svg', '/white-linear.png'])
+                    self.assertTrue(all(source['media'] == '(min-width: 40em)' for source in sources))
+                    images = [attrs for name, attrs in elements.elements if name == 'img']
+                    self.assertEqual([image['src'] for image in images], ['/symbol.svg', '/white-symbol.png'])
+                    self.assertTrue(all(image['alt'] == 'Agency Name' for image in images))
+                    self.assertIn('usx-logo__variant--inverse', html)
+                    self.assertIn('class="usx-image usx-logo__image"', html)
+
     def test_card_root_and_children(self):
         html = render_component('card', {
             'tag': 'li', 'className': 'grid-col-6', 'headerFirst': True,
