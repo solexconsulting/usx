@@ -1,5 +1,30 @@
 # @solexllc/usx-react
 
+## 0.2.0
+
+### Minor Changes
+
+- [`fcddc2a`](https://github.com/solexconsulting/usx/commit/fcddc2a2f6d54e4315bd805a58638409308d80dc) Thanks [@olsonap](https://github.com/olsonap)! - Expand component theming and align React and Django rendering.
+  - Add Card tokens for surfaces, text, borders, and corner radii, including inset, exdent, and flag media variants. Apply theme fonts to Card, Page, and Section headings.
+  - Add semantic radius utilities and themed border-width utilities; constrain avatar images to their containers.
+  - Add Accordion heading/content class targets and ButtonGroup item classes, with matching Django templates and generated contracts.
+  - Align Card content precedence, image props, carousel classes, dot visibility, IDs, and accessibility markup across React and Django. Repair action-button rendering and use Carousel's declared slide contract.
+  - Default buttons to the primary variant, align Django's button type default, remove CheckboxGroup's implicit legend, and add spacing after Required markers.
+  - Support separate visible and screen-reader Spinner labels, with animation limited to the icon.
+
+  Migration notes:
+  - Spinner no longer supplies a default loading label. Use `label` for visible text or `screenReaderLabel` for assistive text. Remove `omitLabel`; omit both label props for an unlabelled spinner. The `usx-spinner` class now belongs to the wrapper rather than the SVG.
+  - Accordion `className` now targets only the root. Use top-level `headingClassName` and `contentClassName` for inner elements instead of relying on root or item `className` propagation.
+  - The default heading font is now Merriweather instead of inheriting the body font. Set `--usx-font-family-heading: var(--usx-font-family)` to retain inheritance.
+  - Layout no longer enforces `min-height: 100vh`; apply a minimum height in the consuming application when needed. Supply a CheckboxGroup `legend` explicitly where required.
+
+### Patch Changes
+
+- Updated dependencies [[`fcddc2a`](https://github.com/solexconsulting/usx/commit/fcddc2a2f6d54e4315bd805a58638409308d80dc)]:
+  - @solexllc/usx@0.2.0
+  - @solexllc/usx-theme@0.3.0
+  - @solexllc/usx-uswds-fixes@0.1.6
+
 ## 0.1.8
 
 ### Patch Changes
