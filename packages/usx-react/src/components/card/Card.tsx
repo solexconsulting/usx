@@ -1,6 +1,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import ButtonGroup from '../button-group/ButtonGroup';
+import type { ButtonGroupItemProps } from '../button-group/ButtonGroup';
 import Tag from '../tag/Tag';
 import Image from '../image/Image';
 import Carousel from '../carousel/Carousel';
@@ -12,7 +13,7 @@ export interface CardTag {
 
 export interface CardAction {
   children: string;
-  variant?: string;
+  variant?: ButtonGroupItemProps['variant'];
   onClick?: () => void;
 }
 
@@ -84,9 +85,9 @@ export default function Card({
       id={`${props.id || 'card'}-carousel`}
       showDots={showCarouselDots}
       className="usx-card__carousel"
-      slides={images?.map((img, index) => (
-        <Image key={index} {...img} hideCaption={true} />
-      ))}
+      slides={images?.map((img, index) => ({
+        content: <Image key={index} {...img} hideCaption={true} />,
+      }))}
     />
   ) : hasImages ? (
     <Image {...images[0]} hideCaption={true} className="usa-card__img" />
@@ -124,7 +125,7 @@ export default function Card({
 
             {actions && actions.length > 0 && (
               <div className="usa-card__footer">
-                <ButtonGroup items={actions} className="flex-wrap" />
+                <ButtonGroup buttonProps={actions} className="flex-wrap" />
               </div>
             )}
           </>

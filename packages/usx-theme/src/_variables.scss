@@ -360,6 +360,67 @@ $surface-colors: (
   'surface-inverse': $usx-text-ink,
 ) !default;
 
+// ── Radius — primitives (reserved for utility classes) ──────────────────────
+$usx-radius-sm-var: null !default;
+$usx-radius-sm: usx-var($usx-radius-sm-var) !default;
+
+$usx-radius-md-var: null !default;
+$usx-radius-md: usx-var($usx-radius-md-var) !default;
+
+$usx-radius-lg-var: null !default;
+$usx-radius-lg: usx-var($usx-radius-lg-var) !default;
+
+$usx-radius-xl-var: null !default;
+$usx-radius-xl: usx-var($usx-radius-xl-var) !default;
+
+$usx-radius-full-var: null !default;
+$usx-radius-full: usx-var($usx-radius-full-var) !default;
+
+// Semantic radii (DaisyUI-inspired): components pick a radius by group, so all
+// boxes, all fields, all selectors, and all square components are themed
+// independently with one variable each. Per-component "advanced" hooks
+// (--usx-<component>-radius) override the group.
+$usx-radius-box-var: null !default; // boxes: cards, code blocks, summary boxes, hero callouts, images
+$usx-radius-box: usx-var($usx-radius-box-var) !default;
+
+$usx-radius-field-var: null !default; // fields: buttons, inputs, selects, comboboxes, text areas
+$usx-radius-field: usx-var($usx-radius-field-var) !default;
+
+$usx-radius-selector-var: null !default; // selectors: checkboxes, badges/tags, small controls
+$usx-radius-selector: usx-var($usx-radius-selector-var) !default;
+
+$usx-radius-none-var: null !default; // square-by-default components: accordions, alerts
+$usx-radius-none: usx-var($usx-radius-none-var) !default;
+
+$border-radius: (
+  'sm': $usx-radius-sm,
+  'md': $usx-radius-md,
+  'lg': $usx-radius-lg,
+  'xl': $usx-radius-xl,
+  'full': $usx-radius-full,
+  'box': $usx-radius-box,
+  'field': $usx-radius-field,
+  'selector': $usx-radius-selector,
+  'none': $usx-radius-none,
+) !default;
+
+// ── Border width ─────────────────────────────────────────────────────────────
+$usx-border-width-sm-var: null !default;
+$usx-border-width-sm: usx-var($usx-border-width-sm-var) !default;
+$usx-border-width-md-var: null !default;
+$usx-border-width-md: usx-var($usx-border-width-md-var) !default;
+$usx-border-width-lg-var: null !default;
+$usx-border-width-lg: usx-var($usx-border-width-lg-var) !default;
+$usx-border-width-xl-var: null !default;
+$usx-border-width-xl: usx-var($usx-border-width-xl-var) !default;
+
+$border-width: (
+  'sm': $usx-border-width-sm,
+  'md': $usx-border-width-md,
+  'lg': $usx-border-width-lg,
+  'xl': $usx-border-width-xl,
+) !default;
+
 // ── Spacing ─────────────────────────────────────────────────────────────────
 $usx-spacing-xs-var: null !default;
 $usx-spacing-xs: usx-var($usx-spacing-xs-var) !default;
@@ -423,7 +484,8 @@ $usx-font-family: usx-var($usx-font-family-var,
 // everywhere) but are their own hook, so a theme with a distinct display/
 // serif face for headings (e.g. VA.gov's Bitter) can override just this one.
 $usx-font-family-heading-var: null !default;
-$usx-font-family-heading: usx-var($usx-font-family-heading-var, $usx-font-family) !default;
+$usx-font-family-heading: usx-var($usx-font-family-heading-var,
+  'Merriweather Web, Georgia, Cambria, Times New Roman, Times, serif') !default;
 
 $usx-font-size-base-var: null !default;
 $usx-font-size-base: usx-var($usx-font-size-base-var, 1rem) !default;
@@ -494,48 +556,6 @@ $usx-tag-line-height: usx-var($usx-tag-line-height-var, 1.6) !default;
 
 $usx-task-list-link-font-size-var: null !default;
 $usx-task-list-link-font-size: usx-var($usx-task-list-link-font-size-var, 1.31rem) !default;
-
-// ── Radius — primitives (reserved for utility classes) ──────────────────────
-$usx-radius-sm-var: null !default;
-$usx-radius-sm: usx-var($usx-radius-sm-var) !default;
-
-$usx-radius-md-var: null !default;
-$usx-radius-md: usx-var($usx-radius-md-var) !default;
-
-$usx-radius-lg-var: null !default;
-$usx-radius-lg: usx-var($usx-radius-lg-var) !default;
-
-$usx-radius-xl-var: null !default;
-$usx-radius-xl: usx-var($usx-radius-xl-var) !default;
-
-$usx-radius-full-var: null !default;
-$usx-radius-full: usx-var($usx-radius-full-var) !default;
-
-// Semantic radii (DaisyUI-inspired): components pick a radius by group, so all
-// boxes, all fields, all selectors, and all square components are themed
-// independently with one variable each. Per-component "advanced" hooks
-// (--usx-<component>-radius) override the group.
-$usx-radius-box-var: null !default; // boxes: cards, code blocks, summary boxes, hero callouts, images
-$usx-radius-box: usx-var($usx-radius-box-var) !default;
-
-$usx-radius-field-var: null !default; // fields: buttons, inputs, selects, comboboxes, text areas
-$usx-radius-field: usx-var($usx-radius-field-var) !default;
-
-$usx-radius-selector-var: null !default; // selectors: checkboxes, badges/tags, small controls
-$usx-radius-selector: usx-var($usx-radius-selector-var) !default;
-
-$usx-radius-none-var: null !default; // square-by-default components: accordions, alerts
-$usx-radius-none: usx-var($usx-radius-none-var) !default;
-
-// ── Border ───────────────────────────────────────────────────────────────────
-$usx-border-width-sm-var: null !default;
-$usx-border-width-sm: usx-var($usx-border-width-sm-var) !default;
-$usx-border-width-md-var: null !default;
-$usx-border-width-md: usx-var($usx-border-width-md-var) !default;
-$usx-border-width-lg-var: null !default;
-$usx-border-width-lg: usx-var($usx-border-width-lg-var) !default;
-$usx-border-width-xl-var: null !default;
-$usx-border-width-xl: usx-var($usx-border-width-xl-var) !default;
 
 // ── Component tokens: Button ─────────────────────────────────────────────────
 $usx-radius-button-var: null !default;
@@ -690,6 +710,21 @@ $usx-site-alert-maintenance-bg: null !default;
 // so a theme that repoints the info family carries the summary box along
 // with it. Text/link colors match existing primitives too, so they chain
 // to those instead.
+$usx-card-bg-var: null !default;
+$usx-card-bg: usx-var($usx-card-bg-var, $usx-surface-3) !default;
+$usx-card-text-var: null !default;
+$usx-card-text: usx-var($usx-card-text-var, $usx-text-ink) !default;
+$usx-card-heading-text-var: null !default;
+$usx-card-heading-text: usx-var($usx-card-heading-text-var, $usx-card-text) !default;
+$usx-card-media-bg-var: null !default;
+$usx-card-media-bg: usx-var($usx-card-media-bg-var, $usx-surface-3) !default;
+$usx-card-border-color-var: null !default;
+$usx-card-border-color: usx-var($usx-card-border-color-var, $usx-color-border) !default;
+$usx-card-border-width-var: null !default;
+$usx-card-border-width: usx-var($usx-card-border-width-var, $usx-border-width-md) !default;
+$usx-card-radius-var: null !default;
+$usx-card-radius: usx-var($usx-card-radius-var, $usx-radius-box) !default;
+
 $usx-summary-box-border-color-var: null !default;
 $usx-summary-box-border-color: usx-var($usx-summary-box-border-color-var, $usx-color-info-light) !default;
 $usx-summary-box-border: usx-when($usx-summary-box-border-color, $usx-border-width-sm solid $usx-summary-box-border-color) !default;

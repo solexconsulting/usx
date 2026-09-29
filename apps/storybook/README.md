@@ -23,7 +23,38 @@ maintained in one place.
   components that extend or go beyond upstream USWDS
 - `Foundations/*` / `Documentation/*`: theme playground, tokens, colors,
   spacing, typography
-- `Patterns/*`: composite, multi-component example pages
+- `Patterns/Building Blocks`: Page Header, Form Section, Status/Metric Card,
+  Empty State, Destructive Action, and Review/Confirmation compositions
+- `Patterns/Search Results`, `Patterns/Data Table`: interactive compositions
+  with normal, loading, empty/no-results, server-error, permission-denied,
+  and incomplete-data stories
+- `Examples/*`: concrete pages using patterns, including Applications and
+  ordered Step Indicator / unordered Task List workflows
+- `States/Form Controls`: the existing React/Django field-error reference
+
+Pattern implementations live alongside their stories in
+`packages/usx-stories/src/patterns`. They compose existing USX components and
+utilities; they are not new exports from `@solexllc/usx-react`. Full-page examples
+reuse these implementations rather than maintaining separate versions.
+
+SearchResults and AdvancedSearchFilters are consolidated into one search pattern.
+The documentation search retains `examples-data-display--search-results`; funding
+and deadline filters are available in `examples-data-display--funding-programs`.
+Login and Address now live under Authentication and Data Collection respectively,
+instead of Examples/Patterns. Their IDs are `examples-authentication--login` and
+`examples-data-collection--address-form`.
+
+The remaining audited pages (Blog, FAQ, Product Showcase, Profile, Dashboard,
+Contact, Settings, Address, and Login) represent distinct page archetypes and
+are retained. Dashboard reuses the Metric Card pattern. This consolidation does
+not imply that every older example has been converted to a working application.
+
+New search, application-table, and workflow stories use deterministic local data.
+Search and filters work locally; table exports download JSON; deletion and
+workflow submission only update in-memory state. Reloading resets the examples.
+Workflow validation, review/edit, success, and submission-error states share the
+same compositions as the normal workflow. Error recovery is simulated, not a
+backend integration.
 
 A "Filter by technology" toolbar control (`.storybook/technologyToggle.jsx`)
 lets you switch the sidebar between React/Django/HTML/All without losing your
@@ -55,3 +86,13 @@ From the repository root:
 
 Both of this app's own scripts (`dev`, `build`) build `packages/usx-theme` first so
 `theme.css` exists before Storybook starts.
+
+## Login example provider buttons
+
+The login pattern uses USX components and SOLEX branding. Account, recovery, and
+provider actions only announce a demo status; they do not send credentials or
+start OAuth. A consuming application must supply its own authentication handlers.
+
+Provider options are plain USX `Button` placeholders using different color variants,
+not branded authentication controls. Production integrations must follow the
+respective provider's current branding requirements.

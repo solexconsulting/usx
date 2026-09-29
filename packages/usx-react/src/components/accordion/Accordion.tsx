@@ -8,7 +8,8 @@ export interface AccordionItemProps {
     id: string;
     content: React.ReactNode;
     expanded?: boolean;
-    className?: string;
+    headingClassName?: string;
+    contentClassName?: string;
     headingLevel?: AccordionHeadingLevel;
     handleToggle?: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -26,15 +27,16 @@ function AccordionItem({
     id,
     content,
     expanded = false,
-    className,
+    headingClassName,
+    contentClassName,
     headingLevel = 'h3',
     handleToggle,
 }: AccordionItemProps) {
-    const headingClasses = classnames('usa-accordion__heading', className)
+    const headingClasses = classnames('usa-accordion__heading', headingClassName)
     const contentClasses = classnames(
         'usa-accordion__content',
         'usa-prose',
-        className
+        contentClassName
     )
 
     const Heading = headingLevel
@@ -72,6 +74,8 @@ export function Accordion({
     headingLevel = 'h3',
     iconPosition,
     className = '',
+    headingClassName = '',
+    contentClassName = '',
     ...props
 }: AccordionProps) {
     const accordionClasses = classnames(
@@ -95,7 +99,8 @@ export function Accordion({
                     key={item.id}
                     {...item}
                     headingLevel={headingLevel}
-                    className={className}
+                    headingClassName={headingClassName}
+                    contentClassName={contentClassName}
                 />
             ))}
         </div>

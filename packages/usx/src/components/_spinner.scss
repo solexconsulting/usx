@@ -1,3 +1,5 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
 @keyframes usx-spin {
   from {
     transform: rotate(0deg);
@@ -10,11 +12,24 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-spinner {
-  animation: usx-spin 800ms infinite linear;
-  will-change: transform;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
 
-  @media (forced-colors: active) {
-    forced-color-adjust: auto;
+  .usa-label.usx-label {
+    margin: 0 0 0 units(2);
+    font-style: italic;
+  }
+  
+  svg {
+    animation: usx-spin 800ms infinite linear;
+    will-change: transform;
+
+    @media (forced-colors: active) {
+      forced-color-adjust: auto;
+    }
   }
 }
 

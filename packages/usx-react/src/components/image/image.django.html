@@ -31,7 +31,7 @@
   {% else %}
     Image
   {% endif %}
-  <figcaption class="usx-image--caption{% if hideCaption %} usa-sr-only{% endif %}">{{ caption }}</figcaption>
+  <figcaption class="usx-image--caption{% if hideCaption %} usa-sr-only{% endif %}" aria-hidden="{{ hideCaption|yesno:'true,false' }}">{{ caption }}</figcaption>
 </figure>
 {% else %}
   {% if href %}<a href="{{ href }}"

@@ -28,7 +28,7 @@ export interface CheckboxGroupProps extends React.HTMLAttributes<HTMLFieldSetEle
 const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   tile = false,
   small = false,
-  legend = 'Select one or more options',
+  legend,
   required = false,
   hint = null,
   error = null,

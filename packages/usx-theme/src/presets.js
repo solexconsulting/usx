@@ -307,7 +307,6 @@ export const PRESETS = {
     // hover color against black, so it's left on the default.
     'usx-header-nav-link-text': 'var(--usx-text-inverse)',
     'usx-header-secondary-link-text': 'var(--usx-text-inverse)',
-    'font-family': '"Source Sans Pro Web", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif', // real nasa.gov body font (same USWDS default stack)
     // The real CTA button (e.g. "Live Mission Coverage") measures a 4px
     // corner radius, not our default 0.5rem — verified via computed style
     // on the live site.
@@ -317,6 +316,7 @@ export const PRESETS = {
     'radius-button': '4px',
     // nasa.gov's content cards (hds-content-card) render perfectly square —
     // verified live.
+    'usx-card-text': 'var(--usx-text-inverse)',
     'usx-checkable-tile-radius': '0',
     // nasa.gov's nav literally renders stock USWDS usa-accordion markup, so
     // its button background is stock USWDS base-lightest rather than our

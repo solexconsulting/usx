@@ -9,7 +9,13 @@
       "items": {
         "type": "object",
         "description": "Button item.",
-        "component": "button"
+        "component": "button",
+        "properties": {
+          "itemClassName": {
+            "type": "string",
+            "description": "Additional CSS classes on the list item wrapping the button."
+          }
+        }
       }
     },
     "segmented": {

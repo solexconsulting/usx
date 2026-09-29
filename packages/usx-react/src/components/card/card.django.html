@@ -1,7 +1,9 @@
 {% load components %}
-<{% if tag %}{{ tag }}{% else %}div{% endif %} class="usa-card{% if headerFirst %} usa-card--header-first{% endif %}{% if flag %} usa-card--flag{% endif %}{% if mediaRight %} usa-card--media-right{% endif %}{% if className %} {{ className }}{% endif %}">
+<{% if tag %}{{ tag }}{% else %}div{% endif %}{% if id %} id="{{ id }}"{% endif %} class="usa-card usx-card{% if headerFirst %} usa-card--header-first{% endif %}{% if flag %} usa-card--flag{% endif %}{% if mediaRight %} usa-card--media-right{% endif %}{% if className %} {{ className }}{% endif %}">
   <div class="usa-card__container">
-    {% if title or description or tags or actions or images %}
+    {% if children %}
+      {{ children }}
+    {% elif title or description or tags or actions or images %}
       {% if title %}
         <div class="usa-card__header">
           <h4 class="usa-card__heading">{{ title }}</h4>
@@ -9,11 +11,11 @@
       {% endif %}
       {% if images and images|length > 1 %}
         <div class="usa-card__media{% if mediaInset %} usa-card__media--inset{% endif %}{% if mediaExdent %} usa-card__media--exdent{% endif %}">
-          {% carousel slides=images id=id|default:'card'|add:'-carousel' showDots=showCarouselDots|default:True className='' %}{% endcarousel %}
+          {% carousel slides=images id=id|default:'card'|add:'-carousel' showDots=showCarouselDots|default_bool:True className='usx-card__carousel' %}{% endcarousel %}
         </div>
       {% elif images and images.0 %}
         <div class="usa-card__media{% if mediaInset %} usa-card__media--inset{% endif %}{% if mediaExdent %} usa-card__media--exdent{% endif %}">
-          {% image src=images.0.src alt=images.0.alt hideCaption=True className='usa-card__img' %}{% endimage %}
+          {% image src=images.0.src alt=images.0.alt caption=images.0.caption hideCaption=True href=images.0.href rounded=images.0.rounded circular=images.0.circular objectFit=images.0.objectFit maxWidth=images.0.maxWidth maxHeight=images.0.maxHeight className='usa-card__img' %}{% endimage %}
         </div>
       {% endif %}
       <div class="usa-card__body">
@@ -30,7 +32,7 @@
       </div>
       {% if actions %}
         <div class="usa-card__footer">
-          {% button_group items=actions %}{% endbutton_group %}
+          {% button_group buttonProps=actions className='flex-wrap' %}{% endbutton_group %}
         </div>
       {% endif %}
     {% else %}

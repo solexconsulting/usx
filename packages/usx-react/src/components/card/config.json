@@ -3,6 +3,10 @@
   "template": "card/card.django.html",
   "version": 1,
   "props": {
+    "id": {
+      "type": "string",
+      "description": "Card element ID, also used as the prefix for carousel slide IDs."
+    },
     "title": {
       "type": "string",
       "description": "The title text displayed in the card header"
@@ -53,7 +57,7 @@
     },
     "images": {
       "type": "array",
-      "description": "Array of image objects (currently uses first image)",
+      "description": "Array of image objects; multiple images render as a carousel",
       "items": {
         "type": "object",
         "description": "Card image.",

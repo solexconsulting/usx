@@ -7,13 +7,13 @@
 >
 {% for item in items %}
     {% if headingLevel == 'h1' %}
-        <h1 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ className }}">
+        <h1 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ headingClassName }}">
     {% elif headingLevel == 'h2' %}
-        <h2 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ className }}">
+        <h2 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ headingClassName }}">
     {% elif headingLevel == 'h4' %}
-        <h4 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ className }}">
+        <h4 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ headingClassName }}">
     {% else %}
-        <h3 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ className }}">
+        <h3 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ headingClassName }}">
     {% endif %}
         <button
             class="usa-accordion__button"
@@ -35,7 +35,7 @@
 
     <div
         id="{{ id }}-{{ forloop.counter0 }}-content"
-        class="usa-accordion__content"
+        class="usa-accordion__content usa-prose {{ contentClassName }}"
         aria-labelledby="{{ id }}-{{ forloop.counter0 }}-heading"
         hidden
     >

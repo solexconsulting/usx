@@ -110,6 +110,35 @@ const errors = [];
 const byVar = new Map(themeManifest.map((t) => [t.cssVar, t]));
 const byName = new Map(themeManifest.map((t) => [t.name, t]));
 
+for (const [name, parent] of Object.entries({
+  'usx-card-bg': 'surface-3',
+  'usx-card-text': 'text-ink',
+  'usx-card-heading-text': 'usx-card-text',
+  'usx-card-media-bg': 'surface-3',
+  'usx-card-border-color': 'color-border',
+  'usx-card-radius': 'radius-box',
+  'usx-card-border-width': 'border-width-md',
+})) {
+  const token = byName.get(name);
+  const parentToken = byName.get(parent);
+  if (!token || !parentToken || token.defaultValue !== `var(${parentToken.cssVar})`) {
+    errors.push(`${name} must follow ${parent} by default`);
+  }
+}
+
+const staticCardCss = compile('src/components/_card.scss');
+for (const [selector, token] of [
+  ['.usx-card .usa-card__container', '--usx-font-family'],
+  ['.usx-card .usa-card__heading', '--usx-font-family-heading'],
+]) {
+  const rule = `${selector} {\n  font-family: var(${token});\n}`;
+  if (!themedCss.includes(rule)) errors.push(`${selector} must use ${token}`);
+}
+if (staticCardCss.replace(/\/\*[\s\S]*?\*\//g, '').trim()) errors.push('unconfigured card styles must leave USWDS defaults untouched');
+for (const selector of ['.usa-card.usx-card > .usa-card__container', '.usa-card.usx-card.usa-card--flag.usa-card--media-right', '.usa-card__media--inset .usa-card__img']) {
+  if (!themedCss.includes(selector)) errors.push(`missing themed card selector: ${selector}`);
+}
+
 const compileGuard = (body) => sass.compileString(
   `@use 'pkg:@solexllc/usx-theme/variables' as *; .probe { ${body} }`,
   {

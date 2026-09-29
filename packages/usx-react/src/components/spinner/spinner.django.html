@@ -1,8 +1,9 @@
 {% load static %}
 {# Django template for Spinner #}
-<span role="status" aria-live="polite" tabindex="0"{% if className %} class="{{ className }}"{% endif %}>
-  <svg class="usa-icon usx-spinner {% if size == 1 %}usx-spinner--size-1{% else %}usa-icon--size-{{ size|default:3 }}{% endif %}{% if color %} text-{{ color }}{% endif %}" aria-hidden="true" focusable="false">
+<span role="status" aria-live="polite" class="usx-spinner{% if className %} {{ className }}{% endif %}">
+  <svg class="usa-icon {% if size == 1 %}usx-spinner--size-1{% else %}usa-icon--size-{{ size|default:3 }}{% endif %}{% if color %} text-{{ color }}{% endif %}" aria-hidden="true" focusable="false">
     <use href="{% static 'img/usx-sprite.svg' %}#spinner"></use>
   </svg>
-  {% if label and not omitLabel %}<span class="usa-sr-only">{{ label }}</span>{% endif %}
+  {% if screenReaderLabel %}<span class="usa-sr-only">{{ screenReaderLabel }}</span>{% endif %}
+  {% if label %}<span class="usa-label usx-label">{{ label }}</span>{% endif %}
 </span>

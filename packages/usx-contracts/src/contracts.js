@@ -52,7 +52,17 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "default": "",
-          "description": "Additional CSS classes to apply to the accordion. Use iconPosition to set the icon position for this accordion. For live global theming, set --usx-accordion-icon-position to 1.25rem auto (start) or auto 1.25rem (end)."
+          "description": "Additional CSS classes to apply to the accordion."
+        },
+        "headingClassName": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes to apply to the accordion heading."
+        },
+        "contentClassName": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes to apply to the accordion content."
         }
       }
     },
@@ -612,7 +622,13 @@ export const componentContracts = {
           "items": {
             "type": "object",
             "description": "Button item.",
-            "component": "button"
+            "component": "button",
+            "properties": {
+              "itemClassName": {
+                "type": "string",
+                "description": "Additional CSS classes on the list item wrapping the button."
+              }
+            }
           }
         },
         "segmented": {
@@ -648,6 +664,10 @@ export const componentContracts = {
       "version": 1,
       "required": [],
       "props": {
+        "id": {
+          "type": "string",
+          "description": "Card element ID, also used as the prefix for carousel slide IDs."
+        },
         "title": {
           "type": "string",
           "description": "The title text displayed in the card header"
@@ -698,7 +718,7 @@ export const componentContracts = {
         },
         "images": {
           "type": "array",
-          "description": "Array of image objects (currently uses first image)",
+          "description": "Array of image objects; multiple images render as a carousel",
           "items": {
             "type": "object",
             "description": "Card image.",
@@ -3526,13 +3546,13 @@ export const componentContracts = {
         },
         "label": {
           "type": "string",
-          "default": "Loading...",
-          "description": "Screen-reader-only label text."
+          "default": null,
+          "description": "Visible label text displayed beside the spinner."
         },
-        "omitLabel": {
-          "type": "boolean",
-          "default": false,
-          "description": "Set to true to omit the sr-only label, e.g. when wrapped in a Tooltip."
+        "screenReaderLabel": {
+          "type": "string",
+          "default": null,
+          "description": "Optional screen-reader-only label text."
         },
         "className": {
           "type": "string",

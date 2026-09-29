@@ -225,6 +225,26 @@ export const Utilities = {
           <code className="font-mono-md">.usx-circle</code>
           <div className="font-mono-2xs">$usx-radius-circle (50%)</div>
         </div>
+        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-rounded-full">
+          <code className="font-mono-md">.usx-rounded-full</code>
+          <div className="font-mono-2xs">$usx-radius-full (50%)</div>
+        </div>
+        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-rounded-box">
+          <code className="font-mono-md">.usx-rounded-box</code>
+          <div className="font-mono-2xs">$usx-radius-box</div>
+        </div>
+        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-rounded-field">
+          <code className="font-mono-md">.usx-rounded-field</code>
+          <div className="font-mono-2xs">$usx-radius-field</div>
+        </div>
+        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-rounded-selector">
+          <code className="font-mono-md">.usx-rounded-selector</code>
+          <div className="font-mono-2xs">$usx-radius-selector</div>
+        </div>
+        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-rounded-none">
+          <code className="font-mono-md">.usx-rounded-none</code>
+          <div className="font-mono-2xs">$usx-radius-none (0)</div>
+        </div>
       </div>
 
       <h3>Simple Animations</h3>

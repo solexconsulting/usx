@@ -1,0 +1,89 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usa-card.usx-card {
+	> .usa-card__container {
+		background-color: usx-when($usx-card-bg);
+		color: usx-when($usx-card-text);
+		border-color: usx-when($usx-card-border-color);
+		border-width: usx-when($usx-card-border-width);
+		border-radius: usx-when($usx-card-radius);
+	}
+
+	.usa-card__heading {
+		color: usx-when($usx-card-heading-text);
+	}
+
+	.usa-card__img {
+		background-color: usx-when($usx-card-media-bg);
+	}
+
+	@if $usx-card-radius and $usx-card-border-width {
+		$inner-radius: max(0px, calc(#{$usx-card-radius} - #{$usx-card-border-width}));
+
+		.usa-card__img {
+			border-radius: $inner-radius $inner-radius 0 0;
+		}
+
+		.usa-card__media--exdent .usa-card__img {
+			border-radius: $usx-card-radius $usx-card-radius 0 0;
+		}
+
+		&.usa-card--header-first {
+			.usa-card__header {
+				border-radius: $inner-radius $inner-radius 0 0;
+			}
+
+			.usa-card__img {
+				border-radius: 0;
+			}
+		}
+
+		.usa-card__media--inset .usa-card__img {
+			border-radius: 0;
+		}
+
+		@media (min-width: $breakpoint-tablet) {
+			&.usa-card--flag {
+				.usa-card__img {
+					border-radius: $inner-radius 0 0 $inner-radius;
+				}
+
+				.usa-card__media--exdent .usa-card__img {
+					border-radius: $usx-card-radius 0 0 $usx-card-radius;
+				}
+
+				&.usa-card--media-right {
+					.usa-card__img {
+						border-radius: 0 $inner-radius $inner-radius 0;
+					}
+
+					.usa-card__media--exdent .usa-card__img {
+						border-radius: 0 $usx-card-radius $usx-card-radius 0;
+					}
+				}
+
+				.usa-card__media--inset .usa-card__img {
+					border-radius: 0;
+				}
+			}
+		}
+	}
+
+	@if $usx-card-border-width {
+		.usa-card__media--exdent {
+			margin-inline: calc(-1 * #{$usx-card-border-width});
+			margin-top: calc(-1 * #{$usx-card-border-width});
+		}
+
+		&.usa-card--header-first .usa-card__media--exdent {
+			margin-top: 0;
+		}
+
+		@media (min-width: $breakpoint-tablet) {
+			&.usa-card--flag .usa-card__media--exdent {
+				margin: calc(-1 * #{$usx-card-border-width});
+			}
+		}
+	}
+}

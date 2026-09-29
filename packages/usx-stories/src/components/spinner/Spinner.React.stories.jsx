@@ -5,8 +5,10 @@ import Tooltip from '../../../../usx-react/src/components/tooltip/Tooltip.tsx';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Default: { size: 3, label: 'Loading...', omitLabel: false },
-  OmitLabel: { size: 3, label: 'Loading...', omitLabel: true },
+  Default: { size: 3 },
+  OmitLabel: { size: 3 },
+  WithLabel: { size: 3, label: 'Loading...' },
+  WithScreenReaderLabel: { size: 3, screenReaderLabel: 'Loading...' },
   Small: { size: 1, label: 'Loading...' },
   Large: { size: 6, label: 'Loading...' },
   WithColor: { size: 3, color: 'primary', label: 'Loading...' },
@@ -21,6 +23,8 @@ export default {
 };
 
 export const Default = { args: storyDefs.Default };
+export const WithLabel = { args: storyDefs.WithLabel };
+export const WithScreenReaderLabel = { args: storyDefs.WithScreenReaderLabel };
 
 export const DifferentSizes = {
   render: () => (
@@ -44,7 +48,7 @@ export const DifferentColors = {
   ),
 };
 
-export const DifferentSizesOnDarkBackground = {
+export const DifferentSizesOnInvertedBackground = {
   render: () => (
     <div className="bg-ink padding-3 display-inline-flex gap-4 flex-align-center">
       {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(size => (
@@ -54,7 +58,7 @@ export const DifferentSizesOnDarkBackground = {
   ),
 };
 
-export const DifferentColorsOnDarkBackground = {
+export const DifferentColorsOnInvertedBackground = {
   render: () => (
     <div className="bg-ink padding-3 display-inline-flex gap-4 flex-align-center">
       <Spinner size={4} color="base-lightest" />
@@ -68,7 +72,7 @@ export const DifferentColorsOnDarkBackground = {
 export const WithTooltip = {
   render: () => (
     <Tooltip label="Loading...">
-      <Spinner size={4} omitLabel />
+      <Spinner size={4} />
     </Tooltip>
   ),
 };

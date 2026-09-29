@@ -13,6 +13,8 @@ const createStory = createDjangoStory({ componentName: 'spinner' });
 
 export const Default = createStory(storyDefs.Default);
 export const OmitLabel = createStory(storyDefs.OmitLabel);
+export const WithLabel = createStory(storyDefs.WithLabel);
+export const WithScreenReaderLabel = createStory(storyDefs.WithScreenReaderLabel);
 export const Small = createStory(storyDefs.Small);
 export const Large = createStory(storyDefs.Large);
 export const WithColor = createStory(storyDefs.WithColor);
@@ -37,7 +39,7 @@ export const DifferentColors = createBulkDjangoStory('spinner', [
   { props: { size: 4, color: 'success' } }
 ]);
 
-export const DifferentSizesOnDarkBackground = createBulkDjangoStory('spinner', [
+export const DifferentSizesOnInvertedBackground = createBulkDjangoStory('spinner', [
   { storyName: 'size 1', props: { size: 1, color: 'white' } },
   { storyName: 'size 2', props: { size: 2, color: 'white' } },
   { storyName: 'size 3', props: { size: 3, color: 'white' } },
@@ -56,7 +58,7 @@ export const DifferentSizesOnDarkBackground = createBulkDjangoStory('spinner', [
   </div>
 ));
 
-export const DifferentColorsOnDarkBackground = createBulkDjangoStory('spinner', [
+export const DifferentColorsOnInvertedBackground = createBulkDjangoStory('spinner', [
   { props: { size: 4, color: 'base-lightest' } },
   { props: { size: 4, color: 'primary-light' } },
   { props: { size: 4, color: 'secondary-light' } },
@@ -69,12 +71,6 @@ export const DifferentColorsOnDarkBackground = createBulkDjangoStory('spinner', 
     {children}
   </div>
 ));
-
-const omittedLabelProps = {
-  size: 4,
-  omitLabel: true,
-  label: 'Loading...'
-};
 
 export const OmittedLabel = createStory(omittedLabelProps);
 

@@ -16,7 +16,7 @@ const Required: React.FC<RequiredProps> = ({
   const classes = ClassNames('usx-required', className);
   return (
     <>
-      <abbr title={title} className={classes} {...props}>*</abbr>
+      <abbr title={title} className={classes} {...props}>*</abbr>{" "}
       {children ? children : ''}
     </>
   );

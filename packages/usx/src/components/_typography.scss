@@ -116,6 +116,16 @@ textarea,
   font-family: $usx-font-family;
 }
 
+.usx-card {
+  .usa-card__container {
+    font-family: $usx-font-family;
+  }
+
+  .usa-card__heading {
+    font-family: $usx-font-family-heading;
+  }
+}
+
 .usx-step-indicator {
   font-family: $usx-font-family;
 
@@ -142,4 +152,20 @@ textarea,
 
 .usx-accordion {
   font-family: $usx-font-family;
+}
+
+.usx-section {
+
+  h2.usx-section__title  {
+    font-family: $usx-font-family-heading;
+    font-size: $usx-font-size-h2;
+  }
+}
+
+.usx-page {
+
+  h1.usx-page__title {
+    font-family: $usx-font-family-heading;
+    font-size: $usx-font-size-h1;
+  }
 }

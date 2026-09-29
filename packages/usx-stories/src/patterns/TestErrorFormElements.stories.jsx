@@ -37,7 +37,7 @@ const colorOptions = [
 // which shows every form input side by side with a single toggle that puts
 // them all into their error state at once.
 export default {
-  title: 'Examples/Error States',
+  title: 'States/Form Controls',
   parameters: { layout: 'padded' },
   argTypes: {
     error_state: {

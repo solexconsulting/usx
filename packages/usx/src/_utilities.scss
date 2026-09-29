@@ -56,29 +56,22 @@
   }
 }
 
-.usx-rounded-sm {
-  border-radius: $usx-radius-sm;
-  overflow: clip;
-}
-
-.usx-rounded-md {
-  border-radius: $usx-radius-md;
-  overflow: clip;
-}
-
-.usx-rounded-lg {
-  border-radius: $usx-radius-lg;
-  overflow: clip;
-}
-
-.usx-rounded-xl {
-  border-radius: $usx-radius-xl;
-  overflow: clip;
+@each $radius-name, $radius-value in $border-radius {
+  .usx-rounded-#{$radius-name} {
+    border-radius: $radius-value !important;
+    overflow: clip;
+  }
 }
 
 .usx-circle {
   border-radius: $usx-radius-full !important;
   overflow: clip;
+}
+
+@each $width-name, $width-value in $border-width {
+  .usx-border-#{$width-name} {
+    border-width: $width-value !important;
+  }
 }
 
 .usx-ping {

@@ -42,13 +42,6 @@ export const BlogPost = {
                   <span className="margin-left-2">Published March 15, 2024</span>
                   <span className="margin-left-2">5 min read</span>
                 </p>
-                <TagGroup
-                  tagProps={[
-                    { value: 'Technology', color: 'info' },
-                    { value: 'Innovation', color: 'success' },
-                  ]}
-                  className="margin-top-1"
-                />
               </div>
 
               <Image
@@ -81,9 +74,22 @@ export const BlogPost = {
                   <li>Measuring and iterating continuously</li>
                 </ol>
 
-                <Block variant="quote">
-                  <p>&quot;Digital transformation is not about technology—it&apos;s about people and processes.&quot;</p>
-                  <cite>— John Doe, CTO</cite>
+                <Block
+                  variant="callout"
+                  attribution={{
+                    avatarProps: {
+                      src: './george_washington.png',
+                      alt: 'George Washington',
+                      shape: 'circle'
+                    },
+                    primary: 'John Doe',
+                    secondary: 'CTO Somewhere Probably',
+                  }}
+                  big
+                  color="info"
+                  quote
+                >
+                  <p className="font-serif-md maxw-tablet margin-0">❝Digital transformation is not about technology—it's about people and processes.❞</p>
                 </Block>
 
                 <p>As we look to the future, the organizations that thrive will be those that embrace digital transformation not as a one-time project, but as an ongoing journey of innovation and adaptation.</p>

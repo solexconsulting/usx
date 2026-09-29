@@ -248,6 +248,7 @@ export const themeManifest = [
   scale('usx-textarea-radius', '--usx-textarea-radius', 'var(--usx-radius-field)', 'radius-advanced'),
   scale('usx-code-radius', '--usx-code-radius', 'var(--usx-radius-box)', 'radius-advanced'),
   scale('usx-summary-box-radius', '--usx-summary-box-radius', 'var(--usx-radius-box)', 'radius-advanced'),
+  scale('usx-card-radius', '--usx-card-radius', 'var(--usx-radius-box)', 'radius-advanced'),
   scale('usx-hero-callout-radius', '--usx-hero-callout-radius', 'var(--usx-radius-box)', 'radius-advanced'),
   scale('usx-image-radius', '--usx-image-radius', 'var(--usx-radius-box)', 'radius-advanced'),
   scale('usx-tag-radius', '--usx-tag-radius', 'var(--usx-radius-selector)', 'radius-advanced'),
@@ -267,6 +268,7 @@ export const themeManifest = [
   scale('usx-task-list-outer-border-width', '--usx-task-list-outer-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
   scale('usx-step-indicator-segment-bar-width', '--usx-step-indicator-segment-bar-width', 'var(--usx-border-width-xl)', 'border-advanced'),
   scale('usx-accordion-border-width', '--usx-accordion-border-width', 'var(--usx-border-width-lg)', 'border-advanced'),
+  scale('usx-card-border-width', '--usx-card-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
   scale('usx-button-outline-border-width', '--usx-button-outline-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
   scale('usx-switch-border-width', '--usx-switch-border-width', '2px', 'border-advanced'),
   scale('usx-file-input-border-width', '--usx-file-input-border-width', 'var(--usx-border-width-inputs)', 'border-advanced'),
@@ -281,7 +283,8 @@ export const themeManifest = [
     'Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif',
     'typography', 'font-family'),
   // Chains to font-family by default — see _variables.scss.
-  scale('font-family-heading', '--usx-font-family-heading', 'var(--usx-font-family)',
+  scale('font-family-heading', '--usx-font-family-heading',
+    'Merriweather Web, Georgia, Cambria, Times New Roman, Times, serif',
     'typography', 'font-family'),
   scale('font-size-base', '--usx-font-size-base', '1rem', 'typography'),
   scale('font-size-h1', '--usx-font-size-h1', '2.5rem', 'typography'),
@@ -314,6 +317,11 @@ export const themeManifest = [
 
   // ── Component tokens (hardcoded-hex promotions) ───────────────────────────
   component('usx-link-text', '#005ea2', 'color-primary'),
+  component('usx-card-bg', 'var(--usx-surface-3)'),
+  component('usx-card-text', 'var(--usx-text-ink)'),
+  component('usx-card-heading-text', 'var(--usx-card-text)'),
+  component('usx-card-media-bg', 'var(--usx-surface-3)'),
+  component('usx-card-border-color', 'var(--usx-color-border)'),
   component('usx-link-text-visited', 'var(--usx-color-visited)'),
   // USWDS swaps link/visited color to a light neutral on a dark background
   // (`.usa-dark-background`) instead of the illegible blue/purple defaults;

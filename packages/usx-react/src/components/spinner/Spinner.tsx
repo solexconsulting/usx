@@ -19,17 +19,17 @@ const getDefaultStaticUrlPrefix = () => {
 const Spinner: React.FC<SpinnerProps> = ({
   size = 3,
   color = null,
-  label = 'Loading...',
-  omitLabel = false,
+  label = null,
+  screenReaderLabel = null,
   staticUrlPrefix = getDefaultStaticUrlPrefix(),
   className = '',
   ...props
 }) => {
   return (
-    <span role="status" aria-live="polite" className={className} {...props}>
+    <span role="status" aria-live="polite" className={`usx-spinner ${className}`} {...props}>
       <svg
         className={
-          'usa-icon usx-spinner ' +
+          'usa-icon ' +
           (size === 1 ? 'usx-spinner--size-1' : 'usa-icon--size-' + size) +
           (color ? ' text-' + color : '')
         }
@@ -38,7 +38,8 @@ const Spinner: React.FC<SpinnerProps> = ({
       >
         <use href={staticUrlPrefix + 'spinner'} />
       </svg>
-      {!omitLabel && label && <span className="usa-sr-only">{label}</span>}
+      {screenReaderLabel && <span className="usa-sr-only">{screenReaderLabel}</span>}
+      {label && <span className="usa-label usx-label">{label}</span>}
     </span>
   );
 };

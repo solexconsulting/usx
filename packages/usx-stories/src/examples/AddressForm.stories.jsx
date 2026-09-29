@@ -16,7 +16,8 @@ import Select from '../../../usx-react/src/components/select/Select.tsx';
 import { headerArgs, footerArgs, identifierArgs } from './commonArgs.js';
 
 export default {
-  title: 'Examples/Patterns',
+  title: 'Examples/Data Collection',
+  parameters: { layout: 'fullscreen' },
 };
 
 const STATE_OPTIONS = [
@@ -30,7 +31,7 @@ const STATE_OPTIONS = [
   { value: 'VA', label: 'Virginia' },
 ];
 
-export const AddressFormPattern = {
+export const AddressForm = {
   render: () => (
     <>
       <Skipnav target="address-form-example" />

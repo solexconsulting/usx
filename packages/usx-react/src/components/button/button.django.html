@@ -5,7 +5,7 @@
         href="{{ href }}"
         class="
             usa-button usx-button
-            {% if variant and variant != '' %} usa-button--{{ variant }}{% endif %}
+            usa-button--{{ variant|default:'primary' }}
             {% if big == True %} usa-button--big{% endif %}
             {% if disabled == True %} usa-button--disabled{% endif %}
             {% if inverse == True %} usa-button--inverse{% endif %}
@@ -18,10 +18,10 @@
 {% else %}
 
     <button
-        type="{{ type }}"
+        type="{{ type|default:'button' }}"
         class="
             usa-button usx-button
-            {% if variant and variant != '' %} usa-button--{{ variant }}{% endif %}
+            usa-button--{{ variant|default:'primary' }}
             {% if big == True %} usa-button--big{% endif %}
             {% if disabled == True %} usa-button--disabled{% endif %}
             {% if inverse == True %} usa-button--inverse{% endif %}

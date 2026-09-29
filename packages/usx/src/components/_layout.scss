@@ -3,7 +3,6 @@
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-layout {
   position: relative;
-  min-height: 100vh;
 
   background-color: usx-when($usx-surface-1);
 
