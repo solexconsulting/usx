@@ -123,19 +123,29 @@ function buildThemesRegistryScss(themeManifest, themes, derive) {
   ].join('\n');
 }
 
+function writeIfChanged(filePath, content) {
+  if (fs.existsSync(filePath) && fs.readFileSync(filePath, 'utf8') === content) return;
+  fs.writeFileSync(filePath, content, 'utf8');
+}
+
 function writeThemes(themeManifest, derive, PRESETS) {
   const themes = resolvePresets(themeManifest, derive, PRESETS);
   const withTokens = themes.filter((t) => t.entries.length > 0);
 
-  fs.rmSync(themesDistDir, { recursive: true, force: true });
   fs.mkdirSync(themesDistDir, { recursive: true });
+  const expectedFiles = new Set(['all.css', ...withTokens.map((theme) => `${theme.slug}.css`)]);
+  for (const entry of fs.readdirSync(themesDistDir, { withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith('.css') || expectedFiles.has(entry.name)) continue;
+    const filePath = path.join(themesDistDir, entry.name);
+    if (fs.readFileSync(filePath, 'utf8').startsWith(GENERATED_CSS)) fs.unlinkSync(filePath);
+  }
   const files = withTokens.map((theme) => {
     const css = buildThemeFileCss(theme);
-    fs.writeFileSync(path.join(themesDistDir, `${theme.slug}.css`), css, 'utf8');
+    writeIfChanged(path.join(themesDistDir, `${theme.slug}.css`), css);
     return css.replace(GENERATED_CSS, '');
   });
-  fs.writeFileSync(path.join(themesDistDir, 'all.css'), GENERATED_CSS + files.join('\n'), 'utf8');
-  fs.writeFileSync(path.join(distDir, '_themes-registry.scss'), buildThemesRegistryScss(themeManifest, themes, derive), 'utf8');
+  writeIfChanged(path.join(themesDistDir, 'all.css'), GENERATED_CSS + files.join('\n'));
+  writeIfChanged(path.join(distDir, '_themes-registry.scss'), buildThemesRegistryScss(themeManifest, themes, derive));
   return withTokens.map((t) => t.slug);
 }
 
@@ -147,14 +157,13 @@ async function build() {
 
   fs.mkdirSync(distDir, { recursive: true });
 
-  fs.writeFileSync(path.join(distDir, 'tokens.css'), buildCss(tokens), 'utf8');
-  fs.writeFileSync(path.join(distDir, 'theme.css'), buildThemeCss(themeManifest), 'utf8');
-  fs.writeFileSync(path.join(distDir, '_hooks.scss'), buildHooksScss(themeManifest), 'utf8');
-  fs.writeFileSync(path.join(distDir, 'tokens.js'), buildJs(tokens), 'utf8');
-  fs.writeFileSync(
+  writeIfChanged(path.join(distDir, 'tokens.css'), buildCss(tokens));
+  writeIfChanged(path.join(distDir, 'theme.css'), buildThemeCss(themeManifest));
+  writeIfChanged(path.join(distDir, '_hooks.scss'), buildHooksScss(themeManifest));
+  writeIfChanged(path.join(distDir, 'tokens.js'), buildJs(tokens));
+  writeIfChanged(
     path.join(distDir, 'theme-manifest.json'),
-    JSON.stringify(themeManifest, null, 2) + '\n',
-    'utf8'
+    JSON.stringify(themeManifest, null, 2) + '\n'
   );
   const slugs = writeThemes(themeManifest, derive, PRESETS);
 

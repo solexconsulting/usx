@@ -17,6 +17,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 import * as sass from 'sass';
 import { themeManifest } from '../src/theme-manifest.js';
 import { PRESETS } from '../src/presets.js';
@@ -28,6 +29,15 @@ const failures = [];
 const fail = (msg) => failures.push(msg);
 
 const cssVars = new Set(themeManifest.map((t) => t.cssVar));
+
+const generatedFiles = fs.readdirSync(distDir, { recursive: true })
+  .map((file) => path.join(distDir, file))
+  .filter((file) => fs.statSync(file).isFile());
+const previousWrites = new Map(generatedFiles.map((file) => [file, fs.statSync(file).mtimeMs]));
+execFileSync(process.execPath, [path.join(pkgDir, 'build.js')]);
+for (const [file, modified] of previousWrites) {
+  if (fs.statSync(file).mtimeMs !== modified) fail(`unchanged build rewrote ${path.relative(distDir, file)}`);
+}
 
 for (const [name, preset] of Object.entries(PRESETS)) {
   const resolved = resolveTheme(preset);

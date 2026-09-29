@@ -87,6 +87,36 @@ From the repository root:
 Both of this app's own scripts (`dev`, `build`) build `packages/usx-theme` first so
 `theme.css` exists before Storybook starts.
 
+### Focused Development
+
+Limit the development story index to a folder, a technology, or both:
+
+```bash
+STORYBOOK_STORY_PATH=components/footer pnpm dev
+STORYBOOK_TECHNOLOGY=React pnpm dev
+STORYBOOK_STORY_PATH=components/footer STORYBOOK_TECHNOLOGY=React pnpm dev
+STORYBOOK_STORY_PATH=examples pnpm dev
+```
+
+`STORYBOOK_STORY_PATH` is a folder relative to `packages/usx-stories/src`.
+`STORYBOOK_TECHNOLOGY` accepts `React`, `Django`, or `HTML`; stories without a
+technology suffix (such as examples and documentation) remain included within
+the selected folder. Imported dependencies can still load across technologies.
+Restart the dev server after changing these environment variables. Without them,
+all stories are indexed. Production builds always include the full catalog.
+
+JS and story edits use Vite's normal HMR. The custom full-reload fallback is
+limited to package Sass files, including theme source variables and generated
+hooks. Runtime theme CSS uses normal CSS HMR, and the theme builder only writes
+outputs whose contents changed. Filesystem polling remains enabled for this
+workspace's mount.
+
+Run the development-config regression checks with:
+
+```bash
+node --test apps/storybook/.storybook/main.test.mjs
+```
+
 ## Login example provider buttons
 
 The login pattern uses USX components and SOLEX branding. Account, recovery, and

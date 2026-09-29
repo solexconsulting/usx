@@ -2,7 +2,25 @@ import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 import { NodePackageImporter } from "sass";
 export default {
-  stories: ['../../../packages/usx-stories/src/**/*stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: (existingStories, { configType } = {}) => {
+    const root = '../../../packages/usx-stories/src';
+    const extensions = '@(js|jsx|mjs|ts|tsx)';
+    if (configType !== 'DEVELOPMENT') return [`${root}/**/*stories.${extensions}`];
+
+    const storyPath = process.env.STORYBOOK_STORY_PATH || '';
+    const technology = process.env.STORYBOOK_TECHNOLOGY || '';
+    if (storyPath && !/^[\w-]+(?:\/[\w-]+)*$/.test(storyPath)) {
+      throw new Error('STORYBOOK_STORY_PATH must be a relative folder under packages/usx-stories/src, e.g. components/footer');
+    }
+    if (technology && !['React', 'Django', 'HTML'].includes(technology)) {
+      throw new Error('STORYBOOK_TECHNOLOGY must be React, Django, or HTML');
+    }
+    const directory = storyPath ? `${root}/${storyPath}` : root;
+    return technology ? [
+      `${directory}/**/*.${technology}.stories.${extensions}`,
+      `${directory}/**/!(*.React|*.Django|*.HTML).stories.${extensions}`,
+    ] : [`${directory}/**/*stories.${extensions}`];
+  },
 
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
@@ -44,34 +62,19 @@ export default {
     config.server.watch.usePolling = true;
     config.server.watch.interval = 300;
 
-    // `packages/usx-theme/src/*` (_variables.scss, theme-manifest.js,
-    // system-colors.generated.js) is only ever reached indirectly through
-    // Sass's `pkg:@solexllc/usx-theme/...` NodePackageImporter resolution.
-    // Vite's CSS dependency graph can't see through that custom importer,
-    // so it never knows any *.scss that `@use`s these files needs to be
-    // recompiled when they change — even `devSourcemap` and a full browser
-    // reload aren't enough, since the stale transform is cached server-side.
-    // `packages/usx-theme/dist/*` (_hooks.scss, theme.css, theme-manifest.json)
-    // has the exact same problem — it's what `pkg:@solexllc/usx-theme/hooks`
-    // actually resolves to (regenerated from src by the tokens package's own
-    // build/watch process). `packages/usx/src/*` and
-    // `packages/usx-uswds-fixes/src/*` are reached the same way via
-    // core.scss's `@use 'pkg:...'`, so they share the blind spot.
-    // Explicitly watch all of them and, on change, drop the cached style
-    // transforms and request a full preview reload.
+    // Sass's pkg: importer hides some dependencies from Vite. Watch source
+    // partials and generated Sass directly, but leave JS and runtime CSS to HMR.
     config.plugins ??= [];
     config.plugins.push({
       name: 'usx-sass-watch-reload',
       configureServer(server) {
         const watchDirs = [
+          '../../../packages/usx-theme/src',
           '../../../packages/usx-theme/dist',
           '../../../packages/usx/src',
           '../../../packages/usx-uswds-fixes/src',
           '../../../packages/usx-react/src',
-          '../../../packages/usx-stories/src',
         ].map((p) => fileURLToPath(new URL(p, import.meta.url)));
-        // usx-theme/src changes are picked up by the tokens watcher (`pnpm dev`),
-        // which rewrites tokens/dist — that write is what triggers the reload.
         for (const dir of watchDirs) server.watcher.add(dir);
 
         // Drop only the cached style transforms. Invalidating the whole module
@@ -86,14 +89,21 @@ export default {
         };
 
         let debounceTimer = null;
-        server.watcher.on('change', (file) => {
-          if (!watchDirs.some((dir) => file.startsWith(dir))) return;
+        const onStyleChange = (event, file) => {
+          if (!['add', 'change', 'unlink'].includes(event)) return;
+          if (!/\.(scss|sass)$/.test(file)) return;
+          if (!watchDirs.some((dir) => file.startsWith(`${dir}/`))) return;
           clearTimeout(debounceTimer);
           debounceTimer = setTimeout(() => {
             invalidateStyleModules();
             server.config.logger.info(`[usx-sass-watch-reload] ${file} changed, reloading preview...`, { timestamp: true });
             server.ws.send({ type: 'full-reload', path: '*' });
           }, 400);
+        };
+        server.watcher.on('all', onStyleChange);
+        server.httpServer?.once('close', () => {
+          clearTimeout(debounceTimer);
+          server.watcher.off('all', onStyleChange);
         });
       },
     });
