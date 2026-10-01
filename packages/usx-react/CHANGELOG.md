@@ -1,5 +1,18 @@
 # @solexllc/usx-react
 
+## 0.3.1
+
+### Patch Changes
+
+- [`4791d75`](https://github.com/solexconsulting/usx/commit/4791d75cc1d12987c405ddd963ff48001eb1543e) Thanks [@olsonap](https://github.com/olsonap)! - Remove the unused early variables import from the Sass entry so the existing themed entry initializes runtime hooks before component styles. This avoids requiring a separate hooks import in consuming stylesheets when theme modules resolve to one canonical path.
+
+  Document shared layout and gutter helpers, custom breakpoint configuration, and integration with unchanged precompiled USWDS CSS. Clarify the distinction between USX layout breakpoints and the upstream Header navigation transition.
+
+- Updated dependencies [[`4791d75`](https://github.com/solexconsulting/usx/commit/4791d75cc1d12987c405ddd963ff48001eb1543e), [`4791d75`](https://github.com/solexconsulting/usx/commit/4791d75cc1d12987c405ddd963ff48001eb1543e)]:
+  - @solexllc/usx@0.4.0
+  - @solexllc/usx-theme@0.5.0
+  - @solexllc/usx-uswds-fixes@0.1.9
+
 ## 0.3.0
 
 ### Minor Changes
