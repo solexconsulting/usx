@@ -1,5 +1,12 @@
 # @solexllc/usx-uswds-fixes
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [[`4791d75`](https://github.com/solexconsulting/usx/commit/4791d75cc1d12987c405ddd963ff48001eb1543e)]:
+  - @solexllc/usx-theme@0.5.0
+
 ## 0.1.8
 
 ### Patch Changes
