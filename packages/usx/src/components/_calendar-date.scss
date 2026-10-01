@@ -37,7 +37,7 @@
   }
 }
 
-@media (width >= 40em) {
+@include at-media('tablet') {
   .usx-calendar-date {
     &:not(.usx-collection *) {
       width: 5rem;

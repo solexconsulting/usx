@@ -7,8 +7,8 @@
   $expanded-max: $usx-layout-expanded-max-width,
   $sidebar-width: $usx-layout-sidebar-width,
   $content-min: $usx-layout-content-min-width,
-  $gutter-mobile: units(1.5),
-  $gutter: units(4)
+  $gutter-mobile: $usx-layout-gutter-mobile-default,
+  $gutter: $usx-layout-gutter-default
 ) {
   $minimum: math.min($content-max, $content-min);
   $grids: (
@@ -19,7 +19,7 @@
   --layout-gutter: #{usx-when($usx-layout-gutter-mobile, $usx-layout-gutter-mobile, $gutter-mobile)};
   --layout-sidebar-gap: #{usx-when($usx-layout-gutter, $usx-layout-gutter, $gutter)};
 
-  @media (min-width: $usx-layout-breakpoint) {
+  @include at-media('desktop') {
     --layout-gutter: #{usx-when($usx-layout-gutter, $usx-layout-gutter, $gutter)};
   }
 
@@ -231,4 +231,10 @@
 
   @include sizing;
 }
+
+.grid-container,
+.usa-identifier__container {
+  @include layout-container;
+}
+
 /* stylelint-enable selector-class-pattern */

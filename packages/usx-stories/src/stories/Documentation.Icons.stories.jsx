@@ -71,6 +71,7 @@ function IconTile({ icon }) {
         background: 'transparent',
         cursor: 'pointer',
       }}
+      className="text-ink"
     >
       {icon.source !== 'uswds' ? (
         <span

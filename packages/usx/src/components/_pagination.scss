@@ -12,7 +12,7 @@
     border-top: 1px solid $usx-color-base;
   }
 
-  @media (width >=#{$breakpoint-desktop}) {
+  @include at-media('desktop') {
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
@@ -23,7 +23,7 @@
   place-content: center center;
   align-items: center;
 
-  @media (width >=#{$breakpoint-desktop}) {
+  @include at-media('desktop') {
     flex: 1 1 auto;
   }
 }
@@ -35,14 +35,14 @@
   align-items: start;
   gap: 1rem;
 
-  @media (width >=#{$breakpoint-tablet}) {
+  @include at-media('tablet') {
     width: 100%;
     flex-flow: row wrap;
     align-items: center;
     justify-content: space-between;
   }
 
-  @media (width >=#{$breakpoint-desktop}) {
+  @include at-media('desktop') {
     width: auto;
     flex: 0 1 auto;
     flex-flow: row wrap;

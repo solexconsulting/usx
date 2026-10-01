@@ -98,7 +98,8 @@ loading component styles. Existing `$max-layout-width` and `$max-sidebar-width`
 remain the static defaults when the new width settings are unset. Runtime gutter
 hooks take precedence in the themed build. `$usx-layout-breakpoint` defaults to
 `$breakpoint-desktop` (1024px) and accepts a CSS length such as `880px`.
-It controls the outer gutters, not sidebar visibility. Configure it at
+It controls outer gutters and USX-owned desktop transitions, including Hero,
+MiscBanner, Pagination, and `at-media('desktop')`, not sidebar visibility. Configure it at
 compile time, since CSS custom properties cannot set media-query thresholds.
 
 CSS container queries show the expand/contract button only when the two widths
@@ -108,17 +109,35 @@ The expanded state is preserved when resizing temporarily removes the difference
 Django and static HTML use the same sizing and visibility rules.
 
 The `layout.sizing()` mixin accepts `$gutter-mobile` and `$gutter` lengths
-(defaults: 12px and 32px). It uses these for static padding and subtracts them
+(defaults: `$usx-layout-gutter-mobile-default`, 12px, and
+`$usx-layout-gutter-default`, 32px). It uses these for static padding and subtracts them
 from the expansion thresholds at the corresponding viewport breakpoint.
 For custom gutters, pass the same lengths used by your runtime gutter tokens
 or static Sass overrides. CSS size queries cannot read custom properties, so
 changing runtime gutters alone does not update the compiled button threshold.
 The compact comparison uses `$gutter-mobile: 1rem` and `$gutter: 2.5rem`.
 
-The custom grid does not require `grid-row`, `grid-col`, or `grid-gap`. USWDS's
-site-margin settings still control its own containers; align those settings
-with the USX gutter values when mixing both container types. Do not add a
+The custom grid does not require `grid-row`, `grid-col`, or `grid-gap`. Shared
+`grid-container`, Banner, Header, Hero, MiscBanner, and Identifier containers use
+the same maximum and responsive gutters. Hero's horizontal tablet padding now
+matches Layout rather than adding a separate intermediate gutter. Do not add a
 second padded `grid-container` around Layout unless nested gutters are intended.
+
+Use `@include layout-container` for new page-shell containers, or
+`@include layout-gutters` for padding alone. `at-media('desktop', 'max')` emits
+an exclusive below-desktop query; `at-media('tablet')` reads
+`$breakpoint-tablet`. The legacy `at-media('mobile')` means below tablet.
+Legacy width and breakpoint variables remain default aliases, but new styles
+should consume the `$usx-layout-*` settings and media helpers.
+
+Load USWDS's precompiled CSS unchanged, then load USX as an overlay. No USWDS Sass
+configuration or compilation is required. USX settings do not redefine upstream
+`desktop:*` or `tablet:*` utilities. Header's mobile drawer and desktop structure
+remain controlled by upstream CSS; use `at-media('uswds-header')` for appearance
+overrides that must follow that transition. Its shared 64em compatibility value
+is not a USWDS customization. Header container widths and gutters still use USX
+layout settings. Use USX-owned selectors and media helpers when custom responsive
+behavior is needed rather than changing the meaning of upstream utility classes.
 
 Layout stories use fullscreen previews. `ResponsiveComparison` and
 `ThemedComparison` cover no, left, right, and both sidebars. When checking

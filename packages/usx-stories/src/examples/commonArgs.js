@@ -173,5 +173,5 @@ export const identifierArgs = {
     { href: '#', label: 'Performance reports' },
     { href: '#', label: 'Privacy policy' },
   ],
-  taxpayerDisclaimer: true,
+  taxpayerDisclaimer: false,
 };

@@ -113,7 +113,7 @@
   }
 }
 
-@media (width >= 40em) {
+@include at-media('tablet') {
   .usa-card--flag .usa-card__media:not(.usa-card__media--inset) {
     .usx-card__carousel {
       border-radius: 0;

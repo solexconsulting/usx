@@ -42,7 +42,18 @@ export default {
     config.css ??= {};
     config.css.preprocessorOptions ??= {};
     config.css.preprocessorOptions.scss ??= {};
-    config.css.preprocessorOptions.scss.importers = [new NodePackageImporter()];
+    config.css.preprocessorOptions.scss.importers = [
+      {
+        findFileUrl(url) {
+          const themeModules = {
+            'pkg:@solexllc/usx-theme/variables': '../../../packages/usx-theme/src/_variables.scss',
+            'pkg:@solexllc/usx-theme/hooks': '../../../packages/usx-theme/dist/_hooks.scss',
+          };
+          return themeModules[url] ? new URL(themeModules[url], import.meta.url) : null;
+        },
+      },
+      new NodePackageImporter(fileURLToPath(new URL('../', import.meta.url))),
+    ];
 
     // Vite discovers a Sass file's dependencies (for HMR/cache invalidation)
     // from the compiler's sourcemap. Files reached only through the custom

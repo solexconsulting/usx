@@ -43,7 +43,7 @@
 			border-radius: 0;
 		}
 
-		@media (min-width: $breakpoint-tablet) {
+		@include at-media('tablet') {
 			&.usa-card--flag {
 				.usa-card__img {
 					border-radius: $inner-radius 0 0 $inner-radius;
@@ -80,7 +80,7 @@
 			margin-top: 0;
 		}
 
-		@media (min-width: $breakpoint-tablet) {
+		@include at-media('tablet') {
 			&.usa-card--flag .usa-card__media--exdent {
 				margin: calc(-1 * #{$usx-card-border-width});
 			}

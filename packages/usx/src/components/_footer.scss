@@ -2,6 +2,14 @@
 
 /* stylelint-disable selector-class-pattern, no-descending-specificity -- Public USX classes use BEM naming; intentional cascade order. */
 .usx-footer {
+  > .grid-container,
+  > .usa-footer__primary-section > .grid-container,
+  > .usa-footer__secondary-section > .grid-container,
+  > .usa-footer__primary-section > .usa-footer__nav,
+  > .usa-footer__primary-section > .usa-footer__primary-container {
+    @include layout-container;
+  }
+
   background-color: usx-when($usx-footer-bg);
 
   border-top: usx-when($usx-footer-border-top);
@@ -28,6 +36,10 @@
   }
 
   // ── Sign-up form ─────────────────────────────────────────────────────────
+  .usa-sign-up .usa-form {
+    max-width: 100%;
+  }
+
   &__sign-up {
     .usa-sign-up__heading {
       color: usx-when($usx-footer-heading-text);

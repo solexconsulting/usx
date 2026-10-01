@@ -7,10 +7,9 @@
   margin-left: 0;
 }
 
-@media (width < 64rem) {
+@include at-media('uswds-header', 'max') {
   .usa-navbar .usx-logo {
-    padding-left: units(1.5);
-    padding-right: units(1.5);
+    padding-inline: usx-when($usx-layout-gutter-mobile, $usx-layout-gutter-mobile, $usx-layout-gutter-mobile-default);
   }
 }
 
@@ -23,7 +22,7 @@
     max-height: 1.75rem;
     width: auto;
 
-    @media (width >= 64em) {
+    @include at-media('uswds-header') {
       max-height: 3rem;
     }
   }

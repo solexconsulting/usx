@@ -66,6 +66,33 @@ exists.
 > is a larger, not-yet-implemented restructuring — see
 > [plan-storybookArchitecture.md](../../plan-storybookArchitecture.md).
 
+## Shared Layout Settings
+
+The preview loads unchanged, precompiled USWDS CSS, followed by the USX overlay.
+USX does not configure or compile USWDS Sass. Shared USX container styles apply
+the layout maximum and responsive gutter tokens. USX-owned responsive rules use
+the layout and tablet breakpoint settings; upstream `desktop:*` and `tablet:*`
+utilities retain their original meanings. Content widths remain separate from
+viewport breakpoints.
+
+Header's drawer structure is provided by USWDS. Its USX appearance overrides
+use `at-media('uswds-header')` / `$uswds-header-breakpoint`, a
+compatibility reference to the upstream 64em transition, not a vendor setting.
+Changing the USX layout breakpoint does not move the vendor navigation transition.
+
+[.storybook/main.js](.storybook/main.js) resolves theme hooks and variables to
+one canonical module, avoiding independent copies through pnpm symlinks. For
+project-wide overrides, configure `pkg:@solexllc/usx-theme/hooks` through Vite's
+SCSS `additionalData`, before any stylesheet loads. The React themed stylesheet
+entry initializes hooks before component styles; the preview needs no separate
+hooks import. Story image sources use illustrative media queries independent of
+the layout breakpoints.
+
+Run `pnpm --filter @solexllc/storybook test` to check default, narrower, and wider
+USX configurations, unchanged vendor utility and navigation breakpoints, and the
+absence of vendor Sass compilation. Runtime gutter changes still require matching
+compile-time lengths for Layout's expansion queries.
+
 ## Running the Django-rendered stories
 
 Django stories require the companion Django app to be running — see

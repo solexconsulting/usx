@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter @solexllc/usx-theme build && storybook dev -p 6006 -h 0.0.0.0",
-    "build": "pnpm --filter @solexllc/usx-theme build && storybook build"
+    "build": "pnpm --filter @solexllc/usx-theme build && storybook build",
+    "test": "node test/layout-check.mjs"
   },
   "devDependencies": {
     "@solexllc/usx": "workspace:*",

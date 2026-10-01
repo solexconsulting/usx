@@ -50,18 +50,22 @@ export const Utilities = {
         </tbody>
       </table>
 
-      <h3>Responsive Media Query Mixin: <code>at-media($breakpoint)</code></h3>
+      <h3>Responsive Media Query Mixin: <code>at-media($breakpoint, $direction: 'min')</code></h3>
       <p>
-        Generates standard media queries matching USX's breakpoint definitions.
+        Generates queries from the shared Sass settings. Desktop uses <code>$usx-layout-breakpoint</code>;
+        tablet uses <code>$breakpoint-tablet</code>. Pass <code>'max'</code> for an exclusive upper bound,
+        such as <code>at-media('desktop', 'max')</code>. The legacy <code>'mobile'</code> call means below tablet.
+        These helpers do not reconfigure USWDS or change its responsive utility classes.
       </p>
       <table className="usa-table usx-table usa-table--borderless width-full">
         <thead>
           <tr><th>Breakpoint Name</th><th>Media Query Condition</th><th>Target Display Device</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>'mobile'</code></td><td><code>(max-width: 639px)</code></td><td>Mobile phones / small screens</td></tr>
+          <tr><td><code>'mobile'</code></td><td><code>(width &lt; 640px)</code></td><td>Mobile phones / small screens</td></tr>
           <tr><td><code>'tablet'</code></td><td><code>(min-width: 640px)</code></td><td>Tablets and wider viewports</td></tr>
           <tr><td><code>'desktop'</code></td><td><code>(min-width: 1024px)</code></td><td>Desktop displays and monitors</td></tr>
+          <tr><td><code>'uswds-header'</code></td><td><code>(min-width: 64em)</code></td><td>Appearance overrides matching the unchanged USWDS Header transition</td></tr>
         </tbody>
       </table>
       <Code
@@ -107,13 +111,24 @@ export const Utilities = {
           <tr><th>Variable</th><th>Default Value</th><th>Purpose</th></tr>
         </thead>
         <tbody>
-          <tr><td><code>$max-layout-width</code></td><td><code>60rem</code> (960px)</td><td>Maximum width container for content layouts</td></tr>
-          <tr><td><code>$max-sidebar-width</code></td><td><code>16rem</code> (256px)</td><td>Standard layout sidebar width</td></tr>
+          <tr><td><code>$usx-layout-max-width</code></td><td><code>64rem</code></td><td>Shared page container width, including outer gutters</td></tr>
+          <tr><td><code>$usx-layout-expanded-max-width</code></td><td><code>100rem</code></td><td>Expanded Layout maximum</td></tr>
+          <tr><td><code>$usx-layout-sidebar-width</code></td><td><code>16rem</code></td><td>Sidebar width, including its inner gap</td></tr>
+          <tr><td><code>$usx-layout-content-min-width</code></td><td><code>32rem</code></td><td>Minimum content capacity before sidebars appear</td></tr>
+          <tr><td><code>$usx-layout-gutter-mobile-default</code></td><td><code>12px</code></td><td>Static mobile gutter and sizing-query input</td></tr>
+          <tr><td><code>$usx-layout-gutter-default</code></td><td><code>32px</code></td><td>Static desktop gutter and sizing-query input</td></tr>
           <tr><td><code>$breakpoint-mobile</code></td><td><code>640px</code></td><td>Mobile breakpoint threshold</td></tr>
           <tr><td><code>$breakpoint-tablet</code></td><td><code>640px</code></td><td>Tablet breakpoint threshold</td></tr>
-          <tr><td><code>$breakpoint-desktop</code></td><td><code>1024px</code></td><td>Desktop breakpoint threshold</td></tr>
+          <tr><td><code>$usx-layout-breakpoint</code></td><td><code>1024px</code></td><td>Shared desktop transition; defaults to the legacy <code>$breakpoint-desktop</code></td></tr>
         </tbody>
       </table>
+
+      <p>
+        Use <code>@include layout-container;</code> for a border-box page container with the shared maximum,
+        centered margins, and responsive gutters. Use <code>@include layout-gutters;</code> when only padding
+        is needed. Both honor the runtime gutter tokens in themed builds. Layout itself owns its outer padding;
+        do not wrap it in another padded container. Sidebar visibility stays container-based, not viewport-based.
+      </p>
 
       <hr className="margin-y-5" />
 

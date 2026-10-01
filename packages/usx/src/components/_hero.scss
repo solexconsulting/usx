@@ -6,7 +6,6 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-hero {
-  position: relative;
   display: flex;
   align-items: center;
   background-color: #010610;
@@ -21,35 +20,22 @@
 
   color: usx-when($usx-hero-text);
 
-  &--has-overlay::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: rgb(0 0 0 / 35%);
-    pointer-events: none;
-
-    background-color: usx-when($usx-hero-overlay-bg);
+  &--has-overlay {
+    box-shadow: inset 0 0 0 100vmax usx-when($usx-hero-overlay-bg, $usx-hero-overlay-bg, rgb(0 0 0 / 35%));
   }
 
   &__inner {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
-    margin-inline: auto;
-    padding: units(6) units(1.5);
+    @include layout-container;
 
-    @media (width >= 40em) {
-      padding: units(8) units(3);
-    }
+    padding-block: units(6);
 
-    @media (width >= 64rem) {
-      padding: units(8) units(4);
+    @include at-media('tablet') {
+      padding-block: units(8);
     }
   }
 
-  &--has-overlay.usx-hero--custom-overlay::before {
-    background-color: rgb(0 0 0 / clamp(0, var(--hero-overlay-opacity), 1));
+  &--has-overlay.usx-hero--custom-overlay {
+    box-shadow: inset 0 0 0 100vmax rgb(0 0 0 / clamp(0, var(--hero-overlay-opacity), 1));
   }
 
   &__callout {
@@ -65,11 +51,11 @@
 
     background-color: usx-when($usx-hero-callout-bg);
 
-    @media (width >= 40rem) {
+    @include at-media('tablet') {
       padding: units(5);
     }
 
-    @media (width >= 64rem) {
+    @include at-media('desktop') {
       padding: usx-when($usx-hero-callout-padding, $usx-hero-callout-padding, units(5));
       max-width: usx-when($usx-hero-callout-max-width, $usx-hero-callout-max-width, 40rem);
 
@@ -117,7 +103,7 @@
     text-align: center;
   }
 
-  @media (width >= 64em) {
+  @include at-media('desktop') {
     &--split:not(.usx-hero--content-center) &__inner {
       display: grid;
       grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);

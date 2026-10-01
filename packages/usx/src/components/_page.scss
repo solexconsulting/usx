@@ -18,7 +18,7 @@
     display: block;
 
     p {
-      max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
+      max-width: $usx-layout-max-width;
     }
   }
 }

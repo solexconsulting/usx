@@ -1,14 +1,4 @@
-/* styles.scss */
-/*
-@use "uswds-core" with (
-    $theme-image-path: "../uswds/img",
-    $theme-color-primary-family: red
-);
-@forward 'uswds';
-*/
-
-//@forward "./node_modules/@uswds/uswds/packages/uswds/_index.scss";
-@forward "../../../packages/usx-react/src/styles/core.scss";
+@forward "../../../packages/usx-react/src/styles/core";
 @use "../../../packages/usx/src/components/layout";
 
 .usx-layout.usx-layout--compact {

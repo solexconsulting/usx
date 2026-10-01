@@ -51,6 +51,8 @@ $usx-layout-gutter-mobile-var: null !default;
 $usx-layout-gutter-mobile: usx-var($usx-layout-gutter-mobile-var) !default;
 $usx-layout-gutter-var: null !default;
 $usx-layout-gutter: usx-var($usx-layout-gutter-var) !default;
+$usx-layout-gutter-mobile-default: 12px !default;
+$usx-layout-gutter-default: 32px !default;
 $usx-layout-max-width: $max-layout-width !default;
 $usx-layout-expanded-max-width: 100rem !default;  // 1600px
 $usx-layout-sidebar-width: $max-sidebar-width !default;
@@ -61,6 +63,7 @@ $breakpoint-mobile: 640px !default;
 $breakpoint-tablet: 640px !default;
 $breakpoint-desktop: 1024px !default;
 $usx-layout-breakpoint: $breakpoint-desktop !default;
+$uswds-header-breakpoint: 64em;
 
 // ── Color — primitives ──────────────────────────────────────────────────────
 $usx-color-primary-var: null !default;
@@ -451,22 +454,55 @@ $usx-spacing-xl: usx-var($usx-spacing-xl-var) !default;
 }
 
 // ── Responsive mixin ─────────────────────────────────────────────────────────
-@mixin at-media($breakpoint) {
-  @if $breakpoint == 'mobile' {
-    @media (max-width: ($breakpoint-tablet - 1px)) {
+@mixin at-media($breakpoint, $direction: 'min') {
+  $width: null;
+
+  @if $breakpoint == 'mobile' and $direction == 'min' {
+    @include at-media('tablet', 'max') {
       @content;
     }
+  } @else if $breakpoint == 'mobile' {
+    $width: $breakpoint-mobile;
   } @else if $breakpoint == 'tablet' {
-    @media (min-width: $breakpoint-tablet) {
-      @content;
-    }
+    $width: $breakpoint-tablet;
   } @else if $breakpoint == 'desktop' {
-    @media (min-width: $breakpoint-desktop) {
-      @content;
-    }
+    $width: $usx-layout-breakpoint;
+  } @else if $breakpoint == 'uswds-header' {
+    $width: $uswds-header-breakpoint;
   } @else {
     @warn "Unknown breakpoint: #{$breakpoint}";
   }
+
+  @if $width {
+    @if $direction == 'max' {
+      @media (width < #{$width}) {
+        @content;
+      }
+    } @else if $direction == 'min' {
+      @media (min-width: $width) {
+        @content;
+      }
+    } @else {
+      @error "Unknown breakpoint direction: #{$direction}";
+    }
+  }
+}
+
+@mixin layout-gutters {
+  padding-inline: usx-when($usx-layout-gutter-mobile, $usx-layout-gutter-mobile, $usx-layout-gutter-mobile-default);
+
+  @include at-media('desktop') {
+    padding-inline: usx-when($usx-layout-gutter, $usx-layout-gutter, $usx-layout-gutter-default);
+  }
+}
+
+@mixin layout-container($max-width: $usx-layout-max-width) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: $max-width;
+  margin-inline: auto;
+
+  @include layout-gutters;
 }
 
 // ── Color function ───────────────────────────────────────────────────────────

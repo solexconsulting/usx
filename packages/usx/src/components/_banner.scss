@@ -2,6 +2,18 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usa-banner.usx-banner {
+  .usa-banner__inner,
+  .usa-banner__content {
+    @include layout-container;
+  }
+
+  // Supports max layout widths larger than 64rem
+  @include at-media('tablet') {
+    .usa-banner__guidance {
+      max-width: unset;
+    }
+  }
+
   background-color: usx-when($usx-banner-bg);
 
   color: usx-when($usx-banner-text);
