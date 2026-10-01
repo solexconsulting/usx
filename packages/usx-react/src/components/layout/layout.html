@@ -30,7 +30,8 @@
 
 <!-- Expandable Layout Example -->
 <div class="usx-layout">
-  <button type="button" class="usx-layout__expand-button" aria-expanded="false" aria-label="Expand">
+  <div class="usx-layout__single-column">
+  <button type="button" class="usx-layout__expand-button" aria-expanded="false" aria-label="Expand" onclick="const expanded = this.closest('.usx-layout').classList.toggle('usx-expanded'); this.setAttribute('aria-expanded', expanded); this.setAttribute('aria-label', expanded ? 'Contract' : 'Expand');">
     <svg class="usa-icon usx-layout__expand-icon usx-layout__expand-icon--expand" aria-hidden="true" focusable="false" role="img">
       <use href="./img/usx-sprite.svg#expand"></use>
     </svg>
@@ -38,7 +39,6 @@
       <use href="./img/usx-sprite.svg#contract"></use>
     </svg>
   </button>
-  <div class="usx-layout__single-column">
     <h1>Page Title</h1>
     <p>Use the expand button in the top-right corner to grow the layout to a wider max-width.</p>
   </div>

@@ -136,7 +136,7 @@ export const UswdsJsInit = {
           { code: '    combobox.init();' },
           { code: '  }, [/* re-run whenever the enhanceable markup changes */]);' },
           { code: '' },
-          { code: '  return &lt;select className="usa-combo-box" ...&gt;...&lt;/select&gt;;' },
+          { code: '  return <select className="usa-combo-box" ...>...</select>;' },
           { code: '}' }
         ]}
       />
@@ -171,7 +171,7 @@ export const UswdsJsInit = {
           { code: '    combobox.init();' },
           { code: '  }, []);' },
           { code: '' },
-          { code: '  return &lt;select className="usa-combo-box" ...&gt;...&lt;/select&gt;;' },
+          { code: '  return <select className="usa-combo-box" ...>...</select>;' },
           { code: '}' }
         ]}
       />

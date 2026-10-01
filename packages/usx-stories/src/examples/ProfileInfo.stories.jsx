@@ -123,8 +123,7 @@ export const ProfileInfo = {
                 ]}
               />
             </Section>
-          <section className="margin-y-4" aria-labelledby="profile-quick-info-heading">
-            <h2 id="profile-quick-info-heading" className="margin-top-0 font-sans-lg">Quick Info</h2>
+          <Section title="Quick Info" className="margin-y-4">
             <dl className="font-sans-sm">
               <dt className="text-bold">Direct Supervisor</dt>
               <dd className="margin-left-0 margin-bottom-3">Jane Doe (Director of Tech)</dd>
@@ -133,7 +132,7 @@ export const ProfileInfo = {
               <dt className="text-bold">Time Zone</dt>
               <dd className="margin-left-0">Eastern Time (America/New_York)</dd>
             </dl>
-          </section>
+          </Section>
           </Page>
         }
       />

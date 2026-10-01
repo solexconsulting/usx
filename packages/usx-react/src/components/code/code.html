@@ -32,6 +32,49 @@
   </div>
 </div>
 
+<h3 class="site-preview-heading">HTML Markup as Literal Text</h3>
+<div class="usx-mockup-code">
+  <div class="usx-mockup-code__content">
+    <pre data-prefix="1"><code>&lt;section aria-label="Account &amp; settings"&gt;</code></pre>
+    <pre data-prefix="2"><code>  &lt;h2&gt;Contact information&lt;/h2&gt;</code></pre>
+    <pre data-prefix="3"><code>  &lt;p&gt;Use &amp;lt;Page&amp;gt; to define the page.&lt;/p&gt;</code></pre>
+    <pre data-prefix="4"><code>&lt;/section&gt;</code></pre>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">React Markup as Literal Text</h3>
+<div class="usx-mockup-code">
+  <div class="usx-mockup-code__content">
+    <pre data-prefix="1"><code>&lt;Layout&gt;</code></pre>
+    <pre data-prefix="2"><code>  &lt;Page title="Account" tabIndex={-1}&gt;</code></pre>
+    <pre data-prefix="3"><code>    &lt;Section title="Contact information"&gt;</code></pre>
+    <pre data-prefix="4"><code>      &lt;ContactDetails user={currentUser} /&gt;</code></pre>
+    <pre data-prefix="5"><code>    &lt;/Section&gt;</code></pre>
+    <pre data-prefix="6"><code>  &lt;/Page&gt;</code></pre>
+    <pre data-prefix="7"><code>&lt;/Layout&gt;</code></pre>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">React Markup with an HTML Fragment</h3>
+<div class="usx-mockup-code">
+  <div class="usx-mockup-code__content">
+    <pre data-prefix="1"><code>&lt;Layout&gt;</code></pre>
+    <pre data-prefix="2"><code>  &lt;Page title="<strong>Account</strong>" tabIndex={-1}&gt;</code></pre>
+    <pre data-prefix="3"><code>    &lt;Section title="Contact information"&gt;</code></pre>
+    <pre data-prefix="4"><code>      &lt;ContactDetails user={currentUser} /&gt;</code></pre>
+    <pre data-prefix="5"><code>    &lt;/Section&gt;</code></pre>
+    <pre data-prefix="6"><code>  &lt;/Page&gt;</code></pre>
+    <pre data-prefix="7"><code>&lt;/Layout&gt;</code></pre>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Rendered HTML Fragment</h3>
+<div class="usx-mockup-code">
+  <div class="usx-mockup-code__content">
+    <pre data-prefix=">"><code>This <em>line</em> has <strong>HTML fragments</strong></code></pre>
+  </div>
+</div>
+
 <h3 class="site-preview-heading">Without Prefix</h3>
 <div class="usx-mockup-code">
   <div class="usx-mockup-code__content">

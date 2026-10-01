@@ -9,6 +9,7 @@ import Image from '../../../usx-react/src/components/image/Image.tsx';
 import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
 import Page from '../../../usx-react/src/components/page/Page.tsx';
+import Section from '../../../usx-react/src/components/section/Section.tsx';
 import Prose from '../../../usx-react/src/components/prose/Prose.tsx';
 import SideNav from '../../../usx-react/src/components/sidenav/SideNav.tsx';
 import TagGroup from '../../../usx-react/src/components/tag-group/TagGroup.tsx';
@@ -16,6 +17,7 @@ import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './common
 
 export default {
   title: 'Examples/Data Display',
+  parameters: { layout: 'fullscreen' },
 };
 
 export const BlogPost = {
@@ -33,9 +35,10 @@ export const BlogPost = {
       />
       <Layout
         variant="grid"
+        expandable={true}
         content={
-          <Page id="blog-post-example" title="The Future of Digital Transformation">
-            <article>
+          <Page element="article" id="blog-post-example" title="The Future of Digital Transformation" tabIndex={-1}>
+            <Section aria-label="Article">
               <div className="margin-bottom-3">
                 <p className="text-base color-base-dark font-sans-xs">
                   <span>By John Doe</span>
@@ -94,7 +97,7 @@ export const BlogPost = {
 
                 <p>As we look to the future, the organizations that thrive will be those that embrace digital transformation not as a one-time project, but as an ongoing journey of innovation and adaptation.</p>
               </Prose>
-            </article>
+            </Section>
           </Page>
         }
         leftSidebar={

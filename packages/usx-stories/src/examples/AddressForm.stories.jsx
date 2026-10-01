@@ -40,7 +40,7 @@ export const AddressForm = {
       <Layout
         variant="single-column"
         content={
-          <Page id="address-form-example" title="Mailing &amp; Billing Address">
+          <Page id="address-form-example" title="Mailing &amp; Billing Address" tabIndex={-1}>
             <p className="text-intro margin-bottom-3">Provide your official mailing address for documentation and correspondence.</p>
 
             <Section>

@@ -24,11 +24,12 @@ export interface CodeLine {
 
 export interface CodeProps {
   lines?: CodeLine[];
+  allowHtml?: boolean;
   copyText?: string | null;
   className?: string;
 }
 
-export default function Code({ lines = [], copyText = null, className = '' }: CodeProps) {
+export default function Code({ lines = [], allowHtml = false, copyText = null, className = '' }: CodeProps) {
   return (
     <div className={ClassNames('usx-mockup-code', className)}>
       <div className="usx-mockup-code__content">
@@ -38,7 +39,7 @@ export default function Code({ lines = [], copyText = null, className = '' }: Co
           {...(line.prefix != null ? { 'data-prefix': line.prefix } : {})}
           className={line.className || undefined}
         >
-          <code dangerouslySetInnerHTML={{ __html: line.code }} />
+          {allowHtml ? <code dangerouslySetInnerHTML={{ __html: line.code }} /> : <code>{line.code}</code>}
         </pre>
       ))}
       </div>

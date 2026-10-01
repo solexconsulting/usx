@@ -1,13 +1,17 @@
 import React from 'react';
+import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
 import { DataTablePattern } from './DataTable.jsx';
 
 export default {
   title: 'Patterns/Data Table',
-  parameters: { layout: 'padded' },
+  parameters: { layout: 'fullscreen' },
   render: (args) => (
-    <div className="maxw-desktop margin-x-auto padding-y-3">
-      <DataTablePattern key={args.state} {...args} />
-    </div>
+    <Layout>
+      <Page title="Applications">
+        <DataTablePattern key={args.state} {...args} />
+      </Page>
+    </Layout>
   ),
 };
 export const Normal = { args: { state: 'normal' } };

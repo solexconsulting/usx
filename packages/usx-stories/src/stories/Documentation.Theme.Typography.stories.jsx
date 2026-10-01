@@ -89,7 +89,7 @@ export const Typography = {
             <strong>Hosted (e.g. Google Fonts) — link the stylesheet, then point the token at it:</strong>
             <Code
               lines={[
-                { code: '&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap"&gt;' },
+                { code: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">' },
               ]}
               className="margin-y-2"
             />

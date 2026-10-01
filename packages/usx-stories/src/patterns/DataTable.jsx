@@ -4,7 +4,8 @@ import Select from '../../../usx-react/src/components/select/Select.tsx';
 import Table from '../../../usx-react/src/components/table/Table.tsx';
 import Tag from '../../../usx-react/src/components/tag/Tag.tsx';
 import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
-import { PageHeader, DestructiveAction } from './BuildingBlocks.jsx';
+import { DestructiveAction } from './BuildingBlocks.jsx';
+import Section from '../../../usx-react/src/components/section/Section.tsx';
 import { EmptyState, PageState } from './Feedback.jsx';
 import Input from '../../../usx-react/src/components/input/Input.tsx';
 
@@ -53,18 +54,17 @@ export function DataTablePattern({ state = 'normal' }) {
         setMessage(`Exported ${rows.length} applications.`);
     };
     return (
-        <>
-            <PageHeader
-                title="Applications"
-                description="Manage requests for controlled data access."
-                actions={[
-                    {
-                        children: 'Create',
-                        href: '?id=examples-workflows--ordered&viewMode=story',
-                        iconProps: [{ name: 'add' }],
-                    },
-                ]}
-            />
+        <Section aria-label="Applications">
+            <div className="display-flex flex-wrap flex-align-center flex-justify">
+                <span className="font-body-md">Manage requests for controlled data access.</span>
+                <Button
+                    href="?id=examples-workflows--ordered&viewMode=story"
+                    className="margin-right-0"
+                    iconProps={[{ name: 'add' }]}
+                >
+                    Create
+                </Button>
+            </div>
             <PageState state={recovered ? 'normal' : state} onRetry={() => setRecovered(true)}>
                 <div className="grid-row grid-gap flex-align-end margin-bottom-2">
                     <div className="tablet:grid-col-3">
@@ -107,6 +107,7 @@ export function DataTablePattern({ state = 'normal' }) {
                             iconProps={[{ name: 'file_download' }]}
                             onClick={exportRecords}
                             disabled={!filtered.length}
+                            className="margin-right-0"
                         >
                             Export
                         </Button>
@@ -120,7 +121,6 @@ export function DataTablePattern({ state = 'normal' }) {
                         id={`${prefix}-table`}
                         aria-label="Applications"
                         className="width-full"
-                        borderless
                         responsive="stack"
                         sortable
                         selectionMode="checkbox"
@@ -203,6 +203,6 @@ export function DataTablePattern({ state = 'normal' }) {
                     />
                 ) : null}
             </PageState>
-        </>
+        </Section>
     );
 }

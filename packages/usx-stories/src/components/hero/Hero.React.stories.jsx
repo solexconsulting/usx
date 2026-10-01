@@ -83,6 +83,18 @@ storyDefs.SplitContent = {
 };
 storyDefs.SplitContentRight = { ...storyDefs.SplitContent, contentPosition: 'right' };
 storyDefs.SectionHeading = { ...storyDefs.SplitContent, headingLevel: 'h2' };
+storyDefs.LongContent = {
+  ...storyDefs.SplitContent,
+  callout: 'Support for you and your household',
+  title: 'Find help with housing, food, healthcare, and everyday expenses',
+  paragraph: 'Explore programs that can help you and your household stay healthy, find stable housing, and cover essential costs. Learn who can apply, what information you will need, and what happens after you submit an application. You can review the available services before deciding where to start, whether you are applying for yourself, helping a family member, or supporting someone in your community.',
+  button: { href: '#services', text: 'Explore available services' },
+  secondaryContent: {
+    title: 'Get support at every step of your application',
+    paragraph: 'You do not have to work through the process alone. Our team can explain eligibility requirements, help you gather documents, and answer questions about an application you have already started. Language assistance and accessible formats are available. Contact us to discuss your circumstances and find a way to get help that works for you.',
+    link: { href: '#contact', text: 'Contact the support team' },
+  },
+};
 
 export default {
   title: 'React/USX/Hero',
@@ -130,6 +142,34 @@ export const Unboxed = {
 };
 export const SplitContent = { args: storyDefs.SplitContent };
 export const SplitContentRight = { args: storyDefs.SplitContentRight };
+export const LongContent = {
+  args: storyDefs.LongContent,
+  play: async ({ canvasElement }) => {
+    const hero = canvasElement.querySelector('.usx-hero');
+    const inner = hero.querySelector('.usx-hero__inner');
+    const heroBounds = hero.getBoundingClientRect();
+    const innerStyle = getComputedStyle(inner);
+    const paddingTop = parseFloat(innerStyle.paddingTop);
+    const paddingBottom = parseFloat(innerStyle.paddingBottom);
+    const minimumHeight = parseFloat(getComputedStyle(hero).minHeight);
+    const rootFontSize = parseFloat(getComputedStyle(canvasElement.ownerDocument.documentElement).fontSize);
+    const wide = canvasElement.ownerDocument.defaultView.matchMedia('(min-width: 40em)').matches;
+    const expectedBlockPadding = (wide ? 4 : 3) * rootFontSize;
+    const expectedInlinePadding = (wide ? 2 : 1.25) * rootFontSize;
+
+    await expect(paddingTop).toBe(expectedBlockPadding);
+    await expect(paddingBottom).toBe(expectedBlockPadding);
+    await expect(parseFloat(innerStyle.paddingLeft)).toBe(expectedInlinePadding);
+    await expect(parseFloat(innerStyle.paddingRight)).toBe(expectedInlinePadding);
+    await expect(heroBounds.height + 1).toBeGreaterThanOrEqual(Math.max(minimumHeight, inner.getBoundingClientRect().height));
+    await expect(hero.scrollWidth).toBeLessThanOrEqual(hero.clientWidth);
+    for (const content of inner.children) {
+      const bounds = content.getBoundingClientRect();
+      await expect(bounds.top - heroBounds.top + 1).toBeGreaterThanOrEqual(paddingTop);
+      await expect(heroBounds.bottom - bounds.bottom + 1).toBeGreaterThanOrEqual(paddingBottom);
+    }
+  },
+};
 export const SectionHeading = {
   args: storyDefs.SectionHeading,
   play: async ({ canvas, canvasElement }) => {

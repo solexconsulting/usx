@@ -9,6 +9,11 @@
 
 //@forward "./node_modules/@uswds/uswds/packages/uswds/_index.scss";
 @forward "../../../packages/usx-react/src/styles/core.scss";
+@use "../../../packages/usx/src/components/layout";
+
+.usx-layout.usx-layout--compact {
+    @include layout.sizing($content-max: 40rem, $expanded-max: 72rem, $sidebar-width: 12rem, $gutter-mobile: 1rem, $gutter: 2.5rem);
+}
 
 .docs-story,
 html,
@@ -17,6 +22,8 @@ html,
     color: var(--usx-text-ink, black);
 }
 
+// This padding ensures the red bar from .usa-form-group--error is not cut off in the small window
 .sb-show-main.sb-main-padded {
     padding-left: 2rem;
+    padding-right: 2rem;
 }

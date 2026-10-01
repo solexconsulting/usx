@@ -9,6 +9,7 @@ import Input from '../../../usx-react/src/components/input/Input.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
 import Link from '../../../usx-react/src/components/link/Link.tsx';
 import Page from '../../../usx-react/src/components/page/Page.tsx';
+import Section from '../../../usx-react/src/components/section/Section.tsx';
 import { headerArgs, footerArgs } from './commonArgs.js';
 
 export default {
@@ -44,6 +45,7 @@ function LoginExample() {
 
       <Layout className="flex-fill">
         <Page id="login-pattern-example" className="maxw-mobile margin-x-auto" title="Sign in" tabIndex={-1}>
+          <Section aria-label="Sign-in options">
           <form className="usa-form maxw-full" onSubmit={handleSubmit}>
             <Input
               id="login-email"
@@ -116,6 +118,7 @@ function LoginExample() {
           <div id="login-status" role="status" className="margin-top-2">
             {status}
           </div>
+          </Section>
         </Page>
       </Layout>
 

@@ -2,7 +2,6 @@ import React, { useState, ReactNode, HTMLAttributes } from 'react';
 import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 import Button from '../button/Button';
-import Tooltip from '../tooltip/Tooltip';
 
 // ── Sub-components ──────────────────────────────────────────────────────────
 
@@ -117,6 +116,7 @@ export default function Layout({
   ...props
 }: LayoutProps) {
   const [expanded, setExpanded] = useState(false);
+
   const classes = ClassNames(
     'usx-layout',
     { 'usx-expanded': expandable && expanded },
@@ -124,17 +124,18 @@ export default function Layout({
   );
 
   const expandButton = expandable ? (
-    
-      <Button
-        variant="primary"
-        ghost={true}
-        className="usx-layout__expand-button"
-        onClick={() => setExpanded((value) => !value)}
-      >
+    <Button
+      variant="primary"
+      ghost={true}
+      type="button"
+      aria-label={expanded ? 'Contract' : 'Expand'}
+      aria-expanded={expanded}
+      className="usx-layout__expand-button"
+      onClick={() => setExpanded((value) => !value)}
+    >
       <Icon source="usx" name="expand" size={3} className="usx-layout__expand-icon usx-layout__expand-icon--expand" />
       <Icon source="usx" name="contract" size={3} className="usx-layout__expand-icon usx-layout__expand-icon--contract" />
     </Button>
-    
   ) : null;
 
   return (

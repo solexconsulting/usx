@@ -1,29 +1,10 @@
 import React, { useId, useState } from 'react';
 import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
-import Breadcrumb from '../../../usx-react/src/components/breadcrumb/Breadcrumb.tsx';
 import Button from '../../../usx-react/src/components/button/Button.tsx';
 import ButtonGroup from '../../../usx-react/src/components/button-group/ButtonGroup.tsx';
 import Fieldset from '../../../usx-react/src/components/fieldset/Fieldset.tsx';
 import Icon from '../../../usx-react/src/components/icon/Icon.tsx';
 import Input from '../../../usx-react/src/components/input/Input.tsx';
-
-export function PageHeader({ title, description, breadcrumbs, actions = [], alert }) {
-  return (
-    <header className="margin-bottom-4">
-      {breadcrumbs && <Breadcrumb items={breadcrumbs} />}
-      <div className="display-flex flex-wrap flex-align-center flex-justify">
-        <h1 className="font-heading-xl margin-y-2 margin-right-3">{title}</h1>
-        {actions.length > 1 ? (
-            <ButtonGroup buttonProps={actions} />
-        ) : (
-            actions.length === 1 && <Button {...actions[0]} />
-        )}
-      </div>
-      {description && <p className="margin-top-0 maxw-tablet">{description}</p>}
-      {alert && <Alert {...alert} />}
-    </header>
-  );
-}
 
 export function FormSection({
   title = 'Personal information',

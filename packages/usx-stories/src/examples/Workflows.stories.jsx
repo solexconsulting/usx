@@ -3,9 +3,12 @@ import ExampleFrame from './ExampleFrame.jsx';
 import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
 import Button from '../../../usx-react/src/components/button/Button.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
+import Section from '../../../usx-react/src/components/section/Section.tsx';
+import Breadcrumb from '../../../usx-react/src/components/breadcrumb/Breadcrumb.tsx';
 import StepIndicator from '../../../usx-react/src/components/step-indicator/StepIndicator.tsx';
 import TaskList from '../../../usx-react/src/components/task-list/TaskList.tsx';
-import { FormSection, PageHeader, ReviewConfirmation } from '../patterns/BuildingBlocks.jsx';
+import { FormSection, ReviewConfirmation } from '../patterns/BuildingBlocks.jsx';
 import { PageState } from '../patterns/Feedback.jsx';
 
 const sections = [
@@ -85,15 +88,15 @@ function ApplicationWorkflow({ ordered = true, state = 'normal', allowDrafts = f
   return (
     <ExampleFrame target="application-workflow">
       <Layout>
-        <main id="application-workflow" tabIndex={-1} className="padding-y-4">
-          <PageHeader
-            title="Request data access"
-            description="Application for controlled research data."
-            breadcrumbs={[
+          <Breadcrumb
+            items={[
               { label: 'Applications', href: '?id=examples-applications--normal&viewMode=story' },
               { label: submitted ? 'Confirmation' : 'New application', current: true },
             ]}
           />
+        <Page id="application-workflow" title="Request data access" tabIndex={-1}>
+          <p>Application for controlled research data.</p>
+          <Section aria-label="Application">
           <PageState state={state === 'error' ? 'normal' : state}>
             <div ref={focusTarget} tabIndex={-1}>
               {submitted ? (
@@ -221,7 +224,8 @@ function ApplicationWorkflow({ ordered = true, state = 'normal', allowDrafts = f
               )}
             </div>
           </PageState>
-        </main>
+          </Section>
+        </Page>
       </Layout>
     </ExampleFrame>
   );

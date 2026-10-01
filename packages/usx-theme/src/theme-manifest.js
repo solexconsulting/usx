@@ -69,6 +69,8 @@ const setting = (name, defaultValue, internal = false) => ({
 // (https://designsystem.digital.gov/design-tokens/color/theme-tokens/ and
 // .../state-tokens/) so the "Default" theme matches USWDS out of the box.
 export const themeManifest = [
+  scale('usx-layout-gutter-mobile', '--usx-layout-gutter-mobile', '0.75rem', 'component'),
+  scale('usx-layout-gutter', '--usx-layout-gutter', '2rem', 'component'),
   // ── Color primitives ──────────────────────────────────────────────────────
 
 
@@ -457,7 +459,7 @@ export const themeManifest = [
   // that already paints the surface. Text on both chains live to usx-text
   // so headings/copy stay legible instead of getting stuck on real USWDS's
   // static, non-themeable body text color.
-  component('usx-page-bg', 'var(--usx-surface-1)'),
+  component('usx-page-bg', 'none'),
   component('usx-page-text', 'var(--usx-text-ink)'),
   component('usx-section-bg', 'transparent'),
   component('usx-section-text', 'var(--usx-text-ink)'),

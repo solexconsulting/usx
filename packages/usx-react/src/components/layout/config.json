@@ -28,6 +28,16 @@
       "type": "string",
       "description": "Right sidebar content (grid variant only)"
     },
+    "expandLeftSidebar": {
+      "type": "boolean",
+      "default": false,
+      "description": "Removes the outer padding from the left sidebar on desktop."
+    },
+    "expandRightSidebar": {
+      "type": "boolean",
+      "default": false,
+      "description": "Removes the outer padding from the right sidebar on desktop."
+    },
     "expandable": {
       "type": "boolean",
       "description": "Adds a toggle button that grows the layout to a wider max-width via the usx-expanded class."

@@ -20,7 +20,7 @@
   {% elif variant == 'grid' %}
     <div class="usx-layout__grid-container">
       {% if leftSidebar %}
-      <aside class="usx-layout__sidebar--left">
+      <aside class="usx-layout__sidebar--left{% if expandLeftSidebar %} usx-layout__sidebar--expanded{% endif %}">
         {{ leftSidebar|safe }}
       </aside>
       {% endif %}
@@ -29,7 +29,7 @@
         {% if children %}{{ children|safe }}{% else %}{{ content|safe }}{% endif %}
       </main>
       {% if rightSidebar %}
-      <aside class="usx-layout__sidebar--right">
+      <aside class="usx-layout__sidebar--right{% if expandRightSidebar %} usx-layout__sidebar--expanded{% endif %}">
         {{ rightSidebar|safe }}
       </aside>
       {% endif %}

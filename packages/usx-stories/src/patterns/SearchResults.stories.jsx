@@ -4,11 +4,9 @@ import { SearchResultsPattern, programs } from './SearchResults.jsx';
 export default {
   title: 'Patterns/Search Results',
   component: SearchResultsPattern,
-  parameters: { layout: 'padded' },
+  parameters: { layout: 'fullscreen' },
   render: (args) => (
-    <div className="maxw-desktop margin-x-auto">
-      <SearchResultsPattern key={args.state} {...args} />
-    </div>
+    <SearchResultsPattern key={args.state} {...args} />
   ),
 };
 export const Normal = { args: { state: 'normal' } };

@@ -20,6 +20,39 @@ class RenderedElements(HTMLParser):
 
 
 class ReactParityTests(SimpleTestCase):
+    def test_code_literal_markup_and_trusted_html(self):
+        source = '  <Page title="Account & settings">&lt;Section&gt;</Page>'
+        for props in ({}, {'allowHtml': False}):
+            with self.subTest(props=props):
+                html = render_component('code', {'lines': [{'code': source, 'prefix': '1'}], **props})
+                self.assertIn('<code>  &lt;Page title=&quot;Account &amp; settings&quot;&gt;&amp;lt;Section&amp;gt;&lt;/Page&gt;</code>', html)
+                self.assertFalse(any(tag in ('page', 'section') for tag, _ in RenderedElements(html).elements))
+        html = render_component('code', {
+            'lines': [{'code': 'This <em>line</em> has <strong>HTML fragments</strong>'}],
+            'allowHtml': True,
+        })
+        self.assertInHTML('<code>This <em>line</em> has <strong>HTML fragments</strong></code>', html)
+
+    def test_layout_sidebar_combinations(self):
+        for left, right in (('', ''), ('Left', ''), ('', 'Right'), ('Left', 'Right')):
+            for expanded in (False, True):
+                with self.subTest(left=left, right=right, expanded=expanded):
+                    html = render_component('layout', {
+                        'variant': 'grid', 'content': 'Main content',
+                        'leftSidebar': left, 'rightSidebar': right,
+                        'expandLeftSidebar': expanded, 'expandRightSidebar': expanded,
+                        'expandable': True,
+                    })
+                    elements = RenderedElements(html)
+                    sidebars = [attrs for tag, attrs in elements.elements if tag == 'aside']
+                    self.assertEqual(len(sidebars), bool(left) + bool(right))
+                    for sidebar in sidebars:
+                        self.assertEqual('usx-layout__sidebar--expanded' in sidebar['class'].split(), expanded)
+                    button = elements.attributes('button')
+                    self.assertEqual(button['aria-expanded'], 'false')
+                    self.assertEqual(button['aria-label'], 'Expand')
+                    self.assertIn('usx-layout__content', elements.attributes('main')['class'])
+
     def test_footer_responsive_branding(self):
         for variant in ('big', 'medium', 'slim'):
             for branding_url in ('/', ''):

@@ -16,7 +16,12 @@
     background-color: inherit;
     padding-top: .75rem;
     padding-bottom: .75rem;
+    padding: units(1.5) units(2) units(1.5) units(1.5);
     line-height: 1.15;
+
+    @media (width >= 64rem) {
+      padding: units(1.5) units(4) units(1.5) units(4);
+    }
 
     .usx-misc-banner__badge {
       background-color: white;
@@ -81,8 +86,8 @@
       }
 
       .usx-misc-banner__dropdown-button {
-        height: 3em;
-        width: 3em;
+        height: 3rem;
+        width: 3rem;
         background: none;
         border: none;
         display: flex;

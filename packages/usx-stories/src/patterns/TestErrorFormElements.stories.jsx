@@ -8,6 +8,9 @@ import Combobox from '../../../usx-react/src/components/combobox/Combobox.tsx';
 import DatePicker from '../../../usx-react/src/components/date-picker/DatePicker.tsx';
 import FileInput from '../../../usx-react/src/components/file-input/FileInput.tsx';
 import Input from '../../../usx-react/src/components/input/Input.tsx';
+import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
+import Section from '../../../usx-react/src/components/section/Section.tsx';
 import MemorableDate from '../../../usx-react/src/components/memorable-date/MemorableDate.tsx';
 import RangeSlider from '../../../usx-react/src/components/range-slider/RangeSlider.tsx';
 import Select from '../../../usx-react/src/components/select/Select.tsx';
@@ -38,7 +41,7 @@ const colorOptions = [
 // them all into their error state at once.
 export default {
   title: 'States/Form Controls',
-  parameters: { layout: 'padded' },
+  parameters: { layout: 'fullscreen' },
   argTypes: {
     error_state: {
       control: 'boolean',
@@ -58,7 +61,15 @@ export default {
         characterCount.init();
       }, []);
 
-      return <Story />;
+      return (
+        <Layout>
+          <Page title="Form control states">
+            <Section aria-label="Form controls">
+              <Story />
+            </Section>
+          </Page>
+        </Layout>
+      );
     }
   ]
 };

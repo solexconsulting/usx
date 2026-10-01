@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  PageHeader as Header,
   FormSection as Form,
   MetricCard as Metric,
   ReviewConfirmation as Review,
@@ -9,37 +8,46 @@ import {
 import { EmptyState as Empty } from './Feedback.jsx';
 import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
 import Button from '../../../usx-react/src/components/button/Button.tsx';
+import Breadcrumb from '../../../usx-react/src/components/breadcrumb/Breadcrumb.tsx';
+import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
+import Section from '../../../usx-react/src/components/section/Section.tsx';
 
 export default {
   title: 'Patterns/Building Blocks',
-  parameters: { layout: 'padded' },
+  parameters: { layout: 'fullscreen' },
   decorators: [
-    (Story) => (
-      <div className="maxw-desktop margin-x-auto padding-2">
-        <Story />
-      </div>
+    (Story, context) => (
+      <Layout>
+        {context.parameters.breadcrumbs && <Breadcrumb items={context.parameters.breadcrumbs} />}
+        <Page title={context.parameters.pageTitle || context.name}>
+          <Section>
+            <Story />
+          </Section>
+        </Page>
+      </Layout>
     ),
   ],
 };
 
 export const PageHeader = {
+  parameters: {
+    pageTitle: 'Applications',
+    breadcrumbs: [
+      { label: 'Dashboard', href: '?id=examples-data-display--dashboard' },
+      { label: 'Applications', current: true },
+    ],
+  },
   render: () => (
-    <Header
-      title="Applications"
-      description="Manage requests for controlled data access."
-      breadcrumbs={[
-        { label: 'Dashboard', href: '?id=examples-data-display--dashboard' },
-        { label: 'Applications', current: true },
-      ]}
-      actions={[
-        {
-          children: 'Create application',
-          href: '?id=examples-workflows--ordered',
-          iconProps: [{ name: 'add' }],
-        },
-      ]}
-      alert={{ variant: 'info', slim: true, text: 'Applications close on October 31, 2026.' }}
-    />
+    <>
+      <div className="display-flex flex-wrap flex-align-center flex-justify margin-bottom-2">
+        <p className="usa-prose usx-prose">Manage requests for controlled data access.</p>
+        <Button href="?id=examples-workflows--ordered" iconProps={[{ name: 'add' }]}>
+          Create application
+        </Button>
+      </div>
+      <Alert variant="info" slim text="Applications close on October 31, 2026." />
+    </>
   ),
 };
 export const FormSection = {

@@ -7,6 +7,7 @@ const generatedArgTypes = buildArgTypes(config.props || {});
 export default {
   title: 'Django/USX/Layout',
   tags: ['USX', 'autodocs'],
+  parameters: { layout: 'fullscreen' },
   argTypes: generatedArgTypes,
   excludeStories: [],
 };
@@ -15,6 +16,7 @@ const createStory = createDjangoStory({ componentName: 'layout' });
 
 export const SingleColumn = createStory(storyDefs.SingleColumn);
 export const GridFullContent = createStory(storyDefs.GridFullContent);
+export const GridWithoutSidebars = createStory({ ...storyDefs.SingleColumn, variant: 'grid' });
 export const GridWithLeftSidebar = createStory(storyDefs.GridWithLeftSidebar);
 export const GridWithRightSidebar = createStory(storyDefs.GridWithRightSidebar);
 export const Expandable = createStory(storyDefs.Expandable);

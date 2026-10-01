@@ -16,8 +16,7 @@
 //   * USX-only (custom) components need defaults to be usable without a
 //     theme; those defaults are baked into each component's own SCSS file
 //     with an "override when the token is set" rule — never here.
-//   * Compile-time only (CSS cannot theme these at runtime): breakpoints,
-//     layout widths, media queries, and the units() function.
+//   * Compile-time only: breakpoints, media queries, and the units() function.
 //
 // NOTE: derived shades (darker/lighter/hover/active/...) are explicit,
 // first-class tokens — overriding a base color does NOT recompute its shades.
@@ -45,14 +44,23 @@
   @return $value;
 }
 
-// ── Layout (compile-time only) ───────────────────────────────────────────────
+// ── Layout defaults and runtime hooks ───────────────────────────────────────
 $max-layout-width: 64rem !default;
 $max-sidebar-width: 16rem !default;
+$usx-layout-gutter-mobile-var: null !default;
+$usx-layout-gutter-mobile: usx-var($usx-layout-gutter-mobile-var) !default;
+$usx-layout-gutter-var: null !default;
+$usx-layout-gutter: usx-var($usx-layout-gutter-var) !default;
+$usx-layout-max-width: $max-layout-width !default;
+$usx-layout-expanded-max-width: 100rem !default;  // 1600px
+$usx-layout-sidebar-width: $max-sidebar-width !default;
+$usx-layout-content-min-width: 32rem !default;
 
 // ── Breakpoints (compile-time only) ─────────────────────────────────────────
 $breakpoint-mobile: 640px !default;
 $breakpoint-tablet: 640px !default;
 $breakpoint-desktop: 1024px !default;
+$usx-layout-breakpoint: $breakpoint-desktop !default;
 
 // ── Color — primitives ──────────────────────────────────────────────────────
 $usx-color-primary-var: null !default;
@@ -671,7 +679,7 @@ $usx-hero-padding-block: null !default;
 $usx-hero-padding-inline: $usx-spacing-lg !default;
 $usx-hero-callout-bg: null !default;
 $usx-hero-callout-max-width: null !default;
-$usx-hero-callout-padding: $usx-spacing-xl !default;
+$usx-hero-callout-padding: null !default;
 $usx-hero-callout-radius-var: null !default;
 $usx-hero-callout-radius: usx-var($usx-hero-callout-radius-var, $usx-radius-box) !default;
 $usx-hero-heading-size: null !default;
@@ -1091,7 +1099,7 @@ $usx-footer-secondary-section-border-top: usx-when($usx-footer-secondary-section
 // and copy stay legible instead of getting stuck on real USWDS's static,
 // non-themeable body text color.
 $usx-page-bg-var: null !default;
-$usx-page-bg: usx-var($usx-page-bg-var, $usx-surface-1) !default;
+$usx-page-bg: usx-var($usx-page-bg-var) !default;
 $usx-page-text-var: null !default;
 $usx-page-text: usx-var($usx-page-text-var, $usx-text-ink) !default;
 

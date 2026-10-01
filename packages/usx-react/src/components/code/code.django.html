@@ -4,7 +4,7 @@
   {% for line in lines %}
   <pre
     {% if line.prefix %} data-prefix="{{ line.prefix }}"{% endif %}{% if line.className %} class="{{ line.className }}"{% endif %}
-  ><code>{{ line.code|safe }}</code></pre>
+  ><code>{% if allowHtml %}{{ line.code|safe }}{% else %}{{ line.code|force_escape }}{% endif %}</code></pre>
   {% endfor %}
   </div>
   {% if copyText %}

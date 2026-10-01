@@ -1,6 +1,7 @@
 import React from 'react';
 import ExampleFrame from './ExampleFrame.jsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
 import { DataTablePattern } from '../patterns/DataTable.jsx';
 
 export default {
@@ -9,9 +10,9 @@ export default {
   render: (args) => (
     <ExampleFrame>
       <Layout>
-        <main id="example-content" tabIndex={-1} className="padding-y-4">
+        <Page id="example-content" title="Applications" tabIndex={-1}>
           <DataTablePattern key={args.state} {...args} />
-        </main>
+        </Page>
       </Layout>
     </ExampleFrame>
   ),

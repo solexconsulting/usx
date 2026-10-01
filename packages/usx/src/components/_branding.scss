@@ -7,10 +7,10 @@
   margin-left: 0;
 }
 
-@media (width <= 64em) {
+@media (width < 64rem) {
   .usa-navbar .usx-logo {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    padding-left: units(1.5);
+    padding-right: units(1.5);
   }
 }
 

@@ -5,11 +5,12 @@ import Collection from '../../../usx-react/src/components/collection/Collection.
 import Button from '../../../usx-react/src/components/button/Button.tsx';
 import Input from '../../../usx-react/src/components/input/Input.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
+import Page from '../../../usx-react/src/components/page/Page.tsx';
+import Section from '../../../usx-react/src/components/section/Section.tsx';
 import Search from '../../../usx-react/src/components/search/Search.tsx';
 import Select from '../../../usx-react/src/components/select/Select.tsx';
 import Tag from '../../../usx-react/src/components/tag/Tag.tsx';
 import { EmptyState, PageState } from './Feedback.jsx';
-import { PageHeader } from './BuildingBlocks.jsx';
 
 export const documentation = [
   {
@@ -181,8 +182,8 @@ export function SearchResultsPattern({
     </>
   );
   const content = (
-    <div className="padding-y-4" id="search-results-content" tabIndex={-1}>
-      <PageHeader title={title} />
+    <Page element={sidebar ? 'div' : 'main'} title={title} id="search-results-content" tabIndex={-1}>
+      <Section aria-label="Search and filters">
       <Search
         key={query}
         id={`${prefix}-search`}
@@ -238,6 +239,8 @@ export function SearchResultsPattern({
           ))
         )}
       </div>
+      </Section>
+      <Section title="Results">
       <PageState state={retry ? 'normal' : state} onRetry={() => setRetry(true)}>
         {results.length ? (
           <Collection
@@ -270,21 +273,21 @@ export function SearchResultsPattern({
           />
         )}
       </PageState>
-    </div>
+      </Section>
+    </Page>
   );
   return sidebar ? (
     <Layout
       variant="grid"
-      expandLeftSidebar={true}
       leftSidebar={
-        <aside className="padding-y-4">
+        <div className="padding-y-4">
           <h2 className="font-sans-md">Filter Results</h2>
           {filterPanel('sidebar')}
-        </aside>
+        </div>
       }
       content={content}
     />
   ) : (
-    content
+    <Layout>{content}</Layout>
   );
 }

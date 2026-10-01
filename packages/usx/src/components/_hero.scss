@@ -9,7 +9,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 30rem;
   background-color: #010610;
   background-size: cover;
   background-position: center;
@@ -38,7 +37,15 @@
     width: 100%;
     max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
     margin-inline: auto;
-    padding: 0 units(4);
+    padding: units(6) units(1.5);
+
+    @media (width >= 40em) {
+      padding: units(8) units(3);
+    }
+
+    @media (width >= 64rem) {
+      padding: units(8) units(4);
+    }
   }
 
   &--has-overlay.usx-hero--custom-overlay::before {
@@ -48,19 +55,25 @@
   &__callout {
     min-width: 0;
     overflow-wrap: anywhere;
-    max-width: 40rem;
-    padding: units(4);
+    padding: units(5) units(3);
     background-color: rgb(0 0 0 / 90%);
 
     // Radius follows the app-wide radius-box group (null/square by default,
     // like every other radius-box consumer: image, code, summary-box).
     border-radius: $usx-hero-callout-radius;
 
-    max-width: usx-when($usx-hero-callout-max-width);
-
-    padding: usx-when($usx-hero-callout-padding);
 
     background-color: usx-when($usx-hero-callout-bg);
+
+    @media (width >= 40rem) {
+      padding: units(5);
+    }
+
+    @media (width >= 64rem) {
+      padding: usx-when($usx-hero-callout-padding, $usx-hero-callout-padding, units(5));
+      max-width: usx-when($usx-hero-callout-max-width, $usx-hero-callout-max-width, 40rem);
+
+    }
   }
 
   &--content-right &__callout {

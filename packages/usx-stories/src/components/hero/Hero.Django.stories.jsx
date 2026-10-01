@@ -26,5 +26,6 @@ export const Centered = createStory(storyDefs.Centered);
 export const Unboxed = createStory(storyDefs.Unboxed);
 export const SplitContent = createStory(storyDefs.SplitContent);
 export const SplitContentRight = createStory(storyDefs.SplitContentRight);
+export const LongContent = createStory(storyDefs.LongContent);
 export const SectionHeading = createStory(storyDefs.SectionHeading);
 

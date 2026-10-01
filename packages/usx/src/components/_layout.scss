@@ -1,38 +1,126 @@
+@use 'sass:math';
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
-.usx-layout {
-  position: relative;
+@mixin sizing(
+  $content-max: $usx-layout-max-width,
+  $expanded-max: $usx-layout-expanded-max-width,
+  $sidebar-width: $usx-layout-sidebar-width,
+  $content-min: $usx-layout-content-min-width,
+  $gutter-mobile: units(1.5),
+  $gutter: units(4)
+) {
+  $minimum: math.min($content-max, $content-min);
+  $grids: (
+    1: '> .usx-layout__grid-container:where(:has(> .usx-layout__sidebar--left, > .usx-layout__sidebar--right):not(:has(> .usx-layout__sidebar--left):has(> .usx-layout__sidebar--right)))',
+    2: '> .usx-layout__grid-container:where(:has(> .usx-layout__sidebar--left):has(> .usx-layout__sidebar--right))'
+  );
 
+  --layout-gutter: #{usx-when($usx-layout-gutter-mobile, $usx-layout-gutter-mobile, $gutter-mobile)};
+  --layout-sidebar-gap: #{usx-when($usx-layout-gutter, $usx-layout-gutter, $gutter)};
+
+  @media (min-width: $usx-layout-breakpoint) {
+    --layout-gutter: #{usx-when($usx-layout-gutter, $usx-layout-gutter, $gutter)};
+  }
+
+  > .usx-layout__single-column,
+  > .usx-layout__grid-container {
+    --layout-collapsed-width: #{$content-max};
+    --layout-expanded-width: #{$expanded-max};
+    --layout-sidebar-width: #{$sidebar-width};
+  }
+
+  > .usx-layout__single-column > .usx-layout__expand-button,
+  > .usx-layout__grid-container > .usx-layout__content > .usx-layout__expand-button {
+    display: none;
+  }
+
+  > .usx-layout__grid-container {
+    --layout-left-width: 0px;
+    --layout-right-width: 0px;
+
+    > .usx-layout__sidebar--left,
+    > .usx-layout__sidebar--right {
+      display: none;
+    }
+  }
+
+  @each $count, $grid in $grids {
+    $sidebars-at: $minimum + $count * $sidebar-width;
+
+    @container usx-layout (width >= #{$sidebars-at}) {
+      #{$grid} {
+        &:where(:has(> .usx-layout__sidebar--left)) {
+          --layout-left-width: var(--layout-sidebar-width);
+        }
+
+        &:where(:has(> .usx-layout__sidebar--right)) {
+          --layout-right-width: var(--layout-sidebar-width);
+        }
+
+        > .usx-layout__sidebar--left,
+        > .usx-layout__sidebar--right {
+          display: block;
+        }
+      }
+    }
+  }
+
+  @if $expanded-max > $content-max {
+    @each $active-gutter, $media in (
+      ($gutter-mobile, '(width < #{$usx-layout-breakpoint})'),
+      ($gutter, '(width >= #{$usx-layout-breakpoint})')
+    ) {
+      @media #{$media} {
+        @container usx-layout (width > calc(#{$content-max} - 2 * #{$active-gutter} + 1px)) {
+          > .usx-layout__single-column > .usx-layout__expand-button,
+          > .usx-layout__grid-container > .usx-layout__content > .usx-layout__expand-button {
+            display: flex;
+          }
+        }
+
+        @each $count, $grid in $grids {
+          $sidebars-at: $minimum + $count * $sidebar-width;
+          $expand-at: $content-max + $count * $sidebar-width;
+
+          @container usx-layout (width >= #{$sidebars-at}) and (width <= calc(#{$expand-at} - 2 * #{$active-gutter} + 1px)) {
+            #{$grid} {
+              > .usx-layout__content > .usx-layout__expand-button {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.usx-layout {
+  container: usx-layout / inline-size;
+  box-sizing: border-box;
+  padding-inline: var(--layout-gutter);
   background-color: usx-when($usx-surface-1);
 
-  &.usx-expanded {
-    .usx-layout__single-column,
-    .usx-layout__content {
-      max-width: 1600px;
-    }
+  &__single-column,
+  &__grid-container {
+    --layout-width: max(0px, calc(var(--layout-collapsed-width) - 2 * var(--layout-gutter)));
 
-    .usx-layout__grid-container {
-      grid-template-columns:
-        [page-start] units(2) [left-sidebar-start] 0 [content-start] minmax(0, 1600px) [content-end] 0 [right-sidebar-end] units(2) [page-end];
+    box-sizing: border-box;
+    width: 100%;
+    margin-inline: auto;
+  }
 
-      @include at-media('tablet') {
-        grid-template-columns:
-          [page-start] units(4) [left-sidebar-start] 0 [content-start] minmax(0, 1600px) [content-end] 0 [right-sidebar-end] units(4) [page-end];
-      }
-
-      @include at-media('desktop') {
-        grid-template-columns:
-          [page-start] 1fr [left-sidebar-start] $max-sidebar-width [content-start] minmax(0, 1600px) [content-end] $max-sidebar-width [right-sidebar-end] 1fr [page-end];
-      }
-    }
+  &.usx-expanded > &__single-column,
+  &.usx-expanded > &__grid-container {
+    --layout-width: max(0px, calc(var(--layout-expanded-width) - 2 * var(--layout-gutter)));
   }
 
   &__expand-button {
     display: none;
     position: absolute;
-    right: calc(0px - units(4));
-    top: 0;
+    right: 0;
+    top: units(3.5);
     width: units(5);
     height: units(5);
     padding: 0;
@@ -42,11 +130,6 @@
     justify-content: center;
     z-index: 1;
     color: usx-when($usx-color-primary, #005ea2);
-
-    // Below this width there's no room to grow into, so hide the toggle.
-    @include at-media('desktop') {
-      display: flex;
-    }
 
     &:hover,
     &:focus {
@@ -58,22 +141,26 @@
     display: none;
   }
 
-  &.usx-expanded &__expand-icon--expand {
+  &.usx-expanded > &__single-column > &__expand-button &__expand-icon--expand,
+  &.usx-expanded > &__grid-container > &__content > &__expand-button &__expand-icon--expand {
     display: none;
   }
 
-  &.usx-expanded &__expand-icon--contract {
+  &.usx-expanded > &__single-column > &__expand-button &__expand-icon--contract,
+  &.usx-expanded > &__grid-container > &__content > &__expand-button &__expand-icon--contract {
     display: block;
   }
 
   // ── Single column layout ──────────────────────────────────────────────────
   // Centers content with max-width and responsive gutters
-  // | gutter | content (max-width 960px) | gutter |
+
+  &__single-column,
+  &__content {
+    display: flow-root;
+  }
 
   &__single-column {
-    max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
-    margin: 0 auto;
-    padding: 0 units(4);
+    max-width: var(--layout-width);
     position: relative;
   }
 
@@ -82,101 +169,66 @@
   // | gutter | left sidebar | content | right sidebar | gutter |
 
   &__grid-container {
+    --layout-left-width: 0px;
+    --layout-right-width: 0px;
+    --layout-free-space: max(0px, calc(100% - var(--layout-width) - var(--layout-left-width) - var(--layout-right-width)));
+    --layout-leading-space: clamp(0px, calc((100% - var(--layout-width)) / 2 - var(--layout-left-width)), var(--layout-free-space));
+
     position: relative;
     display: grid;
     grid-template-rows: auto;
     grid-template-columns:
-      [page-start] units(2) [left-sidebar-start] 0 [content-start] minmax(0, usx-when($max-layout-width, $max-layout-width, 64rem)) [content-end] 0 [right-sidebar-end] units(2) [page-end];
+      [page-start] var(--layout-leading-space)
+      [left-sidebar-start] var(--layout-left-width)
+      [content-start] minmax(0, var(--layout-width))
+      [content-end] var(--layout-right-width)
+      [right-sidebar-end] minmax(0, 1fr) [page-end];
 
-    @include at-media('tablet') {
-      grid-template-columns:
-        [page-start] units(4) [left-sidebar-start] 0 [content-start] minmax(0, usx-when($max-layout-width, $max-layout-width, 64rem)) [content-end] 0 [right-sidebar-end] units(4) [page-end];
-    }
-
-    @include at-media('desktop') {
-      grid-template-columns:
-        [page-start] 1fr [left-sidebar-start] $max-sidebar-width [content-start] minmax(0, usx-when($max-layout-width, $max-layout-width, 64rem)) [content-end] $max-sidebar-width [right-sidebar-end] 1fr [page-end];
-    }
   }
 
   // ── Content areas ─────────────────────────────────────────────────────────
 
   &__content {
     position: relative;
-    grid-column: content-start / span content-end;
+    box-sizing: border-box;
+    min-width: 0;
+    grid-column: content-start / content-end;
     grid-row: 1;
-    max-width: usx-when($max-layout-width, $max-layout-width, 64rem);
-    padding: 0 units(4);
-
-    .usx-layout__expand-button {
-      top: units(3);
-    }
-
-
-    // Content that leaves space for a left sidebar
-    // | gutter | left sidebar | content (width dynamic) | gutter |
-    &--right {
-      grid-column: content-start / span content-end;
-      grid-row: 1;
-
-      @include at-media('desktop') {
-        grid-column: content-start / span right-sidebar-end;
-        padding-right: units(4);
-      }
-    }
-
-    // Content that leaves space for the right sidebar
-    // | gutter | content (width dynamic) | right sidebar | gutter |
-    &--left {
-      grid-column: content-start / span content-end;
-      grid-row: 1;
-
-      @include at-media('desktop') {
-        grid-column: left-sidebar-start / span content-end;
-        width: 100%;
-        justify-self: end;
-        padding-left: units(4);
-      }
-    }
-
-    &:not(&--right) {
-      .usx-layout__expand-button {
-        right: units(4);
-      }
-    }
   }
 
   // ── Sidebar areas ─────────────────────────────────────────────────────────
 
   &__sidebar--left {
-    grid-column: left-sidebar-start / span content-start;
+    grid-column: left-sidebar-start / content-start;
     grid-row: 1;
     height: 100%;
-    padding: 0 0 0 units(4);
+    padding-inline-end: var(--layout-sidebar-gap);
   }
 
   &__sidebar--right {
-    grid-column: content-end / span right-sidebar-end;
+    grid-column: content-end / right-sidebar-end;
     grid-row: 1;
     height: 100%;
-    padding: 0 units(4) 0 0;
+    padding-inline-start: var(--layout-sidebar-gap);
   }
 
-  // Hide sidebars on mobile/tablet, show on desktop
   &__sidebar--right,
   &__sidebar--left {
     display: none;
+    box-sizing: border-box;
+    min-width: 0;
+    overflow-wrap: anywhere;
 
-    @include at-media('desktop') {
-      display: block;
-    }
   }
 
   &__sidebar--right.usx-layout__sidebar--expanded {
-    padding-right: 0;
+    margin-inline-end: calc(-1 * var(--layout-gutter));
   }
 
   &__sidebar--left.usx-layout__sidebar--expanded {
-    padding-left: 0;
+    margin-inline-start: calc(-1 * var(--layout-gutter));
   }
+
+  @include sizing;
 }
+/* stylelint-enable selector-class-pattern */

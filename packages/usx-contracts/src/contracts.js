@@ -1079,7 +1079,7 @@ export const componentContracts = {
             "properties": {
               "code": {
                 "type": "string",
-                "description": "Line content."
+                "description": "Literal line content, including HTML or JSX source. Interpreted as trusted HTML only when allowHtml is true."
               },
               "prefix": {
                 "type": "string",
@@ -1091,6 +1091,11 @@ export const componentContracts = {
               }
             }
           }
+        },
+        "allowHtml": {
+          "type": "boolean",
+          "default": false,
+          "description": "Render line content as HTML instead of literal text. Only enable for trusted HTML; content is not sanitized. Leave false when documenting HTML or React markup."
         },
         "copyText": {
           "type": "string",
@@ -2529,6 +2534,16 @@ export const componentContracts = {
         "rightSidebar": {
           "type": "string",
           "description": "Right sidebar content (grid variant only)"
+        },
+        "expandLeftSidebar": {
+          "type": "boolean",
+          "default": false,
+          "description": "Removes the outer padding from the left sidebar on desktop."
+        },
+        "expandRightSidebar": {
+          "type": "boolean",
+          "default": false,
+          "description": "Removes the outer padding from the right sidebar on desktop."
         },
         "expandable": {
           "type": "boolean",

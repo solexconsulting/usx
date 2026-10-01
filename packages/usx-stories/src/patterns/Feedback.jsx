@@ -27,7 +27,7 @@ export function EmptyState({
 export function PageState({ state, onRetry, children }) {
   if (state === 'loading')
     return (
-      <Spinner size={4} label="Loading records..." />
+      <Spinner size={4} label="Loading records..." className="margin-top-3" />
     );
   if (state === 'error')
     return (

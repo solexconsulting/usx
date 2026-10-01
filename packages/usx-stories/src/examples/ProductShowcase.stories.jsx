@@ -82,6 +82,7 @@ export const ProductShowcase = {
         {...headerArgs}
       />
       <Hero
+        headingLevel="h2"
         callout="Next-Gen Design Platform"
         title="Modern, Themeable Components for Federal Systems"
         paragraph="Build accessible, responsive digital services faster with SOLEX USX's tokenized component library."
@@ -90,7 +91,7 @@ export const ProductShowcase = {
       <Layout
         variant="single-column"
         content={
-          <Page id="product-showcase-example" title="Featured Packages">
+          <Page id="product-showcase-example" title="Featured Packages" tabIndex={-1}>
             <Section id="packages">
               <CardGroup cardProps={productShowcaseCardArgs} />
             </Section>
