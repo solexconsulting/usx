@@ -1,4 +1,5 @@
 {# Django template for Code #}
+{% load components %}
 <div class="usx-mockup-code{% if className %} {{ className }}{% endif %}">
   <div class="usx-mockup-code__content">
   {% for line in lines %}
@@ -8,14 +9,7 @@
   {% endfor %}
   </div>
   {% if copyText %}
-  <button class="usa-button usx-button usx-button--ghost usx-copy"
-    onclick="navigator.clipboard.writeText('{{ copyText|escapejs }}')">
-    <svg class="usa-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
-      <use href="./img/sprite.svg#content_copy"></use>
-    </svg>
-    <svg class="usa-icon usx-copy__check" aria-hidden="true" focusable="false" role="img">
-      <use href="./img/sprite.svg#check"></use>
-    </svg>
-  </button>
+  {% dict label="Copy" copiedTooltip="Copied" position="left" as tooltipProps %}
+  {% copy_to_clipboard copyText=copyText tooltipProps=tooltipProps staticBaseUrl=staticBaseUrl %}{% endcopy_to_clipboard %}
   {% endif %}
 </div>

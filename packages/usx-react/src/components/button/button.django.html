@@ -5,7 +5,7 @@
         href="{{ href }}"
         class="
             usa-button usx-button
-            usa-button--{{ variant|default:'primary' }}
+            {% if variant %} usa-button--{{ variant }}{% endif %}
             {% if big == True %} usa-button--big{% endif %}
             {% if disabled == True %} usa-button--disabled{% endif %}
             {% if inverse == True %} usa-button--inverse{% endif %}
@@ -21,7 +21,7 @@
         type="{{ type|default:'button' }}"
         class="
             usa-button usx-button
-            usa-button--{{ variant|default:'primary' }}
+            {% if variant %} usa-button--{{ variant }}{% endif %}
             {% if big == True %} usa-button--big{% endif %}
             {% if disabled == True %} usa-button--disabled{% endif %}
             {% if inverse == True %} usa-button--inverse{% endif %}

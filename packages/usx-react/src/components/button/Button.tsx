@@ -70,7 +70,7 @@ export default function Button({
   const classes = ClassNames(
     'usa-button',
     'usx-button',
-    variant ? variantClasses[variant] : variantClasses['primary'],
+    variant && variantClasses[variant],
     big && 'usa-button--big',
     inverse && 'usa-button--inverse',
     ghost && 'usx-button--ghost',

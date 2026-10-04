@@ -1,5 +1,4 @@
 {% load components %}
-{% load static %}
 {# Django template for Banner #}
 {% with effective_tld=tld|default:'.gov' %}
 <section
@@ -14,7 +13,7 @@
           <img
             aria-hidden="true"
             class="usa-banner__header-flag"
-            src="{% if flagSrc %}{{ flagSrc }}{% else %}{% static 'img/us_flag_small.png' %}{% endif %}"
+            src="{% asset_url flagSrc|default:'img/us_flag_small.png' staticBaseUrl %}"
             alt=""
           />
         </div>
@@ -46,7 +45,7 @@
         <div class="usa-banner__guidance tablet:grid-col-6">
           <img
             class="usa-banner__icon usa-media-block__img"
-            src="{% static 'img/icon-dot-gov.svg' %}"
+            src="{% asset_url 'img/icon-dot-gov.svg' staticBaseUrl %}"
             role="img"
             alt=""
             aria-hidden="true"
@@ -61,7 +60,7 @@
         <div class="usa-banner__guidance tablet:grid-col-6">
           <img
             class="usa-banner__icon usa-media-block__img"
-            src="{% static 'img/icon-https.svg' %}"
+            src="{% asset_url 'img/icon-https.svg' staticBaseUrl %}"
             role="img"
             alt=""
             aria-hidden="true"
@@ -69,7 +68,7 @@
           <div class="usa-media-block__body">
             <p>
               <strong>{% if httpsHeading %}{{ httpsHeading }}{% else %}Secure {{ effective_tld }} websites use HTTPS{% endif %}</strong><br/>
-              {% if httpsText %}{{ httpsText|safe }}{% else %}A <strong>lock</strong> ({% icon name="lock" size=1 ariaHidden=True focusable=False %}{% endicon %}) or <strong>https://</strong> means you've safely connected to the {{ effective_tld }} website. Share sensitive information only on official, secure websites.{% endif %}
+              {% if httpsText %}{{ httpsText|safe }}{% else %}A <strong>lock</strong> ({% icon name="lock" size=1 staticBaseUrl=staticBaseUrl ariaHidden=True focusable=False %}{% endicon %}) or <strong>https://</strong> means you've safely connected to the {{ effective_tld }} website. Share sensitive information only on official, secure websites.{% endif %}
             </p>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAssetUrl as assetUrl } from '../../assets';
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: string;
@@ -6,6 +7,7 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number;
   color?: string;
   alt?: string;
+  staticBaseUrl?: string;
   staticUrlPrefix?: string;
   className?: string;
 }
@@ -19,11 +21,12 @@ export default function Icon({
   size = 2,
   color,
   alt = name + ' icon',
-  staticUrlPrefix = ((typeof window !== 'undefined' && (window as unknown as { usxBaseUrl?: string }).usxBaseUrl) || '/') +
-    'img/' + (source === 'usx' ? 'usx-sprite.svg' : 'sprite.svg') + '#',
+  staticBaseUrl,
+  staticUrlPrefix,
   className = '',
   ...props
 }: IconProps) {
+  const spritePrefix = staticUrlPrefix ?? assetUrl(`img/${source === 'usx' ? 'usx-sprite.svg' : 'sprite.svg'}#`, staticBaseUrl);
   return (
     <svg
       className={
@@ -40,7 +43,7 @@ export default function Icon({
       role="img"
       {...props}
     >
-      <use href={staticUrlPrefix + name} />
+      <use href={spritePrefix + name} />
     </svg>
   );
 }

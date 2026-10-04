@@ -6,9 +6,17 @@
     "src"
   ],
   "props": {
-    "src": {
+    "staticBaseUrl": {
       "type": "string",
-      "description": "Image source URL"
+      "description": "Optional image asset base, overriding window.usxBaseUrl in React or STATIC_URL in Django. Defaults to the global base or /."
+    },
+    "srcSet": {
+      "type": "string",
+      "description": "Optional image source candidates and width/density descriptors. Each candidate path is resolved against the image asset base."
+    },
+    "src": {
+      "type": ["string", "object"],
+      "description": "Image asset path or responsive object { fallback, sources: [{ srcSet, media?, type?, sizes? }] }. Paths resolve against the asset base; fully qualified and data URLs are unchanged."
     },
     "alt": {
       "type": "string",

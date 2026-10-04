@@ -30,6 +30,34 @@ const fail = (msg) => failures.push(msg);
 
 const cssVars = new Set(themeManifest.map((t) => t.cssVar));
 
+const headerBorders = {
+  'usx-header-border-top': '3px solid #005ea2',
+  'usx-header-border-bottom': '4px solid #237a3b',
+  'usx-header-border-separator': '2px dashed #a72f10',
+  'usx-header-border-bottom-mobile': '5px solid #8a3575',
+  'usx-header-nav-border-bottom-mobile': '6px solid #d1980b',
+  'usx-header-nav-item-border': 'none',
+};
+const resolvedBorders = resolveTheme(headerBorders);
+for (const [name, value] of Object.entries(headerBorders)) {
+  if (resolvedBorders[name] !== value) fail(`${name}: full border override was not preserved`);
+  if (!themeManifest.some((token) => token.name === name && token.type === 'string')) fail(`${name}: border must be a string token, not a color`);
+}
+
+const footerBorders = {
+  'usx-footer-border-top': '3px solid #005ea2',
+  'usx-footer-border-bottom': '4px solid #237a3b',
+  'usx-footer-primary-section-border-top': '2px dashed #a72f10',
+  'usx-footer-secondary-section-border-top': '5px dotted #8a3575',
+  'usx-footer-primary-link-border-top': '2px dashed #237a3b',
+  'usx-footer-nav-border-bottom': '3px solid #d1980b',
+};
+for (const [name, value] of Object.entries(footerBorders)) {
+  if (resolveTheme(footerBorders)[name] !== value) fail(`${name}: full border override was not preserved`);
+  if (resolveTheme({ [name]: 'none' })[name] !== 'none') fail(`${name}: border could not be disabled`);
+  if (!themeManifest.some((token) => token.name === name && token.type === 'string')) fail(`${name}: border must be a string token, not a color`);
+}
+
 const generatedFiles = fs.readdirSync(distDir, { recursive: true })
   .map((file) => path.join(distDir, file))
   .filter((file) => fs.statSync(file).isFile());

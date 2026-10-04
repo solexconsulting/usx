@@ -25,7 +25,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "test": "pnpm build && node test/asset-url-check.mjs"
   },
   "dependencies": {
     "@solexllc/usx": "workspace:*",

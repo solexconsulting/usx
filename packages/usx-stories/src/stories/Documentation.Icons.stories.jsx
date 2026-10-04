@@ -1,4 +1,10 @@
 import React, { useMemo, useState } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import Button from '../../../usx-react/src/components/button/Button.tsx';
+import Icon from '../../../usx-react/src/components/icon/Icon.tsx';
+import Input from '../../../usx-react/src/components/input/Input.tsx';
+import Tag from '../../../usx-react/src/components/tag/Tag.tsx';
+import Label from '../../../usx-react/src/components/label/Label.tsx';
 // @uswds/uswds's package.json `exports` map only exposes `dist/*`, and its
 // own icon browser's `usa-icons.config.js` is CommonJS (breaks as an ESM
 // import via Vite's raw `/@fs/` dev-mode loading). `usa-icon.json` is plain
@@ -41,65 +47,47 @@ function matchesQuery(icon, query) {
 
 function IconTile({ icon }) {
   const [copied, setCopied] = useState(false);
-  const base = (typeof window !== 'undefined' && window.usxBaseUrl) || '/';
-  const spriteFile = icon.source === 'usx' ? 'usx-sprite.svg' : 'sprite.svg';
-  const href = `${base}img/${spriteFile}#${icon.name}`;
   const badge = SOURCE_BADGES[icon.source];
 
   const copy = () => {
-    const snippet = `<svg class="usa-icon" aria-hidden="true" focusable="false"><use href="${href}" /></svg>`;
+    const snippet = renderToStaticMarkup(<Icon name={icon.name} source={icon.source} size={2} />);
     if (typeof navigator !== 'undefined' && navigator.clipboard) navigator.clipboard.writeText(snippet);
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   };
 
   return (
-    <button
+    <Button
       type="button"
+      ghost={true}
       onClick={copy}
-      title={icon.meta ? `${icon.name} — ${icon.meta}` : icon.name}
       style={{
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '0.25rem',
-        width: '7rem',
-        height: '7rem',
-        border: '1px solid #dfe1e2',
-        background: 'transparent',
-        cursor: 'pointer',
       }}
-      className="text-ink"
+      className="text-ink border width-card height-card margin-0"
     >
       {icon.source !== 'uswds' ? (
-        <span
+        <Tag
             style={{
             position: 'absolute',
             top: 4,
             right: 4,
-            fontSize: 12,
-            lineHeight: '14px',
-            fontWeight: 700,
-            letterSpacing: 0.3,
-            textTransform: 'uppercase',
-            padding: '2px 6px',
-            borderRadius: 12,
             background: badge.bg,
             color: badge.fg,
             }}
         >
             {badge.label}
-        </span>
+        </Tag>
       ) : null}
-      <svg className="usa-icon" aria-hidden="true" focusable="false" style={{ width: '2rem', height: '2rem' }}>
-        <use href={href} />
-      </svg>
-      <span style={{ fontSize: '0.7rem', textAlign: 'center', wordBreak: 'break-word' }}>
+      <Icon name={icon.name} source={icon.source} size={4} />
+      <Label className="font-sans-3xs margin-top-105" style={{ textAlign: 'center', wordBreak: 'break-word' }}>
         {copied ? 'Copied!' : icon.name}
-      </span>
-    </button>
+      </Label>
+    </Button>
   );
 }
 
@@ -124,11 +112,11 @@ export const Icons = {
           copy its <code>&lt;svg&gt;</code> snippet.
         </p>
 
-        <label htmlFor="usx-icon-filter" className="usa-label">Filter icons</label>
-        <input
+        <Input
           id="usx-icon-filter"
+          label="Filter icons"
+          formGroup={false}
           type="text"
-          className="usa-input"
           style={{ maxWidth: '20rem' }}
           value={query}
           onChange={(e) => setQuery(e.target.value)}

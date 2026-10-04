@@ -40,18 +40,18 @@ export const DifferentColors = createBulkDjangoStory('spinner', [
 ]);
 
 export const DifferentSizesOnInvertedBackground = createBulkDjangoStory('spinner', [
-  { storyName: 'size 1', props: { size: 1, color: 'white' } },
-  { storyName: 'size 2', props: { size: 2, color: 'white' } },
-  { storyName: 'size 3', props: { size: 3, color: 'white' } },
-  { storyName: 'size 4', props: { size: 4, color: 'white' } },
-  { storyName: 'size 5', props: { size: 5, color: 'white' } },
-  { storyName: 'size 6', props: { size: 6, color: 'white' } },
-  { storyName: 'size 7', props: { size: 7, color: 'white' } },
-  { storyName: 'size 8', props: { size: 8, color: 'white' } },
-  { storyName: 'size 9', props: { size: 9, color: 'white' } }
+  { storyName: 'size 1', props: { size: 1, color: 'inverse' } },
+  { storyName: 'size 2', props: { size: 2, color: 'inverse' } },
+  { storyName: 'size 3', props: { size: 3, color: 'inverse' } },
+  { storyName: 'size 4', props: { size: 4, color: 'inverse' } },
+  { storyName: 'size 5', props: { size: 5, color: 'inverse' } },
+  { storyName: 'size 6', props: { size: 6, color: 'inverse' } },
+  { storyName: 'size 7', props: { size: 7, color: 'inverse' } },
+  { storyName: 'size 8', props: { size: 8, color: 'inverse' } },
+  { storyName: 'size 9', props: { size: 9, color: 'inverse' } }
 ], ({children}) => (
   <div
-    className="bg-surface-inverse padding-3 display-flex flex-row flex-wrap grid-gap-lg flex-align-center text-white"
+    className="bg-surface-inverse text-inverse padding-3 display-flex flex-row flex-wrap grid-gap-lg flex-align-center"
     style={{ gap: '1rem' }}
   >
     {children}
@@ -65,14 +65,14 @@ export const DifferentColorsOnInvertedBackground = createBulkDjangoStory('spinne
   { props: { size: 4, color: 'accent-cool-light' } }
 ], ({children}) => (
   <div
-    className="bg-surface-inverse padding-3 display-flex flex-row flex-wrap grid-gap-lg flex-align-center text-white"
+    className="bg-surface-inverse text-inverse padding-3 display-flex flex-row flex-wrap grid-gap-lg flex-align-center"
     style={{ gap: '1rem' }}
   >
     {children}
   </div>
 ));
 
-export const OmittedLabel = createStory(omittedLabelProps);
+export const OmittedLabel = createStory(storyDefs.OmitLabel);
 
 const SpinnerWithTooltip = (args) => {
   const [spinnerHtml, setSpinnerHtml] = useState('');
@@ -81,7 +81,7 @@ const SpinnerWithTooltip = (args) => {
   const argsKey = JSON.stringify(args);
 
   useEffect(() => {
-    getComponentHtml('spinner', omittedLabelProps).then(setSpinnerHtml);
+    getComponentHtml('spinner', storyDefs.OmitLabel).then(setSpinnerHtml);
   }, []);
 
   useEffect(() => {
@@ -102,7 +102,7 @@ export const WithTooltip = {
   parameters: {
     docs: {
       source: {
-        code: componentTag({ name: 'tooltip', props: { label: 'Loading...', position: 'top' }, children: componentTag({ name: 'spinner', props: omittedLabelProps }) } )
+        code: componentTag({ name: 'tooltip', props: { label: 'Loading...', position: 'top' }, children: componentTag({ name: 'spinner', props: storyDefs.OmitLabel }) } )
       }
     }
   },

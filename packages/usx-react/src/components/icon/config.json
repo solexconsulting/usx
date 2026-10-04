@@ -3,6 +3,10 @@
   "template": "icon/icon.django.html",
   "version": 1,
   "props": {
+    "staticBaseUrl": {
+      "type": "string",
+      "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
+    },
     "name": {
       "type": "string",
       "default": "accessibility_new",
@@ -38,8 +42,7 @@
     },
     "staticUrlPrefix": {
       "type": "string",
-      "default": "/img/sprite.svg#",
-      "description": "The URL prefix for the static assets, which is used to construct the full URL for the icon sprite sheet or icon library being used."
+      "description": "Legacy full sprite URL prefix, including #, overriding automatic asset resolution. Use staticBaseUrl to change only the base directory."
     },
     "className": {
       "type": "string",

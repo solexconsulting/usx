@@ -1,5 +1,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
+import Icon from '../icon/Icon';
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   heading?: string;
@@ -12,6 +13,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   ariaLabel?: string;
   ariaLabelledby?: string;
   onDismiss?: () => void;
+  staticBaseUrl?: string;
   children?: React.ReactNode;
 }
 
@@ -26,6 +28,7 @@ export default function Alert({
   ariaLabel,
   ariaLabelledby,
   onDismiss = undefined,
+  staticBaseUrl,
   children = null,
   ...props
 }: AlertProps) {
@@ -77,9 +80,7 @@ export default function Alert({
         )}
         {onDismiss && (
           <button className="usx-alert__dismiss" aria-label="Dismiss alert" onClick={onDismiss}>
-            <svg className="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
-              <use href="./img/sprite.svg#close" />
-            </svg>
+            <Icon name="close" size={3} staticBaseUrl={staticBaseUrl} />
           </button>
         )}
       </div>

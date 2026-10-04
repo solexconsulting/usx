@@ -1,4 +1,4 @@
-{% load static %}
+{% load components %}
 
 <svg
     class="
@@ -18,9 +18,11 @@
     focusable="false"
     role="img"
 >
-    {% if source == 'usx' %}
-    <use href="{% static 'img/usx-sprite.svg' %}#{{ name }}"></use>
+    {% if staticUrlPrefix %}
+    <use href="{{ staticUrlPrefix }}{{ name }}"></use>
+    {% elif source == 'usx' %}
+    <use href="{% asset_url 'img/usx-sprite.svg' staticBaseUrl %}#{{ name }}"></use>
     {% else %}
-    <use href="{% static 'img/sprite.svg' %}#{{ name }}"></use>
+    <use href="{% asset_url 'img/sprite.svg' staticBaseUrl %}#{{ name }}"></use>
     {% endif %}
 </svg>

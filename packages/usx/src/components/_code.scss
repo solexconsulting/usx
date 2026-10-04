@@ -62,10 +62,20 @@
 
   }
 
-  .usx-copy {
+  > .usx-tooltip,
+  > .usx-copy {
     position: absolute;
     top: .5rem;
     right: .5rem;
+  }
+
+  > .usx-tooltip {
+    .usx-copy {
+      position: static
+    }
+  }
+
+  .usx-copy {
     opacity: .6;
     transition: opacity 0.2s;
 

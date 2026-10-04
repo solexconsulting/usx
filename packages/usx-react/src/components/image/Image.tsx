@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { getAssetUrl, getAssetSrcSet } from '../../assets';
 
 export interface ImageSource {
   srcSet: string;
@@ -13,7 +14,7 @@ export interface ResponsiveImage {
   sources: ImageSource[];
 }
 
-export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+export interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   src: string | ResponsiveImage;
   alt?: string;
   href?: string;
@@ -24,6 +25,7 @@ export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down' | '';
   maxWidth?: string | number;
   maxHeight?: string | number;
+  staticBaseUrl?: string;
   className?: string;
 }
 
@@ -38,6 +40,8 @@ export default function Image({
   objectFit = '',
   maxWidth,
   maxHeight,
+  staticBaseUrl,
+  srcSet,
   className = '',
   ...props
 }: ImageProps) {
@@ -72,15 +76,15 @@ export default function Image({
         <source
           key={i}
           {...(source.media ? { media: source.media } : {})}
-          srcSet={source.srcSet}
+          srcSet={getAssetSrcSet(source.srcSet, staticBaseUrl)}
           {...(source.type ? { type: source.type } : {})}
           {...(source.sizes ? { sizes: source.sizes } : {})}
         />
       ))}
-      <img src={(src as ResponsiveImage).fallback} alt={alt} style={style} {...props} />
+      <img src={getAssetUrl((src as ResponsiveImage).fallback, staticBaseUrl)} srcSet={srcSet ? getAssetSrcSet(srcSet, staticBaseUrl) : undefined} alt={alt} style={style} {...props} />
     </picture>
   ) : (
-    <img src={src as string} alt={alt} style={style} {...props} />
+    <img src={getAssetUrl(src as string, staticBaseUrl)} srcSet={srcSet ? getAssetSrcSet(srcSet, staticBaseUrl) : undefined} alt={alt} style={style} {...props} />
   );
 
   if (caption) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from '../image/Image';
 import ClassNames from 'classnames';
+import { getAssetUrl } from '../../assets';
 
 export interface BrandingLogoSource {
   srcSet: string;
@@ -26,10 +27,11 @@ export interface BrandingConfig {
 export interface BrandingProps extends React.HTMLAttributes<HTMLDivElement> {
   branding: BrandingConfig;
   projectUrl?: string;
+  staticBaseUrl?: string;
   className?: string;
 }
 
-function BrandingContent({ config, projectUrl }: { config: BrandingConfig; projectUrl?: string }) {
+function BrandingContent({ config, projectUrl, staticBaseUrl }: { config: BrandingConfig; projectUrl?: string; staticBaseUrl?: string }) {
   const { title, symbol, symbolInverse, logo, logoInverse, alt } = config;
   const label = alt ?? title ?? '';
 
@@ -41,10 +43,11 @@ function BrandingContent({ config, projectUrl }: { config: BrandingConfig; proje
         {...(projectUrl ? { href: projectUrl } : {})}
         className="usx-image usx-logo__image"
       >
-        <Image src={logo} alt={label} className="usx-logo__variant" />
+        <Image src={logo} alt={label} staticBaseUrl={staticBaseUrl} className="usx-logo__variant" />
         {logoInverse && (
           <Image
             src={logoInverse}
+            staticBaseUrl={staticBaseUrl}
             alt={label}
             className="usx-logo__variant usx-logo__variant--inverse"
           />
@@ -56,11 +59,11 @@ function BrandingContent({ config, projectUrl }: { config: BrandingConfig; proje
   return (
     <em className="usa-logo__text">
       {symbol && (
-        <img src={symbol} alt="" aria-hidden="true" className="usx-logo__symbol usx-logo__variant" />
+        <img src={getAssetUrl(symbol, staticBaseUrl)} alt="" aria-hidden="true" className="usx-logo__symbol usx-logo__variant" />
       )}
       {symbolInverse && (
         <img
-          src={symbolInverse}
+          src={getAssetUrl(symbolInverse, staticBaseUrl)}
           alt=""
           aria-hidden="true"
           className="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
@@ -75,7 +78,7 @@ function BrandingContent({ config, projectUrl }: { config: BrandingConfig; proje
   );
 }
 
-export default function Branding({ branding, projectUrl = '/', className = '', ...props }: BrandingProps) {
+export default function Branding({ branding, projectUrl = '/', staticBaseUrl, className = '', ...props }: BrandingProps) {
   if (!branding) return null;
 
   const classes = ClassNames(
@@ -86,7 +89,7 @@ export default function Branding({ branding, projectUrl = '/', className = '', .
 
   return (
     <div className={classes} {...props}>
-      <BrandingContent config={branding} projectUrl={projectUrl} />
+      <BrandingContent config={branding} projectUrl={projectUrl} staticBaseUrl={staticBaseUrl} />
     </div>
   );
 }

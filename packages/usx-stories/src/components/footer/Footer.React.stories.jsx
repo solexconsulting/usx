@@ -16,15 +16,15 @@ export default {
 
 const branding = {
   logo: {
-    fallback: `${window.usxBaseUrl}symbol-only.svg`,
+    fallback: 'symbol-only.svg',
     sources: [
-      { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}linear-w-symbol_left.svg` },
+      { media: '(min-width: 40em)', srcSet: 'linear-w-symbol_left.svg' },
     ],
   },
   logoInverse: {
-    fallback: `${window.usxBaseUrl}white_symbol-only.png`,
+    fallback: 'white_symbol-only.png',
     sources: [
-      { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}white_linear-w-symbol_left.png` },
+      { media: '(min-width: 40em)', srcSet: 'white_linear-w-symbol_left.png' },
     ],
   },
   title: 'Agency Name',
@@ -32,11 +32,11 @@ const branding = {
 const brandingUrl = '/';
 
 const socialLinks = [
-  { icon: `${window.usxBaseUrl}img/usa-icons/facebook.svg`,  href: 'javascript:void(0);', alt: 'Facebook' },
-  { icon: `${window.usxBaseUrl}img/usa-icons/twitter.svg`,   href: 'javascript:void(0);', alt: 'Twitter' },
-  { icon: `${window.usxBaseUrl}img/usa-icons/youtube.svg`,   href: 'javascript:void(0);', alt: 'YouTube' },
-  { icon: `${window.usxBaseUrl}img/usa-icons/instagram.svg`, href: 'javascript:void(0);', alt: 'Instagram' },
-  { icon: `${window.usxBaseUrl}img/usa-icons/rss_feed.svg`,  href: 'javascript:void(0);', alt: 'RSS' },
+  { icon: 'img/usa-icons/facebook.svg',  href: 'javascript:void(0);', alt: 'Facebook' },
+  { icon: 'img/usa-icons/twitter.svg',   href: 'javascript:void(0);', alt: 'Twitter' },
+  { icon: 'img/usa-icons/youtube.svg',   href: 'javascript:void(0);', alt: 'YouTube' },
+  { icon: 'img/usa-icons/instagram.svg', href: 'javascript:void(0);', alt: 'Instagram' },
+  { icon: 'img/usa-icons/rss_feed.svg',  href: 'javascript:void(0);', alt: 'RSS' },
 ];
 
 const contactArgs = {
@@ -174,6 +174,22 @@ NoNav.args = storyDefs.NoNav;
 
 export const Minimal = Template.bind({});
 Minimal.args = storyDefs.Minimal;
+
+export const BorderRoles = {
+  args: {
+    ...storyDefs.Big,
+    returnToTop: true,
+    style: {
+      '--usx-footer-border-top': '3px solid #005ea2',
+      '--usx-footer-border-bottom': '4px solid #237a3b',
+      '--usx-footer-primary-section-border-top': '2px dashed #a72f10',
+      '--usx-footer-secondary-section-border-top': '5px dotted #8a3575',
+      '--usx-footer-primary-link-border-top': '2px dashed #237a3b',
+      '--usx-footer-nav-border-bottom': '3px solid #d1980b',
+    },
+  },
+  render: Template,
+};
 
 // ── Composition story: using sub-components directly ──────────────────────
 

@@ -1534,7 +1534,7 @@ function Showcase({ resolved }) {
         <Attribution primary="George Washington" secondary="First President" />
         <Code lines={codeLines} />
         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <CopyToClipboard copyText="Example text" tooltip="Copy" copiedTooltip="Copied" label="Copy example" />
+          <CopyToClipboard copyText="Example text" tooltipProps={{ label: 'Copy', copiedTooltip: 'Copied', position: 'right' }} label="Copy example" />
         </div>
         <Clickable href="#" className="display-flex flex-column padding-2 border">
           Everything taking up space in this box is clickable, but only the text below appears as a link.

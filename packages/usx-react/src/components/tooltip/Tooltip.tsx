@@ -2,10 +2,11 @@ import React from 'react';
 import classNames from 'classnames';
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {
-  label: string;
+  label: React.ReactNode;
   position?: 'top' | 'bottom' | 'left' | 'right';
   children?: React.ReactNode;
   className?: string;
+  bodyClassName?: string;
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
@@ -13,6 +14,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   position = 'top',
   children,
   className = '',
+  bodyClassName = '',
   ...props
 }) => {
   const validPositions = ['top', 'bottom', 'left', 'right'] as const;
@@ -21,7 +23,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     <span className={classNames('usx-tooltip', className)} {...props}>
       {children}
       <span
-        className={`usa-tooltip__body usa-tooltip__body--${normalizedPosition}`}
+        className={classNames('usa-tooltip__body', `usa-tooltip__body--${normalizedPosition}`, bodyClassName)}
         role="tooltip"
       >
         {label}

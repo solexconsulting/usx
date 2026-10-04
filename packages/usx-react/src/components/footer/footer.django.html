@@ -145,6 +145,7 @@
   </div>{# /primary-section #}
 
   {# ── Secondary section ──────────────────────────────────────── #}
+  {% firstof branding.alt branding.title '' as brandingLabel %}
   {% if branding or socialLinks or contactHeading or contactPhone or contactEmail or contactLinks %}
   <div class="usa-footer__secondary-section">
     <div class="grid-container">
@@ -155,16 +156,16 @@
         <div class="usa-logo usx-logo usa-footer__logo grid-row grid-gap-2 usx-footer__logo">
           {% if branding.logo %}
             {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-image usx-logo__image">{% else %}<div class="usx-image usx-logo__image">{% endif %}
-            {% image src=branding.logo alt=branding.alt|default:branding.title|default:'' className='usx-logo__variant' %}{% endimage %}
-            {% if branding.logoInverse %}{% image src=branding.logoInverse alt=branding.alt|default:branding.title|default:'' className='usx-logo__variant usx-logo__variant--inverse' %}{% endimage %}{% endif %}
+            {% image src=branding.logo alt=brandingLabel staticBaseUrl=staticBaseUrl className='usx-logo__variant' %}{% endimage %}
+            {% if branding.logoInverse %}{% image src=branding.logoInverse alt=brandingLabel staticBaseUrl=staticBaseUrl className='usx-logo__variant usx-logo__variant--inverse' %}{% endimage %}{% endif %}
             {% if brandingUrl %}</a>{% else %}</div>{% endif %}
           {% else %}
           <em class="usa-logo__text">
             {% if branding.symbol %}
-              <img src="{{ branding.symbol }}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant" />
+              <img src="{% asset_url branding.symbol staticBaseUrl %}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant" />
             {% endif %}
             {% if branding.symbolInverse %}
-              <img src="{{ branding.symbolInverse }}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse" />
+              <img src="{% asset_url branding.symbolInverse staticBaseUrl %}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse" />
             {% endif %}
             {% if branding.title %}
               {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-logo__title">{{ branding.title }}</a>
@@ -182,16 +183,16 @@
           <div class="usa-logo usx-logo usa-footer__logo grid-row mobile-lg:grid-col-6 mobile-lg:grid-gap-2 usx-footer__logo">
             {% if branding.logo %}
               {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-image usx-logo__image">{% else %}<div class="usx-image usx-logo__image">{% endif %}
-              {% image src=branding.logo alt=branding.alt|default:branding.title|default:'' className='usx-logo__variant' %}{% endimage %}
-              {% if branding.logoInverse %}{% image src=branding.logoInverse alt=branding.alt|default:branding.title|default:'' className='usx-logo__variant usx-logo__variant--inverse' %}{% endimage %}{% endif %}
+              {% image src=branding.logo alt=brandingLabel staticBaseUrl=staticBaseUrl className='usx-logo__variant' %}{% endimage %}
+              {% if branding.logoInverse %}{% image src=branding.logoInverse alt=brandingLabel staticBaseUrl=staticBaseUrl className='usx-logo__variant usx-logo__variant--inverse' %}{% endimage %}{% endif %}
               {% if brandingUrl %}</a>{% else %}</div>{% endif %}
             {% else %}
             <em class="usa-logo__text">
               {% if branding.symbol %}
-                <img src="{{ branding.symbol }}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant" />
+                <img src="{% asset_url branding.symbol staticBaseUrl %}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant" />
               {% endif %}
               {% if branding.symbolInverse %}
-                <img src="{{ branding.symbolInverse }}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse" />
+                <img src="{% asset_url branding.symbolInverse staticBaseUrl %}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse" />
               {% endif %}
               {% if branding.title %}
                 {% if brandingUrl %}<a href="{{ brandingUrl }}" class="usx-logo__title">{{ branding.title }}</a>
@@ -209,7 +210,7 @@
               {% for social in socialLinks %}
               <div class="grid-col-auto">
                 <a class="usa-social-link" href="{{ social.href }}"{% if social.alt %} aria-label="{{ social.alt }}"{% endif %}>
-                  <img class="usa-social-link__icon" src="{{ social.icon }}" alt="{{ social.alt|default:'' }}" />
+                  <img class="usa-social-link__icon" src="{% asset_url social.icon staticBaseUrl %}" alt="{{ social.alt|default:'' }}" />
                 </a>
               </div>
               {% endfor %}

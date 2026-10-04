@@ -42,7 +42,7 @@ export const PageHeader = {
     <>
       <div className="display-flex flex-wrap flex-align-center flex-justify margin-bottom-2">
         <p className="usa-prose usx-prose">Manage requests for controlled data access.</p>
-        <Button href="?id=examples-workflows--ordered" iconProps={[{ name: 'add' }]}>
+        <Button variant="primary" href="?id=examples-workflows--ordered" iconProps={[{ name: 'add' }]}>
           Create application
         </Button>
       </div>

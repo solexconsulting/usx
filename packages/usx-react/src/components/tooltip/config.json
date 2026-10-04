@@ -4,9 +4,9 @@
   "version": 1,
   "props": {
     "label": {
-      "type": "string",
+      "type": "slot",
       "default": "Tooltip text",
-      "description": "The text content displayed inside the tooltip body."
+      "description": "Content displayed inside the tooltip body. Accepts text or composed content, such as React nodes or a Django template fragment."
     },
     "position": {
       "type": "select",
@@ -28,6 +28,11 @@
       "type": "string",
       "default": "",
       "description": "Additional CSS classes to apply to the tooltip wrapper."
+    },
+    "bodyClassName": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes to apply to the tooltip body."
     }
   }
 }

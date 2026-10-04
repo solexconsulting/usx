@@ -2,98 +2,96 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
-@mixin sizing(
-  $content-max: $usx-layout-max-width,
+@mixin sizing($content-max: $usx-layout-max-width,
   $expanded-max: $usx-layout-expanded-max-width,
   $sidebar-width: $usx-layout-sidebar-width,
   $content-min: $usx-layout-content-min-width,
   $gutter-mobile: $usx-layout-gutter-mobile-default,
-  $gutter: $usx-layout-gutter-default
-) {
+  $gutter: $usx-layout-gutter-default) {
   $minimum: math.min($content-max, $content-min);
   $grids: (
     1: '> .usx-layout__grid-container:where(:has(> .usx-layout__sidebar--left, > .usx-layout__sidebar--right):not(:has(> .usx-layout__sidebar--left):has(> .usx-layout__sidebar--right)))',
     2: '> .usx-layout__grid-container:where(:has(> .usx-layout__sidebar--left):has(> .usx-layout__sidebar--right))'
   );
 
-  --layout-gutter: #{usx-when($usx-layout-gutter-mobile, $usx-layout-gutter-mobile, $gutter-mobile)};
-  --layout-sidebar-gap: #{usx-when($usx-layout-gutter, $usx-layout-gutter, $gutter)};
+--layout-gutter: #{usx-when($usx-layout-gutter-mobile, $usx-layout-gutter-mobile, $gutter-mobile)};
+--layout-sidebar-gap: #{usx-when($usx-layout-gutter, $usx-layout-gutter, $gutter)};
 
-  @include at-media('desktop') {
-    --layout-gutter: #{usx-when($usx-layout-gutter, $usx-layout-gutter, $gutter)};
-  }
+@include at-media('desktop') {
+  --layout-gutter: #{usx-when($usx-layout-gutter, $usx-layout-gutter, $gutter)};
+}
 
-  > .usx-layout__single-column,
-  > .usx-layout__grid-container {
-    --layout-collapsed-width: #{$content-max};
-    --layout-expanded-width: #{$expanded-max};
-    --layout-sidebar-width: #{$sidebar-width};
-  }
+>.usx-layout__single-column,
+>.usx-layout__grid-container {
+  --layout-collapsed-width: #{$content-max};
+  --layout-expanded-width: #{$expanded-max};
+  --layout-sidebar-width: #{$sidebar-width};
+}
 
-  > .usx-layout__single-column > .usx-layout__expand-button,
-  > .usx-layout__grid-container > .usx-layout__content > .usx-layout__expand-button {
+>.usx-layout__single-column>.usx-layout__expand-button,
+>.usx-layout__grid-container>.usx-layout__content>.usx-layout__expand-button {
+  display: none;
+}
+
+>.usx-layout__grid-container {
+  --layout-left-width: 0px;
+  --layout-right-width: 0px;
+
+  >.usx-layout__sidebar--left,
+  >.usx-layout__sidebar--right {
     display: none;
   }
+}
 
-  > .usx-layout__grid-container {
-    --layout-left-width: 0px;
-    --layout-right-width: 0px;
+@each $count, $grid in $grids {
+  $sidebars-at: $minimum + $count * $sidebar-width;
 
-    > .usx-layout__sidebar--left,
-    > .usx-layout__sidebar--right {
-      display: none;
-    }
-  }
+  @container usx-layout (width >=#{$sidebars-at}) {
+    #{$grid} {
+      &:where(:has(> .usx-layout__sidebar--left)) {
+        --layout-left-width: var(--layout-sidebar-width);
+      }
 
-  @each $count, $grid in $grids {
-    $sidebars-at: $minimum + $count * $sidebar-width;
+      &:where(:has(> .usx-layout__sidebar--right)) {
+        --layout-right-width: var(--layout-sidebar-width);
+      }
 
-    @container usx-layout (width >= #{$sidebars-at}) {
-      #{$grid} {
-        &:where(:has(> .usx-layout__sidebar--left)) {
-          --layout-left-width: var(--layout-sidebar-width);
-        }
-
-        &:where(:has(> .usx-layout__sidebar--right)) {
-          --layout-right-width: var(--layout-sidebar-width);
-        }
-
-        > .usx-layout__sidebar--left,
-        > .usx-layout__sidebar--right {
-          display: block;
-        }
+      >.usx-layout__sidebar--left,
+      >.usx-layout__sidebar--right {
+        display: block;
       }
     }
   }
+}
 
-  @if $expanded-max > $content-max {
-    @each $active-gutter, $media in (
-      ($gutter-mobile, '(width < #{$usx-layout-breakpoint})'),
-      ($gutter, '(width >= #{$usx-layout-breakpoint})')
-    ) {
-      @media #{$media} {
-        @container usx-layout (width > calc(#{$content-max} - 2 * #{$active-gutter} + 1px)) {
-          > .usx-layout__single-column > .usx-layout__expand-button,
-          > .usx-layout__grid-container > .usx-layout__content > .usx-layout__expand-button {
-            display: flex;
-          }
+@if $expanded-max >$content-max {
+
+  @each $active-gutter, $media in (($gutter-mobile, '(width < #{$usx-layout-breakpoint})'),
+    ($gutter, '(width >= #{$usx-layout-breakpoint})')) {
+    @media #{$media} {
+      @container usx-layout (width > calc(#{$content-max} - 2 * #{$active-gutter} + 1px)) {
+
+        >.usx-layout__single-column>.usx-layout__expand-button,
+        >.usx-layout__grid-container>.usx-layout__content>.usx-layout__expand-button {
+          display: flex;
         }
+      }
 
-        @each $count, $grid in $grids {
-          $sidebars-at: $minimum + $count * $sidebar-width;
-          $expand-at: $content-max + $count * $sidebar-width;
+      @each $count, $grid in $grids {
+        $sidebars-at: $minimum + $count * $sidebar-width;
+        $expand-at: $content-max + $count * $sidebar-width;
 
-          @container usx-layout (width >= #{$sidebars-at}) and (width <= calc(#{$expand-at} - 2 * #{$active-gutter} + 1px)) {
-            #{$grid} {
-              > .usx-layout__content > .usx-layout__expand-button {
-                display: none;
-              }
+        @container usx-layout (width >=#{$sidebars-at}) and (width <=calc(#{$expand-at} - 2 * #{$active-gutter} + 1px)) {
+          #{$grid} {
+            >.usx-layout__content>.usx-layout__expand-button {
+              display: none;
             }
           }
         }
       }
     }
   }
+}
 }
 
 .usx-layout {
@@ -111,8 +109,8 @@
     margin-inline: auto;
   }
 
-  &.usx-expanded > &__single-column,
-  &.usx-expanded > &__grid-container {
+  &.usx-expanded>&__single-column,
+  &.usx-expanded>&__grid-container {
     --layout-width: max(0px, calc(var(--layout-expanded-width) - 2 * var(--layout-gutter)));
   }
 
@@ -141,13 +139,13 @@
     display: none;
   }
 
-  &.usx-expanded > &__single-column > &__expand-button &__expand-icon--expand,
-  &.usx-expanded > &__grid-container > &__content > &__expand-button &__expand-icon--expand {
+  &.usx-expanded>&__single-column>&__expand-button &__expand-icon--expand,
+  &.usx-expanded>&__grid-container>&__content>&__expand-button &__expand-icon--expand {
     display: none;
   }
 
-  &.usx-expanded > &__single-column > &__expand-button &__expand-icon--contract,
-  &.usx-expanded > &__grid-container > &__content > &__expand-button &__expand-icon--contract {
+  &.usx-expanded>&__single-column>&__expand-button &__expand-icon--contract,
+  &.usx-expanded>&__grid-container>&__content>&__expand-button &__expand-icon--contract {
     display: block;
   }
 
@@ -178,11 +176,7 @@
     display: grid;
     grid-template-rows: auto;
     grid-template-columns:
-      [page-start] var(--layout-leading-space)
-      [left-sidebar-start] var(--layout-left-width)
-      [content-start] minmax(0, var(--layout-width))
-      [content-end] var(--layout-right-width)
-      [right-sidebar-end] minmax(0, 1fr) [page-end];
+      [page-start] var(--layout-leading-space) [left-sidebar-start] var(--layout-left-width) [content-start] minmax(0, var(--layout-width)) [content-end] var(--layout-right-width) [right-sidebar-end] minmax(0, 1fr) [page-end];
 
   }
 
@@ -233,7 +227,8 @@
 }
 
 .grid-container,
-.usa-identifier__container {
+.usa-identifier__container,
+.usa-site-alert>.usa-alert>.usa-alert__body {
   @include layout-container;
 }
 

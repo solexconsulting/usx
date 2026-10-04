@@ -4,6 +4,7 @@ import Input from '../input/Input';
 import Button from '../button/Button';
 import Icon from '../icon/Icon';
 import ClassNames from 'classnames';
+import { getAssetUrl } from '../../assets';
 
 // ── Sub-components ──────────────────────────────────────────────────────────
 
@@ -95,16 +96,17 @@ export interface FooterSocialLink {
 }
 export interface FooterSocialLinksProps {
   links?: FooterSocialLink[];
+  staticBaseUrl?: string;
   className?: string;
 }
-export function FooterSocialLinks({ links = [], className = '' }: FooterSocialLinksProps) {
+export function FooterSocialLinks({ links = [], staticBaseUrl, className = '' }: FooterSocialLinksProps) {
   if (!links.length) return null;
   return (
     <div className={['usa-footer__social-links grid-row grid-gap-1 usx-footer__social-links', className].filter(Boolean).join(' ')}>
       {links.map((link, i) => (
         <div key={i} className="grid-col-auto">
           <a className="usa-social-link" href={link.href} aria-label={link.alt}>
-            <img className="usa-social-link__icon" src={link.icon} alt={link.alt} />
+            <img className="usa-social-link__icon" src={getAssetUrl(link.icon, staticBaseUrl)} alt={link.alt} />
           </a>
         </div>
       ))}
@@ -172,6 +174,7 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   signUp?: FooterSignUpProps | null;
   branding?: BrandingProps | null;
   brandingUrl?: string;
+  staticBaseUrl?: string;
   socialLinks?: FooterSocialLink[];
   contactHeading?: string | null;
   contactPhone?: LinkShape | null;
@@ -193,6 +196,7 @@ export default function Footer({
   signUp = null,
   branding = null,
   brandingUrl = '/',
+  staticBaseUrl,
   socialLinks = [],
   contactHeading = null,
   contactPhone = null,
@@ -225,12 +229,12 @@ export default function Footer({
     />
   ) : null;
 
-  const socialEl = socialLinks.length > 0 ? <FooterSocialLinks links={socialLinks} /> : null;
+  const socialEl = socialLinks.length > 0 ? <FooterSocialLinks links={socialLinks} staticBaseUrl={staticBaseUrl} /> : null;
   const logoClassName = variant === 'slim'
     ? 'usa-footer__logo grid-row grid-gap-2 usx-footer__logo'
     : 'usa-footer__logo grid-row mobile-lg:grid-col-6 mobile-lg:grid-gap-2 usx-footer__logo';
   const brandingEl = branding ? (
-    <Branding branding={branding} projectUrl={brandingUrl} className={logoClassName} />
+    <Branding branding={branding} projectUrl={brandingUrl} staticBaseUrl={staticBaseUrl} className={logoClassName} />
   ) : null;
 
   const secondaryContactBlock = (socialEl || contactEl) ? (
@@ -287,6 +291,12 @@ export default function Footer({
 
   // ── Slim footer ───────────────────────────────────────────────────────────
   if (variant === 'slim') {
+    const slimContactLinks = [
+      normalizeContactLink(contactPhone, 'tel:'),
+      normalizeContactLink(contactEmail, 'mailto:'),
+      ...contactLinks,
+    ].filter(Boolean) as FooterContactLink[];
+
     return (
       <footer className={classes} {...props}>
         {returnToTopEl}
@@ -308,9 +318,19 @@ export default function Footer({
                   </nav>
                 </div>
               )}
-              {contactEl && (
+              {slimContactLinks.length > 0 && (
                 <div className="mobile-lg:grid-col-4">
-                  {contactEl}
+                  <address className="usa-footer__address usx-footer__contact">
+                    <div className="grid-row grid-gap">
+                      {slimContactLinks.map((link, index) => (
+                        <div key={index} className="grid-col-auto mobile-lg:grid-col-12 desktop:grid-col-auto">
+                          <div className="usa-footer__contact-info">
+                            <a href={link.href}>{link.text}</a>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </address>
                 </div>
               )}
             </div>

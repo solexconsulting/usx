@@ -131,6 +131,83 @@ import '@solexllc/usx-theme/theme.css';
 import '@solexllc/usx-theme/themes/forest.css';   // or .../themes/all.css for all
 ```
 
+### Header Borders
+
+Header borders accept complete CSS border values, including `none`, rather than
+colors alone. Runtime overrides require the themed USX stylesheet and theme CSS.
+The corresponding Sass variables use the same names with `$` instead of `--`.
+
+| CSS custom property | Border owner |
+| --- | --- |
+| `--usx-header-border-top` | Header's outer top, at every viewport width |
+| `--usx-header-border-bottom` | Desktop outer bottom: basic Header, or extended navigation |
+| `--usx-header-border-separator` | Top of extended desktop navigation, between branding and navigation |
+| `--usx-header-border-bottom-mobile` | Collapsed Header's bottom, below the upstream 64em transition |
+| `--usx-header-nav-border-bottom-mobile` | Bottom of the open mobile navigation drawer |
+| `--usx-header-nav-item-border` | Mobile menu-item dividers and desktop secondary-link separators |
+
+Top, desktop bottom, and drawer bottom default to `none`. The other borders
+default to the small border width and shared border color. Non-default presets
+also enable top and desktop bottom borders. Use `none` to disable any border.
+Each boundary is painted once; the mobile navbar's upstream border is removed.
+
+```css
+.site-shell {
+  --usx-header-border-top: none;
+  --usx-header-border-bottom: 2px solid var(--usx-color-primary);
+  --usx-header-border-separator: 1px solid var(--usx-color-border);
+  --usx-header-border-bottom-mobile: 3px solid var(--usx-color-primary);
+  --usx-header-nav-border-bottom-mobile: none;
+}
+```
+
+Apply runtime overrides to a common ancestor of Header and navigation, not only
+the `<header>` element: React and Django render extended navigation as a sibling.
+CSS-only border switching follows the unchanged USWDS Header transition.
+
+### Footer Borders
+
+Footer uses complete border values, including `none`, with one owner for each
+shell edge. Runtime overrides require the themed USX stylesheet and theme CSS;
+the corresponding Sass variables replace `--` with `$`.
+
+| CSS custom property | Border owner |
+| --- | --- |
+| `--usx-footer-border-top` | Footer's outer top |
+| `--usx-footer-border-bottom` | Footer's outer bottom |
+| `--usx-footer-primary-section-border-top` | Boundary above the primary section, after return-to-top content |
+| `--usx-footer-secondary-section-border-top` | Boundary above the secondary section |
+| `--usx-footer-primary-link-border-top` | Primary-link top dividers below 30em |
+| `--usx-footer-nav-border-bottom` | Navigation bottom below 30em; below 40em in Big Footer |
+
+The four shell borders default to `none`, without reserving space for transparent borders.
+Non-default presets enable the top and both section borders using the small
+border width and shared border color; the bottom remains disabled. When a
+section is the footer's first child, its top border is suppressed and the outer
+top border owns that edge. These roles are the same on mobile and desktop.
+The two navigation dividers default to the small border width and shared border
+color. They accept full border overrides or `none`, but retain USWDS's responsive
+visibility: neither divider appears on desktop.
+
+```css
+.usx-footer {
+  --usx-footer-border-top: 3px solid var(--usx-color-primary);
+  --usx-footer-border-bottom: none;
+  --usx-footer-primary-section-border-top: 1px dashed var(--usx-color-border);
+  --usx-footer-secondary-section-border-top: 2px solid var(--usx-color-border);
+  --usx-footer-primary-link-border-top: 1px dashed var(--usx-color-border);
+  --usx-footer-nav-border-bottom: none;
+}
+```
+
+Migration: replace `--usx-footer-border`,
+`--usx-footer-primary-section-border`, and
+`--usx-footer-secondary-section-border` with the respective `-top` names above,
+and replace color-only values with full border values. The old Sass color
+variables and their `-var` hooks are removed. Existing Sass `*-border-top`
+overrides still accept complete borders; their runtime hooks now use the same
+names followed by `-var`.
+
 ### Notes
 
 - **Derived shades are first-class tokens.** Overriding `--usx-color-primary`

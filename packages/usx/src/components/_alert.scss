@@ -29,7 +29,7 @@
 	color: currentcolor;
 	top: 0;
 	right: 0;
-	margin: 0;
+	margin: 0 !important;
 	z-index: 1;
 }
 
@@ -124,5 +124,11 @@
 		font-size: usx-when($usx-alert-text-font-size);
 
 		line-height: usx-when($usx-alert-text-line-height);
+	}
+
+	&:has(.usx-alert__dismiss) {
+		.usa-alert__body {
+			padding-right: 2.5rem;
+		}
 	}
 }

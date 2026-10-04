@@ -1,4 +1,5 @@
 import React from 'react';
+import Code from '../../../usx-react/src/components/code/Code';
 
 export default {
   title: 'Documentation/USX React/Overview',
@@ -51,6 +52,86 @@ export const Overview = {
         USWDS itself is still <strong>not</strong> bundled by any USX package;
         your application loads USWDS's own CSS/JS exactly as it would without
         USX.
+      </p>
+
+      <h2 id="asset-urls">Asset URLs and subpath hosting</h2>
+      <p>
+        No configuration is needed when assets are available at the default
+        root paths, such as <code>/img/sprite.svg</code>. If your assets live
+        elsewhere, <code>window.usxBaseUrl</code> optionally changes that prefix.
+        For example, assets under <code>/static-root/</code> could use:
+      </p>
+      <Code
+        lines={[
+          { code: '<script>window.usxBaseUrl = "/static-root/";</script>' },
+        ]}
+      />
+      <p>
+        In this example, Banner loads{' '}
+        <code>/static-root/img/us_flag_small.png</code>, Icon uses{' '}
+        <code>/static-root/img/sprite.svg</code>, and Spinner uses{' '}
+        <code>/static-root/img/usx-sprite.svg</code>. Alert and copy-button
+        icons use the same base. An unset or empty value defaults to{' '}
+        <code>/</code>; a trailing slash is optional.
+      </p>
+      <p>
+        This is the <strong>static asset root, not the application routing base</strong>.
+        The application and its assets can share a location or use different
+        locations. Even an application hosted under a subpath needs no setting
+        if its assets still use <code>/img/...</code>. USX does not infer the
+        asset location from the current page or change your routing.
+      </p>
+      <p>
+        Asset publishing remains part of your application's deployment.
+        The setting only changes component image and sprite URLs; it does not
+        copy files or rewrite CSS URLs, stylesheet/script URLs, or literal URLs
+        in supplied HTML.
+      </p>
+      <p>
+        Banner, Icon, Spinner, Alert, Code, CopyToClipboard, Image, Header, and Footer accept a
+        single <code>staticBaseUrl</code> string for a per-component override.
+        Resolution is automatic: a non-empty <code>staticBaseUrl</code>, then{' '}
+        <code>window.usxBaseUrl</code>, then <code>/</code>. The base stays
+        separate from the asset filename:
+      </p>
+      <Code
+        lines={[
+          { code: "import { Banner, Icon } from '@solexllc/usx-react';" },
+          { code: '' },
+          { code: '<Banner flagSrc="flags/agency.png" staticBaseUrl="/other-assets/" />' },
+          { code: '<Icon name="check" staticBaseUrl="/other-assets/" />' },
+        ]}
+      />
+      <p>
+        These resolve to <code>/other-assets/flags/agency.png</code> and{' '}
+        <code>/other-assets/img/sprite.svg#check</code>. Banner's override also
+        applies to its other images and nested lock icon. Trailing base slashes
+        and leading path slashes are normalized; no manual concatenation or
+        helper call is needed. An empty override falls back to the global;
+        <code> staticBaseUrl="/"</code> explicitly selects root. Fully qualified
+        asset URLs remain unchanged. The legacy <code>staticUrlPrefix</code>{' '}
+        prop on Icon/Spinner still accepts a complete sprite URL prefix.
+      </p>
+      <p>
+        Image resolves its source, responsive fallback, and each source-set candidate.
+        Header and Footer resolve logos, inverse artwork, and symbols internally;
+        Footer also resolves social-image paths. Supply asset-relative filenames,
+        not paths already prefixed with the base. Fully qualified and data URLs,
+        as well as link destinations, remain unchanged.
+      </p>
+      <Code
+        lines={[
+          { code: '<Image src="img/agency-logo.svg" alt="Agency" />' },
+          { code: '<Header branding={{ logo: "agency-logo.svg", title: "Agency" }} />' },
+          { code: '<Footer branding={{ logo: "agency-logo.svg" }} staticBaseUrl="/other-assets/" />' },
+        ]}
+      />
+      <p>
+        When using a global base, define it before rendering. A component's{' '}
+        <code>staticBaseUrl</code> also works without <code>window</code> during
+        server rendering. Django templates accept the same override and use{' '}
+        <code>STATIC_URL</code> as their global fallback. Browsers generally block
+        cross-origin <code>{'<use>'}</code> references, even with CORS enabled.
       </p>
 
       <h2>Enhanced (JS-driven) USWDS components</h2>

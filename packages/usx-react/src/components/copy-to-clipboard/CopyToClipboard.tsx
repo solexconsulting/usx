@@ -1,48 +1,59 @@
 import React from 'react';
 import ClassNames from 'classnames';
+import Button from '../button/Button';
+import Icon from '../icon/Icon';
+import Tooltip from '../tooltip/Tooltip';
+import type { TooltipProps } from '../tooltip/Tooltip';
+
+function copyTextToClipboard(text: string) {
+  if (window.navigator.clipboard) {
+    return window.navigator.clipboard.writeText(text);
+  }
+}
 
 export interface CopyToClipboardProps {
   copyText?: string;
   label?: string | null;
-  tooltip?: string | null;
-  copiedTooltip?: string;
+  tooltipProps?: TooltipProps & { copiedTooltip?: string };
+  staticBaseUrl?: string;
   className?: string;
 }
 
 export default function CopyToClipboard({
   copyText = '',
   label = null,
-  tooltip = null,
-  copiedTooltip = 'Copied',
+  tooltipProps,
+  staticBaseUrl,
   className = '',
 }: CopyToClipboardProps) {
   const button = (
-    <button
-      className={ClassNames(
-        'usa-button',
-        'usx-button',
-        'usx-button--ghost',
-        'usx-copy',
-        className
-      )}
-      onClick={() => window.navigator.clipboard.writeText(copyText)}
+    <Button
+      ghost={true}
+      className={ClassNames('usx-copy', className)}
+      onClick={() => copyTextToClipboard(copyText)}
       type="button"
     >
-      <svg className="usa-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
-        <use href="./img/sprite.svg#content_copy" />
-      </svg>
-      <svg className="usa-icon usx-copy__check" aria-hidden="true" focusable="false" role="img">
-        <use href="./img/sprite.svg#check" />
-      </svg>
+      <Icon name="content_copy" size={0} className="usx-copy__copy" staticBaseUrl={staticBaseUrl} />
+      <Icon name="check" size={0} className="usx-copy__check" staticBaseUrl={staticBaseUrl} />
       {label && <span className="margin-left-1">{label}</span>}
-    </button>
+    </Button>
   );
 
+  if (!tooltipProps) return button;
+
+  const { label: tooltipLabel, copiedTooltip = 'Copied', ...tooltipOptions } = tooltipProps;
+
   return (
-    <span className="usx-tooltip">
+    <Tooltip
+      {...tooltipOptions}
+      label={(
+        <>
+          <span className="usx-copy__tooltip--copy">{tooltipLabel}</span>
+          <span className="usx-copy__tooltip--copied">{copiedTooltip}</span>
+        </>
+      )}
+    >
       {button}
-      {tooltip && <span className="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copy" role="tooltip">{tooltip}</span>}
-      <span className="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copied" role="tooltip">{copiedTooltip}</span>
-    </span>
+    </Tooltip>
   );
 }

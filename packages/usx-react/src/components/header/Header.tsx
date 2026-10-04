@@ -160,6 +160,7 @@ function PrimaryNav({
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   id?: string;
   branding: BrandingProps;
+  staticBaseUrl?: string;
   projectUrl?: string;
   navSections?: HeaderNavSection[];
   secondaryLinks?: HeaderNavLink[];
@@ -178,6 +179,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
 export default function Header({
   id = 'header',
   branding,
+  staticBaseUrl,
   projectUrl = '/',
   navSections = [],
   secondaryLinks = [],
@@ -208,7 +210,7 @@ export default function Header({
 
   const navbar = (
     <div className="usa-navbar">
-      <Branding branding={branding} projectUrl={projectUrl} />
+      <Branding branding={branding} projectUrl={projectUrl} staticBaseUrl={staticBaseUrl} />
       <button type="button" className="usa-menu-btn align-center">
         {useMenuIcon ? <Icon name="menu" size={3} /> : 'Menu'}
       </button>

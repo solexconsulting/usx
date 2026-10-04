@@ -1,3 +1,4 @@
+{% load components %}
 <div
     class="
         usa-alert
@@ -36,9 +37,7 @@
     {% endif %}
     {% if onDismiss %}
     <button class="usx-alert__dismiss" aria-label="Dismiss alert" onclick="{{ onDismiss }}">
-      <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
-        <use href="./img/sprite.svg#close"></use>
-      </svg>
+      {% icon name='close' size='3' staticBaseUrl=staticBaseUrl aria-hidden="true" focusable="false" role="img" %}{% endicon %}
     </button>
     {% endif %}
   </div>

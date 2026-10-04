@@ -49,7 +49,7 @@ export const storyDefs = {
     bannerActionText: "Just so you know...",
     domainHeading: `This is not a .gov website`,
     domainText: `This website does not belong to a United States government organization.`,
-    flagSrc: `${window.usxBaseUrl}white_symbol-only.png`,
+    flagSrc: 'white_symbol-only.png',
   },
 };
 

@@ -3,6 +3,10 @@
   "template": "footer/footer.django.html",
   "version": 1,
   "props": {
+    "staticBaseUrl": {
+      "type": "string",
+      "description": "Optional branding and social-image asset base, overriding window.usxBaseUrl in React or STATIC_URL in Django. Defaults to the global base or /."
+    },
     "variant": {
       "type": "select",
       "options": [

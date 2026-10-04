@@ -58,6 +58,7 @@ export function DataTablePattern({ state = 'normal' }) {
             <div className="display-flex flex-wrap flex-align-center flex-justify">
                 <span className="font-body-md">Manage requests for controlled data access.</span>
                 <Button
+                    variant="primary"
                     href="?id=examples-workflows--ordered&viewMode=story"
                     className="margin-right-0"
                     iconProps={[{ name: 'add' }]}

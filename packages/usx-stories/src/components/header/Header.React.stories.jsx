@@ -28,34 +28,34 @@ const lotsOfLinks = Array.from({ length: 30 }, (_, i) => ({
 }));
 
 const simpleBranding = {
-  logo: `${window.usxBaseUrl}linear.svg`,
-  logoInverse: `${window.usxBaseUrl}white_linear.png`,
+  logo: 'linear.svg',
+  logoInverse: 'white_linear.png',
   title: 'Agency Name',
 }
 
 const responsiveBranding = {
   logo: {
-    fallback: `${window.usxBaseUrl}symbol-only.svg`,
+    fallback: 'symbol-only.svg',
     sources: [
-      { media: '(min-width: 64em)', srcSet: `${window.usxBaseUrl}stacked-w-symbol_left.svg` },
-      { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}linear.svg` },
-      { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}solex-only.svg` },
+      { media: '(min-width: 64em)', srcSet: 'stacked-w-symbol_left.svg' },
+      { media: '(min-width: 40em)', srcSet: 'linear.svg' },
+      { media: '(min-width: 20em)', srcSet: 'solex-only.svg' },
     ],
   },
   logoInverse: {
-    fallback: `${window.usxBaseUrl}white_symbol-only.png`,
+    fallback: 'white_symbol-only.png',
     sources: [
-      { media: '(min-width: 64em)', srcSet: `${window.usxBaseUrl}white_stacked-w-symbol_left.png` },
-      { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}white_linear.png` },
-      { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}white_solex-only.png` },
+      { media: '(min-width: 64em)', srcSet: 'white_stacked-w-symbol_left.png' },
+      { media: '(min-width: 40em)', srcSet: 'white_linear.png' },
+      { media: '(min-width: 20em)', srcSet: 'white_solex-only.png' },
     ],
   },
   title: 'Agency Name',
 };
 
 const standardBranding = {
-  symbol: `${window.usxBaseUrl}symbol-only.svg`,
-  symbolInverse: `${window.usxBaseUrl}white_symbol-only.png`,
+  symbol: 'symbol-only.svg',
+  symbolInverse: 'white_symbol-only.png',
   title: 'Agency Name',
 }
 
@@ -251,6 +251,21 @@ export const Default = { args: storyDefs.Default };
 export const Basic = { args: storyDefs.Basic };
 export const BasicWithMegamenu = { args: storyDefs.BasicWithMegamenu };
 export const Extended = { args: storyDefs.Extended };
+export const BorderRoles = {
+  args: { ...storyDefs.Extended, id: 'header-border-roles' },
+  render: (args) => (
+    <div style={{
+      '--usx-header-border-top': '3px solid #005ea2',
+      '--usx-header-border-bottom': '4px solid #237a3b',
+      '--usx-header-border-separator': '2px dashed #a72f10',
+      '--usx-header-border-bottom-mobile': '5px solid #8a3575',
+      '--usx-header-nav-border-bottom-mobile': '6px solid #d1980b',
+      '--usx-header-nav-item-border': '3px dashed #e41d3d',
+    }}>
+      <Header {...args} />
+    </div>
+  ),
+};
 export const ExtendedWithMegamenu = { args: storyDefs.ExtendedWithMegamenu };
 export const WithMenuIcon = { args: storyDefs.WithMenuIcon };
 export const Minimal = { args: storyDefs.Minimal };

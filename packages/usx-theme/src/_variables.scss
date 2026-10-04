@@ -51,7 +51,7 @@ $usx-layout-gutter-mobile-var: null !default;
 $usx-layout-gutter-mobile: usx-var($usx-layout-gutter-mobile-var) !default;
 $usx-layout-gutter-var: null !default;
 $usx-layout-gutter: usx-var($usx-layout-gutter-var) !default;
-$usx-layout-gutter-mobile-default: 12px !default;
+$usx-layout-gutter-mobile-default: 1rem !default;
 $usx-layout-gutter-default: 32px !default;
 $usx-layout-max-width: $max-layout-width !default;
 $usx-layout-expanded-max-width: 100rem !default;  // 1600px
@@ -457,11 +457,7 @@ $usx-spacing-xl: usx-var($usx-spacing-xl-var) !default;
 @mixin at-media($breakpoint, $direction: 'min') {
   $width: null;
 
-  @if $breakpoint == 'mobile' and $direction == 'min' {
-    @include at-media('tablet', 'max') {
-      @content;
-    }
-  } @else if $breakpoint == 'mobile' {
+  @if $breakpoint == 'mobile' {
     $width: $breakpoint-mobile;
   } @else if $breakpoint == 'tablet' {
     $width: $breakpoint-tablet;
@@ -475,7 +471,7 @@ $usx-spacing-xl: usx-var($usx-spacing-xl-var) !default;
 
   @if $width {
     @if $direction == 'max' {
-      @media (width < #{$width}) {
+      @media (width < $width) {
         @content;
       }
     } @else if $direction == 'min' {
@@ -1004,10 +1000,18 @@ $usx-header-bg-var: null !default;
 $usx-header-bg: usx-var($usx-header-bg-var, $usx-surface-3) !default;
 $usx-header-text-var: null !default;
 $usx-header-text: usx-var($usx-header-text-var, $usx-text-ink) !default;
-$usx-header-border-var: null !default;
-$usx-header-border: usx-var($usx-header-border-var, $usx-color-border) !default;
-$usx-header-border-bottom: null                                           !default;
-$usx-header-border-top: usx-when($usx-header-border, $usx-border-width-sm inset $usx-header-border) !default;
+$usx-header-border-top-var: null !default;
+$usx-header-border-top: usx-var($usx-header-border-top-var) !default;
+$usx-header-border-bottom-var: null !default;
+$usx-header-border-bottom: usx-var($usx-header-border-bottom-var) !default;
+$usx-header-border-separator-var: null !default;
+$usx-header-border-separator: usx-var($usx-header-border-separator-var, 1px solid #dfe1e2) !default;
+$usx-header-border-bottom-mobile-var: null !default;
+$usx-header-border-bottom-mobile: usx-var($usx-header-border-bottom-mobile-var, 1px solid #dfe1e2) !default;
+$usx-header-nav-border-bottom-mobile-var: null !default;
+$usx-header-nav-border-bottom-mobile: usx-var($usx-header-nav-border-bottom-mobile-var) !default;
+$usx-header-nav-item-border-var: null !default;
+$usx-header-nav-item-border: usx-var($usx-header-nav-item-border-var, 1px solid #dfe1e2) !default;
 
 // Own hooks (not just a Sass fallback) so a theme whose header surface is
 // drastically different from the rest of the document (e.g. a dark/branded
@@ -1018,12 +1022,6 @@ $usx-header-secondary-link-text-hover-var: null !default;
 $usx-header-secondary-link-text-hover: usx-var($usx-header-secondary-link-text-hover-var, $usx-color-primary) !default;
 $usx-header-menu-btn-bg: $usx-color-primary                              !default;
 $usx-header-menu-btn-bg-hover: $usx-color-primary-dark                    !default;
-$usx-header-nav-top-border-var: null !default;
-$usx-header-nav-top-border: usx-var($usx-header-nav-top-border-var, $usx-color-border) !default;
-$usx-header-nav-bottom-border-var: null !default;
-$usx-header-nav-bottom-border: usx-var($usx-header-nav-bottom-border-var, $usx-color-border) !default;
-$usx-header-nav-border-bottom: usx-when($usx-header-nav-bottom-border, 2px solid $usx-header-nav-bottom-border) !default;
-$usx-header-nav-border-top: usx-when($usx-header-nav-top-border, $usx-border-width-sm solid $usx-header-nav-top-border) !default;
 $usx-header-nav-link-text-var: null !default;
 $usx-header-nav-link-text: usx-var($usx-header-nav-link-text-var, $usx-text-muted) !default;
 $usx-header-nav-link-text-mobile-var: null !default;
@@ -1115,15 +1113,18 @@ $usx-footer-social-hover-border: null                                           
 $usx-footer-social-hover-outline: null                                             !default;
 
 // Footer borders
-$usx-footer-border-var: null !default;
-$usx-footer-border: usx-var($usx-footer-border-var, $usx-color-border) !default;
-$usx-footer-primary-section-border-var: null !default;
-$usx-footer-primary-section-border: usx-var($usx-footer-primary-section-border-var, $usx-color-border) !default;
-$usx-footer-secondary-section-border-var: null !default;
-$usx-footer-secondary-section-border: usx-var($usx-footer-secondary-section-border-var, $usx-color-border) !default;
-$usx-footer-border-top: usx-when($usx-footer-border, $usx-border-width-sm solid $usx-footer-border) !default;
-$usx-footer-primary-section-border-top: usx-when($usx-footer-primary-section-border, $usx-border-width-sm solid $usx-footer-primary-section-border) !default;
-$usx-footer-secondary-section-border-top: usx-when($usx-footer-secondary-section-border, $usx-border-width-sm solid $usx-footer-secondary-section-border) !default;
+$usx-footer-border-top-var: null !default;
+$usx-footer-border-top: usx-var($usx-footer-border-top-var) !default;
+$usx-footer-border-bottom-var: null !default;
+$usx-footer-border-bottom: usx-var($usx-footer-border-bottom-var) !default;
+$usx-footer-primary-section-border-top-var: null !default;
+$usx-footer-primary-section-border-top: usx-var($usx-footer-primary-section-border-top-var) !default;
+$usx-footer-secondary-section-border-top-var: null !default;
+$usx-footer-secondary-section-border-top: usx-var($usx-footer-secondary-section-border-top-var) !default;
+$usx-footer-primary-link-border-top-var: null !default;
+$usx-footer-primary-link-border-top: usx-var($usx-footer-primary-link-border-top-var, 1px solid #a9aeb1) !default;
+$usx-footer-nav-border-bottom-var: null !default;
+$usx-footer-nav-border-bottom: usx-var($usx-footer-nav-border-bottom-var, 1px solid #a9aeb1) !default;
 
 // ── Component tokens: Page / Section ──────────────────────────────────────────
 // Page chains its own background to $usx-surface-1 — several patterns

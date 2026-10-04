@@ -6,26 +6,14 @@
 // behind `pkg:@solexllc/usx-theme/themes`. Keys are manifest token names;
 // values are CSS values (hex, `var(--usx-*)`, lengths, keywords).
 
-// The header/footer border-color tokens are each individually configurable
-// (see COMPONENT_COLOR_GROUPS' Header/Footer entries), but every preset and
-// the randomize buttons treat them as one unit, all pointing at whatever
-// color-border landed on — rather than 6 separately-varying colors — so a
-// preset/randomized theme reads as one coherent divider color everywhere
-// instead of a mismatched set.
-const HEADER_FOOTER_BORDER_TOKENS = [
-  'usx-header-border',
-  'usx-header-nav-top-border',
-  'usx-header-nav-bottom-border',
-  'usx-footer-border',
-  'usx-footer-primary-section-border',
-  'usx-footer-secondary-section-border'
-];
-
 export function headerFooterBorderOverrides() {
-  return HEADER_FOOTER_BORDER_TOKENS.reduce((acc, name) => {
-    acc[name] = 'var(--usx-color-border)';
-    return acc;
-  }, {});
+  return {
+    'usx-header-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border)',
+    'usx-header-border-bottom': 'var(--usx-border-width-sm) solid var(--usx-color-border)',
+    'usx-footer-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border)',
+    'usx-footer-primary-section-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border)',
+    'usx-footer-secondary-section-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border)',
+  };
 }
 
 // Header background now defaults to transparent (real USWDS renders no
@@ -53,8 +41,7 @@ export function inverseLogoOverrides() {
 }
 
 export const PRESETS = {
-  // Left with no overrides at all — including the header/footer borders,
-  // which are transparent by default (real USWDS renders no border there).
+  // Left with no overrides, including the optional Header/Footer shell borders.
   Default: {},
   Forest: {
     'color-primary': '#2e7d32',

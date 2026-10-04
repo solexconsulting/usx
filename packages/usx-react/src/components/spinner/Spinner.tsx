@@ -1,45 +1,38 @@
 import React from 'react';
+import Icon from '../icon/Icon';
+import Label from '../label/Label';
 
 export interface SpinnerProps extends React.HTMLAttributes<HTMLSpanElement> {
-  size?: 1 | 2 | 3 | 4 | 5;
-  color?: string | null;
+  size?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+  color?: string;
   label?: string;
-  omitLabel?: boolean;
+  screenReaderLabel?: string;
   staticUrlPrefix?: string;
+  staticBaseUrl?: string;
   className?: string;
 }
 
-const getDefaultStaticUrlPrefix = () => {
-  if (typeof window !== 'undefined' && (window as unknown as { usxBaseUrl?: string }).usxBaseUrl) {
-    return (window as unknown as { usxBaseUrl?: string }).usxBaseUrl + 'img/usx-sprite.svg#';
-  }
-  return '/img/usx-sprite.svg#';
-};
-
 const Spinner: React.FC<SpinnerProps> = ({
   size = 3,
-  color = null,
+  color,
   label = null,
   screenReaderLabel = null,
-  staticUrlPrefix = getDefaultStaticUrlPrefix(),
+  staticUrlPrefix,
+  staticBaseUrl,
   className = '',
   ...props
 }) => {
   return (
     <span role="status" aria-live="polite" className={`usx-spinner ${className}`} {...props}>
-      <svg
-        className={
-          'usa-icon ' +
-          (size === 1 ? 'usx-spinner--size-1' : 'usa-icon--size-' + size) +
-          (color ? ' text-' + color : '')
-        }
-        aria-hidden="true"
-        focusable="false"
-      >
-        <use href={staticUrlPrefix + 'spinner'} />
-      </svg>
-      {screenReaderLabel && <span className="usa-sr-only">{screenReaderLabel}</span>}
-      {label && <span className="usa-label usx-label">{label}</span>}
+      <Icon
+        name="spinner"
+        source="usx"
+        size={size}
+        color={color}
+        staticBaseUrl={staticBaseUrl}
+      />
+      {screenReaderLabel && <Label screenReaderOnly={true}>{screenReaderLabel}</Label>}
+      {label && <Label>{label}</Label>}
     </span>
   );
 };

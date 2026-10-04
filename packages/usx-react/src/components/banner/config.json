@@ -3,6 +3,10 @@
   "template": "banner/banner.django.html",
   "version": 1,
   "props": {
+    "staticBaseUrl": {
+      "type": "string",
+      "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
+    },
     "id": {
       "type": "string",
       "description": "The unique ID for the banner, used for aria-controls and element targeting."
@@ -13,7 +17,7 @@
     },
     "flagSrc": {
       "type": "string",
-      "description": "URL for the decorative banner flag image. Defaults to img/us_flag_small.png under the configured asset base."
+      "description": "Asset path for the decorative flag, resolved under staticBaseUrl or the global asset base. Defaults to img/us_flag_small.png. Fully qualified URLs pass through unchanged."
     },
     "tld": {
       "type": "string",

@@ -1,11 +1,13 @@
 import React from 'react';
 import Icon from '../icon/Icon';
 import ClassNames from 'classnames';
+import { getAssetUrl as assetUrl } from '../../assets';
 
 export interface BannerProps extends React.HTMLAttributes<HTMLElement> {
   id?: string;
   ariaLabel?: string;
   flagSrc?: string;
+  staticBaseUrl?: string;
   tld?: string;
   bannerText?: string;
   bannerActionText?: string;
@@ -19,7 +21,8 @@ export interface BannerProps extends React.HTMLAttributes<HTMLElement> {
 export default function Banner({
   id = 'gov-banner',
   ariaLabel = 'Official government website',
-  flagSrc = ((typeof window !== 'undefined' && (window as { usxBaseUrl?: string }).usxBaseUrl) || '/') + 'img/us_flag_small.png',
+  flagSrc,
+  staticBaseUrl,
   tld = '.gov',
   bannerText = 'An official website of the United States government',
   bannerActionText = "Here's how you know",
@@ -28,14 +31,13 @@ export default function Banner({
   httpsHeading = `Secure ${tld} websites use HTTPS`,
   httpsText = (
     <>
-      A <strong>lock</strong> (<Icon name="lock" size={1} />) or <strong>https://</strong> means
+      A <strong>lock</strong> (<Icon name="lock" size={1} staticBaseUrl={staticBaseUrl} />) or <strong>https://</strong> means
       you’ve safely connected to the {tld} website. Share sensitive information only on official, secure websites.
     </>
   ),
   className = '',
   ...props
 }: BannerProps) {
-  const assetBaseUrl = (typeof window !== 'undefined' && (window as { usxBaseUrl?: string }).usxBaseUrl) || '/';
   const classes = ClassNames(
     'usa-banner',
     'usx-banner',
@@ -50,7 +52,7 @@ export default function Banner({
               <img
                 aria-hidden="true"
                 className="usa-banner__header-flag"
-                src={flagSrc}
+                src={assetUrl(flagSrc ?? 'img/us_flag_small.png', staticBaseUrl)}
                 alt=""
               />
             </div>
@@ -82,7 +84,7 @@ export default function Banner({
             <div className="usa-banner__guidance tablet:grid-col-6">
               <img
                 className="usa-banner__icon usa-media-block__img"
-                src={`${assetBaseUrl}img/icon-dot-gov.svg`}
+                src={assetUrl('img/icon-dot-gov.svg', staticBaseUrl)}
                 role="img"
                 alt=""
                 aria-hidden="true"
@@ -98,7 +100,7 @@ export default function Banner({
             <div className="usa-banner__guidance tablet:grid-col-6">
               <img
                 className="usa-banner__icon usa-media-block__img"
-                src={`${assetBaseUrl}img/icon-https.svg`}
+                src={assetUrl('img/icon-https.svg', staticBaseUrl)}
                 role="img"
                 alt=""
                 aria-hidden="true"

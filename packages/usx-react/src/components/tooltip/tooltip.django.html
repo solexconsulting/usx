@@ -1,5 +1,5 @@
 {# Django template for Tooltip #}
 <span class="usx-tooltip{% if className %} {{ className }}{% endif %}">
   {% if children %}{{ children|safe }}{% endif %}
-  <span class="usa-tooltip__body usa-tooltip__body--{{ position|default:'top' }}" role="tooltip">{{ label|default:"Tooltip text" }}</span>
+  <span class="usa-tooltip__body usa-tooltip__body--{{ position|default:'top' }}{% if bodyClassName %} {{ bodyClassName }}{% endif %}" role="tooltip">{{ label|default:"Tooltip text" }}</span>
 </span>

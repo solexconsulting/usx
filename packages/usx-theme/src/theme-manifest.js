@@ -69,7 +69,7 @@ const setting = (name, defaultValue, internal = false) => ({
 // (https://designsystem.digital.gov/design-tokens/color/theme-tokens/ and
 // .../state-tokens/) so the "Default" theme matches USWDS out of the box.
 export const themeManifest = [
-  scale('usx-layout-gutter-mobile', '--usx-layout-gutter-mobile', '0.75rem', 'component'),
+  scale('usx-layout-gutter-mobile', '--usx-layout-gutter-mobile', '1rem', 'component'),
   scale('usx-layout-gutter', '--usx-layout-gutter', '2rem', 'component'),
   // ── Color primitives ──────────────────────────────────────────────────────
 
@@ -392,11 +392,13 @@ export const themeManifest = [
   component('usx-checkable-border', 'var(--usx-text-ink)'),
   component('usx-sidenav-bg-hover', 'var(--usx-surface-2)'),
   component('usx-sidenav-border', 'var(--usx-color-border)'),
-  // Unlike tile/selector/sidenav (which have a visible border in USWDS by
-  // default), real USWDS renders .usa-header/.usa-footer with NO border at
-  // all by default, so these must stay invisible until a consumer opts in,
-  // rather than chaining to color-border's visible gray.
-  component('usx-header-border', 'transparent'),
+  // Header shell edges are full border values, independent of item dividers.
+  setting('usx-header-border-top', 'none'),
+  setting('usx-header-border-bottom', 'none'),
+  setting('usx-header-border-separator', 'var(--usx-border-width-sm) solid var(--usx-color-border)'),
+  setting('usx-header-border-bottom-mobile', 'var(--usx-border-width-sm) solid var(--usx-color-border)'),
+  setting('usx-header-nav-border-bottom-mobile', 'none'),
+  setting('usx-header-nav-item-border', 'var(--usx-border-width-sm) solid var(--usx-color-border)'),
   // Same reasoning as the borders above: real USWDS renders .usa-header
   // with no explicit background at all (just the ambient page background),
   // so this stays transparent by default; the Sass fallback chains to
@@ -430,11 +432,12 @@ export const themeManifest = [
   // surface-2 so it stays distinct from the surface-3 drawer/header once a
   // theme is active.
   component('usx-header-nav-link-bg-hover', 'var(--usx-surface-2)'),
-  component('usx-header-nav-top-border', 'var(--usx-color-border)'),
-  component('usx-header-nav-bottom-border', 'transparent'),
-  component('usx-footer-border', 'transparent'),
-  component('usx-footer-primary-section-border', 'transparent'),
-  component('usx-footer-secondary-section-border', 'transparent'),
+  setting('usx-footer-border-top', 'none'),
+  setting('usx-footer-border-bottom', 'none'),
+  setting('usx-footer-primary-section-border-top', 'none'),
+  setting('usx-footer-secondary-section-border-top', 'none'),
+  setting('usx-footer-primary-link-border-top', 'var(--usx-border-width-sm) solid var(--usx-color-border)'),
+  setting('usx-footer-nav-border-bottom', 'var(--usx-border-width-sm) solid var(--usx-color-border)'),
   // Independent footer text/link/heading hooks — same rationale as the
   // header text/nav-link hooks above: a theme whose footer secondary
   // section sits on a drastically different surface (e.g. NASA's black

@@ -1,9 +1,11 @@
 from html.parser import HTMLParser
+from xml.etree.ElementTree import fromstring
 
 from django.template import Context, Template
-from django.test import SimpleTestCase
+from django.test import SimpleTestCase, override_settings
 
 from .core.render import render_component
+from .templatetags.components import asset_url, asset_srcset
 
 
 class RenderedElements(HTMLParser):
@@ -19,7 +21,181 @@ class RenderedElements(HTMLParser):
         return next(attrs for name, attrs in self.elements if name == tag)
 
 
+class AssetUrlTests(SimpleTestCase):
+    @override_settings(STATIC_URL='/global/')
+    def test_image_and_branding_asset_resolution(self):
+        self.assertEqual(asset_srcset('  small.png 1x, large.png 2x ', '/assets/'), '  /assets/small.png 1x, /assets/large.png 2x ')
+        self.assertEqual(asset_srcset('data:image/png;base64,AAAA 1x, large.png 2x', '/assets/'), 'data:image/png;base64,AAAA 1x, /assets/large.png 2x')
+        self.assertEqual(asset_srcset('small.png, large.png', '/assets/'), '/assets/small.png, /assets/large.png')
+        logo = {'fallback': '/logo.svg', 'sources': [{'srcSet': 'small.svg 1x, large.svg 2x', 'media': '(min-width: 40em)', 'sizes': '50vw'}]}
+        for override, base in [(None, '/global/'), ('', '/global/'), ('/', '/'), ('/override/', '/override/')]:
+            with self.subTest(override=override):
+                for caption in ('', 'Logo'):
+                    html = render_component('image', {'src': logo, 'staticBaseUrl': override, 'caption': caption})
+                    self.assertIn(f'src="{base}logo.svg"', html)
+                    self.assertIn(f'srcset="{base}small.svg 1x, {base}large.svg 2x"', html)
+                    self.assertIn('sizes="50vw"', html)
+                html = render_component('image', {'src': 'logo.svg', 'srcSet': 'small.svg 1x, large.svg 2x', 'staticBaseUrl': override, 'href': '/destination'})
+                self.assertIn('href="/destination"', html)
+                self.assertIn(f'srcset="{base}small.svg 1x, {base}large.svg 2x"', html)
+                for src in ('https://example.com/logo.svg', 'data:image/png;base64,AAAA'):
+                    self.assertIn(f'src="{src}"', render_component('image', {'src': src, 'staticBaseUrl': override}))
+                for component in ('header', 'footer'):
+                    for branding in ({'logo': logo, 'logoInverse': 'inverse.svg'}, {'symbol': 'symbol.svg', 'symbolInverse': 'inverse.svg'}):
+                        html = render_component(component, {'branding': branding, 'staticBaseUrl': override})
+                        filename = 'logo.svg' if 'logo' in branding else 'symbol.svg'
+                        self.assertIn(f'src="{base}{filename}"', html)
+                        self.assertIn(f'src="{base}inverse.svg"', html)
+                        self.assertNotIn('staticBaseUrl=', html)
+                for variant in ('big', 'medium'):
+                    html = render_component('footer', {'variant': variant, 'staticBaseUrl': override, 'socialLinks': [{'icon': 'social.svg', 'href': '/social', 'alt': 'Social'}]})
+                    self.assertIn(f'src="{base}social.svg"', html)
+                    self.assertIn('href="/social"', html)
+
+    @override_settings(STATIC_URL='/global/')
+    def test_component_asset_bases(self):
+        fixtures = [
+            ('banner', {}, ['img/us_flag_small.png', 'img/icon-dot-gov.svg', 'img/icon-https.svg', 'img/sprite.svg#lock']),
+            ('icon', {'name': 'check'}, ['img/sprite.svg#check']),
+            ('icon', {'name': 'spinner', 'source': 'usx'}, ['img/usx-sprite.svg#spinner']),
+            ('spinner', {}, ['img/usx-sprite.svg#spinner']),
+            ('alert', {'onDismiss': 'dismiss()'}, ['img/sprite.svg#close']),
+            ('code', {'copyText': 'test'}, ['img/sprite.svg#content_copy', 'img/sprite.svg#check']),
+            ('copy-to-clipboard', {'copyText': 'test'}, ['img/sprite.svg#content_copy', 'img/sprite.svg#check']),
+        ]
+        for component, props, paths in fixtures:
+            for base, prefix in [(None, '/global/'), ('', '/global/'), ('/', '/'), ('/override///', '/override/')]:
+                with self.subTest(component=component, base=base):
+                    supplied = props if base is None else {**props, 'staticBaseUrl': base}
+                    html = render_component(component, supplied)
+                    for path in paths:
+                        self.assertIn(f'="{prefix}{path}"', html)
+
+    @override_settings(STATIC_URL='/global/')
+    def test_custom_paths_and_legacy_sprite_override(self):
+        self.assertEqual(asset_url('/img/sprite.svg#check', '/override///'), '/override/img/sprite.svg#check')
+        self.assertEqual(asset_url('///img/sprite.svg#check', '/override///'), '/override/img/sprite.svg#check')
+        self.assertEqual(asset_url('//img/sprite.svg#check'), '/global/img/sprite.svg#check')
+        self.assertEqual(asset_url('/img/sprite.svg#check'), '/global/img/sprite.svg#check')
+        self.assertEqual(asset_url('https://example.com/flag.png', '/override'), 'https://example.com/flag.png')
+        html = render_component('banner', {'flagSrc': '/flags/agency.png', 'staticBaseUrl': '/override'})
+        self.assertIn('src="/override/flags/agency.png"', html)
+        html = render_component('icon', {'name': 'check', 'staticUrlPrefix': '#local-', 'staticBaseUrl': '/override'})
+        self.assertIn('href="#local-check"', html)
+
+    @override_settings(STATIC_URL='/', MEDIA_URL='/media/')
+    def test_default_root(self):
+        self.assertEqual(asset_url('/img/sprite.svg#check'), '/img/sprite.svg#check')
+
+
 class ReactParityTests(SimpleTestCase):
+    def test_spinner_renders_shared_svg_icon(self):
+        for props, size_class in [({}, 'usa-icon--size-3'), ({'size': 1}, 'usx-icon--size-1'), ({'size': 6}, 'usa-icon--size-6')]:
+            with self.subTest(props=props):
+                html = render_component('spinner', {
+                    'staticBaseUrl': '/assets/', 'color': 'primary',
+                    'label': 'Loading', 'screenReaderLabel': 'Please wait',
+                    **props,
+                })
+                root = fromstring(html)
+                self.assertEqual(root.attrib['role'], 'status')
+                svg = root.find('svg')
+                self.assertIsNotNone(svg)
+                self.assertTrue({'usa-icon', size_class, 'text-primary'}.issubset(svg.attrib['class'].split()))
+                self.assertEqual(svg.attrib['aria-hidden'], 'true')
+                self.assertEqual(svg.find('use').attrib['href'], '/assets/img/usx-sprite.svg#spinner')
+                self.assertIsNone(root.find('use'))
+                self.assertIn('Loading', html)
+                self.assertIn('Please wait', html)
+
+    def test_copy_to_clipboard_composed_button(self):
+        for extra_props in ({}, {'className': 'custom-copy', 'tooltipProps': {'label': 'Copy text', 'copiedTooltip': 'Done', 'position': 'left', 'className': 'custom-tooltip', 'bodyClassName': 'custom-body'}}):
+            with self.subTest(props=extra_props):
+                html = render_component('copy-to-clipboard', {
+                    'copyText': 'Agency\'s "copy"\n<tag>',
+                    'label': 'Copy',
+                    'staticBaseUrl': '/assets/',
+                    **extra_props,
+                })
+                elements = RenderedElements(html)
+                button = elements.attributes('button')
+                self.assertTrue({'usa-button', 'usx-button', 'usx-button--ghost', 'usx-copy'}.issubset(button['class'].split()))
+                self.assertEqual('custom-copy' in button['class'].split(), bool(extra_props))
+                self.assertEqual(button['type'], 'button')
+                self.assertEqual(button['onclick'], r"navigator.clipboard.writeText('Agency\u0027s \u0022copy\u0022\u000A\u003Ctag\u003E')")
+                self.assertEqual([attrs['href'] for tag, attrs in elements.elements if tag == 'use'], [
+                    '/assets/img/sprite.svg#content_copy', '/assets/img/sprite.svg#check',
+                ])
+                self.assertInHTML('<span class="margin-left-1">Copy</span>', html)
+                self.assertEqual(sum(attrs.get('role') == 'tooltip' for _, attrs in elements.elements), 1 if extra_props else 0)
+                if extra_props:
+                    self.assertInHTML('<span class="usx-copy__tooltip--copy">Copy text</span>', html)
+                    self.assertInHTML('<span class="usx-copy__tooltip--copied">Done</span>', html)
+                    self.assertIn('usx-tooltip custom-tooltip', html)
+                    self.assertIn('usa-tooltip__body--left custom-body', html)
+                self.assertNotIn('{%', html)
+                self.assertNotIn('{{', html)
+
+        copied_only = render_component('copy-to-clipboard', {'copyText': 'Example', 'tooltipProps': {'bodyClassName': 'custom-body'}})
+        self.assertIn('usa-tooltip__body--top custom-body', copied_only)
+        self.assertInHTML('<span class="usx-copy__tooltip--copied">Copied</span>', copied_only)
+        empty_copied = render_component('copy-to-clipboard', {'copyText': 'Example', 'tooltipProps': {'label': 'Copy', 'copiedTooltip': ''}})
+        self.assertInHTML('<span class="usx-copy__tooltip--copied"></span>', empty_copied)
+
+    def test_clipboard_tooltip_fragment_and_prop_forwarding(self):
+        tooltip_props = {'position': 'bottom', 'className': 'custom-wrapper', 'bodyClassName': 'custom-body', 'label': 'Replaced', 'children': 'Replaced'}
+        html = Template('''{% load components %}
+            {% fragment as richLabel %}<strong>{{ text }}</strong>{% endfragment %}
+            {% tooltip props=tooltipProps label=richLabel %}<button>Trigger</button>{% endtooltip %}
+        ''').render(Context({'tooltipProps': tooltip_props, 'text': '<Copy>'}))
+        self.assertIn('usx-tooltip custom-wrapper', html)
+        self.assertIn('usa-tooltip__body--bottom custom-body', html)
+        self.assertInHTML('<strong>&lt;Copy&gt;</strong>', html)
+        self.assertInHTML('<button>Trigger</button>', html)
+        self.assertNotIn('Replaced', html)
+        self.assertEqual(tooltip_props['label'], 'Replaced')
+
+        rich_label = Template('{% load components %}{% fragment as label %}<strong>{{ text }}</strong>{% endfragment %}{{ label }}').render(Context({'text': '<Copy>'}))
+        html = render_component('copy-to-clipboard', {'copyText': 'Example', 'tooltipProps': {**tooltip_props, 'label': rich_label}})
+        self.assertInHTML('<span class="usx-copy__tooltip--copy"><strong>&lt;Copy&gt;</strong></span>', html)
+        self.assertIn('usa-tooltip__body--bottom custom-body', html)
+        self.assertNotIn('Replaced', html)
+
+    def test_clipboard_tooltip_has_no_template_whitespace(self):
+        for label in ('Copy', 'First line\nSecond line'):
+            with self.subTest(label=label):
+                root = fromstring(render_component('copy-to-clipboard', {
+                    'copyText': 'Example',
+                    'tooltipProps': {'label': label, 'copiedTooltip': 'Copied'},
+                }))
+                tooltip = next(element for element in root.iter('span') if element.get('role') == 'tooltip')
+                self.assertIsNone(tooltip.text)
+                self.assertEqual([child.get('class') for child in tooltip], [
+                    'usx-copy__tooltip--copy', 'usx-copy__tooltip--copied',
+                ])
+                self.assertEqual([child.text for child in tooltip], [label, 'Copied'])
+                self.assertTrue(all(child.tail is None for child in tooltip))
+
+    def test_code_uses_copy_to_clipboard(self):
+        html = render_component('code', {
+            'lines': [{'code': 'example'}],
+            'copyText': "Agency's example",
+            'staticBaseUrl': '/assets/',
+        })
+        elements = RenderedElements(html)
+        button = elements.attributes('button')
+        self.assertIn('usx-copy', button['class'].split())
+        self.assertIn('usa-tooltip__body--left', html)
+        self.assertInHTML('<span class="usx-copy__tooltip--copy">Copy</span>', html)
+        self.assertInHTML('<span class="usx-copy__tooltip--copied">Copied</span>', html)
+        self.assertEqual(button['onclick'], r"navigator.clipboard.writeText('Agency\u0027s example')")
+        self.assertEqual([attrs['href'] for tag, attrs in elements.elements if tag == 'use'], [
+            '/assets/img/sprite.svg#content_copy', '/assets/img/sprite.svg#check',
+        ])
+        self.assertNotIn('{%', html)
+        without_copy = RenderedElements(render_component('code', {'lines': []}))
+        self.assertFalse(any(tag == 'button' for tag, _ in without_copy.elements))
+
     def test_code_literal_markup_and_trusted_html(self):
         source = '  <Page title="Account & settings">&lt;Section&gt;</Page>'
         for props in ({}, {'allowHtml': False}):

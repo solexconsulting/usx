@@ -1,18 +1,8 @@
 import React from 'react';
+import Icon from '../../../../usx-react/src/components/icon/Icon.tsx';
 import Clickable from '../../../../usx-react/src/components/clickable/Clickable.tsx';
 import config from '../../../../usx-react/src/components/clickable/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
-
-const spriteHref = (iconName) => {
-  const base = (typeof window !== 'undefined' && window.usxBaseUrl) || '/';
-  return `${base}img/sprite.svg#${iconName}`;
-};
-
-const Icon = ({ name, className = 'usa-icon usa-icon--size-3', ariaHidden = true }) => (
-  <svg className={className} aria-hidden={ariaHidden} focusable="false" role="img">
-    <use href={spriteHref(name)} />
-  </svg>
-);
 
 export const storyDefs = {
   SingleClickable: {
@@ -94,7 +84,7 @@ export const WithColorChange = {
       <div className="grid-col-12 display-flex flex-justify-center tablet:grid-col-4">
         <Clickable {...args}>
           <Clickable.ColorChange>
-            <Icon name="tornado" className="usa-icon usa-icon--size-3" />
+            <Icon name="tornado" size={3} />
           </Clickable.ColorChange>
           <Clickable.Link className="margin-left-1">Auntie Em!</Clickable.Link>
         </Clickable>
@@ -102,7 +92,7 @@ export const WithColorChange = {
       <div className="grid-col-12 display-flex flex-justify-center margin-top-2 tablet:margin-top-0 tablet:grid-col-4">
         <Clickable {...args}>
           <Clickable.ColorChange>
-            <Icon name="my_location" className="usa-icon usa-icon--size-3" />
+            <Icon name="my_location" size={3} />
           </Clickable.ColorChange>
           <Clickable.Link className="margin-left-1">We're not in Kansas anymore</Clickable.Link>
         </Clickable>
@@ -110,7 +100,7 @@ export const WithColorChange = {
       <div className="grid-col-12 display-flex flex-justify-center margin-top-2 tablet:margin-top-0 tablet:grid-col-4">
         <Clickable {...args}>
           <Clickable.ColorChange>
-            <Icon name="pets" className="usa-icon usa-icon--size-3" />
+            <Icon name="pets" size={3} />
           </Clickable.ColorChange>
           <Clickable.Link className="margin-left-1">Oh, Toto!</Clickable.Link>
         </Clickable>
@@ -125,7 +115,7 @@ export const ReadJohnsStoryCta = {
   render: (args) => (
     <Clickable {...args}>
       <Clickable.BgColorChange className="usx-circle bg-black text-white display-flex flex-align-center flex-justify-center width-4 height-4">
-        <Icon name="arrow_forward" className="usa-icon usa-icon--size-3" />
+        <Icon name="arrow_forward" size={3} />
       </Clickable.BgColorChange>
       <Clickable.Link className="margin-left-1">Read John's Story</Clickable.Link>
     </Clickable>
@@ -151,7 +141,7 @@ export const ReadJohnsStoryInsideBlockquote = {
         </div>
         <div className="display-flex flex-align-center margin-top-2">
           <Clickable.BgColorChange className="usx-circle bg-black text-white display-flex flex-align-center flex-justify-center width-4 height-4">
-            <Icon name="arrow_forward" className="usa-icon usa-icon--size-3" />
+            <Icon name="arrow_forward" size={3} />
           </Clickable.BgColorChange>
           <Clickable.Link className="margin-left-1">Read John's Story</Clickable.Link>
         </div>

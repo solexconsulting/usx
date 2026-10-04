@@ -26,19 +26,19 @@ export const miscBannerArgs = {
 export const headerArgs = {
   branding: {
     logo: {
-      fallback: `${window.usxBaseUrl}symbol-only.svg`,
+      fallback: 'symbol-only.svg',
       sources: [
-        { media: '(min-width: 64em)', srcSet: `${window.usxBaseUrl}stacked-w-symbol_left.svg` },
-        { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}linear.svg` },
-        { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}solex-only.svg` },
+        { media: '(min-width: 64em)', srcSet: 'stacked-w-symbol_left.svg' },
+        { media: '(min-width: 40em)', srcSet: 'linear.svg' },
+        { media: '(min-width: 20em)', srcSet: 'solex-only.svg' },
       ],
     },
     logoInverse: {
-      fallback: `${window.usxBaseUrl}white_symbol-only.png`,
+      fallback: 'white_symbol-only.png',
       sources: [
-        { media: '(min-width: 64em)', srcSet: `${window.usxBaseUrl}white_stacked-w-symbol_left.png` },
-        { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}white_linear.png` },
-        { media: '(min-width: 20em)', srcSet: `${window.usxBaseUrl}white_solex-only.png` },
+        { media: '(min-width: 64em)', srcSet: 'white_stacked-w-symbol_left.png' },
+        { media: '(min-width: 40em)', srcSet: 'white_linear.png' },
+        { media: '(min-width: 20em)', srcSet: 'white_solex-only.png' },
       ],
     },
     title: 'SOLEX Consulting',
@@ -120,15 +120,15 @@ export const footerArgs = {
   returnToTop: true,
   branding: {
     logo: {
-      fallback: `${window.usxBaseUrl}symbol-only.svg`,
+      fallback: 'symbol-only.svg',
       sources: [
-        { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}linear.svg` },
+        { media: '(min-width: 40em)', srcSet: 'linear.svg' },
       ],
     },
     logoInverse: {
-      fallback: `${window.usxBaseUrl}white_symbol-only.png`,
+      fallback: 'white_symbol-only.png',
       sources: [
-        { media: '(min-width: 40em)', srcSet: `${window.usxBaseUrl}white_linear.png` },
+        { media: '(min-width: 40em)', srcSet: 'white_linear.png' },
       ],
     },
     title: 'SOLEX Consulting',
@@ -142,10 +142,10 @@ export const footerArgs = {
     buttonText: 'Subscribe',
   },
   socialLinks: [
-    { icon: `${window.usxBaseUrl}img/usa-icons/facebook.svg`,  href: '#', alt: 'Facebook' },
-    { icon: `${window.usxBaseUrl}img/usa-icons/twitter.svg`,   href: '#', alt: 'Twitter' },
-    { icon: `${window.usxBaseUrl}img/usa-icons/youtube.svg`,   href: '#', alt: 'YouTube' },
-    { icon: `${window.usxBaseUrl}img/usa-icons/instagram.svg`, href: '#', alt: 'Instagram' },
+    { icon: 'img/usa-icons/facebook.svg',  href: '#', alt: 'Facebook' },
+    { icon: 'img/usa-icons/twitter.svg',   href: '#', alt: 'Twitter' },
+    { icon: 'img/usa-icons/youtube.svg',   href: '#', alt: 'YouTube' },
+    { icon: 'img/usa-icons/instagram.svg', href: '#', alt: 'Instagram' },
   ],
   contactHeading: 'Agency Contact Center',
   contactPhone: { href: 'tel:1-800-555-5555', text: '(800) 555-GOVT' },
@@ -160,7 +160,7 @@ export const identifierArgs = {
   avatarProps: [
     {
       href: 'https://google.com',
-      src: `./white_symbol-only.png`,
+      src: 'white_symbol-only.png',
       alt: 'SOLEX Consulting',
     },
   ],

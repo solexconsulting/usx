@@ -35,8 +35,7 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 # STATIC_URL controls the {% static %} template tag prefix.
-# Set to the subpath where static assets are served from (same as FORCE_SCRIPT_NAME
-# since the Storybook nginx container serves them). Defaults to '/'.
+# The asset root is independent of FORCE_SCRIPT_NAME (the application mount).
 STATIC_URL = os.environ.get('DJANGO_STATIC_URL', '/')
 
 # If Django is mounted at a subpath (e.g. /storybook-django/), set this so

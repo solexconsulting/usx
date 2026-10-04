@@ -24,6 +24,12 @@ into wherever they serve static assets from (e.g. Storybook mounts it at
 `/img/usx-sprite.svg` via `staticDirs` in `.storybook/main.js`; a Django app
 would add it to `STATICFILES_DIRS`).
 
+The static asset root is configured by `window.usxBaseUrl` in
+React, or `STATIC_URL` in Django. It is independent of application routing.
+See the [asset deployment guide](../usx-react/README.md#asset-urls-and-subpath-deployment)
+for the expected directory structure, subpath setup, CSS/font handling, and
+the same-origin requirement for external SVG sprites.
+
 The sprite is generated, not hand-written. Each icon lives as its own
 standalone `<svg>` file in `src/icons/<name>.svg` (viewable directly in an
 editor or browser), and `pnpm build` (or `pnpm --filter @solexllc/usx build`)

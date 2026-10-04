@@ -7,21 +7,45 @@ Each component is registered as a BlockInclusionNode subclass, providing
 
 import hashlib
 import json
+import re
 import uuid
 from datetime import datetime
 from typing import Any, Dict, List, Optional
+from urllib.parse import urlsplit, urlunsplit
 
 from django import template
 from django.conf import settings
 from django.template import Context
 from django.template.base import Parser, Token, token_kwargs
+from django.templatetags.static import static
 
 register = template.Library()
 
 
 @register.simple_tag()
-def html_attrs(**attributes: Any) -> Dict[str, Any]:
-    return {name.replace("_", "-"): value for name, value in attributes.items()}
+def asset_url(asset_path: str, static_base_url: Optional[str] = None) -> str:
+    parts = urlsplit(asset_path)
+    if parts.scheme:
+        return asset_path
+    if static_base_url:
+        return f"{static_base_url.rstrip('/')}/{asset_path.lstrip('/')}"
+    parts = urlsplit(asset_path.lstrip('/'))
+    resolved = static(parts.path.lstrip('/')) if settings.STATIC_URL else f"/{parts.path.lstrip('/')}"
+    return urlunsplit((*urlsplit(resolved)[:3], parts.query, parts.fragment))
+
+
+@register.simple_tag()
+def asset_srcset(srcset: str, static_base_url: Optional[str] = None) -> str:
+    return re.sub(
+        r'(^\s*|,\s*)(\S*[^,\s])(?=,?(?:\s|$))',
+        lambda match: match[1] + asset_url(match[2], static_base_url),
+        srcset,
+    )
+
+
+@register.simple_tag(name="dict")
+def make_dict(**values: Any) -> Dict[str, Any]:
+    return {name.replace("_", "-"): value for name, value in values.items()}
 
 
 @register.simple_tag()
@@ -242,10 +266,11 @@ class BlockInclusionNode(template.Node):
             key: value.resolve(context)
             for key, value in self.extra_context.items()
         }
+        base_props = values.pop("props", None) or {}
 
         t = context.template.engine.get_template(self.template)
         # Add the `children` variable in the rendered template's context.
-        context_data = self.get_context_data({**values, "children": children})
+        context_data = self.get_context_data({**base_props, **values, "children": children})
         output = t.render(Context(context_data, autoescape=context.autoescape))
 
         if self.target_var:
@@ -302,6 +327,12 @@ class ButtonBlock(BlockInclusionNode):
 
 class ButtonGroupBlock(BlockInclusionNode):
     template = "button-group/button-group.django.html"
+
+class CodeBlock(BlockInclusionNode):
+    template = "code/code.django.html"
+
+class CopyToClipboardBlock(BlockInclusionNode):
+    template = "copy-to-clipboard/copy-to-clipboard.django.html"
 
 class CalendarDateBlock(BlockInclusionNode):
     template = "calendar-date/calendar-date.django.html"
@@ -501,8 +532,10 @@ register.tag('carousel', CarouselBlock.handle)
 register.tag('character_count', CharacterCountBlock.handle)
 register.tag('checkbox', CheckboxBlock.handle)
 register.tag('checkbox_group', CheckboxGroupBlock.handle)
+register.tag('code', CodeBlock.handle)
 register.tag('collection', CollectionBlock.handle)
 register.tag('combobox', ComboboxBlock.handle)
+register.tag('copy_to_clipboard', CopyToClipboardBlock.handle)
 register.tag('date_picker', DatePickerBlock.handle)
 register.tag('fieldset', FieldsetBlock.handle)
 register.tag('file_input', FileInputBlock.handle)

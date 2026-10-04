@@ -12,26 +12,26 @@ export default {
 };
 
 export const storyDefs = {
-  Default: { copyText: 'Example text to copy', tooltip: 'Copy to clipboard', copiedTooltip: 'Copied' },
+  Default: { copyText: 'Example text to copy', tooltipProps: { label: 'Copy to clipboard', copiedTooltip: 'Copied' } },
   WithText: { copyText: 'Example text to copy', label: 'Copy' },
-  DarkBackground: { copyText: 'Example text to copy', tooltip: 'Copy to clipboard', copiedTooltip: 'Copied', className: 'usa-button--inverse' },
-  DarkBackgroundWithText: { copyText: 'Example text to copy', label: 'Copy', className: 'usa-button--inverse' },
+  InvertedBackground: { copyText: 'Example text to copy', tooltipProps: { label: 'Copy to clipboard', copiedTooltip: 'Copied' }, className: 'usa-button--inverse' },
+  InvertedBackgroundWithText: { copyText: 'Example text to copy', label: 'Copy', className: 'usa-button--inverse' },
 };
 
 export const Default = { args: storyDefs.Default };
 export const WithText = { args: storyDefs.WithText };
-export const DarkBackground = {
-  args: storyDefs.DarkBackground,
+export const InvertedBackground = {
+  args: storyDefs.InvertedBackground,
   render: (args) => (
-    <div className="bg-base-darkest padding-2">
+    <div className="bg-surface-inverse padding-2">
       <CopyToClipboard {...args} />
     </div>
   )
 };
-export const DarkBackgroundWithText = {
-  args: storyDefs.DarkBackgroundWithText,
+export const InvertedBackgroundWithText = {
+  args: storyDefs.InvertedBackgroundWithText,
   render: (args) => (
-    <div className="bg-base-darkest padding-2">
+    <div className="bg-surface-inverse padding-2">
       <CopyToClipboard {...args} />
     </div>
   )

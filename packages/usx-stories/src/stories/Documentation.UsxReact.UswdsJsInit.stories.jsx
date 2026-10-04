@@ -23,6 +23,15 @@ export const UswdsJsInit = {
         version of the component.
       </p>
 
+      <p>
+        Component assets use root paths by default; no base setting is needed
+        when those paths match your deployment. The optional{' '}
+        <code>window.usxBaseUrl</code> changes image and sprite URLs, not the
+        script URLs used to load USWDS or its behavior initialization. See{' '}
+        <strong>Documentation/USX React/Overview</strong>, under{' '}
+        <strong>Asset URLs and subpath hosting</strong>, for examples.
+      </p>
+
       <h2><code>.init()</code> vs <code>.on()</code>/<code>.off()</code></h2>
       <p>
         Every USWDS behavior module exports the same shape:{' '}

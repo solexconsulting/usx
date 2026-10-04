@@ -6,6 +6,14 @@ This repository builds styles and wrappers on top of USWDS conventions. The plat
 
 The repository is organized as a monorepo so teams can define design tokens once and reuse them across framework packages, documentation apps, and implementation examples.
 
+## Asset Deployment
+
+`usxBaseUrl` is the static asset root, independent of the application's router
+base. No setting is needed for the default root asset paths; `window.usxBaseUrl`
+is an optional override for assets hosted elsewhere.
+Django uses `STATIC_URL`. See the [asset URL and subpath deployment guide](packages/usx-react/README.md#asset-urls-and-subpath-deployment)
+for setup, asset publishing, SSR, and CSS/font URL requirements.
+
 ## Repository structure
 
 ### `packages/`

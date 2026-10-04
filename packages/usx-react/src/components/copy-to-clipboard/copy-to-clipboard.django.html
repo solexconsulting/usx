@@ -1,16 +1,16 @@
 {# Django template for CopyToClipboard #}
-{% if tooltip %}<span class="usx-tooltip">{% endif %}
-<button class="usa-button usx-button usx-button--ghost usx-copy{% if className %} {{ className }}{% endif %}"
-  onclick="navigator.clipboard.writeText('{{ copyText|escapejs }}')">
-  <svg class="usa-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
-    <use href="./img/sprite.svg#content_copy"></use>
-  </svg>
-  <svg class="usa-icon usx-copy__check" aria-hidden="true" focusable="false" role="img">
-    <use href="./img/sprite.svg#check"></use>
-  </svg>
+{% load components %}
+{% with buttonClass=className|default:''|add:' usx-copy' escapedCopyText=copyText|default:''|escapejs %}
+{% dict onclick="navigator.clipboard.writeText('"|add:escapedCopyText|add:"')" as copyAttributes %}
+{% button ghost=True className=buttonClass extraAttributes=copyAttributes as copyButton %}
+  {% icon name='content_copy' className="usx-copy__copy" staticBaseUrl=staticBaseUrl %}{% endicon %}
+  {% icon name='check' className="usx-copy__check" staticBaseUrl=staticBaseUrl %}{% endicon %}
   {% if label %}<span class="margin-left-1">{{ label }}</span>{% endif %}
-</button>
-{% if tooltip %}
-  <span class="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copy" role="tooltip">{{ tooltip }}</span>
-  <span class="usa-tooltip__body usa-tooltip__body--right usx-copy__tooltip--copied" role="tooltip">{{ copiedTooltip|default:'Copied' }}</span>
-</span>{% endif %}
+{% endbutton %}
+{% if tooltipProps != None %}
+  {% fragment as tooltipLabel %}<span class="usx-copy__tooltip--copy">{{ tooltipProps.label|default_if_none:'' }}</span><span class="usx-copy__tooltip--copied">{% if tooltipProps.copiedTooltip != None %}{{ tooltipProps.copiedTooltip }}{% else %}Copied{% endif %}</span>{% endfragment %}
+  {% tooltip props=tooltipProps label=tooltipLabel %}{{ copyButton }}{% endtooltip %}
+{% else %}
+  {{ copyButton }}
+{% endif %}
+{% endwith %}

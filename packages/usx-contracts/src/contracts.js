@@ -71,6 +71,10 @@ export const componentContracts = {
       "version": 1,
       "required": [],
       "props": {
+        "staticBaseUrl": {
+          "type": "string",
+          "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
+        },
         "heading": {
           "type": "string",
           "description": "The heading of the alert, which provides a brief summary of the alert's content."
@@ -321,6 +325,10 @@ export const componentContracts = {
       "version": 1,
       "required": [],
       "props": {
+        "staticBaseUrl": {
+          "type": "string",
+          "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
+        },
         "id": {
           "type": "string",
           "description": "The unique ID for the banner, used for aria-controls and element targeting."
@@ -331,7 +339,7 @@ export const componentContracts = {
         },
         "flagSrc": {
           "type": "string",
-          "description": "URL for the decorative banner flag image. Defaults to img/us_flag_small.png under the configured asset base."
+          "description": "Asset path for the decorative flag, resolved under staticBaseUrl or the global asset base. Defaults to img/us_flag_small.png. Fully qualified URLs pass through unchanged."
         },
         "tld": {
           "type": "string",
@@ -1070,6 +1078,10 @@ export const componentContracts = {
         "lines"
       ],
       "props": {
+        "staticBaseUrl": {
+          "type": "string",
+          "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
+        },
         "lines": {
           "type": "array",
           "description": "Array of line objects. Each supports: code (string), prefix (string, omit for no data-prefix attribute), className (string).",
@@ -1254,6 +1266,10 @@ export const componentContracts = {
         "copyText"
       ],
       "props": {
+        "staticBaseUrl": {
+          "type": "string",
+          "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
+        },
         "copyText": {
           "type": "string",
           "description": "Text to copy to clipboard"
@@ -1262,13 +1278,16 @@ export const componentContracts = {
           "type": "string",
           "description": "Visible text label on the button"
         },
-        "tooltip": {
-          "type": "string",
-          "description": "Tooltip text; omit to hide the tooltip wrapper"
-        },
-        "copiedTooltip": {
-          "type": "string",
-          "description": "Tooltip text shown after copying (default: 'Copied')"
+        "tooltipProps": {
+          "type": "object",
+          "component": "tooltip",
+          "description": "Optional Tooltip props passed through unchanged, except label is composed into copy/copied spans. Omit to render only the button. The clipboard button supplies the trigger; Tooltip supplies its own defaults.",
+          "properties": {
+            "copiedTooltip": {
+              "type": "string",
+              "description": "Tooltip text shown after copying (default: 'Copied')"
+            }
+          }
         },
         "className": {
           "type": "string",
@@ -1615,6 +1634,10 @@ export const componentContracts = {
       "version": 1,
       "required": [],
       "props": {
+        "staticBaseUrl": {
+          "type": "string",
+          "description": "Optional branding and social-image asset base, overriding window.usxBaseUrl in React or STATIC_URL in Django. Defaults to the global base or /."
+        },
         "variant": {
           "type": "select",
           "options": [
@@ -1720,6 +1743,10 @@ export const componentContracts = {
       "version": 1,
       "required": [],
       "props": {
+        "staticBaseUrl": {
+          "type": "string",
+          "description": "Optional branding image asset base, overriding window.usxBaseUrl in React or STATIC_URL in Django. Defaults to the global base or /."
+        },
         "id": {
           "type": "string",
           "default": "header",
@@ -1931,6 +1958,10 @@ export const componentContracts = {
       "version": 1,
       "required": [],
       "props": {
+        "staticBaseUrl": {
+          "type": "string",
+          "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
+        },
         "name": {
           "type": "string",
           "default": "accessibility_new",
@@ -1969,8 +2000,7 @@ export const componentContracts = {
         },
         "staticUrlPrefix": {
           "type": "string",
-          "default": "/img/sprite.svg#",
-          "description": "The URL prefix for the static assets, which is used to construct the full URL for the icon sprite sheet or icon library being used."
+          "description": "Legacy full sprite URL prefix, including #, overriding automatic asset resolution. Use staticBaseUrl to change only the base directory."
         },
         "className": {
           "type": "string",
@@ -2175,9 +2205,20 @@ export const componentContracts = {
         "src"
       ],
       "props": {
-        "src": {
+        "staticBaseUrl": {
           "type": "string",
-          "description": "Image source URL"
+          "description": "Optional image asset base, overriding window.usxBaseUrl in React or STATIC_URL in Django. Defaults to the global base or /."
+        },
+        "srcSet": {
+          "type": "string",
+          "description": "Optional image source candidates and width/density descriptors. Each candidate path is resolved against the image asset base."
+        },
+        "src": {
+          "type": [
+            "string",
+            "object"
+          ],
+          "description": "Image asset path or responsive object { fallback, sources: [{ srcSet, media?, type?, sizes? }] }. Paths resolve against the asset base; fully qualified and data URLs are unchanged."
         },
         "alt": {
           "type": "string",
@@ -3537,6 +3578,10 @@ export const componentContracts = {
       "version": 1,
       "required": [],
       "props": {
+        "staticBaseUrl": {
+          "type": "string",
+          "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
+        },
         "size": {
           "type": "select",
           "options": [
@@ -4488,9 +4533,9 @@ export const componentContracts = {
       "required": [],
       "props": {
         "label": {
-          "type": "string",
+          "type": "slot",
           "default": "Tooltip text",
-          "description": "The text content displayed inside the tooltip body."
+          "description": "Content displayed inside the tooltip body. Accepts text or composed content, such as React nodes or a Django template fragment."
         },
         "position": {
           "type": "select",
@@ -4512,6 +4557,11 @@ export const componentContracts = {
           "type": "string",
           "default": "",
           "description": "Additional CSS classes to apply to the tooltip wrapper."
+        },
+        "bodyClassName": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes to apply to the tooltip body."
         }
       }
     },

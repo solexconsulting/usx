@@ -4,6 +4,138 @@ This package uses a self-contained component structure where each component owns
 
 USWDS is treated as an external foundation. This package does not bundle USWDS assets; consuming applications should load USWDS styles in their own application bundle.
 
+## Asset URLs And Subpath Deployment
+
+`usxBaseUrl` means the **static asset root**, not the application's routing
+base. USX does not own routing. An app at `/application-root/` can serve its
+assets at `/application-root/`, `/static/usx/`, or a separate static host.
+It does not affect your router/framework's application base.
+
+### Browser Configuration
+
+No configuration is needed when assets use the default root paths, such as
+`/img/sprite.svg`. For assets hosted elsewhere, `window.usxBaseUrl` is an
+optional prefix override. For example, assets under `/application-root/`
+could use:
+
+```html
+<script>window.usxBaseUrl = '/application-root/';</script>
+```
+
+Banner, Icon, and Spinner then load `/application-root/img/us_flag_small.png`,
+`/application-root/img/sprite.svg#check`, and
+`/application-root/img/usx-sprite.svg#spinner`. Alert and copy-button icons use
+the same base, as do icons nested in other components. The example path is not
+a required deployment layout: the value reflects wherever your assets are
+already served, independently of the page URL.
+
+### Per-Component Overrides
+
+Banner, Icon, Spinner, Alert, Code, CopyToClipboard, Image, Header, and Footer accept an optional
+`staticBaseUrl` string. Their built-in asset URLs resolve automatically:
+
+1. A non-empty `staticBaseUrl` prop.
+2. A non-empty `window.usxBaseUrl`.
+3. `/`.
+
+For example, these two props keep the filename separate from its base:
+
+```jsx
+<Banner flagSrc="flags/agency.png" staticBaseUrl="/other-assets/" />
+<Icon name="check" staticBaseUrl="/other-assets/" />
+```
+
+The flag becomes `/other-assets/flags/agency.png`; the icon uses
+`/other-assets/img/sprite.svg#check`. Banner's other images and nested lock icon
+use its override too. No helper call or manual concatenation is needed.
+Trailing slashes on the base and leading slashes on asset paths are normalized.
+An empty override falls back to the global; `staticBaseUrl="/"` explicitly
+selects root even when the global points elsewhere. Fully qualified asset
+URLs pass through unchanged. Icon/Spinner's legacy `staticUrlPrefix` remains
+a full sprite-URL escape hatch; it bypasses base resolution.
+
+Internal asset resolution reads the global during rendering, with no subscriptions or automatic
+rerendering. When using a global override, define it before rendering. USX does not
+infer an asset root from the current route.
+
+Without `window`, `staticBaseUrl` still works and the default remains `/`.
+For SSR, the same component prop on the server and client keeps asset URLs
+consistent during hydration. No process-global configuration is needed.
+
+### Image And Branding Assets
+
+Image resolves its source, responsive fallback, and every source-set candidate
+against the asset base. Header and Footer resolve branding logos, inverse artwork,
+and symbols internally; Footer also resolves social-image paths. Supply filenames
+without looking up or concatenating the base:
+
+```jsx
+import { Image } from '@solexllc/usx-react';
+
+function AgencyLogo() {
+	return <Image src="img/agency-logo.svg" alt="Agency" />;
+}
+```
+
+Asset resolution is internal to USX; no URL helper is exported from the package.
+Image, Header, Footer, and direct Branding usage accept `staticBaseUrl` overrides.
+Fully qualified and data URLs remain unchanged, as do navigation and image-link
+destinations. Already-prefixed root-relative image paths should be replaced with
+asset-relative paths to avoid adding the base twice.
+Use root-relative or fully qualified bases for reliable deep-link behavior;
+relative bases resolve against the document URL and are usually unsuitable.
+
+### Asset Publishing
+
+How files reach those URLs is up to your application and deployment tools.
+USX generates URLs but does not copy files or serve them. Its default component
+paths expect USWDS images under `img/`, alongside the USX sprite supplied as
+`@solexllc/usx/src/img/usx-sprite.svg`, relative to the asset base.
+
+The asset base does **not** rewrite CSS `url(...)`, stylesheet/script imports,
+router links, or supplied HTML. Precompiled USWDS CSS references sibling
+`img/` and `fonts/` directories; bundlers may instead resolve and emit those
+assets using their own public/base URL. This setting does not change either
+approach or require vendor Sass recompilation.
+
+A fully qualified asset base can point to a static host, but browsers generally
+block cross-origin external SVG `<use>` sprites, even with CORS headers.
+Serve `sprite.svg` and `usx-sprite.svg` through the application's origin (for
+example, a reverse proxy). The safest shared base is same-origin; use explicit
+image URLs for CDN images, or `staticUrlPrefix` to override individual Icon and
+Spinner sprites. A CDN-only base cannot make every default icon work.
+
+### Django And Static HTML
+
+Django uses `STATIC_URL` instead of the browser global. The same six components
+accept `staticBaseUrl`; without an override their `asset_url` template tag
+delegates to Django's static-file resolver. The tag lives in the included
+`components` tag library. For example:
+
+```django
+{% banner flagSrc="flags/agency.png" staticBaseUrl="/other-assets/" %}{% endbanner %}
+```
+
+`STATIC_URL` is independent of `FORCE_SCRIPT_NAME` or URL routing. An example
+static-file configuration is:
+
+```python
+STATIC_URL = '/application-root/static/usx/'
+STATICFILES_DIRS = [
+		BASE_DIR / 'node_modules/@uswds/uswds/dist',
+		('img', BASE_DIR / 'node_modules/@solexllc/usx/src/img'),
+]
+```
+
+Run `collectstatic` into your configured `STATIC_ROOT` and serve its output at
+`STATIC_URL`. Preserve the `css/`, `img/`, and `fonts/` layout. The Storybook Django deployment exposes
+this setting as `DJANGO_STATIC_URL`; its app mount is `DJANGO_FORCE_SCRIPT_NAME`.
+
+Canonical `.html` files are reference markup, not a runtime URL resolver.
+Replace their sample `/img/...` and `/assets/img/...` URLs with your deployed
+asset paths when using that markup directly, or render the Django templates.
+A browser global alone cannot rewrite literal URLs in static HTML.
+
 ## Structure
 
 - `src/components/<component>/`

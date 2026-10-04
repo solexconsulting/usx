@@ -3,6 +3,10 @@
   "template": "spinner/spinner.django.html",
   "version": 1,
   "props": {
+    "staticBaseUrl": {
+      "type": "string",
+      "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
+    },
     "size": {
       "type": "select",
       "options": [

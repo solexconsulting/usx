@@ -3,6 +3,10 @@
   "template": "header/header.django.html",
   "version": 1,
   "props": {
+    "staticBaseUrl": {
+      "type": "string",
+      "description": "Optional branding image asset base, overriding window.usxBaseUrl in React or STATIC_URL in Django. Defaults to the global base or /."
+    },
     "id": {
       "type": "string",
       "default": "header",

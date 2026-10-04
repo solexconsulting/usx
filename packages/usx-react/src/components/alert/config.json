@@ -3,6 +3,10 @@
   "template": "alert/alert.django.html",
   "version": 1,
   "props": {
+    "staticBaseUrl": {
+      "type": "string",
+      "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
+    },
     "heading": {
       "type": "string",
       "description": "The heading of the alert, which provides a brief summary of the alert's content."
