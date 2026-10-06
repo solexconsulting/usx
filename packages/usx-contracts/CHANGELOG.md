@@ -1,5 +1,21 @@
 # @solexllc/usx-contracts
 
+## 0.4.0
+
+### Minor Changes
+
+- [`b8695da`](https://github.com/solexconsulting/usx/commit/b8695dafd4a8370ae0b6fd303485eb218f732fd5) Thanks [@olsonap](https://github.com/olsonap)! - Extend the existing component manifest with exact package release identities,
+  React and Django bindings for every component, and example props kept separate
+  from declared defaults. Describe renderer-specific prop differences.
+
+  Correct Button, Layout, Alert, and Icon metadata and advance those contract
+  versions to 2. This changes component descriptions, not rendering behavior;
+  existing developer APIs and the complete component catalog remain available.
+
+- [`8c570b7`](https://github.com/solexconsulting/usx/commit/8c570b720ca550e91a0a06d2b6209f91583f4257) Thanks [@olsonap](https://github.com/olsonap)! - Add `staticBaseUrl` to the Banner, Icon, Spinner, Alert, Code, CopyToClipboard, Image, Header, and Footer contracts. Remove Icon's hardcoded `staticUrlPrefix` default so automatic asset resolution can apply. Describe Banner flag paths and Image responsive sources and `srcSet` candidates relative to the selected asset base.
+
+  Replace CopyToClipboard's `tooltip` and `copiedTooltip` fields with `tooltipProps`, referencing the Tooltip contract with an additional `copiedTooltip` field. Migrate stored values to `tooltipProps.label` and `tooltipProps.copiedTooltip`. Change Tooltip's `label` to a content slot and add `bodyClassName`.
+
 ## 0.3.0
 
 ### Minor Changes
