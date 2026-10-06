@@ -22,6 +22,16 @@
     "propType": {
       "enum": ["string", "number", "boolean", "select", "array", "object", "function", "slot"]
     },
+    "rendererProp": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "type": { "$ref": "#/definitions/propType" },
+        "supported": { "type": "boolean" },
+        "description": { "type": "string" }
+      }
+    },
     "prop": {
       "type": "object",
       "required": ["type", "description"],
@@ -38,6 +48,15 @@
           ]
         },
         "description": { "type": "string" },
+        "renderers": {
+          "type": "object",
+          "description": "Differences in this prop between rendering implementations. Describes library behavior; consumers decide how to expose it.",
+          "additionalProperties": false,
+          "properties": {
+            "react": { "$ref": "#/definitions/rendererProp" },
+            "django": { "$ref": "#/definitions/rendererProp" }
+          }
+        },
         "default": {},
         "options": {
           "type": "array",

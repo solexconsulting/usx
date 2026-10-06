@@ -1,0 +1,3 @@
+graft usx_django/templates
+include usx_django/component-contracts.json
+global-exclude __pycache__ *.py[cod]

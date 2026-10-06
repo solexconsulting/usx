@@ -1,7 +1,7 @@
 {
   "name": "alert",
   "template": "alert/alert.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "staticBaseUrl": {
       "type": "string",
@@ -41,8 +41,15 @@
       "description": "Additional CSS classes to apply to the alert component."
     },
     "style": {
-      "type": "string",
-      "description": "Inline styles to apply to the alert component."
+      "type": "object",
+      "description": "Inline styles as a React CSSProperties object.",
+      "renderers": {
+        "react": { "type": "object" },
+        "django": {
+          "supported": false,
+          "description": "The Django template does not render this prop."
+        }
+      }
     },
     "role": {
       "type": "select",
@@ -68,7 +75,7 @@
     },
     "children": {
       "type": "slot",
-      "description": "Alert rich content (React node / HTML string). If provided, this content will be rendered instead of the `heading` and `text` props."
+      "description": "Alert content as text or composed content (React nodes or a Django template fragment). When truthy, replaces text; the heading remains visible unless slim is enabled."
     }
   }
 }

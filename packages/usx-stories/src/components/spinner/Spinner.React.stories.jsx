@@ -50,9 +50,9 @@ export const DifferentColors = {
 
 export const DifferentSizesOnInvertedBackground = {
   render: () => (
-    <div className="bg-surface-inverse text-inverse padding-3 display-inline-flex gap-4 flex-align-center">
+    <div className="bg-surface-inverse padding-3 display-inline-flex gap-4 flex-align-center">
       {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(size => (
-        <Spinner key={size} size={size} color="white" />
+        <Spinner key={size} size={size} color="inverse" />
       ))}
     </div>
   ),
@@ -61,7 +61,7 @@ export const DifferentSizesOnInvertedBackground = {
 export const DifferentColorsOnInvertedBackground = {
   render: () => (
     <div className="bg-surface-inverse text-inverse padding-3 display-inline-flex gap-4 flex-align-center">
-      <Spinner size={4} color="base-lightest" />
+      <Spinner size={4} color="base" />
       <Spinner size={4} color="primary-light" />
       <Spinner size={4} color="secondary-light" />
       <Spinner size={4} color="accent-cool-light" />

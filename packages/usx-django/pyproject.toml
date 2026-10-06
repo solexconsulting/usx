@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "solex-usx-django"
+version = "0.1.0"
+description = "Django template components and component contracts for the USX design system."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = ["Django>=5.2,<7.0"]
+classifiers = [
+    "Framework :: Django",
+    "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Repository = "https://github.com/solexconsulting/usx"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["usx_django*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+usx_django = ["component-contracts.json", "templates/**/*.django.html", "templates/**/config.json", "templates/**/*.py"]

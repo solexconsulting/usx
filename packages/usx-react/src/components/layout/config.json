@@ -1,7 +1,7 @@
 {
   "name": "layout",
   "template": "layout/layout.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "variant": {
       "type": "select",
@@ -13,20 +13,20 @@
       "description": "Layout variant: single-column centers content, grid supports sidebars"
     },
     "children": {
-      "type": "string",
-      "description": "Inner HTML or text content (for single-column)"
+      "type": "slot",
+      "description": "Main content in either layout variant. Accepts text, React nodes, or a Django template fragment; takes precedence over content when truthy."
     },
     "content": {
-      "type": "string",
-      "description": "Main content for grid layout"
+      "type": "slot",
+      "description": "Fallback main content in either layout variant when children is falsy. Accepts text, React nodes, or a Django template fragment."
     },
     "leftSidebar": {
-      "type": "string",
-      "description": "Left sidebar content (grid variant only)"
+      "type": "slot",
+      "description": "Left sidebar content in the grid variant; accepts text, React nodes, or a Django template fragment."
     },
     "rightSidebar": {
-      "type": "string",
-      "description": "Right sidebar content (grid variant only)"
+      "type": "slot",
+      "description": "Right sidebar content in the grid variant; accepts text, React nodes, or a Django template fragment."
     },
     "expandLeftSidebar": {
       "type": "boolean",

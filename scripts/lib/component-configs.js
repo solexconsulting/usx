@@ -147,22 +147,67 @@ export function loadComponentConfigs() {
   return { configs, errors };
 }
 
+// Package versions identify the concrete library release that supplied this
+// manifest. They are separate from format and individual component versions.
+function readPackageIdentity(relativePath) {
+  const { name, version } = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, relativePath), 'utf8'));
+  return { name, version };
+}
+
+function readDjangoIdentity() {
+  const source = fs.readFileSync(path.join(REPO_ROOT, 'packages/usx-django/pyproject.toml'), 'utf8');
+  // This project's PEP 621 metadata uses literal name/version strings. Fail
+  // explicitly if that changes instead of publishing guessed package identity.
+  const project = source.split(/^\[project\]\s*$/m)[1]?.split(/^\[/m)[0];
+  const read = (key) => project?.match(new RegExp(`^${key}\\s*=\\s*["']([^"']+)["']\\s*$`, 'm'))?.[1];
+  const name = read('name');
+  const version = read('version');
+  if (!name || !version) throw new Error('Django package must declare literal project.name and project.version');
+  return { name, version };
+}
+
 // The publishable CMS contract manifest (see solex-cms-overview.md). Keyed by
 // component name for O(1) lookup. Cross-component `component` refs are kept
 // as authored — never inlined — so consumers resolve one hop at a time and
 // circular references can't blow up the manifest.
 export function buildContractManifest(configs) {
+  const contractsPackage = readPackageIdentity('packages/usx-contracts/package.json');
+  const reactPackage = readPackageIdentity('packages/usx-react/package.json');
+  const stylesPackage = readPackageIdentity('packages/usx/package.json');
+  const djangoPackage = readDjangoIdentity();
+  const packages = Object.fromEntries([
+    ...[contractsPackage, reactPackage, stylesPackage].map(({ name, version }) => [name, { registry: 'npm', version }]),
+    [djangoPackage.name, { registry: 'pypi', version: djangoPackage.version }],
+  ]);
   const components = {};
   for (const name of [...configs.keys()].sort()) {
     const config = configs.get(name);
+    const reactEntry = findComponentFile(name);
+    if (!reactEntry) throw new Error(`Missing React entry for ${name}`);
+    const template = path.resolve(COMPONENTS_DIR, config.template);
+    if (!template.startsWith(`${COMPONENTS_DIR}${path.sep}`) || !fs.existsSync(template)) {
+      throw new Error(`Missing or invalid Django template for ${name}: ${config.template}`);
+    }
     components[name] = {
       component: name,
       version: config.version,
       required: config.required || [],
       props: config.props || {},
+      renderers: {
+        react: { package: reactPackage.name, export: reactEntry.exportName },
+        django: {
+          package: djangoPackage.name,
+          module: 'usx_django',
+          function: 'render_component',
+          component: name,
+          template: config.template,
+          tag: name.replace(/-/g, '_'),
+        },
+      },
+      ...(Object.hasOwn(config, 'default') ? { examples: { default: config.default } } : {}),
     };
   }
-  return { library: 'usx', schemaVersion: CONTRACT_SCHEMA_VERSION, components };
+  return { library: 'usx', schemaVersion: CONTRACT_SCHEMA_VERSION, packages, components };
 }
 
 export function printErrors(errors) {

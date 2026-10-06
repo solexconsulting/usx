@@ -259,7 +259,11 @@ def _autodiscover_components() -> None:
     # Start with repository-default component paths so the monorepo's
     # conventional locations are included even when Django settings are
     # not configured.
-    repo_default_paths = _find_repo_component_default_paths()
+    bundled_templates = Path(__file__).resolve().parents[1] / 'templates'
+    repo_default_paths = (
+        [str(bundled_templates)] if bundled_templates.is_dir()
+        else _find_repo_component_default_paths()
+    )
 
     extra_paths: List[str] = []
     if django_settings is not None:

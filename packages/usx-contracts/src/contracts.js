@@ -4,9 +4,13 @@ Canonical CMS contract manifest (see solex-cms-overview.md), keyed by component
 name for O(1) lookup and derived from each component's config.json.
 To regenerate: pnpm generate:contracts
 
-Shape: { library, schemaVersion, components: { [componentName]: contract } }.
+Shape: { library, schemaVersion, packages, components: { [componentName]: contract } }.
 "schemaVersion" is this manifest's own format version — distinct from each
 contract's "version" (that component's config.json version).
+"packages" identifies the npm/PyPI releases described by this snapshot.
+Each contract includes exact renderer bindings. "examples.default" is sample
+content from config.default, NOT a runtime default; declared defaults remain
+on props. Optional prop.renderers records implementation-specific differences.
 
 A prop with a "component" field (optionally with "omit"/"properties") is a
 REFERENCE to another entry in "components", not an inlined copy — look up that
@@ -16,6 +20,24 @@ merge this node's own "properties" as overrides/additions.
 export const componentContracts = {
   "library": "usx",
   "schemaVersion": 1,
+  "packages": {
+    "@solexllc/usx-contracts": {
+      "registry": "npm",
+      "version": "0.3.0"
+    },
+    "@solexllc/usx-react": {
+      "registry": "npm",
+      "version": "0.3.1"
+    },
+    "@solexllc/usx": {
+      "registry": "npm",
+      "version": "0.4.0"
+    },
+    "solex-usx-django": {
+      "registry": "pypi",
+      "version": "0.1.0"
+    }
+  },
   "components": {
     "accordion": {
       "component": "accordion",
@@ -64,11 +86,25 @@ export const componentContracts = {
           "default": "",
           "description": "Additional CSS classes to apply to the accordion content."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Accordion"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "accordion",
+          "template": "accordion/accordion.django.html",
+          "tag": "accordion"
+        }
       }
     },
     "alert": {
       "component": "alert",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "staticBaseUrl": {
@@ -109,8 +145,17 @@ export const componentContracts = {
           "description": "Additional CSS classes to apply to the alert component."
         },
         "style": {
-          "type": "string",
-          "description": "Inline styles to apply to the alert component."
+          "type": "object",
+          "description": "Inline styles as a React CSSProperties object.",
+          "renderers": {
+            "react": {
+              "type": "object"
+            },
+            "django": {
+              "supported": false,
+              "description": "The Django template does not render this prop."
+            }
+          }
         },
         "role": {
           "type": "select",
@@ -136,7 +181,21 @@ export const componentContracts = {
         },
         "children": {
           "type": "slot",
-          "description": "Alert rich content (React node / HTML string). If provided, this content will be rendered instead of the `heading` and `text` props."
+          "description": "Alert content as text or composed content (React nodes or a Django template fragment). When truthy, replaces text; the heading remains visible unless slim is enabled."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Alert"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "alert",
+          "template": "alert/alert.django.html",
+          "tag": "alert"
         }
       }
     },
@@ -169,6 +228,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Attribution"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "attribution",
+          "template": "attribution/attribution.django.html",
+          "tag": "attribution"
         }
       }
     },
@@ -229,6 +302,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes for the non-image avatar content container."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Avatar"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "avatar",
+          "template": "avatar/avatar.django.html",
+          "tag": "avatar"
+        }
       }
     },
     "avatar-group": {
@@ -274,6 +361,41 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "AvatarGroup"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "avatar-group",
+          "template": "avatar-group/avatar-group.django.html",
+          "tag": "avatar_group"
+        }
+      },
+      "examples": {
+        "default": {
+          "avatarProps": [
+            {
+              "href": "https://google.com/search?q=George+Washington",
+              "src": "./george_washington.png",
+              "alt": "George Washington"
+            },
+            {
+              "href": "https://google.com/search?q=Thomas+Jefferson",
+              "src": "./thomas_jefferson.png",
+              "alt": "Thomas Jefferson"
+            },
+            {
+              "href": "https://google.com/search?q=Benjamin+Franklin",
+              "src": "./benjamin_franklin.png",
+              "alt": "Benjamin Franklin"
+            }
+          ]
+        }
       }
     },
     "back-to-top": {
@@ -317,6 +439,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes to apply to the component."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "BackToTop"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "back-to-top",
+          "template": "back-to-top/back-to-top.django.html",
+          "tag": "back_to_top"
         }
       }
     },
@@ -372,6 +508,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes to add to the banner"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Banner"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "banner",
+          "template": "banner/banner.django.html",
+          "tag": "banner"
         }
       }
     },
@@ -458,6 +608,25 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes for the block wrapper."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Block"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "block",
+          "template": "block/block.django.html",
+          "tag": "block"
+        }
+      },
+      "examples": {
+        "default": {
+          "children": "This is a block of content."
+        }
       }
     },
     "breadcrumb": {
@@ -511,11 +680,48 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional CSS classes to add to the nav element"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Breadcrumb"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "breadcrumb",
+          "template": "breadcrumb/breadcrumb.django.html",
+          "tag": "breadcrumb"
+        }
+      },
+      "examples": {
+        "default": {
+          "items": [
+            {
+              "href": "#",
+              "label": "Home"
+            },
+            {
+              "href": "#",
+              "label": "Federal Contracting"
+            },
+            {
+              "href": "#",
+              "label": "Contracting assistance programs"
+            },
+            {
+              "href": "#",
+              "label": "Economically disadvantaged women-owned small business federal contracting program",
+              "current": true
+            }
+          ]
+        }
       }
     },
     "button": {
       "component": "button",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "label": {
@@ -530,7 +736,8 @@ export const componentContracts = {
             "accent-cool",
             "accent-warm",
             "base",
-            "outline"
+            "outline",
+            "unstyled"
           ],
           "description": "The visual style of the button, which can be used to indicate the importance or type of action the button represents."
         },
@@ -606,16 +813,39 @@ export const componentContracts = {
           "description": "Additional CSS classes to apply to the button component."
         },
         "style": {
-          "type": "string",
-          "description": "Inline styles to apply to the button component."
+          "type": "object",
+          "description": "Inline styles as a React CSSProperties object.",
+          "renderers": {
+            "react": {
+              "type": "object"
+            },
+            "django": {
+              "supported": false,
+              "description": "The Django template does not render this prop."
+            }
+          }
         },
         "children": {
-          "type": "string",
-          "description": "Inner HTML or text to be displayed within the button, allowing for more complex content such as additional elements or formatting."
+          "type": "slot",
+          "description": "Button content as text or composed content (React nodes or a Django template fragment); takes precedence over label when truthy."
         },
         "extraAttributes": {
           "type": "object",
           "description": "An object containing any additional HTML attributes to be spread onto the button element, providing flexibility for custom use cases or integrations."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Button"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "button",
+          "template": "button/button.django.html",
+          "tag": "button"
         }
       }
     },
@@ -648,6 +878,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "ButtonGroup"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "button-group",
+          "template": "button-group/button-group.django.html",
+          "tag": "button_group"
+        }
       }
     },
     "calendar-date": {
@@ -664,6 +908,20 @@ export const componentContracts = {
           "type": "boolean",
           "default": false,
           "description": "Whether the calendar date is being rendered within a collection item, which applies specific collection-related styles."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "CalendarDate"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "calendar-date",
+          "template": "calendar-date/calendar-date.django.html",
+          "tag": "calendar_date"
         }
       }
     },
@@ -784,6 +1042,20 @@ export const componentContracts = {
           "type": "string",
           "description": "HTML tag to use for the card element (div or li)"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Card"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "card",
+          "template": "card/card.django.html",
+          "tag": "card"
+        }
       }
     },
     "card-group": {
@@ -806,6 +1078,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "CardGroup"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "card-group",
+          "template": "card-group/card-group.django.html",
+          "tag": "card_group"
         }
       }
     },
@@ -844,6 +1130,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes to add to the carousel"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Carousel"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "carousel",
+          "template": "carousel/carousel.django.html",
+          "tag": "carousel"
         }
       }
     },
@@ -923,6 +1223,20 @@ export const componentContracts = {
           "default": "",
           "description": "Additional CSS classes for the outer character-count wrapper."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "CharacterCount"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "character-count",
+          "template": "character-count/character-count.django.html",
+          "tag": "character_count"
+        }
       }
     },
     "checkbox": {
@@ -994,6 +1308,20 @@ export const componentContracts = {
           "default": false,
           "description": "Whether the checkbox is required, adds asterisk to label and required attribute to input"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Checkbox"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "checkbox",
+          "template": "checkbox/checkbox.django.html",
+          "tag": "checkbox"
+        }
       }
     },
     "checkbox-group": {
@@ -1044,6 +1372,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes to apply to the wrapper"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "CheckboxGroup"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "checkbox-group",
+          "template": "checkbox-group/checkbox-group.django.html",
+          "tag": "checkbox_group"
+        }
       }
     },
     "clickable": {
@@ -1068,6 +1410,20 @@ export const componentContracts = {
         "children": {
           "type": "string",
           "description": "Safe inner HTML. Apply usx-clickable__link, usx-clickable__color-on-hover, and/or usx-clickable__bg-color-on-hover to any child elements as needed."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Clickable"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "clickable",
+          "template": "clickable/clickable.django.html",
+          "tag": "clickable"
         }
       }
     },
@@ -1116,6 +1472,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes to apply to the wrapper div."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Code"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "code",
+          "template": "code/code.django.html",
+          "tag": "code"
         }
       }
     },
@@ -1176,6 +1546,20 @@ export const componentContracts = {
           "type": "string",
           "default": "",
           "description": "Additional CSS classes for the collection wrapper."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Collection"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "collection",
+          "template": "collection/collection.django.html",
+          "tag": "collection"
         }
       }
     },
@@ -1257,6 +1641,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Combobox"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "combobox",
+          "template": "combobox/combobox.django.html",
+          "tag": "combobox"
+        }
       }
     },
     "copy-to-clipboard": {
@@ -1292,6 +1690,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "CopyToClipboard"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "copy-to-clipboard",
+          "template": "copy-to-clipboard/copy-to-clipboard.django.html",
+          "tag": "copy_to_clipboard"
         }
       }
     },
@@ -1357,6 +1769,28 @@ export const componentContracts = {
           "type": "string",
           "default": "",
           "description": "Additional classes for the usa-date-picker wrapper."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "DatePicker"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "date-picker",
+          "template": "date-picker/date-picker.django.html",
+          "tag": "date_picker"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "appointment-date",
+          "name": "appointment-date",
+          "label": "Appointment date",
+          "hint": "mm/dd/yyyy"
         }
       }
     },
@@ -1442,6 +1876,30 @@ export const componentContracts = {
           "default": "",
           "description": "Additional classes for the usa-date-range-picker wrapper."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "DateRangePicker"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "date-range-picker",
+          "template": "date-range-picker/date-range-picker.django.html",
+          "tag": "date_range_picker"
+        }
+      },
+      "examples": {
+        "default": {
+          "startId": "event-date-start",
+          "endId": "event-date-end",
+          "startLabel": "Event start date",
+          "endLabel": "Event end date",
+          "startHint": "mm/dd/yyyy",
+          "endHint": "mm/dd/yyyy"
+        }
       }
     },
     "error-message": {
@@ -1461,6 +1919,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "ErrorMessage"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "error-message",
+          "template": "error-message/error-message.django.html",
+          "tag": "error_message"
+        }
       }
     },
     "eyebrow": {
@@ -1475,6 +1947,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Eyebrow"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "eyebrow",
+          "template": "eyebrow/eyebrow.django.html",
+          "tag": "eyebrow"
         }
       }
     },
@@ -1522,6 +2008,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Fieldset"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "fieldset",
+          "template": "fieldset/fieldset.django.html",
+          "tag": "fieldset"
         }
       }
     },
@@ -1598,6 +2098,27 @@ export const componentContracts = {
           "type": "array",
           "description": "When manageIndividualFiles is true, seeds the managed file list with files that already exist on the server (no browser File object). Each entry is { name, size?, url? } — omit size to show no size, provide url to render the name as a download link. React only."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "FileInput"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "file-input",
+          "template": "file-input/file-input.django.html",
+          "tag": "file_input"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "file-input-single",
+          "name": "file-input-single",
+          "label": "Input accepts a single file"
+        }
       }
     },
     "file-list": {
@@ -1626,6 +2147,36 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes for the outer wrapper."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "FileList"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "file-list",
+          "template": "file-list/file-list.django.html",
+          "tag": "file_list"
+        }
+      },
+      "examples": {
+        "default": {
+          "files": [
+            {
+              "key": 1,
+              "name": "test1.jpg",
+              "size": 7000
+            },
+            {
+              "key": 2,
+              "name": "test2.jpg",
+              "size": 7200
+            }
+          ]
         }
       }
     },
@@ -1714,6 +2265,20 @@ export const componentContracts = {
           "default": "",
           "description": "Additional CSS classes applied to the root footer element."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Footer"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "footer",
+          "template": "footer/footer.django.html",
+          "tag": "footer"
+        }
       }
     },
     "form-group": {
@@ -1735,6 +2300,20 @@ export const componentContracts = {
           "type": "string",
           "default": "",
           "description": "Additional CSS classes to apply to the form group wrapper."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "FormGroup"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "form-group",
+          "template": "form-group/form-group.django.html",
+          "tag": "form_group"
         }
       }
     },
@@ -1805,6 +2384,20 @@ export const componentContracts = {
         "navEndContent": {
           "type": "slot",
           "description": "Rendered right-justified, in line with the primary nav links (extended header only)."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Header"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "header",
+          "template": "header/header.django.html",
+          "tag": "header"
         }
       }
     },
@@ -1932,6 +2525,33 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional CSS classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Hero"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "hero",
+          "template": "hero/hero.django.html",
+          "tag": "hero"
+        }
+      },
+      "examples": {
+        "default": {
+          "title": "The hero heading",
+          "callout": "A callout heading",
+          "paragraph": "A short description of the hero section that provides context for the call to action.",
+          "button": {
+            "href": "#",
+            "text": "Call to action"
+          },
+          "backgroundImage": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
+          "overlay": true
+        }
       }
     },
     "hint": {
@@ -1951,11 +2571,25 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Hint"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "hint",
+          "template": "hint/hint.django.html",
+          "tag": "hint"
+        }
       }
     },
     "icon": {
       "component": "icon",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "staticBaseUrl": {
@@ -2013,9 +2647,33 @@ export const componentContracts = {
           "description": "Alternative text for the icon, used for accessibility purposes to provide a textual description of the icon's meaning or function."
         },
         "style": {
-          "type": "string",
-          "default": "",
-          "description": "Inline styles to apply to the icon component."
+          "type": [
+            "string",
+            "object"
+          ],
+          "description": "Inline styles: a React CSSProperties object in React or a CSS declaration string in Django. Omit to leave inline styles unset.",
+          "renderers": {
+            "react": {
+              "type": "object"
+            },
+            "django": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Icon"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "icon",
+          "template": "icon/icon.django.html",
+          "tag": "icon"
         }
       }
     },
@@ -2086,6 +2744,41 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "IconList"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "icon-list",
+          "template": "icon-list/icon-list.django.html",
+          "tag": "icon_list"
+        }
+      },
+      "examples": {
+        "default": {
+          "items": [
+            {
+              "iconName": "check_circle",
+              "iconColor": "green",
+              "content": "Wash your hands for 20 seconds with soap"
+            },
+            {
+              "iconName": "check_circle",
+              "iconColor": "green",
+              "content": "Stay six feet away from others"
+            },
+            {
+              "iconName": "cancel",
+              "iconColor": "red",
+              "content": "Avoid large gatherings"
+            }
+          ]
         }
       }
     },
@@ -2196,6 +2889,71 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Identifier"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "identifier",
+          "template": "identifier/identifier.django.html",
+          "tag": "identifier"
+        }
+      },
+      "examples": {
+        "default": {
+          "domain": "domain.gov",
+          "language": "en",
+          "parentAgencies": [
+            {
+              "name": "<Parent agency>",
+              "href": ""
+            }
+          ],
+          "avatarProps": [
+            {
+              "href": "",
+              "src": "./lady_liberty.png",
+              "alt": "Statue of Liberty"
+            }
+          ],
+          "requiredLinks": [
+            {
+              "href": "",
+              "label": "About <Parent shortname>"
+            },
+            {
+              "href": "",
+              "label": "Accessibility statement"
+            },
+            {
+              "href": "",
+              "label": "FOIA requests"
+            },
+            {
+              "href": "",
+              "label": "No FEAR Act data"
+            },
+            {
+              "href": "",
+              "label": "Office of the Inspector General"
+            },
+            {
+              "href": "",
+              "label": "Performance reports"
+            },
+            {
+              "href": "",
+              "label": "Privacy policy"
+            }
+          ],
+          "taxpayerDisclaimer": false,
+          "overlapAvatars": false
+        }
       }
     },
     "image": {
@@ -2270,6 +3028,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional CSS classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Image"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "image",
+          "template": "image/image.django.html",
+          "tag": "image"
+        }
       }
     },
     "in-page-nav": {
@@ -2335,6 +3107,26 @@ export const componentContracts = {
           "default": "",
           "description": "Additional classes for the observed content container."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "InPageNav"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "in-page-nav",
+          "template": "in-page-nav/in-page-nav.django.html",
+          "tag": "in_page_nav"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "in-page-nav-default",
+          "content": "<h2>Introduction</h2><p>This page walks through setting up and using the example project.</p><p>It's also meant to demonstrate how the in-page navigation component tracks scroll position and highlights whichever section is currently in view. Scroll down through each section below to see the link list on the side update automatically.</p><p>None of the copy on this page is meant to be read closely — it exists purely to give the navigation something substantial enough to observe.</p><h2>Getting started</h2><p>Before you begin, make sure the prerequisites below are met.</p><p>Getting started with any new project usually means working through a short checklist before the real work begins. The sections below cover what you'll need and how to get everything installed.</p><h3>Prerequisites</h3><p>A recent browser and a working internet connection.</p><p>You'll also want a modern code editor and enough disk space for the dependencies. Nothing here is unusual — most standard front-end tooling already satisfies these requirements.</p><p>If you already have Node.js and a package manager installed, you can skip ahead to the installation section below.</p><h3>Installation</h3><p>Download the package and follow the setup instructions.</p><p>Installation typically takes just a few minutes. Run the installer, accept the default options, and confirm that the command-line tool reports a successful install before moving on.</p><p>If you run into trouble, double-check that your environment matches the prerequisites listed above before trying again.</p><h2>Advanced usage</h2><p>Once installed, explore the configuration options to fit your workflow.</p><p>Advanced users can customize almost every aspect of the setup, from heading detection to scroll offsets and intersection thresholds — all of which this component exposes as simple data attributes.</p><p>Most projects never need to touch these settings, but they're available for the cases that do.</p><h2>Conclusion</h2><p>You should now be ready to explore the rest of the documentation.</p><p>Thanks for reading through this example. Scroll back up and watch the navigation list highlight each section as it passes by — that's the entire behavior this component provides.</p>"
+        }
       }
     },
     "indicator": {
@@ -2353,6 +3145,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes to apply to the indicator wrapper."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Indicator"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "indicator",
+          "template": "indicator/indicator.django.html",
+          "tag": "indicator"
         }
       }
     },
@@ -2427,6 +3233,20 @@ export const componentContracts = {
           "default": "",
           "description": "Additional CSS classes to apply to the input field."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Input"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "input",
+          "template": "input/input.django.html",
+          "tag": "input"
+        }
       }
     },
     "label": {
@@ -2465,6 +3285,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Label"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "label",
+          "template": "label/label.django.html",
+          "tag": "label"
         }
       }
     },
@@ -2544,11 +3378,56 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes to apply"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "LanguageSelector"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "language-selector",
+          "template": "language-selector/language-selector.django.html",
+          "tag": "language_selector"
+        }
+      },
+      "examples": {
+        "default": {
+          "variant": "menu",
+          "languages": [
+            {
+              "code": "en",
+              "label": "English",
+              "current": true
+            },
+            {
+              "code": "es",
+              "label": "Español",
+              "description": "Spanish"
+            },
+            {
+              "code": "vi",
+              "label": "Tiếng Việt",
+              "description": "Vietnamese"
+            },
+            {
+              "code": "zh",
+              "label": "简体字",
+              "description": "Chinese – Simplified"
+            },
+            {
+              "label": "Selected content in additional languages",
+              "plain": true
+            }
+          ]
+        }
       }
     },
     "layout": {
       "component": "layout",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "variant": {
@@ -2561,20 +3440,20 @@ export const componentContracts = {
           "description": "Layout variant: single-column centers content, grid supports sidebars"
         },
         "children": {
-          "type": "string",
-          "description": "Inner HTML or text content (for single-column)"
+          "type": "slot",
+          "description": "Main content in either layout variant. Accepts text, React nodes, or a Django template fragment; takes precedence over content when truthy."
         },
         "content": {
-          "type": "string",
-          "description": "Main content for grid layout"
+          "type": "slot",
+          "description": "Fallback main content in either layout variant when children is falsy. Accepts text, React nodes, or a Django template fragment."
         },
         "leftSidebar": {
-          "type": "string",
-          "description": "Left sidebar content (grid variant only)"
+          "type": "slot",
+          "description": "Left sidebar content in the grid variant; accepts text, React nodes, or a Django template fragment."
         },
         "rightSidebar": {
-          "type": "string",
-          "description": "Right sidebar content (grid variant only)"
+          "type": "slot",
+          "description": "Right sidebar content in the grid variant; accepts text, React nodes, or a Django template fragment."
         },
         "expandLeftSidebar": {
           "type": "boolean",
@@ -2593,6 +3472,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Layout"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "layout",
+          "template": "layout/layout.django.html",
+          "tag": "layout"
         }
       }
     },
@@ -2620,6 +3513,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Legend"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "legend",
+          "template": "legend/legend.django.html",
+          "tag": "legend"
         }
       }
     },
@@ -2659,6 +3566,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Link"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "link",
+          "template": "link/link.django.html",
+          "tag": "link"
+        }
       }
     },
     "list": {
@@ -2683,6 +3604,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "List"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "list",
+          "template": "list/list.django.html",
+          "tag": "list"
         }
       }
     },
@@ -2784,6 +3719,26 @@ export const componentContracts = {
           "default": "",
           "description": "Additional classes for the usa-fieldset wrapper."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "MemorableDate"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "memorable-date",
+          "template": "memorable-date/memorable-date.django.html",
+          "tag": "memorable_date"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "memorable-date",
+          "legend": "Date of Birth"
+        }
       }
     },
     "misc-banner": {
@@ -2840,6 +3795,20 @@ export const componentContracts = {
           "type": "boolean",
           "description": "Show return link section",
           "default": false
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "MiscBanner"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "misc-banner",
+          "template": "misc-banner/misc-banner.django.html",
+          "tag": "misc_banner"
         }
       }
     },
@@ -2898,6 +3867,20 @@ export const componentContracts = {
           "default": "",
           "description": "Additional CSS classes to apply to the modal element."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Modal"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "modal",
+          "template": "modal/modal.django.html",
+          "tag": "modal"
+        }
       }
     },
     "page": {
@@ -2930,6 +3913,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Page"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "page",
+          "template": "page/page.django.html",
+          "tag": "page"
         }
       }
     },
@@ -3066,6 +4063,20 @@ export const componentContracts = {
           "default": "",
           "description": "Additional CSS classes on the outer wrapper"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Pagination"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "pagination",
+          "template": "pagination/pagination.django.html",
+          "tag": "pagination"
+        }
       }
     },
     "process-list": {
@@ -3080,6 +4091,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes to apply to the <ol> element."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "ProcessList"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "process-list",
+          "template": "process-list/process-list.django.html",
+          "tag": "process_list"
         }
       }
     },
@@ -3108,6 +4133,20 @@ export const componentContracts = {
           "type": "string",
           "default": "",
           "description": "Additional CSS classes to apply to the prose component"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Prose"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "prose",
+          "template": "prose/prose.django.html",
+          "tag": "prose"
         }
       }
     },
@@ -3164,6 +4203,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes to apply to the wrapper"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "RadioButtons"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "radio-buttons",
+          "template": "radio-buttons/radio-buttons.django.html",
+          "tag": "radio_buttons"
         }
       }
     },
@@ -3245,6 +4298,31 @@ export const componentContracts = {
           "default": "",
           "description": "Additional classes for the usa-range input."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "RangeSlider"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "range-slider",
+          "template": "range-slider/range-slider.django.html",
+          "tag": "range_slider"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "range-slider-default",
+          "label": "Range slider",
+          "hint": "Move the slider to change the value",
+          "min": 0,
+          "max": 100,
+          "step": 10,
+          "defaultValue": 20
+        }
       }
     },
     "required": {
@@ -3264,6 +4342,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Required"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "required",
+          "template": "required/required.django.html",
+          "tag": "required"
         }
       }
     },
@@ -3334,6 +4426,20 @@ export const componentContracts = {
           "default": "",
           "description": "Additional classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Search"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "search",
+          "template": "search/search.django.html",
+          "tag": "search"
+        }
       }
     },
     "section": {
@@ -3356,6 +4462,26 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Section"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "section",
+          "template": "section/section.django.html",
+          "tag": "section"
+        }
+      },
+      "examples": {
+        "default": {
+          "title": "",
+          "content": "Use section to group related page content with consistent spacing."
         }
       }
     },
@@ -3436,6 +4562,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Select"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "select",
+          "template": "select/select.django.html",
+          "tag": "select"
+        }
       }
     },
     "sidenav": {
@@ -3479,6 +4619,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes. Use responsive utilities like 'display-none tablet:display-block' to hide/show at breakpoints."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "SideNav"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "sidenav",
+          "template": "sidenav/sidenav.django.html",
+          "tag": "sidenav"
         }
       }
     },
@@ -3542,6 +4696,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Aria-labelledby target for section (preferred over ariaLabel)"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "SiteAlert"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "site-alert",
+          "template": "site-alert/site-alert.django.html",
+          "tag": "site_alert"
+        }
       }
     },
     "skipnav": {
@@ -3570,6 +4738,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes to add to the skipnav link"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Skipnav"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "skipnav",
+          "template": "skipnav/skipnav.django.html",
+          "tag": "skipnav"
         }
       }
     },
@@ -3619,6 +4801,20 @@ export const componentContracts = {
           "default": "",
           "description": "Additional CSS classes on the wrapper element."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Spinner"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "spinner",
+          "template": "spinner/spinner.django.html",
+          "tag": "spinner"
+        }
       }
     },
     "status": {
@@ -3665,6 +4861,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Status"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "status",
+          "template": "status/status.django.html",
+          "tag": "status"
         }
       }
     },
@@ -3719,6 +4929,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional CSS classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "StepIndicator"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "step-indicator",
+          "template": "step-indicator/step-indicator.django.html",
+          "tag": "step_indicator"
+        }
       }
     },
     "summary-box": {
@@ -3747,6 +4971,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "SummaryBox"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "summary-box",
+          "template": "summary-box/summary-box.django.html",
+          "tag": "summary_box"
         }
       }
     },
@@ -3803,6 +5041,28 @@ export const componentContracts = {
           "type": "string",
           "description": "Animation variant: 'default', 'active', 'rotate', or 'flip'"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Swap"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "swap",
+          "template": "swap/swap.django.html",
+          "tag": "swap"
+        }
+      },
+      "examples": {
+        "default": {
+          "onContent": "ON",
+          "offContent": "OFF",
+          "variant": "default",
+          "includeInput": true
+        }
       }
     },
     "switch": {
@@ -3857,6 +5117,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Switch"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "switch",
+          "template": "switch/switch.django.html",
+          "tag": "switch"
         }
       }
     },
@@ -4153,6 +5427,23 @@ export const componentContracts = {
           "default": null,
           "description": "Django only. Pagination state dict from table_helper.paginate_table(): {current_page, total_pages, total, page_size}. Required when paginate is True."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Table"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "table",
+          "template": "table/table.django.html",
+          "tag": "table"
+        }
+      },
+      "examples": {
+        "default": {}
       }
     },
     "tag": {
@@ -4207,6 +5498,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Inner HTML or text for the tag"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Tag"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "tag",
+          "template": "tag/tag.django.html",
+          "tag": "tag"
+        }
       }
     },
     "tag-group": {
@@ -4230,6 +5535,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "TagGroup"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "tag-group",
+          "template": "tag-group/tag-group.django.html",
+          "tag": "tag_group"
         }
       }
     },
@@ -4270,6 +5589,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes applied to the root ul element."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "TaskList"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "task-list",
+          "template": "task-list/task-list.django.html",
+          "tag": "task_list"
         }
       }
     },
@@ -4349,6 +5682,20 @@ export const componentContracts = {
           "default": "",
           "description": "Additional CSS classes to apply to the textarea."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "TextArea"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "text-area",
+          "template": "text-area/text-area.django.html",
+          "tag": "text_area"
+        }
       }
     },
     "theme-picker": {
@@ -4386,6 +5733,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "ThemePicker"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "theme-picker",
+          "template": "theme-picker/theme-picker.django.html",
+          "tag": "theme_picker"
         }
       }
     },
@@ -4457,6 +5818,28 @@ export const componentContracts = {
           "default": "",
           "description": "Additional classes for the usa-time-picker wrapper."
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "TimePicker"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "time-picker",
+          "template": "time-picker/time-picker.django.html",
+          "tag": "time_picker"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "appointment-time",
+          "name": "appointment-time",
+          "label": "Appointment time",
+          "hint": "Select a time from the dropdown. Type into the input to filter options."
+        }
       }
     },
     "toggle": {
@@ -4525,6 +5908,20 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes"
         }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Toggle"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "toggle",
+          "template": "toggle/toggle.django.html",
+          "tag": "toggle"
+        }
       }
     },
     "tooltip": {
@@ -4562,6 +5959,20 @@ export const componentContracts = {
           "type": "string",
           "default": "",
           "description": "Additional CSS classes to apply to the tooltip body."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Tooltip"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "tooltip",
+          "template": "tooltip/tooltip.django.html",
+          "tag": "tooltip"
         }
       }
     },
@@ -4605,6 +6016,20 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Villain"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "villain",
+          "template": "villain/villain.django.html",
+          "tag": "villain"
         }
       }
     }

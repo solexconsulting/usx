@@ -1,7 +1,7 @@
 {
   "name": "icon",
   "template": "icon/icon.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "staticBaseUrl": {
       "type": "string",
@@ -55,9 +55,12 @@
       "description": "Alternative text for the icon, used for accessibility purposes to provide a textual description of the icon's meaning or function."
     },
     "style": {
-      "type": "string",
-      "default": "",
-      "description": "Inline styles to apply to the icon component."
+      "type": ["string", "object"],
+      "description": "Inline styles: a React CSSProperties object in React or a CSS declaration string in Django. Omit to leave inline styles unset.",
+      "renderers": {
+        "react": { "type": "object" },
+        "django": { "type": "string" }
+      }
     }
   }
 }

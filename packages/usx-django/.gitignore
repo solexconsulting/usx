@@ -1,0 +1,7 @@
+/usx_django/core/
+/usx_django/templatetags/
+/usx_django/table_component.py
+/usx_django/templates/
+/usx_django/component-contracts.json
+/LICENSE
+/*.egg-info/

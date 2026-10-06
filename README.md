@@ -24,6 +24,7 @@ Reusable libraries that power the platform:
 - `usx-uswds-fixes/` (`@solexllc/usx-uswds-fixes`): small SCSS patches/overrides layered on top of upstream USWDS
 - `usx-react/` (`@solexllc/usx-react`): React component wrappers, each co-located with its Django template, canonical static HTML, and `config.json` prop schema — see [packages/usx-react/README.md](packages/usx-react/README.md)
 - `usx-contracts/` (`@solexllc/usx-contracts`): generated CMS contract manifest aggregated from every component's `config.json` — see [packages/usx-contracts/README.md](packages/usx-contracts/README.md)
+- `usx-django/` (`solex-usx-django` on PyPI): installable Django templates, block tags, and component contracts; see [packages/usx-django/README.md](packages/usx-django/README.md) for installation and publishing
 - `usx-stories/` (`@solexllc/usx-stories`): Storybook stories and story-rendering helpers (dev-infra only, not published)
 
 ### `apps/`
@@ -63,6 +64,7 @@ Component tooling:
 pnpm new-component <Name>   # scaffold a component across usx-react, usx and usx-stories
 pnpm generate:exports       # regenerate packages/usx-react/src/index.js
 pnpm generate:contracts     # regenerate packages/usx-contracts/src/contracts.js
+pnpm generate:django        # stage the Python package from canonical sources
 pnpm validate:configs       # schema + cross-ref + file-presence + generated-file freshness
 ```
 
@@ -83,6 +85,10 @@ dev server from `apps/storybook-django` to be running separately (see that
 app's `requirements.txt` for setup) — React and HTML stories work without it.
 
 ## Releasing packages
+
+The Python package has a separate build and release process documented in
+[packages/usx-django/README.md](packages/usx-django/README.md#building-and-publishing).
+Its version is managed in `pyproject.toml`, independently of npm Changesets.
 
 Publishing to npm is automated with [Changesets](https://github.com/changesets/changesets)
 (`.github/workflows/release.yml`) and is a two-step, PR-gated process — a plain

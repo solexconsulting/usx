@@ -26,9 +26,13 @@ Canonical CMS contract manifest (see solex-cms-overview.md), keyed by component
 name for O(1) lookup and derived from each component's config.json.
 To regenerate: pnpm generate:contracts
 
-Shape: { library, schemaVersion, components: { [componentName]: contract } }.
+Shape: { library, schemaVersion, packages, components: { [componentName]: contract } }.
 "schemaVersion" is this manifest's own format version — distinct from each
 contract's "version" (that component's config.json version).
+"packages" identifies the npm/PyPI releases described by this snapshot.
+Each contract includes exact renderer bindings. "examples.default" is sample
+content from config.default, NOT a runtime default; declared defaults remain
+on props. Optional prop.renderers records implementation-specific differences.
 
 A prop with a "component" field (optionally with "omit"/"properties") is a
 REFERENCE to another entry in "components", not an inlined copy — look up that

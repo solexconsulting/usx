@@ -10,6 +10,7 @@ import json
 import re
 import uuid
 from datetime import datetime
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 from urllib.parse import urlsplit, urlunsplit
 
@@ -18,6 +19,8 @@ from django.conf import settings
 from django.template import Context
 from django.template.base import Parser, Token, token_kwargs
 from django.templatetags.static import static
+
+from ..core.registry import _find_repo_component_default_paths
 
 register = template.Library()
 
@@ -587,3 +590,22 @@ register.tag('tag_group', TagGroupBlock.handle)
 register.tag('text_area', TextAreaBlock.handle)
 register.tag('time_picker', TimePickerBlock.handle)
 register.tag('tooltip', TooltipBlock.handle)
+
+
+def _register_template_tags():
+    bundled_templates = Path(__file__).resolve().parents[1] / "templates"
+    template_roots = (
+        [bundled_templates] if bundled_templates.is_dir()
+        else [Path(directory) for directory in _find_repo_component_default_paths()]
+    )
+    for template_root in template_roots:
+        for template_path in sorted(template_root.rglob("*.django.html")):
+            tag_name = template_path.name.removesuffix(".django.html").replace("-", "_")
+            if tag_name not in register.tags:
+                block = type(tag_name, (BlockInclusionNode,), {
+                    "template": template_path.relative_to(template_root).as_posix(),
+                })
+                register.tag(tag_name, block.handle)
+
+
+_register_template_tags()

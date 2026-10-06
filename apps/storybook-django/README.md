@@ -6,6 +6,13 @@ discovers those templates and renders them on demand, so the
 `<Name>.Django.stories.jsx` files in `packages/usx-stories` can fetch real
 server-rendered HTML instead of just simulating it.
 
+For use in another Django project, install the `solex-usx-django` Python package
+and add `usx_django` to `INSTALLED_APPS`; see
+[the package guide](../../packages/usx-django/README.md). The package build copies
+this app's shared component runtime and the canonical templates/configs, so
+Storybook and the published package use the same source. Run
+`pnpm generate:django` after changing either source before rebuilding the package.
+
 ## Structure
 
 - `project/components/` — component registry and renderer (`core/registry.py`,

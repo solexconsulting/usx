@@ -39,6 +39,12 @@ def _load_table_helper():
     Walks parent directories looking for the repo root (pnpm-workspace.yaml).
     """
     here = Path(__file__).resolve()
+    bundled_helper = here.parent / "templates" / "table" / "table_helper.py"
+    if bundled_helper.is_file():
+        spec = importlib.util.spec_from_file_location("usx_table_helper", str(bundled_helper))
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
     for parent in here.parents:
         candidate = parent / "packages" / "usx-react" / "src" / "components" / "table" / "table_helper.py"
         if candidate.exists():

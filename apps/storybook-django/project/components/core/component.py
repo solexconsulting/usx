@@ -8,6 +8,7 @@ custom context preparation based on props.
 
 import os
 import json
+from pathlib import Path
 
 
 class Component:
@@ -60,6 +61,8 @@ class Component:
         base_dir = getattr(settings, 'BASE_DIR', None) if settings is not None else None
         if base_dir:
             dirs.append(str(base_dir))
+
+        dirs.append(str(Path(__file__).resolve().parents[1] / 'templates'))
 
         # search for the props file in each template dir
         for d in dirs:

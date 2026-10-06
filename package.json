@@ -12,16 +12,18 @@
     "build": "pnpm -r build",
     "dev": "pnpm -r --parallel dev",
     "storybook:build": "pnpm --filter @solexllc/storybook run build",
-    "test": "node scripts/validate-configs.js && pnpm -r test",
+    "test": "node scripts/validate-configs.js && pnpm test:contracts && pnpm -r test",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore && stylelint '**/*.{css,scss}' --ignore-path .gitignore",
     "format": "prettier --write .",
     "new-component": "node scripts/new-component.js",
     "generate:exports": "node scripts/generate-exports.js",
     "generate:contracts": "node scripts/generate-contracts.js",
+    "generate:django": "node scripts/generate-django.js",
     "validate:configs": "node scripts/validate-configs.js",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "pnpm build && changeset publish"
+    "release": "pnpm build && changeset publish",
+    "test:contracts": "node --test scripts/tests/component-contracts.test.js"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
