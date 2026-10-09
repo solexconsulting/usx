@@ -1,4 +1,5 @@
 import React from 'react';
+import ClassNames from 'classnames';
 
 import Label from '../label/Label';
 import FormGroup from '../form-group/FormGroup';
@@ -53,7 +54,7 @@ export default function RangeSlider({
       {hint && <Hint id={hintId}>{hint}</Hint>}
       {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
       <input
-        className={['usa-range', 'usx-range-slider', className].filter(Boolean).join(' ')}
+        className={ClassNames('usa-range', 'usx-range-slider', className)}
         id={id}
         type="range"
         name={name || id}

@@ -1,0 +1,15 @@
+{% load components %}
+<div class="usx-quote{% if calloutProps.orientation == 'vertical' %} usx-quote--vertical{% endif %}{% if className %} {{ className }}{% endif %}">
+  {% if calloutProps.orientation != 'vertical' %}{% icon name="format_quote" size=4 className="usx-quote__icon" %}{% endicon %}{% endif %}
+  {% callout props=calloutProps element="div" %}
+    <figure class="usx-quote__body">
+      <blockquote class="usx-quote__content{% if blockquoteClassName %} {{ blockquoteClassName }}{% endif %}"{% if sourceLinkProps.href %} cite="{{ sourceLinkProps.href }}"{% endif %}>{% if calloutProps.orientation == 'vertical' %}❝{% endif %}{% if children != None %}{{ children|safe }}{% elif content != None %}{{ content|safe }}{% endif %}{% if calloutProps.orientation == 'vertical' %}❞{% endif %}</blockquote>
+      {% if attributionProps or sourceTitle %}
+        <figcaption class="usx-quote__attribution">
+          {% if attributionProps %}{% attribution props=attributionProps %}{{ attributionProps.children|safe }}{% endattribution %}{% endif %}
+          {% if sourceTitle %}<cite>{% if sourceLinkProps != None %}{% link props=sourceLinkProps %}{{ sourceTitle|safe }}{% endlink %}{% else %}{{ sourceTitle|safe }}{% endif %}</cite>{% endif %}
+        </figcaption>
+      {% endif %}
+    </figure>
+  {% endcallout %}
+</div>

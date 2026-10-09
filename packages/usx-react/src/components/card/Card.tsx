@@ -2,32 +2,16 @@ import React from 'react';
 import ClassNames from 'classnames';
 import ButtonGroup from '../button-group/ButtonGroup';
 import type { ButtonGroupItemProps } from '../button-group/ButtonGroup';
-import Tag from '../tag/Tag';
-import Image from '../image/Image';
+import Tag, { type TagProps } from '../tag/Tag';
+import Image, { type ImageProps } from '../image/Image';
 import Carousel from '../carousel/Carousel';
-
-export interface CardTag {
-  value: string;
-  color?: string;
-}
-
-export interface CardAction {
-  children: string;
-  variant?: ButtonGroupItemProps['variant'];
-  onClick?: () => void;
-}
-
-export interface CardImage {
-  src: string;
-  alt: string;
-}
 
 export interface CardProps extends React.HTMLAttributes<HTMLElement> {
   title?: string;
   description?: string;
-  tags?: CardTag[];
-  actions?: CardAction[];
-  images?: CardImage[];
+  tagProps?: TagProps[];
+  buttonProps?: ButtonGroupItemProps[];
+  imageProps?: ImageProps[];
   headerFirst?: boolean;
   flag?: boolean;
   mediaRight?: boolean;
@@ -42,9 +26,9 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
 export default function Card({
   title,
   description,
-  tags,
-  actions,
-  images,
+  tagProps,
+  buttonProps,
+  imageProps,
   headerFirst = false,
   flag = false,
   mediaRight = false,
@@ -75,22 +59,22 @@ export default function Card({
     }
   );
 
-  const hasStructuredContent = title || description || tags || actions || images;
+  const hasStructuredContent = title || description || tagProps || buttonProps || imageProps;
   const shouldRenderStructured = hasStructuredContent && !children;
 
-  const hasImages = images && images.length > 0;
-  const useCarousel = images && images.length > 1;
+  const hasImages = imageProps && imageProps.length > 0;
+  const useCarousel = imageProps && imageProps.length > 1;
   const media = useCarousel ? (
     <Carousel
       id={`${props.id || 'card'}-carousel`}
       showDots={showCarouselDots}
       className="usx-card__carousel"
-      slides={images?.map((img, index) => ({
-        content: <Image key={index} {...img} hideCaption={true} />,
+      slides={imageProps?.map((img, index) => ({
+        content: <Image key={index} hideCaption={true} {...img} />,
       }))}
     />
   ) : hasImages ? (
-    <Image {...images[0]} hideCaption={true} className="usa-card__img" />
+    <Image hideCaption={true} {...imageProps[0]} className={ClassNames('usa-card__img', imageProps[0].className)} />
   ) : null;
 
   return (
@@ -111,9 +95,9 @@ export default function Card({
             )}
 
             <div className="usa-card__body">
-              {tags && tags.length > 0 && (
+              {tagProps && tagProps.length > 0 && (
                 <div className="usx-tag-group">
-                  {tags.map((tag, index) => (
+                  {tagProps.map((tag, index) => (
                     <Tag key={index} {...tag} />
                   ))}
                 </div>
@@ -123,9 +107,9 @@ export default function Card({
               )}
             </div>
 
-            {actions && actions.length > 0 && (
+            {buttonProps && buttonProps.length > 0 && (
               <div className="usa-card__footer">
-                <ButtonGroup buttonProps={actions} className="flex-wrap" />
+                <ButtonGroup buttonProps={buttonProps} className="flex-wrap" />
               </div>
             )}
           </>

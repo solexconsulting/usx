@@ -19,3 +19,5 @@ export const CustomId = createStory(storyDefs.CustomId);
 export const WithImages = createStory(storyDefs.WithImages);
 export const WithSlideChildren = createStory(storyDefs.WithSlideChildren);
 export const WithHTMLChildren = createStory(storyDefs.WithHTMLChildren);
+
+export const CardCarousel = { ...createStory(storyDefs.CardCarousel), name: 'Card Carousel' };

@@ -143,7 +143,7 @@ export function SearchResultsPattern({
                   : selected.filter((entry) => entry !== value),
               });
             }}
-            options={[...new Set(records.map((record) => record[key]))].map((value, index) => ({
+            checkboxProps={[...new Set(records.map((record) => record[key]))].map((value, index) => ({
               id: `${prefix}-${location}-${key}-${index}`,
               value,
               label: `${value} (${records.filter((record) => record[key] === value).length})`,

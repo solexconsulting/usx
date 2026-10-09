@@ -1,19 +1,27 @@
-{# Django template for Toggle using USWDS segmented button group #}
 {% load components %}
-
-<ul class="usa-button-group usx-button-group usa-button-group--segmented usx-toggle{% if variant == 'icon' %} usx-toggle--icon{% endif %}{% if className %} {{ className }}{% endif %}" role="radiogroup"{% if name %} aria-label="{{ name }}"{% endif %}>
-  {% for option in options %}
-  {% with optValue=option.value|default:option optLabel=option.label|default:option optDisabled=option.disabled|default:False %}
-  <li class="usa-button-group__item usx-toggle__item{% if optDisabled %} usx-toggle__item--disabled{% endif %}">
-    <input class="usx-toggle__input" type="radio" id="{{ id }}-{{ forloop.counter }}" name="{{ name|default:id }}" value="{{ optValue }}" {% if optValue == value or optValue == defaultValue %}checked{% endif %}{% if disabled or optDisabled %} disabled{% endif %}>
-    <label for="{{ id }}-{{ forloop.counter }}" class="usa-button usx-button usa-button--outline">
-      {% if variant == 'icon' and option.icon %}
-        {% icon name=option.icon className="usx-toggle__label" %}{% endicon %}
-      {% else %}
-        <span class="usx-toggle__label">{{ optLabel }}</span>
-      {% endif %}
-    </label>
-  </li>
-  {% endwith %}
-  {% endfor %}
+{% spaceless %}
+<ul id="{{ id }}" class="usx-toggle usa-button-group{% if variant == 'icon' %} usx-toggle--icon{% endif %}{% if className %} {{ className }}{% endif %}" role="radiogroup" aria-label="{% firstof ariaLabel name 'Choose an option' %}"{% if disabled %} aria-disabled="true"{% endif %}{% if required %} aria-required="true"{% endif %}>
+    {% for option in options %}
+      {% with optionSuffix=option.value|stringformat:"s" %}
+      {% with optionId=id|add:"-"|add:optionSuffix %}
+      <li class="usa-button-group__item" role="presentation">
+        <input
+          class="usx-toggle__input"
+          id="{{ optionId }}"
+          type="radio"
+          name="{% firstof name id "toggle-group" %}"
+          value="{{ option.value }}"
+          {% if value != None %}{% if value == option.value %}checked="checked"{% endif %}{% elif defaultValue == option.value or option.checked %}checked="checked"{% endif %}
+          {% if disabled or option.disabled %}disabled="disabled"{% endif %}
+          {% if required %}required="required"{% endif %}
+        >
+        <label for="{{ optionId }}" class="usa-button usx-button usa-button--primary usx-toggle__button"{% if disabled or option.disabled %} aria-disabled="true"{% endif %}{% if variant == 'icon' and option.icon %} title="{{ option.label|striptags }}"{% endif %}>
+          {% if option.icon %}{% icon name=option.icon className="usx-toggle__icon" %}{% endicon %}{% endif %}
+          <span{% if variant == 'icon' and option.icon %} class="usa-sr-only"{% endif %}>{{ option.label|safe }}</span>
+        </label>
+      </li>
+      {% endwith %}
+      {% endwith %}
+    {% endfor %}
 </ul>
+{% endspaceless %}

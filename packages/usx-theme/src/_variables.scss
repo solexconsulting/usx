@@ -1126,25 +1126,6 @@ $usx-footer-primary-link-border-top: usx-var($usx-footer-primary-link-border-top
 $usx-footer-nav-border-bottom-var: null !default;
 $usx-footer-nav-border-bottom: usx-var($usx-footer-nav-border-bottom-var, 1px solid #a9aeb1) !default;
 
-// ── Component tokens: Page / Section ──────────────────────────────────────────
-// Page chains its own background to $usx-surface-1 — several patterns
-// (e.g. ContactForm, ProductShowcase) render <Page> without a <Layout>
-// ancestor to paint that surface, so Page must be able to paint it itself.
-// Section has no ancestor of its own to fall back on that way, so it stays
-// transparent by default (it's always nested in a Page or Layout already
-// painting the surface). Text on both is chained to $usx-text-ink so headings
-// and copy stay legible instead of getting stuck on real USWDS's static,
-// non-themeable body text color.
-$usx-page-bg-var: null !default;
-$usx-page-bg: usx-var($usx-page-bg-var) !default;
-$usx-page-text-var: null !default;
-$usx-page-text: usx-var($usx-page-text-var, $usx-text-ink) !default;
-
-$usx-section-bg-var: null !default;
-$usx-section-bg: usx-var($usx-section-bg-var) !default;
-$usx-section-text-var: null !default;
-$usx-section-text: usx-var($usx-section-text-var, $usx-text-ink) !default;
-
 // ── Component tokens: Carousel (custom; defaults baked in _carousel.scss) ───
 $usx-carousel-dot-bg-var: null !default;
 $usx-carousel-dot-bg: usx-var($usx-carousel-dot-bg-var) !default;
@@ -1278,12 +1259,12 @@ $usx-task-list-link-text: usx-var($usx-task-list-link-text-var, $usx-link-text) 
 $usx-attribution-secondary-text-var: null !default;
 $usx-attribution-secondary-text: usx-var($usx-attribution-secondary-text-var, $usx-text-subtle) !default;
 
-// ── Component tokens: Block (custom; default baked in _block.scss) ───────────
-$usx-block-callout-bg-var: null !default;
-$usx-block-callout-bg: usx-var($usx-block-callout-bg-var, $usx-surface-2) !default;
-$usx-block-border-width-var: null !default;
-$usx-block-border-width: usx-var($usx-block-border-width-var, $usx-border-width-lg) !default;
-$usx-block-border-var: null !default;
+// ── Component tokens: Callout (custom; default baked in _callout.scss) ───────────
+$usx-callout-background-var: null !default;
+$usx-callout-background: usx-var($usx-callout-background-var, $usx-surface-2) !default;
+$usx-callout-border-width-var: null !default;
+$usx-callout-border-width: usx-var($usx-callout-border-width-var, $usx-border-width-lg) !default;
+$usx-callout-border-var: null !default;
 
 // ── Component tokens: Clickable (custom; defaults baked in SCSS) ─────────────
 $usx-clickable-focus-var: null !default;

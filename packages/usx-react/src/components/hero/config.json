@@ -1,17 +1,17 @@
 {
   "name": "hero",
   "template": "hero/hero.django.html",
-  "version": 1,
+  "version": 2,
   "default": {
     "title": "The hero heading",
     "callout": "A callout heading",
     "paragraph": "A short description of the hero section that provides context for the call to action.",
-    "button": {
+    "backgroundImage": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
+    "overlay": true,
+    "buttonProps": {
       "href": "#",
       "text": "Call to action"
-    },
-    "backgroundImage": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
-    "overlay": true
+    }
   },
   "props": {
     "title": {
@@ -26,23 +26,10 @@
       "type": "string",
       "description": "Optional body paragraph text"
     },
-    "button": {
+    "buttonProps": {
       "type": "object",
-      "description": "Optional call-to-action button. Mutually exclusive with search.",
-      "properties": {
-        "href": {
-          "type": "string",
-          "description": "Button link URL"
-        },
-        "text": {
-          "type": "string",
-          "description": "Button label text"
-        },
-        "onClick": {
-          "type": "function",
-          "description": "Optional click handler for the button"
-        }
-      }
+      "component": "button",
+      "description": "Button props. Search takes precedence when searchProps is supplied."
     },
     "searchProps": {
       "type": "object",
@@ -55,7 +42,11 @@
     },
     "contentPosition": {
       "type": "select",
-      "options": ["left", "center", "right"],
+      "options": [
+        "left",
+        "center",
+        "right"
+      ],
       "default": "left",
       "description": "Main content position. Secondary content sits opposite on desktop for left/right layouts, and below for centered or mobile layouts. Reading order always starts with the main content."
     },
@@ -74,7 +65,13 @@
     },
     "headingLevel": {
       "type": "select",
-      "options": ["h1", "h2", "h3", "h4", "h5"],
+      "options": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5"
+      ],
       "default": "h1",
       "description": "Main heading element, independent of visual size. Secondary content uses the next heading level."
     },
@@ -82,14 +79,26 @@
       "type": "object",
       "description": "Optional unboxed supporting content: title, paragraph, and link. Stacks after the main content on mobile; use overlay or a suitable background for readable contrast.",
       "properties": {
-        "title": { "type": "string", "description": "Supporting heading" },
-        "paragraph": { "type": "string", "description": "Supporting description" },
+        "title": {
+          "type": "string",
+          "description": "Supporting heading"
+        },
+        "paragraph": {
+          "type": "string",
+          "description": "Supporting description"
+        },
         "link": {
           "type": "object",
           "description": "Optional secondary text link",
           "properties": {
-            "href": { "type": "string", "description": "Destination URL" },
-            "text": { "type": "string", "description": "Link text" }
+            "href": {
+              "type": "string",
+              "description": "Destination URL"
+            },
+            "text": {
+              "type": "string",
+              "description": "Link text"
+            }
           }
         }
       }

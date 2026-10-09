@@ -1,7 +1,7 @@
 {
   "name": "card",
   "template": "card/card.django.html",
-  "version": 1,
+  "version": 3,
   "props": {
     "id": {
       "type": "string",
@@ -15,62 +15,37 @@
       "type": "string",
       "description": "The description text displayed in the card body"
     },
-    "tags": {
+    "tagProps": {
       "type": "array",
-      "description": "Array of tag objects with value and color properties",
+      "description": "Props for each tag component.",
       "items": {
         "type": "object",
-        "description": "Card tag.",
+        "component": "tag",
+        "description": "Props passed to the tag component."
+      }
+    },
+    "buttonProps": {
+      "type": "array",
+      "description": "Props for each button component.",
+      "items": {
+        "type": "object",
+        "component": "button",
+        "description": "Props passed to the button component.",
         "properties": {
-          "value": {
+          "itemClassName": {
             "type": "string",
-            "description": "Tag text"
-          },
-          "color": {
-            "type": "string",
-            "description": "Tag color variant"
+            "description": "Additional classes for the button group list item."
           }
         }
       }
     },
-    "actions": {
+    "imageProps": {
       "type": "array",
-      "description": "Array of action button objects",
+      "description": "Props for each image component.",
       "items": {
         "type": "object",
-        "description": "Card action button.",
-        "properties": {
-          "children": {
-            "type": "string",
-            "description": "Button text"
-          },
-          "variant": {
-            "type": "string",
-            "description": "Button variant"
-          },
-          "onClick": {
-            "type": "function",
-            "description": "Click handler"
-          }
-        }
-      }
-    },
-    "images": {
-      "type": "array",
-      "description": "Array of image objects; multiple images render as a carousel",
-      "items": {
-        "type": "object",
-        "description": "Card image.",
-        "properties": {
-          "src": {
-            "type": "string",
-            "description": "Image source URL"
-          },
-          "alt": {
-            "type": "string",
-            "description": "Alt text for the image"
-          }
-        }
+        "component": "image",
+        "description": "Props passed to the image component."
       }
     },
     "headerFirst": {

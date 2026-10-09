@@ -21,14 +21,14 @@ const productShowcaseCardArgs = [
   {
     title: 'Enterprise Suite',
     description: 'Our flagship solution for large-scale operations. Includes advanced analytics, priority support, and multi-tenant security.',
-    images: [{
+    imageProps: [{
       src: 'https://picsum.photos/400/300?random=1',
       alt: 'Enterprise Suite',
       caption: 'Enterprise Suite Package',
       rounded: true,
     }],
     mediaInset: true,
-    actions: [
+    buttonProps: [
       {
         children: 'Explore Suite',
         variant: 'primary',
@@ -45,14 +45,14 @@ const productShowcaseCardArgs = [
   {
     title: 'Essential Platform',
     description: 'A streamlined, cost-effective toolkit providing core design system components and workflow tools for growing teams.',
-    images: [{
+    imageProps: [{
       src: 'https://picsum.photos/400/300?random=2',
       alt: 'Essential Platform',
       caption: 'Essential Platform Package',
       rounded: true,
     }],
     mediaInset: true,
-    actions: [
+    buttonProps: [
       {
         children: 'Get Started',
         variant: 'primary',
@@ -86,7 +86,7 @@ export const ProductShowcase = {
         callout="Next-Gen Design Platform"
         title="Modern, Themeable Components for Federal Systems"
         paragraph="Build accessible, responsive digital services faster with SOLEX USX's tokenized component library."
-        button={{ text: 'Explore Packages', href: '#packages' }}
+        buttonProps={{ label: 'Explore Packages', href: '#packages' }}
       />
       <Layout
         variant="single-column"

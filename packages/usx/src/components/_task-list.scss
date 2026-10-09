@@ -3,8 +3,8 @@
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-task-list {
   display: block;
-  margin: 0;
-  padding: 0;
+  margin: unset;
+  padding: unset;
   list-style: none;
   border-top: 2px solid #e2e8f0;
   border-bottom: 2px solid #e2e8f0;

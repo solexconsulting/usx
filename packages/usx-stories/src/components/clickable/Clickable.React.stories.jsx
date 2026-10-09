@@ -1,8 +1,11 @@
 import React from 'react';
 import Icon from '../../../../usx-react/src/components/icon/Icon.tsx';
 import Clickable from '../../../../usx-react/src/components/clickable/Clickable.tsx';
+import Quote from '../../../../usx-react/src/components/quote/Quote.tsx';
+import Callout from '../../../../usx-react/src/components/callout/Callout.tsx';
 import config from '../../../../usx-react/src/components/clickable/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import Attribution from '../../../../usx-react/src/components/attribution/Attribution.tsx';
 
 export const storyDefs = {
   SingleClickable: {
@@ -21,9 +24,13 @@ export const storyDefs = {
     href: 'https://google.com',
     className: 'display-flex flex-row flex-align-center margin-1 usx-width-fit',
   },
-  ReadJohnsStoryInsideBlockquote: {
+  ClickableQuote: {
     href: 'https://google.com',
-    className: 'usx-block usx-block--callout usx-border-primary',
+    className: 'display-block maxw-tablet',
+  },
+  ClickableQuoteV2: {
+    href: 'https://google.com',
+    className: 'display-block maxw-tablet',
   },
   AllClassesSingleElement: {
     href: 'https://google.com',
@@ -122,30 +129,53 @@ export const ReadJohnsStoryCta = {
   ),
 };
 
-export const ReadJohnsStoryInsideBlockquote = {
-  name: "Read John's Story in blockquote",
-  args: storyDefs.ReadJohnsStoryInsideBlockquote,
+export const ClickableQuote = {
+  args: storyDefs.ClickableQuote,
   render: (args) => (
     <Clickable {...args}>
-      <div className="usx-block__content usx-border-info maxw-tablet margin-0">
-        <p className="font-serif-lg maxw-tablet margin-0">
-          ❝We found this wand shop that had the best wands, and we were like, "We have to go here!" So we went there.❞
-        </p>
-        <div className="usx-block__attribution">
-          <div className="usx-attribution">
-            <span className="usx-attribution__content">
-              <span className="usx-attribution__primary">John Doe</span>
-              <span className="usx-attribution__secondary">Under Secretary for the Department of Magic and Mystical Affairs</span>
-            </span>
-          </div>
-        </div>
-        <div className="display-flex flex-align-center margin-top-2">
-          <Clickable.BgColorChange className="usx-circle bg-black text-white display-flex flex-align-center flex-justify-center width-4 height-4">
-            <Icon name="arrow_forward" size={3} />
-          </Clickable.BgColorChange>
-          <Clickable.Link className="margin-left-1">Read John's Story</Clickable.Link>
-        </div>
+      <Quote
+        calloutProps={{ orientation: 'vertical', strokeColor: 'info', big: true }}
+        blockquoteClassName="font-serif-lg"
+        attributionProps={{ primary: 'John Doe', secondary: 'Under Secretary for the Department of Magic and Mystical Affairs' }}
+        content={'We found this wand shop that had the best wands, and we were like, "We have to go here!" So we went there.'}
+      />
+      <div className="display-flex flex-align-center margin-top-2">
+        <Clickable.BgColorChange className="usx-circle bg-black text-white display-flex flex-align-center flex-justify-center width-4 height-4">
+          <Icon name="arrow_forward" size={3} />
+        </Clickable.BgColorChange>
+        <Clickable.Link className="margin-left-1">Read John's Story</Clickable.Link>
       </div>
+    </Clickable>
+  ),
+};
+
+export const ClickableQuoteManualMarkup = {
+  name: "Clickable Quote v2 (Manual Markup)",
+  args: storyDefs.ClickableQuote,
+  render: (args) => (
+    <Clickable {...args}>
+      <Callout
+        orientation="vertical"
+        strokeColor="info"
+        big={true}
+        className="usx-quote"
+      >
+        <figure className="usx-quote__body">
+          <blockquote className="usx-quote__content font-serif-lg">❝We found this wand shop that had the best wands, and we were like, "We have to go here!" So we went there.❞</blockquote>
+          <figcaption className="usx-quote__attribution">
+            <Attribution
+              primary="John Doe"
+              secondary="Under Secretary for the Department of Magic and Mystical Affairs"
+            />
+          </figcaption>
+          <div className="display-flex flex-align-center margin-top-2">
+            <Clickable.BgColorChange className="usx-circle bg-black text-white display-flex flex-align-center flex-justify-center width-4 height-4">
+              <Icon name="arrow_forward" size={3} />
+            </Clickable.BgColorChange>
+            <Clickable.Link className="margin-left-1">Read John's Story</Clickable.Link>
+          </div>
+        </figure>
+      </Callout>
     </Clickable>
   ),
 };

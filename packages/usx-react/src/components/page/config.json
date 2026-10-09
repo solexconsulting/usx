@@ -1,7 +1,7 @@
 {
   "name": "page",
   "template": "page/page.django.html",
-  "version": 1,
+  "version": 2,
   "required": [
     "title"
   ],
@@ -11,20 +11,20 @@
       "description": "Optional id attribute applied to the root main element."
     },
     "title": {
-      "type": "string",
+      "type": "slot",
       "description": "Required page title rendered as an h1."
     },
     "eyebrow": {
-      "type": "string",
+      "type": "slot",
       "description": "Optional eyebrow text rendered above the page title inside the h1."
     },
     "content": {
-      "type": "string",
-      "description": "Body content rendered below the title. Supports HTML in Django stories."
+      "type": "slot",
+      "description": "Body content rendered below the title. Supports HTML in Django stories. Ignored if children is provided."
     },
     "children": {
-      "type": "string",
-      "description": "Body content for React usage."
+      "type": "slot",
+      "description": "Body content for React usage. Takes precedence over content if both are provided."
     },
     "className": {
       "type": "string",

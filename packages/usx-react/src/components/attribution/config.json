@@ -1,7 +1,7 @@
 {
   "name": "attribution",
   "template": "attribution/attribution.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "avatarProps": {
       "type": "object",
@@ -9,19 +9,19 @@
       "component": "avatar"
     },
     "media": {
-      "type": "string",
+      "type": "slot",
       "description": "HTML for the left media area (avatar image or initials badge)."
     },
     "primary": {
-      "type": "string",
+      "type": "slot",
       "description": "Primary text shown in the top-right cell."
     },
     "secondary": {
-      "type": "string",
+      "type": "slot",
       "description": "Secondary text shown in the bottom-right cell."
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Optional full custom markup. When provided, it overrides media/primary/secondary."
     },
     "className": {

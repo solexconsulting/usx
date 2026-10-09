@@ -39,7 +39,7 @@ export interface FooterNavColumnProps {
 }
 export function FooterNavColumn({ heading, links = [], className = '' }: FooterNavColumnProps) {
   return (
-    <section className={['usa-footer__primary-content usa-footer__primary-content--collapsible usx-footer__nav-column', className].filter(Boolean).join(' ')}>
+    <section className={ClassNames('usa-footer__primary-content usa-footer__primary-content--collapsible usx-footer__nav-column', className)}>
       {heading && <h4 className="usa-footer__primary-link">{heading}</h4>}
       {links.length > 0 && (
         <ul className="usa-list usa-list--unstyled">
@@ -73,7 +73,7 @@ export function FooterSignUp({
   className = '',
 }: FooterSignUpProps) {
   return (
-    <div className={['usa-sign-up usx-footer__sign-up', className].filter(Boolean).join(' ')}>
+    <div className={ClassNames('usa-sign-up usx-footer__sign-up', className)}>
       <h3 className="usa-sign-up__heading">{heading}</h3>
       <form className="usa-form" action={action || undefined} onSubmit={onSubmit || undefined}>
         <Input
@@ -102,7 +102,7 @@ export interface FooterSocialLinksProps {
 export function FooterSocialLinks({ links = [], staticBaseUrl, className = '' }: FooterSocialLinksProps) {
   if (!links.length) return null;
   return (
-    <div className={['usa-footer__social-links grid-row grid-gap-1 usx-footer__social-links', className].filter(Boolean).join(' ')}>
+    <div className={ClassNames('usa-footer__social-links grid-row grid-gap-1 usx-footer__social-links', className)}>
       {links.map((link, i) => (
         <div key={i} className="grid-col-auto">
           <a className="usa-social-link" href={link.href} aria-label={link.alt}>
@@ -148,7 +148,7 @@ export function FooterContact({
 
   if (!heading && allLinks.length === 0) return null;
   return (
-    <address className={['usa-footer__address usx-footer__contact', className].filter(Boolean).join(' ')}>
+    <address className={ClassNames('usa-footer__address usx-footer__contact', className)}>
       {heading && <p className="usa-footer__contact-heading">{heading}</p>}
       {allLinks.length > 0 && (
         <div className="usa-footer__contact-info grid-row grid-gap">
@@ -210,7 +210,7 @@ export default function Footer({
   const variantClass = variant === 'big' ? 'usa-footer--big'
     : variant === 'slim' ? 'usa-footer--slim'
     : '';
-  const classes = ['usa-footer', variantClass, 'usx-footer', className].filter(Boolean).join(' ');
+  const classes = ClassNames('usa-footer', variantClass, 'usx-footer', className);
 
   const returnToTopEl = returnToTop ? (
     <FooterReturnToTop

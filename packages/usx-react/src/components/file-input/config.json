@@ -1,7 +1,7 @@
 {
   "name": "file-input",
   "template": "file-input/file-input.django.html",
-  "version": 1,
+  "version": 2,
   "default": {
     "id": "file-input-single",
     "name": "file-input-single",
@@ -18,20 +18,20 @@
       "description": "name attribute for the input. Defaults to id."
     },
     "label": {
-      "type": "string",
+      "type": "slot",
       "description": "Label text for the field."
     },
     "hint": {
-      "type": "string",
+      "type": "slot",
       "description": "Hint text displayed below the label."
     },
     "fileListHint": {
-      "type": "string",
+      "type": "slot",
       "default": "Selected files",
       "description": "Heading/hint text shown above the managed file list, passed to FileList's hint prop. React only."
     },
     "error": {
-      "type": "string",
+      "type": "slot",
       "description": "Error message. Renders aria-describedby and error styling."
     },
     "disabled": {

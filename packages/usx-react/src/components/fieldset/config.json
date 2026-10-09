@@ -1,10 +1,10 @@
 {
   "name": "fieldset",
   "template": "fieldset/fieldset.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "legend": {
-      "type": "string",
+      "type": "slot",
       "description": "Text for the fieldset legend"
     },
     "largeLegend": {
@@ -20,11 +20,11 @@
       "description": "Whether to disable all form controls within the fieldset"
     },
     "hint": {
-      "type": "string",
+      "type": "slot",
       "description": "Group-level hint text, rendered after the legend"
     },
     "error": {
-      "type": "string",
+      "type": "slot",
       "description": "Group-level error message, rendered after the hint"
     },
     "hintId": {
@@ -36,7 +36,7 @@
       "description": "Element id for the error message span"
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Inner HTML or text"
     },
     "className": {

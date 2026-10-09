@@ -13,12 +13,12 @@ const actions = [
 const baseCardArgs = {
   title: 'Card Title',
   description: 'This is the main content of the card. It can contain text, links, or other elements.',
-  actions: actions,
+  buttonProps: actions,
   className: 'tablet:grid-col-6 widescreen:grid-col-4',
 };
 
 const images = {
-  images: [
+  imageProps: [
     {
       src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
       alt: 'Placeholder image for card',
@@ -35,7 +35,7 @@ const images = {
 }
 
 const tagsArgs = {
-  tags: [
+  tagProps: [
     { value: 'Primary', color: 'primary' },
     { value: 'Success', color: 'success' },
     { value: 'Warning', color: 'warning' }

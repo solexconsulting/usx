@@ -1,4 +1,5 @@
 import React, { ReactNode, HTMLAttributes } from 'react';
+import ClassNames from 'classnames';
 
 export interface PaginationContainerProps extends HTMLAttributes<HTMLDivElement> {
   summary?: ReactNode;
@@ -20,7 +21,7 @@ export default function PaginationContainer({
   className = '',
   ...props
 }: PaginationContainerProps) {
-  const classes = ['usx-pagination__container', className].filter(Boolean).join(' ');
+  const classes = ClassNames('usx-pagination__container', className);
 
   return (
     <div className={classes} {...props}>

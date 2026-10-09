@@ -1,7 +1,7 @@
 {
   "name": "tag",
   "template": "tag/tag.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "id": {
       "type": "string",
@@ -47,7 +47,7 @@
       "description": "Additional classes to add to the tag"
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Inner HTML or text for the tag"
     }
   }

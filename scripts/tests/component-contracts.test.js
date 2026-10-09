@@ -83,3 +83,88 @@ test('generation rejects a missing or external template instead of publishing a 
     assert.throws(() => buildContractManifest(changed), /Missing or invalid Django template/);
   }
 });
+
+test('renderable children are slots, including nested composition and scaffold metadata', () => {
+  function check(props, location) {
+    for (const [name, prop] of Object.entries(props)) {
+      const key = `${location}.${name}`;
+      if (name === 'children') {
+        // SideNav children are recursive navigation data, not rendered content.
+        assert.equal(prop.type, key === 'sidenav.items.items.children' ? 'array' : 'slot', key);
+      }
+      if (prop.properties) check(prop.properties, key);
+      if (prop.items?.properties) check(prop.items.properties, `${key}.items`);
+    }
+  }
+  for (const [name, contract] of Object.entries(manifest.components)) check(contract.props, name);
+  for (const name of ['page', 'section', 'breadcrumb', 'prose', 'table', 'in-page-nav']) {
+    assert.equal(manifest.components[name].props.children.type, 'slot', name);
+  }
+  const scaffold = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, 'scripts/templates/component/config.json'), 'utf8'));
+  assert.equal(scaffold.props.children.type, 'slot');
+});
+
+test('content slots preserve the distinction from string-only renderer inputs', () => {
+  for (const [component, props] of Object.entries({
+    page: ['title', 'eyebrow', 'content'],
+    section: ['content'],
+    attribution: ['media', 'primary', 'secondary'],
+    fieldset: ['legend', 'hint', 'error'],
+    swap: ['onContent', 'offContent'],
+    table: ['caption', 'placeholder'],
+  })) {
+    for (const prop of props) assert.equal(manifest.components[component].props[prop].type, 'slot', `${component}.${prop}`);
+  }
+  assert.equal(manifest.components.prose.props.content.type, 'string');
+  assert.equal(manifest.components['in-page-nav'].props.content.type, 'string');
+  assert.deepEqual(manifest.components['text-area'].props.error.type, ['string', 'boolean']);
+  for (const name of ['breadcrumb', 'table', 'in-page-nav']) {
+    assert.equal(manifest.components[name].props.children.renderers.django.supported, false);
+  }
+});
+
+test('Quote references Attribution without duplicating its contract', () => {
+  const { props } = manifest.components.quote;
+  assert.equal(Object.hasOwn(props, 'attribution'), false);
+  assert.equal(props.attributionProps.component, 'attribution');
+  assert.equal(props.attributionProps.type, 'object');
+  assert.equal(Object.hasOwn(props.attributionProps, 'properties'), false);
+  assert.equal(manifest.components[props.attributionProps.component].props.avatarProps.component, 'avatar');
+});
+
+test('composed children reference their component contracts', () => {
+  const { card, hero, collection, 'checkbox-group': checkboxGroup } = manifest.components;
+  for (const [prop, component] of [['tagProps', 'tag'], ['buttonProps', 'button'], ['imageProps', 'image']]) {
+    assert.equal(card.props[prop].items.component, component);
+  }
+  for (const old of ['tags', 'actions', 'images']) assert.equal(Object.hasOwn(card.props, old), false);
+  assert.equal(hero.props.buttonProps.component, 'button');
+  assert.equal(Object.hasOwn(hero.props, 'button'), false);
+  assert.equal(collection.props.items.items.properties.calendarDateProps.component, 'calendar-date');
+  assert.equal(Object.hasOwn(collection.props.items.items.properties, 'calendarDate'), false);
+  assert.equal(checkboxGroup.props.checkboxProps.items.component, 'checkbox');
+  assert.equal(Object.hasOwn(checkboxGroup.props, 'options'), false);
+});
+
+test('Callout replaces Block and Quote references its styling contract', () => {
+  assert.equal(manifest.components.block, undefined);
+  const { callout, quote } = manifest.components;
+  assert.deepEqual(callout.props.orientation.options, ['horizontal', 'vertical']);
+  assert.equal(callout.props.orientation.default, 'horizontal');
+  for (const removed of ['variant', 'quote', 'color', 'attributionProps', 'contentClassName']) {
+    assert.equal(Object.hasOwn(callout.props, removed), false);
+  }
+  assert.equal(callout.props.children.type, 'slot');
+  assert.equal(callout.props.content.type, 'slot');
+  assert.equal(Object.hasOwn(callout.props.strokeColor, 'default'), false);
+  assert.equal(quote.props.calloutProps.component, 'callout');
+  assert.deepEqual(quote.props.calloutProps.omit, ['element', 'children', 'content', 'cite']);
+});
+
+test('Quote source links reference Link and receive their children from sourceTitle', () => {
+  const props = manifest.components.quote.props;
+  assert.equal(Object.hasOwn(props, 'cite'), false);
+  assert.equal(props.sourceLinkProps.component, 'link');
+  assert.deepEqual(props.sourceLinkProps.omit, ['children']);
+  assert.equal(props.sourceTitle.type, 'slot');
+});

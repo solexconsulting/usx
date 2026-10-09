@@ -5,10 +5,6 @@
   margin-top: units(4);
   margin-bottom: units(8);
 
-  background-color: usx-when($usx-page-bg);
-
-  color: usx-when($usx-page-text);
-
   .usx-page__title {
     margin-top: 0;
     margin-bottom: 1.5rem;

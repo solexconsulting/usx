@@ -1,28 +1,35 @@
 {
   "name": "toggle",
   "template": "toggle/toggle.django.html",
-  "version": 1,
+  "version": 2,
   "required": [
     "options"
   ],
   "props": {
     "id": {
       "type": "string",
-      "description": "ID for the control (used as prefix for option IDs)"
+      "description": "ID for the control (used as prefix for option IDs). Supply a unique ID in Django."
     },
     "options": {
       "type": "array",
-      "description": "Array of option objects: {value,label,icon?,disabled?}",
+      "description": "Options as strings, numbers, or objects with value, label, icon, and disabled. Django requires option objects with value and label. Use distinct values and a label for every icon option.",
       "items": {
-        "type": "object",
+        "type": [
+          "object",
+          "string",
+          "number"
+        ],
         "description": "Toggle option.",
         "properties": {
           "value": {
-            "type": "string",
+            "type": [
+              "string",
+              "number"
+            ],
             "description": "Option value."
           },
           "label": {
-            "type": "string",
+            "type": "slot",
             "description": "Option display label."
           },
           "icon": {
@@ -37,11 +44,17 @@
       }
     },
     "value": {
-      "type": "string",
+      "type": [
+        "string",
+        "number"
+      ],
       "description": "Controlled selected value"
     },
     "defaultValue": {
-      "type": "string",
+      "type": [
+        "string",
+        "number"
+      ],
       "description": "Uncontrolled initial value"
     },
     "name": {
@@ -54,7 +67,8 @@
         "text",
         "icon"
       ],
-      "description": "Visual variant"
+      "description": "Visual variant",
+      "default": "text"
     },
     "disabled": {
       "type": "boolean",
@@ -63,7 +77,25 @@
     },
     "className": {
       "type": "string",
-      "description": "Additional classes"
+      "description": "Additional classes for the toggle list"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "description": "Accessible name for the radio group. Defaults to name when omitted."
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "description": "Require a choice for native form submission."
+    },
+    "onChange": {
+      "type": "function",
+      "description": "React callback receiving the selected string or number.",
+      "renderers": {
+        "django": {
+          "supported": false
+        }
+      }
     }
   }
 }

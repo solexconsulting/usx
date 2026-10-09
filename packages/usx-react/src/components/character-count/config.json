@@ -1,7 +1,7 @@
 {
   "name": "character-count",
   "template": "character-count/character-count.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "id": {
       "type": "string",
@@ -9,7 +9,7 @@
       "description": "ID for the input/textarea field. Used to wire label, hint, message, and error/success spans."
     },
     "label": {
-      "type": "string",
+      "type": "slot",
       "default": null,
       "description": "Label text for the field."
     },

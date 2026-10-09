@@ -1,7 +1,7 @@
 {
   "name": "memorable-date",
   "template": "memorable-date/memorable-date.django.html",
-  "version": 1,
+  "version": 2,
   "default": {
     "id": "memorable-date",
     "legend": "Date of Birth"
@@ -13,42 +13,42 @@
       "description": "Base id for the component. Month/day/year field ids and hint ids are derived from this."
     },
     "legend": {
-      "type": "string",
+      "type": "slot",
       "default": "Date of Birth",
       "description": "Legend text for the fieldset."
     },
     "groupHint": {
-      "type": "string",
+      "type": "slot",
       "default": "Select a month. Enter 1 or 2 digits for the day and 4 digits for the year.",
       "description": "Visible hint shown once for the whole group. Hidden from screen readers (aria-hidden) since each field has its own hint."
     },
     "monthLabel": {
-      "type": "string",
+      "type": "slot",
       "default": "Month",
       "description": "Label text for the month select."
     },
     "dayLabel": {
-      "type": "string",
+      "type": "slot",
       "default": "Day",
       "description": "Label text for the day input."
     },
     "yearLabel": {
-      "type": "string",
+      "type": "slot",
       "default": "Year",
       "description": "Label text for the year input."
     },
     "monthHint": {
-      "type": "string",
+      "type": "slot",
       "default": "Select a month from the dropdown.",
       "description": "Screen-reader-only hint for the month field."
     },
     "dayHint": {
-      "type": "string",
+      "type": "slot",
       "default": "Enter 1 or 2 digits for the day.",
       "description": "Screen-reader-only hint for the day field."
     },
     "yearHint": {
-      "type": "string",
+      "type": "slot",
       "default": "Enter 4 digits for the year.",
       "description": "Screen-reader-only hint for the year field."
     },

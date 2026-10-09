@@ -1,0 +1,43 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+$stroke-width: 4px;
+
+@if $usx-callout-border-width {
+  $stroke-width: $usx-callout-border-width;
+}
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-callout {
+  margin: 0;
+  padding-left: 1rem;
+  border-style: solid;
+  border-width: 0 0 0 $stroke-width;
+
+  &:where(.usx-callout--vertical) {
+    border-width: $stroke-width 0 0;
+    padding: 1rem 1.25rem;
+  }
+
+  &.usx-callout--big {
+    border-left-width: calc(1.5 * #{$stroke-width});
+
+    &.usx-callout--vertical {
+      border-left-width: 0;
+      border-top-width: calc(1.5 * #{$stroke-width});
+    }
+  }
+
+  &.usx-callout--dedent {
+    margin-left: -1.25rem;
+  }
+
+  @each $size, $amount in (sm: 1.25rem, md: 2.5rem, lg: 3.75rem, xl: 5rem) {
+    &.usx-callout--indent-#{$size} {
+      margin-left: $amount;
+    }
+  }
+}
+
+:where(.usx-callout--vertical) {
+  background-color: usx-when($usx-callout-background);
+}

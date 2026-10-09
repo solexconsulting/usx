@@ -1,7 +1,7 @@
 {
   "name": "label",
   "template": "label/label.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "htmlFor": {
       "type": "string",
@@ -28,7 +28,7 @@
       "description": "Label text content"
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Inner HTML or text"
     },
     "className": {

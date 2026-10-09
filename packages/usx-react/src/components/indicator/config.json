@@ -1,14 +1,14 @@
 {
   "name": "indicator",
   "template": "indicator/indicator.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "items": {
       "type": "object",
       "description": "Array of indicator badge objects. Each item supports: className (classes beyond usx-indicator-item), label (text content), and style (inline styles)."
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "The element being decorated by the indicator badges."
     },
     "className": {

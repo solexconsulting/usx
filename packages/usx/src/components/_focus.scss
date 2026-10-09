@@ -17,7 +17,8 @@
   }
 
   .usa-checkbox__input:focus + [class*="__label"]::before,
-  .usa-radio__input:focus + [class*="__label"]::before {
+  .usa-radio__input:focus + [class*="__label"]::before,
+  .usx-toggle__input:focus + .usx-toggle__button {
     outline: .25rem solid $usx-color-focus;
     outline-offset: 0.25rem;
   }

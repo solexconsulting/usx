@@ -1,4 +1,5 @@
 import React from 'react';
+import ClassNames from 'classnames';
 
 export interface PageProps extends Omit<React.HTMLAttributes<HTMLElement>, 'title' | 'content'> {
   title?: React.ReactNode;
@@ -17,7 +18,7 @@ export default function Page({
   className = '',
   ...props
 }: PageProps) {
-  const classes = ['usx-page', className].filter(Boolean).join(' ');
+  const classes = ClassNames('usx-page', className);
   const pageContent = children || content;
 
   const Element = element;

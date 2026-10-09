@@ -21,7 +21,7 @@ export function Slide({
   children = null,
   ...rest
 }: SlideProps) {
-  const cls = ['usx-carousel__slide', className].filter(Boolean).join(' ');
+  const cls = ClassNames('usx-carousel__slide', className);
   return (
     <section
       id={id}
@@ -63,6 +63,7 @@ export default function Carousel({
 }: CarouselProps) {
   const classes = ClassNames('usx-carousel', className);
   const childArray = React.Children.toArray(children).filter(Boolean);
+
   return (
     <div className={classes} {...props} role="region" aria-roledescription="carousel" aria-label={ariaLabel}>
       <div className="usx-carousel__viewport" tabIndex={-1}>
@@ -88,7 +89,7 @@ export default function Carousel({
       </div>
       {showDots && (
         <div className="usx-carousel__dots" aria-label="Slide navigation">
-          {slides?.map((_, i) => (
+          {(childArray.length > 0 ? childArray : slides)?.map((_, i) => (
             <a key={i} href={`#${id}-slide-${i + 1}`} aria-label={`Go to slide ${i + 1}`} tabIndex={-1} />
           ))}
           {childArray.length > 0 && slideIds.length === childArray.length && slideIds.map((slideId, i) => (

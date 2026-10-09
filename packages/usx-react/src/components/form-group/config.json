@@ -1,10 +1,10 @@
 {
   "name": "form-group",
   "template": "form-group/form-group.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "children": {
-      "type": "string",
+      "type": "slot",
       "default": null,
       "description": "Inner HTML content of the form group."
     },

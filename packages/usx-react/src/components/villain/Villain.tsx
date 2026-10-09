@@ -1,4 +1,5 @@
 import React from 'react';
+import ClassNames from 'classnames';
 
 export interface VillainButton {
   href: string;
@@ -23,7 +24,7 @@ const Villain: React.FC<VillainProps> = ({
   className = '',
   ...props
 }) => {
-  const classes = ['usa-hero', className].filter(Boolean).join(' ');
+  const classes = ClassNames('usa-hero', className);
   return (
     <section className={classes} aria-label={ariaLabel} {...props}>
       <div className="grid-container">

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ClassNames from 'classnames';
 import PaginationNavigation from './navigation/PaginationNavigation';
 import PaginationStepOptions from './step-options/PaginationStepOptions';
 import PaginationSummary from './summary/PaginationSummary';
@@ -70,7 +71,7 @@ export default function Pagination({
     onPageChange?.(newPage, size);
   };
 
-  const classes = ['usx-pagination', className].filter(Boolean).join(' ');
+  const classes = ClassNames('usx-pagination', className);
 
   return (
     <div className={classes}>

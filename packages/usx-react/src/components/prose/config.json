@@ -1,7 +1,7 @@
 {
   "name": "prose",
   "template": "prose/prose.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "containerElement": {
       "type": "select",
@@ -23,6 +23,10 @@
       "type": "string",
       "default": "",
       "description": "Additional CSS classes to apply to the prose component"
+    },
+    "children": {
+      "type": "slot",
+      "description": "Composed body content. Omit content when supplying children in React."
     }
   }
 }

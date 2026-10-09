@@ -23,7 +23,7 @@
 
   /* Improve UX */
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
+  scrollbar-width: none;  // Questionable for UX as it hides the scrollbar entirely
 }
 
 /* Track */
@@ -31,6 +31,14 @@
   height: 100%;
   display: flex;
   gap: 1rem;
+
+  .usa-card.usx-card {
+    margin: 0;
+
+    .usa-card__container {
+      margin: 0;
+    }
+  }
 }
 
 /* Slides */

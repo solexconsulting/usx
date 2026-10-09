@@ -23,15 +23,15 @@ export const componentContracts = {
   "packages": {
     "@solexllc/usx-contracts": {
       "registry": "npm",
-      "version": "0.3.0"
+      "version": "0.4.0"
     },
     "@solexllc/usx-react": {
       "registry": "npm",
-      "version": "0.3.1"
+      "version": "0.4.0"
     },
     "@solexllc/usx": {
       "registry": "npm",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     "solex-usx-django": {
       "registry": "pypi",
@@ -201,7 +201,7 @@ export const componentContracts = {
     },
     "attribution": {
       "component": "attribution",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "avatarProps": {
@@ -210,19 +210,19 @@ export const componentContracts = {
           "component": "avatar"
         },
         "media": {
-          "type": "string",
+          "type": "slot",
           "description": "HTML for the left media area (avatar image or initials badge)."
         },
         "primary": {
-          "type": "string",
+          "type": "slot",
           "description": "Primary text shown in the top-right cell."
         },
         "secondary": {
-          "type": "string",
+          "type": "slot",
           "description": "Secondary text shown in the bottom-right cell."
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Optional full custom markup. When provided, it overrides media/primary/secondary."
         },
         "className": {
@@ -458,7 +458,7 @@ export const componentContracts = {
     },
     "banner": {
       "component": "banner",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "staticBaseUrl": {
@@ -502,7 +502,7 @@ export const componentContracts = {
           "description": "Heading text for HTTPS section."
         },
         "httpsText": {
-          "type": "string",
+          "type": "slot",
           "description": "Body text for the HTTPS section."
         },
         "className": {
@@ -525,113 +525,9 @@ export const componentContracts = {
         }
       }
     },
-    "block": {
-      "component": "block",
-      "version": 1,
-      "required": [],
-      "props": {
-        "variant": {
-          "type": "select",
-          "options": [
-            "callout"
-          ],
-          "description": "Visual variant. Omit for standard bordered block; 'callout' for top-border background style."
-        },
-        "indent": {
-          "type": "select",
-          "options": [
-            "sm",
-            "md",
-            "lg",
-            "xl"
-          ],
-          "description": "Left indent level applied to the block wrapper."
-        },
-        "dedent": {
-          "type": "boolean",
-          "description": "Pull the block left beyond the content edge.",
-          "default": false
-        },
-        "big": {
-          "type": "boolean",
-          "description": "Increases border width for stronger emphasis.",
-          "default": false
-        },
-        "quote": {
-          "type": "boolean",
-          "description": "Adds a quote icon and flex-row layout (non-callout only).",
-          "default": false
-        },
-        "color": {
-          "type": "string",
-          "description": "Border color token name. Applied as usx-border-{color} on content (or block wrapper for callout)."
-        },
-        "contentClassName": {
-          "type": "string",
-          "description": "Additional classes for the inner content element."
-        },
-        "attribution": {
-          "type": "object",
-          "description": "Attribution component props object rendered by the block component.",
-          "properties": {
-            "avatar": {
-              "type": "object",
-              "description": "Avatar component props object."
-            },
-            "media": {
-              "type": "string",
-              "description": "HTML for the left media area."
-            },
-            "primary": {
-              "type": "string",
-              "description": "Primary text shown in the top-right cell."
-            },
-            "secondary": {
-              "type": "string",
-              "description": "Secondary text shown in the bottom-right cell."
-            },
-            "children": {
-              "type": "string",
-              "description": "Optional full custom markup, overrides media/primary/secondary."
-            },
-            "className": {
-              "type": "string",
-              "description": "Additional classes."
-            }
-          }
-        },
-        "children": {
-          "type": "string",
-          "description": "Main block content."
-        },
-        "className": {
-          "type": "string",
-          "description": "Additional classes for the block wrapper."
-        }
-      },
-      "renderers": {
-        "react": {
-          "package": "@solexllc/usx-react",
-          "export": "Block"
-        },
-        "django": {
-          "package": "solex-usx-django",
-          "module": "usx_django",
-          "function": "render_component",
-          "component": "block",
-          "template": "block/block.django.html",
-          "tag": "block"
-        }
-      },
-      "examples": {
-        "default": {
-          "children": "This is a block of content."
-        }
-      }
-    },
     "breadcrumb": {
       "component": "breadcrumb",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "items": {
@@ -679,6 +575,16 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes to add to the nav element"
+        },
+        "children": {
+          "type": "slot",
+          "description": "Fallback content rendered when no breadcrumb items are supplied (React only).",
+          "renderers": {
+            "django": {
+              "supported": false,
+              "description": "The Django template does not consume children."
+            }
+          }
         }
       },
       "renderers": {
@@ -925,9 +831,97 @@ export const componentContracts = {
         }
       }
     },
+    "callout": {
+      "component": "callout",
+      "version": 1,
+      "required": [],
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "Additional classes."
+        },
+        "strokeColor": {
+          "type": "string",
+          "description": "Border color token. Omit to leave the border color utility unset."
+        },
+        "indent": {
+          "type": "select",
+          "description": "Left indentation.",
+          "options": [
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ]
+        },
+        "dedent": {
+          "type": "boolean",
+          "description": "Pull the callout left beyond the content edge.",
+          "default": false
+        },
+        "big": {
+          "type": "boolean",
+          "description": "Use a thicker border."
+        },
+        "orientation": {
+          "type": "select",
+          "description": "Horizontal uses a left border; vertical uses a top border.",
+          "options": [
+            "horizontal",
+            "vertical"
+          ],
+          "default": "horizontal"
+        },
+        "children": {
+          "type": "slot",
+          "description": "Body content. Takes precedence over content when supplied."
+        },
+        "content": {
+          "type": "slot",
+          "description": "Fallback body content, ignored when children is supplied."
+        },
+        "backgroundColor": {
+          "type": "string",
+          "description": "Background utility token: bg-{backgroundColor}."
+        },
+        "textColor": {
+          "type": "string",
+          "description": "Text utility token: text-{textColor}."
+        },
+        "element": {
+          "type": "select",
+          "description": "Root HTML element.",
+          "options": [
+            "div",
+            "section",
+            "aside",
+            "blockquote"
+          ],
+          "default": "div"
+        },
+        "cite": {
+          "type": "string",
+          "description": "Source URL when the root element is blockquote."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Callout"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "callout",
+          "template": "callout/callout.django.html",
+          "tag": "callout"
+        }
+      }
+    },
     "card": {
       "component": "card",
-      "version": 1,
+      "version": 3,
       "required": [],
       "props": {
         "id": {
@@ -942,62 +936,37 @@ export const componentContracts = {
           "type": "string",
           "description": "The description text displayed in the card body"
         },
-        "tags": {
+        "tagProps": {
           "type": "array",
-          "description": "Array of tag objects with value and color properties",
+          "description": "Props for each tag component.",
           "items": {
             "type": "object",
-            "description": "Card tag.",
+            "component": "tag",
+            "description": "Props passed to the tag component."
+          }
+        },
+        "buttonProps": {
+          "type": "array",
+          "description": "Props for each button component.",
+          "items": {
+            "type": "object",
+            "component": "button",
+            "description": "Props passed to the button component.",
             "properties": {
-              "value": {
+              "itemClassName": {
                 "type": "string",
-                "description": "Tag text"
-              },
-              "color": {
-                "type": "string",
-                "description": "Tag color variant"
+                "description": "Additional classes for the button group list item."
               }
             }
           }
         },
-        "actions": {
+        "imageProps": {
           "type": "array",
-          "description": "Array of action button objects",
+          "description": "Props for each image component.",
           "items": {
             "type": "object",
-            "description": "Card action button.",
-            "properties": {
-              "children": {
-                "type": "string",
-                "description": "Button text"
-              },
-              "variant": {
-                "type": "string",
-                "description": "Button variant"
-              },
-              "onClick": {
-                "type": "function",
-                "description": "Click handler"
-              }
-            }
-          }
-        },
-        "images": {
-          "type": "array",
-          "description": "Array of image objects; multiple images render as a carousel",
-          "items": {
-            "type": "object",
-            "description": "Card image.",
-            "properties": {
-              "src": {
-                "type": "string",
-                "description": "Image source URL"
-              },
-              "alt": {
-                "type": "string",
-                "description": "Alt text for the image"
-              }
-            }
+            "component": "image",
+            "description": "Props passed to the image component."
           }
         },
         "headerFirst": {
@@ -1097,7 +1066,7 @@ export const componentContracts = {
     },
     "carousel": {
       "component": "carousel",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -1110,7 +1079,7 @@ export const componentContracts = {
           "description": "Array of slide objects {content: string|node}"
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Optional raw slide markup rendered directly inside the track."
         },
         "slideIds": {
@@ -1149,7 +1118,7 @@ export const componentContracts = {
     },
     "character-count": {
       "component": "character-count",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -1158,7 +1127,7 @@ export const componentContracts = {
           "description": "ID for the input/textarea field. Used to wire label, hint, message, and error/success spans."
         },
         "label": {
-          "type": "string",
+          "type": "slot",
           "default": null,
           "description": "Label text for the field."
         },
@@ -1326,7 +1295,7 @@ export const componentContracts = {
     },
     "checkbox-group": {
       "component": "checkbox-group",
-      "version": 1,
+      "version": 3,
       "required": [],
       "props": {
         "id": {
@@ -1353,20 +1322,25 @@ export const componentContracts = {
           "default": false
         },
         "hint": {
-          "type": "string",
+          "type": "slot",
           "description": "Group-level hint text, rendered after the legend"
         },
         "error": {
-          "type": "string",
+          "type": "slot",
           "description": "Group-level error message, rendered after the hint"
         },
         "name": {
           "type": "string",
           "description": "Name attribute shared by the checkbox inputs"
         },
-        "options": {
+        "checkboxProps": {
           "type": "array",
-          "description": "Array of option objects: {id, value, label, description, checked, disabled}"
+          "description": "Checkbox props. Item values override group name, tile, and small defaults; omitted IDs use the group id or name plus the item index.",
+          "items": {
+            "type": "object",
+            "component": "checkbox",
+            "description": "Props passed to the checkbox component."
+          }
         },
         "className": {
           "type": "string",
@@ -1390,7 +1364,7 @@ export const componentContracts = {
     },
     "clickable": {
       "component": "clickable",
-      "version": 1,
+      "version": 2,
       "required": [
         "href"
       ],
@@ -1408,7 +1382,7 @@ export const componentContracts = {
           "description": "Optional id attribute for the anchor element."
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Safe inner HTML. Apply usx-clickable__link, usx-clickable__color-on-hover, and/or usx-clickable__bg-color-on-hover to any child elements as needed."
         }
       },
@@ -1491,13 +1465,13 @@ export const componentContracts = {
     },
     "collection": {
       "component": "collection",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "items": {
           "type": "array",
           "default": [],
-          "description": "Array of collection item objects. Each item: { href, heading, description?, imgSrc?, imgAlt?, calendarDate?: { datetime, month, day }, meta?: [{ text, datetime? }], tags?: [{ label, isNew? }] }",
+          "description": "Collection items with optional calendarDateProps, meta, and tags.",
           "items": {
             "type": "object",
             "description": "Collection item.",
@@ -1522,10 +1496,6 @@ export const componentContracts = {
                 "type": "string",
                 "description": "Alt text for the thumbnail image."
               },
-              "calendarDate": {
-                "type": "object",
-                "description": "Optional { datetime, month, day } calendar date badge."
-              },
               "meta": {
                 "type": "array",
                 "description": "Optional meta list: [{ text, datetime? }]."
@@ -1533,6 +1503,11 @@ export const componentContracts = {
               "tags": {
                 "type": "array",
                 "description": "Optional tag list: [{ label, isNew? }]."
+              },
+              "calendarDateProps": {
+                "type": "object",
+                "component": "calendar-date",
+                "description": "Props passed to the calendar-date component."
               }
             }
           }
@@ -1565,7 +1540,7 @@ export const componentContracts = {
     },
     "combobox": {
       "component": "combobox",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -1577,7 +1552,7 @@ export const componentContracts = {
           "description": "name attribute for the select"
         },
         "label": {
-          "type": "string",
+          "type": "slot",
           "description": "Label text for the combobox"
         },
         "disabled": {
@@ -1591,7 +1566,7 @@ export const componentContracts = {
           "default": false
         },
         "hint": {
-          "type": "string",
+          "type": "slot",
           "description": "Hint text (renders aria-describedby)"
         },
         "placeholder": {
@@ -1603,7 +1578,7 @@ export const componentContracts = {
           "description": "Default selected value"
         },
         "error": {
-          "type": "string",
+          "type": "slot",
           "description": "Error message (renders aria-describedby and error class)"
         },
         "options": {
@@ -1709,7 +1684,7 @@ export const componentContracts = {
     },
     "date-picker": {
       "component": "date-picker",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -1722,16 +1697,16 @@ export const componentContracts = {
           "description": "name attribute for the input. Defaults to id."
         },
         "label": {
-          "type": "string",
+          "type": "slot",
           "description": "Label text for the field."
         },
         "hint": {
-          "type": "string",
+          "type": "slot",
           "default": "mm/dd/yyyy",
           "description": "Hint text displayed below the label."
         },
         "error": {
-          "type": "string",
+          "type": "slot",
           "description": "Error message. Renders aria-describedby and error styling."
         },
         "disabled": {
@@ -1796,7 +1771,7 @@ export const componentContracts = {
     },
     "date-range-picker": {
       "component": "date-range-picker",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "startId": {
@@ -1818,31 +1793,31 @@ export const componentContracts = {
           "description": "name attribute for the end date input. Defaults to endId."
         },
         "startLabel": {
-          "type": "string",
+          "type": "slot",
           "default": "Event start date",
           "description": "Label text for the start date field."
         },
         "endLabel": {
-          "type": "string",
+          "type": "slot",
           "default": "Event end date",
           "description": "Label text for the end date field."
         },
         "startHint": {
-          "type": "string",
+          "type": "slot",
           "default": "mm/dd/yyyy",
           "description": "Hint text displayed below the start date label."
         },
         "endHint": {
-          "type": "string",
+          "type": "slot",
           "default": "mm/dd/yyyy",
           "description": "Hint text displayed below the end date label."
         },
         "startError": {
-          "type": "string",
+          "type": "slot",
           "description": "Error message for the start date field."
         },
         "endError": {
-          "type": "string",
+          "type": "slot",
           "description": "Error message for the end date field."
         },
         "disabled": {
@@ -1904,7 +1879,7 @@ export const componentContracts = {
     },
     "error-message": {
       "component": "error-message",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -1912,7 +1887,7 @@ export const componentContracts = {
           "description": "Element id, referenced by the associated field's aria-describedby"
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Inner HTML or text"
         },
         "className": {
@@ -1937,11 +1912,11 @@ export const componentContracts = {
     },
     "eyebrow": {
       "component": "eyebrow",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Eyebrow text content"
         },
         "className": {
@@ -1966,11 +1941,11 @@ export const componentContracts = {
     },
     "fieldset": {
       "component": "fieldset",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "legend": {
-          "type": "string",
+          "type": "slot",
           "description": "Text for the fieldset legend"
         },
         "largeLegend": {
@@ -1986,11 +1961,11 @@ export const componentContracts = {
           "description": "Whether to disable all form controls within the fieldset"
         },
         "hint": {
-          "type": "string",
+          "type": "slot",
           "description": "Group-level hint text, rendered after the legend"
         },
         "error": {
-          "type": "string",
+          "type": "slot",
           "description": "Group-level error message, rendered after the hint"
         },
         "hintId": {
@@ -2002,7 +1977,7 @@ export const componentContracts = {
           "description": "Element id for the error message span"
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Inner HTML or text"
         },
         "className": {
@@ -2027,7 +2002,7 @@ export const componentContracts = {
     },
     "file-input": {
       "component": "file-input",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -2040,20 +2015,20 @@ export const componentContracts = {
           "description": "name attribute for the input. Defaults to id."
         },
         "label": {
-          "type": "string",
+          "type": "slot",
           "description": "Label text for the field."
         },
         "hint": {
-          "type": "string",
+          "type": "slot",
           "description": "Hint text displayed below the label."
         },
         "fileListHint": {
-          "type": "string",
+          "type": "slot",
           "default": "Selected files",
           "description": "Heading/hint text shown above the managed file list, passed to FileList's hint prop. React only."
         },
         "error": {
-          "type": "string",
+          "type": "slot",
           "description": "Error message. Renders aria-describedby and error styling."
         },
         "disabled": {
@@ -2123,7 +2098,7 @@ export const componentContracts = {
     },
     "file-list": {
       "component": "file-list",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "files": {
@@ -2131,7 +2106,7 @@ export const componentContracts = {
           "description": "Files to render as rows. Each entry is { key, file?, name?, size?, url?, onRemove? } — key uniquely identifies the row; file is a browser File (name/size read from it); name/size describe entries with no File object (e.g. files already on the server); url renders the name as a download link; onRemove overrides the onRemove prop for just this row. React only."
         },
         "hint": {
-          "type": "string",
+          "type": "slot",
           "default": "Selected files",
           "description": "Heading/hint text shown above the file list."
         },
@@ -2283,11 +2258,11 @@ export const componentContracts = {
     },
     "form-group": {
       "component": "form-group",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "children": {
-          "type": "string",
+          "type": "slot",
           "default": null,
           "description": "Inner HTML content of the form group."
         },
@@ -2403,7 +2378,7 @@ export const componentContracts = {
     },
     "hero": {
       "component": "hero",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "title": {
@@ -2418,23 +2393,10 @@ export const componentContracts = {
           "type": "string",
           "description": "Optional body paragraph text"
         },
-        "button": {
+        "buttonProps": {
           "type": "object",
-          "description": "Optional call-to-action button. Mutually exclusive with search.",
-          "properties": {
-            "href": {
-              "type": "string",
-              "description": "Button link URL"
-            },
-            "text": {
-              "type": "string",
-              "description": "Button label text"
-            },
-            "onClick": {
-              "type": "function",
-              "description": "Optional click handler for the button"
-            }
-          }
+          "component": "button",
+          "description": "Button props. Search takes precedence when searchProps is supplied."
         },
         "searchProps": {
           "type": "object",
@@ -2545,18 +2507,18 @@ export const componentContracts = {
           "title": "The hero heading",
           "callout": "A callout heading",
           "paragraph": "A short description of the hero section that provides context for the call to action.",
-          "button": {
+          "backgroundImage": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
+          "overlay": true,
+          "buttonProps": {
             "href": "#",
             "text": "Call to action"
-          },
-          "backgroundImage": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
-          "overlay": true
+          }
         }
       }
     },
     "hint": {
       "component": "hint",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -2564,7 +2526,7 @@ export const componentContracts = {
           "description": "Element id, referenced by the associated field's aria-describedby"
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Inner HTML or text"
         },
         "className": {
@@ -3046,7 +3008,7 @@ export const componentContracts = {
     },
     "in-page-nav": {
       "component": "in-page-nav",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -3106,6 +3068,16 @@ export const componentContracts = {
           "type": "string",
           "default": "",
           "description": "Additional classes for the observed content container."
+        },
+        "children": {
+          "type": "slot",
+          "description": "Composed content containing the observed headings; takes precedence over content (React only).",
+          "renderers": {
+            "django": {
+              "supported": false,
+              "description": "The Django template does not consume children."
+            }
+          }
         }
       },
       "renderers": {
@@ -3131,7 +3103,7 @@ export const componentContracts = {
     },
     "indicator": {
       "component": "indicator",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "items": {
@@ -3139,7 +3111,7 @@ export const componentContracts = {
           "description": "Array of indicator badge objects. Each item supports: className (classes beyond usx-indicator-item), label (text content), and style (inline styles)."
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "The element being decorated by the indicator badges."
         },
         "className": {
@@ -3164,11 +3136,11 @@ export const componentContracts = {
     },
     "input": {
       "component": "input",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "label": {
-          "type": "string",
+          "type": "slot",
           "default": null,
           "description": "The label for the input field. If provided, it will render a label element associated with the control."
         },
@@ -3251,7 +3223,7 @@ export const componentContracts = {
     },
     "label": {
       "component": "label",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "htmlFor": {
@@ -3279,7 +3251,7 @@ export const componentContracts = {
           "description": "Label text content"
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Inner HTML or text"
         },
         "className": {
@@ -3304,7 +3276,7 @@ export const componentContracts = {
     },
     "language-selector": {
       "component": "language-selector",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "languages": {
@@ -3360,7 +3332,7 @@ export const componentContracts = {
           "description": "Compact sizing for the menu variant (usa-language--small), e.g. inside a header"
         },
         "label": {
-          "type": "string",
+          "type": "slot",
           "default": "Languages",
           "description": "Menu variant trigger button text"
         },
@@ -3491,11 +3463,11 @@ export const componentContracts = {
     },
     "legend": {
       "component": "legend",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "text": {
-          "type": "string",
+          "type": "slot",
           "description": "Text for the legend"
         },
         "required": {
@@ -3507,7 +3479,7 @@ export const componentContracts = {
           "description": "Whether to use the larger legend style (adds class `usa-legend--large`)"
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Inner HTML or text"
         },
         "className": {
@@ -3532,7 +3504,7 @@ export const componentContracts = {
     },
     "link": {
       "component": "link",
-      "version": 1,
+      "version": 2,
       "required": [
         "href",
         "children"
@@ -3543,7 +3515,7 @@ export const componentContracts = {
           "description": "Link destination URL."
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Inner link text or HTML."
         },
         "visited": {
@@ -3623,7 +3595,7 @@ export const componentContracts = {
     },
     "memorable-date": {
       "component": "memorable-date",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -3632,42 +3604,42 @@ export const componentContracts = {
           "description": "Base id for the component. Month/day/year field ids and hint ids are derived from this."
         },
         "legend": {
-          "type": "string",
+          "type": "slot",
           "default": "Date of Birth",
           "description": "Legend text for the fieldset."
         },
         "groupHint": {
-          "type": "string",
+          "type": "slot",
           "default": "Select a month. Enter 1 or 2 digits for the day and 4 digits for the year.",
           "description": "Visible hint shown once for the whole group. Hidden from screen readers (aria-hidden) since each field has its own hint."
         },
         "monthLabel": {
-          "type": "string",
+          "type": "slot",
           "default": "Month",
           "description": "Label text for the month select."
         },
         "dayLabel": {
-          "type": "string",
+          "type": "slot",
           "default": "Day",
           "description": "Label text for the day input."
         },
         "yearLabel": {
-          "type": "string",
+          "type": "slot",
           "default": "Year",
           "description": "Label text for the year input."
         },
         "monthHint": {
-          "type": "string",
+          "type": "slot",
           "default": "Select a month from the dropdown.",
           "description": "Screen-reader-only hint for the month field."
         },
         "dayHint": {
-          "type": "string",
+          "type": "slot",
           "default": "Enter 1 or 2 digits for the day.",
           "description": "Screen-reader-only hint for the day field."
         },
         "yearHint": {
-          "type": "string",
+          "type": "slot",
           "default": "Enter 4 digits for the year.",
           "description": "Screen-reader-only hint for the year field."
         },
@@ -3743,11 +3715,11 @@ export const componentContracts = {
     },
     "misc-banner": {
       "component": "misc-banner",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Advanced override for custom inner markup"
         },
         "className": {
@@ -3814,7 +3786,7 @@ export const componentContracts = {
     },
     "modal": {
       "component": "modal",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -3858,7 +3830,7 @@ export const componentContracts = {
           "description": "When true, prevents closing the modal via the overlay or Escape key, and hides the close button. Used for required-action flows."
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "default": null,
           "description": "Inner HTML to render as the modal body, replacing the description text."
         },
@@ -3885,7 +3857,7 @@ export const componentContracts = {
     },
     "page": {
       "component": "page",
-      "version": 1,
+      "version": 2,
       "required": [
         "title"
       ],
@@ -3895,20 +3867,20 @@ export const componentContracts = {
           "description": "Optional id attribute applied to the root main element."
         },
         "title": {
-          "type": "string",
+          "type": "slot",
           "description": "Required page title rendered as an h1."
         },
         "eyebrow": {
-          "type": "string",
+          "type": "slot",
           "description": "Optional eyebrow text rendered above the page title inside the h1."
         },
         "content": {
-          "type": "string",
-          "description": "Body content rendered below the title. Supports HTML in Django stories."
+          "type": "slot",
+          "description": "Body content rendered below the title. Supports HTML in Django stories. Ignored if children is provided."
         },
         "children": {
-          "type": "string",
-          "description": "Body content for React usage."
+          "type": "slot",
+          "description": "Body content for React usage. Takes precedence over content if both are provided."
         },
         "className": {
           "type": "string",
@@ -4110,7 +4082,7 @@ export const componentContracts = {
     },
     "prose": {
       "component": "prose",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "containerElement": {
@@ -4133,6 +4105,10 @@ export const componentContracts = {
           "type": "string",
           "default": "",
           "description": "Additional CSS classes to apply to the prose component"
+        },
+        "children": {
+          "type": "slot",
+          "description": "Composed body content. Omit content when supplying children in React."
         }
       },
       "renderers": {
@@ -4150,9 +4126,74 @@ export const componentContracts = {
         }
       }
     },
+    "quote": {
+      "component": "quote",
+      "version": 3,
+      "required": [],
+      "props": {
+        "className": {
+          "type": "string",
+          "description": "Additional classes on the outer quote wrapper."
+        },
+        "calloutProps": {
+          "type": "object",
+          "description": "Props passed to the Callout containing the quotation and attribution.",
+          "component": "callout",
+          "omit": [
+            "element",
+            "children",
+            "content",
+            "cite"
+          ]
+        },
+        "attributionProps": {
+          "type": "object",
+          "description": "Props passed directly to Attribution in the figcaption.",
+          "component": "attribution"
+        },
+        "children": {
+          "type": "slot",
+          "description": "Quotation content. Takes precedence over content when supplied."
+        },
+        "content": {
+          "type": "slot",
+          "description": "Fallback quotation content."
+        },
+        "sourceLinkProps": {
+          "type": "object",
+          "component": "link",
+          "omit": [
+            "children"
+          ],
+          "description": "Props passed directly to the source Link. sourceTitle supplies its children; href also supplies the blockquote cite URL. Omit for an unlinked source title."
+        },
+        "sourceTitle": {
+          "type": "slot",
+          "description": "Title of the cited work, rendered in cite; use Attribution for the author."
+        },
+        "blockquoteClassName": {
+          "type": "string",
+          "description": "Additional classes applied only to the blockquote, excluding attribution and the outer wrapper."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Quote"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "quote",
+          "template": "quote/quote.django.html",
+          "tag": "quote"
+        }
+      }
+    },
     "radio-buttons": {
       "component": "radio-buttons",
-      "version": 1,
+      "version": 2,
       "required": [
         "options"
       ],
@@ -4181,11 +4222,11 @@ export const componentContracts = {
           "default": false
         },
         "hint": {
-          "type": "string",
+          "type": "slot",
           "description": "Group-level hint text, rendered after the legend"
         },
         "error": {
-          "type": "string",
+          "type": "slot",
           "description": "Group-level error message, rendered after the hint"
         },
         "name": {
@@ -4222,7 +4263,7 @@ export const componentContracts = {
     },
     "range-slider": {
       "component": "range-slider",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -4235,15 +4276,15 @@ export const componentContracts = {
           "description": "name attribute for the input. Defaults to id."
         },
         "label": {
-          "type": "string",
+          "type": "slot",
           "description": "Label text for the field."
         },
         "hint": {
-          "type": "string",
+          "type": "slot",
           "description": "Hint text displayed below the label."
         },
         "error": {
-          "type": "string",
+          "type": "slot",
           "description": "Error message. Renders aria-describedby and error styling."
         },
         "disabled": {
@@ -4327,7 +4368,7 @@ export const componentContracts = {
     },
     "required": {
       "component": "required",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "title": {
@@ -4336,7 +4377,7 @@ export const componentContracts = {
           "description": "Title attribute for the required indicator (default: 'required')"
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Inner HTML or text"
         },
         "className": {
@@ -4444,20 +4485,33 @@ export const componentContracts = {
     },
     "section": {
       "component": "section",
-      "version": 1,
+      "version": 3,
       "required": [],
       "props": {
         "title": {
           "type": "string",
-          "description": "Optional section heading rendered as an h2."
+          "description": "Optional section heading."
+        },
+        "headingLevel": {
+          "type": "select",
+          "options": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+          ],
+          "default": "h2",
+          "description": "Heading element used when title is provided. Defaults to h2."
         },
         "content": {
-          "type": "string",
-          "description": "Section body content. Supports HTML in Django stories."
+          "type": "slot",
+          "description": "Section body content. Supports HTML in Django stories. Ignored if children is provided."
         },
         "children": {
-          "type": "string",
-          "description": "Section body content for React usage."
+          "type": "slot",
+          "description": "Section body content for React usage. Takes precedence over content if both are provided."
         },
         "className": {
           "type": "string",
@@ -4487,7 +4541,7 @@ export const componentContracts = {
     },
     "select": {
       "component": "select",
-      "version": 1,
+      "version": 2,
       "required": [
         "options"
       ],
@@ -4501,7 +4555,7 @@ export const componentContracts = {
           "description": "Name of the select input, used for form submission"
         },
         "label": {
-          "type": "string",
+          "type": "slot",
           "description": "Label for the select input"
         },
         "options": {
@@ -4714,7 +4768,7 @@ export const componentContracts = {
     },
     "skipnav": {
       "component": "skipnav",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "target": {
@@ -4727,7 +4781,7 @@ export const componentContracts = {
           "description": "Full href for the skip link (overrides `target`/`skipTo`). Useful if you need to link to a different page or a non-anchor URL."
         },
         "content": {
-          "type": "string",
+          "type": "slot",
           "default": "Skip to main content",
           "description": "Text content for the skipnav link"
         },
@@ -4947,7 +5001,7 @@ export const componentContracts = {
     },
     "summary-box": {
       "component": "summary-box",
-      "version": 1,
+      "version": 2,
       "required": [
         "heading"
       ],
@@ -4961,11 +5015,11 @@ export const componentContracts = {
           "description": "Required summary heading"
         },
         "content": {
-          "type": "string",
+          "type": "slot",
           "description": "HTML/text summary content"
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Inner HTML or text (takes priority over content)"
         },
         "className": {
@@ -4990,19 +5044,19 @@ export const componentContracts = {
     },
     "swap": {
       "component": "swap",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Advanced override for full inner HTML"
         },
         "onContent": {
-          "type": "string",
+          "type": "slot",
           "description": "Markup or text shown when swap is on"
         },
         "offContent": {
-          "type": "string",
+          "type": "slot",
           "description": "Markup or text shown when swap is off"
         },
         "includeInput": {
@@ -5067,7 +5121,7 @@ export const componentContracts = {
     },
     "switch": {
       "component": "switch",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -5102,7 +5156,7 @@ export const componentContracts = {
           "description": "Color variant (primary, success, warning, etc.)"
         },
         "label": {
-          "type": "string",
+          "type": "slot",
           "description": "Optional label text to display next to the switch"
         },
         "indeterminate": {
@@ -5136,7 +5190,7 @@ export const componentContracts = {
     },
     "table": {
       "component": "table",
-      "version": 1,
+      "version": 2,
       "required": [
         "columns",
         "data"
@@ -5227,7 +5281,7 @@ export const componentContracts = {
           "description": "Property name used as the unique row identifier."
         },
         "caption": {
-          "type": "string",
+          "type": "slot",
           "description": "Table caption rendered as <caption>."
         },
         "striped": {
@@ -5354,7 +5408,7 @@ export const componentContracts = {
           "description": "Show a loading state overlay. Does not affect interactivity."
         },
         "placeholder": {
-          "type": "string",
+          "type": "slot",
           "description": "Content shown when the data array is empty."
         },
         "className": {
@@ -5426,6 +5480,16 @@ export const componentContracts = {
           "type": "object",
           "default": null,
           "description": "Django only. Pagination state dict from table_helper.paginate_table(): {current_page, total_pages, total, page_size}. Required when paginate is True."
+        },
+        "children": {
+          "type": "slot",
+          "description": "Composed table sections, replacing the generated table sections (React only).",
+          "renderers": {
+            "django": {
+              "supported": false,
+              "description": "The Django template does not consume children."
+            }
+          }
         }
       },
       "renderers": {
@@ -5448,7 +5512,7 @@ export const componentContracts = {
     },
     "tag": {
       "component": "tag",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -5495,7 +5559,7 @@ export const componentContracts = {
           "description": "Additional classes to add to the tag"
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Inner HTML or text for the tag"
         }
       },
@@ -5516,7 +5580,7 @@ export const componentContracts = {
     },
     "tag-group": {
       "component": "tag-group",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "tagProps": {
@@ -5529,7 +5593,7 @@ export const componentContracts = {
           }
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "description": "Inner HTML or text"
         },
         "className": {
@@ -5608,11 +5672,11 @@ export const componentContracts = {
     },
     "text-area": {
       "component": "text-area",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "label": {
-          "type": "string",
+          "type": "slot",
           "default": null,
           "description": "The label for the textarea. If provided, renders a label element associated with the control."
         },
@@ -5752,7 +5816,7 @@ export const componentContracts = {
     },
     "time-picker": {
       "component": "time-picker",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -5765,16 +5829,16 @@ export const componentContracts = {
           "description": "name attribute for the input. Defaults to id."
         },
         "label": {
-          "type": "string",
+          "type": "slot",
           "description": "Label text for the field."
         },
         "hint": {
-          "type": "string",
+          "type": "slot",
           "default": "Select a time from the dropdown. Type into the input to filter options.",
           "description": "Hint text displayed below the label."
         },
         "error": {
-          "type": "string",
+          "type": "slot",
           "description": "Error message. Renders aria-describedby and error styling."
         },
         "disabled": {
@@ -5844,7 +5908,7 @@ export const componentContracts = {
     },
     "toggle": {
       "component": "toggle",
-      "version": 1,
+      "version": 2,
       "required": [
         "options"
       ],
@@ -5855,17 +5919,24 @@ export const componentContracts = {
         },
         "options": {
           "type": "array",
-          "description": "Array of option objects: {value,label,icon?,disabled?}",
+          "description": "Options as strings, numbers, or objects with value, label, icon, and disabled. Use distinct values and a label for every icon option.",
           "items": {
-            "type": "object",
+            "type": [
+              "object",
+              "string",
+              "number"
+            ],
             "description": "Toggle option.",
             "properties": {
               "value": {
-                "type": "string",
+                "type": [
+                  "string",
+                  "number"
+                ],
                 "description": "Option value."
               },
               "label": {
-                "type": "string",
+                "type": "slot",
                 "description": "Option display label."
               },
               "icon": {
@@ -5880,11 +5951,17 @@ export const componentContracts = {
           }
         },
         "value": {
-          "type": "string",
+          "type": [
+            "string",
+            "number"
+          ],
           "description": "Controlled selected value"
         },
         "defaultValue": {
-          "type": "string",
+          "type": [
+            "string",
+            "number"
+          ],
           "description": "Uncontrolled initial value"
         },
         "name": {
@@ -5897,7 +5974,8 @@ export const componentContracts = {
             "text",
             "icon"
           ],
-          "description": "Visual variant"
+          "description": "Visual variant",
+          "default": "text"
         },
         "disabled": {
           "type": "boolean",
@@ -5907,6 +5985,28 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        },
+        "label": {
+          "type": "slot",
+          "description": "Visible accessible group label."
+        },
+        "ariaLabel": {
+          "type": "string",
+          "description": "Accessible group name when no visible label is supplied."
+        },
+        "required": {
+          "type": "boolean",
+          "default": false,
+          "description": "Require a choice for native form submission."
+        },
+        "onChange": {
+          "type": "function",
+          "description": "React callback receiving the selected string or number.",
+          "renderers": {
+            "django": {
+              "supported": false
+            }
+          }
         }
       },
       "renderers": {
@@ -5926,7 +6026,7 @@ export const componentContracts = {
     },
     "tooltip": {
       "component": "tooltip",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "label": {
@@ -5946,7 +6046,7 @@ export const componentContracts = {
           "description": "The direction the tooltip appears relative to its trigger."
         },
         "children": {
-          "type": "string",
+          "type": "slot",
           "default": null,
           "description": "The trigger element that activates the tooltip on hover or focus."
         },

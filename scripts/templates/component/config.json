@@ -7,7 +7,7 @@
     "children": "NOT IMPLEMENTED: {{Name}}"
   },
   "props": {
-    "children": { "type": "string", "description": "Inner HTML or text" },
+    "children": { "type": "slot", "description": "Inner HTML or text" },
     "className": { "type": "string", "description": "Additional classes" }
   }
 }

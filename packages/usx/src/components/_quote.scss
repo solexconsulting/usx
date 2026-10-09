@@ -1,0 +1,36 @@
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-quote {
+  display: flex;
+  flex-direction: column;
+}
+
+.usx-quote__body {
+  margin: 0;
+}
+
+.usx-quote__icon {
+  margin-left: -0.4375rem;
+  transform: rotate(180deg);
+}
+
+.usx-quote__content {
+  margin: 0;
+  min-width: 0;
+
+  & > p {
+    margin: 0;
+  }
+}
+
+.usx-quote__attribution {
+  padding-top: 1rem;
+}
+
+.usx-quote--vertical {
+  display: block;
+}
+
+// Keep the quotation marks beside a single paragraph supplied as rich content.
+.usx-quote--vertical .usx-quote__content > p:only-child {
+  display: inline;
+}

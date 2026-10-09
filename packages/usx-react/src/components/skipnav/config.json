@@ -1,7 +1,7 @@
 {
   "name": "skipnav",
   "template": "skipnav/skipnav.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "target": {
       "type": "string",
@@ -13,7 +13,7 @@
       "description": "Full href for the skip link (overrides `target`/`skipTo`). Useful if you need to link to a different page or a non-anchor URL."
     },
     "content": {
-      "type": "string",
+      "type": "slot",
       "default": "Skip to main content",
       "description": "Text content for the skipnav link"
     },

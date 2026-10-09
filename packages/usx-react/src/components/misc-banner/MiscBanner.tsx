@@ -1,4 +1,5 @@
 import React, { ReactNode, HTMLAttributes, useId } from 'react';
+import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 
 export interface MiscBannerProps extends HTMLAttributes<HTMLDivElement> {
@@ -33,7 +34,7 @@ export default function MiscBanner({
 }: MiscBannerProps) {
   const menuId = useId();
   const toggleId = useId();
-  const classes = ['usx-misc-banner', `bg-${tone}`, className].filter(Boolean).join(' ');
+  const classes = ClassNames('usx-misc-banner', `bg-${tone}`, className);
   const mobileLinks: { href: string; text: string }[] = [];
   const hasLearnMoreLink = showLearnMore && Boolean(casualLinkText);
   const hasReturnLink = showReturnLink && Boolean(importantLinkText);

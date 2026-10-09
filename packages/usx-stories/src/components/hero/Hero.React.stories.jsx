@@ -5,7 +5,7 @@ import { expect } from 'storybook/test';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
-const defaultButton = { href: '#', text: 'Call to action' };
+const defaultButton = { href: '#', label: 'Call to action' };
 const defaultParagraph = 'A short description of the hero section that provides context for the call to action.';
 const defaultImage = 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg';
 
@@ -14,7 +14,7 @@ export const storyDefs = {
     title: 'The hero heading',
     callout: 'A callout heading',
     paragraph: defaultParagraph,
-    button: defaultButton,
+    buttonProps: defaultButton,
     backgroundImage: defaultImage,
     overlay: true,
   },
@@ -22,13 +22,13 @@ export const storyDefs = {
     title: 'The hero heading',
     callout: 'A callout heading',
     paragraph: defaultParagraph,
-    button: defaultButton,
+    buttonProps: defaultButton,
     overlay: true,
   },
   WithoutCallout: {
     title: 'The hero heading',
     paragraph: defaultParagraph,
-    button: defaultButton,
+    buttonProps: defaultButton,
     backgroundImage: defaultImage,
     overlay: true,
   },
@@ -43,7 +43,7 @@ export const storyDefs = {
     title: 'The hero heading',
     callout: 'A callout heading',
     paragraph: defaultParagraph,
-    button: defaultButton,
+    buttonProps: defaultButton,
     backgroundImage: defaultImage,
     overlay: false,
   },
@@ -72,7 +72,7 @@ storyDefs.SplitContent = {
   title: 'Public services',
   callout: 'Your community',
   paragraph: 'Find the services and information you need, all in one place.',
-  button: { href: '#services', text: 'Explore services' },
+  buttonProps: { href: '#services', label: 'Explore services' },
   boxed: false,
   overlayOpacity: 0.8,
   secondaryContent: {
@@ -88,7 +88,7 @@ storyDefs.LongContent = {
   callout: 'Support for you and your household',
   title: 'Find help with housing, food, healthcare, and everyday expenses',
   paragraph: 'Explore programs that can help you and your household stay healthy, find stable housing, and cover essential costs. Learn who can apply, what information you will need, and what happens after you submit an application. You can review the available services before deciding where to start, whether you are applying for yourself, helping a family member, or supporting someone in your community.',
-  button: { href: '#services', text: 'Explore available services' },
+  buttonProps: { href: '#services', label: 'Explore available services' },
   secondaryContent: {
     title: 'Get support at every step of your application',
     paragraph: 'You do not have to work through the process alone. Our team can explain eligibility requirements, help you gather documents, and answer questions about an application you have already started. Language assistance and accessible formats are available. Contact us to discuss your circumstances and find a way to get help that works for you.',

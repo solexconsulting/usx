@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import ClassNames from 'classnames';
 
 import Label from '../label/Label';
 import Hint from '../hint/Hint';
@@ -125,7 +126,7 @@ export default function FileInput({
         {commonHint}
         {commonError}
         <input
-          className={['usa-file-input', 'usx-file-input', className].filter(Boolean).join(' ')}
+          className={ClassNames('usa-file-input', 'usx-file-input', className)}
           id={id}
           type="file"
           name={name || id}
@@ -149,7 +150,7 @@ export default function FileInput({
       {commonError}
       <div className="usx-file-input__add-only">
         <input
-          className={['usa-file-input', 'usx-file-input', className].filter(Boolean).join(' ')}
+          className={ClassNames('usa-file-input', 'usx-file-input', className)}
           id={id}
           type="file"
           name={name || id}

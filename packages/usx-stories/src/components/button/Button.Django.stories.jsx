@@ -78,7 +78,7 @@ export const GhostBase = createStory(toDjangoArgs(storyDefs.GhostBase));
 export const GhostInverse = {
   ...createStory(toDjangoArgs(storyDefs.GhostInverse)),
   render: (args) => (
-    <div style={{ backgroundColor: '#333', padding: '1rem' }}>
+    <div className="bg-surface-inverse padding-1">
       {createStory(toDjangoArgs(storyDefs.GhostInverse)).render(args)}
     </div>
   )

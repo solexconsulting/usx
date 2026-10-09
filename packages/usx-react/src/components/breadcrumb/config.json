@@ -1,7 +1,7 @@
 {
   "name": "breadcrumb",
   "template": "breadcrumb/breadcrumb.django.html",
-  "version": 1,
+  "version": 2,
   "default": {
     "items": [
       {
@@ -69,6 +69,16 @@
     "className": {
       "type": "string",
       "description": "Additional CSS classes to add to the nav element"
+    },
+    "children": {
+      "type": "slot",
+      "description": "Fallback content rendered when no breadcrumb items are supplied (React only).",
+      "renderers": {
+        "django": {
+          "supported": false,
+          "description": "The Django template does not consume children."
+        }
+      }
     }
   }
 }

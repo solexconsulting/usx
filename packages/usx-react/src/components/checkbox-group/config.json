@@ -1,7 +1,7 @@
 {
   "name": "checkbox-group",
   "template": "checkbox-group/checkbox-group.django.html",
-  "version": 1,
+  "version": 3,
   "props": {
     "id": {
       "type": "string",
@@ -27,20 +27,25 @@
       "default": false
     },
     "hint": {
-      "type": "string",
+      "type": "slot",
       "description": "Group-level hint text, rendered after the legend"
     },
     "error": {
-      "type": "string",
+      "type": "slot",
       "description": "Group-level error message, rendered after the hint"
     },
     "name": {
       "type": "string",
       "description": "Name attribute shared by the checkbox inputs"
     },
-    "options": {
+    "checkboxProps": {
       "type": "array",
-      "description": "Array of option objects: {id, value, label, description, checked, disabled}"
+      "description": "Checkbox props. Item values override group name, tile, and small defaults; omitted IDs use the group id or name plus the item index.",
+      "items": {
+        "type": "object",
+        "component": "checkbox",
+        "description": "Props passed to the checkbox component."
+      }
     },
     "className": {
       "type": "string",

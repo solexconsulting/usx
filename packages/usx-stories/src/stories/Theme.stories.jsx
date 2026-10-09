@@ -23,7 +23,7 @@ import Accordion from '../../../usx-react/src/components/accordion/Accordion.tsx
 import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
 import Attribution from '../../../usx-react/src/components/attribution/Attribution.tsx';
 import Banner from '../../../usx-react/src/components/banner/Banner.tsx';
-import Block from '../../../usx-react/src/components/block/Block.tsx';
+import Callout from '../../../usx-react/src/components/callout/Callout.tsx';
 import Breadcrumb from '../../../usx-react/src/components/breadcrumb/Breadcrumb.tsx';
 import LanguageSelector from '../../../usx-react/src/components/language-selector/LanguageSelector.tsx';
 import Button from '../../../usx-react/src/components/button/Button.tsx';
@@ -1325,7 +1325,7 @@ function Showcase({ resolved }) {
           callout="Bring attention to a project priority"
           backgroundImage="https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg"
           paragraph="Support the callout with some short explanatory text."
-          button={{ href: '#', text: 'Call to action' }}
+          buttonProps={{ href: '#', label: 'Call to action' }}
           overlay
         />
       </div>
@@ -1475,9 +1475,9 @@ function Showcase({ resolved }) {
           Section heading
         </h4>
         <SummaryBox heading="Program summary" content="A 12-week initiative to modernize service delivery." />
-        <Block variant="callout" color="primary">
+        <Callout orientation="vertical" strokeColor="primary">
           A callout block with themed accents.
-        </Block>
+        </Callout>
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', marginBottom: '1rem' }}>

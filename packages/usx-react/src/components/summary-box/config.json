@@ -1,7 +1,7 @@
 {
   "name": "summary-box",
   "template": "summary-box/summary-box.django.html",
-  "version": 1,
+  "version": 2,
   "required": [
     "heading"
   ],
@@ -15,11 +15,11 @@
       "description": "Required summary heading"
     },
     "content": {
-      "type": "string",
+      "type": "slot",
       "description": "HTML/text summary content"
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Inner HTML or text (takes priority over content)"
     },
     "className": {

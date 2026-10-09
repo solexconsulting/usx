@@ -14,8 +14,8 @@
       {% if paragraph %}<p class="usx-hero__paragraph">{{ paragraph }}</p>{% endif %}
       {% if searchProps %}
         {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps.defaultValue onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
-      {% elif button %}
-        {% button variant="primary" href=button.href %}{{ button.text }}{% endbutton %}
+      {% elif buttonProps %}
+        {% button props=buttonProps %}{{ buttonProps.children|safe }}{% endbutton %}
       {% endif %}
     </div>
     {% if secondaryContent %}

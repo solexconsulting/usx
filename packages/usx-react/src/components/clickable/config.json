@@ -1,7 +1,7 @@
 {
   "name": "clickable",
   "template": "clickable/clickable.django.html",
-  "version": 1,
+  "version": 2,
   "required": [
     "href"
   ],
@@ -19,7 +19,7 @@
       "description": "Optional id attribute for the anchor element."
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Safe inner HTML. Apply usx-clickable__link, usx-clickable__color-on-hover, and/or usx-clickable__bg-color-on-hover to any child elements as needed."
     }
   }

@@ -1,10 +1,10 @@
 {
   "name": "misc-banner",
   "template": "misc-banner/misc-banner.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Advanced override for custom inner markup"
     },
     "className": {

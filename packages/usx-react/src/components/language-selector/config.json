@@ -1,7 +1,7 @@
 {
   "name": "language-selector",
   "template": "language-selector/language-selector.django.html",
-  "version": 1,
+  "version": 2,
   "default": {
     "variant": "menu",
     "languages": [
@@ -85,7 +85,7 @@
       "description": "Compact sizing for the menu variant (usa-language--small), e.g. inside a header"
     },
     "label": {
-      "type": "string",
+      "type": "slot",
       "default": "Languages",
       "description": "Menu variant trigger button text"
     },

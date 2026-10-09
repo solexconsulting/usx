@@ -1,4 +1,5 @@
 import React from 'react';
+import ClassNames from 'classnames';
 
 import Icon from '../icon/Icon';
 import Link from '../link/Link';
@@ -52,7 +53,7 @@ export default function FileList({ files, hint = 'Selected files', onRemove = nu
   const lastEntry = getEntryDisplay(files[files.length - 1]);
 
   return (
-    <div className={['usx-file-input__list', 'margin-top-1', className].filter(Boolean).join(' ')}>
+    <div className={ClassNames('usx-file-input__list', 'margin-top-1', className)}>
       <span className="usa-sr-only" aria-live="polite">
         {`You have selected the file: ${lastEntry.name}.`}
       </span>

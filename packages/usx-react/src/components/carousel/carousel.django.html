@@ -5,14 +5,20 @@
   <div class="usx-carousel__viewport" tabindex="-1">
     <div class="usx-carousel__track">
       {% if children %}
-        {{ children|safe }}
+        {% if children.length > 0 %}
+          {% for child in children %}
+            {{ child|safe }}
+          {% endfor %}
+        {% else %}
+          {{ children|safe }}
+        {% endif %}
       {% elif slides %}
         {% for slide in slides %}
             <section id="{{ id }}-slide-{{ forloop.counter }}" class="usx-carousel__slide" role="group" aria-roledescription="slide" aria-label="{{ forloop.counter }} of {{ slides|length }}" tabindex="0">
               {% if slide.content %}
                 {{ slide.content|safe }}
               {% elif slide.src %}
-                {% image src=slide.src alt=slide.alt caption=slide.caption hideCaption=True href=slide.href rounded=slide.rounded circular=slide.circular objectFit=slide.objectFit maxWidth=slide.maxWidth maxHeight=slide.maxHeight className=slide.className %}{% endimage %}
+                {% image props=slide hideCaption=slide.hideCaption|default_bool:True %}{{ slide.children|safe }}{% endimage %}
               {% else %}
                 {# Fallback: render the slide object/string directly #}
                 {{ slide|safe }}
@@ -27,6 +33,11 @@
 
   {% if showDots %}
     <div class="usx-carousel__dots" aria-label="Slide navigation">
+      {% if children and children.length > 0 %}
+        {% for child in children %}
+          <a href="#{{ id }}-slide-{{ forloop.counter }}" aria-label="Go to slide {{ forloop.counter }}" tabindex="-1"></a>
+        {% endfor %}
+      {% endif %}
       {% if slides %}
         {% for slide in slides %}
           <a href="#{{ id }}-slide-{{ forloop.counter }}" aria-label="Go to slide {{ forloop.counter }}" tabindex="-1"></a>

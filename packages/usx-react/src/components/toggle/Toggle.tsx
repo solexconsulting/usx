@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useId } from 'react';
+import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 
 export interface ToggleOption {
@@ -8,73 +9,101 @@ export interface ToggleOption {
   disabled?: boolean;
 }
 
-export interface ToggleProps extends React.HTMLAttributes<HTMLUListElement> {
+export interface ToggleProps extends Omit<React.HTMLAttributes<HTMLUListElement>, 'onChange'> {
+  className?: string;
+  id?: string;
   options?: (ToggleOption | string | number)[];
   value?: string | number;
   defaultValue?: string | number;
   onChange?: (value: string | number) => void;
   name?: string;
-  id?: string;
+  ariaLabel?: string;
   variant?: 'text' | 'icon';
   disabled?: boolean;
-  className?: string;
+  required?: boolean;
 }
 
-const Toggle: React.FC<ToggleProps> = ({
+export default function Toggle({
   options = [],
   value,
   defaultValue,
   onChange,
   name,
   id,
+  ariaLabel,
   variant = 'text',
   disabled = false,
-  className = '',
+  required = false,
+  className,
+  'aria-label': nativeAriaLabel,
+  'aria-labelledby': labelledBy,
   ...props
-}) => {
-  const idRef = useRef(id || name || `toggle-${Math.random().toString(36).substr(2, 8)}`);
-  const generatedName = idRef.current;
-  const classes = [
-    'usa-button-group',
-    'usx-button-group',
-    'usa-button-group--segmented',
-    'usx-toggle',
-    variant === 'icon' ? 'usx-toggle--icon' : '',
-    className
-  ].filter(Boolean).join(' ');
+}: ToggleProps) {
+  const instanceId = useId();
+  const groupId = id || `toggle-${instanceId}`;
+  const groupName = name || groupId;
+  const controlled = value !== undefined;
   return (
-    <ul className={classes} role="radiogroup" aria-disabled={disabled} {...props}>
-      {options.map((opt, i) => {
-        const optValue = typeof opt === 'object' ? opt.value ?? opt : opt;
-        const optLabel = typeof opt === 'object' ? opt.label ?? opt : opt;
-        const optIcon = typeof opt === 'object' ? opt.icon : undefined;
-        const optDisabled = typeof opt === 'object' ? !!opt.disabled : false;
-        const inputId = `${generatedName}-${i}`;
+    <ul
+      {...props}
+      id={groupId}
+      className={ClassNames(
+        'usx-toggle',
+        'usa-button-group',
+        variant === 'icon' && 'usx-toggle--icon',
+        className
+      )}
+      role="radiogroup"
+      aria-labelledby={labelledBy}
+      aria-label={
+        labelledBy ? undefined : ariaLabel || nativeAriaLabel || name || 'Choose an option'
+      }
+      aria-disabled={disabled || undefined}
+      aria-required={required || undefined}
+    >
+      {options.map((option, index) => {
+        const opt = typeof option === 'object' ? option : { value: option, label: option };
+        const optionValue =
+          opt.value ??
+          (typeof opt.label === 'string' || typeof opt.label === 'number' ? opt.label : index);
+        const optionLabel = opt.label ?? String(optionValue);
+        const inputId = `${groupId}-option-${index}`;
+        const iconOnly = variant === 'icon' && Boolean(opt.icon);
         return (
-          <li key={inputId} className={`usa-button-group__item usx-toggle__item${optDisabled ? ' usx-toggle__item--disabled' : ''}`}>
+          <li key={inputId} className="usa-button-group__item" role="presentation">
             <input
               className="usx-toggle__input"
               type="radio"
               id={inputId}
-              name={name || generatedName}
-              value={optValue}
-              checked={value === optValue ? true : undefined}
-              defaultChecked={defaultValue === optValue ? true : undefined}
-              disabled={disabled ? true : optDisabled ? true : undefined}
-              onChange={onChange ? () => onChange(optValue as string | number) : undefined}
+              name={groupName}
+              value={optionValue}
+              {...(controlled
+                ? { checked: value === optionValue }
+                : { defaultChecked: defaultValue === optionValue })}
+              disabled={disabled || opt.disabled}
+              required={required}
+              onChange={(event) => {
+                if (event.target.checked) onChange?.(optionValue);
+              }}
             />
-            <label htmlFor={inputId} className="usa-button usx-button usa-button--outline">
-              {variant === 'icon' && optIcon ? (
-                <Icon name={optIcon} className="usx-toggle__label" ariaHidden />
-              ) : (
-                <span className="usx-toggle__label">{optLabel}</span>
-              )}
+            <label
+              htmlFor={inputId}
+              className="usa-button usx-button usa-button--primary usx-toggle__button"
+              aria-disabled={disabled || opt.disabled || undefined}
+              title={
+                iconOnly && (typeof optionLabel === 'string' || typeof optionLabel === 'number')
+                  ? String(optionLabel)
+                  : undefined
+              }
+            >
+              {opt.icon && <Icon name={opt.icon} className="usx-toggle__icon" aria-hidden="true" />}
+              <span className={iconOnly ? 'usa-sr-only' : undefined}>
+                {optionLabel}
+              </span>
             </label>
           </li>
         );
       })}
     </ul>
   );
-};
-
-export default Toggle;
+}

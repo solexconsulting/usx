@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel, { Slide } from '../../../../usx-react/src/components/carousel/Carousel.tsx';
 import config from '../../../../usx-react/src/components/carousel/config.json';
+import Card from '../../../../usx-react/src/components/card/Card.tsx';
 import Image from '../../../../usx-react/src/components/image/Image.tsx';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
@@ -44,6 +45,37 @@ export const storyDefs = {
     id: 'carousel-with-images',
     slides: imageSlides,
   },
+  CardCarousel: {
+    id: 'card-carousel',
+    ariaLabel: 'Featured services',
+    showDots: true,
+    children: [
+      <Card
+        id="card-1"
+        title="Find a program"
+        description="Explore programs and services available in your community."
+        className="usx-carousel__slide"
+        tagProps={[{ value: 'Programs', color: 'primary' }]}
+        buttonProps={[{ href: '#programs', children: 'Explore programs' }]}
+      />,
+      <Card
+        id="card-2"
+        title="Prepare your application"
+        description="Learn what you need before applying and gather your documents."
+        className="usx-carousel__slide"
+        tagProps={[{ value: 'Getting started', color: 'info' }]}
+        buttonProps={[{ href: '#application', children: 'Review requirements' }]}
+      />,
+      <Card
+        id="card-3"
+        title="Get support"
+        description="Connect with a specialist for help with your next step."
+        className="usx-carousel__slide"
+        tagProps={[{ value: 'Support', color: 'secondary' }]}
+        buttonProps={[{ href: '#support', children: 'Contact support' }]}
+      />,
+    ],
+  },
   WithSlideChildren: {
     id: 'carousel-children',
     showDots: true,
@@ -76,3 +108,4 @@ export const CustomId = { args: storyDefs.CustomId };
 export const WithImages = { args: storyDefs.WithImages };
 export const WithSlideChildren = { args: storyDefs.WithSlideChildren };
 export const WithHTMLChildren = { args: storyDefs.WithHTMLChildren };
+export const CardCarousel = { name: 'Card Carousel', args: storyDefs.CardCarousel };

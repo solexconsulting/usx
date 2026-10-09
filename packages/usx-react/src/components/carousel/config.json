@@ -1,7 +1,7 @@
 {
   "name": "carousel",
   "template": "carousel/carousel.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "id": {
       "type": "string",
@@ -13,7 +13,7 @@
       "description": "Array of slide objects {content: string|node}"
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Optional raw slide markup rendered directly inside the track."
     },
     "slideIds": {

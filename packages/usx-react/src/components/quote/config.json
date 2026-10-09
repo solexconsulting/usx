@@ -1,0 +1,51 @@
+{
+  "name": "quote",
+  "template": "quote/quote.django.html",
+  "version": 3,
+  "props": {
+    "className": {
+      "type": "string",
+      "description": "Additional classes on the outer quote wrapper."
+    },
+    "calloutProps": {
+      "type": "object",
+      "description": "Props passed to the Callout containing the quotation and attribution.",
+      "component": "callout",
+      "omit": [
+        "element",
+        "children",
+        "content",
+        "cite"
+      ]
+    },
+    "attributionProps": {
+      "type": "object",
+      "description": "Props passed directly to Attribution in the figcaption.",
+      "component": "attribution"
+    },
+    "children": {
+      "type": "slot",
+      "description": "Quotation content. Takes precedence over content when supplied."
+    },
+    "content": {
+      "type": "slot",
+      "description": "Fallback quotation content."
+    },
+    "sourceLinkProps": {
+      "type": "object",
+      "component": "link",
+      "omit": [
+        "children"
+      ],
+      "description": "Props passed directly to the source Link. sourceTitle supplies its children; href also supplies the blockquote cite URL. Omit for an unlinked source title."
+    },
+    "sourceTitle": {
+      "type": "slot",
+      "description": "Title of the cited work, rendered in cite; use Attribution for the author."
+    },
+    "blockquoteClassName": {
+      "type": "string",
+      "description": "Additional classes applied only to the blockquote, excluding attribution and the outer wrapper."
+    }
+  }
+}

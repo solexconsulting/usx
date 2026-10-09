@@ -1,7 +1,7 @@
 {
   "name": "required",
   "template": "required/required.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "title": {
       "type": "string",
@@ -9,7 +9,7 @@
       "description": "Title attribute for the required indicator (default: 'required')"
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Inner HTML or text"
     },
     "className": {

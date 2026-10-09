@@ -1,7 +1,7 @@
 {
   "name": "radio-buttons",
   "template": "radio-buttons/radio-buttons.django.html",
-  "version": 1,
+  "version": 2,
   "required": [
     "options"
   ],
@@ -30,11 +30,11 @@
       "default": false
     },
     "hint": {
-      "type": "string",
+      "type": "slot",
       "description": "Group-level hint text, rendered after the legend"
     },
     "error": {
-      "type": "string",
+      "type": "slot",
       "description": "Group-level error message, rendered after the hint"
     },
     "name": {

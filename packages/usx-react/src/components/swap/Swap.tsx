@@ -1,4 +1,5 @@
 import React from 'react';
+import ClassNames from 'classnames';
 
 export interface SwapProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   children?: React.ReactNode;
@@ -25,9 +26,9 @@ const Swap: React.FC<SwapProps> = ({
   ...props
 }) => {
   const variantClass = variant !== 'default' ? `usx-swap--${variant}` : '';
-  const classes = ['usx-swap', variantClass, className].filter(Boolean).join(' ');
-  const onClasses = ['usx-swap-on', onClassName].filter(Boolean).join(' ');
-  const offClasses = ['usx-swap-off', offClassName].filter(Boolean).join(' ');
+  const classes = ClassNames('usx-swap', variantClass, className);
+  const onClasses = ClassNames('usx-swap-on', onClassName);
+  const offClasses = ClassNames('usx-swap-off', offClassName);
 
   const content = children || (
     <>

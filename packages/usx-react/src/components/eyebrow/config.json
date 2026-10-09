@@ -1,10 +1,10 @@
 {
   "name": "eyebrow",
   "template": "eyebrow/eyebrow.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Eyebrow text content"
     },
     "className": {

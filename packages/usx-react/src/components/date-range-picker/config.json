@@ -1,7 +1,7 @@
 {
   "name": "date-range-picker",
   "template": "date-range-picker/date-range-picker.django.html",
-  "version": 1,
+  "version": 2,
   "default": {
     "startId": "event-date-start",
     "endId": "event-date-end",
@@ -30,31 +30,31 @@
       "description": "name attribute for the end date input. Defaults to endId."
     },
     "startLabel": {
-      "type": "string",
+      "type": "slot",
       "default": "Event start date",
       "description": "Label text for the start date field."
     },
     "endLabel": {
-      "type": "string",
+      "type": "slot",
       "default": "Event end date",
       "description": "Label text for the end date field."
     },
     "startHint": {
-      "type": "string",
+      "type": "slot",
       "default": "mm/dd/yyyy",
       "description": "Hint text displayed below the start date label."
     },
     "endHint": {
-      "type": "string",
+      "type": "slot",
       "default": "mm/dd/yyyy",
       "description": "Hint text displayed below the end date label."
     },
     "startError": {
-      "type": "string",
+      "type": "slot",
       "description": "Error message for the start date field."
     },
     "endError": {
-      "type": "string",
+      "type": "slot",
       "description": "Error message for the end date field."
     },
     "disabled": {

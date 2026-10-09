@@ -93,7 +93,7 @@ export const FormComponents = {
           legend="Checkbox"
           hint="Select one or more historical figures."
           name="tefe-checkbox-group"
-          options={historicalFigures}
+          checkboxProps={historicalFigures}
           error={error}
         />
 

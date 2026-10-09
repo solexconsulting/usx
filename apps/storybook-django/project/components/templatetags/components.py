@@ -270,6 +270,7 @@ class BlockInclusionNode(template.Node):
             for key, value in self.extra_context.items()
         }
         base_props = values.pop("props", None) or {}
+        children = children or values.get("children", base_props.get("children"))
 
         t = context.template.engine.get_template(self.template)
         # Add the `children` variable in the rendered template's context.

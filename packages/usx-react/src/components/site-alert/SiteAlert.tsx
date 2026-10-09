@@ -1,4 +1,5 @@
 import React from 'react';
+import ClassNames from 'classnames';
 import Alert, { AlertProps } from '../alert/Alert';
 import Icon from '../icon/Icon';
 
@@ -36,7 +37,7 @@ const SiteAlert: React.FC<SiteAlertProps> = ({
       ? 'warning'
       : normalizedVariant;
 
-  const classes = [
+  const classes = ClassNames(
     'usa-site-alert',
     'usx-site-alert',
     (normalizedVariant === 'info' || normalizedVariant === 'emergency') && `usa-site-alert--${normalizedVariant}`,
@@ -45,11 +46,9 @@ const SiteAlert: React.FC<SiteAlertProps> = ({
     noIcon && 'usa-site-alert--no-icon',
     onDismiss && 'usa-site-alert--dismissible',
     className
-  ]
-    .filter(Boolean)
-    .join(' ');
+  );
 
-  const alertClasses = [
+  const alertClasses = ClassNames(
     'usa-alert',
     `usa-alert--${alertVariant}`,
     'usx-alert',
@@ -58,7 +57,7 @@ const SiteAlert: React.FC<SiteAlertProps> = ({
     slim && 'usx-alert--slim',
     noIcon && 'usa-alert--no-icon',
     noIcon && 'usx-alert--no-icon',
-  ].filter(Boolean).join(' ');
+  );
 
   return (
     <section

@@ -1,10 +1,10 @@
 {
   "name": "text-area",
   "template": "text-area/text-area.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "label": {
-      "type": "string",
+      "type": "slot",
       "default": null,
       "description": "The label for the textarea. If provided, renders a label element associated with the control."
     },

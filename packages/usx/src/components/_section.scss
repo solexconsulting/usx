@@ -3,10 +3,6 @@
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-section {
   margin: units(4) 0;
-
-  background-color: usx-when($usx-section-bg);
-
-  color: usx-when($usx-section-text);
 }
 
 .usx-section__title {

@@ -17,7 +17,7 @@ export const Overview = {
         original <code>usa-*</code> classes and markup. USX adds passive{' '}
         <code>usx-*</code> hooks alongside them for agency-level branding and
         runtime theming, and fills in a handful of components USWDS doesn't
-        ship (Attribution, Avatar, Block, Swap, Switch, and more).
+        ship (Attribution, Avatar, Callout, Quote, Swap, Switch, and more).
       </p>
 
       <h2>Packages</h2>

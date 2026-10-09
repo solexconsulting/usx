@@ -4,7 +4,7 @@ import Banner from '../../../usx-react/src/components/banner/Banner.tsx';
 import MiscBanner from '../../../usx-react/src/components/misc-banner/MiscBanner.tsx';
 import Header from '../../../usx-react/src/components/header/Header.tsx';
 import Footer from '../../../usx-react/src/components/footer/Footer.tsx';
-import Block from '../../../usx-react/src/components/block/Block.tsx';
+import Quote from '../../../usx-react/src/components/quote/Quote.tsx';
 import Image from '../../../usx-react/src/components/image/Image.tsx';
 import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
@@ -77,9 +77,9 @@ export const BlogPost = {
                   <li>Measuring and iterating continuously</li>
                 </ol>
 
-                <Block
-                  variant="callout"
-                  attribution={{
+                <Quote
+                  calloutProps={{ orientation: 'vertical', big: true, strokeColor: 'info' }}
+                  attributionProps={{
                     avatarProps: {
                       src: './george_washington.png',
                       alt: 'George Washington',
@@ -88,12 +88,9 @@ export const BlogPost = {
                     primary: 'John Doe',
                     secondary: 'CTO Somewhere Probably',
                   }}
-                  big
-                  color="info"
-                  quote
                 >
-                  <p className="font-serif-md maxw-tablet margin-0">❝Digital transformation is not about technology—it's about people and processes.❞</p>
-                </Block>
+                  <p className="font-serif-md maxw-tablet margin-0">Digital transformation is not about technology—it's about people and processes.</p>
+                </Quote>
 
                 <p>As we look to the future, the organizations that thrive will be those that embrace digital transformation not as a one-time project, but as an ongoing journey of innovation and adaptation.</p>
               </Prose>

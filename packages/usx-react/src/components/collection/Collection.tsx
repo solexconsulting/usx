@@ -1,6 +1,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import CalendarDate from '../calendar-date/CalendarDate';
+import CalendarDate, { type CalendarDateProps } from '../calendar-date/CalendarDate';
 
 export interface CollectionMetaItem {
   text: string;
@@ -18,19 +18,19 @@ export interface CollectionItemProps {
   description?: string;
   imgSrc?: string;
   imgAlt?: string;
-  calendarDate?: string | { datetime: string; month: string; day: string };
+  calendarDateProps?: CalendarDateProps;
   meta?: (string | CollectionMetaItem)[];
   tags?: (string | CollectionTag)[];
 }
 
-function CollectionItem({ href, heading, description, imgSrc, imgAlt = '', calendarDate, meta, tags }: CollectionItemProps) {
+function CollectionItem({ href, heading, description, imgSrc, imgAlt = '', calendarDateProps, meta, tags }: CollectionItemProps) {
   return (
     <li className="usa-collection__item">
       {imgSrc && (
         <img className="usa-collection__img" src={imgSrc} alt={imgAlt} />
       )}
-      {calendarDate && (
-        <CalendarDate datetime={typeof calendarDate === 'string' ? calendarDate : calendarDate.datetime} underCollection={true} />
+      {calendarDateProps && (
+        <CalendarDate underCollection={true} {...calendarDateProps} />
       )}
       <div className="usa-collection__body">
         <h4 className="usa-collection__heading">

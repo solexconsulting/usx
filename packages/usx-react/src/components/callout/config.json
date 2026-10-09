@@ -1,0 +1,74 @@
+{
+  "name": "callout",
+  "template": "callout/callout.django.html",
+  "version": 1,
+  "props": {
+    "className": {
+      "type": "string",
+      "description": "Additional classes."
+    },
+    "strokeColor": {
+      "type": "string",
+      "description": "Border color token. Omit to leave the border color utility unset."
+    },
+    "indent": {
+      "type": "select",
+      "description": "Left indentation.",
+      "options": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "dedent": {
+      "type": "boolean",
+      "description": "Pull the callout left beyond the content edge.",
+      "default": false
+    },
+    "big": {
+      "type": "boolean",
+      "description": "Use a thicker border."
+    },
+    "orientation": {
+      "type": "select",
+      "description": "Horizontal uses a left border; vertical uses a top border.",
+      "options": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    },
+    "children": {
+      "type": "slot",
+      "description": "Body content. Takes precedence over content when supplied."
+    },
+    "content": {
+      "type": "slot",
+      "description": "Fallback body content, ignored when children is supplied."
+    },
+    "backgroundColor": {
+      "type": "string",
+      "description": "Background utility token: bg-{backgroundColor}."
+    },
+    "textColor": {
+      "type": "string",
+      "description": "Text utility token: text-{textColor}."
+    },
+    "element": {
+      "type": "select",
+      "description": "Root HTML element.",
+      "options": [
+        "div",
+        "section",
+        "aside",
+        "blockquote"
+      ],
+      "default": "div"
+    },
+    "cite": {
+      "type": "string",
+      "description": "Source URL when the root element is blockquote."
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
   "name": "legend",
   "template": "legend/legend.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "text": {
-      "type": "string",
+      "type": "slot",
       "description": "Text for the legend"
     },
     "required": {
@@ -16,7 +16,7 @@
       "description": "Whether to use the larger legend style (adds class `usa-legend--large`)"
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Inner HTML or text"
     },
     "className": {

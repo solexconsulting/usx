@@ -57,7 +57,7 @@ export const Overview = {
       <h2>Components USWDS doesn't ship</h2>
       <p>
         A handful of components in this library have no real USWDS
-        counterpart at all (Attribution, Avatar, Block, Swap, Switch, and more). These
+        counterpart at all (Attribution, Avatar, Callout, Quote, Swap, Switch, and more). These
         are USX-original — they follow the same token-driven pattern as
         everything else, but their sensible-default values are baked directly
         into the component's own Sass file (since there's no upstream USWDS

@@ -1,7 +1,7 @@
 {
   "name": "link",
   "template": "link/link.django.html",
-  "version": 1,
+  "version": 2,
   "required": [
     "href",
     "children"
@@ -12,7 +12,7 @@
       "description": "Link destination URL."
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Inner link text or HTML."
     },
     "visited": {

@@ -1,7 +1,7 @@
 {
   "name": "select",
   "template": "select/select.django.html",
-  "version": 1,
+  "version": 2,
   "required": [
     "options"
   ],
@@ -15,7 +15,7 @@
       "description": "Name of the select input, used for form submission"
     },
     "label": {
-      "type": "string",
+      "type": "slot",
       "description": "Label for the select input"
     },
     "options": {

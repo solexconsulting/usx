@@ -42,10 +42,10 @@ export const storyDefs = {
     className: 'display-flex flex-align-center margin-1 usx-width-fit',
     children: '<span class="usx-circle bg-black text-white usx-clickable__bg-color-on-hover display-flex flex-align-center flex-justify-center width-4 height-4"><svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#arrow_forward"></use></svg></span><span class="margin-left-1 usx-clickable__link">Read John\'s Story</span>',
   },
-  ReadJohnsStoryInsideBlockquote: {
+  ClickableQuote: {
     href: 'https://google.com',
-    className: 'usx-block usx-block--callout usx-border-primary',
-    children: '<div class="usx-block__content usx-border-info maxw-tablet margin-0"><p class="font-serif-lg maxw-tablet margin-0">❝We found this wand shop that had the best wands, and we were like, "We have to go here!" So we went there.❞</p><div class="usx-block__attribution"><div class="usx-attribution"><span class="usx-attribution__content"><span class="usx-attribution__primary">John Doe</span><span class="usx-attribution__secondary">Under Secretary for the Department of Magic and Mystical Affairs</span></span></div></div><div class="display-flex flex-align-center margin-top-2"><span class="usx-circle bg-black text-white usx-clickable__bg-color-on-hover display-flex flex-align-center flex-justify-center width-4 height-4"><svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#arrow_forward"></use></svg></span><span class="margin-left-1 usx-clickable__link">Read John\'s Story</span></div></div>',
+    className: 'display-block maxw-tablet',
+    children: '<div class="usx-quote usx-quote--vertical"><div class="usx-callout usx-callout--vertical usx-border-primary"><figure class="usx-quote__body"><blockquote class="usx-quote__content font-serif-lg">❝We found this wand shop that had the best wands, and we were like, "We have to go here!" So we went there.❞</blockquote><figcaption class="usx-quote__attribution"><div class="usx-attribution"><span class="usx-attribution__content"><span class="usx-attribution__primary">John Doe</span><span class="usx-attribution__secondary">Under Secretary for the Department of Magic and Mystical Affairs</span></span></div></figcaption></figure></div></div><span class="display-flex flex-align-center margin-top-2"><span class="usx-circle bg-black text-white usx-clickable__bg-color-on-hover display-flex flex-align-center flex-justify-center width-4 height-4"><svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#arrow_forward"></use></svg></span><span class="margin-left-1 usx-clickable__link">Read John\'s Story</span></span>',
   },
   AllClassesSingleElement: {
     href: 'https://google.com',
@@ -81,7 +81,7 @@ export const WithColorChangeTornado = createStory(storyDefs.WithColorChangeTorna
 export const WithColorChangeLocation = createStory(storyDefs.WithColorChangeLocation);
 export const WithColorChangePets = createStory(storyDefs.WithColorChangePets);
 export const ReadJohnsStoryCta = createStory(storyDefs.ReadJohnsStoryCta);
-export const ReadJohnsStoryInsideBlockquote = createStory(storyDefs.ReadJohnsStoryInsideBlockquote);
+export const ClickableQuote = createStory(storyDefs.ClickableQuote);
 export const AllClassesSingleElement = createStory(storyDefs.AllClassesSingleElement);
 export const ColorClassesWithinLinkClass = createStory(storyDefs.ColorClassesWithinLinkClass);
 export const ColorClassesOutsideLinkClass = createStory(storyDefs.ColorClassesOutsideLinkClass);

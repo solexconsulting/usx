@@ -1,7 +1,7 @@
 {
   "name": "file-list",
   "template": "file-list/file-list.django.html",
-  "version": 1,
+  "version": 2,
   "default": {
     "files": [
       {
@@ -22,7 +22,7 @@
       "description": "Files to render as rows. Each entry is { key, file?, name?, size?, url?, onRemove? } — key uniquely identifies the row; file is a browser File (name/size read from it); name/size describe entries with no File object (e.g. files already on the server); url renders the name as a download link; onRemove overrides the onRemove prop for just this row. React only."
     },
     "hint": {
-      "type": "string",
+      "type": "slot",
       "default": "Selected files",
       "description": "Heading/hint text shown above the file list."
     },

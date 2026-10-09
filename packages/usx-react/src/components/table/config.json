@@ -1,7 +1,7 @@
 {
   "name": "table",
   "template": "table/table.django.html",
-  "version": 1,
+  "version": 2,
   "required": [
     "columns",
     "data"
@@ -93,7 +93,7 @@
       "description": "Property name used as the unique row identifier."
     },
     "caption": {
-      "type": "string",
+      "type": "slot",
       "description": "Table caption rendered as <caption>."
     },
     "striped": {
@@ -220,7 +220,7 @@
       "description": "Show a loading state overlay. Does not affect interactivity."
     },
     "placeholder": {
-      "type": "string",
+      "type": "slot",
       "description": "Content shown when the data array is empty."
     },
     "className": {
@@ -292,6 +292,16 @@
       "type": "object",
       "default": null,
       "description": "Django only. Pagination state dict from table_helper.paginate_table(): {current_page, total_pages, total, page_size}. Required when paginate is True."
+    },
+    "children": {
+      "type": "slot",
+      "description": "Composed table sections, replacing the generated table sections (React only).",
+      "renderers": {
+        "django": {
+          "supported": false,
+          "description": "The Django template does not consume children."
+        }
+      }
     }
   }
 }

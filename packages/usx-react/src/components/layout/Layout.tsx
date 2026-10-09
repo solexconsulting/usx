@@ -12,7 +12,7 @@ export interface SingleColumnLayoutProps extends HTMLAttributes<HTMLDivElement> 
 }
 
 export function SingleColumnLayout({ children, expandButton = null, className = '', ...props }: SingleColumnLayoutProps) {
-  const classes = ['usx-layout__single-column', className].filter(Boolean).join(' ');
+  const classes = ClassNames('usx-layout__single-column', className);
   return (
     <div className={classes} {...props}>
       {expandButton}

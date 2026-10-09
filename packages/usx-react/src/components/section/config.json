@@ -1,7 +1,7 @@
 {
   "name": "section",
   "template": "section/section.django.html",
-  "version": 1,
+  "version": 3,
   "default": {
     "title": "",
     "content": "Use section to group related page content with consistent spacing."
@@ -9,15 +9,28 @@
   "props": {
     "title": {
       "type": "string",
-      "description": "Optional section heading rendered as an h2."
+      "description": "Optional section heading."
+    },
+    "headingLevel": {
+      "type": "select",
+      "options": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ],
+      "default": "h2",
+      "description": "Heading element used when title is provided. Defaults to h2."
     },
     "content": {
-      "type": "string",
-      "description": "Section body content. Supports HTML in Django stories."
+      "type": "slot",
+      "description": "Section body content. Supports HTML in Django stories. Ignored if children is provided."
     },
     "children": {
-      "type": "string",
-      "description": "Section body content for React usage."
+      "type": "slot",
+      "description": "Section body content for React usage. Takes precedence over content if both are provided."
     },
     "className": {
       "type": "string",

@@ -1,5 +1,12 @@
 {# Django template for Section #}
 <section class="usx-section{% if className %} {{ className }}{% endif %}">
-  {% if title %}<h2 class="usx-section__title">{{ title }}</h2>{% endif %}
-  <div class="usx-section__content">{% if content %}{{ content|safe }}{% elif children %}{{ children|safe }}{% endif %}</div>
+  {% if title %}
+    {% if headingLevel == 'h1' %}<h1 class="usx-section__title">{{ title }}</h1>
+    {% elif headingLevel == 'h3' %}<h3 class="usx-section__title">{{ title }}</h3>
+    {% elif headingLevel == 'h4' %}<h4 class="usx-section__title">{{ title }}</h4>
+    {% elif headingLevel == 'h5' %}<h5 class="usx-section__title">{{ title }}</h5>
+    {% elif headingLevel == 'h6' %}<h6 class="usx-section__title">{{ title }}</h6>
+    {% else %}<h2 class="usx-section__title">{{ title }}</h2>{% endif %}
+  {% endif %}
+  <div class="usx-section__content">{% if children %}{{ children|safe }}{% elif content %}{{ content|safe }}{% endif %}</div>
 </section>

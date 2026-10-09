@@ -6,10 +6,8 @@
       {% if item.imgSrc %}
         <img class="usa-collection__img" src="{{ item.imgSrc }}" alt="{{ item.imgAlt }}" />
       {% endif %}
-      {% if item.calendarDate %}
-        {% with datetime=item.calendarDate %}
-          {% calendar_date datetime=datetime under_collection=True %}{% endcalendar_date %}
-        {% endwith %}
+      {% if item.calendarDateProps %}
+        {% calendar_date props=item.calendarDateProps underCollection=item.calendarDateProps.underCollection|default_bool:True %}{% endcalendar_date %}
       {% endif %}
       <div class="usa-collection__body">
         <h4 class="usa-collection__heading">

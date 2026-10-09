@@ -1,10 +1,10 @@
 {
   "name": "input",
   "template": "input/input.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "label": {
-      "type": "string",
+      "type": "slot",
       "default": null,
       "description": "The label for the input field. If provided, it will render a label element associated with the control."
     },

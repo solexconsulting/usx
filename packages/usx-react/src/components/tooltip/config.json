@@ -1,7 +1,7 @@
 {
   "name": "tooltip",
   "template": "tooltip/tooltip.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "label": {
       "type": "slot",
@@ -20,7 +20,7 @@
       "description": "The direction the tooltip appears relative to its trigger."
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "default": null,
       "description": "The trigger element that activates the tooltip on hover or focus."
     },

@@ -1,12 +1,12 @@
 {
   "name": "collection",
   "template": "collection/collection.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "items": {
       "type": "array",
       "default": [],
-      "description": "Array of collection item objects. Each item: { href, heading, description?, imgSrc?, imgAlt?, calendarDate?: { datetime, month, day }, meta?: [{ text, datetime? }], tags?: [{ label, isNew? }] }",
+      "description": "Collection items with optional calendarDateProps, meta, and tags.",
       "items": {
         "type": "object",
         "description": "Collection item.",
@@ -31,10 +31,6 @@
             "type": "string",
             "description": "Alt text for the thumbnail image."
           },
-          "calendarDate": {
-            "type": "object",
-            "description": "Optional { datetime, month, day } calendar date badge."
-          },
           "meta": {
             "type": "array",
             "description": "Optional meta list: [{ text, datetime? }]."
@@ -42,6 +38,11 @@
           "tags": {
             "type": "array",
             "description": "Optional tag list: [{ label, isNew? }]."
+          },
+          "calendarDateProps": {
+            "type": "object",
+            "component": "calendar-date",
+            "description": "Props passed to the calendar-date component."
           }
         }
       }

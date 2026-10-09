@@ -1,7 +1,7 @@
 {
   "name": "modal",
   "template": "modal/modal.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "id": {
       "type": "string",
@@ -44,7 +44,7 @@
       "description": "When true, prevents closing the modal via the overlay or Escape key, and hides the close button. Used for required-action flows."
     },
     "children": {
-      "type": "string",
+      "type": "slot",
       "default": null,
       "description": "Inner HTML to render as the modal body, replacing the description text."
     },

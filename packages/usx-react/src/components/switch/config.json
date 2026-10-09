@@ -1,7 +1,7 @@
 {
   "name": "switch",
   "template": "switch/switch.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "id": {
       "type": "string",
@@ -35,7 +35,7 @@
       "description": "Color variant (primary, success, warning, etc.)"
     },
     "label": {
-      "type": "string",
+      "type": "slot",
       "description": "Optional label text to display next to the switch"
     },
     "indeterminate": {

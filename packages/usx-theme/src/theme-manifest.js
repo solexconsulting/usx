@@ -456,16 +456,6 @@ export const themeManifest = [
   // color by default but can be overridden independently since they sit on
   // usx-footer-secondary-bg-color rather than usx-footer-primary-bg-color.
   component('usx-footer-heading-secondary-text', 'var(--usx-footer-heading-text)'),
-  // Page chains its own background to surface-1 (some patterns render
-  // <Page> without a <Layout> ancestor to paint it); Section has no such
-  // fallback role and stays transparent, always nested in a Page/Layout
-  // that already paints the surface. Text on both chains live to usx-text
-  // so headings/copy stay legible instead of getting stuck on real USWDS's
-  // static, non-themeable body text color.
-  component('usx-page-bg', 'none'),
-  component('usx-page-text', 'var(--usx-text-ink)'),
-  component('usx-section-bg', 'transparent'),
-  component('usx-section-text', 'var(--usx-text-ink)'),
   // Hover/selected row highlights alias the surface-2/surface-3 roles (like
   // usx-sidenav-hover-color above) instead of a color-primary blue tint, so
   // the table's aesthetic stays neutral and in step with the rest of the

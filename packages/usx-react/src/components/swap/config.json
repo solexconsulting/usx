@@ -1,7 +1,7 @@
 {
   "name": "swap",
   "template": "swap/swap.django.html",
-  "version": 1,
+  "version": 2,
   "default": {
     "onContent": "ON",
     "offContent": "OFF",
@@ -10,15 +10,15 @@
   },
   "props": {
     "children": {
-      "type": "string",
+      "type": "slot",
       "description": "Advanced override for full inner HTML"
     },
     "onContent": {
-      "type": "string",
+      "type": "slot",
       "description": "Markup or text shown when swap is on"
     },
     "offContent": {
-      "type": "string",
+      "type": "slot",
       "description": "Markup or text shown when swap is off"
     },
     "includeInput": {

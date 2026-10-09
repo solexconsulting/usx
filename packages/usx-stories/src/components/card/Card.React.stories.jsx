@@ -13,11 +13,11 @@ const actions = [
 const baseArgs = {
   title: 'Card Title',
   description: 'This is the main content of the card. It can contain text, links, or other elements.',
-  actions: actions,
+  buttonProps: actions,
 };
 
 const imageCoverArgs = {
-  images: [
+  imageProps: [
     {
       src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
       alt: 'Placeholder image for card',
@@ -40,7 +40,7 @@ const imageCoverArgs = {
 };
 
 const imageContainArgs = {
-  images: [
+  imageProps: [
     {
       src: 'https://picsum.photos/800/300?random=1',
       alt: 'Placeholder image for card',
@@ -63,7 +63,7 @@ const imageContainArgs = {
 };
 
 const imageFillArgs = {
-  images: [
+  imageProps: [
     {
       src: 'https://picsum.photos/800/300?random=1',
       alt: 'Placeholder image for card',
@@ -86,7 +86,7 @@ const imageFillArgs = {
 };
 
 const singleImageArgs = {
-  images: [
+  imageProps: [
     {
       src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
       alt: 'Placeholder image for card',
@@ -96,7 +96,7 @@ const singleImageArgs = {
 };
 
 const tagsArgs = {
-  tags: [
+  tagProps: [
     { value: 'Primary', color: 'primary' },
     { value: 'Success', color: 'success' },
     { value: 'Warning', color: 'warning' }

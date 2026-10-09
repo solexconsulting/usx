@@ -1,7 +1,7 @@
 {
   "name": "banner",
   "template": "banner/banner.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "staticBaseUrl": {
       "type": "string",
@@ -44,7 +44,7 @@
       "description": "Heading text for HTTPS section."
     },
     "httpsText": {
-      "type": "string",
+      "type": "slot",
       "description": "Body text for the HTTPS section."
     },
     "className": {

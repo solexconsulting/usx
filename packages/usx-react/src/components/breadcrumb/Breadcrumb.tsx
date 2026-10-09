@@ -1,4 +1,5 @@
 import React from 'react';
+import ClassNames from 'classnames';
 
 export interface BreadcrumbItem {
   href?: string;
@@ -27,7 +28,7 @@ export default function Breadcrumb({
   ...props
 }: BreadcrumbProps) {
   if (!items || items.length === 0) {
-    const classes = ['usx-breadcrumb', className].filter(Boolean).join(' ');
+    const classes = ClassNames('usx-breadcrumb', className);
     return (
       <div className={classes} {...props}>
         {children || 'Breadcrumb'}
@@ -35,15 +36,13 @@ export default function Breadcrumb({
     );
   }
 
-  const navClasses = [
+  const navClasses = ClassNames(
     'usa-breadcrumb',
     'usx-breadcrumb',
     wrap ? 'usa-breadcrumb--wrap' : null,
     truncate ? 'usa-breadcrumb--truncate' : null,
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  );
 
   return (
     <nav className={navClasses} aria-label={ariaLabel} {...props}>
@@ -53,7 +52,7 @@ export default function Breadcrumb({
       >
         {items.map((item, idx) => {
           const isCurrent = !!item.current;
-          const liClass = ['usa-breadcrumb__list-item', isCurrent ? 'usa-current' : null].filter(Boolean).join(' ');
+          const liClass = ClassNames('usa-breadcrumb__list-item', isCurrent ? 'usa-current' : null);
 
           return (
             <li
