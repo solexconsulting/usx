@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "build": "vite build",
-    "test": "pnpm build && node test/toggle-check.mjs && node test/quote-check.mjs && node test/composition-check.mjs && node test/asset-url-check.mjs"
+    "test": "pnpm build && node test/toggle-check.mjs && node test/quote-check.mjs && node test/composition-check.mjs && node test/asset-url-check.mjs && node test/container-check.mjs"
   },
   "dependencies": {
     "@solexllc/usx": "workspace:*",

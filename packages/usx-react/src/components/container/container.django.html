@@ -1,0 +1,13 @@
+{% load components %}
+{% fragment as containerTag %}{% if element == 'section' or element == 'article' or element == 'aside' or element == 'nav' or element == 'ul' or element == 'ol' or element == 'li' %}{{ element }}{% else %}div{% endif %}{% endfragment %}
+{% dict display=display direction=direction wrap=wrap justify=justify align=align alignSelf=alignSelf flex=flex gap=gap column=column offset=offset gutters=gutters float=float as baseLayout %}
+{% fragment as containerClasses %}
+usx-container
+{% if gridContainer == 'default' %} grid-container{% elif gridContainer == 'card' or gridContainer == 'card-lg' or gridContainer == 'mobile' or gridContainer == 'mobile-lg' or gridContainer == 'tablet' or gridContainer == 'tablet-lg' or gridContainer == 'desktop' or gridContainer == 'desktop-lg' or gridContainer == 'widescreen' %} grid-container-{{ gridContainer }}{% endif %}
+{% if gridRow is True %} grid-row{% endif %}
+{% include 'container/_layout-classes.django.html' with layout=baseLayout prefix='' only %}
+{% include 'container/_layout-classes.django.html' with layout=responsive.mobileLg prefix='mobile-lg:' only %}
+{% include 'container/_layout-classes.django.html' with layout=responsive.tablet prefix='tablet:' only %}
+{% include 'container/_layout-classes.django.html' with layout=responsive.desktop prefix='desktop:' only %}
+{% endfragment %}
+<{{ containerTag }} class="{{ containerClasses.split|join:' ' }}{% if className and className == className|stringformat:'s' %} {{ className }}{% endif %}"{% if id == id|stringformat:'s' %} id="{{ id }}"{% endif %}{% if role == role|stringformat:'s' %} role="{{ role }}"{% endif %}{% if ariaLabel == ariaLabel|stringformat:'s' %} aria-label="{{ ariaLabel }}"{% endif %}{% if ariaLabelledby == ariaLabelledby|stringformat:'s' %} aria-labelledby="{{ ariaLabelledby }}"{% endif %}>{% if children is not None %}{% if children is not True and children is not False %}{{ children|safe }}{% endif %}{% elif content is not None and content is not True and content is not False %}{{ content|safe }}{% endif %}</{{ containerTag }}>

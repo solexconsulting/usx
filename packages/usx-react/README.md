@@ -165,6 +165,105 @@ at the repo root for the full, up-to-date list of implemented components.
 
 ## Token usage
 
+### Generic Container
+
+`Container` groups arbitrary content in one element. Its default `div` has only
+the passive `usx-container` hook: no padding, width, display override, or child
+wrappers. `children` takes precedence over `content` unless null or undefined;
+empty children and zero are preserved. It is available in React, Django, the
+CMS contract, and the React/Django/HTML Storybook catalogs.
+
+```jsx
+import { Container, Button } from '@solexllc/usx-react';
+
+<Container
+  display="flex"
+  direction="column"
+  gap="2"
+  responsive={{ tablet: { direction: 'row', wrap: 'wrap', align: 'center' } }}
+>
+  <Button>Save changes</Button>
+  <Button variant="secondary">Cancel</Button>
+</Container>
+```
+
+Top-level layout props apply at every width. `responsive` overrides individual
+fields at `mobileLg` (30em), `tablet` (40em), and `desktop` (64em), continuing
+upward until overridden again. At a 16px browser default these are 480, 640,
+and 1024px. Missing fields inherit the smaller-screen setting; use an explicit
+value to reset it, such as `gap: '0'`, `offset: 'none'`, or `direction: 'row'`.
+Keys are processed in breakpoint order, regardless of JSON insertion order.
+`mobileLg` emits the USWDS `mobile-lg:` class prefix.
+Values are string tokens; unsupported tokens and breakpoint names are ignored.
+
+| Control | Purpose |
+| --- | --- |
+| `display` | Normal flow, flex, inline flex, hidden, or `flow-root` for containing floats. |
+| `direction`, `wrap`, `justify`, `align` | Arrange children of a flex container. Set `display="flex"` or `"inline-flex"` to enable flex layout. |
+| `alignSelf`, `flex` | Control this container as a child of a flex parent. Use `column` instead of `flex` for USWDS grid columns. |
+| `gap` | Space between flex children. Spacing tokens include `0`, `2px`, `05`, and `1`–`6`; `2` is 1rem. |
+| `column`, `offset` | USWDS column width (`1`–`12`, `auto`, `fill`) and offset (`none`, `1`–`12`). |
+| `gutters` | Horizontal USWDS grid gutters, including `sm`, `md`, `lg`, and spacing tokens. Requires `gridRow`. |
+| `float` | Float this container within surrounding text. Has no effect on a flex child. |
+
+These controls all accept breakpoint overrides. `gridContainer` and `gridRow`
+are structural options set on the container itself:
+
+```jsx
+<Container gridContainer="default">
+  <Container gridRow gutters="2" responsive={{ desktop: { gutters: '4' } }}>
+    <Container column="12" responsive={{ tablet: { column: '4' } }}>
+      Sidebar content
+    </Container>
+    <Container column="12" responsive={{ tablet: { column: '8' } }}>
+      Main content
+    </Container>
+  </Container>
+</Container>
+```
+
+Nest columns directly inside rows. Use `gutters` for rows and `gap` for ordinary
+flex groups: adding CSS gap to percentage-width grid columns can cause unwanted
+wrapping. Gutters add child padding and negative row margins, so nest the row
+inside a padded parent, usually `gridContainer`. Keep page containers, rows, and
+columns as separate nested elements when combining their behaviors. Widths and
+gutters remain opt-in; children are never cloned, wrapped, or reordered.
+
+`gridContainer="default"` uses the existing USX-themed `grid-container` width
+and side padding. Named sizes, such as `gridContainer="widescreen"`, use the
+corresponding USWDS class. Load precompiled USWDS CSS followed by USX styles.
+Container supplies its own flex/display/gap/float classes because upstream
+precompiled CSS omits some responsive variants. Its breakpoints deliberately
+match the upstream grid, independently of USX page-layout theme settings.
+
+Django uses the same props and nesting:
+
+```django
+{% load components %}
+{% container display="flex" direction="column" gap="2" responsive=layout_overrides %}
+  {% button %}Save changes{% endbutton %}
+  {% button variant="secondary" %}Cancel{% endbutton %}
+{% endcontainer %}
+```
+
+Here `layout_overrides` is a context dictionary such as
+`{"tablet": {"direction": "row", "wrap": "wrap"}}`. CMS integrations discover
+all options in `container/config.json`; responsive objects reference the same
+contract with non-layout fields omitted.
+
+Use `element` for semantic roots (`section`, `article`, `aside`, `nav`, `ul`,
+`ol`, or `li`), with `id`, `role`, `ariaLabel`, or `ariaLabelledby` as needed.
+The ARIA props render as `aria-label` and `aria-labelledby` in both frameworks.
+React and Django use the same explicit prop contract; Container does not forward
+arbitrary HTML props or inline styles. Use `className` for additional styling.
+The Django renderer uses the existing component tags and a reusable template
+fragment for layout classes; it has no Container-specific Python helper.
+Native element styling still applies; for example, lists retain their browser
+spacing unless explicitly reset. Reverse directions affect visual order only,
+so preserve a sensible reading and keyboard order in the source. Responsive
+`display: 'none'` also hides content from assistive technology.
+Use `className` for application-specific decoration, spacing, or other layouts.
+
 ### Responsive Layout
 
 `.usx-layout` owns the responsive outer padding: 12px (1.5 units)

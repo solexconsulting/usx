@@ -79,6 +79,26 @@ class InstalledPackageTests(SimpleTestCase):
         self.assertIn("Ada", html)
         self.assertIn("Name", html)
 
+    def test_container_renders_without_component_specific_helpers(self):
+        self.assertFalse(files("usx_django").joinpath("templatetags", "container.py").is_file())
+        props = {
+            "display": "flex", "direction": "column", "ariaLabel": "Application actions",
+            "responsive": {"mobileLg": {"gap": "2"}, "tablet": {"direction": "row"}},
+        }
+        html = render_component("container", {**props, "content": "<p>Grouped content</p>"})
+        self.assertIn("usx-container--direction-column", html)
+        self.assertIn("mobile-lg:usx-container--gap-2", html)
+        self.assertIn("tablet:usx-container--direction-row", html)
+        self.assertIn('aria-label="Application actions"', html)
+        self.assertInHTML("<p>Grouped content</p>", html)
+        html = Template(
+            '{% load components %}{% container props=props element="section" %}'
+            '<p>{{ text }}</p>{% endcontainer %}'
+        ).render(Context({"props": props, "text": "<Child>"}))
+        self.assertIn('<section class="usx-container ', html)
+        self.assertIn("tablet:usx-container--direction-row", html)
+        self.assertInHTML("<p>&lt;Child&gt;</p>", html)
+
 
 if __name__ == "__main__":
     unittest.main()

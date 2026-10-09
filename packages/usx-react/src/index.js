@@ -22,6 +22,7 @@ export { default as Clickable } from './components/clickable/Clickable.tsx';
 export { default as Code } from './components/code/Code.tsx';
 export { default as Collection } from './components/collection/Collection.tsx';
 export { default as Combobox } from './components/combobox/Combobox.tsx';
+export { default as Container } from './components/container/Container.tsx';
 export { default as CopyToClipboard } from './components/copy-to-clipboard/CopyToClipboard.tsx';
 export { default as DatePicker } from './components/date-picker/DatePicker.tsx';
 export { default as DateRangePicker } from './components/date-range-picker/DateRangePicker.tsx';

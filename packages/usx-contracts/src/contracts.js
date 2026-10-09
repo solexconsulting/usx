@@ -1632,6 +1632,308 @@ export const componentContracts = {
         }
       }
     },
+    "container": {
+      "component": "container",
+      "version": 1,
+      "required": [],
+      "props": {
+        "element": {
+          "type": "select",
+          "description": "Root HTML element. Use a heading or accessible label for named sections and navigation; list roots require list-item children.",
+          "options": [
+            "div",
+            "section",
+            "article",
+            "aside",
+            "nav",
+            "ul",
+            "ol",
+            "li"
+          ],
+          "default": "div"
+        },
+        "gridContainer": {
+          "type": "select",
+          "description": "Opt-in centered USWDS page-width container with side padding. Default uses the USX themed grid-container; named sizes use USWDS widths. Usually wrap a gridRow inside this container rather than combining them.",
+          "options": [
+            "default",
+            "card",
+            "card-lg",
+            "mobile",
+            "mobile-lg",
+            "tablet",
+            "tablet-lg",
+            "desktop",
+            "desktop-lg",
+            "widescreen"
+          ]
+        },
+        "gridRow": {
+          "type": "boolean",
+          "description": "Use a wrapping USWDS grid row. Nest Containers with column settings as direct children. Omitted leaves the container unstyled.",
+          "default": false
+        },
+        "display": {
+          "type": "select",
+          "description": "Display mode. Choose flex or inline-flex to enable direction, wrap, alignment, and gap. Flow-root contains floated children; none hides the container and its descendants.",
+          "options": [
+            "block",
+            "flex",
+            "inline",
+            "inline-block",
+            "inline-flex",
+            "none",
+            "flow-root"
+          ]
+        },
+        "direction": {
+          "type": "select",
+          "description": "Direction of flex children. Requires display flex or inline-flex (or gridRow). Reverse directions change visual order only, not reading or keyboard order.",
+          "options": [
+            "row",
+            "column",
+            "row-reverse",
+            "column-reverse"
+          ]
+        },
+        "wrap": {
+          "type": "select",
+          "description": "Whether flex children wrap onto new lines. Set wrap for a flexible toolbar; omitted uses normal CSS behavior.",
+          "options": [
+            "wrap",
+            "nowrap",
+            "wrap-reverse"
+          ]
+        },
+        "justify": {
+          "type": "select",
+          "description": "Distribute children along the main flex axis.",
+          "options": [
+            "start",
+            "end",
+            "center",
+            "space-between",
+            "space-around",
+            "space-evenly"
+          ]
+        },
+        "align": {
+          "type": "select",
+          "description": "Align children across the flex axis.",
+          "options": [
+            "start",
+            "end",
+            "center",
+            "stretch",
+            "baseline"
+          ]
+        },
+        "alignSelf": {
+          "type": "select",
+          "description": "Override this container’s alignment as a child of a flex parent. Auto restores parent alignment.",
+          "options": [
+            "auto",
+            "start",
+            "end",
+            "center",
+            "stretch",
+            "baseline"
+          ]
+        },
+        "flex": {
+          "type": "select",
+          "description": "Size this container as a flex child: auto uses its content size, fill shares available space, none keeps its size. Use column instead when this is a USWDS grid column.",
+          "options": [
+            "auto",
+            "fill",
+            "none"
+          ]
+        },
+        "gap": {
+          "type": "select",
+          "description": "Space between flex children using USWDS spacing tokens (1 = 8px, 05 = 4px). Use gutters instead on gridRow: CSS gap adds to percentage column widths.",
+          "options": [
+            "0",
+            "2px",
+            "05",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ]
+        },
+        "column": {
+          "type": "select",
+          "description": "Width of this container inside a gridRow: 1–12 columns, auto for content width, or fill for equal shares. Set 12 at the base to stack on small screens, then override at larger breakpoints.",
+          "options": [
+            "auto",
+            "fill",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+          ]
+        },
+        "offset": {
+          "type": "select",
+          "description": "Offset this grid column by 1–12 columns. Use none to reset an earlier offset.",
+          "options": [
+            "none",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+          ]
+        },
+        "gutters": {
+          "type": "select",
+          "description": "Horizontal USWDS grid gutters; requires gridRow. Use 2 with a desktop override of 4 for standard responsive spacing; 0 removes gutters. Rows use negative margins, so nest them in a gridContainer or another padded parent.",
+          "options": [
+            "sm",
+            "md",
+            "lg",
+            "0",
+            "2px",
+            "05",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ]
+        },
+        "float": {
+          "type": "select",
+          "description": "Float this container so surrounding content wraps around it. Float has no effect on flex children; use a flow-root parent to contain floats.",
+          "options": [
+            "none",
+            "left",
+            "right"
+          ]
+        },
+        "responsive": {
+          "type": "object",
+          "description": "Mobile-first overrides keyed by mobileLg, tablet, and desktop. Omitted fields keep the smaller-screen setting; use explicit values (none, 0, row, etc.) to reset. Breakpoints match precompiled USWDS and do not follow USX page-layout theme breakpoints.",
+          "properties": {
+            "mobileLg": {
+              "type": "object",
+              "description": "Layout overrides at 30em / 480px and wider (pixel equivalent assumes 16px browser default).",
+              "component": "container",
+              "omit": [
+                "element",
+                "gridContainer",
+                "gridRow",
+                "responsive",
+                "children",
+                "content",
+                "className",
+                "id",
+                "role",
+                "ariaLabel",
+                "ariaLabelledby"
+              ]
+            },
+            "tablet": {
+              "type": "object",
+              "description": "Layout overrides at 40em / 640px and wider (pixel equivalent assumes 16px browser default).",
+              "component": "container",
+              "omit": [
+                "element",
+                "gridContainer",
+                "gridRow",
+                "responsive",
+                "children",
+                "content",
+                "className",
+                "id",
+                "role",
+                "ariaLabel",
+                "ariaLabelledby"
+              ]
+            },
+            "desktop": {
+              "type": "object",
+              "description": "Layout overrides at 64em / 1024px and wider (pixel equivalent assumes 16px browser default).",
+              "component": "container",
+              "omit": [
+                "element",
+                "gridContainer",
+                "gridRow",
+                "responsive",
+                "children",
+                "content",
+                "className",
+                "id",
+                "role",
+                "ariaLabel",
+                "ariaLabelledby"
+              ]
+            }
+          }
+        },
+        "children": {
+          "type": "slot",
+          "description": "Grouped content rendered directly, with no child wrappers or reordering. Takes precedence over content unless null or undefined."
+        },
+        "content": {
+          "type": "slot",
+          "description": "Fallback grouped content when children is null or undefined."
+        },
+        "className": {
+          "type": "string",
+          "description": "Additional CSS classes for spacing, decoration, or layouts beyond these controls."
+        },
+        "id": {
+          "type": "string",
+          "description": "HTML identifier for links and accessible references."
+        },
+        "role": {
+          "type": "string",
+          "description": "Optional ARIA role; prefer an appropriate semantic element."
+        },
+        "ariaLabel": {
+          "type": "string",
+          "description": "Accessible name when a visible label is not available."
+        },
+        "ariaLabelledby": {
+          "type": "string",
+          "description": "ID of the visible heading or label that names this container."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Container"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "container",
+          "template": "container/container.django.html",
+          "tag": "container"
+        }
+      }
+    },
     "copy-to-clipboard": {
       "component": "copy-to-clipboard",
       "version": 1,
@@ -5915,11 +6217,11 @@ export const componentContracts = {
       "props": {
         "id": {
           "type": "string",
-          "description": "ID for the control (used as prefix for option IDs)"
+          "description": "ID for the control (used as prefix for option IDs). Supply a unique ID in Django."
         },
         "options": {
           "type": "array",
-          "description": "Options as strings, numbers, or objects with value, label, icon, and disabled. Use distinct values and a label for every icon option.",
+          "description": "Options as strings, numbers, or objects with value, label, icon, and disabled. Django requires option objects with value and label. Use distinct values and a label for every icon option.",
           "items": {
             "type": [
               "object",
@@ -5984,15 +6286,11 @@ export const componentContracts = {
         },
         "className": {
           "type": "string",
-          "description": "Additional classes"
-        },
-        "label": {
-          "type": "slot",
-          "description": "Visible accessible group label."
+          "description": "Additional classes for the toggle list"
         },
         "ariaLabel": {
           "type": "string",
-          "description": "Accessible group name when no visible label is supplied."
+          "description": "Accessible name for the radio group. Defaults to name when omitted."
         },
         "required": {
           "type": "boolean",
