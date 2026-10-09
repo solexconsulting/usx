@@ -544,14 +544,14 @@ class CalloutQuoteTests(SimpleTestCase):
     def test_callout_props_and_content_precedence(self):
         plain = render_component("callout", {"content": "Fallback"})
         self.assertIn("Fallback", plain)
-        self.assertNotIn("usx-border-", plain)
+        self.assertNotIn("border-", plain)
         html = render_component("callout", {
             "orientation": "vertical", "element": "aside", "strokeColor": "info",
             "backgroundColor": "base-lightest", "textColor": "primary",
             "indent": "md", "dedent": True, "big": True,
             "children": "Preferred", "content": "Ignored",
         })
-        for text in ("<aside", "usx-callout--vertical", "usx-border-info", "bg-base-lightest",
+        for text in ("<aside", "usx-callout--vertical", "border-info", "bg-base-lightest",
                      "text-primary", "usx-callout--indent-md", "usx-callout--dedent",
                      "usx-callout--big", "Preferred"):
             self.assertIn(text, html)

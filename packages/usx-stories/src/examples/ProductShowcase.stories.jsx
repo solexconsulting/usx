@@ -99,7 +99,7 @@ export const ProductShowcase = {
             <Section title="Why Choose USX Platform?" className="margin-top-4">
               <div className="grid-row grid-gap">
                 <div className="tablet:grid-col-4 margin-bottom-2">
-                  <div className="padding-3 border usx-border-border usx-rounded-box bg-surface-1 height-full">
+                  <div className="padding-3 border usx-rounded-box bg-surface-1 height-full">
                     <h3 className="margin-top-0 display-flex flex-align-center text-primary">
                       <Icon name="check_circle" size="lg" className="text-success margin-right-1" /> Reliable Uptime
                     </h3>
@@ -110,7 +110,7 @@ export const ProductShowcase = {
                 </div>
 
                 <div className="tablet:grid-col-4 margin-bottom-2">
-                  <div className="padding-3 border usx-border-border usx-rounded-box bg-surface-1 height-full">
+                  <div className="padding-3 border usx-rounded-box bg-surface-1 height-full">
                     <h3 className="margin-top-0 display-flex flex-align-center text-primary">
                       <Icon name="security" size="lg" className="text-primary margin-right-1" /> Security Compliant
                     </h3>
@@ -121,7 +121,7 @@ export const ProductShowcase = {
                 </div>
 
                 <div className="tablet:grid-col-4 margin-bottom-2">
-                  <div className="padding-3 border usx-border-border usx-rounded-box bg-surface-1 height-full">
+                  <div className="padding-3 border usx-rounded-box bg-surface-1 height-full">
                     <h3 className="margin-top-0 display-flex flex-align-center text-primary">
                       <Icon name="support" size="lg" className="text-accent-cool margin-right-1" /> Dedicated Support
                     </h3>

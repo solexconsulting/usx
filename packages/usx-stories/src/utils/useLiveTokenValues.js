@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { themeManifest } from '@solexllc/usx-theme/theme-manifest';
 
 const VAR_REF = /^var\((--[\w-]+)\)$/;
+const THEME_VARS = new Set(themeManifest.map((token) => token.cssVar));
 
 function readRawValues() {
   const declared = new Map();
@@ -31,7 +32,7 @@ function readRawValues() {
           if (sel && (sel === ':root' || sel === '[data-theme]' || sel.includes(':root'))) {
             for (let i = 0; i < rule.style.length; i++) {
               const name = rule.style[i];
-              if (name.startsWith('--usx-') && !declared.has(name)) {
+              if (THEME_VARS.has(name) && !declared.has(name)) {
                 const val = rule.style.getPropertyValue(name).trim();
                 if (val) declared.set(name, val);
               }

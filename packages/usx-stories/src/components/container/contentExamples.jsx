@@ -167,18 +167,18 @@ export const contentStoryDefs = {
         </Container>
         <Section id="contact-options-title" title="Start with the option that works for you" headingLevel="h3">
           <Container display="flex" direction="column" gap="3" responsive={{ tablet: { direction: 'row' } }}>
-            <Container flex="fill" className="minw-0 border-top-05 usx-border-primary padding-top-2">
+            <Container flex="fill" className="minw-0 border-top-05 border-primary padding-top-2">
               <Eyebrow>By phone</Eyebrow>
               <Container display="flex" direction="column" gap="1" className="margin-top-2">
                 <Link href="tel:+12025550100">(202) 555-0100</Link>
                 <Prose>Monday–Friday, 9 a.m.–5 p.m.</Prose>
               </Container>
             </Container>
-            <Container flex="fill" className="minw-0 border-top-05 usx-border-primary padding-top-2">
+            <Container flex="fill" className="minw-0 border-top-05 border-primary padding-top-2">
               <Eyebrow>In person</Eyebrow>
               <Prose className="margin-top-2">Walk in at any service center. Appointments may reduce your wait.</Prose>
             </Container>
-            <Container flex="fill" className="minw-0 border-top-05 usx-border-primary padding-top-2">
+            <Container flex="fill" className="minw-0 border-top-05 border-primary padding-top-2">
               <Eyebrow>In your neighborhood</Eyebrow>
               <Prose className="margin-top-2">Meet our outreach team at a participating library.</Prose>
             </Container>

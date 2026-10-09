@@ -338,7 +338,7 @@ $usx-text-inverse-var: null !default;
 $usx-text-inverse: usx-var($usx-text-inverse-var) !default;
 
 // ── Color map (used by usx utilities; null entries emit no classes) ─────────
-$colors: (
+$usx-colors: (
   'primary':        $usx-color-primary,
   'primary-dark':   $usx-color-primary-dark,
   'primary-darker': $usx-color-primary-darker,
@@ -357,14 +357,14 @@ $colors: (
   'test':           $usx-color-test,
 ) !default;
 
-$text-colors: (
+$usx-text-colors: (
   'ink':      $usx-text-ink,
   'muted':    $usx-text-muted,
   'subtle':   $usx-text-subtle,
   'inverse':  $usx-text-inverse,
 ) !default;
 
-$surface-colors: (
+$usx-surface-colors: (
   'surface-1': $usx-surface-1,
   'surface-2': $usx-surface-2,
   'surface-3': $usx-surface-3,
@@ -403,7 +403,7 @@ $usx-radius-selector: usx-var($usx-radius-selector-var) !default;
 $usx-radius-none-var: null !default; // square-by-default components: accordions, alerts
 $usx-radius-none: usx-var($usx-radius-none-var) !default;
 
-$border-radius: (
+$usx-border-radiuses: (
   'sm': $usx-radius-sm,
   'md': $usx-radius-md,
   'lg': $usx-radius-lg,
@@ -425,7 +425,7 @@ $usx-border-width-lg: usx-var($usx-border-width-lg-var) !default;
 $usx-border-width-xl-var: null !default;
 $usx-border-width-xl: usx-var($usx-border-width-xl-var) !default;
 
-$border-width: (
+$usx-border-widths: (
   'sm': $usx-border-width-sm,
   'md': $usx-border-width-md,
   'lg': $usx-border-width-lg,

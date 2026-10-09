@@ -34,7 +34,7 @@ export const ProfileInfo = {
         content={
           <Page id="profile-info-example" title="User Profile" tabIndex={-1}>
             <Section>
-              <div className="padding-3 border usx-border-border usx-rounded-box bg-surface-2 margin-bottom-3">
+              <div className="padding-3 border usx-rounded-box bg-surface-2 margin-bottom-3">
                 <div className="display-flex flex-wrap flex-align-start gap-3">
                   <Indicator className="usx-indicator-top usx-indicator-end margin-right-3">
                     <Avatar
@@ -77,7 +77,7 @@ export const ProfileInfo = {
             <Section title="Account & Contact Information">
               <div className="grid-row grid-gap">
                 <div className="tablet:grid-col-6 margin-bottom-2">
-                  <section className="height-full padding-3 border usx-border-border usx-rounded-box bg-surface-1" aria-labelledby="profile-contact-heading">
+                  <section className="height-full padding-3 border usx-rounded-box bg-surface-1" aria-labelledby="profile-contact-heading">
                     <h3 id="profile-contact-heading" className="margin-top-0">Contact Details</h3>
                       <IconList
                         items={[
@@ -90,7 +90,7 @@ export const ProfileInfo = {
                 </div>
 
                 <div className="tablet:grid-col-6 margin-bottom-2">
-                  <section className="height-full padding-3 border usx-border-border usx-rounded-box bg-surface-1" aria-labelledby="profile-access-heading">
+                  <section className="height-full padding-3 border usx-rounded-box bg-surface-1" aria-labelledby="profile-access-heading">
                     <h3 id="profile-access-heading" className="margin-top-0">Role &amp; Access Summary</h3>
                       <IconList
                         items={[

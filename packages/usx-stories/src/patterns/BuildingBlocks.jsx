@@ -36,7 +36,7 @@ export function FormSection({
   ];
   return (
     <form
-      className="border-top usx-border-border padding-top-3"
+      className="border-top padding-top-3"
       noValidate
       onChange={() => setDraftSaved(false)}
       onSubmit={(event) => {
@@ -138,7 +138,7 @@ export function MetricCard({
 }) {
   return (
     <div
-      className={`bg-surface-2 border-left-05 usx-border-${color} padding-3 usx-rounded-md height-full`}
+      className={`bg-surface-2 border-left-05 border-${color} padding-3 usx-rounded-md height-full`}
     >
       <h3 className={`margin-0 text-${color} font-sans-sm`}>{title}</h3>
       <div className="font-heading-xl text-ink margin-y-1">
@@ -179,7 +179,7 @@ export function ReviewConfirmation({ items, onEdit, onSubmit, disabled = false }
         {items.map((item, index) => (
           <div
             key={item.label}
-            className="padding-y-2 border-bottom usx-border-border display-flex flex-align-center flex-justify"
+            className="padding-y-2 border-bottom display-flex flex-align-center flex-justify"
           >
             <div>
               <dt className="text-base font-sans-xs">{item.label}</dt>
@@ -208,7 +208,7 @@ export function ReviewConfirmation({ items, onEdit, onSubmit, disabled = false }
 export function DestructiveAction({ name = 'application', onCancel, onDelete }) {
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId} className="border-top usx-border-error padding-y-3">
+    <section aria-labelledby={headingId} className="border-top border-error padding-y-3">
       <h2 id={headingId} className="font-sans-lg">
         Delete {name}?
       </h2>

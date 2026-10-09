@@ -2,12 +2,12 @@
 //
 // Compiles both Sass entry points once and asserts the "static by default,
 // no fallback" architecture plus manifest parity:
-//   1. default build (src/index.scss, hooks null) has zero var(--usx-*) refs —
+//   1. default build (src/index.scss, hooks null) has zero theme var() refs —
 //      unconfigured tokens are dropped so USWDS defaults show through.
-//   2. themed build (src/themed.scss, hooks on) uses only bare var(--usx-*)
+//   2. themed build (src/themed.scss, hooks on) uses only bare theme var()
 //      refs — no compiled-in fallbacks; runtime values come from theme.css.
 //   3. neither build leaks a literal "null" (an unguarded composite value).
-//   4. every var(--usx-*) in the themed build has a manifest entry.
+//   4. every theme var() in the themed build has a manifest entry.
 //   5. every manifest entry is consumed by the themed build, unless listed in
 //      UNCONSUMED (published for downstream Sass / theme.css chains only).
 //   6. every manifest `derivedFrom` names a real manifest entry.
@@ -83,15 +83,16 @@ const UNCONSUMED = new Set([
   '--usx-radius-field',
   '--usx-radius-selector',
   '--usx-radius-none',
-  '--usx-border-width-md',
+  '--border-width-md',
 ]);
 
-// Every `var(--usx-…)` occurrence as { name, fallback }, nested-paren safe.
-function usxVarRefs(css) {
+// Every theme var() occurrence as { name, fallback }, nested-paren safe.
+function themeVarRefs(css) {
   const refs = [];
-  const marker = 'var(--usx-';
-  let i = 0;
-  while ((i = css.indexOf(marker, i)) !== -1) {
+  const marker = /var\(--(?:usx-|border-)/g;
+  let match;
+  while ((match = marker.exec(css)) !== null) {
+    const i = match.index;
     let depth = 0;
     let j = i;
     for (; j < css.length; j++) {
@@ -101,7 +102,7 @@ function usxVarRefs(css) {
     const inner = css.slice(i + 'var('.length, j);
     const comma = inner.indexOf(',');
     refs.push({ name: (comma === -1 ? inner : inner.slice(0, comma)).trim(), fallback: comma !== -1 ? inner : null });
-    i += 'var('.length; // rescan inside for nested var(--usx-*)
+    marker.lastIndex = i + 'var('.length; // rescan inside for nested theme var() references
   }
   return refs;
 }
@@ -161,15 +162,15 @@ for (const condition of ['null', 'false', '0', 'true']) {
 
 for (const w of sassWarnings) errors.push(`sass warning: ${w}`);
 
-if (usxVarRefs(defaultCss).length) {
-  errors.push('default build contains var(--usx-*) references — unconfigured tokens must be omitted, not var()-wrapped');
+if (themeVarRefs(defaultCss).length) {
+  errors.push('default build contains theme var() references — unconfigured tokens must be omitted, not var()-wrapped');
 }
 for (const [label, css] of [['default', defaultCss], ['themed', themedCss]]) {
   if (/:\s*[^;{}]*\bnull\b/.test(css)) errors.push(`${label} build contains a literal "null" value — a composite declaration needs an @if guard`);
 }
 
 const seen = new Set();
-for (const ref of usxVarRefs(themedCss)) {
+for (const ref of themeVarRefs(themedCss)) {
   if (ref.fallback) errors.push(`themed build uses a fallback: var(${ref.fallback}) — fallbacks are not allowed`);
   if (!byVar.has(ref.name)) errors.push(`no manifest entry for ${ref.name}`);
   seen.add(ref.name);

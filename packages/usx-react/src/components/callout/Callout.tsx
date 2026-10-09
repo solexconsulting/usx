@@ -37,7 +37,7 @@ export default function Callout({
       className={ClassNames(
         'usx-callout',
         orientation === 'vertical' && 'usx-callout--vertical',
-        strokeColor && `usx-border-${strokeColor}`,
+        strokeColor && `border-${strokeColor}`,
         indent && `usx-callout--indent-${indent}`,
         dedent && 'usx-callout--dedent',
         (big ?? orientation === 'horizontal') && 'usx-callout--big',

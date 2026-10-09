@@ -2,6 +2,7 @@ import React from 'react';
 import Code from '../../../usx-react/src/components/code/Code';
 import Status from '../../../usx-react/src/components/status/Status';
 import Tag from '../../../usx-react/src/components/tag/Tag';
+import Link from '../../../usx-react/src/components/link/Link';
 
 export default {
   title: 'Documentation/USX/Utilities',
@@ -14,6 +15,67 @@ const COLOR_NAMES = [
   'disabled', 'beta', 'dev', 'test'
 ];
 
+const TEXT_COLORS = [
+  { name: 'ink', description: 'Primary body ink' },
+  { name: 'muted', description: 'Nav & pending ink' },
+  { name: 'subtle', description: 'Secondary/eyebrow ink' },
+  { name: 'inverse', description: 'Inverted surface ink', className: 'bg-surface-inverse' }
+]
+
+const SURFACE_COLORS = [
+  { name: 'surface-1', description: 'Primary page surface / main background' },
+  { name: 'surface-2', description: 'Card, accordion header & callout surface' },
+  { name: 'surface-3', description: 'Header bar, footer, & carousel media background' },
+  { name: 'surface-inverse', description: 'Inverse surface', className: 'text-inverse' }
+]
+
+const BORDER_RADIUSES = [
+  { name: 'box', size: 'var(--usx-box-radius)' },
+  { name: 'field', size: 'var(--usx-field-radius)' },
+  { name: 'selector', size: 'var(--usx-selector-radius)' },
+  { name: 'none', size: '0' },
+  { name: 'sm', size: '0.25rem' },
+  { name: 'md', size: '0.5rem' },
+  { name: 'lg', size: '1rem' },
+  { name: 'xl', size: '2rem' },
+  { name: 'full', size: '50%' },
+]
+
+const BORDER_WIDTHS = [
+  // name: sm | md | lg | xl, description: What is it used by?
+  { name: 'sm', usedBy: [
+    'Task List (inner border)',
+    'Sidenav',
+    'Radio/Checkbox Tile',
+    'File Input',
+    'Summary Box',
+    '.usx-border-width-inputs'
+  ], description: 'Task List (inner border), Sidenav, Radio/Checkbox Tile, File Input, Summary Box, .usx-border-width-inputs' },
+  { name: 'md', usedBy: [
+    'Task List (outer border)',
+    'Slider',
+    'Card',
+    'Button'
+  ], description: 'Task List (outer border), Slider, Card, Button' },
+  { name: 'lg', usedBy: [
+    'Callout',
+    'Accordion',
+    'Form Group (error state)',
+    'Input',
+    'Select',
+    'Text Area (success or error state)'
+  ], description: 'Callout, Accordion, Form Group (error state), Input, Select, and Text Area (success or error state)' },
+  { name: 'xl', usedBy: [
+    'Step Indicator',
+    'Alert'
+  ], description: 'Step Indicator, Alert' },
+  { name: 'inputs', usedBy: [
+    'Input fields'
+  ], description: 'Input fields' }
+]
+
+const BORDER_WIDTH_KEYS = BORDER_WIDTHS.map(bw => bw.name);
+
 export const Utilities = {
   render: () => (
     <div className="usa-prose maxw-desktop">
@@ -23,14 +85,14 @@ export const Utilities = {
         and runtime-themeable CSS utility classes (in <code>_utilities.scss</code>, importable standalone via <code>@solexllc/usx/utilities</code>).
       </p>
 
-      <hr className="margin-y-4" />
+      <hr className="margin-y-7" />
 
       <h2>1. SCSS Helpers &amp; Functions (<code>_variables.scss</code>)</h2>
       <p>
         Import variables and functions in your SCSS modules via <code>@use 'pkg:@solexllc/usx-theme/variables' as *;</code> or <code>@use '@solexllc/usx/variables' as *;</code>.
       </p>
 
-      <h3>Spacing Function: <code>units($value)</code></h3>
+      <h3>1.1 Spacing Function: <code>units($value)</code></h3>
       <p>
         Calculates pixel values based on an 8px grid multiplier (<code>$value * 8px</code>). Ensures spacing values remain consistent across component SCSS.
       </p>
@@ -50,7 +112,7 @@ export const Utilities = {
         </tbody>
       </table>
 
-      <h3>Responsive Media Query Mixin: <code>at-media($breakpoint, $direction: 'min')</code></h3>
+      <h3>1.2 Responsive Media Query Mixin: <code>at-media($breakpoint, $direction: 'min')</code></h3>
       <p>
         Generates queries from the shared Sass settings. Desktop uses <code>$usx-layout-breakpoint</code>;
         tablet uses <code>$breakpoint-tablet</code>. Pass <code>'max'</code> for an exclusive upper bound,
@@ -81,7 +143,7 @@ export const Utilities = {
         ]}
       />
 
-      <h3>Theming &amp; Utility Functions</h3>
+      <h3>1.3 Theming &amp; Utility Functions</h3>
       <table className="usa-table usx-table usa-table--borderless width-full">
         <thead>
           <tr><th>Function</th><th>Signature</th><th>Description</th></tr>
@@ -94,7 +156,7 @@ export const Utilities = {
           </tr>
           <tr>
             <td><code>usx-when()</code></td>
-            <td><code>usx-when($condition, $value)</code></td>
+            <td><code>usx-when($condition, $value, $fallback: null)</code></td>
             <td>Guards composite property values: returns <code>$value</code> only when <code>$condition</code> is non-null (prevents invalid output like <code>1px solid null</code>).</td>
           </tr>
           <tr>
@@ -105,7 +167,7 @@ export const Utilities = {
         </tbody>
       </table>
 
-      <h3>Layout &amp; Breakpoint SCSS Variables</h3>
+      <h3>1.4 Layout &amp; Breakpoint SCSS Variables</h3>
       <table className="usa-table usx-table usa-table--borderless width-full">
         <thead>
           <tr><th>Variable</th><th>Default Value</th><th>Purpose</th></tr>
@@ -130,7 +192,7 @@ export const Utilities = {
         do not wrap it in another padded container. Sidebar visibility stays container-based, not viewport-based.
       </p>
 
-      <hr className="margin-y-5" />
+      <hr className="margin-y-7" />
 
       <h2>2. CSS Utility Classes (<code>_utilities.scss</code>)</h2>
       <p>
@@ -138,19 +200,19 @@ export const Utilities = {
         All utility classes automatically update when switching themes.
       </p>
 
-      <h3>Color Utilities</h3>
+      <h3>2.1 Color Utilities</h3>
       <p>
-        Generated for every non-null entry in the <code>$colors</code> map (theme, state, and environment roles):
+        Generated for every non-null entry in the <code>$usx-colors</code> map (theme, state, and environment roles):
       </p>
       <ul>
         <li><code>.bg-{'{name}'}</code> — background color (<code>!important</code>)</li>
         <li><code>.text-{'{name}'}</code> — text color (<code>!important</code>)</li>
-        <li><code>.usx-border-{'{name}'}</code> — border color (<code>!important</code>)</li>
+        <li><code>.border-{'{name}'}</code> — border color (<code>!important</code>)</li>
         <li><code>.before-bg-{'{name}'}::before</code> / <code>.after-bg-{'{name}'}::after</code> — pseudo-element background fill</li>
       </ul>
-      
-      <h4>Background Utilities (<code>.bg-*</code>)</h4>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }} className="margin-bottom-3">
+
+      <h4>2.1.1 Background Utilities (<code>.bg-*</code>)</h4>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }} className="margin-bottom-5">
         {COLOR_NAMES.map((name) => (
           <div key={name} className="border usx-rounded-md">
             <div className={`bg-${name} height-5`} />
@@ -161,8 +223,8 @@ export const Utilities = {
         ))}
       </div>
 
-      <h4>Text Color Utilities (<code>.text-*</code>)</h4>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }} className="margin-bottom-3">
+      <h4>2.1.2 Text Color Utilities (<code>.text-*</code>)</h4>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }} className="margin-bottom-5">
         {COLOR_NAMES.map((name) => (
           <div key={name} className={`${name === "inverse" ? "bg-surface-inverse" : ""} border padding-1 usx-rounded-md`}>
             <span className={`text-${name} font-sans-md text-bold`}>
@@ -173,98 +235,104 @@ export const Utilities = {
         ))}
       </div>
 
-      <h3>Text-Role Utilities (<code>.text-ink</code>, <code>.usx-text*</code>)</h3>
+      <h4>2.1.3 Surface Utilities (<code>.bg-surface*</code>)</h4>
+      <p>Generated from the <code>$usx-surface-colors</code> map:</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }} className="margin-bottom-5">
+        {SURFACE_COLORS.map((surface) => (
+          <div key={surface.name} className={`border usx-rounded-md padding-1 bg-${surface.name} ${surface.className}`}>
+            <code className="font-mono-md text-bold">.bg-{surface.name}</code>
+            <div className="font-sans-2xs margin-top-05">
+              {surface.description}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h4>2.1.4 Text-Role Utilities (<code>.text-ink</code>, <code>.usx-text*</code>)</h4>
       <p>
-        Generated from the <code>$text-colors</code> map. Class names use the bare token role (no <code>text-</code> prefix):
+        Generated from the <code>$usx-text-colors</code> map. Class names use the bare token role (no <code>text-</code> prefix):
       </p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem' }} className="margin-bottom-3">
-        <div className="border usx-rounded-md padding-1">
-          <div className="text-ink font-sans-md text-bold">Primary body ink</div>
-          <code className="font-mono-2xs">.text-ink</code>
-        </div>
-        <div className="border usx-rounded-md padding-1">
-          <div className="text-muted font-sans-md text-bold">Nav &amp; pending ink</div>
-          <code className="font-mono-2xs">.text-muted</code>
-        </div>
-        <div className="border usx-rounded-md padding-1">
-          <div className="text-subtle font-sans-md text-bold">Secondary/eyebrow ink</div>
-          <code className="font-mono-2xs">.text-subtle</code>
-        </div>
-        <div className="bg-surface-inverse text-inverse border usx-rounded-md padding-1">
-          <div className="font-sans-md text-bold">Inverted surface ink</div>
-          <code className="font-mono-2xs">.text-inverse</code>
-        </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem' }} className="margin-bottom-9">
+        {TEXT_COLORS.map((text) => (
+          <div key={text.name} className={`border usx-rounded-md padding-1 text-${text.name} ${text.className}`}>
+            <code className="font-mono-md text-bold">.text-{text.name}</code>
+            <div className="font-sans-2xs margin-top-05">
+              {text.description}
+            </div>
+          </div>
+
+        ))}
       </div>
 
-      <h3>Surface Utilities (<code>.bg-surface*</code>)</h3>
-      <p>Generated from the <code>$surface-colors</code> map:</p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }} className="margin-bottom-3">
-        <div className="border usx-rounded-md padding-1 bg-surface-1">
-          <code className="font-mono-md">.bg-surface-1</code>
-          <div className="font-sans-2xs margin-top-05">Primary page surface / main background</div>
-        </div>
-        <div className="border usx-rounded-md padding-1 bg-surface-2">
-          <code className="font-mono-md">.bg-surface-2</code>
-          <div className="font-sans-2xs margin-top-05">Card, accordion header &amp; callout surface</div>
-        </div>
-        <div className="border usx-rounded-md padding-1 bg-surface-3">
-          <code className="font-mono-md">.bg-surface-3</code>
-          <div className="font-sans-2xs margin-top-05">Header bar, footer &amp; carousel media background</div>
-        </div>
-        <div className="border usx-rounded-md padding-1 bg-surface-inverse text-inverse">
-          <code className="font-mono-md">.bg-surface-inverse</code>
-          <div className="font-sans-2xs margin-top-05">Inverse surface</div>
-        </div>
-      </div>
+      <h3>2.2 Border Utilities</h3>
+      <p>
+        In addition to the <Link external={true} href="https://designsystem.digital.gov/utilities/border/">border utilities provided by USWDS</Link>,
+        USX provides additional border utilities for consistent styling across components.
+      </p>
 
-      <h3>Border Radius Utilities</h3>
+      <h4>2.2.1 Border Radius Utilities</h4>
       <p>Classes set <code>border-radius</code> and clip overflowing content.</p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem' }} className="margin-top-2 margin-bottom-4">
-        <div  className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-1 padding-y-2 border usx-border-accent-cool usx-rounded-sm">
-          <code className="font-mono-md">.usx-rounded-sm</code>
-          <div className="font-mono-2xs">$usx-radius-sm (0.25rem)</div>
-        </div>
-        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-1 padding-y-2 border usx-border-accent-cool usx-rounded-md">
-          <code className="font-mono-md">.usx-rounded-md</code>
-          <div className="font-mono-2xs">$usx-radius-md (0.5rem)</div>
-        </div>
-        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-1 padding-y-2 border usx-border-accent-cool usx-rounded-lg">
-          <code className="font-mono-md">.usx-rounded-lg</code>
-          <div className="font-mono-2xs">$usx-radius-lg (1rem)</div>
-        </div>
-        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-1 padding-y-2 border usx-border-accent-cool usx-rounded-xl">
-          <code className="font-mono-md">.usx-rounded-xl</code>
-          <div className="font-mono-2xs">$usx-radius-xl (2rem)</div>
-        </div>
-        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-circle">
-          <code className="font-mono-md">.usx-circle</code>
-          <div className="font-mono-2xs">$usx-radius-circle (50%)</div>
-        </div>
-        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-rounded-full">
-          <code className="font-mono-md">.usx-rounded-full</code>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '1rem' }} className="margin-top-2">
+        {BORDER_RADIUSES.map((radius) => (
+          radius.name !== 'full' && (
+            <div key={radius.name} className={`bg-surface-2 display-flex flex-column flex-justify-center padding-x-1 padding-y-2 border border-accent-cool usx-rounded-${radius.name}`}>
+              <code className="font-mono-md text-bold">.usx-rounded-{radius.name}</code>
+              <div className="font-mono-2xs">${`usx-radius-${radius.name}`} ({radius.size})</div>
+            </div>
+          )
+        ))}
+      </div>
+      <div className="margin-top-3 margin-bottom-5" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, max-content)', gap: '1rem', placeItems: 'center' }}>
+        <div style={{ gridColumn: '1 / -1', justifySelf: 'start' }}>
+          <code className="font-mono-md text-bold">.usx-rounded-full or<br />.usx-circle</code>
           <div className="font-mono-2xs">$usx-radius-full (50%)</div>
         </div>
-        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-rounded-box">
-          <code className="font-mono-md">.usx-rounded-box</code>
-          <div className="font-mono-2xs">$usx-radius-box</div>
-        </div>
-        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-rounded-field">
-          <code className="font-mono-md">.usx-rounded-field</code>
-          <div className="font-mono-2xs">$usx-radius-field</div>
-        </div>
-        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-rounded-selector">
-          <code className="font-mono-md">.usx-rounded-selector</code>
-          <div className="font-mono-2xs">$usx-radius-selector</div>
-        </div>
-        <div className="bg-surface-2 display-flex flex-column flex-justify-center padding-x-3 padding-y-2 border usx-border-accent-cool usx-rounded-none">
-          <code className="font-mono-md">.usx-rounded-none</code>
-          <div className="font-mono-2xs">$usx-radius-none (0)</div>
-        </div>
+        {[[9, 5], [5, 5], [9, 9], [5, 9]].map(([width, height]) => (
+          <div
+            key={`${width}-${height}`}
+            className={`width-${width} height-${height} usx-rounded-full bg-surface-2 border border-accent-cool`}
+            style={{ display: 'grid', placeItems: 'center' }}
+          >
+            {width} x {height}
+          </div>
+        ))}
       </div>
 
-      <h3>Simple Animations</h3>
+      <h4>2.2.2 Border Color Utilities (.border-*)</h4>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }} className="margin-bottom-3 margin-bottom-5">
+        {COLOR_NAMES.map((name) => (
+          <div key={name} className={`border-1 usx-rounded-md border-${name}`}>
+            <div className="padding-y-05 padding-x-1">
+              <code className="font-mono-2xs">.border-{name}</code>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h4>2.2.3 Border Width Utilities (.border-width-({BORDER_WIDTH_KEYS.join('|')}))</h4>
+      <p>
+        The border width utilities don't create a border, but instead adjust the width of an existing border.
+        The underlying tokens ($usx-border-width-({BORDER_WIDTH_KEYS.join('|')})) defines the actual width value applied by the utility.
+        The same tokens configure the default border width of borders within USX components.
+      </p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }} className="margin-bottom-3 margin-bottom-9">
+        {BORDER_WIDTHS.map(( width ) => (
+          <div key={width.name} className={`usx-rounded-md border usx-border-width-${width.name}`}>
+            <div className="padding-y-05 padding-x-1 padding-bottom-105">
+              <code className="font-mono-md">.usx-border-width-{width.name}</code>
+              <ul className="usa-list usx-list">
+                {width.usedBy.map((item) => (
+                  <li key={item} className="font-mono-2xs">{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))} 
+      </div>
+
+      <h3>2.3 Simple Animations</h3>
       <p>CSS animations for status indicators and attention-grabbing elements:</p>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1rem' }} className="margin-top-2">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1rem' }} className="margin-top-2 margin-bottom-9">
         <div className="bg-surface-2 border usx-rounded-md padding-2 display-flex flex-column flex-align-center flex-justify-center">
           <Status color="success" size="lg" animation="ping" />
           <code className="font-mono-2xs margin-top-1">.usx-ping</code>
@@ -283,7 +351,7 @@ export const Utilities = {
         </div>
       </div>
 
-      <h3>Sizing Utilities</h3>
+      <h3>2.4 Sizing Utilities</h3>
       <table className="usa-table usx-table usa-table--borderless width-full">
         <thead>
           <tr><th>Class</th><th>CSS Declaration</th><th>Description</th></tr>

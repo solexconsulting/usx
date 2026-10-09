@@ -55,7 +55,7 @@ export const Dashboard = {
         variant="single-column"
         content={
           <Page id="dashboard-example" title="Dashboard" tabIndex={-1}>
-            <div className="padding-bottom-2 border-bottom usx-border-border display-flex flex-wrap flex-align-center flex-justify">
+            <div className="padding-bottom-2 border-bottom display-flex flex-wrap flex-align-center flex-justify">
               <p className="margin-y-1 margin-right-3 font-sans-sm">September 2026 <span className="text-base"> / Monthly overview</span></p>
               <ButtonGroup
                 className="margin-y-1"
@@ -120,7 +120,7 @@ export const Dashboard = {
                   { name: 'Maintenance', status: 'Scheduled', detail: 'October 1, 2:00-4:00 AM ET', color: 'warning' },
                 ].map((system) => (
                   <div key={system.name} className="tablet:grid-col-4 margin-bottom-2 display-flex">
-                    <Indicator className="flex-fill flex-column padding-2 border usx-border-border usx-radius-box bg-surface-1">
+                    <Indicator className="flex-fill flex-column padding-2 border usx-radius-box bg-surface-1">
                       <Status
                         color={system.color}
                         size="lg"

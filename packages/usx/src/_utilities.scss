@@ -1,6 +1,6 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
-@each $color-name, $color-value in $colors {
+@each $color-name, $color-value in $usx-colors {
   @if $color-value {
     .bg-#{$color-name} {
       background-color: $color-value !important;
@@ -10,7 +10,7 @@
       color: $color-value !important;
     }
 
-    .usx-border-#{$color-name} {
+    .border-#{$color-name} {
       border-color: $color-value !important;
     }
 
@@ -24,7 +24,7 @@
   }
 }
 
-@each $color-name, $color-value in $text-colors {
+@each $color-name, $color-value in $usx-text-colors {
   @if $color-value {
     .text-#{$color-name} {
       color: $color-value !important;
@@ -40,7 +40,7 @@
   }
 }
 
-@each $color-name, $color-value in $surface-colors {
+@each $color-name, $color-value in $usx-surface-colors {
   @if $color-value {
     .bg-#{$color-name} {
       background-color: $color-value !important;
@@ -56,7 +56,7 @@
   }
 }
 
-@each $radius-name, $radius-value in $border-radius {
+@each $radius-name, $radius-value in $usx-border-radiuses {
   .usx-rounded-#{$radius-name} {
     border-radius: $radius-value !important;
     overflow: clip;
@@ -68,8 +68,8 @@
   overflow: clip;
 }
 
-@each $width-name, $width-value in $border-width {
-  .usx-border-#{$width-name} {
+@each $width-name, $width-value in $usx-border-widths {
+  .usx-border-width-#{$width-name} {
     border-width: $width-value !important;
   }
 }

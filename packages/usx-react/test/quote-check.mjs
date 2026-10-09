@@ -37,13 +37,13 @@ for (const library of [esm, cjs]) {
   const render = (component, props) => renderToStaticMarkup(React.createElement(component, props));
   const plain = render(library.Callout, { content: 'Fallback' });
   assert.ok(plain.includes('Fallback'));
-  assert.ok(!plain.includes('usx-border-'));
+  assert.ok(!plain.includes('border-'));
   const styled = render(library.Callout, {
     orientation: 'vertical', strokeColor: 'info', backgroundColor: 'base-lightest',
     textColor: 'primary', indent: 'md', dedent: true, big: true, className: 'custom',
     content: 'Ignored', children: 'Preferred', element: 'aside',
   });
-  for (const value of ['<aside', 'usx-callout--vertical', 'usx-border-info', 'bg-base-lightest',
+  for (const value of ['<aside', 'usx-callout--vertical', 'border-info', 'bg-base-lightest',
     'text-primary', 'usx-callout--indent-md', 'usx-callout--dedent', 'usx-callout--big', 'custom', 'Preferred']) {
     assert.ok(styled.includes(value), value);
   }
