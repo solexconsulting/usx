@@ -1,5 +1,13 @@
 # @solexllc/usx-contracts
 
+## 0.6.0
+
+### Minor Changes
+
+- [`4a123a8`](https://github.com/solexconsulting/usx/commit/4a123a8376b3764847fc97f24f2cfbec6020cd7f) Thanks [@olsonap](https://github.com/olsonap)! - Add an unstyled Container with optional responsive flex, display, spacing, float, and USWDS grid controls. Include React and Django rendering, CMS metadata, and Storybook examples.
+
+  Use one shared prop contract with template-only Django rendering and no Container-specific Python helper.
+
 ## 0.5.0
 
 ### Minor Changes
