@@ -1,5 +1,12 @@
 # @solexllc/usx
 
+## 0.8.1
+
+### Patch Changes
+
+- Updated dependencies [[`369d0b5`](https://github.com/solexconsulting/usx/commit/369d0b56799744f4e1a90985ebce5c661d3a8297)]:
+  - @solexllc/usx-theme@0.10.0
+
 ## 0.8.0
 
 ### Minor Changes

@@ -1,5 +1,14 @@
 # @solexllc/usx-react
 
+## 0.6.2
+
+### Patch Changes
+
+- Updated dependencies [[`369d0b5`](https://github.com/solexconsulting/usx/commit/369d0b56799744f4e1a90985ebce5c661d3a8297)]:
+  - @solexllc/usx-theme@0.10.0
+  - @solexllc/usx@0.8.1
+  - @solexllc/usx-uswds-fixes@0.1.14
+
 ## 0.6.1
 
 ### Patch Changes
