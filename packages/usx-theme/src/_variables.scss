@@ -293,11 +293,20 @@ $usx-surface-2: usx-var($usx-surface-2-var) !default;
 $usx-surface-3-var: null !default;
 $usx-surface-3: usx-var($usx-surface-3-var) !default;
 
-// Shared border color: checkbox/radio tiles, task-list item dividers, sidenav
-// item dividers, and the default (overridable) for header/footer section
-// dividers all chain to this unless their own hook is set individually.
+// Independent border roles: default > muted > subtle in contrast, matching
+// the text roles. Components retain their own optional overrides. Inverse
+// is available for opposite-polarity surfaces but unused by default.
 $usx-color-border-var: null !default;
 $usx-color-border: usx-var($usx-color-border-var) !default;
+
+$usx-color-border-subtle-var: null !default;
+$usx-color-border-subtle: usx-var($usx-color-border-subtle-var) !default;
+
+$usx-color-border-muted-var: null !default;
+$usx-color-border-muted: usx-var($usx-color-border-muted-var) !default;
+
+$usx-color-border-inverse-var: null !default;
+$usx-color-border-inverse: usx-var($usx-color-border-inverse-var) !default;
 
 $usx-color-beta-var: null !default;
 $usx-color-beta: usx-var($usx-color-beta-var) !default;
@@ -362,6 +371,13 @@ $usx-text-colors: (
   'muted':    $usx-text-muted,
   'subtle':   $usx-text-subtle,
   'inverse':  $usx-text-inverse,
+) !default;
+
+$usx-border-colors: (
+  'default': $usx-color-border,
+  'subtle':  $usx-color-border-subtle,
+  'muted':   $usx-color-border-muted,
+  'inverse': $usx-color-border-inverse,
 ) !default;
 
 $usx-surface-colors: (
@@ -759,7 +775,7 @@ $usx-card-heading-text: usx-var($usx-card-heading-text-var, $usx-card-text) !def
 $usx-card-media-bg-var: null !default;
 $usx-card-media-bg: usx-var($usx-card-media-bg-var, $usx-surface-3) !default;
 $usx-card-border-color-var: null !default;
-$usx-card-border-color: usx-var($usx-card-border-color-var, $usx-color-border) !default;
+$usx-card-border-color: usx-var($usx-card-border-color-var, $usx-color-border-subtle) !default;
 $usx-card-border-width-var: null !default;
 $usx-card-border-width: usx-var($usx-card-border-width-var, $usx-border-width-md) !default;
 $usx-card-radius-var: null !default;
@@ -803,7 +819,7 @@ $usx-input-radius-var: null !default;
 $usx-input-radius: usx-var($usx-input-radius-var, $usx-radius-field) !default;
 $usx-input-bg: null !default;
 $usx-input-text: null !default;
-$usx-input-border: null !default;
+$usx-input-border: $usx-color-border !default;
 $usx-input-padding: null !default;
 $usx-input-error-border-width: $usx-border-width-lg !default;
 $usx-input-error-border: $usx-color-error !default;
@@ -821,7 +837,7 @@ $usx-textarea-radius-var: null !default;
 $usx-textarea-radius: usx-var($usx-textarea-radius-var, $usx-radius-field) !default;
 $usx-textarea-bg: null !default;
 $usx-textarea-text: null !default;
-$usx-textarea-border: null !default;
+$usx-textarea-border: $usx-input-border !default;
 $usx-textarea-padding: null !default;
 
 // ── Component tokens: File Input ─────────────────────────────────────────────
@@ -830,11 +846,11 @@ $usx-textarea-padding: null !default;
 // chain to the shared border role/width by default, same as other
 // components' advanced border overrides above.
 $usx-file-input-border-var: null !default;
-$usx-file-input-border: usx-var($usx-file-input-border-var, $usx-color-border) !default;
+$usx-file-input-border: usx-var($usx-file-input-border-var, $usx-color-border-muted) !default;
 $usx-file-input-border-width-var: null !default;
 $usx-file-input-border-width: usx-var($usx-file-input-border-width-var, $usx-border-width-inputs) !default;
 $usx-file-input-item-border-var: null !default;
-$usx-file-input-item-border: usx-var($usx-file-input-item-border-var, $usx-color-border) !default;
+$usx-file-input-item-border: usx-var($usx-file-input-item-border-var, $usx-color-border-muted) !default;
 $usx-file-input-item-border-width-var: null !default;
 $usx-file-input-item-border-width: usx-var($usx-file-input-item-border-width-var, $usx-border-width-sm) !default;
 $usx-range-slider-border-width-var: null !default;
@@ -854,7 +870,7 @@ $usx-file-input-preview-text: usx-var($usx-file-input-preview-text-var, $usx-tex
 $usx-switch-border-width-var: null !default;
 $usx-switch-border-width: usx-var($usx-switch-border-width-var, 2px) !default;
 $usx-switch-border-off-var: null !default;
-$usx-switch-border-off: usx-var($usx-switch-border-off-var, $usx-text-ink) !default;
+$usx-switch-border-off: usx-var($usx-switch-border-off-var, $usx-color-border) !default;
 $usx-switch-track-bg-var: null !default;
 $usx-switch-track-bg: usx-var($usx-switch-track-bg-var, $usx-surface-2) !default;
 
@@ -952,19 +968,19 @@ $usx-checkable-radius: usx-var($usx-checkable-radius-var, $usx-radius-selector) 
 $usx-checkable-tile-radius-var: null !default;
 $usx-checkable-tile-radius: usx-var($usx-checkable-tile-radius-var, $usx-radius-selector) !default;
 $usx-checkable-tile-border-var: null !default;
-$usx-checkable-tile-border: usx-var($usx-checkable-tile-border-var, $usx-color-border) !default;
+$usx-checkable-tile-border: usx-var($usx-checkable-tile-border-var, $usx-color-border-muted) !default;
 $usx-checkable-tile-border-width-var: null !default;
 $usx-checkable-tile-border-width: usx-var($usx-checkable-tile-border-width-var, $usx-border-width-sm) !default;
 
 // "Selector" covers both checkbox and radio unchecked ::before styling.
 // Background chains to surface-1 (white, matching USWDS's default input
-// background); border chains to the shared $usx-color-border token (same as
-// the tile variants above).
+// background). The ink-colored outline is unchanged unless configured;
+// the larger tile outline above uses the border-muted role.
 $usx-checkable-bg-var: null !default;
 $usx-checkable-bg: usx-var($usx-checkable-bg-var, $usx-surface-1) !default;
 
 $usx-checkable-border-var: null !default;
-$usx-checkable-border: usx-var($usx-checkable-border-var, $usx-text-ink) !default;
+$usx-checkable-border: usx-var($usx-checkable-border-var) !default;
 
 // ── Component tokens: Banner ─────────────────────────────────────────────────
 // Real USWDS's background is actually "base-lightest" (surface-3's hex),
@@ -1005,13 +1021,13 @@ $usx-header-border-top: usx-var($usx-header-border-top-var) !default;
 $usx-header-border-bottom-var: null !default;
 $usx-header-border-bottom: usx-var($usx-header-border-bottom-var) !default;
 $usx-header-border-separator-var: null !default;
-$usx-header-border-separator: usx-var($usx-header-border-separator-var, 1px solid #dfe1e2) !default;
+$usx-header-border-separator: usx-var($usx-header-border-separator-var, usx-when($usx-border-width-sm, $usx-border-width-sm, 1px) solid usx-when($usx-color-border-subtle, $usx-color-border-subtle, #dfe1e2)) !default;
 $usx-header-border-bottom-mobile-var: null !default;
-$usx-header-border-bottom-mobile: usx-var($usx-header-border-bottom-mobile-var, 1px solid #dfe1e2) !default;
+$usx-header-border-bottom-mobile: usx-var($usx-header-border-bottom-mobile-var, usx-when($usx-border-width-sm, $usx-border-width-sm, 1px) solid usx-when($usx-color-border-subtle, $usx-color-border-subtle, #dfe1e2)) !default;
 $usx-header-nav-border-bottom-mobile-var: null !default;
 $usx-header-nav-border-bottom-mobile: usx-var($usx-header-nav-border-bottom-mobile-var) !default;
 $usx-header-nav-item-border-var: null !default;
-$usx-header-nav-item-border: usx-var($usx-header-nav-item-border-var, 1px solid #dfe1e2) !default;
+$usx-header-nav-item-border: usx-var($usx-header-nav-item-border-var, usx-when($usx-border-width-sm, $usx-border-width-sm, 1px) solid usx-when($usx-color-border-subtle, $usx-color-border-subtle, #dfe1e2)) !default;
 
 // Own hooks (not just a Sass fallback) so a theme whose header surface is
 // drastically different from the rest of the document (e.g. a dark/branded
@@ -1122,9 +1138,9 @@ $usx-footer-primary-section-border-top: usx-var($usx-footer-primary-section-bord
 $usx-footer-secondary-section-border-top-var: null !default;
 $usx-footer-secondary-section-border-top: usx-var($usx-footer-secondary-section-border-top-var) !default;
 $usx-footer-primary-link-border-top-var: null !default;
-$usx-footer-primary-link-border-top: usx-var($usx-footer-primary-link-border-top-var, 1px solid #a9aeb1) !default;
+$usx-footer-primary-link-border-top: usx-var($usx-footer-primary-link-border-top-var, usx-when($usx-border-width-sm, $usx-border-width-sm, 1px) solid usx-when($usx-color-border-subtle, $usx-color-border-subtle, #a9aeb1)) !default;
 $usx-footer-nav-border-bottom-var: null !default;
-$usx-footer-nav-border-bottom: usx-var($usx-footer-nav-border-bottom-var, 1px solid #a9aeb1) !default;
+$usx-footer-nav-border-bottom: usx-var($usx-footer-nav-border-bottom-var, usx-when($usx-border-width-sm, $usx-border-width-sm, 1px) solid usx-when($usx-color-border-subtle, $usx-color-border-subtle, #a9aeb1)) !default;
 
 // ── Component tokens: Carousel (custom; defaults baked in _carousel.scss) ───
 $usx-carousel-dot-bg-var: null !default;
@@ -1157,7 +1173,7 @@ $usx-sidenav-link-text-hover: $usx-color-primary               !default;
 $usx-sidenav-bg-hover-var: null                         !default;
 $usx-sidenav-bg-hover: usx-var($usx-sidenav-bg-hover-var, $usx-surface-2) !default;
 $usx-sidenav-border-var: null                         !default;
-$usx-sidenav-border: usx-var($usx-sidenav-border-var, $usx-color-border) !default;
+$usx-sidenav-border: usx-var($usx-sidenav-border-var, $usx-color-border-subtle) !default;
 $usx-sidenav-border-width-var: null                         !default;
 $usx-sidenav-border-width: usx-var($usx-sidenav-border-width-var, $usx-border-width-sm) !default;
 
@@ -1172,20 +1188,17 @@ $usx-sidenav-border-width: usx-var($usx-sidenav-border-width-var, $usx-border-wi
 $usx-step-indicator-bg-var: null !default;
 $usx-step-indicator-bg: usx-var($usx-step-indicator-bg-var, $usx-surface-1) !default;
 
+// Pending labels, segment bars, and counter rings share the muted text role.
+$usx-step-indicator-segment-label-text: $usx-text-muted !default;
+
 $usx-step-indicator-segment-pending-border-var: null !default;
-$usx-step-indicator-segment-pending-border: usx-var($usx-step-indicator-segment-pending-border-var, $usx-color-base-light) !default;
+$usx-step-indicator-segment-pending-border: usx-var($usx-step-indicator-segment-pending-border-var, $usx-step-indicator-segment-label-text) !default;
 
 $usx-step-indicator-segment-complete: $usx-color-primary-darker !default;
 $usx-step-indicator-segment-current: $usx-color-primary-dark !default;
 
 $usx-step-indicator-segment-bar-width-var: null !default;
 $usx-step-indicator-segment-bar-width: usx-var($usx-step-indicator-segment-bar-width-var, $usx-border-width-xl) !default;
-
-// USWDS's own pending-label/pending-counter-number color is a fixed
-// "base-dark" gray (#565c65) at build time; chain to $usx-text-muted (same role
-// as nav-link/sidenav-link above) instead of $usx-text-subtle (#71767a is too
-// light a match) so it tracks the theme's muted-text role.
-$usx-step-indicator-segment-label-text: $usx-text-muted !default;
 
 // Text drawn on filled (complete/current) counter circles — contrasts
 // against $usx-step-indicator-segment-complete/-current-color, not
@@ -1227,10 +1240,10 @@ $usx-table-selected-bg: usx-var($usx-table-selected-bg-var, $usx-surface-3) !def
 $usx-table-bg-hover-var: null !default;
 $usx-table-bg-hover: usx-var($usx-table-bg-hover-var, $usx-surface-2) !default;
 
-// Divider border (footer rule, sticky-first-column shadow line) — same
-// shared $usx-color-border role used by the header/footer/sidenav/tile dividers.
+// Leave the ink-colored table grid unchanged unless configured. Runtime
+// themes default to currentColor; a theme can opt into a border role instead.
 $usx-table-border-var: null !default;
-$usx-table-border: usx-var($usx-table-border-var, $usx-color-border) !default;
+$usx-table-border: usx-var($usx-table-border-var) !default;
 
 // Muted placeholder/empty-state text.
 $usx-table-placeholder-text-var: null !default;
@@ -1244,7 +1257,7 @@ $usx-table-sorted-column-text: usx-var($usx-table-sorted-column-text-var, $usx-t
 
 // ── Component tokens: Task List (custom; defaults baked in _task-list.scss) ──
 $usx-task-list-border-var: null !default;
-$usx-task-list-border: usx-var($usx-task-list-border-var, $usx-color-border) !default;
+$usx-task-list-border: usx-var($usx-task-list-border-var, $usx-color-border-subtle) !default;
 $usx-task-list-inner-border-width-var: null !default;
 $usx-task-list-inner-border-width: usx-var($usx-task-list-inner-border-width-var, $usx-border-width-sm) !default;
 $usx-task-list-outer-border-width-var: null !default;
@@ -1317,22 +1330,19 @@ $usx-date-picker-button-hover-active-bg-var: null !default;
 $usx-date-picker-button-hover-active-bg: usx-var($usx-date-picker-button-hover-active-bg-var, $usx-color-base-light) !default;
 
 // ── Component tokens: Range Slider (custom; defaults baked in SCSS) ─────────
-// Real USWDS bakes the track/thumb to fixed "base-lightest"/"base-darker"
-// grays and the thumb's focus ring to a compile-time Sass setting. Kept
-// static here on purpose (matches $usx-input-bg/-border below, always
-// null) rather than chained to surface-3 — form controls keep one fixed
-// white-ish surface + gray border across every preset.
+// Track/thumb surfaces stay light like text inputs; their neutral outlines
+// share the strong control border role. The focus ring retains its own hook.
 $usx-range-slider-track-bg-var: null !default;
 $usx-range-slider-track-bg: usx-var($usx-range-slider-track-bg-var, $usx-color-base-lightest) !default;
 
 $usx-range-slider-track-border-var: null !default;
-$usx-range-slider-track-border: usx-var($usx-range-slider-track-border-var, $usx-color-base-darker) !default;
+$usx-range-slider-track-border: usx-var($usx-range-slider-track-border-var, $usx-color-border) !default;
 
 $usx-range-slider-thumb-bg-var: null !default;
 $usx-range-slider-thumb-bg: usx-var($usx-range-slider-thumb-bg-var, $usx-color-base-lightest) !default;
 
 $usx-range-slider-thumb-border-var: null !default;
-$usx-range-slider-thumb-border: usx-var($usx-range-slider-thumb-border-var, $usx-color-base-darker) !default;
+$usx-range-slider-thumb-border: usx-var($usx-range-slider-thumb-border-var, $usx-color-border) !default;
 
 $usx-range-slider-focus-var: null !default;
 $usx-range-slider-focus: usx-var($usx-range-slider-focus-var, $usx-color-focus) !default;
@@ -1353,7 +1363,7 @@ $usx-in-page-nav-text-var: null !default;
 $usx-in-page-nav-text: usx-var($usx-in-page-nav-text-var, $usx-text-ink) !default;
 
 $usx-in-page-nav-border-var: null !default;
-$usx-in-page-nav-border: usx-var($usx-in-page-nav-border-var, $usx-color-border) !default;
+$usx-in-page-nav-border: usx-var($usx-in-page-nav-border-var, $usx-color-border-muted) !default;
 
 $usx-in-page-nav-link-text-var: null !default;
 $usx-in-page-nav-link-text: usx-var($usx-in-page-nav-link-text-var, $usx-link-text) !default;
@@ -1394,11 +1404,12 @@ $usx-process-list-heading-text-var: null !default;
 $usx-process-list-heading-text: usx-var($usx-process-list-heading-text-var, $usx-text-ink) !default;
 
 $usx-process-list-border-var: null !default;
-$usx-process-list-border: usx-var($usx-process-list-border-var, $usx-color-primary) !default;
+$usx-process-list-border: usx-var($usx-process-list-border-var, $usx-color-primary-lighter) !default;
 
 $usx-process-list-counter-text-var: null !default;
 $usx-process-list-counter-text: usx-var($usx-process-list-counter-text-var, $usx-text-ink) !default;
 
+// Counter outlines share the ink role by default, with an independent override.
 $usx-process-list-counter-border-var: null !default;
 $usx-process-list-counter-border: usx-var($usx-process-list-counter-border-var, $usx-text-ink) !default;
 
@@ -1406,6 +1417,10 @@ $usx-process-list-counter-ring-var: null !default;
 $usx-process-list-counter-ring: usx-var($usx-process-list-counter-ring-var, $usx-surface-1) !default;
 
 // ── Component tokens: Collection (custom; defaults baked in SCSS) ──────────
+// Ink-colored separators remain unchanged unless their own hook is configured.
+$usx-collection-border-var: null !default;
+$usx-collection-border: usx-var($usx-collection-border-var) !default;
+
 // Real USWDS never sets a color on collection meta/description — they
 // inherit ambient text (the heading link is already themed via .usx-link).
 $usx-collection-meta-text-var: null !default;
@@ -1442,7 +1457,7 @@ $usx-pagination-text: usx-var($usx-pagination-text-var, $usx-text-ink) !default;
 // Real USWDS hardcodes the button border to rgba(27,27,27,.2), a black-based
 // translucent border that's drowned out on dark surfaces.
 $usx-pagination-button-border-var: null !default;
-$usx-pagination-button-border: usx-var($usx-pagination-button-border-var, $usx-color-border) !default;
+$usx-pagination-button-border: usx-var($usx-pagination-button-border-var, $usx-color-border-muted) !default;
 
 // Real USWDS hardcodes the modal surface to a static white background with
 // auto-contrast (effectively text-ink) body text, and the close button to

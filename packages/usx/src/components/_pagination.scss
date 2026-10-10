@@ -8,8 +8,8 @@
   align-items: start;
   gap: 1rem;
 
-  @if $usx-color-base {
-    border-top: 1px solid $usx-color-base;
+  @if $usx-color-border-subtle {
+    border-top: 1px solid $usx-color-border-subtle;
   }
 
   @include at-media('desktop') {

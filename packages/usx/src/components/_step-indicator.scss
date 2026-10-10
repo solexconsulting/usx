@@ -8,6 +8,24 @@
     color: usx-when($usx-step-indicator-heading-text);
   }
 
+  // Pending bars match their labels; completed/current states below keep
+  // their own shared label and segment colors.
+  .usa-step-indicator__segment::after {
+    background-color: usx-when($usx-step-indicator-segment-label-text);
+
+    @if $usx-step-indicator-segment-bar-width {
+      height: $usx-step-indicator-segment-bar-width;
+
+      // Normal height is 0.5rem and top is normally 0
+      // Center by offsetting by half the difference between the normal height and the new height
+      // Note: the bare "0" must be a length (0rem), not a unitless number —
+      // once $usx-step-indicator-segment-bar-width is a var(), Sass can't
+      // fold this at build time, and calc(0 - <length>) is invalid CSS,
+      // which silently falls back to `top: auto` (bar drops to the bottom).
+      top: calc(0rem - ($usx-step-indicator-segment-bar-width - 0.5rem) / 2);
+    }
+  }
+
   .usa-step-indicator__segment--complete {
     &::before, &::after {
       background-color: usx-when($usx-step-indicator-segment-complete);
@@ -30,7 +48,6 @@
 
   .usa-step-indicator__current-step {
     background-color: usx-when($usx-step-indicator-segment-current);
-
     color: usx-when($usx-step-indicator-counter-text);
   }
 
@@ -40,20 +57,6 @@
 
   .usa-step-indicator__segment-label {
     color: usx-when($usx-step-indicator-segment-label-text);
-  }
-
-  .usa-step-indicator__segment::after {
-    @if $usx-step-indicator-segment-bar-width {
-      height: $usx-step-indicator-segment-bar-width;
-
-      // Normal height is 0.5rem and top is normally 0
-      // Center by offsetting by half the difference between the normal height and the new height
-      // Note: the bare "0" must be a length (0rem), not a unitless number —
-      // once $usx-step-indicator-segment-bar-width is a var(), Sass can't
-      // fold this at build time, and calc(0 - <length>) is invalid CSS,
-      // which silently falls back to `top: auto` (bar drops to the bottom).
-      top: calc(0rem - ($usx-step-indicator-segment-bar-width - 0.5rem) / 2);
-    }
   }
 
   // ── Counters / counters-sm variants ───────────────────────────────────────

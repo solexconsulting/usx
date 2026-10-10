@@ -29,6 +29,13 @@ const SURFACE_COLORS = [
   { name: 'surface-inverse', description: 'Inverse surface', className: 'text-inverse' }
 ]
 
+const BORDER_COLORS = [
+  { name: 'default', token: 'color-border', description: 'Input fields and other strong outlines' },
+  { name: 'muted', token: 'color-border-muted', description: 'File inputs, pagination, in-page navigation, and checkable tiles' },
+  { name: 'subtle', token: 'color-border-subtle', description: 'Cards, header/navigation/footer dividers, sidenav, and task lists' },
+  { name: 'inverse', token: 'color-border-inverse', description: 'Available for borders on inverse surfaces', className: 'bg-surface-inverse text-inverse' }
+];
+
 const BORDER_RADIUSES = [
   { name: 'box', size: 'var(--usx-box-radius)' },
   { name: 'field', size: 'var(--usx-field-radius)' },
@@ -282,6 +289,7 @@ export const Utilities = {
           )
         ))}
       </div>
+
       <div className="margin-top-3 margin-bottom-5" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, max-content)', gap: '1rem', placeItems: 'center' }}>
         <div style={{ gridColumn: '1 / -1', justifySelf: 'start' }}>
           <code className="font-mono-md text-bold">.usx-rounded-full or<br />.usx-circle</code>
@@ -299,6 +307,38 @@ export const Utilities = {
       </div>
 
       <h4>2.2.2 Border Color Utilities (.border-*)</h4>
+      <p>
+        Neutral border roles come from <code>$usx-border-colors</code>. The default border is strongest,
+        muted is intermediate, and subtle is least prominent. Inverse is available for custom inverted surfaces;
+        components do not use it by default. These utilities set only the color; add a border width and style separately.
+      </p>
+      <p>
+        Table and collection borders, plus checkbox/radio indicator outlines, follow their text color by default
+        (<code>currentColor</code>). Set <code>$usx-table-border</code>, <code>$usx-collection-border</code>, or{' '}
+        <code>$usx-checkable-border</code> (or their matching CSS variables) to opt into a different color.
+        Checkable tile borders use the muted role separately from their indicators.
+      </p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }} className="margin-bottom-3">
+        {BORDER_COLORS.map((border) => {
+
+          const borderedElement = (
+            <div key={border.name} className={`border-1 usx-rounded-md padding-1 border-${border.name} ${border.className || ''}`}>
+              <code className="font-mono-md text-bold">.border-{border.name}</code>
+              <div className="font-mono-2xs">$usx-{border.token}</div>
+              <div className="font-sans-2xs margin-top-05">{border.description}</div>
+            </div>
+          );
+          if (border.name === 'inverse') {
+            return (
+              <div key={border.name} className="bg-surface-inverse margin-neg-1 padding-1">
+                {borderedElement}
+              </div>
+            );
+          }
+          return borderedElement;
+        })}
+      </div>
+      <p>Theme, state, and environment colors also remain available for semantic borders:</p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }} className="margin-bottom-3 margin-bottom-5">
         {COLOR_NAMES.map((name) => (
           <div key={name} className={`border-1 usx-rounded-md border-${name}`}>

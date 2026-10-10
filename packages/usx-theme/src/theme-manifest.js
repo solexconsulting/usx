@@ -186,10 +186,17 @@ export const themeManifest = [
   c('surface-2', '#e6e6e6'),
   c('surface-3', '#f0f0f0'),
 
-  // Shared border color: checkbox/radio tiles, task-list item dividers,
-  // sidenav item dividers, and the default (overridable) for header/footer
-  // section dividers all chain to this via their own usx-*-border-color hook.
-  c('color-border', '#c9c9c9', 'color-base-lighter'),
+  // Independent border roles, ordered by contrast like the text roles:
+  // default > muted > subtle. Consolidate USWDS's neutral border colors
+  // without tying borders to text colors or palette shade derivation.
+  //   border         — input, switch, and range outlines
+  //   border-muted   — file targets, tiles, pagination, and in-page nav rails
+  //   border-subtle  — cards and layout/navigation dividers
+  //   border-inverse — available for opposite-polarity surfaces; unused by default
+  c('color-border', '#565c65'),
+  c('color-border-subtle', '#dfe1e2'),
+  c('color-border-muted', '#a9aeb1'),
+  c('color-border-inverse', '#ffffff'),
 
   c('color-beta', '#2e8540'),
   c('color-test', '#7800af'),
@@ -323,7 +330,7 @@ export const themeManifest = [
   component('usx-card-text', 'var(--usx-text-ink)'),
   component('usx-card-heading-text', 'var(--usx-card-text)'),
   component('usx-card-media-bg', 'var(--usx-surface-3)'),
-  component('usx-card-border-color', 'var(--usx-color-border)'),
+  component('usx-card-border-color', 'var(--usx-color-border-subtle)'),
   component('usx-link-text-visited', 'var(--usx-color-visited)'),
   // USWDS swaps link/visited color to a light neutral on a dark background
   // (`.usa-dark-background`) instead of the illegible blue/purple defaults;
@@ -365,9 +372,10 @@ export const themeManifest = [
   // Real USWDS ships the step-indicator's CSS precompiled — these two get
   // their own hooks (unlike the plain $color-primary-dark/-darker aliases
   // in _variables.scss) so the --counters variant's ring/gap colors are
-  // independently overridable from the general surface/border roles.
+  // independently overridable. Pending rings follow the same muted text
+  // role as pending labels and segment bars, independent of border colors.
   component('usx-step-indicator-bg', 'var(--usx-surface-1)'),
-  component('usx-step-indicator-segment-pending-border', 'var(--usx-color-base-light)'),
+  component('usx-step-indicator-segment-pending-border', 'var(--usx-text-muted)'),
   // Follows usx-link-color by default (a `var()` reference, like the
   // radius-advanced tokens default to `var(--usx-radius-none)`) unless its
   // own custom property is explicitly overridden.
@@ -375,11 +383,11 @@ export const themeManifest = [
   component('usx-clickable-focus', 'var(--usx-color-focus)'),
   component('usx-clickable-text-hover', '#005ea2'),
   component('usx-misc-banner-focus', '#9bdaf1'),
-  // Per-component overrides of the shared color-border token (see above).
-  component('usx-checkable-tile-border', 'var(--usx-color-border)'),
-  component('usx-task-list-border', 'var(--usx-color-border)'),
-  component('usx-file-input-border', 'var(--usx-color-border)'),
-  component('usx-file-input-item-border', 'var(--usx-color-border)'),
+  // Per-component overrides of the shared border roles (see above).
+  component('usx-checkable-tile-border', 'var(--usx-color-border-muted)'),
+  component('usx-task-list-border', 'var(--usx-color-border-subtle)'),
+  component('usx-file-input-border', 'var(--usx-color-border-muted)'),
+  component('usx-file-input-item-border', 'var(--usx-color-border-muted)'),
   // USWDS bakes the "N files selected" heading and each preview row to a
   // fixed "primary-lighter" callout background (with default body text),
   // regardless of theme — same callout role as usx-accordion-bg/
@@ -387,18 +395,19 @@ export const themeManifest = [
   component('usx-file-input-preview-bg', '#d9e8f6', 'surface-2'),
   component('usx-file-input-preview-text', '#1b1b1b', 'text-ink'),
   component('usx-task-list-bg-hover', 'var(--usx-surface-2)'),
-  // Shared by both checkbox and radio unchecked ::before styling.
+  // Shared by both checkbox and radio unchecked ::before styling. The
+  // outline follows the label's ink color unless explicitly overridden.
   component('usx-checkable-bg', 'var(--usx-surface-1)'),
-  component('usx-checkable-border', 'var(--usx-text-ink)'),
+  component('usx-checkable-border', 'currentColor'),
   component('usx-sidenav-bg-hover', 'var(--usx-surface-2)'),
-  component('usx-sidenav-border', 'var(--usx-color-border)'),
+  component('usx-sidenav-border', 'var(--usx-color-border-subtle)'),
   // Header shell edges are full border values, independent of item dividers.
   setting('usx-header-border-top', 'none'),
   setting('usx-header-border-bottom', 'none'),
-  setting('usx-header-border-separator', 'var(--usx-border-width-sm) solid var(--usx-color-border)'),
-  setting('usx-header-border-bottom-mobile', 'var(--usx-border-width-sm) solid var(--usx-color-border)'),
+  setting('usx-header-border-separator', 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)'),
+  setting('usx-header-border-bottom-mobile', 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)'),
   setting('usx-header-nav-border-bottom-mobile', 'none'),
-  setting('usx-header-nav-item-border', 'var(--usx-border-width-sm) solid var(--usx-color-border)'),
+  setting('usx-header-nav-item-border', 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)'),
   // Same reasoning as the borders above: real USWDS renders .usa-header
   // with no explicit background at all (just the ambient page background),
   // so this stays transparent by default; the Sass fallback chains to
@@ -436,8 +445,8 @@ export const themeManifest = [
   setting('usx-footer-border-bottom', 'none'),
   setting('usx-footer-primary-section-border-top', 'none'),
   setting('usx-footer-secondary-section-border-top', 'none'),
-  setting('usx-footer-primary-link-border-top', 'var(--usx-border-width-sm) solid var(--usx-color-border)'),
-  setting('usx-footer-nav-border-bottom', 'var(--usx-border-width-sm) solid var(--usx-color-border)'),
+  setting('usx-footer-primary-link-border-top', 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)'),
+  setting('usx-footer-nav-border-bottom', 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)'),
   // Independent footer text/link/heading hooks — same rationale as the
   // header text/nav-link hooks above: a theme whose footer secondary
   // section sits on a drastically different surface (e.g. NASA's black
@@ -469,9 +478,8 @@ export const themeManifest = [
   component('usx-table-bg', 'var(--usx-surface-1)'),
   component('usx-table-header-bg', 'var(--usx-surface-2)'),
   component('usx-table-stripe-bg', 'var(--usx-surface-3)'),
-  // Divider border (footer rule, sticky-first-column shadow line) — same
-  // shared color-border role used by header/footer/sidenav/tile dividers.
-  component('usx-table-border', 'var(--usx-color-border)'),
+  // Table rules follow their text color; a theme may opt into a border role.
+  component('usx-table-border', 'currentColor'),
   component('usx-table-placeholder-text', 'var(--usx-text-subtle)'),
   component('usx-table-sorted-column-bg', 'var(--usx-color-accent-cool)'),
   component('usx-table-grouped-row-bg', 'var(--usx-surface-3)'),
@@ -504,17 +512,12 @@ export const themeManifest = [
   // chain it to color-primary instead of leaving it static.
   component('usx-combo-box-selected-bg', '#005ea2', 'color-primary'),
 
-  // Real USWDS bakes the range slider's track/thumb to fixed "base-lightest"/
-  // "base-darker" grays regardless of theme. Unlike most components, this
-  // one intentionally stays that way — text inputs/selects/textareas also
-  // keep a static white surface + gray border under every preset (see
-  // $usx-input-bg/-text/-border in _variables.scss, always null), so the
-  // range slider matches that same "form controls don't flip surfaces"
-  // convention instead of chasing the surface-1/2/3 abstraction.
+  // Range controls keep their fixed light surfaces like text inputs. Their
+  // neutral track/thumb outlines share the strong control border role.
   component('usx-range-slider-track-bg', '#f0f0f0'),
-  component('usx-range-slider-track-border', '#3d4551'),
+  component('usx-range-slider-track-border', 'var(--usx-color-border)'),
   component('usx-range-slider-thumb-bg', '#f0f0f0'),
-  component('usx-range-slider-thumb-border', '#3d4551'),
+  component('usx-range-slider-thumb-border', 'var(--usx-color-border)'),
   component('usx-range-slider-focus', 'var(--usx-color-focus)'),
 
   // Real USWDS resolves the in-page-nav card's background/text/link/current/
@@ -526,7 +529,7 @@ export const themeManifest = [
   // presets with a dark shell — see presets.js/Theme.stories.jsx).
   component('usx-in-page-nav-bg', 'transparent'),
   component('usx-in-page-nav-text', 'var(--usx-text-ink)'),
-  component('usx-in-page-nav-border', 'var(--usx-color-border)'),
+  component('usx-in-page-nav-border', 'var(--usx-color-border-muted)'),
   component('usx-in-page-nav-link-text', 'var(--usx-link-text)'),
   component('usx-in-page-nav-link-text-hover', 'var(--usx-link-text-hover)'),
   component('usx-in-page-nav-current-text', 'var(--usx-text-ink)'),
@@ -547,11 +550,13 @@ export const themeManifest = [
   // #1b1b1b and the connecting line + circle border to fixed light-blue/
   // gray-cool literals, none of which follow a runtime theme override.
   component('usx-process-list-heading-text', 'var(--usx-text-ink)'),
-  component('usx-process-list-border', '#d9e8f6', 'color-primary'),
+  component('usx-process-list-border', 'var(--usx-color-primary-lighter)'),
   component('usx-process-list-counter-text', 'var(--usx-text-ink)'),
   component('usx-process-list-counter-border', 'var(--usx-text-ink)'),
   component('usx-process-list-counter-ring', 'var(--usx-surface-1)'),
 
+  // Separators follow the collection's text color unless explicitly themed.
+  component('usx-collection-border', 'currentColor'),
   // Real USWDS never sets a color on collection meta/description — they
   // inherit ambient text (the heading link is already themed via .usx-link).
   component('usx-collection-meta-text', 'var(--usx-text-subtle)'),
@@ -571,7 +576,7 @@ export const themeManifest = [
   component('usx-pagination-text', 'var(--usx-text-ink)'),
   // Real USWDS hardcodes the button border to rgba(27,27,27,.2), a black-
   // based translucent border that's drowned out on dark surfaces.
-  component('usx-pagination-button-border', 'var(--usx-color-border)'),
+  component('usx-pagination-button-border', 'var(--usx-color-border-muted)'),
 
   // Real USWDS hardcodes the modal surface to a static white background
   // with auto-contrast (effectively text-ink) body text, and the close

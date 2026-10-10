@@ -32,7 +32,8 @@ function Grid({ tokens, live }) {
 
 const THEME_BASE_NAMES = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm', 'color-base'];
 const STATE_BASE_NAMES = ['color-info', 'color-warning', 'color-success', 'color-error', 'color-emergency', 'color-disabled', 'color-focus', 'color-visited'];
-const SURFACE_TEXT_NAMES = ['surface-1', 'surface-2', 'surface-3', 'text-ink', 'text-muted', 'text-subtle', 'text-inverse', 'color-border'];
+const SURFACE_TEXT_NAMES = ['surface-1', 'surface-2', 'surface-3', 'text-ink', 'text-muted', 'text-subtle', 'text-inverse'];
+const BORDER_NAMES = ['color-border', 'color-border-muted', 'color-border-subtle', 'color-border-inverse'];
 const ENVIRONMENT_NAMES = ['color-beta', 'color-test', 'color-dev'];
 
 export const Palette = {
@@ -44,6 +45,7 @@ export const Palette = {
     const themeBase = colorTokens.filter((t) => THEME_BASE_NAMES.includes(t.name));
     const stateBase = colorTokens.filter((t) => STATE_BASE_NAMES.includes(t.name));
     const surfaceTextBase = colorTokens.filter((t) => SURFACE_TEXT_NAMES.includes(t.name));
+    const borderBase = colorTokens.filter((t) => BORDER_NAMES.includes(t.name));
     const environmentBase = colorTokens.filter((t) => ENVIRONMENT_NAMES.includes(t.name));
 
     // Derived Shade Groups
@@ -78,6 +80,9 @@ export const Palette = {
               <strong>Surface &amp; Text colors:</strong> Theme-responsive background layers (<code>surface-1/2/3</code>) and ink roles (<code>text</code>, <code>text-muted</code>, <code>text-subtle</code>, <code>text-inverse</code>) that automatically adapt across light and dark modes.
             </li>
             <li>
+              <strong>Border colors:</strong> Neutral outlines and dividers, ordered from strongest to least prominent as <code>color-border</code>, <code>color-border-muted</code>, and <code>color-border-subtle</code>, plus <code>color-border-inverse</code> for inverted surfaces.
+            </li>
+            <li>
               <strong>Environment colors:</strong> Special indicator tokens (<code>color-beta</code>, <code>color-test</code>, <code>color-dev</code>) for environment badges and headers.
             </li>
           </ul>
@@ -85,7 +90,7 @@ export const Palette = {
         />
 
         <h2>Base colors</h2>
-        <p>The core theme, state, surface, and environment role tokens components ultimately chain to.</p>
+        <p>The core theme, state, surface, text, border, and environment role tokens components ultimately chain to.</p>
 
         <h3>Theme colors</h3>
         <p>Primary brand, secondary, and accent colors defining visual identity.</p>
@@ -96,8 +101,23 @@ export const Palette = {
         <Grid tokens={stateBase} live={live} />
 
         <h3>Surface &amp; Text colors</h3>
-        <p>Structural surface layers, typography ink roles, and shared border tokens.</p>
+        <p>Structural surface layers and typography ink roles.</p>
         <Grid tokens={surfaceTextBase} live={live} />
+
+        <h3>Border colors</h3>
+        <p>
+          <code>color-border</code> supplies strong input outlines.{' '}
+          <code>color-border-muted</code> marks file inputs, pagination, in-page navigation, and checkable tiles.{' '}
+          <code>color-border-subtle</code> separates cards, header/navigation/footer regions, sidenav, and task lists.{' '}
+          <code>color-border-inverse</code> is available for custom inverted surfaces and is not assigned to components by default.
+        </p>
+        <p>
+          Table and collection borders and checkbox/radio indicator outlines retain their ink color
+          through <code>currentColor</code>. Their component tokens (<code>usx-table-border</code>,{' '}
+          <code>usx-collection-border</code>, and <code>usx-checkable-border</code>) allow explicit overrides
+          without tying them to the shared border scale.
+        </p>
+        <Grid tokens={borderBase} live={live} />
 
         <h3>Environment colors</h3>
         <p>Indicator tokens for environment banners, badges, and dev tool ribbons.</p>

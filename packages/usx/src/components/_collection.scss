@@ -3,6 +3,10 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
 .usx-collection {
+  .usa-collection__item {
+    border-top-color: usx-when($usx-collection-border);
+  }
+
   .usx-calendar-date {
     margin-right: 1rem;
   }

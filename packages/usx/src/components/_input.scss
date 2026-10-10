@@ -24,7 +24,7 @@
 
 .usa-input.usx-input, .usa-select.usx-select {
   &:not(.usa-input--error):not(.usa-input--success) {
-    &:not(:disabled) {
+    &:not(:disabled, [aria-disabled="true"]) {
       background-color: usx-when($usx-input-bg);
 
       color: usx-when($usx-input-text);
@@ -84,10 +84,19 @@
 
 /* ---------------------------------- */
 
-@if $usx-color-border {
-  .usa-combo-box__input, .usa-input, .usa-input-group, .usa-select, .usa-textarea, .usx-switch {
-    border-color: $usx-color-border;
+// Keep neutral defaults below the specificity of component overrides and
+// leave validation and disabled borders to their own state rules.
+.usa-combo-box__input,
+.usa-input,
+.usa-input-group,
+.usa-select {
+  &:where(:not(.usa-input--error, .usa-input--success, .usa-input-group--error, .usa-input-group--success, :disabled, [aria-disabled="true"], :has(input:disabled, input[aria-disabled="true"]))) {
+    border-color: usx-when($usx-input-border);
   }
+}
+
+.usa-textarea:where(:not(.usa-input--error, .usa-input--success, :disabled, [aria-disabled="true"])) {
+  border-color: usx-when($usx-textarea-border);
 }
 
 @if $usx-border-width-inputs {

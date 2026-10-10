@@ -56,6 +56,14 @@
   }
 }
 
+@each $color-name, $color-value in $usx-border-colors {
+  @if $color-value {
+    .border-#{$color-name} {
+      border-color: $color-value !important;
+    }
+  }
+}
+
 @each $radius-name, $radius-value in $usx-border-radiuses {
   .usx-rounded-#{$radius-name} {
     border-radius: $radius-value !important;

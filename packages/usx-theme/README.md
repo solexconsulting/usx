@@ -80,6 +80,64 @@ the output contains zero `var()` references:
 Individual tokens can also opt out by nulling their hook
 (e.g. `$usx-color-primary-var: null`).
 
+### Border colors
+
+Neutral borders use four independent roles. As with text, `muted` is stronger
+than `subtle`. Each role has a CSS custom property, a matching Sass variable
+(for example, `$usx-color-border-subtle`), and an optional `-var` Sass hook.
+
+| CSS token | Default | Component use | Color utility |
+| --- | --- | --- | --- |
+| `--usx-color-border` | `#565c65` | Inputs, switches, range controls | `.border-default` |
+| `--usx-color-border-muted` | `#a9aeb1` | File targets/items, checkbox/radio tiles, pagination buttons, in-page navigation rails | `.border-muted` |
+| `--usx-color-border-subtle` | `#dfe1e2` | Cards, header/footer/navigation dividers, task-list dividers, combo-box option dividers | `.border-subtle` |
+| `--usx-color-border-inverse` | `#ffffff` | Reserved for opposite-polarity surfaces; no default component assignments | `.border-inverse` |
+
+The strong role covers input outlines. The muted role consolidates file-input
+gray and translucent pagination/in-page-navigation borders. The subtle role
+covers light structural dividers. Brand, focus, error, success, selected, and
+disabled colors keep their existing roles.
+
+Step-indicator bars and counter outlines follow their label colors: pending
+segments use `--usx-text-muted`, while current and completed segments share
+their respective label/state colors. They are independent of the border scale.
+
+Process-list counter outlines default to `--usx-text-ink` through
+`--usx-process-list-counter-border`, independently of the border scale. The
+Theme Playground's **Component colors → Process List** group exposes heading
+text, the connecting line, counter text, counter outline, and counter
+background/ring as separate overrides.
+
+Table rules, collection separators, and checkbox/radio `::before` outlines
+remain ink-colored and independent of this scale. Their Sass overrides
+(`$usx-table-border`, `$usx-collection-border`, and `$usx-checkable-border`)
+default to `null` when no hook is enabled, preserving USWDS styling. With
+runtime theming enabled, their CSS tokens default to `currentColor` so they
+follow the component's text color. Assign a component token explicitly to
+opt into a border role:
+
+```css
+:root {
+  --usx-table-border: var(--usx-color-border);
+  --usx-collection-border: var(--usx-color-border-subtle);
+  --usx-checkable-border: var(--usx-color-border);
+}
+```
+
+These utilities set only `border-color`; combine them with a border style and
+width, such as `class="border border-subtle"`. Component hooks such as
+`--usx-card-border-color` and `--usx-collection-border` can override their role.
+Configure the roles at compile time or enable runtime hooks with
+`@use 'pkg:@solexllc/usx/themed'` and load a theme stylesheet. Without configured
+tokens, the new role declarations are omitted and USWDS defaults remain.
+
+Existing themes that set only `--usx-color-border` now customize strong borders.
+Set `--usx-color-border-muted` and `--usx-color-border-subtle` too when migrating
+a theme that previously used the same color for every neutral border. To keep
+tables, collections, or checkable outlines on that scale, explicitly assign
+their component tokens as shown above. Dark presets provide their own scale
+and inverse color.
+
 ### Prebuilt themes
 
 The Playground's presets ship prebuilt. List the ones you want; nothing else
@@ -155,7 +213,7 @@ Each boundary is painted once; the mobile navbar's upstream border is removed.
 .site-shell {
   --usx-header-border-top: none;
   --usx-header-border-bottom: 2px solid var(--usx-color-primary);
-  --usx-header-border-separator: 1px solid var(--usx-color-border);
+  --usx-header-border-separator: 1px solid var(--usx-color-border-subtle);
   --usx-header-border-bottom-mobile: 3px solid var(--usx-color-primary);
   --usx-header-nav-border-bottom-mobile: none;
 }
@@ -193,9 +251,9 @@ visibility: neither divider appears on desktop.
 .usx-footer {
   --usx-footer-border-top: 3px solid var(--usx-color-primary);
   --usx-footer-border-bottom: none;
-  --usx-footer-primary-section-border-top: 1px dashed var(--usx-color-border);
-  --usx-footer-secondary-section-border-top: 2px solid var(--usx-color-border);
-  --usx-footer-primary-link-border-top: 1px dashed var(--usx-color-border);
+  --usx-footer-primary-section-border-top: 1px dashed var(--usx-color-border-subtle);
+  --usx-footer-secondary-section-border-top: 2px solid var(--usx-color-border-subtle);
+  --usx-footer-primary-link-border-top: 1px dashed var(--usx-color-border-subtle);
   --usx-footer-nav-border-bottom: none;
 }
 ```

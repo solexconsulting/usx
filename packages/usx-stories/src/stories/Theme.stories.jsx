@@ -90,11 +90,11 @@ const STATE_COLOR_NAMES = ['color-info', 'color-warning', 'color-error', 'color-
 const ENVIRONMENT_COLOR_NAMES = ['color-beta', 'color-test', 'color-dev'];
 // The former single "Surface & text colors" flat list, split into 3
 // component-style groups (see SURFACE_TEXT_GROUPS below) — surfaces,
-// borders (currently just color-border, but may gain more later) and text
+// borders and text
 // — since these are sibling tokens rather than a base-color-plus-shades
 // relationship.
 const SURFACE_COLOR_NAMES = ['surface-1', 'surface-2', 'surface-3'];
-const BORDER_COLOR_NAMES = ['color-border'];
+const BORDER_COLOR_NAMES = ['color-border', 'color-border-muted', 'color-border-subtle', 'color-border-inverse'];
 const TEXT_COLOR_NAMES = ['text-ink', 'text-muted', 'text-subtle', 'text-inverse'];
 const SURFACE_TEXT_COLOR_NAMES = [...SURFACE_COLOR_NAMES, ...BORDER_COLOR_NAMES, ...TEXT_COLOR_NAMES];
 const SURFACE_TEXT_GROUPS = [
@@ -173,7 +173,12 @@ function buildScaleRow(baseName, resolved) {
 // doesn't convey — surfaced as a tooltip on the control (see ColorControl).
 const TOKEN_NOTES = {
   'usx-header-nav-bg': 'only applies when the header uses the .usa-header--extended layout (desktop width)',
-  'usx-header-nav-bg-mobile': 'only applies when the header uses the .usa-header--extended layout (mobile off-canvas drawer)'
+  'usx-header-nav-bg-mobile': 'only applies when the header uses the .usa-header--extended layout (mobile off-canvas drawer)',
+  'usx-process-list-heading-text': 'step heading text',
+  'usx-process-list-border': 'vertical connector between steps',
+  'usx-process-list-counter-text': 'number inside each step marker',
+  'usx-process-list-counter-border': 'circular marker outline; follows text-ink by default and can be overridden independently',
+  'usx-process-list-counter-ring': 'marker background and outer ring that mask the connector; follows surface-1 by default'
 };
 
 const COMPONENT_COLOR_GROUPS = [
@@ -184,6 +189,7 @@ const COMPONENT_COLOR_GROUPS = [
   { label: 'Misc Banner', prefix: 'usx-misc-banner-' },
   { label: 'Carousel', prefix: 'usx-carousel-' },
   { label: 'Step Indicator', prefix: 'usx-step-indicator-' },
+  { label: 'Process List', prefix: 'usx-process-list-' },
   { label: 'Task List', prefix: 'usx-task-list-' },
   { label: 'Clickable', prefix: 'usx-clickable-' },
   { label: 'Checkable (Checkbox/Radio/Tile)', prefix: 'usx-checkable-' },
@@ -191,6 +197,7 @@ const COMPONENT_COLOR_GROUPS = [
   { label: 'Header', prefix: 'usx-header-', extra: ['usx-header-nav-bg', 'usx-header-nav-bg-mobile', 'usx-header-nav-link-bg-hover', 'usx-header-nav-link-text', 'usx-header-nav-link-text-mobile', 'usx-header-nav-link-text-hover', 'usx-header-nav-link-text-hover-mobile'] },
   { label: 'Footer', prefix: 'usx-footer-' },
   { label: 'Table', prefix: 'usx-table-' },
+  { label: 'Collection', prefix: 'usx-collection-' },
   { label: 'Tooltip', prefix: 'usx-tooltip-' },
   { label: 'Icon List', prefix: 'usx-icon-list-' },
   { label: 'Logo', prefix: 'usx-logo-' },
@@ -279,18 +286,15 @@ function randomPalette() {
   overrides['surface-3'] = hslToHex({ h: hue, s: saturation, l: surfaceLightnesses[1] });
   overrides['surface-1'] = hslToHex({ h: hue, s: saturation, l: surfaceLightnesses[2] });
 
-  // Dividers/borders (table footer rule, sticky-column shadow, header/
-  // footer/sidenav/tile rules) live in the same neutral family as the
-  // surfaces, one lightness band further in from the extreme — a bit darker
-  // than the light surfaces, a bit lighter than the dark ones — so they stay
-  // a visible divider against whichever surface tone the theme lands on
-  // instead of blending in or vanishing. color-border isn't itself one of
-  // the surface tokens, so it needs its own explicit override here.
-  {
-    const [min, max] = isDark ? [22, 38] : [68, 84];
-    const lightness = min + Math.random() * (max - min);
-    overrides['color-border'] = hslToHex({ h: hue, s: saturation, l: lightness });
-  }
+  // Borders share the surface hue, with separate bands that preserve the
+  // default > muted > subtle contrast hierarchy in either color scheme.
+  const borderBands = isDark
+    ? { 'color-border': [50, 56], 'color-border-muted': [36, 46], 'color-border-subtle': [22, 32] }
+    : { 'color-border': [32, 42], 'color-border-muted': [58, 68], 'color-border-subtle': [76, 84] };
+  Object.entries(borderBands).forEach(([name, [min, max]]) => {
+    overrides[name] = hslToHex({ h: hue, s: saturation, l: min + Math.random() * (max - min) });
+  });
+  overrides['color-border-inverse'] = isDark ? '#1b1b1b' : '#ffffff';
   Object.assign(overrides, headerFooterBorderOverrides(), headerNavBackgroundOverrides());
 
   // A dark surface set → the default dark ink (text) would be unreadable, so
@@ -355,7 +359,7 @@ function randomSystemPalette() {
   const isDark = Math.random() < 0.5;
   const surfaceFamily = NEUTRAL_FAMILIES[Math.floor(Math.random() * NEUTRAL_FAMILIES.length)];
   const surfaceGrades = gradesFor(surfaceFamily, false);
-  const pool = isDark ? surfaceGrades.slice(-6) : surfaceGrades.slice(0, 6);
+  const pool = surfaceGrades.filter((grade) => isDark ? Number(grade) >= 70 : Number(grade) <= 5);
   const surfacePicks = [0, 0, 0]
     .map(() => pool[Math.floor(Math.random() * pool.length)])
     .sort((a, b) => Number(a) - Number(b));
@@ -363,15 +367,15 @@ function randomSystemPalette() {
   overrides['surface-3'] = lookupHex(surfaceFamily, surfacePicks[1], false);
   overrides['surface-1'] = lookupHex(surfaceFamily, surfacePicks[0], false);
 
-  // Same reasoning as randomPalette() above: a border/divider grade from the
-  // same neutral family, one band further in from the surface pool's extreme
-  // so it stays a visible divider against whichever surface grade the theme
-  // lands on. Falls back to the surface pool itself if the family's scale is
-  // too short to have a distinct further-in band.
-  const borderPool = (isDark ? surfaceGrades.slice(-12, -6) : surfaceGrades.slice(6, 12)) || [];
-  const borderGrades = borderPool.length ? borderPool : pool;
-  const borderGrade = borderGrades[Math.floor(Math.random() * borderGrades.length)];
-  overrides['color-border'] = lookupHex(surfaceFamily, borderGrade, false);
+  // Distinct grades keep structural dividers subtle, interactive outlines
+  // muted, and input borders strongest against the surface pool. Table,
+  // collection, and checkbox/radio indicator borders retain currentColor.
+  const borderGrades = isDark
+    ? { 'color-border': '40', 'color-border-muted': '50', 'color-border-subtle': '60', 'color-border-inverse': '90' }
+    : { 'color-border': '60', 'color-border-muted': '30', 'color-border-subtle': '10', 'color-border-inverse': '1' };
+  Object.entries(borderGrades).forEach(([name, grade]) => {
+    overrides[name] = lookupHex(surfaceFamily, grade, false);
+  });
   Object.assign(overrides, headerFooterBorderOverrides(), headerNavBackgroundOverrides());
 
   // See randomPalette() above for why text-inverse flips opposite of text
@@ -639,21 +643,58 @@ function Section({ title, children, open = false, count }) {
   );
 }
 
-function ColorControl({ token, value, isOverridden, onChange, onClear }) {
+// Resolve aliases only for the swatch/picker. The raw value remains in the
+// theme state and exports so inherited colors keep following their targets.
+const TOKEN_NAMES_BY_CSS_VAR = new Map(themeManifest.map((token) => [token.cssVar, token.name]));
+
+function colorPreview(value, resolved) {
+  const seen = new Set();
+  let preview = value;
+  let match;
+  while ((match = /^var\(\s*(--usx-[\w-]+)\s*\)$/.exec(preview))) {
+    const name = TOKEN_NAMES_BY_CSS_VAR.get(match[1]);
+    if (!name || seen.has(name) || resolved[name] === undefined) break;
+    seen.add(name);
+    preview = resolved[name];
+  }
+  return /^#[\da-f]{3}$/i.test(preview)
+    ? `#${preview.slice(1).split('').map((digit) => digit + digit).join('')}`
+    : preview;
+}
+
+function ColorControl({ token, value, resolved = {}, isOverridden, onChange, onClear }) {
   const note = TOKEN_NOTES[token.name];
+  const preview = colorPreview(value, resolved);
+  const canPickColor = /^#[\da-f]{6}$/i.test(preview);
+  const supportsTextColor = /^currentcolor$/i.test(token.defaultValue);
   return (
     <div className={`usx-pg-row${isOverridden ? ' is-overridden' : ''}`}>
-      <input
-        type="color"
-        aria-label={token.name}
-        value={value}
-        onChange={(e) => onChange(token.name, e.target.value)}
-        className="usx-pg-swatch"
-      />
+      {!canPickColor ? (
+        <span className="usx-pg-swatch-static" style={{ background: preview }} aria-hidden="true" />
+      ) : (
+        <input
+          type="color"
+          aria-label={token.name}
+          value={preview}
+          onChange={(e) => onChange(token.name, e.target.value)}
+          className="usx-pg-swatch"
+        />
+      )}
       <span className="usx-pg-label" title={note ? `${token.cssVar} \u2014 ${note}` : token.cssVar}>
         {token.name.replace(/^color-|^usx-/, '')}
       </span>
       <code className="usx-pg-value">{value}</code>
+      {(supportsTextColor || !canPickColor) && (
+        <button
+          type="button"
+          className="usx-pg-mode-toggle"
+          aria-label={`${token.name}: ${canPickColor ? 'follow component text color' : 'choose a custom color'}`}
+          title={canPickColor ? 'Follow component text color' : 'Choose a custom color'}
+          onClick={() => onChange(token.name, canPickColor ? 'currentColor' : '#1b1b1b')}
+        >
+          {canPickColor ? 'text' : 'custom'}
+        </button>
+      )}
       {isOverridden && (
         <button type="button" className="usx-pg-reset" title="Reset to default" onClick={() => onClear(token.name)}>
           ×
@@ -963,6 +1004,7 @@ function ColorGroupRow({ token, resolved, overrides, systemSelections, onChange,
           <Control
             token={token}
             value={resolved[token.name]}
+            resolved={resolved}
             isOverridden={overrides[token.name] !== undefined}
             onChange={onChange}
             onClear={onClear}
@@ -975,6 +1017,7 @@ function ColorGroupRow({ token, resolved, overrides, systemSelections, onChange,
                 key={s.name}
                 token={s}
                 value={resolved[s.name]}
+                resolved={resolved}
                 isOverridden={overrides[s.name] !== undefined}
                 onChange={onChange}
                 onClear={onClear}
@@ -1325,7 +1368,7 @@ function Showcase({ resolved }) {
           callout="Bring attention to a project priority"
           backgroundImage="https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg"
           paragraph="Support the callout with some short explanatory text."
-          buttonProps={{ href: '#', label: 'Call to action' }}
+          buttonProps={{ href: '#', label: 'Call to action', variant: 'primary' }}
           overlay
         />
       </div>
@@ -1457,7 +1500,7 @@ function Showcase({ resolved }) {
         <LanguageSelector languages={languageSelectorLanguages} />
         <SideNav items={sideNavItems} />
         <StepIndicator
-          steps={[{ label: 'Personal info' }, { label: 'Documents' }, { label: 'Review' }]}
+          steps={[{ label: 'Personal info' }, { label: 'Documents' }, { label: 'Review' }, { label: 'Confirmation' }]}
           currentStep={2}
           variant="counters"
         />
@@ -1814,6 +1857,7 @@ function ThemePlayground({ initialTheme } = {}) {
         <Control
           token={t}
           value={resolved[t.name]}
+          resolved={resolved}
           isOverridden={overrides[t.name] !== undefined}
           onChange={setToken}
           onClear={clearToken}
@@ -1829,6 +1873,7 @@ function ThemePlayground({ initialTheme } = {}) {
                   key={s.name}
                   token={s}
                   value={resolved[s.name]}
+                  resolved={resolved}
                   isOverridden={overrides[s.name] !== undefined}
                   onChange={setToken}
                   onClear={clearToken}

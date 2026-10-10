@@ -30,6 +30,88 @@ const fail = (msg) => failures.push(msg);
 
 const cssVars = new Set(themeManifest.map((t) => t.cssVar));
 
+// The border roles are independent of text/palette colors and remain live
+// CSS aliases at the component layer, so scoped theme overrides propagate.
+const borderDefaults = {
+  'color-border': '#565c65',
+  'color-border-subtle': '#dfe1e2',
+  'color-border-muted': '#a9aeb1',
+  'color-border-inverse': '#ffffff',
+};
+const borderParents = {
+  'usx-card-border-color': 'color-border-subtle',
+  'usx-checkable-tile-border': 'color-border-muted',
+  'usx-file-input-border': 'color-border-muted',
+  'usx-file-input-item-border': 'color-border-muted',
+  'usx-in-page-nav-border': 'color-border-muted',
+  'usx-pagination-button-border': 'color-border-muted',
+  'usx-range-slider-track-border': 'color-border',
+  'usx-range-slider-thumb-border': 'color-border',
+  'usx-sidenav-border': 'color-border-subtle',
+  'usx-task-list-border': 'color-border-subtle',
+};
+const resolvedDefault = resolveTheme();
+for (const [name, value] of Object.entries(borderDefaults)) {
+  const token = themeManifest.find((entry) => entry.name === name);
+  if (resolvedDefault[name] !== value || token?.type !== 'color') fail(`${name}: missing border color or incorrect default`);
+  if (token?.derivedFrom) fail(`${name}: semantic border role must be independently configurable`);
+}
+for (const [name, parent] of Object.entries(borderParents)) {
+  if (resolvedDefault[name] !== `var(--usx-${parent})`) fail(`${name}: border must follow ${parent}`);
+}
+if (resolvedDefault['usx-step-indicator-segment-pending-border'] !== 'var(--usx-text-muted)') {
+  fail('pending step indicator ring must follow its muted label text');
+}
+if (resolvedDefault['usx-process-list-counter-border'] !== 'var(--usx-text-ink)') {
+  fail('process counter border must inherit text-ink by default');
+}
+const inkBorders = ['usx-table-border', 'usx-collection-border', 'usx-checkable-border'];
+for (const name of inkBorders) {
+  if (resolvedDefault[name] !== 'currentColor') fail(`${name}: default border must retain the component's ink color`);
+}
+for (const name of ['usx-header-border-separator', 'usx-header-border-bottom-mobile', 'usx-header-nav-item-border', 'usx-footer-primary-link-border-top', 'usx-footer-nav-border-bottom']) {
+  if (resolvedDefault[name] !== 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)') fail(`${name}: divider must follow the subtle border role`);
+}
+if (themeManifest.some((token) => token.group === 'component' && token.defaultValue.includes('var(--usx-color-border-inverse)'))) {
+  fail('inverse border must remain available without changing default component borders');
+}
+
+const customBorderScale = {
+  'color-border': '#135791',
+  'color-border-subtle': '#246802',
+  'color-border-muted': '#357913',
+  'color-border-inverse': '#468024',
+};
+const scaleOnlyTheme = resolveTheme(customBorderScale);
+if (scaleOnlyTheme['usx-step-indicator-segment-pending-border'] !== 'var(--usx-text-muted)') {
+  fail('shared border overrides must not change the pending step indicator ring');
+}
+if (scaleOnlyTheme['usx-process-list-counter-border'] !== 'var(--usx-text-ink)') {
+  fail('shared border overrides must not change the process counter ink outline');
+}
+for (const name of inkBorders) {
+  if (scaleOnlyTheme[name] !== 'currentColor') fail(`${name}: changing shared border roles must not change its ink border`);
+}
+const customBorderOverrides = {
+  ...customBorderScale,
+  'usx-table-border': '#def456',
+  'usx-collection-border': '#579135',
+  'usx-checkable-border': '#ad17ce',
+  'usx-process-list-counter-border': '#6a17bc',
+  'usx-process-list-counter-text': '#7b28cd',
+};
+const customBorderTheme = resolveTheme(customBorderOverrides);
+for (const [name, value] of Object.entries(customBorderOverrides)) {
+  if (customBorderTheme[name] !== value) fail(`${name}: explicit border override was not preserved`);
+}
+for (const [name, parent] of Object.entries(borderParents)) {
+  if (!(name in customBorderOverrides) && customBorderTheme[name] !== `var(--usx-${parent})`) fail(`${name}: custom scale broke its runtime border alias`);
+}
+for (const name of inkBorders) {
+  const value = 'var(--usx-color-border)';
+  if (resolveTheme({ [name]: value })[name] !== value) fail(`${name}: explicit opt-in to a shared border role was not preserved`);
+}
+
 const headerBorders = {
   'usx-header-border-top': '3px solid #005ea2',
   'usx-header-border-bottom': '4px solid #237a3b',
@@ -74,6 +156,12 @@ for (const [name, preset] of Object.entries(PRESETS)) {
   if (resolved['usx-footer-social-icon-filter'] !== expectedFilter) fail(`${name}: footer social icon filter mismatch`);
   if (resolved['usx-footer-social-bg'] !== 'var(--usx-surface-2)') fail(`${name}: footer social background must follow surface-2`);
   if (resolved['usx-footer-social-bg-hover'] !== 'var(--usx-surface-1)') fail(`${name}: footer social hover must follow surface-1`);
+  if (['Borealis', 'Midnight', 'Carbon'].includes(name)) {
+    for (const token of Object.keys(borderDefaults)) {
+      if (!preset[token]) fail(`${name}: dark preset must define ${token}`);
+    }
+    if (new Set(['color-border', 'color-border-subtle', 'color-border-muted'].map((token) => resolved[token])).size !== 3) fail(`${name}: dark border roles must remain distinct`);
+  }
 }
 
 // Parses `selector { decl; decl; }` blocks into [{ selector, decls: Map }].
@@ -182,6 +270,17 @@ if (!copy) fail('sass: Playground export did not produce a [data-theme=forest-co
 else {
   for (const [cssVar, value] of themeEntries(resolveTheme(PRESETS.Forest))) {
     if (copy.decls.get(cssVar) !== value) fail(`sass export: ${cssVar} is ${copy.decls.get(cssVar)}, expected ${value}`);
+  }
+}
+
+const borderExport = themeToSass(customBorderTheme, { name: 'Custom Borders' });
+const borderRoundTrip = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${borderExport}));`));
+const customBorders = borderRoundTrip.find((block) => block.selector.endsWith('[data-theme=custom-borders]'));
+if (!customBorders) fail('sass: border scale export did not produce a theme block');
+else {
+  for (const [name, value] of Object.entries(customBorderOverrides)) {
+    const cssVar = name.startsWith('usx-') ? `--${name}` : `--usx-${name}`;
+    if (customBorders.decls.get(cssVar) !== value) fail(`sass: ${name} border override did not survive export/import`);
   }
 }
 

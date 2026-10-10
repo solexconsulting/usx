@@ -30,7 +30,7 @@
 /* ---------------------------------- */
 
 .usa-select.usx-select:not(.usa-input--error):not(.usa-input--success) {
-  &:not(:disabled) {
+  &:not(:disabled, [aria-disabled="true"]) {
     background-color: usx-when($usx-input-bg);
 
     color: usx-when($usx-input-text);

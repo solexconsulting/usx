@@ -9,11 +9,16 @@
 // real USWDS (no runtime theme switching) but breaks under our dark presets,
 // which flip ambient text to a light color while the list keeps its
 // permanently-white background (same "form controls don't flip surfaces"
-// convention as $usx-input-bg/-text/-border, both always null) — making
+// convention as $usx-input-bg/-text, both always null) — making
 // options illegible. Pin the same ink color the input already gets so list
 // text stays legible under every preset.
 .usa-combo-box__list {
   color: #1b1b1b;
+  border-color: usx-when($usx-input-border);
+}
+
+.usa-combo-box__list-option:where(:not(.usa-combo-box__list-option--selected)) {
+  border-bottom-color: usx-when($usx-color-border-subtle);
 }
 
 // Real USWDS's compiled CSS hardcodes the selected-option highlight to a

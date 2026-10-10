@@ -24,20 +24,24 @@
   }
 
   .usa-radio__input--tile + .usa-radio__label {
-    border-color: usx-when($usx-checkable-tile-border);
-
     border-width: usx-when($usx-checkable-tile-border-width);
+  }
+
+  .usa-radio__input--tile:where(:not(:checked, :disabled, [aria-disabled="true"])) + .usa-radio__label {
+    border-color: usx-when($usx-checkable-tile-border);
   }
 
   .usa-radio__label::before {
     background-color: usx-when($usx-checkable-bg);
+  }
 
+  .usa-radio__input:where(:not(:checked, :disabled, [aria-disabled="true"])) + .usa-radio__label::before {
     @if $usx-checkable-border {
       box-shadow: 0 0 0 2px $usx-checkable-border;
     }
   }
 
-  .usa-radio__input:checked:not(:disabled) {
+  .usa-radio__input:checked:not(:disabled, [aria-disabled="true"]) {
     & + .usa-radio__label {
       @if $usx-color-primary {
         &::before {

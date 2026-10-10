@@ -74,15 +74,12 @@ const UNCONSUMED = new Set([
   '--usx-color-disabled-darker',
   '--usx-color-visited',
   '--usx-spacing-sm',
+  '--usx-spacing-xl',
   '--usx-typography-font-family-base',
   '--usx-typography-font-size-base',
   '--usx-typography-font-weight-regular',
   '--usx-typography-font-weight-bold',
   '--usx-typography-line-height-base',
-  '--usx-radius-box',
-  '--usx-radius-field',
-  '--usx-radius-selector',
-  '--usx-radius-none',
   '--border-width-md',
 ]);
 
@@ -116,7 +113,7 @@ for (const [name, parent] of Object.entries({
   'usx-card-text': 'text-ink',
   'usx-card-heading-text': 'usx-card-text',
   'usx-card-media-bg': 'surface-3',
-  'usx-card-border-color': 'color-border',
+  'usx-card-border-color': 'color-border-subtle',
   'usx-card-radius': 'radius-box',
   'usx-card-border-width': 'border-width-md',
 })) {
@@ -139,6 +136,227 @@ if (staticCardCss.replace(/\/\*[\s\S]*?\*\//g, '').trim()) errors.push('unconfig
 for (const selector of ['.usa-card.usx-card > .usa-card__container', '.usa-card.usx-card.usa-card--flag.usa-card--media-right', '.usa-card__media--inset .usa-card__img']) {
   if (!themedCss.includes(selector)) errors.push(`missing themed card selector: ${selector}`);
 }
+
+// Read emitted declarations without splitting commas inside :where/:not.
+function cssRules(css) {
+  const rules = [];
+  const clean = css.replace(/\/\*[\s\S]*?\*\//g, '');
+  for (const [, selectorText, body] of clean.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    const selectors = [];
+    let depth = 0;
+    let start = 0;
+    for (let i = 0; i <= selectorText.length; i++) {
+      if ('(['.includes(selectorText[i])) depth++;
+      if (')]'.includes(selectorText[i])) depth--;
+      if (i === selectorText.length || (selectorText[i] === ',' && depth === 0)) {
+        selectors.push(selectorText.slice(start, i).trim());
+        start = i + 1;
+      }
+    }
+    const declarations = new Map();
+    for (const declaration of body.split(';')) {
+      const colon = declaration.indexOf(':');
+      if (colon > 0) declarations.set(declaration.slice(0, colon).trim(), declaration.slice(colon + 1).trim());
+    }
+    for (const selector of selectors) rules.push({ selector, declarations });
+  }
+  return rules;
+}
+
+function expectDeclaration(rules, label, selector, property, expected) {
+  const actual = rules.filter((rule) => rule.selector === selector && rule.declarations.has(property)).at(-1)?.declarations.get(property);
+  if (actual !== expected) errors.push(`${label}: ${selector} ${property} is ${actual}, expected ${expected}`);
+}
+
+const defaultRules = cssRules(defaultCss);
+const themedRules = cssRules(themedCss);
+const borderComponents = [
+  ['.usa-card.usx-card > .usa-card__container', 'border-color', 'usx-card-border-color', 'subtle'],
+  // Ink borders have no shared border role; leave their USWDS defaults alone
+  // until a component override or runtime hook is explicitly enabled.
+  ['.usa-table td', 'border-color', 'usx-table-border', null],
+  ['.usx-table.usa-table th', 'border-color', 'usx-table-border', null],
+  ['.usx-collection .usa-collection__item', 'border-top-color', 'usx-collection-border', null],
+  ['.usa-file-input__target', 'border-color', 'usx-file-input-border', 'muted'],
+  ['.usx-file-input__file-item', 'border-color', 'usx-file-input-item-border', 'muted'],
+  ['.usx-pagination__nav .usa-pagination__button:not(.usa-current)', 'border-color', 'usx-pagination-button-border', 'muted'],
+  ['.usa-in-page-nav__list', 'border-left-color', 'usx-in-page-nav-border', 'muted'],
+  ['.usx-sidenav.usa-sidenav', 'border-bottom-color', 'usx-sidenav-border', 'subtle'],
+  ['.usx-task-list', 'border-color', 'usx-task-list-border', 'subtle'],
+  ['.usa-range::-webkit-slider-runnable-track', 'border-color', 'usx-range-slider-track-border', 'default'],
+];
+for (const [selector, property, token] of borderComponents) {
+  expectDeclaration(defaultRules, 'unconfigured border leaves USWDS intact', selector, property, undefined);
+  expectDeclaration(themedRules, 'runtime component border', selector, property, `var(--${token})`);
+}
+
+const customBorders = { default: '#135791', subtle: '#246802', muted: '#357913', inverse: '#468024' };
+const borderConfig = `
+  $usx-color-border: ${customBorders.default},
+  $usx-color-border-subtle: ${customBorders.subtle},
+  $usx-color-border-muted: ${customBorders.muted},
+  $usx-color-border-inverse: ${customBorders.inverse},
+  $usx-text-ink: #579135,
+  $usx-color-error: #a10000,
+  $usx-color-success: #006100,
+`;
+const compileBorders = (extra = '') => cssRules(sass.compileString(`
+  @use 'pkg:@solexllc/usx-theme/variables' with (${borderConfig}${extra});
+  @use '../src/index';
+`, {
+  url: new URL('file://' + path.join(pkgDir, 'test', 'inline.scss')),
+  importers: [new sass.NodePackageImporter(pkgDir)],
+  logger: { warn: (message) => sassWarnings.push(message) },
+}).css);
+const customRules = compileBorders();
+for (const [selector, property, , role] of borderComponents) {
+  expectDeclaration(customRules, 'custom Sass border scale', selector, property, customBorders[role]);
+}
+
+const processCounter = '.usx-process-list .usa-process-list__item::before';
+expectDeclaration(defaultRules, 'unconfigured process counter preserves USWDS', processCounter, 'border-color', undefined);
+expectDeclaration(themedRules, 'runtime process counter border hook', processCounter, 'border-color', 'var(--usx-process-list-counter-border)');
+expectDeclaration(customRules, 'process counter border follows ink instead of shared border colors', processCounter, 'border-color', '#579135');
+expectDeclaration(customRules, 'process counter text follows ink', processCounter, 'color', '#579135');
+
+function expectCheckableOutline(rules, label, expected) {
+  for (const [container, input, pseudo] of [
+    ['.usx-checkbox', '.usa-checkbox__input', '.usa-checkbox__label::before'],
+    ['.usa-radio.usx-radio', '.usa-radio__input', '.usa-radio__label::before'],
+  ]) {
+    const outlines = rules.filter((rule) => rule.selector.startsWith(`${container} ${input}:where(`) && rule.selector.endsWith(` + ${pseudo}`));
+    const shadows = outlines.filter((rule) => rule.declarations.has('box-shadow')).map((rule) => rule.declarations.get('box-shadow'));
+    if (expected === undefined ? shadows.length : !shadows.length || shadows.some((shadow) => shadow !== `0 0 0 2px ${expected}`)) {
+      errors.push(`${label}: ${pseudo} outline is ${shadows.join(', ') || 'unset'}, expected ${expected ?? 'unset'}`);
+    }
+  }
+}
+expectCheckableOutline(defaultRules, 'unconfigured checkables preserve USWDS ink', undefined);
+expectCheckableOutline(customRules, 'shared border scale does not change checkable ink', undefined);
+expectCheckableOutline(themedRules, 'runtime checkable component hook', 'var(--usx-checkable-border)');
+for (const [role, value] of Object.entries(customBorders)) {
+  const selector = `.border-${role}`;
+  const token = `--usx-color-border${role === 'default' ? '' : `-${role}`}`;
+  expectDeclaration(defaultRules, 'unconfigured utility', selector, 'border-color', undefined);
+  expectDeclaration(themedRules, 'runtime border utility', selector, 'border-color', `var(${token}) !important`);
+  expectDeclaration(customRules, 'custom Sass border utility', selector, 'border-color', `${value} !important`);
+}
+
+// A neutral border must never erase validation or disabled state styling.
+for (const selector of ['.usa-input', '.usa-select', '.usa-input-group', '.usa-combo-box__input', '.usa-textarea']) {
+  const neutral = customRules.filter((rule) => rule.selector.startsWith(`${selector}:where(`) && rule.declarations.has('border-color'));
+  if (!neutral.length) errors.push(`${selector}: missing guarded neutral border`);
+  for (const rule of neutral) {
+    if (rule.declarations.get('border-color') !== customBorders.default) errors.push(`${selector}: neutral border does not use the default role`);
+    for (const state of ['.usa-input--error', '.usa-input--success', ':disabled']) {
+      if (!rule.selector.includes(':not(') || !rule.selector.includes(state)) errors.push(`${selector}: neutral border must exclude ${state}`);
+    }
+  }
+  expectDeclaration(customRules, 'no unguarded form border', selector, 'border-color', undefined);
+}
+for (const selector of ['.usa-input.usx-input', '.usa-select.usx-select', '.usa-textarea.usx-textarea']) {
+  expectDeclaration(customRules, 'error border preserved', `${selector}.usa-input--error`, 'border-color', '#a10000');
+  expectDeclaration(customRules, 'success border preserved', `${selector}.usa-input--success:not(.usa-input--error)`, 'border-color', '#006100');
+}
+
+const componentOverrides = {
+  'usx-card-border-color': '#abc123',
+  'usx-table-border': '#def456',
+  'usx-collection-border': '#789abc',
+  'usx-checkable-border': '#ad17ce',
+  'usx-process-list-counter-border': '#6a17bc',
+  'usx-process-list-counter-text': '#7b28cd',
+  'usx-file-input-border': '#612345',
+  'usx-input-border': '#b15c2a',
+  'usx-textarea-border': '#c26d3b',
+};
+const overrideRules = compileBorders(Object.entries(componentOverrides).map(([name, value]) => `$${name}: ${value},`).join('\n'));
+for (const [selector, property, token, role] of borderComponents) {
+  expectDeclaration(overrideRules, 'component override precedence', selector, property, componentOverrides[token] ?? customBorders[role]);
+}
+expectCheckableOutline(overrideRules, 'independent checkable border override', componentOverrides['usx-checkable-border']);
+expectDeclaration(overrideRules, 'process counter border override wins independently', processCounter, 'border-color', componentOverrides['usx-process-list-counter-border']);
+expectDeclaration(overrideRules, 'process counter text remains independently configurable', processCounter, 'color', componentOverrides['usx-process-list-counter-text']);
+for (const selector of ['.usa-input', '.usa-select', '.usa-input-group', '.usa-combo-box__input', '.usa-textarea']) {
+  const expected = componentOverrides[selector === '.usa-textarea' ? 'usx-textarea-border' : 'usx-input-border'];
+  for (const rule of overrideRules.filter((rule) => rule.selector.startsWith(`${selector}:where(`) && rule.declarations.has('border-color'))) {
+    if (rule.declarations.get('border-color') !== expected) errors.push(`${selector}: neutral border ignores its component override`);
+  }
+}
+
+const inkBorderOptIns = {
+  'usx-table-border': 'var(--usx-color-border-subtle)',
+  'usx-collection-border': 'var(--usx-color-border)',
+  'usx-checkable-border': 'var(--usx-color-border-muted)',
+};
+const optInRules = compileBorders(Object.entries(inkBorderOptIns).map(([name, value]) => `$${name}: ${value},`).join('\n'));
+for (const [selector, property, token, role] of borderComponents) {
+  if (role === null) expectDeclaration(optInRules, 'explicit border-role opt-in', selector, property, inkBorderOptIns[token]);
+}
+expectCheckableOutline(optInRules, 'explicit checkable border-role opt-in', inkBorderOptIns['usx-checkable-border']);
+
+// Step segments communicate state through the same colors as their labels.
+// Use distinct text/border palettes to catch accidental border-role fallbacks.
+const stepPalette = { pending: '#5a6570', complete: '#193c66', current: '#2463a8', inverse: '#f5f6f7', surface: '#eef2f6' };
+const compileStepIndicator = (extra = '') => cssRules(sass.compileString(`
+  @use 'pkg:@solexllc/usx-theme/variables' with (
+    ${borderConfig}
+    $usx-text-muted: ${stepPalette.pending},
+    $usx-text-inverse: ${stepPalette.inverse},
+    $usx-surface-1: ${stepPalette.surface},
+    $usx-color-primary-darker: ${stepPalette.complete},
+    $usx-color-primary-dark: ${stepPalette.current},
+    ${extra}
+  );
+  @use '../src/components/step-indicator';
+`, {
+  url: new URL('file://' + path.join(pkgDir, 'test', 'inline.scss')),
+  importers: [new sass.NodePackageImporter(pkgDir)],
+  logger: { warn: (message) => sassWarnings.push(message) },
+}).css);
+
+function expectStepPalette(rules, label, palette) {
+  const base = '.usx-step-indicator';
+  const segment = '.usa-step-indicator__segment';
+  expectDeclaration(rules, label, `${base} ${segment}::after`, 'background-color', palette.pending);
+  expectDeclaration(rules, label, `${base} ${segment}-label`, 'color', palette.pending);
+  for (const state of ['complete', 'current']) {
+    for (const pseudo of ['::before', '::after']) {
+      expectDeclaration(rules, label, `${base} ${segment}--${state}${pseudo}`, 'background-color', palette[state]);
+    }
+    expectDeclaration(rules, label, `${base} ${segment}--${state} ${segment}-label`, 'color', palette[state]);
+    // Base and state bar selectors have equal specificity, so state fills
+    // must follow the pending fill to win on completed/current segments.
+    const colorIndex = (selector) => rules.findLastIndex((rule) => rule.selector === selector && rule.declarations.has('background-color'));
+    if (colorIndex(`${base} ${segment}::after`) >= colorIndex(`${base} ${segment}--${state}::after`)) {
+      errors.push(`${label}: pending bar color would override the ${state} state`);
+    }
+  }
+  for (const variant of ['counters', 'counters-sm']) {
+    const counterBase = `${base}.usa-step-indicator--${variant}`;
+    const pending = `${counterBase} ${segment}::before`;
+    expectDeclaration(rules, label, pending, 'background-color', palette.surface);
+    expectDeclaration(rules, label, pending, 'color', palette.pending);
+    expectDeclaration(rules, label, pending, 'box-shadow', `inset 0 0 0 0.25rem ${palette.ring ?? palette.pending}, 0 0 0 0.25rem ${palette.surface}`);
+    for (const state of ['complete', 'current']) {
+      const filled = `${counterBase} ${segment}--${state}::before`;
+      expectDeclaration(rules, label, filled, 'background-color', palette[state]);
+      expectDeclaration(rules, label, filled, 'color', palette.inverse);
+      expectDeclaration(rules, label, filled, 'box-shadow', `0 0 0 0.25rem ${palette.surface}`);
+    }
+  }
+  expectDeclaration(rules, label, `${base} .usa-step-indicator__current-step`, 'color', palette.inverse);
+}
+expectStepPalette(compileStepIndicator(), 'step indicator uses text/state colors', stepPalette);
+expectStepPalette(compileStepIndicator('$usx-step-indicator-segment-label-text: #4b5967,'), 'custom pending label also colors bar and ring', { ...stepPalette, pending: '#4b5967' });
+expectStepPalette(themedRules, 'runtime step indicator colors', {
+  pending: 'var(--usx-text-muted)',
+  ring: 'var(--usx-step-indicator-segment-pending-border)',
+  complete: 'var(--usx-color-primary-darker)',
+  current: 'var(--usx-color-primary-dark)',
+  inverse: 'var(--usx-text-inverse)',
+  surface: 'var(--usx-step-indicator-bg)',
+});
 
 const compileGuard = (body) => sass.compileString(
   `@use 'pkg:@solexllc/usx-theme/variables' as *; .probe { ${body} }`,

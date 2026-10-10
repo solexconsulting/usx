@@ -17,22 +17,26 @@
   }
 
   .usa-checkbox__input--tile + .usa-checkbox__label {
-    border-color: usx-when($usx-checkable-tile-border);
-
     border-width: usx-when($usx-checkable-tile-border-width);
+  }
+
+  .usa-checkbox__input--tile:where(:not(:checked, :indeterminate, [data-indeterminate], :disabled, [aria-disabled="true"])) + .usa-checkbox__label {
+    border-color: usx-when($usx-checkable-tile-border);
   }
 
   .usa-checkbox__label::before {
     border-radius: usx-when($usx-checkable-radius);
 
     background-color: usx-when($usx-checkable-bg);
+  }
 
+  .usa-checkbox__input:where(:not(:checked, :indeterminate, [data-indeterminate], :disabled, [aria-disabled="true"])) + .usa-checkbox__label::before {
     @if $usx-checkable-border {
       box-shadow: 0 0 0 2px $usx-checkable-border;
     }
   }
 
-  .usa-checkbox__input:checked:not(:disabled) {
+  .usa-checkbox__input:checked:not(:disabled, [aria-disabled="true"]) {
     & + .usa-checkbox__label {
       @if $usx-color-primary {
         &::before {

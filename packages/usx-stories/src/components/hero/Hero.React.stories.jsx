@@ -5,7 +5,7 @@ import { expect } from 'storybook/test';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
-const defaultButton = { href: '#', label: 'Call to action' };
+const defaultButton = { href: '#', label: 'Call to action', variant: 'primary' };
 const defaultParagraph = 'A short description of the hero section that provides context for the call to action.';
 const defaultImage = 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg';
 

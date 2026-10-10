@@ -8,11 +8,11 @@
 
 export function headerFooterBorderOverrides() {
   return {
-    'usx-header-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border)',
-    'usx-header-border-bottom': 'var(--usx-border-width-sm) solid var(--usx-color-border)',
-    'usx-footer-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border)',
-    'usx-footer-primary-section-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border)',
-    'usx-footer-secondary-section-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border)',
+    'usx-header-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
+    'usx-header-border-bottom': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
+    'usx-footer-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
+    'usx-footer-primary-section-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
+    'usx-footer-secondary-section-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
   };
 }
 
@@ -56,6 +56,7 @@ export const PRESETS = {
   },
   Sunset: {
     'color-primary': '#d84315',
+    'color-primary-lighter': '#faeee5',
     'color-secondary': '#6a1b9a',
     'color-accent-cool': '#ff8a65',
     'color-accent-warm': '#ffd54f',
@@ -76,12 +77,10 @@ export const PRESETS = {
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides()
   },
-  // Built around a fixed, given set of state colors (sky blue / peach /
-  // teal / red-orange / violet) rather than starting from a theme palette
-  // and leaving the states at their defaults like the presets above — the
-  // theme colors here are chosen to echo those five hues instead.
   Aurora: {
-    'color-primary': '#3457d5', // echoes the info blue as the brand anchor
+    'color-primary': '#3457d5',
+    'color-primary-lighter': '#cfe8ff',
+    'color-primary-light': '#58b4ff',
     'color-secondary': '#7c4dff', // brighter kin of the emergency violet
     'color-accent-cool': '#00b8d9', // echoes the success teal
     'color-accent-warm': '#ff8f6b', // saturated kin of the warning peach
@@ -107,6 +106,8 @@ export const PRESETS = {
   Borealis: {
     'usx-footer-social-icon-filter': 'brightness(0) invert(1)',
     'color-primary': '#5b7cfa',
+    'color-primary-lighter': '#cfe8ff',
+    'color-primary-light': '#58b4ff',
     'color-secondary': '#b98cff',
     'color-accent-cool': '#2dd4bf',
     'color-accent-warm': '#ffab91',
@@ -117,6 +118,10 @@ export const PRESETS = {
     'text-muted': '#dcddff',
     'text-subtle': '#aeafc9',
     'text-inverse': '#161a2e',
+    'color-border': '#858ba5',
+    'color-border-muted': '#565d7f',
+    'color-border-subtle': '#363d5e',
+    'color-border-inverse': '#161a2e',
     'color-info': '#58b4ff',
     'color-warning': '#fdb8ae',
     'color-success': '#009ec1',
@@ -160,6 +165,10 @@ export const PRESETS = {
     'text-muted': '#c7c9da',
     'text-subtle': '#aeafc9',
     'text-inverse': '#1e293b',
+    'color-border': '#8494aa',
+    'color-border-muted': '#64748b',
+    'color-border-subtle': '#475569',
+    'color-border-inverse': '#1e293b',
     'usx-summary-box-bg': '#0f1b2e',
     'usx-summary-box-border-color': '#60a5fa',
     'usx-link-text-visited': '#b39ddb',
@@ -177,6 +186,8 @@ export const PRESETS = {
   Carbon: {
     'usx-footer-social-icon-filter': 'brightness(0) invert(1)',
     'color-primary': '#fa9441',
+    'color-primary-light': '#f3bf90',
+    'color-primary-lighter': '#f2e4d4',
     'color-secondary': '#22d3ee',
     'color-accent-cool': '#38bdf8',
     'color-accent-warm': '#facc15',
@@ -187,6 +198,10 @@ export const PRESETS = {
     'text-muted': '#c0c0c0',
     'text-subtle': '#a3a3a3',
     'text-inverse': '#1c1c1e',
+    'color-border': '#919191',
+    'color-border-muted': '#6b6b70',
+    'color-border-subtle': '#505055',
+    'color-border-inverse': '#1c1c1e',
     'usx-summary-box-bg': '#241a10',
     'usx-summary-box-border-color': '#fb923c',
     'usx-link-text-visited': '#b39ddb',
@@ -196,6 +211,14 @@ export const PRESETS = {
     // color-base-light.
     'usx-date-picker-button-hover-active-bg': '#565c65',
     'usx-in-page-nav-bg': 'var(--usx-surface-2)',
+    'radius-box': '1.25rem',
+    'radius-button': '0.5rem',
+    'radius-field': '0.5rem',
+    'radius-selector': '4px',
+    'usx-accordion-radius': 'var(--usx-radius-button)',
+    'usx-alert-radius': 'var(--usx-radius-box)',
+    'usx-tag-radius': 'var(--usx-radius-box)',
+    'usx-checkable-tile-radius': 'var(--usx-radius-box)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     // Carbon wants the desktop nav bar one tone lighter than the header
@@ -228,11 +251,12 @@ export const PRESETS = {
     // GOV.UK Design System (design-system.service.gov.uk) web palette +
     // functional colours.
     'color-primary': '#1d70b8', // govuk-colour('blue') / functional brand
+    'color-primary-lighter': '#cfe8ff',
     'color-secondary': '#0f7a52', // govuk-colour('green') — the "Start now" button
     'color-accent-cool': '#8eb8dc', // govuk-colour('blue', $variant: 'tint-50')
     'color-accent-warm': '#f47738', // govuk-colour('orange')
     'surface-3': '#f4f8fb', // functional template-background
-    'color-border': '#cecece', // functional border
+    'color-border-subtle': '#cecece', // section dividers
     'color-focus': '#ffdd00', // functional focus — GOV.UK's signature yellow focus state
     'font-family': '"GDS Transport", arial, sans-serif', // real gov.uk body/heading font
     ...headerFooterBorderOverrides(),
@@ -289,7 +313,7 @@ export const PRESETS = {
     'color-accent-cool': '#959599', // real neutral gray used across icons/labels
     'color-accent-warm': '#f64137', // real "read more" arrow-icon accent
     'surface-3': '#000000', // real header background — solid black
-    'color-border': '#b9b9bb', // real divider/border gray (light enough to read against the black header)
+    'color-border-subtle': '#b9b9bb', // divider gray (also visible against the black header)
     'usx-header-text': 'var(--usx-text-inverse)', // real header text is white against the black bar
     // text-subtle/text-muted are tuned for a light/neutral surface — against
     // the solid black header/nav they'd be low-contrast, so match the real
