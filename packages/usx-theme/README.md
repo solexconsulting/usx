@@ -13,8 +13,8 @@ This package stores platform-agnostic tokens in JSON source files and compiles t
 - `src/presets.js`: the prebuilt theme palettes (Forest, Carbon, GOV.UK, …)
 - `src/derive.js`: shade derivation + theme serialization (CSS / Sass export), shared by the build and the Playground
 - `src/_themes.scss`: the opt-in prebuilt/custom themes Sass module (`@solexllc/usx-theme/themes`)
-- `dist/tokens.css`: generated CSS variables
-- `dist/tokens.js`: generated JS export
+- `dist/tokens.css`: raw JSON primitives as `--usx-primitive-<group>-<name>` CSS variables
+- `dist/tokens.js`: generated JS export of the raw JSON primitives
 - `dist/theme-manifest.json`: generated theme manifest
 - `dist/theme.css`: every `--usx-*` token at its default, on `:root`
 - `dist/themes/<slug>.css`, `dist/themes/all.css`: each prebuilt theme as a `[data-theme="<slug>"]` block (and all of them together)
@@ -80,12 +80,45 @@ the output contains zero `var()` references:
 Individual tokens can also opt out by nulling their hook
 (e.g. `$usx-color-primary-var: null`).
 
+### Configuration keys and variable names
+
+Theme configuration keys omit the `usx-` prefix everywhere: Playground labels,
+manifest `name`/`derivedFrom` fields, JavaScript theme objects, and Sass `$themes`
+maps. Sass variables and CSS custom properties retain their prefixes:
+
+| Configuration key | Sass variable | CSS custom property |
+| --- | --- | --- |
+| `color-primary` | `$usx-color-primary` | `--usx-color-primary` |
+| `accordion-radius` | `$usx-accordion-radius` | `--usx-accordion-radius` |
+| `link-text` | `$usx-link-text` | `--usx-link-text` |
+
+```js
+resolveTheme({
+  'color-primary': '#b00020',
+  'accordion-radius': '0.5rem',
+  'link-text': 'var(--usx-color-primary)',
+});
+```
+
+Keep CSS references inside values prefixed. Sass theme exports use unprefixed
+map keys; CSS exports emit `--usx-*` properties. JavaScript theme objects and
+Sass theme maps accept only recognized canonical keys. Unknown keys and
+prefixed keys such as `usx-accordion-radius` or `--usx-accordion-radius` are
+rejected; use `accordion-radius` instead. Resolved JavaScript objects and
+manifest entries also use canonical unprefixed names.
+
+The separate `tokens.css` primitive stylesheet uses
+`--usx-primitive-<group>-<name>` to avoid collisions with semantic theme roles.
+Migrate raw primitive references such as `--color-primary` to
+`--usx-primitive-color-primary`. The `tokens.js` object structure is unchanged;
+semantic `theme.css` properties such as `--usx-color-primary` retain their names.
+
 ### Pagination button radius
 
 Pagination's numbered `.usa-pagination__button` links inherit
 `--usx-radius-button` through `--usx-pagination-button-radius` by default.
 In the Theme Playground, change the shared value under **Radius → radius-button**
-or customize pagination independently under **Advanced radius → usx-pagination-button-radius**:
+or customize pagination independently under **Advanced radius → pagination-button-radius**:
 
 ```css
 :root {
@@ -199,11 +232,13 @@ Playground's **Sass theme entry** export pastes straight in:
 @use 'pkg:@solexllc/usx-theme/themes' with (
   $themes: (
     forest: (),
-    carbon: (--usx-color-primary: #ff7a00),
+    carbon: (color-primary: #ff7a00),
     acme: (
       color-scheme: light,
-      --usx-color-primary: #b00020,
-      --usx-color-primary-hover: #8a0018,
+      color-primary: #b00020,
+      color-primary-hover: #8a0018,
+      accordion-radius: 0.5rem,
+      link-text: var(--usx-color-primary),
     ),
   ),
   $default: acme,

@@ -8,11 +8,11 @@
 
 export function headerFooterBorderOverrides() {
   return {
-    'usx-header-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
-    'usx-header-border-bottom': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
-    'usx-footer-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
-    'usx-footer-primary-section-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
-    'usx-footer-secondary-section-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
+    'header-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
+    'header-border-bottom': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
+    'footer-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
+    'footer-primary-section-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
+    'footer-secondary-section-border-top': 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)',
   };
 }
 
@@ -24,9 +24,9 @@ export function headerFooterBorderOverrides() {
 // the visibly distinct tone against that shared surface.
 export function headerNavBackgroundOverrides() {
   return {
-    'usx-header-bg': 'var(--usx-surface-3)',
-    'usx-header-nav-bg': 'var(--usx-surface-3)',
-    'usx-header-nav-bg-mobile': 'var(--usx-surface-3)'
+    'header-bg': 'var(--usx-surface-3)',
+    'header-nav-bg': 'var(--usx-surface-3)',
+    'header-nav-bg-mobile': 'var(--usx-surface-3)'
   };
 }
 
@@ -35,8 +35,8 @@ export function headerNavBackgroundOverrides() {
 // shell — only used by presets whose header AND footer are both dark.
 export function inverseLogoOverrides() {
   return {
-    'usx-logo-display': 'none',
-    'usx-logo-inverse-display': 'block'
+    'logo-display': 'none',
+    'logo-inverse-display': 'block'
   };
 }
 
@@ -49,8 +49,8 @@ export const PRESETS = {
     'color-accent-cool': '#81c784',
     'color-accent-warm': '#ffb300',
     'surface-3': '#f4faf4',
-    'usx-summary-box-bg': 'var(--usx-surface-3)',
-    'usx-summary-box-border-color': 'var(--usx-color-primary)',
+    'summary-box-bg': 'var(--usx-surface-3)',
+    'summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides()
   },
@@ -61,8 +61,8 @@ export const PRESETS = {
     'color-accent-cool': '#ff8a65',
     'color-accent-warm': '#ffd54f',
     'surface-3': '#fdf6f1',
-    'usx-summary-box-bg': 'var(--usx-surface-3)',
-    'usx-summary-box-border-color': 'var(--usx-color-primary)',
+    'summary-box-bg': 'var(--usx-surface-3)',
+    'summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides()
   },
@@ -72,8 +72,8 @@ export const PRESETS = {
     'color-accent-cool': '#67e8f9',
     'color-accent-warm': '#fb923c',
     'surface-3': '#f0f9fb',
-    'usx-summary-box-bg': 'var(--usx-surface-3)',
-    'usx-summary-box-border-color': 'var(--usx-color-primary)',
+    'summary-box-bg': 'var(--usx-surface-3)',
+    'summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides()
   },
@@ -90,12 +90,12 @@ export const PRESETS = {
     'color-success': '#009ec1',
     'color-error': '#e52207',
     'color-emergency': '#5942d2',
-    'usx-accordion-icon-position': 'auto 1.25rem',
-    'usx-accordion-icon-padding-start': '1.25rem',
-    'usx-accordion-icon-padding-end': '3.5rem',
-    'usx-accordion-bg-hover': 'var(--usx-surface-3)',
-    'usx-summary-box-bg': 'var(--usx-surface-3)',
-    'usx-summary-box-border-color': 'var(--usx-color-primary)',
+    'accordion-icon-position': 'auto 1.25rem',
+    'accordion-icon-padding-start': '1.25rem',
+    'accordion-icon-padding-end': '3.5rem',
+    'accordion-bg-hover': 'var(--usx-surface-3)',
+    'summary-box-bg': 'var(--usx-surface-3)',
+    'summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
   },
@@ -104,7 +104,7 @@ export const PRESETS = {
   // read clearly against the near-black surfaces, and surface/border/text
   // are flipped the same way Midnight/Carbon do below.
   Borealis: {
-    'usx-footer-social-icon-filter': 'brightness(0) invert(1)',
+    'footer-social-icon-filter': 'brightness(0) invert(1)',
     'color-primary': '#5b7cfa',
     'color-primary-lighter': '#cfe8ff',
     'color-primary-light': '#58b4ff',
@@ -127,22 +127,22 @@ export const PRESETS = {
     'color-success': '#009ec1',
     'color-error': '#e52207',
     'color-emergency': '#5942d2',
-    'usx-accordion-icon-position': 'auto 1.25rem',
-    'usx-accordion-icon-padding-start': '1.25rem',
-    'usx-accordion-icon-padding-end': '3.5rem',
-    'usx-accordion-bg-hover': 'var(--usx-surface-3)',
-    'usx-summary-box-bg': '#101b33',
-    'usx-summary-box-border-color': '#5b7cfa',
+    'accordion-icon-position': 'auto 1.25rem',
+    'accordion-icon-padding-start': '1.25rem',
+    'accordion-icon-padding-end': '3.5rem',
+    'accordion-bg-hover': 'var(--usx-surface-3)',
+    'summary-box-bg': '#101b33',
+    'summary-box-border-color': '#5b7cfa',
     'color-visited': '#c9a8ff',
-    'usx-banner-button-text': 'var(--usx-text-ink)',
+    'banner-button-text': 'var(--usx-text-ink)',
     // The date-picker toggle button's hover/active background defaults to
     // color-base-light (#a9aeb1) — too close to this preset's light 'text-ink'
     // color for the calendar icon to stay visible. color-base-dark (#565c65)
     // is the mirrored mid-gray on the dark side of the same scale.
-    'usx-date-picker-button-hover-active-bg': '#565c65',
+    'date-picker-button-hover-active-bg': '#565c65',
     // Nav background defaults transparent; a filled card reads better
     // against this preset's dark page background.
-    'usx-in-page-nav-bg': 'var(--usx-surface-2)',
+    'in-page-nav-bg': 'var(--usx-surface-2)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     ...inverseLogoOverrides()
@@ -151,7 +151,7 @@ export const PRESETS = {
   // background), these also flip the surface/border/text tokens so cards,
   // dividers and copy stay legible against a dark page.
   Midnight: {
-    'usx-footer-social-icon-filter': 'brightness(0) invert(1)',
+    'footer-social-icon-filter': 'brightness(0) invert(1)',
     'color-primary': '#60a5fa',
     'color-secondary': '#a78bfa',
     'color-accent-cool': '#38bdf8',
@@ -167,20 +167,20 @@ export const PRESETS = {
     'color-border-muted': '#64748b',
     'color-border-subtle': '#475569',
     'color-border-inverse': '#1e293b',
-    'usx-summary-box-bg': '#0f1b2e',
-    'usx-summary-box-border-color': '#60a5fa',
+    'summary-box-bg': '#0f1b2e',
+    'summary-box-border-color': '#60a5fa',
     'color-visited': '#b39ddb',
-    'usx-banner-button-text': 'var(--usx-text-ink)',
+    'banner-button-text': 'var(--usx-text-ink)',
     // See Borealis's comment above for why this can't just chain to
     // color-base-light.
-    'usx-date-picker-button-hover-active-bg': '#565c65',
-    'usx-in-page-nav-bg': 'var(--usx-surface-2)',
+    'date-picker-button-hover-active-bg': '#565c65',
+    'in-page-nav-bg': 'var(--usx-surface-2)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     ...inverseLogoOverrides(),
   },
   Carbon: {
-    'usx-footer-social-icon-filter': 'brightness(0) invert(1)',
+    'footer-social-icon-filter': 'brightness(0) invert(1)',
     'color-primary': '#fa9441',
     'color-primary-light': '#f3bf90',
     'color-primary-lighter': '#f2e4d4',
@@ -198,31 +198,31 @@ export const PRESETS = {
     'color-border-muted': '#6b6b70',
     'color-border-subtle': '#505055',
     'color-border-inverse': '#1c1c1e',
-    'usx-summary-box-bg': '#241a10',
-    'usx-summary-box-border-color': '#fb923c',
+    'summary-box-bg': '#241a10',
+    'summary-box-border-color': '#fb923c',
     'color-visited': '#b39ddb',
     // See Borealis's comment above for why this can't just chain to
     // color-base-light.
-    'usx-date-picker-button-hover-active-bg': '#565c65',
-    'usx-in-page-nav-bg': 'var(--usx-surface-2)',
+    'date-picker-button-hover-active-bg': '#565c65',
+    'in-page-nav-bg': 'var(--usx-surface-2)',
     'radius-box': '1.25rem',
     'radius-button': '0.5rem',
     'radius-field': '0.5rem',
     'radius-selector': '4px',
-    'usx-accordion-radius': 'var(--usx-radius-button)',
-    'usx-alert-radius': 'var(--usx-radius-box)',
-    'usx-tag-radius': 'var(--usx-radius-box)',
-    'usx-checkable-tile-radius': 'var(--usx-radius-box)',
+    'accordion-radius': 'var(--usx-radius-button)',
+    'alert-radius': 'var(--usx-radius-box)',
+    'tag-radius': 'var(--usx-radius-box)',
+    'checkable-tile-radius': 'var(--usx-radius-box)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     // Carbon wants the desktop nav bar one tone lighter than the header
     // (surface-2), but the mobile drawer matching the header (surface-3).
-    'usx-header-nav-bg': 'var(--usx-surface-2)',
-    'usx-header-nav-bg-mobile': 'var(--usx-surface-3)',
+    'header-nav-bg': 'var(--usx-surface-2)',
+    'header-nav-bg-mobile': 'var(--usx-surface-3)',
     // Overrides banner's own surface-2 default — Carbon wants the banner to
     // match the header's surface-3 instead.
-    'usx-banner-bg': 'var(--usx-surface-3)',
-    'usx-banner-button-text': 'var(--usx-text-ink)',
+    'banner-bg': 'var(--usx-surface-3)',
+    'banner-button-text': 'var(--usx-text-ink)',
     ...inverseLogoOverrides()
   },
   // The three presets below are sourced from real design systems/sites
@@ -257,20 +257,20 @@ export const PRESETS = {
     ...headerNavBackgroundOverrides(),
     // gov.uk's real header/nav bar is filled with brand blue, not a neutral
     // surface — override past the shared surface-3 default to match.
-    'usx-header-bg': 'var(--usx-color-primary)',
-    'usx-header-nav-bg': 'var(--usx-color-primary)',
-    'usx-header-text': 'var(--usx-text-inverse)',
+    'header-bg': 'var(--usx-color-primary)',
+    'header-nav-bg': 'var(--usx-color-primary)',
+    'header-text': 'var(--usx-text-inverse)',
     // text-subtle/text-muted are tuned for a light/neutral surface — real
     // gov.uk nav links are white against the blue bar (verified live), and
     // color-primary as a hover color would be invisible against the
     // color-primary background it now sits on.
-    'usx-header-nav-link-text': 'var(--usx-text-inverse)',
-    'usx-header-nav-link-text-hover': 'var(--usx-text-inverse)',
-    'usx-header-secondary-link-text': 'var(--usx-text-ink)',
-    'usx-header-secondary-link-text-hover': 'var(--usx-text-ink)',
-    'usx-header-nav-bg-mobile': '#f4f8fb',
-    'usx-header-nav-link-text-mobile': '#1a65a6',
-    'usx-header-nav-link-text-hover-mobile': '#0f385c',
+    'header-nav-link-text': 'var(--usx-text-inverse)',
+    'header-nav-link-text-hover': 'var(--usx-text-inverse)',
+    'header-secondary-link-text': 'var(--usx-text-ink)',
+    'header-secondary-link-text-hover': 'var(--usx-text-ink)',
+    'header-nav-bg-mobile': '#f4f8fb',
+    'header-nav-link-text-mobile': '#1a65a6',
+    'header-nav-link-text-hover-mobile': '#0f385c',
     // GOV.UK famously never rounds a corner (buttons, inputs, panels, tags,
     // checkboxes all render dead square — verified live on the design
     // system's own component pages). Overriding the three base radius
@@ -279,8 +279,8 @@ export const PRESETS = {
     'radius-field': '0', // buttons/inputs/textarea
     'radius-box': '0', // summary box/alert/code/hero-callout/image
     'radius-selector': '0', // tags/checkboxes
-    'usx-checkable-tile-radius': '0',
-    'usx-misc-banner-badge-radius': '0',
+    'checkable-tile-radius': '0',
+    'misc-banner-badge-radius': '0',
     // Real GOV.UK form inputs render with a thick 2px black border — one of
     // its most recognizable traits (verified on design-system.service.gov.uk).
     'border-width-inputs': '2px',
@@ -288,16 +288,16 @@ export const PRESETS = {
     // heavy border) with a light-grey button background (#f3f3f3) and
     // near-black text — verified live on the design system's accordion
     // example page.
-    'usx-accordion-border-width': '1px',
-    'usx-accordion-bg': '#f3f3f3',
-    'usx-accordion-content-bg': '#ffffff',
-    'usx-accordion-text': '#0b0c0c',
-    'usx-accordion-content-text': '#0b0c0c',
+    'accordion-border-width': '1px',
+    'accordion-bg': '#f3f3f3',
+    'accordion-content-bg': '#ffffff',
+    'accordion-text': '#0b0c0c',
+    'accordion-content-text': '#0b0c0c',
     // Modeled on the real GOV.UK notification banner (a blue-bordered white
     // panel) as the closest analog to our summary box.
-    'usx-summary-box-bg': 'var(--usx-surface-3)',
-    'usx-summary-box-border-color': 'var(--usx-color-primary)',
-    'usx-summary-box-text': '#0b0c0c',
+    'summary-box-bg': 'var(--usx-surface-3)',
+    'summary-box-border-color': 'var(--usx-color-primary)',
+    'summary-box-text': '#0b0c0c',
   },
   NASA: {
     // nasa.gov's live site itself (not the unaffiliated/outdated NASAWDS
@@ -308,13 +308,13 @@ export const PRESETS = {
     'color-accent-warm': '#f64137', // real "read more" arrow-icon accent
     'surface-3': '#000000', // real header background — solid black
     'color-border-subtle': '#b9b9bb', // divider gray (also visible against the black header)
-    'usx-header-text': 'var(--usx-text-inverse)', // real header text is white against the black bar
+    'header-text': 'var(--usx-text-inverse)', // real header text is white against the black bar
     // text-subtle/text-muted are tuned for a light/neutral surface — against
     // the solid black header/nav they'd be low-contrast, so match the real
     // white nav text instead. color-primary (red) already reads fine as the
     // hover color against black, so it's left on the default.
-    'usx-header-nav-link-text': 'var(--usx-text-inverse)',
-    'usx-header-secondary-link-text': 'var(--usx-text-inverse)',
+    'header-nav-link-text': 'var(--usx-text-inverse)',
+    'header-secondary-link-text': 'var(--usx-text-inverse)',
     // The real CTA button (e.g. "Live Mission Coverage") measures a 4px
     // corner radius, not our default 0.5rem — verified via computed style
     // on the live site.
@@ -324,33 +324,33 @@ export const PRESETS = {
     'radius-button': '4px',
     // nasa.gov's content cards (hds-content-card) render perfectly square —
     // verified live.
-    'usx-card-text': 'var(--usx-text-inverse)',
-    'usx-checkable-tile-radius': '0',
+    'card-text': 'var(--usx-text-inverse)',
+    'checkable-tile-radius': '0',
     // nasa.gov's nav literally renders stock USWDS usa-accordion markup, so
     // its button background is stock USWDS base-lightest rather than our
     // slightly darker surface-2 default.
-    'usx-accordion-bg': 'var(--usx-surface-3)',
-    'usx-accordion-bg-hover': 'var(--usx-color-primary)',
-    'usx-accordion-text': 'var(--usx-text-inverse)',
-    'usx-range-slider-track-bg': 'var(--usx-surface-1)',
-    'usx-range-slider-thumb-bg': 'var(--usx-surface-1)',
-    'usx-range-slider-track-border': '#000000',
-    'usx-range-slider-thumb-border': '#000000',
-    'usx-summary-box-bg': 'var(--usx-surface-3)',
-    'usx-summary-box-border-color': 'var(--usx-color-primary)',
-    'usx-summary-box-text': 'var(--usx-text-inverse)',
+    'accordion-bg': 'var(--usx-surface-3)',
+    'accordion-bg-hover': 'var(--usx-color-primary)',
+    'accordion-text': 'var(--usx-text-inverse)',
+    'range-slider-track-bg': 'var(--usx-surface-1)',
+    'range-slider-thumb-bg': 'var(--usx-surface-1)',
+    'range-slider-track-border': '#000000',
+    'range-slider-thumb-border': '#000000',
+    'summary-box-bg': 'var(--usx-surface-3)',
+    'summary-box-border-color': 'var(--usx-color-primary)',
+    'summary-box-text': 'var(--usx-text-inverse)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     // Keep the mobile drawer the same black as the desktop header/nav bar.
-    'usx-header-nav-bg-mobile': 'var(--usx-surface-3)',
+    'header-nav-bg-mobile': 'var(--usx-surface-3)',
     // The footer's secondary section (logo + contact block) chains its
     // background to surface-3 too, so it's solid black here just like the
     // header — same text-color/heading-color-secondary fix as above.
     // Link colors are untouched since color-primary (red) already reads
     // fine against black.
-    'usx-footer-text': 'var(--usx-text-inverse)',
-    'usx-footer-heading-secondary-text': 'var(--usx-text-inverse)',
-    'usx-table-grouped-row-text': 'var(--usx-text-inverse)',
+    'footer-text': 'var(--usx-text-inverse)',
+    'footer-heading-secondary-text': 'var(--usx-text-inverse)',
+    'table-grouped-row-text': 'var(--usx-text-inverse)',
     ...inverseLogoOverrides(),
   }
 };

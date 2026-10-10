@@ -12,8 +12,8 @@ function Swatch({ token, current }) {
   return (
     <div style={{ border: '1px solid #dfe1e2', borderRadius: '8px', overflow: 'hidden' }}>
       <div style={{ height: '56px', background: current }} />
-      <div style={{ padding: '0.6rem' }}>
-        <code style={{ fontSize: '0.85rem' }}>${token.name}</code>
+      <div style={{ padding: '0.6rem', overflowWrap: 'anywhere' }}>
+        <div><code style={{ fontSize: '0.85rem' }}>{token.name}</code></div>
         <div><code style={{ fontSize: '0.8rem', opacity: 0.7 }}>{current}</code></div>
       </div>
     </div>
@@ -55,6 +55,10 @@ export const Palette = {
     return (
       <div className="usa-prose usx-prose" style={{ maxWidth: '960px' }}>
         <h1>Color tokens</h1>
+        <p>
+          Each swatch shows its configuration key and current hex value. Use the key to form the Sass
+          variable <code>{'$usx-<key>'}</code> and CSS custom property <code>{'--usx-<key>'}</code>.
+        </p>
         <p>
           USX color tokens are structured into semantic categories so themes can swap identities seamlessly
           without breaking UI contrast or hardcoding gray steps. Every swatch below is a runtime{' '}
@@ -103,9 +107,7 @@ export const Palette = {
         <h3>Surface &amp; Text colors</h3>
         <p>
           Structural surface layers and typography ink roles. <code>surface-inverse</code> follows{' '}
-          <code>text-ink</code> unless overridden. Tooltips use <code>surface-inverse</code> for their background
-          and <code>text-inverse</code> for their text; the <code>usx-tooltip-bg</code> and{' '}
-          <code>usx-tooltip-text</code> component tokens allow independent overrides.
+          <code>text-ink</code> unless overridden.
         </p>
         <Grid tokens={surfaceTextBase} live={live} />
 
@@ -118,8 +120,8 @@ export const Palette = {
         </p>
         <p>
           Table and collection borders and checkbox/radio indicator outlines retain their ink color
-          through <code>currentColor</code>. Their component tokens (<code>usx-table-border</code>,{' '}
-          <code>usx-collection-border</code>, and <code>usx-checkable-border</code>) allow explicit overrides
+          through <code>currentColor</code>. Their configuration keys (<code>table-border</code>,{' '}
+          <code>collection-border</code>, and <code>checkable-border</code>) allow explicit overrides
           without tying them to the shared border scale.
         </p>
         <Grid tokens={borderBase} live={live} />

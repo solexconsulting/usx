@@ -109,14 +109,14 @@ const byVar = new Map(themeManifest.map((t) => [t.cssVar, t]));
 const byName = new Map(themeManifest.map((t) => [t.name, t]));
 
 for (const [name, parent] of Object.entries({
-  'usx-card-bg': 'surface-3',
-  'usx-card-text': 'text-ink',
-  'usx-card-heading-text': 'usx-card-text',
-  'usx-card-media-bg': 'surface-3',
-  'usx-card-border-color': 'color-border-subtle',
-  'usx-card-radius': 'radius-box',
-  'usx-card-border-width': 'border-width-md',
-  'usx-pagination-button-radius': 'radius-button',
+  'card-bg': 'surface-3',
+  'card-text': 'text-ink',
+  'card-heading-text': 'card-text',
+  'card-media-bg': 'surface-3',
+  'card-border-color': 'color-border-subtle',
+  'card-radius': 'radius-box',
+  'card-border-width': 'border-width-md',
+  'pagination-button-radius': 'radius-button',
 })) {
   const token = byName.get(name);
   const parentToken = byName.get(parent);

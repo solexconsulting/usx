@@ -22,7 +22,9 @@ export const Typography = {
         <table className="usa-table usx-table usa-table--borderless" style={{ width: '100%' }}>
           <thead>
             <tr>
-              <th>Token</th>
+              <th>Configuration key</th>
+              <th>Sass variable</th>
+              <th>CSS custom property</th>
               <th>Default</th>
               <th>Current</th>
             </tr>
@@ -30,7 +32,9 @@ export const Typography = {
           <tbody>
             {typographyTokens.map((t) => (
               <tr key={t.name}>
-                <td><code>${t.name}</code></td>
+                <td><code>{t.name}</code></td>
+                <td><code>${t.cssVar.slice(2)}</code></td>
+                <td><code>{t.cssVar}</code></td>
                 <td><code>{t.defaultValue}</code></td>
                 <td><code>{getLiveValue(live, t)}</code></td>
               </tr>

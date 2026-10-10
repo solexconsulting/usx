@@ -26,11 +26,12 @@ function TokenTable({ tokens, live }) {
     <table className="usa-table usx-table usa-table--borderless" style={{ width: '100%' }}>
       <thead>
         <tr>
-          <th>Token</th>
-          <th>CSS variable</th>
+          <th>Configuration key</th>
+          <th>Sass variable</th>
+          <th>CSS custom property</th>
           <th>Default</th>
           <th>Current</th>
-          <th>Derived from</th>
+          <th>Derived from key</th>
         </tr>
       </thead>
       <tbody>
@@ -40,7 +41,8 @@ function TokenTable({ tokens, live }) {
 
           return (
             <tr key={t.name}>
-              <td><code>${t.name}</code></td>
+              <td><code>{t.name}</code></td>
+              <td><code>${t.cssVar.slice(2)}</code></td>
               <td><code>{t.cssVar}</code></td>
               <td><code>{t.defaultValue}</code></td>
               <td>
@@ -55,7 +57,7 @@ function TokenTable({ tokens, live }) {
                   <code>{current}</code>
                 )}
               </td>
-              <td>{t.derivedFrom ? <code>${t.derivedFrom}</code> : '—'}</td>
+              <td>{t.derivedFrom ? <code>{t.derivedFrom}</code> : '—'}</td>
             </tr>
           );
         })}
@@ -89,6 +91,11 @@ export const AllTokens = {
           <strong>Documentation/Theme → Getting Started</strong> for how to
           override any of these, and <strong>Documentation/Theme →
           Playground</strong> for a live editor.
+        </p>
+        <p>
+          Configuration keys omit the <code>usx-</code> prefix in JavaScript theme objects and Sass theme maps.
+          Sass variables retain <code>$usx-</code>, and CSS custom properties retain <code>--usx-</code>.
+          {' '}Theme configuration rejects unknown or prefixed keys; use the canonical keys listed here.
         </p>
         {byGroup.map(({ group, label, tokens }) => (
           <section key={group} style={{ marginBottom: '2rem' }}>

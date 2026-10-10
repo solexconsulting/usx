@@ -172,44 +172,44 @@ function buildScaleRow(baseName, resolved) {
 // Tokens whose effect is conditional on markup/context the name alone
 // doesn't convey — surfaced as a tooltip on the control (see ColorControl).
 const TOKEN_NOTES = {
-  'usx-header-nav-bg': 'only applies when the header uses the .usa-header--extended layout (desktop width)',
-  'usx-header-nav-bg-mobile': 'only applies when the header uses the .usa-header--extended layout (mobile off-canvas drawer)',
-  'usx-process-list-heading-text': 'step heading text',
-  'usx-process-list-border': 'vertical connector between steps',
-  'usx-process-list-counter-text': 'number inside each step marker',
-  'usx-process-list-counter-border': 'circular marker outline; follows text-ink by default and can be overridden independently',
-  'usx-process-list-counter-ring': 'marker background and outer ring that mask the connector; follows surface-1 by default',
-  'usx-tooltip-bg': 'follows surface-inverse by default; can be overridden independently',
-  'usx-tooltip-text': 'follows text-inverse by default; can be overridden independently'
+  'header-nav-bg': 'only applies when the header uses the .usa-header--extended layout (desktop width)',
+  'header-nav-bg-mobile': 'only applies when the header uses the .usa-header--extended layout (mobile off-canvas drawer)',
+  'process-list-heading-text': 'step heading text',
+  'process-list-border': 'vertical connector between steps',
+  'process-list-counter-text': 'number inside each step marker',
+  'process-list-counter-border': 'circular marker outline; follows text-ink by default and can be overridden independently',
+  'process-list-counter-ring': 'marker background and outer ring that mask the connector; follows surface-1 by default',
+  'tooltip-bg': 'follows surface-inverse by default; can be overridden independently',
+  'tooltip-text': 'follows text-inverse by default; can be overridden independently'
 };
 
 const COMPONENT_COLOR_GROUPS = [
-  { label: 'Link', prefix: 'usx-link-' },
-  { label: 'Summary Box', prefix: 'usx-summary-box-' },
-  { label: 'Accordion', prefix: 'usx-accordion-' },
-  { label: 'Banner', prefix: 'usx-banner-' },
-  { label: 'Misc Banner', prefix: 'usx-misc-banner-' },
-  { label: 'Carousel', prefix: 'usx-carousel-' },
-  { label: 'Step Indicator', prefix: 'usx-step-indicator-' },
-  { label: 'Process List', prefix: 'usx-process-list-' },
-  { label: 'Task List', prefix: 'usx-task-list-' },
-  { label: 'Clickable', prefix: 'usx-clickable-' },
-  { label: 'Checkable (Checkbox/Radio/Tile)', prefix: 'usx-checkable-' },
-  { label: 'SideNav', prefix: 'usx-sidenav-' },
-  { label: 'Header', prefix: 'usx-header-', extra: ['usx-header-nav-bg', 'usx-header-nav-bg-mobile', 'usx-header-nav-link-bg-hover', 'usx-header-nav-link-text', 'usx-header-nav-link-text-mobile', 'usx-header-nav-link-text-hover', 'usx-header-nav-link-text-hover-mobile'] },
-  { label: 'Footer', prefix: 'usx-footer-' },
-  { label: 'Table', prefix: 'usx-table-' },
-  { label: 'Collection', prefix: 'usx-collection-' },
-  { label: 'Tooltip', prefix: 'usx-tooltip-' },
-  { label: 'Icon List', prefix: 'usx-icon-list-' },
-  { label: 'Logo', prefix: 'usx-logo-' },
-  { label: 'Range Slider', prefix: 'usx-range-slider-' },
-  { label: 'In-page Navigation', prefix: 'usx-in-page-nav-' }
+  { label: 'Link', prefix: 'link-' },
+  { label: 'Summary Box', prefix: 'summary-box-' },
+  { label: 'Accordion', prefix: 'accordion-' },
+  { label: 'Banner', prefix: 'banner-' },
+  { label: 'Misc Banner', prefix: 'misc-banner-' },
+  { label: 'Carousel', prefix: 'carousel-' },
+  { label: 'Step Indicator', prefix: 'step-indicator-' },
+  { label: 'Process List', prefix: 'process-list-' },
+  { label: 'Task List', prefix: 'task-list-' },
+  { label: 'Clickable', prefix: 'clickable-' },
+  { label: 'Checkable (Checkbox/Radio/Tile)', prefix: 'checkable-' },
+  { label: 'SideNav', prefix: 'sidenav-' },
+  { label: 'Header', prefix: 'header-', extra: ['header-nav-bg', 'header-nav-bg-mobile', 'header-nav-link-bg-hover', 'header-nav-link-text', 'header-nav-link-text-mobile', 'header-nav-link-text-hover', 'header-nav-link-text-hover-mobile'] },
+  { label: 'Footer', prefix: 'footer-' },
+  { label: 'Table', prefix: 'table-' },
+  { label: 'Collection', prefix: 'collection-' },
+  { label: 'Tooltip', prefix: 'tooltip-' },
+  { label: 'Icon List', prefix: 'icon-list-' },
+  { label: 'Logo', prefix: 'logo-' },
+  { label: 'Range Slider', prefix: 'range-slider-' },
+  { label: 'In-page Navigation', prefix: 'in-page-nav-' }
 ];
 
 // Splits a flat list of component-group tokens into the ordered groups
 // above. A token whose `derivedFrom` points at another token already in the
-// same group (e.g. usx-carousel-dot-color-hover -> usx-carousel-dot-color)
+// same group (e.g. carousel-dot-color-hover -> carousel-dot-color)
 // is left out of the group's own list here — renderColor() already surfaces
 // it as a nested "shades" entry under its base, so listing it again at the
 // top level would just show it twice.
@@ -242,12 +242,12 @@ function groupComponentColors(tokens) {
 // visited ink stays dark on that light background; only its (unrelated)
 // radius token is left free to vary.
 const SUMMARY_BOX_PINNED_COLORS = [
-  'usx-summary-box-bg',
-  'usx-summary-box-border-color',
-  'usx-summary-box-text',
-  'usx-summary-box-link-text',
-  'usx-summary-box-link-text-hover',
-  'usx-summary-box-link-text-visited'
+  'summary-box-bg',
+  'summary-box-border-color',
+  'summary-box-text',
+  'summary-box-link-text',
+  'summary-box-link-text-hover',
+  'summary-box-link-text-visited'
 ];
 
 function pinSummaryBoxColors(overrides) {
@@ -318,10 +318,10 @@ function randomPalette() {
     // Same reasoning as the Midnight/Carbon/Borealis presets in
     // presets.js: color-base-light is too close to a light 'text-ink' for
     // the calendar icon to stay visible on hover/active.
-    overrides['usx-date-picker-button-hover-active-bg'] = '#565c65';
+    overrides['date-picker-button-hover-active-bg'] = '#565c65';
     // Nav background defaults transparent; fill it with a surface once we've
     // committed to a dark page, same as the prebuilt dark presets.
-    overrides['usx-in-page-nav-bg'] = 'var(--usx-surface-2)';
+    overrides['in-page-nav-bg'] = 'var(--usx-surface-2)';
   }
   pinSummaryBoxColors(overrides);
   return overrides;
@@ -389,8 +389,8 @@ function randomSystemPalette() {
     overrides['color-visited'] = '#b39ddb';
     // See randomPalette() above for why this can't just chain to
     // color-base-light.
-    overrides['usx-date-picker-button-hover-active-bg'] = '#565c65';
-    overrides['usx-in-page-nav-bg'] = 'var(--usx-surface-2)';
+    overrides['date-picker-button-hover-active-bg'] = '#565c65';
+    overrides['in-page-nav-bg'] = 'var(--usx-surface-2)';
   }
   pinSummaryBoxColors(overrides);
   return { overrides, selections };
@@ -680,7 +680,7 @@ function ColorControl({ token, value, resolved = {}, isOverridden, onChange, onC
         />
       )}
       <span className="usx-pg-label" title={note ? `${token.cssVar} \u2014 ${note}` : token.cssVar}>
-        {token.name.replace(/^color-|^usx-/, '')}
+        {token.name.replace(/^color-/, '')}
       </span>
       <code className="usx-pg-value">{value}</code>
       {(supportsTextColor || !canPickColor) && (
@@ -728,8 +728,8 @@ function AccordionIconPositionControl({ token, value, isOverridden, onChange, on
         onChange={(e) => {
           const next = ACCORDION_ICON_POSITION_VALUES[e.target.value];
           onChange(token.name, next.position);
-          onChange('usx-accordion-icon-padding-start', next.paddingStart);
-          onChange('usx-accordion-icon-padding-end', next.paddingEnd);
+          onChange('accordion-icon-padding-start', next.paddingStart);
+          onChange('accordion-icon-padding-end', next.paddingEnd);
         }}
       >
         <option value="start">Start</option>
@@ -762,7 +762,7 @@ function LogoVariantControl({ token, value, isOverridden, onChange, onClear }) {
         onChange={(e) => {
           const next = LOGO_VARIANT_VALUES[e.target.value];
           onChange(token.name, next.display);
-          onChange('usx-logo-inverse-display', next.inverse);
+          onChange('logo-inverse-display', next.inverse);
         }}
       >
         <option value="default">Default</option>
@@ -1328,7 +1328,7 @@ function ColorScaleGrid({ resolved }) {
 
 
 function Showcase({ resolved }) {
-  // Pre-select a row so `usx-table-selected-bg` is visible without user
+  // Pre-select a row so `table-selected-bg` is visible without user
   // interaction; `groupBy` + `onClickRow` exercise the grouped-row and
   // hover-row color tokens too.
   const [tableSelection, setTableSelection] = useState([2]);
@@ -1739,10 +1739,10 @@ function ThemePlayground({ initialTheme } = {}) {
   };
   const clearToken = (name) => {
     setActivePreset(null);
-    const names = name === 'usx-accordion-icon-position'
-      ? [name, 'usx-accordion-icon-padding-start', 'usx-accordion-icon-padding-end']
-      : name === 'usx-logo-display'
-        ? [name, 'usx-logo-inverse-display']
+    const names = name === 'accordion-icon-position'
+      ? [name, 'accordion-icon-padding-start', 'accordion-icon-padding-end']
+      : name === 'logo-display'
+        ? [name, 'logo-inverse-display']
         : [name];
     setOverrides((prev) => {
       const next = { ...prev };
@@ -1826,7 +1826,7 @@ function ThemePlayground({ initialTheme } = {}) {
   };
 
   const renderColor = (t) => {
-    if (t.name === 'usx-accordion-icon-position') {
+    if (t.name === 'accordion-icon-position') {
       return (
         <AccordionIconPositionControl
           key={t.name}
@@ -1838,7 +1838,7 @@ function ThemePlayground({ initialTheme } = {}) {
         />
       );
     }
-    if (t.name === 'usx-logo-display') {
+    if (t.name === 'logo-display') {
       return (
         <LogoVariantControl
           key={t.name}

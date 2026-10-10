@@ -26,7 +26,8 @@ export const Scale = {
           return (
             <div key={t.name} style={{ marginBottom: '1rem' }}>
               <div>
-                <code>${t.name}</code> / <code>{t.cssVar}</code> — default <code>{t.defaultValue}</code>, current <code>{current}</code>
+                Key: <code>{t.name}</code> / Sass: <code>${t.cssVar.slice(2)}</code> / CSS: <code>{t.cssVar}</code>
+                {' '}— default <code>{t.defaultValue}</code>, current <code>{current}</code>
               </div>
               <div style={{ height: '0.75rem', width: current, background: '#005ea2', marginTop: '0.25rem' }} />
             </div>

@@ -21,7 +21,7 @@ import { execFileSync } from 'node:child_process';
 import * as sass from 'sass';
 import { themeManifest } from '../src/theme-manifest.js';
 import { PRESETS } from '../src/presets.js';
-import { resolveTheme, themeEntries, themeSlug, themeToSass } from '../src/derive.js';
+import { getToken, shadesOf, resolveTheme, themeEntries, themeSlug, themeToCss, themeToCssVars, themeToSass } from '../src/derive.js';
 
 const pkgDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const distDir = path.join(pkgDir, 'dist');
@@ -29,6 +29,42 @@ const failures = [];
 const fail = (msg) => failures.push(msg);
 
 const cssVars = new Set(themeManifest.map((t) => t.cssVar));
+
+for (const token of themeManifest) {
+  if (/^(?:--)?usx-/.test(token.name) || /^(?:--)?usx-/.test(token.derivedFrom ?? '')) fail(`${token.name}: manifest configuration names must omit the namespace`);
+  if (!token.cssVar.startsWith('--usx-')) fail(`${token.name}: public CSS variable lost its namespace`);
+}
+const canonicalConfig = { 'color-primary': '#3764a1', 'card-bg': '#123456', 'font-family': '"Example", Arial, sans-serif' };
+const canonicalTheme = resolveTheme(canonicalConfig);
+for (const [name, value] of Object.entries(canonicalConfig)) {
+  if (canonicalTheme[name] !== value || getToken(name)?.name !== name) fail(`${name}: canonical configuration or token lookup failed`);
+}
+if (!shadesOf('color-primary').some((token) => token.name === 'color-primary-dark')) fail('canonical shade lookup lost the primary dark shade');
+if (Object.keys(canonicalTheme).some((key) => /^(?:--)?usx-/.test(key))) fail('resolved themes must expose only canonical configuration names');
+
+function expectConfigRejection(label, key, run) {
+  try {
+    run();
+    fail(`${label}: invalid configuration key ${key} was accepted`);
+  } catch (error) {
+    if (!String(error.message).includes('Unknown theme configuration key') || !String(error.message).includes(key)) fail(`${label}: unexpected invalid-key error: ${error.message}`);
+  }
+}
+for (const key of ['usx-color-primary', '--usx-color-primary', 'usx-card-bg', '--usx-card-bg', 'unknown-token']) {
+  if (getToken(key) !== undefined || shadesOf(key).length) fail(`${key}: noncanonical token lookup must not resolve`);
+  for (const [name, serialize] of Object.entries({ resolveTheme, themeEntries, themeToCssVars, themeToCss, themeToSass })) {
+    expectConfigRejection(name, key, () => serialize({ ...canonicalConfig, [key]: '#abcdef' }));
+  }
+  expectConfigRejection('autoDerive', key, () => resolveTheme(canonicalConfig, { 'color-primary': true, [key]: false }));
+}
+const originalPrimaryDark = getToken('color-primary-dark')?.defaultValue;
+if (canonicalTheme['color-primary-dark'] === originalPrimaryDark) fail('canonical base override must still derive its palette shades');
+if (resolveTheme(canonicalConfig, { 'color-primary': false })['color-primary-dark'] !== originalPrimaryDark) fail('canonical autoDerive flag did not disable derivation');
+const canonicalCssVars = themeToCssVars(canonicalTheme);
+if (canonicalCssVars['--usx-card-bg'] !== '#123456' || Object.keys(canonicalCssVars).some((key) => !key.startsWith('--usx-'))) fail('CSS style exports must retain prefixed variable names');
+if (!themeToCss(canonicalTheme).includes('--usx-card-bg: #123456;')) fail('CSS text export must retain prefixed variable names');
+const canonicalSass = themeToSass(canonicalTheme, { name: 'Canonical Config' });
+if (!/^\s+card-bg: #123456,/m.test(canonicalSass) || /^\s+(?:--)?usx-[\w-]+:/m.test(canonicalSass)) fail('Sass configuration export must use canonical keys');
 
 // The border roles are independent of text/palette colors and remain live
 // CSS aliases at the component layer, so scoped theme overrides propagate.
@@ -39,22 +75,22 @@ const borderDefaults = {
   'color-border-inverse': '#ffffff',
 };
 const borderParents = {
-  'usx-card-border-color': 'color-border-subtle',
-  'usx-checkable-tile-border': 'color-border-muted',
-  'usx-file-input-border': 'color-border-muted',
-  'usx-file-input-item-border': 'color-border-muted',
-  'usx-in-page-nav-border': 'color-border-muted',
-  'usx-pagination-button-border': 'color-border-muted',
-  'usx-range-slider-track-border': 'color-border',
-  'usx-range-slider-thumb-border': 'color-border',
-  'usx-sidenav-border': 'color-border-subtle',
-  'usx-task-list-border': 'color-border-subtle',
+  'card-border-color': 'color-border-subtle',
+  'checkable-tile-border': 'color-border-muted',
+  'file-input-border': 'color-border-muted',
+  'file-input-item-border': 'color-border-muted',
+  'in-page-nav-border': 'color-border-muted',
+  'pagination-button-border': 'color-border-muted',
+  'range-slider-track-border': 'color-border',
+  'range-slider-thumb-border': 'color-border',
+  'sidenav-border': 'color-border-subtle',
+  'task-list-border': 'color-border-subtle',
 };
 const resolvedDefault = resolveTheme();
 const inverseAliases = {
   'surface-inverse': 'var(--usx-text-ink)',
-  'usx-tooltip-bg': 'var(--usx-surface-inverse)',
-  'usx-tooltip-text': 'var(--usx-text-inverse)',
+  'tooltip-bg': 'var(--usx-surface-inverse)',
+  'tooltip-text': 'var(--usx-text-inverse)',
 };
 for (const [name, value] of Object.entries(inverseAliases)) {
   if (resolvedDefault[name] !== value) fail(`${name}: missing live inverse-role alias`);
@@ -67,17 +103,17 @@ for (const [name, value] of Object.entries(borderDefaults)) {
 for (const [name, parent] of Object.entries(borderParents)) {
   if (resolvedDefault[name] !== `var(--usx-${parent})`) fail(`${name}: border must follow ${parent}`);
 }
-if (resolvedDefault['usx-step-indicator-segment-pending-border'] !== 'var(--usx-text-muted)') {
+if (resolvedDefault['step-indicator-segment-pending-border'] !== 'var(--usx-text-muted)') {
   fail('pending step indicator ring must follow its muted label text');
 }
-if (resolvedDefault['usx-process-list-counter-border'] !== 'var(--usx-text-ink)') {
+if (resolvedDefault['process-list-counter-border'] !== 'var(--usx-text-ink)') {
   fail('process counter border must inherit text-ink by default');
 }
-const inkBorders = ['usx-table-border', 'usx-collection-border', 'usx-checkable-border'];
+const inkBorders = ['table-border', 'collection-border', 'checkable-border'];
 for (const name of inkBorders) {
   if (resolvedDefault[name] !== 'currentColor') fail(`${name}: default border must retain the component's ink color`);
 }
-for (const name of ['usx-header-border-separator', 'usx-header-border-bottom-mobile', 'usx-header-nav-item-border', 'usx-footer-primary-link-border-top', 'usx-footer-nav-border-bottom']) {
+for (const name of ['header-border-separator', 'header-border-bottom-mobile', 'header-nav-item-border', 'footer-primary-link-border-top', 'footer-nav-border-bottom']) {
   if (resolvedDefault[name] !== 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)') fail(`${name}: divider must follow the subtle border role`);
 }
 if (themeManifest.some((token) => token.group === 'component' && token.defaultValue.includes('var(--usx-color-border-inverse)'))) {
@@ -91,10 +127,10 @@ const customBorderScale = {
   'color-border-inverse': '#468024',
 };
 const scaleOnlyTheme = resolveTheme(customBorderScale);
-if (scaleOnlyTheme['usx-step-indicator-segment-pending-border'] !== 'var(--usx-text-muted)') {
+if (scaleOnlyTheme['step-indicator-segment-pending-border'] !== 'var(--usx-text-muted)') {
   fail('shared border overrides must not change the pending step indicator ring');
 }
-if (scaleOnlyTheme['usx-process-list-counter-border'] !== 'var(--usx-text-ink)') {
+if (scaleOnlyTheme['process-list-counter-border'] !== 'var(--usx-text-ink)') {
   fail('shared border overrides must not change the process counter ink outline');
 }
 for (const name of inkBorders) {
@@ -102,11 +138,11 @@ for (const name of inkBorders) {
 }
 const customBorderOverrides = {
   ...customBorderScale,
-  'usx-table-border': '#def456',
-  'usx-collection-border': '#579135',
-  'usx-checkable-border': '#ad17ce',
-  'usx-process-list-counter-border': '#6a17bc',
-  'usx-process-list-counter-text': '#7b28cd',
+  'table-border': '#def456',
+  'collection-border': '#579135',
+  'checkable-border': '#ad17ce',
+  'process-list-counter-border': '#6a17bc',
+  'process-list-counter-text': '#7b28cd',
 };
 const customBorderTheme = resolveTheme(customBorderOverrides);
 for (const [name, value] of Object.entries(customBorderOverrides)) {
@@ -121,12 +157,12 @@ for (const name of inkBorders) {
 }
 
 const headerBorders = {
-  'usx-header-border-top': '3px solid #005ea2',
-  'usx-header-border-bottom': '4px solid #237a3b',
-  'usx-header-border-separator': '2px dashed #a72f10',
-  'usx-header-border-bottom-mobile': '5px solid #8a3575',
-  'usx-header-nav-border-bottom-mobile': '6px solid #d1980b',
-  'usx-header-nav-item-border': 'none',
+  'header-border-top': '3px solid #005ea2',
+  'header-border-bottom': '4px solid #237a3b',
+  'header-border-separator': '2px dashed #a72f10',
+  'header-border-bottom-mobile': '5px solid #8a3575',
+  'header-nav-border-bottom-mobile': '6px solid #d1980b',
+  'header-nav-item-border': 'none',
 };
 const resolvedBorders = resolveTheme(headerBorders);
 for (const [name, value] of Object.entries(headerBorders)) {
@@ -135,12 +171,12 @@ for (const [name, value] of Object.entries(headerBorders)) {
 }
 
 const footerBorders = {
-  'usx-footer-border-top': '3px solid #005ea2',
-  'usx-footer-border-bottom': '4px solid #237a3b',
-  'usx-footer-primary-section-border-top': '2px dashed #a72f10',
-  'usx-footer-secondary-section-border-top': '5px dotted #8a3575',
-  'usx-footer-primary-link-border-top': '2px dashed #237a3b',
-  'usx-footer-nav-border-bottom': '3px solid #d1980b',
+  'footer-border-top': '3px solid #005ea2',
+  'footer-border-bottom': '4px solid #237a3b',
+  'footer-primary-section-border-top': '2px dashed #a72f10',
+  'footer-secondary-section-border-top': '5px dotted #8a3575',
+  'footer-primary-link-border-top': '2px dashed #237a3b',
+  'footer-nav-border-bottom': '3px solid #d1980b',
 };
 for (const [name, value] of Object.entries(footerBorders)) {
   if (resolveTheme(footerBorders)[name] !== value) fail(`${name}: full border override was not preserved`);
@@ -162,24 +198,25 @@ const visitedAlias = 'var(--usx-color-visited)';
 const editedVisitedState = '#713bc6';
 const editedVisitedLink = '#bc528d';
 for (const [name, preset] of Object.entries(PRESETS)) {
+  if (Object.keys(preset).some((key) => /^(?:--)?usx-/.test(key))) fail(`${name}: preset configuration keys must be canonical`);
   const resolved = resolveTheme(preset);
-  if (resolved['usx-pagination-button-radius'] !== 'var(--usx-radius-button)') fail(`${name}: pagination must inherit the shared button radius`);
-  for (const token of ['usx-tooltip-bg', 'usx-tooltip-text']) {
+  if (resolved['pagination-button-radius'] !== 'var(--usx-radius-button)') fail(`${name}: pagination must inherit the shared button radius`);
+  for (const token of ['tooltip-bg', 'tooltip-text']) {
     if (resolved[token] !== inverseAliases[token]) fail(`${name}: ${token} must inherit its inverse role`);
   }
-  if (resolved['usx-link-text-visited'] !== visitedAlias) fail(`${name}: visited links must inherit the shared visited state`);
+  if (resolved['link-text-visited'] !== visitedAlias) fail(`${name}: visited links must inherit the shared visited state`);
   if (darkVisitedColors[name] && resolved['color-visited'] !== darkVisitedColors[name]) fail(`${name}: existing dark visited color changed`);
 
   const edited = resolveTheme({ ...preset, 'color-visited': editedVisitedState });
-  if (edited['color-visited'] !== editedVisitedState || edited['usx-link-text-visited'] !== visitedAlias) fail(`${name}: editing the shared visited state detached visited links`);
-  const explicit = resolveTheme({ ...preset, 'color-visited': editedVisitedState, 'usx-link-text-visited': editedVisitedLink });
-  if (explicit['color-visited'] !== editedVisitedState || explicit['usx-link-text-visited'] !== editedVisitedLink) fail(`${name}: explicit visited-link override must remain independent of the shared state`);
+  if (edited['color-visited'] !== editedVisitedState || edited['link-text-visited'] !== visitedAlias) fail(`${name}: editing the shared visited state detached visited links`);
+  const explicit = resolveTheme({ ...preset, 'color-visited': editedVisitedState, 'link-text-visited': editedVisitedLink });
+  if (explicit['color-visited'] !== editedVisitedState || explicit['link-text-visited'] !== editedVisitedLink) fail(`${name}: explicit visited-link override must remain independent of the shared state`);
 
   const expectedFilter = ['Borealis', 'Midnight', 'Carbon'].includes(name)
     ? 'brightness(0) invert(1)' : 'none';
-  if (resolved['usx-footer-social-icon-filter'] !== expectedFilter) fail(`${name}: footer social icon filter mismatch`);
-  if (resolved['usx-footer-social-bg'] !== 'var(--usx-surface-2)') fail(`${name}: footer social background must follow surface-2`);
-  if (resolved['usx-footer-social-bg-hover'] !== 'var(--usx-surface-1)') fail(`${name}: footer social hover must follow surface-1`);
+  if (resolved['footer-social-icon-filter'] !== expectedFilter) fail(`${name}: footer social icon filter mismatch`);
+  if (resolved['footer-social-bg'] !== 'var(--usx-surface-2)') fail(`${name}: footer social background must follow surface-2`);
+  if (resolved['footer-social-bg-hover'] !== 'var(--usx-surface-1)') fail(`${name}: footer social hover must follow surface-1`);
   if (['Borealis', 'Midnight', 'Carbon'].includes(name)) {
     for (const token of Object.keys(borderDefaults)) {
       if (!preset[token]) fail(`${name}: dark preset must define ${token}`);
@@ -210,6 +247,19 @@ function parseBlocks(css) {
 }
 
 // ── 1. dist/themes ──────────────────────────────────────────────────────────
+const primitiveBlocks = parseBlocks(fs.readFileSync(path.join(distDir, 'tokens.css'), 'utf8'));
+const primitiveVars = primitiveBlocks.flatMap((block) => [...block.decls.keys()]);
+if (!primitiveVars.length) fail('primitive CSS export contains no variables');
+for (const cssVar of primitiveVars) {
+  if (!cssVar.startsWith('--usx-primitive-')) fail(`${cssVar}: primitive CSS variables must use their distinct namespace`);
+  if (cssVars.has(cssVar)) fail(`${cssVar}: primitive and semantic CSS variables must not collide`);
+}
+const primitiveModule = fs.readFileSync(path.join(distDir, 'tokens.js'), 'utf8');
+const primitiveData = JSON.parse(primitiveModule.match(/^module\.exports\s*=\s*([\s\S]*);\s*$/)?.[1] || '{}');
+for (const group of ['color', 'spacing', 'typography', 'radius']) {
+  const expected = JSON.parse(fs.readFileSync(path.join(pkgDir, 'src', 'primitives', `${group}.json`), 'utf8'));
+  if (JSON.stringify(primitiveData[group]) !== JSON.stringify(expected)) fail(`${group}: JavaScript primitive token data changed during CSS namespacing`);
+}
 const allThemesCss = fs.readFileSync(path.join(distDir, 'themes', 'all.css'), 'utf8');
 if (fs.existsSync(path.join(distDir, 'themes.css'))) fail('dist/themes.css must not exist — it makes pkg:.../themes ambiguous (see build.js)');
 for (const [name, overrides] of Object.entries(PRESETS)) {
@@ -247,8 +297,25 @@ const compile = (source) =>
     logger: { warn: (message) => sassWarnings.push(message.split('\n')[0]) }
   }).css;
 
+for (const key of ['usx-card-bg', '--usx-card-bg', 'unknown-token']) {
+  for (const source of [
+    `@use '../../src/themes' with ($themes: (custom: (card-bg: #123456, ${key}: #abcdef)));`,
+    `@use '../../src/themes'; @include themes.theme((card-bg: #123456, ${key}: #abcdef));`,
+  ]) {
+    try {
+      compile(source);
+      fail(`sass: invalid configuration key ${key} was accepted`);
+    } catch (error) {
+      if (!String(error.message).includes('is not a themeable token') || !String(error.message).includes(key)) fail(`sass: unexpected invalid-key error: ${error.message.split('\n')[0]}`);
+    }
+  }
+}
+
 const fixture = fs.readFileSync(path.join(pkgDir, 'test', 'fixtures', 'themes-config.scss'), 'utf8');
 const blocks = parseBlocks(compile(fixture));
+for (const block of blocks) {
+  if ([...block.decls.keys()].some((key) => key !== 'color-scheme' && !key.startsWith('--usx-'))) fail('sass: canonical configuration emitted an unprefixed CSS property');
+}
 const bySelector = (sel) => blocks.find((b) => b.selector === sel || b.selector.endsWith(sel));
 
 const root = blocks.find((b) => b.selector === ':root');
@@ -287,6 +354,11 @@ try {
 }
 
 // ── 3. Playground Sass export round-trip ────────────────────────────────────
+const canonicalRoundTrip = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${canonicalSass}));`));
+const canonicalCopy = canonicalRoundTrip.find((block) => block.selector.endsWith('[data-theme=canonical-config]'));
+for (const [cssVar, value] of themeEntries(canonicalTheme)) {
+  if (canonicalCopy?.decls.get(cssVar) !== value) fail(`sass: canonical configuration round-trip lost ${cssVar}`);
+}
 const exported = themeToSass(resolveTheme(PRESETS.Forest), { name: 'Forest Copy' });
 const roundTrip = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${exported}));`));
 const copy = roundTrip.find((b) => b.selector.endsWith('[data-theme=forest-copy]'));
@@ -303,7 +375,7 @@ const customBorders = borderRoundTrip.find((block) => block.selector.endsWith('[
 if (!customBorders) fail('sass: border scale export did not produce a theme block');
 else {
   for (const [name, value] of Object.entries(customBorderOverrides)) {
-    const cssVar = name.startsWith('usx-') ? `--${name}` : `--usx-${name}`;
+    const cssVar = `--usx-${name}`;
     if (customBorders.decls.get(cssVar) !== value) fail(`sass: ${name} border override did not survive export/import`);
   }
 }
@@ -312,7 +384,7 @@ else {
 // alias for the inherited case while preserving an explicit link override.
 const visitedCases = [
   { name: 'Visited State', overrides: { ...PRESETS.Midnight, 'color-visited': editedVisitedState }, linkColor: visitedAlias },
-  { name: 'Visited Link', overrides: { ...PRESETS.Midnight, 'color-visited': editedVisitedState, 'usx-link-text-visited': editedVisitedLink }, linkColor: editedVisitedLink },
+  { name: 'Visited Link', overrides: { ...PRESETS.Midnight, 'color-visited': editedVisitedState, 'link-text-visited': editedVisitedLink }, linkColor: editedVisitedLink },
 ];
 const visitedExport = visitedCases.map(({ name, overrides }) => themeToSass(resolveTheme(overrides), { name })).join('\n');
 const visitedBlocks = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${visitedExport}));`));
@@ -327,12 +399,12 @@ for (const { name, linkColor } of visitedCases) {
 
 const tooltipPalette = { ...PRESETS.Carbon, 'surface-inverse': '#bcd123', 'text-inverse': '#234bcd' };
 const tooltipCases = [
-  { name: 'Tooltip Inherited', overrides: tooltipPalette, background: inverseAliases['usx-tooltip-bg'], text: inverseAliases['usx-tooltip-text'] },
-  { name: 'Tooltip Explicit', overrides: { ...tooltipPalette, 'usx-tooltip-bg': '#7d3f81', 'usx-tooltip-text': '#f1e2d3' }, background: '#7d3f81', text: '#f1e2d3' },
+  { name: 'Tooltip Inherited', overrides: tooltipPalette, background: inverseAliases['tooltip-bg'], text: inverseAliases['tooltip-text'] },
+  { name: 'Tooltip Explicit', overrides: { ...tooltipPalette, 'tooltip-bg': '#7d3f81', 'tooltip-text': '#f1e2d3' }, background: '#7d3f81', text: '#f1e2d3' },
 ];
 const tooltipExport = tooltipCases.map(({ name, overrides, background, text }) => {
   const resolved = resolveTheme(overrides);
-  if (resolved['usx-tooltip-bg'] !== background || resolved['usx-tooltip-text'] !== text) fail(`${name}: inverse palette changes broke tooltip inheritance or explicit overrides`);
+  if (resolved['tooltip-bg'] !== background || resolved['tooltip-text'] !== text) fail(`${name}: inverse palette changes broke tooltip inheritance or explicit overrides`);
   return themeToSass(resolved, { name });
 }).join('\n');
 const tooltipBlocks = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${tooltipExport}));`));

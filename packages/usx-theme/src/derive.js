@@ -119,14 +119,24 @@ export function getToken(name) {
   return byName.get(name);
 }
 
+// Configuration keys have one spelling: the manifest's unprefixed name.
+// Reject mistakes at the boundary instead of silently dropping overrides.
+function assertThemeKeys(values, index) {
+  for (const name of Object.keys(values)) {
+    if (!index.has(name)) {
+      throw new Error(`Unknown theme configuration key "${name}". Use an unprefixed key from the theme manifest.`);
+    }
+  }
+}
+
 // All manifest entries whose `derivedFrom` is `baseName`, restricted to the
 // same `group` as the base itself. `derivedFrom` is also used by "component"
 // tokens purely to auto-recompute when their underlying color changes (e.g.
-// usx-accordion-content-bg → color-light); those aren't true
+// accordion-content-bg → color-light); those aren't true
 // palette "shades" and must not be nested under the base's Colors-panel
 // control (they already get their own row under Component colors).
 export function shadesOf(baseName) {
-  const base = byName.get(baseName);
+  const base = getToken(baseName);
   return themeManifest.filter((t) => t.derivedFrom === baseName && (!base || t.group === base.group));
 }
 
@@ -146,6 +156,8 @@ export function baseColorTokens() {
 // Returns { [tokenName]: effectiveValue }.
 export function resolveTheme(overrides = {}, autoDerive = {}, manifest = themeManifest) {
   const index = indexOf(manifest);
+  assertThemeKeys(overrides, index);
+  assertThemeKeys(autoDerive, index);
   const out = {};
   for (const t of manifest) {
     if (overrides[t.name] !== undefined && overrides[t.name] !== '') {
@@ -165,20 +177,12 @@ export function resolveTheme(overrides = {}, autoDerive = {}, manifest = themeMa
 
 // Build a { '--usx-*': value } style object of CHANGED tokens only.
 export function themeToCssVars(resolved) {
-  const vars = {};
-  for (const t of themeManifest) {
-    const value = resolved[t.name];
-    if (value !== undefined && value.toLowerCase?.() !== t.defaultValue.toLowerCase()) {
-      vars[t.cssVar] = value;
-    } else if (value !== undefined && value !== t.defaultValue) {
-      vars[t.cssVar] = value;
-    }
-  }
-  return vars;
+  return Object.fromEntries(themeEntries(resolved));
 }
 
 // Ordered [cssVar, value] pairs for a resolved theme (changed-only by default).
 export function themeEntries(resolved, { changedOnly = true, manifest = themeManifest } = {}) {
+  assertThemeKeys(resolved, indexOf(manifest));
   const entries = [];
   for (const t of manifest) {
     const value = resolved[t.name] ?? t.defaultValue;
@@ -222,12 +226,13 @@ export function toSassValue(value) {
 }
 
 // A `<slug>: ( ... )` map entry for the `$themes` config of
-// `pkg:@solexllc/usx-theme/themes` — the same shape the prebuilt registry
-// uses, so a Playground export pastes in alongside the built-in themes.
+// `pkg:@solexllc/usx-theme/themes`, using unprefixed configuration keys.
+// CSS variable references inside values keep their published --usx- names.
 export function themeToSass(resolved, { name = 'custom', changedOnly = true, colorScheme, manifest = themeManifest, indent = '' } = {}) {
   const lines = [`${indent}  color-scheme: ${colorScheme || colorSchemeOf(resolved)},`];
+  const namesByCssVar = new Map(manifest.map((token) => [token.cssVar, token.name]));
   for (const [cssVar, value] of themeEntries(resolved, { changedOnly, manifest })) {
-    lines.push(`${indent}  ${cssVar}: ${toSassValue(value)},`);
+    lines.push(`${indent}  ${namesByCssVar.get(cssVar)}: ${toSassValue(value)},`);
   }
   return `${indent}${themeSlug(name)}: (\n${lines.join('\n')}\n${indent}),\n`;
 }

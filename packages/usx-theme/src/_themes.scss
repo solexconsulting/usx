@@ -19,8 +19,8 @@
 //     forest: (),
 //     acme: (
 //       color-scheme: light,
-//       --usx-color-primary: #b00020,
-//       --usx-color-primary-hover: #8a0018,
+//       color-primary: #b00020,
+//       color-primary-hover: #8a0018,
 //     ),
 //   )
 //
@@ -39,16 +39,34 @@ $prefersdark: null !default;
 // Prebuilt theme names, for consumers that want to list/iterate them.
 $available: map.keys(registry.$themes);
 
+// Configuration maps use canonical manifest names. Prefixes belong to CSS
+// variables and Sass variables, not the keys in a theme configuration.
+@function -validate-tokens($tokens) {
+  @if $tokens != () and meta.type-of($tokens) != 'map' {
+    @error 'usx-theme: theme overrides must be a token map.';
+  }
+
+  @each $key in map.keys($tokens) {
+    @if $key != color-scheme and not map.has-key(registry.$defaults, $key) {
+      @error "usx-theme: '#{$key}' is not a themeable token (see theme-manifest.js).";
+    }
+  }
+
+  @return $tokens;
+}
+
 // Normalizes `$themes` (list of names, or name → overrides map) into
 // name → full token map, merging user overrides over the prebuilt entry.
 @function -resolve-themes($config) {
   @if meta.type-of($config) != 'map' {
     $as-map: ();
+
     @each $name in $config {
       $as-map: map.set($as-map, $name, ());
     }
     $config: $as-map;
   }
+
   @each $flagged in ($default, $prefersdark) {
     @if $flagged and not map.has-key($config, $flagged) {
       $config: map.set($config, $flagged, ());
@@ -56,43 +74,56 @@ $available: map.keys(registry.$themes);
   }
 
   $out: ();
+
   @each $name, $overrides in $config {
+    $overrides: -validate-tokens($overrides);
     $prebuilt: map.get(registry.$themes, $name);
+
     @if not $prebuilt and list.length(map.keys(map.remove($overrides, color-scheme))) == 0 {
       @error "usx-theme: unknown theme '#{$name}'. Prebuilt themes: #{$available}. To add a custom theme, give it a token map.";
     }
     $out: map.set($out, $name, map.merge($prebuilt or (), $overrides));
   }
+
   @return $out;
 }
 
 @function -token-union($themes) {
   $keys: ();
+
   @each $name, $tokens in $themes {
     @each $key in map.keys(map.remove($tokens, color-scheme)) {
       $keys: map.set($keys, $key, true);
     }
   }
+
   @return map.keys($keys);
 }
 
 @mixin -declarations($tokens, $keys) {
   color-scheme: map.get($tokens, color-scheme) or light;
+
   @each $key in $keys {
     $value: map.get($tokens, $key);
+
+    /* stylelint-disable-next-line scss/at-if-no-null -- Only null is missing; an explicit false must not fall back. */
     @if $value == null {
       $value: map.get(registry.$defaults, $key);
     }
+
+    /* stylelint-disable-next-line scss/at-if-no-null -- An explicit false is a value, not an unknown token. */
     @if $value == null {
       @error "usx-theme: '#{$key}' is not a themeable token (see theme-manifest.js).";
     }
-    #{$key}: #{meta.inspect($value)};
+
+    #{map.get(registry.$token-names, $key)}: #{meta.inspect($value)};
   }
 }
 
 // Emits one theme under an arbitrary selector — for ad-hoc use outside the
 // `$themes` config (no union with other themes is applied).
 @mixin theme($tokens, $selector: ':root') {
+  $tokens: -validate-tokens($tokens);
   #{$selector} {
     @include -declarations($tokens, map.keys(map.remove($tokens, color-scheme)));
   }
@@ -106,6 +137,7 @@ $-keys: -token-union($-resolved);
     @include -declarations(map.get($-resolved, $default), $-keys);
   }
 }
+
 @if $prefersdark {
   @media (prefers-color-scheme: dark) {
     :root {
@@ -113,6 +145,7 @@ $-keys: -token-union($-resolved);
     }
   }
 }
+
 @each $name, $tokens in $-resolved {
   [data-theme='#{$name}'] {
     @include -declarations($tokens, $-keys);

@@ -178,10 +178,12 @@ export const GettingStarted = {
           { code: "    forest: ()," },
           { code: "    acme: (" },
           { code: "      color-scheme: light," },
-          { code: "      --usx-color-primary: #b00020," },
-          { code: "      --usx-color-primary-hover: #8a0018," },
-          { code: "      --usx-color-primary-active: #6c0013," },
-          { code: "      --usx-font-family: (\"Acme Sans\", Helvetica, sans-serif)," },
+          { code: "      color-primary: #b00020," },
+          { code: "      color-primary-hover: #8a0018," },
+          { code: "      color-primary-active: #6c0013," },
+          { code: "      accordion-radius: 0.5rem," },
+          { code: "      link-text: var(--usx-color-primary)," },
+          { code: "      font-family: (\"Acme Sans\", Helvetica, sans-serif)," },
           { code: "    )," },
           { code: "  )," },
           { code: "  $default: acme," },
@@ -193,6 +195,18 @@ export const GettingStarted = {
         to change instead of <code>()</code>. The Playground's{' '}
         <strong>CSS ([data-theme])</strong> export is the equivalent for the
         plain-stylesheet route.
+      </p>
+      <p>
+        Configuration keys are unprefixed: <code>accordion-radius</code> and <code>link-text</code>
+        {' '}work in Sass theme maps and JavaScript theme objects. The corresponding Sass variables remain
+        {' '}<code>$usx-accordion-radius</code> and <code>$usx-link-text</code>; CSS properties and references
+        {' '}retain <code>--usx-</code>, such as <code>var(--usx-color-primary)</code>.
+        The Playground exports unprefixed keys in Sass and prefixed custom properties in CSS.
+      </p>
+      <p>
+        JavaScript theme objects and Sass theme maps accept only recognized canonical keys.
+        Unknown keys and prefixed keys such as <code>usx-accordion-radius</code> or{' '}
+        <code>--usx-accordion-radius</code> are rejected; use <code>accordion-radius</code> instead.
       </p>
 
       <h3>Two important rules</h3>
