@@ -114,23 +114,23 @@ export default {
 export const storyDefs = {
   Default: {
     ...baseArgs,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   WithImage: {
     ...baseArgs,
     ...singleImageArgs,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   WithTags: {
     ...baseArgs,
     ...singleImageArgs,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   WithImageAndTags: {
     ...baseArgs,
     ...singleImageArgs,
     ...tagsArgs,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   FlagLayout: {
     ...baseArgs,
@@ -149,13 +149,13 @@ export const storyDefs = {
     ...baseArgs,
     ...singleImageArgs,
     headerFirst: true,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   MediaInset: {
     ...baseArgs,
     ...singleImageArgs,
     mediaInset: true,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   MediaInsetRight: {
     ...baseArgs,
@@ -163,47 +163,47 @@ export const storyDefs = {
     flag: true,
     mediaInset: true,
     mediaRight: true,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   MediaExdent: {
     ...baseArgs,
     ...singleImageArgs,
     mediaExdent: true,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   WithCarousel: {
     ...baseArgs,
     ...imageCoverArgs,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   WithCarouselInset: {
     ...baseArgs,
     ...imageCoverArgs,
     mediaInset: true,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   WithCarouselNoDots: {
     ...baseArgs,
     ...imageCoverArgs,
     showCarouselDots: false,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   WithCarouselAndTags: {
     ...baseArgs,
     ...imageCoverArgs,
     ...tagsArgs,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   WithCarouselFlagLayout: {
     ...baseArgs,
     ...imageCoverArgs,
     flag: true,
-    className: 'grid-col-8',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   Minimal: {
     title: 'Simple Card',
     description: 'Just the basics.',
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   FullFeatured: {
     ...baseArgs,
@@ -213,17 +213,17 @@ export const storyDefs = {
     mediaRight: true,
     headerFirst: true,
     mediaInset: true,
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   ImagesWithObjectFitContain: {
     ...baseArgs,
     ...imageContainArgs,
-    className: 'tablet:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
   ImagesWithObjectFitFill: {
     ...baseArgs,
     ...imageFillArgs,
-    className: 'tablet:grid-col-4',
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
 };
 
