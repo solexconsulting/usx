@@ -93,7 +93,7 @@ const ENVIRONMENT_COLOR_NAMES = ['color-beta', 'color-test', 'color-dev'];
 // borders and text
 // — since these are sibling tokens rather than a base-color-plus-shades
 // relationship.
-const SURFACE_COLOR_NAMES = ['surface-1', 'surface-2', 'surface-3'];
+const SURFACE_COLOR_NAMES = ['surface-1', 'surface-2', 'surface-3', 'surface-inverse'];
 const BORDER_COLOR_NAMES = ['color-border', 'color-border-muted', 'color-border-subtle', 'color-border-inverse'];
 const TEXT_COLOR_NAMES = ['text-ink', 'text-muted', 'text-subtle', 'text-inverse'];
 const SURFACE_TEXT_COLOR_NAMES = [...SURFACE_COLOR_NAMES, ...BORDER_COLOR_NAMES, ...TEXT_COLOR_NAMES];
@@ -178,7 +178,9 @@ const TOKEN_NOTES = {
   'usx-process-list-border': 'vertical connector between steps',
   'usx-process-list-counter-text': 'number inside each step marker',
   'usx-process-list-counter-border': 'circular marker outline; follows text-ink by default and can be overridden independently',
-  'usx-process-list-counter-ring': 'marker background and outer ring that mask the connector; follows surface-1 by default'
+  'usx-process-list-counter-ring': 'marker background and outer ring that mask the connector; follows surface-1 by default',
+  'usx-tooltip-bg': 'follows surface-inverse by default; can be overridden independently',
+  'usx-tooltip-text': 'follows text-inverse by default; can be overridden independently'
 };
 
 const COMPONENT_COLOR_GROUPS = [
@@ -236,7 +238,8 @@ function groupComponentColors(tokens) {
 // randomized dark theme — but its text/link colors DO `derivedFrom` the
 // randomized 'text-ink'/'color-primary' bases and would otherwise cascade via
 // resolveTheme(), e.g. flipping to white text on a background that stays
-// light. Pin all of these to their designed defaults; only its (unrelated)
+// light. Pin all of these to their designed defaults, resolving aliases so
+// visited ink stays dark on that light background; only its (unrelated)
 // radius token is left free to vary.
 const SUMMARY_BOX_PINNED_COLORS = [
   'usx-summary-box-bg',
@@ -248,8 +251,9 @@ const SUMMARY_BOX_PINNED_COLORS = [
 ];
 
 function pinSummaryBoxColors(overrides) {
+  const defaults = resolveTheme();
   SUMMARY_BOX_PINNED_COLORS.forEach((name) => {
-    overrides[name] = getToken(name).defaultValue;
+    overrides[name] = colorPreview(getToken(name).defaultValue, defaults);
   });
 }
 
@@ -299,21 +303,18 @@ function randomPalette() {
 
   // A dark surface set → the default dark ink (text) would be unreadable, so
   // swap in a light color instead. Same reasoning for secondary/muted text
-  // (text-subtle) and visited links (usx-link-visited-color) — their
+  // (text-subtle) and the visited color role (color-visited) — their
   // light-mode defaults are just as illegible against a dark surface.
   // text-inverse must flip the other way (back to a dark ink) so it stays
-  // the opposite of text instead of also going light-on-light. The tooltip
-  // (whose own defaults are theme-invariant — always a dark chip with light
-  // text) then follows text/text-inverse here so it flips right along with
-  // the rest of the dark theme instead of staying a dark-on-dark chip.
+  // the opposite of text instead of also going light-on-light. The inverse
+  // surface follows text-ink; tooltips inherit surface-inverse/text-inverse
+  // through their default aliases.
   if (isDark) {
     overrides['text-ink'] = '#ffffff';
     overrides['text-muted'] = '#d1d1d6';
     overrides['text-subtle'] = '#b9b9bb';
     overrides['text-inverse'] = '#1b1b1b';
-    overrides['usx-link-text-visited'] = '#b39ddb';
-    overrides['usx-tooltip-bg'] = overrides['text-ink'];
-    overrides['usx-tooltip-text'] = overrides['text-inverse'];
+    overrides['color-visited'] = '#b39ddb';
     // Same reasoning as the Midnight/Carbon/Borealis presets in
     // presets.js: color-base-light is too close to a light 'text-ink' for
     // the calendar icon to stay visible on hover/active.
@@ -378,16 +379,14 @@ function randomSystemPalette() {
   });
   Object.assign(overrides, headerFooterBorderOverrides(), headerNavBackgroundOverrides());
 
-  // See randomPalette() above for why text-inverse flips opposite of text
-  // and the tooltip follows both.
+  // See randomPalette() above for why text-inverse flips opposite of text.
+  // Inverse surfaces and tooltips inherit through their default aliases.
   if (isDark) {
     overrides['text-ink'] = '#ffffff';
     overrides['text-muted'] = lookupHex('gray-cool', '20') || '#d1d1d6';
     overrides['text-subtle'] = lookupHex('gray-cool', '30') || '#b9b9bb';
     overrides['text-inverse'] = '#1b1b1b';
-    overrides['usx-link-text-visited'] = '#b39ddb';
-    overrides['usx-tooltip-bg'] = overrides['text-ink'];
-    overrides['usx-tooltip-text'] = overrides['text-inverse'];
+    overrides['color-visited'] = '#b39ddb';
     // See randomPalette() above for why this can't just chain to
     // color-base-light.
     overrides['usx-date-picker-button-hover-active-bg'] = '#565c65';

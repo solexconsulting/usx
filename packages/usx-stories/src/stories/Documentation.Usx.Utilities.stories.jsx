@@ -26,7 +26,7 @@ const SURFACE_COLORS = [
   { name: 'surface-1', description: 'Primary page surface / main background' },
   { name: 'surface-2', description: 'Card, accordion header & callout surface' },
   { name: 'surface-3', description: 'Header bar, footer, & carousel media background' },
-  { name: 'surface-inverse', description: 'Inverse surface', className: 'text-inverse' }
+  { name: 'surface-inverse', description: 'Inverse surface; follows text-ink unless overridden', className: 'text-inverse' }
 ]
 
 const BORDER_COLORS = [

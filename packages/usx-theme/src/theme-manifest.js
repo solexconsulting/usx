@@ -167,7 +167,7 @@ export const themeManifest = [
   // so any component can chain to it, same as the other state colors.
   c('color-visited', '#54278f', null, { family: 'violet', grade: '70', vivid: true }),
 
-  // Surface abstraction: components chain to these three roles — not
+  // Surface abstraction: components chain to these roles — not
   // directly to color-light/color-base-lightest/color-base-lighter — so a
   // dark theme can repoint them freely without the confusing "lightest is
   // actually the darkest surface" naming a raw USWDS base-tier alias would
@@ -180,11 +180,13 @@ export const themeManifest = [
   //               usx-header-background-color/usx-nav-background-color
   //               below), table grouped rows, footer secondary section,
   //               carousel media
+  //   surface-inverse — opposite-polarity surface, following text-ink by default
   // Default values match the real USWDS base-family tiers they replace, so
   // the Default theme is pixel-identical to plain USWDS.
   c('surface-1', '#ffffff'),
   c('surface-2', '#e6e6e6'),
   c('surface-3', '#f0f0f0'),
+  c('surface-inverse', 'var(--usx-text-ink)'),
 
   // Independent border roles, ordered by contrast like the text roles:
   // default > muted > subtle. Consolidate USWDS's neutral border colors
@@ -255,6 +257,7 @@ export const themeManifest = [
   scale('usx-alert-radius', '--usx-alert-radius', 'var(--usx-radius-none)', 'radius-advanced'),
   scale('usx-input-radius', '--usx-input-radius', 'var(--usx-radius-field)', 'radius-advanced'),
   scale('usx-textarea-radius', '--usx-textarea-radius', 'var(--usx-radius-field)', 'radius-advanced'),
+  scale('usx-pagination-button-radius', '--usx-pagination-button-radius', 'var(--usx-radius-button)', 'radius-advanced'),
   scale('usx-code-radius', '--usx-code-radius', 'var(--usx-radius-box)', 'radius-advanced'),
   scale('usx-summary-box-radius', '--usx-summary-box-radius', 'var(--usx-radius-box)', 'radius-advanced'),
   scale('usx-card-radius', '--usx-card-radius', 'var(--usx-radius-box)', 'radius-advanced'),
@@ -484,13 +487,10 @@ export const themeManifest = [
   component('usx-table-sorted-column-bg', 'var(--usx-color-accent-cool)'),
   component('usx-table-grouped-row-bg', 'var(--usx-surface-3)'),
   component('usx-table-grouped-row-text', 'var(--usx-text-ink)'),
-  // Real USWDS bakes the tooltip's background/font color as fixed values at
-  // its own build time, so it never followed our theme. Defaults mirror
-  // color-base-darkest/text-inverse (see _variables.scss) — a stable,
-  // theme-invariant dark neutral (not the per-preset brand-tinted
-  // color-dark-bg used by hero/banner) with light text on it.
-  component('usx-tooltip-bg', '#1b1b1b', 'color-base-darkest'),
-  component('usx-tooltip-text', '#ffffff', 'text-inverse'),
+  // Tooltip body and arrow share the inverse surface; both component
+  // colors remain independently overridable from their shared roles.
+  component('usx-tooltip-bg', 'var(--usx-surface-inverse)'),
+  component('usx-tooltip-text', 'var(--usx-text-inverse)'),
   // Real USWDS only colors icon-list icons via opt-in BEM modifier classes;
   // give it a themeable default (color-primary) instead.
   component('usx-icon-list-icon-text', '#005ea2', 'color-primary'),

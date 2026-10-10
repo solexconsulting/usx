@@ -80,6 +80,22 @@ the output contains zero `var()` references:
 Individual tokens can also opt out by nulling their hook
 (e.g. `$usx-color-primary-var: null`).
 
+### Pagination button radius
+
+Pagination's numbered `.usa-pagination__button` links inherit
+`--usx-radius-button` through `--usx-pagination-button-radius` by default.
+In the Theme Playground, change the shared value under **Radius → radius-button**
+or customize pagination independently under **Advanced radius → usx-pagination-button-radius**:
+
+```css
+:root {
+  --usx-pagination-button-radius: 0.75rem;
+}
+```
+
+Reset the pagination override to restore its shared button radius. The matching
+Sass variable is `$usx-pagination-button-radius`, with an optional `-var` hook.
+
 ### Border colors
 
 Neutral borders use four independent roles. As with text, `muted` is stronger
@@ -137,6 +153,25 @@ a theme that previously used the same color for every neutral border. To keep
 tables, collections, or checkable outlines on that scale, explicitly assign
 their component tokens as shown above. Dark presets provide their own scale
 and inverse color.
+
+### Tooltip colors
+
+Tooltips inherit `--usx-surface-inverse` for their background and arrow, and
+`--usx-text-inverse` for their text. The inverse surface follows
+`--usx-text-ink` by default and also powers the `.bg-surface-inverse` utility.
+Change either shared role in the Theme Playground or override the tooltip
+independently through **Component colors → Tooltip**:
+
+```css
+:root {
+  --usx-tooltip-bg: #234567;
+  --usx-tooltip-text: #ffffff;
+}
+```
+
+The matching Sass variables are `$usx-surface-inverse`, `$usx-tooltip-bg`,
+and `$usx-tooltip-text`, with optional `-var` hooks. Without configured
+tokens, tooltip color declarations are omitted and USWDS defaults remain.
 
 ### Prebuilt themes
 

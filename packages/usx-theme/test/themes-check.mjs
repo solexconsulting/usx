@@ -51,6 +51,14 @@ const borderParents = {
   'usx-task-list-border': 'color-border-subtle',
 };
 const resolvedDefault = resolveTheme();
+const inverseAliases = {
+  'surface-inverse': 'var(--usx-text-ink)',
+  'usx-tooltip-bg': 'var(--usx-surface-inverse)',
+  'usx-tooltip-text': 'var(--usx-text-inverse)',
+};
+for (const [name, value] of Object.entries(inverseAliases)) {
+  if (resolvedDefault[name] !== value) fail(`${name}: missing live inverse-role alias`);
+}
 for (const [name, value] of Object.entries(borderDefaults)) {
   const token = themeManifest.find((entry) => entry.name === name);
   if (resolvedDefault[name] !== value || token?.type !== 'color') fail(`${name}: missing border color or incorrect default`);
@@ -149,8 +157,24 @@ for (const [file, modified] of previousWrites) {
   if (fs.statSync(file).mtimeMs !== modified) fail(`unchanged build rewrote ${path.relative(distDir, file)}`);
 }
 
+const darkVisitedColors = { Borealis: '#c9a8ff', Midnight: '#b39ddb', Carbon: '#b39ddb' };
+const visitedAlias = 'var(--usx-color-visited)';
+const editedVisitedState = '#713bc6';
+const editedVisitedLink = '#bc528d';
 for (const [name, preset] of Object.entries(PRESETS)) {
   const resolved = resolveTheme(preset);
+  if (resolved['usx-pagination-button-radius'] !== 'var(--usx-radius-button)') fail(`${name}: pagination must inherit the shared button radius`);
+  for (const token of ['usx-tooltip-bg', 'usx-tooltip-text']) {
+    if (resolved[token] !== inverseAliases[token]) fail(`${name}: ${token} must inherit its inverse role`);
+  }
+  if (resolved['usx-link-text-visited'] !== visitedAlias) fail(`${name}: visited links must inherit the shared visited state`);
+  if (darkVisitedColors[name] && resolved['color-visited'] !== darkVisitedColors[name]) fail(`${name}: existing dark visited color changed`);
+
+  const edited = resolveTheme({ ...preset, 'color-visited': editedVisitedState });
+  if (edited['color-visited'] !== editedVisitedState || edited['usx-link-text-visited'] !== visitedAlias) fail(`${name}: editing the shared visited state detached visited links`);
+  const explicit = resolveTheme({ ...preset, 'color-visited': editedVisitedState, 'usx-link-text-visited': editedVisitedLink });
+  if (explicit['color-visited'] !== editedVisitedState || explicit['usx-link-text-visited'] !== editedVisitedLink) fail(`${name}: explicit visited-link override must remain independent of the shared state`);
+
   const expectedFilter = ['Borealis', 'Midnight', 'Carbon'].includes(name)
     ? 'brightness(0) invert(1)' : 'none';
   if (resolved['usx-footer-social-icon-filter'] !== expectedFilter) fail(`${name}: footer social icon filter mismatch`);
@@ -281,6 +305,43 @@ else {
   for (const [name, value] of Object.entries(customBorderOverrides)) {
     const cssVar = name.startsWith('usx-') ? `--${name}` : `--usx-${name}`;
     if (customBorders.decls.get(cssVar) !== value) fail(`sass: ${name} border override did not survive export/import`);
+  }
+}
+
+// Export both cases together so union fill must retain the shared-state
+// alias for the inherited case while preserving an explicit link override.
+const visitedCases = [
+  { name: 'Visited State', overrides: { ...PRESETS.Midnight, 'color-visited': editedVisitedState }, linkColor: visitedAlias },
+  { name: 'Visited Link', overrides: { ...PRESETS.Midnight, 'color-visited': editedVisitedState, 'usx-link-text-visited': editedVisitedLink }, linkColor: editedVisitedLink },
+];
+const visitedExport = visitedCases.map(({ name, overrides }) => themeToSass(resolveTheme(overrides), { name })).join('\n');
+const visitedBlocks = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${visitedExport}));`));
+for (const { name, linkColor } of visitedCases) {
+  const block = visitedBlocks.find((entry) => entry.selector.endsWith(`[data-theme=${themeSlug(name)}]`));
+  if (!block) fail(`sass: ${name} export did not produce a theme block`);
+  else {
+    if (block.decls.get('--usx-color-visited') !== editedVisitedState) fail(`sass: ${name} lost the shared visited-state edit`);
+    if (block.decls.get('--usx-link-text-visited') !== linkColor) fail(`sass: ${name} changed visited-link inheritance during export/import`);
+  }
+}
+
+const tooltipPalette = { ...PRESETS.Carbon, 'surface-inverse': '#bcd123', 'text-inverse': '#234bcd' };
+const tooltipCases = [
+  { name: 'Tooltip Inherited', overrides: tooltipPalette, background: inverseAliases['usx-tooltip-bg'], text: inverseAliases['usx-tooltip-text'] },
+  { name: 'Tooltip Explicit', overrides: { ...tooltipPalette, 'usx-tooltip-bg': '#7d3f81', 'usx-tooltip-text': '#f1e2d3' }, background: '#7d3f81', text: '#f1e2d3' },
+];
+const tooltipExport = tooltipCases.map(({ name, overrides, background, text }) => {
+  const resolved = resolveTheme(overrides);
+  if (resolved['usx-tooltip-bg'] !== background || resolved['usx-tooltip-text'] !== text) fail(`${name}: inverse palette changes broke tooltip inheritance or explicit overrides`);
+  return themeToSass(resolved, { name });
+}).join('\n');
+const tooltipBlocks = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${tooltipExport}));`));
+for (const { name, background, text } of tooltipCases) {
+  const block = tooltipBlocks.find((entry) => entry.selector.endsWith(`[data-theme=${themeSlug(name)}]`));
+  if (!block) fail(`sass: ${name} export did not produce a theme block`);
+  else {
+    if (block.decls.get('--usx-surface-inverse') !== '#bcd123' || block.decls.get('--usx-text-inverse') !== '#234bcd') fail(`sass: ${name} lost its inverse palette`);
+    if (block.decls.get('--usx-tooltip-bg') !== background || block.decls.get('--usx-tooltip-text') !== text) fail(`sass: ${name} changed tooltip inheritance during export/import`);
   }
 }
 

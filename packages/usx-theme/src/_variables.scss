@@ -346,6 +346,11 @@ $usx-text-subtle: usx-var($usx-text-subtle-var) !default;
 $usx-text-inverse-var: null !default;
 $usx-text-inverse: usx-var($usx-text-inverse-var) !default;
 
+// Opposite-polarity surfaces follow ink unless their own hook is configured.
+// Declared after text tokens so the Sass fallback can inherit text-ink too.
+$usx-surface-inverse-var: null !default;
+$usx-surface-inverse: usx-var($usx-surface-inverse-var, $usx-text-ink) !default;
+
 // ── Color map (used by usx utilities; null entries emit no classes) ─────────
 $usx-colors: (
   'primary':        $usx-color-primary,
@@ -384,7 +389,7 @@ $usx-surface-colors: (
   'surface-1': $usx-surface-1,
   'surface-2': $usx-surface-2,
   'surface-3': $usx-surface-3,
-  'surface-inverse': $usx-text-ink,
+  'surface-inverse': $usx-surface-inverse,
 ) !default;
 
 // ── Radius — primitives (reserved for utility classes) ──────────────────────
@@ -715,9 +720,8 @@ $usx-alert-text-line-height: null !default;
 // ── Component tokens: Hero (custom; defaults baked in _hero.scss) ───────────
 // Neutral dark box regardless of theme polarity: $usx-text-ink flips to a light
 // value under dark presets (Midnight/Carbon), so Hero can't chain to it the
-// way Header/Footer do. Defaults to $usx-color-base-darkest instead — the same
-// theme-invariant neutral used by Tooltip — paired with $usx-text-inverse for
-// legible light text on it.
+// way Header/Footer do. Defaults to $usx-color-base-darkest instead, paired
+// with light text for contrast against that fixed dark surface.
 $usx-hero-min-height: null !default;
 $usx-hero-bg: $usx-color-base-darkest !default;
 $usx-hero-text-var: null !default;
@@ -1298,15 +1302,10 @@ $usx-theme-picker-trigger-text-var: null !default;
 $usx-theme-picker-trigger-text: usx-var($usx-theme-picker-trigger-text-var, $usx-text-ink) !default;
 
 // ── Component tokens: Tooltip ─────────────────────────────────────────────
-// Real USWDS CSS bakes the tooltip's background/font color as fixed values
-// computed from $theme-tooltip-background-color/$theme-tooltip-font-color
-// at build time, so it never follows our runtime overrides and stays a flat
-// "ink" black in every theme. Defaults to $usx-color-base-darkest (a stable,
-// theme-invariant neutral that stays dark under both light and dark presets,
-// unlike $usx-text-ink) so the tooltip stays a consistent dark chip; pair with
-// $usx-text-inverse for legible light text on it.
+// Body and arrow follow the inverse surface, paired with inverse text.
+// Each component hook can override its shared role independently.
 $usx-tooltip-bg-var: null !default;
-$usx-tooltip-bg: usx-var($usx-tooltip-bg-var, $usx-color-base-darkest) !default;
+$usx-tooltip-bg: usx-var($usx-tooltip-bg-var, $usx-surface-inverse) !default;
 
 $usx-tooltip-text-var: null !default;
 $usx-tooltip-text: usx-var($usx-tooltip-text-var, $usx-text-inverse) !default;
@@ -1430,6 +1429,10 @@ $usx-collection-description-text-var: null !default;
 $usx-collection-description-text: usx-var($usx-collection-description-text-var, $usx-text-ink) !default;
 
 // ── Component tokens: Pagination (custom; defaults baked in SCSS) ──────────
+// Page buttons share the button radius unless independently overridden.
+$usx-pagination-button-radius-var: null !default;
+$usx-pagination-button-radius: usx-var($usx-pagination-button-radius-var, $usx-radius-button) !default;
+
 // Real USWDS's compiled CSS hardcodes pagination link/button text and the
 // current-page underline to literal `color("primary")`/`color("primary-
 // vivid")` — nav/wayfinding element, should track the theme.

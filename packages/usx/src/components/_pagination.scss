@@ -58,7 +58,6 @@
   // Real USWDS hardcodes the `.usa-pagination` nav to a static white bg /
   // #1b1b1b text — floats as an opaque box over a themed page background.
   background-color: usx-when($usx-pagination-bg);
-
   color: usx-when($usx-pagination-text);
 
   .usa-pagination__list {
@@ -87,6 +86,7 @@
   }
 
   .usa-pagination__button {
+    border-radius: usx-when($usx-pagination-button-radius);
     color: usx-when($usx-pagination-link-text);
 
     &:not(.usa-current) {
@@ -104,14 +104,12 @@
     // inheriting the link color over its own filled background.
     &.usa-current {
       background-color: usx-when($usx-pagination-current-bg);
-
       color: usx-when($usx-pagination-current-text);
 
       &:hover,
       &:focus,
       &:active {
         background-color: usx-when($usx-pagination-current-bg);
-
         color: usx-when($usx-pagination-current-text);
       }
     }

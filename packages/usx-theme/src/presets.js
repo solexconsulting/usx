@@ -133,9 +133,7 @@ export const PRESETS = {
     'usx-accordion-bg-hover': 'var(--usx-surface-3)',
     'usx-summary-box-bg': '#101b33',
     'usx-summary-box-border-color': '#5b7cfa',
-    'usx-link-text-visited': '#c9a8ff',
-    'usx-tooltip-bg': '#e6e8f5',
-    'usx-tooltip-text': '#0b0e1c',
+    'color-visited': '#c9a8ff',
     'usx-banner-button-text': 'var(--usx-text-ink)',
     // The date-picker toggle button's hover/active background defaults to
     // color-base-light (#a9aeb1) — too close to this preset's light 'text-ink'
@@ -171,9 +169,7 @@ export const PRESETS = {
     'color-border-inverse': '#1e293b',
     'usx-summary-box-bg': '#0f1b2e',
     'usx-summary-box-border-color': '#60a5fa',
-    'usx-link-text-visited': '#b39ddb',
-    'usx-tooltip-bg': '#e2e8f0',
-    'usx-tooltip-text': '#020617',
+    'color-visited': '#b39ddb',
     'usx-banner-button-text': 'var(--usx-text-ink)',
     // See Borealis's comment above for why this can't just chain to
     // color-base-light.
@@ -204,9 +200,7 @@ export const PRESETS = {
     'color-border-inverse': '#1c1c1e',
     'usx-summary-box-bg': '#241a10',
     'usx-summary-box-border-color': '#fb923c',
-    'usx-link-text-visited': '#b39ddb',
-    'usx-tooltip-bg': '#e5e5e5',
-    'usx-tooltip-text': '#000000',
+    'color-visited': '#b39ddb',
     // See Borealis's comment above for why this can't just chain to
     // color-base-light.
     'usx-date-picker-button-hover-active-bg': '#565c65',

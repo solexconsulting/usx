@@ -116,6 +116,7 @@ for (const [name, parent] of Object.entries({
   'usx-card-border-color': 'color-border-subtle',
   'usx-card-radius': 'radius-box',
   'usx-card-border-width': 'border-width-md',
+  'usx-pagination-button-radius': 'radius-button',
 })) {
   const token = byName.get(name);
   const parentToken = byName.get(parent);
@@ -199,6 +200,7 @@ const borderConfig = `
   $usx-text-ink: #579135,
   $usx-color-error: #a10000,
   $usx-color-success: #006100,
+  $usx-radius-button: 0.75rem,
 `;
 const compileBorders = (extra = '') => cssRules(sass.compileString(`
   @use 'pkg:@solexllc/usx-theme/variables' with (${borderConfig}${extra});
@@ -209,6 +211,10 @@ const compileBorders = (extra = '') => cssRules(sass.compileString(`
   logger: { warn: (message) => sassWarnings.push(message) },
 }).css);
 const customRules = compileBorders();
+const paginationButton = '.usx-pagination__nav .usa-pagination__button';
+expectDeclaration(defaultRules, 'unconfigured pagination radius preserves USWDS', paginationButton, 'border-radius', undefined);
+expectDeclaration(themedRules, 'runtime pagination radius hook', paginationButton, 'border-radius', 'var(--usx-pagination-button-radius)');
+expectDeclaration(customRules, 'pagination inherits the shared button radius', paginationButton, 'border-radius', '0.75rem');
 for (const [selector, property, , role] of borderComponents) {
   expectDeclaration(customRules, 'custom Sass border scale', selector, property, customBorders[role]);
 }
@@ -218,6 +224,36 @@ expectDeclaration(defaultRules, 'unconfigured process counter preserves USWDS', 
 expectDeclaration(themedRules, 'runtime process counter border hook', processCounter, 'border-color', 'var(--usx-process-list-counter-border)');
 expectDeclaration(customRules, 'process counter border follows ink instead of shared border colors', processCounter, 'border-color', '#579135');
 expectDeclaration(customRules, 'process counter text follows ink', processCounter, 'color', '#579135');
+
+function expectTooltip(rules, label, background, text) {
+  expectDeclaration(rules, label, '.usx-tooltip .usa-tooltip__body', 'background-color', background);
+  expectDeclaration(rules, label, '.usx-tooltip .usa-tooltip__body::after', 'border-right-color', background);
+  expectDeclaration(rules, label, '.usx-tooltip .usa-tooltip__body', 'color', text);
+}
+expectTooltip(defaultRules, 'unconfigured tooltip leaves USWDS colors intact', undefined, undefined);
+expectTooltip(themedRules, 'runtime tooltip hooks', 'var(--usx-tooltip-bg)', 'var(--usx-tooltip-text)');
+expectTooltip(customRules, 'inverse surface defaults to configured ink', '#579135', undefined);
+expectDeclaration(defaultRules, 'unconfigured inverse surface utility', '.bg-surface-inverse', 'background-color', undefined);
+expectDeclaration(themedRules, 'runtime inverse surface utility', '.bg-surface-inverse', 'background-color', 'var(--usx-surface-inverse) !important');
+expectDeclaration(customRules, 'inverse surface utility defaults to ink', '.bg-surface-inverse', 'background-color', '#579135 !important');
+
+const tooltipRules = cssRules(sass.compileString(`
+  @use 'pkg:@solexllc/usx-theme/variables' with (
+    $usx-text-ink: #102030,
+    $usx-surface-inverse: #bcd123,
+    $usx-text-inverse: #234bcd,
+  );
+  @use '../src/components/tooltip';
+  @use '../src/utilities';
+`, {
+  url: new URL('file://' + path.join(pkgDir, 'test', 'inline.scss')),
+  importers: [new sass.NodePackageImporter(pkgDir)],
+  logger: { warn: (message) => sassWarnings.push(message) },
+}).css);
+expectTooltip(tooltipRules, 'tooltip follows independent inverse roles', '#bcd123', '#234bcd');
+for (const selector of ['.bg-surface-inverse', '.before-bg-surface-inverse::before', '.after-bg-surface-inverse::after']) {
+  expectDeclaration(tooltipRules, 'inverse utility follows the same surface as tooltip', selector, 'background-color', '#bcd123 !important');
+}
 
 function expectCheckableOutline(rules, label, expected) {
   for (const [container, input, pseudo] of [
@@ -269,14 +305,21 @@ const componentOverrides = {
   'usx-file-input-border': '#612345',
   'usx-input-border': '#b15c2a',
   'usx-textarea-border': '#c26d3b',
+  'usx-tooltip-bg': '#7d3f81',
+  'usx-tooltip-text': '#f1e2d3',
+  'usx-pagination-button-radius': '0',
 };
 const overrideRules = compileBorders(Object.entries(componentOverrides).map(([name, value]) => `$${name}: ${value},`).join('\n'));
+expectDeclaration(overrideRules, 'pagination radius can independently be square', paginationButton, 'border-radius', '0');
+expectDeclaration(overrideRules, 'pagination override preserves regular button radius', '.usa-button.usx-button:not(.usa-button--unstyled)', 'border-radius', '0.75rem');
 for (const [selector, property, token, role] of borderComponents) {
   expectDeclaration(overrideRules, 'component override precedence', selector, property, componentOverrides[token] ?? customBorders[role]);
 }
 expectCheckableOutline(overrideRules, 'independent checkable border override', componentOverrides['usx-checkable-border']);
 expectDeclaration(overrideRules, 'process counter border override wins independently', processCounter, 'border-color', componentOverrides['usx-process-list-counter-border']);
 expectDeclaration(overrideRules, 'process counter text remains independently configurable', processCounter, 'color', componentOverrides['usx-process-list-counter-text']);
+expectTooltip(overrideRules, 'explicit tooltip overrides win', componentOverrides['usx-tooltip-bg'], componentOverrides['usx-tooltip-text']);
+expectDeclaration(overrideRules, 'tooltip override leaves inverse surface utility independent', '.bg-surface-inverse', 'background-color', '#579135 !important');
 for (const selector of ['.usa-input', '.usa-select', '.usa-input-group', '.usa-combo-box__input', '.usa-textarea']) {
   const expected = componentOverrides[selector === '.usa-textarea' ? 'usx-textarea-border' : 'usx-input-border'];
   for (const rule of overrideRules.filter((rule) => rule.selector.startsWith(`${selector}:where(`) && rule.declarations.has('border-color'))) {

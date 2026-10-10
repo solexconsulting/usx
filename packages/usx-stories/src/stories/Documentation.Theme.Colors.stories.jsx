@@ -32,7 +32,7 @@ function Grid({ tokens, live }) {
 
 const THEME_BASE_NAMES = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm', 'color-base'];
 const STATE_BASE_NAMES = ['color-info', 'color-warning', 'color-success', 'color-error', 'color-emergency', 'color-disabled', 'color-focus', 'color-visited'];
-const SURFACE_TEXT_NAMES = ['surface-1', 'surface-2', 'surface-3', 'text-ink', 'text-muted', 'text-subtle', 'text-inverse'];
+const SURFACE_TEXT_NAMES = ['surface-1', 'surface-2', 'surface-3', 'surface-inverse', 'text-ink', 'text-muted', 'text-subtle', 'text-inverse'];
 const BORDER_NAMES = ['color-border', 'color-border-muted', 'color-border-subtle', 'color-border-inverse'];
 const ENVIRONMENT_NAMES = ['color-beta', 'color-test', 'color-dev'];
 
@@ -77,7 +77,7 @@ export const Palette = {
               <strong>State colors:</strong> Interactive and status feedback colors (info, warning, success, error, emergency, disabled, focus, visited).
             </li>
             <li>
-              <strong>Surface &amp; Text colors:</strong> Theme-responsive background layers (<code>surface-1/2/3</code>) and ink roles (<code>text</code>, <code>text-muted</code>, <code>text-subtle</code>, <code>text-inverse</code>) that automatically adapt across light and dark modes.
+              <strong>Surface &amp; Text colors:</strong> Theme-responsive background layers (<code>surface-1/2/3</code>, <code>surface-inverse</code>) and ink roles (<code>text-ink</code>, <code>text-muted</code>, <code>text-subtle</code>, <code>text-inverse</code>) that automatically adapt across light and dark modes.
             </li>
             <li>
               <strong>Border colors:</strong> Neutral outlines and dividers, ordered from strongest to least prominent as <code>color-border</code>, <code>color-border-muted</code>, and <code>color-border-subtle</code>, plus <code>color-border-inverse</code> for inverted surfaces.
@@ -101,7 +101,12 @@ export const Palette = {
         <Grid tokens={stateBase} live={live} />
 
         <h3>Surface &amp; Text colors</h3>
-        <p>Structural surface layers and typography ink roles.</p>
+        <p>
+          Structural surface layers and typography ink roles. <code>surface-inverse</code> follows{' '}
+          <code>text-ink</code> unless overridden. Tooltips use <code>surface-inverse</code> for their background
+          and <code>text-inverse</code> for their text; the <code>usx-tooltip-bg</code> and{' '}
+          <code>usx-tooltip-text</code> component tokens allow independent overrides.
+        </p>
         <Grid tokens={surfaceTextBase} live={live} />
 
         <h3>Border colors</h3>
