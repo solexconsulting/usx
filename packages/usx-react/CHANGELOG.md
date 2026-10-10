@@ -1,5 +1,27 @@
 # @solexllc/usx-react
 
+## 0.6.0
+
+### Minor Changes
+
+- [`ef3a85c`](https://github.com/solexconsulting/usx/commit/ef3a85cd7cd34f31bf5582b5e78a45fad66a331c) Thanks [@olsonap](https://github.com/olsonap)! - Align border color utilities with USWDS and clarify border width utility names. Update React and Django callouts, examples, and utility documentation, including grid layouts for radius demonstrations.
+
+  Migration:
+  - Replace `.usx-border-{color}` with `.border-{color}`.
+  - Replace `.usx-border-{size}` with `.usx-border-width-{size}`.
+  - Rename Sass maps: `$colors` to `$usx-colors`, `$text-colors` to `$usx-text-colors`, `$surface-colors` to `$usx-surface-colors`, `$border-radius` to `$usx-border-radiuses`, and `$border-width` to `$usx-border-widths`.
+
+- [`4a123a8`](https://github.com/solexconsulting/usx/commit/4a123a8376b3764847fc97f24f2cfbec6020cd7f) Thanks [@olsonap](https://github.com/olsonap)! - Add an unstyled Container with optional responsive flex, display, spacing, float, and USWDS grid controls. Include React and Django rendering, CMS metadata, and Storybook examples.
+
+  Use one shared prop contract with template-only Django rendering and no Container-specific Python helper.
+
+### Patch Changes
+
+- Updated dependencies [[`ef3a85c`](https://github.com/solexconsulting/usx/commit/ef3a85cd7cd34f31bf5582b5e78a45fad66a331c), [`4a123a8`](https://github.com/solexconsulting/usx/commit/4a123a8376b3764847fc97f24f2cfbec6020cd7f)]:
+  - @solexllc/usx@0.7.0
+  - @solexllc/usx-theme@0.8.0
+  - @solexllc/usx-uswds-fixes@0.1.12
+
 ## 0.5.0
 
 ### Minor Changes
