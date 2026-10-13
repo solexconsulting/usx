@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Storybook stories and story helpers for USX components (development infrastructure, not a runtime package).",
   "dependencies": {
+    "@solexllc/usx": "workspace:*",
     "@solexllc/usx-theme": "workspace:*",
     "@uswds/uswds": "^3.14.0",
     "prop-types": "^15.8.1",

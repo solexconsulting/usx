@@ -1,12 +1,19 @@
 <!-- Default -->
 <div class="usa-form-group usx-form-group">
   <label class="usa-label usx-label" for="file-input-single">Input accepts a single file</label>
-  <input class="usa-file-input usx-file-input" id="file-input-single" type="file" name="file-input-single" />
+  <input
+    class="usa-file-input usx-file-input"
+    id="file-input-single"
+    type="file"
+    name="file-input-single"
+  />
 </div>
 
 <!-- AcceptSpecificTypes -->
 <div class="usa-form-group usx-form-group">
-  <label class="usa-label usx-label" for="file-input-specific">Input accepts only specific file types</label>
+  <label class="usa-label usx-label" for="file-input-specific"
+    >Input accepts only specific file types</label
+  >
   <span class="usa-hint usx-hint" id="file-input-specific-hint">Select PDF or TXT files</span>
   <input
     class="usa-file-input usx-file-input"
@@ -49,9 +56,13 @@
 
 <!-- WithError -->
 <div class="usa-form-group usx-form-group usa-form-group--error">
-  <label class="usa-label usx-label usa-label--error" for="file-input-error">Input has an error</label>
+  <label class="usa-label usx-label usa-label--error" for="file-input-error"
+    >Input has an error</label
+  >
   <span class="usa-hint usx-hint" id="file-input-error-hint">Select any valid file</span>
-  <span class="usa-error-message usx-error-message" id="file-input-error-error" role="alert">Display a helpful error message</span>
+  <span class="usa-error-message usx-error-message" id="file-input-error-error" role="alert"
+    >Display a helpful error message</span
+  >
   <input
     class="usa-file-input usx-file-input"
     id="file-input-error"
@@ -64,7 +75,13 @@
 <!-- Disabled -->
 <div class="usa-form-group usx-form-group">
   <label class="usa-label usx-label" for="file-input-disabled">Disabled input</label>
-  <input class="usa-file-input usx-file-input" id="file-input-disabled" type="file" name="file-input-disabled" disabled />
+  <input
+    class="usa-file-input usx-file-input"
+    id="file-input-disabled"
+    type="file"
+    name="file-input-disabled"
+    disabled
+  />
 </div>
 
 <!-- ManagedMultiple (static snapshot; interactive Delete requires React) -->
@@ -89,8 +106,16 @@
           <span class="usx-file-input__file-name">test1.jpg</span>
           <span class="usx-file-input__file-size">JPG, 7 KB</span>
         </div>
-        <button type="button" class="usa-button usx-button usa-button--secondary usx-file-input__delete-button">
-          <svg class="usa-icon usx-file-input__delete-icon" aria-hidden="true" focusable="false" role="img">
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-file-input__delete-button"
+        >
+          <svg
+            class="usa-icon usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
             <use href="./img/sprite.svg#delete"></use>
           </svg>
           <span class="usx-file-input__delete-label">Delete</span>
@@ -101,8 +126,16 @@
           <span class="usx-file-input__file-name">test2.jpg</span>
           <span class="usx-file-input__file-size">JPG, 7 KB</span>
         </div>
-        <button type="button" class="usa-button usx-button usa-button--secondary usx-file-input__delete-button">
-          <svg class="usa-icon usx-file-input__delete-icon" aria-hidden="true" focusable="false" role="img">
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-file-input__delete-button"
+        >
+          <svg
+            class="usa-icon usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
             <use href="./img/sprite.svg#delete"></use>
           </svg>
           <span class="usx-file-input__delete-label">Delete</span>
@@ -114,8 +147,12 @@
 
 <!-- PreloadedDownloadable (static snapshot; interactive Delete requires React) -->
 <div class="usa-form-group usx-form-group">
-  <label class="usa-label usx-label" for="file-input-preloaded-downloadable">Supporting documents</label>
-  <span class="usa-hint usx-hint" id="file-input-preloaded-downloadable-hint">Select one or more files</span>
+  <label class="usa-label usx-label" for="file-input-preloaded-downloadable"
+    >Supporting documents</label
+  >
+  <span class="usa-hint usx-hint" id="file-input-preloaded-downloadable-hint"
+    >Select one or more files</span
+  >
   <div class="usx-file-input__add-only">
     <input
       class="usa-file-input usx-file-input"
@@ -131,11 +168,25 @@
     <ul class="usx-file-input__file-list">
       <li class="usx-file-input__file-item">
         <div class="usx-file-input__file-info">
-          <a class="usa-link usx-link usa-link--external usx-file-input__file-name" rel="noreferrer noopener" target="_blank" href="#">w2-2023.pdf</a>
+          <a
+            class="usa-link usx-link usa-link--external usx-file-input__file-name"
+            rel="noreferrer noopener"
+            target="_blank"
+            href="#"
+            >w2-2023.pdf</a
+          >
           <span class="usx-file-input__file-size">PDF, 240 KB</span>
         </div>
-        <button type="button" class="usa-button usx-button usa-button--secondary usx-file-input__delete-button">
-          <svg class="usa-icon usx-file-input__delete-icon" aria-hidden="true" focusable="false" role="img">
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-file-input__delete-button"
+        >
+          <svg
+            class="usa-icon usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
             <use href="./img/sprite.svg#delete"></use>
           </svg>
           <span class="usx-file-input__delete-label">Delete</span>
@@ -147,8 +198,12 @@
 
 <!-- PreloadedDisabled (static snapshot; fully locked, read-only record of already-submitted files) -->
 <div class="usa-form-group usx-form-group">
-  <label class="usa-label usx-label" for="file-input-preloaded-disabled">Supporting documents</label>
-  <span class="usa-hint usx-hint" id="file-input-preloaded-disabled-hint">These files were submitted with your application</span>
+  <label class="usa-label usx-label" for="file-input-preloaded-disabled"
+    >Supporting documents</label
+  >
+  <span class="usa-hint usx-hint" id="file-input-preloaded-disabled-hint"
+    >These files were submitted with your application</span
+  >
   <div class="usx-file-input__add-only">
     <input
       class="usa-file-input usx-file-input"
@@ -165,11 +220,26 @@
     <ul class="usx-file-input__file-list">
       <li class="usx-file-input__file-item">
         <div class="usx-file-input__file-info">
-          <a class="usa-link usx-link usa-link--external usx-file-input__file-name" rel="noreferrer noopener" target="_blank" href="#">w2-2023.pdf</a>
+          <a
+            class="usa-link usx-link usa-link--external usx-file-input__file-name"
+            rel="noreferrer noopener"
+            target="_blank"
+            href="#"
+            >w2-2023.pdf</a
+          >
           <span class="usx-file-input__file-size">PDF, 240 KB</span>
         </div>
-        <button type="button" class="usa-button usx-button usa-button--secondary usx-file-input__delete-button" disabled>
-          <svg class="usa-icon usx-file-input__delete-icon" aria-hidden="true" focusable="false" role="img">
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-file-input__delete-button"
+          disabled
+        >
+          <svg
+            class="usa-icon usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
             <use href="./img/sprite.svg#delete"></use>
           </svg>
           <span class="usx-file-input__delete-label">Delete</span>
@@ -181,8 +251,12 @@
 
 <!-- PreloadedNameOnly (static snapshot; a filename with no size or download link) -->
 <div class="usa-form-group usx-form-group">
-  <label class="usa-label usx-label" for="file-input-preloaded-name-only">Supporting documents</label>
-  <span class="usa-hint usx-hint" id="file-input-preloaded-name-only-hint">Select one or more files</span>
+  <label class="usa-label usx-label" for="file-input-preloaded-name-only"
+    >Supporting documents</label
+  >
+  <span class="usa-hint usx-hint" id="file-input-preloaded-name-only-hint"
+    >Select one or more files</span
+  >
   <div class="usx-file-input__add-only">
     <input
       class="usa-file-input usx-file-input"
@@ -200,8 +274,16 @@
         <div class="usx-file-input__file-info">
           <span class="usx-file-input__file-name">government-id.jpg</span>
         </div>
-        <button type="button" class="usa-button usx-button usa-button--secondary usx-file-input__delete-button">
-          <svg class="usa-icon usx-file-input__delete-icon" aria-hidden="true" focusable="false" role="img">
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-file-input__delete-button"
+        >
+          <svg
+            class="usa-icon usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
             <use href="./img/sprite.svg#delete"></use>
           </svg>
           <span class="usx-file-input__delete-label">Delete</span>
@@ -213,8 +295,12 @@
 
 <!-- LongFileName (static snapshot; long filenames should wrap, not overflow, and never push the Delete button out of view — check on both desktop and mobile) -->
 <div class="usa-form-group usx-form-group">
-  <label class="usa-label usx-label" for="file-input-long-file-name">Upload supporting documents</label>
-  <span class="usa-hint usx-hint" id="file-input-long-file-name-hint">Select one or more files</span>
+  <label class="usa-label usx-label" for="file-input-long-file-name"
+    >Upload supporting documents</label
+  >
+  <span class="usa-hint usx-hint" id="file-input-long-file-name-hint"
+    >Select one or more files</span
+  >
   <div class="usx-file-input__add-only">
     <input
       class="usa-file-input usx-file-input"
@@ -230,11 +316,21 @@
     <ul class="usx-file-input__file-list">
       <li class="usx-file-input__file-item">
         <div class="usx-file-input__file-info">
-          <span class="usx-file-input__file-name">this-is-an-unusually-long-supporting-document-filename-used-to-verify-wrapping-behavior.pdf</span>
+          <span class="usx-file-input__file-name"
+            >this-is-an-unusually-long-supporting-document-filename-used-to-verify-wrapping-behavior.pdf</span
+          >
           <span class="usx-file-input__file-size">PDF, 1.8 MB</span>
         </div>
-        <button type="button" class="usa-button usx-button usa-button--secondary usx-file-input__delete-button">
-          <svg class="usa-icon usx-file-input__delete-icon" aria-hidden="true" focusable="false" role="img">
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-file-input__delete-button"
+        >
+          <svg
+            class="usa-icon usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
             <use href="./img/sprite.svg#delete"></use>
           </svg>
           <span class="usx-file-input__delete-label">Delete</span>
@@ -242,11 +338,25 @@
       </li>
       <li class="usx-file-input__file-item">
         <div class="usx-file-input__file-info">
-          <a class="usa-link usx-link usa-link--external usx-file-input__file-name" rel="noreferrer noopener" target="_blank" href="#">another-extremely-long-filename-for-a-downloadable-preloaded-file-to-check-the-download-icon-and-link-wrapping.pdf</a>
+          <a
+            class="usa-link usx-link usa-link--external usx-file-input__file-name"
+            rel="noreferrer noopener"
+            target="_blank"
+            href="#"
+            >another-extremely-long-filename-for-a-downloadable-preloaded-file-to-check-the-download-icon-and-link-wrapping.pdf</a
+          >
           <span class="usx-file-input__file-size">PDF, 500 KB</span>
         </div>
-        <button type="button" class="usa-button usx-button usa-button--secondary usx-file-input__delete-button">
-          <svg class="usa-icon usx-file-input__delete-icon" aria-hidden="true" focusable="false" role="img">
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-file-input__delete-button"
+        >
+          <svg
+            class="usa-icon usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
             <use href="./img/sprite.svg#delete"></use>
           </svg>
           <span class="usx-file-input__delete-label">Delete</span>
@@ -256,3 +366,172 @@
   </div>
 </div>
 
+<!-- Static previews; preloading File objects and removing them require React. -->
+<h3 class="site-preview-heading">Preloaded Single</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="html-file-input-preloaded-single-file-input-single"
+    >Input accepts a single file</label
+  >
+  <div class="usa-file-input" data-enhanced="true">
+    <div class="usa-sr-only" aria-live="polite">You have selected the file: photo.png</div>
+    <div class="usa-file-input__target">
+      <div class="usa-file-input__box"></div>
+      <div class="usa-file-input__preview-heading">
+        Selected file <span class="usa-file-input__choose">Change file</span>
+      </div>
+      <div class="usa-file-input__instructions" aria-hidden="true" hidden="true">
+        <span class="usa-file-input__drag-text">Drag file here or</span>
+        <span class="usa-file-input__choose">choose from folder</span>
+      </div>
+      <div class="usa-file-input__preview" aria-hidden="true">
+        <img
+          id="file-input-preloaded-single-preview"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+          alt=""
+          class="usa-file-input__preview-image"
+        />photo.png
+        <div></div>
+      </div>
+      <input
+        class="usx-file-input usa-file-input__input"
+        id="html-file-input-preloaded-single-file-input-single"
+        type="file"
+        name="file-input-single"
+        aria-label="Change file"
+      />
+    </div>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Preloaded Multiple</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="html-file-input-preloaded-multiple-file-input-multiple"
+    >Input accepts multiple files</label
+  ><span class="usa-hint usx-hint" id="html-file-input-preloaded-multiple-file-input-multiple-hint"
+    >Select one or more files</span
+  >
+  <div class="usa-file-input" data-enhanced="true">
+    <div class="usa-sr-only" aria-live="polite">
+      You have selected 2 files: photo-one.png, photo-two.jpg
+    </div>
+    <div class="usa-file-input__target">
+      <div class="usa-file-input__box"></div>
+      <div class="usa-file-input__preview-heading">
+        2 files selected <span class="usa-file-input__choose">Change files</span>
+      </div>
+      <div class="usa-file-input__instructions" aria-hidden="true" hidden="true">
+        <span class="usa-file-input__drag-text">Drag files here or</span>
+        <span class="usa-file-input__choose">choose from folder</span>
+      </div>
+      <div class="usa-file-input__preview" aria-hidden="true">
+        <img
+          id="file-input-preloaded-multiple-preview-jpg"
+          src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/wAALCAABAAEBAREA/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAD8AVN//2Q=="
+          alt=""
+          class="usa-file-input__preview-image"
+        />photo-two.jpg
+        <div></div>
+      </div>
+      <div class="usa-file-input__preview" aria-hidden="true">
+        <img
+          id="file-input-preloaded-multiple-preview-png"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+          alt=""
+          class="usa-file-input__preview-image"
+        />photo-one.png
+        <div></div>
+      </div>
+      <input
+        class="usx-file-input usa-file-input__input"
+        id="html-file-input-preloaded-multiple-file-input-multiple"
+        type="file"
+        name="file-input-multiple"
+        aria-describedby="html-file-input-preloaded-multiple-file-input-multiple-hint"
+        multiple=""
+        aria-label="Change files"
+      />
+    </div>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Preloaded Not Downloadable</h3>
+<div class="usa-form-group usx-form-group">
+  <label
+    class="usa-label usx-label"
+    for="html-file-input-preloaded-not-downloadable-file-input-preloaded-not-downloadable"
+    >Supporting documents</label
+  ><span
+    class="usa-hint usx-hint"
+    id="html-file-input-preloaded-not-downloadable-file-input-preloaded-not-downloadable-hint"
+    >Select one or more files</span
+  >
+  <div class="usx-file-input__add-only">
+    <div class="usa-file-input" data-enhanced="true">
+      <div class="usa-sr-only" aria-live="polite">No files selected.</div>
+      <div class="usa-file-input__target">
+        <div class="usa-file-input__box"></div>
+        <div class="usa-file-input__instructions" aria-hidden="true">
+          <span class="usa-file-input__drag-text">Drag files here or</span>
+          <span class="usa-file-input__choose">choose from folder</span>
+        </div>
+        <input
+          class="usx-file-input usa-file-input__input"
+          id="html-file-input-preloaded-not-downloadable-file-input-preloaded-not-downloadable"
+          type="file"
+          name="file-input-preloaded-not-downloadable"
+          aria-describedby="html-file-input-preloaded-not-downloadable-file-input-preloaded-not-downloadable-hint"
+          multiple=""
+          aria-label="Drag files here or choose from folder"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="usx-file-input__list margin-top-1">
+    <span class="usa-sr-only" aria-live="polite">You have selected the file: pay-stub.pdf.</span
+    ><span class="usa-hint usx-hint usx-file-input__list-heading">Selected files</span>
+    <ul class="usx-file-input__file-list">
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <span class="usx-file-input__file-name">w2-2023.pdf</span
+          ><span class="usx-file-input__file-size">PDF, 240 KB</span>
+        </div>
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-button--ghost usx-file-input__delete-button"
+          tooltip="Delete this file"
+        >
+          <svg
+            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            aria-hidden="true"
+            aria-label="delete icon"
+            focusable="false"
+            role="img"
+          >
+            <use href="/img/sprite.svg#delete"></use></svg
+          ><span class="usx-file-input__delete-label">Delete</span>
+        </button>
+      </li>
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <span class="usx-file-input__file-name">pay-stub.pdf</span
+          ><span class="usx-file-input__file-size">PDF, 100 KB</span>
+        </div>
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-button--ghost usx-file-input__delete-button"
+          tooltip="Delete this file"
+        >
+          <svg
+            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            aria-hidden="true"
+            aria-label="delete icon"
+            focusable="false"
+            role="img"
+          >
+            <use href="/img/sprite.svg#delete"></use></svg
+          ><span class="usx-file-input__delete-label">Delete</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

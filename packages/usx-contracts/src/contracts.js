@@ -23,15 +23,15 @@ export const componentContracts = {
   "packages": {
     "@solexllc/usx-contracts": {
       "registry": "npm",
-      "version": "0.4.0"
+      "version": "0.6.0"
     },
     "@solexllc/usx-react": {
       "registry": "npm",
-      "version": "0.4.0"
+      "version": "0.6.1"
     },
     "@solexllc/usx": {
       "registry": "npm",
-      "version": "0.5.0"
+      "version": "0.8.0"
     },
     "solex-usx-django": {
       "registry": "pypi",
@@ -921,12 +921,12 @@ export const componentContracts = {
     },
     "card": {
       "component": "card",
-      "version": 3,
+      "version": 4,
       "required": [],
       "props": {
         "id": {
           "type": "string",
-          "description": "Card element ID, also used as the prefix for carousel slide IDs."
+          "description": "Card element ID."
         },
         "title": {
           "type": "string",
@@ -1007,6 +1007,10 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional CSS classes"
         },
+        "containerClassName": {
+          "type": "string",
+          "description": "Additional CSS classes for the card container"
+        },
         "tag": {
           "type": "string",
           "description": "HTML tag to use for the card element (div or li)"
@@ -1066,39 +1070,57 @@ export const componentContracts = {
     },
     "carousel": {
       "component": "carousel",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "id": {
           "type": "string",
-          "default": "carousel-1",
-          "description": "Base id for slides and anchors"
+          "description": "Optional ID for the carousel region"
         },
         "slides": {
           "type": "array",
-          "description": "Array of slide objects {content: string|node}"
+          "description": "Slides with content and an optional accessible label; image props can also be used in Django",
+          "items": {
+            "type": "object",
+            "description": "Content and accessible name for one slide",
+            "properties": {
+              "content": {
+                "type": "slot",
+                "description": "Rendered content of the slide"
+              },
+              "label": {
+                "type": "string",
+                "description": "Optional accessible name for the slide"
+              }
+            }
+          }
         },
         "children": {
           "type": "slot",
-          "description": "Optional raw slide markup rendered directly inside the track."
-        },
-        "slideIds": {
-          "type": "array",
-          "description": "Anchor targets used for dot navigation when children are provided."
+          "description": "React children become individual slides; Django slot content becomes one slide"
         },
         "ariaLabel": {
           "type": "string",
           "default": "Featured content",
-          "description": "Aria label for the carousel region"
+          "description": "Accessible name for the carousel"
+        },
+        "role": {
+          "type": "select",
+          "options": [
+            "region",
+            "group"
+          ],
+          "default": "region",
+          "description": "Use group for a carousel nested in another component"
         },
         "showDots": {
           "type": "boolean",
           "default": true,
-          "description": "Whether to render navigation dots"
+          "description": "Show slide selection buttons when there are multiple slides; hidden buttons appear on focus"
         },
         "className": {
           "type": "string",
-          "description": "Additional classes to add to the carousel"
+          "description": "Additional classes for the carousel region"
         }
       },
       "renderers": {

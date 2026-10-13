@@ -1,6 +1,6 @@
 {% load components %}
 <{% if tag %}{{ tag }}{% else %}div{% endif %}{% if id %} id="{{ id }}"{% endif %} class="usa-card usx-card{% if headerFirst %} usa-card--header-first{% endif %}{% if flag %} usa-card--flag{% endif %}{% if mediaRight %} usa-card--media-right{% endif %}{% if className %} {{ className }}{% endif %}">
-  <div class="usa-card__container">
+  <div class="usa-card__container{% if containerClassName %} {{ containerClassName }}{% endif %}">
     {% if children %}
       {{ children }}
     {% elif title or description or tagProps or buttonProps or imageProps %}
@@ -11,7 +11,7 @@
       {% endif %}
       {% if imageProps and imageProps|length > 1 %}
         <div class="usa-card__media{% if mediaInset %} usa-card__media--inset{% endif %}{% if mediaExdent %} usa-card__media--exdent{% endif %}">
-          {% carousel slides=imageProps id=id|default:'card'|add:'-carousel' showDots=showCarouselDots|default_bool:True className='usx-card__carousel' %}{% endcarousel %}
+          {% carousel slides=imageProps ariaLabel=title|default:'Card'|add:' images' role='group' showDots=showCarouselDots|default_bool:True className='usx-card__carousel' %}{% endcarousel %}
         </div>
       {% elif imageProps and imageProps.0 %}
         <div class="usa-card__media{% if mediaInset %} usa-card__media--inset{% endif %}{% if mediaExdent %} usa-card__media--exdent{% endif %}">

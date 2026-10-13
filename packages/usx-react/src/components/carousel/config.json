@@ -1,38 +1,51 @@
 {
   "name": "carousel",
   "template": "carousel/carousel.django.html",
-  "version": 2,
+  "version": 3,
   "props": {
     "id": {
       "type": "string",
-      "default": "carousel-1",
-      "description": "Base id for slides and anchors"
+      "description": "Optional ID for the carousel region"
     },
     "slides": {
       "type": "array",
-      "description": "Array of slide objects {content: string|node}"
+      "description": "Slides with content and an optional accessible label; image props can also be used in Django",
+      "items": {
+        "type": "object",
+        "description": "Content and accessible name for one slide",
+        "properties": {
+          "content": { "type": "slot", "description": "Rendered content of the slide" },
+          "label": { "type": "string", "description": "Optional accessible name for the slide" }
+        }
+      }
     },
     "children": {
       "type": "slot",
-      "description": "Optional raw slide markup rendered directly inside the track."
-    },
-    "slideIds": {
-      "type": "array",
-      "description": "Anchor targets used for dot navigation when children are provided."
+      "description": "Each child becomes a slide; Django children may be pre-rendered HTML or an array of HTML fragments"
     },
     "ariaLabel": {
       "type": "string",
       "default": "Featured content",
-      "description": "Aria label for the carousel region"
+      "description": "Accessible name for the carousel"
+    },
+    "role": {
+      "type": "select",
+      "options": ["region", "group"],
+      "default": "region",
+      "description": "Use group for a carousel nested in another component"
     },
     "showDots": {
       "type": "boolean",
       "default": true,
-      "description": "Whether to render navigation dots"
+      "description": "Show slide selection buttons when there are multiple slides; hidden buttons appear on focus"
+    },
+    "statusClassName": {
+      "type": "string",
+      "description": "Additional classes for the slide status element"
     },
     "className": {
       "type": "string",
-      "description": "Additional classes to add to the carousel"
+      "description": "Additional classes for the carousel region"
     }
   }
 }

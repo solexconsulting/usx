@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import config from '../../../../usx-react/src/components/file-input/config.json';
-import { buildArgTypes, createDjangoStory, componentTag } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, componentTag, componentInit } from '../../utils/storyHelpers.jsx';
 import { useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
 import {
   storyDefs,
@@ -12,7 +12,6 @@ import {
   PreloadedNameOnly as PreloadedNameOnlyReactStory,
   LongFileName as LongFileNameReactStory,
 } from './FileInput.React.stories.jsx';
-import fileInput from '@uswds/uswds/js/usa-file-input';
 import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
@@ -28,22 +27,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // Ensure USWDS JS is initialized for the story
-      React.useEffect(() => {
-        // Set a delay because it's struggling
-        const timeout = setTimeout(() => {
-          fileInput.init();
-        }, 400);
-        return () => {
-          clearTimeout(timeout);
-        };
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('fileInput')]
 };
 
 const createStory = createDjangoStory({ componentName: 'file-input' });

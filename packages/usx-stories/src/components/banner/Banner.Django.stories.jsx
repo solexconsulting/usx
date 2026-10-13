@@ -1,8 +1,7 @@
 import React from 'react';
 import config from '../../../../usx-react/src/components/banner/config.json';
-import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Banner.React.stories.jsx';
-import banner from "@uswds/uswds/js/usa-banner";
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -18,21 +17,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // Ensure the banner component is initialized for Django stories
-      React.useEffect(() => {
-        const timeout = setTimeout(() => {
-          banner.init();
-        }, 200);
-
-        return () => {
-          clearTimeout(timeout);
-        }
-      }, []);
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('banner')]
 };
 
 const createStory = createDjangoStory({ componentName: 'banner' });

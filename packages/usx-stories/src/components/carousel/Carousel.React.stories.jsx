@@ -1,111 +1,139 @@
 import React from 'react';
-import Carousel, { Slide } from '../../../../usx-react/src/components/carousel/Carousel.tsx';
+import Carousel from '../../../../usx-react/src/components/carousel/Carousel.tsx';
 import config from '../../../../usx-react/src/components/carousel/config.json';
 import Card from '../../../../usx-react/src/components/card/Card.tsx';
 import Image from '../../../../usx-react/src/components/image/Image.tsx';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
-
-const generatedArgTypes = buildArgTypes(config.props || {});
+import { buildArgTypes, componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'React/USX/Carousel',
   component: Carousel,
   tags: ['USX', 'autodocs'],
-  argTypes: generatedArgTypes,
+  argTypes: buildArgTypes(config.props || {}),
   excludeStories: ['storyDefs'],
+  decorators: [...componentInit('carousel')],
 };
 
-const getSlideContent = (bgColor, textColor, index) => (
-  <div className={`width-full height-card bg-${bgColor} text-${textColor} padding-8`}>
-    Slide {index + 1}
-  </div>
+const panel = (color, text, number) => (
+  <div className={`width-full height-card bg-${color} text-${text} padding-8`}>Slide {number}</div>
 );
 
-const baseArgs = {
-  id: "carousel-1",
-  slides: [
-    { content: getSlideContent('primary-dark', 'white', 0) },
-    { content: getSlideContent('primary-light', 'black', 1) },
-    { content: getSlideContent('secondary-dark', 'white', 2) }
-  ]
-};
-
-const imageSlides = [
-  { content: <Image src="https://picsum.photos/400/300?random=1" alt="Random image 1" fit={true} /> },
-  { content: <Image src="https://picsum.photos/400/300?random=2" alt="Random image 2" fit={true} /> },
-  { content: <Image src="https://picsum.photos/400/300?random=3" alt="Random image 3" fit={true} /> }
+const baseSlides = [
+  { content: panel('primary-dark', 'white', 1) },
+  { content: panel('primary-light', 'black', 2) },
+  { content: panel('secondary-dark', 'white', 3) },
 ];
 
 export const storyDefs = {
-  Default: baseArgs,
-  WithoutDots: { ...baseArgs, showDots: false },
-  CustomId: { ...baseArgs, id: 'custom-carousel' },
+  Default: { ariaLabel: 'Featured content', slides: baseSlides },
+  Unenhanced: { ariaLabel: 'Carousel without JS enhancement', slides: baseSlides, 'data-enhanced': 'true' },
+  WithoutDots: { ariaLabel: 'Featured content', slides: baseSlides, showDots: false },
+  HiddenStatus: { ariaLabel: 'Featured content', slides: baseSlides, statusClassName: 'display-none' },
+  CustomId: { id: 'custom-carousel', ariaLabel: 'Featured content', slides: baseSlides },
   WithImages: {
-    ...baseArgs,
-    id: 'carousel-with-images',
-    slides: imageSlides,
+    ariaLabel: 'Photo gallery',
+    slides: [1, 2, 3].map((number) => ({
+      content: (
+        <Image
+          src={`https://picsum.photos/400/300?random=${number}`}
+          alt={`Random image ${number}`}
+          fit
+        />
+      ),
+      label: `Photo ${number} of 3`,
+    })),
   },
   CardCarousel: {
-    id: 'card-carousel',
     ariaLabel: 'Featured services',
-    showDots: true,
-    children: [
-      <Card
-        id="card-1"
-        title="Find a program"
-        description="Explore programs and services available in your community."
-        className="usx-carousel__slide"
-        tagProps={[{ value: 'Programs', color: 'primary' }]}
-        buttonProps={[{ href: '#programs', children: 'Explore programs' }]}
-      />,
-      <Card
-        id="card-2"
-        title="Prepare your application"
-        description="Learn what you need before applying and gather your documents."
-        className="usx-carousel__slide"
-        tagProps={[{ value: 'Getting started', color: 'info' }]}
-        buttonProps={[{ href: '#application', children: 'Review requirements' }]}
-      />,
-      <Card
-        id="card-3"
-        title="Get support"
-        description="Connect with a specialist for help with your next step."
-        className="usx-carousel__slide"
-        tagProps={[{ value: 'Support', color: 'secondary' }]}
-        buttonProps={[{ href: '#support', children: 'Contact support' }]}
-      />,
+    slides: [
+      {
+        content: (
+          <Card
+            id="card-1"
+            title="Find a program"
+            description="Explore programs and services available in your community."
+            tagProps={[{ value: 'Programs', color: 'primary' }]}
+            buttonProps={[{ href: '#programs', children: 'Explore programs' }]}
+            containerClassName="radius-bottom-0"
+          />
+        ),
+      },
+      {
+        content: (
+          <Card
+            id="card-2"
+            title="Prepare your application"
+            description="Learn what you need before applying and gather your documents."
+            tagProps={[{ value: 'Getting started', color: 'info' }]}
+            buttonProps={[{ href: '#application', children: 'Review requirements' }]}
+            containerClassName="radius-bottom-0"
+          />
+        ),
+      },
+      {
+        content: (
+          <Card
+            id="card-3"
+            title="Get support"
+            description="Connect with a specialist for help with your next step."
+            tagProps={[{ value: 'Support', color: 'secondary' }]}
+            buttonProps={[{ href: '#support', children: 'Contact support' }]}
+            containerClassName="radius-bottom-0"
+          />
+        ),
+      },
     ],
   },
+  ManyCards: {
+    ariaLabel: 'Service directory',
+    slides: Array.from({ length: 20 }, (_, index) => {
+      const number = index + 1;
+      return {
+        content: (
+          <Card
+            id={`many-card-${number}`}
+            title={`Service ${number}`}
+            description={`Explore service ${number} of 20.`}
+            containerClassName="radius-bottom-0"
+          />
+        ),
+        label: `Card ${number} of 20`,
+      };
+    }),
+  },
+  NestedCarousels: {
+    ariaLabel: 'Cards with photo galleries',
+    statusClassName: 'display-none',
+    slides: [1, 2].map((number) => ({
+      content: (
+        <Card
+          title={`Gallery ${number}`}
+          description={`Photos in gallery ${number}.`}
+          imageProps={[1, 2].map((photo) => ({
+            src: `https://picsum.photos/800/450?random=${number * 10 + photo}`,
+            alt: `Gallery ${number} photo ${photo}`,
+          }))}
+        />
+      ),
+    })),
+  },
   WithSlideChildren: {
-    id: 'carousel-children',
-    showDots: true,
-    slideIds: ['#child-1', '#child-2', '#child-3'],
-    children: (
-      <>
-        <Slide id="child-1">{getSlideContent('primary-dark', 'white', 0)}</Slide>
-        <Slide id="child-2">{getSlideContent('primary-light', 'black', 1)}</Slide>
-        <Slide id="child-3">{getSlideContent('secondary-dark', 'white', 2)}</Slide>
-      </>
-    ),
+    ariaLabel: 'Child content',
+    children: baseSlides.map(({ content }) => content),
   },
-  WithHTMLChildren: {
-    id: 'carousel-manual',
-    showDots: true,
-    slideIds: ['#manual-1', '#manual-2', '#manual-3'],
-    children: (
-      <>
-        <section id="manual-1" className="usx-carousel__slide" tabIndex={0}>{getSlideContent('primary-dark', 'white', 0)}</section>
-        <section id="manual-2" className="usx-carousel__slide" tabIndex={0}>{getSlideContent('primary-light', 'black', 1)}</section>
-        <section id="manual-3" className="usx-carousel__slide" tabIndex={0}>{getSlideContent('secondary-dark', 'white', 2)}</section>
-      </>
-    ),
-  },
+  SingleSlide: { ariaLabel: 'Single item', slides: [baseSlides[0]] },
+  Empty: { ariaLabel: 'Empty carousel' },
 };
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced };
 export const WithoutDots = { args: storyDefs.WithoutDots };
+export const HiddenStatus = { args: storyDefs.HiddenStatus };
 export const CustomId = { args: storyDefs.CustomId };
 export const WithImages = { args: storyDefs.WithImages };
+export const CardCarousel = { args: storyDefs.CardCarousel };
+export const ManyCards = { args: storyDefs.ManyCards };
+export const NestedCarousels = { args: storyDefs.NestedCarousels };
 export const WithSlideChildren = { args: storyDefs.WithSlideChildren };
-export const WithHTMLChildren = { args: storyDefs.WithHTMLChildren };
-export const CardCarousel = { name: 'Card Carousel', args: storyDefs.CardCarousel };
+export const SingleSlide = { args: storyDefs.SingleSlide };
+export const Empty = { args: storyDefs.Empty };

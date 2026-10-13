@@ -2,8 +2,7 @@ import React from 'react';
 import Modal from '../../../../usx-react/src/components/modal/Modal.tsx';
 import Button from '../../../../usx-react/src/components/button/Button.tsx';
 import config from '../../../../usx-react/src/components/modal/config.json';
-import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
-import modal from "@uswds/uswds/js/usa-modal";
+import { buildArgTypes, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'React/USWDS/Modal',
@@ -18,22 +17,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // Ensure USWDS JS is initialized for the story
-      React.useEffect(() => {
-        const timeout = setTimeout(() => {
-          modal.init();
-        }, 30);
-
-        return () => {
-          clearTimeout(timeout);
-        };
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('modal')]
 };
 
 const defaultActions = [

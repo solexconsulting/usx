@@ -1,8 +1,7 @@
 import React from 'react';
-import accordion from '@uswds/uswds/js/usa-accordion';
 import { Accordion } from '../../../../usx-react/src/components/accordion/Accordion.tsx';
 import config from '../../../../usx-react/src/components/accordion/config.json';
-import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 import { expect, fn, userEvent } from 'storybook/test';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
@@ -20,15 +19,7 @@ export default {
         }
       }
     },
-    decorators: [
-      (Story, context) => {
-        const root = React.useRef(null);
-        React.useEffect(() => {
-          accordion.init(root.current);
-        }, [context.args.items, context.args.multiselectable]);
-        return <div ref={root}><Story /></div>;
-      },
-    ],
+    decorators: [...componentInit('accordion')],
 };
 
 const items1 = [

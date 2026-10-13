@@ -1,8 +1,7 @@
 import React from 'react';
 import LanguageSelector from '../../../../usx-react/src/components/language-selector/LanguageSelector.tsx';
 import config from '../../../../usx-react/src/components/language-selector/config.json';
-import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
-import languageSelector from '@uswds/uswds/js/usa-language-selector';
+import { buildArgTypes, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -12,17 +11,7 @@ export default {
   title: 'React/USWDS/LanguageSelector',
   component: LanguageSelector,
   argTypes: generatedArgTypes,
-  decorators: [
-    (Story) => {
-      // The usa-language__primary menu reuses accordion show/hide behavior;
-      // initialize the real USWDS JS for the story, same as the HTML story.
-      React.useEffect(() => {
-        languageSelector.init();
-      }, []);
-
-      return <Story />;
-    }
-  ],
+  decorators: [...componentInit('languageSelector')],
   parameters: {
     docs: {
       description: {

@@ -369,9 +369,9 @@ export const themeManifest = [
   component('banner-text', '#1b1b1b', 'text-ink'),
   component('banner-button-text', '#005ea2', 'link-text'),
   component('banner-chevron-text', '#005ea2', 'color-primary'),
-  component('carousel-dot-bg', '#c0c0c0'),
-  component('carousel-dot-bg-hover', '#a0a0a0', 'carousel-dot-bg'),
-  component('carousel-dot-bg-active', '#808080', 'carousel-dot-bg'),
+  component('carousel-dot-bg', 'var(--usx-color-primary)'),
+  component('carousel-dot-bg-hover', 'var(--usx-color-primary-dark)'),
+  component('carousel-dot-bg-active', 'var(--usx-color-primary-darker)'),
   component('carousel-focus', 'var(--usx-color-focus)'),
   // Real USWDS ships the step-indicator's CSS precompiled — these two get
   // their own hooks (unlike the plain $color-primary-dark/-darker aliases

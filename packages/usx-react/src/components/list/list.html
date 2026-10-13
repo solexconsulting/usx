@@ -1,26 +1,46 @@
-<div class="grid-row grid-gap">
-  <div class="mobile-lg:grid-col-4">
-    <h3 class="site-preview-heading margin-0">Unordered list</h3>
-    <ul class="usa-list">
-      <li>Unordered list item</li>
-      <li>Unordered list item</li>
-      <li>Unordered list item</li>
+<h3 class="site-preview-heading">Default</h3>
+<ul class="usa-list usx-list">
+  <li>List item</li>
+  <li>List item</li>
+  <li>List item</li>
+</ul>
+
+<h3 class="site-preview-heading">Ordered</h3>
+<ol class="usa-list usx-list">
+  <li>List item</li>
+  <li>List item</li>
+  <li>List item</li>
+</ol>
+
+<h3 class="site-preview-heading">Unstyled</h3>
+<ul class="usa-list usx-list usa-list--unstyled">
+  <li>List item</li>
+  <li>List item</li>
+  <li>List item</li>
+</ul>
+
+<h3 class="site-preview-heading">Nested</h3>
+<ul class="usa-list usx-list">
+  <li>Main point</li>
+  <li>
+    Program requirements
+    <ul class="usa-list usx-list">
+      <li>Submit application</li>
+      <li>
+        Provide supporting documents
+        <ul class="usa-list usx-list">
+          <li>Photo identification</li>
+          <li>Proof of address</li>
+          <li>
+            Income documents
+            <ol class="usa-list usx-list">
+              <li>Recent pay stubs</li>
+              <li>Most recent tax return</li>
+            </ol>
+          </li>
+        </ul>
+      </li>
     </ul>
-  </div>
-  <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
-    <h3 class="site-preview-heading margin-0">Ordered list</h3>
-    <ol class="usa-list">
-      <li>Ordered list item</li>
-      <li>Ordered list item</li>
-      <li>Ordered list item</li>
-    </ol>
-  </div>
-  <div class="mobile-lg:grid-col-4 margin-top-4 mobile-lg:margin-top-0">
-    <h3 class="site-preview-heading margin-0">Unstyled list</h3>
-    <ul class="usa-list usa-list--unstyled">
-      <li>Unstyled list item</li>
-      <li>Unstyled list item</li>
-      <li>Unstyled list item</li>
-    </ul>
-  </div>
-</div>
+  </li>
+  <li>Final confirmation</li>
+</ul>

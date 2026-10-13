@@ -1,7 +1,6 @@
 import React from 'react';
 import html from '../../../../usx-react/src/components/in-page-nav/in-page-nav.html?raw';
-import inPageNavigation from '@uswds/uswds/js/usa-in-page-navigation';
-import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'HTML/USWDS/InPageNav',
@@ -13,16 +12,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // Ensure USWDS JS is initialized for the story
-      React.useEffect(() => {
-        inPageNavigation.init();
-      }, []);
-
-      return <Story />;
-    },
-  ],
+  decorators: [...componentInit('inPageNavigation')],
 };
 
 export const AllVariants = {

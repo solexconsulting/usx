@@ -1,11 +1,11 @@
 {
   "name": "card",
   "template": "card/card.django.html",
-  "version": 3,
+  "version": 4,
   "props": {
     "id": {
       "type": "string",
-      "description": "Card element ID, also used as the prefix for carousel slide IDs."
+      "description": "Card element ID."
     },
     "title": {
       "type": "string",
@@ -85,6 +85,10 @@
     "className": {
       "type": "string",
       "description": "Additional CSS classes"
+    },
+    "containerClassName": {
+      "type": "string",
+      "description": "Additional CSS classes for the card container"
     },
     "tag": {
       "type": "string",

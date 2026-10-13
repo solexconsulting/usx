@@ -306,6 +306,9 @@ importers:
 
   packages/usx-stories:
     dependencies:
+      '@solexllc/usx':
+        specifier: workspace:*
+        version: link:../usx
       '@solexllc/usx-theme':
         specifier: workspace:*
         version: link:../usx-theme

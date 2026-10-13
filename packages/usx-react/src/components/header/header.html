@@ -1,49 +1,56 @@
-<h3 class="site-preview-heading">Basic header</h3>
-<div class="usa-overlay"></div>
+<h3 class="site-preview-heading">Text Only</h3>
 <header class="usa-header usx-header usa-header--basic">
   <div class="usa-nav-container">
     <div class="usa-navbar">
       <div class="usa-logo usx-logo">
         <em class="usa-logo__text"
-          ><a href="/" class="usx-logo__title">&lt;Project title&gt;</a></em
+          ><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
         >
       </div>
-      <button type="button" class="usa-menu-btn">Menu</button>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg
+          class="usa-icon usa-icon--size-3"
+          aria-hidden="true"
+          aria-label="menu icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#menu"></use>
+        </svg>
+      </button>
     </div>
     <nav aria-label="Primary navigation" class="usa-nav usx-nav">
       <button type="button" class="usa-nav__close">
-        <img src="/img/usa-icons/close.svg" role="img" alt="Close" />
+        <svg
+          class="usa-icon usa-icon--size-2"
+          aria-hidden="true"
+          aria-label="close icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#close"></use>
+        </svg>
       </button>
       <ul class="usa-nav__primary usa-accordion">
         <li class="usa-nav__primary-item">
           <button
             type="button"
-            class="usa-accordion__button usa-nav__link usa-current"
+            class="usa-accordion__button usa-nav__link"
             aria-expanded="false"
-            aria-controls="basic-nav-section-one"
+            aria-controls="html-header-text-only-header-text-only-nav-section-0"
           >
-            <span>&lt;Current section&gt;</span>
+            <span>Section 1</span>
           </button>
-          <ul id="basic-nav-section-one" class="usa-nav__submenu" hidden="hidden">
+          <ul
+            id="html-header-text-only-header-text-only-nav-section-0"
+            class="usa-nav__submenu"
+            hidden=""
+          >
             <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
+              <a href="https://example.com/linkA" aria-label="Link A"><span>Link A</span></a>
             </li>
             <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
-            </li>
-            <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
-            </li>
-            <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
+              <a href="https://example.com/linkB" aria-label="Link B"><span>Link B</span></a>
             </li>
           </ul>
         </li>
@@ -52,140 +59,875 @@
             type="button"
             class="usa-accordion__button usa-nav__link"
             aria-expanded="false"
-            aria-controls="basic-nav-section-two"
+            aria-controls="html-header-text-only-header-text-only-nav-section-1"
           >
-            <span>&lt;Section&gt;</span>
+            <span>Section 2</span>
           </button>
-          <ul id="basic-nav-section-two" class="usa-nav__submenu" hidden="hidden">
+          <ul
+            id="html-header-text-only-header-text-only-nav-section-1"
+            class="usa-nav__submenu"
+            hidden=""
+          >
             <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
+              <a href="https://example.com/linkC" aria-label="Link C"><span>Link C</span></a>
             </li>
             <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
-            </li>
-            <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
+              <a href="https://example.com/linkD" aria-label="Link D"><span>Link D</span></a>
             </li>
           </ul>
         </li>
         <li class="usa-nav__primary-item">
-          <a href="javascript:void(0);" class="usa-nav-link"
-            ><span>&lt;Simple link&gt;</span></a
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+            ><span>Section 3</span></a
           >
         </li>
       </ul>
-      <section aria-label="Search component">
-        <form class="usa-search usa-search--small" role="search">
-          <label class="usa-sr-only" for="search-field">Search</label>
-          <input
-            class="usa-input"
-            id="search-field"
-            type="search"
-            name="search"
-          />
-          <button class="usa-button" type="submit">
-            <img
-              src="/img/usa-icons-bg/search--white.svg"
-              class="usa-search__submit-icon"
-              alt="Search"
-            />
-          </button>
-        </form>
-      </section>
     </nav>
   </div>
 </header>
 
-<h3 class="site-preview-heading">Basic header with megamenu</h3>
-<div class="usa-overlay"></div>
+<h3 class="site-preview-heading">Symbol And Text</h3>
+<header class="usa-header usx-header usa-header--basic">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text"
+          ><img
+            src="/symbol-only.svg"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant"
+          /><img
+            src="/white_symbol-only.png"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+          /><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
+        >
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg
+          class="usa-icon usa-icon--size-3"
+          aria-hidden="true"
+          aria-label="menu icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg
+          class="usa-icon usa-icon--size-2"
+          aria-hidden="true"
+          aria-label="close icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="html-header-symbol-and-text-header-symbol-text-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+          <ul
+            id="html-header-symbol-and-text-header-symbol-text-nav-section-0"
+            class="usa-nav__submenu"
+            hidden=""
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A"><span>Link A</span></a>
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B"><span>Link B</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="html-header-symbol-and-text-header-symbol-text-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+          <ul
+            id="html-header-symbol-and-text-header-symbol-text-nav-section-1"
+            class="usa-nav__submenu"
+            hidden=""
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C"><span>Link C</span></a>
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D"><span>Link D</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+            ><span>Section 3</span></a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Single Logo</h3>
+<header class="usa-header usx-header usa-header--basic">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <a href="https://example.com" class="usx-image usx-logo__image"
+          ><div class="usx-image usx-logo__variant">
+            <img src="/linear.svg" alt="Agency Name" />
+          </div>
+          <div class="usx-image usx-logo__variant usx-logo__variant--inverse">
+            <img src="/white_linear.png" alt="Agency Name" /></div
+        ></a>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg
+          class="usa-icon usa-icon--size-3"
+          aria-hidden="true"
+          aria-label="menu icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg
+          class="usa-icon usa-icon--size-2"
+          aria-hidden="true"
+          aria-label="close icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="html-header-single-logo-header-single-logo-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+          <ul
+            id="html-header-single-logo-header-single-logo-nav-section-0"
+            class="usa-nav__submenu"
+            hidden=""
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A"><span>Link A</span></a>
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B"><span>Link B</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="html-header-single-logo-header-single-logo-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+          <ul
+            id="html-header-single-logo-header-single-logo-nav-section-1"
+            class="usa-nav__submenu"
+            hidden=""
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C"><span>Link C</span></a>
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D"><span>Link D</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+            ><span>Section 3</span></a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Responsive Logo</h3>
+<header class="usa-header usx-header usa-header--basic">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <a href="https://example.com" class="usx-image usx-logo__image"
+          ><div class="usx-image usx-logo__variant">
+            <picture
+              ><source media="(min-width: 64em)" srcset="/stacked-w-symbol_left.svg" />
+              <source media="(min-width: 40em)" srcset="/linear.svg" />
+              <source media="(min-width: 20em)" srcset="/solex-only.svg" />
+              <img src="/symbol-only.svg" alt="Agency Name"
+            /></picture>
+          </div>
+          <div class="usx-image usx-logo__variant usx-logo__variant--inverse">
+            <picture
+              ><source media="(min-width: 64em)" srcset="/white_stacked-w-symbol_left.png" />
+              <source media="(min-width: 40em)" srcset="/white_linear.png" />
+              <source media="(min-width: 20em)" srcset="/white_solex-only.png" />
+              <img src="/white_symbol-only.png" alt="Agency Name"
+            /></picture></div
+        ></a>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg
+          class="usa-icon usa-icon--size-3"
+          aria-hidden="true"
+          aria-label="menu icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg
+          class="usa-icon usa-icon--size-2"
+          aria-hidden="true"
+          aria-label="close icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="html-header-responsive-logo-header-responsive-logo-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+          <ul
+            id="html-header-responsive-logo-header-responsive-logo-nav-section-0"
+            class="usa-nav__submenu"
+            hidden=""
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A"><span>Link A</span></a>
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B"><span>Link B</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="html-header-responsive-logo-header-responsive-logo-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+          <ul
+            id="html-header-responsive-logo-header-responsive-logo-nav-section-1"
+            class="usa-nav__submenu"
+            hidden=""
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C"><span>Link C</span></a>
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D"><span>Link D</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+            ><span>Section 3</span></a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Responsive Logo Extended</h3>
+<header class="usa-header usx-header usa-header--extended">
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <a href="https://example.com" class="usx-image usx-logo__image"
+        ><div class="usx-image usx-logo__variant">
+          <picture
+            ><source media="(min-width: 64em)" srcset="/stacked-w-symbol_left.svg" />
+            <source media="(min-width: 40em)" srcset="/linear.svg" />
+            <source media="(min-width: 20em)" srcset="/solex-only.svg" />
+            <img src="/symbol-only.svg" alt="Agency Name"
+          /></picture>
+        </div>
+        <div class="usx-image usx-logo__variant usx-logo__variant--inverse">
+          <picture
+            ><source media="(min-width: 64em)" srcset="/white_stacked-w-symbol_left.png" />
+            <source media="(min-width: 40em)" srcset="/white_linear.png" />
+            <source media="(min-width: 20em)" srcset="/white_solex-only.png" />
+            <img src="/white_symbol-only.png" alt="Agency Name"
+          /></picture></div
+      ></a>
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg
+        class="usa-icon usa-icon--size-3"
+        aria-hidden="true"
+        aria-label="menu icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg
+        class="usa-icon usa-icon--size-2"
+        aria-hidden="true"
+        aria-label="close icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-responsive-logo-extended-header-responsive-logo-extended-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+        <ul
+          id="html-header-responsive-logo-extended-header-responsive-logo-extended-nav-section-0"
+          class="usa-nav__submenu"
+          hidden=""
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkA" aria-label="Link A"><span>Link A</span></a>
+          </li>
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkB" aria-label="Link B"><span>Link B</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-responsive-logo-extended-header-responsive-logo-extended-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+        <ul
+          id="html-header-responsive-logo-extended-header-responsive-logo-extended-nav-section-1"
+          class="usa-nav__submenu"
+          hidden=""
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkC" aria-label="Link C"><span>Link C</span></a>
+          </li>
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkD" aria-label="Link D"><span>Link D</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+          ><span>Section 3</span></a
+        >
+      </li>
+    </ul>
+    <div class="usa-nav__secondary"><ul class="usa-nav__secondary-links"></ul></div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Theme Responsive Logo</h3>
+<header class="usa-header usx-header usa-header--extended">
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <a href="https://example.com" class="usx-image usx-logo__image"
+        ><div class="usx-image usx-logo__variant">
+          <picture
+            ><source media="(min-width: 64em)" srcset="/stacked-w-symbol_left.svg" />
+            <source media="(min-width: 40em)" srcset="/linear.svg" />
+            <source media="(min-width: 20em)" srcset="/solex-only.svg" />
+            <img src="/symbol-only.svg" alt="Agency Name"
+          /></picture>
+        </div>
+        <div class="usx-image usx-logo__variant usx-logo__variant--inverse">
+          <picture
+            ><source media="(min-width: 64em)" srcset="/white_stacked-w-symbol_left.png" />
+            <source media="(min-width: 40em)" srcset="/white_linear.png" />
+            <source media="(min-width: 20em)" srcset="/white_solex-only.png" />
+            <img src="/white_symbol-only.png" alt="Agency Name"
+          /></picture></div
+      ></a>
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg
+        class="usa-icon usa-icon--size-3"
+        aria-hidden="true"
+        aria-label="menu icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg
+        class="usa-icon usa-icon--size-2"
+        aria-hidden="true"
+        aria-label="close icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-theme-responsive-logo-header-theme-responsive-logo-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+        <ul
+          id="html-header-theme-responsive-logo-header-theme-responsive-logo-nav-section-0"
+          class="usa-nav__submenu"
+          hidden=""
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkA" aria-label="Link A"><span>Link A</span></a>
+          </li>
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkB" aria-label="Link B"><span>Link B</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-theme-responsive-logo-header-theme-responsive-logo-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+        <ul
+          id="html-header-theme-responsive-logo-header-theme-responsive-logo-nav-section-1"
+          class="usa-nav__submenu"
+          hidden=""
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkC" aria-label="Link C"><span>Link C</span></a>
+          </li>
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkD" aria-label="Link D"><span>Link D</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+          ><span>Section 3</span></a
+        >
+      </li>
+    </ul>
+    <div class="usa-nav__secondary"><ul class="usa-nav__secondary-links"></ul></div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Default</h3>
+<header class="usa-header usx-header usa-header--extended">
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <em class="usa-logo__text"
+        ><img
+          src="/symbol-only.svg"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant"
+        /><img
+          src="/white_symbol-only.png"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        /><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
+      >
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg
+        class="usa-icon usa-icon--size-3"
+        aria-hidden="true"
+        aria-label="menu icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg
+        class="usa-icon usa-icon--size-2"
+        aria-hidden="true"
+        aria-label="close icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-default-header-default-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+        <div
+          id="html-header-default-header-default-nav-section-0"
+          class="usa-nav__submenu usa-megamenu"
+          hidden=""
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkA" aria-label="Link A">Link A</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkB" aria-label="Link B">Link B</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-default-header-default-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+        <div
+          id="html-header-default-header-default-nav-section-1"
+          class="usa-nav__submenu usa-megamenu"
+          hidden=""
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkC" aria-label="Link C">Link C</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkD" aria-label="Link D">Link D</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+          ><span>Section 3</span></a
+        >
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links">
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary1" aria-label="Secondary Link 1"
+            ><span>Secondary Link 1</span></a
+          >
+        </li>
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary2" aria-label="Secondary Link 2"
+            ><span>Secondary Link 2</span></a
+          >
+        </li>
+      </ul>
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="html-header-default-undefined-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+          >
+            <label class="usa-label usx-label usa-sr-only" for="html-header-default-input-yuj8ts3mc"
+              >Search</label
+            ><input
+              id="html-header-default-input-yuj8ts3mc"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              type="search"
+              name="q"
+              value=""
+            /><button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-icon--size-2 usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                aria-label="Search"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Basic</h3>
+<header class="usa-header usx-header usa-header--basic">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text"
+          ><img
+            src="/symbol-only.svg"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant"
+          /><img
+            src="/white_symbol-only.png"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+          /><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
+        >
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg
+          class="usa-icon usa-icon--size-3"
+          aria-hidden="true"
+          aria-label="menu icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg
+          class="usa-icon usa-icon--size-2"
+          aria-hidden="true"
+          aria-label="close icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="html-header-basic-header-basic-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+          <ul id="html-header-basic-header-basic-nav-section-0" class="usa-nav__submenu" hidden="">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A"><span>Link A</span></a>
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B"><span>Link B</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="html-header-basic-header-basic-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+          <ul id="html-header-basic-header-basic-nav-section-1" class="usa-nav__submenu" hidden="">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C"><span>Link C</span></a>
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D"><span>Link D</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+            ><span>Section 3</span></a
+          >
+        </li>
+      </ul>
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="html-header-basic-undefined-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+          >
+            <label class="usa-label usx-label usa-sr-only" for="html-header-basic-input-hivkjr773"
+              >Search</label
+            ><input
+              id="html-header-basic-input-hivkjr773"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              type="search"
+              name="q"
+              value=""
+            /><button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-icon--size-2 usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                aria-label="Search"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+        </section>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Basic With Megamenu</h3>
 <header class="usa-header usx-header usa-header--basic usa-header--megamenu">
   <div class="usa-nav-container">
     <div class="usa-navbar">
       <div class="usa-logo usx-logo">
         <em class="usa-logo__text"
-          ><a href="/" class="usx-logo__title">&lt;Project title&gt;</a></em
+          ><img
+            src="/symbol-only.svg"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant"
+          /><img
+            src="/white_symbol-only.png"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+          /><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
         >
       </div>
-      <button type="button" class="usa-menu-btn">Menu</button>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg
+          class="usa-icon usa-icon--size-3"
+          aria-hidden="true"
+          aria-label="menu icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#menu"></use>
+        </svg>
+      </button>
     </div>
     <nav aria-label="Primary navigation" class="usa-nav usx-nav">
       <button type="button" class="usa-nav__close">
-        <img src="/img/usa-icons/close.svg" role="img" alt="Close" />
+        <svg
+          class="usa-icon usa-icon--size-2"
+          aria-hidden="true"
+          aria-label="close icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#close"></use>
+        </svg>
       </button>
       <ul class="usa-nav__primary usa-accordion">
         <li class="usa-nav__primary-item">
           <button
             type="button"
-            class="usa-accordion__button usa-nav__link usa-current"
+            class="usa-accordion__button usa-nav__link"
             aria-expanded="false"
-            aria-controls="basic-mega-nav-section-one"
+            aria-controls="html-header-basic-with-megamenu-header-basic-megamenu-nav-section-0"
           >
-            <span>&lt;Current section&gt;</span>
+            <span>Section 1</span>
           </button>
           <div
-            id="basic-mega-nav-section-one"
+            id="html-header-basic-with-megamenu-header-basic-megamenu-nav-section-0"
             class="usa-nav__submenu usa-megamenu"
-            hidden="hidden"
+            hidden=""
           >
             <div class="grid-row grid-gap-4">
               <div class="usa-col">
                 <ul class="usa-nav__submenu-list">
                   <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
+                    <a href="https://example.com/linkA" aria-label="Link A">Link A</a>
                   </li>
                   <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);"
-                      >&lt;A very long navigation link that goes onto two
-                      lines&gt;</a
-                    >
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
+                    <a href="https://example.com/linkB" aria-label="Link B">Link B</a>
                   </li>
                 </ul>
               </div>
@@ -197,68 +939,23 @@
             type="button"
             class="usa-accordion__button usa-nav__link"
             aria-expanded="false"
-            aria-controls="basic-mega-nav-section-two"
+            aria-controls="html-header-basic-with-megamenu-header-basic-megamenu-nav-section-1"
           >
-            <span>&lt;Section&gt;</span>
+            <span>Section 2</span>
           </button>
           <div
-            id="basic-mega-nav-section-two"
+            id="html-header-basic-with-megamenu-header-basic-megamenu-nav-section-1"
             class="usa-nav__submenu usa-megamenu"
-            hidden="hidden"
+            hidden=""
           >
             <div class="grid-row grid-gap-4">
               <div class="usa-col">
                 <ul class="usa-nav__submenu-list">
                   <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
+                    <a href="https://example.com/linkC" aria-label="Link C">Link C</a>
                   </li>
                   <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);"
-                      >&lt;A very long navigation link that goes onto two
-                      lines&gt;</a
-                    >
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
+                    <a href="https://example.com/linkD" aria-label="Link D">Link D</a>
                   </li>
                 </ul>
               </div>
@@ -266,79 +963,269 @@
           </div>
         </li>
         <li class="usa-nav__primary-item">
-          <a href="javascript:void(0);" class="usa-nav-link"
-            >&lt;Simple link&gt;</a
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+            ><span>Section 3</span></a
           >
         </li>
       </ul>
-      <section aria-label="Search component">
-        <form class="usa-search usa-search--small" role="search">
-          <label class="usa-sr-only" for="search-field">Search</label>
-          <input
-            class="usa-input"
-            id="search-field"
-            type="search"
-            name="search"
-          />
-          <button class="usa-button" type="submit">
-            <img
-              src="/img/usa-icons-bg/search--white.svg"
-              class="usa-search__submit-icon"
-              alt="Search"
-            />
-          </button>
-        </form>
-      </section>
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="html-header-basic-with-megamenu-undefined-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+          >
+            <label
+              class="usa-label usx-label usa-sr-only"
+              for="html-header-basic-with-megamenu-input-dmdnz1u7o"
+              >Search</label
+            ><input
+              id="html-header-basic-with-megamenu-input-dmdnz1u7o"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              type="search"
+              name="q"
+              value=""
+            /><button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-icon--size-2 usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                aria-label="Search"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+        </section>
+      </div>
     </nav>
   </div>
 </header>
 
-<h3 class="site-preview-heading">Extended header</h3>
-<div class="usa-overlay"></div>
+<h3 class="site-preview-heading">Extended</h3>
 <header class="usa-header usx-header usa-header--extended">
   <div class="usa-navbar">
     <div class="usa-logo usx-logo">
       <em class="usa-logo__text"
-        ><a href="/" class="usx-logo__title">&lt;Project title&gt;</a></em
+        ><img
+          src="/symbol-only.svg"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant"
+        /><img
+          src="/white_symbol-only.png"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        /><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
       >
     </div>
-    <button type="button" class="usa-menu-btn">Menu</button>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg
+        class="usa-icon usa-icon--size-3"
+        aria-hidden="true"
+        aria-label="menu icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#menu"></use>
+      </svg>
+    </button>
   </div>
+</header>
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg
+        class="usa-icon usa-icon--size-2"
+        aria-hidden="true"
+        aria-label="close icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-extended-header-extended-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+        <ul
+          id="html-header-extended-header-extended-nav-section-0"
+          class="usa-nav__submenu"
+          hidden=""
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkA" aria-label="Link A"><span>Link A</span></a>
+          </li>
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkB" aria-label="Link B"><span>Link B</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-extended-header-extended-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+        <ul
+          id="html-header-extended-header-extended-nav-section-1"
+          class="usa-nav__submenu"
+          hidden=""
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkC" aria-label="Link C"><span>Link C</span></a>
+          </li>
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkD" aria-label="Link D"><span>Link D</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+          ><span>Section 3</span></a
+        >
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links">
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary1" aria-label="Secondary Link 1"
+            ><span>Secondary Link 1</span></a
+          >
+        </li>
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary2" aria-label="Secondary Link 2"
+            ><span>Secondary Link 2</span></a
+          >
+        </li>
+      </ul>
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="html-header-extended-undefined-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+          >
+            <label
+              class="usa-label usx-label usa-sr-only"
+              for="html-header-extended-input-fn5vhk2fo"
+              >Search</label
+            ><input
+              id="html-header-extended-input-fn5vhk2fo"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              type="search"
+              name="q"
+              value=""
+            /><button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-icon--size-2 usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                aria-label="Search"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Border Roles</h3>
+<div
+  style="
+    --usx-header-border-top: 3px solid #005ea2;
+    --usx-header-border-bottom: 4px solid #237a3b;
+    --usx-header-border-separator: 2px dashed #a72f10;
+    --usx-header-border-bottom-mobile: 5px solid #8a3575;
+    --usx-header-nav-border-bottom-mobile: 6px solid #d1980b;
+    --usx-header-nav-item-border: 3px dashed #e41d3d;
+  "
+>
+  <header class="usa-header usx-header usa-header--extended">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text"
+          ><img
+            src="/symbol-only.svg"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant"
+          /><img
+            src="/white_symbol-only.png"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+          /><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
+        >
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg
+          class="usa-icon usa-icon--size-3"
+          aria-hidden="true"
+          aria-label="menu icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+  </header>
   <nav aria-label="Primary navigation" class="usa-nav usx-nav">
     <div class="usa-nav__inner">
       <button type="button" class="usa-nav__close">
-        <img src="/img/usa-icons/close.svg" role="img" alt="Close" />
+        <svg
+          class="usa-icon usa-icon--size-2"
+          aria-hidden="true"
+          aria-label="close icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#close"></use>
+        </svg>
       </button>
       <ul class="usa-nav__primary usa-accordion">
         <li class="usa-nav__primary-item">
           <button
             type="button"
-            class="usa-accordion__button usa-nav__link usa-current"
+            class="usa-accordion__button usa-nav__link"
             aria-expanded="false"
-            aria-controls="extended-nav-section-one"
+            aria-controls="html-header-border-roles-header-border-roles-nav-section-0"
           >
-            <span>&lt;Current section&gt;</span>
+            <span>Section 1</span>
           </button>
-          <ul id="extended-nav-section-one" class="usa-nav__submenu" hidden="hidden">
+          <ul
+            id="html-header-border-roles-header-border-roles-nav-section-0"
+            class="usa-nav__submenu"
+            hidden=""
+          >
             <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
+              <a href="https://example.com/linkA" aria-label="Link A"><span>Link A</span></a>
             </li>
             <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
-            </li>
-            <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
-            </li>
-            <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
+              <a href="https://example.com/linkB" aria-label="Link B"><span>Link B</span></a>
             </li>
           </ul>
         </li>
@@ -347,477 +1234,1532 @@
             type="button"
             class="usa-accordion__button usa-nav__link"
             aria-expanded="false"
-            aria-controls="extended-nav-section-two"
+            aria-controls="html-header-border-roles-header-border-roles-nav-section-1"
           >
-            <span>&lt;Section&gt;</span>
+            <span>Section 2</span>
           </button>
-          <ul id="extended-nav-section-two" class="usa-nav__submenu" hidden="hidden">
+          <ul
+            id="html-header-border-roles-header-border-roles-nav-section-1"
+            class="usa-nav__submenu"
+            hidden=""
+          >
             <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
+              <a href="https://example.com/linkC" aria-label="Link C"><span>Link C</span></a>
             </li>
             <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
-            </li>
-            <li class="usa-nav__submenu-item">
-              <a href="javascript:void(0);"
-                ><span>&lt;Navigation link&gt;</span></a
-              >
+              <a href="https://example.com/linkD" aria-label="Link D"><span>Link D</span></a>
             </li>
           </ul>
         </li>
         <li class="usa-nav__primary-item">
-          <a href="javascript:void(0);" class="usa-nav-link"
-            ><span>&lt;Simple link&gt;</span></a
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+            ><span>Section 3</span></a
           >
         </li>
       </ul>
       <div class="usa-nav__secondary">
         <ul class="usa-nav__secondary-links">
           <li class="usa-nav__secondary-item">
-            <a href="javascript:void(0);">
-              <span>Secondary link</span>
-            </a>
+            <a href="https://example.com/secondary1" aria-label="Secondary Link 1"
+              ><span>Secondary Link 1</span></a
+            >
           </li>
           <li class="usa-nav__secondary-item">
-            <a href="javascript:void(0);">
-              <span>Secondary link</span>
-            </a>
+            <a href="https://example.com/secondary2" aria-label="Secondary Link 2"
+              ><span>Secondary Link 2</span></a
+            >
           </li>
         </ul>
-        <section aria-label="Search component">
-          <form class="usa-search usa-search--small" role="search">
-            <label class="usa-sr-only" for="search-field">Search</label>
-            <input
-              class="usa-input"
-              id="search-field"
-              type="search"
-              name="search"
-            />
-            <button class="usa-button" type="submit">
-              <img
-                src="/img/usa-icons-bg/search--white.svg"
-                class="usa-search__submit-icon"
-                alt="Search"
-              />
-            </button>
-          </form>
-        </section>
+        <div class="usx-nav__utility">
+          <section aria-label="Header search">
+            <form
+              id="html-header-border-roles-undefined-form"
+              class="usa-search usa-search--small"
+              method="get"
+              role="search"
+              action="https://www.google.com/search"
+            >
+              <label
+                class="usa-label usx-label usa-sr-only"
+                for="html-header-border-roles-input-6jcxt1n2z"
+                >Search</label
+              ><input
+                id="html-header-border-roles-input-6jcxt1n2z"
+                class="usa-input usx-input"
+                placeholder="Search..."
+                type="search"
+                name="q"
+                value=""
+              /><button type="submit" class="usa-button usx-button usa-button--primary">
+                <svg
+                  class="usa-icon usa-icon--size-2 usa-search__submit-icon display-inline-block"
+                  aria-hidden="true"
+                  aria-label="Search"
+                  focusable="false"
+                  role="img"
+                >
+                  <use href="/img/sprite.svg#search"></use>
+                </svg>
+              </button>
+            </form>
+          </section>
+        </div>
       </div>
     </div>
   </nav>
-</header>
+</div>
 
-<h3 class="site-preview-heading">Basic header with megamenu</h3>
-<div class="usa-overlay"></div>
+<h3 class="site-preview-heading">Extended With Megamenu</h3>
 <header class="usa-header usx-header usa-header--extended">
   <div class="usa-navbar">
     <div class="usa-logo usx-logo">
       <em class="usa-logo__text"
-        ><a href="/" class="usx-logo__title">&lt;Project title&gt;</a></em
+        ><img
+          src="/symbol-only.svg"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant"
+        /><img
+          src="/white_symbol-only.png"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        /><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
       >
     </div>
-    <button type="button" class="usa-menu-btn">Menu</button>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg
+        class="usa-icon usa-icon--size-3"
+        aria-hidden="true"
+        aria-label="menu icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#menu"></use>
+      </svg>
+    </button>
   </div>
-  <nav aria-label="Primary navigation" class="usa-nav usx-nav">
-    <div class="usa-nav__inner">
+</header>
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg
+        class="usa-icon usa-icon--size-2"
+        aria-hidden="true"
+        aria-label="close icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-extended-with-megamenu-header-extended-megamenu-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+        <div
+          id="html-header-extended-with-megamenu-header-extended-megamenu-nav-section-0"
+          class="usa-nav__submenu usa-megamenu"
+          hidden=""
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkA" aria-label="Link A">Link A</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkB" aria-label="Link B">Link B</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-extended-with-megamenu-header-extended-megamenu-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+        <div
+          id="html-header-extended-with-megamenu-header-extended-megamenu-nav-section-1"
+          class="usa-nav__submenu usa-megamenu"
+          hidden=""
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkC" aria-label="Link C">Link C</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkD" aria-label="Link D">Link D</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+          ><span>Section 3</span></a
+        >
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links">
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary1" aria-label="Secondary Link 1"
+            ><span>Secondary Link 1</span></a
+          >
+        </li>
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary2" aria-label="Secondary Link 2"
+            ><span>Secondary Link 2</span></a
+          >
+        </li>
+      </ul>
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="html-header-extended-with-megamenu-undefined-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+          >
+            <label
+              class="usa-label usx-label usa-sr-only"
+              for="html-header-extended-with-megamenu-input-eqdumftg1"
+              >Search</label
+            ><input
+              id="html-header-extended-with-megamenu-input-eqdumftg1"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              type="search"
+              name="q"
+              value=""
+            /><button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-icon--size-2 usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                aria-label="Search"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">With Menu Icon</h3>
+<header class="usa-header usx-header usa-header--basic">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text"
+          ><img
+            src="/symbol-only.svg"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant"
+          /><img
+            src="/white_symbol-only.png"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+          /><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
+        >
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg
+          class="usa-icon usa-icon--size-3"
+          aria-hidden="true"
+          aria-label="menu icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
       <button type="button" class="usa-nav__close">
-        <img src="/img/usa-icons/close.svg" role="img" alt="Close" />
+        <svg
+          class="usa-icon usa-icon--size-2"
+          aria-hidden="true"
+          aria-label="close icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#close"></use>
+        </svg>
       </button>
       <ul class="usa-nav__primary usa-accordion">
         <li class="usa-nav__primary-item">
           <button
             type="button"
-            class="usa-accordion__button usa-nav__link usa-current"
+            class="usa-accordion__button usa-nav__link"
             aria-expanded="false"
-            aria-controls="extended-mega-nav-section-one"
+            aria-controls="html-header-with-menu-icon-header-menu-icon-nav-section-0"
           >
-            <span>&lt;Current section&gt;</span>
+            <span>Section 1</span>
           </button>
-          <div
-            id="extended-mega-nav-section-one"
-            class="usa-nav__submenu usa-megamenu"
-            hidden="hidden"
+          <ul
+            id="html-header-with-menu-icon-header-menu-icon-nav-section-0"
+            class="usa-nav__submenu"
+            hidden=""
           >
-            <div class="grid-row grid-gap-4">
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);"
-                      >&lt;A very long navigation link that goes onto two
-                      lines&gt;</a
-                    >
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A"><span>Link A</span></a>
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B"><span>Link B</span></a>
+            </li>
+          </ul>
         </li>
         <li class="usa-nav__primary-item">
           <button
             type="button"
             class="usa-accordion__button usa-nav__link"
             aria-expanded="false"
-            aria-controls="extended-mega-nav-section-two"
+            aria-controls="html-header-with-menu-icon-header-menu-icon-nav-section-1"
           >
-            <span>&lt;Section&gt;</span>
+            <span>Section 2</span>
           </button>
-          <div
-            id="extended-mega-nav-section-two"
-            class="usa-nav__submenu usa-megamenu"
-            hidden="hidden"
+          <ul
+            id="html-header-with-menu-icon-header-menu-icon-nav-section-1"
+            class="usa-nav__submenu"
+            hidden=""
           >
-            <div class="grid-row grid-gap-4">
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);"
-                      >&lt;A very long navigation link that goes onto two
-                      lines&gt;</a
-                    >
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C"><span>Link C</span></a>
+            </li>
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D"><span>Link D</span></a>
+            </li>
+          </ul>
         </li>
         <li class="usa-nav__primary-item">
-          <a href="javascript:void(0);" class="usa-nav-link"
-            >&lt;Simple link&gt;</a
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+            ><span>Section 3</span></a
           >
         </li>
       </ul>
-      <div class="usa-nav__secondary">
-        <ul class="usa-nav__secondary-links">
-          <li class="usa-nav__secondary-item">
-            <a href="javascript:void(0);">
-              <span>Secondary link</span>
-            </a>
-          </li>
-          <li class="usa-nav__secondary-item">
-            <a href="javascript:void(0);">
-              <span>Secondary link</span>
-            </a>
-          </li>
-        </ul>
-        <section aria-label="Search component">
-          <form class="usa-search usa-search--small" role="search">
-            <label class="usa-sr-only" for="search-field">Search</label>
-            <input
-              class="usa-input"
-              id="search-field"
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="html-header-with-menu-icon-undefined-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+          >
+            <label
+              class="usa-label usx-label usa-sr-only"
+              for="html-header-with-menu-icon-input-17u9aozyv"
+              >Search</label
+            ><input
+              id="html-header-with-menu-icon-input-17u9aozyv"
+              class="usa-input usx-input"
+              placeholder="Search..."
               type="search"
-              name="search"
-            />
-            <button class="usa-button" type="submit">
-              <img
-                src="/img/usa-icons-bg/search--white.svg"
-                class="usa-search__submit-icon"
-                alt="Search"
-              />
+              name="q"
+              value=""
+            /><button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-icon--size-2 usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                aria-label="Search"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#search"></use>
+              </svg>
             </button>
           </form>
         </section>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
 </header>
 
+<h3 class="site-preview-heading">Minimal</h3>
+<header class="usa-header usx-header usa-header--basic">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text"><a href="/" class="usx-logo__title">Simple Site</a></em>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">Menu</button>
+    </div>
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg
+          class="usa-icon usa-icon--size-2"
+          aria-hidden="true"
+          aria-label="close icon"
+          focusable="false"
+          role="img"
+        >
+          <use href="/img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <a href="/" class="usa-nav__link"><span>Home</span></a>
+        </li>
+        <li class="usa-nav__primary-item">
+          <a href="/about" class="usa-nav__link"><span>About</span></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-<h3 class="site-preview-heading">Colored background w/ Logo</h3>
-<div class="usa-overlay"></div>
-<header class="usa-header usx-header usa-header--extended">
-  <div class="usa-navbar bg-primary-lighter">
+<h3 class="site-preview-heading">Maximal</h3>
+<header class="usa-header usx-header usa-header--extended bg-primary-lighter">
+  <div class="usa-navbar">
     <div class="usa-logo usx-logo">
-      <a href="/" class="usx-image usx-logo__image">
-        <img src="placeholder_logo.png" alt="Project Title" />
-      </a>
+      <em class="usa-logo__text"
+        ><img
+          src="/symbol-only.svg"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant"
+        /><img
+          src="/white_symbol-only.png"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        /><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
+      >
     </div>
-    <button type="button" class="usa-menu-btn">Menu</button>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg
+        class="usa-icon usa-icon--size-3"
+        aria-hidden="true"
+        aria-label="menu icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#menu"></use>
+      </svg>
+    </button>
   </div>
-  <nav aria-label="Primary navigation" class="usa-nav usx-nav">
-    <div class="usa-nav__inner">
-      <button type="button" class="usa-nav__close">
-        <img src="/img/usa-icons/close.svg" role="img" alt="Close" />
-      </button>
-      <ul class="usa-nav__primary usa-accordion">
-        <li class="usa-nav__primary-item">
-          <button
-            type="button"
-            class="usa-accordion__button usa-nav__link usa-current"
-            aria-expanded="false"
-            aria-controls="extended-mega-nav-section-one"
-          >
-            <span>&lt;Current section&gt;</span>
-          </button>
-          <div
-            id="extended-mega-nav-section-one"
-            class="usa-nav__submenu usa-megamenu"
-            hidden="hidden"
-          >
-            <div class="grid-row grid-gap-4">
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);"
-                      >&lt;A very long navigation link that goes onto two
-                      lines&gt;</a
-                    >
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
+</header>
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg
+        class="usa-icon usa-icon--size-2"
+        aria-hidden="true"
+        aria-label="close icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-maximal-header-maximal-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+        <div
+          id="html-header-maximal-header-maximal-nav-section-0"
+          class="usa-nav__submenu usa-megamenu"
+          hidden=""
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1">Link 1</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2">Link 2</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3">Link 3</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4">Link 4</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5">Link 5</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6">Link 6</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7">Link 7</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8">Link 8</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9">Link 9</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10">Link 10</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11">Link 11</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12">Link 12</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13">Link 13</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14">Link 14</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15">Link 15</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16">Link 16</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17">Link 17</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18">Link 18</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19">Link 19</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20">Link 20</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21">Link 21</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22">Link 22</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23">Link 23</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24">Link 24</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25">Link 25</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26">Link 26</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27">Link 27</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28">Link 28</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29">Link 29</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30">Link 30</a>
+                </li>
+              </ul>
             </div>
           </div>
-        </li>
-        <li class="usa-nav__primary-item">
-          <button
-            type="button"
-            class="usa-accordion__button usa-nav__link"
-            aria-expanded="false"
-            aria-controls="extended-mega-nav-section-two"
-          >
-            <span>&lt;Section&gt;</span>
-          </button>
-          <div
-            id="extended-mega-nav-section-two"
-            class="usa-nav__submenu usa-megamenu"
-            hidden="hidden"
-          >
-            <div class="grid-row grid-gap-4">
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);"
-                      >&lt;A very long navigation link that goes onto two
-                      lines&gt;</a
-                    >
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="usa-col">
-                <ul class="usa-nav__submenu-list">
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                  <li class="usa-nav__submenu-item">
-                    <a href="javascript:void(0);">&lt;Navigation link&gt;</a>
-                  </li>
-                </ul>
-              </div>
+        </div>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-maximal-header-maximal-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+        <div
+          id="html-header-maximal-header-maximal-nav-section-1"
+          class="usa-nav__submenu usa-megamenu"
+          hidden=""
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1">Link 1</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2">Link 2</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3">Link 3</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4">Link 4</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5">Link 5</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6">Link 6</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7">Link 7</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8">Link 8</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9">Link 9</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10">Link 10</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11">Link 11</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12">Link 12</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13">Link 13</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14">Link 14</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15">Link 15</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16">Link 16</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17">Link 17</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18">Link 18</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19">Link 19</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20">Link 20</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21">Link 21</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22">Link 22</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23">Link 23</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24">Link 24</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25">Link 25</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26">Link 26</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27">Link 27</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28">Link 28</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29">Link 29</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30">Link 30</a>
+                </li>
+              </ul>
             </div>
           </div>
+        </div>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-maximal-header-maximal-nav-section-2"
+        >
+          <span>Section 3</span>
+        </button>
+        <div
+          id="html-header-maximal-header-maximal-nav-section-2"
+          class="usa-nav__submenu usa-megamenu"
+          hidden=""
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1">Link 1</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2">Link 2</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3">Link 3</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4">Link 4</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5">Link 5</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6">Link 6</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7">Link 7</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8">Link 8</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9">Link 9</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10">Link 10</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11">Link 11</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12">Link 12</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13">Link 13</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14">Link 14</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15">Link 15</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16">Link 16</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17">Link 17</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18">Link 18</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19">Link 19</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20">Link 20</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21">Link 21</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22">Link 22</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23">Link 23</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24">Link 24</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25">Link 25</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26">Link 26</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27">Link 27</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28">Link 28</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29">Link 29</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30">Link 30</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-maximal-header-maximal-nav-section-3"
+        >
+          <span>Section 4</span>
+        </button>
+        <div
+          id="html-header-maximal-header-maximal-nav-section-3"
+          class="usa-nav__submenu usa-megamenu"
+          hidden=""
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1">Link 1</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2">Link 2</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3">Link 3</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4">Link 4</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5">Link 5</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6">Link 6</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7">Link 7</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8">Link 8</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9">Link 9</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10">Link 10</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11">Link 11</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12">Link 12</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13">Link 13</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14">Link 14</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15">Link 15</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16">Link 16</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17">Link 17</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18">Link 18</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19">Link 19</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20">Link 20</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21">Link 21</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22">Link 22</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23">Link 23</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24">Link 24</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25">Link 25</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26">Link 26</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27">Link 27</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28">Link 28</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29">Link 29</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30">Link 30</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-maximal-header-maximal-nav-section-4"
+        >
+          <span>Section 5</span>
+        </button>
+        <div
+          id="html-header-maximal-header-maximal-nav-section-4"
+          class="usa-nav__submenu usa-megamenu"
+          hidden=""
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1">Link 1</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2">Link 2</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3">Link 3</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4">Link 4</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5">Link 5</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6">Link 6</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7">Link 7</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8">Link 8</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9">Link 9</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10">Link 10</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11">Link 11</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12">Link 12</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13">Link 13</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14">Link 14</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15">Link 15</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16">Link 16</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17">Link 17</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18">Link 18</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19">Link 19</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20">Link 20</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21">Link 21</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22">Link 22</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23">Link 23</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24">Link 24</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25">Link 25</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26">Link 26</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27">Link 27</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28">Link 28</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29">Link 29</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30">Link 30</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-maximal-header-maximal-nav-section-5"
+        >
+          <span>Section 6</span>
+        </button>
+        <div
+          id="html-header-maximal-header-maximal-nav-section-5"
+          class="usa-nav__submenu usa-megamenu"
+          hidden=""
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1">Link 1</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2">Link 2</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3">Link 3</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4">Link 4</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5">Link 5</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6">Link 6</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7">Link 7</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8">Link 8</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9">Link 9</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10">Link 10</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11">Link 11</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12">Link 12</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13">Link 13</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14">Link 14</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15">Link 15</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16">Link 16</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17">Link 17</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18">Link 18</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19">Link 19</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20">Link 20</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21">Link 21</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22">Link 22</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23">Link 23</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24">Link 24</a>
+                </li>
+              </ul>
+            </div>
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25">Link 25</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26">Link 26</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27">Link 27</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28">Link 28</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29">Link 29</a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30">Link 30</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section7" class="usa-nav__link"><span>Section 7</span></a>
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links">
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary1" aria-label="Secondary Link 1"
+            ><span>Secondary Link 1</span></a
+          >
         </li>
-        <li class="usa-nav__primary-item">
-          <a href="javascript:void(0);" class="usa-nav-link"
-            >&lt;Simple link&gt;</a
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary2" aria-label="Secondary Link 2"
+            ><span>Secondary Link 2</span></a
           >
         </li>
       </ul>
-      <div class="usa-nav__secondary">
-        <ul class="usa-nav__secondary-links">
-          <li class="usa-nav__secondary-item">
-            <a href="javascript:void(0);">
-              <span>Secondary link</span>
-            </a>
-          </li>
-          <li class="usa-nav__secondary-item">
-            <a href="javascript:void(0);">
-              <span>Secondary link</span>
-            </a>
-          </li>
-        </ul>
-        <section aria-label="Search component">
-          <form class="usa-search usa-search--small" role="search">
-            <label class="usa-sr-only" for="search-field">Search</label>
-            <input
-              class="usa-input"
-              id="search-field"
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="html-header-maximal-undefined-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+          >
+            <label class="usa-label usx-label usa-sr-only" for="html-header-maximal-input-6aw6h1sis"
+              >Search</label
+            ><input
+              id="html-header-maximal-input-6aw6h1sis"
+              class="usa-input usx-input"
+              placeholder="Search..."
               type="search"
-              name="search"
-            />
-            <button class="usa-button" type="submit">
-              <img
-                src="/img/usa-icons-bg/search--white.svg"
-                class="usa-search__submit-icon"
-                alt="Search"
-              />
+              name="q"
+              value=""
+            /><button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-icon--size-2 usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                aria-label="Search"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#search"></use>
+              </svg>
             </button>
           </form>
         </section>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">External Links</h3>
+<header class="usa-header usx-header usa-header--extended">
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <em class="usa-logo__text"
+        ><img
+          src="/symbol-only.svg"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant"
+        /><img
+          src="/white_symbol-only.png"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        /><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
+      >
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg
+        class="usa-icon usa-icon--size-3"
+        aria-hidden="true"
+        aria-label="menu icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
 </header>
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg
+        class="usa-icon usa-icon--size-2"
+        aria-hidden="true"
+        aria-label="close icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <a
+          href="https://example.com/section-external"
+          class="usa-nav__link"
+          aria-label="External Section"
+          ><span>External Section</span><span class="usa-sr-only">External.</span
+          ><svg
+            class="usa-icon usx-icon--size-1 margin-left-05"
+            aria-hidden="true"
+            aria-label="launch icon"
+            focusable="false"
+            role="img"
+          >
+            <use href="/img/sprite.svg#launch"></use></svg
+        ></a>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-external-links-header-external-links-nav-section-1"
+        >
+          <span>Section With Links</span>
+        </button>
+        <ul
+          id="html-header-external-links-header-external-links-nav-section-1"
+          class="usa-nav__submenu"
+          hidden=""
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkA" aria-label="External Link A"
+              ><span>External Link A</span><span class="usa-sr-only">External.</span
+              ><svg
+                class="usa-icon usx-icon--size-1 margin-left-05"
+                aria-hidden="true"
+                aria-label="launch icon"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#launch"></use></svg
+            ></a>
+          </li>
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkB" aria-label="External Link B"
+              ><span>External Link B</span><span class="usa-sr-only">External.</span
+              ><svg
+                class="usa-icon usx-icon--size-1 margin-left-05"
+                aria-hidden="true"
+                aria-label="launch icon"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#launch"></use></svg
+            ></a>
+          </li>
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkC" aria-label="External Link C"
+              ><span>External Link C</span><span class="usa-sr-only">External.</span
+              ><svg
+                class="usa-icon usx-icon--size-1 margin-left-05"
+                aria-hidden="true"
+                aria-label="launch icon"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#launch"></use></svg
+            ></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links">
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary1" aria-label="Secondary External 1"
+            ><span>Secondary External 1</span><span class="usa-sr-only">External.</span
+            ><svg
+              class="usa-icon usx-icon--size-1 margin-left-05"
+              aria-hidden="true"
+              aria-label="launch icon"
+              focusable="false"
+              role="img"
+            >
+              <use href="/img/sprite.svg#launch"></use></svg
+          ></a>
+        </li>
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary2" aria-label="Secondary External 2"
+            ><span>Secondary External 2</span><span class="usa-sr-only">External.</span
+            ><svg
+              class="usa-icon usx-icon--size-1 margin-left-05"
+              aria-hidden="true"
+              aria-label="launch icon"
+              focusable="false"
+              role="img"
+            >
+              <use href="/img/sprite.svg#launch"></use></svg
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Extensibility Slots</h3>
+<header class="usa-header usx-header usa-header--extended">
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <em class="usa-logo__text"
+        ><img
+          src="/symbol-only.svg"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant"
+        /><img
+          src="/white_symbol-only.png"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        /><a href="https://example.com" class="usx-logo__title">Agency Name</a></em
+      >
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg
+        class="usa-icon usa-icon--size-3"
+        aria-hidden="true"
+        aria-label="menu icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg
+        class="usa-icon usa-icon--size-2"
+        aria-hidden="true"
+        aria-label="close icon"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-extensibility-slots-header-extensibility-slots-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+        <ul
+          id="html-header-extensibility-slots-header-extensibility-slots-nav-section-0"
+          class="usa-nav__submenu"
+          hidden=""
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkA" aria-label="Link A"><span>Link A</span></a>
+          </li>
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkB" aria-label="Link B"><span>Link B</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="html-header-extensibility-slots-header-extensibility-slots-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+        <ul
+          id="html-header-extensibility-slots-header-extensibility-slots-nav-section-1"
+          class="usa-nav__submenu"
+          hidden=""
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkC" aria-label="Link C"><span>Link C</span></a>
+          </li>
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkD" aria-label="Link D"><span>Link D</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3"
+          ><span>Section 3</span></a
+        >
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links">
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary1" aria-label="Secondary Link 1"
+            ><span>Secondary Link 1</span></a
+          >
+        </li>
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary2" aria-label="Secondary Link 2"
+            ><span>Secondary Link 2</span></a
+          >
+        </li>
+      </ul>
+      <div class="usx-nav__utility">
+        <a
+          class="usa-button usx-button usa-button--primary usx-button--ghost margin-right-0"
+          href="https://example.com/sign-in"
+          >Sign In</a
+        >
+      </div>
+    </div>
+    <div class="usx-nav__end-slot">
+      <div class="usx-theme-picker">
+        <button
+          type="button"
+          class="usa-button usx-button usx-button--ghost text-muted usx-theme-picker__trigger"
+          aria-label="Theme"
+        >
+          <svg
+            class="usa-icon usx-theme-picker__icon"
+            aria-hidden="true"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

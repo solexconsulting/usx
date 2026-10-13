@@ -1,8 +1,7 @@
 import React from 'react';
 import RangeSlider from '../../../../usx-react/src/components/range-slider/RangeSlider.tsx';
 import config from '../../../../usx-react/src/components/range-slider/config.json';
-import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
-import range from '@uswds/uswds/js/usa-range';
+import { buildArgTypes, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -87,16 +86,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // Ensure USWDS JS is initialized for the story
-      React.useEffect(() => {
-        range.init();
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('range')]
 };
 
 export const Default = { args: storyDefs.Default };

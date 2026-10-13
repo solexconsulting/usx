@@ -3,7 +3,7 @@
 /* stylelint-disable selector-class-pattern, selector-not-notation, no-descending-specificity -- Public USX classes use BEM naming; preserve original :not() specificity and cascade order. */
 .usx-link,
 .usx-prose a:not(.usa-button) {
-  display: inline-flex;
+  display: inline;
   width: max-content;
 
   &:not([class^="text-"]):not([class*=" text-"]) {

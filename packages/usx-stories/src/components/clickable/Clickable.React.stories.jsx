@@ -71,7 +71,7 @@ export const SingleClickable = {
 export const MultipleClickables = {
   args: storyDefs.MultipleClickableCard,
   render: (args) => (
-    <div className="grid-row grid-gap-6 bg-base-lighter padding-2">
+    <div className="grid-row grid-gap-6 bg-surface-2 padding-2">
       {[1, 2, 3].map((n) => (
         <div key={n} className="grid-col-12 display-flex flex-justify-center tablet:grid-col-4">
           <Clickable {...args}>
@@ -87,7 +87,7 @@ export const MultipleClickables = {
 export const WithColorChange = {
   args: storyDefs.WithColorChange,
   render: (args) => (
-    <div className="grid-row grid-gap-6 bg-base-lighter padding-2">
+    <div className="grid-row grid-gap-6 bg-surface-2 padding-2">
       <div className="grid-col-12 display-flex flex-justify-center tablet:grid-col-4">
         <Clickable {...args}>
           <Clickable.ColorChange>

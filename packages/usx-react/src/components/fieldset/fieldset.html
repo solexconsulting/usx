@@ -1,17 +1,43 @@
 <h3 class="site-preview-heading">Default</h3>
 <fieldset class="usa-fieldset usx-fieldset">
-  <legend class="usa-legend usx-legend">Fieldset legend</legend>
+  <legend class="usa-legend usx-legend">Fieldset Legend</legend>
   <label class="usa-checkbox__label">Hello world</label>
 </fieldset>
 
-<h3 class="site-preview-heading">With additional class</h3>
+<h3 class="site-preview-heading">No Legend</h3>
+<fieldset class="usa-fieldset usx-fieldset">
+  <label class="usa-checkbox__label">Hello world</label>
+</fieldset>
+
+<h3 class="site-preview-heading">Required Legend</h3>
+<fieldset class="usa-fieldset usx-fieldset">
+  <legend class="usa-legend usx-legend">
+    <abbr title="Required" class="usx-required">*</abbr> Required Fieldset
+  </legend>
+  <label class="usa-checkbox__label">Hello world</label>
+</fieldset>
+
+<h3 class="site-preview-heading">With Custom Class</h3>
 <fieldset class="usa-fieldset usx-fieldset border-1px border-base padding-2">
-  <legend class="usa-legend usx-legend">Fieldset legend</legend>
+  <legend class="usa-legend usx-legend">Custom Class Fieldset</legend>
+  <label class="usa-checkbox__label">Hello world</label>
+</fieldset>
+
+<h3 class="site-preview-heading">Large Legend</h3>
+<fieldset class="usa-fieldset usx-fieldset">
+  <legend class="usa-legend usx-legend usa-legend--large">Large Legend Fieldset</legend>
   <label class="usa-checkbox__label">Hello world</label>
 </fieldset>
 
 <h3 class="site-preview-heading">Disabled</h3>
-<fieldset class="usa-fieldset usx-fieldset" disabled>
-  <legend class="usa-legend usx-legend">Fieldset legend</legend>
-  <label class="usa-checkbox__label">Hello world</label>
+<fieldset class="usa-fieldset usx-fieldset" disabled="">
+  <legend class="usa-legend usx-legend">Disabled Fieldset</legend>
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="html-fieldset-disabled-lonely-input">Lonely input</label
+    ><input
+      id="html-fieldset-disabled-lonely-input"
+      class="usa-input usx-input"
+      placeholder="Type here..."
+    />
+  </div>
 </fieldset>

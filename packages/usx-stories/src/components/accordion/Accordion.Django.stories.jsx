@@ -1,12 +1,13 @@
 // import React from 'react';
 import config from '../../../../usx-react/src/components/accordion/config.json';
-import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, componentInit } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Accordion.React.stories.jsx';
 
 export default {
   title: 'Django/USWDS/Accordion',
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
+  decorators: [...componentInit('accordion')],
 };
 
 const createStory = createDjangoStory({ componentName: 'accordion' });

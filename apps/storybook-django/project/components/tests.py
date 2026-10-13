@@ -304,21 +304,63 @@ class ReactParityTests(SimpleTestCase):
                     props['showCarouselDots'] = show_dots
                 html = render_component('card', props)
                 self.assertEqual(RenderedElements(html).attributes('div')['id'], 'gallery')
-                self.assertIn('id="gallery-carousel-slide-1"', html)
-                if show_dots is not False:
-                    self.assertIn('href="#gallery-carousel-slide-1"', html)
+                self.assertIn('aria-label="1 of 2"', html)
+                self.assertEqual(html.count('class="usx-carousel__slide"'), 2)
                 self.assertIn('usx-carousel usx-card__carousel', html)
                 elements = RenderedElements(html)
                 carousel = next(attrs for _, attrs in elements.elements if 'usx-carousel' in attrs.get('class', '').split())
                 viewport = next(attrs for _, attrs in elements.elements if 'usx-carousel__viewport' in attrs.get('class', '').split())
-                self.assertEqual(carousel['role'], 'region')
+                self.assertEqual(carousel['role'], 'group')
                 self.assertEqual(carousel['aria-roledescription'], 'carousel')
                 self.assertNotIn('role', viewport)
-                self.assertEqual('usx-carousel__dots' in html, show_dots is not False)
+                self.assertEqual('data-show-dots="false"' in html, show_dots is False)
+                self.assertNotIn('usx-carousel__dots', html)
+                self.assertNotIn('usx-carousel__button', html)
+                self.assertNotIn('usx-carousel__status', html)
+                self.assertNotIn('aria-hidden="true" inert', html)
                 self.assertIn('usx-object-fit-contain', html)
                 self.assertIn('usx-image--rounded', html)
                 self.assertIn('max-height: 100px', html)
-                self.assertInHTML('<figcaption class="usx-image--caption usa-sr-only" aria-hidden="true">Caption</figcaption>', html)
+                self.assertInHTML('<figcaption class="usx-image--caption usa-sr-only">Caption</figcaption>', html)
+
+    def test_carousel_base_markup(self):
+        html = render_component('carousel', {'slides': [
+            {'content': '<a href="/first">First</a>'},
+            {'content': '<a href="/second">Second</a>', 'label': 'Second item'},
+        ], 'showDots': False})
+        self.assertIn('aria-label="Second item"', html)
+        self.assertIn('data-show-dots="false"', html)
+        self.assertNotIn('usx-carousel__button', html)
+        self.assertNotIn('usx-carousel__dots', html)
+        self.assertNotIn('aria-hidden="true" inert', html)
+        self.assertIn('data-status-class-name="display-none"', render_component('carousel', {
+            'slides': [{'content': 'First'}, {'content': 'Second'}],
+            'statusClassName': 'display-none',
+        }))
+        self.assertNotIn('usx-carousel__button--previous', render_component('carousel', {
+            'slides': [{'content': 'Only slide'}],
+        }))
+        self.assertIn('aria-label="Card images"', render_component('card', {
+            'imageProps': [{'src': '/first.jpg'}, {'src': '/second.jpg'}],
+        }))
+
+    def test_carousel_children_are_slides(self):
+        children = ['<strong>First</strong>', '<em>Second</em>']
+        props = {'children': children, 'slides': [{'content': 'Ignored slide'}]}
+        for html in (
+            render_component('carousel', props),
+            Template('{% load components %}{% carousel children=children slides=slides %}{% endcarousel %}')
+                .render(Context(props)),
+        ):
+            self.assertEqual(html.count('class="usx-carousel__slide"'), 2)
+            self.assertIn('<strong>First</strong>', html)
+            self.assertIn('<em>Second</em>', html)
+            self.assertNotIn('Ignored slide', html)
+            self.assertNotIn('usx-carousel__status', html)
+
+        single = render_component('carousel', {'children': '<strong>Only</strong>'})
+        self.assertEqual(single.count('class="usx-carousel__slide"'), 1)
+        self.assertNotIn('usx-carousel__button--next', single)
 
     def test_card_actions(self):
         html = render_component('card', {'buttonProps': [

@@ -1,8 +1,7 @@
 import React from 'react';
 import config from '../../../../usx-react/src/components/character-count/config.json';
-import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './CharacterCount.React.stories.jsx';
-import characterCount from "@uswds/uswds/js/usa-character-count";
 import Alert from '../../../../usx-react/src/components/alert/Alert';
 
 export default {
@@ -16,21 +15,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // Ensure USWDS JS is initialized for the story
-      React.useEffect(() => {
-        const timeout = setTimeout(() => {
-          characterCount.init();
-        }, 200);
-        return () => {
-          clearTimeout(timeout);
-        };
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('characterCount')]
 };
 
 const createStory = createDjangoStory({ componentName: 'character-count' });

@@ -2,8 +2,7 @@
 import React from 'react';
 import CharacterCount from '../../../../usx-react/src/components/character-count/CharacterCount.tsx';
 import config from '../../../../usx-react/src/components/character-count/config.json';
-import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
-import characterCount from "@uswds/uswds/js/usa-character-count";
+import { buildArgTypes, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
 export const storyDefs = {
@@ -52,16 +51,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // Ensure USWDS JS is initialized for the story
-      React.useEffect(() => {
-        characterCount.init();
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('characterCount')]
 };
 
 export const Default = { args: storyDefs.Default };

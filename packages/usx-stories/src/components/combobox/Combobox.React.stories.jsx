@@ -1,8 +1,7 @@
 import React from 'react';
 import Combobox from '../../../../usx-react/src/components/combobox/Combobox.tsx';
 import config from '../../../../usx-react/src/components/combobox/config.json';
-import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
-import combobox from '@uswds/uswds/js/usa-combo-box';
+import { buildArgTypes, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 
 const fruitOptions = [
   { value: '', label: 'Select a fruit' },
@@ -150,15 +149,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      React.useEffect(() => {
-        combobox.init();
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('combobox')]
 };
 
 export const Default = { args: storyDefs.Default };

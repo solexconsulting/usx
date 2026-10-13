@@ -1,62 +1,116 @@
-<form class="usa-form">
-  <div class="usa-form-group usx-form-group">
-    <label class="usa-label" for="options">Dropdown label</label>
-    <select class="usa-select usx-select" name="options" id="options">
-      <option value>- Select -</option>
-      <option value="value1">Option A</option>
-      <option value="value2">Option B</option>
-      <option value="value3">Option C</option>
-    </select>
-  </div>
-</form>
+<h3 class="site-preview-heading">Default</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="html-select-default-select-default">Dropdown label</label
+  ><select id="html-select-default-select-default" class="usa-select usx-select">
+    <option value="">Select an option</option>
+    <option value="option1">Option A</option>
+    <option value="option2">Option B</option>
+    <option value="option3">Option C</option>
+  </select>
+</div>
 
-<form class="usa-form">
-  <div class="usa-form-group usx-form-group usa-form-group--error">
-    <label class="usa-label usa-label--error" for="select-with-error">Dropdown label</label>
-    <span id="select-with-error-hint" class="usa-hint usx-hint">This is a select with an error message.</span>
-    <span id="select-with-error-error" class="usa-error-message usx-error-message" role="alert">Selection error message</span>
-    <select id="select-with-error" class="usa-select usx-select usa-input--error" name="options" aria-describedby="select-with-error-hint select-with-error-error" aria-invalid="true">
-      <option value>- Select -</option>
-      <option value="value1">Option A</option>
-      <option value="value2">Option B</option>
-      <option value="value3">Option C</option>
-    </select>
-  </div>
-</form>
+<h3 class="site-preview-heading">Error State</h3>
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label class="usa-label usx-label usa-label--error" for="html-select-error-state-select-error"
+    >Dropdown label</label
+  ><span class="usa-hint usx-hint" id="html-select-error-state-select-error-hint"
+    >This is a select with an error message.</span
+  ><span
+    class="usa-error-message usx-error-message"
+    role="alert"
+    id="html-select-error-state-select-error-error"
+    >Selection error message</span
+  ><select
+    id="html-select-error-state-select-error"
+    class="usa-select usx-select usa-input--error"
+    aria-describedby="html-select-error-state-select-error-hint html-select-error-state-select-error-error"
+    aria-invalid="true"
+  >
+    <option value="">Select an option</option>
+    <option value="option1">Option A</option>
+    <option value="option2">Option B</option>
+    <option value="option3">Option C</option>
+  </select>
+</div>
 
-<form class="usa-form">
-  <div class="usa-form-group usx-form-group">
-    <label class="usa-label" for="select-with-success">Success state select</label>
-    <select class="usa-select usx-select usa-input--success" name="options" id="select-with-success">
-      <option value>- Select -</option>
-      <option value="value1">Option A</option>
-      <option value="value2">Option B</option>
-      <option value="value3">Option C</option>
-    </select>
-    <span class="usa-success-message">Success message goes here.</span>
-  </div>
-</form>
+<h3 class="site-preview-heading">Success State</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="html-select-success-state-select-success"
+    >Success state select</label
+  ><select
+    id="html-select-success-state-select-success"
+    class="usa-select usx-select usa-input--success"
+  >
+    <option value="">Select an option</option>
+    <option value="option1">Option A</option>
+    <option value="option2">Option B</option>
+    <option value="option3">Option C</option></select
+  ><span class="usa-success-message">Success message goes here.</span>
+</div>
 
-<form class="usa-form">
-  <div class="usa-form-group usx-form-group">
-    <label class="usa-label" for="select-disabled">Disabled select</label>
-    <select class="usa-select usx-select" id="select-disabled" name="options" disabled="disabled">
-      <option value>- Select -</option>
-      <option value="value1">Option A</option>
-      <option value="value2">Option B</option>
-      <option value="value3">Option C</option>
-    </select>
-  </div>
-</form>
+<h3 class="site-preview-heading">Disabled</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="html-select-disabled-select-disabled"
+    >Disabled select</label
+  ><select id="html-select-disabled-select-disabled" class="usa-select usx-select" disabled="">
+    <option value="">Select an option</option>
+    <option value="option1">Option A</option>
+    <option value="option2">Option B</option>
+    <option value="option3">Option C</option>
+  </select>
+</div>
 
-<form class="usa-form">
-  <div class="usa-form-group usx-form-group usa-form-group--error">
-    <label class="usa-label usa-label--error" for="select-disabled-error">Disabled with error</label>
-    <select class="usa-select usx-select usa-input--error" id="select-disabled-error" name="options" disabled="disabled">
-      <option value>- Select -</option>
-      <option value="value1">Option A</option>
-      <option value="value2">Option B</option>
-      <option value="value3">Option C</option>
-    </select>
-  </div>
-</form>
+<h3 class="site-preview-heading">Disabled With Error</h3>
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label
+    class="usa-label usx-label usa-label--error"
+    for="html-select-disabled-with-error-select-disabled-error"
+    >Disabled with error</label
+  ><span
+    class="usa-error-message usx-error-message"
+    role="alert"
+    id="html-select-disabled-with-error-select-disabled-error-error"
+    >This field is disabled due to an error.</span
+  ><select
+    id="html-select-disabled-with-error-select-disabled-error"
+    class="usa-select usx-select usa-input--error"
+    disabled=""
+    aria-describedby="html-select-disabled-with-error-select-disabled-error-error"
+    aria-invalid="true"
+  >
+    <option value="">Select an option</option>
+    <option value="option1">Option A</option>
+    <option value="option2">Option B</option>
+    <option value="option3">Option C</option>
+  </select>
+</div>
+
+<h3 class="site-preview-heading">Default Value</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="html-select-default-value-select-default-value"
+    >Select with default value</label
+  ><select id="html-select-default-value-select-default-value" class="usa-select usx-select">
+    <option value="">Select an option</option>
+    <option value="option1">Option A</option>
+    <option value="option2" selected="">Option B</option>
+    <option value="option3">Option C</option>
+  </select>
+</div>
+
+<h3 class="site-preview-heading">With Hint</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="html-select-with-hint-select-with-hint"
+    >Select with hint</label
+  ><span class="usa-hint usx-hint" id="html-select-with-hint-select-with-hint-hint"
+    >This is a helpful hint for the select.</span
+  ><select
+    id="html-select-with-hint-select-with-hint"
+    class="usa-select usx-select"
+    aria-describedby="html-select-with-hint-select-with-hint-hint"
+  >
+    <option value="">Select an option</option>
+    <option value="option1">Option A</option>
+    <option value="option2">Option B</option>
+    <option value="option3">Option C</option>
+  </select>
+</div>

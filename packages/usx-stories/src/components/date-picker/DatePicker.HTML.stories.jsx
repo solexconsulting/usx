@@ -1,7 +1,6 @@
 import React from 'react';
 import html from '../../../../usx-react/src/components/date-picker/date-picker.html?raw';
-import datePicker from "@uswds/uswds/js/usa-date-picker";
-import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'HTML/USWDS/DatePicker',
@@ -13,16 +12,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // Ensure USWDS JS is initialized for the story
-      React.useEffect(() => {
-        datePicker.init();
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('datePicker')]
 };
 
 export const AllVariants = {

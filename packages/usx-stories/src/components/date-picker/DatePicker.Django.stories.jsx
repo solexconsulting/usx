@@ -1,8 +1,7 @@
 import React from 'react';
 import config from '../../../../usx-react/src/components/date-picker/config.json';
-import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './DatePicker.React.stories.jsx';
-import datePicker from "@uswds/uswds/js/usa-date-picker";
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -17,22 +16,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // Ensure USWDS JS is initialized for the story
-      React.useEffect(() => {
-        // Set a delay because it's struggling
-        const timeout = setTimeout(() => {
-          datePicker.init();
-        }, 400);
-        return () => {
-          clearTimeout(timeout);
-        };
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('datePicker')]
 };
 
 const createStory = createDjangoStory({ componentName: 'date-picker' });

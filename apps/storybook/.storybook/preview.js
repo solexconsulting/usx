@@ -1,4 +1,5 @@
 import React from 'react';
+import '@solexllc/usx/js/start';
 import "@uswds/uswds/css/uswds.min.css";
 // Runtime theme values (:root custom properties) — required because the
 // themed usx build emits bare var(--usx-*) with no fallback.

@@ -1,7 +1,7 @@
 
 import CardGroup from '../../../../usx-react/src/components/card-group/CardGroup.tsx';
 import config from '../../../../usx-react/src/components/card-group/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -20,7 +20,7 @@ const baseCardArgs = {
 const images = {
   imageProps: [
     {
-      src: 'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg',
+      src: 'https://picsum.photos/800/300?random=2',
       alt: 'Placeholder image for card',
       caption: 'This is an image caption.',
       objectFit: 'cover',
@@ -48,6 +48,7 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
   excludeStories: ['storyDefs'],
+  decorators: [...componentInit('carousel')],
 };
 
 export const storyDefs = {

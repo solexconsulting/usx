@@ -1,7 +1,6 @@
 import React from 'react';
 import html from '../../../../usx-react/src/components/file-input/file-input.html?raw';
-import fileInput from '@uswds/uswds/js/usa-file-input';
-import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'HTML/USWDS/FileInput',
@@ -13,16 +12,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // Ensure USWDS JS is initialized for the story
-      React.useEffect(() => {
-        fileInput.init();
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('fileInput')]
 };
 
 export const AllVariants = {

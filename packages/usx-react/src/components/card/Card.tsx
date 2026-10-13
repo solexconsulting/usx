@@ -20,6 +20,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
   showCarouselDots?: boolean;
   children?: React.ReactNode;
   className?: string;
+  containerClassName?: string;
   tag?: React.ElementType;
 }
 
@@ -37,6 +38,7 @@ export default function Card({
   showCarouselDots = true,
   children,
   className = '',
+  containerClassName = '',
   tag: RootTag = 'div',
   ...props
 }: CardProps) {
@@ -59,14 +61,15 @@ export default function Card({
     }
   );
 
-  const hasStructuredContent = title || description || tagProps || buttonProps || imageProps;
+  const hasStructuredContent = title || description || tagProps?.length || buttonProps?.length || imageProps?.length;
   const shouldRenderStructured = hasStructuredContent && !children;
 
   const hasImages = imageProps && imageProps.length > 0;
   const useCarousel = imageProps && imageProps.length > 1;
   const media = useCarousel ? (
     <Carousel
-      id={`${props.id || 'card'}-carousel`}
+      ariaLabel={`${title || props.id || 'Card'} images`}
+      role="group"
       showDots={showCarouselDots}
       className="usx-card__carousel"
       slides={imageProps?.map((img, index) => ({
@@ -79,7 +82,7 @@ export default function Card({
 
   return (
     <RootTag className={cardClasses} {...props}>
-      <div className="usa-card__container">
+      <div className={ClassNames('usa-card__container', containerClassName)}>
         {shouldRenderStructured ? (
           <>
             {title && (

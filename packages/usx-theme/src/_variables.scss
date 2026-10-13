@@ -1148,18 +1148,18 @@ $usx-footer-nav-border-bottom: usx-var($usx-footer-nav-border-bottom-var, usx-wh
 
 // ── Component tokens: Carousel (custom; defaults baked in _carousel.scss) ───
 $usx-carousel-dot-bg-var: null !default;
-$usx-carousel-dot-bg: usx-var($usx-carousel-dot-bg-var) !default;
+$usx-carousel-dot-bg: usx-var($usx-carousel-dot-bg-var, $usx-color-primary) !default;
 
 $usx-carousel-dot-bg-hover-var: null !default;
-$usx-carousel-dot-bg-hover: usx-var($usx-carousel-dot-bg-hover-var) !default;
+$usx-carousel-dot-bg-hover: usx-var($usx-carousel-dot-bg-hover-var, $usx-color-primary-dark) !default;
 
 $usx-carousel-dot-bg-active-var: null !default;
-$usx-carousel-dot-bg-active: usx-var($usx-carousel-dot-bg-active-var) !default;
+$usx-carousel-dot-bg-active: usx-var($usx-carousel-dot-bg-active-var, $usx-color-primary-darker) !default;
 
 $usx-carousel-dot-gap: null !default;
 
 $usx-carousel-focus-var: null !default;
-$usx-carousel-focus: usx-var($usx-carousel-focus-var) !default;
+$usx-carousel-focus: usx-var($usx-carousel-focus-var, $usx-color-focus) !default;
 
 $usx-carousel-card-media-bg: $usx-surface-3 !default;
 

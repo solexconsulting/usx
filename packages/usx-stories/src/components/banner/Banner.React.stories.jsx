@@ -1,9 +1,8 @@
 import React from 'react';
-import banner from '@uswds/uswds/js/usa-banner';
 import { expect, userEvent } from 'storybook/test';
 import Banner from '../../../../usx-react/src/components/banner/Banner.tsx';
 import config from '../../../../usx-react/src/components/banner/config.json';
-import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -20,14 +19,7 @@ export default {
       },
     },
   },
-  decorators: [
-    (Story) => {
-      React.useEffect(() => {
-        banner.init();
-      }, []);
-      return <Story />;
-    },
-  ],
+  decorators: [...componentInit('banner')],
 };
 
 export const storyDefs = {

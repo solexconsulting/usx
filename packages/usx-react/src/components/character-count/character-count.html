@@ -1,8 +1,4 @@
-<!-- Plain (unenhanced) usa-character-count markup — relies on -->
-<!-- @uswds/uswds/js/usa-character-count at runtime (call ONLY -->
-<!-- characterCount.init(), never .on()/.off()) to move `maxlength` to -->
-<!-- `data-maxlength`, hide the fallback message below, and manage the live -->
-<!-- count/over-limit state itself. -->
+<!-- Plain markup: the HTML story initializes USWDS characterCount.init() at runtime. -->
 
 <!-- Default -->
 <div class="usa-character-count usx-character-count">
@@ -18,22 +14,7 @@
   <span id="cc-1-info" class="usa-character-count__message">You can enter up to 25 characters</span>
 </div>
 
-<!-- WithHint -->
-<div class="usa-character-count usx-character-count">
-  <div class="usa-form-group usx-form-group">
-    <label class="usa-label usx-label" for="cc-3">Text input with hint</label>
-    <span id="cc-3-hint" class="usa-hint">You can enter up to 25 characters.</span>
-    <input
-      class="usa-input usx-input usa-character-count__field"
-      id="cc-3"
-      maxlength="25"
-      aria-describedby="cc-3-info cc-3-hint"
-    />
-  </div>
-  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 25 characters</span>
-</div>
-
-<!-- WithTextArea -->
+<!-- Text Area -->
 <div class="usa-character-count usx-character-count">
   <div class="usa-form-group usx-form-group">
     <label class="usa-label usx-label" for="cc-4">Text area</label>
@@ -47,12 +28,76 @@
   <span id="cc-4-info" class="usa-character-count__message">You can enter up to 50 characters</span>
 </div>
 
+<!-- With Placeholder -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-17">Text input with placeholder</label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-17"
+      maxlength="25"
+      aria-describedby="cc-17-info"
+      placeholder="Enter text here"
+    />
+  </div>
+  <span id="cc-17-info" class="usa-character-count__message"
+    >You can enter up to 25 characters</span
+  >
+</div>
+
+<!-- Text Area With Placeholder -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-18">Text area with placeholder</label>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-18"
+      maxlength="50"
+      aria-describedby="cc-18-info"
+      placeholder="Enter text here"
+    ></textarea>
+  </div>
+  <span id="cc-18-info" class="usa-character-count__message"
+    >You can enter up to 50 characters</span
+  >
+</div>
+
+<!-- With Hint -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-3">Text input with hint</label>
+    <span class="usa-hint usx-hint" id="cc-3-hint">You can enter up to 25 characters.</span>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-3"
+      maxlength="25"
+      aria-describedby="cc-3-info cc-3-hint"
+    />
+  </div>
+  <span id="cc-3-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- Text Area With Hint -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-2">Text area with hint</label>
+    <span class="usa-hint usx-hint" id="cc-2-hint">You can enter up to 50 characters.</span>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-2"
+      maxlength="50"
+      aria-describedby="cc-2-info cc-2-hint"
+    ></textarea>
+  </div>
+  <span id="cc-2-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
 <!-- Required -->
 <div class="usa-character-count usx-character-count">
   <div class="usa-form-group usx-form-group">
-    <label class="usa-label usx-label" for="cc-6">
-      <abbr title="required" class="usx-required">*</abbr>Required field
-    </label>
+    <label class="usa-label usx-label" for="cc-6"
+      ><abbr title="Required" class="usx-required">*</abbr> Required field</label
+    >
     <input
       class="usa-input usx-input usa-character-count__field"
       id="cc-6"
@@ -64,7 +109,24 @@
   <span id="cc-6-info" class="usa-character-count__message">You can enter up to 25 characters</span>
 </div>
 
-<!-- SuccessState -->
+<!-- Text Area Required -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-5"
+      ><abbr title="Required" class="usx-required">*</abbr> Text area required field</label
+    >
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-5"
+      maxlength="50"
+      aria-describedby="cc-5-info"
+      required
+    ></textarea>
+  </div>
+  <span id="cc-5-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
+<!-- Success State -->
 <div class="usa-character-count usx-character-count">
   <div class="usa-form-group usx-form-group">
     <label class="usa-label usx-label" for="cc-7">Success state</label>
@@ -74,37 +136,180 @@
       maxlength="25"
       aria-describedby="cc-7-info cc-7-success"
     />
-    <span id="cc-7-success" class="usa-success-message" role="status">Looks good!</span>
+    <span class="usa-success-message" id="cc-7-success" role="status">Looks good!</span>
   </div>
   <span id="cc-7-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- Text Area Success State -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-8">Text area success state</label>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field usa-input--success"
+      id="cc-8"
+      maxlength="50"
+      aria-describedby="cc-8-info cc-8-success"
+    ></textarea>
+    <span class="usa-success-message" id="cc-8-success" role="status">Looks good!</span>
+  </div>
+  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 50 characters</span>
+</div>
+
+<!-- Error State -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group usa-form-group--error">
+    <label class="usa-label usx-label usa-label--error" for="cc-9">Error state</label>
+    <span class="usa-error-message usx-error-message" id="cc-9-error" role="alert"
+      >This field has an error.</span
+    >
+    <input
+      class="usa-input usx-input usa-character-count__field usa-input--error"
+      id="cc-9"
+      maxlength="25"
+      aria-describedby="cc-9-info cc-9-error"
+    />
+  </div>
+  <span id="cc-9-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+</div>
+
+<!-- Text Area Error State -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group usa-form-group--error">
+    <label class="usa-label usx-label usa-label--error" for="cc-10">Text area error state</label>
+    <span class="usa-error-message usx-error-message" id="cc-10-error" role="alert"
+      >This field has an error.</span
+    >
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field usa-input--error"
+      id="cc-10"
+      maxlength="50"
+      aria-describedby="cc-10-info cc-10-error"
+    ></textarea>
+  </div>
+  <span id="cc-10-info" class="usa-character-count__message"
+    >You can enter up to 50 characters</span
+  >
 </div>
 
 <!-- Disabled -->
 <div class="usa-character-count usx-character-count">
   <div class="usa-form-group usx-form-group">
-    <label class="usa-label usx-label" for="cc-8">Disabled field</label>
+    <label class="usa-label usx-label" for="cc-12">Disabled field</label>
     <input
       class="usa-input usx-input usa-character-count__field"
-      id="cc-8"
+      id="cc-12"
       maxlength="25"
-      aria-describedby="cc-8-info"
+      aria-describedby="cc-12-info"
       disabled
     />
   </div>
-  <span id="cc-8-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-12-info" class="usa-character-count__message"
+    >You can enter up to 25 characters</span
+  >
 </div>
 
-<!-- DefaultValueOverLimit -->
+<!-- Text Area Disabled -->
 <div class="usa-character-count usx-character-count">
   <div class="usa-form-group usx-form-group">
-    <label class="usa-label usx-label" for="cc-10">Pre-filled, already over the limit</label>
+    <label class="usa-label usx-label" for="cc-14">Text area disabled field</label>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-14"
+      maxlength="50"
+      aria-describedby="cc-14-info"
+      disabled
+    ></textarea>
+  </div>
+  <span id="cc-14-info" class="usa-character-count__message"
+    >You can enter up to 50 characters</span
+  >
+</div>
+
+<!-- Default Value -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-11">Pre-filled with default value</label>
     <input
       class="usa-input usx-input usa-character-count__field"
-      id="cc-10"
+      id="cc-11"
       maxlength="25"
-      aria-describedby="cc-10-info"
+      aria-describedby="cc-11-info"
+      value="Default value"
+    />
+  </div>
+  <span id="cc-11-info" class="usa-character-count__message"
+    >You can enter up to 25 characters</span
+  >
+</div>
+
+<!-- Text Area Default Value -->
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-15">Text area pre-filled with default value</label>
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-15"
+      maxlength="50"
+      aria-describedby="cc-15-info"
+    >
+Default value</textarea
+    >
+  </div>
+  <span id="cc-15-info" class="usa-character-count__message"
+    >You can enter up to 50 characters</span
+  >
+</div>
+
+<!-- Default Value Over Limit -->
+<div class="usa-alert usx-alert usa-alert--warning">
+  <div class="usa-alert__body">
+    <h4 class="usa-alert__heading">Known Issue</h4>
+    <p class="usa-alert__text">
+      USWDS does not currently handle a default value that exceeds the character limit.
+    </p>
+  </div>
+</div>
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-13">Pre-filled, already over the limit</label>
+    <input
+      class="usa-input usx-input usa-character-count__field"
+      id="cc-13"
+      maxlength="25"
+      aria-describedby="cc-13-info"
       value="This default value is already way too long for the limit."
     />
   </div>
-  <span id="cc-10-info" class="usa-character-count__message">You can enter up to 25 characters</span>
+  <span id="cc-13-info" class="usa-character-count__message"
+    >You can enter up to 25 characters</span
+  >
+</div>
+
+<!-- Text Area Default Value Over Limit -->
+<div class="usa-alert usx-alert usa-alert--warning">
+  <div class="usa-alert__body">
+    <h4 class="usa-alert__heading">Known Issue</h4>
+    <p class="usa-alert__text">
+      USWDS does not currently handle a default value that exceeds the character limit.
+    </p>
+  </div>
+</div>
+<div class="usa-character-count usx-character-count">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="cc-16"
+      >Text area pre-filled, already over the limit</label
+    >
+    <textarea
+      class="usa-textarea usx-textarea usa-character-count__field"
+      id="cc-16"
+      maxlength="50"
+      aria-describedby="cc-16-info"
+    >
+Despite the text area providing more space, this default value is already way too long for the limit.</textarea
+    >
+  </div>
+  <span id="cc-16-info" class="usa-character-count__message"
+    >You can enter up to 50 characters</span
+  >
 </div>

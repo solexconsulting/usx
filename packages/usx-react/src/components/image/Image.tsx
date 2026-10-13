@@ -90,8 +90,8 @@ export default function Image({
   if (caption) {
     return (
       <figure className={classes} style={style}>
-        {imgElement}
-        <figcaption className={captionClasses} aria-hidden={hideCaption}>{caption}</figcaption>
+        {href ? <a href={href}>{imgElement}</a> : imgElement}
+        <figcaption className={captionClasses}>{caption}</figcaption>
       </figure>
     );
   }

@@ -163,6 +163,13 @@ def default_bool(value: Any, default_value: bool) -> bool:
 
 
 @register.filter()
+def as_list(value: Any) -> list:
+    if value is None or value == "":
+        return []
+    return value if isinstance(value, (list, tuple)) else [value]
+
+
+@register.filter()
 def file_extension(value: str) -> str:
     """
     Returns a filename's extension, uppercased (e.g. "report.pdf" -> "PDF").

@@ -8,6 +8,7 @@
 		border-color: usx-when($usx-card-border-color);
 		border-width: usx-when($usx-card-border-width);
 		border-radius: usx-when($usx-card-radius);
+		overflow: hidden;
 	}
 
 	.usa-card__heading {
@@ -16,6 +17,28 @@
 
 	.usa-card__img {
 		background-color: usx-when($usx-card-media-bg);
+	}
+
+	.usa-card__media > .usx-card__carousel {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+
+		.usx-carousel__viewport {
+			flex: 1;
+			min-height: 0;
+			aspect-ratio: 16 / 9;
+		}
+
+		.usx-carousel__track {
+			height: 100%;
+		}
+
+		.usx-carousel__slide > .usx-image {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
 	}
 
 	@if $usx-card-radius and $usx-card-border-width {

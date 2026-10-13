@@ -1,8 +1,7 @@
 import config from '../../../../usx-react/src/components/combobox/config.json';
-import { buildArgTypes, createDjangoStory, uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Combobox.React.stories.jsx';
 import React from 'react';
-import combobox from "@uswds/uswds/js/usa-combo-box";
 
 export default {
   title: 'Django/USWDS/Combobox',
@@ -15,23 +14,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // The preview's globally-loaded USWDS bundle already attaches the real
-      // delegated listeners to document.body on page load, so we only need
-      // combobox.init() here to enhance the markup this story just rendered.
-      React.useEffect(() => {
-        const timeout = setTimeout(() => {
-          combobox.init();
-        }, 100);
-        return () => {
-          clearTimeout(timeout);
-        };
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('combobox')]
 };
 
 const createStory = createDjangoStory({ componentName: 'combobox' });

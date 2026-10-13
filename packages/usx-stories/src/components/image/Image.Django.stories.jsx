@@ -10,11 +10,11 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'image' });
 
-// Responsive story is excluded — object-shaped src is not supported by the Django render endpoint
 export const Default = createStory(storyDefs.Default);
 export const Rounded = createStory(storyDefs.Rounded);
 export const Circular = createStory(storyDefs.Circular);
 export const WithCaption = createStory(storyDefs.WithCaption);
+export const WithLinkedCaption = createStory(storyDefs.WithLinkedCaption);
 export const WithHiddenCaption = createStory(storyDefs.WithHiddenCaption);
 export const ObjectFitCover = createStory(storyDefs.ObjectFitCover);
 export const ObjectFitContain = createStory(storyDefs.ObjectFitContain);

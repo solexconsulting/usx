@@ -1,7 +1,6 @@
 import React from 'react';
 import html from '../../../../usx-react/src/components/language-selector/language-selector.html?raw';
-import languageSelector from '@uswds/uswds/js/usa-language-selector';
-import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'HTML/USWDS/LanguageSelector',
@@ -13,17 +12,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // The usa-language__primary menu reuses accordion show/hide behavior;
-      // initialize the real USWDS JS for the story, same as the HTML story.
-      React.useEffect(() => {
-        languageSelector.init();
-      }, []);
-
-      return <Story />;
-    }
-  ],
+  decorators: [...componentInit('languageSelector')],
 };
 
 export const AllVariants = {

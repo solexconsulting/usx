@@ -16,6 +16,7 @@ export const storyDefs = {
   Rounded: { ...getArgs(2), rounded: true },
   Circular: { ...getArgs(3), circular: true },
   WithCaption: { ...getArgs(10), caption: shortCaption },
+  WithLinkedCaption: { ...getArgs(20), href: '#image-details', caption: shortCaption },
   WithHiddenCaption: { ...getArgs(11), caption: 'This caption is visually hidden but accessible to screen readers.', hideCaption: true },
   ObjectFitCover: { ...getArgs(12), src: 'https://picsum.photos/400/300?random=12', objectFit: 'cover', caption: shortCaption },
   ObjectFitContain: { ...getArgs(13), src: 'https://picsum.photos/200/500?random=13', objectFit: 'contain', caption: shortCaption },
@@ -50,6 +51,7 @@ export const Default = { args: storyDefs.Default };
 export const Rounded = { args: storyDefs.Rounded };
 export const Circular = { args: storyDefs.Circular };
 export const WithCaption = { args: storyDefs.WithCaption };
+export const WithLinkedCaption = { args: storyDefs.WithLinkedCaption };
 export const WithHiddenCaption = { args: storyDefs.WithHiddenCaption };
 export const ObjectFitCover = { args: storyDefs.ObjectFitCover };
 export const ObjectFitContain = { args: storyDefs.ObjectFitContain };

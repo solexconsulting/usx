@@ -25,6 +25,9 @@
     "./typography": {
       "sass": "./src/components/_typography.scss"
     },
+    "./js": "./src/js/index.mjs",
+    "./js/start": "./src/js/start.mjs",
+    "./js/carousel": "./src/js/carousel.mjs",
     "./img/usx-sprite.svg": "./src/img/usx-sprite.svg",
     "./img/usx-icons.json": "./src/img/usx-icons.json"
   },

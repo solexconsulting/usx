@@ -16,12 +16,8 @@ import RangeSlider from '../../../usx-react/src/components/range-slider/RangeSli
 import Select from '../../../usx-react/src/components/select/Select.tsx';
 import TextArea from '../../../usx-react/src/components/text-area/TextArea.tsx';
 import TimePicker from '../../../usx-react/src/components/time-picker/TimePicker.tsx';
-import combobox from "@uswds/uswds/js/usa-combo-box";
-import fileInput from "@uswds/uswds/js/usa-file-input";
-import timePicker from "@uswds/uswds/js/usa-time-picker";
-import datePicker from "@uswds/uswds/js/usa-date-picker";
-import characterCount from "@uswds/uswds/js/usa-character-count";
 import { useDjangoRenderedFields } from '../utils/djangoComponent.js';
+import { componentInit } from '../utils/storyHelpers.jsx';
 
 const ERROR_MESSAGE = 'Helpful error message';
 
@@ -52,15 +48,8 @@ export default {
     error_state: true,
   },
   decorators: [
+    ...componentInit('fileInput', 'timePicker', 'datePicker', 'combobox', 'characterCount'),
     (Story) => {
-      React.useEffect(() => {
-        fileInput.init();
-        timePicker.init();
-        datePicker.init();
-        combobox.init();
-        characterCount.init();
-      }, []);
-
       return (
         <Layout>
           <Page title="Form control states">
@@ -224,7 +213,7 @@ function DjangoFormComponents({ error_state }) {
         legend: 'Checkbox',
         hint: 'Select one or more historical figures.',
         name: 'tefe-django-checkbox-group',
-        options: historicalFigures,
+        checkboxProps: historicalFigures,
         error,
       },
     },
@@ -350,17 +339,6 @@ function DjangoFormComponents({ error_state }) {
   const { html, errors } = useDjangoRenderedFields(fields);
   const { html: buttonsHtml, errors: buttonErrors } = useDjangoRenderedFields(buttonFields);
   const allErrors = [...errors, ...buttonErrors];
-
-  // All fields' HTML lands in the DOM together (one dangerouslySetInnerHTML per
-  // group below), so enhancement only needs to run once per html change.
-  React.useEffect(() => {
-    if (!html) return;
-    fileInput.init();
-    timePicker.init();
-    datePicker.init();
-    combobox.init();
-    characterCount.init();
-  }, [html]);
 
   return (
     <>

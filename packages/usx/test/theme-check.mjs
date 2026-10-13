@@ -125,7 +125,6 @@ for (const [name, parent] of Object.entries({
   }
 }
 
-const staticCardCss = compile('src/components/_card.scss');
 for (const [selector, token] of [
   ['.usx-card .usa-card__container', '--usx-font-family'],
   ['.usx-card .usa-card__heading', '--usx-font-family-heading'],
@@ -133,7 +132,6 @@ for (const [selector, token] of [
   const rule = `${selector} {\n  font-family: var(${token});\n}`;
   if (!themedCss.includes(rule)) errors.push(`${selector} must use ${token}`);
 }
-if (staticCardCss.replace(/\/\*[\s\S]*?\*\//g, '').trim()) errors.push('unconfigured card styles must leave USWDS defaults untouched');
 for (const selector of ['.usa-card.usx-card > .usa-card__container', '.usa-card.usx-card.usa-card--flag.usa-card--media-right', '.usa-card__media--inset .usa-card__img']) {
   if (!themedCss.includes(selector)) errors.push(`missing themed card selector: ${selector}`);
 }
@@ -171,6 +169,10 @@ function expectDeclaration(rules, label, selector, property, expected) {
 
 const defaultRules = cssRules(defaultCss);
 const themedRules = cssRules(themedCss);
+for (const property of ['background-color', 'color', 'border-color', 'border-width', 'border-radius']) {
+  expectDeclaration(defaultRules, 'unconfigured card cosmetics preserve USWDS', '.usa-card.usx-card > .usa-card__container', property, undefined);
+}
+expectDeclaration(defaultRules, 'unconfigured card heading preserves USWDS', '.usa-card.usx-card .usa-card__heading', 'color', undefined);
 const borderComponents = [
   ['.usa-card.usx-card > .usa-card__container', 'border-color', 'usx-card-border-color', 'subtle'],
   // Ink borders have no shared border role; leave their USWDS defaults alone

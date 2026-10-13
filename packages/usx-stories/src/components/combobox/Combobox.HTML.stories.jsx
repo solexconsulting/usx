@@ -1,7 +1,6 @@
 import React from 'react';
 import html from '../../../../usx-react/src/components/combobox/combobox.html?raw';
-import combobox from "@uswds/uswds/js/usa-combo-box";
-import { uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'HTML/USWDS/Combobox',
@@ -13,16 +12,7 @@ export default {
       }
     }
   },
-  decorators: [
-    (Story) => {
-      // Ensure USWDS JS is initialized for the story
-      React.useEffect(() => {
-        combobox.init();
-      }, []);
-
-      return <Story />;
-    }
-  ]
+  decorators: [...componentInit('combobox')]
 };
 
 export const AllVariants = {

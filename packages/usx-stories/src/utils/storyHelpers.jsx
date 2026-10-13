@@ -6,6 +6,80 @@ An array of helpers for story rendering.
 import { djangoComponent, fetchComponentHtml, useDjangoRenderedHtml } from './djangoComponent.js';
 import React from 'react';
 
+const componentLoaders = {
+    accordion: () => import('@uswds/uswds/js/usa-accordion'),
+    banner: () => import('@uswds/uswds/js/usa-banner'),
+    button: () => import('@uswds/uswds/js/usa-button'),
+    carousel: () => import('@solexllc/usx/js/carousel'),
+    characterCount: () => import('@uswds/uswds/js/usa-character-count'),
+    comboBox: () => import('@uswds/uswds/js/usa-combo-box'),
+    combobox: () => import('@uswds/uswds/js/usa-combo-box'),
+    datePicker: () => import('@uswds/uswds/js/usa-date-picker'),
+    dateRangePicker: () => import('@uswds/uswds/js/usa-date-range-picker'),
+    fileInput: () => import('@uswds/uswds/js/usa-file-input'),
+    footer: () => import('@uswds/uswds/js/usa-footer'),
+    inPageNavigation: () => import('@uswds/uswds/js/usa-in-page-navigation'),
+    inputMask: () => import('@uswds/uswds/js/usa-input-mask'),
+    languageSelector: () => import('@uswds/uswds/js/usa-language-selector'),
+    modal: () => import('@uswds/uswds/js/usa-modal').then(({ default: modal }) => ({
+        init(root) {
+            root.querySelectorAll('.usa-modal[id]').forEach((element) => modal.init(element));
+        },
+    })),
+    navigation: () => import('@uswds/uswds/js/usa-header'),
+    password: () => import('@uswds/uswds/js/_usa-password'),
+    range: () => import('@uswds/uswds/js/usa-range'),
+    search: () => import('@uswds/uswds/js/usa-search'),
+    skipnav: () => import('@uswds/uswds/js/usa-skipnav'),
+    table: () => import('@uswds/uswds/js/usa-table'),
+    timePicker: () => import('@uswds/uswds/js/usa-time-picker'),
+    tooltip: () => import('@uswds/uswds/js/usa-tooltip'),
+    validator: () => import('@uswds/uswds/js/usa-validation'),
+};
+
+export const componentInit = (...names) => {
+    const options = typeof names[names.length - 1] === 'object' ? names.pop() : {};
+    const loaders = names.map((name) => {
+        if (!componentLoaders[name]) throw new Error(`Unknown component initializer: ${name}`);
+        return componentLoaders[name];
+    });
+
+    function ComponentInitDecorator(Story) {
+        React.useEffect(() => {
+            let observer;
+            let active = true;
+
+            Promise.all(loaders.map((load) => load())).then((modules) => {
+                if (!active) return;
+                const components = modules.map((module) => module.default || module);
+                const init = (root) => components.forEach((component) => component.init(root));
+
+                observer = new MutationObserver((records) => {
+                    const roots = new Set();
+                    records.forEach(({ addedNodes }) => addedNodes.forEach((node) => {
+                        if (node.nodeType === Node.ELEMENT_NODE && node.isConnected) {
+                            roots.add(node.parentElement || node);
+                        }
+                    }));
+                    roots.forEach(init);
+                });
+                observer.observe(document.body, { childList: true, subtree: true });
+                init(document.body);
+                options.onReady?.();
+            });
+
+            return () => {
+                active = false;
+                observer?.disconnect();
+            };
+        }, []);
+
+        return <Story />;
+    }
+
+    return [ComponentInitDecorator];
+};
+
 export const getComponentHtml = async (componentName, props) => {
     return fetchComponentHtml(componentName, props);
 };

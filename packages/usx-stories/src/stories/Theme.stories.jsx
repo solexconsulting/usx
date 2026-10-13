@@ -64,15 +64,13 @@ import Table from '../../../usx-react/src/components/table/Table.tsx';
 import Tag from '../../../usx-react/src/components/tag/Tag.tsx';
 import TaskList from '../../../usx-react/src/components/task-list/TaskList.tsx';
 import TextArea from '../../../usx-react/src/components/text-area/TextArea.tsx';
-import datePicker from '@uswds/uswds/js/usa-date-picker';
-import fileInput from '@uswds/uswds/js/usa-file-input';
-import range from '@uswds/uswds/js/usa-range';
-import inPageNavigation from '@uswds/uswds/js/usa-in-page-navigation';
+import { componentInit } from '../utils/storyHelpers.jsx';
 
 export default {
   title: 'Documentation/Theme/Playground',
   tags: ['USX'],
   parameters: { layout: 'fullscreen' },
+  decorators: [...componentInit('datePicker', 'fileInput', 'range', 'inPageNavigation')],
 };
 
 // ── Presets ──────────────────────────────────────────────────────────────────
@@ -1332,17 +1330,6 @@ function Showcase({ resolved }) {
   // interaction; `groupBy` + `onClickRow` exercise the grouped-row and
   // hover-row color tokens too.
   const [tableSelection, setTableSelection] = useState([2]);
-
-  // DatePicker's calendar toggle button/panel and FileInput's drag-and-drop
-  // target are both injected by USWDS's own JS enhancement, not the static
-  // React markup, so they need the same init/cleanup as their own stories
-  // (see DatePicker.React.stories.jsx / FileInput.React.stories.jsx).
-  useEffect(() => {
-    datePicker.init();
-    fileInput.init();
-    range.init();
-    inPageNavigation.init();
-  }, []);
 
   return (
     <div style={{ columnWidth: '22rem', columnGap: '1rem' }}>

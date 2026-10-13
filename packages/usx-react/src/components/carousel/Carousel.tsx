@@ -1,102 +1,73 @@
 import React from 'react';
 import ClassNames from 'classnames';
 
-export interface SlideProps extends React.HTMLAttributes<HTMLElement> {
-  id?: string;
-  className?: string;
-  role?: string;
-  ariaRoledescription?: string;
-  ariaLabel?: string;
-  tabIndex?: number;
-  children?: React.ReactNode;
-}
-
-export function Slide({
-  id,
-  className = '',
-  role = 'group',
-  ariaRoledescription = 'slide',
-  ariaLabel,
-  tabIndex = 0,
-  children = null,
-  ...rest
-}: SlideProps) {
-  const cls = ClassNames('usx-carousel__slide', className);
-  return (
-    <section
-      id={id}
-      className={cls}
-      role={role}
-      aria-roledescription={ariaRoledescription}
-      aria-label={ariaLabel}
-      tabIndex={tabIndex}
-      {...rest}
-    >
-      {children}
-    </section>
-  );
-}
-
 export interface CarouselSlide {
   content: React.ReactNode;
+  label?: string;
 }
 
 export interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
-  id?: string;
   slides?: CarouselSlide[];
   ariaLabel?: string;
-  className?: string;
   showDots?: boolean;
+  statusClassName?: string;
   children?: React.ReactNode;
-  slideIds?: string[];
+}
+
+function flattenChildren(children: React.ReactNode): React.ReactNode[] {
+  return React.Children.toArray(children).flatMap((child) =>
+    React.isValidElement<{ children?: React.ReactNode }>(child) && child.type === React.Fragment
+      ? flattenChildren(child.props.children)
+      : [child]
+  );
 }
 
 export default function Carousel({
-  id = 'carousel-1',
   slides = [],
   ariaLabel = 'Featured content',
-  className = '',
   showDots = true,
-  children = null,
-  slideIds = [],
+  statusClassName,
+  children,
+  className,
+  role = 'region',
   ...props
 }: CarouselProps) {
-  const classes = ClassNames('usx-carousel', className);
-  const childArray = React.Children.toArray(children).filter(Boolean);
+  const childSlides = flattenChildren(children);
+  const items: CarouselSlide[] = childSlides.length
+    ? childSlides.map((content) => ({ content }))
+    : slides;
+  const count = items.length;
 
   return (
-    <div className={classes} {...props} role="region" aria-roledescription="carousel" aria-label={ariaLabel}>
-      <div className="usx-carousel__viewport" tabIndex={-1}>
-        <div className="usx-carousel__track">
-          {childArray.length > 0 ? (
-            childArray
-          ) : slides.length > 0 ? (
-            slides.map((slide, i) => (
-              <Slide
-                id={`${id}-slide-${i + 1}`}
-                key={i}
-                className=""
-                ariaLabel={`${i + 1} of ${slides.length}`}
-                tabIndex={0}
+    <div
+      key={`${count}-${showDots}-${statusClassName ?? ''}`}
+      {...props}
+      className={ClassNames('usx-carousel', className)}
+      role={role}
+      aria-roledescription="carousel"
+      aria-label={ariaLabel}
+      data-show-dots={showDots ? undefined : 'false'}
+      data-status-class-name={statusClassName}
+    >
+      <div className="usx-carousel__viewport">
+        <div className="usx-carousel__track" aria-live="polite" tabIndex={count > 1 ? 0 : undefined}>
+          {count ? (
+            items.map((item, index) => (
+              <div
+                key={index}
+                className="usx-carousel__slide"
+                role="group"
+                aria-roledescription="slide"
+                aria-label={item.label || `${index + 1} of ${count}`}
               >
-                {slide?.content || slide}
-              </Slide>
+                {item.content}
+              </div>
             ))
           ) : (
-            <p><em>No slides available.</em></p>
+            <p>No slides available.</p>
           )}
         </div>
       </div>
-      {showDots && (
-        <div className="usx-carousel__dots" aria-label="Slide navigation">
-          {(childArray.length > 0 ? childArray : slides)?.map((_, i) => (
-            <a key={i} href={`#${id}-slide-${i + 1}`} aria-label={`Go to slide ${i + 1}`} tabIndex={-1} />
-          ))}
-          {childArray.length > 0 && slideIds.length === childArray.length && slideIds.map((slideId, i) => (
-            <a key={i} href={slideId} aria-label={`Go to slide ${i + 1}`} tabIndex={-1} />
-          ))}
-        </div>
-      )}
     </div>
   );
 }

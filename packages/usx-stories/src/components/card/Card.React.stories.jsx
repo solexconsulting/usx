@@ -1,7 +1,7 @@
 
 import Card from '../../../../usx-react/src/components/card/Card.tsx';
 import config from '../../../../usx-react/src/components/card/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit } from '../../utils/storyHelpers.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -109,6 +109,7 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
   excludeStories: ['storyDefs'],
+  decorators: [...componentInit('carousel')],
 };
 
 export const storyDefs = {
