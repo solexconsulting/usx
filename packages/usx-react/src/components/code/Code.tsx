@@ -14,16 +14,17 @@ export interface CodeProps {
   copyText?: string | null;
   staticBaseUrl?: string;
   className?: string;
+  contentClassName?: string;
 }
 
-export default function Code({ lines = [], allowHtml = false, copyText = null, staticBaseUrl, className = '' }: CodeProps) {
+export default function Code({ lines = [], allowHtml = false, copyText = null, staticBaseUrl, className = '', contentClassName = '' }: CodeProps) {
   return (
     <div className={ClassNames('usx-mockup-code', className)}>
-      <div className="usx-mockup-code__content">
+      <div className={ClassNames('usx-mockup-code__content', contentClassName)}>
       {lines.map((line, i) => (
         <pre
           key={i}
-          {...(line.prefix != null ? { 'data-prefix': line.prefix } : {})}
+          data-prefix={line.prefix != null ? line.prefix : undefined}
           className={line.className || undefined}
         >
           {allowHtml ? <code dangerouslySetInnerHTML={{ __html: line.code }} /> : <code>{line.code}</code>}

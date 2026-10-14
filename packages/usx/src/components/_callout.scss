@@ -1,14 +1,9 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
-$stroke-width: 4px;
-
-@if $usx-callout-border-width {
-  $stroke-width: $usx-callout-border-width;
-}
+$stroke-width: usx-when($usx-callout-border-width, $usx-callout-border-width, 4px);
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-callout {
-  margin: 0;
   padding-left: 1rem;
   border-style: solid;
   border-width: 0 0 0 $stroke-width;

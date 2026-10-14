@@ -27,7 +27,9 @@ export default {
     options: {}
   },
 
-  addons: ['@storybook/addon-docs'],
+  addons: [
+    '@storybook/addon-docs',
+  ],
 
   staticDirs: [
     '../../../node_modules/@uswds/uswds/dist',

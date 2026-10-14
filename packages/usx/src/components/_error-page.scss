@@ -1,0 +1,31 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-error-page {
+  &__content,
+  &__actions,
+  &__support,
+  &__meta,
+  &__details {
+    margin-top: units(4);
+  }
+
+  &__actions,
+  &__support-links {
+    margin-bottom: 0;
+  }
+
+  &__support-heading {
+    margin-top: 0;
+  }
+
+  &__meta {
+    p {
+      margin-block: units(1);
+    }
+  }
+
+  &__meta-value {
+    overflow-wrap: anywhere;
+  }
+}

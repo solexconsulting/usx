@@ -158,7 +158,7 @@ test('Callout replaces Block and Quote references its styling contract', () => {
   assert.equal(callout.props.content.type, 'slot');
   assert.equal(Object.hasOwn(callout.props.strokeColor, 'default'), false);
   assert.equal(quote.props.calloutProps.component, 'callout');
-  assert.deepEqual(quote.props.calloutProps.omit, ['element', 'children', 'content', 'cite']);
+  assert.deepEqual(quote.props.calloutProps.omit, ['element', 'children', 'content']);
 });
 
 test('Quote source links reference Link and receive their children from sourceTitle', () => {

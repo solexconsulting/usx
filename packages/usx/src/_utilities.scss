@@ -21,6 +21,10 @@
     .after-bg-#{$color-name}::after {
       background-color: $color-value !important;
     }
+
+    .marker-#{$color-name}::marker {
+      color: $color-value !important;
+    }
   }
 }
 
@@ -37,6 +41,10 @@
     .after-bg-#{$color-name}::after {
       background-color: $color-value !important;
     }
+
+    .marker-#{$color-name}::marker {
+      color: $color-value !important;
+    }
   }
 }
 
@@ -52,6 +60,10 @@
 
     .after-bg-#{$color-name}::after {
       background-color: $color-value !important;
+    }
+
+    .marker-#{$color-name}::marker {
+      color: $color-value !important;
     }
   }
 }

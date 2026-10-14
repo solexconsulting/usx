@@ -1,0 +1,152 @@
+{
+  "name": "error-page",
+  "template": "error-page/error-page.django.html",
+  "version": 3,
+  "required": ["title"],
+  "default": {
+    "id": "main-content",
+    "title": "Page not found",
+    "description": "We're sorry, we can't find the page you're looking for.",
+    "guidance": "Check the address for typing errors, or use one of the options below.",
+    "actions": [
+      {
+        "label": "Visit the home page",
+        "href": "/",
+        "variant": "primary"
+      },
+      {
+        "label": "Search the site",
+        "href": "/search",
+        "variant": "outline"
+      }
+    ],
+    "supportHeading": "Need help?",
+    "supportText": "If you followed a link to this page, tell us where you found it.",
+    "supportLinks": [
+      {
+        "label": "Contact support",
+        "href": "/contact"
+      }
+    ],
+    "errorCode": "404"
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "default": "main-content",
+      "description": "ID for the Page root and its heading reference. The default supports a standard skip link; override it when another element already uses main-content."
+    },
+    "title": {
+      "type": "string",
+      "description": "Plain-language h1 that summarizes the problem without blaming the user."
+    },
+    "description": {
+      "type": "string",
+      "default": "We’re sorry. Please try again later.",
+      "description": "Short lead text that explains what happened in user-facing language."
+    },
+    "guidance": {
+      "type": "string",
+      "default": "",
+      "description": "Optional recovery guidance rendered as a paragraph before the actions."
+    },
+    "actions": {
+      "type": "array",
+      "default": [],
+      "description": "Ordered navigation actions. Each item must provide label and href. Links work without JavaScript; callback-only actions belong in a framework adapter outside this shared component.",
+      "items": {
+        "type": "object",
+        "description": "A link rendered with the USX Button component inside a ButtonGroup. Labels must disclose when a destination opens in a new tab.",
+        "component": "button",
+        "omit": [
+          "type",
+          "disabled",
+          "onClick",
+          "big",
+          "inverse",
+          "ghost",
+          "loading",
+          "iconProps",
+          "style",
+          "children",
+          "extraAttributes"
+        ],
+        "properties": {
+          "itemClassName": {
+            "type": "string",
+            "description": "Additional CSS classes for the list item around this action."
+          }
+        }
+      }
+    },
+    "supportHeading": {
+      "type": "string",
+      "default": "",
+      "description": "Optional heading for support channels."
+    },
+    "supportText": {
+      "type": "string",
+      "default": "",
+      "description": "Optional instructions shown with the support channels."
+    },
+    "supportLinks": {
+      "type": "array",
+      "default": [],
+      "description": "Optional help links, including web, mailto, or tel destinations.",
+      "items": {
+        "type": "object",
+        "description": "A support channel rendered with the USX Link component. Labels should disclose when a destination opens a new window.",
+        "component": "link",
+        "omit": ["children", "visited", "alt"],
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Visible, descriptive link text."
+          }
+        }
+      }
+    },
+    "cats": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true and errorCode has a value, displays the corresponding http.cat illustration after the description. This makes an external browser request to https://http.cat and may require that origin in the host Content Security Policy img-src directive."
+    },
+    "catAlt": {
+      "type": "string",
+      "default": "",
+      "description": "Optional localized alt text for the cat illustration. When omitted, the component uses 'Cat illustration for HTTP error {errorCode}'."
+    },
+    "errorCode": {
+      "type": ["string", "number"],
+      "description": "Optional public error or HTTP status code, displayed as subordinate metadata. This prop does not set the response status."
+    },
+    "errorCodeLabel": {
+      "type": "string",
+      "default": "Error code",
+      "description": "Localized label for errorCode."
+    },
+    "referenceId": {
+      "type": "string",
+      "description": "Optional opaque identifier that a user can give support. Do not include secrets, session IDs, stack traces, or raw request data."
+    },
+    "referenceLabel": {
+      "type": "string",
+      "default": "Reference ID",
+      "description": "Localized label for referenceId."
+    },
+    "detailsProps": {
+      "type": "object",
+      "component": "details",
+      "description": "Optional Details disclosure rendered after support and public metadata with monospace font utilities. Supply a descriptive summary and escaped plain text or trusted composed children. When supplying diagnostics, authorize the viewer and redact sensitive values first. A closed disclosure is still present in the page source."
+    },
+    "children": {
+      "type": "slot",
+      "description": "Optional trusted, composed recovery content rendered after guidance and before actions. Use React nodes or a Django block with equivalent markup."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes for the root Page element."
+    }
+  }
+}

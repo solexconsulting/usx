@@ -583,6 +583,13 @@ class ChildComponentPropsTests(SimpleTestCase):
 
 
 class CalloutQuoteTests(SimpleTestCase):
+    def test_paragraph_callout(self):
+        html = render_component("callout", {"element": "p", "content": "Supporting information"})
+        root = fromstring(html.strip())
+        self.assertEqual(root.tag, "p")
+        self.assertIn("usx-callout", root.attrib["class"].split())
+        self.assertEqual(root.text.strip(), "Supporting information")
+
     def test_callout_props_and_content_precedence(self):
         plain = render_component("callout", {"content": "Fallback"})
         self.assertIn("Fallback", plain)
@@ -737,3 +744,283 @@ class ToggleTests(SimpleTestCase):
         self.assertIn('class="usx-toggle usa-button-group"', html)
         self.assertNotIn('<fieldset', html)
         self.assertNotIn('<legend', html)
+
+
+class DetailsTests(SimpleTestCase):
+    diagnostic_text = (
+        'Traceback (most recent call last):\n'
+        '  File "/app/records.py", line 42, in save\n'
+        'ValueError: A <script> tag & invalid input were rejected.'
+    )
+
+    def test_plain_text_details_are_collapsed_and_escaped(self):
+        html = render_component("details", {
+            "summary": "Technical details",
+            "text": self.diagnostic_text,
+        })
+        elements = RenderedElements(html)
+        details = elements.attributes("details")
+        self.assertEqual(details["class"], "usx-details")
+        self.assertNotIn("open", details)
+        self.assertIn(
+            '<summary class="usx-details__summary"><span class="usx-details__summary-text">Technical details</span></summary>',
+            html,
+        )
+        self.assertIn("Traceback (most recent call last):\n", html)
+        self.assertIn("&lt;script&gt; tag &amp; invalid input", html)
+        self.assertNotIn("<script>", html)
+        self.assertNotIn("<code", html)
+        self.assertNotIn("<pre", html)
+        self.assertEqual(html.count('<p class="usx-details__text">'), 1)
+
+    def test_open_custom_summary_and_empty_details(self):
+        html = render_component("details", {
+            "text": self.diagnostic_text,
+            "summary": "Exception traceback",
+            "open": True,
+            "className": "custom-details",
+        })
+        details = RenderedElements(html).attributes("details")
+        self.assertIn("open", details)
+        self.assertIn("custom-details", details["class"].split())
+        self.assertIn(">Exception traceback</span></summary>", html)
+        empty_html = render_component("details", {"summary": "More information", "text": ""})
+        self.assertIn('<p class="usx-details__text"></p>', empty_html)
+
+    def test_plain_text_is_escaped_even_when_marked_safe_or_autoescape_is_off(self):
+        from django.utils.safestring import mark_safe
+
+        text = '</p><script>alert("details")</script> &lt;already escaped&gt;'
+        summary = '</summary><script>alert("summary")</script> & details'
+        template = Template(
+            "{% load components %}"
+            "{% details text=text summary=summary %}{% enddetails %}"
+        )
+        for safe in (False, True):
+            for autoescape in (False, True):
+                with self.subTest(marked_safe=safe, autoescape=autoescape):
+                    html = template.render(Context({
+                        "text": mark_safe(text) if safe else text,
+                        "summary": mark_safe(summary) if safe else summary,
+                    }, autoescape=autoescape))
+                    self.assertIn("&lt;/p&gt;&lt;script&gt;", html)
+                    self.assertIn("&lt;/summary&gt;&lt;script&gt;", html)
+                    self.assertIn("&amp;lt;already escaped&amp;gt;", html)
+                    self.assertNotIn("<script>", html)
+                    self.assertEqual(html.count("<summary"), 1)
+                    self.assertEqual(html.count('<p class="usx-details__text">'), 1)
+
+    def test_diagnostic_report_preserves_whitespace_and_empty_summary_uses_default(self):
+        report = "\n\nRequest status: failed\n  Reference: JOB-1204\n\tItems processed: 0\n"
+        html = render_component("details", {"text": report, "summary": ""})
+        root = fromstring(html.strip())
+        self.assertEqual(root.find("summary/span").text, "Details")
+        text = root.find("div/p")
+        self.assertIsNotNone(text)
+        self.assertEqual(len(text), 0)
+        self.assertEqual(text.text, report)
+
+    def test_rich_children_replace_plain_text(self):
+        html = Template(
+            "{% load components %}"
+            "{% details summary='Before you apply' text='Hidden fallback' %}"
+            '<ul><li><a href="/guidance">Read the guidance</a></li></ul>'
+            "{% enddetails %}"
+        ).render(Context({}))
+        self.assertIn('<ul><li><a href="/guidance">Read the guidance</a></li></ul>', html)
+        self.assertNotIn("Hidden fallback", html)
+        self.assertNotIn("usx-details__text", html)
+
+    def test_empty_children_replace_text_and_null_children_use_text(self):
+        for children in ("", False, True):
+            with self.subTest(children=children):
+                empty_html = render_component("details", {
+                    "summary": "More information", "text": "Hidden fallback", "children": children,
+                })
+                self.assertNotIn("Hidden fallback", empty_html)
+                self.assertNotIn("usx-details__text", empty_html)
+                root = fromstring(empty_html.strip())
+                self.assertEqual(len(root.find("div")), 0)
+                self.assertIsNone(root.find("div").text)
+        count_html = render_component("details", {"summary": "Count", "children": 0})
+        self.assertIn('<div class="usx-details__content">0</div>', count_html)
+        fallback_html = render_component("details", {
+            "summary": "More information", "text": "Visible fallback", "children": None,
+        })
+        self.assertIn('<p class="usx-details__text">Visible fallback</p>', fallback_html)
+
+    def test_summary_classes_apply_to_their_respective_elements(self):
+        html = render_component("details", {
+            "summary": "Help", "summaryClassName": "padding-1",
+            "summaryTextClassName": "text-bold",
+        })
+        root = fromstring(html.strip())
+        self.assertEqual(root.find("summary").attrib["class"], "usx-details__summary padding-1")
+        self.assertEqual(root.find("summary/span").attrib["class"], "usx-details__summary-text text-bold")
+        self.assertEqual(root.find("summary/span").text, "Help")
+
+    def test_color_utilities_and_independent_decoration_switches(self):
+        for no_content_border in (False, True):
+            for no_summary_underline in (False, True):
+                with self.subTest(borderless=no_content_border, no_underline=no_summary_underline):
+                    html = render_component("details", {
+                        "summary": "Supporting information",
+                        "text": "More information",
+                        "markerColor": "primary",
+                        "underlineColor": "secondary",
+                        "contentBorderColor": "accent-cool",
+                        "noContentBorder": no_content_border,
+                        "noSummaryUnderline": no_summary_underline,
+                        "className": "margin-top-3",
+                        "contentClassName": "font-family-mono",
+                    })
+                    root = fromstring(html.strip())
+                    classes = root.attrib["class"].split()
+                    self.assertEqual("usx-details--borderless" in classes, no_content_border)
+                    self.assertEqual("usx-details--no-underline" in classes, no_summary_underline)
+                    self.assertIn("margin-top-3", classes)
+                    self.assertEqual(root.find("summary").attrib["class"], "usx-details__summary marker-primary")
+                    self.assertEqual(root.find("summary/span").attrib["class"], "usx-details__summary-text border-secondary")
+                    content_classes = root.find("div").attrib["class"].split()
+                    self.assertIn("font-family-mono", content_classes)
+                    self.assertEqual("border-accent-cool" in content_classes, not no_content_border)
+
+    def test_template_tag_can_be_composed_inside_error_page(self):
+        html = Template(
+            "{% load components %}"
+            "{% error_page title='Request failed' %}"
+            "{% details summary='Technical details' text=diagnostic_text %}{% enddetails %}"
+            "{% enderror_page %}"
+        ).render(Context({"diagnostic_text": self.diagnostic_text}))
+        self.assertIn("usx-error-page", html)
+        self.assertIn("usx-details", html)
+        self.assertIn("&lt;script&gt; tag &amp; invalid input", html)
+        self.assertNotIn("<script>", html)
+
+
+class ErrorPageTests(SimpleTestCase):
+    def test_default_page_semantics_and_composition(self):
+        html = render_component("error-page", {})
+        elements = RenderedElements(html)
+        main = elements.attributes("main")
+        self.assertEqual(main["id"], "main-content")
+        self.assertNotIn("tabindex", main)
+        self.assertEqual(main["aria-labelledby"], "main-content-title")
+        self.assertTrue({"usx-page", "usx-error-page"}.issubset(main["class"].split()))
+        self.assertIn('id="main-content-title" class="usx-page__title"', html)
+        self.assertIn('class="usx-page__content"', html)
+        self.assertIn('class="usa-prose usx-prose usx-error-page__body"', html)
+        self.assertNotIn("usx-container", html)
+        self.assertNotIn("grid-container", html)
+        self.assertEqual(html.count("<h1"), 1)
+        self.assertIn("We couldn’t complete your request", html)
+        self.assertNotIn('role="alert"', html)
+        for optional_class in ("usx-error-page__actions", "usx-error-page__support", "usx-error-page__meta", "usx-error-page__cat"):
+            self.assertNotIn(optional_class, html)
+        self.assertNotIn("https://http.cat/", html)
+        self.assertNotIn("usx-details", html)
+
+    def test_full_page_uses_shared_actions_links_and_safe_text(self):
+        html = render_component("error-page", {
+            "id": "request-error",
+            "title": "Request <failed>",
+            "description": "The service could not process A & B.",
+            "guidance": "Try one of these options.",
+            "actions": [
+                {"label": "Go home", "href": "/", "variant": "primary"},
+                {"label": "External status (opens in a new tab)", "href": "https://status.example.gov", "variant": "outline", "isExternal": True},
+            ],
+            "supportHeading": "Get help",
+            "supportText": "Share the reference ID with support.",
+            "supportLinks": [
+                {"label": "Email support", "href": "mailto:support@example.gov"},
+                {"label": "External help (opens in a new tab)", "href": "https://help.example.gov", "external": True},
+            ],
+            "errorCode": 500,
+            "referenceId": "REF-1234567890-ABCDEFGHIJ",
+            "detailsProps": {
+                "summary": "Technical details",
+                "text": DetailsTests.diagnostic_text,
+                "className": "custom-details",
+            },
+            "children": "<p>Your draft is safe.</p>",
+            "className": "custom-error-page",
+        })
+        for value in (
+            'id="request-error"', "custom-error-page", "Request &lt;failed&gt;",
+            "A &amp; B", "<p>Your draft is safe.</p>",
+            "usa-button-group usx-button-group", "usa-button--primary",
+            "usa-button--outline", "usa-link usx-link",
+            "request-error-support-heading", "Error code:", "Reference ID:",
+            "REF-1234567890-ABCDEFGHIJ", "usx-details",
+            "&lt;script&gt; tag &amp; invalid input",
+        ):
+            self.assertIn(value, html)
+        self.assertLess(html.index("Go home"), html.index("External status (opens in a new tab)"))
+        self.assertEqual(html.count('target="_blank"'), 2)
+        self.assertNotIn("<failed>", html)
+        self.assertNotIn("<script>", html)
+        self.assertNotIn("https://http.cat/", html)
+        details = RenderedElements(html).attributes("details")
+        self.assertTrue({
+            "usx-error-page__details", "font-family-mono", "font-mono-sm", "custom-details",
+        }.issubset(details["class"].split()))
+
+    def test_template_tag_has_the_same_fallbacks(self):
+        html = Template("{% load components %}{% error_page %}{% enderror_page %}").render(Context({}))
+        self.assertIn('id="main-content"', html)
+        self.assertIn("We couldn’t complete your request", html)
+        self.assertIn("We’re sorry. Please try again later.", html)
+
+    def test_numeric_zero_error_code_is_rendered(self):
+        html = render_component("error-page", {"title": "Request failed", "errorCode": 0, "cats": True})
+        self.assertIn('<strong>Error code:</strong>', html)
+        self.assertIn('<span class="usx-error-page__meta-value">0</span>', html)
+        self.assertNotIn("https://http.cat/", html)
+
+    def test_cats_use_the_error_code_and_safe_alt_text(self):
+        for error_code in (404, "503"):
+            with self.subTest(error_code=error_code):
+                html = render_component("error-page", {
+                    "title": "Request failed",
+                    "errorCode": error_code,
+                    "cats": True,
+                })
+                self.assertIn('class="usx-image"', html)
+                self.assertIn(f'src="https://http.cat/{error_code}"', html)
+                self.assertIn(f'alt="Cat illustration for HTTP error {error_code}"', html)
+
+        custom_alt = render_component("error-page", {
+            "title": "Request failed",
+            "errorCode": 500,
+            "cats": True,
+            "catAlt": "A waiting cat & a service notice",
+        })
+        self.assertIn('alt="A waiting cat &amp; a service notice"', custom_alt)
+
+        html = render_component("error-page", {"title": "Request failed", "cats": True})
+        self.assertNotIn("https://http.cat/", html)
+
+        for error_code in ("CUSTOM", 200, 505, 999):
+            with self.subTest(error_code=error_code):
+                html = render_component("error-page", {
+                    "title": "Request failed",
+                    "errorCode": error_code,
+                    "cats": True,
+                })
+                self.assertIn(f"https://http.cat/{error_code}", html)
+
+    def test_page_supports_focus_and_heading_label_props(self):
+        html = render_component("page", {
+            "id": "account-page",
+            "title": "Account",
+            "titleId": "account-title",
+            "tabIndex": -1,
+            "ariaLabelledby": "custom-label",
+            "content": "Page content",
+        })
+        elements = RenderedElements(html)
+        main = elements.attributes("main")
+        self.assertEqual(main["tabindex"], "-1")
+        self.assertEqual(main["aria-labelledby"], "custom-label")
+        self.assertIn('<h1 id="account-title" class="usx-page__title">Account</h1>', html)

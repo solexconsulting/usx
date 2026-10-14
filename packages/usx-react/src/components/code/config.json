@@ -44,6 +44,10 @@
     "className": {
       "type": "string",
       "description": "Additional CSS classes to apply to the wrapper div."
+    },
+    "contentClassName": {
+      "type": "string",
+      "description": "Additional CSS classes to apply to the content wrapper div inside the component."
     }
   }
 }

@@ -17,7 +17,6 @@ export const WithAttribution = createStory(storyDefs.WithAttribution);
 export const WithAvatar = createStory(storyDefs.WithAvatar);
 export const Vertical = createStory(storyDefs.Vertical);
 export const WithCalloutProps = createStory(storyDefs.WithCalloutProps);
-export const Typography = createStory(storyDefs.Typography);
 export const WithSource = createStory(storyDefs.WithSource);
 export const WithAvatarAndSource = createStory(storyDefs.WithAvatarAndSource);
 export const SourceTitleOnly = createStory(storyDefs.SourceTitleOnly);

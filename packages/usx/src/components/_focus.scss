@@ -11,7 +11,8 @@
   .usa-footer__return-to-top a:focus,
   [contentEditable="true"]:focus,
   [href]:focus, [tabindex]:focus,
-  iframe:focus {
+  iframe:focus,
+  .usx-details__summary:focus {
     outline: .25rem solid usx-when($usx-color-focus, $usx-color-focus, #2491ff);
     outline-offset: 0;
   }

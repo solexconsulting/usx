@@ -8,8 +8,8 @@
 .docs-story,
 html,
 .sb-show-main {
-    background-color: var(--usx-surface-1, white);
-    color: var(--usx-text-ink, black);
+    background-color: var(--usx-surface-1, #ffffff);
+    color: var(--usx-text-ink, #1b1b1b);
 }
 
 // This padding ensures the red bar from .usa-form-group--error is not cut off in the small window

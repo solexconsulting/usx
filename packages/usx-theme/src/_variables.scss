@@ -379,6 +379,7 @@ $usx-text-colors: (
 ) !default;
 
 $usx-border-colors: (
+  'ink': $usx-text-ink,
   'default': $usx-color-border,
   'subtle':  $usx-color-border-subtle,
   'muted':   $usx-color-border-muted,

@@ -90,6 +90,15 @@ export const storyDefs = {
     lines: defaultLines,
     copyText: 'npm install @solexllc/usx\ninstalling...\nDone!',
   },
+  WithManyLinesAndMaxHeight: {
+    lines: Array.from({ length: 50 }, (_, i) => ({ code: `Line ${i + 1}`, prefix: `${i + 1}` })),
+    contentClassName: 'maxh-card',
+  },
+  WithLongLine: {
+    lines: [
+      { code: 'This is a very long line that should test how the component handles overflow of content within the code block. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', prefix: '~' },
+    ]
+  }
 };
 
 export default {
@@ -134,3 +143,5 @@ export const ReactMarkupWithHTMLFragment = {
 export const WithoutPrefix = { args: storyDefs.WithoutPrefix };
 export const WithColor = { args: storyDefs.WithColor };
 export const WithCopyButton = { args: storyDefs.WithCopyButton };
+export const WithManyLinesAndMaxHeight = { args: storyDefs.WithManyLinesAndMaxHeight };
+export const WithLongLine = { args: storyDefs.WithLongLine };

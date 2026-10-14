@@ -7,7 +7,7 @@ import Link, { type LinkProps } from '../link/Link';
 
 export interface QuoteProps extends Omit<React.HTMLAttributes<HTMLElement>, 'content'> {
   className?: string;
-  calloutProps?: Omit<CalloutProps, 'element' | 'children' | 'content' | 'cite'>;
+  calloutProps?: Omit<CalloutProps, 'element' | 'children' | 'content'>;
   attributionProps?: AttributionProps;
   children?: React.ReactNode;
   content?: React.ReactNode;

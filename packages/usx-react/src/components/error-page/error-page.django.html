@@ -1,0 +1,80 @@
+{# Django template for ErrorPage #}
+{% load components %}
+{% firstof id 'main-content' as pageId %}
+{% firstof title 'We couldn’t complete your request' as pageTitle %}
+{% firstof description 'We’re sorry. Please try again later.' as pageDescription %}
+{% fragment as pageClasses %}usx-error-page{% if className %} {{ className }}{% endif %}{% endfragment %}
+{% with titleId=pageId|add:'-title' %}
+  {% page id=pageId title=pageTitle titleId=titleId className=pageClasses %}
+    {% prose className='usx-error-page__body' %}
+      <p class="usa-intro usx-error-page__description margin-bottom-4">{{ pageDescription }}</p>
+
+      {% if cats %}
+        {% if errorCode %}
+          {% with catCode=errorCode|stringformat:'s' %}
+            {% with catImageSrc='https://http.cat/'|add:catCode defaultCatAlt='Cat illustration for HTTP error '|add:catCode %}
+              {% firstof catAlt defaultCatAlt as catImageAlt %}
+              {% image src=catImageSrc alt=catImageAlt %}{% endimage %}
+            {% endwith %}
+          {% endwith %}
+        {% endif %}
+      {% endif %}
+
+      {% if guidance or children %}
+        <div class="usx-error-page__content">
+          {% if guidance %}<p>{{ guidance }}</p>{% endif %}
+          {{ children|safe }}
+        </div>
+      {% endif %}
+    {% endprose %}
+
+    {% if actions %}
+      {% button_group buttonProps=actions className='usx-error-page__actions' %}{% endbutton_group %}
+    {% endif %}
+
+    {% prose className='usx-error-page__body' %}
+      {% if supportHeading or supportText or supportLinks %}
+        <section
+          class="usx-error-page__support"
+          {% if supportHeading %}aria-labelledby="{{ pageId }}-support-heading"{% endif %}
+        >
+          {% if supportHeading %}
+            <h2 id="{{ pageId }}-support-heading" class="usx-error-page__support-heading">{{ supportHeading }}</h2>
+          {% endif %}
+          {% if supportText %}<p>{{ supportText }}</p>{% endif %}
+          {% if supportLinks %}
+            <ul class="usx-error-page__support-links">
+              {% for item in supportLinks %}
+                <li>
+                  {% link href=item.href external=item.external newTab=item.newTab className=item.className %}{{ item.label }}{% endlink %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </section>
+      {% endif %}
+
+      {% if errorCode or errorCode == 0 or referenceId %}
+        <div class="usx-error-page__meta text-base font-body-2xs">
+          {% if errorCode or errorCode == 0 %}
+            <p>
+              <strong>{% firstof errorCodeLabel 'Error code' %}:</strong>
+              <span class="usx-error-page__meta-value">{{ errorCode }}</span>
+            </p>
+          {% endif %}
+          {% if referenceId %}
+            <p>
+              <strong>{% firstof referenceLabel 'Reference ID' %}:</strong>
+              <span class="usx-error-page__meta-value">{{ referenceId }}</span>
+            </p>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if detailsProps %}
+        {% fragment as detailsClasses %}usx-error-page__details font-family-mono font-mono-sm{% if detailsProps.className %} {{ detailsProps.className }}{% endif %}{% endfragment %}
+        {% details props=detailsProps className=detailsClasses %}{% enddetails %}
+      {% endif %}
+    {% endprose %}
+  {% endpage %}
+{% endwith %}

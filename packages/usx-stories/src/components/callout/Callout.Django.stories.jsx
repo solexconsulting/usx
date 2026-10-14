@@ -24,6 +24,5 @@ export const IndentXL = createStory(storyDefs.IndentXL);
 export const Dedent = createStory(storyDefs.Dedent);
 export const Section = createStory(storyDefs.Section);
 export const Aside = createStory(storyDefs.Aside);
-export const Blockquote = createStory(storyDefs.Blockquote);
 export const ChildrenOverride = createStory(storyDefs.ChildrenOverride);
 export const EmptyChildren = createStory(storyDefs.EmptyChildren);

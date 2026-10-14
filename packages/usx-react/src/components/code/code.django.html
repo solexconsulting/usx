@@ -1,7 +1,7 @@
 {# Django template for Code #}
 {% load components %}
 <div class="usx-mockup-code{% if className %} {{ className }}{% endif %}">
-  <div class="usx-mockup-code__content">
+  <div class="usx-mockup-code__content{% if contentClassName %} {{ contentClassName }}{% endif %}">
   {% for line in lines %}
   <pre
     {% if line.prefix %} data-prefix="{{ line.prefix }}"{% endif %}{% if line.className %} class="{{ line.className }}"{% endif %}

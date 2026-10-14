@@ -32,8 +32,9 @@
   }
 
   .usx-mockup-code__content {
-    overflow: scroll;
+    overflow: auto;
     padding-bottom: 0.5rem;
+    scrollbar-color: currentColor transparent;
 
     pre {
       padding: 0;

@@ -16,7 +16,6 @@ export const storyDefs = {
   Dedent: { dedent: true, content: 'Pulled left beyond the normal content edge.' },
   Section: { element: 'section', children: <><h3>Program details</h3><p>Related information in a semantic section.</p></> },
   Aside: { element: 'aside', content: 'Supplementary information in an aside.' },
-  Blockquote: { element: 'blockquote', cite: 'https://example.com/report', content: 'A sourced quotation using the blockquote root.' },
   ChildrenOverride: { content: 'This fallback must not appear.', children: <p><strong>Children win.</strong> Rich content can include <a className="usa-link usx-link usa-link--external" href="#details">links</a> and emphasis.</p> },
   EmptyChildren: { children: '', content: 'This fallback must not appear.', className: 'padding-y-2' },
 };

@@ -895,13 +895,9 @@ export const componentContracts = {
             "div",
             "section",
             "aside",
-            "blockquote"
+            "p"
           ],
           "default": "div"
-        },
-        "cite": {
-          "type": "string",
-          "description": "Source URL when the root element is blockquote."
         }
       },
       "renderers": {
@@ -1097,7 +1093,7 @@ export const componentContracts = {
         },
         "children": {
           "type": "slot",
-          "description": "React children become individual slides; Django slot content becomes one slide"
+          "description": "Each child becomes a slide; Django children may be pre-rendered HTML or an array of HTML fragments"
         },
         "ariaLabel": {
           "type": "string",
@@ -1117,6 +1113,10 @@ export const componentContracts = {
           "type": "boolean",
           "default": true,
           "description": "Show slide selection buttons when there are multiple slides; hidden buttons appear on focus"
+        },
+        "statusClassName": {
+          "type": "string",
+          "description": "Additional classes for the slide status element"
         },
         "className": {
           "type": "string",
@@ -1468,6 +1468,10 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes to apply to the wrapper div."
+        },
+        "contentClassName": {
+          "type": "string",
+          "description": "Additional CSS classes to apply to the content wrapper div inside the component."
         }
       },
       "renderers": {
@@ -2201,6 +2205,96 @@ export const componentContracts = {
         }
       }
     },
+    "details": {
+      "component": "details",
+      "version": 1,
+      "required": [
+        "summary"
+      ],
+      "props": {
+        "summary": {
+          "type": "string",
+          "default": "Details",
+          "description": "Text label describing the supporting content. Always escaped."
+        },
+        "text": {
+          "type": "string",
+          "default": "",
+          "description": "Plain-text content. Always escaped; line breaks and indentation are preserved, and long lines wrap. Ignored when children is supplied."
+        },
+        "children": {
+          "type": "slot",
+          "description": "Composed content. Takes precedence over text when supplied, including an empty string."
+        },
+        "open": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the native disclosure is initially open."
+        },
+        "markerColor": {
+          "type": "string",
+          "description": "USX color utility name for the summary marker, such as primary. Adds marker-{value} to the summary."
+        },
+        "underlineColor": {
+          "type": "string",
+          "description": "USWDS color utility name for the summary underline, such as secondary. Adds border-{value} to the summary text span."
+        },
+        "contentBorderColor": {
+          "type": "string",
+          "description": "USWDS color utility name for the content border, such as accent-cool. Adds border-{value} to the content unless noContentBorder is true."
+        },
+        "noContentBorder": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to remove the content border."
+        },
+        "noSummaryUnderline": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to remove the summary underline."
+        },
+        "className": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes for the details element, including font and spacing utilities."
+        },
+        "summaryClassName": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes for the summary element, including font and spacing utilities."
+        },
+        "summaryTextClassName": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes for the summary text span, including font and spacing utilities."
+        },
+        "contentClassName": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes for the content element, including font and spacing utilities."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Details"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "details",
+          "template": "details/details.django.html",
+          "tag": "details"
+        }
+      },
+      "examples": {
+        "default": {
+          "summary": "Help finding your reference number",
+          "text": "Your reference number is included in the confirmation email we sent you."
+        }
+      }
+    },
     "error-message": {
       "component": "error-message",
       "version": 2,
@@ -2231,6 +2325,182 @@ export const componentContracts = {
           "component": "error-message",
           "template": "error-message/error-message.django.html",
           "tag": "error_message"
+        }
+      }
+    },
+    "error-page": {
+      "component": "error-page",
+      "version": 3,
+      "required": [
+        "title"
+      ],
+      "props": {
+        "id": {
+          "type": "string",
+          "default": "main-content",
+          "description": "ID for the Page root and its heading reference. The default supports a standard skip link; override it when another element already uses main-content."
+        },
+        "title": {
+          "type": "string",
+          "description": "Plain-language h1 that summarizes the problem without blaming the user."
+        },
+        "description": {
+          "type": "string",
+          "default": "We’re sorry. Please try again later.",
+          "description": "Short lead text that explains what happened in user-facing language."
+        },
+        "guidance": {
+          "type": "string",
+          "default": "",
+          "description": "Optional recovery guidance rendered as a paragraph before the actions."
+        },
+        "actions": {
+          "type": "array",
+          "default": [],
+          "description": "Ordered navigation actions. Each item must provide label and href. Links work without JavaScript; callback-only actions belong in a framework adapter outside this shared component.",
+          "items": {
+            "type": "object",
+            "description": "A link rendered with the USX Button component inside a ButtonGroup. Labels must disclose when a destination opens in a new tab.",
+            "component": "button",
+            "omit": [
+              "type",
+              "disabled",
+              "onClick",
+              "big",
+              "inverse",
+              "ghost",
+              "loading",
+              "iconProps",
+              "style",
+              "children",
+              "extraAttributes"
+            ],
+            "properties": {
+              "itemClassName": {
+                "type": "string",
+                "description": "Additional CSS classes for the list item around this action."
+              }
+            }
+          }
+        },
+        "supportHeading": {
+          "type": "string",
+          "default": "",
+          "description": "Optional heading for support channels."
+        },
+        "supportText": {
+          "type": "string",
+          "default": "",
+          "description": "Optional instructions shown with the support channels."
+        },
+        "supportLinks": {
+          "type": "array",
+          "default": [],
+          "description": "Optional help links, including web, mailto, or tel destinations.",
+          "items": {
+            "type": "object",
+            "description": "A support channel rendered with the USX Link component. Labels should disclose when a destination opens a new window.",
+            "component": "link",
+            "omit": [
+              "children",
+              "visited",
+              "alt"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "Visible, descriptive link text."
+              }
+            }
+          }
+        },
+        "cats": {
+          "type": "boolean",
+          "default": false,
+          "description": "When true and errorCode has a value, displays the corresponding http.cat illustration after the description. This makes an external browser request to https://http.cat and may require that origin in the host Content Security Policy img-src directive."
+        },
+        "catAlt": {
+          "type": "string",
+          "default": "",
+          "description": "Optional localized alt text for the cat illustration. When omitted, the component uses 'Cat illustration for HTTP error {errorCode}'."
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "number"
+          ],
+          "description": "Optional public error or HTTP status code, displayed as subordinate metadata. This prop does not set the response status."
+        },
+        "errorCodeLabel": {
+          "type": "string",
+          "default": "Error code",
+          "description": "Localized label for errorCode."
+        },
+        "referenceId": {
+          "type": "string",
+          "description": "Optional opaque identifier that a user can give support. Do not include secrets, session IDs, stack traces, or raw request data."
+        },
+        "referenceLabel": {
+          "type": "string",
+          "default": "Reference ID",
+          "description": "Localized label for referenceId."
+        },
+        "detailsProps": {
+          "type": "object",
+          "component": "details",
+          "description": "Optional Details disclosure rendered after support and public metadata with monospace font utilities. Supply a descriptive summary and escaped plain text or trusted composed children. When supplying diagnostics, authorize the viewer and redact sensitive values first. A closed disclosure is still present in the page source."
+        },
+        "children": {
+          "type": "slot",
+          "description": "Optional trusted, composed recovery content rendered after guidance and before actions. Use React nodes or a Django block with equivalent markup."
+        },
+        "className": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes for the root Page element."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "ErrorPage"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "error-page",
+          "template": "error-page/error-page.django.html",
+          "tag": "error_page"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "main-content",
+          "title": "Page not found",
+          "description": "We're sorry, we can't find the page you're looking for.",
+          "guidance": "Check the address for typing errors, or use one of the options below.",
+          "actions": [
+            {
+              "label": "Visit the home page",
+              "href": "/",
+              "variant": "primary"
+            },
+            {
+              "label": "Search the site",
+              "href": "/search",
+              "variant": "outline"
+            }
+          ],
+          "supportHeading": "Need help?",
+          "supportText": "If you followed a link to this page, tell us where you found it.",
+          "supportLinks": [
+            {
+              "label": "Contact support",
+              "href": "/contact"
+            }
+          ],
+          "errorCode": "404"
         }
       }
     },
@@ -4181,7 +4451,7 @@ export const componentContracts = {
     },
     "page": {
       "component": "page",
-      "version": 2,
+      "version": 3,
       "required": [
         "title"
       ],
@@ -4189,6 +4459,18 @@ export const componentContracts = {
         "id": {
           "type": "string",
           "description": "Optional id attribute applied to the root main element."
+        },
+        "titleId": {
+          "type": "string",
+          "description": "Optional id for the h1. Also labels the root element unless ariaLabelledby is provided."
+        },
+        "tabIndex": {
+          "type": "number",
+          "description": "Optional tabindex for the root element. Use -1 when the page needs to receive programmatic focus."
+        },
+        "ariaLabelledby": {
+          "type": "string",
+          "description": "Optional id reference that labels the root element. Takes precedence over titleId."
         },
         "title": {
           "type": "slot",
@@ -4466,8 +4748,7 @@ export const componentContracts = {
           "omit": [
             "element",
             "children",
-            "content",
-            "cite"
+            "content"
           ]
         },
         "attributionProps": {

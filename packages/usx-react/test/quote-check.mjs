@@ -35,6 +35,9 @@ console.log('PASS: Quote forwards Attribution props in ESM and CommonJS');
 for (const library of [esm, cjs]) {
   assert.equal(library.Block, undefined);
   const render = (component, props) => renderToStaticMarkup(React.createElement(component, props));
+  const paragraph = render(library.Callout, { element: 'p', content: 'Supporting information' });
+  assert.ok(paragraph.startsWith('<p class="usx-callout'));
+  assert.ok(paragraph.endsWith('>Supporting information</p>'));
   const plain = render(library.Callout, { content: 'Fallback' });
   assert.ok(plain.includes('Fallback'));
   assert.ok(!plain.includes('border-'));

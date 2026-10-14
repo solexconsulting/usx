@@ -14,8 +14,7 @@
       "omit": [
         "element",
         "children",
-        "content",
-        "cite"
+        "content"
       ]
     },
     "attributionProps": {

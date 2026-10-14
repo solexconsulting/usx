@@ -1,7 +1,7 @@
 {
   "name": "page",
   "template": "page/page.django.html",
-  "version": 2,
+  "version": 3,
   "required": [
     "title"
   ],
@@ -9,6 +9,18 @@
     "id": {
       "type": "string",
       "description": "Optional id attribute applied to the root main element."
+    },
+    "titleId": {
+      "type": "string",
+      "description": "Optional id for the h1. Also labels the root element unless ariaLabelledby is provided."
+    },
+    "tabIndex": {
+      "type": "number",
+      "description": "Optional tabindex for the root element. Use -1 when the page needs to receive programmatic focus."
+    },
+    "ariaLabelledby": {
+      "type": "string",
+      "description": "Optional id reference that labels the root element. Takes precedence over titleId."
     },
     "title": {
       "type": "slot",
