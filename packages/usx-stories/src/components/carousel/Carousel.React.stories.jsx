@@ -26,7 +26,7 @@ const baseSlides = [
 
 export const storyDefs = {
   Default: { ariaLabel: 'Featured content', slides: baseSlides },
-  Unenhanced: { ariaLabel: 'Carousel without JS enhancement', slides: baseSlides, 'data-enhanced': 'true' },
+  Unenhanced: { ariaLabel: 'Carousel without JS enhancement', slides: baseSlides, extraAttributes: { 'data-enhanced': 'true' } },
   WithoutDots: { ariaLabel: 'Featured content', slides: baseSlides, showDots: false },
   HiddenStatus: { ariaLabel: 'Featured content', slides: baseSlides, statusClassName: 'display-none' },
   CustomId: { id: 'custom-carousel', ariaLabel: 'Featured content', slides: baseSlides },

@@ -1,0 +1,36 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-summary {
+  width: fit-content;
+  cursor: pointer;
+
+  &::marker {
+    height: 100%;
+    color: usx-when($usx-color-primary, $usx-color-primary, currentcolor);
+  }
+
+  &--no-marker {
+    &::marker {
+      content: none;
+    }
+  }
+
+  .usx-summary-text {
+    display: inline-flex;
+    align-items: center;
+    gap: units(1);
+    width: fit-content;
+  }
+
+  &:not(.usx-summary--no-underline) > .usx-summary-text {
+    border-color: usx-when($usx-color-primary, $usx-color-primary, currentcolor);
+    border-bottom-style: dotted;
+    border-bottom-width: usx-when($usx-border-width-md, $usx-border-width-md, 2px);
+    text-wrap: nowrap;
+  }
+
+  &:hover {
+    background-color: color-mix(in srgb, currentcolor 20%, transparent);
+  }
+}

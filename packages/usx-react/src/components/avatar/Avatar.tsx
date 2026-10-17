@@ -59,7 +59,7 @@ export default function Avatar({
     : isIconVariant
       ? (
         <span className={contentClasses}>
-          <Icon name={value as string} alt={alt || `${value} icon`} />
+          <Icon name={value as string} alt={alt ? undefined : `${value} icon`} />
         </span>
       )
       : <img className={imgClasses} src={src || undefined} alt={alt || undefined} role="img" {...props} />;

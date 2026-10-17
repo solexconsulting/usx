@@ -42,5 +42,33 @@ for (const lib of [esm, cjs]) {
   const group = lib.CheckboxGroup({ checkboxProps });
   const renderedCheckbox = group.props.children.props.children[0];
   assert.equal(renderedCheckbox.props.onChange, onClick);
+
+  const details = render(lib.Details, {
+    summaryProps: {
+      label: 'Grouped summary',
+      className: 'grouped-class',
+      markerColor: 'error',
+      underlineColor: 'secondary',
+      textClassName: 'bold-text',
+    },
+    text: 'Details body',
+  });
+  for (const text of ['Grouped summary', 'grouped-class', 'marker-error', 'border-secondary', 'bold-text']) {
+    assert.ok(details.includes(text), text);
+  }
+
+  const popover = render(lib.Popover, {
+    id: 'summary-props',
+    summaryProps: {
+      label: 'Grouped trigger',
+      className: 'grouped-trigger',
+      ariaLabel: 'Accessible grouped trigger',
+    },
+    children: 'Popover body',
+  });
+  for (const text of ['Grouped trigger', 'grouped-trigger', 'Accessible grouped trigger']) {
+    assert.ok(popover.includes(text), text);
+  }
+  assert.ok(render(lib.Popover, { id: 'default-summary' }).includes('Open panel'));
 }
-console.log('PASS: Card, Hero, Collection, and CheckboxGroup composition in ESM and CommonJS');
+console.log('PASS: Card, Hero, Collection, CheckboxGroup, Details, and Popover composition in ESM and CommonJS');

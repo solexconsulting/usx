@@ -1,7 +1,10 @@
-
 import config from '../../../../usx-react/src/components/header/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
-import { storyDefs } from './Header.React.stories.jsx';
+import {
+  storyDefs,
+  borderRoleVars,
+  BorderRoles as BorderRolesReact,
+} from './Header.React.stories.jsx';
 import { storyDefs as themePickerStoryDefs } from '../theme-picker/ThemePicker.React.stories.jsx';
 import { fetchComponentHtml, useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
 import React, { useEffect, useState } from 'react';
@@ -30,6 +33,12 @@ export const ResponsiveLogoExtended = createStory(storyDefs.ResponsiveLogoExtend
 export const ThemeResponsiveLogo = createStory(storyDefs.ThemeResponsiveLogo);
 export const ExternalLinks = createStory(storyDefs.ExternalLinks);
 
+const borderRoles = createStory(BorderRolesReact.args);
+export const BorderRoles = {
+  ...borderRoles,
+  render: (args) => <div style={borderRoleVars}>{borderRoles.render(args)}</div>,
+};
+
 // Same channel event the toolbar's own theme switcher emits — see
 // ThemePicker.Django.stories.jsx, which drives the global theme the same way.
 const THEME_PICKER_ONCHANGE =
@@ -51,13 +60,17 @@ const ExtensibilitySlotsStory = (args) => {
     }).then((html) => {
       if (active) setNavEndContent(html);
     });
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, []);
 
   const { html, error } = useDjangoRenderedHtml('header', { ...args, navEndContent });
 
   if (error) {
-    return <div className="usa-error-message usx-error-message">Error rendering component: {error}</div>;
+    return (
+      <div className="usa-error-message usx-error-message">Error rendering component: {error}</div>
+    );
   }
 
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
@@ -68,9 +81,10 @@ export const ExtensibilitySlots = {
   parameters: {
     docs: {
       description: {
-        story: '`navEndContent` embeds Django\'s own `theme-picker` component (fetched and rendered server-side), so it drives the toolbar theme global the same way the React story\'s live `ThemePicker` does.'
-      }
-    }
+        story:
+          "`navEndContent` embeds Django's own `theme-picker` component (fetched and rendered server-side), so it drives the toolbar theme global the same way the React story's live `ThemePicker` does.",
+      },
+    },
   },
   render: (args) => <ExtensibilitySlotsStory {...args} />,
 };

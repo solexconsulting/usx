@@ -1,7 +1,7 @@
 {
   "name": "site-alert",
   "template": "site-alert/site-alert.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "className": {
       "type": "string",
@@ -40,11 +40,13 @@
     },
     "alertHeading": {
       "type": "string",
-      "description": "Alert heading text"
+      "description": "Alert heading text",
+      "default": "Short alert message"
     },
     "alertText": {
       "type": "string",
-      "description": "Alert text content"
+      "description": "Alert text content",
+      "default": "Additional context and followup information including a link."
     },
     "alertContent": {
       "type": "slot",

@@ -70,6 +70,7 @@ export default {
 };
 
 export const Default = {
+    args: storyDefs.Default,
     render: (args) => {
         const [globals, updateGlobals] = useGlobals();
         return (
@@ -84,6 +85,7 @@ export const Default = {
 };
 
 export const LightDark = {
+    args: storyDefs.LightDark,
     render: (args) => {
         const [globals, updateGlobals] = useGlobals();
         return (

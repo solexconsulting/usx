@@ -35,7 +35,7 @@ export default function Search({
   action,
   defaultValue,
   onSubmit,
-  className = ''
+  className = '',
 }: SearchProps) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (onSubmit) {
@@ -46,12 +46,9 @@ export default function Search({
     }
   };
 
-  const iconClasses = ClassNames(
-    'usa-search__submit-icon',
-    {
-      'display-inline-block': iconOnly
-    }
-  );
+  const iconClasses = ClassNames('usa-search__submit-icon', {
+    'display-inline-block': iconOnly,
+  });
 
   const formClasses = ClassNames(
     'usa-search',
@@ -76,7 +73,7 @@ export default function Search({
           id={id}
           label={label}
           screenReaderOnlyLabel={true}
-          placeholder={placeholder}
+          placeholder={placeholder ?? ''}
           defaultValue={defaultValue}
           type="search"
           name={searchKey}
@@ -84,7 +81,7 @@ export default function Search({
         />
         <Button variant={buttonVariant} type="submit">
           {!iconOnly && <span className="usa-search__submit-text">{label}</span>}
-          <Icon name={icon} className={iconClasses} aria-hidden="true" alt={label} />
+          <Icon name={icon} className={iconClasses} />
         </Button>
       </form>
     </section>

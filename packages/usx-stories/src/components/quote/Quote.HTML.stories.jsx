@@ -1,16 +1,17 @@
 import React from 'react';
-import html from '../../../../usx-react/src/components/quote/quote.html?raw';
+import reactSnapshot from '../../../../usx-react/src/components/quote/quote.react-snapshot.html?raw';
 
 export default {
   title: 'HTML/USX/Quote',
   tags: ['USX', 'autodocs'],
 };
 
-export const Default = {
+export const AllVariantsReact = {
+  name: 'All Variants (React)',
   parameters: {
     docs: {
-      source: { code: html },
+      source: { code: reactSnapshot },
     },
   },
-  render: () => <div dangerouslySetInnerHTML={{ __html: html }} />,
+  render: () => <div dangerouslySetInnerHTML={{ __html: reactSnapshot }} />,
 };

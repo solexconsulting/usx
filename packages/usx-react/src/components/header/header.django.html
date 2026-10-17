@@ -65,9 +65,10 @@
                 {% if megamenu %}
                   <div id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu usa-megamenu" hidden="hidden">
                     <div class="grid-row grid-gap-4">
+                      {% for column in section.links|megamenu_columns %}
                       <div class="usa-col">
                         <ul class="usa-nav__submenu-list">
-                          {% for link in section.links %}
+                          {% for link in column %}
                             <li class="usa-nav__submenu-item">
                               <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
                                 {{ link.text }}
@@ -77,6 +78,7 @@
                           {% endfor %}
                         </ul>
                       </div>
+                      {% endfor %}
                     </div>
                   </div>
                 {% else %}
@@ -130,9 +132,10 @@
                 {% if megamenu %}
                   <div id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu usa-megamenu" hidden="hidden">
                     <div class="grid-row grid-gap-4">
+                      {% for column in section.links|megamenu_columns %}
                       <div class="usa-col">
                         <ul class="usa-nav__submenu-list">
-                          {% for link in section.links %}
+                          {% for link in column %}
                             <li class="usa-nav__submenu-item">
                               <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
                                 {{ link.text }}
@@ -142,6 +145,7 @@
                           {% endfor %}
                         </ul>
                       </div>
+                      {% endfor %}
                     </div>
                   </div>
                 {% else %}

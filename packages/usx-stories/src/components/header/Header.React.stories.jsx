@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../../../../usx-react/src/components/header/Header.tsx';
 import config from '../../../../usx-react/src/components/header/config.json';
@@ -9,29 +8,29 @@ import ThemePicker from '../../../../usx-react/src/components/theme-picker/Theme
 import Button from '../../../../usx-react/src/components/button/Button.tsx';
 
 const LIGHTDARKTHEMES = [
-    { value: 'Aurora', label: 'Light' },
-    { value: 'Borealis', label: 'Dark' },
-]
+  { value: 'Aurora', label: 'Light' },
+  { value: 'Borealis', label: 'Dark' },
+];
 
 export default {
   title: 'React/USWDS/Header',
   component: Header,
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'borderRoleVars'],
 };
 
 const lotsOfLinks = Array.from({ length: 30 }, (_, i) => ({
   text: `Link ${i + 1}`,
   href: `https://example.com/link${i + 1}`,
-  ariaLabel: `Link ${i + 1}`
+  ariaLabel: `Link ${i + 1}`,
 }));
 
 const simpleBranding = {
   logo: 'linear.svg',
   logoInverse: 'white_linear.png',
   title: 'Agency Name',
-}
+};
 
 const responsiveBranding = {
   logo: {
@@ -57,7 +56,7 @@ const standardBranding = {
   symbol: 'symbol-only.svg',
   symbolInverse: 'white_symbol-only.png',
   title: 'Agency Name',
-}
+};
 
 // Same responsive source set in both polarities; the active theme decides
 // which one renders (toolbar theme → Borealis/Midnight/Carbon/NASA).
@@ -85,8 +84,8 @@ const navSections = [
   {
     title: 'Section 3',
     href: 'https://example.com/section3',
-    ariaLabel: 'Section 3'
-  }
+    ariaLabel: 'Section 3',
+  },
 ];
 
 const searchArgs = {
@@ -102,8 +101,16 @@ const searchArgs = {
 };
 
 const secondaryLinks = [
-  { text: 'Secondary Link 1', href: 'https://example.com/secondary1', ariaLabel: 'Secondary Link 1' },
-  { text: 'Secondary Link 2', href: 'https://example.com/secondary2', ariaLabel: 'Secondary Link 2' },
+  {
+    text: 'Secondary Link 1',
+    href: 'https://example.com/secondary1',
+    ariaLabel: 'Secondary Link 1',
+  },
+  {
+    text: 'Secondary Link 2',
+    href: 'https://example.com/secondary2',
+    ariaLabel: 'Secondary Link 2',
+  },
 ];
 
 const externalNavSections = [
@@ -116,16 +123,41 @@ const externalNavSections = [
   {
     title: 'Section With Links',
     links: [
-      { text: 'External Link A', href: 'https://example.com/linkA', ariaLabel: 'External Link A', external: true },
-      { text: 'External Link B', href: 'https://example.com/linkB', ariaLabel: 'External Link B', external: true },
-      { text: 'External Link C', href: 'https://example.com/linkC', ariaLabel: 'External Link C', external: true },
+      {
+        text: 'External Link A',
+        href: 'https://example.com/linkA',
+        ariaLabel: 'External Link A',
+        external: true,
+      },
+      {
+        text: 'External Link B',
+        href: 'https://example.com/linkB',
+        ariaLabel: 'External Link B',
+        external: true,
+      },
+      {
+        text: 'External Link C',
+        href: 'https://example.com/linkC',
+        ariaLabel: 'External Link C',
+        external: true,
+      },
     ],
   },
 ];
 
 const externalSecondaryLinks = [
-  { text: 'Secondary External 1', href: 'https://example.com/secondary1', ariaLabel: 'Secondary External 1', external: true },
-  { text: 'Secondary External 2', href: 'https://example.com/secondary2', ariaLabel: 'Secondary External 2', external: true },
+  {
+    text: 'Secondary External 1',
+    href: 'https://example.com/secondary1',
+    ariaLabel: 'Secondary External 1',
+    external: true,
+  },
+  {
+    text: 'Secondary External 2',
+    href: 'https://example.com/secondary2',
+    ariaLabel: 'Secondary External 2',
+    external: true,
+  },
 ];
 
 const utilityContentExample = (
@@ -183,7 +215,12 @@ export const storyDefs = {
   Basic: { ...fullArgs, id: 'header-basic', extended: false, megamenu: false },
   BasicWithMegamenu: { ...fullArgs, id: 'header-basic-megamenu', extended: false, megamenu: true },
   Extended: { ...fullArgs, id: 'header-extended', extended: true, megamenu: false },
-  ExtendedWithMegamenu: { ...fullArgs, id: 'header-extended-megamenu', extended: true, megamenu: true },
+  ExtendedWithMegamenu: {
+    ...fullArgs,
+    id: 'header-extended-megamenu',
+    extended: true,
+    megamenu: true,
+  },
   WithMenuIcon: { ...fullArgs, id: 'header-menu-icon', useMenuIcon: true },
   Minimal: {
     id: 'header-minimal',
@@ -227,6 +264,14 @@ export const storyDefs = {
   },
 };
 
+// Search derives its input id from this prop; one per story keeps ids stable and unique on a page.
+const withSearchId = (args) =>
+  args.searchProps
+    ? { ...args, searchProps: { ...args.searchProps, id: `${args.id}-search` } }
+    : args;
+
+for (const [key, args] of Object.entries(storyDefs)) storyDefs[key] = withSearchId(args);
+
 // ─── Branding variants ───────────────────────────────────────────────────────
 
 export const TextOnly = { args: storyDefs.TextOnly };
@@ -239,10 +284,11 @@ export const ThemeResponsiveLogo = {
   parameters: {
     docs: {
       description: {
-        story: 'Supply `logo` and `logoInverse` to switch artwork with the theme. Resize the viewport to see each variant\'s own responsive sources, and switch the toolbar theme to a dark preset to see the white artwork.'
-      }
-    }
-  }
+        story:
+          "Supply `logo` and `logoInverse` to switch artwork with the theme. Resize the viewport to see each variant's own responsive sources, and switch the toolbar theme to a dark preset to see the white artwork.",
+      },
+    },
+  },
 };
 
 // ─── Layout variants ─────────────────────────────────────────────────────────
@@ -251,17 +297,19 @@ export const Default = { args: storyDefs.Default };
 export const Basic = { args: storyDefs.Basic };
 export const BasicWithMegamenu = { args: storyDefs.BasicWithMegamenu };
 export const Extended = { args: storyDefs.Extended };
+export const borderRoleVars = {
+  '--usx-header-border-top': '3px solid #005ea2',
+  '--usx-header-border-bottom': '4px solid #237a3b',
+  '--usx-header-border-separator': '2px dashed #a72f10',
+  '--usx-header-border-bottom-mobile': '5px solid #8a3575',
+  '--usx-header-nav-border-bottom-mobile': '6px solid #d1980b',
+  '--usx-header-nav-item-border': '3px dashed #e41d3d',
+};
+
 export const BorderRoles = {
-  args: { ...storyDefs.Extended, id: 'header-border-roles' },
+  args: withSearchId({ ...storyDefs.Extended, id: 'header-border-roles' }),
   render: (args) => (
-    <div style={{
-      '--usx-header-border-top': '3px solid #005ea2',
-      '--usx-header-border-bottom': '4px solid #237a3b',
-      '--usx-header-border-separator': '2px dashed #a72f10',
-      '--usx-header-border-bottom-mobile': '5px solid #8a3575',
-      '--usx-header-nav-border-bottom-mobile': '6px solid #d1980b',
-      '--usx-header-nav-item-border': '3px dashed #e41d3d',
-    }}>
+    <div style={borderRoleVars}>
       <Header {...args} />
     </div>
   ),
@@ -276,9 +324,10 @@ export const ExtensibilitySlots = {
   parameters: {
     docs: {
       description: {
-        story: '`utilityContent` renders inline to the left of search; `navEndContent` renders right-justified in line with the primary nav links (extended header only). Here `utilityContent` is a live `ThemePicker` wired to the toolbar theme global.'
-      }
-    }
+        story:
+          '`utilityContent` renders inline to the left of search; `navEndContent` renders right-justified in line with the primary nav links (extended header only). Here `utilityContent` is a live `ThemePicker` wired to the toolbar theme global.',
+      },
+    },
   },
   render: (args) => {
     const [globals, updateGlobals] = useGlobals();
@@ -294,5 +343,5 @@ export const ExtensibilitySlots = {
         }
       />
     );
-  }
+  },
 };

@@ -1,6 +1,11 @@
+import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 import { NodePackageImporter } from "sass";
+
+// reports/ is gitignored and only exists after `pnpm snapshot:report`; mounting a missing folder fails.
+const reportsDir = fileURLToPath(new URL('../../../reports', import.meta.url));
+const reportStaticDirs = existsSync(reportsDir) ? [{ from: reportsDir, to: '/reports' }] : [];
 export default {
   stories: (existingStories, { configType } = {}) => {
     const root = '../../../packages/usx-stories/src';
@@ -35,6 +40,7 @@ export default {
     '../../../node_modules/@uswds/uswds/dist',
     { from: '../../../packages/usx/src/img', to: '/img' },
     '../static',
+    ...reportStaticDirs,
   ],
 
   // base: './' makes Vite emit relative asset URLs so Storybook works

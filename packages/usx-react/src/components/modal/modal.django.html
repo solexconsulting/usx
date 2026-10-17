@@ -1,12 +1,11 @@
 {# Django template for Modal #}
 {% load components %}
-{% load static %}
 <div
     class="usa-modal usx-modal{% if size == 'lg' %} usa-modal--lg{% elif size == 'lg-collapsed' %} usx-modal--lg-collapsed{% endif %}{% if className %} {{ className }}{% endif %}"
     id="{{ id }}"
     aria-labelledby="{{ id }}-heading"
     aria-describedby="{{ id }}-description"
-    {% if forceAction %}data-force-action{% endif %}
+    {% if forceAction %}data-force-action="true"{% endif %}
   >
     <div class="usa-modal__content">
       <div class="usa-modal__main">
@@ -31,13 +30,10 @@
         type="button"
         class="usa-button usa-modal__close"
         aria-label="Close this window"
-        data-close-modal
+        data-close-modal="true"
       >
-        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
-          <use href="{% static 'img/sprite.svg' %}#close"></use>
-        </svg>
+        {% icon name="close" %}{% endicon %}
       </button>
       {% endif %}
     </div>
   </div>
-</div>

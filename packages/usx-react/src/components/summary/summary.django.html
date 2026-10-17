@@ -1,0 +1,14 @@
+{# Django template for Summary #}
+{% load components %}
+{% spaceless %}
+{% if unstyled %}
+<summary{% if className %} class="{{ className|force_escape }}"{% endif %}{% if ariaLabel %} aria-label="{{ ariaLabel|force_escape }}"{% endif %}>{% if children != None %}{{ children|safe }}{% elif label %}{{ label|force_escape }}{% else %}Details{% endif %}</summary>
+{% else %}
+<summary class="usx-summary{% if markerColor and not noMarker %} marker-{{ markerColor|force_escape }}{% endif %}{% if noMarker %} usx-summary--no-marker{% endif %}{% if noUnderline %} usx-summary--no-underline{% endif %}{% if className %} {{ className|force_escape }}{% endif %}"{% if ariaLabel %} aria-label="{{ ariaLabel|force_escape }}"{% endif %}>
+  <span class="usx-summary-text{% if underlineColor and not noUnderline %} border-{{ underlineColor|force_escape }}{% endif %}{% if textClassName %} {{ textClassName|force_escape }}{% endif %}">
+    {% if children != None %}{{ children|safe }}{% elif label %}{{ label|force_escape }}{% else %}Details{% endif %}
+  </span>
+</summary>
+{% endif %}
+{% endspaceless %}
+  

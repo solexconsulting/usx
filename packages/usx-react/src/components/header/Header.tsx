@@ -220,7 +220,7 @@ export default function Header({
   if (extended) {
     return (
       <>
-        <header className={headerClasses} {...props}>
+        <header id={id} className={headerClasses} {...props}>
           {navbar}
         </header>
         <nav aria-label="Primary navigation" className={navClasses}>
@@ -260,7 +260,7 @@ export default function Header({
   }
 
   return (
-    <header className={headerClasses} {...props}>
+    <header id={id} className={headerClasses} {...props}>
       <div className="usa-nav-container">
         {navbar}
         <nav aria-label="Primary navigation" className={navClasses}>

@@ -7,6 +7,7 @@ Each component is registered as a BlockInclusionNode subclass, providing
 
 import hashlib
 import json
+import math
 import re
 import uuid
 from datetime import datetime
@@ -118,6 +119,20 @@ def enum_to_kebab_case(value: str) -> str:
 
 
 @register.filter()
+def megamenu_columns(links: List[Any]) -> List[List[Any]]:
+    """
+    Splits megamenu links into at most four columns of roughly equal size
+    (one column per three links), as the React Header does.
+    """
+    links = list(links or [])
+    if not links:
+        return []
+    columns = min(4, max(1, math.ceil(len(links) / 3)))
+    per_column = math.ceil(len(links) / columns)
+    return [links[start:start + per_column] for start in range(0, len(links), per_column)]
+
+
+@register.filter()
 def get_cell_header(headers: List[Dict[str, str]], index: int) -> str:
     """
     Returns the column header for the given column index.
@@ -178,6 +193,23 @@ def file_extension(value: str) -> str:
     if not value or "." not in value:
         return ""
     return value.rsplit(".", 1)[-1].upper()
+
+
+@register.filter()
+def file_size(value) -> str:
+    """
+    Formats a byte count like the React FileList ("812 B", "7 KB", "1.2 MB").
+    """
+    try:
+        size = float(value)
+    except (TypeError, ValueError):
+        return ""
+    if size < 1024:
+        return f"{int(size)} B"
+    kb = size / 1024
+    if kb < 1024:
+        return f"{round(kb)} KB"
+    return f"{kb / 1024:.1f} MB"
 
 
 class FragmentNode(template.Node):
@@ -375,6 +407,9 @@ class ComboboxBlock(BlockInclusionNode):
 class DatePickerBlock(BlockInclusionNode):
     template = "date-picker/date-picker.django.html"
 
+class DetailsBlock(BlockInclusionNode):
+    template = "details/details.django.html"
+
 class FieldsetBlock(BlockInclusionNode):
     template = "fieldset/fieldset.django.html"
 
@@ -489,6 +524,9 @@ class SpinnerBlock(BlockInclusionNode):
 class StepIndicatorBlock(BlockInclusionNode):
     template = "step-indicator/step-indicator.django.html"
 
+class SummaryBlock(BlockInclusionNode):
+    template = "summary/summary.django.html"
+
 class SummaryBoxBlock(BlockInclusionNode):
     template = "summary-box/summary-box.django.html"
 
@@ -525,6 +563,9 @@ class TimePickerBlock(BlockInclusionNode):
 class TooltipBlock(BlockInclusionNode):
     template = "tooltip/tooltip.django.html"
 
+class TreeBlock(BlockInclusionNode):
+    template = "tree/tree.django.html"
+
 
 register.tag('avatar', AvatarBlock.handle)
 register.tag('avatar_group', AvatarGroupBlock.handle)
@@ -548,6 +589,7 @@ register.tag('collection', CollectionBlock.handle)
 register.tag('combobox', ComboboxBlock.handle)
 register.tag('copy_to_clipboard', CopyToClipboardBlock.handle)
 register.tag('date_picker', DatePickerBlock.handle)
+register.tag('details', DetailsBlock.handle)
 register.tag('fieldset', FieldsetBlock.handle)
 register.tag('file_input', FileInputBlock.handle)
 register.tag('footer', FooterBlock.handle)
@@ -586,6 +628,7 @@ register.tag('site_alert', SiteAlertBlock.handle)
 register.tag('skipnav', SkipnavBlock.handle)
 register.tag('spinner', SpinnerBlock.handle)
 register.tag('step_indicator', StepIndicatorBlock.handle)
+register.tag('summary', SummaryBlock.handle)
 register.tag('summary_box', SummaryBoxBlock.handle)
 register.tag('table', TableBlock.handle)
 register.tag('table_head', TableHeadBlock.handle)
@@ -598,6 +641,7 @@ register.tag('tag_group', TagGroupBlock.handle)
 register.tag('text_area', TextAreaBlock.handle)
 register.tag('time_picker', TimePickerBlock.handle)
 register.tag('tooltip', TooltipBlock.handle)
+register.tag('tree', TreeBlock.handle)
 
 
 def _register_template_tags():

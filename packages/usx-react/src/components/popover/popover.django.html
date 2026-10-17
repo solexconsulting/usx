@@ -1,0 +1,11 @@
+{% load components %}
+<!-- prettier-ignore -->
+<details
+  {% if name %}name="{{ name|force_escape }}"{% endif %}
+  class="usx-popover{% if className %} {{ className }}{% endif %}"{% if defaultOpen %} open{% endif %}
+  data-side="{{ side|default:'bottom'|force_escape }}"
+  data-align="{{ align|default:'start'|force_escape }}"
+>{% summary props=summaryProps label=summaryProps.label|default:'Open panel' unstyled=True %}{% endsummary %}<div
+    id="{{ id|force_escape }}"
+    class="usx-popover__panel{% if panelClassName %} {{ panelClassName }}{% endif %}"
+  >{% if panelHeading %}{% if headingLevel == 'h1' %}<h1 class="usx-popover__panel-heading">{{ panelHeading|force_escape }}</h1>{% elif headingLevel == 'h3' %}<h3 class="usx-popover__panel-heading">{{ panelHeading|force_escape }}</h3>{% elif headingLevel == 'h4' %}<h4 class="usx-popover__panel-heading">{{ panelHeading|force_escape }}</h4>{% elif headingLevel == 'h5' %}<h5 class="usx-popover__panel-heading">{{ panelHeading|force_escape }}</h5>{% elif headingLevel == 'h6' %}<h6 class="usx-popover__panel-heading">{{ panelHeading|force_escape }}</h6>{% else %}<h2 class="usx-popover__panel-heading">{{ panelHeading|force_escape }}</h2>{% endif %}{% endif %}{% if menuItems %}{% include "popover/_popover-menu.django.html" with items=menuItems prefix=id only %}{% endif %}{% if children %}<div class="usx-popover__panel-content{% if scrollable %} usx-popover__scroll{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">{{ children|safe }}</div>{% endif %}{% if showClose %}<button type="button" class="usa-button usx-button usa-button--unstyled usx-popover__panel-close" data-usx-popover-close="{{ id|force_escape }}">{{ closeLabel|default:'Close'|force_escape }}</button>{% endif %}</div></details>

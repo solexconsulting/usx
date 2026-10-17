@@ -1,20 +1,36 @@
 import React from 'react';
-import proseHtml from '../../../../usx-react/src/components/prose/prose.html?raw';
+import reactSnapshot from '../../../../usx-react/src/components/prose/prose.react-snapshot.html?raw';
+import djangoSnapshot from '../../../../usx-react/src/components/prose/prose.django-snapshot.html?raw';
 
 export default {
   title: 'HTML/USWDS/Prose',
-  tags: ['USWDS', 'autodocs']
+  tags: ['USWDS', 'autodocs'],
 };
 
-export const SimplePage = {
+export const AllVariantsReact = {
+  name: 'All Variants (React)',
   parameters: {
     docs: {
       source: {
-        code: proseHtml
-      }
-    }
+        code: reactSnapshot,
+      },
+    },
   },
   render: () => {
-    return <div dangerouslySetInnerHTML={{ __html: proseHtml }} />;
-  }
-}
+    return <div dangerouslySetInnerHTML={{ __html: reactSnapshot }} />;
+  },
+};
+
+export const AllVariantsDjango = {
+  name: 'All Variants (Django)',
+  parameters: {
+    docs: {
+      source: {
+        code: djangoSnapshot,
+      },
+    },
+  },
+  render: () => {
+    return <div dangerouslySetInnerHTML={{ __html: djangoSnapshot }} />;
+  },
+};

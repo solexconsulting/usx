@@ -1,0 +1,253 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-drawer {
+  display: inline-block;
+}
+
+.usx-drawer__trigger.usa-button {
+  margin: 0;
+}
+
+// Native dialog and popover visibility remains under browser control. Only
+// the open state becomes a grid, so a closed dialog stays hidden.
+.usx-drawer__panel {
+  box-sizing: border-box;
+  position: fixed;
+  inset: auto;
+  max-inline-size: 100vw;
+  max-block-size: 100vh;
+  max-block-size: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 0;
+  background: usx-when($usx-surface-1, $usx-surface-1, #fff);
+  color: usx-when($usx-text-ink, $usx-text-ink, #1b1b1b);
+  box-shadow: 0 0 1.5rem rgb(0 0 0 / 22%);
+
+  &:is([open], :popover-open) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(4rem, 1fr) auto;
+  }
+
+  &:not([popover])::backdrop {
+    background: rgb(0 0 0 / 48%);
+  }
+}
+
+.usx-drawer__panel[data-side='inline-start'],
+.usx-drawer__panel[data-side='inline-end'] {
+  inset-block: 0;
+  inline-size: min(28rem, 100vw);
+  block-size: 100vh;
+  block-size: 100dvh;
+
+  &[data-size='compact'] {
+    inline-size: min(22rem, 100vw);
+  }
+
+  &[data-size='wide'] {
+    inline-size: min(40rem, 100vw);
+  }
+}
+
+.usx-drawer__panel[data-side='inline-start'] {
+  inset-inline-start: 0;
+  border-start-end-radius: usx-when($usx-radius-box, $usx-radius-box, 0.25rem);
+  border-end-end-radius: usx-when($usx-radius-box, $usx-radius-box, 0.25rem);
+}
+
+.usx-drawer__panel[data-side='inline-end'] {
+  inset-inline-end: 0;
+  border-start-start-radius: usx-when($usx-radius-box, $usx-radius-box, 0.25rem);
+  border-end-start-radius: usx-when($usx-radius-box, $usx-radius-box, 0.25rem);
+}
+
+.usx-drawer__panel[data-side='top'],
+.usx-drawer__panel[data-side='bottom'] {
+  inset-inline: 0;
+  inline-size: 100vw;
+  block-size: min(24rem, 90vh);
+  block-size: min(24rem, 90dvh);
+
+  &[data-size='compact'] {
+    block-size: min(16rem, 90vh);
+    block-size: min(16rem, 90dvh);
+  }
+
+  &[data-size='wide'] {
+    block-size: min(36rem, 90vh);
+    block-size: min(36rem, 90dvh);
+  }
+}
+
+.usx-drawer__panel[data-side='top'] {
+  inset-block-start: 0;
+  border-end-start-radius: usx-when($usx-radius-box, $usx-radius-box, 0.25rem);
+  border-end-end-radius: usx-when($usx-radius-box, $usx-radius-box, 0.25rem);
+}
+
+.usx-drawer__panel[data-side='bottom'] {
+  inset-block-end: 0;
+  border-start-start-radius: usx-when($usx-radius-box, $usx-radius-box, 0.25rem);
+  border-start-end-radius: usx-when($usx-radius-box, $usx-radius-box, 0.25rem);
+}
+
+.usx-drawer__header {
+  grid-column: 1;
+  grid-row: 1;
+  min-inline-size: 0;
+  padding-block: 1.5rem 1.25rem;
+  padding-inline: 1.5rem 0.75rem;
+}
+
+.usx-drawer__heading {
+  margin: 0;
+  font-family: $usx-font-family-heading;
+  font-size: 1.375rem;
+  font-weight: usx-when($usx-font-weight-bold, $usx-font-weight-bold, 700);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.usx-drawer__description {
+  max-inline-size: 65ch;
+  margin: 0.5rem 0 0;
+  color: usx-when($usx-text-muted, $usx-text-muted, #565c65);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.usx-drawer__body {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  min-block-size: 4rem;
+  padding: 1.5rem;
+  overflow: auto;
+  border-block-start: 1px solid
+    usx-when($usx-color-border-subtle, $usx-color-border-subtle, #dfe1e2);
+}
+
+.usx-drawer__footer {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-block-start: 1px solid
+    usx-when($usx-color-border-subtle, $usx-color-border-subtle, #dfe1e2);
+
+  > .usa-button {
+    margin: 0;
+  }
+}
+
+.usx-drawer__close {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  place-self: start end;
+  min-inline-size: 2.75rem;
+  max-inline-size: min(10rem, 45vw);
+  min-block-size: 2.75rem;
+  margin: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: usx-when($usx-radius-field, $usx-radius-field, 0.25rem);
+  background: transparent;
+  color: usx-when($usx-text-muted, $usx-text-muted, #565c65);
+  font: inherit;
+  line-height: 1.25;
+  text-align: center;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+
+  &:hover {
+    background: usx-when($usx-surface-2, $usx-surface-2, #e6e6e6);
+    color: usx-when($usx-text-ink, $usx-text-ink, #1b1b1b);
+  }
+}
+
+.usx-drawer__trigger:focus-visible,
+.usx-drawer__close:focus-visible {
+  outline: 0.25rem solid usx-when($usx-color-focus, $usx-color-focus, #2491ff);
+  outline-offset: 0.125rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .usx-drawer__panel:is([open], :popover-open) {
+    animation-duration: 180ms;
+    animation-timing-function: ease-out;
+  }
+
+  .usx-drawer__panel[data-side='inline-start']:is([open], :popover-open) {
+    animation-name: usx-drawer-in-from-left;
+  }
+
+  .usx-drawer__panel[data-side='inline-end']:is([open], :popover-open) {
+    animation-name: usx-drawer-in-from-right;
+  }
+
+  .usx-drawer__panel:dir(rtl)[data-side='inline-start']:is([open], :popover-open) {
+    animation-name: usx-drawer-in-from-right;
+  }
+
+  .usx-drawer__panel:dir(rtl)[data-side='inline-end']:is([open], :popover-open) {
+    animation-name: usx-drawer-in-from-left;
+  }
+
+  .usx-drawer__panel[data-side='top']:is([open], :popover-open) {
+    animation-name: usx-drawer-in-from-top;
+  }
+
+  .usx-drawer__panel[data-side='bottom']:is([open], :popover-open) {
+    animation-name: usx-drawer-in-from-bottom;
+  }
+}
+
+@keyframes usx-drawer-in-from-left {
+  from {
+    transform: translateX(-1rem);
+    opacity: 0;
+  }
+}
+
+@keyframes usx-drawer-in-from-right {
+  from {
+    transform: translateX(1rem);
+    opacity: 0;
+  }
+}
+
+@keyframes usx-drawer-in-from-top {
+  from {
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+}
+
+@keyframes usx-drawer-in-from-bottom {
+  from {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .usx-drawer__panel {
+    border: 1px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+    box-shadow: none;
+  }
+
+  .usx-drawer__close {
+    color: ButtonText;
+  }
+}

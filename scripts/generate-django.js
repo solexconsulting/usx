@@ -24,21 +24,28 @@ for (const directory of ['core', 'templatetags', 'templates']) {
 for (const directory of ['core', 'templatetags']) {
   fs.cpSync(path.join(runtimeDir, directory), path.join(outputDir, directory), {
     recursive: true,
-    filter: (source) => fs.statSync(source).isDirectory()
-      ? path.basename(source) !== '__pycache__'
-      : source.endsWith('.py'),
+    filter: (source) =>
+      fs.statSync(source).isDirectory()
+        ? path.basename(source) !== '__pycache__'
+        : source.endsWith('.py'),
   });
 }
-fs.copyFileSync(path.join(runtimeDir, 'table_component.py'), path.join(outputDir, 'table_component.py'));
+fs.copyFileSync(
+  path.join(runtimeDir, 'table_component.py'),
+  path.join(outputDir, 'table_component.py')
+);
 fs.cpSync(COMPONENTS_DIR, path.join(outputDir, 'templates'), {
   recursive: true,
-  filter: (source) => fs.statSync(source).isDirectory()
-    ? path.basename(source) !== '__pycache__'
-    : source.endsWith('.django.html') || path.basename(source) === 'config.json' || source.endsWith('.py'),
+  filter: (source) =>
+    fs.statSync(source).isDirectory()
+      ? path.basename(source) !== '__pycache__'
+      : source.endsWith('.django.html') ||
+        path.basename(source) === 'config.json' ||
+        source.endsWith('.py'),
 });
 fs.writeFileSync(
   path.join(outputDir, 'component-contracts.json'),
-  `${JSON.stringify(buildContractManifest(configs), null, 2)}\n`,
+  `${JSON.stringify(buildContractManifest(configs), null, 2)}\n`
 );
 fs.copyFileSync(path.join(REPO_ROOT, 'LICENSE'), path.join(packageDir, 'LICENSE'));
 console.log(`Prepared Django package with ${configs.size} contracts in packages/usx-django.`);

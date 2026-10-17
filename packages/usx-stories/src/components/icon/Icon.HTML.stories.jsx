@@ -1,20 +1,36 @@
 import React from 'react';
-import iconHtml from '../../../../usx-react/src/components/icon/icon.html?raw';
+import reactSnapshot from '../../../../usx-react/src/components/icon/icon.react-snapshot.html?raw';
+import djangoSnapshot from '../../../../usx-react/src/components/icon/icon.django-snapshot.html?raw';
 
 export default {
   title: 'HTML/USWDS/Icon',
-  tags: ['USWDS', 'autodocs']
+  tags: ['USWDS', 'autodocs'],
 };
 
-export const AllVariants = {
+export const AllVariantsReact = {
+  name: 'All Variants (React)',
   parameters: {
     docs: {
       source: {
-        code: iconHtml
-      }
-    }
+        code: reactSnapshot,
+      },
+    },
   },
   render: () => {
-    return <div dangerouslySetInnerHTML={{ __html: iconHtml }} />;
-  }
-}
+    return <div dangerouslySetInnerHTML={{ __html: reactSnapshot }} />;
+  },
+};
+
+export const AllVariantsDjango = {
+  name: 'All Variants (Django)',
+  parameters: {
+    docs: {
+      source: {
+        code: djangoSnapshot,
+      },
+    },
+  },
+  render: () => {
+    return <div dangerouslySetInnerHTML={{ __html: djangoSnapshot }} />;
+  },
+};

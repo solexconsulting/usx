@@ -41,5 +41,9 @@ merge this node's own "properties" as overrides/additions.
 */
 `;
 
-fs.writeFileSync(CONTRACTS_PATH, `${header}export const componentContracts = ${JSON.stringify(manifest, null, 2)};\n`, 'utf8');
+fs.writeFileSync(
+  CONTRACTS_PATH,
+  `${header}export const componentContracts = ${JSON.stringify(manifest, null, 2)};\n`,
+  'utf8'
+);
 console.log(`Wrote ${configs.size} component contracts to ${rel(CONTRACTS_PATH)}`);

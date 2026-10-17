@@ -46,6 +46,10 @@
     "className": {
       "type": "string",
       "description": "Additional classes for the carousel region"
+    },
+    "extraAttributes": {
+      "type": "object",
+      "description": "An object containing any additional HTML attributes to be spread onto the carousel root element, providing flexibility for custom use cases or integrations."
     }
   }
 }

@@ -113,8 +113,15 @@ export const storyDefs = {
     tile: true,
     description: 'Please check this box to continue.',
   },
-  Success: {
+  ErrorWithoutFormGroup: {
     ...getArgs(19),
+    error: 'You\'ve done something wrong, although we don\'t necessarily know what.',
+    tile: true,
+    formGroup: false,
+    description: 'Please check this box to continue.',
+  },
+  Success: {
+    ...getArgs(20),
     success: 'Great! You have successfully seen this message.',
     tile: true,
     description: 'Confirmation received.',
@@ -139,18 +146,5 @@ export const SmallCheckedTileDisabled = { args: storyDefs.SmallCheckedTileDisabl
 export const WithOnChange = { args: storyDefs.WithOnChange };
 export const Required = { args: storyDefs.Required };
 export const Error = { args: storyDefs.Error };
+export const ErrorWithoutFormGroup = { args: storyDefs.ErrorWithoutFormGroup };
 export const Success = { args: storyDefs.Success };
-
-// Demonstrates the usa-form-group--error wrapper USWDS applies around a
-// fieldset of checkboxes when the group as a whole is invalid.
-export const GroupError = {
-  render: () => (
-    <FormGroup error>
-      <Fieldset legend="Select any historical figure" error="Select at least one option.">
-        <Checkbox id="group-error-truth" name="group-error-figures" value="sojourner-truth" label="Sojourner Truth" />
-        <Checkbox id="group-error-douglass" name="group-error-figures" value="frederick-douglass" label="Frederick Douglass" />
-      </Fieldset>
-    </FormGroup>
-  ),
-};
-

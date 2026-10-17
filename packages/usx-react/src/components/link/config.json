@@ -11,9 +11,13 @@
       "type": "string",
       "description": "Link destination URL."
     },
+    "text": {
+      "type": "string",
+      "description": "Link text content. Ignored if children are provided."
+    },
     "children": {
       "type": "slot",
-      "description": "Inner link text or HTML."
+      "description": "Inner link text or HTML. Overrides the text prop if provided."
     },
     "visited": {
       "type": "boolean",

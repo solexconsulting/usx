@@ -33,8 +33,8 @@ export default function CopyToClipboard({
       onClick={() => copyTextToClipboard(copyText)}
       type="button"
     >
-      <Icon name="content_copy" size={0} className="usx-copy__copy" staticBaseUrl={staticBaseUrl} />
-      <Icon name="check" size={0} className="usx-copy__check" staticBaseUrl={staticBaseUrl} />
+      <Icon name="content_copy" className="usx-copy__copy" staticBaseUrl={staticBaseUrl} />
+      <Icon name="check" className="usx-copy__check" staticBaseUrl={staticBaseUrl} />
       {label && <span className="margin-left-1">{label}</span>}
     </Button>
   );

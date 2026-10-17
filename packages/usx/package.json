@@ -29,7 +29,8 @@
     "./js/start": "./src/js/start.mjs",
     "./js/carousel": "./src/js/carousel.mjs",
     "./img/usx-sprite.svg": "./src/img/usx-sprite.svg",
-    "./img/usx-icons.json": "./src/img/usx-icons.json"
+    "./img/usx-icons.json": "./src/img/usx-icons.json",
+    "./js/popover": "./src/js/popover.mjs"
   },
   "files": [
     "src"

@@ -1,0 +1,56 @@
+{
+  "name": "summary",
+  "template": "summary/summary.django.html",
+  "version": 2,
+  "default": {
+    "label": "Help finding your reference number"
+  },
+  "props": {
+    "label": {
+      "type": "string",
+      "default": "Details",
+      "description": "Text label describing the disclosure. Always escaped."
+    },
+    "children": {
+      "type": "slot",
+      "description": "Optional summary content. Takes precedence over label."
+    },
+    "ariaLabel": {
+      "type": "string",
+      "description": "Accessible name for the summary control."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional classes for the summary element."
+    },
+    "textClassName": {
+      "type": "string",
+      "default": "",
+      "description": "Additional classes for the summary text span."
+    },
+    "markerColor": {
+      "type": "string",
+      "description": "USX color utility name for the summary marker, such as primary."
+    },
+    "underlineColor": {
+      "type": "string",
+      "description": "USWDS color utility name for the summary underline, such as secondary."
+    },
+    "noUnderline": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to remove the summary underline."
+    },
+    "noMarker": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to remove the native summary marker."
+    },
+    "unstyled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Render native summary content without USX classes or a text wrapper."
+    }
+  }
+}

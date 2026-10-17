@@ -1,11 +1,11 @@
 {
   "name": "process-list",
   "template": "process-list/process-list.django.html",
-  "version": 1,
+  "version": 3,
   "props": {
     "items": {
       "type": "object",
-      "description": "Array of process list item objects. Each item supports: heading (required), headingTag (default h4), headingClassName, body, bodyClassName, and className (applied to the <li>)."
+      "description": "Array of process list item objects. Each item supports: heading (required), headingTag (default h4), headingClassName, body (markup, rendered as-is; wrap plain text in a <p>), bodyClassName (wraps the body in a <div> with these classes), and className (applied to the <li>)."
     },
     "className": {
       "type": "string",

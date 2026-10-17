@@ -12,14 +12,16 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'accordion' });
 const allowedPropNames = new Set(Object.keys(config.props || {}));
-const toDjangoArgs = (args) => Object.fromEntries(
-  Object.entries(args).filter(([key]) => allowedPropNames.has(key))
-);
+const toDjangoArgs = (args) =>
+  Object.fromEntries(Object.entries(args).filter(([key]) => allowedPropNames.has(key)));
 
 export const Default = createStory(toDjangoArgs(storyDefs.Default));
 export const Bordered = createStory(toDjangoArgs(storyDefs.Bordered));
+export const InitiallyExpanded = createStory(toDjangoArgs(storyDefs.InitiallyExpanded));
 export const MultiSelectable = createStory(toDjangoArgs(storyDefs.MultiSelectable));
 export const CustomHeadingLevel = createStory(toDjangoArgs(storyDefs.CustomHeadingLevel));
-export const BorderedMultiSelectableH4 = createStory(toDjangoArgs(storyDefs.BorderedMultiSelectableH4));
+export const BorderedMultiSelectableH4 = createStory(
+  toDjangoArgs(storyDefs.BorderedMultiSelectableH4)
+);
 export const IconStart = createStory(toDjangoArgs(storyDefs.IconStart));
 export const IconEnd = createStory(toDjangoArgs(storyDefs.IconEnd));

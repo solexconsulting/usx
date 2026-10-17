@@ -1,17 +1,19 @@
 {
   "name": "details",
   "template": "details/details.django.html",
-  "version": 1,
-  "required": ["summary"],
+  "version": 3,
   "default": {
-    "summary": "Help finding your reference number",
+    "summaryProps": {
+      "label": "Help finding your reference number"
+    },
     "text": "Your reference number is included in the confirmation email we sent you."
   },
   "props": {
-    "summary": {
-      "type": "string",
-      "default": "Details",
-      "description": "Text label describing the supporting content. Always escaped."
+    "summaryProps": {
+      "type": "object",
+      "description": "Props passed directly to the Summary component, including label, className, markerColor, underlineColor, noUnderline, and noMarker.",
+      "component": "summary",
+      "omit": ["unstyled"]
     },
     "text": {
       "type": "string",
@@ -27,13 +29,9 @@
       "default": false,
       "description": "Whether the native disclosure is initially open."
     },
-    "markerColor": {
+    "name": {
       "type": "string",
-      "description": "USX color utility name for the summary marker, such as primary. Adds marker-{value} to the summary."
-    },
-    "underlineColor": {
-      "type": "string",
-      "description": "USWDS color utility name for the summary underline, such as secondary. Adds border-{value} to the summary text span."
+      "description": "Optional native details group name. Disclosures with the same name are mutually exclusive. Use distinct names for each nesting level."
     },
     "contentBorderColor": {
       "type": "string",
@@ -44,25 +42,10 @@
       "default": false,
       "description": "Whether to remove the content border."
     },
-    "noSummaryUnderline": {
-      "type": "boolean",
-      "default": false,
-      "description": "Whether to remove the summary underline."
-    },
     "className": {
       "type": "string",
       "default": "",
       "description": "Additional CSS classes for the details element, including font and spacing utilities."
-    },
-    "summaryClassName": {
-      "type": "string",
-      "default": "",
-      "description": "Additional CSS classes for the summary element, including font and spacing utilities."
-    },
-    "summaryTextClassName": {
-      "type": "string",
-      "default": "",
-      "description": "Additional CSS classes for the summary text span, including font and spacing utilities."
     },
     "contentClassName": {
       "type": "string",

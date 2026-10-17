@@ -1,4 +1,3 @@
-import React from 'react';
 import Switch from '../../../../usx-react/src/components/switch/Switch.tsx';
 import config from '../../../../usx-react/src/components/switch/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
@@ -44,15 +43,4 @@ export const Disabled = { args: storyDefs.Disabled };
 export const DisabledChecked = { args: storyDefs.DisabledChecked };
 export const WithLabel = { args: storyDefs.WithLabel };
 
-export const Indeterminate = {
-  render: () => {
-    const Indet = () => {
-      const ref = React.useRef(null);
-      React.useEffect(() => {
-        if (ref.current) ref.current.indeterminate = true;
-      }, []);
-      return <input ref={ref} className="usx-switch" type="checkbox" aria-checked="mixed" />;
-    };
-    return <Indet />;
-  },
-};
+export const Indeterminate = { args: { indeterminate: true } };

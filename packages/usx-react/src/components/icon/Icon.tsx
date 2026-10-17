@@ -18,9 +18,9 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
 export default function Icon({
   name,
   source = 'uswds',
-  size = 2,
+  size,
   color,
-  alt = name + ' icon',
+  alt,
   staticBaseUrl,
   staticUrlPrefix,
   className = '',
@@ -37,8 +37,8 @@ export default function Icon({
         ' ' +
         className
       }
-      aria-hidden="true"
-      aria-label={alt}
+      aria-hidden={alt ? undefined : 'true'}
+      aria-label={alt || undefined}
       focusable="false"
       role="img"
       {...props}

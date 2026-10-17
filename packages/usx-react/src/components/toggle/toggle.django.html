@@ -2,8 +2,8 @@
 {% spaceless %}
 <ul id="{{ id }}" class="usx-toggle usa-button-group{% if variant == 'icon' %} usx-toggle--icon{% endif %}{% if className %} {{ className }}{% endif %}" role="radiogroup" aria-label="{% firstof ariaLabel name 'Choose an option' %}"{% if disabled %} aria-disabled="true"{% endif %}{% if required %} aria-required="true"{% endif %}>
     {% for option in options %}
-      {% with optionSuffix=option.value|stringformat:"s" %}
-      {% with optionId=id|add:"-"|add:optionSuffix %}
+      {% with optionSuffix=forloop.counter0|stringformat:"s" %}
+      {% with optionId=id|add:"-option-"|add:optionSuffix %}
       <li class="usa-button-group__item" role="presentation">
         <input
           class="usx-toggle__input"

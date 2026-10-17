@@ -1,0 +1,146 @@
+<h3 class="site-preview-heading">Default</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-select-default"> Dropdown label </label>
+
+  <select class="usa-select usx-select" id="django-select-default">
+    <option value="">Select an option</option>
+
+    <option value="option1">Option A</option>
+
+    <option value="option2">Option B</option>
+
+    <option value="option3">Option C</option>
+  </select>
+</div>
+
+<h3 class="site-preview-heading">Error State</h3>
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label class="usa-label usx-label usa-label--error" for="django-select-error">
+    Dropdown label
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-select-error-hint"
+    >This is a select with an error message.</span
+  >
+
+  <span class="usa-error-message usx-error-message" id="django-select-error-error" role="alert"
+    >Selection error message</span
+  >
+
+  <select
+    class="usa-select usx-select usa-input--error"
+    id="django-select-error"
+    aria-describedby="django-select-error-hint django-select-error-error"
+    aria-invalid="true"
+  >
+    <option value="">Select an option</option>
+
+    <option value="option1">Option A</option>
+
+    <option value="option2">Option B</option>
+
+    <option value="option3">Option C</option>
+  </select>
+</div>
+
+<h3 class="site-preview-heading">Success State</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-select-success"> Success state select </label>
+
+  <select class="usa-select usx-select usa-input--success" id="django-select-success">
+    <option value="">Select an option</option>
+
+    <option value="option1">Option A</option>
+
+    <option value="option2">Option B</option>
+
+    <option value="option3">Option C</option>
+  </select>
+
+  <span class="usa-success-message">Success message goes here.</span>
+</div>
+
+<h3 class="site-preview-heading">Disabled</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-select-disabled"> Disabled select </label>
+
+  <select class="usa-select usx-select" id="django-select-disabled" disabled>
+    <option value="">Select an option</option>
+
+    <option value="option1">Option A</option>
+
+    <option value="option2">Option B</option>
+
+    <option value="option3">Option C</option>
+  </select>
+</div>
+
+<h3 class="site-preview-heading">Disabled With Error</h3>
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label class="usa-label usx-label usa-label--error" for="django-select-disabled-error">
+    Disabled with error
+  </label>
+
+  <span
+    class="usa-error-message usx-error-message"
+    id="django-select-disabled-error-error"
+    role="alert"
+    >This field is disabled due to an error.</span
+  >
+
+  <select
+    class="usa-select usx-select usa-input--error"
+    id="django-select-disabled-error"
+    disabled
+    aria-describedby="django-select-disabled-error-error"
+    aria-invalid="true"
+  >
+    <option value="">Select an option</option>
+
+    <option value="option1">Option A</option>
+
+    <option value="option2">Option B</option>
+
+    <option value="option3">Option C</option>
+  </select>
+</div>
+
+<h3 class="site-preview-heading">Default Value</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-select-default-value">
+    Select with default value
+  </label>
+
+  <select class="usa-select usx-select" id="django-select-default-value">
+    <option value="">Select an option</option>
+
+    <option value="option1">Option A</option>
+
+    <option value="option2" selected>Option B</option>
+
+    <option value="option3">Option C</option>
+  </select>
+</div>
+
+<h3 class="site-preview-heading">With Hint</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-select-with-hint"> Select with hint </label>
+
+  <span class="usa-hint usx-hint" id="django-select-with-hint-hint"
+    >This is a helpful hint for the select.</span
+  >
+
+  <select
+    class="usa-select usx-select"
+    id="django-select-with-hint"
+    aria-describedby="django-select-with-hint-hint"
+  >
+    <option value="">Select an option</option>
+
+    <option value="option1">Option A</option>
+
+    <option value="option2">Option B</option>
+
+    <option value="option3">Option C</option>
+  </select>
+</div>

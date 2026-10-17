@@ -1,0 +1,505 @@
+<h3 class="site-preview-heading">Default</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-single">
+    Input accepts a single file
+  </label>
+
+  <input
+    class="usa-file-input usx-file-input"
+    id="django-file-input-single"
+    type="file"
+    name="file-input-single"
+  />
+</div>
+
+<h3 class="site-preview-heading">Accept Specific Types</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-specific">
+    Input accepts only specific file types
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-file-input-specific-hint"
+    >Select PDF or TXT files</span
+  >
+
+  <input
+    class="usa-file-input usx-file-input"
+    id="django-file-input-specific"
+    type="file"
+    name="file-input-specific"
+    aria-describedby="django-file-input-specific-hint"
+    accept=".pdf,.txt"
+    data-errormessage="Only PDF or TXT files are accepted."
+  />
+</div>
+
+<h3 class="site-preview-heading">Accept Images</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-images">
+    Input accepts any kind of image
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-file-input-images-hint"
+    >Select any type of image format</span
+  >
+
+  <input
+    class="usa-file-input usx-file-input"
+    id="django-file-input-images"
+    type="file"
+    name="file-input-images"
+    aria-describedby="django-file-input-images-hint"
+    accept="image/*"
+  />
+</div>
+
+<h3 class="site-preview-heading">Multiple</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-multiple">
+    Input accepts multiple files
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-file-input-multiple-hint"
+    >Select one or more files</span
+  >
+
+  <input
+    class="usa-file-input usx-file-input"
+    id="django-file-input-multiple"
+    type="file"
+    name="file-input-multiple"
+    aria-describedby="django-file-input-multiple-hint"
+    multiple
+  />
+</div>
+
+<h3 class="site-preview-heading">With Error</h3>
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label class="usa-label usx-label usa-label--error" for="django-file-input-error">
+    Input has an error
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-file-input-error-hint">Select any valid file</span>
+
+  <span class="usa-error-message usx-error-message" id="django-file-input-error-error" role="alert"
+    >Display a helpful error message</span
+  >
+
+  <input
+    class="usa-file-input usx-file-input"
+    id="django-file-input-error"
+    type="file"
+    name="file-input-error"
+    aria-describedby="django-file-input-error-hint django-file-input-error-error"
+  />
+</div>
+
+<h3 class="site-preview-heading">Disabled</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-disabled"> Disabled input </label>
+
+  <input
+    class="usa-file-input usx-file-input"
+    id="django-file-input-disabled"
+    type="file"
+    name="file-input-disabled"
+    disabled
+  />
+</div>
+
+<h3 class="site-preview-heading">Managed Multiple</h3>
+<div class="usx-file-input__add-only">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="django-file-input-managed">
+      Upload supporting documents
+    </label>
+
+    <span class="usa-hint usx-hint" id="django-file-input-managed-hint"
+      >Select one or more files</span
+    >
+
+    <input
+      class="usa-file-input usx-file-input"
+      id="django-file-input-managed"
+      type="file"
+      name="file-input-managed"
+      aria-describedby="django-file-input-managed-hint"
+      multiple
+    />
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Preloaded Downloadable</h3>
+<div class="usx-file-input__add-only">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="django-file-input-preloaded-downloadable">
+      Supporting documents
+    </label>
+
+    <span class="usa-hint usx-hint" id="django-file-input-preloaded-downloadable-hint"
+      >Select one or more files</span
+    >
+
+    <input
+      class="usa-file-input usx-file-input"
+      id="django-file-input-preloaded-downloadable"
+      type="file"
+      name="file-input-preloaded-downloadable"
+      aria-describedby="django-file-input-preloaded-downloadable-hint"
+      multiple
+    />
+  </div>
+</div>
+<div>
+  <div class="usx-file-input__list margin-top-1">
+    <span class="usa-sr-only" aria-live="polite">You have selected the file: pay-stub.pdf.</span>
+
+    <span class="usa-hint usx-hint usx-file-input__list-heading">Selected files</span>
+
+    <ul class="usx-file-input__file-list">
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <a
+            class="usa-link usx-link usa-link--external usx-file-input__file-name"
+            rel="noreferrer noopener"
+            target="_blank"
+            href="https://example.com/files/w2-2023.pdf"
+            >w2-2023.pdf</a
+          >
+
+          <span class="usx-file-input__file-size">PDF, 240 KB</span>
+        </div>
+
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-button--ghost usx-file-input__delete-button"
+          tooltip="Delete this file"
+        >
+          <svg
+            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
+            <use href="img/sprite.svg#delete"></use>
+          </svg>
+          <span class="usx-file-input__delete-label">Delete</span>
+        </button>
+      </li>
+
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <a
+            class="usa-link usx-link usa-link--external usx-file-input__file-name"
+            rel="noreferrer noopener"
+            target="_blank"
+            href="https://example.com/files/pay-stub.pdf"
+            >pay-stub.pdf</a
+          >
+
+          <span class="usx-file-input__file-size">PDF, 100 KB</span>
+        </div>
+
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-button--ghost usx-file-input__delete-button"
+          tooltip="Delete this file"
+        >
+          <svg
+            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
+            <use href="img/sprite.svg#delete"></use>
+          </svg>
+          <span class="usx-file-input__delete-label">Delete</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Preloaded Not Downloadable</h3>
+<div class="usx-file-input__add-only">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="django-file-input-preloaded-not-downloadable">
+      Supporting documents
+    </label>
+
+    <span class="usa-hint usx-hint" id="django-file-input-preloaded-not-downloadable-hint"
+      >Select one or more files</span
+    >
+
+    <input
+      class="usa-file-input usx-file-input"
+      id="django-file-input-preloaded-not-downloadable"
+      type="file"
+      name="file-input-preloaded-not-downloadable"
+      aria-describedby="django-file-input-preloaded-not-downloadable-hint"
+      multiple
+    />
+  </div>
+</div>
+<div>
+  <div class="usx-file-input__list margin-top-1">
+    <span class="usa-sr-only" aria-live="polite">You have selected the file: pay-stub.pdf.</span>
+
+    <span class="usa-hint usx-hint usx-file-input__list-heading">Selected files</span>
+
+    <ul class="usx-file-input__file-list">
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <span class="usx-file-input__file-name">w2-2023.pdf</span>
+
+          <span class="usx-file-input__file-size">PDF, 240 KB</span>
+        </div>
+
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-button--ghost usx-file-input__delete-button"
+          tooltip="Delete this file"
+        >
+          <svg
+            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
+            <use href="img/sprite.svg#delete"></use>
+          </svg>
+          <span class="usx-file-input__delete-label">Delete</span>
+        </button>
+      </li>
+
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <span class="usx-file-input__file-name">pay-stub.pdf</span>
+
+          <span class="usx-file-input__file-size">PDF, 100 KB</span>
+        </div>
+
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-button--ghost usx-file-input__delete-button"
+          tooltip="Delete this file"
+        >
+          <svg
+            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
+            <use href="img/sprite.svg#delete"></use>
+          </svg>
+          <span class="usx-file-input__delete-label">Delete</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Preloaded Disabled</h3>
+<div class="usx-file-input__add-only">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="django-file-input-preloaded-disabled">
+      Supporting documents
+    </label>
+
+    <span class="usa-hint usx-hint" id="django-file-input-preloaded-disabled-hint"
+      >These files were submitted with your application</span
+    >
+
+    <input
+      class="usa-file-input usx-file-input"
+      id="django-file-input-preloaded-disabled"
+      type="file"
+      name="file-input-preloaded-disabled"
+      aria-describedby="django-file-input-preloaded-disabled-hint"
+      multiple
+      disabled
+    />
+  </div>
+</div>
+<div>
+  <div class="usx-file-input__list margin-top-1">
+    <span class="usa-sr-only" aria-live="polite">You have selected the file: pay-stub.pdf.</span>
+
+    <span class="usa-hint usx-hint usx-file-input__list-heading">Selected files</span>
+
+    <ul class="usx-file-input__file-list">
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <a
+            class="usa-link usx-link usa-link--external usx-file-input__file-name"
+            rel="noreferrer noopener"
+            target="_blank"
+            href="https://example.com/files/w2-2023.pdf"
+            >w2-2023.pdf</a
+          >
+
+          <span class="usx-file-input__file-size">PDF, 240 KB</span>
+        </div>
+      </li>
+
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <a
+            class="usa-link usx-link usa-link--external usx-file-input__file-name"
+            rel="noreferrer noopener"
+            target="_blank"
+            href="https://example.com/files/pay-stub.pdf"
+            >pay-stub.pdf</a
+          >
+
+          <span class="usx-file-input__file-size">PDF, 100 KB</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Preloaded Name Only</h3>
+<div class="usx-file-input__add-only">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="django-file-input-preloaded-name-only">
+      Supporting documents
+    </label>
+
+    <span class="usa-hint usx-hint" id="django-file-input-preloaded-name-only-hint"
+      >Select one or more files</span
+    >
+
+    <input
+      class="usa-file-input usx-file-input"
+      id="django-file-input-preloaded-name-only"
+      type="file"
+      name="file-input-preloaded-name-only"
+      aria-describedby="django-file-input-preloaded-name-only-hint"
+      multiple
+    />
+  </div>
+</div>
+<div>
+  <div class="usx-file-input__list margin-top-1">
+    <span class="usa-sr-only" aria-live="polite"
+      >You have selected the file: government-id.jpg.</span
+    >
+
+    <span class="usa-hint usx-hint usx-file-input__list-heading">Selected files</span>
+
+    <ul class="usx-file-input__file-list">
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <span class="usx-file-input__file-name">government-id.jpg</span>
+        </div>
+
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-button--ghost usx-file-input__delete-button"
+          tooltip="Delete this file"
+        >
+          <svg
+            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
+            <use href="img/sprite.svg#delete"></use>
+          </svg>
+          <span class="usx-file-input__delete-label">Delete</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Long File Name</h3>
+<div class="usx-file-input__add-only">
+  <div class="usa-form-group usx-form-group">
+    <label class="usa-label usx-label" for="django-file-input-long-file-name">
+      Upload supporting documents
+    </label>
+
+    <span class="usa-hint usx-hint" id="django-file-input-long-file-name-hint"
+      >Select one or more files</span
+    >
+
+    <input
+      class="usa-file-input usx-file-input"
+      id="django-file-input-long-file-name"
+      type="file"
+      name="file-input-long-file-name"
+      aria-describedby="django-file-input-long-file-name-hint"
+      multiple
+    />
+  </div>
+</div>
+<div>
+  <div class="usx-file-input__list margin-top-1">
+    <span class="usa-sr-only" aria-live="polite"
+      >You have selected the file:
+      another-extremely-long-filename-for-a-downloadable-preloaded-file-to-check-the-download-icon-and-link-wrapping.pdf.</span
+    >
+
+    <span class="usa-hint usx-hint usx-file-input__list-heading">Selected files</span>
+
+    <ul class="usx-file-input__file-list">
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <span class="usx-file-input__file-name"
+            >this-is-an-unusually-long-supporting-document-filename-used-to-verify-wrapping-behavior.pdf</span
+          >
+
+          <span class="usx-file-input__file-size">PDF, 1.8 MB</span>
+        </div>
+
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-button--ghost usx-file-input__delete-button"
+          tooltip="Delete this file"
+        >
+          <svg
+            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
+            <use href="img/sprite.svg#delete"></use>
+          </svg>
+          <span class="usx-file-input__delete-label">Delete</span>
+        </button>
+      </li>
+
+      <li class="usx-file-input__file-item">
+        <div class="usx-file-input__file-info">
+          <a
+            class="usa-link usx-link usa-link--external usx-file-input__file-name"
+            rel="noreferrer noopener"
+            target="_blank"
+            href="https://example.com/files/another-extremely-long-filename-for-a-downloadable-preloaded-file.pdf"
+            >another-extremely-long-filename-for-a-downloadable-preloaded-file-to-check-the-download-icon-and-link-wrapping.pdf</a
+          >
+
+          <span class="usx-file-input__file-size">PDF, 500 KB</span>
+        </div>
+
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--secondary usx-button--ghost usx-file-input__delete-button"
+          tooltip="Delete this file"
+        >
+          <svg
+            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
+            <use href="img/sprite.svg#delete"></use>
+          </svg>
+          <span class="usx-file-input__delete-label">Delete</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -19,5 +19,5 @@ export const StoryStep2Actions = createStory(storyDefs.StoryStep2Actions);
 export const StoryStep3Outcomes = createStory(storyDefs.StoryStep3Outcomes);
 export const StoryStep4Decision = createStory(storyDefs.StoryStep4Decision);
 export const ChildrenPriority = createStory(storyDefs.ChildrenPriority);
-export const WithListComponent = createStory(storyDefs.WithListComponent);
-export const WithIconHighlights = createStory(storyDefs.WithIconHighlights);
+export const WithListComponent = { ...createStory(storyDefs.WithListComponent), name: 'Action plan summary' };
+export const WithIconHighlights = { ...createStory(storyDefs.WithIconHighlights), name: 'KPI highlights summary' };

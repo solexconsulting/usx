@@ -1,0 +1,410 @@
+<h3 class="site-preview-heading">Default</h3>
+<section
+  class="usx-hero usx-hero--has-overlay"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">A callout heading</span>
+        The hero heading
+      </h1>
+      <p class="usx-hero__paragraph">
+        A short description of the hero section that provides context for the call to action.
+      </p>
+
+      <a href="#" class="usa-button usx-button usa-button--primary"> Call to action </a>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">No background image</h3>
+<section class="usx-hero usx-hero--has-overlay" aria-label="Introduction">
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">A callout heading</span>
+        The hero heading
+      </h1>
+      <p class="usx-hero__paragraph">
+        A short description of the hero section that provides context for the call to action.
+      </p>
+
+      <a href="#" class="usa-button usx-button usa-button--primary"> Call to action </a>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Without callout</h3>
+<section
+  class="usx-hero usx-hero--has-overlay"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">The hero heading</h1>
+      <p class="usx-hero__paragraph">
+        A short description of the hero section that provides context for the call to action.
+      </p>
+
+      <a href="#" class="usa-button usx-button usa-button--primary"> Call to action </a>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Without button</h3>
+<section
+  class="usx-hero usx-hero--has-overlay"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">A callout heading</span>
+        The hero heading
+      </h1>
+      <p class="usx-hero__paragraph">
+        A short description of the hero section that provides context for the call to action.
+      </p>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">No overlay</h3>
+<section
+  class="usx-hero"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">A callout heading</span>
+        The hero heading
+      </h1>
+      <p class="usx-hero__paragraph">
+        A short description of the hero section that provides context for the call to action.
+      </p>
+
+      <a href="#" class="usa-button usx-button usa-button--primary"> Call to action </a>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">With search</h3>
+<section
+  class="usx-hero usx-hero--has-overlay"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">A callout heading</span>
+        The hero heading
+      </h1>
+      <p class="usx-hero__paragraph">
+        A short description of the hero section that provides context for the call to action.
+      </p>
+
+      <section aria-label="Search">
+        <form
+          id="django-hero-search-form"
+          class="usa-search usa-search--big"
+          method="get"
+          role="search"
+          onsubmit="handleSubmit"
+        >
+          <label class="usa-label usx-label usa-sr-only" for="django-hero-search"> Search </label>
+
+          <input
+            id="django-hero-search"
+            class="usa-input usx-input"
+            placeholder="Search..."
+            value=""
+            type="search"
+            name="q"
+          />
+
+          <button type="submit" class="usa-button usx-button usa-button--primary">
+            <svg
+              class="usa-icon usa-search__submit-icon display-inline-block"
+              aria-hidden="true"
+              focusable="false"
+              role="img"
+            >
+              <use href="img/sprite.svg#search"></use>
+            </svg>
+          </button>
+        </form>
+        <script data-id="hero-search" data-on-submit="" data-search-key="q">
+          const data = document.currentScript.dataset;
+          const onSubmit = data.onSubmit;
+
+          if (!!onSubmit) {
+            const id = data.id;
+            const searchKey = data.searchKey;
+            document.addEventListener('DOMContentLoaded', function () {
+              document.getElementById(`${id}-form`).onsubmit = function (e) {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const query = formData.get(searchKey);
+                const func = eval(onSubmit);
+                func(query);
+                return false;
+              };
+            });
+          }
+        </script>
+      </section>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Right Aligned</h3>
+<section
+  class="usx-hero usx-hero--has-overlay usx-hero--content-right"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+    background-position: left center;
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">A callout heading</span>
+        The hero heading
+      </h1>
+      <p class="usx-hero__paragraph">
+        A short description of the hero section that provides context for the call to action.
+      </p>
+
+      <a href="#" class="usa-button usx-button usa-button--primary"> Call to action </a>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Narrow Callout</h3>
+<section
+  class="usx-hero usx-hero--has-overlay"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+    background-position: right center;
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout" style="max-width: 28rem">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">A callout heading</span>
+        The hero heading
+      </h1>
+      <p class="usx-hero__paragraph">
+        A short description of the hero section that provides context for the call to action.
+      </p>
+
+      <a href="#" class="usa-button usx-button usa-button--primary"> Call to action </a>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Centered</h3>
+<section
+  class="usx-hero usx-hero--has-overlay usx-hero--custom-overlay usx-hero--content-center usx-hero--unboxed"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+    --hero-overlay-opacity: 0.8;
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">A callout heading</span>
+        The hero heading
+      </h1>
+      <p class="usx-hero__paragraph">
+        A short description of the hero section that provides context for the call to action.
+      </p>
+
+      <a href="#" class="usa-button usx-button usa-button--primary"> Call to action </a>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Unboxed</h3>
+<section
+  class="usx-hero usx-hero--has-overlay usx-hero--custom-overlay usx-hero--unboxed"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+    --hero-overlay-opacity: 0.8;
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">A callout heading</span>
+        The hero heading
+      </h1>
+      <p class="usx-hero__paragraph">
+        A short description of the hero section that provides context for the call to action.
+      </p>
+
+      <a href="#" class="usa-button usx-button usa-button--primary"> Call to action </a>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Split Content</h3>
+<section
+  class="usx-hero usx-hero--has-overlay usx-hero--custom-overlay usx-hero--unboxed usx-hero--split"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+    --hero-overlay-opacity: 0.8;
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">Your community</span>
+        Public services
+      </h1>
+      <p class="usx-hero__paragraph">
+        Find the services and information you need, all in one place.
+      </p>
+
+      <a href="#services" class="usa-button usx-button"> Explore services </a>
+    </div>
+
+    <div class="usx-hero__secondary">
+      <h2 class="usx-hero__secondary-heading">Need a hand?</h2>
+
+      <p class="usx-hero__paragraph">
+        Our team can help you find the right service or answer questions about your application.
+      </p>
+      <a class="usx-hero__secondary-link" href="#contact">Contact our team</a>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Split Content Right</h3>
+<section
+  class="usx-hero usx-hero--has-overlay usx-hero--custom-overlay usx-hero--content-right usx-hero--unboxed usx-hero--split"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+    --hero-overlay-opacity: 0.8;
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">Your community</span>
+        Public services
+      </h1>
+      <p class="usx-hero__paragraph">
+        Find the services and information you need, all in one place.
+      </p>
+
+      <a href="#services" class="usa-button usx-button"> Explore services </a>
+    </div>
+
+    <div class="usx-hero__secondary">
+      <h2 class="usx-hero__secondary-heading">Need a hand?</h2>
+
+      <p class="usx-hero__paragraph">
+        Our team can help you find the right service or answer questions about your application.
+      </p>
+      <a class="usx-hero__secondary-link" href="#contact">Contact our team</a>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Long Content</h3>
+<section
+  class="usx-hero usx-hero--has-overlay usx-hero--custom-overlay usx-hero--unboxed usx-hero--split"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+    --hero-overlay-opacity: 0.8;
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h1 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">Support for you and your household</span>
+        Find help with housing, food, healthcare, and everyday expenses
+      </h1>
+      <p class="usx-hero__paragraph">
+        Explore programs that can help you and your household stay healthy, find stable housing, and
+        cover essential costs. Learn who can apply, what information you will need, and what happens
+        after you submit an application. You can review the available services before deciding where
+        to start, whether you are applying for yourself, helping a family member, or supporting
+        someone in your community.
+      </p>
+
+      <a href="#services" class="usa-button usx-button"> Explore available services </a>
+    </div>
+
+    <div class="usx-hero__secondary">
+      <h2 class="usx-hero__secondary-heading">Get support at every step of your application</h2>
+
+      <p class="usx-hero__paragraph">
+        You do not have to work through the process alone. Our team can explain eligibility
+        requirements, help you gather documents, and answer questions about an application you have
+        already started. Language assistance and accessible formats are available. Contact us to
+        discuss your circumstances and find a way to get help that works for you.
+      </p>
+      <a class="usx-hero__secondary-link" href="#contact">Contact the support team</a>
+    </div>
+  </div>
+</section>
+
+<h3 class="site-preview-heading">Section Heading</h3>
+<section
+  class="usx-hero usx-hero--has-overlay usx-hero--custom-overlay usx-hero--unboxed usx-hero--split"
+  aria-label="Introduction"
+  style="
+    background-image: url('https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg');
+    --hero-overlay-opacity: 0.8;
+  "
+>
+  <div class="usx-hero__inner">
+    <div class="usx-hero__callout">
+      <h2 class="usx-hero__heading">
+        <span class="usx-hero__heading--alt">Your community</span>
+        Public services
+      </h2>
+      <p class="usx-hero__paragraph">
+        Find the services and information you need, all in one place.
+      </p>
+
+      <a href="#services" class="usa-button usx-button"> Explore services </a>
+    </div>
+
+    <div class="usx-hero__secondary">
+      <h3 class="usx-hero__secondary-heading">Need a hand?</h3>
+
+      <p class="usx-hero__paragraph">
+        Our team can help you find the right service or answer questions about your application.
+      </p>
+      <a class="usx-hero__secondary-link" href="#contact">Contact our team</a>
+    </div>
+  </div>
+</section>

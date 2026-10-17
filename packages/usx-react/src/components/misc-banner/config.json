@@ -1,8 +1,12 @@
 {
   "name": "misc-banner",
   "template": "misc-banner/misc-banner.django.html",
-  "version": 2,
+  "version": 3,
   "props": {
+    "id": {
+      "type": "string",
+      "description": "Id for the banner's root element. The dropdown toggle and menu ids derive from it as `<id>-dropdown-toggle` and `<id>-dropdown`. React generates one when omitted."
+    },
     "children": {
       "type": "slot",
       "description": "Advanced override for custom inner markup"

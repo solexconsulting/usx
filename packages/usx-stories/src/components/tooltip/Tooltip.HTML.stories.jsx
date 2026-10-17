@@ -1,18 +1,32 @@
 import React from 'react';
-import html from '../../../../usx-react/src/components/tooltip/tooltip.html?raw';
+import reactSnapshot from '../../../../usx-react/src/components/tooltip/tooltip.react-snapshot.html?raw';
+import djangoSnapshot from '../../../../usx-react/src/components/tooltip/tooltip.django-snapshot.html?raw';
 
 export default {
   title: 'HTML/USWDS-Inspired/Tooltip (CSS-only)',
   tags: ['USWDS-Inspired', 'autodocs'],
 };
 
-export const AllVariants = {
+export const AllVariantsReact = {
+  name: 'All Variants (React)',
   parameters: {
     docs: {
       source: {
-        code: html
-      }
-    }
+        code: reactSnapshot,
+      },
+    },
   },
-  render: () => <div dangerouslySetInnerHTML={{ __html: html }} />
-}
+  render: () => <div dangerouslySetInnerHTML={{ __html: reactSnapshot }} />,
+};
+
+export const AllVariantsDjango = {
+  name: 'All Variants (Django)',
+  parameters: {
+    docs: {
+      source: {
+        code: djangoSnapshot,
+      },
+    },
+  },
+  render: () => <div dangerouslySetInnerHTML={{ __html: djangoSnapshot }} />,
+};

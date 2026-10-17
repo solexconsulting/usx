@@ -10,7 +10,7 @@
         {% if item.title %}
           <h4 class="usa-icon-list__title">{{ item.title }}</h4>
         {% endif %}
-        {{ item.content|safe }}
+        <div>{{ item.content|safe }}</div>
       </div>
     </li>
   {% endfor %}

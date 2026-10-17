@@ -1,0 +1,74 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-tree {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &> li:not(:first-child) {
+    margin-top: units(0.75);
+  }
+}
+
+.usx-tree--padded > li > .usx-link,
+.usx-tree--padded > li > .usx-tree__label,
+.usx-tree--padded > li > .usx-details > .usx-summary {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+  padding: units(1.5);
+}
+
+.usx-tree--padded > li > .usx-link,
+.usx-tree--padded > li > .usx-tree__label,
+.usx-tree--padded > li > .usx-details > .usx-summary {
+  box-sizing: border-box;
+  display: inline-flex;  // usx-link overrides to inline-block
+  align-items: center;
+  column-gap: units(1);
+  width: 100%;
+  padding: units(1.5);
+}
+
+.usx-tree--padded > li > .usx-link::before,
+.usx-tree--padded > li > .usx-tree__label::before {
+  content: none;
+}
+
+.usx-tree--padded > li > .usx-details > .usx-summary {
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::before {
+    justify-self: center;
+    width: 0;
+    height: 0;
+    border-block: 0.35rem solid transparent;
+    border-inline-start: 0.45rem solid usx-when($usx-color-primary, $usx-color-primary, currentcolor);
+    content: '';
+  }  
+}
+
+.usx-tree--padded > li > .usx-details[open] > .usx-summary::before {
+  transform: rotate(90deg);
+}
+
+.usx-tree--padded:dir(rtl) > li > .usx-details[open] > .usx-summary::before {
+  transform: rotate(-90deg);
+}
+
+.usx-tree--padded > li > .usx-link:is(:hover, :focus-visible),
+.usx-tree--padded > li > .usx-details > .usx-summary:is(:hover, :focus-visible) {
+  background-color: color-mix(in srgb, currentcolor 20%, transparent);
+}
+
+.usx-tree--padded > li > .usx-details > .usx-details__content {
+  margin-top: 0;
+  padding-left: 0;
+  padding-inline-start: units(2);
+  margin-left: calc(units(2) - 1px);
+}

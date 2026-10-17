@@ -1,0 +1,150 @@
+<h3 class="site-preview-heading">Default</h3>
+<div class="usa-form-group usx-form-group">
+  <label
+    id="django-appointment-date-label"
+    class="usa-label usx-label"
+    for="django-appointment-date"
+  >
+    Appointment date
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-appointment-date-hint">mm/dd/yyyy</span>
+
+  <div class="usa-date-picker usx-date-picker">
+    <input
+      class="usa-input usx-input"
+      id="django-appointment-date"
+      name="appointment-date"
+      aria-labelledby="django-appointment-date-label"
+      aria-describedby="django-appointment-date-hint"
+    />
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Disabled</h3>
+<div class="usa-form-group usx-form-group">
+  <label
+    id="django-appointment-date-disabled-label"
+    class="usa-label usx-label"
+    for="django-appointment-date-disabled"
+  >
+    Appointment date
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-appointment-date-disabled-hint">mm/dd/yyyy</span>
+
+  <div class="usa-date-picker usx-date-picker">
+    <input
+      class="usa-input usx-input"
+      id="django-appointment-date-disabled"
+      name="appointment-date-disabled"
+      aria-labelledby="django-appointment-date-disabled-label"
+      aria-describedby="django-appointment-date-disabled-hint"
+      disabled
+    />
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Required</h3>
+<div class="usa-form-group usx-form-group">
+  <label
+    id="django-appointment-date-required-label"
+    class="usa-label usx-label"
+    for="django-appointment-date-required"
+  >
+    <abbr title="Required" class="usx-required">*</abbr> Appointment date
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-appointment-date-required-hint">mm/dd/yyyy</span>
+
+  <div class="usa-date-picker usx-date-picker">
+    <input
+      class="usa-input usx-input"
+      id="django-appointment-date-required"
+      name="appointment-date-required"
+      aria-labelledby="django-appointment-date-required-label"
+      aria-describedby="django-appointment-date-required-hint"
+      required
+    />
+  </div>
+</div>
+
+<h3 class="site-preview-heading">With Default Value</h3>
+<div class="usa-form-group usx-form-group">
+  <label
+    id="django-appointment-date-default-value-label"
+    class="usa-label usx-label"
+    for="django-appointment-date-default-value"
+  >
+    Appointment date
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-appointment-date-default-value-hint">mm/dd/yyyy</span>
+
+  <div class="usa-date-picker usx-date-picker" data-default-value="2020-05-22">
+    <input
+      class="usa-input usx-input"
+      id="django-appointment-date-default-value"
+      name="appointment-date-default-value"
+      aria-labelledby="django-appointment-date-default-value-label"
+      aria-describedby="django-appointment-date-default-value-hint"
+    />
+  </div>
+</div>
+
+<h3 class="site-preview-heading">With Error</h3>
+<div class="usa-form-group usx-form-group usa-form-group--error">
+  <label
+    id="django-appointment-date-error-label"
+    class="usa-label usx-label usa-label--error"
+    for="django-appointment-date-error"
+  >
+    Appointment date
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-appointment-date-error-hint">mm/dd/yyyy</span>
+
+  <span
+    class="usa-error-message usx-error-message"
+    id="django-appointment-date-error-error"
+    role="alert"
+    >Enter a valid date in mm/dd/yyyy format.</span
+  >
+
+  <div class="usa-date-picker usx-date-picker">
+    <input
+      class="usa-input usx-input usa-input--error"
+      id="django-appointment-date-error"
+      name="appointment-date-error"
+      aria-labelledby="django-appointment-date-error-label"
+      aria-describedby="django-appointment-date-error-hint django-appointment-date-error-error"
+    />
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Min Max Date</h3>
+<div class="usa-form-group usx-form-group">
+  <label
+    id="django-appointment-date-min-max-label"
+    class="usa-label usx-label"
+    for="django-appointment-date-min-max"
+  >
+    Appointment date
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-appointment-date-min-max-hint">mm/dd/yyyy</span>
+
+  <div
+    class="usa-date-picker usx-date-picker"
+    data-min-date="2020-05-22"
+    data-max-date="2021-06-20"
+  >
+    <input
+      class="usa-input usx-input"
+      id="django-appointment-date-min-max"
+      name="appointment-date-min-max"
+      aria-labelledby="django-appointment-date-min-max-label"
+      aria-describedby="django-appointment-date-min-max-hint"
+    />
+  </div>
+</div>

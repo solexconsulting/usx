@@ -40,6 +40,19 @@ export default function TimePicker({
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [label ? labelId : undefined, hintId, errorId].filter(Boolean).join(' ') || undefined;
 
+  const containerClasses = classNames(
+    'usa-time-picker',
+    'usx-time-picker',
+    { 'usx-combo-box--error': !!error },
+    className
+  );
+
+  const inputClasses = classNames(
+    'usa-input',
+    'usx-input',
+    { 'usa-input--error': !!error }
+  );
+
   const content = (
     <>
       {label && (
@@ -50,20 +63,13 @@ export default function TimePicker({
       {hint && <Hint id={hintId}>{hint}</Hint>}
       {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
       <div
-        className={
-          classNames(
-            'usa-time-picker',
-            'usx-time-picker',
-            {'usx-combo-box--error': !!error},
-            className
-          )
-        }
+        className={containerClasses}
         {...(minTime ? { 'data-min-time': minTime } : {})}
         {...(maxTime ? { 'data-max-time': maxTime } : {})}
         {...(step ? { 'data-step': step } : {})}
       >
         <input
-          className={`usa-input usx-input${error ? ' usa-input--error' : ''}`}
+          className={inputClasses}
           id={id}
           name={name || id}
           type="text"

@@ -2,7 +2,7 @@
 {% with childSlides=children|as_list %}
 {% with fallback=slides|default:'' %}
 {% with items=childSlides|default:fallback %}
-<div{% if id %} id="{{ id }}"{% endif %} class="usx-carousel{% if className %} {{ className }}{% endif %}" role="{{ role|default:'region' }}" aria-roledescription="carousel" aria-label="{{ ariaLabel|default:'Featured content' }}"{% if not showDots|default_bool:True %} data-show-dots="false"{% endif %}{% if statusClassName %} data-status-class-name="{{ statusClassName }}"{% endif %}>
+<div{% if id %} id="{{ id }}"{% endif %} class="usx-carousel{% if className %} {{ className }}{% endif %}" role="{{ role|default:'region' }}" aria-roledescription="carousel" aria-label="{{ ariaLabel|default:'Featured content' }}"{% if not showDots|default_bool:True %} data-show-dots="false"{% endif %}{% if statusClassName %} data-status-class-name="{{ statusClassName }}"{% endif %}{% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}>
   <div class="usx-carousel__viewport">
     <div class="usx-carousel__track" aria-live="polite"{% if items|length > 1 %} tabindex="0"{% endif %}>
       {% if items %}

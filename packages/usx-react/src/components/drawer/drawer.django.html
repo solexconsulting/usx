@@ -1,0 +1,31 @@
+<!-- prettier-ignore -->
+<div class="usx-drawer{% if className %} {{ className }}{% endif %}">
+  <button
+    type="button"
+    class="usa-button usx-button usx-drawer__trigger{% if triggerClassName %} {{ triggerClassName }}{% endif %}"
+    aria-haspopup="dialog"
+    aria-controls="{{ id|force_escape }}"{% if triggerAriaLabel %}
+    aria-label="{{ triggerAriaLabel|force_escape }}"{% endif %}{% if disabled %}
+    disabled{% endif %}{% if modal != False %}
+    commandfor="{{ id|force_escape }}"
+    command="show-modal"{% else %}
+    popovertarget="{{ id|force_escape }}"{% endif %}
+  >{% if trigger != None %}{{ trigger|safe }}{% else %}{{ label|force_escape }}{% endif %}</button>
+  <dialog
+    id="{{ id|force_escape }}"
+    class="usx-drawer__panel{% if panelClassName %} {{ panelClassName }}{% endif %}"
+    data-side="{{ side|default:'inline-end'|force_escape }}"
+    data-size="{{ size|default:'default'|force_escape }}"{% if modal == False %}
+    popover="auto"{% endif %}
+    aria-labelledby="{{ id|force_escape }}-heading"{% if description %}
+    aria-describedby="{{ id|force_escape }}-description"{% endif %}
+  >
+    <header class="usx-drawer__header">
+      <h2 id="{{ id|force_escape }}-heading" class="usx-drawer__heading"{% if focusHeading != False %} tabindex="-1" autofocus{% endif %}>{{ heading|force_escape }}</h2>{% if description %}
+      <p id="{{ id|force_escape }}-description" class="usx-drawer__description">{{ description|force_escape }}</p>{% endif %}
+    </header>
+    <div class="usx-drawer__body">{{ children|safe }}</div>{% if footer %}
+    <footer class="usx-drawer__footer">{{ footer|safe }}</footer>{% endif %}
+    <button type="button" class="usx-drawer__close"{% if modal != False %} commandfor="{{ id|force_escape }}" command="close"{% else %} popovertarget="{{ id|force_escape }}" popovertargetaction="hide"{% endif %}>{{ closeLabel|default:'Close'|force_escape }}</button>
+  </dialog>
+</div>

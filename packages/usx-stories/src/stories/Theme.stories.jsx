@@ -1192,9 +1192,9 @@ const languageSelectorLanguages = [
 ];
 
 const processListItems = [
-  { heading: 'Create an account', body: 'Fill out the sign-up form to get started.' },
-  { heading: 'Confirm your email', body: 'Click the link we send you to verify your address.' },
-  { heading: 'Complete your profile', body: 'Add any remaining details to finish setup.' }
+  { heading: 'Create an account', body: <p>Fill out the sign-up form to get started.</p> },
+  { heading: 'Confirm your email', body: <p>Click the link we send you to verify your address.</p> },
+  { heading: 'Complete your profile', body: <p>Add any remaining details to finish setup.</p> }
 ];
 
 const listItems = [

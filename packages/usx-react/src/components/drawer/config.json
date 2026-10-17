@@ -1,0 +1,90 @@
+{
+  "name": "drawer",
+  "template": "drawer/drawer.django.html",
+  "version": 1,
+  "required": ["id", "label", "heading", "children"],
+  "default": {
+    "id": "services-drawer",
+    "label": "Browse services",
+    "heading": "Services",
+    "children": "<nav aria-label=\"Services\"><ul><li><a href=\"#benefits\">Benefits</a></li><li><a href=\"#applications\">Applications</a></li></ul></nav>"
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "description": "Unique dialog ID used by the native opener and close button."
+    },
+    "label": {
+      "type": "string",
+      "description": "Default visible trigger text."
+    },
+    "heading": {
+      "type": "string",
+      "description": "Visible heading that names the dialog."
+    },
+    "children": {
+      "type": "slot",
+      "description": "Trusted semantic content, including navigation, forms, and nested overlays."
+    },
+    "trigger": {
+      "type": "slot",
+      "description": "Optional trusted markup inside the trigger button. Visible text supplies the accessible name unless triggerAriaLabel is set."
+    },
+    "triggerAriaLabel": {
+      "type": "string",
+      "description": "Accessible name for an icon-only trigger. If the trigger has visible text, include that text."
+    },
+    "side": {
+      "type": "select",
+      "options": ["inline-start", "inline-end", "top", "bottom"],
+      "default": "inline-end",
+      "description": "Viewport side. Inline start and end follow the writing direction."
+    },
+    "size": {
+      "type": "select",
+      "options": ["compact", "default", "wide"],
+      "default": "default",
+      "description": "Preferred width for inline drawers or height for top and bottom drawers."
+    },
+    "modal": {
+      "type": "boolean",
+      "default": true,
+      "description": "Modal drawers make the page inert and contain focus; modeless drawers use a native auto popover."
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief text announced with the dialog heading. Omit for complex content."
+    },
+    "footer": {
+      "type": "slot",
+      "description": "Optional trusted action markup after the scrollable drawer body."
+    },
+    "closeLabel": {
+      "type": "string",
+      "default": "Close",
+      "description": "Visible text for the always-present close button."
+    },
+    "focusHeading": {
+      "type": "boolean",
+      "default": true,
+      "description": "Focus the heading when opened. Set false to focus the first control in the content."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable the trigger button."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes for the wrapper."
+    },
+    "triggerClassName": {
+      "type": "string",
+      "description": "Additional classes for the trigger button, including USWDS button variants."
+    },
+    "panelClassName": {
+      "type": "string",
+      "description": "Additional classes for the dialog panel."
+    }
+  }
+}

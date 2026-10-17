@@ -4,6 +4,7 @@ import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
   Misc: {
+    id: 'misc-banner-misc',
     ...(config.default || {}),
     tone: 'base',
     badgeText: 'misc',
@@ -17,6 +18,7 @@ export const storyDefs = {
     showReturnLink: true,
   },
   Primary: {
+    id: 'misc-banner-primary',
     ...(config.default || {}),
     tone: 'primary',
     badgeText: 'prime',
@@ -30,6 +32,7 @@ export const storyDefs = {
     showReturnLink: true,
   },
   Beta: {
+    id: 'misc-banner-beta',
     ...(config.default || {}),
     tone: 'beta',
     badgeText: 'beta',
@@ -43,6 +46,7 @@ export const storyDefs = {
     showReturnLink: true,
   },
   Dev: {
+    id: 'misc-banner-dev',
     ...(config.default || {}),
     tone: 'dev',
     badgeText: 'dev',
@@ -54,6 +58,7 @@ export const storyDefs = {
     showReturnLink: true,
   },
   TestStaging: {
+    id: 'misc-banner-test-staging',
     ...(config.default || {}),
     tone: 'test',
     badgeText: 'test',
@@ -65,6 +70,7 @@ export const storyDefs = {
     showReturnLink: true,
   },
   NoLinks: {
+    id: 'misc-banner-no-links',
     ...(config.default || {}),
     tone: 'error',
     badgeText: 'oops',

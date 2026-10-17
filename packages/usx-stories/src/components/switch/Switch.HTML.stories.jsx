@@ -1,5 +1,6 @@
 import React from 'react';
-import html from '../../../../usx-react/src/components/switch/switch.html?raw';
+import reactSnapshot from '../../../../usx-react/src/components/switch/switch.react-snapshot.html?raw';
+import djangoSnapshot from '../../../../usx-react/src/components/switch/switch.django-snapshot.html?raw';
 
 export default {
   title: 'HTML/USX/Switch',
@@ -8,25 +9,39 @@ export default {
   decorators: [
     (Story) => {
       React.useEffect(() => {
-        const checkbox = document.getElementById('indeterminate-switch');
-        if (checkbox) {
+        document.querySelectorAll('[id$="indeterminate-switch"]').forEach((checkbox) => {
           checkbox.indeterminate = true;
-        }
+        });
       }, []);
       return <Story />;
     },
   ],
 };
 
-export const AllVariants = {
+export const AllVariantsReact = {
+  name: 'All Variants (React)',
   parameters: {
     docs: {
       source: {
-        code: html
-      }
-    }
+        code: reactSnapshot,
+      },
+    },
   },
   render: () => {
-    return <div dangerouslySetInnerHTML={{ __html: html }} />;
-  }
-}
+    return <div dangerouslySetInnerHTML={{ __html: reactSnapshot }} />;
+  },
+};
+
+export const AllVariantsDjango = {
+  name: 'All Variants (Django)',
+  parameters: {
+    docs: {
+      source: {
+        code: djangoSnapshot,
+      },
+    },
+  },
+  render: () => {
+    return <div dangerouslySetInnerHTML={{ __html: djangoSnapshot }} />;
+  },
+};

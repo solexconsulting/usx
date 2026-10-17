@@ -3,7 +3,7 @@
 {% with formGroup|default_if_none:True as wrap_group %}
 {% if wrap_group %}
 {% form_group error=error %}
-{% label htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
+{% label id=id|add:"-label" htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
 
 {% if hint %}
 {% hint id=id|add:"-hint" %}{{ hint }}{% endhint %}
@@ -31,7 +31,7 @@
 </div>
 {% endform_group %}
 {% else %}
-{% label htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
+{% label id=id|add:"-label" htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
 
 {% if hint %}
 {% hint id=id|add:"-hint" %}{{ hint }}{% endhint %}

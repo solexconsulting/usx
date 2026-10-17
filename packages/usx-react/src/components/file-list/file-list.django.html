@@ -1,7 +1,9 @@
 {# Django template for FileList (static preview — Delete buttons aren't wired up; the interactive managed list lives in FileInput's React mode) #}
 {% load components %}
 
+{% if files %}
 <div class="usx-file-input__list margin-top-1{% if className %} {{ className }}{% endif %}">
+  {% with lastFile=files|last %}<span class="usa-sr-only" aria-live="polite">You have selected the file: {{ lastFile.name }}.</span>{% endwith %}
   {% if hint %}
   <span class="usa-hint usx-hint usx-file-input__list-heading">{{ hint }}</span>
   {% endif %}
@@ -15,11 +17,11 @@
         <span class="usx-file-input__file-name">{{ file.name }}</span>
         {% endif %}
         {% if file.size %}
-        <span class="usx-file-input__file-size">{% with ext=file.name|file_extension %}{% if ext %}{{ ext }}, {% endif %}{% endwith %}{{ file.size }}</span>
+        <span class="usx-file-input__file-size">{% with ext=file.name|file_extension %}{% if ext %}{{ ext }}, {% endif %}{% endwith %}{{ file.size|file_size }}</span>
         {% endif %}
       </div>
       {% if not disabled %}
-      <button type="button" class="usa-button usx-button usa-button--secondary usx-file-input__delete-button">
+      <button type="button" class="usa-button usx-button usa-button--secondary usx-button--ghost usx-file-input__delete-button" tooltip="Delete this file">
         {% icon name='delete' size=3 className='usx-file-input__delete-icon' %}{% endicon %}
         <span class="usx-file-input__delete-label">Delete</span>
       </button>
@@ -28,3 +30,4 @@
     {% endfor %}
   </ul>
 </div>
+{% endif %}

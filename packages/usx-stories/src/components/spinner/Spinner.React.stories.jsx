@@ -23,8 +23,12 @@ export default {
 };
 
 export const Default = { args: storyDefs.Default };
+export const OmitLabel = { args: storyDefs.OmitLabel };
 export const WithLabel = { args: storyDefs.WithLabel };
 export const WithScreenReaderLabel = { args: storyDefs.WithScreenReaderLabel };
+export const Small = { args: storyDefs.Small };
+export const Large = { args: storyDefs.Large };
+export const WithColor = { args: storyDefs.WithColor };
 
 export const DifferentSizes = {
   render: () => (

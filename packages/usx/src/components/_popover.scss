@@ -1,0 +1,183 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+$popover-panel-y-padding: calc(usx-when($usx-radius-box, $usx-radius-box, 0.5rem) + 0.25rem);
+$popover-panel-x-padding: 0.25rem;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+.usx-popover {
+  position: relative;
+  display: inline-block;
+
+  > .usx-popover__panel {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 0.25rem);
+    inset-inline-start: 0;
+    box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%), 0 0.5rem 1.5rem rgb(0 0 0 / 14%);
+  }
+
+  /* BEGIN Panel Positioning */
+  &[data-side='top'] > .usx-popover__panel {
+    top: auto;
+    bottom: calc(100% + 0.25rem);
+  }
+
+  &:is([data-side='top'], [data-side='bottom']) {
+    &[data-align='center'] > .usx-popover__panel {
+      inset-inline-start: 50%;
+      translate: -50% 0;
+    }
+
+    &:dir(rtl)[data-align='center'] > .usx-popover__panel {
+      translate: 50% 0;
+    }
+
+    &[data-align='end'] > .usx-popover__panel {
+      inset-inline: auto 0;
+    }
+  }
+
+  &:is([data-side='left'], [data-side='right']) {
+    > .usx-popover__panel {
+      top: 0;
+      inset-inline-start: auto;
+    }
+
+    &[data-align='center'] > .usx-popover__panel {
+      top: 50%;
+      translate: 0 -50%;
+    }
+
+    &[data-align='end'] > .usx-popover__panel {
+      top: auto;
+      bottom: 0;
+    }
+  }
+
+  &[data-side='left'] > .usx-popover__panel {
+    right: calc(100% + 0.25rem);
+  }
+
+  &[data-side='right'] > .usx-popover__panel {
+    left: calc(100% + 0.25rem);
+  }
+  /* END Panel Positioning */
+}
+
+.usx-popover__panel {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  inline-size: max-content;
+  max-inline-size: min(32rem, calc(100vw - 2rem));
+  padding: $popover-panel-y-padding $popover-panel-x-padding;
+  overflow-wrap: anywhere;
+  border: 1px solid usx-when($usx-color-border-subtle, $usx-color-border-subtle, #aeb0b5);
+  border-radius: usx-when($usx-radius-box, $usx-radius-box, 0.5rem);
+  background: usx-when($usx-surface-1, $usx-surface-1, #fff);
+  color: usx-when($usx-text-ink, $usx-text-ink, #1b1b1b);
+
+  .usx-popover__panel-heading,
+  .usx-popover__panel-content
+  {
+    &:not([class^='margin-'], [class*=' margin-']) {
+      margin: 0 1rem;
+    }
+  }
+
+  .usx-popover__panel-close {
+    margin: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .usx-popover[open] > .usx-popover__panel {
+    animation: usx-popover-in 120ms ease-out;
+  }
+}
+
+// Opacity only: panels use translate for centering.
+@keyframes usx-popover-in {
+  from {
+    opacity: 0;
+  }
+}
+
+// A stacked list of equal rows. Links and Popover triggers look alike; triggers add a chevron.
+.usx-popover__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    margin: 0;
+    padding: 0;
+  }
+
+  > li > .usx-popover {
+    // Switch from block to flex for nested popovers
+    display: flex;
+  }
+
+  > li > .usx-popover[open] > summary {
+    background: usx-when($usx-surface-2, $usx-surface-2, #f0f0f0);
+  }
+
+  > li > .usx-popover > summary {
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      // Create a chevron for the popover trigger
+      content: '';
+      flex: none;
+      box-sizing: border-box;
+      inline-size: 0.5rem;
+      block-size: 0.5rem;
+      border: solid currentcolor;
+      border-width: 0.125rem 0.125rem 0 0;
+      rotate: 45deg;
+    }
+  }
+
+  > li > .usx-popover[data-side='left'] > summary::after {
+    rotate: -135deg;
+  }
+
+  // Align the flyout's first row with its trigger row: panel padding plus border.
+  > li > .usx-popover:is([data-side='left'], [data-side='right']) > .usx-popover__panel {
+    top: calc(0rem - #{$popover-panel-y-padding} - 1px);
+  }
+}
+
+.usx-popover__menu-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+  padding: 0.75rem;
+  line-height: 1.2;
+
+  &:not(span) {
+    cursor: pointer;
+
+    &:is(:hover, :focus-visible) {
+      background: usx-when($usx-surface-3, $usx-surface-3, #f0f0f0);
+    }
+  }
+}
+
+// Opt into scrolling on inner content; scrolling an outer panel clips flyouts.
+.usx-popover__scroll {
+  max-block-size: min(24rem, 70vh);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: currentColor transparent;
+}

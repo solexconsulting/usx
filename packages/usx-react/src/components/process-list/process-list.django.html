@@ -8,7 +8,7 @@
     </{{ tag }}>
     {% endwith %}
     {% if item.body %}
-    <p{% if item.bodyClassName %} class="{{ item.bodyClassName }}"{% endif %}>{{ item.body|safe }}</p>
+    {% if item.bodyClassName %}<div class="{{ item.bodyClassName }}">{{ item.body|safe }}</div>{% else %}{{ item.body|safe }}{% endif %}
     {% endif %}
   </li>
   {% endfor %}

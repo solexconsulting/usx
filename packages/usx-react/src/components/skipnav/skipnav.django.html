@@ -7,5 +7,5 @@
     <a class="usa-skipnav{% if className %} {{ className }}{% endif %}" href="#main-content">
   {% endif %}
 {% endif %}
-  {{ children|default:content|default:"Skip to main content" }}
+  {{ children|default:content|default:"Skip to main content"|safe }}
 </a>

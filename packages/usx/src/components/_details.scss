@@ -4,26 +4,6 @@
 .usx-details {
   min-width: 0;
 
-  &__summary {
-    width: fit-content;
-    cursor: pointer;
-
-    &::marker {
-      height: 100%;
-      color: usx-when($usx-color-primary, $usx-color-primary, currentcolor);
-    }
-
-    .usx-details__summary-text {
-      display: inline-flex;
-      align-items: center;
-      gap: units(1);
-    }
-
-    &:hover {
-      background-color: color-mix(in srgb, currentcolor 20%, transparent);
-    }
-  }
-
   &__content {
     padding-left: units(2);
 
@@ -42,13 +22,6 @@
     border-left-color: usx-when($usx-color-primary, $usx-color-primary, currentcolor);
     border-left-style: solid;
     border-left-width: usx-when($usx-border-width-md, $usx-border-width-md, 2px);
-  }
-
-  // Each disclosure controls the underline on its own summary text.
-  &:not(.usx-details--no-underline) > .usx-details__summary > .usx-details__summary-text {
-    border-color: usx-when($usx-color-primary, $usx-color-primary, currentcolor);
-    border-bottom-style: dotted;
-    border-bottom-width: usx-when($usx-border-width-md, $usx-border-width-md, 2px);
   }
 
   &__text {

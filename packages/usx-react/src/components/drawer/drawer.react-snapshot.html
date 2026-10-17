@@ -1,0 +1,785 @@
+<h3 class="site-preview-heading">Default</h3>
+<div class="usx-drawer">
+  <button
+    type="button"
+    class="usa-button usx-button usx-drawer__trigger"
+    aria-haspopup="dialog"
+    aria-controls="react-drawer-default"
+    commandfor="react-drawer-default"
+    command="show-modal"
+  >
+    Open application details
+  </button>
+  <dialog
+    id="react-drawer-default"
+    class="usx-drawer__panel"
+    data-side="inline-end"
+    data-size="default"
+    aria-labelledby="react-drawer-default-heading"
+    aria-describedby="react-drawer-default-description"
+  >
+    <header class="usx-drawer__header">
+      <h2 id="react-drawer-default-heading" class="usx-drawer__heading" tabindex="-1" autofocus="">
+        Application details
+      </h2>
+      <p id="react-drawer-default-description" class="usx-drawer__description">
+        Review the information for your current application.
+      </p>
+    </header>
+    <div class="usx-drawer__body"><p>Your application was last updated today.</p></div>
+    <button
+      type="button"
+      class="usx-drawer__close"
+      commandfor="react-drawer-default"
+      command="close"
+    >
+      Close
+    </button>
+  </dialog>
+</div>
+
+<h3 class="site-preview-heading">All Sides</h3>
+<div style="display: flex; flex-wrap: wrap; gap: 1rem">
+  <div class="usx-drawer">
+    <button
+      type="button"
+      class="usa-button usx-button usx-drawer__trigger"
+      aria-haspopup="dialog"
+      aria-controls="react-drawer-inline-start"
+      commandfor="react-drawer-inline-start"
+      command="show-modal"
+    >
+      Open start edge drawer
+    </button>
+    <dialog
+      id="react-drawer-inline-start"
+      class="usx-drawer__panel"
+      data-side="inline-start"
+      data-size="default"
+      aria-labelledby="react-drawer-inline-start-heading"
+    >
+      <header class="usx-drawer__header">
+        <h2
+          id="react-drawer-inline-start-heading"
+          class="usx-drawer__heading"
+          tabindex="-1"
+          autofocus=""
+        >
+          Start edge drawer
+        </h2>
+      </header>
+      <div class="usx-drawer__body"><p>This drawer opens from the start edge.</p></div>
+      <button
+        type="button"
+        class="usx-drawer__close"
+        commandfor="react-drawer-inline-start"
+        command="close"
+      >
+        Close
+      </button>
+    </dialog>
+  </div>
+  <div class="usx-drawer">
+    <button
+      type="button"
+      class="usa-button usx-button usx-drawer__trigger"
+      aria-haspopup="dialog"
+      aria-controls="react-drawer-inline-end"
+      commandfor="react-drawer-inline-end"
+      command="show-modal"
+    >
+      Open end edge drawer
+    </button>
+    <dialog
+      id="react-drawer-inline-end"
+      class="usx-drawer__panel"
+      data-side="inline-end"
+      data-size="default"
+      aria-labelledby="react-drawer-inline-end-heading"
+    >
+      <header class="usx-drawer__header">
+        <h2
+          id="react-drawer-inline-end-heading"
+          class="usx-drawer__heading"
+          tabindex="-1"
+          autofocus=""
+        >
+          End edge drawer
+        </h2>
+      </header>
+      <div class="usx-drawer__body"><p>This drawer opens from the end edge.</p></div>
+      <button
+        type="button"
+        class="usx-drawer__close"
+        commandfor="react-drawer-inline-end"
+        command="close"
+      >
+        Close
+      </button>
+    </dialog>
+  </div>
+  <div class="usx-drawer">
+    <button
+      type="button"
+      class="usa-button usx-button usx-drawer__trigger"
+      aria-haspopup="dialog"
+      aria-controls="react-drawer-top"
+      commandfor="react-drawer-top"
+      command="show-modal"
+    >
+      Open top edge drawer
+    </button>
+    <dialog
+      id="react-drawer-top"
+      class="usx-drawer__panel"
+      data-side="top"
+      data-size="default"
+      aria-labelledby="react-drawer-top-heading"
+    >
+      <header class="usx-drawer__header">
+        <h2 id="react-drawer-top-heading" class="usx-drawer__heading" tabindex="-1" autofocus="">
+          Top edge drawer
+        </h2>
+      </header>
+      <div class="usx-drawer__body"><p>This drawer opens from the top edge.</p></div>
+      <button type="button" class="usx-drawer__close" commandfor="react-drawer-top" command="close">
+        Close
+      </button>
+    </dialog>
+  </div>
+  <div class="usx-drawer">
+    <button
+      type="button"
+      class="usa-button usx-button usx-drawer__trigger"
+      aria-haspopup="dialog"
+      aria-controls="react-drawer-bottom"
+      commandfor="react-drawer-bottom"
+      command="show-modal"
+    >
+      Open bottom edge drawer
+    </button>
+    <dialog
+      id="react-drawer-bottom"
+      class="usx-drawer__panel"
+      data-side="bottom"
+      data-size="default"
+      aria-labelledby="react-drawer-bottom-heading"
+    >
+      <header class="usx-drawer__header">
+        <h2 id="react-drawer-bottom-heading" class="usx-drawer__heading" tabindex="-1" autofocus="">
+          Bottom edge drawer
+        </h2>
+      </header>
+      <div class="usx-drawer__body"><p>This drawer opens from the bottom edge.</p></div>
+      <button
+        type="button"
+        class="usx-drawer__close"
+        commandfor="react-drawer-bottom"
+        command="close"
+      >
+        Close
+      </button>
+    </dialog>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">All Sizes</h3>
+<div style="display: flex; flex-wrap: wrap; gap: 1rem">
+  <div class="usx-drawer">
+    <button
+      type="button"
+      class="usa-button usx-button usx-drawer__trigger"
+      aria-haspopup="dialog"
+      aria-controls="react-drawer-size-compact"
+      commandfor="react-drawer-size-compact"
+      command="show-modal"
+    >
+      Open compact drawer
+    </button>
+    <dialog
+      id="react-drawer-size-compact"
+      class="usx-drawer__panel"
+      data-side="inline-end"
+      data-size="compact"
+      aria-labelledby="react-drawer-size-compact-heading"
+    >
+      <header class="usx-drawer__header">
+        <h2
+          id="react-drawer-size-compact-heading"
+          class="usx-drawer__heading"
+          tabindex="-1"
+          autofocus=""
+        >
+          Compact drawer
+        </h2>
+      </header>
+      <div class="usx-drawer__body">
+        <p>The compact size allows different amounts of content.</p>
+      </div>
+      <button
+        type="button"
+        class="usx-drawer__close"
+        commandfor="react-drawer-size-compact"
+        command="close"
+      >
+        Close
+      </button>
+    </dialog>
+  </div>
+  <div class="usx-drawer">
+    <button
+      type="button"
+      class="usa-button usx-button usx-drawer__trigger"
+      aria-haspopup="dialog"
+      aria-controls="react-drawer-size-default"
+      commandfor="react-drawer-size-default"
+      command="show-modal"
+    >
+      Open default drawer
+    </button>
+    <dialog
+      id="react-drawer-size-default"
+      class="usx-drawer__panel"
+      data-side="inline-end"
+      data-size="default"
+      aria-labelledby="react-drawer-size-default-heading"
+    >
+      <header class="usx-drawer__header">
+        <h2
+          id="react-drawer-size-default-heading"
+          class="usx-drawer__heading"
+          tabindex="-1"
+          autofocus=""
+        >
+          Default drawer
+        </h2>
+      </header>
+      <div class="usx-drawer__body">
+        <p>The default size allows different amounts of content.</p>
+      </div>
+      <button
+        type="button"
+        class="usx-drawer__close"
+        commandfor="react-drawer-size-default"
+        command="close"
+      >
+        Close
+      </button>
+    </dialog>
+  </div>
+  <div class="usx-drawer">
+    <button
+      type="button"
+      class="usa-button usx-button usx-drawer__trigger"
+      aria-haspopup="dialog"
+      aria-controls="react-drawer-size-wide"
+      commandfor="react-drawer-size-wide"
+      command="show-modal"
+    >
+      Open wide drawer
+    </button>
+    <dialog
+      id="react-drawer-size-wide"
+      class="usx-drawer__panel"
+      data-side="inline-end"
+      data-size="wide"
+      aria-labelledby="react-drawer-size-wide-heading"
+    >
+      <header class="usx-drawer__header">
+        <h2
+          id="react-drawer-size-wide-heading"
+          class="usx-drawer__heading"
+          tabindex="-1"
+          autofocus=""
+        >
+          Wide drawer
+        </h2>
+      </header>
+      <div class="usx-drawer__body"><p>The wide size allows different amounts of content.</p></div>
+      <button
+        type="button"
+        class="usx-drawer__close"
+        commandfor="react-drawer-size-wide"
+        command="close"
+      >
+        Close
+      </button>
+    </dialog>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Modeless</h3>
+<div style="display: flex; gap: 1rem">
+  <div class="usx-drawer">
+    <button
+      type="button"
+      class="usa-button usx-button usx-drawer__trigger"
+      aria-haspopup="dialog"
+      aria-controls="react-drawer-modeless"
+      popovertarget="react-drawer-modeless"
+    >
+      Open reference guide
+    </button>
+    <dialog
+      id="react-drawer-modeless"
+      class="usx-drawer__panel"
+      data-side="inline-end"
+      data-size="default"
+      popover="auto"
+      aria-labelledby="react-drawer-modeless-heading"
+    >
+      <header class="usx-drawer__header">
+        <h2
+          id="react-drawer-modeless-heading"
+          class="usx-drawer__heading"
+          tabindex="-1"
+          autofocus=""
+        >
+          Reference guide
+        </h2>
+      </header>
+      <div class="usx-drawer__body">
+        <nav aria-label="Reference guide sections">
+          <ul class="usa-list usx-list">
+            <li><a href="#eligibility">Eligibility</a></li>
+            <li><a href="#documents">Documents</a></li>
+          </ul>
+        </nav>
+      </div>
+      <button
+        type="button"
+        class="usx-drawer__close"
+        popovertarget="react-drawer-modeless"
+        popovertargetaction="hide"
+      >
+        Close
+      </button>
+    </dialog>
+  </div>
+  <button class="usa-button usa-button--outline" type="button">Other page task</button>
+</div>
+
+<h3 class="site-preview-heading">Rich Form</h3>
+<div class="usx-drawer">
+  <button
+    type="button"
+    class="usa-button usx-button usx-drawer__trigger"
+    aria-haspopup="dialog"
+    aria-controls="react-drawer-rich-form"
+    commandfor="react-drawer-rich-form"
+    command="show-modal"
+  >
+    Filter programs
+  </button>
+  <dialog
+    id="react-drawer-rich-form"
+    class="usx-drawer__panel"
+    data-side="inline-end"
+    data-size="default"
+    aria-labelledby="react-drawer-rich-form-heading"
+    aria-describedby="react-drawer-rich-form-description"
+  >
+    <header class="usx-drawer__header">
+      <h2 id="react-drawer-rich-form-heading" class="usx-drawer__heading">Filter programs</h2>
+      <p id="react-drawer-rich-form-description" class="usx-drawer__description">
+        Choose the programs you want to see.
+      </p>
+    </header>
+    <div class="usx-drawer__body">
+      <form id="react-drawer-filter-form" method="dialog">
+        <label class="usa-label usx-label" for="react-drawer-search-term">Search term</label
+        ><input
+          class="usa-input usx-input"
+          id="react-drawer-search-term"
+          name="query"
+          type="search"
+        />
+        <fieldset class="usa-fieldset margin-top-2">
+          <legend class="usa-legend">Status</legend>
+          <div class="usa-checkbox usx-checkbox">
+            <input
+              class="usa-checkbox__input"
+              id="react-drawer-status-open"
+              name="status"
+              type="checkbox"
+              value="open"
+            /><label class="usa-checkbox__label" for="react-drawer-status-open">Open</label>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <footer class="usx-drawer__footer">
+      <button
+        class="usa-button usx-button"
+        type="submit"
+        form="react-drawer-filter-form"
+        value="apply"
+      >
+        Apply filters
+      </button>
+    </footer>
+    <button
+      type="button"
+      class="usx-drawer__close"
+      commandfor="react-drawer-rich-form"
+      command="close"
+    >
+      Close
+    </button>
+  </dialog>
+</div>
+
+<h3 class="site-preview-heading">Nested Popover</h3>
+<div class="usx-drawer">
+  <button
+    type="button"
+    class="usa-button usx-button usx-drawer__trigger"
+    aria-haspopup="dialog"
+    aria-controls="react-drawer-nested-popover"
+    commandfor="react-drawer-nested-popover"
+    command="show-modal"
+  >
+    Open service details
+  </button>
+  <dialog
+    id="react-drawer-nested-popover"
+    class="usx-drawer__panel"
+    data-side="inline-end"
+    data-size="default"
+    aria-labelledby="react-drawer-nested-popover-heading"
+  >
+    <header class="usx-drawer__header">
+      <h2
+        id="react-drawer-nested-popover-heading"
+        class="usx-drawer__heading"
+        tabindex="-1"
+        autofocus=""
+      >
+        Service details
+      </h2>
+    </header>
+    <div class="usx-drawer__body">
+      <p>Review this service and its related actions.</p>
+      <details label="Related actions" class="usx-popover" data-side="bottom" data-align="start">
+        <summary>Open panel</summary>
+        <div id="react-drawer-related-actions" class="usx-popover__panel">
+          <div class="usx-popover__panel-content">
+            <nav aria-label="Related actions">
+              <ul class="usa-list usx-list usa-list--unstyled">
+                <li><a href="#save-service">Save service</a></li>
+                <li><a href="#share-service">Share service</a></li>
+              </ul>
+            </nav>
+            <button
+              class="usa-button usx-button usa-button--unstyled"
+              type="button"
+              data-usx-popover-close="react-drawer-related-actions"
+            >
+              Close related actions
+            </button>
+          </div>
+        </div>
+      </details>
+    </div>
+    <button
+      type="button"
+      class="usx-drawer__close"
+      commandfor="react-drawer-nested-popover"
+      command="close"
+    >
+      Close
+    </button>
+  </dialog>
+</div>
+
+<h3 class="site-preview-heading">Long Content</h3>
+<div class="usx-drawer">
+  <button
+    type="button"
+    class="usa-button usx-button usx-drawer__trigger"
+    aria-haspopup="dialog"
+    aria-controls="react-drawer-long-content"
+    commandfor="react-drawer-long-content"
+    command="show-modal"
+  >
+    Browse all programs
+  </button>
+  <dialog
+    id="react-drawer-long-content"
+    class="usx-drawer__panel"
+    data-side="inline-end"
+    data-size="default"
+    aria-labelledby="react-drawer-long-content-heading"
+  >
+    <header class="usx-drawer__header">
+      <h2
+        id="react-drawer-long-content-heading"
+        class="usx-drawer__heading"
+        tabindex="-1"
+        autofocus=""
+      >
+        All programs
+      </h2>
+    </header>
+    <div class="usx-drawer__body">
+      <nav aria-label="Programs">
+        <ol class="usa-list usx-list">
+          <li><a href="#program-1">Program 1</a></li>
+          <li><a href="#program-2">Program 2</a></li>
+          <li><a href="#program-3">Program 3</a></li>
+          <li><a href="#program-4">Program 4</a></li>
+          <li><a href="#program-5">Program 5</a></li>
+          <li><a href="#program-6">Program 6</a></li>
+          <li><a href="#program-7">Program 7</a></li>
+          <li><a href="#program-8">Program 8</a></li>
+          <li><a href="#program-9">Program 9</a></li>
+          <li><a href="#program-10">Program 10</a></li>
+          <li><a href="#program-11">Program 11</a></li>
+          <li><a href="#program-12">Program 12</a></li>
+          <li><a href="#program-13">Program 13</a></li>
+          <li><a href="#program-14">Program 14</a></li>
+          <li><a href="#program-15">Program 15</a></li>
+          <li><a href="#program-16">Program 16</a></li>
+          <li><a href="#program-17">Program 17</a></li>
+          <li><a href="#program-18">Program 18</a></li>
+          <li><a href="#program-19">Program 19</a></li>
+          <li><a href="#program-20">Program 20</a></li>
+          <li><a href="#program-21">Program 21</a></li>
+          <li><a href="#program-22">Program 22</a></li>
+          <li><a href="#program-23">Program 23</a></li>
+          <li><a href="#program-24">Program 24</a></li>
+          <li><a href="#program-25">Program 25</a></li>
+          <li><a href="#program-26">Program 26</a></li>
+          <li><a href="#program-27">Program 27</a></li>
+          <li><a href="#program-28">Program 28</a></li>
+          <li><a href="#program-29">Program 29</a></li>
+          <li><a href="#program-30">Program 30</a></li>
+          <li><a href="#program-31">Program 31</a></li>
+          <li><a href="#program-32">Program 32</a></li>
+          <li><a href="#program-33">Program 33</a></li>
+          <li><a href="#program-34">Program 34</a></li>
+          <li><a href="#program-35">Program 35</a></li>
+          <li><a href="#program-36">Program 36</a></li>
+          <li><a href="#program-37">Program 37</a></li>
+          <li><a href="#program-38">Program 38</a></li>
+          <li><a href="#program-39">Program 39</a></li>
+          <li><a href="#program-40">Program 40</a></li>
+        </ol>
+      </nav>
+    </div>
+    <button
+      type="button"
+      class="usx-drawer__close"
+      commandfor="react-drawer-long-content"
+      command="close"
+    >
+      Close
+    </button>
+  </dialog>
+</div>
+
+<h3 class="site-preview-heading">Rtl</h3>
+<div dir="rtl" style="display: flex; gap: 1rem">
+  <div class="usx-drawer">
+    <button
+      type="button"
+      class="usa-button usx-button usx-drawer__trigger"
+      aria-haspopup="dialog"
+      aria-controls="react-drawer-rtl-start"
+      commandfor="react-drawer-rtl-start"
+      command="show-modal"
+    >
+      Open start drawer
+    </button>
+    <dialog
+      id="react-drawer-rtl-start"
+      class="usx-drawer__panel"
+      data-side="inline-start"
+      data-size="default"
+      aria-labelledby="react-drawer-rtl-start-heading"
+    >
+      <header class="usx-drawer__header">
+        <h2
+          id="react-drawer-rtl-start-heading"
+          class="usx-drawer__heading"
+          tabindex="-1"
+          autofocus=""
+        >
+          Start drawer
+        </h2>
+      </header>
+      <div class="usx-drawer__body"><p>The start edge is the right edge in this example.</p></div>
+      <button
+        type="button"
+        class="usx-drawer__close"
+        commandfor="react-drawer-rtl-start"
+        command="close"
+      >
+        Close
+      </button>
+    </dialog>
+  </div>
+  <div class="usx-drawer">
+    <button
+      type="button"
+      class="usa-button usx-button usx-drawer__trigger"
+      aria-haspopup="dialog"
+      aria-controls="react-drawer-rtl-end"
+      commandfor="react-drawer-rtl-end"
+      command="show-modal"
+    >
+      Open end drawer
+    </button>
+    <dialog
+      id="react-drawer-rtl-end"
+      class="usx-drawer__panel"
+      data-side="inline-end"
+      data-size="default"
+      aria-labelledby="react-drawer-rtl-end-heading"
+    >
+      <header class="usx-drawer__header">
+        <h2
+          id="react-drawer-rtl-end-heading"
+          class="usx-drawer__heading"
+          tabindex="-1"
+          autofocus=""
+        >
+          End drawer
+        </h2>
+      </header>
+      <div class="usx-drawer__body"><p>The end edge is the left edge in this example.</p></div>
+      <button
+        type="button"
+        class="usx-drawer__close"
+        commandfor="react-drawer-rtl-end"
+        command="close"
+      >
+        Close
+      </button>
+    </dialog>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Disabled</h3>
+<div class="usx-drawer">
+  <button
+    type="button"
+    class="usa-button usx-button usx-drawer__trigger"
+    aria-haspopup="dialog"
+    aria-controls="react-drawer-disabled"
+    disabled=""
+    commandfor="react-drawer-disabled"
+    command="show-modal"
+  >
+    Open unavailable information
+  </button>
+  <dialog
+    id="react-drawer-disabled"
+    class="usx-drawer__panel"
+    data-side="inline-end"
+    data-size="default"
+    aria-labelledby="react-drawer-disabled-heading"
+  >
+    <header class="usx-drawer__header">
+      <h2 id="react-drawer-disabled-heading" class="usx-drawer__heading" tabindex="-1" autofocus="">
+        Unavailable information
+      </h2>
+    </header>
+    <div class="usx-drawer__body"><p>This information is not available yet.</p></div>
+    <button
+      type="button"
+      class="usx-drawer__close"
+      commandfor="react-drawer-disabled"
+      command="close"
+    >
+      Close
+    </button>
+  </dialog>
+</div>
+
+<h3 class="site-preview-heading">Icon Trigger</h3>
+<div class="usx-drawer">
+  <button
+    type="button"
+    class="usa-button usx-button usx-drawer__trigger"
+    aria-haspopup="dialog"
+    aria-controls="react-drawer-icon-trigger"
+    aria-label="Open account details"
+    commandfor="react-drawer-icon-trigger"
+    command="show-modal"
+  >
+    <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false">
+      <use href="./img/sprite.svg#person"></use>
+    </svg>
+  </button>
+  <dialog
+    id="react-drawer-icon-trigger"
+    class="usx-drawer__panel"
+    data-side="inline-end"
+    data-size="default"
+    aria-labelledby="react-drawer-icon-trigger-heading"
+  >
+    <header class="usx-drawer__header">
+      <h2
+        id="react-drawer-icon-trigger-heading"
+        class="usx-drawer__heading"
+        tabindex="-1"
+        autofocus=""
+      >
+        Account details
+      </h2>
+    </header>
+    <div class="usx-drawer__body"><p>Manage your account details.</p></div>
+    <button
+      type="button"
+      class="usx-drawer__close"
+      commandfor="react-drawer-icon-trigger"
+      command="close"
+    >
+      Close
+    </button>
+  </dialog>
+</div>
+
+<h3 class="site-preview-heading">Custom Trigger</h3>
+<div class="usx-drawer">
+  <button
+    type="button"
+    class="usa-button usx-button usx-drawer__trigger"
+    aria-haspopup="dialog"
+    aria-controls="react-drawer-custom-trigger"
+    commandfor="react-drawer-custom-trigger"
+    command="show-modal"
+  >
+    <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false">
+      <use href="./img/sprite.svg#edit"></use></svg
+    ><span>Edit profile</span>
+  </button>
+  <dialog
+    id="react-drawer-custom-trigger"
+    class="usx-drawer__panel"
+    data-side="inline-end"
+    data-size="default"
+    aria-labelledby="react-drawer-custom-trigger-heading"
+  >
+    <header class="usx-drawer__header">
+      <h2
+        id="react-drawer-custom-trigger-heading"
+        class="usx-drawer__heading"
+        tabindex="-1"
+        autofocus=""
+      >
+        Edit profile
+      </h2>
+    </header>
+    <div class="usx-drawer__body"><p>Update your profile information.</p></div>
+    <button
+      type="button"
+      class="usx-drawer__close"
+      commandfor="react-drawer-custom-trigger"
+      command="close"
+    >
+      Close
+    </button>
+  </dialog>
+</div>

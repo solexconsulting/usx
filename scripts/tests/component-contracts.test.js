@@ -49,7 +49,8 @@ test('example content is preserved separately and never merged into prop default
 
 test('corrected contracts describe composition and actual renderer differences', () => {
   const { button, layout, alert, icon } = manifest.components;
-  for (const contract of [button, layout, alert, icon]) assert.equal(contract.version, 2);
+  for (const contract of [button, layout, alert]) assert.equal(contract.version, 2);
+  assert.equal(icon.version, 3);
   assert.ok(button.props.variant.options.includes('unstyled'));
   assert.equal(button.props.children.type, 'slot');
   for (const name of ['children', 'content', 'leftSidebar', 'rightSidebar']) assert.equal(layout.props[name].type, 'slot');
@@ -118,7 +119,7 @@ test('content slots preserve the distinction from string-only renderer inputs', 
   assert.equal(manifest.components.prose.props.content.type, 'string');
   assert.equal(manifest.components['in-page-nav'].props.content.type, 'string');
   assert.deepEqual(manifest.components['text-area'].props.error.type, ['string', 'boolean']);
-  for (const name of ['breadcrumb', 'table', 'in-page-nav']) {
+  for (const name of ['table', 'in-page-nav']) {
     assert.equal(manifest.components[name].props.children.renderers.django.supported, false);
   }
 });

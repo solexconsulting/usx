@@ -25,5 +25,5 @@ export const PreChecked = createStory(storyDefs.PreChecked);
 export const Disabled = createStory(storyDefs.Disabled);
 export const DisabledChecked = createStory(storyDefs.DisabledChecked);
 
-export const Indeterminate = createStory({ indeterminate: true, ariaChecked: 'mixed' });
-export const WithLabel = createStory({ ...storyDefs.Default, label: 'Switch Label' });
+export const Indeterminate = createStory({ indeterminate: true });
+export const WithLabel = createStory(storyDefs.WithLabel);

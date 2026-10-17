@@ -59,7 +59,7 @@ ValueError: A <script> tag & invalid input were rejected.`;
   assert.ok(!collapsedDetails.startsWith('<details class="usx-details" open'));
   assert.ok(
     collapsedDetails.includes(
-      '<summary class="usx-details__summary"><span class="usx-details__summary-text">Technical details</span></summary>'
+      '<summary class="usx-summary"><span class="usx-summary-text">Technical details</span></summary>'
     )
   );
   assert.ok(collapsedDetails.includes('Traceback (most recent call last):\n'));
@@ -90,9 +90,9 @@ ValueError: A <script> tag & invalid input were rejected.`;
     summaryClassName: 'padding-1',
     summaryTextClassName: 'text-bold',
   });
-  assert.ok(customSummary.includes('<summary class="usx-details__summary padding-1">'));
+  assert.ok(customSummary.includes('<summary class="usx-summary padding-1">'));
   assert.ok(
-    customSummary.includes('<span class="usx-details__summary-text text-bold">Help</span>')
+    customSummary.includes('<span class="usx-summary-text text-bold">Help</span>')
   );
 
   const hostileDetails = render(library.Details, {
@@ -170,8 +170,8 @@ ValueError: A <script> tag & invalid input were rejected.`;
       });
       assert.equal(styled.includes('usx-details--borderless'), noContentBorder);
       assert.equal(styled.includes('usx-details--no-underline'), noSummaryUnderline);
-      assert.ok(styled.includes('class="usx-details__summary marker-primary"'));
-      assert.ok(styled.includes('class="usx-details__summary-text border-secondary"'));
+      assert.ok(styled.includes('class="usx-summary marker-primary"'));
+      assert.ok(styled.includes('class="usx-summary-text border-secondary"'));
       assert.ok(
         styled.includes(
           `class="usx-details__content${noContentBorder ? '' : ' border-accent-cool'} font-family-mono"`

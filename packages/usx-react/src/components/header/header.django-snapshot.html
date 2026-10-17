@@ -1,0 +1,3191 @@
+<h3 class="site-preview-heading">Default</h3>
+<header class="usa-header usx-header usa-header--extended" id="django-header-default">
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <em class="usa-logo__text">
+        <img
+          src="symbol-only.svg"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant"
+        />
+
+        <img
+          src="white_symbol-only.png"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        />
+
+        <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+      </em>
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-default-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+
+        <div
+          id="django-header-default-nav-section-0"
+          class="usa-nav__submenu usa-megamenu"
+          hidden="hidden"
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkA" aria-label="Link A"> Link A </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkB" aria-label="Link B"> Link B </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-default-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+
+        <div
+          id="django-header-default-nav-section-1"
+          class="usa-nav__submenu usa-megamenu"
+          hidden="hidden"
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkC" aria-label="Link C"> Link C </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkD" aria-label="Link D"> Link D </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+          <span>Section 3</span>
+        </a>
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links">
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary1" aria-label="Secondary Link 1">
+            <span>Secondary Link 1</span>
+          </a>
+        </li>
+
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary2" aria-label="Secondary Link 2">
+            <span>Secondary Link 2</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="django-header-default-search-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+            onsubmit="handleSubmit"
+          >
+            <label class="usa-label usx-label usa-sr-only" for="django-header-default-search">
+              Search
+            </label>
+
+            <input
+              id="django-header-default-search"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              value=""
+              type="search"
+              name="q"
+            />
+
+            <button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                focusable="false"
+                role="img"
+              >
+                <use href="img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+          <script data-id="header-default-search" data-on-submit="" data-search-key="q">
+            const data = document.currentScript.dataset;
+            const onSubmit = data.onSubmit;
+
+            if (!!onSubmit) {
+              const id = data.id;
+              const searchKey = data.searchKey;
+              document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById(`${id}-form`).onsubmit = function (e) {
+                  e.preventDefault();
+                  const formData = new FormData(e.target);
+                  const query = formData.get(searchKey);
+                  const func = eval(onSubmit);
+                  func(query);
+                  return false;
+                };
+              });
+            }
+          </script>
+        </section>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Basic</h3>
+<header class="usa-header usx-header usa-header--basic" id="django-header-basic">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text">
+          <img
+            src="symbol-only.svg"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant"
+          />
+
+          <img
+            src="white_symbol-only.png"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+          />
+
+          <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+        </em>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-basic-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+
+          <ul id="django-header-basic-nav-section-0" class="usa-nav__submenu" hidden="hidden">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A">
+                <span>Link A</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B">
+                <span>Link B</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-basic-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+
+          <ul id="django-header-basic-nav-section-1" class="usa-nav__submenu" hidden="hidden">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C">
+                <span>Link C</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D">
+                <span>Link D</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+            <span>Section 3</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="django-header-basic-search-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+            onsubmit="handleSubmit"
+          >
+            <label class="usa-label usx-label usa-sr-only" for="django-header-basic-search">
+              Search
+            </label>
+
+            <input
+              id="django-header-basic-search"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              value=""
+              type="search"
+              name="q"
+            />
+
+            <button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                focusable="false"
+                role="img"
+              >
+                <use href="img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+          <script data-id="header-basic-search" data-on-submit="" data-search-key="q">
+            const data = document.currentScript.dataset;
+            const onSubmit = data.onSubmit;
+
+            if (!!onSubmit) {
+              const id = data.id;
+              const searchKey = data.searchKey;
+              document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById(`${id}-form`).onsubmit = function (e) {
+                  e.preventDefault();
+                  const formData = new FormData(e.target);
+                  const query = formData.get(searchKey);
+                  const func = eval(onSubmit);
+                  func(query);
+                  return false;
+                };
+              });
+            }
+          </script>
+        </section>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Basic With Megamenu</h3>
+<header
+  class="usa-header usx-header usa-header--basic usa-header--megamenu"
+  id="django-header-basic-megamenu"
+>
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text">
+          <img
+            src="symbol-only.svg"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant"
+          />
+
+          <img
+            src="white_symbol-only.png"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+          />
+
+          <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+        </em>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-basic-megamenu-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+
+          <div
+            id="django-header-basic-megamenu-nav-section-0"
+            class="usa-nav__submenu usa-megamenu"
+            hidden="hidden"
+          >
+            <div class="grid-row grid-gap-4">
+              <div class="usa-col">
+                <ul class="usa-nav__submenu-list">
+                  <li class="usa-nav__submenu-item">
+                    <a href="https://example.com/linkA" aria-label="Link A"> Link A </a>
+                  </li>
+
+                  <li class="usa-nav__submenu-item">
+                    <a href="https://example.com/linkB" aria-label="Link B"> Link B </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-basic-megamenu-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+
+          <div
+            id="django-header-basic-megamenu-nav-section-1"
+            class="usa-nav__submenu usa-megamenu"
+            hidden="hidden"
+          >
+            <div class="grid-row grid-gap-4">
+              <div class="usa-col">
+                <ul class="usa-nav__submenu-list">
+                  <li class="usa-nav__submenu-item">
+                    <a href="https://example.com/linkC" aria-label="Link C"> Link C </a>
+                  </li>
+
+                  <li class="usa-nav__submenu-item">
+                    <a href="https://example.com/linkD" aria-label="Link D"> Link D </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+            <span>Section 3</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="django-header-basic-megamenu-search-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+            onsubmit="handleSubmit"
+          >
+            <label
+              class="usa-label usx-label usa-sr-only"
+              for="django-header-basic-megamenu-search"
+            >
+              Search
+            </label>
+
+            <input
+              id="django-header-basic-megamenu-search"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              value=""
+              type="search"
+              name="q"
+            />
+
+            <button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                focusable="false"
+                role="img"
+              >
+                <use href="img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+          <script data-id="header-basic-megamenu-search" data-on-submit="" data-search-key="q">
+            const data = document.currentScript.dataset;
+            const onSubmit = data.onSubmit;
+
+            if (!!onSubmit) {
+              const id = data.id;
+              const searchKey = data.searchKey;
+              document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById(`${id}-form`).onsubmit = function (e) {
+                  e.preventDefault();
+                  const formData = new FormData(e.target);
+                  const query = formData.get(searchKey);
+                  const func = eval(onSubmit);
+                  func(query);
+                  return false;
+                };
+              });
+            }
+          </script>
+        </section>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Extended</h3>
+<header class="usa-header usx-header usa-header--extended" id="django-header-extended">
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <em class="usa-logo__text">
+        <img
+          src="symbol-only.svg"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant"
+        />
+
+        <img
+          src="white_symbol-only.png"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        />
+
+        <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+      </em>
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-extended-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+
+        <ul id="django-header-extended-nav-section-0" class="usa-nav__submenu" hidden="hidden">
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkA" aria-label="Link A">
+              <span>Link A</span>
+            </a>
+          </li>
+
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkB" aria-label="Link B">
+              <span>Link B</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-extended-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+
+        <ul id="django-header-extended-nav-section-1" class="usa-nav__submenu" hidden="hidden">
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkC" aria-label="Link C">
+              <span>Link C</span>
+            </a>
+          </li>
+
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkD" aria-label="Link D">
+              <span>Link D</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+          <span>Section 3</span>
+        </a>
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links">
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary1" aria-label="Secondary Link 1">
+            <span>Secondary Link 1</span>
+          </a>
+        </li>
+
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary2" aria-label="Secondary Link 2">
+            <span>Secondary Link 2</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="django-header-extended-search-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+            onsubmit="handleSubmit"
+          >
+            <label class="usa-label usx-label usa-sr-only" for="django-header-extended-search">
+              Search
+            </label>
+
+            <input
+              id="django-header-extended-search"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              value=""
+              type="search"
+              name="q"
+            />
+
+            <button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                focusable="false"
+                role="img"
+              >
+                <use href="img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+          <script data-id="header-extended-search" data-on-submit="" data-search-key="q">
+            const data = document.currentScript.dataset;
+            const onSubmit = data.onSubmit;
+
+            if (!!onSubmit) {
+              const id = data.id;
+              const searchKey = data.searchKey;
+              document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById(`${id}-form`).onsubmit = function (e) {
+                  e.preventDefault();
+                  const formData = new FormData(e.target);
+                  const query = formData.get(searchKey);
+                  const func = eval(onSubmit);
+                  func(query);
+                  return false;
+                };
+              });
+            }
+          </script>
+        </section>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Extended With Megamenu</h3>
+<header class="usa-header usx-header usa-header--extended" id="django-header-extended-megamenu">
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <em class="usa-logo__text">
+        <img
+          src="symbol-only.svg"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant"
+        />
+
+        <img
+          src="white_symbol-only.png"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        />
+
+        <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+      </em>
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-extended-megamenu-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+
+        <div
+          id="django-header-extended-megamenu-nav-section-0"
+          class="usa-nav__submenu usa-megamenu"
+          hidden="hidden"
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkA" aria-label="Link A"> Link A </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkB" aria-label="Link B"> Link B </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-extended-megamenu-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+
+        <div
+          id="django-header-extended-megamenu-nav-section-1"
+          class="usa-nav__submenu usa-megamenu"
+          hidden="hidden"
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkC" aria-label="Link C"> Link C </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/linkD" aria-label="Link D"> Link D </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+          <span>Section 3</span>
+        </a>
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links">
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary1" aria-label="Secondary Link 1">
+            <span>Secondary Link 1</span>
+          </a>
+        </li>
+
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary2" aria-label="Secondary Link 2">
+            <span>Secondary Link 2</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="django-header-extended-megamenu-search-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+            onsubmit="handleSubmit"
+          >
+            <label
+              class="usa-label usx-label usa-sr-only"
+              for="django-header-extended-megamenu-search"
+            >
+              Search
+            </label>
+
+            <input
+              id="django-header-extended-megamenu-search"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              value=""
+              type="search"
+              name="q"
+            />
+
+            <button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                focusable="false"
+                role="img"
+              >
+                <use href="img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+          <script data-id="header-extended-megamenu-search" data-on-submit="" data-search-key="q">
+            const data = document.currentScript.dataset;
+            const onSubmit = data.onSubmit;
+
+            if (!!onSubmit) {
+              const id = data.id;
+              const searchKey = data.searchKey;
+              document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById(`${id}-form`).onsubmit = function (e) {
+                  e.preventDefault();
+                  const formData = new FormData(e.target);
+                  const query = formData.get(searchKey);
+                  const func = eval(onSubmit);
+                  func(query);
+                  return false;
+                };
+              });
+            }
+          </script>
+        </section>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">With Menu Icon</h3>
+<header class="usa-header usx-header usa-header--basic" id="django-header-menu-icon">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text">
+          <img
+            src="symbol-only.svg"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant"
+          />
+
+          <img
+            src="white_symbol-only.png"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+          />
+
+          <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+        </em>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-menu-icon-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+
+          <ul id="django-header-menu-icon-nav-section-0" class="usa-nav__submenu" hidden="hidden">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A">
+                <span>Link A</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B">
+                <span>Link B</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-menu-icon-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+
+          <ul id="django-header-menu-icon-nav-section-1" class="usa-nav__submenu" hidden="hidden">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C">
+                <span>Link C</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D">
+                <span>Link D</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+            <span>Section 3</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="django-header-menu-icon-search-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+            onsubmit="handleSubmit"
+          >
+            <label class="usa-label usx-label usa-sr-only" for="django-header-menu-icon-search">
+              Search
+            </label>
+
+            <input
+              id="django-header-menu-icon-search"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              value=""
+              type="search"
+              name="q"
+            />
+
+            <button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                focusable="false"
+                role="img"
+              >
+                <use href="img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+          <script data-id="header-menu-icon-search" data-on-submit="" data-search-key="q">
+            const data = document.currentScript.dataset;
+            const onSubmit = data.onSubmit;
+
+            if (!!onSubmit) {
+              const id = data.id;
+              const searchKey = data.searchKey;
+              document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById(`${id}-form`).onsubmit = function (e) {
+                  e.preventDefault();
+                  const formData = new FormData(e.target);
+                  const query = formData.get(searchKey);
+                  const func = eval(onSubmit);
+                  func(query);
+                  return false;
+                };
+              });
+            }
+          </script>
+        </section>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Minimal</h3>
+<header class="usa-header usx-header usa-header--basic" id="django-header-minimal">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text">
+          <a href="/" class="usx-logo__title">Simple Site</a>
+        </em>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">Menu</button>
+    </div>
+
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <a href="/" class="usa-nav__link">
+            <span>Home</span>
+          </a>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <a href="/about" class="usa-nav__link">
+            <span>About</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Maximal</h3>
+<header
+  class="usa-header usx-header usa-header--extended bg-primary-lighter"
+  id="django-header-maximal"
+>
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <em class="usa-logo__text">
+        <img
+          src="symbol-only.svg"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant"
+        />
+
+        <img
+          src="white_symbol-only.png"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        />
+
+        <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+      </em>
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-maximal-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+
+        <div
+          id="django-header-maximal-nav-section-0"
+          class="usa-nav__submenu usa-megamenu"
+          hidden="hidden"
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1"> Link 1 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2"> Link 2 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3"> Link 3 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4"> Link 4 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5"> Link 5 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6"> Link 6 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7"> Link 7 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8"> Link 8 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9"> Link 9 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10"> Link 10 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11"> Link 11 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12"> Link 12 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13"> Link 13 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14"> Link 14 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15"> Link 15 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16"> Link 16 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17"> Link 17 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18"> Link 18 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19"> Link 19 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20"> Link 20 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21"> Link 21 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22"> Link 22 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23"> Link 23 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24"> Link 24 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25"> Link 25 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26"> Link 26 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27"> Link 27 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28"> Link 28 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29"> Link 29 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30"> Link 30 </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-maximal-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+
+        <div
+          id="django-header-maximal-nav-section-1"
+          class="usa-nav__submenu usa-megamenu"
+          hidden="hidden"
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1"> Link 1 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2"> Link 2 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3"> Link 3 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4"> Link 4 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5"> Link 5 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6"> Link 6 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7"> Link 7 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8"> Link 8 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9"> Link 9 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10"> Link 10 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11"> Link 11 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12"> Link 12 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13"> Link 13 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14"> Link 14 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15"> Link 15 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16"> Link 16 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17"> Link 17 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18"> Link 18 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19"> Link 19 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20"> Link 20 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21"> Link 21 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22"> Link 22 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23"> Link 23 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24"> Link 24 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25"> Link 25 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26"> Link 26 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27"> Link 27 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28"> Link 28 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29"> Link 29 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30"> Link 30 </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-maximal-nav-section-2"
+        >
+          <span>Section 3</span>
+        </button>
+
+        <div
+          id="django-header-maximal-nav-section-2"
+          class="usa-nav__submenu usa-megamenu"
+          hidden="hidden"
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1"> Link 1 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2"> Link 2 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3"> Link 3 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4"> Link 4 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5"> Link 5 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6"> Link 6 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7"> Link 7 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8"> Link 8 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9"> Link 9 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10"> Link 10 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11"> Link 11 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12"> Link 12 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13"> Link 13 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14"> Link 14 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15"> Link 15 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16"> Link 16 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17"> Link 17 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18"> Link 18 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19"> Link 19 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20"> Link 20 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21"> Link 21 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22"> Link 22 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23"> Link 23 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24"> Link 24 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25"> Link 25 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26"> Link 26 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27"> Link 27 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28"> Link 28 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29"> Link 29 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30"> Link 30 </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-maximal-nav-section-3"
+        >
+          <span>Section 4</span>
+        </button>
+
+        <div
+          id="django-header-maximal-nav-section-3"
+          class="usa-nav__submenu usa-megamenu"
+          hidden="hidden"
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1"> Link 1 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2"> Link 2 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3"> Link 3 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4"> Link 4 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5"> Link 5 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6"> Link 6 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7"> Link 7 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8"> Link 8 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9"> Link 9 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10"> Link 10 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11"> Link 11 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12"> Link 12 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13"> Link 13 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14"> Link 14 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15"> Link 15 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16"> Link 16 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17"> Link 17 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18"> Link 18 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19"> Link 19 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20"> Link 20 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21"> Link 21 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22"> Link 22 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23"> Link 23 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24"> Link 24 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25"> Link 25 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26"> Link 26 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27"> Link 27 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28"> Link 28 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29"> Link 29 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30"> Link 30 </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-maximal-nav-section-4"
+        >
+          <span>Section 5</span>
+        </button>
+
+        <div
+          id="django-header-maximal-nav-section-4"
+          class="usa-nav__submenu usa-megamenu"
+          hidden="hidden"
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1"> Link 1 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2"> Link 2 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3"> Link 3 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4"> Link 4 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5"> Link 5 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6"> Link 6 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7"> Link 7 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8"> Link 8 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9"> Link 9 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10"> Link 10 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11"> Link 11 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12"> Link 12 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13"> Link 13 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14"> Link 14 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15"> Link 15 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16"> Link 16 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17"> Link 17 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18"> Link 18 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19"> Link 19 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20"> Link 20 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21"> Link 21 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22"> Link 22 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23"> Link 23 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24"> Link 24 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25"> Link 25 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26"> Link 26 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27"> Link 27 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28"> Link 28 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29"> Link 29 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30"> Link 30 </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-maximal-nav-section-5"
+        >
+          <span>Section 6</span>
+        </button>
+
+        <div
+          id="django-header-maximal-nav-section-5"
+          class="usa-nav__submenu usa-megamenu"
+          hidden="hidden"
+        >
+          <div class="grid-row grid-gap-4">
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link1" aria-label="Link 1"> Link 1 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link2" aria-label="Link 2"> Link 2 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link3" aria-label="Link 3"> Link 3 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link4" aria-label="Link 4"> Link 4 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link5" aria-label="Link 5"> Link 5 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link6" aria-label="Link 6"> Link 6 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link7" aria-label="Link 7"> Link 7 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link8" aria-label="Link 8"> Link 8 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link9" aria-label="Link 9"> Link 9 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link10" aria-label="Link 10"> Link 10 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link11" aria-label="Link 11"> Link 11 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link12" aria-label="Link 12"> Link 12 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link13" aria-label="Link 13"> Link 13 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link14" aria-label="Link 14"> Link 14 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link15" aria-label="Link 15"> Link 15 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link16" aria-label="Link 16"> Link 16 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link17" aria-label="Link 17"> Link 17 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link18" aria-label="Link 18"> Link 18 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link19" aria-label="Link 19"> Link 19 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link20" aria-label="Link 20"> Link 20 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link21" aria-label="Link 21"> Link 21 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link22" aria-label="Link 22"> Link 22 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link23" aria-label="Link 23"> Link 23 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link24" aria-label="Link 24"> Link 24 </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="usa-col">
+              <ul class="usa-nav__submenu-list">
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link25" aria-label="Link 25"> Link 25 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link26" aria-label="Link 26"> Link 26 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link27" aria-label="Link 27"> Link 27 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link28" aria-label="Link 28"> Link 28 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link29" aria-label="Link 29"> Link 29 </a>
+                </li>
+
+                <li class="usa-nav__submenu-item">
+                  <a href="https://example.com/link30" aria-label="Link 30"> Link 30 </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section7" class="usa-nav__link">
+          <span>Section 7</span>
+        </a>
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links">
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary1" aria-label="Secondary Link 1">
+            <span>Secondary Link 1</span>
+          </a>
+        </li>
+
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary2" aria-label="Secondary Link 2">
+            <span>Secondary Link 2</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="usx-nav__utility">
+        <section aria-label="Header search">
+          <form
+            id="django-header-maximal-search-form"
+            class="usa-search usa-search--small"
+            method="get"
+            role="search"
+            action="https://www.google.com/search"
+            onsubmit="handleSubmit"
+          >
+            <label class="usa-label usx-label usa-sr-only" for="django-header-maximal-search">
+              Search
+            </label>
+
+            <input
+              id="django-header-maximal-search"
+              class="usa-input usx-input"
+              placeholder="Search..."
+              value=""
+              type="search"
+              name="q"
+            />
+
+            <button type="submit" class="usa-button usx-button usa-button--primary">
+              <svg
+                class="usa-icon usa-search__submit-icon display-inline-block"
+                aria-hidden="true"
+                focusable="false"
+                role="img"
+              >
+                <use href="img/sprite.svg#search"></use>
+              </svg>
+            </button>
+          </form>
+          <script data-id="header-maximal-search" data-on-submit="" data-search-key="q">
+            const data = document.currentScript.dataset;
+            const onSubmit = data.onSubmit;
+
+            if (!!onSubmit) {
+              const id = data.id;
+              const searchKey = data.searchKey;
+              document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById(`${id}-form`).onsubmit = function (e) {
+                  e.preventDefault();
+                  const formData = new FormData(e.target);
+                  const query = formData.get(searchKey);
+                  const func = eval(onSubmit);
+                  func(query);
+                  return false;
+                };
+              });
+            }
+          </script>
+        </section>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Text Only</h3>
+<header class="usa-header usx-header usa-header--basic" id="django-header-text-only">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text">
+          <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+        </em>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-text-only-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+
+          <ul id="django-header-text-only-nav-section-0" class="usa-nav__submenu" hidden="hidden">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A">
+                <span>Link A</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B">
+                <span>Link B</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-text-only-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+
+          <ul id="django-header-text-only-nav-section-1" class="usa-nav__submenu" hidden="hidden">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C">
+                <span>Link C</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D">
+                <span>Link D</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+            <span>Section 3</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Symbol And Text</h3>
+<header class="usa-header usx-header usa-header--basic" id="django-header-symbol-text">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text">
+          <img
+            src="symbol-only.svg"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant"
+          />
+
+          <img
+            src="white_symbol-only.png"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+          />
+
+          <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+        </em>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-symbol-text-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+
+          <ul id="django-header-symbol-text-nav-section-0" class="usa-nav__submenu" hidden="hidden">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A">
+                <span>Link A</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B">
+                <span>Link B</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-symbol-text-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+
+          <ul id="django-header-symbol-text-nav-section-1" class="usa-nav__submenu" hidden="hidden">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C">
+                <span>Link C</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D">
+                <span>Link D</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+            <span>Section 3</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Single Logo</h3>
+<header class="usa-header usx-header usa-header--basic" id="django-header-single-logo">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <a href="https://example.com" class="usx-image usx-logo__image">
+          <div class="usx-image usx-logo__variant">
+            <img src="linear.svg" alt="Agency Name" />
+          </div>
+
+          <div class="usx-image usx-logo__variant usx-logo__variant--inverse">
+            <img src="white_linear.png" alt="Agency Name" />
+          </div>
+        </a>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-single-logo-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+
+          <ul id="django-header-single-logo-nav-section-0" class="usa-nav__submenu" hidden="hidden">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A">
+                <span>Link A</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B">
+                <span>Link B</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-single-logo-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+
+          <ul id="django-header-single-logo-nav-section-1" class="usa-nav__submenu" hidden="hidden">
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C">
+                <span>Link C</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D">
+                <span>Link D</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+            <span>Section 3</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Responsive Logo</h3>
+<header class="usa-header usx-header usa-header--basic" id="django-header-responsive-logo">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <a href="https://example.com" class="usx-image usx-logo__image">
+          <div class="usx-image usx-logo__variant">
+            <picture>
+              <source srcset="stacked-w-symbol_left.svg" media="(min-width: 64em)" />
+
+              <source srcset="linear.svg" media="(min-width: 40em)" />
+
+              <source srcset="solex-only.svg" media="(min-width: 20em)" />
+
+              <img src="symbol-only.svg" alt="Agency Name" />
+            </picture>
+          </div>
+
+          <div class="usx-image usx-logo__variant usx-logo__variant--inverse">
+            <picture>
+              <source srcset="white_stacked-w-symbol_left.png" media="(min-width: 64em)" />
+
+              <source srcset="white_linear.png" media="(min-width: 40em)" />
+
+              <source srcset="white_solex-only.png" media="(min-width: 20em)" />
+
+              <img src="white_symbol-only.png" alt="Agency Name" />
+            </picture>
+          </div>
+        </a>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+
+    <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+      <button type="button" class="usa-nav__close">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-responsive-logo-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+
+          <ul
+            id="django-header-responsive-logo-nav-section-0"
+            class="usa-nav__submenu"
+            hidden="hidden"
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A">
+                <span>Link A</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B">
+                <span>Link B</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-responsive-logo-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+
+          <ul
+            id="django-header-responsive-logo-nav-section-1"
+            class="usa-nav__submenu"
+            hidden="hidden"
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C">
+                <span>Link C</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D">
+                <span>Link D</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+            <span>Section 3</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<h3 class="site-preview-heading">Responsive Logo Extended</h3>
+<header
+  class="usa-header usx-header usa-header--extended"
+  id="django-header-responsive-logo-extended"
+>
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <a href="https://example.com" class="usx-image usx-logo__image">
+        <div class="usx-image usx-logo__variant">
+          <picture>
+            <source srcset="stacked-w-symbol_left.svg" media="(min-width: 64em)" />
+
+            <source srcset="linear.svg" media="(min-width: 40em)" />
+
+            <source srcset="solex-only.svg" media="(min-width: 20em)" />
+
+            <img src="symbol-only.svg" alt="Agency Name" />
+          </picture>
+        </div>
+
+        <div class="usx-image usx-logo__variant usx-logo__variant--inverse">
+          <picture>
+            <source srcset="white_stacked-w-symbol_left.png" media="(min-width: 64em)" />
+
+            <source srcset="white_linear.png" media="(min-width: 40em)" />
+
+            <source srcset="white_solex-only.png" media="(min-width: 20em)" />
+
+            <img src="white_symbol-only.png" alt="Agency Name" />
+          </picture>
+        </div>
+      </a>
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-responsive-logo-extended-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+
+        <ul
+          id="django-header-responsive-logo-extended-nav-section-0"
+          class="usa-nav__submenu"
+          hidden="hidden"
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkA" aria-label="Link A">
+              <span>Link A</span>
+            </a>
+          </li>
+
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkB" aria-label="Link B">
+              <span>Link B</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-responsive-logo-extended-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+
+        <ul
+          id="django-header-responsive-logo-extended-nav-section-1"
+          class="usa-nav__submenu"
+          hidden="hidden"
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkC" aria-label="Link C">
+              <span>Link C</span>
+            </a>
+          </li>
+
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkD" aria-label="Link D">
+              <span>Link D</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+          <span>Section 3</span>
+        </a>
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links"></ul>
+    </div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Theme Responsive Logo</h3>
+<header class="usa-header usx-header usa-header--extended" id="django-header-theme-responsive-logo">
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <a href="https://example.com" class="usx-image usx-logo__image">
+        <div class="usx-image usx-logo__variant">
+          <picture>
+            <source srcset="stacked-w-symbol_left.svg" media="(min-width: 64em)" />
+
+            <source srcset="linear.svg" media="(min-width: 40em)" />
+
+            <source srcset="solex-only.svg" media="(min-width: 20em)" />
+
+            <img src="symbol-only.svg" alt="Agency Name" />
+          </picture>
+        </div>
+
+        <div class="usx-image usx-logo__variant usx-logo__variant--inverse">
+          <picture>
+            <source srcset="white_stacked-w-symbol_left.png" media="(min-width: 64em)" />
+
+            <source srcset="white_linear.png" media="(min-width: 40em)" />
+
+            <source srcset="white_solex-only.png" media="(min-width: 20em)" />
+
+            <img src="white_symbol-only.png" alt="Agency Name" />
+          </picture>
+        </div>
+      </a>
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-theme-responsive-logo-nav-section-0"
+        >
+          <span>Section 1</span>
+        </button>
+
+        <ul
+          id="django-header-theme-responsive-logo-nav-section-0"
+          class="usa-nav__submenu"
+          hidden="hidden"
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkA" aria-label="Link A">
+              <span>Link A</span>
+            </a>
+          </li>
+
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkB" aria-label="Link B">
+              <span>Link B</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-theme-responsive-logo-nav-section-1"
+        >
+          <span>Section 2</span>
+        </button>
+
+        <ul
+          id="django-header-theme-responsive-logo-nav-section-1"
+          class="usa-nav__submenu"
+          hidden="hidden"
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkC" aria-label="Link C">
+              <span>Link C</span>
+            </a>
+          </li>
+
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkD" aria-label="Link D">
+              <span>Link D</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+          <span>Section 3</span>
+        </a>
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links"></ul>
+    </div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">External Links</h3>
+<header class="usa-header usx-header usa-header--extended" id="django-header-external-links">
+  <div class="usa-navbar">
+    <div class="usa-logo usx-logo">
+      <em class="usa-logo__text">
+        <img
+          src="symbol-only.svg"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant"
+        />
+
+        <img
+          src="white_symbol-only.png"
+          alt=""
+          aria-hidden="true"
+          class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+        />
+
+        <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+      </em>
+    </div>
+    <button type="button" class="usa-menu-btn align-center">
+      <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#menu"></use>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<nav aria-label="Primary navigation" class="usa-nav usx-nav">
+  <div class="usa-nav__inner">
+    <button type="button" class="usa-nav__close">
+      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <ul class="usa-nav__primary usa-accordion">
+      <li class="usa-nav__primary-item">
+        <a
+          href="https://example.com/section-external"
+          class="usa-nav__link"
+          aria-label="External Section"
+        >
+          <span>External Section</span>
+          <span class="usa-sr-only">External.</span>
+
+          <svg
+            class="usa-icon usx-icon--size-1 margin-left-05"
+            aria-hidden="true"
+            focusable="false"
+            role="img"
+          >
+            <use href="img/sprite.svg#launch"></use>
+          </svg>
+        </a>
+      </li>
+
+      <li class="usa-nav__primary-item">
+        <button
+          type="button"
+          class="usa-accordion__button usa-nav__link"
+          aria-expanded="false"
+          aria-controls="django-header-external-links-nav-section-1"
+        >
+          <span>Section With Links</span>
+        </button>
+
+        <ul
+          id="django-header-external-links-nav-section-1"
+          class="usa-nav__submenu"
+          hidden="hidden"
+        >
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkA" aria-label="External Link A">
+              <span>External Link A</span>
+              <span class="usa-sr-only">External.</span>
+
+              <svg
+                class="usa-icon usx-icon--size-1 margin-left-05"
+                aria-hidden="true"
+                focusable="false"
+                role="img"
+              >
+                <use href="img/sprite.svg#launch"></use>
+              </svg>
+            </a>
+          </li>
+
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkB" aria-label="External Link B">
+              <span>External Link B</span>
+              <span class="usa-sr-only">External.</span>
+
+              <svg
+                class="usa-icon usx-icon--size-1 margin-left-05"
+                aria-hidden="true"
+                focusable="false"
+                role="img"
+              >
+                <use href="img/sprite.svg#launch"></use>
+              </svg>
+            </a>
+          </li>
+
+          <li class="usa-nav__submenu-item">
+            <a href="https://example.com/linkC" aria-label="External Link C">
+              <span>External Link C</span>
+              <span class="usa-sr-only">External.</span>
+
+              <svg
+                class="usa-icon usx-icon--size-1 margin-left-05"
+                aria-hidden="true"
+                focusable="false"
+                role="img"
+              >
+                <use href="img/sprite.svg#launch"></use>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="usa-nav__secondary">
+      <ul class="usa-nav__secondary-links">
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary1" aria-label="Secondary External 1">
+            <span>Secondary External 1</span>
+            <span class="usa-sr-only">External.</span>
+
+            <svg
+              class="usa-icon usx-icon--size-1 margin-left-05"
+              aria-hidden="true"
+              focusable="false"
+              role="img"
+            >
+              <use href="img/sprite.svg#launch"></use>
+            </svg>
+          </a>
+        </li>
+
+        <li class="usa-nav__secondary-item">
+          <a href="https://example.com/secondary2" aria-label="Secondary External 2">
+            <span>Secondary External 2</span>
+            <span class="usa-sr-only">External.</span>
+
+            <svg
+              class="usa-icon usx-icon--size-1 margin-left-05"
+              aria-hidden="true"
+              focusable="false"
+              role="img"
+            >
+              <use href="img/sprite.svg#launch"></use>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<h3 class="site-preview-heading">Border Roles</h3>
+<div
+  style="
+    --usx-header-border-top: 3px solid #005ea2;
+    --usx-header-border-bottom: 4px solid #237a3b;
+    --usx-header-border-separator: 2px dashed #a72f10;
+    --usx-header-border-bottom-mobile: 5px solid #8a3575;
+    --usx-header-nav-border-bottom-mobile: 6px solid #d1980b;
+    --usx-header-nav-item-border: 3px dashed #e41d3d;
+  "
+>
+  <header class="usa-header usx-header usa-header--extended" id="django-header-border-roles">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text">
+          <img
+            src="symbol-only.svg"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant"
+          />
+
+          <img
+            src="white_symbol-only.png"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+          />
+
+          <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+        </em>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+    <div class="usa-nav__inner">
+      <button type="button" class="usa-nav__close">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-border-roles-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+
+          <ul
+            id="django-header-border-roles-nav-section-0"
+            class="usa-nav__submenu"
+            hidden="hidden"
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A">
+                <span>Link A</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B">
+                <span>Link B</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-border-roles-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+
+          <ul
+            id="django-header-border-roles-nav-section-1"
+            class="usa-nav__submenu"
+            hidden="hidden"
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C">
+                <span>Link C</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D">
+                <span>Link D</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+            <span>Section 3</span>
+          </a>
+        </li>
+      </ul>
+      <div class="usa-nav__secondary">
+        <ul class="usa-nav__secondary-links">
+          <li class="usa-nav__secondary-item">
+            <a href="https://example.com/secondary1" aria-label="Secondary Link 1">
+              <span>Secondary Link 1</span>
+            </a>
+          </li>
+
+          <li class="usa-nav__secondary-item">
+            <a href="https://example.com/secondary2" aria-label="Secondary Link 2">
+              <span>Secondary Link 2</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="usx-nav__utility">
+          <section aria-label="Header search">
+            <form
+              id="django-header-border-roles-search-form"
+              class="usa-search usa-search--small"
+              method="get"
+              role="search"
+              action="https://www.google.com/search"
+              onsubmit="handleSubmit"
+            >
+              <label
+                class="usa-label usx-label usa-sr-only"
+                for="django-header-border-roles-search"
+              >
+                Search
+              </label>
+
+              <input
+                id="django-header-border-roles-search"
+                class="usa-input usx-input"
+                placeholder="Search..."
+                value=""
+                type="search"
+                name="q"
+              />
+
+              <button type="submit" class="usa-button usx-button usa-button--primary">
+                <svg
+                  class="usa-icon usa-search__submit-icon display-inline-block"
+                  aria-hidden="true"
+                  focusable="false"
+                  role="img"
+                >
+                  <use href="img/sprite.svg#search"></use>
+                </svg>
+              </button>
+            </form>
+            <script data-id="header-border-roles-search" data-on-submit="" data-search-key="q">
+              const data = document.currentScript.dataset;
+              const onSubmit = data.onSubmit;
+
+              if (!!onSubmit) {
+                const id = data.id;
+                const searchKey = data.searchKey;
+                document.addEventListener('DOMContentLoaded', function () {
+                  document.getElementById(`${id}-form`).onsubmit = function (e) {
+                    e.preventDefault();
+                    const formData = new FormData(e.target);
+                    const query = formData.get(searchKey);
+                    const func = eval(onSubmit);
+                    func(query);
+                    return false;
+                  };
+                });
+              }
+            </script>
+          </section>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<h3 class="site-preview-heading">Extensibility Slots</h3>
+<div>
+  <header class="usa-header usx-header usa-header--extended" id="django-header-extensibility-slots">
+    <div class="usa-navbar">
+      <div class="usa-logo usx-logo">
+        <em class="usa-logo__text">
+          <img
+            src="symbol-only.svg"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant"
+          />
+
+          <img
+            src="white_symbol-only.png"
+            alt=""
+            aria-hidden="true"
+            class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse"
+          />
+
+          <a href="https://example.com" class="usx-logo__title">Agency Name</a>
+        </em>
+      </div>
+      <button type="button" class="usa-menu-btn align-center">
+        <svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#menu"></use>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <nav aria-label="Primary navigation" class="usa-nav usx-nav">
+    <div class="usa-nav__inner">
+      <button type="button" class="usa-nav__close">
+        <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+          <use href="img/sprite.svg#close"></use>
+        </svg>
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-extensibility-slots-nav-section-0"
+          >
+            <span>Section 1</span>
+          </button>
+
+          <ul
+            id="django-header-extensibility-slots-nav-section-0"
+            class="usa-nav__submenu"
+            hidden="hidden"
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkA" aria-label="Link A">
+                <span>Link A</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkB" aria-label="Link B">
+                <span>Link B</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <button
+            type="button"
+            class="usa-accordion__button usa-nav__link"
+            aria-expanded="false"
+            aria-controls="django-header-extensibility-slots-nav-section-1"
+          >
+            <span>Section 2</span>
+          </button>
+
+          <ul
+            id="django-header-extensibility-slots-nav-section-1"
+            class="usa-nav__submenu"
+            hidden="hidden"
+          >
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkC" aria-label="Link C">
+                <span>Link C</span>
+              </a>
+            </li>
+
+            <li class="usa-nav__submenu-item">
+              <a href="https://example.com/linkD" aria-label="Link D">
+                <span>Link D</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="usa-nav__primary-item">
+          <a href="https://example.com/section3" class="usa-nav__link" aria-label="Section 3">
+            <span>Section 3</span>
+          </a>
+        </li>
+      </ul>
+      <div class="usa-nav__secondary">
+        <ul class="usa-nav__secondary-links">
+          <li class="usa-nav__secondary-item">
+            <a href="https://example.com/secondary1" aria-label="Secondary Link 1">
+              <span>Secondary Link 1</span>
+            </a>
+          </li>
+
+          <li class="usa-nav__secondary-item">
+            <a href="https://example.com/secondary2" aria-label="Secondary Link 2">
+              <span>Secondary Link 2</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="usx-nav__utility">
+          <a
+            class="usa-button usx-button usa-button--primary usx-button--ghost margin-right-0"
+            href="https://example.com/sign-in"
+            >Sign In</a
+          >
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>

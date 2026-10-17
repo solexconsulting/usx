@@ -746,6 +746,151 @@ class ToggleTests(SimpleTestCase):
         self.assertNotIn('<legend', html)
 
 
+class TreeTests(SimpleTestCase):
+    def test_nested_tree_matches_react_component_structure(self):
+        html = render_component("tree", {
+            "items": [
+                {"type": "text", "text": "Applications"},
+                {"type": "link", "text": "Check status", "href": "#status"},
+                {
+                    "type": "details",
+                    "summaryProps": {"label": "More services"},
+                    "items": [
+                        {"type": "link", "text": "Renew", "href": "#renew"},
+                        {
+                            "type": "details",
+                            "summaryProps": {"label": "Benefits"},
+                            "items": [{"type": "link", "text": "Eligibility", "href": "#eligibility"}],
+                        },
+                    ],
+                },
+                {
+                    "type": "details",
+                    "summaryProps": {"label": "Help"},
+                    "text": "Read the guidance.",
+                },
+                {"type": "details", "summaryProps": {"label": "Coming soon"}, "items": []},
+            ],
+        })
+        root = fromstring(html.strip())
+
+        self.assertEqual(root.tag, "ul")
+        self.assertEqual(root.attrib["class"], "usx-tree usx-tree--raw")
+        self.assertEqual(len(root.findall("li")), 5)
+        self.assertEqual(root.find("li/span").text, "Applications")
+        self.assertEqual(root.find("li/a").attrib["href"], "#status")
+
+        branch = root.findall("li/details")[0]
+        self.assertEqual(branch.attrib["class"], "usx-details usx-tree__branch")
+        self.assertEqual(branch.find("summary/span").text, "More services")
+        nested_tree = branch.find("div/ul")
+        self.assertEqual(nested_tree.attrib["class"], "usx-tree usx-tree--raw")
+        self.assertEqual(nested_tree.findall("li/details")[0].find("summary/span").text, "Benefits")
+        self.assertEqual(nested_tree.find("li/details/div/ul/li/a").attrib["href"], "#eligibility")
+
+        leaf = root.findall("li/details")[1]
+        self.assertEqual(leaf.find("div/p").text, "Read the guidance.")
+        empty_branch = root.findall("li/details")[2]
+        self.assertEqual(len(empty_branch.find("div/ul")), 0)
+
+
+class PopoverTests(SimpleTestCase):
+    def test_panel_markup_matches_react_composition_order(self):
+        html = render_component("popover", {
+            "id": "services-panel",
+            "summaryProps": {
+                "label": "Services",
+                "className": "usa-button usx-button",
+                "ariaLabel": "Services menu",
+            },
+            "panelHeading": "Services heading",
+            "headingLevel": "h3",
+            "children": "<p>Additional information</p>",
+            "scrollable": True,
+            "contentClassName": "font-sans-xs",
+            "panelClassName": "font-sans-sm",
+            "showClose": True,
+            "closeLabel": "Close services",
+        })
+        root = fromstring(html.strip())
+        summary = root.find("summary")
+        panel = root.find("div")
+
+        self.assertEqual(root.tag, "details")
+        self.assertEqual(root.attrib["class"], "usx-popover")
+        self.assertEqual(summary.attrib["class"], "usa-button usx-button")
+        self.assertEqual(summary.attrib["aria-label"], "Services menu")
+        self.assertEqual("".join(summary.itertext()), "Services")
+        self.assertEqual(panel.attrib["id"], "services-panel")
+        self.assertEqual(panel.attrib["class"], "usx-popover__panel font-sans-sm")
+        self.assertNotIn("role", panel.attrib)
+        self.assertNotIn("aria-label", panel.attrib)
+        self.assertEqual(panel.find("h3").attrib["class"], "usx-popover__panel-heading")
+        self.assertEqual(panel.find("h3").text, "Services heading")
+        self.assertEqual(
+            panel.find("div").attrib["class"],
+            "usx-popover__panel-content usx-popover__scroll font-sans-xs",
+        )
+        self.assertEqual(panel.find("div/p").text, "Additional information")
+        close_button = panel.find("button")
+        self.assertEqual(
+            close_button.attrib["class"],
+            "usa-button usx-button usa-button--unstyled usx-popover__panel-close",
+        )
+        self.assertEqual(close_button.attrib["data-usx-popover-close"], "services-panel")
+        self.assertEqual(close_button.text, "Close services")
+        self.assertLess(html.index("<h3"), html.index("usx-popover__panel-content"))
+        self.assertLess(html.index("usx-popover__panel-content"), html.index("usx-popover__panel-close"))
+
+    def test_menu_items_render_links_text_and_nested_popovers(self):
+        html = render_component("popover", {
+            "id": "menu",
+            "summaryProps": {"label": "Services"},
+            "menuItems": [
+                {"type": "link", "href": "#all", "text": "All <services>"},
+                {
+                    "type": "details",
+                    "summaryProps": {"label": "Housing", "className": "custom"},
+                    "items": [
+                        {"type": "link", "href": "#rent", "text": "Rent help"},
+                        {
+                            "type": "details",
+                            "id": "custom-id",
+                            "summaryProps": {"label": "More"},
+                            "items": [{"type": "text", "text": "Closed on holidays"}],
+                        },
+                    ],
+                },
+            ],
+            "children": "<p>After menu</p>",
+        })
+        root = fromstring(html.strip())
+        panel = root.find("div")
+        menu = panel.find("ul")
+
+        self.assertEqual(menu.attrib["class"], "usx-popover__menu")
+        link = menu.find("li/a")
+        self.assertEqual(link.attrib["href"], "#all")
+        self.assertEqual(link.attrib["class"], "usa-link usx-link usx-no-visited usx-popover__menu-item")
+        self.assertEqual(link.text, "All <services>")
+
+        nested = menu.findall("li")[1].find("details")
+        self.assertEqual(nested.attrib["class"], "usx-popover")
+        self.assertEqual(nested.attrib["name"], "menu")
+        self.assertEqual(nested.attrib["data-side"], "right")
+        self.assertEqual(nested.find("summary").attrib["class"], "custom usx-popover__menu-item")
+        nested_panel = nested.find("div")
+        self.assertEqual(nested_panel.attrib["id"], "menu-1")
+        self.assertEqual(nested_panel.find("ul/li/a").attrib["href"], "#rent")
+
+        deepest = nested_panel.find("ul").findall("li")[1].find("details")
+        self.assertEqual(deepest.attrib["name"], "menu-1")
+        self.assertEqual(deepest.find("summary").attrib["class"], "usx-popover__menu-item")
+        self.assertEqual(deepest.find("div").attrib["id"], "custom-id")
+        self.assertEqual(deepest.find("div/ul/li/span").text, "Closed on holidays")
+        self.assertLess(html.index("usx-popover__menu"), html.index("usx-popover__panel-content"))
+
+
 class DetailsTests(SimpleTestCase):
     diagnostic_text = (
         'Traceback (most recent call last):\n'
@@ -755,7 +900,7 @@ class DetailsTests(SimpleTestCase):
 
     def test_plain_text_details_are_collapsed_and_escaped(self):
         html = render_component("details", {
-            "summary": "Technical details",
+            "summaryProps": {"label": "Technical details"},
             "text": self.diagnostic_text,
         })
         elements = RenderedElements(html)
@@ -763,7 +908,7 @@ class DetailsTests(SimpleTestCase):
         self.assertEqual(details["class"], "usx-details")
         self.assertNotIn("open", details)
         self.assertIn(
-            '<summary class="usx-details__summary"><span class="usx-details__summary-text">Technical details</span></summary>',
+            '<summary class="usx-summary"><span class="usx-summary-text">Technical details</span></summary>',
             html,
         )
         self.assertIn("Traceback (most recent call last):\n", html)
@@ -776,7 +921,7 @@ class DetailsTests(SimpleTestCase):
     def test_open_custom_summary_and_empty_details(self):
         html = render_component("details", {
             "text": self.diagnostic_text,
-            "summary": "Exception traceback",
+            "summaryProps": {"label": "Exception traceback"},
             "open": True,
             "className": "custom-details",
         })
@@ -784,7 +929,9 @@ class DetailsTests(SimpleTestCase):
         self.assertIn("open", details)
         self.assertIn("custom-details", details["class"].split())
         self.assertIn(">Exception traceback</span></summary>", html)
-        empty_html = render_component("details", {"summary": "More information", "text": ""})
+        empty_html = render_component("details", {
+            "summaryProps": {"label": "More information"}, "text": "",
+        })
         self.assertIn('<p class="usx-details__text"></p>', empty_html)
 
     def test_plain_text_is_escaped_even_when_marked_safe_or_autoescape_is_off(self):
@@ -794,14 +941,16 @@ class DetailsTests(SimpleTestCase):
         summary = '</summary><script>alert("summary")</script> & details'
         template = Template(
             "{% load components %}"
-            "{% details text=text summary=summary %}{% enddetails %}"
+            "{% details text=text summaryProps=summary_props %}{% enddetails %}"
         )
         for safe in (False, True):
             for autoescape in (False, True):
                 with self.subTest(marked_safe=safe, autoescape=autoescape):
                     html = template.render(Context({
                         "text": mark_safe(text) if safe else text,
-                        "summary": mark_safe(summary) if safe else summary,
+                        "summary_props": {
+                            "label": mark_safe(summary) if safe else summary,
+                        },
                     }, autoescape=autoescape))
                     self.assertIn("&lt;/p&gt;&lt;script&gt;", html)
                     self.assertIn("&lt;/summary&gt;&lt;script&gt;", html)
@@ -812,7 +961,9 @@ class DetailsTests(SimpleTestCase):
 
     def test_diagnostic_report_preserves_whitespace_and_empty_summary_uses_default(self):
         report = "\n\nRequest status: failed\n  Reference: JOB-1204\n\tItems processed: 0\n"
-        html = render_component("details", {"text": report, "summary": ""})
+        html = render_component("details", {
+            "text": report, "summaryProps": {"label": ""},
+        })
         root = fromstring(html.strip())
         self.assertEqual(root.find("summary/span").text, "Details")
         text = root.find("div/p")
@@ -823,10 +974,10 @@ class DetailsTests(SimpleTestCase):
     def test_rich_children_replace_plain_text(self):
         html = Template(
             "{% load components %}"
-            "{% details summary='Before you apply' text='Hidden fallback' %}"
+            "{% details summaryProps=summary_props text='Hidden fallback' %}"
             '<ul><li><a href="/guidance">Read the guidance</a></li></ul>'
             "{% enddetails %}"
-        ).render(Context({}))
+        ).render(Context({"summary_props": {"label": "Before you apply"}}))
         self.assertIn('<ul><li><a href="/guidance">Read the guidance</a></li></ul>', html)
         self.assertNotIn("Hidden fallback", html)
         self.assertNotIn("usx-details__text", html)
@@ -835,28 +986,37 @@ class DetailsTests(SimpleTestCase):
         for children in ("", False, True):
             with self.subTest(children=children):
                 empty_html = render_component("details", {
-                    "summary": "More information", "text": "Hidden fallback", "children": children,
+                    "summaryProps": {"label": "More information"},
+                    "text": "Hidden fallback",
+                    "children": children,
                 })
                 self.assertNotIn("Hidden fallback", empty_html)
                 self.assertNotIn("usx-details__text", empty_html)
                 root = fromstring(empty_html.strip())
                 self.assertEqual(len(root.find("div")), 0)
                 self.assertIsNone(root.find("div").text)
-        count_html = render_component("details", {"summary": "Count", "children": 0})
+        count_html = render_component("details", {
+            "summaryProps": {"label": "Count"}, "children": 0,
+        })
         self.assertIn('<div class="usx-details__content">0</div>', count_html)
         fallback_html = render_component("details", {
-            "summary": "More information", "text": "Visible fallback", "children": None,
+            "summaryProps": {"label": "More information"},
+            "text": "Visible fallback",
+            "children": None,
         })
         self.assertIn('<p class="usx-details__text">Visible fallback</p>', fallback_html)
 
     def test_summary_classes_apply_to_their_respective_elements(self):
         html = render_component("details", {
-            "summary": "Help", "summaryClassName": "padding-1",
-            "summaryTextClassName": "text-bold",
+            "summaryProps": {
+                "label": "Help",
+                "className": "padding-1",
+                "textClassName": "text-bold",
+            },
         })
         root = fromstring(html.strip())
-        self.assertEqual(root.find("summary").attrib["class"], "usx-details__summary padding-1")
-        self.assertEqual(root.find("summary/span").attrib["class"], "usx-details__summary-text text-bold")
+        self.assertEqual(root.find("summary").attrib["class"], "usx-summary padding-1")
+        self.assertEqual(root.find("summary/span").attrib["class"], "usx-summary-text text-bold")
         self.assertEqual(root.find("summary/span").text, "Help")
 
     def test_color_utilities_and_independent_decoration_switches(self):
@@ -864,23 +1024,30 @@ class DetailsTests(SimpleTestCase):
             for no_summary_underline in (False, True):
                 with self.subTest(borderless=no_content_border, no_underline=no_summary_underline):
                     html = render_component("details", {
-                        "summary": "Supporting information",
+                        "summaryProps": {
+                            "label": "Supporting information",
+                            "markerColor": "primary",
+                            "underlineColor": "secondary",
+                            "noUnderline": no_summary_underline,
+                        },
                         "text": "More information",
-                        "markerColor": "primary",
-                        "underlineColor": "secondary",
                         "contentBorderColor": "accent-cool",
                         "noContentBorder": no_content_border,
-                        "noSummaryUnderline": no_summary_underline,
                         "className": "margin-top-3",
                         "contentClassName": "font-family-mono",
                     })
                     root = fromstring(html.strip())
                     classes = root.attrib["class"].split()
                     self.assertEqual("usx-details--borderless" in classes, no_content_border)
-                    self.assertEqual("usx-details--no-underline" in classes, no_summary_underline)
                     self.assertIn("margin-top-3", classes)
-                    self.assertEqual(root.find("summary").attrib["class"], "usx-details__summary marker-primary")
-                    self.assertEqual(root.find("summary/span").attrib["class"], "usx-details__summary-text border-secondary")
+                    summary_classes = root.find("summary").attrib["class"].split()
+                    self.assertIn("marker-primary", summary_classes)
+                    self.assertEqual(
+                        "usx-summary--no-underline" in summary_classes,
+                        no_summary_underline,
+                    )
+                    span_classes = root.find("summary/span").attrib["class"].split()
+                    self.assertEqual("border-secondary" in span_classes, not no_summary_underline)
                     content_classes = root.find("div").attrib["class"].split()
                     self.assertIn("font-family-mono", content_classes)
                     self.assertEqual("border-accent-cool" in content_classes, not no_content_border)
@@ -889,9 +1056,12 @@ class DetailsTests(SimpleTestCase):
         html = Template(
             "{% load components %}"
             "{% error_page title='Request failed' %}"
-            "{% details summary='Technical details' text=diagnostic_text %}{% enddetails %}"
+            "{% details summaryProps=summary_props text=diagnostic_text %}{% enddetails %}"
             "{% enderror_page %}"
-        ).render(Context({"diagnostic_text": self.diagnostic_text}))
+        ).render(Context({
+            "diagnostic_text": self.diagnostic_text,
+            "summary_props": {"label": "Technical details"},
+        }))
         self.assertIn("usx-error-page", html)
         self.assertIn("usx-details", html)
         self.assertIn("&lt;script&gt; tag &amp; invalid input", html)

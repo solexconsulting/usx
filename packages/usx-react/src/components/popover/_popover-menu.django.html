@@ -1,0 +1,35 @@
+{% load components %}{% spaceless %}
+<ul class="usx-popover__menu">
+  {% for item in items %}
+  {% with index=forloop.counter0|stringformat:"s" %}
+  {% with generated=prefix|add:"-"|add:index %}
+  {% with id=item.id|default:generated %}
+  <li>
+    {% if item.type == 'details' %}
+    <details
+      name="{{ prefix|force_escape }}"
+      class="usx-popover"
+      data-side="right"
+      data-align="start"
+    >
+      {% if item.summaryProps.className %}
+      {% summary props=item.summaryProps label=item.summaryProps.label|default:'Open panel' className=item.summaryProps.className|add:" usx-popover__menu-item" unstyled=True %}{% endsummary %}
+      {% else %}
+      {% summary props=item.summaryProps label=item.summaryProps.label|default:'Open panel' className="usx-popover__menu-item" unstyled=True %}{% endsummary %}
+      {% endif %}
+      <div id="{{ id|force_escape }}" class="usx-popover__panel">
+        {% include "popover/_popover-menu.django.html" with items=item.items prefix=id only %}
+      </div>
+    </details>
+    {% elif item.type == 'link' %}
+    {% link href=item.href text=item.text className="usx-no-visited usx-popover__menu-item" %}{{ item.text|force_escape }}{% endlink %}
+    {% elif item.type == 'text' %}
+    <span class="usx-popover__menu-item">{{ item.text|force_escape }}</span>
+    {% endif %}
+  </li>
+  {% endwith %}
+  {% endwith %}
+  {% endwith %}
+  {% endfor %}
+</ul>
+{% endspaceless %}

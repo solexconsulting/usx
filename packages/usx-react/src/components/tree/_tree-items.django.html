@@ -1,0 +1,15 @@
+{% load components %} {% for item in items %} {% if item.type == 'link' %}
+<li>{% link props=item %}{{ item.text|force_escape }}{% endlink %}</li>
+{% elif item.type == 'details' %}
+<li>
+  {% if 'items' in item %} {% details props=item className=item.className|default:""|add:" usx-tree__branch" %}
+  <ul
+    class="usx-tree{% if variant == 'padded' %} usx-tree--padded{% else %} usx-tree--raw{% endif %}"
+  >
+    {% include "tree/_tree-items.django.html" with items=item.items variant=variant only %}
+  </ul>
+  {% enddetails %} {% else %} {% details props=item %}{% enddetails %} {% endif %}
+</li>
+{% elif item.type == 'text' %}
+<li><span class="usx-tree__label">{{ item.text|force_escape }}</span></li>
+{% endif %} {% endfor %}

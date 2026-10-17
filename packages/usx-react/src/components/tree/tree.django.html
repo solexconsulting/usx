@@ -1,0 +1,5 @@
+<ul
+  class="usx-tree{% if variant == 'padded' %} usx-tree--padded{% else %} usx-tree--raw{% endif %}{% if className %} {{ className|force_escape }}{% endif %}"
+>
+  {% include "tree/_tree-items.django.html" with items=items variant=variant only %}
+</ul>

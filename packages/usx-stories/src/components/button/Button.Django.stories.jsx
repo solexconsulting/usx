@@ -1,7 +1,7 @@
 import React from 'react';
 import config from '../../../../usx-react/src/components/button/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
-import { storyDefs } from './Button.React.stories.jsx';
+import { storyDefs, renderAllVariants } from './Button.React.stories.jsx';
 
 export default {
   title: 'Django/USWDS/Button',
@@ -10,10 +10,19 @@ export default {
 };
 
 const createStory = createDjangoStory({ componentName: 'button' });
+const createInverseStory = createDjangoStory({
+  componentName: 'button',
+  wrapper: (payload, args, { mode }) => {
+    if (mode === 'source') return `<div class="bg-surface-inverse padding-1">${payload}</div>`;
+    return <div className="bg-surface-inverse padding-1" dangerouslySetInnerHTML={{ __html: payload }} />;
+  },
+});
 const allowedPropNames = new Set(Object.keys(config.props || {}));
-const toDjangoArgs = (args) => Object.fromEntries(
-  Object.entries(args).filter(([key]) => allowedPropNames.has(key))
-);
+// Django has no passthrough props, so aria-disabled goes through extraAttributes.
+const toDjangoArgs = ({ 'aria-disabled': ariaDisabled, ...args }) => ({
+  ...Object.fromEntries(Object.entries(args).filter(([key]) => allowedPropNames.has(key))),
+  ...(ariaDisabled ? { extraAttributes: { 'aria-disabled': 'true' } } : {}),
+});
 
 export const Default = createStory(toDjangoArgs(storyDefs.Default));
 export const DefaultHover = createStory(toDjangoArgs(storyDefs.DefaultHover));
@@ -57,12 +66,12 @@ export const OutlineActive = createStory(toDjangoArgs(storyDefs.OutlineActive));
 export const OutlineFocus = createStory(toDjangoArgs(storyDefs.OutlineFocus));
 export const OutlineDisabled = createStory(toDjangoArgs(storyDefs.OutlineDisabled));
 export const OutlineAriaDisabled = createStory(toDjangoArgs(storyDefs.OutlineAriaDisabled));
-export const OutlineInverse = createStory(toDjangoArgs(storyDefs.OutlineInverse));
-export const OutlineInverseHover = createStory(toDjangoArgs(storyDefs.OutlineInverseHover));
-export const OutlineInverseActive = createStory(toDjangoArgs(storyDefs.OutlineInverseActive));
-export const OutlineInverseFocus = createStory(toDjangoArgs(storyDefs.OutlineInverseFocus));
-export const OutlineInverseDisabled = createStory(toDjangoArgs(storyDefs.OutlineInverseDisabled));
-export const OutlineInverseAriaDisabled = createStory(toDjangoArgs(storyDefs.OutlineInverseAriaDisabled));
+export const OutlineInverse = createInverseStory(toDjangoArgs(storyDefs.OutlineInverse));
+export const OutlineInverseHover = createInverseStory(toDjangoArgs(storyDefs.OutlineInverseHover));
+export const OutlineInverseActive = createInverseStory(toDjangoArgs(storyDefs.OutlineInverseActive));
+export const OutlineInverseFocus = createInverseStory(toDjangoArgs(storyDefs.OutlineInverseFocus));
+export const OutlineInverseDisabled = createInverseStory(toDjangoArgs(storyDefs.OutlineInverseDisabled));
+export const OutlineInverseAriaDisabled = createInverseStory(toDjangoArgs(storyDefs.OutlineInverseAriaDisabled));
 
 export const Big = createStory(toDjangoArgs(storyDefs.Big));
 export const BigDisabled = createStory(toDjangoArgs(storyDefs.BigDisabled));
@@ -90,3 +99,11 @@ export const GhostWithIcon = createStory(toDjangoArgs(storyDefs.GhostWithIcon));
 export const MultipleIcons = createStory(toDjangoArgs(storyDefs.MultipleIcons));
 export const Loading = createStory(toDjangoArgs(storyDefs.Loading));
 export const LoadingDisabled = createStory(toDjangoArgs(storyDefs.LoadingDisabled));
+
+export const AllVariants = {
+  render: () =>
+    renderAllVariants((props) => {
+      const args = toDjangoArgs(props);
+      return createStory(args).render(args);
+    }),
+};

@@ -6,7 +6,7 @@
     {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
 >
   {% if iconPosition == 'left' or not iconPosition %}
-  <svg class="margin-right-05usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+  <svg class="margin-right-05 usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
     <use href="./img/sprite.svg#arrow_upward"></use>
   </svg>
   {% endif %}
@@ -24,13 +24,13 @@
     onclick="{{ onClick|default:'window.scrollTo({ top: 0, behavior: \'smooth\' });' }}"
 >
   {% if iconPosition == 'left' %}
-  <svg class="usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+  <svg class="margin-right-05 usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
     <use href="./img/sprite.svg#arrow_upward"></use>
   </svg>
   {% endif %}
   {% if label %}{{ label }}{% endif %}
   {% if iconPosition != 'left' %}
-  <svg class="usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+  <svg class="margin-left-05 usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
     <use href="./img/sprite.svg#arrow_upward"></use>
   </svg>
   {% endif %}

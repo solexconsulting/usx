@@ -1,0 +1,335 @@
+<h3 class="site-preview-heading">Single Column</h3>
+<div class="usx-layout">
+  <div class="usx-layout__single-column">
+    <div class="bg-blue">
+      <h2>Single Column Layout</h2>
+      <p>This content is centered with responsive gutters.</p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua.
+      </p>
+    </div>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Grid Full Content</h3>
+<div class="usx-layout">
+  <div class="usx-layout__grid-container">
+    <aside class="usx-layout__sidebar--left">
+      <div class="bg-violet">
+        <h2>Left Sidebar</h2>
+        <p>Navigation or secondary content</p>
+      </div>
+    </aside>
+
+    <main class="usx-layout__content">
+      <div class="bg-blue">
+        <h2>Grid Layout - Full Content</h2>
+        <p>Content spans the full width, sidebars are hidden on mobile.</p>
+        <p>
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.
+        </p>
+      </div>
+    </main>
+
+    <aside class="usx-layout__sidebar--right">
+      <div class="bg-cyan">
+        <h2>Right Sidebar</h2>
+        <p>Related links or ads</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Grid Without Sidebars</h3>
+<div class="usx-layout">
+  <div class="usx-layout__grid-container">
+    <main class="usx-layout__content">
+      <div class="bg-blue">
+        <h2>Single Column Layout</h2>
+        <p>This content is centered with responsive gutters.</p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua.
+        </p>
+      </div>
+    </main>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Grid With Left Sidebar</h3>
+<div class="usx-layout">
+  <div class="usx-layout__grid-container">
+    <aside class="usx-layout__sidebar--left">
+      <nav aria-label="Side navigation">
+        <ul class="usa-sidenav usx-sidenav">
+          <li class="usa-sidenav__item">
+            <a href="#" class="usa-current" aria-current="page">Home</a>
+          </li>
+          <li class="usa-sidenav__item"><a href="#">About</a></li>
+          <li class="usa-sidenav__item"><a href="#">Services</a></li>
+          <li class="usa-sidenav__item"><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="usx-layout__content usx-layout__content--right">
+      <div class="bg-blue">
+        <h2>Grid Layout - Content with Left Sidebar</h2>
+        <p>Content adjusts to leave space for the left sidebar on desktop.</p>
+        <p>
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+          nulla pariatur.
+        </p>
+      </div>
+    </main>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Grid With Right Sidebar</h3>
+<div class="usx-layout">
+  <div class="usx-layout__grid-container">
+    <main class="usx-layout__content usx-layout__content--left">
+      <div class="bg-blue">
+        <h2>Grid Layout - Content with Right Sidebar</h2>
+        <p>Content adjusts to leave space for the right sidebar on desktop.</p>
+        <p>
+          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+          anim id est laborum.
+        </p>
+      </div>
+    </main>
+
+    <aside class="usx-layout__sidebar--right">
+      <div class="bg-cyan">
+        <h2>Related Content</h2>
+        <ul>
+          <li>Related Link 1</li>
+          <li>Related Link 2</li>
+          <li>Related Link 3</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Expandable</h3>
+<div class="usx-layout">
+  <div class="usx-layout__single-column">
+    <button
+      type="button"
+      class="usa-button usx-button usa-button--primary usx-button--ghost usx-layout__expand-button"
+      aria-expanded="false"
+      aria-label="Expand"
+      onclick="
+        const layout = this.closest('.usx-layout');
+        const expanded = layout.classList.toggle('usx-expanded');
+        this.setAttribute('aria-expanded', expanded);
+        this.setAttribute('aria-label', expanded ? 'Contract' : 'Expand');
+      "
+    >
+      <svg
+        class="usa-icon usa-icon--size-3 usx-layout__expand-icon usx-layout__expand-icon--expand"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="img/usx-sprite.svg#expand"></use>
+      </svg>
+
+      <svg
+        class="usa-icon usa-icon--size-3 usx-layout__expand-icon usx-layout__expand-icon--contract"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="img/usx-sprite.svg#contract"></use>
+      </svg>
+    </button>
+
+    <div class="bg-blue">
+      <h2>Expandable Layout</h2>
+      <p>Use the expand button in the top-right corner to grow the layout to a wider max-width.</p>
+    </div>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Expandable Grid Full Content</h3>
+<div class="usx-layout">
+  <div class="usx-layout__grid-container">
+    <aside class="usx-layout__sidebar--left">
+      <div class="bg-violet">
+        <h2>Left Sidebar</h2>
+        <p>Navigation or secondary content</p>
+      </div>
+    </aside>
+
+    <main class="usx-layout__content">
+      <button
+        type="button"
+        class="usa-button usx-button usa-button--primary usx-button--ghost usx-layout__expand-button"
+        aria-expanded="false"
+        aria-label="Expand"
+        onclick="
+          const layout = this.closest('.usx-layout');
+          const expanded = layout.classList.toggle('usx-expanded');
+          this.setAttribute('aria-expanded', expanded);
+          this.setAttribute('aria-label', expanded ? 'Contract' : 'Expand');
+        "
+      >
+        <svg
+          class="usa-icon usa-icon--size-3 usx-layout__expand-icon usx-layout__expand-icon--expand"
+          aria-hidden="true"
+          focusable="false"
+          role="img"
+        >
+          <use href="img/usx-sprite.svg#expand"></use>
+        </svg>
+
+        <svg
+          class="usa-icon usa-icon--size-3 usx-layout__expand-icon usx-layout__expand-icon--contract"
+          aria-hidden="true"
+          focusable="false"
+          role="img"
+        >
+          <use href="img/usx-sprite.svg#contract"></use>
+        </svg>
+      </button>
+
+      <div class="bg-blue">
+        <h2>Grid Layout - Full Content</h2>
+        <p>Content spans the full width, sidebars are hidden on mobile.</p>
+        <p>
+          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.
+        </p>
+      </div>
+    </main>
+
+    <aside class="usx-layout__sidebar--right">
+      <div class="bg-cyan">
+        <h2>Right Sidebar</h2>
+        <p>Related links or ads</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Expandable Grid With Left Sidebar</h3>
+<div class="usx-layout">
+  <div class="usx-layout__grid-container">
+    <aside class="usx-layout__sidebar--left">
+      <nav aria-label="Side navigation">
+        <ul class="usa-sidenav usx-sidenav">
+          <li class="usa-sidenav__item">
+            <a href="#" class="usa-current" aria-current="page">Home</a>
+          </li>
+          <li class="usa-sidenav__item"><a href="#">About</a></li>
+          <li class="usa-sidenav__item"><a href="#">Services</a></li>
+          <li class="usa-sidenav__item"><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="usx-layout__content usx-layout__content--right">
+      <button
+        type="button"
+        class="usa-button usx-button usa-button--primary usx-button--ghost usx-layout__expand-button"
+        aria-expanded="false"
+        aria-label="Expand"
+        onclick="
+          const layout = this.closest('.usx-layout');
+          const expanded = layout.classList.toggle('usx-expanded');
+          this.setAttribute('aria-expanded', expanded);
+          this.setAttribute('aria-label', expanded ? 'Contract' : 'Expand');
+        "
+      >
+        <svg
+          class="usa-icon usa-icon--size-3 usx-layout__expand-icon usx-layout__expand-icon--expand"
+          aria-hidden="true"
+          focusable="false"
+          role="img"
+        >
+          <use href="img/usx-sprite.svg#expand"></use>
+        </svg>
+
+        <svg
+          class="usa-icon usa-icon--size-3 usx-layout__expand-icon usx-layout__expand-icon--contract"
+          aria-hidden="true"
+          focusable="false"
+          role="img"
+        >
+          <use href="img/usx-sprite.svg#contract"></use>
+        </svg>
+      </button>
+
+      <div class="bg-blue">
+        <h2>Grid Layout - Content with Left Sidebar</h2>
+        <p>Content adjusts to leave space for the left sidebar on desktop.</p>
+        <p>
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+          nulla pariatur.
+        </p>
+      </div>
+    </main>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Expandable Grid With Right Sidebar</h3>
+<div class="usx-layout">
+  <div class="usx-layout__grid-container">
+    <main class="usx-layout__content usx-layout__content--left">
+      <button
+        type="button"
+        class="usa-button usx-button usa-button--primary usx-button--ghost usx-layout__expand-button"
+        aria-expanded="false"
+        aria-label="Expand"
+        onclick="
+          const layout = this.closest('.usx-layout');
+          const expanded = layout.classList.toggle('usx-expanded');
+          this.setAttribute('aria-expanded', expanded);
+          this.setAttribute('aria-label', expanded ? 'Contract' : 'Expand');
+        "
+      >
+        <svg
+          class="usa-icon usa-icon--size-3 usx-layout__expand-icon usx-layout__expand-icon--expand"
+          aria-hidden="true"
+          focusable="false"
+          role="img"
+        >
+          <use href="img/usx-sprite.svg#expand"></use>
+        </svg>
+
+        <svg
+          class="usa-icon usa-icon--size-3 usx-layout__expand-icon usx-layout__expand-icon--contract"
+          aria-hidden="true"
+          focusable="false"
+          role="img"
+        >
+          <use href="img/usx-sprite.svg#contract"></use>
+        </svg>
+      </button>
+
+      <div class="bg-blue">
+        <h2>Grid Layout - Content with Right Sidebar</h2>
+        <p>Content adjusts to leave space for the right sidebar on desktop.</p>
+        <p>
+          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+          anim id est laborum.
+        </p>
+      </div>
+    </main>
+
+    <aside class="usx-layout__sidebar--right">
+      <div class="bg-cyan">
+        <h2>Related Content</h2>
+        <ul>
+          <li>Related Link 1</li>
+          <li>Related Link 2</li>
+          <li>Related Link 3</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>

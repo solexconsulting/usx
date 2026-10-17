@@ -23,7 +23,9 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish",
-    "test:contracts": "node --test scripts/tests/component-contracts.test.js"
+    "test:contracts": "node --test scripts/tests/component-contracts.test.js",
+    "generate:snapshot": "node scripts/generate-snapshot.js",
+    "snapshot:report": "node scripts/snapshot-report.js"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
@@ -42,6 +44,7 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-storybook": "10.3.6",
+    "playwright-core": "1.63.0",
     "prettier": "^3.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -49,7 +52,8 @@
     "storybook": "^10.3.6",
     "stylelint": "^16.10.0",
     "stylelint-config-standard-scss": "^13.1.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vite": "6.4.1"
   },
   "dependencies": {
     "ajv": "^8.12.0"

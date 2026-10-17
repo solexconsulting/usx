@@ -41,12 +41,12 @@ export const componentContracts = {
   "components": {
     "accordion": {
       "component": "accordion",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
           "type": "string",
-          "description": "Base ID for the accordion. Each item's ID will be this base plus the item's index."
+          "description": "Base ID for the accordion. Items without their own id get this base plus the item's index."
         },
         "bordered": {
           "type": "boolean",
@@ -56,12 +56,25 @@ export const componentContracts = {
         "items": {
           "type": "array",
           "default": [],
-          "description": "An array of accordion items."
+          "description": "An array of accordion items. Each item sets title and content, and may set id (used for the heading and content ids) and expanded (start open)."
         },
         "multiselectable": {
           "type": "boolean",
           "default": false,
           "description": "Whether multiple accordion items can be expanded at the same time."
+        },
+        "headingLevel": {
+          "type": "select",
+          "options": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+          ],
+          "default": "h3",
+          "description": "Heading element wrapping each item's button. Choose the level that fits the surrounding page outline."
         },
         "iconPosition": {
           "type": "select",
@@ -527,7 +540,7 @@ export const componentContracts = {
     },
     "breadcrumb": {
       "component": "breadcrumb",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "items": {
@@ -578,13 +591,7 @@ export const componentContracts = {
         },
         "children": {
           "type": "slot",
-          "description": "Fallback content rendered when no breadcrumb items are supplied (React only).",
-          "renderers": {
-            "django": {
-              "supported": false,
-              "description": "The Django template does not consume children."
-            }
-          }
+          "description": "Fallback content rendered when no breadcrumb items are supplied. Defaults to the text Breadcrumb."
         }
       },
       "renderers": {
@@ -1121,6 +1128,10 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes for the carousel region"
+        },
+        "extraAttributes": {
+          "type": "object",
+          "description": "An object containing any additional HTML attributes to be spread onto the carousel root element, providing flexibility for custom use cases or integrations."
         }
       },
       "renderers": {
@@ -1232,7 +1243,7 @@ export const componentContracts = {
     },
     "checkbox": {
       "component": "checkbox",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -1285,6 +1296,11 @@ export const componentContracts = {
           "type": "string",
           "default": null,
           "description": "Success message to display when the checkbox is in a success state"
+        },
+        "formGroup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to wrap the checkbox and its message in a `.usa-form-group`. Set to `false` when composing inside another form group, as CheckboxGroup does."
         },
         "className": {
           "type": "string",
@@ -2207,15 +2223,16 @@ export const componentContracts = {
     },
     "details": {
       "component": "details",
-      "version": 1,
-      "required": [
-        "summary"
-      ],
+      "version": 3,
+      "required": [],
       "props": {
-        "summary": {
-          "type": "string",
-          "default": "Details",
-          "description": "Text label describing the supporting content. Always escaped."
+        "summaryProps": {
+          "type": "object",
+          "description": "Props passed directly to the Summary component, including label, className, markerColor, underlineColor, noUnderline, and noMarker.",
+          "component": "summary",
+          "omit": [
+            "unstyled"
+          ]
         },
         "text": {
           "type": "string",
@@ -2231,13 +2248,9 @@ export const componentContracts = {
           "default": false,
           "description": "Whether the native disclosure is initially open."
         },
-        "markerColor": {
+        "name": {
           "type": "string",
-          "description": "USX color utility name for the summary marker, such as primary. Adds marker-{value} to the summary."
-        },
-        "underlineColor": {
-          "type": "string",
-          "description": "USWDS color utility name for the summary underline, such as secondary. Adds border-{value} to the summary text span."
+          "description": "Optional native details group name. Disclosures with the same name are mutually exclusive. Use distinct names for each nesting level."
         },
         "contentBorderColor": {
           "type": "string",
@@ -2248,25 +2261,10 @@ export const componentContracts = {
           "default": false,
           "description": "Whether to remove the content border."
         },
-        "noSummaryUnderline": {
-          "type": "boolean",
-          "default": false,
-          "description": "Whether to remove the summary underline."
-        },
         "className": {
           "type": "string",
           "default": "",
           "description": "Additional CSS classes for the details element, including font and spacing utilities."
-        },
-        "summaryClassName": {
-          "type": "string",
-          "default": "",
-          "description": "Additional CSS classes for the summary element, including font and spacing utilities."
-        },
-        "summaryTextClassName": {
-          "type": "string",
-          "default": "",
-          "description": "Additional CSS classes for the summary text span, including font and spacing utilities."
         },
         "contentClassName": {
           "type": "string",
@@ -2290,8 +2288,129 @@ export const componentContracts = {
       },
       "examples": {
         "default": {
-          "summary": "Help finding your reference number",
+          "summaryProps": {
+            "label": "Help finding your reference number"
+          },
           "text": "Your reference number is included in the confirmation email we sent you."
+        }
+      }
+    },
+    "drawer": {
+      "component": "drawer",
+      "version": 1,
+      "required": [
+        "id",
+        "label",
+        "heading",
+        "children"
+      ],
+      "props": {
+        "id": {
+          "type": "string",
+          "description": "Unique dialog ID used by the native opener and close button."
+        },
+        "label": {
+          "type": "string",
+          "description": "Default visible trigger text."
+        },
+        "heading": {
+          "type": "string",
+          "description": "Visible heading that names the dialog."
+        },
+        "children": {
+          "type": "slot",
+          "description": "Trusted semantic content, including navigation, forms, and nested overlays."
+        },
+        "trigger": {
+          "type": "slot",
+          "description": "Optional trusted markup inside the trigger button. Visible text supplies the accessible name unless triggerAriaLabel is set."
+        },
+        "triggerAriaLabel": {
+          "type": "string",
+          "description": "Accessible name for an icon-only trigger. If the trigger has visible text, include that text."
+        },
+        "side": {
+          "type": "select",
+          "options": [
+            "inline-start",
+            "inline-end",
+            "top",
+            "bottom"
+          ],
+          "default": "inline-end",
+          "description": "Viewport side. Inline start and end follow the writing direction."
+        },
+        "size": {
+          "type": "select",
+          "options": [
+            "compact",
+            "default",
+            "wide"
+          ],
+          "default": "default",
+          "description": "Preferred width for inline drawers or height for top and bottom drawers."
+        },
+        "modal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Modal drawers make the page inert and contain focus; modeless drawers use a native auto popover."
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief text announced with the dialog heading. Omit for complex content."
+        },
+        "footer": {
+          "type": "slot",
+          "description": "Optional trusted action markup after the scrollable drawer body."
+        },
+        "closeLabel": {
+          "type": "string",
+          "default": "Close",
+          "description": "Visible text for the always-present close button."
+        },
+        "focusHeading": {
+          "type": "boolean",
+          "default": true,
+          "description": "Focus the heading when opened. Set false to focus the first control in the content."
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable the trigger button."
+        },
+        "className": {
+          "type": "string",
+          "description": "Additional classes for the wrapper."
+        },
+        "triggerClassName": {
+          "type": "string",
+          "description": "Additional classes for the trigger button, including USWDS button variants."
+        },
+        "panelClassName": {
+          "type": "string",
+          "description": "Additional classes for the dialog panel."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Drawer"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "drawer",
+          "template": "drawer/drawer.django.html",
+          "tag": "drawer"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "services-drawer",
+          "label": "Browse services",
+          "heading": "Services",
+          "children": "<nav aria-label=\"Services\"><ul><li><a href=\"#benefits\">Benefits</a></li><li><a href=\"#applications\">Applications</a></li></ul></nav>"
         }
       }
     },
@@ -2448,7 +2567,7 @@ export const componentContracts = {
         "detailsProps": {
           "type": "object",
           "component": "details",
-          "description": "Optional Details disclosure rendered after support and public metadata with monospace font utilities. Supply a descriptive summary and escaped plain text or trusted composed children. When supplying diagnostics, authorize the viewer and redact sensitive values first. A closed disclosure is still present in the page source."
+          "description": "Optional Details disclosure rendered after support and public metadata with monospace font utilities. Supply its label through `detailsProps.summaryProps.label` and use escaped plain text or trusted composed children. When supplying diagnostics, authorize the viewer and redact sensitive values first. A closed disclosure is still present in the page source."
         },
         "children": {
           "type": "slot",
@@ -3145,7 +3264,7 @@ export const componentContracts = {
     },
     "icon": {
       "component": "icon",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "staticBaseUrl": {
@@ -3180,7 +3299,6 @@ export const componentContracts = {
             8,
             9
           ],
-          "default": null,
           "description": "The size of the icon, which can be specified as a predefined value corresponding to specific dimensions or as a custom value to allow for more flexible sizing."
         },
         "color": {
@@ -3200,7 +3318,7 @@ export const componentContracts = {
         "alt": {
           "type": "string",
           "default": "",
-          "description": "Alternative text for the icon, used for accessibility purposes to provide a textual description of the icon's meaning or function."
+          "description": "Accessible name for a meaningful icon. Omit for a decorative icon, which is hidden from assistive technology."
         },
         "style": {
           "type": [
@@ -3730,7 +3848,7 @@ export const componentContracts = {
     },
     "input": {
       "component": "input",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "label": {
@@ -3747,6 +3865,14 @@ export const componentContracts = {
           "type": "string",
           "default": null,
           "description": "name attribute for the input. Defaults to id."
+        },
+        "type": {
+          "type": "string",
+          "description": "The input's type attribute, e.g. email or password. Omit for a plain text input."
+        },
+        "autoComplete": {
+          "type": "string",
+          "description": "The input's autocomplete attribute, e.g. email."
         },
         "placeholder": {
           "type": "string",
@@ -3820,6 +3946,10 @@ export const componentContracts = {
       "version": 2,
       "required": [],
       "props": {
+        "id": {
+          "type": "string",
+          "description": "ID of the label element"
+        },
         "htmlFor": {
           "type": "string",
           "description": "ID of the form element this label is associated with"
@@ -4108,9 +4238,13 @@ export const componentContracts = {
           "type": "string",
           "description": "Link destination URL."
         },
+        "text": {
+          "type": "string",
+          "description": "Link text content. Ignored if children are provided."
+        },
         "children": {
           "type": "slot",
-          "description": "Inner link text or HTML."
+          "description": "Inner link text or HTML. Overrides the text prop if provided."
         },
         "visited": {
           "type": "boolean",
@@ -4309,9 +4443,13 @@ export const componentContracts = {
     },
     "misc-banner": {
       "component": "misc-banner",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
+        "id": {
+          "type": "string",
+          "description": "Id for the banner's root element. The dropdown toggle and menu ids derive from it as `<id>-dropdown-toggle` and `<id>-dropdown`. React generates one when omitted."
+        },
         "children": {
           "type": "slot",
           "description": "Advanced override for custom inner markup"
@@ -4510,7 +4648,7 @@ export const componentContracts = {
     },
     "pagination": {
       "component": "pagination",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "currentPage": {
@@ -4586,12 +4724,10 @@ export const componentContracts = {
         },
         "firstItem": {
           "type": "number",
-          "default": 1,
           "description": "First item number on the current page (for summary)"
         },
         "lastItem": {
           "type": "number",
-          "default": 10,
           "description": "Last item number on the current page (for summary)"
         },
         "totalItems": {
@@ -4657,14 +4793,177 @@ export const componentContracts = {
         }
       }
     },
+    "popover": {
+      "component": "popover",
+      "version": 4,
+      "required": [
+        "id",
+        "children"
+      ],
+      "props": {
+        "id": {
+          "type": "string",
+          "description": "Unique ID for the panel. Close controls target this ID."
+        },
+        "summaryProps": {
+          "type": "object",
+          "description": "Props passed directly to the unstyled Summary trigger. Use label, children, ariaLabel, and className here. Defaults label to Open panel.",
+          "component": "summary"
+        },
+        "children": {
+          "type": "slot",
+          "description": "Trusted semantic content for the positioned panel, including forms, a Tree, lists, or nested Popovers."
+        },
+        "menuItems": {
+          "type": "array",
+          "description": "Rows for a stacked menu rendered in the panel before children. Each item sets `type`: \"link\" ({href, text}), \"details\" ({summaryProps, items}) which opens a nested Popover to the right, or \"text\" ({text}).",
+          "items": {
+            "type": "object",
+            "description": "A link, details, or text row, chosen by `type`.",
+            "properties": {
+              "type": {
+                "type": "select",
+                "options": [
+                  "link",
+                  "details",
+                  "text"
+                ],
+                "description": "Required. Selects how the row renders."
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique ID for a details row's panel. Defaults to the parent ID plus the row index."
+              },
+              "text": {
+                "type": "string",
+                "description": "Link or plain text."
+              },
+              "href": {
+                "type": "string",
+                "description": "Link destination. Only for type \"link\"."
+              },
+              "summaryProps": {
+                "type": "object",
+                "component": "summary",
+                "omit": [
+                  "unstyled"
+                ],
+                "description": "Props passed to the details row summary. Only for type \"details\"."
+              },
+              "items": {
+                "type": "array",
+                "description": "Nested menu rows with the same shape. Only for type \"details\"."
+              }
+            }
+          }
+        },
+        "side": {
+          "type": "select",
+          "options": [
+            "top",
+            "right",
+            "bottom",
+            "left"
+          ],
+          "default": "bottom",
+          "description": "Physical side of the trigger where CSS places the floating panel. Choose a side and alignment with enough space for the panel."
+        },
+        "align": {
+          "type": "select",
+          "options": [
+            "start",
+            "center",
+            "end"
+          ],
+          "default": "start",
+          "description": "Alignment along the chosen side. Start and end follow text direction for top and bottom."
+        },
+        "defaultOpen": {
+          "type": "boolean",
+          "default": false,
+          "description": "Open initially. Native details owns subsequent disclosure state."
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional native details group: opening one closes another with the same name. Use unique group names for unrelated groups and each nesting level."
+        },
+        "showClose": {
+          "type": "boolean",
+          "default": false,
+          "description": "Add a visible close button after panel content. The shared enhancement enables it, outside dismissal, and Escape with focus return. The summary toggles natively without JavaScript."
+        },
+        "closeLabel": {
+          "type": "string",
+          "default": "Close",
+          "description": "Visible text for the optional close button."
+        },
+        "panelHeading": {
+          "type": "string",
+          "description": "Optional visible heading for the panel."
+        },
+        "headingLevel": {
+          "type": "select",
+          "options": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+          ],
+          "default": "h2",
+          "description": "Heading element used for panelHeading. Choose the level that fits the surrounding page outline."
+        },
+        "scrollable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Bounds and enables scrolling on the panel content by adding the usx-popover__scroll class."
+        },
+        "className": {
+          "type": "string",
+          "description": "Additional classes for the wrapper."
+        },
+        "panelClassName": {
+          "type": "string",
+          "description": "Additional classes for the popover panel, including custom sizing and spacing rules."
+        },
+        "contentClassName": {
+          "type": "string",
+          "description": "Optional class name for the inner content container."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Popover"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "popover",
+          "template": "popover/popover.django.html",
+          "tag": "popover"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "services-popover",
+          "summaryProps": {
+            "label": "Services"
+          },
+          "children": "<nav aria-label=\"Services\"><ul class=\"usa-list usx-list usa-list--unstyled\"><li class=\"padding-y-1\"><a href=\"#benefits\">Benefits</a></li><li class=\"padding-y-1\"><a href=\"#applications\">Applications</a></li></ul></nav>"
+        }
+      }
+    },
     "process-list": {
       "component": "process-list",
-      "version": 1,
+      "version": 3,
       "required": [],
       "props": {
         "items": {
           "type": "object",
-          "description": "Array of process list item objects. Each item supports: heading (required), headingTag (default h4), headingClassName, body, bodyClassName, and className (applied to the <li>)."
+          "description": "Array of process list item objects. Each item supports: heading (required), headingTag (default h4), headingClassName, body (markup, rendered as-is; wrap plain text in a <p>), bodyClassName (wraps the body in a <div> with these classes), and className (applied to the <li>)."
         },
         "className": {
           "type": "string",
@@ -4973,13 +5272,13 @@ export const componentContracts = {
     },
     "required": {
       "component": "required",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "title": {
           "type": "string",
-          "default": "required",
-          "description": "Title attribute for the required indicator (default: 'required')"
+          "default": "Required",
+          "description": "Title attribute for the required indicator (default: 'Required')"
         },
         "children": {
           "type": "slot",
@@ -5007,7 +5306,7 @@ export const componentContracts = {
     },
     "search": {
       "component": "search",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "id": {
@@ -5050,8 +5349,7 @@ export const componentContracts = {
         },
         "action": {
           "type": "string",
-          "default": "/search",
-          "description": "URL to submit the search query to"
+          "description": "URL to submit the search query to. Omit to submit to the current page."
         },
         "placeholder": {
           "type": "string",
@@ -5297,7 +5595,7 @@ export const componentContracts = {
     },
     "site-alert": {
       "component": "site-alert",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "className": {
@@ -5337,11 +5635,13 @@ export const componentContracts = {
         },
         "alertHeading": {
           "type": "string",
-          "description": "Alert heading text"
+          "description": "Alert heading text",
+          "default": "Short alert message"
         },
         "alertText": {
           "type": "string",
-          "description": "Alert text content"
+          "description": "Alert text content",
+          "default": "Additional context and followup information including a link."
         },
         "alertContent": {
           "type": "slot",
@@ -5601,6 +5901,78 @@ export const componentContracts = {
           "component": "step-indicator",
           "template": "step-indicator/step-indicator.django.html",
           "tag": "step_indicator"
+        }
+      }
+    },
+    "summary": {
+      "component": "summary",
+      "version": 2,
+      "required": [],
+      "props": {
+        "label": {
+          "type": "string",
+          "default": "Details",
+          "description": "Text label describing the disclosure. Always escaped."
+        },
+        "children": {
+          "type": "slot",
+          "description": "Optional summary content. Takes precedence over label."
+        },
+        "ariaLabel": {
+          "type": "string",
+          "description": "Accessible name for the summary control."
+        },
+        "className": {
+          "type": "string",
+          "default": "",
+          "description": "Additional classes for the summary element."
+        },
+        "textClassName": {
+          "type": "string",
+          "default": "",
+          "description": "Additional classes for the summary text span."
+        },
+        "markerColor": {
+          "type": "string",
+          "description": "USX color utility name for the summary marker, such as primary."
+        },
+        "underlineColor": {
+          "type": "string",
+          "description": "USWDS color utility name for the summary underline, such as secondary."
+        },
+        "noUnderline": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to remove the summary underline."
+        },
+        "noMarker": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to remove the native summary marker."
+        },
+        "unstyled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Render native summary content without USX classes or a text wrapper."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Summary"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "summary",
+          "template": "summary/summary.django.html",
+          "tag": "summary"
+        }
+      },
+      "examples": {
+        "default": {
+          "label": "Help finding your reference number"
         }
       }
     },
@@ -6674,6 +7046,109 @@ export const componentContracts = {
           "component": "tooltip",
           "template": "tooltip/tooltip.django.html",
           "tag": "tooltip"
+        }
+      }
+    },
+    "tree": {
+      "component": "tree",
+      "version": 3,
+      "required": [
+        "items"
+      ],
+      "props": {
+        "items": {
+          "type": "array",
+          "description": "Tree items. Every item sets `type`: \"link\" ({href, text}) renders a Link; \"details\" renders a Details with `summaryProps` and either `items` (a nested Tree) or `text` (a paragraph); \"text\" ({text}) renders a plain label. Link and Details options can be passed on their respective items. Each nested items array uses the same shape.",
+          "items": {
+            "type": "object",
+            "description": "A link, details, or text item, chosen by `type`.",
+            "properties": {
+              "type": {
+                "type": "select",
+                "options": [
+                  "link",
+                  "details",
+                  "text"
+                ],
+                "description": "Required. Selects how the item renders."
+              },
+              "text": {
+                "type": "string",
+                "description": "Link text, plain label text, or details paragraph text."
+              },
+              "href": {
+                "type": "string",
+                "description": "Link destination. Only for type \"link\"."
+              },
+              "summaryProps": {
+                "type": "object",
+                "component": "summary",
+                "omit": [
+                  "unstyled"
+                ],
+                "description": "Props passed to the Details summary. Only for type \"details\"."
+              },
+              "items": {
+                "type": "array",
+                "description": "Nested Tree items shown inside the Details, including an empty array. Only for type \"details\"; use instead of text."
+              },
+              "name": {
+                "type": "string",
+                "description": "Native Details group name; give sibling details items the same name for exclusive opening. Only for type \"details\"."
+              }
+            }
+          }
+        },
+        "variant": {
+          "type": "select",
+          "options": [
+            "raw",
+            "padded"
+          ],
+          "default": "raw",
+          "description": "Raw keeps Details styling; padded adds row spacing, alignment, and an interactive hover surface. The variant applies to every nested list."
+        },
+        "className": {
+          "type": "string",
+          "description": "Additional classes for the ul element."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "Tree"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "tree",
+          "template": "tree/tree.django.html",
+          "tag": "tree"
+        }
+      },
+      "examples": {
+        "default": {
+          "items": [
+            {
+              "type": "link",
+              "href": "https://www.google.com",
+              "text": "Google"
+            },
+            {
+              "type": "details",
+              "summaryProps": {
+                "label": "Socials"
+              },
+              "items": [
+                {
+                  "type": "link",
+                  "href": "https://www.facebook.com",
+                  "text": "Facebook"
+                }
+              ]
+            }
+          ]
         }
       }
     },

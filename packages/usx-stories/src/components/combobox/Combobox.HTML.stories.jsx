@@ -1,5 +1,6 @@
 import React from 'react';
-import html from '../../../../usx-react/src/components/combobox/combobox.html?raw';
+import reactSnapshot from '../../../../usx-react/src/components/combobox/combobox.react-snapshot.html?raw';
+import djangoSnapshot from '../../../../usx-react/src/components/combobox/combobox.django-snapshot.html?raw';
 import { uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
@@ -8,22 +9,37 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: uswdsInitNote('`combobox.init()`')
-      }
-    }
+        component: uswdsInitNote('`combobox.init()`'),
+      },
+    },
   },
-  decorators: [...componentInit('combobox')]
+  decorators: [...componentInit('combobox')],
 };
 
-export const AllVariants = {
+export const AllVariantsReact = {
+  name: 'All Variants (React)',
   parameters: {
     docs: {
       source: {
-        code: html
-      }
-    }
+        code: reactSnapshot,
+      },
+    },
   },
   render: () => {
-    return <div dangerouslySetInnerHTML={{ __html: html }} />;
-  }
-}
+    return <div dangerouslySetInnerHTML={{ __html: reactSnapshot }} />;
+  },
+};
+
+export const AllVariantsDjango = {
+  name: 'All Variants (Django)',
+  parameters: {
+    docs: {
+      source: {
+        code: djangoSnapshot,
+      },
+    },
+  },
+  render: () => {
+    return <div dangerouslySetInnerHTML={{ __html: djangoSnapshot }} />;
+  },
+};

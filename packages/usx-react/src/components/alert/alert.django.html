@@ -2,10 +2,10 @@
 <div
     class="
         usa-alert
-        usa-alert--{{ variant }}
-        usx-alert usx-alert--{{ variant }}
-        {% if slim %} usa-alert--slim usx-alert--slim{% endif %}
-        {% if noIcon %} usa-alert--no-icon usx-alert--no-icon{% endif %}
+        {% if variant %}usa-alert--{{ variant }}{% endif %}
+        usx-alert
+        {% if slim %} usa-alert--slim{% endif %}
+        {% if noIcon %} usa-alert--no-icon{% endif %}
     "
     {% if role %}
     role="{{ role }}"
@@ -20,20 +20,20 @@
     aria-labelledby="{{ ariaLabelledby }}"
     {% elif ariaLabel %}
     aria-label="{{ ariaLabel }}"
-    {% elif variant == 'info' or variant == 'warning' %}
-    aria-label="{{ heading }}"
+    {% elif role == 'region' or not role and variant != 'error' and variant != 'emergency' and variant != 'success' %}
+    {% if heading %}aria-label="{{ heading }}"{% elif variant %}aria-label="{{ variant }} alert"{% endif %}
     {% endif %}
 >
-  <div class="usa-alert__body usx-alert__body">
+  <div class="usa-alert__body">
     {% if heading and not slim %}
-        <h4 class="usa-alert__heading usx-alert__heading">{{ heading }}</h4>
+        <h4 class="usa-alert__heading">{{ heading }}</h4>
     {% endif %}
     {% if children %}
-      <div class="usa-alert__text usx-alert__text">
+      <div class="usa-alert__text">
         {{ children|safe }}
       </div>
     {% elif text %}
-        <p class="usa-alert__text usx-alert__text">{{ text }}</p>
+        <p class="usa-alert__text">{{ text }}</p>
     {% endif %}
     {% if onDismiss %}
     <button class="usx-alert__dismiss" aria-label="Dismiss alert" onclick="{{ onDismiss }}">

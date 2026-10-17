@@ -1,0 +1,53 @@
+{
+  "clickable": {
+    "Button Surface": "React-only: Clickable renders a button with onClick; the Django template only renders links."
+  },
+  "combobox": {
+    "With On Search": "React-only: onSearch is a JS callback prop with no Django equivalent."
+  },
+  "file-input": {
+    "Managed Multiple": "The Django story composes the file-input and file-list fragments in the browser, so the add-only and list wrappers sit outside the form group; the contents match.",
+    "Preloaded Downloadable": "The Django story composes the file-input and file-list fragments in the browser, so the add-only and list wrappers sit outside the form group; the contents match.",
+    "Preloaded Not Downloadable": "The Django story composes the file-input and file-list fragments in the browser, so the add-only and list wrappers sit outside the form group; the contents match.",
+    "Preloaded Disabled": "The Django story composes the file-input and file-list fragments in the browser, so the add-only and list wrappers sit outside the form group; the contents match.",
+    "Preloaded Name Only": "The Django story composes the file-input and file-list fragments in the browser, so the add-only and list wrappers sit outside the form group; the contents match.",
+    "Long File Name": "The Django story composes the file-input and file-list fragments in the browser, so the add-only and list wrappers sit outside the form group; the contents match.",
+    "Preloaded Single": "React-only: reuses the Default/Multiple args and preloads files from a play function; the static markup is the same as the matching Default/Multiple story.",
+    "Preloaded Multiple": "React-only: reuses the Default/Multiple args and preloads files from a play function; the static markup is the same as the matching Default/Multiple story."
+  },
+  "file-list": {
+    "No On Remove": "The Django FileList is a static preview and always renders Delete buttons; React hides them when no onRemove is given.",
+    "Per File Override": "React-only: demonstrates a per-row onRemove callback."
+  },
+  "footer": {
+    "Custom Composition": "React-only: composes the footer from custom child elements, which the Django template does not accept."
+  },
+  "header": {
+    "Extensibility Slots": "The Django story fetches theme-picker in the browser for navEndContent, so the static Django snapshot has no end slot."
+  },
+  "in-page-nav": {
+    "Custom Content Selector": "React only: the Django template does not consume children, so a custom content region cannot be passed."
+  },
+  "layout": {
+    "Vertical Spacing": "React-only documentation/comparison demo with no Django counterpart.",
+    "Responsiveness And Availability": "React-only documentation/comparison demo with no Django counterpart.",
+    "Themed Comparison": "React-only documentation/comparison demo with no Django counterpart."
+  },
+  "pagination": {
+    "$ignoreAttributes": [
+      "href"
+    ],
+    "Sub: Navigation (bounded)": "Subcomponent with no standalone Django render.",
+    "Sub: Navigation (unbounded)": "Subcomponent with no standalone Django render.",
+    "Sub: Navigation (icon-only prev/next)": "Subcomponent with no standalone Django render.",
+    "Sub: Navigation (unbounded, icon-only)": "Subcomponent with no standalone Django render.",
+    "Sub: Step Options": "Subcomponent with no standalone Django render.",
+    "Sub: Summary": "Subcomponent with no standalone Django render."
+  },
+  "spinner": {
+    "With Tooltip": "The Django story fetches the spinner and tooltip in the browser, so the static Django snapshot is empty."
+  },
+  "toggle": {
+    "Controlled": "React-only: demonstrates controlled state with an onChange handler; Django has no equivalent."
+  }
+}

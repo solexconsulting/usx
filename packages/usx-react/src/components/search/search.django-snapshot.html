@@ -1,0 +1,567 @@
+<h3 class="site-preview-heading">Default</h3>
+<section aria-label="Search">
+  <form
+    id="django-search-default-form"
+    class="usa-search"
+    method="get"
+    role="search"
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="django-search-default"> Search </label>
+
+    <input
+      id="django-search-default"
+      class="usa-input usx-input"
+      placeholder=""
+      value=""
+      type="search"
+      name="q"
+    />
+
+    <button type="submit" class="usa-button usx-button usa-button--primary">
+      <span class="usa-search__submit-text">Search</span>
+
+      <svg class="usa-icon usa-search__submit-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+  <script data-id="search-default" data-on-submit="" data-search-key="q">
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById(`${id}-form`).onsubmit = function (e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+  </script>
+</section>
+
+<h3 class="site-preview-heading">Custom Placeholder</h3>
+<section aria-label="Search">
+  <form
+    id="django-search-custom-placeholder-form"
+    class="usa-search"
+    method="get"
+    role="search"
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="django-search-custom-placeholder">
+      Search
+    </label>
+
+    <input
+      id="django-search-custom-placeholder"
+      class="usa-input usx-input"
+      placeholder="Custom placeholder..."
+      value=""
+      type="search"
+      name="q"
+    />
+
+    <button type="submit" class="usa-button usx-button usa-button--primary">
+      <span class="usa-search__submit-text">Search</span>
+
+      <svg class="usa-icon usa-search__submit-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+  <script data-id="search-custom-placeholder" data-on-submit="" data-search-key="q">
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById(`${id}-form`).onsubmit = function (e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+  </script>
+</section>
+
+<h3 class="site-preview-heading">With Default Value</h3>
+<section aria-label="Search">
+  <form
+    id="django-search-default-value-form"
+    class="usa-search"
+    method="get"
+    role="search"
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="django-search-default-value">
+      Search
+    </label>
+
+    <input
+      id="django-search-default-value"
+      class="usa-input usx-input"
+      placeholder=""
+      value="Default search value"
+      type="search"
+      name="q"
+    />
+
+    <button type="submit" class="usa-button usx-button usa-button--primary">
+      <span class="usa-search__submit-text">Search</span>
+
+      <svg class="usa-icon usa-search__submit-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+  <script data-id="search-default-value" data-on-submit="" data-search-key="q">
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById(`${id}-form`).onsubmit = function (e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+  </script>
+</section>
+
+<h3 class="site-preview-heading">Big</h3>
+<section aria-label="Search">
+  <form
+    id="django-search-big-form"
+    class="usa-search usa-search--big"
+    method="get"
+    role="search"
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="django-search-big"> Search </label>
+
+    <input
+      id="django-search-big"
+      class="usa-input usx-input"
+      placeholder=""
+      value=""
+      type="search"
+      name="q"
+    />
+
+    <button type="submit" class="usa-button usx-button usa-button--primary">
+      <span class="usa-search__submit-text">Search</span>
+
+      <svg class="usa-icon usa-search__submit-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+  <script data-id="search-big" data-on-submit="" data-search-key="q">
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById(`${id}-form`).onsubmit = function (e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+  </script>
+</section>
+
+<h3 class="site-preview-heading">Icon Only</h3>
+<section aria-label="Search">
+  <form
+    id="django-search-icon-only-form"
+    class="usa-search usa-search--small"
+    method="get"
+    role="search"
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="django-search-icon-only"> Search </label>
+
+    <input
+      id="django-search-icon-only"
+      class="usa-input usx-input"
+      placeholder=""
+      value=""
+      type="search"
+      name="q"
+    />
+
+    <button type="submit" class="usa-button usx-button usa-button--primary">
+      <svg
+        class="usa-icon usa-search__submit-icon display-inline-block"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+  <script data-id="search-icon-only" data-on-submit="" data-search-key="q">
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById(`${id}-form`).onsubmit = function (e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+  </script>
+</section>
+
+<h3 class="site-preview-heading">Big Icon Only</h3>
+<section aria-label="Search">
+  <form
+    id="django-search-big-icon-only-form"
+    class="usa-search usa-search--big"
+    method="get"
+    role="search"
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="django-search-big-icon-only">
+      Search
+    </label>
+
+    <input
+      id="django-search-big-icon-only"
+      class="usa-input usx-input"
+      placeholder=""
+      value=""
+      type="search"
+      name="q"
+    />
+
+    <button type="submit" class="usa-button usx-button usa-button--primary">
+      <svg
+        class="usa-icon usa-search__submit-icon display-inline-block"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+  <script data-id="search-big-icon-only" data-on-submit="" data-search-key="q">
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById(`${id}-form`).onsubmit = function (e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+  </script>
+</section>
+
+<h3 class="site-preview-heading">Non Standard Icon</h3>
+<section aria-label="Search">
+  <form
+    id="django-search-non-standard-icon-form"
+    class="usa-search usa-search--small"
+    method="get"
+    role="search"
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="django-search-non-standard-icon">
+      Search
+    </label>
+
+    <input
+      id="django-search-non-standard-icon"
+      class="usa-input usx-input"
+      placeholder=""
+      value=""
+      type="search"
+      name="q"
+    />
+
+    <button type="submit" class="usa-button usx-button usa-button--primary">
+      <svg
+        class="usa-icon usa-search__submit-icon display-inline-block"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="img/sprite.svg#star"></use>
+      </svg>
+    </button>
+  </form>
+  <script data-id="search-non-standard-icon" data-on-submit="" data-search-key="q">
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById(`${id}-form`).onsubmit = function (e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+  </script>
+</section>
+
+<h3 class="site-preview-heading">With Custom Button Variant</h3>
+<section aria-label="Search">
+  <form
+    id="django-search-custom-variant-form"
+    class="usa-search"
+    method="get"
+    role="search"
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="django-search-custom-variant">
+      Search
+    </label>
+
+    <input
+      id="django-search-custom-variant"
+      class="usa-input usx-input"
+      placeholder=""
+      value=""
+      type="search"
+      name="q"
+    />
+
+    <button type="submit" class="usa-button usx-button usa-button--accent-cool">
+      <span class="usa-search__submit-text">Search</span>
+
+      <svg class="usa-icon usa-search__submit-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+  <script data-id="search-custom-variant" data-on-submit="" data-search-key="q">
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById(`${id}-form`).onsubmit = function (e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+  </script>
+</section>
+
+<h3 class="site-preview-heading">Google Action</h3>
+<section aria-label="Search">
+  <form
+    id="django-search-google-action-form"
+    class="usa-search"
+    method="get"
+    role="search"
+    action="https://www.google.com/search"
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="django-search-google-action">
+      Search
+    </label>
+
+    <input
+      id="django-search-google-action"
+      class="usa-input usx-input"
+      placeholder="Search Google..."
+      value=""
+      type="search"
+      name="q"
+    />
+
+    <button type="submit" class="usa-button usx-button usa-button--primary">
+      <span class="usa-search__submit-text">Search</span>
+
+      <svg class="usa-icon usa-search__submit-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+  <script data-id="search-google-action" data-on-submit="" data-search-key="q">
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById(`${id}-form`).onsubmit = function (e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+  </script>
+</section>
+
+<h3 class="site-preview-heading">Path Action</h3>
+<section aria-label="Search">
+  <form
+    id="django-search-path-action-form"
+    class="usa-search"
+    method="get"
+    role="search"
+    action="/searching-with-an-action/"
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="django-search-path-action"> Search </label>
+
+    <input
+      id="django-search-path-action"
+      class="usa-input usx-input"
+      placeholder="Search the site..."
+      value=""
+      type="search"
+      name="q"
+    />
+
+    <button type="submit" class="usa-button usx-button usa-button--primary">
+      <span class="usa-search__submit-text">Search</span>
+
+      <svg class="usa-icon usa-search__submit-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+  <script data-id="search-path-action" data-on-submit="" data-search-key="q">
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById(`${id}-form`).onsubmit = function (e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+  </script>
+</section>
+
+<h3 class="site-preview-heading">With On Submit</h3>
+<section aria-label="Search">
+  <form
+    id="django-search-with-onsubmit-form"
+    class="usa-search"
+    method="get"
+    role="search"
+    onsubmit="handleSubmit"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="django-search-with-onsubmit">
+      Search
+    </label>
+
+    <input
+      id="django-search-with-onsubmit"
+      class="usa-input usx-input"
+      placeholder="Type something and submit..."
+      value=""
+      type="search"
+      name="q"
+    />
+
+    <button type="submit" class="usa-button usx-button usa-button--primary">
+      <span class="usa-search__submit-text">Search</span>
+
+      <svg class="usa-icon usa-search__submit-icon" aria-hidden="true" focusable="false" role="img">
+        <use href="img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+  <script
+    data-id="search-with-onsubmit"
+    data-on-submit='(query) =&gt; alert("Search submitted: " + query)'
+    data-search-key="q"
+  >
+    const data = document.currentScript.dataset;
+    const onSubmit = data.onSubmit;
+
+    if (!!onSubmit) {
+      const id = data.id;
+      const searchKey = data.searchKey;
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById(`${id}-form`).onsubmit = function (e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const query = formData.get(searchKey);
+          const func = eval(onSubmit);
+          func(query);
+          return false;
+        };
+      });
+    }
+  </script>
+</section>

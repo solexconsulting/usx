@@ -1,9 +1,9 @@
 {# Django template for LanguageSelector #}
 {# Props: languages (array of {code,label,description,href,current,plain}), variant ('two'|'menu'), unstyled (bool), small (bool), label (string), id (string), navAriaLabel (string), className (string) #}
 {# For variant="two", mark exactly one language `current: true` — the other renders as the switch target. #}
-<nav aria-label="{{ navAriaLabel|default:'Language selection' }}"{% if className %} class="{{ className }}"{% endif %}>
+<nav aria-label="{{ navAriaLabel|default:'Language selection' }}" class="usx-language-selector{% if className %} {{ className }}{% endif %}">
   {% if variant == 'menu' %}
-    <div class="usa-language-container usx-language-selector{% if small %} usa-language--small{% endif %}">
+    <div class="usa-language-container{% if small %} usa-language--small{% endif %}">
       <ul class="usa-language__primary usa-accordion">
         <li class="usa-language__primary-item">
           <button
@@ -27,7 +27,7 @@
       </ul>
     </div>
   {% else %}
-    <div class="usa-language-container usx-language-selector">
+    <div class="usa-language-container">
       {% for lang in languages %}{% if not lang.current %}
         {% if lang.href %}
           <a href="{{ lang.href }}" class="usa-button usx-button usa-button--primary"><span lang="{{ lang.code }}" xml:lang="{{ lang.code }}"><strong>{{ lang.label }}</strong></span></a>

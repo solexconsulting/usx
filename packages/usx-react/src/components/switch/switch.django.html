@@ -3,26 +3,24 @@
 <label class="usa-label usx-switch__label">
   <input
     type="checkbox"
-    class="usx-switch{% if size %} usx-toggle-{{ size }}{% endif %}{% if variant %} text-{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}"
+    class="usx-switch usx-toggle-{{ size|default:"md" }}{% if variant %} text-{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}"
     {% if id %}id="{{ id }}"{% endif %}
     {% if name %}name="{{ name }}"{% endif %}
     {% if checked %}checked{% endif %}
     {% if defaultChecked %}checked{% endif %}
-    {% if indeterminate %}indeterminate{% endif %}
-    {% if disabled %}disabled aria-disabled="true"{% endif %}
-    {% if ariaChecked is not none %}aria-checked="{{ ariaChecked }}"{% endif %}
+    {% if indeterminate %}aria-checked="mixed"{% elif ariaChecked is not none %}aria-checked="{{ ariaChecked }}"{% endif %}
+    {% if disabled %}disabled{% endif %}
   />
   {{ label }}
 </label>
 {% else %}
 <input
   type="checkbox"
-  class="usx-switch{% if size %} usx-toggle-{{ size }}{% endif %}{% if variant %} text-{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}"
+  class="usx-switch usx-toggle-{{ size|default:"md" }}{% if variant %} text-{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}"
   {% if id %}id="{{ id }}"{% endif %}
   {% if name %}name="{{ name }}"{% endif %}
   {% if checked %}checked{% endif %}
   {% if defaultChecked %}checked{% endif %}
-  {% if indeterminate %}indeterminate{% endif %}
-  {% if disabled %}disabled aria-disabled="true"{% endif %}
-  {% if ariaChecked is not none %}aria-checked="{{ ariaChecked }}"{% endif %}
+  {% if indeterminate %}aria-checked="mixed"{% elif ariaChecked is not none %}aria-checked="{{ ariaChecked }}"{% endif %}
+  {% if disabled %}disabled{% endif %}
 />{% endif %}

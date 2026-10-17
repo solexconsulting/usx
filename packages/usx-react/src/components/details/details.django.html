@@ -1,7 +1,12 @@
 {# Django template for Details #}
 {% load components %}
-{% fragment as summaryText %}<span class="usx-details__summary-text{% if underlineColor %} border-{{ underlineColor|force_escape }}{% endif %}{% if summaryTextClassName %} {{ summaryTextClassName }}{% endif %}">{% if summary %}{{ summary|force_escape }}{% else %}Details{% endif %}</span>{% endfragment %}
-<details class="usx-details{% if noContentBorder %} usx-details--borderless{% endif %}{% if noSummaryUnderline %} usx-details--no-underline{% endif %}{% if className %} {{ className }}{% endif %}"{% if open %} open{% endif %}>
-  <summary class="usx-details__summary{% if markerColor %} marker-{{ markerColor|force_escape }}{% endif %}{% if summaryClassName %} {{ summaryClassName }}{% endif %}">{{ summaryText }}</summary>
-  <div class="usx-details__content{% if not noContentBorder and contentBorderColor %} border-{{ contentBorderColor|force_escape }}{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">{% if children != None %}{% if children is not True and children is not False %}{{ children|safe }}{% endif %}{% else %}<p class="usx-details__text">{{ text|default_if_none:''|force_escape }}</p>{% endif %}</div>
+<details
+  class="usx-details{% if noContentBorder %} usx-details--borderless{% endif %}{% if className %} {{ className }}{% endif %}"{% if open %}
+  open{% endif %}{% if name %}
+  name="{{ name|force_escape }}"{% endif %}
+>
+  {% summary props=summaryProps %}{% endsummary %}
+  <div class="usx-details__content{% if not noContentBorder and contentBorderColor %} border-{{ contentBorderColor|force_escape }}{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">{% if children != None %}{% if children is not True and children is not False %}{{ children|safe }}{% endif %}{% else %}
+    <p class="usx-details__text">{{ text|default_if_none:''|force_escape }}</p>{% endif %}
+  </div>
 </details>

@@ -2,6 +2,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
 import ErrorMessage from '../error-message/ErrorMessage';
+import FormGroup from '../form-group/FormGroup';
 
 export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -19,6 +20,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
   className?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   required?: boolean;
+  formGroup?: boolean;
 }
 
 export default function Checkbox({
@@ -37,6 +39,7 @@ export default function Checkbox({
   className = '',
   onChange,
   required = false,
+  formGroup = true,
   ...props
 }: CheckboxProps) {
   const hasError = !!error;
@@ -54,7 +57,7 @@ export default function Checkbox({
     { 'usa-checkbox__input--tile': tile }
   );
 
-  return (
+  const content = (
     <>
       <div className={divClasses} {...props}>
         <input
@@ -63,7 +66,7 @@ export default function Checkbox({
           type="checkbox"
           name={name}
           value={value}
-          aria-label={ariaLabel}
+          aria-label={ariaLabel || undefined}
           defaultChecked={checked}
           disabled={disabled}
           required={required}
@@ -87,4 +90,6 @@ export default function Checkbox({
       ) : null}
     </>
   );
+
+  return formGroup ? <FormGroup error={hasError}>{content}</FormGroup> : content;
 }

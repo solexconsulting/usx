@@ -9,7 +9,7 @@ export default {
   component: Footer,
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'borderRoleVars'],
 };
 
 // ── Shared story data ──────────────────────────────────────────────────────
@@ -175,20 +175,22 @@ NoNav.args = storyDefs.NoNav;
 export const Minimal = Template.bind({});
 Minimal.args = storyDefs.Minimal;
 
+export const borderRoleVars = {
+  '--usx-footer-border-top': '3px solid #005ea2',
+  '--usx-footer-border-bottom': '4px solid #237a3b',
+  '--usx-footer-primary-section-border-top': '2px dashed #a72f10',
+  '--usx-footer-secondary-section-border-top': '5px dotted #8a3575',
+  '--usx-footer-primary-link-border-top': '2px dashed #237a3b',
+  '--usx-footer-nav-border-bottom': '3px solid #d1980b',
+};
+
 export const BorderRoles = {
-  args: {
-    ...storyDefs.Big,
-    returnToTop: true,
-    style: {
-      '--usx-footer-border-top': '3px solid #005ea2',
-      '--usx-footer-border-bottom': '4px solid #237a3b',
-      '--usx-footer-primary-section-border-top': '2px dashed #a72f10',
-      '--usx-footer-secondary-section-border-top': '5px dotted #8a3575',
-      '--usx-footer-primary-link-border-top': '2px dashed #237a3b',
-      '--usx-footer-nav-border-bottom': '3px solid #d1980b',
-    },
-  },
-  render: Template,
+  args: { ...storyDefs.Big, returnToTop: true },
+  render: (args) => (
+    <div style={borderRoleVars}>
+      <Footer {...args} />
+    </div>
+  ),
 };
 
 // ── Composition story: using sub-components directly ──────────────────────

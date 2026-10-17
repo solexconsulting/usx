@@ -14,6 +14,7 @@
         "
         {% if disabled == True %} aria-disabled="true" {% endif %}
         {% if isExternal %} target="_blank" rel="noopener noreferrer" {% endif %}
+        {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
     >
 {% else %}
 
@@ -23,13 +24,12 @@
             usa-button usx-button
             {% if variant %} usa-button--{{ variant }}{% endif %}
             {% if big == True %} usa-button--big{% endif %}
-            {% if disabled == True %} usa-button--disabled{% endif %}
             {% if inverse == True %} usa-button--inverse{% endif %}
             {% if ghost == True %} usx-button--ghost{% endif %}
             {% if className %} {{ className }}{% endif %}
         "
-        {% if disabled == True %} disabled="disabled" aria-disabled="true" {% endif %}
-        {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{{ value }}"{% endfor %}{% endif %}
+        {% if disabled == True %} disabled aria-disabled="true" {% endif %}
+        {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
     >
 {% endif %}
     {% if loading %}

@@ -1,0 +1,65 @@
+{
+  "name": "tree",
+  "template": "tree/tree.django.html",
+  "version": 3,
+  "required": ["items"],
+  "default": {
+    "items": [
+      { "type": "link", "href": "https://www.google.com", "text": "Google" },
+      {
+        "type": "details",
+        "summaryProps": { "label": "Socials" },
+        "items": [{ "type": "link", "href": "https://www.facebook.com", "text": "Facebook" }]
+      }
+    ]
+  },
+  "props": {
+    "items": {
+      "type": "array",
+      "description": "Tree items. Every item sets `type`: \"link\" ({href, text}) renders a Link; \"details\" renders a Details with `summaryProps` and either `items` (a nested Tree) or `text` (a paragraph); \"text\" ({text}) renders a plain label. Link and Details options can be passed on their respective items. Each nested items array uses the same shape.",
+      "items": {
+        "type": "object",
+        "description": "A link, details, or text item, chosen by `type`.",
+        "properties": {
+          "type": {
+            "type": "select",
+            "options": ["link", "details", "text"],
+            "description": "Required. Selects how the item renders."
+          },
+          "text": {
+            "type": "string",
+            "description": "Link text, plain label text, or details paragraph text."
+          },
+          "href": {
+            "type": "string",
+            "description": "Link destination. Only for type \"link\"."
+          },
+          "summaryProps": {
+            "type": "object",
+            "component": "summary",
+            "omit": ["unstyled"],
+            "description": "Props passed to the Details summary. Only for type \"details\"."
+          },
+          "items": {
+            "type": "array",
+            "description": "Nested Tree items shown inside the Details, including an empty array. Only for type \"details\"; use instead of text."
+          },
+          "name": {
+            "type": "string",
+            "description": "Native Details group name; give sibling details items the same name for exclusive opening. Only for type \"details\"."
+          }
+        }
+      }
+    },
+    "variant": {
+      "type": "select",
+      "options": ["raw", "padded"],
+      "default": "raw",
+      "description": "Raw keeps Details styling; padded adds row spacing, alignment, and an interactive hover surface. The variant applies to every nested list."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes for the ul element."
+    }
+  }
+}

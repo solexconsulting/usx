@@ -11,7 +11,7 @@ export default {
   tags: ['USWDS', 'autodocs'],
   layout: 'fullwidth',
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'renderAllVariants'],
 };
 
 // Default variant
@@ -22,83 +22,77 @@ export const Default = {
   }
 };
 
+const stateButtons = (variant, extra = {}) => [
+  { label: 'Default', variant, ...extra },
+  { label: 'Hover', variant, className: 'usa-button--hover', ...extra },
+  { label: 'Active', variant, className: 'usa-button--active', ...extra },
+  { label: 'Focus', variant, className: 'usa-focus', ...extra },
+  { label: 'Disabled', variant, disabled: true, ...extra },
+  { label: 'aria-disabled', variant, 'aria-disabled': 'true', ...extra },
+];
+
+const allVariantGroups = [
+  ...[
+    ['Primary', 'primary'],
+    ['Secondary', 'secondary'],
+    ['Accent Cool', 'accent-cool'],
+    ['Accent Warm', 'accent-warm'],
+    ['Base', 'base'],
+    ['Outline', 'outline'],
+  ].map(([heading, variant]) => ({
+    heading,
+    buttons: [...stateButtons(variant), { label: 'Unstyled button', variant: 'unstyled' }],
+  })),
+  {
+    heading: 'Outline Inverse',
+    inverse: true,
+    buttons: [
+      ...stateButtons('outline', { inverse: true }),
+      { label: 'Unstyled button', variant: 'unstyled', inverse: true },
+    ],
+  },
+  {
+    heading: 'Big',
+    buttons: [
+      { label: 'Default', big: true },
+      { label: 'Active', big: true, className: 'usa-button--active' },
+      { label: 'Disabled', big: true, disabled: true },
+      { label: 'aria-disabled', big: true, 'aria-disabled': 'true' },
+      { label: 'Unstyled button', big: true, variant: 'unstyled' },
+    ],
+  },
+  { heading: 'Unstyled', buttons: stateButtons('unstyled') },
+];
+
+// Shared with the Django stories, which pass in a renderer for the Django-rendered button.
+export const renderAllVariants = (renderButton) => (
+  <>
+    {allVariantGroups.map(({ heading, inverse, buttons }) => {
+      const row = buttons.map((props, index) => (
+        <React.Fragment key={index}>
+          {index > 0 && ' '}
+          {renderButton(props)}
+        </React.Fragment>
+      ));
+      return (
+        <React.Fragment key={heading}>
+          <h3>{heading}</h3>
+          {inverse ? (
+            <div className="bg-surface-inverse padding-1" style={{ marginLeft: '-1rem', width: 'fit-content' }}>
+              {row}
+            </div>
+          ) : (
+            row
+          )}
+        </React.Fragment>
+      );
+    })}
+  </>
+);
+
 export const AllVariants = {
-  render: () => (
-    <>
-      <h3>Primary</h3>
-      <Button label="Default" variant="primary" />{" "}
-      <Button label="Hover" variant="primary" className="usa-button--hover" />{" "}
-      <Button label="Active" variant="primary" className="usa-button--active" />{" "}
-      <Button label="Focus" variant="primary" className="usa-focus" />{" "}
-      <Button label="Disabled" variant="primary" disabled />{" "}
-      <Button label="aria-disabled" variant="primary" aria-disabled="true" />{" "}
-      <Button label="Unstyled button" variant="unstyled" />
-      <h3>Secondary</h3>
-      <Button label="Default" variant="secondary" />{" "}
-      <Button label="Hover" variant="secondary" className="usa-button--hover" />{" "}
-      <Button label="Active" variant="secondary" className="usa-button--active" />{" "}
-      <Button label="Focus" variant="secondary" className="usa-focus" />{" "}
-      <Button label="Disabled" variant="secondary" disabled />{" "}
-      <Button label="aria-disabled" variant="secondary" aria-disabled="true" />{" "}
-      <Button label="Unstyled button" variant="unstyled" />
-      <h3>Accent Cool</h3>
-      <Button label="Default" variant="accent-cool" />{" "}
-      <Button label="Hover" variant="accent-cool" className="usa-button--hover" />{" "}
-      <Button label="Active" variant="accent-cool" className="usa-button--active" />{" "}
-      <Button label="Focus" variant="accent-cool" className="usa-focus" />{" "}
-      <Button label="Disabled" variant="accent-cool" disabled />{" "}
-      <Button label="aria-disabled" variant="accent-cool" aria-disabled="true" />{" "}
-      <Button label="Unstyled button" variant="unstyled" />
-      <h3>Accent Warm</h3>
-      <Button label="Default" variant="accent-warm" />{" "}
-      <Button label="Hover" variant="accent-warm" className="usa-button--hover" />{" "}
-      <Button label="Active" variant="accent-warm" className="usa-button--active" />{" "}
-      <Button label="Focus" variant="accent-warm" className="usa-focus" />{" "}
-      <Button label="Disabled" variant="accent-warm" disabled />{" "}
-      <Button label="aria-disabled" variant="accent-warm" aria-disabled="true" />{" "}
-      <Button label="Unstyled button" variant="unstyled" />
-      <h3>Base</h3>
-      <Button label="Default" variant="base" />{" "}
-      <Button label="Hover" variant="base" className="usa-button--hover" />{" "}
-      <Button label="Active" variant="base" className="usa-button--active" />{" "}
-      <Button label="Focus" variant="base" className="usa-focus" />{" "}
-      <Button label="Disabled" variant="base" disabled />{" "}
-      <Button label="aria-disabled" variant="base" aria-disabled="true" />{" "}
-      <Button label="Unstyled button" variant="unstyled" />
-      <h3>Outline</h3>
-      <Button label="Default" variant="outline" />{" "}
-      <Button label="Hover" variant="outline" className="usa-button--hover" />{" "}
-      <Button label="Active" variant="outline" className="usa-button--active" />{" "}
-      <Button label="Focus" variant="outline" className="usa-focus" />{" "}
-      <Button label="Disabled" variant="outline" disabled />{" "}
-      <Button label="aria-disabled" variant="outline" aria-disabled="true" />{" "}
-      <Button label="Unstyled button" variant="unstyled" />
-      <h3>Outline Inverse</h3>
-      <div className="bg-surface-inverse padding-1" style={{ marginLeft: '-1rem', width: 'fit-content' }}>
-        <Button label="Default" variant="outline" inverse />{" "}
-        <Button label="Hover" variant="outline" inverse className="usa-button--hover" />{" "}
-        <Button label="Active" variant="outline" inverse className="usa-button--active" />{" "}
-        <Button label="Focus" variant="outline" inverse className="usa-focus" />{" "}
-        <Button label="Disabled" variant="outline" inverse disabled />{" "}
-        <Button label="aria-disabled" variant="outline" inverse aria-disabled="true" />{" "}
-        <Button label="Unstyled button" variant="unstyled" inverse />
-      </div>
-      <h3>Big</h3>
-      <Button label="Default" big />{" "}
-      <Button label="Active" big className="usa-button--active" />{" "}
-      <Button label="Disabled" big disabled />{" "}
-      <Button label="aria-disabled" big aria-disabled="true" />{" "}
-      <Button label="Unstyled button" big variant="unstyled" />
-      <h3>Unstyled</h3>
-      <Button label="Default" variant="unstyled" />{" "}
-      <Button label="Hover" variant="unstyled" className="usa-button--hover" />{" "}
-      <Button label="Active" variant="unstyled" className="usa-button--active" />{" "}
-      <Button label="Focus" variant="unstyled" className="usa-focus" />{" "}
-      <Button label="Disabled" variant="unstyled" disabled />{" "}
-      <Button label="aria-disabled" variant="unstyled" aria-disabled="true" />
-    </>
-  )
-}
+  render: () => renderAllVariants((props) => <Button {...props} />),
+};
 
 export const DefaultHover = {
   args: {

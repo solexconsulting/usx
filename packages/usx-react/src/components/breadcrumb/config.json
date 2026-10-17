@@ -1,7 +1,7 @@
 {
   "name": "breadcrumb",
   "template": "breadcrumb/breadcrumb.django.html",
-  "version": 2,
+  "version": 3,
   "default": {
     "items": [
       {
@@ -72,13 +72,7 @@
     },
     "children": {
       "type": "slot",
-      "description": "Fallback content rendered when no breadcrumb items are supplied (React only).",
-      "renderers": {
-        "django": {
-          "supported": false,
-          "description": "The Django template does not consume children."
-        }
-      }
+      "description": "Fallback content rendered when no breadcrumb items are supplied. Defaults to the text Breadcrumb."
     }
   }
 }

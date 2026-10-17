@@ -23,6 +23,9 @@ export const FewPages = createStory(toDjangoArgs(storyDefs.FewPages));
 export const FirstPage = createStory(toDjangoArgs(storyDefs.FirstPage));
 export const LastPage = createStory(toDjangoArgs(storyDefs.LastPage));
 export const ArrowsOnly = createStory(toDjangoArgs(storyDefs.ArrowsOnly));
-export const ArrowsOnlyNoExtras = createStory(toDjangoArgs(storyDefs.ArrowsOnlyNoExtras));
+export const ArrowsOnlyNoExtras = {
+  ...createStory(toDjangoArgs(storyDefs.ArrowsOnlyNoExtras)),
+  name: 'Arrows Only (no summary or step options)',
+};
 export const IconOnlyArrows = createStory(toDjangoArgs(storyDefs.IconOnlyArrows));
 export const WithSummaryAndStepOptions = createStory(toDjangoArgs(storyDefs.WithSummaryAndStepOptions));

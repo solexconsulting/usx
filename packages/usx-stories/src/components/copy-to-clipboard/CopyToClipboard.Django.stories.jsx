@@ -13,19 +13,13 @@ const createStory = createDjangoStory({ componentName: 'copy-to-clipboard' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithText = createStory(storyDefs.WithText);
-export const DarkBackground = {
-  ...createStory(storyDefs.DarkBackground),
-  render: (args) => (
-    <div className="bg-base-darkest padding-2">
-      {createStory(storyDefs.DarkBackground).render(args)}
-    </div>
-  )
+const createInvertedStory = (args) => {
+  const story = createStory(args);
+  return {
+    ...story,
+    render: (storyArgs) => <div className="bg-surface-inverse padding-2">{story.render(storyArgs)}</div>,
+  };
 };
-export const DarkBackgroundWithText = {
-  ...createStory(storyDefs.DarkBackgroundWithText),
-  render: (args) => (
-    <div className="bg-base-darkest padding-2">
-      {createStory(storyDefs.DarkBackgroundWithText).render(args)}
-    </div>
-  )
-};
+
+export const InvertedBackground = createInvertedStory(storyDefs.InvertedBackground);
+export const InvertedBackgroundWithText = createInvertedStory(storyDefs.InvertedBackgroundWithText);

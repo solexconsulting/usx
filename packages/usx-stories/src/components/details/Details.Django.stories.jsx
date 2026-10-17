@@ -34,7 +34,10 @@ export const MonoColor = createStory(storyDefs.MonoColor);
 /** noContentBorder removes the left border and suppresses the contentBorderColor utility. */
 export const Borderless = createStory(storyDefs.Borderless);
 
-/** noSummaryUnderline removes the dotted underline while retaining the content border. */
+/** No marker example removes the native marker while keeping the summary underline and content border. */
+export const NoMarker = createStory(storyDefs.NoMarker);
+
+/** summaryProps.noUnderline removes the dotted underline while retaining the content border. */
 export const NoSummaryUnderline = createStory(storyDefs.NoSummaryUnderline);
 
 /** The two decoration switches can be combined without changing native disclosure behavior. */
@@ -45,6 +48,12 @@ export const CustomStyles = createStory(storyDefs.CustomStyles);
 
 /** contentClassName styles only the revealed content, leaving the summary's typography unchanged. */
 export const CustomContentStyles = createStory(storyDefs.CustomContentStyles);
+
+/** summaryProps.className applies button styles to the summary element. */
+export const ButtonClasses = createStory(storyDefs.ButtonClasses);
+
+/** Summary options can be grouped and passed to the shared Summary component. */
+export const GroupedSummaryProps = createStory(storyDefs.GroupedSummaryProps);
 
 /** Tough on the eyes example demonstrating all color utilities applied together for testing visual contrast and readability. */
 export const ToughOnTheEyes = createStory(storyDefs.ToughOnTheEyes);

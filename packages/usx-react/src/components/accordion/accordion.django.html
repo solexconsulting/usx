@@ -1,43 +1,27 @@
 <div
     id="{{ id }}"
-    class="usa-accordion usx-accordion {% if bordered %}usa-accordion--bordered{% endif %} {% if iconPosition == 'start' %}usa-accordion--icon-start{% elif iconPosition == 'end' %}usa-accordion--icon-end{% endif %} {{ className }}"
+    class="usa-accordion usx-accordion {% if bordered %}usa-accordion--bordered{% endif %}{% if iconPosition == 'start' %} usa-accordion--icon-start{% elif iconPosition == 'end' %} usa-accordion--icon-end{% endif %}{% if className %} {{ className }}{% endif %}"
     {% if multiselectable %}
     data-allow-multiple="true"
     {% endif %}
 >
 {% for item in items %}
-    {% if headingLevel == 'h1' %}
-        <h1 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ headingClassName }}">
-    {% elif headingLevel == 'h2' %}
-        <h2 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ headingClassName }}">
-    {% elif headingLevel == 'h4' %}
-        <h4 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ headingClassName }}">
-    {% else %}
-        <h3 id="{{ id }}-{{ forloop.counter0 }}-heading" class="usa-accordion__heading {{ headingClassName }}">
-    {% endif %}
+    <{% if headingLevel == 'h1' %}h1{% elif headingLevel == 'h2' %}h2{% elif headingLevel == 'h4' %}h4{% elif headingLevel == 'h5' %}h5{% elif headingLevel == 'h6' %}h6{% else %}h3{% endif %} id="{% if item.id %}{{ item.id }}{% else %}{{ id }}-{{ forloop.counter0 }}{% endif %}-heading" class="usa-accordion__heading{% if headingClassName %} {{ headingClassName }}{% endif %}">
         <button
             class="usa-accordion__button"
-            aria-expanded="false"
-            aria-controls="{{ id }}-{{ forloop.counter0 }}-content"
+            aria-expanded="{% if item.expanded %}true{% else %}false{% endif %}"
+            aria-controls="{% if item.id %}{{ item.id }}{% else %}{{ id }}-{{ forloop.counter0 }}{% endif %}-content"
             type="button"
         >
             {{ item.title }}
         </button>
-    {% if headingLevel == 'h1' %}
-        </h1>
-    {% elif headingLevel == 'h2' %}
-        </h2>
-    {% elif headingLevel == 'h4' %}
-        </h4>
-    {% else %}
-        </h3>
-    {% endif %}
+    </{% if headingLevel == 'h1' %}h1{% elif headingLevel == 'h2' %}h2{% elif headingLevel == 'h4' %}h4{% elif headingLevel == 'h5' %}h5{% elif headingLevel == 'h6' %}h6{% else %}h3{% endif %}>
 
     <div
-        id="{{ id }}-{{ forloop.counter0 }}-content"
-        class="usa-accordion__content usa-prose {{ contentClassName }}"
-        aria-labelledby="{{ id }}-{{ forloop.counter0 }}-heading"
-        hidden
+        id="{% if item.id %}{{ item.id }}{% else %}{{ id }}-{{ forloop.counter0 }}{% endif %}-content"
+        class="usa-accordion__content usa-prose{% if contentClassName %} {{ contentClassName }}{% endif %}"
+        aria-labelledby="{% if item.id %}{{ item.id }}{% else %}{{ id }}-{{ forloop.counter0 }}{% endif %}-heading"
+        {% if not item.expanded %}hidden{% endif %}
     >
         {{ item.content }}
     </div>

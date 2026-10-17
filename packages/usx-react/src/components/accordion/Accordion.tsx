@@ -49,7 +49,6 @@ function AccordionItem({
                     className="usa-accordion__button"
                     aria-expanded={expanded}
                     aria-controls={`${id}-content`}
-                    data-testid={`accordionButton_${id}`}
                     onClick={handleToggle}>
                     {title}
                 </button>
@@ -57,7 +56,6 @@ function AccordionItem({
             <div
                 id={`${id}-content`}
                 aria-labelledby={`${id}-heading`}
-                data-testid={`accordionItem_${id}`}
                 className={contentClasses}
                 hidden={!expanded}>
                 {content}

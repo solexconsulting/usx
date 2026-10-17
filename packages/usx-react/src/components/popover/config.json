@@ -1,0 +1,121 @@
+{
+  "name": "popover",
+  "template": "popover/popover.django.html",
+  "version": 4,
+  "required": ["id", "children"],
+  "default": {
+    "id": "services-popover",
+    "summaryProps": { "label": "Services" },
+    "children": "<nav aria-label=\"Services\"><ul class=\"usa-list usx-list usa-list--unstyled\"><li class=\"padding-y-1\"><a href=\"#benefits\">Benefits</a></li><li class=\"padding-y-1\"><a href=\"#applications\">Applications</a></li></ul></nav>"
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "description": "Unique ID for the panel. Close controls target this ID."
+    },
+    "summaryProps": {
+      "type": "object",
+      "description": "Props passed directly to the unstyled Summary trigger. Use label, children, ariaLabel, and className here. Defaults label to Open panel.",
+      "component": "summary"
+    },
+    "children": {
+      "type": "slot",
+      "description": "Trusted semantic content for the positioned panel, including forms, a Tree, lists, or nested Popovers."
+    },
+    "menuItems": {
+      "type": "array",
+      "description": "Rows for a stacked menu rendered in the panel before children. Each item sets `type`: \"link\" ({href, text}), \"details\" ({summaryProps, items}) which opens a nested Popover to the right, or \"text\" ({text}).",
+      "items": {
+        "type": "object",
+        "description": "A link, details, or text row, chosen by `type`.",
+        "properties": {
+          "type": {
+            "type": "select",
+            "options": ["link", "details", "text"],
+            "description": "Required. Selects how the row renders."
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique ID for a details row's panel. Defaults to the parent ID plus the row index."
+          },
+          "text": {
+            "type": "string",
+            "description": "Link or plain text."
+          },
+          "href": {
+            "type": "string",
+            "description": "Link destination. Only for type \"link\"."
+          },
+          "summaryProps": {
+            "type": "object",
+            "component": "summary",
+            "omit": ["unstyled"],
+            "description": "Props passed to the details row summary. Only for type \"details\"."
+          },
+          "items": {
+            "type": "array",
+            "description": "Nested menu rows with the same shape. Only for type \"details\"."
+          }
+        }
+      }
+    },
+    "side": {
+      "type": "select",
+      "options": ["top", "right", "bottom", "left"],
+      "default": "bottom",
+      "description": "Physical side of the trigger where CSS places the floating panel. Choose a side and alignment with enough space for the panel."
+    },
+    "align": {
+      "type": "select",
+      "options": ["start", "center", "end"],
+      "default": "start",
+      "description": "Alignment along the chosen side. Start and end follow text direction for top and bottom."
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "default": false,
+      "description": "Open initially. Native details owns subsequent disclosure state."
+    },
+    "name": {
+      "type": "string",
+      "description": "Optional native details group: opening one closes another with the same name. Use unique group names for unrelated groups and each nesting level."
+    },
+    "showClose": {
+      "type": "boolean",
+      "default": false,
+      "description": "Add a visible close button after panel content. The shared enhancement enables it, outside dismissal, and Escape with focus return. The summary toggles natively without JavaScript."
+    },
+    "closeLabel": {
+      "type": "string",
+      "default": "Close",
+      "description": "Visible text for the optional close button."
+    },
+    "panelHeading": {
+      "type": "string",
+      "description": "Optional visible heading for the panel."
+    },
+    "headingLevel": {
+      "type": "select",
+      "options": ["h1", "h2", "h3", "h4", "h5", "h6"],
+      "default": "h2",
+      "description": "Heading element used for panelHeading. Choose the level that fits the surrounding page outline."
+    },
+    "scrollable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Bounds and enables scrolling on the panel content by adding the usx-popover__scroll class."
+    },
+    "className": {
+      "type": "string",
+      "description": "Additional classes for the wrapper."
+    },
+    "panelClassName": {
+      "type": "string",
+      "description": "Additional classes for the popover panel, including custom sizing and spacing rules."
+    },
+    "contentClassName": {
+      "type": "string",
+      "description": "Optional class name for the inner content container."
+    }
+  }
+}

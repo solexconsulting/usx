@@ -1,5 +1,5 @@
 import React from 'react';
-import html from '../../../../usx-react/src/components/carousel/carousel.html?raw';
+import reactSnapshot from '../../../../usx-react/src/components/carousel/carousel.react-snapshot.html?raw';
 import { componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
@@ -8,15 +8,16 @@ export default {
   decorators: [...componentInit('carousel')],
 };
 
-export const AllVariants = {
+export const AllVariantsReact = {
+  name: 'All Variants (React)',
   parameters: {
     docs: {
       source: {
-        code: html
-      }
-    }
+        code: reactSnapshot,
+      },
+    },
   },
   render: () => {
-    return <div dangerouslySetInnerHTML={{ __html: html }} />;
-  }
-}
+    return <div dangerouslySetInnerHTML={{ __html: reactSnapshot }} />;
+  },
+};

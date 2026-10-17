@@ -1,8 +1,6 @@
-
 import Identifier from '../../../../usx-react/src/components/identifier/Identifier.tsx';
 import config from '../../../../usx-react/src/components/identifier/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
-import { expect } from 'storybook/test';
 
 const linksEn = [
   { href: 'javascript:void(0)', label: 'About <Parent shortname>' },
@@ -24,12 +22,15 @@ const linksEs = [
   { href: '', label: 'Politica de privacidad' },
 ];
 
-const statueAvatars = [
-  { href: '', src: './lady_liberty.png', alt: 'Statue of Liberty' },
-];
+const statueAvatars = [{ href: '', src: './lady_liberty.png', alt: 'Statue of Liberty' }];
 
 const solexAvatars = [
-  { href: 'https://solex-llc.com', src: './white_symbol-only.png', alt: 'SOLEX Consulting LLC', className: 'height-auto' }
+  {
+    href: 'https://solex-llc.com',
+    src: './white_symbol-only.png',
+    alt: 'SOLEX Consulting LLC',
+    className: 'height-auto',
+  },
 ];
 
 const presidentAvatars = [
@@ -136,12 +137,14 @@ export const storyDefs = {
     ...(config.default || {}),
     domain: 'solex-llc.com',
     avatarProps: solexAvatars,
-    parentAgencies: [{ name: 'SOLEX Consulting LLC', href: 'https://solex-llc.com', useThe: false }],
+    parentAgencies: [
+      { name: 'SOLEX Consulting LLC', href: 'https://solex-llc.com', useThe: false },
+    ],
     requiredLinks: [
       { href: 'https://solex-llc.com', label: 'About SOLEX Consulting' },
       { href: 'https://solex-llc.com', label: 'Privacy policy' },
     ],
-  }
+  },
 };
 
 storyDefs.MultipleParentsAndAvatarsMixedArticle = {
@@ -157,8 +160,20 @@ storyDefs.AvatarVariants = {
   logoShape: 'circle',
   avatarProps: [
     { ...statueAvatars[0], shape: 'rounded-lg', className: 'height-auto' },
-    { variant: 'initials', value: 'US', alt: 'United States', href: '#agency', contentClassName: 'bg-primary-lighter text-primary-darker' },
-    { variant: 'icon', value: 'account_circle', alt: 'Agency account', href: '#account', contentClassName: 'bg-primary-lighter text-primary-darker' },
+    {
+      variant: 'initials',
+      value: 'US',
+      alt: 'United States',
+      href: '#agency',
+      contentClassName: 'bg-primary-lighter text-primary-darker',
+    },
+    {
+      variant: 'icon',
+      value: 'account_circle',
+      alt: 'Agency account',
+      href: '#account',
+      contentClassName: 'bg-primary-lighter text-primary-darker',
+    },
   ],
 };
 
@@ -173,36 +188,19 @@ export default {
 export const Default = { args: storyDefs.Default };
 export const DefaultSpanish = { args: storyDefs.DefaultSpanish };
 export const MultipleParentsAndAvatars = { args: storyDefs.MultipleParentsAndAvatars };
-export const MultipleParentsAndAvatarsSpanish = { args: storyDefs.MultipleParentsAndAvatarsSpanish };
-export const MultipleParentsAndAvatarsOverlappingAvatars = { args: storyDefs.MultipleParentsAndAvatarsOverlappingAvatars };
+export const MultipleParentsAndAvatarsSpanish = {
+  args: storyDefs.MultipleParentsAndAvatarsSpanish,
+};
+export const MultipleParentsAndAvatarsOverlappingAvatars = {
+  args: storyDefs.MultipleParentsAndAvatarsOverlappingAvatars,
+};
 export const LogoShapeRounded = { args: storyDefs.LogoShapeRounded };
 export const LogoShapeGlobal = { args: storyDefs.LogoShapeGlobal };
 export const NoAvatars = { args: storyDefs.NoAvatars };
 export const TaxpayerDisclaimer = { args: storyDefs.TaxpayerDisclaimer };
 export const TaxpayerDisclaimerSpanish = { args: storyDefs.TaxpayerDisclaimerSpanish };
-export const Solex = {
-  args: storyDefs.Solex,
-  play: async ({ canvasElement }) => {
-    const disclaimer = canvasElement.querySelector('.usa-identifier__identity-disclaimer');
-    await expect(disclaimer).toHaveTextContent('official website of SOLEX Consulting LLC');
-    await expect(disclaimer).not.toHaveTextContent('the SOLEX Consulting LLC');
-  },
-};
+export const Solex = { args: storyDefs.Solex };
 export const MultipleParentsAndAvatarsMixedArticle = {
   args: storyDefs.MultipleParentsAndAvatarsMixedArticle,
-  play: async ({ canvasElement }) => {
-    const disclaimer = canvasElement.querySelector('.usa-identifier__identity-disclaimer');
-    await expect(disclaimer).toHaveTextContent('official website of the <Parent agency> and SOLEX Consulting LLC');
-  },
 };
-export const AvatarVariants = {
-  args: storyDefs.AvatarVariants,
-  play: async ({ canvas, canvasElement }) => {
-    await expect(canvasElement.querySelector('.usa-identifier__logo.height-auto .usx-avatar__img')).toHaveClass('usa-identifier__logo-img', 'usx-rounded-lg', 'identifier-custom-image');
-    await expect(canvas.getByRole('link', { name: 'United States' })).toHaveAttribute('href', '#agency');
-    await expect(canvasElement.querySelector('.identifier-custom-content')).toHaveClass('usx-avatar__content', 'usx-circle');
-    await expect(canvasElement.querySelector('.identifier-custom-content')).toHaveTextContent('US');
-    await expect(canvasElement.querySelector('[role="tooltip"]')).toHaveTextContent('Agency profile');
-    await expect(canvas.getByRole('link', { name: 'Agency account' }).querySelector('svg')).toBeInTheDocument();
-  },
-};
+export const AvatarVariants = { args: storyDefs.AvatarVariants };

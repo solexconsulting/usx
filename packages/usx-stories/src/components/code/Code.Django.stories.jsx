@@ -22,3 +22,5 @@ export const ReactMarkupWithHTMLFragment = createStory(storyDefs.ReactMarkupWith
 export const WithoutPrefix = createStory(storyDefs.WithoutPrefix);
 export const WithColor = createStory(storyDefs.WithColor);
 export const WithCopyButton = createStory(storyDefs.WithCopyButton);
+export const WithManyLinesAndMaxHeight = createStory(storyDefs.WithManyLinesAndMaxHeight);
+export const WithLongLine = createStory(storyDefs.WithLongLine);

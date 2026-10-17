@@ -45,7 +45,6 @@ export default function CharacterCount({
   const infoId = `${fieldId}-info`;
   const hintId = hint ? `${fieldId}-hint` : undefined;
   const errorId = error ? `${fieldId}-error` : undefined;
-  const successId = !error && success ? `${fieldId}-success` : undefined;
 
   const outerClasses = ClassNames('usa-character-count', 'usx-character-count', className);
 
@@ -62,7 +61,7 @@ export default function CharacterCount({
     maxLength: max,
     formGroup: true,
     className: 'usa-character-count__field',
-    'aria-describedby': [infoId, hintId, errorId, successId].filter(Boolean).join(' '),
+    'aria-describedby': [infoId, hintId, errorId].filter(Boolean).join(' '),
     ...props,
   };
 

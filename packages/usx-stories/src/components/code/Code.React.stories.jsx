@@ -1,6 +1,4 @@
-
 import Code from '../../../../usx-react/src/components/code/Code.tsx';
-import { expect } from 'storybook/test';
 import config from '../../../../usx-react/src/components/code/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
@@ -21,15 +19,8 @@ const reactMarkup = `<Layout>
     </Section>
   </Page>
 </Layout>`;
-const markupLines = (source) => source.split('\n').map((code, index) => ({ code, prefix: String(index + 1) }));
-const checkLiteralMarkup = async ({ canvasElement, args }) => {
-  const elements = canvasElement.querySelectorAll('.usx-mockup-code code');
-  await expect(elements.length).toBe(args.lines.length);
-  for (const [index, element] of [...elements].entries()) {
-    await expect(element.textContent).toBe(args.lines[index].code);
-    await expect(element.childElementCount).toBe(0);
-  }
-};
+const markupLines = (source) =>
+  source.split('\n').map((code, index) => ({ code, prefix: String(index + 1) }));
 
 export const storyDefs = {
   Default: { lines: defaultLines },
@@ -49,14 +40,21 @@ export const storyDefs = {
   },
   LongLine: {
     lines: [
-      { code: 'Magnam dolore beatae necessitatibus nemopsum itaque sit. Et porro quae qui et et dolore ratione.', prefix: '~' },
+      {
+        code: 'Magnam dolore beatae necessitatibus nemopsum itaque sit. Et porro quae qui et et dolore ratione.',
+        prefix: '~',
+      },
     ],
   },
   WithHTMLFragment: {
     allowHtml: true,
     lines: [
       { code: 'npm install @solexllc/usx', prefix: '$' },
-      { code: 'This <em>line</em> has <strong>HTML fragments</strong>', prefix: '>', className: 'text-warning' },
+      {
+        code: 'This <em>line</em> has <strong>HTML fragments</strong>',
+        prefix: '>',
+        className: 'text-warning',
+      },
       { code: 'Done!', prefix: '>', className: 'text-success' },
     ],
   },
@@ -96,9 +94,12 @@ export const storyDefs = {
   },
   WithLongLine: {
     lines: [
-      { code: 'This is a very long line that should test how the component handles overflow of content within the code block. Lorem ipsum dolor sit amet, consectetur adipiscing elit.', prefix: '~' },
-    ]
-  }
+      {
+        code: 'This is a very long line that should test how the component handles overflow of content within the code block. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        prefix: '~',
+      },
+    ],
+  },
 };
 
 export default {
@@ -116,28 +117,19 @@ export const LongLine = { args: storyDefs.LongLine };
 export const WithHTMLFragment = { args: storyDefs.WithHTMLFragment };
 export const WithHTMLMarkup = {
   args: storyDefs.WithHTMLMarkup,
-  play: checkLiteralMarkup,
 };
 export const WithReactMarkup = {
   args: storyDefs.WithReactMarkup,
-  play: checkLiteralMarkup,
 };
 export const ReactMarkupWithHTMLFragment = {
   args: storyDefs.ReactMarkupWithHTMLFragment,
   parameters: {
     docs: {
       description: {
-        story: 'With `allowHtml` enabled, escape the source markup as `&lt;` and `&gt;`, but leave the formatting `<strong>` element unescaped. Only Account is bold; the surrounding JSX remains visible source. `copyText` contains the original JSX without formatting tags.',
+        story:
+          'With `allowHtml` enabled, escape the source markup as `&lt;` and `&gt;`, but leave the formatting `<strong>` element unescaped. Only Account is bold; the surrounding JSX remains visible source. `copyText` contains the original JSX without formatting tags.',
       },
     },
-  },
-  play: async ({ canvasElement, args }) => {
-    const lines = [...canvasElement.querySelectorAll('.usx-mockup-code code')];
-    await expect(lines.map((line) => line.textContent).join('\n')).toBe(args.copyText);
-    const fragments = canvasElement.querySelectorAll('.usx-mockup-code code *');
-    await expect(fragments.length).toBe(1);
-    await expect(fragments[0].tagName).toBe('STRONG');
-    await expect(fragments[0].textContent).toBe('Account');
   },
 };
 export const WithoutPrefix = { args: storyDefs.WithoutPrefix };

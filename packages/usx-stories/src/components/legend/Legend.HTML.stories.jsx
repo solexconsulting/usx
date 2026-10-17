@@ -1,20 +1,36 @@
 import React from 'react';
-import html from '../../../../usx-react/src/components/legend/legend.html?raw';
+import reactSnapshot from '../../../../usx-react/src/components/legend/legend.react-snapshot.html?raw';
+import djangoSnapshot from '../../../../usx-react/src/components/legend/legend.django-snapshot.html?raw';
 
 export default {
   title: 'HTML/USWDS/Legend',
   tags: ['USWDS', 'autodocs'],
 };
 
-export const AllVariants = {
+export const AllVariantsReact = {
+  name: 'All Variants (React)',
   parameters: {
     docs: {
       source: {
-        code: html
-      }
-    }
+        code: reactSnapshot,
+      },
+    },
   },
   render: () => {
-    return <div dangerouslySetInnerHTML={{ __html: html }} />;
-  }
-}
+    return <div dangerouslySetInnerHTML={{ __html: reactSnapshot }} />;
+  },
+};
+
+export const AllVariantsDjango = {
+  name: 'All Variants (Django)',
+  parameters: {
+    docs: {
+      source: {
+        code: djangoSnapshot,
+      },
+    },
+  },
+  render: () => {
+    return <div dangerouslySetInnerHTML={{ __html: djangoSnapshot }} />;
+  },
+};

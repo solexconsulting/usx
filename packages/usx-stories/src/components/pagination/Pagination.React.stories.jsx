@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Pagination from '../../../../usx-react/src/components/pagination/Pagination.tsx';
-import PaginationNavigation from '../../../../usx-react/src/components/pagination/navigation/PaginationNavigation.tsx';
+import PaginationNavigation, {
+  getPageItems,
+  getUnboundedPageItems,
+} from '../../../../usx-react/src/components/pagination/navigation/PaginationNavigation.tsx';
 import PaginationStepOptions from '../../../../usx-react/src/components/pagination/step-options/PaginationStepOptions.tsx';
 import PaginationSummary from '../../../../usx-react/src/components/pagination/summary/PaginationSummary.tsx';
 
@@ -22,53 +25,6 @@ export default {
   },
 };
 
-// ── Shared page-item arrays (for Django parity) ───────────────────────────
-
-const PAGES_MIDDLE = [
-  { type: 'page', page: 1 },
-  { type: 'ellipsis' },
-  { type: 'page', page: 9 },
-  { type: 'page', page: 10 },
-  { type: 'page', page: 11 },
-  { type: 'ellipsis' },
-  { type: 'page', page: 24 },
-];
-
-const PAGES_NEAR_START = [
-  { type: 'page', page: 1 },
-  { type: 'page', page: 2 },
-  { type: 'page', page: 3 },
-  { type: 'page', page: 4 },
-  { type: 'page', page: 5 },
-  { type: 'ellipsis' },
-  { type: 'page', page: 24 },
-];
-
-const PAGES_NEAR_END = [
-  { type: 'page', page: 1 },
-  { type: 'ellipsis' },
-  { type: 'page', page: 20 },
-  { type: 'page', page: 21 },
-  { type: 'page', page: 22 },
-  { type: 'page', page: 23 },
-  { type: 'page', page: 24 },
-];
-
-const PAGES_FEW = [
-  { type: 'page', page: 1 },
-  { type: 'page', page: 2 },
-  { type: 'page', page: 3 },
-];
-
-const PAGES_UNBOUNDED = [
-  { type: 'page', page: 1 },
-  { type: 'ellipsis' },
-  { type: 'page', page: 4 },
-  { type: 'page', page: 5 },
-  { type: 'page', page: 6 },
-  { type: 'ellipsis' },
-];
-
 // ── Exportable story definitions (reused by Django stories) ───────────────
 
 export const storyDefs = {
@@ -78,7 +34,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 10,
     totalPages: 24,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
   },
   Unbounded: {
@@ -86,7 +41,6 @@ export const storyDefs = {
     initialPage: 5,
     showSummary: false,
     currentPage: 5,
-    pages: PAGES_UNBOUNDED,
     pageUrlPrefix: '?page=',
   },
   NoStepOptions: {
@@ -96,7 +50,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 3,
     totalPages: 10,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
   },
   NavigationOnly: {
@@ -107,7 +60,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 5,
     totalPages: 10,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
   },
   SpanishLocale: {
@@ -116,7 +68,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 10,
     totalPages: 24,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?pagina=',
     ariaLabel: 'Paginación',
     prevLabel: 'Anterior',
@@ -132,7 +83,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 1,
     totalPages: 3,
-    pages: PAGES_FEW,
     pageUrlPrefix: '?page=',
   },
   FirstPage: {
@@ -141,7 +91,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 1,
     totalPages: 24,
-    pages: PAGES_NEAR_START,
     pageUrlPrefix: '?page=',
   },
   LastPage: {
@@ -150,7 +99,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 10,
     totalPages: 10,
-    pages: PAGES_NEAR_END,
     pageUrlPrefix: '?page=',
   },
   ArrowsOnly: {
@@ -159,7 +107,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 5,
     totalPages: 10,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
     arrowsOnly: true,
   },
@@ -169,7 +116,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 5,
     totalPages: 10,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
     arrowsOnly: true,
     showSummary: false,
@@ -181,7 +127,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 10,
     totalPages: 24,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
     hideLinkText: true,
   },
@@ -191,7 +136,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 10,
     totalPages: 24,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
     showSummary: true,
     firstItem: 91,
@@ -201,6 +145,15 @@ export const storyDefs = {
     pageSizeOptions: [10, 25, 50, 100],
   },
 };
+
+// Django renders server-side, so it is handed the page list React computes itself.
+for (const def of Object.values(storyDefs)) {
+  if (def.currentPage) {
+    def.pages = def.totalPages
+      ? getPageItems(def.currentPage, def.totalPages)
+      : getUnboundedPageItems(def.currentPage);
+  }
+}
 
 // ── Full component stories ─────────────────────────────────────────────────
 

@@ -14,7 +14,7 @@ export interface PaginationNavigationProps {
   className?: string;
 }
 
-function getPageItems(currentPage: number, totalPages: number) {
+export function getPageItems(currentPage: number, totalPages: number) {
   const page = (p: number) => ({ type: 'page' as const, page: p });
   const ellipsis = (key: string) => ({ type: 'ellipsis' as const, key });
 
@@ -46,7 +46,7 @@ function getPageItems(currentPage: number, totalPages: number) {
   ];
 }
 
-function getUnboundedPageItems(currentPage: number) {
+export function getUnboundedPageItems(currentPage: number) {
   const items = [{ type: 'page' as const, page: 1 }];
   if (currentPage <= 3) {
     for (let p = 2; p <= currentPage + 1; p++) {

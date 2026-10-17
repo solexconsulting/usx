@@ -1,20 +1,36 @@
 import React from 'react';
-import inputHtml from '../../../../usx-react/src/components/input/input.html?raw';
+import reactSnapshot from '../../../../usx-react/src/components/input/input.react-snapshot.html?raw';
+import djangoSnapshot from '../../../../usx-react/src/components/input/input.django-snapshot.html?raw';
 
 export default {
   title: 'HTML/USWDS/Input',
   tags: ['USWDS', 'autodocs'],
 };
 
-export const AllVariants = {
+export const AllVariantsReact = {
+  name: 'All Variants (React)',
   parameters: {
     docs: {
       source: {
-        code: inputHtml
-      }
-    }
+        code: reactSnapshot,
+      },
+    },
   },
   render: () => {
-    return <div dangerouslySetInnerHTML={{ __html: inputHtml }} />;
-  }
-}
+    return <div dangerouslySetInnerHTML={{ __html: reactSnapshot }} />;
+  },
+};
+
+export const AllVariantsDjango = {
+  name: 'All Variants (Django)',
+  parameters: {
+    docs: {
+      source: {
+        code: djangoSnapshot,
+      },
+    },
+  },
+  render: () => {
+    return <div dangerouslySetInnerHTML={{ __html: djangoSnapshot }} />;
+  },
+};

@@ -15,24 +15,15 @@ export default {
 };
 
 const defaultInput = (
-  <Input
-    label="Form group label"
-    placeholder="Type here"
-  />
+  <Input id="form-group-default-input" label="Form group label" placeholder="Type here" />
 );
 
 const errorInput = (
-  <Input
-    label="Error state"
-    error="This field is required."
-  />
+  <Input id="form-group-error-input" label="Error state" error="This field is required." />
 );
 
 const successInput = (
-  <Input
-    label="Success state"
-    success="Looks good!"
-  />
+  <Input id="form-group-success-input" label="Success state" success="Looks good!" />
 );
 
 export const storyDefs = {

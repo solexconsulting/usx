@@ -6,11 +6,11 @@
 <span class="usx-tooltip">
 {% endif %}
 
-<a href="{{ href|default:'#' }}" class="usx-avatar{% if className %} {{ className }}{% endif %}"{% if variant != 'image' and alt %} aria-label="{{ alt }}"{% endif %}>
+<a href="{% if href is None %}#{% else %}{{ href }}{% endif %}" class="usx-avatar{% if className %} {{ className }}{% endif %}"{% if variant == 'initials' or variant == 'icon' %}{% if alt %} aria-label="{{ alt }}"{% endif %}{% endif %}>
   {% if variant == 'initials' %}
     <span class="usx-avatar__content{% if shape == 'circle' %} usx-circle{% elif shape == 'rounded-sm' %} usx-rounded-sm{% elif shape == 'rounded-md' %} usx-rounded-md{% elif shape == 'rounded-lg' %} usx-rounded-lg{% elif shape == 'rounded-xl' %} usx-rounded-xl{% else %} usx-circle{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">{{ value }}</span>
   {% elif variant == 'icon' %}
-    <span class="usx-avatar__content{% if shape == 'circle' %} usx-circle{% elif shape == 'rounded-sm' %} usx-rounded-sm{% elif shape == 'rounded-md' %} usx-rounded-md{% elif shape == 'rounded-lg' %} usx-rounded-lg{% elif shape == 'rounded-xl' %} usx-rounded-xl{% else %} usx-circle{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">{% icon name=value %}{% endicon %}</span>
+    <span class="usx-avatar__content{% if shape == 'circle' %} usx-circle{% elif shape == 'rounded-sm' %} usx-rounded-sm{% elif shape == 'rounded-md' %} usx-rounded-md{% elif shape == 'rounded-lg' %} usx-rounded-lg{% elif shape == 'rounded-xl' %} usx-rounded-xl{% else %} usx-circle{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">{% if alt %}{% icon name=value %}{% endicon %}{% else %}{% icon name=value alt=value|add:' icon' %}{% endicon %}{% endif %}</span>
   {% else %}
     <img
       class="usx-avatar__img{% if shape == 'circle' %} usx-circle{% elif shape == 'rounded-sm' %} usx-rounded-sm{% elif shape == 'rounded-md' %} usx-rounded-md{% elif shape == 'rounded-lg' %} usx-rounded-lg{% elif shape == 'rounded-xl' %} usx-rounded-xl{% endif %}{% if imageClassName %} {{ imageClassName }}{% endif %}"

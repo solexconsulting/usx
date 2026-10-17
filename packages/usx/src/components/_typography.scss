@@ -153,6 +153,14 @@ textarea,
   }
 }
 
+.usx-popover {
+  font-family: $usx-font-family;
+
+  .usx-popover__panel-heading {
+    font-family: $usx-font-family-heading;
+  }
+}
+
 .usx-page {
 
   h1.usx-page__title {

@@ -5,7 +5,7 @@ export interface ProcessListItem {
   heading: string;
   headingTag?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
   headingClassName?: string;
-  body?: string | React.ReactNode;
+  body?: React.ReactNode;
   bodyClassName?: string;
   className?: string;
 }
@@ -13,13 +13,6 @@ export interface ProcessListItem {
 export interface ProcessListProps extends React.OlHTMLAttributes<HTMLOListElement> {
   items?: ProcessListItem[];
   className?: string;
-}
-
-function renderContent(content: string | React.ReactNode) {
-  if (typeof content === 'string') {
-    return <div dangerouslySetInnerHTML={{ __html: content }} />;
-  }
-  return content;
 }
 
 const ProcessList: React.FC<ProcessListProps> = ({ items = [], className = '', ...props }) => {
@@ -33,15 +26,7 @@ const ProcessList: React.FC<ProcessListProps> = ({ items = [], className = '', .
             <HeadingTag className={ClassNames('usa-process-list__heading', item.headingClassName)}>
               {item.heading}
             </HeadingTag>
-            {item.body && (
-              typeof item.body === 'string' || item.bodyClassName ? (
-                <p className={ClassNames(item.bodyClassName)}>
-                  {renderContent(item.body)}
-                </p>
-              ) : (
-                renderContent(item.body)
-              )
-            )}
+            {item.body && (item.bodyClassName ? <div className={item.bodyClassName}>{item.body}</div> : item.body)}
           </li>
         );
       })}

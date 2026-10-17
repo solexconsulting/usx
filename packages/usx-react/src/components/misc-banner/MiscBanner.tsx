@@ -30,10 +30,13 @@ export default function MiscBanner({
   importantLinkHref,
   importantLinkIcon = 'undo',
   showReturnLink = true,
+  id,
   ...props
 }: MiscBannerProps) {
-  const menuId = useId();
-  const toggleId = useId();
+  const instanceId = useId();
+  const baseId = id || instanceId;
+  const toggleId = `${baseId}-dropdown-toggle`;
+  const menuId = `${baseId}-dropdown`;
   const classes = ClassNames('usx-misc-banner', `bg-${tone}`, className);
   const mobileLinks: { href: string; text: string }[] = [];
   const hasLearnMoreLink = showLearnMore && Boolean(casualLinkText);
@@ -68,7 +71,7 @@ export default function MiscBanner({
       {hasReturnLink ? (
         <span className="usx-misc-banner__return-text">
           <a className="usa-link usx-misc-banner__link" href={importantLinkHref}>
-            <Icon name={importantLinkIcon} size={1} className="usx-icon--size-1" />
+            <Icon name={importantLinkIcon} size={1} />
             {' '}
             {importantLinkText}
           </a>
@@ -104,7 +107,7 @@ export default function MiscBanner({
   );
 
   return (
-    <div className={classes} {...props}>
+    <div id={id} className={classes} {...props}>
       <div className="usx-misc-banner__content grid-container">
         {content}
       </div>

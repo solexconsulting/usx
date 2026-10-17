@@ -1,7 +1,7 @@
 {
   "name": "input",
   "template": "input/input.django.html",
-  "version": 2,
+  "version": 3,
   "props": {
     "label": {
       "type": "slot",
@@ -17,6 +17,14 @@
       "type": "string",
       "default": null,
       "description": "name attribute for the input. Defaults to id."
+    },
+    "type": {
+      "type": "string",
+      "description": "The input's type attribute, e.g. email or password. Omit for a plain text input."
+    },
+    "autoComplete": {
+      "type": "string",
+      "description": "The input's autocomplete attribute, e.g. email."
     },
     "placeholder": {
       "type": "string",

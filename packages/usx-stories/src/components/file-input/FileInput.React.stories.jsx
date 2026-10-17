@@ -5,30 +5,6 @@ import { buildArgTypes, uswdsInitNote, componentInit } from '../../utils/storyHe
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
-// Tiny (1x1px) real image files, used to auto-populate the native USWDS
-// preview (thumbnail + filename) via a play function, so theming can be
-// inspected without manually choosing files in every story/theme.
-const SAMPLE_PNG_B64 =
-  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
-const SAMPLE_JPG_B64 =
-  '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/wAALCAABAAEBAREA/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAD8AVN//2Q==';
-
-function base64ToFile(base64, filename, mime) {
-  const binary = atob(base64);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-  return new File([bytes], filename, { type: mime });
-}
-
-// userEvent.upload isn't available in this Storybook version's play context,
-// so files are injected directly via DataTransfer + a native change event.
-function uploadFiles(input, files) {
-  const dataTransfer = new DataTransfer();
-  files.forEach((file) => dataTransfer.items.add(file));
-  input.files = dataTransfer.files;
-  input.dispatchEvent(new Event('change', { bubbles: true }));
-}
-
 export default {
   title: 'React/USWDS/FileInput',
   component: FileInput,
@@ -38,11 +14,11 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: uswdsInitNote('`fileInput.init()`')
-      }
-    }
+        component: uswdsInitNote('`fileInput.init()`'),
+      },
+    },
   },
-  decorators: [...componentInit('fileInput')]
+  decorators: [...componentInit('fileInput')],
 };
 
 export const storyDefs = {
@@ -95,29 +71,12 @@ export const Multiple = { args: storyDefs.Multiple };
 export const WithError = { args: storyDefs.WithError };
 export const Disabled = { args: storyDefs.Disabled };
 
-// The native USWDS input's own preview UI (not FileList) — pre-filled via a
-// play function so its theming can be checked without a manual upload.
-// autoplay is needed so this still runs when shown inline on the Docs page,
-// not just on the story's own canvas.
 export const PreloadedSingle = {
   args: storyDefs.Default,
-  parameters: { docs: { story: { autoplay: true } } },
-  play: async function ({ canvasElement }) {
-    const input = canvasElement.querySelector('input[type="file"]');
-    uploadFiles(input, [base64ToFile(SAMPLE_PNG_B64, 'photo.png', 'image/png')]);
-  },
 };
 
 export const PreloadedMultiple = {
   args: storyDefs.Multiple,
-  parameters: { docs: { story: { autoplay: true } } },
-  play: async function ({ canvasElement }) {
-    const input = canvasElement.querySelector('input[type="file"]');
-    uploadFiles(input, [
-      base64ToFile(SAMPLE_PNG_B64, 'photo-one.png', 'image/png'),
-      base64ToFile(SAMPLE_JPG_B64, 'photo-two.jpg', 'image/jpeg'),
-    ]);
-  },
 };
 
 // VA.gov's file-input-multiple pattern: a single, permanently-enhanced USWDS
@@ -232,4 +191,3 @@ export const LongFileName = {
     ],
   },
 };
-
