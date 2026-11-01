@@ -1,3 +1,4 @@
+import json
 from html.parser import HTMLParser
 from xml.etree.ElementTree import fromstring
 
@@ -767,6 +768,42 @@ class ToggleTests(SimpleTestCase):
         self.assertNotIn('<fieldset', html)
         self.assertNotIn('<legend', html)
 
+
+class ClickableCompositionTests(SimpleTestCase):
+    def test_every_clickable_story_renders_its_composed_django_template(self):
+        stories = (
+            'single', 'multiple', 'color', 'read-johns', 'quote', 'quote-manual',
+            'all-classes', 'within-link', 'outside-link', 'button',
+        )
+        for story in stories:
+            with self.subTest(story=story):
+                response = self.client.get('/render/clickable/', {
+                    'props': json.dumps({
+                        '__storybookExample': story,
+                        'href': 'https://example.com',
+                        'className': 'test-clickable',
+                    }),
+                })
+                self.assertEqual(response.status_code, 200)
+                self.assertIn('usx-clickable', response.content.decode())
+
+    def test_nested_part_tags_render_react_classes_and_escape_attributes(self):
+        html = Template('''{% load components %}
+{% clickable href="/services" className="display-flex flex-align-center padding-2 border" %}
+{% clickable_bg_color_change className="padding-1" %}Featured{% endclickable_bg_color_change %}
+{% clickable_link as="strong" colorChange=True bgColorChange=True className="margin-left-1" title=title %}Explore services{% endclickable_link %}
+{% clickable_color_change as="em" className="margin-left-1" %}Today{% endclickable_color_change %}
+{% endclickable %}''').render(Context({'title': 'Services "today"'}))
+        elements = RenderedElements(html).elements
+        self.assertEqual([tag for tag, _ in elements], ['a', 'span', 'strong', 'em'])
+        self.assertEqual(elements[0][1]['href'], '/services')
+        self.assertEqual(elements[1][1]['class'], 'usx-clickable__bg-color-on-hover padding-1')
+        self.assertEqual(
+            elements[2][1]['class'],
+            'usx-clickable__link usx-clickable__color-on-hover usx-clickable__bg-color-on-hover margin-left-1',
+        )
+        self.assertIn('title="Services &quot;today&quot;"', html)
+        self.assertEqual(elements[3][1]['class'], 'usx-clickable__color-on-hover margin-left-1')
 
 class TreeTests(SimpleTestCase):
     def test_nested_tree_matches_react_component_structure(self):

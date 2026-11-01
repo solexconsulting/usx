@@ -41,6 +41,7 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / 'project' / 'components',
             BASE_DIR / '../../packages/usx-react/src/components',
+            BASE_DIR / '../../packages/usx-stories/src/components',
         ],
         'APP_DIRS': True,
         'OPTIONS': {

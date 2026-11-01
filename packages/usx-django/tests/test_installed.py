@@ -63,6 +63,16 @@ class InstalledPackageTests(SimpleTestCase):
         self.assertInHTML("<strong>&lt;Email&gt;</strong>", html)
         self.assertEqual(props["htmlFor"], "original")
 
+    def test_clickable_part_tags_are_bundled(self):
+        for name in ("clickable", "clickable_link", "clickable_color_change", "clickable_bg_color_change"):
+            self.assertIn(name, register.tags)
+        html = Template(
+            '{% load components %}{% clickable href="/services" %}'
+            '{% clickable_link as="strong" colorChange=True %}Services{% endclickable_link %}'
+            '{% endclickable %}'
+        ).render(Context({}))
+        self.assertInHTML('<strong class="usx-clickable__link usx-clickable__color-on-hover">Services</strong>', html)
+
     def test_render_api_and_static_url(self):
         self.assertIn("Hello", render_component("label", {"label": "Hello"}))
         self.assertIn('/static/img/sprite.svg#check', render_component("icon", {"name": "check"}))

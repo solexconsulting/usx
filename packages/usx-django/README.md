@@ -28,6 +28,18 @@ Tag names use underscores for hyphenated component names, for example
 closing tag. Keyword arguments are props; `props=my_dict` forwards a dictionary,
 with explicit keywords taking precedence. `as variable` captures the output.
 
+Clickable's React composition helpers have matching Django block tags:
+
+```django
+{% clickable href="/services" %}
+  {% clickable_bg_color_change %}Featured{% endclickable_bg_color_change %}
+  {% clickable_link as="strong" colorChange=True %}Explore services{% endclickable_link %}
+  {% clickable_color_change as="em" %}Today{% endclickable_color_change %}
+{% endclickable %}
+```
+
+The part tags default to `span`; `as` selects the element.
+
 ```python
 from usx_django import get_contracts, render_component
 

@@ -17,7 +17,7 @@
     },
     "children": {
       "type": "slot",
-      "description": "Safe inner HTML. Apply usx-clickable__link, usx-clickable__color-on-hover, and/or usx-clickable__bg-color-on-hover to any child elements as needed."
+      "description": "Composed content. React provides Clickable.Link, Clickable.ColorChange, and Clickable.BgColorChange; Django provides clickable_link, clickable_color_change, and clickable_bg_color_change block tags."
     }
   }
 }

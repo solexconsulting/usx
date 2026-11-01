@@ -1,0 +1,14 @@
+{% load components %}
+{% dict orientation="vertical" strokeColor="info" big=True as callout_props %}
+{% dict primary="John Doe" secondary="Under Secretary for the Department of Magic and Mystical Affairs" as attribution_props %}
+{% clickable href=href className=className %}
+    {% quote calloutProps=callout_props blockquoteClassName="font-serif-lg" attributionProps=attribution_props content='We found this wand shop that had the best wands, and we were like, "We have to go here!" So we went there.' %}{% endquote %}
+    <div class="display-flex flex-align-center margin-top-2">
+        {% clickable_bg_color_change className="usx-circle bg-black text-white display-flex flex-align-center flex-justify-center width-4 height-4" %}
+            {% icon name="arrow_forward" size=3 %}{% endicon %}
+        {% endclickable_bg_color_change %}
+        {% clickable_link className="margin-left-1" %}
+            Read John's Story
+        {% endclickable_link %}
+    </div>
+{% endclickable %}

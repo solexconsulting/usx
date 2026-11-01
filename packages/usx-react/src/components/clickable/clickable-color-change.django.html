@@ -1,0 +1,1 @@
+{% with tag=as|default:'span' %}<{{ tag }} class="usx-clickable__color-on-hover{% if className %} {{ className|force_escape }}{% endif %}"{% if id %} id="{{ id|force_escape }}"{% endif %}{% if title %} title="{{ title|force_escape }}"{% endif %}{% if ariaLabel %} aria-label="{{ ariaLabel|force_escape }}"{% endif %}>{{ children|safe }}</{{ tag }}>{% endwith %}
