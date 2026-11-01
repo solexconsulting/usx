@@ -1,5 +1,30 @@
 # @solexllc/usx-react
 
+## 0.7.0
+
+### Minor Changes
+
+- [`e3ff428`](https://github.com/solexconsulting/usx/commit/e3ff428873c9cadf2ad43a71b13434c618406fd4) Thanks [@olsonap](https://github.com/olsonap)! - Build an accessible Carousel with a packaged USWDS-style JavaScript initializer. React and Django render scrollable slide markup, while initialization adds navigation controls and selected-slide state and skips elements marked `data-enhanced`. Native scroll snapping supports touch dragging; arrow and dot controls animate between slides, respect reduced-motion preferences, and keep slide status in sync with scrolling and keyboard navigation.
+
+  Improve Card, Carousel, and Image composition: Card supports `containerClassName`, image carousels fill card media space at a stable aspect ratio, and captioned Images retain their links and screen-reader captions. Update the Card and Carousel contracts for their revised props, and expand standalone HTML examples across components to cover the React variants.
+
+  Default Carousel dot colors to the primary, primary-dark, and primary-darker tokens, with a focus-color fallback.
+
+- [`c219836`](https://github.com/solexconsulting/usx/commit/c2198366e15314a0fa1083b5a8393c959ab13931) Thanks [@olsonap](https://github.com/olsonap)! - Add ErrorPage and Details components with matching React and Django contracts and HTML story snapshots.
+  - Details uses native details/summary elements for plain text or composed content. It supports initial open state, marker and border colors, summary and content classes, and independent border and underline switches that also work in nested disclosures.
+  - ErrorPage composes USX Page, Prose, ButtonGroup, Button, Link, Image, and Details for recovery actions, support channels, public error metadata, optional diagnostics, and opt-in HTTP Cats illustrations. ErrorPage does not set a tabindex on Page.
+  - Page supports shared heading IDs, root labeling, and optional programmatic focus props in React and Django.
+  - Callout supports paragraph roots alongside div, section, and aside. Remove its blockquote root and cite prop; use Quote for quotations.
+  - Code supports contentClassName for styling its content independently.
+  - Add marker color utilities and the ink border color utility used by Details.
+
+### Patch Changes
+
+- Updated dependencies [[`e3ff428`](https://github.com/solexconsulting/usx/commit/e3ff428873c9cadf2ad43a71b13434c618406fd4), [`369d0b5`](https://github.com/solexconsulting/usx/commit/369d0b56799744f4e1a90985ebce5c661d3a8297), [`c219836`](https://github.com/solexconsulting/usx/commit/c2198366e15314a0fa1083b5a8393c959ab13931)]:
+  - @solexllc/usx@0.9.0
+  - @solexllc/usx-theme@0.10.0
+  - @solexllc/usx-uswds-fixes@0.1.14
+
 ## 0.6.1
 
 ### Patch Changes
