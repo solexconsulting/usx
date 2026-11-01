@@ -1,6 +1,9 @@
 {# Django template for Label #}
 {% load components %}
 <label
+  {% if id %}
+    id="{{ id }}"
+  {% endif %}
   class="
   {% if classOverride %}
     {{ className }}

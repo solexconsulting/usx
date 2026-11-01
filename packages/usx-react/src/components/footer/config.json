@@ -1,7 +1,7 @@
 {
   "name": "footer",
   "template": "footer/footer.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "staticBaseUrl": {
       "type": "string",
@@ -82,6 +82,14 @@
       "type": "string",
       "default": "",
       "description": "Additional CSS classes applied to the root footer element."
+    },
+    "primaryChildren": {
+      "type": "slot",
+      "description": "Content for the primary section, replacing the variant's default navigation and sign-up content."
+    },
+    "secondaryChildren": {
+      "type": "slot",
+      "description": "Content for the secondary section, replacing the default branding and contact content."
     }
   }
 }

@@ -25,3 +25,6 @@ venv/
 # Storybook
 apps/storybook/storybook-static/
 local-docs/*
+
+# Snapshot tooling output
+reports/

@@ -12,6 +12,7 @@ export interface CarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   showDots?: boolean;
   statusClassName?: string;
   children?: React.ReactNode;
+  extraAttributes?: Record<string, unknown>;
 }
 
 function flattenChildren(children: React.ReactNode): React.ReactNode[] {
@@ -29,6 +30,7 @@ export default function Carousel({
   statusClassName,
   children,
   className,
+  extraAttributes,
   role = 'region',
   ...props
 }: CarouselProps) {
@@ -48,6 +50,7 @@ export default function Carousel({
       aria-label={ariaLabel}
       data-show-dots={showDots ? undefined : 'false'}
       data-status-class-name={statusClassName}
+      {...extraAttributes}
     >
       <div className="usx-carousel__viewport">
         <div className="usx-carousel__track" aria-live="polite" tabIndex={count > 1 ? 0 : undefined}>

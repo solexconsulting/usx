@@ -7,9 +7,7 @@
 .usa-alert:not(.usx-site-alert *) {
 	&.usx-alert, .usa-alert__body {
 		position: relative;
-
 		border-radius: usx-when($usx-alert-radius);
-
 		box-shadow: usx-when($usx-alert-box-shadow);
 	}
 }
@@ -56,7 +54,6 @@
 		}
 
 		border-color: usx-when($border);
-
 		border-width: usx-when($usx-alert-border-width);
 	}
 }
@@ -100,7 +97,6 @@
 .usx-alert {
 	.usa-alert--slim {
 		padding-block: usx-when($usx-alert-slim-padding-block);
-
 		padding-inline: usx-when($usx-alert-slim-padding-inline);
 	}
 
@@ -114,15 +110,12 @@
 
 	.usa-alert__heading {
 		font-size: usx-when($usx-alert-heading-font-size);
-
 		font-weight: usx-when($usx-alert-heading-font-weight);
-
 		margin-block-end: usx-when($usx-alert-heading-margin-block-end);
 	}
 
 	.usa-alert__text {
 		font-size: usx-when($usx-alert-text-font-size);
-
 		line-height: usx-when($usx-alert-text-line-height);
 	}
 

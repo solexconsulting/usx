@@ -10,14 +10,6 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'process-list' });
 
-const toDjangoItems = (items) =>
-  items.map((item) => ({
-    ...item,
-    body: typeof item.body === 'string' ? item.body : undefined,
-  }));
-
-export const Default = createStory({ items: toDjangoItems(storyDefs.Default.items) });
-export const HeadingOnly = createStory({ items: toDjangoItems(storyDefs.HeadingOnly.items) });
-export const CustomSizing = createStory({ items: toDjangoItems(storyDefs.CustomSizing.items) });
-
-
+export const Default = createStory(storyDefs.Default);
+export const HeadingOnly = createStory(storyDefs.HeadingOnly);
+export const CustomSizing = createStory(storyDefs.CustomSizing);

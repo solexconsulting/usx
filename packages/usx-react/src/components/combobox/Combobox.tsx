@@ -99,6 +99,7 @@ export default function Combobox({
           name={name}
           disabled={disabled}
           required={required}
+          aria-describedby={[hintId, errorId].filter(Boolean).join(' ') || undefined}
           onChange={handleChange}
           {...props}
         >

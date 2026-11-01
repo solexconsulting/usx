@@ -108,6 +108,7 @@ export default function Button({
       type={type}
       className={classes}
       disabled={disabled}
+      aria-disabled={disabled ? 'true' : undefined}
       {...(onClick ? { onClick } : {})}
       {...buttonProps}
       {...extraAttributes}

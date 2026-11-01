@@ -21,7 +21,7 @@ export interface ContainerLayout {
 }
 
 export interface ContainerProps extends ContainerLayout {
-  element?: 'div' | 'section' | 'article' | 'aside' | 'nav' | 'ul' | 'ol' | 'li';
+  as?: 'div' | 'section' | 'article' | 'aside' | 'nav' | 'ul' | 'ol' | 'li';
   gridContainer?: 'default' | 'card' | 'card-lg' | 'mobile' | 'mobile-lg' | 'tablet' | 'tablet-lg' | 'desktop' | 'desktop-lg' | 'widescreen';
   gridRow?: boolean;
   responsive?: Partial<Record<'mobileLg' | 'tablet' | 'desktop', ContainerLayout>>;
@@ -58,7 +58,7 @@ function layoutClasses(layout: ContainerLayout, prefix = ''): string[] {
 
 /** An unstyled grouping element with opt-in, mobile-first layout controls. */
 export default function Container({
-  element = 'div',
+  as = 'div',
   gridContainer,
   gridRow = false,
   display,
@@ -82,7 +82,7 @@ export default function Container({
   ariaLabel,
   ariaLabelledby,
 }: ContainerProps) {
-  const Element = config.props.element.options.includes(element) ? element : 'div';
+  const Element = config.props.as.options.includes(as) ? as : 'div';
   const classes = ClassNames(
     'usx-container',
     gridContainer && config.props.gridContainer.options.includes(gridContainer)

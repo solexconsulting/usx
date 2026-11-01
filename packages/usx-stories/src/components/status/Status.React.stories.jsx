@@ -8,7 +8,7 @@ export default {
   component: Status,
   tags: ['USX', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'renderAllVariants', 'colorProps', 'sizeProps', 'animationProps'],
 };
 
 export const storyDefs = {
@@ -47,40 +47,29 @@ export const Ping = { args: storyDefs.Ping };
 export const Pulse = { args: storyDefs.Pulse };
 export const Bounce = { args: storyDefs.Bounce };
 
+export const colorProps = [undefined, 'primary', 'accent-cool', 'accent-warm', 'secondary', 'success', 'warning', 'error'].map(
+  (color) => (color ? { color } : {})
+);
+export const sizeProps = ['xs', 'sm', 'md', 'lg', 'xl'].map((size) => ({ color: 'primary', size }));
+export const animationProps = ['ping', 'pulse', 'bounce'].map((animation) => ({ color: 'primary', animation }));
+
+// Shared with the Django stories, which pass in a renderer for the Django-rendered status.
+export const renderAllVariants = (renderStatus, props, gap) => (
+  <div style={{ display: 'flex', gap, alignItems: 'center' }}>
+    {props.map((statusProps, index) => (
+      <React.Fragment key={index}>{renderStatus(statusProps)}</React.Fragment>
+    ))}
+  </div>
+);
+
 export const AllColors = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-      <Status />
-      <Status color="primary" />
-      <Status color="accent-cool" />
-      <Status color="accent-warm" />
-      <Status color="secondary" />
-      <Status color="success" />
-      <Status color="warning" />
-      <Status color="error" />
-    </div>
-  ),
+  render: () => renderAllVariants((props) => <Status {...props} />, colorProps, '0.75rem'),
 };
 
 export const AllSizes = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-      <Status color="primary" size="xs" />
-      <Status color="primary" size="sm" />
-      <Status color="primary" size="md" />
-      <Status color="primary" size="lg" />
-      <Status color="primary" size="xl" />
-    </div>
-  ),
+  render: () => renderAllVariants((props) => <Status {...props} />, sizeProps, '0.75rem'),
 };
 
 export const AllAnimations = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-      <Status color="primary" animation="ping" />
-      <Status color="primary" animation="pulse" />
-      <Status color="primary" animation="bounce" />
-    </div>
-  ),
+  render: () => renderAllVariants((props) => <Status {...props} />, animationProps, '1.5rem'),
 };
-

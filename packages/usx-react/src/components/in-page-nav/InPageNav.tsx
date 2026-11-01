@@ -5,13 +5,14 @@ import classNames from 'classnames';
 export interface InPageNavProps extends React.HTMLAttributes<HTMLElement> {
   headingElements?: string;
   mainContentSelector?: string | null;
-  titleHeadingLevel?: string;
+  titleAs?: string;
   titleText?: string;
   scrollOffset?: string | number;
   rootMargin?: string;
   threshold?: string | number;
   minimumHeadingCount?: string | number;
   contentClassName?: string;
+  content?: string;
 }
 
 // USWDS's own JS (usa-in-page-navigation) builds the <nav>/<ul> list into
@@ -24,7 +25,7 @@ export default function InPageNav({
   id = 'in-page-nav',
   headingElements = 'h2 h3',
   mainContentSelector = null,
-  titleHeadingLevel = 'h4',
+  titleAs = 'h4',
   titleText = 'On this page',
   scrollOffset = 0,
   rootMargin = '0px 0px 0px 0px',
@@ -52,7 +53,7 @@ export default function InPageNav({
         className={classNames('usa-in-page-nav', 'usx-in-page-nav', className)}
         data-heading-elements={headingElements}
         data-main-content-selector={resolvedSelector}
-        data-title-heading-level={titleHeadingLevel}
+        data-title-heading-level={titleAs}
         data-title-text={titleText}
         data-scroll-offset={scrollOffset}
         data-root-margin={rootMargin}

@@ -82,7 +82,7 @@ export const ProductShowcase = {
         {...headerArgs}
       />
       <Hero
-        headingLevel="h2"
+        headingAs="h2"
         callout="Next-Gen Design Platform"
         title="Modern, Themeable Components for Federal Systems"
         paragraph="Build accessible, responsive digital services faster with SOLEX USX's tokenized component library."

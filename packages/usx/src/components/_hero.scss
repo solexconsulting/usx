@@ -8,17 +8,12 @@
 .usx-hero {
   display: flex;
   align-items: center;
-  background-color: #010610;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: #fff;
-
   min-height: usx-when($usx-hero-min-height);
-
-  background-color: usx-when($usx-hero-bg);
-
-  color: usx-when($usx-hero-text);
+  background-color: usx-when($usx-hero-bg, $usx-hero-bg, #010610);
+  color: usx-when($usx-hero-text, $usx-hero-text, #fff);
 
   &--has-overlay {
     box-shadow: inset 0 0 0 100vmax usx-when($usx-hero-overlay-bg, $usx-hero-overlay-bg, rgb(0 0 0 / 35%));
@@ -42,14 +37,11 @@
     min-width: 0;
     overflow-wrap: anywhere;
     padding: units(5) units(3);
-    background-color: rgb(0 0 0 / 90%);
 
     // Radius follows the app-wide radius-box group (null/square by default,
     // like every other radius-box consumer: image, code, summary-box).
     border-radius: $usx-hero-callout-radius;
-
-
-    background-color: usx-when($usx-hero-callout-bg);
+    background-color: usx-when($usx-hero-callout-bg, $usx-hero-callout-bg, rgb(0 0 0 / 90%));
 
     @include at-media('tablet') {
       padding: units(5);
@@ -136,48 +128,28 @@
 
   &__heading {
     font-family: $usx-font-family-heading;
-    font-size: $usx-font-size-h1;
-    font-weight: $usx-font-weight-bold;
     line-height: $usx-line-height-heading;
     margin-top: 0;
-    margin-bottom: 1rem;
-    color: #fff;
-
-    font-size: usx-when($usx-hero-heading-size);
-
-    font-weight: usx-when($usx-hero-heading-font-weight);
-
-    margin-bottom: usx-when($usx-spacing-md);
-
-    color: usx-when($usx-hero-text);
+    font-size: usx-when($usx-hero-heading-size, $usx-hero-heading-size, $usx-font-size-h1);
+    font-weight: usx-when($usx-hero-heading-font-weight, $usx-hero-heading-font-weight, $usx-font-weight-bold);
+    margin-bottom: usx-when($usx-spacing-md, $usx-spacing-md, 1rem);
+    color: usx-when($usx-hero-text, $usx-hero-text, #fff);
 
     &--alt {
       display: block;
-      font-size: 1.125rem;
       font-weight: $usx-font-weight-regular;
-      margin-bottom: 0.25rem;
-      color: #66b5ee;
-
-      font-size: usx-when($usx-hero-alt-size);
-
-      margin-bottom: usx-when($usx-spacing-xs);
-
-      color: usx-when($usx-hero-alt-text);
+      font-size: usx-when($usx-hero-alt-size, $usx-hero-alt-size, 1.125rem);
+      margin-bottom: usx-when($usx-spacing-xs, $usx-spacing-xs, 0.25rem);
+      color: usx-when($usx-hero-alt-text, $usx-hero-alt-text, #66b5ee);
     }
   }
 
   &__paragraph {
-    font-size: 1.125rem;
     line-height: 1.6;
     margin-top: 0;
-    margin-bottom: 1.5rem;
-    color: #fff;
-
-    font-size: usx-when($usx-hero-paragraph-size);
-
-    margin-bottom: usx-when($usx-spacing-lg);
-
-    color: usx-when($usx-hero-text);
+    font-size: usx-when($usx-hero-paragraph-size, $usx-hero-paragraph-size, 1.125rem);
+    margin-bottom: usx-when($usx-spacing-lg, $usx-spacing-lg, 1.5rem);
+    color: usx-when($usx-hero-text, $usx-hero-text, #fff);
   }
 }
 /* stylelint-enable selector-class-pattern */

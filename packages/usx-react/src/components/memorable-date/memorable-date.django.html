@@ -47,6 +47,7 @@
         value="{{ defaultDay|default:'' }}"
         maxlength="2"
         pattern="[0-9]*"
+        placeholder=""
         inputmode="numeric"
         aria-describedby="{{ day_hint_id }}{% if error %} {{ error_id }}{% endif %}"
         {% if error %}aria-invalid="true"{% endif %}
@@ -68,6 +69,7 @@
         minlength="4"
         maxlength="4"
         pattern="[0-9]*"
+        placeholder=""
         inputmode="numeric"
         aria-describedby="{{ year_hint_id }}{% if error %} {{ error_id }}{% endif %}"
         {% if error %}aria-invalid="true"{% endif %}

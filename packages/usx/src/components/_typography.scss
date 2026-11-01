@@ -146,17 +146,31 @@ textarea,
 }
 
 .usx-section {
-
   h2.usx-section__title  {
     font-family: $usx-font-family-heading;
     font-size: $usx-font-size-h2;
   }
 }
 
-.usx-page {
+.usx-popover {
+  font-family: $usx-font-family;
 
+  .usx-popover__panel-heading {
+    font-family: $usx-font-family-heading;
+  }
+}
+
+.usx-page {
   h1.usx-page__title {
     font-family: $usx-font-family-heading;
     font-size: $usx-font-size-h1;
+  }
+}
+
+.usx-drawer {
+  h2.usx-drawer__heading {
+    font-family: $usx-font-family-heading;
+    font-size: $usx-font-size-h2;
+    font-weight: $usx-font-weight-bold;
   }
 }

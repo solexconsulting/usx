@@ -1,7 +1,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Alert, { AlertProps } from '../alert/Alert';
-import Icon from '../icon/Icon';
 
 export type SiteAlertVariant = 'info' | 'emergency' | 'maintenance' | 'maintenance-warning';
 
@@ -48,17 +47,6 @@ const SiteAlert: React.FC<SiteAlertProps> = ({
     className
   );
 
-  const alertClasses = ClassNames(
-    'usa-alert',
-    `usa-alert--${alertVariant}`,
-    'usx-alert',
-    `usx-alert--${alertVariant}`,
-    slim && 'usa-alert--slim',
-    slim && 'usx-alert--slim',
-    noIcon && 'usa-alert--no-icon',
-    noIcon && 'usx-alert--no-icon',
-  );
-
   return (
     <section
       className={classes}
@@ -67,32 +55,16 @@ const SiteAlert: React.FC<SiteAlertProps> = ({
       aria-labelledby={ariaLabelledby}
       {...props}
     >
-      {alertContent ? (
-        <div className={alertClasses}>
-          <div className="usa-alert__body usx-alert__body">
-            {alertHeading && <h4 className="usa-alert__heading usx-alert__heading">{alertHeading}</h4>}
-            {alertContent}
-            {onDismiss && (
-              <button
-                className="usx-alert__dismiss"
-                aria-label="Close alert"
-                onClick={onDismiss}
-              >
-                <Icon name="close" size={3} aria-hidden="true" focusable="false" />
-              </button>
-            )}
-          </div>
-        </div>
-      ) : (
-        <Alert
-          heading={alertHeading}
-          text={alertText}
-          variant={alertVariant as unknown as AlertProps['variant']}
-          slim={slim}
-          noIcon={noIcon}
-          onDismiss={onDismiss}
-        />
-      )}
+      <Alert
+        heading={alertHeading}
+        text={alertText}
+        variant={alertVariant as unknown as AlertProps['variant']}
+        slim={slim}
+        noIcon={noIcon}
+        onDismiss={onDismiss}
+      >
+        {alertContent}
+      </Alert>
     </section>
   );
 };

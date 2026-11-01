@@ -1,54 +1,37 @@
 import React from 'react';
 import ClassNames from 'classnames';
+import Summary, { type SummaryProps } from '../summary/Summary';
 
 export interface DetailsProps {
-  summary: string;
+  summaryProps?: Omit<SummaryProps, 'unstyled'>;
   text?: string;
   children?: React.ReactNode;
   open?: boolean;
-  markerColor?: string;
-  underlineColor?: string;
+  name?: string;
   contentBorderColor?: string;
   noContentBorder?: boolean;
-  noSummaryUnderline?: boolean;
   className?: string;
-  summaryClassName?: string;
-  summaryTextClassName?: string;
   contentClassName?: string;
 }
 
 /** A native disclosure for optional supporting content. */
 export default function Details({
-  summary = 'Details',
+  summaryProps = {},
   text = '',
   children = null,
   open = false,
-  markerColor = undefined,
-  underlineColor = undefined,
+  name,
   contentBorderColor = undefined,
   noContentBorder = false,
-  noSummaryUnderline = false,
   className = '',
-  summaryClassName = '',
-  summaryTextClassName = '',
   contentClassName = '',
 }: DetailsProps) {
   const detailsClassName = ClassNames(
     'usx-details',
     { 'usx-details--borderless': noContentBorder },
-    { 'usx-details--no-underline': noSummaryUnderline },
     className
   );
-  const summaryClassNames = ClassNames(
-    'usx-details__summary',
-    { [`marker-${markerColor}`]: markerColor },
-    summaryClassName
-  );
-  const summaryTextClassNames = ClassNames(
-    'usx-details__summary-text',
-    { [`border-${underlineColor}`]: underlineColor },
-    summaryTextClassName
-  );
+
   const compositeContentClassName = ClassNames(
     'usx-details__content',
     { [`border-${contentBorderColor}`]: !noContentBorder && contentBorderColor },
@@ -56,11 +39,8 @@ export default function Details({
   );
 
   return (
-    <details className={detailsClassName} open={open || undefined}>
-      <summary className={summaryClassNames}>
-        {/* ::marker is here */}
-        <span className={summaryTextClassNames}>{summary || 'Details'}</span>
-      </summary>
+    <details className={detailsClassName} open={open || undefined} name={name}>
+      <Summary {...summaryProps} />
       <div className={compositeContentClassName}>
         {children ?? <p className="usx-details__text">{text}</p>}
       </div>

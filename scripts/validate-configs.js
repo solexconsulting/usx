@@ -32,7 +32,8 @@ for (const dir of listComponentDirs()) {
   if (!files.includes(`${dir}.django.html`)) missing.push(`${dir}.django.html`);
   if (!files.includes(`${dir}.html`)) missing.push(`${dir}.html`);
   if (!files.includes('config.json')) missing.push('config.json');
-  if (missing.length) problems.push(`${rel(path.join(COMPONENTS_DIR, dir))}/ is missing: ${missing.join(', ')}`);
+  if (missing.length)
+    problems.push(`${rel(path.join(COMPONENTS_DIR, dir))}/ is missing: ${missing.join(', ')}`);
 }
 
 // ── Generated-file freshness ─────────────────────────────────────────────────
@@ -56,7 +57,9 @@ if (problems.length) {
   for (const p of problems) console.error(`  - ${p}`);
 }
 if (errors.size || problems.length) {
-  console.error(`\nValidation failed: ${errors.size} config error file(s), ${problems.length} other problem(s).`);
+  console.error(
+    `\nValidation failed: ${errors.size} config error file(s), ${problems.length} other problem(s).`
+  );
   process.exit(1);
 }
 console.log(`All ${configs.size} components validated OK (configs, files, generated artifacts).`);

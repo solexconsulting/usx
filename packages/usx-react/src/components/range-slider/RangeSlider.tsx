@@ -35,7 +35,7 @@ export default function RangeSlider({
   value,
   defaultValue,
   textUnit = null,
-  textPreposition = null,
+  textPreposition = 'of',
   formGroup = true,
   className = '',
   ...props

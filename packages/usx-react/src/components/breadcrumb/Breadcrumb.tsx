@@ -31,7 +31,7 @@ export default function Breadcrumb({
     const classes = ClassNames('usx-breadcrumb', className);
     return (
       <div className={classes} {...props}>
-        {children || 'Breadcrumb'}
+        {children}
       </div>
     );
   }

@@ -7,7 +7,13 @@ export default {
   title: 'Django/USX/Callout',
   tags: ['USX', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
-  decorators: [(Story) => <div className="padding-3"><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div className="padding-3">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const createStory = createDjangoStory({ componentName: 'callout' });

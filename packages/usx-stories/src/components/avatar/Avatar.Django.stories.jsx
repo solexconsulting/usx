@@ -20,6 +20,7 @@ export const CircleAvatar = createStory(toDjangoArgs(storyDefs.CircleAvatar));
 export const MediumRoundedAvatar = createStory(toDjangoArgs(storyDefs.MediumRoundedAvatar));
 export const LargeRoundedAvatar = createStory(toDjangoArgs(storyDefs.LargeRoundedAvatar));
 export const AvatarWithTooltip = createStory(toDjangoArgs(storyDefs.AvatarWithTooltip));
+export const AvatarWithCustomTooltip = createStory(toDjangoArgs(storyDefs.AvatarWithCustomTooltip));
 export const InitialsAvatar = createStory(toDjangoArgs(storyDefs.InitialsAvatar));
 export const InitialsAvatarSmall = createStory(toDjangoArgs(storyDefs.InitialsAvatarSmall));
 export const ImageAvatarMedium = createStory(toDjangoArgs(storyDefs.ImageAvatarMedium));

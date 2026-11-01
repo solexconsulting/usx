@@ -1,6 +1,23 @@
 {# Django template for Checkbox #}
 {% load components %}
-
+{% with formGroup|default_if_none:True as wrap_group %}
+{% if wrap_group %}
+{% form_group error=error %}
+  <div class="usa-checkbox usx-checkbox{% if small %} usx-checkbox--small{% endif %}{% if className %} {{ className }}{% endif %}">
+    <input class="usa-checkbox__input{% if tile %} usa-checkbox__input--tile{% endif %}" id="{{ id }}" type="checkbox" name="{{ name }}" value="{{ value }}"{% if checked %} checked{% endif %}{% if disabled %} disabled{% endif %}{% if required %} required{% endif %}{% if onChange %} onchange="{{ onChange }}"{% endif %}>
+    {% label htmlFor=id className="usa-checkbox__label" classOverride=True required=required %}{{ label }}
+      {% if description %}
+      <span class="usa-checkbox__label-description">{{ description }}</span>
+      {% endif %}
+    {% endlabel %}
+  </div>
+  {% if error %}
+  {% error_message %}{{ error }}{% enderror_message %}
+  {% elif success %}
+  <span class="usa-success-message text-success" role="status">{{ success }}</span>
+  {% endif %}
+{% endform_group %}
+{% else %}
 <div class="usa-checkbox usx-checkbox{% if small %} usx-checkbox--small{% endif %}{% if className %} {{ className }}{% endif %}">
   <input class="usa-checkbox__input{% if tile %} usa-checkbox__input--tile{% endif %}" id="{{ id }}" type="checkbox" name="{{ name }}" value="{{ value }}"{% if checked %} checked{% endif %}{% if disabled %} disabled{% endif %}{% if required %} required{% endif %}{% if onChange %} onchange="{{ onChange }}"{% endif %}>
   {% label htmlFor=id className="usa-checkbox__label" classOverride=True required=required %}{{ label }}
@@ -14,3 +31,5 @@
 {% elif success %}
 <span class="usa-success-message text-success" role="status">{{ success }}</span>
 {% endif %}
+{% endif %}
+{% endwith %}

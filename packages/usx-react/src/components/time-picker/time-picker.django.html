@@ -22,7 +22,7 @@
     {% if step %} data-step="{{ step }}"{% endif %}
   >
     <input
-      class="usa-input usx-input"
+      class="usa-input usx-input{% if error %} usa-input--error{% endif %}"
       id="{{ id }}"
       name="{{ name|default:id }}"
       type="text"

@@ -46,6 +46,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
               small={small}
               {...opt}
               id={id}
+              formGroup={false}
             />
           );
         })}

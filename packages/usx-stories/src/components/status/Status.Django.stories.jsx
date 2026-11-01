@@ -1,7 +1,13 @@
 // import React from 'react';
 import config from '../../../../usx-react/src/components/status/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
-import { storyDefs } from './Status.React.stories.jsx';
+import {
+  storyDefs,
+  renderAllVariants,
+  colorProps,
+  sizeProps,
+  animationProps,
+} from './Status.React.stories.jsx';
 
 export default {
   title: 'Django/USX/Status',
@@ -28,3 +34,7 @@ export const Ping = createStory(storyDefs.Ping);
 export const Pulse = createStory(storyDefs.Pulse);
 export const Bounce = createStory(storyDefs.Bounce);
 
+const renderStatus = (props) => createStory(props).render(props);
+export const AllColors = { render: () => renderAllVariants(renderStatus, colorProps, '0.75rem') };
+export const AllSizes = { render: () => renderAllVariants(renderStatus, sizeProps, '0.75rem') };
+export const AllAnimations = { render: () => renderAllVariants(renderStatus, animationProps, '1.5rem') };

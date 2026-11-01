@@ -1,12 +1,26 @@
 {
   "name": "pagination",
   "template": "pagination/pagination.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
-    "currentPage": {
+    "initialPage": {
       "type": "number",
       "default": 1,
-      "description": "Current 1-based page number"
+      "description": "Initial page when currentPage is not supplied."
+    },
+    "initialPageSize": {
+      "type": "number",
+      "default": 10,
+      "description": "Initial items per page when pageSize is not supplied."
+    },
+    "renderPart": {
+      "type": "select",
+      "options": ["navigation", "step-options", "summary"],
+      "description": "Render just one Pagination part for composition; omit for the complete component."
+    },
+    "currentPage": {
+      "type": "number",
+      "description": "Current 1-based page number to render. Consumers supply a new value after loading data."
     },
     "totalPages": {
       "type": "number",
@@ -67,8 +81,7 @@
     },
     "pageUrlPrefix": {
       "type": "string",
-      "default": "?page=",
-      "description": "URL prefix that the page number is appended to, e.g. '?page='"
+      "description": "Optional URL or fragment prefix appended with the page number, e.g. '?page=' or '#page-'. The browser follows these links without Pagination JavaScript; the application must provide the target page or element and render the active page state. Omit for literal '#' placeholders handled by consumer code."
     },
     "showSummary": {
       "type": "boolean",
@@ -76,12 +89,10 @@
     },
     "firstItem": {
       "type": "number",
-      "default": 1,
       "description": "First item number on the current page (for summary)"
     },
     "lastItem": {
       "type": "number",
-      "default": 10,
       "description": "Last item number on the current page (for summary)"
     },
     "totalItems": {
@@ -99,8 +110,7 @@
     },
     "pageSize": {
       "type": "number",
-      "default": 10,
-      "description": "Currently selected page size"
+      "description": "Current page size to render. Consumers supply a new value after loading data."
     },
     "pageSizeOptions": {
       "type": "array",

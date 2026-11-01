@@ -3,16 +3,17 @@
 <a
     class="usx-link usx-no-visited flex-align-center{% if className %} {{ className }}{% endif %}"
     href="{{ href }}"
+    {% if not label %}aria-label="{{ ariaLabel|default:'Back to top' }}"{% endif %}
     {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
 >
   {% if iconPosition == 'left' or not iconPosition %}
-  <svg class="margin-right-05usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+  <svg class="margin-right-05 usa-icon usx-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
     <use href="./img/sprite.svg#arrow_upward"></use>
   </svg>
   {% endif %}
   {% if label %}{{ label }}{% endif %}
   {% if iconPosition == 'right' %}
-  <svg class="margin-left-05 usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+  <svg class="margin-left-05 usa-icon usx-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
     <use href="./img/sprite.svg#arrow_upward"></use>
   </svg>
   {% endif %}
@@ -20,17 +21,18 @@
 {% else %}
 <button
     type="button"
+    {% if not label %}aria-label="{{ ariaLabel|default:'Back to top' }}"{% endif %}
     class="usa-button usx-button{% if variant == 'primary' %} usa-button--primary{% endif %} usx-button--ghost{% if className %} {{ className }}{% endif %}"
     onclick="{{ onClick|default:'window.scrollTo({ top: 0, behavior: \'smooth\' });' }}"
 >
   {% if iconPosition == 'left' %}
-  <svg class="usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+  <svg class="margin-right-05 usa-icon usx-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
     <use href="./img/sprite.svg#arrow_upward"></use>
   </svg>
   {% endif %}
   {% if label %}{{ label }}{% endif %}
   {% if iconPosition != 'left' %}
-  <svg class="usa-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
+  <svg class="margin-left-05 usa-icon usx-icon usa-icon--size-{{ iconSize|default:'2' }}" aria-hidden="true" focusable="false" role="img">
     <use href="./img/sprite.svg#arrow_upward"></use>
   </svg>
   {% endif %}

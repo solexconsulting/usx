@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string;
+  text?: string;
   children?: ReactNode;
   visited?: boolean;
   external?: boolean;
@@ -14,6 +15,7 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 
 export default function Link({
   href = 'javascript:void(0);',
+  text,
   children,
   visited = false,
   external = false,
@@ -39,7 +41,7 @@ export default function Link({
       rel={newTab || external ? 'noreferrer noopener' : undefined}
       {...props}
     >
-      {children}
+      {children ?? text}
     </a>
   );
 }

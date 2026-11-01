@@ -1,7 +1,7 @@
 {# ─── USX InPageNav ──────────────────────────────────────────────────────── #}
-{# Props: id, headingElements, mainContentSelector, titleHeadingLevel,       #}
+{# Props: id, headingElements, mainContentSelector, titleAs,       #}
 {#        titleText, scrollOffset, rootMargin, threshold,                   #}
-{#        minimumHeadingCount, content, className, contentClassName         #}
+{#        minimumHeadingCount, content, children, className, contentClassName #}
 {# The <aside> below is left empty — usa-in-page-navigation's JS builds the #}
 {# <nav>/<ul> list into it after scanning the content container for        #}
 {# headings. Call ONLY inPageNavigation.init() around the rendered markup,  #}
@@ -14,7 +14,7 @@
     class="usa-in-page-nav usx-in-page-nav{% if className %} {{ className }}{% endif %}"
     data-heading-elements="{{ headingElements|default:'h2 h3' }}"
     data-main-content-selector="{% if mainContentSelector %}{{ mainContentSelector }}{% else %}#{{ content_id }}{% endif %}"
-    data-title-heading-level="{{ titleHeadingLevel|default:'h4' }}"
+    data-title-heading-level="{{ titleAs|default:'h4' }}"
     data-title-text="{{ titleText|default:'On this page' }}"
     data-scroll-offset="{{ scrollOffset|default:0 }}"
     data-root-margin="{{ rootMargin|default:'0px 0px 0px 0px' }}"
@@ -22,7 +22,7 @@
     data-minimum-heading-count="{{ minimumHeadingCount|default:2 }}"
   ></aside>
   <div id="{{ content_id }}" class="usx-in-page-nav__content usa-prose{% if contentClassName %} {{ contentClassName }}{% endif %}">
-    {{ content|safe }}
+    {% if children %}{{ children|safe }}{% else %}{{ content|safe }}{% endif %}
   </div>
 </div>
 {% endwith %}

@@ -25,3 +25,4 @@ export const Default = createStory(storyDefs.Default);
 export const CustomHeadingElements = createStory(storyDefs.CustomHeadingElements);
 export const CustomTitle = createStory(storyDefs.CustomTitle);
 export const BelowMinimumHeadingCount = createStory(storyDefs.BelowMinimumHeadingCount);
+export const CustomContentSelector = createStory(storyDefs.CustomContentSelector);

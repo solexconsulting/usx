@@ -1,7 +1,7 @@
 {
   "name": "callout",
   "template": "callout/callout.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "className": {
       "type": "string",
@@ -55,7 +55,7 @@
       "type": "string",
       "description": "Text utility token: text-{textColor}."
     },
-    "element": {
+    "as": {
       "type": "select",
       "description": "Root HTML element.",
       "options": [

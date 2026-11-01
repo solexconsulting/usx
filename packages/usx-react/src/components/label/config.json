@@ -3,6 +3,10 @@
   "template": "label/label.django.html",
   "version": 2,
   "props": {
+    "id": {
+      "type": "string",
+      "description": "ID of the label element"
+    },
     "htmlFor": {
       "type": "string",
       "description": "ID of the form element this label is associated with"

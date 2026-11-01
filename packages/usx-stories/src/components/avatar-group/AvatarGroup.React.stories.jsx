@@ -6,7 +6,7 @@ import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 const baseAvatars = (config.default && config.default.avatarProps) || [];
 const roundedAvatars = baseAvatars.map((avatar) => ({ ...avatar, shape: 'rounded-md' }));
 const circleAvatars = baseAvatars.map((avatar) => ({ ...avatar, shape: 'circle' }));
-const tooltipAvatars = circleAvatars.map((avatar) => ({ ...avatar, tooltip: avatar.alt }));
+const tooltipAvatars = circleAvatars.map((avatar) => ({ ...avatar, tooltipProps: { label: avatar.alt, position: 'right' } }));
 
 export const storyDefs = {
   BasicAvatarGroup: {
@@ -35,8 +35,13 @@ export const storyDefs = {
     avatarProps: roundedAvatars,
     overlap: true,
   },
-  AvatarGroupWithTooltips: {
+  WithTooltips: {
     avatarProps: tooltipAvatars,
+    overlap: true,
+  },
+  StackedWithTooltips: {
+    avatarProps: tooltipAvatars,
+    stacked: true,
     overlap: true,
   },
 };
@@ -56,4 +61,5 @@ export const OverlappingAvatars = { args: storyDefs.OverlappingAvatars };
 export const StackedAvatars = { args: storyDefs.StackedAvatars };
 export const OverlappingStackedAvatars = { args: storyDefs.OverlappingStackedAvatars };
 export const OverlappingRoundedAvatars = { args: storyDefs.OverlappingRoundedAvatars };
-export const AvatarGroupWithTooltips = { args: storyDefs.AvatarGroupWithTooltips };
+export const WithTooltips = { args: storyDefs.WithTooltips };
+export const StackedWithTooltips = { args: storyDefs.StackedWithTooltips };

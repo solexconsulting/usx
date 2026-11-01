@@ -120,7 +120,7 @@ function ApplicationWorkflow({ ordered = true, state = 'normal', allowDrafts = f
                         { label: 'Review' },
                       ]}
                       currentStep={active + 1}
-                      headingTag="h2"
+                      headingAs="h2"
                     />
                   )}
                   {!ordered && (

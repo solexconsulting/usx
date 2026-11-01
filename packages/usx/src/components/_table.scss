@@ -288,8 +288,9 @@
     transform: rotate(180deg);
   }
 
-  // No-JS row details: reveal the adjacent detail row when disclosure is open.
-  .usx-table__detail-row {
+  // No-JS row details: reveal the adjacent detail row when disclosure is open. React renders the
+  // detail row only while expanded and has no disclosure, so it is never hidden here.
+  .usx-table__row:has(.usx-table__detail-disclosure) + .usx-table__detail-row {
     display: none;
   }
 

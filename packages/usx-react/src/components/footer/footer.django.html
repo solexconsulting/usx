@@ -22,7 +22,7 @@
 
   {# ── Primary section ────────────────────────────────────────── #}
   <div class="usa-footer__primary-section">
-
+    {% if primaryChildren != None %}{{ primaryChildren|safe }}{% else %}
     {% if variant == 'big' %}
       {# Big footer: nav columns + optional sign-up form #}
       <div class="grid-container">
@@ -57,10 +57,7 @@
             <div class="usa-sign-up usx-footer__sign-up">
               <h3 class="usa-sign-up__heading">{{ signUp.heading|default:'Sign up' }}</h3>
               <form class="usa-form"{% if signUp.action %} action="{{ signUp.action }}"{% endif %}>
-                <label class="usa-label" for="{{ signUp.emailId|default:'footer-email' }}">
-                  {{ signUp.emailLabel|default:'Your email address' }}
-                </label>
-                <input class="usa-input" id="{{ signUp.emailId|default:'footer-email' }}" name="email" type="email" autocomplete="email" />
+                {% input id=signUp.emailId|default:"footer-email" name="email" type="email" label=signUp.emailLabel|default:"Your email address" autoComplete="email" formGroup=True %}{% endinput %}
                 <button class="usa-button usx-button usa-button--primary" type="submit">
                   {{ signUp.buttonText|default:'Sign up' }}
                 </button>
@@ -141,13 +138,16 @@
       </nav>
       {% endif %}
     {% endif %}
+    {% endif %}
 
   </div>{# /primary-section #}
 
   {# ── Secondary section ──────────────────────────────────────── #}
   {% firstof branding.alt branding.title '' as brandingLabel %}
-  {% if branding or socialLinks or contactHeading or contactPhone or contactEmail or contactLinks %}
+  {% if variant == 'slim' %}{% firstof branding secondaryChildren "" as showSecondary %}{% else %}{% firstof branding socialLinks contactHeading contactPhone contactEmail contactLinks secondaryChildren "" as showSecondary %}{% endif %}
+  {% if variant != 'slim' or showSecondary %}
   <div class="usa-footer__secondary-section">
+    {% if secondaryChildren != None %}{{ secondaryChildren|safe }}{% else %}
     <div class="grid-container">
 
       {% if variant == 'slim' %}
@@ -217,6 +217,7 @@
             </div>
             {% endif %}
 
+            {% if contactHeading or contactPhone or contactEmail or contactLinks %}
             <address class="usa-footer__address usx-footer__contact">
               {% if contactHeading %}
               <p class="usa-footer__contact-heading">{{ contactHeading }}</p>
@@ -249,12 +250,14 @@
               </div>
               {% endif %}
             </address>
+            {% endif %}
           </div>
           {% endif %}
         </div>
       {% endif %}
 
     </div>
+    {% endif %}
   </div>
   {% endif %}{# /secondary-section #}
 

@@ -12,14 +12,16 @@
   [contentEditable="true"]:focus,
   [href]:focus, [tabindex]:focus,
   iframe:focus,
-  .usx-details__summary:focus {
+  .usx-summary:focus,
+  .usx-popover > summary:focus {
     outline: .25rem solid usx-when($usx-color-focus, $usx-color-focus, #2491ff);
     outline-offset: 0;
   }
 
   .usa-checkbox__input:focus + [class*="__label"]::before,
   .usa-radio__input:focus + [class*="__label"]::before,
-  .usx-toggle__input:focus + .usx-toggle__button {
+  .usx-toggle__input:focus + .usx-toggle__button,
+  .usa-button.usx-button:focus {
     outline: .25rem solid usx-when($usx-color-focus, $usx-color-focus, #2491ff);
     outline-offset: 0.25rem;
   }

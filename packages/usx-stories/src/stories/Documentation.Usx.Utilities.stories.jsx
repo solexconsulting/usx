@@ -83,6 +83,13 @@ const BORDER_WIDTHS = [
 
 const BORDER_WIDTH_KEYS = BORDER_WIDTHS.map(bw => bw.name);
 
+const OVERFLOWS = [
+  { name: 'auto', description: 'Adds scrollbars only when the content overflows.' },
+  { name: 'hidden', description: 'Clips the overflow and hides scrollbars; users can still scroll it with a keyboard or by selecting text, and scripts can scroll it.' },
+  { name: 'scroll', description: 'Always shows scrollbars, whether or not the content overflows.' },
+  { name: 'clip', description: 'Clips the overflow without creating a scroll container; nothing can scroll it, even from script.' }
+];
+
 export const Utilities = {
   render: () => (
     <div className="usa-prose maxw-desktop">
@@ -221,7 +228,7 @@ export const Utilities = {
       <h4>2.1.1 Background Utilities (<code>.bg-*</code>)</h4>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }} className="margin-bottom-5">
         {COLOR_NAMES.map((name) => (
-          <div key={name} className="border usx-rounded-md">
+          <div key={name} className="border usx-rounded-md usx-overflow-clip">
             <div className={`bg-${name} height-5`} />
             <div className="padding-y-05 padding-x-1">
               <code className="font-mono-2xs">.bg-{name}</code>
@@ -402,6 +409,72 @@ export const Utilities = {
           <tr><td><code>.usx-width-fit</code> / <code>.usx-height-fit</code></td><td><code>width: fit-content</code> / <code>height: fit-content</code></td><td>Sizes element to fit available space up to max-content.</td></tr>
         </tbody>
       </table>
+
+      <h3>2.5 Overflow Utilities</h3>
+      <p>
+        Set how an element handles content that is larger than its box. <code>.usx-overflow-{'{value}'}</code> sets{' '}
+        <code>overflow</code> on both axes; <code>.usx-overflow-x-{'{value}'}</code> and{' '}
+        <code>.usx-overflow-y-{'{value}'}</code> set one axis. Every class uses <code>!important</code>.
+      </p>
+      <table className="usa-table usx-table usa-table--borderless width-full">
+        <thead>
+          <tr><th>Class</th><th>CSS Declaration</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          {OVERFLOWS.map((overflow) => (
+            <tr key={overflow.name}>
+              <td style={{ whiteSpace: 'nowrap' }}>
+                <code>.usx-overflow-{overflow.name}</code>
+                <br />
+                <code>.usx-overflow-x-{overflow.name}</code>
+                <br />
+                <code>.usx-overflow-y-{overflow.name}</code>
+              </td>
+              <td style={{ whiteSpace: 'nowrap' }}>
+                <code>overflow: {overflow.name}</code>
+                <br />
+                <code>overflow-x: {overflow.name}</code>
+                <br />
+                <code>overflow-y: {overflow.name}</code>
+              </td>
+              <td>{overflow.description}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem' }} className="margin-top-2 margin-bottom-5">
+        {OVERFLOWS.map((overflow) => (
+          <div key={overflow.name}>
+            <div className={`border padding-1 usx-overflow-${overflow.name}`} style={{ height: '5rem' }}>
+              Content that is taller than its box, so each overflow value handles the extra lines differently. A fixed height
+              of 5rem makes the difference visible.
+            </div>
+            <code className="font-mono-2xs">.usx-overflow-{overflow.name}</code>
+          </div>
+        ))}
+      </div>
+
+      <h4>2.5.1 Single-Axis Overflow</h4>
+      <p>
+        Browsers do not let one axis clip or scroll while the other stays <code>visible</code>: if only one axis is set to{' '}
+        <code>hidden</code>, <code>scroll</code> or <code>auto</code>, the other computes to <code>auto</code>. Set both axes
+        when you need a specific pair, as below. <code>clip</code> is the exception and can be set on one axis alone.
+      </p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '1rem' }} className="margin-top-2 margin-bottom-9">
+        <div>
+          <div className="border padding-1 usx-overflow-x-auto usx-overflow-y-hidden" style={{ height: '4rem', whiteSpace: 'nowrap' }}>
+            A single long line that scrolls sideways while any vertical overflow is hidden, so a long line like this one needs the scrollbar to be read.
+          </div>
+          <code className="font-mono-2xs">.usx-overflow-x-auto .usx-overflow-y-hidden</code>
+        </div>
+        <div>
+          <div className="border padding-1 usx-overflow-y-scroll usx-overflow-x-hidden" style={{ height: '4rem' }}>
+            Several lines of text that scroll vertically in a short box, with the horizontal axis hidden so nothing scrolls sideways. This text keeps
+            going until it is taller than the box.
+          </div>
+          <code className="font-mono-2xs">.usx-overflow-y-scroll .usx-overflow-x-hidden</code>
+        </div>
+      </div>
     </div>
   )
 };

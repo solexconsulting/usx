@@ -25,10 +25,13 @@ assert.deepEqual(snapshotHeadings('../src/components/details/details.html'), [
   'Colors',
   'Mono Color',
   'Borderless',
+  'No Marker',
   'No Summary Underline',
   'Minimal Decoration',
   'Custom Styles',
   'Custom Content Styles',
+  'Button Classes',
+  'Grouped Summary Props',
   'Tough On The Eyes',
   'Nested Details',
 ]);
@@ -52,14 +55,14 @@ for (const library of [esm, cjs]) {
 ValueError: A <script> tag & invalid input were rejected.`;
 
   const collapsedDetails = render(library.Details, {
-    summary: 'Technical details',
+    summaryProps: { label: 'Technical details' },
     text: diagnosticText,
   });
   assert.ok(collapsedDetails.startsWith('<details class="usx-details">'));
   assert.ok(!collapsedDetails.startsWith('<details class="usx-details" open'));
   assert.ok(
     collapsedDetails.includes(
-      '<summary class="usx-details__summary"><span class="usx-details__summary-text">Technical details</span></summary>'
+      '<summary class="usx-summary"><span class="usx-summary-text">Technical details</span></summary>'
     )
   );
   assert.ok(collapsedDetails.includes('Traceback (most recent call last):\n'));
@@ -73,31 +76,29 @@ ValueError: A <script> tag & invalid input were rejected.`;
 
   const openDetails = render(library.Details, {
     text: diagnosticText,
-    summary: 'Exception traceback',
+    summaryProps: { label: 'Exception traceback' },
     open: true,
     className: 'custom-details',
   });
   assert.ok(openDetails.startsWith('<details class="usx-details custom-details" open="">'));
   assert.ok(openDetails.includes('>Exception traceback</span></summary>'));
   assert.ok(
-    render(library.Details, { summary: 'More information', text: '' }).includes(
+    render(library.Details, { summaryProps: { label: 'More information' }, text: '' }).includes(
       '<p class="usx-details__text"></p>'
     )
   );
 
   const customSummary = render(library.Details, {
-    summary: 'Help',
-    summaryClassName: 'padding-1',
-    summaryTextClassName: 'text-bold',
+    summaryProps: { label: 'Help', className: 'padding-1', textClassName: 'text-bold' },
   });
-  assert.ok(customSummary.includes('<summary class="usx-details__summary padding-1">'));
+  assert.ok(customSummary.includes('<summary class="usx-summary padding-1">'));
   assert.ok(
-    customSummary.includes('<span class="usx-details__summary-text text-bold">Help</span>')
+    customSummary.includes('<span class="usx-summary-text text-bold">Help</span>')
   );
 
   const hostileDetails = render(library.Details, {
     text: '</p><script>alert("details")</script> &lt;already escaped&gt;',
-    summary: '</summary><script>alert("summary")</script> & details',
+    summaryProps: { label: '</summary><script>alert("summary")</script> & details' },
   });
   assert.ok(hostileDetails.includes('&lt;/p&gt;&lt;script&gt;'));
   assert.ok(hostileDetails.includes('&lt;/summary&gt;&lt;script&gt;'));
@@ -108,17 +109,16 @@ ValueError: A <script> tag & invalid input were rejected.`;
 
   const diagnosticReport =
     '\n\nRequest status: failed\n  Reference: JOB-1204\n\tItems processed: 0\n';
-  const reportTree = library.Details({ text: diagnosticReport, summary: '' });
+  const reportTree = library.Details({ text: diagnosticReport, summaryProps: { label: '' } });
   const reportChildren = React.Children.toArray(reportTree.props.children);
-  assert.equal(reportChildren[0].type, 'summary');
-  assert.equal(reportChildren[0].props.children.type, 'span');
-  assert.equal(reportChildren[0].props.children.props.children, 'Details');
+  assert.equal(reportChildren[0].props.label, '');
+  assert.ok(render(library.Details, { summaryProps: { label: '' } }).includes('>Details</span>'));
   assert.equal(reportChildren[1].type, 'div');
   assert.equal(reportChildren[1].props.children.type, 'p');
   assert.equal(reportChildren[1].props.children.props.children, diagnosticReport);
 
   const richDetails = render(library.Details, {
-    summary: 'Before you apply',
+    summaryProps: { label: 'Before you apply' },
     text: 'This fallback should not appear.',
     children: React.createElement(
       'ul',
@@ -135,7 +135,7 @@ ValueError: A <script> tag & invalid input were rejected.`;
   assert.ok(!richDetails.includes('usx-details__text'));
   for (const children of ['', false, true]) {
     const emptyChildren = render(library.Details, {
-      summary: 'More information',
+      summaryProps: { label: 'More information' },
       text: 'Hidden fallback',
       children,
     });
@@ -143,13 +143,13 @@ ValueError: A <script> tag & invalid input were rejected.`;
     assert.ok(!emptyChildren.includes('Hidden fallback'));
   }
   assert.ok(
-    render(library.Details, { summary: 'Count', children: 0 }).includes(
+    render(library.Details, { summaryProps: { label: 'Count' }, children: 0 }).includes(
       '<div class="usx-details__content">0</div>'
     )
   );
   assert.ok(
     render(library.Details, {
-      summary: 'More information',
+      summaryProps: { label: 'More information' },
       text: 'Visible fallback',
       children: null,
     }).includes('<p class="usx-details__text">Visible fallback</p>')
@@ -158,20 +158,22 @@ ValueError: A <script> tag & invalid input were rejected.`;
   for (const noContentBorder of [false, true]) {
     for (const noSummaryUnderline of [false, true]) {
       const styled = render(library.Details, {
-        summary: 'Supporting information',
+        summaryProps: {
+          label: 'Supporting information',
+          markerColor: 'primary',
+          underlineColor: 'secondary',
+          noUnderline: noSummaryUnderline,
+        },
         text: 'More information',
-        markerColor: 'primary',
-        underlineColor: 'secondary',
         contentBorderColor: 'accent-cool',
         noContentBorder,
-        noSummaryUnderline,
         className: 'margin-top-3',
         contentClassName: 'font-family-mono',
       });
       assert.equal(styled.includes('usx-details--borderless'), noContentBorder);
-      assert.equal(styled.includes('usx-details--no-underline'), noSummaryUnderline);
-      assert.ok(styled.includes('class="usx-details__summary marker-primary"'));
-      assert.ok(styled.includes('class="usx-details__summary-text border-secondary"'));
+      assert.equal(styled.includes('usx-summary--no-underline'), noSummaryUnderline);
+      assert.ok(styled.includes('marker-primary'));
+      assert.equal(styled.includes('underline-secondary'), !noSummaryUnderline);
       assert.ok(
         styled.includes(
           `class="usx-details__content${noContentBorder ? '' : ' border-accent-cool'} font-family-mono"`
@@ -265,7 +267,7 @@ ValueError: A <script> tag & invalid input were rejected.`;
     errorCode: 500,
     referenceId: 'REF-1234567890-ABCDEFGHIJ',
     detailsProps: {
-      summary: 'Technical details',
+      summaryProps: { label: 'Technical details' },
       text: diagnosticText,
       className: 'custom-details',
     },
@@ -316,7 +318,7 @@ ValueError: A <script> tag & invalid input were rejected.`;
 
   const detailsTree = library.ErrorPage({
     title: 'Request failed',
-    detailsProps: { summary: 'Technical details', text: diagnosticText },
+    detailsProps: { summaryProps: { label: 'Technical details' }, text: diagnosticText },
   });
   const detailsProse = React.Children.toArray(detailsTree.props.children).at(-1);
   assert.equal(detailsProse.type, library.Prose);

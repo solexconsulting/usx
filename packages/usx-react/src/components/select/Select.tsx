@@ -70,6 +70,7 @@ export default function Select({
     name,
     className: combinedSelectClasses,
     disabled,
+    required: required || undefined,
     defaultValue,
     'aria-describedby': describedByParts.length ? describedByParts.join(' ') : undefined,
     'aria-invalid': hasError ? true : undefined,

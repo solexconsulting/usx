@@ -2,6 +2,7 @@
 {% load components %}
 
 <fieldset
+  {% if id %}id="{{ id }}"{% endif %}
   class="usa-fieldset usx-fieldset {{ className }}"
   {% if disabled %}disabled{% endif %}
 >

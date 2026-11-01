@@ -9,7 +9,7 @@ export interface StepIndicatorProps extends React.HTMLAttributes<HTMLDivElement>
   steps?: Step[];
   currentStep?: number | string;
   variant?: '' | 'no-labels' | 'center' | 'counters' | 'counters-sm';
-  headingTag?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  headingAs?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   className?: string;
 }
 
@@ -17,7 +17,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({
   steps = [],
   currentStep = 1,
   variant = '',
-  headingTag: HeadingTag = 'h4',
+  headingAs: Heading = 'h4',
   className = '',
   ...props
 }) => {
@@ -64,14 +64,14 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({
         })}
       </ol>
       <div className="usa-step-indicator__header">
-        <HeadingTag className="usa-step-indicator__heading">
+        <Heading className="usa-step-indicator__heading">
           <span className="usa-step-indicator__heading-counter">
             <span className="usa-sr-only">Step</span>{' '}
             <span className="usa-step-indicator__current-step">{step}</span>
             <span className="usa-step-indicator__total-steps"> of {steps.length}</span>{' '}
           </span>
           <span className="usa-step-indicator__heading-text">{currentLabel}</span>
-        </HeadingTag>
+        </Heading>
       </div>
     </div>
   );

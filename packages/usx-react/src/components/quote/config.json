@@ -1,7 +1,7 @@
 {
   "name": "quote",
   "template": "quote/quote.django.html",
-  "version": 3,
+  "version": 4,
   "props": {
     "className": {
       "type": "string",
@@ -12,7 +12,7 @@
       "description": "Props passed to the Callout containing the quotation and attribution.",
       "component": "callout",
       "omit": [
-        "element",
+        "as",
         "children",
         "content"
       ]

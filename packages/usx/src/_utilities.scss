@@ -14,6 +14,10 @@
       border-color: $color-value !important;
     }
 
+    .underline-#{$color-name} {
+      text-decoration-color: $color-value !important;
+    }
+
     .before-bg-#{$color-name}::before {
       background-color: $color-value !important;
     }
@@ -73,19 +77,21 @@
     .border-#{$color-name} {
       border-color: $color-value !important;
     }
+
+    .underline-#{$color-name} {
+      text-decoration-color: $color-value !important;
+    }
   }
 }
 
 @each $radius-name, $radius-value in $usx-border-radiuses {
   .usx-rounded-#{$radius-name} {
     border-radius: $radius-value !important;
-    overflow: clip;
   }
 }
 
 .usx-circle {
   border-radius: $usx-radius-full !important;
-  overflow: clip;
 }
 
 @each $width-name, $width-value in $usx-border-widths {
@@ -155,5 +161,26 @@ $usx-sizes: (
 
   .usx-height-#{$key} {
     height: $value;
+  }
+}
+
+$usx-overflow: (
+  auto: auto,
+  hidden: hidden,
+  scroll: scroll,
+  clip: clip
+);
+
+@each $key, $value in $usx-overflow {
+  .usx-overflow-#{$key} {
+    overflow: $value !important;
+  }
+
+  .usx-overflow-x-#{$key} {
+    overflow-x: $value !important;
+  }
+
+  .usx-overflow-y-#{$key} {
+    overflow-y: $value !important;
   }
 }

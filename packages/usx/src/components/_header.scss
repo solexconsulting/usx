@@ -161,44 +161,39 @@
   .usx-header.usa-header--extended > .usx-nav {
     border-top: $usx-header-border-separator;
     border-bottom: usx-when($usx-header-border-bottom, $usx-header-border-bottom, none);
-  }
+    background-color: usx-when($usx-header-nav-bg);
 
-  :has(> .usa-header--extended) {
-    .usx-nav {
-      background-color: usx-when($usx-header-nav-bg);
+    .usa-nav__inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
 
-      .usa-nav__inner {
+    .usx-nav__end-slot {
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .usa-nav__primary-item > .usa-nav__link {
+      &:hover,
+      &.usa-current {
         position: relative;
-        display: flex;
-        align-items: center;
+
+        &::after {
+          background-color: $usx-color-primary;
+          border-radius: 0;
+          content: "";
+          display: block;
+          position: absolute;
+          height: 0.25rem;
+          left: 1rem;
+          right: 1rem;
+          bottom: 0;
+        }
       }
 
-      .usx-nav__end-slot {
-        flex-shrink: 0;
-        margin-left: auto;
-      }
-
-      .usa-nav__primary-item > .usa-nav__link {
-        &:hover,
-        &.usa-current {
-          position: relative;
-
-          &::after {
-            background-color: $usx-color-primary;
-            border-radius: 0;
-            content: "";
-            display: block;
-            position: absolute;
-            height: 0.25rem;
-            left: 1rem;
-            right: 1rem;
-            bottom: 0;
-          }
-        }
-
-        &[aria-expanded="true"]::after {
-          display: none;
-        }
+      &[aria-expanded="true"]::after {
+        display: none;
       }
     }
 

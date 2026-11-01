@@ -9,6 +9,13 @@ export default {
   title: 'React/USWDS/Icon',
   component: Icon,
   tags: ['USWDS', 'autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Looking for all available icons? Check out the [Icons Documentation](/docs/documentation-icons--docs&globals=technology:django) for a complete list.'
+      }
+    }
+  },
   argTypes: generatedArgTypes,
   excludeStories: ['storyDefs'],
 };

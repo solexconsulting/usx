@@ -10,7 +10,7 @@ export default {
   component: Skipnav,
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'renderWithTarget'],
 };
 
 export const storyDefs = {
@@ -27,9 +27,10 @@ export const storyDefs = {
   },
 };
 
-const renderWithTarget = (args, targetId) => (
+// Shared with the Django stories, which pass in the Django-rendered link.
+export const renderWithTarget = (skipnav, targetId) => (
   <>
-    <Skipnav {...args}>{args.children}</Skipnav>
+    {skipnav}
     Click <button className="usa-button usa-button--unstyled">
       here
     </button> and type &quot;shift + tab&quot; to focus the Skipnav link, then press &quot;enter&quot; to jump to the target content below.
@@ -45,15 +46,18 @@ const renderWithTarget = (args, targetId) => (
 
 export const Default = {
   args: storyDefs.Default,
-  render: (args) => renderWithTarget(args, 'custom-target-1'),
+  render: (args) =>
+    renderWithTarget(<Skipnav {...args}>{args.children}</Skipnav>, 'custom-target-1'),
 };
 
 export const CustomContent = {
   args: storyDefs.CustomContent,
-  render: (args) => renderWithTarget(args, 'custom-target-2'),
+  render: (args) =>
+    renderWithTarget(<Skipnav {...args}>{args.children}</Skipnav>, 'custom-target-2'),
 };
 
 export const WithChildren = {
   args: storyDefs.WithChildren,
-  render: (args) => renderWithTarget(args, 'custom-target-3'),
+  render: (args) =>
+    renderWithTarget(<Skipnav {...args}>{args.children}</Skipnav>, 'custom-target-3'),
 };

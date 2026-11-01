@@ -7,6 +7,10 @@
       "type": "string",
       "description": "The visible text label. Defaults to 'Back to top'. Omit or pass null for icon-only display."
     },
+    "ariaLabel": {
+      "type": "string",
+      "description": "Accessible name used when there is no visible label (icon-only display). Defaults to 'Back to top'."
+    },
     "href": {
       "type": "string",
       "description": "If provided, renders as an anchor link (<a>) targeting the given href. Otherwise renders as a <button>."

@@ -21,7 +21,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
   className?: string;
   containerClassName?: string;
-  tag?: React.ElementType;
+  as?: 'div' | 'li' | 'article';
 }
 
 export default function Card({
@@ -39,7 +39,7 @@ export default function Card({
   children,
   className = '',
   containerClassName = '',
-  tag: RootTag = 'div',
+  as: RootTag = 'div',
   ...props
 }: CardProps) {
   const cardClasses = ClassNames(

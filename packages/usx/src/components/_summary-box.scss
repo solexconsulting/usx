@@ -3,13 +3,9 @@
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usa-summary-box.usx-summary-box {
   border: usx-when($usx-summary-box-border);
-
   border-radius: usx-when($usx-summary-box-radius);
-
   padding: usx-when($usx-summary-box-padding);
-
   background-color: usx-when($usx-summary-box-bg);
-
   color: usx-when($usx-summary-box-text);
 
   @if $usx-summary-box-link-text {

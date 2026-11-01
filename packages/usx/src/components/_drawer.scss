@@ -1,0 +1,226 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
+/* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
+
+// A drawer is the USWDS mobile navigation (`.usa-nav`) made available at every
+// viewport width and from any edge. Like `.usa-nav`, it has 1rem padding, a
+// corner close button, and a 0.3s slide-in. The compact size is the same width
+// as `.usa-nav` (15rem).
+
+$usx-drawer-radius: usx-when($usx-radius-box, $usx-radius-box, 0.25rem);
+
+.usx-drawer {
+  display: inline-block;
+}
+
+// Native dialog visibility remains under browser control; only the open state
+// becomes a flex column, so a closed dialog stays hidden.
+.usx-drawer__panel {
+  // Width for inline-edge drawers; height for top and bottom drawers.
+  --drawer-panel-size: 28rem;
+
+  box-sizing: border-box;
+  position: fixed;
+  inset: auto;
+  max-inline-size: 100%;
+  max-block-size: 100%;
+  margin: 0;
+  padding: units(2);
+  overflow: hidden;
+  border: 0;
+  background: usx-when($usx-surface-1, $usx-surface-1, #fff);
+  color: usx-when($usx-text-ink, $usx-text-ink, #1b1b1b);
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // The backdrop separates the modal drawer from the page, like `.usa-overlay`.
+  &::backdrop {
+    background: rgb(0 0 0 / 70%);
+  }
+
+  &[data-size='compact'] {
+    --drawer-panel-size: 15rem;
+  }
+
+  &[data-size='wide'] {
+    --drawer-panel-size: 40rem;
+  }
+
+  &[data-side='inline-start'],
+  &[data-side='inline-end'] {
+    inset-block: 0;
+    inline-size: min(var(--drawer-panel-size), 100vw);
+    block-size: 100vh;
+    block-size: 100dvh;
+  }
+
+  &[data-side='top'],
+  &[data-side='bottom'] {
+    inset-inline: 0;
+    inline-size: auto;
+    block-size: min(var(--drawer-panel-size), 100vh);
+    block-size: min(var(--drawer-panel-size), 100dvh);
+
+    --drawer-panel-size: 24rem;
+
+    &[data-size='compact'] {
+      --drawer-panel-size: 15rem;
+    }
+
+    &[data-size='wide'] {
+      --drawer-panel-size: 36rem;
+    }
+  }
+
+  &[data-side='inline-start'] {
+    inset-inline-start: 0;
+
+    --drawer-panel-offset: translateX(-100%);
+
+    &:dir(rtl) {
+      --drawer-panel-offset: translateX(100%);
+    }
+  }
+
+  &[data-side='inline-end'] {
+    inset-inline-end: 0;
+
+    --drawer-panel-offset: translateX(100%);
+
+    &:dir(rtl) {
+      --drawer-panel-offset: translateX(-100%);
+    }
+  }
+
+  &[data-side='top'] {
+    inset-block-start: 0;
+
+    --drawer-panel-offset: translateY(-100%);
+  }
+
+  &[data-side='bottom'] {
+    inset-block-end: 0;
+
+    --drawer-panel-offset: translateY(100%);
+  }
+}
+
+// Edges are square by default; this rounds the corners of the edge facing the
+// page content.
+.usx-drawer__panel--rounded {
+  &[data-side='inline-start'] {
+    border-start-end-radius: $usx-drawer-radius;
+    border-end-end-radius: $usx-drawer-radius;
+  }
+
+  &[data-side='inline-end'] {
+    border-start-start-radius: $usx-drawer-radius;
+    border-end-start-radius: $usx-drawer-radius;
+  }
+
+  &[data-side='top'] {
+    border-end-start-radius: $usx-drawer-radius;
+    border-end-end-radius: $usx-drawer-radius;
+  }
+
+  &[data-side='bottom'] {
+    border-start-start-radius: $usx-drawer-radius;
+    border-start-end-radius: $usx-drawer-radius;
+  }
+}
+
+// Looks like `.usa-nav__close`, but that class is also the hook for USWDS's header
+// script, which would lock page scroll and hide the page from assistive tech.
+.usx-drawer__close {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  box-sizing: border-box;
+  block-size: units(6);
+  inline-size: units(6);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+
+  + .usx-drawer__header {
+    padding-inline-end: units(4);
+    margin-inline-end: units(0.5);
+  }
+
+  &:hover {
+    background-color: usx-when($usx-surface-2, $usx-surface-2, #f0f0f0);
+  }
+}
+
+.usx-drawer__header {
+  flex: none;
+  margin-block-end: units(2);
+}
+
+.usx-drawer__heading {
+  margin: 0;
+  width: fit-content;
+  overflow-wrap: anywhere;
+}
+
+.usx-drawer__description {
+  max-inline-size: 65ch;
+  margin: units(1) 0 0;
+  color: usx-when($usx-text-muted, $usx-text-muted, #565c65);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+// Only the body scrolls, keeping the heading, close button, and footer in view.
+// The negative margin and matching padding put the scrollbar on the panel edge.
+.usx-drawer__body {
+  flex: 1 1 auto;
+  min-block-size: 0;
+  margin-inline: units(-2);
+  padding-inline: units(2);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.usx-drawer__footer {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: units(1);
+  margin-block-start: units(2);
+  padding-block-start: units(2);
+  border-block-start: 1px solid
+    usx-when($usx-color-border-subtle, $usx-color-border-subtle, #dfe1e2);
+
+  > .usa-button {
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .usx-drawer__panel[open] {
+    animation: usx-drawer-slide-in 0.3s ease-in-out;
+  }
+}
+
+@keyframes usx-drawer-slide-in {
+  from {
+    transform: var(--drawer-panel-offset);
+  }
+}
+
+@media (forced-colors: active) {
+  .usx-drawer__panel {
+    border: 1px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+}

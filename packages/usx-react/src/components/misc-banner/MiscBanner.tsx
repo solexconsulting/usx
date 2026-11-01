@@ -5,7 +5,7 @@ import Icon from '../icon/Icon';
 export interface MiscBannerProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   className?: string;
-  tone?: 'base' | 'primary' | 'beta' | 'dev' | 'test';
+  color?: string;
   badgeText?: string;
   message?: string;
   casualLinkText?: string;
@@ -20,8 +20,8 @@ export interface MiscBannerProps extends HTMLAttributes<HTMLDivElement> {
 export default function MiscBanner({
   children = null,
   className = '',
-  tone = 'beta',
-  badgeText = 'beta',
+  color = 'beta',
+  badgeText,
   message = 'Welcome to the beta website!',
   casualLinkText,
   casualLinkHref,
@@ -30,11 +30,15 @@ export default function MiscBanner({
   importantLinkHref,
   importantLinkIcon = 'undo',
   showReturnLink = true,
+  id,
   ...props
 }: MiscBannerProps) {
-  const menuId = useId();
-  const toggleId = useId();
-  const classes = ClassNames('usx-misc-banner', `bg-${tone}`, className);
+  const instanceId = useId();
+  const baseId = id || instanceId;
+  const bannerColor = color || 'beta';
+  const toggleId = `${baseId}-dropdown-toggle`;
+  const menuId = `${baseId}-dropdown`;
+  const classes = ClassNames('usx-misc-banner', `bg-${bannerColor}`, className);
   const mobileLinks: { href: string; text: string }[] = [];
   const hasLearnMoreLink = showLearnMore && Boolean(casualLinkText);
   const hasReturnLink = showReturnLink && Boolean(importantLinkText);
@@ -55,7 +59,9 @@ export default function MiscBanner({
 
   const content = children || (
     <>
-      <strong className={`usx-misc-banner__badge text-${tone}`}>{badgeText}</strong>
+      {badgeText ? (
+        <strong className={`usx-misc-banner__badge text-${bannerColor}`}>{badgeText}</strong>
+      ) : null}
       <p className="usx-misc-banner__text">
         {message}
         {hasLearnMoreLink ? (
@@ -68,7 +74,7 @@ export default function MiscBanner({
       {hasReturnLink ? (
         <span className="usx-misc-banner__return-text">
           <a className="usa-link usx-misc-banner__link" href={importantLinkHref}>
-            <Icon name={importantLinkIcon} size={1} className="usx-icon--size-1" />
+            <Icon name={importantLinkIcon} size={1} />
             {' '}
             {importantLinkText}
           </a>
@@ -87,7 +93,7 @@ export default function MiscBanner({
             aria-controls={menuId}
             aria-label="Toggle banner links"
           >
-            <Icon name="expand_more" size={4} className="usx-icon" />
+            <Icon name="expand_more" size={4} />
           </label>
           <div id={menuId} className="usx-misc-banner__dropdown-content">
             <ul className="usa-list">
@@ -104,7 +110,7 @@ export default function MiscBanner({
   );
 
   return (
-    <div className={classes} {...props}>
+    <div id={id} className={classes} {...props}>
       <div className="usx-misc-banner__content grid-container">
         {content}
       </div>

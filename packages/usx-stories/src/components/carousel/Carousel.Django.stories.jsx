@@ -11,21 +11,9 @@ export default {
 };
 
 const createStory = createDjangoStory({ componentName: 'carousel' });
-const createUnenhancedStory = createDjangoStory({
-  componentName: 'carousel',
-  wrapper: (payload, _args, { mode }) => {
-    if (mode === 'source') return payload;
-    const container = document.createElement('div');
-    container.innerHTML = payload;
-    container.querySelector('.usx-carousel')?.setAttribute('data-enhanced', 'true');
-    return <div dangerouslySetInnerHTML={{ __html: container.innerHTML }} />;
-  },
-});
-const unenhancedArgs = { ...storyDefs.Unenhanced };
-delete unenhancedArgs['data-enhanced'];
 
 export const Default = createStory(storyDefs.Default);
-export const Unenhanced = createUnenhancedStory(unenhancedArgs);
+export const Unenhanced = createStory(storyDefs.Unenhanced);
 export const WithoutDots = createStory(storyDefs.WithoutDots);
 export const HiddenStatus = createStory(storyDefs.HiddenStatus);
 export const CustomId = createStory(storyDefs.CustomId);

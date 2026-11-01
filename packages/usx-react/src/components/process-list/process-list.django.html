@@ -2,13 +2,13 @@
 <ol class="usa-process-list usx-process-list{% if className %} {{ className }}{% endif %}">
   {% for item in items %}
   <li class="usa-process-list__item{% if item.className %} {{ item.className }}{% endif %}">
-    {% with tag=item.headingTag|default:'h4' %}
+    {% with tag=item.headingAs|default:'h4' %}
     <{{ tag }} class="usa-process-list__heading{% if item.headingClassName %} {{ item.headingClassName }}{% endif %}">
       {{ item.heading }}
     </{{ tag }}>
     {% endwith %}
     {% if item.body %}
-    <p{% if item.bodyClassName %} class="{{ item.bodyClassName }}"{% endif %}>{{ item.body|safe }}</p>
+    {% if item.bodyClassName %}<div class="{{ item.bodyClassName }}">{{ item.body|safe }}</div>{% else %}{{ item.body|safe }}{% endif %}
     {% endif %}
   </li>
   {% endfor %}

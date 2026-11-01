@@ -1,5 +1,5 @@
 {# Django template for StepIndicator #}
-{% with headingTagName=headingTag|default:'h4' %}
+{% with headingAsName=headingAs|default:'h4' %}
 <div class="usa-step-indicator usx-step-indicator{% if variant %} usa-step-indicator--{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}">
   <ol class="usa-step-indicator__segments">
     {% for step in steps %}
@@ -19,11 +19,11 @@
     {% endfor %}
   </ol>
   <div class="usa-step-indicator__header">
-    <{{ headingTagName }} class="usa-step-indicator__heading">
+    <{{ headingAsName }} class="usa-step-indicator__heading">
       <span class="usa-step-indicator__heading-counter"><span class="usa-sr-only">Step</span>
         <span class="usa-step-indicator__current-step">{{ currentStep }}</span>
         <span class="usa-step-indicator__total-steps">of {{ steps|length }}</span> </span><span class="usa-step-indicator__heading-text">{% for step in steps %}{% if forloop.counter == currentStep %}{{ step.label }}{% endif %}{% endfor %}</span>
-    </{{ headingTagName }}>
+    </{{ headingAsName }}>
   </div>
 </div>
 {% endwith %}

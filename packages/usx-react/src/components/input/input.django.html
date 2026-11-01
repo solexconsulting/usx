@@ -11,16 +11,19 @@
 {% if hint %}
   {% hint id=field_id|add:"-hint" %}{{ hint }}{% endhint %}
 {% endif %}
-{% if error %}
+{% if error and error != "true" and error != True and error != "false" %}
   {% error_message id=field_id|add:"-error" %}{{ error }}{% enderror_message %}
 {% endif %}
 <input
   class="usa-input usx-input{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
   id="{{ field_id }}"
-  placeholder="{{ placeholder|default:'' }}"
+  {% if name %}name="{{ name }}" {% endif %}
+  {% if type %}type="{{ type }}" {% endif %}
+  {% if autoComplete %}autocomplete="{{ autoComplete }}" {% endif %}
+  placeholder="{% if placeholder is None %}Type here{% else %}{{ placeholder }}{% endif %}"
   value="{{ value|default:'' }}"
   {% if maxlength %}maxlength="{{ maxlength }}" {% endif %}
-  {% if hint or error or success or describedBy %}aria-describedby="{% if describedBy %}{{ describedBy }} {% endif %}{% if hint %}{{ field_id }}-hint {% endif %}{% if error %}{{ field_id }}-error {% elif success %}{{ field_id }}-success {% endif %}"
+  {% if hint or describedBy or error and error != "true" and error != True and error != "false" %}aria-describedby="{% if describedBy %}{{ describedBy }} {% endif %}{% if hint %}{{ field_id }}-hint {% endif %}{% if error and error != "true" and error != True and error != "false" %}{{ field_id }}-error {% endif %}"
   {% endif %}
   {% if error %}aria-invalid="true" {% endif %}
   {% if disabled %}disabled {% endif %}
@@ -34,16 +37,19 @@
 {% if hint %}
   {% hint id=field_id|add:"-hint" %}{{ hint }}{% endhint %}
 {% endif %}
-{% if error %}
+{% if error and error != "true" and error != True and error != "false" %}
   {% error_message id=field_id|add:"-error" %}{{ error }}{% enderror_message %}
 {% endif %}
 <input
   class="usa-input usx-input{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
   id="{{ field_id }}"
-  placeholder="{{ placeholder|default:'Type here' }}"
+  {% if name %}name="{{ name }}" {% endif %}
+  {% if type %}type="{{ type }}" {% endif %}
+  {% if autoComplete %}autocomplete="{{ autoComplete }}" {% endif %}
+  placeholder="{% if placeholder is None %}Type here{% else %}{{ placeholder }}{% endif %}"
   value="{{ value|default:'' }}"
   {% if maxlength %}maxlength="{{ maxlength }}" {% endif %}
-  {% if hint or error or success or describedBy %}aria-describedby="{% if describedBy %}{{ describedBy }} {% endif %}{% if hint %}{{ field_id }}-hint {% endif %}{% if error %}{{ field_id }}-error {% elif success %}{{ field_id }}-success {% endif %}"
+  {% if hint or describedBy or error and error != "true" and error != True and error != "false" %}aria-describedby="{% if describedBy %}{{ describedBy }} {% endif %}{% if hint %}{{ field_id }}-hint {% endif %}{% if error and error != "true" and error != True and error != "false" %}{{ field_id }}-error {% endif %}"
   {% endif %}
   {% if error %}aria-invalid="true" {% endif %}
   {% if disabled %}disabled {% endif %}

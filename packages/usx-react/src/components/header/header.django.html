@@ -47,7 +47,7 @@
   {% if not extended %}
     <nav aria-label="Primary navigation" class="usa-nav usx-nav{% if stickyNav %} usx-nav--sticky{% endif %}">
       <button type="button" class="usa-nav__close">
-        {% icon name='close' %}{% endicon %}
+        {% icon name='close' size=3 %}{% endicon %}
       </button>
       <ul class="usa-nav__primary usa-accordion">
         {% for section in navSections %}
@@ -65,9 +65,10 @@
                 {% if megamenu %}
                   <div id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu usa-megamenu" hidden="hidden">
                     <div class="grid-row grid-gap-4">
+                      {% for column in section.links|megamenu_columns %}
                       <div class="usa-col">
                         <ul class="usa-nav__submenu-list">
-                          {% for link in section.links %}
+                          {% for link in column %}
                             <li class="usa-nav__submenu-item">
                               <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
                                 {{ link.text }}
@@ -77,6 +78,7 @@
                           {% endfor %}
                         </ul>
                       </div>
+                      {% endfor %}
                     </div>
                   </div>
                 {% else %}
@@ -112,7 +114,7 @@
   <nav aria-label="Primary navigation" class="usa-nav usx-nav{% if stickyNav %} usx-nav--sticky{% endif %}">
     <div class="usa-nav__inner">
       <button type="button" class="usa-nav__close">
-        {% icon name='close' %}{% endicon %}
+        {% icon name='close' size=3 %}{% endicon %}
       </button>
       <ul class="usa-nav__primary usa-accordion">
         {% for section in navSections %}
@@ -130,9 +132,10 @@
                 {% if megamenu %}
                   <div id="{{ id }}-nav-section-{{ forloop.counter0 }}" class="usa-nav__submenu usa-megamenu" hidden="hidden">
                     <div class="grid-row grid-gap-4">
+                      {% for column in section.links|megamenu_columns %}
                       <div class="usa-col">
                         <ul class="usa-nav__submenu-list">
-                          {% for link in section.links %}
+                          {% for link in column %}
                             <li class="usa-nav__submenu-item">
                               <a href="{{ link.href }}" {% if link.ariaLabel %}aria-label="{{ link.ariaLabel }}"{% endif %}>
                                 {{ link.text }}
@@ -142,6 +145,7 @@
                           {% endfor %}
                         </ul>
                       </div>
+                      {% endfor %}
                     </div>
                   </div>
                 {% else %}

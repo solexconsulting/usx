@@ -142,11 +142,11 @@ const SmallHTMLString = `
 
 
 export const storyDefs = {
-  Default: { content: BigHTMLString, containerElement: 'div' },
-  ProseWithDiv: { content: SmallHTMLString, containerElement: 'div' },
-  ProseWithArticle: { content: SmallHTMLString, containerElement: 'article' },
-  ProseWithSection: { content: SmallHTMLString, containerElement: 'section' },
-  ProseWithMain: { content: SmallHTMLString, containerElement: 'main' },
+  Default: { content: BigHTMLString, as: 'div' },
+  ProseWithDiv: { content: SmallHTMLString, as: 'div' },
+  ProseWithArticle: { content: SmallHTMLString, as: 'article' },
+  ProseWithSection: { content: SmallHTMLString, as: 'section' },
+  ProseWithMain: { content: SmallHTMLString, as: 'main' },
 };
 
 export const Default = { args: storyDefs.Default };

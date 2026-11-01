@@ -12,7 +12,7 @@ export interface CalloutProps extends Omit<React.HTMLAttributes<HTMLElement>, 'c
   content?: React.ReactNode;
   backgroundColor?: string;
   textColor?: string;
-  element?: 'div' | 'section' | 'aside' | 'p';
+  as?: 'div' | 'section' | 'aside' | 'p';
 }
 
 export default function Callout({
@@ -26,11 +26,9 @@ export default function Callout({
   content,
   backgroundColor,
   textColor,
-  element = 'div',
+  as: Element = 'div',
   ...props
 }: CalloutProps) {
-  const Element = element;
-
   return (
     <Element
       className={ClassNames(

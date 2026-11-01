@@ -1,9 +1,10 @@
-<h3 class="site-preview-heading">.gov domains</h3>
+<h3 class="site-preview-heading">Default</h3>
 <section
+  id="gov-banner-default"
   class="usa-banner usx-banner"
-  aria-label="Official website of the United States government"
+  aria-label="Official government website"
 >
-  <div class="usa-accordion">
+  <div id="gov-banner-default-accordion" class="usa-accordion">
     <header class="usa-banner__header">
       <div class="usa-banner__inner">
         <div class="grid-col-auto">
@@ -15,24 +16,23 @@
           />
         </div>
         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
-          <p class="usa-banner__header-text">
-            An official website of the United States government
-          </p>
-          <p class="usa-banner__header-action">Here’s how you know</p>
+          <p class="usa-banner__header-text">An official website of the United States government</p>
+          <p class="usa-banner__header-action">Here&#x27;s how you know</p>
         </div>
         <button
           type="button"
           class="usa-accordion__button usa-banner__button"
           aria-expanded="false"
-          aria-controls="gov-banner-default"
+          aria-controls="gov-banner-default-content"
         >
-          <span class="usa-banner__button-text">Here’s how you know</span>
+          <span class="usa-banner__button-text">Here&#x27;s how you know</span>
         </button>
       </div>
     </header>
     <div
+      id="gov-banner-default-content"
       class="usa-banner__content usa-accordion__content"
-      id="gov-banner-default"
+      hidden=""
     >
       <div class="grid-row grid-gap-lg">
         <div class="usa-banner__guidance tablet:grid-col-6">
@@ -45,9 +45,8 @@
           />
           <div class="usa-media-block__body">
             <p>
-              <strong>Official websites use .gov</strong><br />A
-              <strong>.gov</strong> website belongs to an official government
-              organization in the United States.
+              <strong>Official websites use .gov</strong><br />A .gov website belongs to an official
+              government organization in the United States.
             </p>
           </div>
         </div>
@@ -61,30 +60,16 @@
           />
           <div class="usa-media-block__body">
             <p>
-              <strong>Secure .gov websites use HTTPS</strong><br />A
-              <strong>lock</strong> (
-              <span class="icon-lock"
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="52"
-                  height="64"
-                  viewBox="0 0 52 64"
-                  class="usa-banner__lock-image"
-                  role="img"
-                  aria-labelledby="banner-lock-description-default"
-                  focusable="false"
-                >
-                  <title id="banner-lock-title-default">Lock</title>
-                  <desc id="banner-lock-description-default">Locked padlock icon</desc>
-                  <path
-                    fill="#000000"
-                    fill-rule="evenodd"
-                    d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"
-                  />
-                </svg> </span
-              >) or <strong>https://</strong> means you’ve safely connected to
-              the .gov website. Share sensitive information only on official,
-              secure websites.
+              <strong>Secure .gov websites use HTTPS</strong><br />A <strong>lock</strong> (<svg
+                class="usa-icon usx-icon--size-1"
+                aria-hidden="true"
+                aria-label="lock icon"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#lock"></use></svg
+              >) or <strong>https://</strong> means you’ve safely connected to the .gov website.
+              Share sensitive information only on official, secure websites.
             </p>
           </div>
         </div>
@@ -93,12 +78,9 @@
   </div>
 </section>
 
-<h3 class="site-preview-heading">.mil domains</h3>
-<section
-  class="usa-banner usx-banner"
-  aria-label="Official website of the United States government,"
->
-  <div class="usa-accordion">
+<h3 class="site-preview-heading">.mil TLD</h3>
+<section id="gov-banner-mil" class="usa-banner usx-banner" aria-label="Official government website">
+  <div id="gov-banner-mil-accordion" class="usa-accordion">
     <header class="usa-banner__header">
       <div class="usa-banner__inner">
         <div class="grid-col-auto">
@@ -110,25 +92,20 @@
           />
         </div>
         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
-          <p class="usa-banner__header-text">
-            An official website of the United States government
-          </p>
-          <p class="usa-banner__header-action">Here’s how you know</p>
+          <p class="usa-banner__header-text">An official website of the United States government</p>
+          <p class="usa-banner__header-action">Here&#x27;s how you know</p>
         </div>
         <button
           type="button"
           class="usa-accordion__button usa-banner__button"
           aria-expanded="false"
-          aria-controls="gov-banner-dot-mil"
+          aria-controls="gov-banner-mil-content"
         >
-          <span class="usa-banner__button-text">Here’s how you know</span>
+          <span class="usa-banner__button-text">Here&#x27;s how you know</span>
         </button>
       </div>
     </header>
-    <div
-      class="usa-banner__content usa-accordion__content"
-      id="gov-banner-dot-mil"
-    >
+    <div id="gov-banner-mil-content" class="usa-banner__content usa-accordion__content" hidden="">
       <div class="grid-row grid-gap-lg">
         <div class="usa-banner__guidance tablet:grid-col-6">
           <img
@@ -140,9 +117,8 @@
           />
           <div class="usa-media-block__body">
             <p>
-              <strong>Official websites use .mil</strong><br />A
-              <strong>.mil</strong> website belongs to an official U.S.
-              Department of Defense organization.
+              <strong>Official websites use .mil</strong><br />A .mil website belongs to an official
+              government organization in the United States.
             </p>
           </div>
         </div>
@@ -156,30 +132,16 @@
           />
           <div class="usa-media-block__body">
             <p>
-              <strong>Secure .mil websites use HTTPS</strong><br />A
-              <strong>lock</strong> (
-              <span class="icon-lock"
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="52"
-                  height="64"
-                  viewBox="0 0 52 64"
-                  class="usa-banner__lock-image"
-                  role="img"
-                  aria-labelledby="banner-lock-description-dot-mil"
-                  focusable="false"
-                >
-                  <title id="banner-lock-title-dot-mil">Lock</title>
-                  <desc id="banner-lock-description-dot-mil">Locked padlock icon</desc>
-                  <path
-                    fill="#000000"
-                    fill-rule="evenodd"
-                    d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"
-                  />
-                </svg> </span
-              >) or <strong>https://</strong> means you’ve safely connected to
-              the .mil website. Share sensitive information only on official,
-              secure websites.
+              <strong>Secure .mil websites use HTTPS</strong><br />A <strong>lock</strong> (<svg
+                class="usa-icon usx-icon--size-1"
+                aria-hidden="true"
+                aria-label="lock icon"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#lock"></use></svg
+              >) or <strong>https://</strong> means you’ve safely connected to the .mil website.
+              Share sensitive information only on official, secure websites.
             </p>
           </div>
         </div>
@@ -188,12 +150,13 @@
   </div>
 </section>
 
-<h3 class="site-preview-heading">.gov domains (Spanish)</h3>
+<h3 class="site-preview-heading">Custom text and TLD</h3>
 <section
+  id="gov-banner-custom"
   class="usa-banner usx-banner"
-  aria-label="Un sitio oficial del Gobierno de Estados Unidos"
+  aria-label="Official government website"
 >
-  <div class="usa-accordion">
+  <div id="gov-banner-custom-accordion" class="usa-accordion">
     <header class="usa-banner__header">
       <div class="usa-banner__inner">
         <div class="grid-col-auto">
@@ -206,27 +169,24 @@
         </div>
         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
           <p class="usa-banner__header-text">
-            Un sitio oficial del Gobierno de Estados Unidos
+            An unofficial website of the Not A Number organization
           </p>
-          <p class="usa-banner__header-action">
-            Así es como usted puede verificarlo
-          </p>
+          <p class="usa-banner__header-action">Here&#x27;s how you don&#x27;t know</p>
         </div>
         <button
           type="button"
           class="usa-accordion__button usa-banner__button"
           aria-expanded="false"
-          aria-controls="gov-banner-lang-es"
+          aria-controls="gov-banner-custom-content"
         >
-          <span class="usa-banner__button-text"
-            >Así es como usted puede verificarlo</span
-          >
+          <span class="usa-banner__button-text">Here&#x27;s how you don&#x27;t know</span>
         </button>
       </div>
     </header>
     <div
+      id="gov-banner-custom-content"
       class="usa-banner__content usa-accordion__content"
-      id="gov-banner-lang-es"
+      hidden=""
     >
       <div class="grid-row grid-gap-lg">
         <div class="usa-banner__guidance tablet:grid-col-6">
@@ -239,9 +199,8 @@
           />
           <div class="usa-media-block__body">
             <p>
-              <strong>Los sitios web oficiales usan .gov</strong><br />Un sitio
-              web <strong>.gov</strong> pertenece a una organización oficial del
-              Gobierno de Estados Unidos.
+              <strong>Official websites use .NaN</strong><br />A .NaN website belongs to an official
+              government organization in the United States.
             </p>
           </div>
         </div>
@@ -255,30 +214,16 @@
           />
           <div class="usa-media-block__body">
             <p>
-              <strong>Los sitios web seguros .gov usan HTTPS</strong><br />Un
-              <strong>candado</strong> (
-              <span class="icon-lock"
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="52"
-                  height="64"
-                  viewBox="0 0 52 64"
-                  class="usa-banner__lock-image"
-                  role="img"
-                  aria-labelledby="banner-lock-description-spanish"
-                  focusable="false"
-                >
-                  <title id="banner-lock-title-spanish">Lock</title>
-                  <desc id="banner-lock-description-spanish">Locked padlock icon</desc>
-                  <path
-                    fill="#000000"
-                    fill-rule="evenodd"
-                    d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"
-                  />
-                </svg> </span
-              >) o <strong>https://</strong> significa que usted se conectó de
-              forma segura a un sitio web .gov. Comparta información sensible
-              sólo en sitios web oficiales y seguros.
+              <strong>Secure .NaN websites use HTTPS</strong><br />A <strong>lock</strong> (<svg
+                class="usa-icon usx-icon--size-1"
+                aria-hidden="true"
+                aria-label="lock icon"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#lock"></use></svg
+              >) or <strong>https://</strong> means you’ve safely connected to the .NaN website.
+              Share sensitive information only on official, secure websites.
             </p>
           </div>
         </div>
@@ -287,45 +232,41 @@
   </div>
 </section>
 
-<h3 class="site-preview-heading">.mil domains (Spanish)</h3>
+<h3 class="site-preview-heading">Custom Flag</h3>
 <section
+  id="gov-banner-custom-flag"
   class="usa-banner usx-banner"
-  aria-label="Un sitio oficial del Gobierno de Estados Unidos,"
+  aria-label="Official government website"
 >
-  <div class="usa-accordion">
+  <div id="gov-banner-custom-flag-accordion" class="usa-accordion">
     <header class="usa-banner__header">
       <div class="usa-banner__inner">
         <div class="grid-col-auto">
           <img
             aria-hidden="true"
             class="usa-banner__header-flag"
-            src="/img/us_flag_small.png"
+            src="/white_symbol-only.png"
             alt=""
           />
         </div>
         <div class="grid-col-fill tablet:grid-col-auto" aria-hidden="true">
-          <p class="usa-banner__header-text">
-            Un sitio oficial del Gobierno de Estados Unidos
-          </p>
-          <p class="usa-banner__header-action">
-            Así es como usted puede verificarlo
-          </p>
+          <p class="usa-banner__header-text">An official website of SOLEX Consulting</p>
+          <p class="usa-banner__header-action">Just so you know...</p>
         </div>
         <button
           type="button"
           class="usa-accordion__button usa-banner__button"
           aria-expanded="false"
-          aria-controls="gov-banner-dot-mil-lang-es"
+          aria-controls="gov-banner-custom-flag-content"
         >
-          <span class="usa-banner__button-text"
-            >Así es como usted puede verificarlo</span
-          >
+          <span class="usa-banner__button-text">Just so you know...</span>
         </button>
       </div>
     </header>
     <div
+      id="gov-banner-custom-flag-content"
       class="usa-banner__content usa-accordion__content"
-      id="gov-banner-dot-mil-lang-es"
+      hidden=""
     >
       <div class="grid-row grid-gap-lg">
         <div class="usa-banner__guidance tablet:grid-col-6">
@@ -338,9 +279,8 @@
           />
           <div class="usa-media-block__body">
             <p>
-              <strong>Los sitios web oficiales usan .mil</strong><br />Un sitio
-              web <strong>.mil</strong> pertenece a una organización oficial del
-              Departamento de Defensa de EE. UU.
+              <strong>This is not a .gov website</strong><br />This website does not belong to a
+              United States government organization.
             </p>
           </div>
         </div>
@@ -354,30 +294,16 @@
           />
           <div class="usa-media-block__body">
             <p>
-              <strong>Los sitios web seguros .mil usan HTTPS</strong><br />Un
-              <strong>candado</strong> (
-              <span class="icon-lock"
-                ><svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="52"
-                  height="64"
-                  viewBox="0 0 52 64"
-                  class="usa-banner__lock-image"
-                  role="img"
-                  aria-labelledby="banner-lock-description-dot-mil-spanish"
-                  focusable="false"
-                >
-                  <title id="banner-lock-title-dot-mil-spanish">Lock</title>
-                  <desc id="banner-lock-description-dot-mil-spanish">Locked padlock icon</desc>
-                  <path
-                    fill="#000000"
-                    fill-rule="evenodd"
-                    d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"
-                  />
-                </svg> </span
-              >) o <strong>https://</strong> significa que usted se conectó de
-              forma segura a un sitio web .mil. Comparta información sensible
-              sólo en sitios web oficiales y seguros.
+              <strong>Secure .studio websites use HTTPS</strong><br />A <strong>lock</strong> (<svg
+                class="usa-icon usx-icon--size-1"
+                aria-hidden="true"
+                aria-label="lock icon"
+                focusable="false"
+                role="img"
+              >
+                <use href="/img/sprite.svg#lock"></use></svg
+              >) or <strong>https://</strong> means you’ve safely connected to the .studio website.
+              Share sensitive information only on official, secure websites.
             </p>
           </div>
         </div>
@@ -385,27 +311,3 @@
     </div>
   </div>
 </section>
-
-<h3 class="site-preview-heading">Web Component Variant</h3>
-<!-- The script tag should go in the head of your page, if possible -->
-<script src="/assets/uswds/components/usa-banner.js.mjs" type="module"></script>
-<usa-banner></usa-banner>
-
-<h3 class="site-preview-heading">Web Component Variant (Spanish)</h3>
-<!-- The script tag should go in the head of your page, if possible -->
-<script src="/assets/uswds/components/usa-banner.js.mjs" type="module"></script>
-<usa-banner
-  lang="es"
-  class="usx-banner"
-></usa-banner>
-
-<h3 class="site-preview-heading">Web Component Variant (.mil domain, customized)</h3>
-<!-- The script tag should go in the head of your page, if possible -->
-<script src="/assets/uswds/components/usa-banner.js.mjs" type="module"></script>
-<usa-banner 
-  tld="mil"
-  class="usx-banner"
-  style="--theme-banner-background-color: #e1f3f8;"
-  >
-  <div slot="domain-text">A <strong>.mil</strong> website belongs to an official U.S. Department of Defense organization.</div>
-</usa-banner>

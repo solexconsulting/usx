@@ -19,7 +19,7 @@ class ContainerTests(SimpleTestCase):
             "gutters": "grid-gap-", "alignSelf": "usx-container--align-self-",
         }
         for name, definition in props.items():
-            if "options" not in definition or name in ("element", "gridContainer"):
+            if "options" not in definition or name in ("as", "gridContainer"):
                 continue
             for value in definition["options"]:
                 with self.subTest(prop=name, value=value):
@@ -86,14 +86,14 @@ class ContainerTests(SimpleTestCase):
 
     def test_invalid_cms_values_are_ignored(self):
         props = {
-            "element": "script", "gridContainer": ["default"], "gridRow": "true",
+            "as": "script", "gridContainer": ["default"], "gridRow": "true",
             "display": {"value": "flex"}, "direction": "diagonal", "column": True,
             "offset": "13", "gap": "100", "flex": "2", "gutters": "default",
             "responsive": {
                 "phone": {"display": "none"},
                 "mobileLg": ["flex"],
                 "tablet": {"display": "flex injected", "gridRow": True, "className": "injected", "gutters": "default"},
-                "desktop": {"element": "section", "responsive": {"tablet": {"display": "flex"}}},
+                "desktop": {"as": "section", "responsive": {"tablet": {"display": "flex"}}},
             },
         }
         root = fromstring(render_component("container", props))
@@ -118,7 +118,7 @@ class ContainerTests(SimpleTestCase):
         props = get_component("container").load_props()
         layout_names = [
             name for name, definition in props.items()
-            if "options" in definition and name not in ("element", "gridContainer")
+            if "options" in definition and name not in ("as", "gridContainer")
         ]
         for value in (None, "", False, True, 0, 1, [], {}):
             with self.subTest(value=value):
@@ -130,10 +130,10 @@ class ContainerTests(SimpleTestCase):
                 self.assertEqual(root.attrib, {"class": "usx-container"})
 
     def test_semantic_elements_and_attributes_are_escaped(self):
-        for element in get_component("container").load_props()["element"]["options"]:
+        for element in get_component("container").load_props()["as"]["options"]:
             with self.subTest(element=element):
                 props = {
-                    "element": element, "id": 'layout" onclick="bad()',
+                    "as": element, "id": 'layout" onclick="bad()',
                     "ariaLabel": "Content & information", "ariaLabelledby": "heading",
                     "role": "group", "className": 'custom" data-injected="yes',
                 }
@@ -177,7 +177,7 @@ class ContainerTests(SimpleTestCase):
         ])
 
         html = Template('''{% load components %}
-            {% container props=layout element="section" %}{% container element="article" column="6" %}<p>{{ text }}</p>{% endcontainer %}{% endcontainer %}
+            {% container props=layout as="section" %}{% container as="article" column="6" %}<p>{{ text }}</p>{% endcontainer %}{% endcontainer %}
         ''').render(Context({"layout": props, "text": "<Child>"}))
         root = fromstring(html)
         self.assertEqual(root.tag, "section")

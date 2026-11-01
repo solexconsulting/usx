@@ -7,7 +7,7 @@ import Link, { type LinkProps } from '../link/Link';
 
 export interface QuoteProps extends Omit<React.HTMLAttributes<HTMLElement>, 'content'> {
   className?: string;
-  calloutProps?: Omit<CalloutProps, 'element' | 'children' | 'content'>;
+  calloutProps?: Omit<CalloutProps, 'as' | 'children' | 'content'>;
   attributionProps?: AttributionProps;
   children?: React.ReactNode;
   content?: React.ReactNode;
@@ -31,7 +31,7 @@ export default function Quote({
   return (
     <div className={ClassNames('usx-quote', isVertical && 'usx-quote--vertical', className)} {...props}>
       {!isVertical && <Icon name="format_quote" size={4} className="usx-quote__icon" />}
-      <Callout {...calloutProps} element="div">
+      <Callout {...calloutProps} as="div">
         <figure className="usx-quote__body">
           <blockquote
             className={ClassNames('usx-quote__content', blockquoteClassName)}

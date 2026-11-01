@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-export type AccordionHeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+export type AccordionHeadingAs = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export interface AccordionItemProps {
     title: React.ReactNode;
@@ -10,7 +10,7 @@ export interface AccordionItemProps {
     expanded?: boolean;
     headingClassName?: string;
     contentClassName?: string;
-    headingLevel?: AccordionHeadingLevel;
+    headingAs?: AccordionHeadingAs;
     handleToggle?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -18,7 +18,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
     bordered?: boolean;
     items?: AccordionItemProps[];
     multiselectable?: boolean;
-    headingLevel?: AccordionHeadingLevel;
+    headingAs?: AccordionHeadingAs;
     iconPosition?: 'start' | 'end';
 }
 
@@ -29,7 +29,7 @@ function AccordionItem({
     expanded = false,
     headingClassName,
     contentClassName,
-    headingLevel = 'h3',
+    headingAs = 'h3',
     handleToggle,
 }: AccordionItemProps) {
     const headingClasses = classnames('usa-accordion__heading', headingClassName)
@@ -39,7 +39,7 @@ function AccordionItem({
         contentClassName
     )
 
-    const Heading = headingLevel
+    const Heading = headingAs
 
     return (
         <>
@@ -49,7 +49,6 @@ function AccordionItem({
                     className="usa-accordion__button"
                     aria-expanded={expanded}
                     aria-controls={`${id}-content`}
-                    data-testid={`accordionButton_${id}`}
                     onClick={handleToggle}>
                     {title}
                 </button>
@@ -57,7 +56,6 @@ function AccordionItem({
             <div
                 id={`${id}-content`}
                 aria-labelledby={`${id}-heading`}
-                data-testid={`accordionItem_${id}`}
                 className={contentClasses}
                 hidden={!expanded}>
                 {content}
@@ -71,7 +69,7 @@ export function Accordion({
     bordered = false,
     items = [],
     multiselectable = false,
-    headingLevel = 'h3',
+    headingAs = 'h3',
     iconPosition,
     className = '',
     headingClassName = '',
@@ -98,7 +96,7 @@ export function Accordion({
                 <AccordionItem
                     key={item.id}
                     {...item}
-                    headingLevel={headingLevel}
+                    headingAs={headingAs}
                     headingClassName={headingClassName}
                     contentClassName={contentClassName}
                 />

@@ -34,28 +34,28 @@ const RadioButtons: React.FC<RadioButtonsProps> = ({
   hint = null,
   error = null,
   name = 'radio-group',
+  id: groupId,
   options = [],
   defaultValue = undefined,
   className = '',
   ...props
 }) => {
-  const classes = classNames(
-    'usa-radio',
-    'usx-radio',
-    { 'usx-radio--small': small },
-    className
-  );
+  const classes = classNames('usa-radio', 'usx-radio', { 'usx-radio--small': small }, className);
 
-  const inputClasses = classNames(
-    'usa-radio__input',
-    { 'usa-radio__input--tile': tile }
-  );
+  const inputClasses = classNames('usa-radio__input', { 'usa-radio__input--tile': tile });
 
   return (
     <FormGroup error={!!error}>
-      <Fieldset legend={legend} required={required} hint={hint} error={error} {...props}>
+      <Fieldset
+        id={groupId}
+        legend={legend}
+        required={required}
+        hint={hint}
+        error={error}
+        {...props}
+      >
         {options.map((opt, idx) => {
-          const id = opt.id || `${name}-${idx}`;
+          const id = opt.id || `${groupId || name}-${idx}`;
           return (
             <div className={classes} key={id}>
               <input
@@ -69,7 +69,9 @@ const RadioButtons: React.FC<RadioButtonsProps> = ({
               />
               <Label className="usa-radio__label" classOverride={true} htmlFor={id}>
                 {opt.label}
-                {opt.description ? <span className="usa-checkbox__label-description">{opt.description}</span> : null}
+                {opt.description ? (
+                  <span className="usa-checkbox__label-description">{opt.description}</span>
+                ) : null}
               </Label>
             </div>
           );

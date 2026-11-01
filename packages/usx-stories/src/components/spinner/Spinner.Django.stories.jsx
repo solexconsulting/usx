@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import config from '../../../../usx-react/src/components/spinner/config.json';
-import { buildArgTypes, createDjangoStory, createBulkDjangoStory, getComponentHtml, componentTag } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, createBulkDjangoStory, componentTag } from '../../utils/storyHelpers.jsx';
+import { useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
 import { storyDefs } from './Spinner.React.stories.jsx';
 
 export default {
@@ -19,76 +20,45 @@ export const Small = createStory(storyDefs.Small);
 export const Large = createStory(storyDefs.Large);
 export const WithColor = createStory(storyDefs.WithColor);
 
-export const DifferentSizes = createBulkDjangoStory('spinner', [
-  { storyName: 'size 1', props: { size: 1 } },
-  { storyName: 'size 2', props: { size: 2 } },
-  { storyName: 'size 3', props: { size: 3 } },
-  { storyName: 'size 4', props: { size: 4 } },
-  { storyName: 'size 5', props: { size: 5 } },
-  { storyName: 'size 6', props: { size: 6 } },
-  { storyName: 'size 7', props: { size: 7 } },
-  { storyName: 'size 8', props: { size: 8 } },
-  { storyName: 'size 9', props: { size: 9 } }
-]);
+const flexRow = ({ children }) => (
+  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>{children}</div>
+);
+const invertedRow = (extraClasses) =>
+  function InvertedRow({ children }) {
+    return (
+      <div className={`bg-surface-inverse padding-3 display-inline-flex gap-4 flex-align-center${extraClasses}`}>
+        {children}
+      </div>
+    );
+  };
 
-export const DifferentColors = createBulkDjangoStory('spinner', [
-  { props: { size: 4, color: 'primary' } },
-  { props: { size: 4, color: 'secondary' } },
-  { props: { size: 4, color: 'accent-cool' } },
-  { props: { size: 4, color: 'error' } },
-  { props: { size: 4, color: 'success' } }
-]);
+export const DifferentSizes = createBulkDjangoStory(
+  'spinner',
+  [1, 2, 3, 4, 5, 6, 7, 8, 9].map((size) => ({ props: { size } })),
+  flexRow
+);
 
-export const DifferentSizesOnInvertedBackground = createBulkDjangoStory('spinner', [
-  { storyName: 'size 1', props: { size: 1, color: 'inverse' } },
-  { storyName: 'size 2', props: { size: 2, color: 'inverse' } },
-  { storyName: 'size 3', props: { size: 3, color: 'inverse' } },
-  { storyName: 'size 4', props: { size: 4, color: 'inverse' } },
-  { storyName: 'size 5', props: { size: 5, color: 'inverse' } },
-  { storyName: 'size 6', props: { size: 6, color: 'inverse' } },
-  { storyName: 'size 7', props: { size: 7, color: 'inverse' } },
-  { storyName: 'size 8', props: { size: 8, color: 'inverse' } },
-  { storyName: 'size 9', props: { size: 9, color: 'inverse' } }
-], ({children}) => (
-  <div
-    className="bg-surface-inverse text-inverse padding-3 display-flex flex-row flex-wrap grid-gap-lg flex-align-center"
-    style={{ gap: '1rem' }}
-  >
-    {children}
-  </div>
-));
+export const DifferentColors = createBulkDjangoStory(
+  'spinner',
+  ['primary', 'secondary', 'accent-cool', 'error', 'success'].map((color) => ({ props: { size: 4, color } })),
+  flexRow
+);
 
-export const DifferentColorsOnInvertedBackground = createBulkDjangoStory('spinner', [
-  { props: { size: 4, color: 'base-lightest' } },
-  { props: { size: 4, color: 'primary-light' } },
-  { props: { size: 4, color: 'secondary-light' } },
-  { props: { size: 4, color: 'accent-cool-light' } }
-], ({children}) => (
-  <div
-    className="bg-surface-inverse text-inverse padding-3 display-flex flex-row flex-wrap grid-gap-lg flex-align-center"
-    style={{ gap: '1rem' }}
-  >
-    {children}
-  </div>
-));
+export const DifferentSizesOnInvertedBackground = createBulkDjangoStory(
+  'spinner',
+  [1, 2, 3, 4, 5, 6, 7, 8, 9].map((size) => ({ props: { size, color: 'inverse' } })),
+  invertedRow('')
+);
 
-export const OmittedLabel = createStory(storyDefs.OmitLabel);
+export const DifferentColorsOnInvertedBackground = createBulkDjangoStory(
+  'spinner',
+  ['base', 'primary-light', 'secondary-light', 'accent-cool-light'].map((color) => ({ props: { size: 4, color } })),
+  invertedRow(' text-inverse')
+);
 
 const SpinnerWithTooltip = (args) => {
-  const [spinnerHtml, setSpinnerHtml] = useState('');
-  const [tooltipHtml, setTooltipHtml] = useState('');
-  // Keyed on the serialized args so a new-but-equal args object doesn't refetch.
-  const argsKey = JSON.stringify(args);
-
-  useEffect(() => {
-    getComponentHtml('spinner', storyDefs.OmitLabel).then(setSpinnerHtml);
-  }, []);
-
-  useEffect(() => {
-    if (!spinnerHtml) return;
-    setTooltipHtml('');
-    getComponentHtml('tooltip', { ...JSON.parse(argsKey), children: spinnerHtml }).then(setTooltipHtml);
-  }, [spinnerHtml, argsKey]);
+  const { html: spinnerHtml } = useDjangoRenderedHtml('spinner', { size: 4 });
+  const { html: tooltipHtml } = useDjangoRenderedHtml('tooltip', { ...args, children: spinnerHtml });
 
   if (!tooltipHtml) return null;
   return <div dangerouslySetInnerHTML={{ __html: tooltipHtml }} />;
@@ -102,7 +72,7 @@ export const WithTooltip = {
   parameters: {
     docs: {
       source: {
-        code: componentTag({ name: 'tooltip', props: { label: 'Loading...', position: 'top' }, children: componentTag({ name: 'spinner', props: storyDefs.OmitLabel }) } )
+        code: componentTag({ name: 'tooltip', props: { label: 'Loading...', position: 'top' }, children: componentTag({ name: 'spinner', props: { size: 4 } }) } )
       }
     }
   },

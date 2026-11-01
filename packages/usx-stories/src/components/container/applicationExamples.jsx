@@ -20,7 +20,7 @@ export const applicationStoryDescriptions = {
 
 export const applicationStoryDefs = {
   DeeplyNestedApplicationWorkspace: {
-    element: 'section',
+    as: 'section',
     ariaLabel: 'Riverbend neighborhood garden application',
     gridContainer: 'default',
     display: 'flex',
@@ -31,7 +31,7 @@ export const applicationStoryDefs = {
       <>
         <Container display="flex" direction="column" gap="2" responsive={{ tablet: { direction: 'row', justify: 'space-between', align: 'center', wrap: 'wrap' } }}>
           <Container id="workspace-overview">
-            <Section title="Riverbend neighborhood garden" headingLevel="h2" style={{ margin: 0 }}>
+            <Section title="Riverbend neighborhood garden" headingAs="h2" style={{ margin: 0 }}>
               <Prose className="text-base">Community improvement grant · CG-2048</Prose>
             </Section>
           </Container>
@@ -46,7 +46,7 @@ export const applicationStoryDefs = {
             <Container display="flex" direction="column" gap="3">
               <Alert variant="info" noIcon heading="One document needs attention" text="Confirm the project budget before sending your application for review." className="margin-top-0" />
               <Container id="workspace-documents" display="flex" direction="column" gap="2">
-                <Section title="Supporting documents" headingLevel="h3" style={{ margin: 0 }}>
+                <Section title="Supporting documents" headingAs="h3" style={{ margin: 0 }}>
                   <Prose className="text-base">2 of 3 ready for review</Prose>
                 </Section>
                 <Container display="flex" direction="column" gap="2">
@@ -75,7 +75,7 @@ export const applicationStoryDefs = {
                     <Container key={batch.title} display="flex" direction="column" gap="2">
                       <Card className="margin-0">
                         <Container display="flex" direction="column" gap="2" className="padding-1 tablet:padding-2">
-                          <Section title={batch.title} headingLevel="h4" style={{ margin: 0 }}>
+                          <Section title={batch.title} headingAs="h4" style={{ margin: 0 }}>
                             <Prose>{batch.description}</Prose>
                           </Section>
                           <Container display="flex" wrap="wrap" align="center" gap="1">
@@ -95,7 +95,7 @@ export const applicationStoryDefs = {
                 </Container>
               </Container>
               <Container id="workspace-activity">
-                <Section title="Recent activity" headingLevel="h3" style={{ margin: 0 }}>
+                <Section title="Recent activity" headingAs="h3" style={{ margin: 0 }}>
                   <List ordered items={[
                     'Budget uploaded. Jamie added the latest cost estimate.',
                     'Site confirmed. The garden committee approved the location.',
@@ -104,10 +104,10 @@ export const applicationStoryDefs = {
               </Container>
             </Container>
           </Container>
-          <Container element="aside" ariaLabel="Application navigation and next steps" column="12" responsive={{ desktop: { column: '4' } }} className="margin-top-3 desktop:margin-top-0">
+          <Container as="aside" ariaLabel="Application navigation and next steps" column="12" responsive={{ desktop: { column: '4' } }} className="margin-top-3 desktop:margin-top-0">
             <Container display="flex" direction="column" gap="2">
-              <Section title="In this application" headingLevel="h3" style={{ margin: 0 }}>
-                <Container element="nav" ariaLabel="Application sections" display="flex" direction="column" gap="1">
+              <Section title="In this application" headingAs="h3" style={{ margin: 0 }}>
+                <Container as="nav" ariaLabel="Application sections" display="flex" direction="column" gap="1">
                   <Link href="#workspace-overview">Overview</Link>
                   <Link href="#workspace-documents">Supporting documents</Link>
                   <Link href="#workspace-activity">Recent activity</Link>
@@ -129,7 +129,7 @@ export const applicationStoryDefs = {
     ),
   },
   ResponsiveActionBar: {
-    element: 'section',
+    as: 'section',
     id: 'action-bar-title',
     ariaLabel: 'Neighborhood access study',
     display: 'flex',
@@ -140,7 +140,7 @@ export const applicationStoryDefs = {
         <Card className="margin-0">
           <Container display="flex" direction="column" gap="2" responsive={{ tablet: { direction: 'row', wrap: 'wrap', align: 'center', justify: 'space-between' }, desktop: { gap: '4' } }} className="padding-2 tablet:padding-3">
             <Container flex="auto" className="minw-0">
-              <Section title="Neighborhood access study" headingLevel="h2" style={{ margin: 0 }}>
+              <Section title="Neighborhood access study" headingAs="h2" style={{ margin: 0 }}>
                 <Container display="flex" wrap="wrap" gap="1" align="center">
                   <Tag color="blue-20v">In review</Tag>
                   <Prose>Record NS-1042</Prose>
@@ -148,14 +148,14 @@ export const applicationStoryDefs = {
                 </Container>
               </Section>
             </Container>
-            <Container element="nav" ariaLabel="Record actions" display="flex" direction="column" gap="1" responsive={{ mobileLg: { direction: 'row', wrap: 'wrap' } }}>
+            <Container as="nav" ariaLabel="Record actions" display="flex" direction="column" gap="1" responsive={{ mobileLg: { direction: 'row', wrap: 'wrap' } }}>
               <Button href="#action-overview" variant="primary" className="margin-0">Read overview</Button>
               <Button href="#action-history" variant="outline" className="margin-0">Review activity</Button>
             </Container>
           </Container>
         </Card>
         <Container id="action-overview">
-          <Section title="Study overview" headingLevel="h3" style={{ margin: 0 }}>
+          <Section title="Study overview" headingAs="h3" style={{ margin: 0 }}>
             <Prose>Review proposed walking routes between the library, community center, and neighborhood parks.</Prose>
           </Section>
         </Container>
@@ -168,21 +168,21 @@ export const applicationStoryDefs = {
     ),
   },
   ServiceComparison: {
-    element: 'section',
+    as: 'section',
     ariaLabel: 'Choose how to get help',
     gridContainer: 'default',
     children: (
       <>
-        <Section title="Choose how to get help" headingLevel="h2">
+        <Section title="Choose how to get help" headingAs="h2">
           <Prose>Use the route that best fits your question and access needs.</Prose>
         </Section>
-        <Container element="ul" gridRow gutters="2" className="add-list-reset margin-top-3">
+        <Container as="ul" gridRow gutters="2" className="add-list-reset margin-top-3">
           {[
             { title: 'Self-service', tag: 'Anytime', body: 'Browse answers and application guides whenever you need them.', target: 'guides', link: 'View guide topics' },
             { title: 'Phone appointment', tag: 'Personal help', body: 'Talk through your application with a specialist. Language help is available.', target: 'phone', link: 'Phone details' },
             { title: 'Community help desk', tag: 'In person', body: 'Bring your documents to a local help desk and work through the next steps together.', target: 'desk', link: 'Plan your visit' },
           ].map((route) => (
-            <Container key={route.target} element="li" column="12" display="flex" responsive={{ tablet: { column: '6', offset: route.target === 'desk' ? '3' : 'none' }, desktop: { column: '4', offset: 'none' } }} className="margin-bottom-2">
+            <Container key={route.target} as="li" column="12" display="flex" responsive={{ tablet: { column: '6', offset: route.target === 'desk' ? '3' : 'none' }, desktop: { column: '4', offset: 'none' } }} className="margin-bottom-2">
               <Card
                 title={route.title}
                 description={route.body}
@@ -195,18 +195,18 @@ export const applicationStoryDefs = {
         </Container>
         <Container gridRow gutters="2" responsive={{ desktop: { gutters: '3' } }} className="margin-top-2">
           <Container id="comparison-guides" column="12" responsive={{ tablet: { column: '6' }, desktop: { column: '4' } }} className="margin-bottom-3">
-            <Section title="Self-service guide topics" headingLevel="h3" className="border-top-1px border-base-lighter padding-top-2" style={{ margin: 0 }}>
+            <Section title="Self-service guide topics" headingAs="h3" className="border-top-1px border-base-lighter padding-top-2" style={{ margin: 0 }}>
               <List items={['Eligibility and step-by-step application guides', 'Supporting document checklists', 'Submitting a completed application']} />
             </Section>
           </Container>
           <Container id="comparison-phone" column="12" responsive={{ tablet: { column: '6' }, desktop: { column: '4' } }} className="margin-bottom-3">
-            <Section title="Phone appointment details" headingLevel="h3" className="border-top-1px border-base-lighter padding-top-2" style={{ margin: 0 }}>
+            <Section title="Phone appointment details" headingAs="h3" className="border-top-1px border-base-lighter padding-top-2" style={{ margin: 0 }}>
               <Prose>Have your application reference available. A support person may join the call.</Prose>
               <List items={['Help with form questions', 'Language assistance on request', 'A written follow-up summary']} />
             </Section>
           </Container>
           <Container id="comparison-desk" column="12" responsive={{ tablet: { column: '6', offset: '3' }, desktop: { column: '4', offset: 'none' } }} className="margin-bottom-3">
-            <Section title="Planning an in-person visit" headingLevel="h3" className="border-top-1px border-base-lighter padding-top-2" style={{ margin: 0 }}>
+            <Section title="Planning an in-person visit" headingAs="h3" className="border-top-1px border-base-lighter padding-top-2" style={{ margin: 0 }}>
               <Prose>Bring copies of your supporting documents and a list of questions. Ask the help desk about access arrangements before your visit.</Prose>
               <List items={['Accessible meeting rooms', 'Document review', 'Support for family members']} />
             </Section>
@@ -216,7 +216,7 @@ export const applicationStoryDefs = {
     ),
   },
   CommunityEvent: {
-    element: 'article',
+    as: 'article',
     ariaLabel: 'Building a greener neighborhood workshop',
     gridContainer: 'default',
     display: 'flex',
@@ -225,7 +225,7 @@ export const applicationStoryDefs = {
     children: (
       <>
         <Container display="flex" direction="column" gap="2" responsive={{ tablet: { direction: 'row', wrap: 'wrap', justify: 'space-between', align: 'center' } }}>
-          <Section title="Building a greener neighborhood" headingLevel="h2" style={{ margin: 0 }}>
+          <Section title="Building a greener neighborhood" headingAs="h2" style={{ margin: 0 }}>
             <Prose className="text-base">Community workshop</Prose>
           </Section>
           <Container flex="none"><Button variant="primary" href="#event-attendance" className="margin-0">Plan your attendance</Button></Container>
@@ -237,7 +237,7 @@ export const applicationStoryDefs = {
         </Container>
         <Container gridRow gutters="3">
           <Container column="12" responsive={{ desktop: { column: '8' } }}>
-            <Section title="Workshop agenda" headingLevel="h3" style={{ margin: 0 }}>
+            <Section title="Workshop agenda" headingAs="h3" style={{ margin: 0 }}>
               <List ordered unstyled items={[
                 ['9:00 AM', 'Welcome and neighborhood priorities', 'Community planning team', 'Discussion'],
                 ['9:30 AM', 'Design a shared green space', 'Riverbend garden volunteers', 'Small groups'],
@@ -246,7 +246,7 @@ export const applicationStoryDefs = {
                 <Container key={time} display="flex" direction="column" gap="1" responsive={{ tablet: { direction: 'row', gap: '3', align: 'start' } }} className="border-top-1px border-base-lighter padding-y-2">
                   <Container flex="none" className="minw-10"><Prose className="text-bold">{time}</Prose></Container>
                   <Container flex="fill" className="minw-0">
-                    <Section title={title} headingLevel="h4" style={{ margin: 0 }}>
+                    <Section title={title} headingAs="h4" style={{ margin: 0 }}>
                       <Container display="flex" wrap="wrap" gap="1" align="center">
                         <Prose>{speaker}</Prose>
                         <Tag className="margin-0">{format}</Tag>
@@ -257,13 +257,13 @@ export const applicationStoryDefs = {
               ))} />
             </Section>
           </Container>
-          <Container element="aside" ariaLabel="Workshop attendance" column="12" responsive={{ desktop: { column: '4' } }} className="margin-top-2 desktop:margin-top-0">
+          <Container as="aside" ariaLabel="Workshop attendance" column="12" responsive={{ desktop: { column: '4' } }} className="margin-top-2 desktop:margin-top-0">
             <Container id="event-attendance">
               <SummaryBox id="event-attendance-title" heading="Attending the workshop">
                 <Container display="flex" direction="column" gap="2">
                   <Prose>Riverbend Community Center, main meeting room</Prose>
                   <Prose>Bring your ideas and a reusable water bottle. Materials are provided.</Prose>
-                  <Section title="Access and participation" headingLevel="h5" style={{ margin: 0 }}>
+                  <Section title="Access and participation" headingAs="h5" style={{ margin: 0 }}>
                     <Prose>The main entrance is step-free. Quiet seating and large-print materials are available at the welcome desk.</Prose>
                   </Section>
                 </Container>

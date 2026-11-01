@@ -12,5 +12,5 @@ export default {
 const createStory = createDjangoStory({ componentName: 'villain' });
 
 export const Default = createStory(storyDefs.Default);
-export const WithoutCallout = createStory(storyDefs.WithoutCallout);
-export const WithoutButton = createStory(storyDefs.WithoutButton);
+export const WithoutCallout = { ...createStory(storyDefs.WithoutCallout), name: 'Without callout' };
+export const WithoutButton = { ...createStory(storyDefs.WithoutButton), name: 'Without button' };

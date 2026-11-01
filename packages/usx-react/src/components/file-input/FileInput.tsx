@@ -148,8 +148,9 @@ export default function FileInput({
       {commonLabel}
       {commonHint}
       {commonError}
-      <div className="usx-file-input__add-only">
+      <div className="usx-file-input__add-only" data-usx-file-list-hint={typeof fileListHint === 'string' && fileListHint ? fileListHint : 'Selected files'}>
         <input
+          ref={(node) => { if (node) (node as HTMLInputElement & { usxReactManaged?: boolean }).usxReactManaged = true; }}
           className={ClassNames('usa-file-input', 'usx-file-input', className)}
           id={id}
           type="file"

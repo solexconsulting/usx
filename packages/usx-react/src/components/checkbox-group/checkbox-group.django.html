@@ -8,7 +8,7 @@
     {% with index=forloop.counter0|stringformat:"s" %}
     {% with baseId=id|default:groupName %}
     {% with optionId=baseId|add:"-"|add:index %}
-    {% checkbox props=opt id=opt.id|default:optionId name=opt.name|default:groupName tile=opt.tile|default_bool:tile small=opt.small|default_bool:small %}{% endcheckbox %}
+    {% checkbox props=opt id=opt.id|default:optionId name=opt.name|default:groupName tile=opt.tile|default_bool:tile small=opt.small|default_bool:small formGroup=False %}{% endcheckbox %}
     {% endwith %}
     {% endwith %}
     {% endwith %}

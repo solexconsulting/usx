@@ -3,6 +3,7 @@ import ClassNames from 'classnames';
 import Required from '../required/Required';
 
 export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+  id?: string;
   htmlFor?: string;
   required?: boolean;
   error?: unknown;
@@ -13,6 +14,7 @@ export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 }
 
 export default function Label({
+  id,
   htmlFor,
   required = false,
   error = false,
@@ -31,8 +33,9 @@ export default function Label({
 
   return (
     <label
+      id={id || undefined}
       className={classOverride ? className : classes}
-      {...(htmlFor ? { htmlFor } : {})}
+      htmlFor={htmlFor || undefined}
       {...props}
     >
       {required && <Required />}

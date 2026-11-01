@@ -65,12 +65,15 @@ export const componentInit = (...names) => {
                 });
                 observer.observe(document.body, { childList: true, subtree: true });
                 init(document.body);
+                // Lets play functions wait for the USWDS scripts, which load asynchronously.
+                document.body.dataset.usxReady = 'true';
                 options.onReady?.();
             });
 
             return () => {
                 active = false;
                 observer?.disconnect();
+                delete document.body.dataset.usxReady;
             };
         }, []);
 

@@ -2,14 +2,17 @@ import React from 'react';
 import Footer from '../../../../usx-react/src/components/footer/Footer.tsx';
 import Branding from '../../../../usx-react/src/components/header/Branding.tsx';
 import config from '../../../../usx-react/src/components/footer/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, uswdsInitNote } from '../../utils/storyHelpers.jsx';
+import { FooterInitOnce } from './footerInit.jsx';
 
 export default {
   title: 'React/USWDS/Footer',
   component: Footer,
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'borderRoleVars'],
+  decorators: [FooterInitOnce],
+  parameters: { docs: { description: { component: uswdsInitNote('`footer.init()`') } } },
 };
 
 // ── Shared story data ──────────────────────────────────────────────────────
@@ -32,11 +35,11 @@ const branding = {
 const brandingUrl = '/';
 
 const socialLinks = [
-  { icon: 'img/usa-icons/facebook.svg',  href: 'javascript:void(0);', alt: 'Facebook' },
-  { icon: 'img/usa-icons/twitter.svg',   href: 'javascript:void(0);', alt: 'Twitter' },
-  { icon: 'img/usa-icons/youtube.svg',   href: 'javascript:void(0);', alt: 'YouTube' },
-  { icon: 'img/usa-icons/instagram.svg', href: 'javascript:void(0);', alt: 'Instagram' },
-  { icon: 'img/usa-icons/rss_feed.svg',  href: 'javascript:void(0);', alt: 'RSS' },
+  { icon: 'img/usa-icons/facebook.svg',  href: '/social/facebook', alt: 'Facebook' },
+  { icon: 'img/usa-icons/twitter.svg',   href: '/social/twitter', alt: 'Twitter' },
+  { icon: 'img/usa-icons/youtube.svg',   href: '/social/youtube', alt: 'YouTube' },
+  { icon: 'img/usa-icons/instagram.svg', href: '/social/instagram', alt: 'Instagram' },
+  { icon: 'img/usa-icons/rss_feed.svg',  href: '/social/rss', alt: 'RSS' },
 ];
 
 const contactArgs = {
@@ -133,7 +136,7 @@ export const storyDefs = {
   },
   NoNav: {
     variant: 'big',
-    signUp,
+    signUp: { ...signUp, emailId: 'footer-email-no-nav' },
     branding,
     brandingUrl,
     ...contactArgs,
@@ -145,6 +148,39 @@ export const storyDefs = {
       { text: 'Accessibility', href: '/accessibility' },
     ],
     contactPhone: { href: 'tel:18005555555', text: '(800) 555-5555' },
+  },
+  PrimaryOnly: {
+    variant: 'medium',
+    navLinks,
+    returnToTop: false,
+  },
+  CustomComposition: {
+    variant: 'medium',
+    returnToTop: true,
+    navLinks,
+    primaryChildren: (
+      <nav className="usa-footer__nav" aria-label="Custom footer nav">
+        <ul className="grid-row grid-gap">
+          {navLinks.map((link, i) => (
+            <li key={i} className="mobile-lg:grid-col-4 desktop:grid-col-auto usa-footer__primary-content">
+              <a className="usa-footer__primary-link" href={link.href}>{link.text}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    ),
+    secondaryChildren: (
+      <div className="grid-container">
+        <div className="grid-row grid-gap" style={{ alignItems: 'center' }}>
+          <Branding
+            branding={branding}
+            projectUrl={brandingUrl}
+            className="usa-footer__logo grid-row mobile-lg:grid-col-6 mobile-lg:grid-gap-2 usx-footer__logo"
+          />
+          <div className="usa-footer__contact-links mobile-lg:grid-col-6" />
+        </div>
+      </div>
+    ),
   },
 };
 
@@ -175,56 +211,28 @@ NoNav.args = storyDefs.NoNav;
 export const Minimal = Template.bind({});
 Minimal.args = storyDefs.Minimal;
 
+export const PrimaryOnly = Template.bind({});
+PrimaryOnly.args = storyDefs.PrimaryOnly;
+
+export const borderRoleVars = {
+  '--usx-footer-border-top': '3px solid #005ea2',
+  '--usx-footer-border-bottom': '4px solid #237a3b',
+  '--usx-footer-primary-section-border-top': '2px dashed #a72f10',
+  '--usx-footer-secondary-section-border-top': '5px dotted #8a3575',
+  '--usx-footer-primary-link-border-top': '2px dashed #237a3b',
+  '--usx-footer-nav-border-bottom': '3px solid #d1980b',
+};
+
 export const BorderRoles = {
-  args: {
-    ...storyDefs.Big,
-    returnToTop: true,
-    style: {
-      '--usx-footer-border-top': '3px solid #005ea2',
-      '--usx-footer-border-bottom': '4px solid #237a3b',
-      '--usx-footer-primary-section-border-top': '2px dashed #a72f10',
-      '--usx-footer-secondary-section-border-top': '5px dotted #8a3575',
-      '--usx-footer-primary-link-border-top': '2px dashed #237a3b',
-      '--usx-footer-nav-border-bottom': '3px solid #d1980b',
-    },
-  },
-  render: Template,
+  args: { ...storyDefs.Big, signUp: { ...signUp, emailId: 'footer-email-border-roles' }, returnToTop: true },
+  render: (args) => (
+    <div style={borderRoleVars}>
+      <Footer {...args} />
+    </div>
+  ),
 };
 
 // ── Composition story: using sub-components directly ──────────────────────
 
-export const CustomComposition = {
-  render: () => (
-    <Footer
-      variant="medium"
-      returnToTop
-      navLinks={navLinks}
-      primaryChildren={
-        <nav className="usa-footer__nav" aria-label="Custom footer nav">
-          <ul className="grid-row grid-gap">
-            {navLinks.map((link, i) => (
-              <li key={i} className="mobile-lg:grid-col-4 desktop:grid-col-auto usa-footer__primary-content">
-                <a className="usa-footer__primary-link" href={link.href}>{link.text}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      }
-      secondaryChildren={
-        <div className="grid-container">
-          <div className="grid-row grid-gap" style={{ alignItems: 'center' }}>
-            <Branding
-              branding={branding}
-              projectUrl={brandingUrl}
-              className="usa-footer__logo grid-row mobile-lg:grid-col-6 mobile-lg:grid-gap-2 usx-footer__logo"
-            />
-            <div className="usa-footer__contact-links mobile-lg:grid-col-6">
-              {/* Social links and contact info can be added here if needed */}
-            </div>
-          </div>
-        </div>
-      }
-    />
-  ),
-};
+export const CustomComposition = { args: storyDefs.CustomComposition };
 

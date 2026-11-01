@@ -57,6 +57,23 @@ export const storyDefs = {
     action: '/searching-with-an-action/',
     placeholder: 'Search the site...',
   },
+  CustomLabel: {
+    id: 'search-custom-label',
+    label: 'Find a program',
+  },
+  IconOnlyCustomLabel: {
+    id: 'search-icon-only-custom-label',
+    label: 'Find a program',
+    iconOnly: true,
+  },
+  CustomAriaLabel: {
+    id: 'search-custom-aria-label',
+    ariaLabel: 'Site search',
+  },
+  CustomSearchKey: {
+    id: 'search-custom-key',
+    searchKey: 'query',
+  },
   WithOnSubmit: {
     id: 'search-with-onsubmit',
     placeholder: 'Type something and submit...',
@@ -72,6 +89,10 @@ export const IconOnly = { args: storyDefs.IconOnly };
 export const BigIconOnly = { args: storyDefs.BigIconOnly };
 export const NonStandardIcon = { args: storyDefs.NonStandardIcon };
 export const WithCustomButtonVariant = { args: storyDefs.WithCustomButtonVariant };
+export const CustomLabel = { args: storyDefs.CustomLabel };
+export const IconOnlyCustomLabel = { args: storyDefs.IconOnlyCustomLabel };
+export const CustomAriaLabel = { args: storyDefs.CustomAriaLabel };
+export const CustomSearchKey = { args: storyDefs.CustomSearchKey };
 export const GoogleAction = { args: storyDefs.GoogleAction };
 export const PathAction = { args: storyDefs.PathAction };
 export const WithOnSubmit = {

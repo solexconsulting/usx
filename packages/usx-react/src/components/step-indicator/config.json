@@ -1,7 +1,7 @@
 {
   "name": "step-indicator",
   "template": "step-indicator/step-indicator.django.html",
-  "version": 1,
+  "version": 2,
   "required": [
     "steps"
   ],
@@ -35,7 +35,7 @@
       ],
       "description": "Visual variant modifier"
     },
-    "headingTag": {
+    "headingAs": {
       "type": "select",
       "options": [
         "h2",

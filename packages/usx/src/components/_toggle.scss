@@ -7,7 +7,7 @@
   border: usx-when($usx-border-width-inputs, $usx-border-width-inputs, 1px) solid usx-when($usx-color-border, $usx-color-border, currentcolor);
   border-radius: 0.375rem;
 
-  @media (min-width: 30em) {
+  @media (width >= 30em) {
     display: inline-flex;
   }
 

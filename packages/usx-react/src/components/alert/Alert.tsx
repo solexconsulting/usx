@@ -62,7 +62,8 @@ export default function Alert({
   } else if (ariaLabel) {
     accessibilityProps['aria-label'] = ariaLabel;
   } else if (resolvedRole === 'region') {
-    accessibilityProps['aria-label'] = heading || `${normalizedVariant} alert`;
+    const label = heading || (normalizedVariant ? `${normalizedVariant} alert` : undefined);
+    if (label) accessibilityProps['aria-label'] = label;
   }
 
   return (
@@ -73,11 +74,11 @@ export default function Alert({
           <div className="usa-alert__text">
             {children}
           </div>
-        ) : (
+        ) : text ? (
           <p className="usa-alert__text">
             {text}
           </p>
-        )}
+        ) : null}
         {onDismiss && (
           <button className="usx-alert__dismiss" aria-label="Dismiss alert" onClick={onDismiss}>
             <Icon name="close" size={3} staticBaseUrl={staticBaseUrl} />

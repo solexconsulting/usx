@@ -15,7 +15,6 @@
 
     &::before {
       color: usx-when($usx-process-list-counter-text);
-
       border-color: usx-when($usx-process-list-counter-border);
 
       @if $usx-process-list-counter-ring {

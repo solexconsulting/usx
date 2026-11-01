@@ -15,11 +15,11 @@ export default {
 const createStory = createDjangoStory({ componentName: 'hero' });
 
 export const Default = createStory(storyDefs.Default);
-export const NoBackground = createStory(storyDefs.NoBackground);
-export const WithoutCallout = createStory(storyDefs.WithoutCallout);
-export const WithoutButton = createStory(storyDefs.WithoutButton);
-export const NoOverlay = createStory(storyDefs.NoOverlay);
-export const WithSearch = createStory(storyDefs.WithSearch);
+export const NoBackground = { ...createStory(storyDefs.NoBackground), name: 'No background image' };
+export const WithoutCallout = { ...createStory(storyDefs.WithoutCallout), name: 'Without callout' };
+export const WithoutButton = { ...createStory(storyDefs.WithoutButton), name: 'Without button' };
+export const NoOverlay = { ...createStory(storyDefs.NoOverlay), name: 'No overlay' };
+export const WithSearch = { ...createStory(storyDefs.WithSearch), name: 'With search' };
 export const RightAligned = createStory(storyDefs.RightAligned);
 export const NarrowCallout = createStory(storyDefs.NarrowCallout);
 export const Centered = createStory(storyDefs.Centered);

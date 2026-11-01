@@ -10,7 +10,7 @@ export default {
   component: BackToTop,
   tags: ['USX', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'renderAllVariants'],
 };
 
 export const storyDefs = {
@@ -85,32 +85,39 @@ export const LinkOnDark = {
   ),
 };
 
-export const AllVariants = {
-  render: () => (
-    <div className="display-flex flex-wrap" style={{ gap: '2rem' }}>
-      <div className="display-flex flex-column flex-justify-start flex-align-self-start" style={{ gap: '0.5rem' }}>
-        <h4>Button (icon right)</h4>
-        <BackToTop label="Back to top" iconPosition="right" iconSize={2} />
-        <BackToTop label="Back to top" variant="primary" iconPosition="right" iconSize={2} />
-        <BackToTop label={null} variant="primary" iconSize={3} className="width-6" />
-        <BackToTop label={null} variant="primary" iconSize={4} className="width-7" />
-        <BackToTop label="Back to top" href="#back-to-top" iconPosition="right" iconSize={2} />
-        <div className="bg-primary-darkest padding-1">
-          <BackToTop label="Back to top" href="#back-to-top" iconPosition="right" iconSize={2} className="text-white hover:text-accent-cool" />
-        </div>
-      </div>
-      <div className="display-flex flex-column flex-align-end margin-left-auto" style={{ gap: '0.5rem' }}>
-        <h4>Button (icon left)</h4>
-        <BackToTop label="Back to top" iconPosition="left" iconSize={2} />
-        <BackToTop label="Back to top" variant="primary" iconPosition="left" iconSize={2} />
-        <BackToTop label={null} variant="primary" iconSize={3} className="width-6" />
-        <BackToTop label={null} variant="primary" iconSize={4} className="width-7" />
-        <BackToTop label="Back to top" href="#back-to-top" iconPosition="left" iconSize={2} />
-        <div className="bg-primary-darkest padding-1">
-          <BackToTop label="Back to top" href="#back-to-top" iconPosition="left" iconSize={2} className="text-white hover:text-accent-cool" />
-        </div>
-      </div>
-    </div>
-  ),
-};
+const stackProps = (position) => [
+  { label: 'Back to top', iconPosition: position, iconSize: 2 },
+  { label: 'Back to top', variant: 'primary', iconPosition: position, iconSize: 2 },
+  { label: null, variant: 'primary', iconSize: 3, className: 'width-6' },
+  { label: null, variant: 'primary', iconSize: 4, className: 'width-7' },
+  { label: 'Back to top', href: '#back-to-top', iconPosition: position, iconSize: 2 },
+];
+const onDarkProps = (position) => ({
+  label: 'Back to top',
+  href: '#back-to-top',
+  iconPosition: position,
+  iconSize: 2,
+  className: 'text-white hover:text-accent-cool',
+});
 
+// Shared with the Django stories, which pass in a renderer for the Django-rendered link/button.
+export const renderAllVariants = (renderBackToTop) => (
+  <div className="display-flex flex-wrap" style={{ gap: '2rem' }}>
+    {[
+      ['right', 'Button (icon right)', 'flex-justify-start flex-align-self-start'],
+      ['left', 'Button (icon left)', 'flex-align-end margin-left-auto'],
+    ].map(([position, heading, alignment]) => (
+      <div key={position} className={`display-flex flex-column ${alignment}`} style={{ gap: '0.5rem' }}>
+        <h4>{heading}</h4>
+        {stackProps(position).map((props, index) => (
+          <React.Fragment key={index}>{renderBackToTop(props)}</React.Fragment>
+        ))}
+        <div className="bg-primary-darkest padding-1">{renderBackToTop(onDarkProps(position))}</div>
+      </div>
+    ))}
+  </div>
+);
+
+export const AllVariants = {
+  render: () => renderAllVariants((props) => <BackToTop {...props} />),
+};

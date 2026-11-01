@@ -107,7 +107,7 @@ export const storyDefs = {
   },
   CustomTitle: {
     id: 'in-page-nav-custom-title',
-    titleHeadingLevel: 'h3',
+    titleAs: 'h3',
     titleText: 'Jump to a section',
     content: customTitleContent,
   },
@@ -115,6 +115,31 @@ export const storyDefs = {
     id: 'in-page-nav-below-minimum',
     minimumHeadingCount: 3,
     content: belowMinimumContent,
+  },
+  CustomContentSelector: {
+    id: 'in-page-nav-custom-selector',
+    mainContentSelector: '#in-page-nav-custom-selector-region',
+    children: (
+      <>
+        <h3>Heading outside the observed region</h3>
+        <p>This heading is not counted because it lives outside the element matched by mainContentSelector.</p>
+        <div id="in-page-nav-custom-selector-region">
+          <h2>Introduction</h2>
+          <p>Only headings inside this inner region are observed.</p>
+          <p>The nav on the left is watching <code>#in-page-nav-custom-selector-region</code> specifically,
+          rather than this component's own default content container — so any heading outside that div,
+          including the one above, is invisible to it.</p>
+          <h2>Getting started</h2>
+          <p>Before you begin, make sure the prerequisites below are met.</p>
+          <p>Getting started with any new project usually means working through a short checklist
+          before the real work begins.</p>
+          <h3>Prerequisites</h3>
+          <p>A recent browser and a working internet connection.</p>
+          <p>You'll also want a modern code editor and enough disk space for the dependencies.
+          Scroll through this section and the two above it to watch the active link update.</p>
+        </div>
+      </>
+    ),
   },
 };
 
@@ -139,26 +164,4 @@ export const CustomHeadingElements = { args: storyDefs.CustomHeadingElements };
 export const CustomTitle = { args: storyDefs.CustomTitle };
 export const BelowMinimumHeadingCount = { args: storyDefs.BelowMinimumHeadingCount };
 
-export const CustomContentSelector = {
-  render: () => (
-    <InPageNav id="in-page-nav-custom-selector" mainContentSelector="#in-page-nav-custom-selector-region">
-      <h3>Heading outside the observed region</h3>
-      <p>This heading is not counted because it lives outside the element matched by mainContentSelector.</p>
-      <div id="in-page-nav-custom-selector-region">
-        <h2>Introduction</h2>
-        <p>Only headings inside this inner region are observed.</p>
-        <p>The nav on the left is watching <code>#in-page-nav-custom-selector-region</code> specifically,
-        rather than this component's own default content container — so any heading outside that div,
-        including the one above, is invisible to it.</p>
-        <h2>Getting started</h2>
-        <p>Before you begin, make sure the prerequisites below are met.</p>
-        <p>Getting started with any new project usually means working through a short checklist
-        before the real work begins.</p>
-        <h3>Prerequisites</h3>
-        <p>A recent browser and a working internet connection.</p>
-        <p>You'll also want a modern code editor and enough disk space for the dependencies.
-        Scroll through this section and the two above it to watch the active link update.</p>
-      </div>
-    </InPageNav>
-  ),
-};
+export const CustomContentSelector = { args: storyDefs.CustomContentSelector };

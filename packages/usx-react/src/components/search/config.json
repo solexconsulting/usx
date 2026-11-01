@@ -1,7 +1,7 @@
 {
   "name": "search",
   "template": "search/search.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "id": {
       "type": "string",
@@ -43,8 +43,7 @@
     },
     "action": {
       "type": "string",
-      "default": "/search",
-      "description": "URL to submit the search query to"
+      "description": "URL to submit the search query to. Omit to submit to the current page."
     },
     "placeholder": {
       "type": "string",

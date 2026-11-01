@@ -22,9 +22,7 @@
 }
 
 .usx-layout__sidebar--right {
-
   .usa-in-page-nav-container {
-
     .usa-in-page-nav.usx-in-page-nav {
       margin: 0;
     }
@@ -33,7 +31,6 @@
 
 .usa-in-page-nav__nav {
   background-color: usx-when($usx-in-page-nav-bg);
-
   color: usx-when($usx-in-page-nav-text);
 }
 

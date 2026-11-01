@@ -1,9 +1,9 @@
 {
   "name": "prose",
   "template": "prose/prose.django.html",
-  "version": 2,
+  "version": 3,
   "props": {
-    "containerElement": {
+    "as": {
       "type": "select",
       "options": [
         "div",

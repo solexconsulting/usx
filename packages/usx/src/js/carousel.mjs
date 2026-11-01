@@ -148,7 +148,7 @@ function select(carousel, index) {
   const target = current(carousel);
   const position = track.scrollLeft / track.clientWidth;
   if (Math.abs(target - position) > 0.01) {
-    scrollTargets.set(track, { index: target, last: position });
+    scrollTargets.set(track, target);
   } else {
     scrollTargets.delete(track);
   }
@@ -183,6 +183,12 @@ function keydown(event) {
   }
 }
 
+function manualScroll(event) {
+  if (event.type === 'wheel' && !event.shiftKey && Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+  const track = event.target.closest?.(TRACK);
+  if (track && this.contains(track)) scrollTargets.delete(track);
+}
+
 function scroll(event) {
   const track = event.target;
   if (!track.matches?.(TRACK)) return;
@@ -192,10 +198,8 @@ function scroll(event) {
   const last = scrollPositions.get(track) ?? current(carousel);
   scrollPositions.set(track, position);
   const target = scrollTargets.get(track);
-  if (target) {
-    const reversed = (position - target.last) * (target.index - target.last) < -0.0001;
-    target.last = position;
-    if (Math.abs(position - target.index) < 0.01 || reversed) scrollTargets.delete(track);
+  if (target !== undefined) {
+    if (Math.abs(position - target) < 0.01) scrollTargets.delete(track);
     else return;
   }
   if (position === last) return;
@@ -224,12 +228,16 @@ const carousel = {
     if (listening.has(root)) return;
     root.addEventListener('click', click);
     root.addEventListener('keydown', keydown);
+    root.addEventListener('pointerdown', manualScroll, true);
+    root.addEventListener('wheel', manualScroll, { capture: true, passive: true });
     root.addEventListener('scroll', scroll, true);
     listening.add(root);
   },
   off(root = document.body) {
     root.removeEventListener('click', click);
     root.removeEventListener('keydown', keydown);
+    root.removeEventListener('pointerdown', manualScroll, true);
+    root.removeEventListener('wheel', manualScroll, true);
     root.removeEventListener('scroll', scroll, true);
     listening.delete(root);
   },

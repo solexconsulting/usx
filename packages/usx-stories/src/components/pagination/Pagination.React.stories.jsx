@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import Pagination from '../../../../usx-react/src/components/pagination/Pagination.tsx';
-import PaginationNavigation from '../../../../usx-react/src/components/pagination/navigation/PaginationNavigation.tsx';
+import PaginationNavigation, {
+  getPageItems,
+  getUnboundedPageItems,
+} from '../../../../usx-react/src/components/pagination/navigation/PaginationNavigation.tsx';
 import PaginationStepOptions from '../../../../usx-react/src/components/pagination/step-options/PaginationStepOptions.tsx';
 import PaginationSummary from '../../../../usx-react/src/components/pagination/summary/PaginationSummary.tsx';
+import { demoRows, fetchDemoRows, pageFromClick, sizeFromChange } from './asyncDemo.js';
+import { waitFor } from 'storybook/test';
 
 export default {
   title: 'React/USWDS/Pagination',
@@ -22,53 +27,6 @@ export default {
   },
 };
 
-// ── Shared page-item arrays (for Django parity) ───────────────────────────
-
-const PAGES_MIDDLE = [
-  { type: 'page', page: 1 },
-  { type: 'ellipsis' },
-  { type: 'page', page: 9 },
-  { type: 'page', page: 10 },
-  { type: 'page', page: 11 },
-  { type: 'ellipsis' },
-  { type: 'page', page: 24 },
-];
-
-const PAGES_NEAR_START = [
-  { type: 'page', page: 1 },
-  { type: 'page', page: 2 },
-  { type: 'page', page: 3 },
-  { type: 'page', page: 4 },
-  { type: 'page', page: 5 },
-  { type: 'ellipsis' },
-  { type: 'page', page: 24 },
-];
-
-const PAGES_NEAR_END = [
-  { type: 'page', page: 1 },
-  { type: 'ellipsis' },
-  { type: 'page', page: 20 },
-  { type: 'page', page: 21 },
-  { type: 'page', page: 22 },
-  { type: 'page', page: 23 },
-  { type: 'page', page: 24 },
-];
-
-const PAGES_FEW = [
-  { type: 'page', page: 1 },
-  { type: 'page', page: 2 },
-  { type: 'page', page: 3 },
-];
-
-const PAGES_UNBOUNDED = [
-  { type: 'page', page: 1 },
-  { type: 'ellipsis' },
-  { type: 'page', page: 4 },
-  { type: 'page', page: 5 },
-  { type: 'page', page: 6 },
-  { type: 'ellipsis' },
-];
-
 // ── Exportable story definitions (reused by Django stories) ───────────────
 
 export const storyDefs = {
@@ -78,7 +36,30 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 10,
     totalPages: 24,
-    pages: PAGES_MIDDLE,
+    pageUrlPrefix: '?page=',
+  },
+  CallbackLinks: {
+    totalItems: 100,
+    initialPage: 2,
+    initialPageSize: 10,
+    currentPage: 2,
+    totalPages: 10,
+  },
+  HashLinks: {
+    totalItems: 30,
+    initialPage: 1,
+    initialPageSize: 10,
+    currentPage: 1,
+    totalPages: 3,
+    pageUrlPrefix: '#pagination-hash-page-',
+  },
+  AsyncResults: {
+    totalItems: 42,
+    initialPage: 1,
+    initialPageSize: 10,
+    currentPage: 1,
+    pageSize: 10,
+    totalPages: 5,
     pageUrlPrefix: '?page=',
   },
   Unbounded: {
@@ -86,7 +67,6 @@ export const storyDefs = {
     initialPage: 5,
     showSummary: false,
     currentPage: 5,
-    pages: PAGES_UNBOUNDED,
     pageUrlPrefix: '?page=',
   },
   NoStepOptions: {
@@ -96,7 +76,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 3,
     totalPages: 10,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
   },
   NavigationOnly: {
@@ -107,7 +86,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 5,
     totalPages: 10,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
   },
   SpanishLocale: {
@@ -116,7 +94,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 10,
     totalPages: 24,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?pagina=',
     ariaLabel: 'Paginación',
     prevLabel: 'Anterior',
@@ -132,7 +109,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 1,
     totalPages: 3,
-    pages: PAGES_FEW,
     pageUrlPrefix: '?page=',
   },
   FirstPage: {
@@ -141,7 +117,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 1,
     totalPages: 24,
-    pages: PAGES_NEAR_START,
     pageUrlPrefix: '?page=',
   },
   LastPage: {
@@ -150,7 +125,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 10,
     totalPages: 10,
-    pages: PAGES_NEAR_END,
     pageUrlPrefix: '?page=',
   },
   ArrowsOnly: {
@@ -159,7 +133,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 5,
     totalPages: 10,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
     arrowsOnly: true,
   },
@@ -169,7 +142,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 5,
     totalPages: 10,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
     arrowsOnly: true,
     showSummary: false,
@@ -181,7 +153,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 10,
     totalPages: 24,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
     hideLinkText: true,
   },
@@ -191,7 +162,6 @@ export const storyDefs = {
     initialPageSize: 10,
     currentPage: 10,
     totalPages: 24,
-    pages: PAGES_MIDDLE,
     pageUrlPrefix: '?page=',
     showSummary: true,
     firstItem: 91,
@@ -202,10 +172,97 @@ export const storyDefs = {
   },
 };
 
+// Django renders server-side, so it is handed the page list React computes itself.
+for (const [key, def] of Object.entries(storyDefs)) {
+  def.stepOptionsId = `pagination-${key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}-step-options`;
+  if (def.currentPage) {
+    def.pages = def.totalPages
+      ? getPageItems(def.currentPage, def.totalPages)
+      : getUnboundedPageItems(def.currentPage);
+  }
+}
+
 // ── Full component stories ─────────────────────────────────────────────────
 
 export const Default = {
   args: storyDefs.Default,
+};
+
+const connectedCallbackNavs = new WeakSet();
+export const CallbackLinks = {
+  args: storyDefs.CallbackLinks,
+  play: async ({ canvasElement }) => {
+    const nav = await waitFor(() => {
+      const node = canvasElement.querySelector('nav.usx-pagination__nav');
+      if (!node) throw new Error('Pagination has not rendered');
+      return node;
+    });
+    if (connectedCallbackNavs.has(nav)) return;
+    connectedCallbackNavs.add(nav);
+    nav.addEventListener('click', (event) => {
+      const request = pageFromClick(event, nav);
+      if (!request) return;
+      event.preventDefault();
+      window.exampleEventTrigger?.(event.target.closest('[data-usx-pagination-page]').getAttribute('aria-label'));
+    });
+  },
+};
+
+export const HashLinks = {
+  args: storyDefs.HashLinks,
+  render: (args) => (
+    <div className="pagination-hash-example">
+      <div><Pagination {...args} /></div>
+      {[1, 2, 3].map((page) => (
+        <div id={`pagination-hash-page-${page}`} key={page}>Page {page} content</div>
+      ))}
+    </div>
+  ),
+  parameters: { docs: { description: { story: 'Native fragment links navigate to matching page sections without any Pagination JavaScript.' } } },
+};
+
+function AsyncResultsRender(args) {
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(10);
+  const [rows, setRows] = useState(() => demoRows(1, 10));
+  const [status, setStatus] = useState('Showing page 1');
+  const onPageChange = async (nextPage, nextSize) => {
+    setStatus(`Loading page ${nextPage}`);
+    const nextRows = await fetchDemoRows(nextPage, nextSize, args.totalItems);
+    setRows(nextRows);
+    setPage(nextPage);
+    setSize(nextSize);
+    setStatus(`Showing page ${nextPage}`);
+  };
+  const handleClick = (event) => {
+    const request = pageFromClick(event, event.currentTarget);
+    if (!request) return;
+    event.preventDefault();
+    if (request.page !== page) void onPageChange(request.page, request.pageSize);
+  };
+  const handleChange = (event) => {
+    const request = sizeFromChange(event, event.currentTarget);
+    if (request) void onPageChange(request.page, request.pageSize);
+  };
+  return (
+    <div className="pagination-async-example" onClick={handleClick} onChange={handleChange}>
+      <p role="status" aria-live="polite">{status}</p>
+      <ul className="pagination-async-example__results">{rows.map((row) => <li key={row}>{row}</li>)}</ul>
+      <div>
+        <Pagination
+          {...args}
+          currentPage={page}
+          pageSize={size}
+        />
+      </div>
+    </div>
+  );
+}
+
+export const AsyncResults = {
+  args: storyDefs.AsyncResults,
+  render: AsyncResultsRender,
+  parameters: { docs: { description: { story: 'Consumer code handles link clicks and page-size changes on the surrounding element, fetches result data, then supplies currentPage and pageSize. Pagination renders markup only.' } } },
 };
 
 export const Unbounded = {
@@ -257,72 +314,27 @@ export const WithSummaryAndStepOptions = {
 
 export const NavigationBounded = {
   name: 'Sub: Navigation (bounded)',
-  render: () => {
-    const [page, setPage] = useState(10);
-    return (
-      <PaginationNavigation
-        currentPage={page}
-        totalPages={24}
-        onPageChange={setPage}
-      />
-    );
-  },
+  render: () => <PaginationNavigation currentPage={10} totalPages={24} />,
 };
 
 export const NavigationUnbounded = {
   name: 'Sub: Navigation (unbounded)',
-  render: () => {
-    const [page, setPage] = useState(10);
-    return (
-      <PaginationNavigation
-        currentPage={page}
-        onPageChange={setPage}
-      />
-    );
-  },
+  render: () => <PaginationNavigation currentPage={10} />,
 };
 
 export const NavigationIconOnly = {
   name: 'Sub: Navigation (icon-only prev/next)',
-  render: () => {
-    const [page, setPage] = useState(5);
-    return (
-      <PaginationNavigation
-        currentPage={page}
-        totalPages={20}
-        onPageChange={setPage}
-        hideLinkText
-      />
-    );
-  },
+  render: () => <PaginationNavigation currentPage={5} totalPages={20} hideLinkText />,
 };
 
 export const NavigationUnboundedIconOnly = {
   name: 'Sub: Navigation (unbounded, icon-only)',
-  render: () => {
-    const [page, setPage] = useState(5);
-    return (
-      <PaginationNavigation
-        currentPage={page}
-        onPageChange={setPage}
-        hideLinkText
-      />
-    );
-  },
+  render: () => <PaginationNavigation currentPage={5} hideLinkText />,
 };
 
 export const StepOptionsSubcomponent = {
   name: 'Sub: Step Options',
-  render: () => {
-    const [size, setSize] = useState(10);
-    return (
-      <PaginationStepOptions
-        pageSize={size}
-        pageSizeOptions={[10, 25, 50, 100]}
-        onPageSizeChange={setSize}
-      />
-    );
-  },
+  render: () => <PaginationStepOptions id="pagination-sub-step-options" pageSize={10} pageSizeOptions={[10, 25, 50, 100]} />,
 };
 
 export const SummarySubcomponent = {

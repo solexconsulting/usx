@@ -41,7 +41,7 @@
         {% with sortable=col.sortable|default:False %}
         {% with sort_dir=col.sort_direction|default:None %}
 
-        <th scope="col" role="columnheader"
+        <th scope="col"
             class="usx-table__cell{% if col.headerAlign %} usx-table__cell--align-{{ col.headerAlign }}{% elif col.align %} usx-table__cell--align-{{ col.align }}{% endif %}{% if col.headerClassName %} {{ col.headerClassName }}{% endif %}"
             {% if cell.row_span > 1 %}rowspan="{{ cell.row_span }}"{% endif %}
             {% if cell.col_span > 1 %}colspan="{{ cell.col_span }}"{% endif %}

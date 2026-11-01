@@ -1,7 +1,7 @@
 {
   "name": "checkbox",
   "template": "checkbox/checkbox.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "id": {
       "type": "string",
@@ -53,6 +53,11 @@
       "type": "string",
       "default": null,
       "description": "Success message to display when the checkbox is in a success state"
+    },
+    "formGroup": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to wrap the checkbox and its message in a `.usa-form-group`. Set to `false` when composing inside another form group, as CheckboxGroup does."
     },
     "className": {
       "type": "string",

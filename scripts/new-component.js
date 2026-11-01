@@ -38,7 +38,10 @@ if (fs.existsSync(targetDir) && fs.readdirSync(targetDir).length) {
 }
 
 const render = (file) =>
-  fs.readFileSync(path.join(templatesDir, file), 'utf8').replace(/{{Name}}/g, Name).replace(/{{kebab}}/g, kebab);
+  fs
+    .readFileSync(path.join(templatesDir, file), 'utf8')
+    .replace(/{{Name}}/g, Name)
+    .replace(/{{kebab}}/g, kebab);
 
 function write(dest, contents) {
   if (fs.existsSync(dest)) {
@@ -57,7 +60,10 @@ for (const file of fs.readdirSync(templatesDir)) {
   } else if (file.endsWith('.scss')) {
     write(path.join(USX_SCSS_DIR, `_${kebab}.scss`), contents);
   } else {
-    write(path.join(targetDir, file.replace('component', kebab).replace('Component', Name)), contents);
+    write(
+      path.join(targetDir, file.replace('component', kebab).replace('Component', Name)),
+      contents
+    );
   }
 }
 

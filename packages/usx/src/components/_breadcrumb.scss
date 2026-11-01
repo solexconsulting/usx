@@ -6,7 +6,6 @@
 // give it a themeable default instead (nav/wayfinding element).
 .usx-breadcrumb {
   background-color: usx-when($usx-breadcrumb-bg);
-
   color: usx-when($usx-breadcrumb-text);
 
   .usa-breadcrumb__link {

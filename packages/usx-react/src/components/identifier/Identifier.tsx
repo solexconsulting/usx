@@ -129,7 +129,7 @@ export default function Identifier({
               className={classNames(
                 'usa-identifier__logos',
                 'usx-avatar-group',
-                overlapAvatars && 'usa-avatar-group--overlap',
+                overlapAvatars && 'usx-avatar-group--overlap',
               )}
             >
               {avatarProps.map((avatar, index) => (

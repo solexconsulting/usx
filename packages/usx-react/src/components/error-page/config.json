@@ -137,7 +137,7 @@
     "detailsProps": {
       "type": "object",
       "component": "details",
-      "description": "Optional Details disclosure rendered after support and public metadata with monospace font utilities. Supply a descriptive summary and escaped plain text or trusted composed children. When supplying diagnostics, authorize the viewer and redact sensitive values first. A closed disclosure is still present in the page source."
+      "description": "Optional Details disclosure rendered after support and public metadata with monospace font utilities. Supply its label through `detailsProps.summaryProps.label` and use escaped plain text or trusted composed children. When supplying diagnostics, authorize the viewer and redact sensitive values first. A closed disclosure is still present in the page source."
     },
     "children": {
       "type": "slot",

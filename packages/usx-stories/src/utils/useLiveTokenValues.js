@@ -100,7 +100,7 @@ export function getLiveValue(values, token) {
 export function getRawLiveValue(values, token) {
   if (values && values.raw) {
     const val = values.raw.get(token.cssVar);
-    return (val !== undefined && val !== '') ? val : token.defaultValue;
+    return val !== undefined && val !== '' ? val : token.defaultValue;
   }
   if (values && typeof values.get === 'function') {
     return values.get(token.name) ?? token.defaultValue;
