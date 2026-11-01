@@ -4,4 +4,4 @@
 '@solexllc/usx-contracts': minor
 ---
 
-Add a themeable, accessible Drawer with four viewport edges, three sizes, modal and modeless behavior, semantic content, and React, HTML, and Django examples.
+Add a themeable Drawer built on a native modal dialog, with four viewport edges, three sizes, semantic content, and React, HTML, and Django examples.

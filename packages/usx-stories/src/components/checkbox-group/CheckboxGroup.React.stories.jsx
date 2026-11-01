@@ -23,12 +23,13 @@ const optionsWithDescriptions = [
   {
     value: 'sojourner-truth',
     label: 'Sojourner Truth',
-    description: 'A prominent abolitionist and women\'s rights activist.',
+    description: "A prominent abolitionist and women's rights activist.",
   },
   {
     value: 'frederick-douglass',
     label: 'Frederick Douglass',
-    description: 'A former enslaved person who became a national leader of the abolitionist movement.',
+    description:
+      'A former enslaved person who became a national leader of the abolitionist movement.',
   },
 ];
 

@@ -97,7 +97,7 @@ $usx-swap-transition-time: 0.25s !default;
   }
 }
 
-.usx-swap-active {
+.usx-swap--active {
   .usx-swap-off {
     opacity: 0;
     max-height: 0;
@@ -115,12 +115,12 @@ $usx-swap-transition-time: 0.25s !default;
   }
 
   input:is(:checked, :indeterminate) ~ .usx-swap-on,
-  &.usx-swap-active .usx-swap-on {
+  &.usx-swap--active .usx-swap-on {
     transform: rotate(0deg);
   }
 
   input:is(:checked, :indeterminate) ~ .usx-swap-off,
-  &.usx-swap-active .usx-swap-off {
+  &.usx-swap--active .usx-swap-off {
     transform: rotate(45deg);
   }
 }
@@ -137,12 +137,12 @@ $usx-swap-transition-time: 0.25s !default;
   }
 
   input:is(:checked, :indeterminate) ~ .usx-swap-on,
-  &.usx-swap-active .usx-swap-on {
+  &.usx-swap--active .usx-swap-on {
     transform: rotateY(0deg);
   }
 
   input:is(:checked, :indeterminate) ~ .usx-swap-off,
-  &.usx-swap-active .usx-swap-off {
+  &.usx-swap--active .usx-swap-off {
     transform: rotateY(-180deg);
     backface-visibility: hidden;
     opacity: 1;

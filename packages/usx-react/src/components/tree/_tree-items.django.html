@@ -4,7 +4,7 @@
 <li>
   {% if 'items' in item %} {% details props=item className=item.className|default:""|add:" usx-tree__branch" %}
   <ul
-    class="usx-tree{% if variant == 'padded' %} usx-tree--padded{% else %} usx-tree--raw{% endif %}"
+    class="usx-tree{% if variant and variant != 'default' %} usx-tree--{{ variant|force_escape }}{% endif %}"
   >
     {% include "tree/_tree-items.django.html" with items=item.items variant=variant only %}
   </ul>

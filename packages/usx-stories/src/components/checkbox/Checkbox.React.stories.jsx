@@ -1,8 +1,5 @@
-
 import React from 'react';
 import Checkbox from '../../../../usx-react/src/components/checkbox/Checkbox.tsx';
-import Fieldset from '../../../../usx-react/src/components/fieldset/Fieldset.tsx';
-import FormGroup from '../../../../usx-react/src/components/form-group/FormGroup.tsx';
 import config from '../../../../usx-react/src/components/checkbox/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
@@ -109,13 +106,13 @@ export const storyDefs = {
   },
   Error: {
     ...getArgs(18),
-    error: 'You\'ve done something wrong, although we don\'t necessarily know what.',
+    error: "You've done something wrong, although we don't necessarily know what.",
     tile: true,
     description: 'Please check this box to continue.',
   },
   ErrorWithoutFormGroup: {
     ...getArgs(19),
-    error: 'You\'ve done something wrong, although we don\'t necessarily know what.',
+    error: "You've done something wrong, although we don't necessarily know what.",
     tile: true,
     formGroup: false,
     description: 'Please check this box to continue.',

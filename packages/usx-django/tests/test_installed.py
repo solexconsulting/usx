@@ -92,7 +92,7 @@ class InstalledPackageTests(SimpleTestCase):
         self.assertIn('aria-label="Application actions"', html)
         self.assertInHTML("<p>Grouped content</p>", html)
         html = Template(
-            '{% load components %}{% container props=props element="section" %}'
+            '{% load components %}{% container props=props as="section" %}'
             '<p>{{ text }}</p>{% endcontainer %}'
         ).render(Context({"props": props, "text": "<Child>"}))
         self.assertIn('<section class="usx-container ', html)

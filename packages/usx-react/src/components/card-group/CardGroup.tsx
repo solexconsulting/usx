@@ -16,7 +16,7 @@ export default function CardGroup({ cardProps = [], className = '', ...props }: 
   return (
     <ul className={classes} {...props}>
       {cardProps.map((card, index) => (
-        <Card key={index} {...card} tag="li" />
+        <Card key={index} {...card} as="li" />
       ))}
     </ul>
   );

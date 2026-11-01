@@ -6,7 +6,7 @@
     {% endif %}
 >
 {% for item in items %}
-    <{% if headingLevel == 'h1' %}h1{% elif headingLevel == 'h2' %}h2{% elif headingLevel == 'h4' %}h4{% elif headingLevel == 'h5' %}h5{% elif headingLevel == 'h6' %}h6{% else %}h3{% endif %} id="{% if item.id %}{{ item.id }}{% else %}{{ id }}-{{ forloop.counter0 }}{% endif %}-heading" class="usa-accordion__heading{% if headingClassName %} {{ headingClassName }}{% endif %}">
+    <{% if headingAs == 'h1' %}h1{% elif headingAs == 'h2' %}h2{% elif headingAs == 'h4' %}h4{% elif headingAs == 'h5' %}h5{% elif headingAs == 'h6' %}h6{% else %}h3{% endif %} id="{% if item.id %}{{ item.id }}{% else %}{{ id }}-{{ forloop.counter0 }}{% endif %}-heading" class="usa-accordion__heading{% if headingClassName %} {{ headingClassName }}{% endif %}">
         <button
             class="usa-accordion__button"
             aria-expanded="{% if item.expanded %}true{% else %}false{% endif %}"
@@ -15,7 +15,7 @@
         >
             {{ item.title }}
         </button>
-    </{% if headingLevel == 'h1' %}h1{% elif headingLevel == 'h2' %}h2{% elif headingLevel == 'h4' %}h4{% elif headingLevel == 'h5' %}h5{% elif headingLevel == 'h6' %}h6{% else %}h3{% endif %}>
+    </{% if headingAs == 'h1' %}h1{% elif headingAs == 'h2' %}h2{% elif headingAs == 'h4' %}h4{% elif headingAs == 'h5' %}h5{% elif headingAs == 'h6' %}h6{% else %}h3{% endif %}>
 
     <div
         id="{% if item.id %}{{ item.id }}{% else %}{{ id }}-{{ forloop.counter0 }}{% endif %}-content"

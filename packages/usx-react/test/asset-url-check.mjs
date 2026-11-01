@@ -77,7 +77,7 @@ assert.equal(clipboardButton.props.className, 'usx-copy custom-copy');
 for (const icon of clipboardButton.props.children.slice(0, 2)) {
   assert.equal(icon.type, Icon);
   assert.equal(icon.props.staticBaseUrl, '/assets/');
-  assert.equal(icon.props.size, 0);
+  assert.ok(!('size' in icon.props));
 }
 const clipboardMarkup = renderToStaticMarkup(clipboard);
 assert.equal((clipboardMarkup.match(/role="tooltip"/g) || []).length, 1);

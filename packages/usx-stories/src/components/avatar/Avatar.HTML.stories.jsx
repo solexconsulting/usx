@@ -44,9 +44,12 @@ const checkAvatar = (def) => async (section) => {
   const { width, height } = link.getBoundingClientRect();
   await expect(Math.abs(width - height)).toBeLessThan(1);
 
-  if (def.tooltip) {
+  if (def.tooltipProps) {
     await expect(section).toHaveClass('usx-tooltip');
-    await expect(section.querySelector('[role="tooltip"]')).toHaveTextContent(def.tooltip);
+    await expect(section.querySelector('[role="tooltip"]')).toHaveTextContent(def.tooltipProps.label);
+    await expect(section.querySelector('[role="tooltip"]')).toHaveClass(`usa-tooltip__body--${def.tooltipProps.position ?? 'top'}`);
+    if (def.tooltipProps.className) await expect(section).toHaveClass(def.tooltipProps.className);
+    if (def.tooltipProps.bodyClassName) await expect(section.querySelector('[role="tooltip"]')).toHaveClass(def.tooltipProps.bodyClassName);
   }
 };
 

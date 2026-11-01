@@ -43,13 +43,12 @@ export default function Summary({
   );
   const summaryTextClassNames = ClassNames(
     'usx-summary-text',
-    { [`border-${underlineColor}`]: !noUnderline && underlineColor },
+    { [`underline-${underlineColor}`]: !noUnderline && underlineColor },
     textClassName
   );
   return (
     <summary className={summaryClassNames} aria-label={ariaLabel}>
-      {/* ::marker is here */}
-      <span className={summaryTextClassNames}>      {children ?? (label || 'Details')}</span>
+      <span className={summaryTextClassNames}>{children ?? (label || 'Details')}</span>
     </summary>
   );
 }

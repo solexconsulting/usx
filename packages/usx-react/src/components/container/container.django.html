@@ -1,5 +1,5 @@
 {% load components %}
-{% fragment as containerTag %}{% if element == 'section' or element == 'article' or element == 'aside' or element == 'nav' or element == 'ul' or element == 'ol' or element == 'li' %}{{ element }}{% else %}div{% endif %}{% endfragment %}
+{% fragment as containerTag %}{% if as == 'section' or as == 'article' or as == 'aside' or as == 'nav' or as == 'ul' or as == 'ol' or as == 'li' %}{{ as }}{% else %}div{% endif %}{% endfragment %}
 {% dict display=display direction=direction wrap=wrap justify=justify align=align alignSelf=alignSelf flex=flex gap=gap column=column offset=offset gutters=gutters float=float as baseLayout %}
 {% fragment as containerClasses %}
 usx-container

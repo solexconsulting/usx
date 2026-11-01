@@ -28,7 +28,7 @@
     "fileListHint": {
       "type": "slot",
       "default": "Selected files",
-      "description": "Heading/hint text shown above the managed file list, passed to FileList's hint prop. React only."
+      "description": "Heading/hint text shown above the managed file list, passed to FileList's hint prop."
     },
     "error": {
       "type": "slot",
@@ -56,7 +56,7 @@
     "manageIndividualFiles": {
       "type": "boolean",
       "default": false,
-      "description": "When multiple is true, selects files one at a time into a managed list where each file has its own Delete action (VA.gov file-input-multiple pattern). React only."
+      "description": "When multiple is true, selects files one at a time into a managed list where each file has its own Delete action (VA.gov file-input-multiple pattern)."
     },
     "invalidFileTypeMessage": {
       "type": "string",
@@ -74,7 +74,11 @@
     },
     "defaultFiles": {
       "type": "array",
-      "description": "When manageIndividualFiles is true, seeds the managed file list with files that already exist on the server (no browser File object). Each entry is { name, size?, url? } — omit size to show no size, provide url to render the name as a download link. React only."
+      "description": "When manageIndividualFiles is true, seeds the managed file list with files that already exist on the server (no browser File object). Each entry is { name, size?, url? } — omit size to show no size, provide url to render the name as a download link."
+    },
+    "onFilesChange": {
+      "type": "function",
+      "description": "Receives the current browser File objects after managed add or delete. React calls this function; Django dispatches a bubbling usx:files-change event from the input with detail.files. Preloaded files are excluded."
     }
   }
 }

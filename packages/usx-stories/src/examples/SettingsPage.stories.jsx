@@ -37,7 +37,7 @@ export const SettingsPage = {
             <Layout
                 variant="grid"
                 content={
-                    <Page element="div" id="settings-page-example" title="Settings" tabIndex={-1}>
+                    <Page as="div" id="settings-page-example" title="Settings" tabIndex={-1}>
                         <Section title="Profile Settings">
                             <Alert
                                 variant="success"

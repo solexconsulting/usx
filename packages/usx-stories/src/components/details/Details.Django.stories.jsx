@@ -40,7 +40,7 @@ export const NoMarker = createStory(storyDefs.NoMarker);
 /** summaryProps.noUnderline removes the dotted underline while retaining the content border. */
 export const NoSummaryUnderline = createStory(storyDefs.NoSummaryUnderline);
 
-/** The two decoration switches can be combined without changing native disclosure behavior. */
+/** Remove the underline and content border while retaining the native marker. */
 export const MinimalDecoration = createStory(storyDefs.MinimalDecoration);
 
 /** className applies font and spacing utilities to the whole disclosure, including its summary. */

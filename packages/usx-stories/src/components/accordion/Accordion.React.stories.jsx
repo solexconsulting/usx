@@ -57,17 +57,17 @@ export const storyDefs = {
     items: items1,
     multiselectable: true,
   },
-  CustomHeadingLevel: {
+  CustomHeadingAs: {
     id: 'accordion-h2',
     items: items1,
-    headingLevel: 'h2',
+    headingAs: 'h2',
   },
   BorderedMultiSelectableH4: {
     id: 'accordion-bordered-multi-h4',
     items: items1,
     bordered: true,
     multiselectable: true,
-    headingLevel: 'h4',
+    headingAs: 'h4',
   },
   IconStart: {
     id: 'accordion-icon-start',
@@ -98,7 +98,7 @@ export const Default = {args: storyDefs.Default};
 export const Bordered = {args: storyDefs.Bordered};
 export const InitiallyExpanded = {args: storyDefs.InitiallyExpanded};
 export const MultiSelectable = {args: storyDefs.MultiSelectable};
-export const CustomHeadingLevel = {args: storyDefs.CustomHeadingLevel};
+export const CustomHeadingAs = {args: storyDefs.CustomHeadingAs};
 export const BorderedMultiSelectableH4 = {args: storyDefs.BorderedMultiSelectableH4};
 export const IconStart = {args: storyDefs.IconStart};
 export const IconEnd = {args: storyDefs.IconEnd};

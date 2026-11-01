@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ClassNames from 'classnames';
 import PaginationNavigation from './navigation/PaginationNavigation';
 import PaginationStepOptions from './step-options/PaginationStepOptions';
@@ -6,13 +6,15 @@ import PaginationSummary from './summary/PaginationSummary';
 import PaginationContainer from './container/PaginationContainer';
 
 export interface PaginationProps {
+  renderPart?: 'navigation' | 'step-options' | 'summary';
   initialPage?: number;
   initialPageSize?: number;
+  currentPage?: number;
+  pageSize?: number;
   pageSizeOptions?: number[];
+  stepOptionsId?: string;
   totalItems?: number;
   unbounded?: boolean;
-  onPageChange?: (page: number, pageSize: number) => void;
-  onPageSizeChange?: (pageSize: number, page: number) => void;
   ariaLabel?: string;
   prevLabel?: string;
   nextLabel?: string;
@@ -21,17 +23,20 @@ export interface PaginationProps {
   showSummary?: boolean;
   hideLinkText?: boolean;
   arrowsOnly?: boolean;
+  pageUrlPrefix?: string;
   className?: string;
 }
 
 export default function Pagination({
+  renderPart,
   initialPage = 1,
   initialPageSize = 10,
+  currentPage: page,
+  pageSize: size,
   pageSizeOptions = [10, 25, 50, 100],
+  stepOptionsId,
   totalItems,
   unbounded = false,
-  onPageChange,
-  onPageSizeChange,
   ariaLabel = 'Pagination',
   prevLabel = 'Previous',
   nextLabel = 'Next',
@@ -40,10 +45,11 @@ export default function Pagination({
   showSummary = true,
   hideLinkText = true,
   arrowsOnly = false,
+  pageUrlPrefix,
   className = '',
 }: PaginationProps) {
-  const [currentPage, setCurrentPage] = useState(initialPage);
-  const [pageSize, setPageSize] = useState(initialPageSize);
+  const currentPage = page ?? initialPage;
+  const pageSize = size ?? initialPageSize;
 
   const totalPages =
     totalItems !== undefined && !unbounded
@@ -53,60 +59,48 @@ export default function Pagination({
   // showSummary defaults to true when totalItems is provided
   const displaySummary = showSummary !== undefined ? showSummary : totalItems !== undefined;
 
-  const handlePageChange = (pageOrFn: number | ((prev: number) => number)) => {
-    setCurrentPage((prev) => {
-      const next = typeof pageOrFn === 'function' ? pageOrFn(prev) : pageOrFn;
-      onPageChange?.(next, pageSize);
-      return next;
-    });
-  };
-
-  const handlePageSizeChange = (size: number) => {
-    // Clamp current page to the new total if bounded
-    const newTotalPages = totalItems ? Math.ceil(totalItems / size) : undefined;
-    const newPage = newTotalPages ? Math.min(currentPage, newTotalPages) : 1;
-    setPageSize(size);
-    setCurrentPage(newPage);
-    onPageSizeChange?.(size, newPage);
-    onPageChange?.(newPage, size);
-  };
-
   const classes = ClassNames('usx-pagination', className);
+
+  const navigation = (
+    <PaginationNavigation
+      currentPage={currentPage}
+      totalPages={totalPages}
+      pageSize={pageSize}
+      totalItems={totalItems}
+      ariaLabel={ariaLabel}
+      prevLabel={prevLabel}
+      nextLabel={nextLabel}
+      hideLinkText={hideLinkText}
+      arrowsOnly={arrowsOnly}
+      pageUrlPrefix={pageUrlPrefix}
+    />
+  );
+  const stepOptions = (
+    <PaginationStepOptions
+      pageSize={pageSize}
+      pageSizeOptions={pageSizeOptions}
+      id={stepOptionsId}
+    />
+  );
+  const summary = typeof totalItems === 'number' ? (
+    <PaginationSummary
+      currentPage={currentPage}
+      pageSize={pageSize}
+      totalItems={totalItems}
+      itemLabel={itemLabel}
+    />
+  ) : null;
+
+  if (renderPart === 'navigation') return navigation;
+  if (renderPart === 'step-options') return stepOptions;
+  if (renderPart === 'summary') return summary;
 
   return (
     <div className={classes}>
       <PaginationContainer
-        summary={
-          displaySummary && typeof totalItems === 'number' ? (
-            <PaginationSummary
-              currentPage={currentPage}
-              pageSize={pageSize}
-              totalItems={totalItems}
-              itemLabel={itemLabel}
-            />
-          ) : null
-        }
-        navigation={
-          <PaginationNavigation
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-            ariaLabel={ariaLabel}
-            prevLabel={prevLabel}
-            nextLabel={nextLabel}
-            hideLinkText={hideLinkText}
-            arrowsOnly={arrowsOnly}
-          />
-        }
-        stepOptions={
-          showStepOptions ? (
-            <PaginationStepOptions
-              pageSize={pageSize}
-              pageSizeOptions={pageSizeOptions}
-              onPageSizeChange={handlePageSizeChange}
-            />
-          ) : null
-        }
+        summary={displaySummary ? summary : null}
+        navigation={navigation}
+        stepOptions={showStepOptions ? stepOptions : null}
       />
     </div>
   );

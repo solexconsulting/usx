@@ -1,9 +1,9 @@
 {
   "name": "container",
   "template": "container/container.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
-    "element": {
+    "as": {
       "type": "select",
       "description": "Root HTML element. Use a heading or accessible label for named sections and navigation; list roots require list-item children.",
       "options": [
@@ -205,7 +205,7 @@
           "description": "Layout overrides at 30em / 480px and wider (pixel equivalent assumes 16px browser default).",
           "component": "container",
           "omit": [
-            "element",
+            "as",
             "gridContainer",
             "gridRow",
             "responsive",
@@ -223,7 +223,7 @@
           "description": "Layout overrides at 40em / 640px and wider (pixel equivalent assumes 16px browser default).",
           "component": "container",
           "omit": [
-            "element",
+            "as",
             "gridContainer",
             "gridRow",
             "responsive",
@@ -241,7 +241,7 @@
           "description": "Layout overrides at 64em / 1024px and wider (pixel equivalent assumes 16px browser default).",
           "component": "container",
           "omit": [
-            "element",
+            "as",
             "gridContainer",
             "gridRow",
             "responsive",

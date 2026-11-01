@@ -28,7 +28,16 @@ export const storyDefs = {
   AvatarWithTooltip: {
     ...baseArgs,
     shape: 'rounded-lg',
-    tooltip: 'Statue of Liberty',
+    tooltipProps: { label: 'Statue of Liberty', position: 'right' },
+  },
+  AvatarWithCustomTooltip: {
+    ...baseArgs,
+    tooltipProps: {
+      label: 'Custom tooltip',
+      position: 'bottom',
+      className: 'avatar-tooltip-wrapper',
+      bodyClassName: 'avatar-tooltip-body',
+    },
   },
   InitialsAvatar: {
     href: '#',
@@ -125,6 +134,7 @@ export const CircleAvatar = { args: storyDefs.CircleAvatar };
 export const MediumRoundedAvatar = { args: storyDefs.MediumRoundedAvatar };
 export const LargeRoundedAvatar = { args: storyDefs.LargeRoundedAvatar };
 export const AvatarWithTooltip = { args: storyDefs.AvatarWithTooltip };
+export const AvatarWithCustomTooltip = { args: storyDefs.AvatarWithCustomTooltip };
 export const InitialsAvatar = { args: storyDefs.InitialsAvatar };
 export const InitialsAvatarSmall = { args: storyDefs.InitialsAvatarSmall };
 export const ImageAvatarMedium = { args: storyDefs.ImageAvatarMedium };

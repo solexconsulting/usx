@@ -1,14 +1,20 @@
 {
   "name": "page",
   "template": "page/page.django.html",
-  "version": 3,
+  "version": 4,
   "required": [
     "title"
   ],
   "props": {
+    "as": {
+      "type": "select",
+      "options": ["main", "div", "section", "article"],
+      "default": "main",
+      "description": "Root HTML element. Use div, section, or article when the page sits inside another main landmark."
+    },
     "id": {
       "type": "string",
-      "description": "Optional id attribute applied to the root main element."
+      "description": "Optional id attribute applied to the root element."
     },
     "titleId": {
       "type": "string",

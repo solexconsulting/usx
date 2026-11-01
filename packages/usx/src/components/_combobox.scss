@@ -33,20 +33,10 @@
 .usx-combo-box,
 .usx-time-picker {
   &.usx-combo-box--error .usa-combo-box__input {
-    border-width: 0.25rem;
-    border-color: #b50909;
-    border-style: solid;
-    padding-top: calc(0.5rem - 0.25rem);
-    padding-bottom: calc(0.5rem - 0.25rem);
-
-    border-width: usx-when($usx-input-error-border-width);
-
-    border-color: usx-when($usx-input-error-border);
-
-    border-style: usx-when($usx-input-error-border-style);
-
-    padding-top: usx-when($usx-input-error-padding-top);
-
-    padding-bottom: usx-when($usx-input-error-padding-bottom);
+    border-width: usx-when($usx-input-error-border-width, $usx-input-error-border-width, 0.25rem);
+    border-color: usx-when($usx-input-error-border, $usx-input-error-border, #b50909);
+    border-style: usx-when($usx-input-error-border-style, $usx-input-error-border-style, solid);
+    padding-top: usx-when($usx-input-error-padding-top, $usx-input-error-padding-top, calc(0.5rem - 0.25rem));
+    padding-bottom: usx-when($usx-input-error-padding-bottom, $usx-input-error-padding-bottom, calc(0.5rem - 0.25rem));
   }
 }

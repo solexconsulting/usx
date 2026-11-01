@@ -1,7 +1,7 @@
 import React from 'react';
 import config from '../../../../usx-react/src/components/tree/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
-import { storyDefs, examples, TreeExample } from './Tree.React.stories.jsx';
+import ReactMeta, { storyDefs, examples, TreeExample } from './Tree.React.stories.jsx';
 
 export default {
   title: 'Django/USX/Tree',
@@ -10,8 +10,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component:
-          'Pass items as a list of dictionaries from the Django view context. Every item sets type: "link" (href, text), "details" (summaryProps plus nested items or paragraph text), or "text" (text). Use variant="raw" for existing component styles or variant="padded" for padded rows.',
+        component: ReactMeta.parameters.docs.description.component,
       },
     },
   },
@@ -30,8 +29,6 @@ const createStory = (args) => ({
 });
 
 export const Default = createStory(storyDefs.Default);
-
-export const Raw = createStory(storyDefs.Raw);
 
 export const Padded = createStory(storyDefs.Padded);
 

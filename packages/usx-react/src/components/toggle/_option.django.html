@@ -1,0 +1,21 @@
+{% load components %}
+{% with optionSuffix=forloop.counter0|stringformat:"s" %}
+{% with optionId=id|add:"-option-"|add:optionSuffix %}
+<li class="usa-button-group__item" role="presentation">
+  <input
+    class="usx-toggle__input"
+    id="{{ optionId }}"
+    type="radio"
+    name="{% firstof name id "toggle-group" %}"
+    value="{{ itemValue }}"
+    {% if value != None %}{% if value == itemValue %}checked="checked"{% endif %}{% elif defaultValue == itemValue or itemChecked %}checked="checked"{% endif %}
+    {% if disabled or itemDisabled %}disabled="disabled"{% endif %}
+    {% if required %}required="required"{% endif %}
+  >
+  <label for="{{ optionId }}" class="usa-button usx-button usa-button--primary usx-toggle__button"{% if disabled or itemDisabled %} aria-disabled="true"{% endif %}{% if variant == 'icon' and itemIcon %} title="{{ itemLabel|striptags }}"{% endif %}>
+    {% if itemIcon %}{% icon name=itemIcon className="usx-toggle__icon" %}{% endicon %}{% endif %}
+    <span{% if variant == 'icon' and itemIcon %} class="usa-sr-only"{% endif %}>{{ itemLabel|safe }}</span>
+  </label>
+</li>
+{% endwith %}
+{% endwith %}

@@ -48,10 +48,22 @@ const testGroupedSummaryProps = async ({ canvasElement }) => {
   await expect(summary).toHaveClass('usx-summary', 'marker-error', 'font-family-mono');
   await expect(summary.querySelector('.usx-summary-text')).toHaveClass(
     'usx-summary-text',
-    'border-secondary',
+    'underline-secondary',
     'text-bold'
   );
   await expect(summary).toHaveTextContent('Summary configured through summaryProps');
+};
+
+const testNoMarker = async ({ canvasElement }) => {
+  const disclosure = sectionFor(canvasElement, 'No Marker');
+  const summary = disclosure.querySelector('summary');
+  await expect(summary).toHaveClass('usx-summary--no-marker');
+  await expect(getComputedStyle(summary).listStyleType).toBe('none');
+  await expect(disclosure).toHaveAttribute('open');
+  await userEvent.click(summary);
+  await expect(disclosure).not.toHaveAttribute('open');
+  await userEvent.click(summary);
+  await expect(disclosure).toHaveAttribute('open');
 };
 
 const testNestedDetails = async ({ canvasElement }) => {
@@ -65,8 +77,8 @@ const testNestedDetails = async ({ canvasElement }) => {
     const borderless = disclosure.classList.contains('usx-details--borderless');
     const noUnderline = summary.classList.contains('usx-summary--no-underline');
     await expect(getComputedStyle(content).borderLeftStyle).toBe(borderless ? 'none' : 'solid');
-    await expect(getComputedStyle(summaryText).borderBottomStyle).toBe(
-      noUnderline ? 'none' : 'dotted'
+    await expect(getComputedStyle(summaryText).textDecorationLine).toBe(
+      noUnderline ? 'none' : 'underline'
     );
   }
 };
@@ -76,6 +88,7 @@ const play = async (context) => {
   await step('Default', testDefault);
   await step('Rich Content', testRichContent);
   await step('Grouped Summary Props', testGroupedSummaryProps);
+  await step('No Marker', testNoMarker);
   await step('Nested Details', testNestedDetails);
 };
 

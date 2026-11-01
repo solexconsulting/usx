@@ -2,7 +2,7 @@ import React from 'react';
 import ClassNames from 'classnames';
 import Link from '../link/Link';
 import type { SummaryProps } from '../summary/Summary';
-import Popover from './Popover';
+import Popover, { type PopoverPanelShape } from './Popover';
 
 interface PopoverMenuItemBase {
   /** Unique ID for the item's panel. Defaults to `${prefix}-${index}`. */
@@ -34,11 +34,13 @@ export interface PopoverMenuProps extends Omit<React.HTMLAttributes<HTMLUListEle
   items: PopoverMenuItem[];
   /** Prefix for generated panel IDs and the native details group name. Generated if omitted. */
   prefix?: string;
+  /** Shape inherited by nested Popover panels. */
+  panelShape?: PopoverPanelShape;
   children?: never;
 }
 
 /** A stacked list of rows; `details` items open nested PopoverMenus beside their row. */
-export default function PopoverMenu({ items, prefix, className, ...props }: PopoverMenuProps) {
+export default function PopoverMenu({ items, prefix, panelShape, className, ...props }: PopoverMenuProps) {
   const generatedPrefix = React.useId();
   const base = prefix ?? generatedPrefix;
 
@@ -58,6 +60,7 @@ export default function PopoverMenu({ items, prefix, className, ...props }: Popo
                 }}
                 name={base}
                 side="right"
+                panelShape={panelShape}
                 menuItems={item.items}
               />
             )}

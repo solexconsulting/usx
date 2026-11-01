@@ -10,9 +10,8 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'checkbox-group' });
 const allowedPropNames = new Set(Object.keys(config.props || {}));
-const toDjangoArgs = (args) => Object.fromEntries(
-  Object.entries(args).filter(([key]) => allowedPropNames.has(key))
-);
+const toDjangoArgs = (args) =>
+  Object.fromEntries(Object.entries(args).filter(([key]) => allowedPropNames.has(key)));
 
 export const Default = createStory(toDjangoArgs(storyDefs.Default));
 export const WithDescriptions = createStory(toDjangoArgs(storyDefs.WithDescriptions));

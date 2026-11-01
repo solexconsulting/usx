@@ -36,7 +36,7 @@ const resources = [
 
 export const contentStoryDefs = {
   ServiceDirectory: {
-    element: 'section',
+    as: 'section',
     ariaLabel: 'Community service directory',
     gridContainer: 'default',
     className: 'padding-x-0',
@@ -56,15 +56,15 @@ export const contentStoryDefs = {
             <Button variant="primary" href="#service-directory-help" label="Talk with a navigator" className="margin-right-0" />
           </Container>
         </Container>
-        <Container element="nav" ariaLabel="Browse community services" display="flex" wrap="wrap" gap="2">
+        <Container as="nav" ariaLabel="Browse community services" display="flex" wrap="wrap" gap="2">
           {services.map(([category]) => (
             <Link key={category} href={`#service-${category.toLowerCase()}`}>{category}</Link>
           ))}
         </Container>
-        <Section title="Explore services" headingLevel="h3">
-          <Container element="ul" gridRow gutters="2" responsive={{ desktop: { gutters: '3' } }} className="usa-list--unstyled">
+        <Section title="Explore services" headingAs="h3">
+          <Container as="ul" gridRow gutters="2" responsive={{ desktop: { gutters: '3' } }} className="usa-list--unstyled">
             {services.map(([category, title, description, action]) => (
-              <Container element="li" key={category} column="12" responsive={{ tablet: { column: '6' }, desktop: { column: '4' } }} className="padding-bottom-3">
+              <Container as="li" key={category} column="12" responsive={{ tablet: { column: '6' }, desktop: { column: '4' } }} className="padding-bottom-3">
                 <Card
                   id={`service-${category.toLowerCase()}`}
                   title={title}
@@ -77,7 +77,7 @@ export const contentStoryDefs = {
             ))}
           </Container>
         </Section>
-        <Container id="service-directory-help" element="aside">
+        <Container id="service-directory-help" as="aside">
           <SummaryBox id="service-help-title" heading="You do not have to figure it out alone">
             <Container display="flex" direction="column" gap="2" responsive={{ tablet: { direction: 'row', align: 'center' } }}>
               <Container flex="fill" className="minw-0">
@@ -93,7 +93,7 @@ export const contentStoryDefs = {
     ),
   },
   EditorialFeature: {
-    element: 'article',
+    as: 'article',
     ariaLabel: 'A new chapter for the Riverside library',
     gridContainer: 'default',
     className: 'padding-x-0',
@@ -112,10 +112,10 @@ export const contentStoryDefs = {
         </Container>
         <Container gridRow gutters="3" responsive={{ desktop: { gutters: '4' } }}>
           <Container column="12" responsive={{ tablet: { column: '8', offset: '2' }, desktop: { column: '8', offset: 'none' } }}>
-            <Section id="library-space-title" title="Room for the whole neighborhood" headingLevel="h3">
+            <Section id="library-space-title" title="Room for the whole neighborhood" headingAs="h3">
               <Container display="flow-root">
                 <Prose className="margin-bottom-2">On a typical afternoon, the library hosts students working on a science project, neighbors trading gardening tips, and job seekers getting help with applications. The renewed Riverside branch makes room for all of them.</Prose>
-                <Container element="aside" float="none" responsive={{ desktop: { float: 'right' } }} className="width-full desktop:width-card-lg desktop:margin-left-3 margin-bottom-2">
+                <Container as="aside" float="none" responsive={{ desktop: { float: 'right' } }} className="width-full desktop:width-card-lg desktop:margin-left-3 margin-bottom-2">
                   <SummaryBox id="library-improvements-title" heading="More ways to use your library">
                     <List items={['Two reservable meeting rooms', 'A family reading corner', 'Six additional public computers']} />
                   </SummaryBox>
@@ -125,7 +125,7 @@ export const contentStoryDefs = {
                 <Prose>A new welcome desk brings library staff and community navigators together. Visitors can ask about a book, get help finding a service, or learn how to reserve a computer in one place.</Prose>
               </Container>
             </Section>
-            <Section id="library-programs-title" title="Built around your day" headingLevel="h3" className="margin-y-4">
+            <Section id="library-programs-title" title="Built around your day" headingAs="h3" className="margin-y-4">
               <Container display="flex" direction="column" gap="3">
                 <Prose>Weekly activities include family story time, guided technology practice, and conversation groups. Most programs are free and welcome drop-in visitors.</Prose>
                 <Quote attributionProps={{ primary: 'Jordan Lee', secondary: 'Riverside branch manager' }}>
@@ -135,12 +135,12 @@ export const contentStoryDefs = {
               </Container>
             </Section>
           </Container>
-          <Container element="aside" ariaLabel="Plan a library visit" column="12" responsive={{ tablet: { column: '8', offset: '2' }, desktop: { column: '4', offset: 'none' } }}>
+          <Container as="aside" ariaLabel="Plan a library visit" column="12" responsive={{ tablet: { column: '8', offset: '2' }, desktop: { column: '4', offset: 'none' } }}>
             <Container display="flex" direction="column" gap="3">
-              <Section id="library-visit-title" title="Visit Riverside" headingLevel="h3">
+              <Section id="library-visit-title" title="Visit Riverside" headingAs="h3">
                 <List unstyled items={['45 River Street, Cedar County', 'Monday–Thursday: 9 a.m.–8 p.m.', 'Friday–Saturday: 9 a.m.–5 p.m.']} />
               </Section>
-              <Section id="library-events-title" title="This week at the library" headingLevel="h3">
+              <Section id="library-events-title" title="This week at the library" headingAs="h3">
                 <Container display="flex" direction="column" gap="2">
                   <List items={['Tuesday: Family story time, 10 a.m.', 'Thursday: Technology help, 2 p.m.', 'Saturday: Community open house, 11 a.m.']} />
                   <Link href="tel:+12025550105">Call the library</Link>
@@ -153,7 +153,7 @@ export const contentStoryDefs = {
     ),
   },
   ContactDirectory: {
-    element: 'section',
+    as: 'section',
     ariaLabel: 'Resident service center directory',
     gridContainer: 'default',
     className: 'padding-x-0',
@@ -165,7 +165,7 @@ export const contentStoryDefs = {
             <Prose className="measure-5">Visit a service center for help with applications, documents, and local programs. Call ahead if you need an interpreter or an accommodation.</Prose>
           </Section>
         </Container>
-        <Section id="contact-options-title" title="Start with the option that works for you" headingLevel="h3">
+        <Section id="contact-options-title" title="Start with the option that works for you" headingAs="h3">
           <Container display="flex" direction="column" gap="3" responsive={{ tablet: { direction: 'row' } }}>
             <Container flex="fill" className="minw-0 border-top-05 border-primary padding-top-2">
               <Eyebrow>By phone</Eyebrow>
@@ -184,10 +184,10 @@ export const contentStoryDefs = {
             </Container>
           </Container>
         </Section>
-        <Section title="Service centers and outreach" headingLevel="h3">
-          <Container element="ul" gridRow gutters="3" className="usa-list--unstyled">
+        <Section title="Service centers and outreach" headingAs="h3">
+          <Container as="ul" gridRow gutters="3" className="usa-list--unstyled">
             {offices.map((office) => (
-              <Container element="li" key={office.name} column="12" responsive={{ tablet: { column: '6' } }} className="padding-bottom-3">
+              <Container as="li" key={office.name} column="12" responsive={{ tablet: { column: '6' } }} className="padding-bottom-3">
                 <Card
                   title={office.name}
                   description={`${office.address}. ${office.days}, ${office.hours}. ${office.detail}`}
@@ -202,7 +202,7 @@ export const contentStoryDefs = {
     ),
   },
   ResourceCenter: {
-    element: 'section',
+    as: 'section',
     ariaLabel: 'Application resource center',
     gridContainer: 'default',
     className: 'padding-x-0',
@@ -212,7 +212,7 @@ export const contentStoryDefs = {
           <Section id="resource-center-title" title="Application resource center">
             <Prose className="measure-5">Clear, practical information to help you prepare an application and understand what happens next.</Prose>
           </Section>
-          <Container element="nav" ariaLabel="Resource topics" display="flex" direction="column" gap="2" responsive={{ mobileLg: { direction: 'row', wrap: 'wrap', gap: '3' } }}>
+          <Container as="nav" ariaLabel="Resource topics" display="flex" direction="column" gap="2" responsive={{ mobileLg: { direction: 'row', wrap: 'wrap', gap: '3' } }}>
             <Link href="#resources-getting-started">Getting started</Link>
             <Link href="#resources-common-questions">Common questions</Link>
             <Link href="#resources-help">Personal assistance</Link>
@@ -220,7 +220,7 @@ export const contentStoryDefs = {
         </Container>
         <Container gridRow gutters="3" responsive={{ desktop: { gutters: '4' } }}>
           <Container column="12" responsive={{ desktop: { column: '8' } }} className="margin-bottom-4">
-            <Section id="resources-getting-started" title="Getting started" headingLevel="h3">
+            <Section id="resources-getting-started" title="Getting started" headingAs="h3">
               <Container display="flex" direction="column" gap="2">
                 {resources.map((resource) => (
                   <Container id={resource.id} key={resource.id}>
@@ -235,7 +235,7 @@ export const contentStoryDefs = {
                 ))}
               </Container>
             </Section>
-            <Section id="resources-common-questions" title="Common questions" headingLevel="h3" className="margin-top-4">
+            <Section id="resources-common-questions" title="Common questions" headingAs="h3" className="margin-top-4">
               <Container gridRow gutters="2">
                 <Container column="12" responsive={{ tablet: { column: '6' } }} className="padding-bottom-2">
                   <Card title="Can someone help me complete an application?" description="Yes. A community navigator can walk through the steps with you by phone or in person." className="height-full margin-bottom-0" />
@@ -246,8 +246,8 @@ export const contentStoryDefs = {
               </Container>
             </Section>
           </Container>
-          <Container id="resources-help" element="aside" column="12" responsive={{ desktop: { column: '4' } }}>
-            <Section id="resources-help-title" title="Personal assistance" headingLevel="h3">
+          <Container id="resources-help" as="aside" column="12" responsive={{ desktop: { column: '4' } }}>
+            <Section id="resources-help-title" title="Personal assistance" headingAs="h3">
               <Container display="flex" direction="column" gap="2">
                 <SummaryBox id="resource-navigator-title" heading="Talk with a navigator">
                   <Container display="flex" direction="column" gap="2">

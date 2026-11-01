@@ -7,10 +7,10 @@
 >
   <div class="usx-hero__inner">
     <div class="usx-hero__callout"{% if calloutMaxWidth %} style="max-width: {{ calloutMaxWidth }};"{% endif %}>
-      {% if headingLevel == 'h2' %}<h2 class="usx-hero__heading">{% elif headingLevel == 'h3' %}<h3 class="usx-hero__heading">{% elif headingLevel == 'h4' %}<h4 class="usx-hero__heading">{% elif headingLevel == 'h5' %}<h5 class="usx-hero__heading">{% else %}<h1 class="usx-hero__heading">{% endif %}
+      {% if headingAs == 'h2' %}<h2 class="usx-hero__heading">{% elif headingAs == 'h3' %}<h3 class="usx-hero__heading">{% elif headingAs == 'h4' %}<h4 class="usx-hero__heading">{% elif headingAs == 'h5' %}<h5 class="usx-hero__heading">{% else %}<h1 class="usx-hero__heading">{% endif %}
         {% if callout %}<span class="usx-hero__heading--alt">{{ callout }}</span>{% endif %}
         {{ title }}
-      {% if headingLevel == 'h2' %}</h2>{% elif headingLevel == 'h3' %}</h3>{% elif headingLevel == 'h4' %}</h4>{% elif headingLevel == 'h5' %}</h5>{% else %}</h1>{% endif %}
+      {% if headingAs == 'h2' %}</h2>{% elif headingAs == 'h3' %}</h3>{% elif headingAs == 'h4' %}</h4>{% elif headingAs == 'h5' %}</h5>{% else %}</h1>{% endif %}
       {% if paragraph %}<p class="usx-hero__paragraph">{{ paragraph }}</p>{% endif %}
       {% if searchProps %}
         {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps.defaultValue onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
@@ -21,9 +21,9 @@
     {% if secondaryContent %}
       <div class="usx-hero__secondary">
         {% if secondaryContent.title %}
-          {% if headingLevel == 'h2' %}<h3 class="usx-hero__secondary-heading">{% elif headingLevel == 'h3' %}<h4 class="usx-hero__secondary-heading">{% elif headingLevel == 'h4' %}<h5 class="usx-hero__secondary-heading">{% elif headingLevel == 'h5' %}<h6 class="usx-hero__secondary-heading">{% else %}<h2 class="usx-hero__secondary-heading">{% endif %}
+          {% if headingAs == 'h2' %}<h3 class="usx-hero__secondary-heading">{% elif headingAs == 'h3' %}<h4 class="usx-hero__secondary-heading">{% elif headingAs == 'h4' %}<h5 class="usx-hero__secondary-heading">{% elif headingAs == 'h5' %}<h6 class="usx-hero__secondary-heading">{% else %}<h2 class="usx-hero__secondary-heading">{% endif %}
             {{ secondaryContent.title }}
-          {% if headingLevel == 'h2' %}</h3>{% elif headingLevel == 'h3' %}</h4>{% elif headingLevel == 'h4' %}</h5>{% elif headingLevel == 'h5' %}</h6>{% else %}</h2>{% endif %}
+          {% if headingAs == 'h2' %}</h3>{% elif headingAs == 'h3' %}</h4>{% elif headingAs == 'h4' %}</h5>{% elif headingAs == 'h5' %}</h6>{% else %}</h2>{% endif %}
         {% endif %}
         {% if secondaryContent.paragraph %}<p class="usx-hero__paragraph">{{ secondaryContent.paragraph }}</p>{% endif %}
         {% if secondaryContent.link %}<a class="usx-hero__secondary-link" href="{{ secondaryContent.link.href }}">{{ secondaryContent.link.text }}</a>{% endif %}

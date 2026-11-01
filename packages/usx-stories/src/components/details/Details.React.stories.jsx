@@ -79,7 +79,7 @@ export const storyDefs = {
       noUnderline: true,
       markerColor: 'ink',
     },
-    text: 'Both decorations can be removed together. The native marker still indicates the disclosure state.',
+    text: 'The underline and content border are removed. The native marker still indicates the disclosure state.',
     noContentBorder: true,
     open: true,
   },
@@ -166,7 +166,7 @@ export default {
     docs: {
       description: {
         component:
-          'A native details/summary disclosure for supporting information that some users may need. Keep essential instructions visible outside the disclosure. Use summaryProps to configure the Summary component. Accepts escaped plain text or composed content and works without JavaScript.',
+          'A native disclosure for optional supporting content. Configure the summary through `summaryProps`; supply escaped plain `text` or composed `children`. Works without JavaScript.',
       },
     },
   },
@@ -206,7 +206,7 @@ export const NoMarker = { args: storyDefs.NoMarker };
 /** summaryProps.noUnderline removes the dotted underline while retaining the content border. */
 export const NoSummaryUnderline = { args: storyDefs.NoSummaryUnderline };
 
-/** The two decoration switches can be combined without changing native disclosure behavior. */
+/** Remove the underline and content border while retaining the native marker. */
 export const MinimalDecoration = { args: storyDefs.MinimalDecoration };
 
 /** className applies font and spacing utilities to the whole disclosure, including its summary. */

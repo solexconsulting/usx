@@ -48,7 +48,7 @@ const reviewGroups = [
 
 export const workflowStoryDefs = {
   SearchResultsWorkspace: {
-    element: 'section',
+    as: 'section',
     gridContainer: 'default',
     display: 'flex',
     direction: 'column',
@@ -60,7 +60,7 @@ export const workflowStoryDefs = {
           <Prose>Showing community services programs for Riverton residents who need help with energy costs.</Prose>
         </Section>
         <Container gridRow gutters="3" responsive={{ desktop: { gutters: '4' } }}>
-          <Container element="aside" column="12" responsive={{ desktop: { column: '4' } }} className="margin-bottom-3">
+          <Container as="aside" column="12" responsive={{ desktop: { column: '4' } }} className="margin-bottom-3">
             <SummaryBox id="program-search-criteria" heading="Applied search criteria">
               <Container display="flex" direction="column" gap="2">
                 <Container display="flex" direction="column" gap="1">
@@ -80,14 +80,14 @@ export const workflowStoryDefs = {
           </Container>
           <Container column="12" responsive={{ desktop: { column: '8' } }} className="minw-0">
             <Container display="flex" direction="column" gap="1" responsive={{ desktop: { direction: 'row', justify: 'space-between', align: 'center' } }} className="margin-bottom-3">
-              <Section headingLevel="h3" title="3 programs match your search" style={{ margin: 0 }} />
+              <Section headingAs="h3" title="3 programs match your search" style={{ margin: 0 }} />
               <Prose className="text-base-dark">Sorted by relevance</Prose>
             </Container>
             <Container display="flex" direction="column" gap="3">
               {programResults.map((program) => (
                 <Card
                   key={program.name}
-                  tag="article"
+                  as="article"
                   title={program.name}
                   description={`${program.summary} ${program.detail}`}
                   tagProps={[{ value: program.category }, { value: program.availability, color: 'primary', outline: true }]}
@@ -105,7 +105,7 @@ export const workflowStoryDefs = {
     ),
   },
   ProgramDashboard: {
-    element: 'section',
+    as: 'section',
     gridContainer: 'default',
     display: 'flex',
     direction: 'column',
@@ -119,12 +119,12 @@ export const workflowStoryDefs = {
               <Prose>Community energy program</Prose>
             </Section>
           </Container>
-          <Container element="nav" display="flex" wrap="wrap" gap="2" ariaLabel="Dashboard sections">
+          <Container as="nav" display="flex" wrap="wrap" gap="2" ariaLabel="Dashboard sections">
             <Link href="#dashboard-queue">Application queue</Link>
             <Link href="#dashboard-priorities">Team priorities</Link>
           </Container>
         </Container>
-        <Section headingLevel="h3" title="Program activity" style={{ margin: 0 }}>
+        <Section headingAs="h3" title="Program activity" style={{ margin: 0 }}>
           <Container gridRow gutters="2">
             {[
               ['86', 'Active applications', 'Across all program teams'],
@@ -145,7 +145,7 @@ export const workflowStoryDefs = {
         </Section>
         <Container gridRow gutters="3">
           <Container column="12" responsive={{ desktop: { column: '8' } }} className="margin-bottom-3">
-            <Section id="dashboard-queue" headingLevel="h3" title="Application queue" style={{ margin: 0 }}>
+            <Section id="dashboard-queue" headingAs="h3" title="Application queue" style={{ margin: 0 }}>
               <Prose className="margin-bottom-3">Active applications are grouped by their current stage.</Prose>
               <Container gridRow gutters="2">
                 {[
@@ -170,7 +170,7 @@ export const workflowStoryDefs = {
               </Container>
             </Section>
           </Container>
-          <Container element="aside" column="12" responsive={{ desktop: { column: '4' } }}>
+          <Container as="aside" column="12" responsive={{ desktop: { column: '4' } }}>
             <SummaryBox id="dashboard-priorities" heading="Team priorities">
               <List ordered items={[
                 'Assign the 12 complete applications for review.',
@@ -184,7 +184,7 @@ export const workflowStoryDefs = {
     ),
   },
   ApplicationReview: {
-    element: 'article',
+    as: 'article',
     gridContainer: 'default',
     display: 'flex',
     direction: 'column',
@@ -209,7 +209,7 @@ export const workflowStoryDefs = {
           <Container column="12" responsive={{ desktop: { column: '8' } }} className="margin-bottom-3">
             <Container display="flex" direction="column" gap="3">
               {reviewGroups.map((group) => (
-                <Section key={group.title} headingLevel="h3" title={group.title} style={{ margin: 0 }}>
+                <Section key={group.title} headingAs="h3" title={group.title} style={{ margin: 0 }}>
                   <Container gridRow gutters="2">
                     {group.fields.map(([label, value]) => (
                       <Container key={label} column="12" responsive={{ tablet: { column: '6' } }} className="margin-bottom-2">
@@ -222,7 +222,7 @@ export const workflowStoryDefs = {
                   </Container>
                 </Section>
               ))}
-              <Section headingLevel="h3" title="Supporting documents" style={{ margin: 0 }}>
+              <Section headingAs="h3" title="Supporting documents" style={{ margin: 0 }}>
                 <FileList hint="Received documents" files={[
                   { key: 'utility-bill', name: 'utility-bill.pdf', size: 245760 },
                   { key: 'residence', name: 'lease-summary.pdf', size: 184320 },
@@ -230,7 +230,7 @@ export const workflowStoryDefs = {
               </Section>
             </Container>
           </Container>
-          <Container element="aside" column="12" responsive={{ desktop: { column: '4' } }}>
+          <Container as="aside" column="12" responsive={{ desktop: { column: '4' } }}>
             <SummaryBox id="application-review-guidance" heading="Before you continue">
               <Container display="flex" direction="column" gap="3">
                 <List items={[
@@ -239,7 +239,7 @@ export const workflowStoryDefs = {
                   'Review the consent information below.',
                 ]} />
                 <Link href="#application-review-consent">Read about the final step</Link>
-                <Section headingLevel="h5" title="Need to make a correction?" style={{ margin: 0 }}>
+                <Section headingAs="h5" title="Need to make a correction?" style={{ margin: 0 }}>
                   <Prose>Your draft remains saved while you review it. Ask your service navigator to update any information that has changed.</Prose>
                 </Section>
               </Container>
@@ -248,7 +248,7 @@ export const workflowStoryDefs = {
         </Container>
         <Container display="flex" direction="column" gap="2" responsive={{ tablet: { direction: 'row', align: 'center', justify: 'space-between' } }} className="border-top-1px border-base-lighter padding-top-3">
           <Container flex="fill" className="minw-0">
-            <Section id="application-review-consent" headingLevel="h3" title="Next: consent and submission" style={{ margin: 0 }}>
+            <Section id="application-review-consent" headingAs="h3" title="Next: consent and submission" style={{ margin: 0 }}>
               <Prose>The final step explains how your information will be used and asks you to confirm your request.</Prose>
             </Section>
           </Container>
@@ -260,7 +260,7 @@ export const workflowStoryDefs = {
     ),
   },
   AppointmentSummary: {
-    element: 'article',
+    as: 'article',
     gridContainer: 'default',
     display: 'flex',
     direction: 'column',
@@ -282,14 +282,14 @@ export const workflowStoryDefs = {
             <SummaryBox id="appointment-confirmation" heading="Confirmation number"><Prose>RV-1048</Prose></SummaryBox>
           </Container>
         </Container>
-        <Container element="nav" display="flex" direction="column" gap="2" responsive={{ mobileLg: { direction: 'row', wrap: 'wrap', gap: '3' } }} ariaLabel="Appointment details">
+        <Container as="nav" display="flex" direction="column" gap="2" responsive={{ mobileLg: { direction: 'row', wrap: 'wrap', gap: '3' } }} ariaLabel="Appointment details">
           <Link href="#appointment-itinerary">Your itinerary</Link>
           <Link href="#appointment-preparation">What to bring</Link>
           <Link href="#appointment-location">Getting here</Link>
         </Container>
         <Container gridRow gutters="3">
           <Container column="12" responsive={{ desktop: { column: '8' } }} className="margin-bottom-3">
-            <Section id="appointment-itinerary" headingLevel="h3" title="Your itinerary" style={{ margin: 0 }}>
+            <Section id="appointment-itinerary" headingAs="h3" title="Your itinerary" style={{ margin: 0 }}>
               <List ordered unstyled className="margin-0" items={[
                 ['9:00 a.m.', 'Check in', 'Main lobby', 'Show your confirmation number and documents at the welcome desk.'],
                 ['9:15 a.m.', 'Meet your navigator', 'Room 204', 'Talk through your household needs and programs that may help.'],
@@ -307,17 +307,17 @@ export const workflowStoryDefs = {
               ))} />
             </Section>
           </Container>
-          <Container element="aside" column="12" responsive={{ desktop: { column: '4' } }}>
+          <Container as="aside" column="12" responsive={{ desktop: { column: '4' } }}>
             <Container display="flex" direction="column" gap="3">
               <SummaryBox id="appointment-preparation" heading="What to bring">
                 <Container display="flex" direction="column" gap="3">
                   <List items={['Your confirmation number', 'A recent utility bill', 'Any questions for your navigator']} />
-                  <Section headingLevel="h5" title="Missing a document?" style={{ margin: 0 }}>
+                  <Section headingAs="h5" title="Missing a document?" style={{ margin: 0 }}>
                     <Prose>Keep your appointment. Your navigator can help you identify another document or explain how to provide it later.</Prose>
                   </Section>
                 </Container>
               </SummaryBox>
-              <Section id="appointment-location" headingLevel="h3" title="Getting here" style={{ margin: 0 }}>
+              <Section id="appointment-location" headingAs="h3" title="Getting here" style={{ margin: 0 }}>
                 <Container display="flex" direction="column" gap="2">
                   <List unstyled items={['Riverton Service Center', '120 River Street', 'Riverton']} />
                   <Prose>The main entrance faces River Street. An accessible entrance and elevator are available from the courtyard.</Prose>
@@ -332,7 +332,7 @@ export const workflowStoryDefs = {
             <Prose>Your navigator will call to check your progress and answer any new questions.</Prose>
             <Container display="flex" gap="2" align="center" flex="none">
               <CalendarDate datetime="2026-11-17" />
-              <Section headingLevel="h5" title="Phone follow-up" style={{ margin: 0 }}><Prose>November 17 · 10:00 a.m. Central</Prose></Section>
+              <Section headingAs="h5" title="Phone follow-up" style={{ margin: 0 }}><Prose>November 17 · 10:00 a.m. Central</Prose></Section>
             </Container>
           </Container>
         </SummaryBox>

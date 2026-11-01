@@ -2,12 +2,13 @@
 {% load components %}
 {# Props: currentPage, totalPages, pages, unbounded, arrowsOnly, #}
 {#        prevLabel, nextLabel, hideLinkText, ariaLabel, pageUrlPrefix #}
-<nav aria-label="{{ ariaLabel }}" class="usa-pagination usx-pagination__nav{% if arrowsOnly %} usx-pagination__arrows-only{% endif %}">
+<nav aria-label="{{ ariaLabel }}" class="usa-pagination usx-pagination__nav{% if arrowsOnly %} usx-pagination__arrows-only{% endif %}" data-usx-pagination-current-page="{{ currentPage }}" data-usx-pagination-page-size="{{ pageSize|default:10 }}" data-usx-pagination-total-items="{{ totalItems|default_if_none:'' }}">
   <ul class="usa-pagination__list">
 
     {# ── Previous arrow ──────────────────────────────────────────────── #}
     <li class="usa-pagination__item usa-pagination__arrow">
-      <a href="{{ pageUrlPrefix }}{{ currentPage|add:"-1" }}"
+      <a href="{% if currentPage == 1 or not pageUrlPrefix %}#{% else %}{{ pageUrlPrefix }}{{ currentPage|add:"-1" }}{% endif %}"
+         data-usx-pagination-page="{{ currentPage|add:'-1' }}"
          class="usa-pagination__link usa-pagination__previous-page{% if currentPage == 1 %} display-none{% endif %}{% if hideLinkText %} padding-1 margin-0{% endif %}"
          aria-label="{{ prevLabel }} page"{% if currentPage == 1 %} aria-disabled="true" tabindex="-1"{% endif %}>
         {% icon name="navigate_before" %}{% endicon %}
@@ -25,12 +26,14 @@
         {% else %}
         <li class="usa-pagination__item usa-pagination__page-no">
           {% if item.page == currentPage %}
-          <a href="{{ pageUrlPrefix }}{{ item.page }}"
+          <a href="{% if pageUrlPrefix %}{{ pageUrlPrefix }}{{ item.page }}{% else %}#{% endif %}"
+             data-usx-pagination-page="{{ item.page }}"
              class="usa-pagination__button usa-current"
              aria-label="Page {{ item.page }}"
              aria-current="page">{{ item.page }}</a>
           {% else %}
-          <a href="{{ pageUrlPrefix }}{{ item.page }}"
+          <a href="{% if pageUrlPrefix %}{{ pageUrlPrefix }}{{ item.page }}{% else %}#{% endif %}"
+             data-usx-pagination-page="{{ item.page }}"
              class="usa-pagination__button"
              aria-label="Page {{ item.page }}">{{ item.page }}</a>
           {% endif %}
@@ -41,7 +44,8 @@
 
     {# ── Next arrow ──────────────────────────────────────────────────── #}
     <li class="usa-pagination__item usa-pagination__arrow">
-      <a href="{{ pageUrlPrefix }}{{ currentPage|add:"1" }}"
+      <a href="{% if not unbounded and currentPage == totalPages or not pageUrlPrefix %}#{% else %}{{ pageUrlPrefix }}{{ currentPage|add:"1" }}{% endif %}"
+         data-usx-pagination-page="{{ currentPage|add:'1' }}"
          class="usa-pagination__link usa-pagination__next-page{% if not unbounded and currentPage == totalPages %} display-none{% endif %}{% if hideLinkText %} padding-1 margin-0{% endif %}"
          aria-label="{{ nextLabel }} page"{% if not unbounded and currentPage == totalPages %} aria-disabled="true" tabindex="-1"{% endif %}>
         <span class="usa-pagination__link-text{% if hideLinkText %} usa-sr-only{% endif %}">{{ nextLabel }}</span>

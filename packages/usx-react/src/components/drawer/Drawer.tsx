@@ -1,5 +1,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
+import Icon from '../icon/Icon';
 
 export type DrawerSide = 'inline-start' | 'inline-end' | 'top' | 'bottom';
 export type DrawerSize = 'compact' | 'default' | 'wide';
@@ -21,15 +22,20 @@ export interface DrawerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   side?: DrawerSide;
   /** Preferred width or height, depending on the side. */
   size?: DrawerSize;
-  /** Modal drawers make the page inert. Modeless drawers use native light dismissal. */
-  modal?: boolean;
   /** Brief text announced with the dialog heading. Omit for complex content. */
   description?: string;
   /** Optional persistent action area after the scrollable content. */
   footer?: React.ReactNode;
-  /** Visible close button text. */
+  /** Square off or round the edge facing the page content. Edges are square by default. */
+  rounded?: boolean;
+  /**
+   * Require an action inside the drawer: omits the close button and disables light dismissal
+   * and Escape. Provide a control in the content or footer that closes the drawer.
+   */
+  actionRequired?: boolean;
+  /** Accessible name of the icon-only close button. */
   closeLabel?: string;
-  /** Focus the heading on open; disable to focus the first control in the content. */
+  /** Focus the heading on open; disable to focus the control marked `autoFocus` in the content. */
   focusHeading?: boolean;
   disabled?: boolean;
   triggerClassName?: string;
@@ -46,9 +52,10 @@ export default function Drawer({
   triggerAriaLabel,
   side = 'inline-end',
   size = 'default',
-  modal = true,
   description,
   footer,
+  rounded = false,
+  actionRequired = false,
   closeLabel = 'Close',
   focusHeading = true,
   disabled = false,
@@ -58,16 +65,17 @@ export default function Drawer({
   ...props
 }: DrawerProps) {
   // Lowercase native attributes work with React 18 and its current DOM typings.
-  const opener = modal ? { commandfor: id, command: 'show-modal' } : { popovertarget: id };
-  const closer = modal
-    ? { commandfor: id, command: 'close' }
-    : { popovertarget: id, popovertargetaction: 'hide' };
+  const opener = { commandfor: id, command: 'show-modal' };
+  const closer = { commandfor: id, command: 'close' };
+  const dismissal: Record<string, string | undefined> = {
+    closedby: actionRequired ? 'none' : undefined,
+  };
 
   return (
     <div {...props} className={ClassNames('usx-drawer', className)}>
       <button
         type="button"
-        className={ClassNames('usa-button', 'usx-button', 'usx-drawer__trigger', triggerClassName)}
+        className={triggerClassName || undefined}
         aria-haspopup="dialog"
         aria-controls={id}
         aria-label={triggerAriaLabel}
@@ -78,13 +86,22 @@ export default function Drawer({
       </button>
       <dialog
         id={id}
-        className={ClassNames('usx-drawer__panel', panelClassName)}
+        className={ClassNames(
+          'usx-drawer__panel',
+          { 'usx-drawer__panel--rounded': rounded },
+          panelClassName
+        )}
         data-side={side}
         data-size={size}
-        popover={modal ? undefined : 'auto'}
+        {...dismissal}
         aria-labelledby={`${id}-heading`}
         aria-describedby={description ? `${id}-description` : undefined}
       >
+        {!actionRequired && (
+          <button type="button" className="usx-drawer__close" {...closer}>
+            <Icon name="close" size={3} alt={closeLabel} />
+          </button>
+        )}
         <header className="usx-drawer__header">
           <h2
             id={`${id}-heading`}
@@ -102,9 +119,6 @@ export default function Drawer({
         </header>
         <div className="usx-drawer__body">{children}</div>
         {footer && <footer className="usx-drawer__footer">{footer}</footer>}
-        <button type="button" className="usx-drawer__close" {...closer}>
-          {closeLabel}
-        </button>
       </dialog>
     </div>
   );

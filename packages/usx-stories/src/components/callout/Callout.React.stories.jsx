@@ -30,7 +30,7 @@ export const storyDefs = {
   IndentXL: { indent: 'xl', content: 'Indent: xl.' },
   Dedent: { dedent: true, content: 'Pulled left beyond the normal content edge.' },
   Section: {
-    element: 'section',
+    as: 'section',
     children: (
       <>
         <h3>Program details</h3>
@@ -38,7 +38,7 @@ export const storyDefs = {
       </>
     ),
   },
-  Aside: { element: 'aside', content: 'Supplementary information in an aside.' },
+  Aside: { as: 'aside', content: 'Supplementary information in an aside.' },
   ChildrenOverride: {
     content: 'This fallback must not appear.',
     children: (

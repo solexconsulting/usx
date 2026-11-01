@@ -28,31 +28,6 @@ export const storyDefs = {
       { type: 'text', text: 'Applications' },
     ],
   },
-  Raw: {
-    items: [
-      {
-        type: 'details',
-        summaryProps: { label: 'More application services' },
-        items: [
-          { type: 'link', href: '#renew-application', text: 'Renew an application' },
-          { type: 'link', href: '#get-help', text: 'Get help' },
-        ],
-      },
-      {
-        type: 'details',
-        summaryProps: { label: 'About these services' },
-        text: 'Find applications and support here.',
-      },
-      {
-        type: 'details',
-        summaryProps: { label: 'Coming soon' },
-        items: [{ type: 'text', text: 'Feature under development' }],
-      },
-      { type: 'link', href: '#application-status', text: 'Check application status' },
-      { type: 'text', text: 'Applications' },
-    ],
-    variant: 'raw',
-  },
   Padded: {
     items: [
       {
@@ -177,7 +152,7 @@ export const storyDefs = {
     ],
   },
   DocumentLibrary: {
-    variant: 'raw',
+    variant: 'default',
     items: [
       {
         type: 'details',
@@ -227,7 +202,7 @@ export const storyDefs = {
     ],
   },
   ApplicationHelp: {
-    variant: 'raw',
+    variant: 'default',
     items: [
       {
         type: 'details',
@@ -283,14 +258,14 @@ const exampleMetadata = {
     heading: 'Public document library',
     intro: 'Browse adopted budgets, financial reports, and public meeting records.',
     description:
-      'A document hierarchy uses raw styling and keeps several years expanded for comparison. File links include their format and size in the visible text.',
+      'A document hierarchy uses default styling and keeps several years expanded for comparison. File links include their format and size in the visible text.',
     navigationLabel: 'Public documents',
   },
   ApplicationHelp: {
     heading: 'Help with your application',
     intro: 'Find answers to common questions about submitting your application.',
     description:
-      'A help panel uses raw Details styling for answers, with a nested group for supporting documents. Disclosure items can contain text without linking to another page.',
+      'A help panel uses default Details styling for answers, with a nested group for supporting documents. Disclosure items can contain text without linking to another page.',
   },
 };
 
@@ -324,7 +299,7 @@ export default {
     docs: {
       description: {
         component:
-          'Pass `items` as nested data. Every item sets `type`: `link` renders a Link (`href`, `text`), `details` renders a Details configured through `summaryProps` and either nested `items` or paragraph `text`, and `text` renders a label in a span. The default `raw` variant keeps Details styling; `padded` adds full-width rows with spacing and hover surfaces. Use `<nav aria-label="…">` around the Tree when it provides navigation. Keyboard users move through controls with Tab and toggle branches with Enter or Space. This is a disclosure list, so it does not use ARIA treeview or menu roles.',
+          'A nested list of links, labels, and native Details disclosures. Use `variant="padded"` for full-width rows. When the list provides navigation, wrap it in `<nav aria-label="…">`. Branches use native disclosure controls and list semantics.',
       },
     },
   },
@@ -333,11 +308,6 @@ export default {
 /** Labels, links, and expandable branches keep their native semantics. */
 export const Default = {
   args: storyDefs.Default,
-};
-
-/** Explicit raw styling leaves the Link and Details appearance to those components. */
-export const Raw = {
-  args: storyDefs.Raw,
 };
 
 export const EmptyBranch = { args: storyDefs.EmptyBranch };

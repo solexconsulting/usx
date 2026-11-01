@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import Icon from '../icon/Icon.jsx';
+import Tooltip from '../tooltip/Tooltip';
+import type { TooltipProps } from '../tooltip/Tooltip';
 
 const shapeClassMap = {
   circle: 'usx-circle',
@@ -17,7 +19,7 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLAnchorElement> {
   variant?: 'image' | 'initials' | 'icon';
   value?: string | null;
   shape?: null | 'circle' | 'rounded-sm' | 'rounded-md' | 'rounded-lg' | 'rounded-xl';
-  tooltip?: string | null;
+  tooltipProps?: Omit<TooltipProps, 'children'> | null;
   className?: string;
   imageClassName?: string;
   contentClassName?: string;
@@ -30,7 +32,7 @@ export default function Avatar({
   variant = 'image',
   value = null,
   shape = null,
-  tooltip = null,
+  tooltipProps = null,
   className = '',
   imageClassName = '',
   contentClassName = '',
@@ -70,16 +72,5 @@ export default function Avatar({
     </a>
   );
 
-  if (tooltip) {
-    return (
-      <span className="usx-tooltip">
-        {avatar}
-        <span className="usa-tooltip__body usa-tooltip__body--right" role="tooltip">{tooltip}</span>
-      </span>
-    );
-  }
-
-  return (
-    avatar
-  );
+  return tooltipProps ? <Tooltip {...tooltipProps}>{avatar}</Tooltip> : avatar;
 }

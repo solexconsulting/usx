@@ -61,11 +61,11 @@
     },
     "onSearch": {
       "type": "function",
-      "description": "Called on every keystroke in the text input; receives (value: string)"
+      "description": "Called on every keystroke in the text input; receives (value: string). Django consumers attach an input listener to the USWDS-enhanced control."
     },
     "onSelect": {
       "type": "function",
-      "description": "Called when an option is selected or cleared; receives (value: string, option: object|null)"
+      "description": "Called when an option is selected or cleared; receives (value: string, option: object|null). Django consumers attach a change listener to the select."
     },
     "formGroup": {
       "type": "boolean",

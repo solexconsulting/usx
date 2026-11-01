@@ -3,7 +3,6 @@
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-modal {
   background: usx-when($usx-modal-bg);
-
   color: usx-when($usx-modal-text);
 
   .usa-modal__close {

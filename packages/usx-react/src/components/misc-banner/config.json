@@ -1,7 +1,7 @@
 {
   "name": "misc-banner",
   "template": "misc-banner/misc-banner.django.html",
-  "version": 3,
+  "version": 4,
   "props": {
     "id": {
       "type": "string",
@@ -15,13 +15,14 @@
       "type": "string",
       "description": "Additional classes for the root banner"
     },
-    "tone": {
+    "color": {
       "type": "string",
-      "description": "Banner tone and style: beta, dev, or test"
+      "default": "beta",
+      "description": "Color utility name for the banner background and optional badge text; accepts any string"
     },
     "badgeText": {
       "type": "string",
-      "description": "Badge label text"
+      "description": "Badge label text; omit or pass an empty string to hide the badge"
     },
     "message": {
       "type": "string",

@@ -15,7 +15,7 @@ export const Default = createStory(storyDefs.Default);
 export const WithTitle = createStory(storyDefs.WithTitle);
 export const WithAdditionalClasses = createStory(storyDefs.WithAdditionalClasses);
 
-export const WithHeadingLevel = createStory(storyDefs.WithHeadingLevel);
+export const WithHeadingAs = createStory(storyDefs.WithHeadingAs);
 
 export const HeadingH1 = { ...createStory(storyDefs.HeadingH1), name: 'Heading H1' };
 export const HeadingH2 = { ...createStory(storyDefs.HeadingH2), name: 'Heading H2' };

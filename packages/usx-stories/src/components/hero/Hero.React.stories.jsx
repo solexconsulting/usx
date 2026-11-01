@@ -97,7 +97,7 @@ storyDefs.SplitContent = {
   },
 };
 storyDefs.SplitContentRight = { ...storyDefs.SplitContent, contentPosition: 'right' };
-storyDefs.SectionHeading = { ...storyDefs.SplitContent, headingLevel: 'h2' };
+storyDefs.SectionHeading = { ...storyDefs.SplitContent, headingAs: 'h2' };
 storyDefs.LongContent = {
   ...storyDefs.SplitContent,
   callout: 'Support for you and your household',

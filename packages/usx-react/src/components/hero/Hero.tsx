@@ -21,7 +21,7 @@ export interface HeroProps extends React.HTMLAttributes<HTMLElement> {
   contentPosition?: 'left' | 'center' | 'right';
   boxed?: boolean;
   calloutMaxWidth?: string;
-  headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+  headingAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
   secondaryContent?: HeroSecondaryContent | null;
   overlay?: boolean;
   overlayOpacity?: number;
@@ -40,7 +40,7 @@ export default function Hero({
   contentPosition = 'left',
   boxed = true,
   calloutMaxWidth,
-  headingLevel = 'h1',
+  headingAs = 'h1',
   secondaryContent = null,
   overlay = true,
   overlayOpacity,
@@ -49,9 +49,9 @@ export default function Hero({
   style,
   ...props
 }: HeroProps) {
-  const Heading = headingLevel;
+  const Heading = headingAs;
   const secondaryHeadings = { h1: 'h2', h2: 'h3', h3: 'h4', h4: 'h5', h5: 'h6' } as const;
-  const SecondaryHeading = secondaryHeadings[headingLevel];
+  const SecondaryHeading = secondaryHeadings[headingAs];
   const classes = ClassNames(
     'usx-hero',
     overlay && 'usx-hero--has-overlay',

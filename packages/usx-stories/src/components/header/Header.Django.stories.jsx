@@ -6,8 +6,9 @@ import {
   BorderRoles as BorderRolesReact,
 } from './Header.React.stories.jsx';
 import { storyDefs as themePickerStoryDefs } from '../theme-picker/ThemePicker.React.stories.jsx';
-import { fetchComponentHtml, useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
-import React, { useEffect, useState } from 'react';
+import { useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
+import { useGlobals } from 'storybook/preview-api';
+import React, { useEffect, useRef } from 'react';
 
 export default {
   title: 'Django/USWDS/Header',
@@ -39,33 +40,23 @@ export const BorderRoles = {
   render: (args) => <div style={borderRoleVars}>{borderRoles.render(args)}</div>,
 };
 
-// Same channel event the toolbar's own theme switcher emits — see
-// ThemePicker.Django.stories.jsx, which drives the global theme the same way.
-const THEME_PICKER_ONCHANGE =
-  "window.__STORYBOOK_ADDONS_CHANNEL__.emit('updateGlobals', { globals: { theme: this.value } })";
-
-// utilityContent is a plain React element, serialized to static HTML by
-// createDjangoStory. navEndContent instead needs to stay *interactive*, so
-// rather than serialize a React ThemePicker, this fetches Django's own
-// theme-picker render (a real onchange attribute, not a stripped React
-// handler) and passes its HTML straight through as the slot's string prop.
-const ExtensibilitySlotsStory = (args) => {
-  const [navEndContent, setNavEndContent] = useState(null);
-
-  useEffect(() => {
-    let active = true;
-    fetchComponentHtml('theme-picker', {
-      ...themePickerStoryDefs.LightDark,
-      onChange: THEME_PICKER_ONCHANGE,
-    }).then((html) => {
-      if (active) setNavEndContent(html);
-    });
-    return () => {
-      active = false;
-    };
-  }, []);
-
+// Both requests are visible to the snapshot renderer. The live story also
+// receives Django's rendered ThemePicker HTML for its interactive end slot.
+const ExtensibilitySlotsStory = ({ updateGlobals, ...args }) => {
+  const storyRoot = useRef(null);
+  const { html: navEndContent } = useDjangoRenderedHtml('theme-picker', {
+    ...themePickerStoryDefs.LightDark,
+    id: 'theme-picker',
+  });
   const { html, error } = useDjangoRenderedHtml('header', { ...args, navEndContent });
+  useEffect(() => {
+    const root = storyRoot.current;
+    const onChange = (event) => {
+      if (event.target.matches('.usx-theme-picker select')) updateGlobals({ theme: event.target.value });
+    };
+    root?.addEventListener('change', onChange);
+    return () => root?.removeEventListener('change', onChange);
+  }, [updateGlobals]);
 
   if (error) {
     return (
@@ -73,7 +64,7 @@ const ExtensibilitySlotsStory = (args) => {
     );
   }
 
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div ref={storyRoot} dangerouslySetInnerHTML={{ __html: html }} />;
 };
 
 export const ExtensibilitySlots = {
@@ -86,5 +77,8 @@ export const ExtensibilitySlots = {
       },
     },
   },
-  render: (args) => <ExtensibilitySlotsStory {...args} />,
+  render: (args) => {
+    const [, updateGlobals] = useGlobals();
+    return <ExtensibilitySlotsStory {...args} updateGlobals={updateGlobals} />;
+  },
 };

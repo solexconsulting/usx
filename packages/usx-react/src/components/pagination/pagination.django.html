@@ -1,4 +1,12 @@
 {% load components %}
+{% with resolvedPage=currentPage|default:initialPage|default:1 resolvedPageSize=pageSize|default:initialPageSize|default:10 %}
+{% if renderPart == 'navigation' %}
+  {% pagination_navigation currentPage=resolvedPage totalPages=totalPages pages=pages unbounded=unbounded arrowsOnly=arrowsOnly prevLabel=prevLabel|default:"Previous" nextLabel=nextLabel|default:"Next" hideLinkText=hideLinkText|default_if_none:True ariaLabel=ariaLabel|default:"Pagination" pageUrlPrefix=pageUrlPrefix pageSize=resolvedPageSize totalItems=totalItems %}{% endpagination_navigation %}
+{% elif renderPart == 'step-options' %}
+  {% pagination_step_options pageSize=resolvedPageSize pageSizeOptions=pageSizeOptions stepOptionsLabel=stepOptionsLabel|default:"Items per page" stepOptionsId=stepOptionsId|default:"pagination-step-options" %}{% endpagination_step_options %}
+{% elif renderPart == 'summary' %}
+  {% pagination_summary firstItem=firstItem lastItem=lastItem currentPage=resolvedPage pageSize=resolvedPageSize totalItems=totalItems itemLabel=itemLabel|default:"items" %}{% endpagination_summary %}
+{% else %}
 
 {# Django template for Pagination #}
 {# ─────────────────────────────────────────────────────────── #}
@@ -28,7 +36,7 @@
     {% if totalItems %}
       {% if showSummary != False and showSummary != "false" %}
       <div class="usx-pagination__container-summary">
-        {% pagination_summary firstItem=firstItem lastItem=lastItem currentPage=currentPage pageSize=pageSize|default:10 totalItems=totalItems itemLabel=itemLabel|default:"items" %}{% endpagination_summary %}
+        {% pagination_summary firstItem=firstItem lastItem=lastItem currentPage=resolvedPage pageSize=resolvedPageSize totalItems=totalItems itemLabel=itemLabel|default:"items" %}{% endpagination_summary %}
       </div>
       {% endif %}
     {% endif %}
@@ -37,12 +45,14 @@
     <div class="usx-pagination__container-end">
 
       {% if showStepOptions != False %}
-      {% pagination_step_options pageSize=pageSize|default:10 pageSizeOptions=pageSizeOptions stepOptionsLabel=stepOptionsLabel|default:"Items per page" stepOptionsId=stepOptionsId|default:"pagination-step-options" %}{% endpagination_step_options %}
+      {% pagination_step_options pageSize=resolvedPageSize pageSizeOptions=pageSizeOptions stepOptionsLabel=stepOptionsLabel|default:"Items per page" stepOptionsId=stepOptionsId|default:"pagination-step-options" %}{% endpagination_step_options %}
       {% endif %}
 
-      {% pagination_navigation currentPage=currentPage|default:1 totalPages=totalPages pages=pages unbounded=unbounded arrowsOnly=arrowsOnly prevLabel=prevLabel|default:"Previous" nextLabel=nextLabel|default:"Next" hideLinkText=hideLinkText|default:True ariaLabel=ariaLabel|default:"Pagination" pageUrlPrefix=pageUrlPrefix|default:"?page=" %}{% endpagination_navigation %}
+      {% pagination_navigation currentPage=resolvedPage totalPages=totalPages pages=pages unbounded=unbounded arrowsOnly=arrowsOnly prevLabel=prevLabel|default:"Previous" nextLabel=nextLabel|default:"Next" hideLinkText=hideLinkText|default_if_none:True ariaLabel=ariaLabel|default:"Pagination" pageUrlPrefix=pageUrlPrefix pageSize=resolvedPageSize totalItems=totalItems %}{% endpagination_navigation %}
 
     </div>
 
   </div>
 </div>
+{% endif %}
+{% endwith %}

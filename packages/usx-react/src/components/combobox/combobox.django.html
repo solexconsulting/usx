@@ -22,7 +22,6 @@
     {% if required %} required{% endif %}
     {% if hint or error %} aria-describedby="{% if hint %}{{ id }}-hint{% endif %}{% if hint and error %} {% endif %}
     {% if error %}{{ id }}-error{% endif %}"{% endif %}
-    {% if onSelect %} onchange="{{ onSelect }}"{% endif %}
   >
     {% for option in options %}
     <option value="{{ option.value }}">{{ option.label }}</option>
@@ -50,7 +49,6 @@
     {% if required %} required{% endif %}
     {% if hint or error %} aria-describedby="{% if hint %}{{ id }}-hint{% endif %}{% if hint and error %} {% endif %}
     {% if error %}{{ id }}-error{% endif %}"{% endif %}
-    {% if onSelect %} onchange="{{ onSelect }}"{% endif %}
   >
     {% for option in options %}
     <option value="{{ option.value }}">{{ option.label }}</option>

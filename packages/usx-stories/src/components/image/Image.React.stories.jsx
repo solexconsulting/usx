@@ -36,7 +36,7 @@ export const storyDefs = {
         { media: '(min-width: 20em)', srcSet: '/solex-only.svg' },
       ],
     },
-  },
+    staticBaseUrl: (typeof window !== 'undefined' && window.usxBaseUrl) || '/',  },
 };
 
 export default {

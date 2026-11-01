@@ -6,7 +6,5 @@
   name="{{ name|force_escape }}"{% endif %}
 >
   {% summary props=summaryProps %}{% endsummary %}
-  <div class="usx-details__content{% if not noContentBorder and contentBorderColor %} border-{{ contentBorderColor|force_escape }}{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">{% if children != None %}{% if children is not True and children is not False %}{{ children|safe }}{% endif %}{% else %}
-    <p class="usx-details__text">{{ text|default_if_none:''|force_escape }}</p>{% endif %}
-  </div>
+  <div class="usx-details__content{% if not noContentBorder and contentBorderColor %} border-{{ contentBorderColor|force_escape }}{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">{% if children != None %}{% if children is not True and children is not False %}{{ children|safe }}{% endif %}{% else %}<p class="usx-details__text">{{ text|default_if_none:''|force_escape }}</p>{% endif %}</div>
 </details>

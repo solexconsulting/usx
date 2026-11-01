@@ -2,21 +2,18 @@
   "name": "clickable",
   "template": "clickable/clickable.django.html",
   "version": 2,
-  "required": [
-    "href"
-  ],
   "props": {
     "href": {
       "type": "string",
-      "description": "URL the clickable navigates to."
+      "description": "URL the clickable navigates to. Omit it to render a button instead of a link."
     },
     "className": {
       "type": "string",
-      "description": "Additional layout or utility classes applied to the root anchor (e.g. 'flex-column padding-2')."
+      "description": "Additional layout or utility classes applied to the root anchor or button (e.g. 'flex-column padding-2')."
     },
     "id": {
       "type": "string",
-      "description": "Optional id attribute for the anchor element."
+      "description": "Optional id attribute for the root element."
     },
     "children": {
       "type": "slot",

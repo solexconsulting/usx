@@ -8,10 +8,10 @@
   >
     <div class="usa-identifier__container">
       {% if avatarProps %}
-      <div class="usa-identifier__logos usx-avatar-group{% if overlapAvatars %} usa-avatar-group--overlap{% endif %}">
+      <div class="usa-identifier__logos usx-avatar-group{% if overlapAvatars %} usx-avatar-group--overlap{% endif %}">
         {% for item in avatarProps %}
           {% with avatarClass=item.className|default:'' imageClass=item.imageClassName|default:'' defaultShape=logoShape|default:'' %}
-            {% avatar href=item.href src=item.src alt=item.alt variant=item.variant|default:'image' value=item.value shape=item.shape|default:defaultShape tooltip=item.tooltip className='usa-identifier__logo '|add:avatarClass imageClassName='usa-identifier__logo-img '|add:imageClass contentClassName=item.contentClassName %}{% endavatar %}
+            {% avatar href=item.href src=item.src alt=item.alt variant=item.variant|default:'image' value=item.value shape=item.shape|default:defaultShape tooltipProps=item.tooltipProps className='usa-identifier__logo '|add:avatarClass imageClassName='usa-identifier__logo-img '|add:imageClass contentClassName=item.contentClassName %}{% endavatar %}
           {% endwith %}
         {% endfor %}
       </div>

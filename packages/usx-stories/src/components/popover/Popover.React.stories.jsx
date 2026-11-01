@@ -1,5 +1,4 @@
 import React from 'react';
-import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 import Popover from '../../../../usx-react/src/components/popover/Popover.tsx';
 import PopoverMenu from '../../../../usx-react/src/components/popover/PopoverMenu.tsx';
 import Details from '../../../../usx-react/src/components/details/Details.tsx';
@@ -11,11 +10,6 @@ import { storyDefs as treeStoryDefs } from '../tree/Tree.React.stories.jsx';
 
 // One navigation model drives the Tree and the nested Popovers.
 const serviceNavigation = treeStoryDefs.ResidentServices.items;
-const resourceLinks = [
-  { type: 'link', href: '#eligibility', text: 'Check eligibility' },
-  { type: 'link', href: '#documents', text: 'Required documents' },
-  { type: 'link', href: '#contact', text: 'Contact support' },
-];
 
 // Sibling details share a native group name; each nesting level gets its own.
 const withGroupNames = (items, group) =>
@@ -28,15 +22,15 @@ const withGroupNames = (items, group) =>
 /** A horizontal site navigation row around a Popover dropdown. */
 export function NavigationBarLayout({ children }) {
   return (
-    <nav aria-label="City website" className="display-flex flex-wrap flex-align-center grid-gap-1">
-      <a href="#home" className="usa-button usa-button--unstyled">
+    <nav aria-label="City website" className="grid-row">
+      <a href="#home" className="padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled">
         Home
       </a>
       {children}
-      <a href="#permits" className="usa-button usa-button--unstyled">
+      <a href="#permits" className="padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled">
         Permits and licenses
       </a>
-      <a href="#contact" className="usa-button usa-button--unstyled">
+      <a href="#contact" className="padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled">
         Contact us
       </a>
     </nav>
@@ -74,7 +68,7 @@ const placementExamples = placementAlignments.flatMap((align) =>
     id: `popover-${side}-${align}`,
     summaryProps: {
       label: `${side} / ${align}`,
-      className: 'usa-button usx-button margin-0',
+      className: 'usa-button usx-button usa-button--primary margin-0',
     },
     side,
     align,
@@ -86,27 +80,43 @@ const rtlPlacementExamples = ['start', 'end'].map((align) => ({
   id: `popover-rtl-${align}`,
   summaryProps: {
     label: `Bottom / ${align} in RTL`,
-    className: 'usa-button usx-button margin-0',
+    className: 'usa-button usx-button usa-button--primary margin-0',
   },
   side: 'bottom',
   align,
   children: `In right-to-left content, ${align} follows the reading direction.`,
 }));
 
-const headingLevelExample = (id, panelHeading, headingLevel) => ({
+const headingAsExample = (id, panelHeading, headingAs) => ({
   id,
-  summaryProps: { label: 'Important dates', className: 'usa-button usx-button margin-0' },
+  summaryProps: { label: 'Important dates', className: 'usa-button usx-button usa-button--primary margin-0' },
   panelHeading,
-  ...(headingLevel ? { headingLevel } : {}),
+  ...(headingAs ? { headingAs } : {}),
   showClose: true,
   children: <p className="margin-0">Applications are due by the last business day of the month.</p>,
 });
+
+const panelShapeExample = (panelShape) => ({
+  id: `popover-panel-${panelShape}`,
+  summaryProps: {
+    label: `${panelShape === 'rounded' ? 'Rounded' : 'Square'} panel`,
+    className: 'usa-button usx-button usa-button--primary margin-0',
+  },
+  panelShape,
+  children: 'The panel shape changes its corners and outer padding.',
+});
+
+const menuItemsExample = {
+  id: 'popover-menu-items',
+  summaryProps: { label: 'Resident services', className: 'usa-button usx-button usa-button--primary margin-0' },
+  menuItems: serviceNavigation,
+};
 
 export const storyDefs = {
   ResponsiveComposition: {
     id: 'site-menu',
     summaryProps: {
-      className: 'usa-button usx-button margin-0',
+      className: 'usa-button usx-button usa-button--primary margin-0',
       children: (
         <>
           <svg className="usa-icon margin-right-1" aria-hidden="true" focusable="false">
@@ -140,25 +150,22 @@ export const storyDefs = {
     id: 'site-nav-services',
     summaryProps: {
       label: 'Resident services',
-      className: 'usa-button usx-button usa-button--unstyled margin-0',
+      className: 'padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled margin-0',
     },
-    children: (
-      <PopoverMenu
-        items={serviceNavigation.filter((item) => item.type === 'details')}
-        prefix="site-nav"
-      />
-    ),
-  },
-  MenuItems: {
-    id: 'popover-menu-items',
-    summaryProps: { label: 'Resident services', className: 'usa-button usx-button margin-0' },
+    panelShape: 'square',
     menuItems: serviceNavigation,
+  },
+  MenuItems: menuItemsExample,
+  SquareMenuItems: {
+    ...menuItemsExample,
+    id: 'popover-square-menu-items',
+    panelShape: 'square',
   },
   WorstCase: {
     id: 'popover-worst-case',
     summaryProps: {
       ariaLabel: 'Account and services, 3 notifications',
-      className: 'usa-button usx-button margin-0',
+      className: 'usa-button usx-button usa-button--primary margin-0',
       children: (
         <>
           <svg className="usa-icon margin-right-1" aria-hidden="true" focusable="false">
@@ -204,12 +211,14 @@ export const storyDefs = {
     className: 'usx-details',
     children: 'Your case number is in the confirmation email we sent after you applied.',
   },
+  RoundedPanel: panelShapeExample('rounded'),
+  SquarePanel: panelShapeExample('square'),
   GroupedSummaryProps: {
     id: 'popover-summary-props',
     summaryProps: {
       label: 'Account options',
       ariaLabel: 'Account options menu',
-      className: 'usa-button usx-button margin-0',
+      className: 'usa-button usx-button usa-button--primary margin-0',
     },
     children: 'Manage your account settings.',
   },
@@ -240,32 +249,25 @@ export const storyDefs = {
       </>
     ),
   },
-  Navigation: {
-    id: 'popover-navigation',
-    summaryProps: { label: 'Resources', className: 'usa-button usx-button margin-0' },
-    children: (
-      <nav aria-label="Resource links">
-        <PopoverMenu items={resourceLinks} prefix="popover-navigation" />
-      </nav>
-    ),
-  },
-  Actions: {
-    id: 'popover-actions',
-    summaryProps: { label: 'Record actions', className: 'usa-button usx-button margin-0' },
+  Links: {
+    id: 'popover-links',
+    summaryProps: { label: 'Record links', className: 'usa-button usx-button usa-button--primary margin-0' },
     menuItems: [
       {
         type: 'link',
-        text: 'Save for later',
+        href: '#saved-records',
+        text: 'Saved records',
       },
       {
         type: 'link',
-        text: 'Share record',
+        href: '#sharing-options',
+        text: 'Sharing options',
       },
     ],
   },
   RichForm: {
     id: 'popover-rich-form',
-    summaryProps: { label: 'Filter results', className: 'usa-button usx-button margin-0' },
+    summaryProps: { label: 'Filter results', className: 'usa-button usx-button usa-button--primary margin-0' },
     showClose: true,
     children: (
       <form method="get" action="#results">
@@ -296,7 +298,7 @@ export const storyDefs = {
           text="Combine a search term and status to narrow your results."
           className="margin-top-2"
         />
-        <button className="usa-button usx-button margin-top-2" type="submit">
+        <button className="usa-button usx-button usa-button--primary margin-top-2" type="submit">
           Apply filters
         </button>
       </form>
@@ -304,7 +306,7 @@ export const storyDefs = {
   },
   LongContent: {
     id: 'popover-long-content',
-    summaryProps: { label: 'City departments', className: 'usa-button usx-button margin-0' },
+    summaryProps: { label: 'City departments', className: 'usa-button usx-button usa-button--primary margin-0' },
     scrollable: true,
     children: (
       <nav aria-label="City departments">
@@ -322,9 +324,9 @@ export const storyDefs = {
       </nav>
     ),
   },
-  HeadingLevelDefault: headingLevelExample('popover-heading-default', 'Filing deadlines'),
-  HeadingLevelH3: headingLevelExample('popover-heading-h3', 'Filing deadlines', 'h3'),
-  HeadingLevelH5: headingLevelExample('popover-heading-h5', 'Filing deadlines', 'h5'),
+  HeadingAsDefault: headingAsExample('popover-heading-default', 'Filing deadlines'),
+  HeadingAsH3: headingAsExample('popover-heading-h3', 'Filing deadlines', 'h3'),
+  HeadingAsH5: headingAsExample('popover-heading-h5', 'Filing deadlines', 'h5'),
   Placements: placementExamples,
   RtlPlacements: rtlPlacementExamples,
 };
@@ -332,14 +334,6 @@ export default {
   decorators: [
     (Story) => (
       <div className="height-viewport">
-        <Alert
-          variant="warning"
-          heading="Experimental — do not use in production"
-          className="margin-bottom-3"
-        >
-          This component is for evaluation while browser and assistive technology validation is
-          completed.
-        </Alert>
         <Story />
         <p>This content following the popover should be covered when it opens.</p>
       </div>
@@ -357,7 +351,7 @@ export default {
     docs: {
       description: {
         component:
-          'Popover positions a native `<details>` panel beside its summary. Configure the summary through `summaryProps`. Content is arbitrary semantic markup. Choose `side` and `align` with enough room for the panel. Import `@solexllc/usx/js/start` or call `popover.on(root)` for outside dismissal and Escape with focus return.\n\nFor site navigation, put a Tree or a list inside Popover. The Responsive Composition story builds one Menu from a single list of items: a padded Tree for inline navigation at small widths, and nested Popovers that open to the right from the tablet breakpoint (640px by default). Keep markup IDs and native `name` groups distinct between the two hidden views.',
+          'A native `<details>` disclosure with a positioned panel. Use `summaryProps` for its trigger and `children` or `menuItems` for panel content. The summary toggles without JavaScript; `@solexllc/usx/js/start` adds outside dismissal, Escape, and the optional close button.',
       },
     },
   },
@@ -368,6 +362,16 @@ export const Default = {
   args: storyDefs.Default,
 };
 
+/** Original rounded panel with extra vertical padding. */
+export const RoundedPanel = {
+  args: storyDefs.RoundedPanel,
+};
+
+/** Square panel with equal outer padding on all sides. */
+export const SquarePanel = {
+  args: storyDefs.SquarePanel,
+};
+
 /** An existing item becomes the trigger by using summary with its own classes. */
 export const AuthoredTrigger = {
   args: storyDefs.AuthoredTrigger,
@@ -375,7 +379,7 @@ export const AuthoredTrigger = {
     docs: {
       description: {
         story:
-          'The application item owns its appearance. Its utility classes are passed directly to the summary using `summaryProps.className`; Popover adds no summary classes or styles. In authored HTML, wrap the item in `<details class="usx-popover">` and change its element from `<div>` to `<summary>`, retaining its classes and noninteractive content. This example uses the same keyboard activation and dismissal as the unstyled Default story.',
+          'Pass the application item’s classes through `summaryProps.className`. Popover leaves the summary unstyled.',
       },
     },
   },
@@ -386,11 +390,6 @@ export const GroupedSummaryProps = {
   args: storyDefs.GroupedSummaryProps,
 };
 
-/** A labelled navigation landmark keeps links in their familiar semantics and tab order. */
-export const Navigation = {
-  args: storyDefs.Navigation,
-};
-
 /** Pass `menuItems` to render a stacked menu in the panel; `details` rows open flyouts to the right. */
 export const MenuItems = {
   args: storyDefs.MenuItems,
@@ -398,10 +397,15 @@ export const MenuItems = {
     docs: {
       description: {
         story:
-          'Link rows are plain links; `details` rows are nested Popovers with a chevron, aligned with their row. Each level has its own native `name` group, so opening one flyout closes its siblings. Nesting can continue to any depth.',
+          'Link rows navigate; `details` rows open nested flyouts. Native `name` groups make sibling flyouts mutually exclusive.',
       },
     },
   },
+};
+
+/** The same nested menu in a square panel. */
+export const SquareMenuItems = {
+  args: storyDefs.SquareMenuItems,
 };
 
 /** Every panel feature at once: menu, children, close button, custom trigger. */
@@ -411,15 +415,15 @@ export const WorstCase = {
     docs: {
       description: {
         story:
-          'A stress test combining `menuItems` (three levels, a text row, and a long link), `children` with a heading, a nested Details, `showClose`, a rich trigger with `summaryProps.ariaLabel`, and custom wrapper and panel classes.',
+          'Combines nested menu items, rich content, a close button, and a custom trigger.',
       },
     },
   },
 };
 
-/** Menu rows render as links. */
-export const Actions = {
-  args: storyDefs.Actions,
+/** Menu link rows have real destinations. */
+export const Links = {
+  args: storyDefs.Links,
 };
 
 /** A form popover with a nested Details and a close button. */
@@ -427,19 +431,19 @@ export const RichForm = {
   args: storyDefs.RichForm,
 };
 
-/** Without `headingLevel`, `panelHeading` renders as an h2. */
-export const HeadingLevelDefault = {
-  args: storyDefs.HeadingLevelDefault,
+/** Without `headingAs`, `panelHeading` renders as an h2. */
+export const HeadingAsDefault = {
+  args: storyDefs.HeadingAsDefault,
 };
 
-/** Set `headingLevel` so the panel heading fits the outline of the page that contains it. */
-export const HeadingLevelH3 = {
-  args: storyDefs.HeadingLevelH3,
+/** Set `headingAs` so the panel heading fits the outline of the page that contains it. */
+export const HeadingAsH3 = {
+  args: storyDefs.HeadingAsH3,
 };
 
 /** Heading levels are independent of visual size; use `panelClassName` or utilities to restyle. */
-export const HeadingLevelH5 = {
-  args: storyDefs.HeadingLevelH5,
+export const HeadingAsH5 = {
+  args: storyDefs.HeadingAsH5,
 };
 
 /** All four sides and three alignments are available from the same API. */
@@ -487,7 +491,7 @@ export const ResponsiveComposition = {
     docs: {
       description: {
         story:
-          'Both presentations are built from the same list of items. Below the tablet breakpoint, the Menu opens a padded Tree for inline navigation. From the tablet breakpoint, each branch becomes a nested Popover that opens to the right.',
+          'The same items render as a padded Tree on small screens and nested Popovers from the tablet breakpoint.',
       },
     },
   },

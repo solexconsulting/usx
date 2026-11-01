@@ -7,6 +7,10 @@
       "type": "string",
       "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
     },
+    "staticUrlPrefix": {
+      "type": "string",
+      "description": "Optional sprite URL prefix, including the # separator. Overrides staticBaseUrl for the spinner icon."
+    },
     "size": {
       "type": "select",
       "options": [

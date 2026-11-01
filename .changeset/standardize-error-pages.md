@@ -12,4 +12,4 @@ Add ErrorPage and Details components with matching React and Django contracts an
 - Page supports shared heading IDs, root labeling, and optional programmatic focus props in React and Django.
 - Callout supports paragraph roots alongside div, section, and aside. Remove its blockquote root and cite prop; use Quote for quotations.
 - Code supports contentClassName for styling its content independently.
-- Add marker color utilities and the ink border color utility used by Details.
+- Add marker and underline color utilities for Details and Summary, plus the ink border color utility.

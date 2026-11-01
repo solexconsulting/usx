@@ -29,20 +29,26 @@ export type TreeTextItem = {
 };
 
 export type TreeItem = TreeLinkItem | TreeBranchItem | TreeDetailsItem | TreeTextItem;
-export type TreeVariant = 'raw' | 'padded';
+export type TreeVariant = 'default' | 'padded';
 
 export interface TreeProps extends Omit<React.HTMLAttributes<HTMLUListElement>, 'children'> {
   /** Each item sets `type` to "link", "details", or "text". */
   items: TreeItem[];
-  /** Raw preserves Details styling; padded adds row spacing and alignment. */
+  /** Default preserves Details styling; padded adds row spacing and alignment. */
   variant?: TreeVariant;
   children?: never;
 }
 
 /** A semantic nested list built from Link and Details items. */
-export default function Tree({ items, variant = 'raw', className, ...props }: TreeProps) {
+export default function Tree({ items, variant = 'default', className, ...props }: TreeProps) {
+  const treeClassNames = ClassNames(
+    'usx-tree',
+    { [`usx-tree--${variant}`]: variant !== 'default' },
+    className
+  );
+
   return (
-    <ul {...props} className={ClassNames('usx-tree', `usx-tree--${variant}`, className)}>
+    <ul {...props} className={treeClassNames}>
       {items.map((item, index) => {
         switch (item.type) {
           case 'link': {

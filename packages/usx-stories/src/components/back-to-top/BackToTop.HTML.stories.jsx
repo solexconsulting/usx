@@ -34,6 +34,8 @@ const checkControl = async (
   );
   await expect(icon).toHaveClass(`usa-icon--size-${iconSize}`);
   await expect(control.textContent.trim()).toBe(label ?? '');
+  // Icon-only controls are named by the default aria-label.
+  await expect(control).toHaveAccessibleName(label ?? 'Back to top');
   if (label) {
     const iconFirst = Boolean(icon.nextSibling?.textContent.trim());
     await expect(iconFirst).toBe(iconPosition === 'left');

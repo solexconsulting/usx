@@ -1,5 +1,6 @@
 import React from 'react';
 import { getAssetUrl as assetUrl } from '../../assets';
+import ClassNames from 'classnames';
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: string;
@@ -27,16 +28,17 @@ export default function Icon({
   ...props
 }: IconProps) {
   const spritePrefix = staticUrlPrefix ?? assetUrl(`img/${source === 'usx' ? 'usx-sprite.svg' : 'sprite.svg'}#`, staticBaseUrl);
+  const classes = ClassNames(
+    'usa-icon',
+    'usx-icon',
+    size ? (size === 1 ? 'usx-icon--size-1' : 'usa-icon--size-' + size) : '',
+    color ? 'text-' + color : '',
+    className
+  );
+
   return (
     <svg
-      className={
-        'usa-icon ' +
-        (size ? (size === 1 ? 'usx-icon--size-1' : 'usa-icon--size-' + size) : '') +
-        ' ' +
-        (color ? 'text-' + color : '') +
-        ' ' +
-        className
-      }
+      className={classes}
       aria-hidden={alt ? undefined : 'true'}
       aria-label={alt || undefined}
       focusable="false"

@@ -17,31 +17,44 @@ export default {
 
 export const storyDefs = {
   ExecutiveSummary: {
+    id: 'summary-box-executive-summary',
     heading: 'Program summary: Winter Relief 2026',
-    content: 'This page tracks a 12-week emergency housing initiative serving 4 counties. Use the summaries below to review what happened, what changed, and what decisions remain.',
+    content:
+      'This page tracks a 12-week emergency housing initiative serving 4 counties. Use the summaries below to review what happened, what changed, and what decisions remain.',
   },
   StoryStep1Context: {
+    id: 'summary-box-step-1',
     heading: 'Step 1: Starting conditions',
-    content: 'At launch, 1,840 households were on waitlists, average placement time was 19 days, and only 2 shelters had overnight capacity during severe weather events.',
+    content:
+      'At launch, 1,840 households were on waitlists, average placement time was 19 days, and only 2 shelters had overnight capacity during severe weather events.',
   },
   StoryStep2Actions: {
+    id: 'summary-box-step-2',
     heading: 'Step 2: Actions completed',
-    content: 'Teams expanded outreach coverage, opened two temporary warming sites, added weekend processing, and launched an SMS intake path for applicants without reliable internet.',
+    content:
+      'Teams expanded outreach coverage, opened two temporary warming sites, added weekend processing, and launched an SMS intake path for applicants without reliable internet.',
   },
   StoryStep3Outcomes: {
+    id: 'summary-box-step-3',
     heading: 'Step 3: Measured outcomes',
-    content: 'Waitlist volume decreased 37%, median placement time improved from 19 to 11 days, and no-weather-exposure incidents were reported at participating overnight sites.',
+    content:
+      'Waitlist volume decreased 37%, median placement time improved from 19 to 11 days, and no-weather-exposure incidents were reported at participating overnight sites.',
   },
   StoryStep4Decision: {
+    id: 'summary-box-step-4',
     heading: 'Step 4: Decision points for leadership',
-    content: 'Leadership must decide whether to fund weekend processing permanently and whether to scale SMS intake statewide before the next forecasted severe-weather cycle.',
+    content:
+      'Leadership must decide whether to fund weekend processing permanently and whether to scale SMS intake statewide before the next forecasted severe-weather cycle.',
   },
   ChildrenPriority: {
+    id: 'summary-box-children-priority',
     heading: 'Children priority demo',
     content: 'This narrative should not render because children is provided.',
-    children: 'Children content takes priority and can be used for tailored, page-specific summaries.',
+    children:
+      'Children content takes priority and can be used for tailored, page-specific summaries.',
   },
   WithListComponent: {
+    id: 'summary-box-list',
     heading: '90-day action plan summary',
     children: (
       <List
@@ -55,6 +68,7 @@ export const storyDefs = {
     ),
   },
   WithIconHighlights: {
+    id: 'summary-box-icon-highlights',
     heading: 'Weekly KPI highlights',
     children: (
       <IconList

@@ -53,7 +53,7 @@ for (const lib of [esm, cjs]) {
     },
     text: 'Details body',
   });
-  for (const text of ['Grouped summary', 'grouped-class', 'marker-error', 'border-secondary', 'bold-text']) {
+  for (const text of ['Grouped summary', 'grouped-class', 'marker-error', 'underline-secondary', 'bold-text']) {
     assert.ok(details.includes(text), text);
   }
 

@@ -61,6 +61,7 @@ $popover-panel-x-padding: 0.25rem;
   &[data-side='right'] > .usx-popover__panel {
     left: calc(100% + 0.25rem);
   }
+
   /* END Panel Positioning */
 }
 
@@ -88,6 +89,22 @@ $popover-panel-x-padding: 0.25rem;
 
   .usx-popover__panel-close {
     margin: 1rem;
+  }
+
+  &--square {
+    padding: $popover-panel-x-padding;
+    border-radius: 0;
+
+    .usx-popover__panel-heading,
+    .usx-popover__panel-content {
+      &:not([class^='margin-'], [class*=' margin-']) {
+        margin-inline: 0;
+      }
+    }
+
+    .usx-popover__panel-close {
+      margin: 0;
+    }
   }
 }
 
@@ -153,6 +170,10 @@ $popover-panel-x-padding: 0.25rem;
   > li > .usx-popover:is([data-side='left'], [data-side='right']) > .usx-popover__panel {
     top: calc(0rem - #{$popover-panel-y-padding} - 1px);
   }
+
+  > li > .usx-popover:is([data-side='left'], [data-side='right']) > .usx-popover__panel--square {
+    top: calc(0rem - #{$popover-panel-x-padding} - 1px);
+  }
 }
 
 .usx-popover__menu-item {
@@ -179,5 +200,5 @@ $popover-panel-x-padding: 0.25rem;
   max-block-size: min(24rem, 70vh);
   overflow: auto;
   overscroll-behavior: contain;
-  scrollbar-color: currentColor transparent;
+  scrollbar-color: currentcolor transparent;
 }

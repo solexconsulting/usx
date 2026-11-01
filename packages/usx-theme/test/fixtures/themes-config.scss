@@ -12,5 +12,4 @@
   $default: acme,
   $prefersdark: carbon,
 );
-
 @include themes.theme((color-secondary: #123456), '.tenant-x');

@@ -12,8 +12,8 @@ export default {
 
 const checkGroup = (def) => async (group) => {
   await expect(group).toHaveClass('usx-avatar-group');
-  await (def.overlap ? expect(group) : expect(group).not).toHaveClass('usa-avatar-group--overlap');
-  await (def.stacked ? expect(group) : expect(group).not).toHaveClass('usa-avatar-group--stacked');
+  await (def.overlap ? expect(group) : expect(group).not).toHaveClass('usx-avatar-group--overlap');
+  await (def.stacked ? expect(group) : expect(group).not).toHaveClass('usx-avatar-group--stacked');
 
   const links = [...group.querySelectorAll('a.usx-avatar')];
   await expect(links).toHaveLength(def.avatarProps.length);
@@ -24,7 +24,7 @@ const checkGroup = (def) => async (group) => {
     await expect(links[index]).toHaveAccessibleName(avatar.alt);
     if (avatar.shape) await expect(img).toHaveClass(`usx-${avatar.shape}`);
     const tooltip = links[index].parentElement.querySelector('[role="tooltip"]');
-    if (avatar.tooltip) await expect(tooltip).toHaveTextContent(avatar.tooltip);
+    if (avatar.tooltipProps) await expect(tooltip).toHaveTextContent(avatar.tooltipProps.label);
     else await expect(tooltip).toBeNull();
   }
 

@@ -11,7 +11,7 @@
     /><button type="submit" class="usa-button usx-button usa-button--primary">
       <span class="usa-search__submit-text">Search</span
       ><svg
-        class="usa-icon usa-search__submit-icon"
+        class="usa-icon usx-icon usa-search__submit-icon"
         aria-hidden="true"
         focusable="false"
         role="img"
@@ -36,7 +36,7 @@
     /><button type="submit" class="usa-button usx-button usa-button--primary">
       <span class="usa-search__submit-text">Search</span
       ><svg
-        class="usa-icon usa-search__submit-icon"
+        class="usa-icon usx-icon usa-search__submit-icon"
         aria-hidden="true"
         focusable="false"
         role="img"
@@ -61,7 +61,7 @@
     /><button type="submit" class="usa-button usx-button usa-button--primary">
       <span class="usa-search__submit-text">Search</span
       ><svg
-        class="usa-icon usa-search__submit-icon"
+        class="usa-icon usx-icon usa-search__submit-icon"
         aria-hidden="true"
         focusable="false"
         role="img"
@@ -85,7 +85,7 @@
     /><button type="submit" class="usa-button usx-button usa-button--primary">
       <span class="usa-search__submit-text">Search</span
       ><svg
-        class="usa-icon usa-search__submit-icon"
+        class="usa-icon usx-icon usa-search__submit-icon"
         aria-hidden="true"
         focusable="false"
         role="img"
@@ -113,8 +113,8 @@
       name="q"
     /><button type="submit" class="usa-button usx-button usa-button--primary">
       <svg
-        class="usa-icon usa-search__submit-icon display-inline-block"
-        aria-hidden="true"
+        class="usa-icon usx-icon usa-search__submit-icon display-inline-block"
+        aria-label="Search"
         focusable="false"
         role="img"
       >
@@ -141,8 +141,8 @@
       name="q"
     /><button type="submit" class="usa-button usx-button usa-button--primary">
       <svg
-        class="usa-icon usa-search__submit-icon display-inline-block"
-        aria-hidden="true"
+        class="usa-icon usx-icon usa-search__submit-icon display-inline-block"
+        aria-label="Search"
         focusable="false"
         role="img"
       >
@@ -170,8 +170,8 @@
       name="q"
     /><button type="submit" class="usa-button usx-button usa-button--primary">
       <svg
-        class="usa-icon usa-search__submit-icon display-inline-block"
-        aria-hidden="true"
+        class="usa-icon usx-icon usa-search__submit-icon display-inline-block"
+        aria-label="Search"
         focusable="false"
         role="img"
       >
@@ -194,7 +194,110 @@
     /><button type="submit" class="usa-button usx-button usa-button--accent-cool">
       <span class="usa-search__submit-text">Search</span
       ><svg
-        class="usa-icon usa-search__submit-icon"
+        class="usa-icon usx-icon usa-search__submit-icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+</section>
+
+<h3 class="site-preview-heading">Custom Label</h3>
+<section aria-label="Find a program">
+  <form id="react-search-custom-label-form" class="usa-search" method="get" role="search">
+    <label class="usa-label usx-label usa-sr-only" for="react-search-custom-label"
+      >Find a program</label
+    ><input
+      id="react-search-custom-label"
+      class="usa-input usx-input"
+      placeholder=""
+      type="search"
+      name="q"
+    /><button type="submit" class="usa-button usx-button usa-button--primary">
+      <span class="usa-search__submit-text">Find a program</span
+      ><svg
+        class="usa-icon usx-icon usa-search__submit-icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+</section>
+
+<h3 class="site-preview-heading">Icon Only Custom Label</h3>
+<section aria-label="Find a program">
+  <form
+    id="react-search-icon-only-custom-label-form"
+    class="usa-search usa-search--small"
+    method="get"
+    role="search"
+  >
+    <label class="usa-label usx-label usa-sr-only" for="react-search-icon-only-custom-label"
+      >Find a program</label
+    ><input
+      id="react-search-icon-only-custom-label"
+      class="usa-input usx-input"
+      placeholder=""
+      type="search"
+      name="q"
+    /><button type="submit" class="usa-button usx-button usa-button--primary">
+      <svg
+        class="usa-icon usx-icon usa-search__submit-icon display-inline-block"
+        aria-label="Find a program"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+</section>
+
+<h3 class="site-preview-heading">Custom Aria Label</h3>
+<section aria-label="Site search">
+  <form id="react-search-custom-aria-label-form" class="usa-search" method="get" role="search">
+    <label class="usa-label usx-label usa-sr-only" for="react-search-custom-aria-label"
+      >Search</label
+    ><input
+      id="react-search-custom-aria-label"
+      class="usa-input usx-input"
+      placeholder=""
+      type="search"
+      name="q"
+    /><button type="submit" class="usa-button usx-button usa-button--primary">
+      <span class="usa-search__submit-text">Search</span
+      ><svg
+        class="usa-icon usx-icon usa-search__submit-icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#search"></use>
+      </svg>
+    </button>
+  </form>
+</section>
+
+<h3 class="site-preview-heading">Custom Search Key</h3>
+<section aria-label="Search">
+  <form id="react-search-custom-key-form" class="usa-search" method="get" role="search">
+    <label class="usa-label usx-label usa-sr-only" for="react-search-custom-key">Search</label
+    ><input
+      id="react-search-custom-key"
+      class="usa-input usx-input"
+      placeholder=""
+      type="search"
+      name="query"
+    /><button type="submit" class="usa-button usx-button usa-button--primary">
+      <span class="usa-search__submit-text">Search</span
+      ><svg
+        class="usa-icon usx-icon usa-search__submit-icon"
         aria-hidden="true"
         focusable="false"
         role="img"
@@ -224,7 +327,7 @@
     /><button type="submit" class="usa-button usx-button usa-button--primary">
       <span class="usa-search__submit-text">Search</span
       ><svg
-        class="usa-icon usa-search__submit-icon"
+        class="usa-icon usx-icon usa-search__submit-icon"
         aria-hidden="true"
         focusable="false"
         role="img"
@@ -254,7 +357,7 @@
     /><button type="submit" class="usa-button usx-button usa-button--primary">
       <span class="usa-search__submit-text">Search</span
       ><svg
-        class="usa-icon usa-search__submit-icon"
+        class="usa-icon usx-icon usa-search__submit-icon"
         aria-hidden="true"
         focusable="false"
         role="img"
@@ -278,7 +381,7 @@
     /><button type="submit" class="usa-button usx-button usa-button--primary">
       <span class="usa-search__submit-text">Search</span
       ><svg
-        class="usa-icon usa-search__submit-icon"
+        class="usa-icon usx-icon usa-search__submit-icon"
         aria-hidden="true"
         focusable="false"
         role="img"

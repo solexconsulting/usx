@@ -77,7 +77,6 @@
 
       .usx-misc-banner__dropdown-toggle:focus + .usx-misc-banner__dropdown-button {
         outline: 0.25rem solid #9bdaf1;
-
         outline-color: usx-when($usx-misc-banner-focus);
       }
 

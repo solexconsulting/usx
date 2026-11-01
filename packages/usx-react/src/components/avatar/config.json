@@ -39,9 +39,10 @@
       ],
       "description": "Optional shape utility for avatar image or initials."
     },
-    "tooltip": {
-      "type": "string",
-      "description": "Optional tooltip text displayed on hover."
+    "tooltipProps": {
+      "type": "object",
+      "component": "tooltip",
+      "description": "Optional Tooltip props passed through unchanged. The Avatar supplies the trigger element."
     },
     "className": {
       "type": "string",

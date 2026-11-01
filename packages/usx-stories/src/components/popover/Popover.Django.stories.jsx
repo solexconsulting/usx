@@ -30,35 +30,41 @@ const createPopoverStory = (args) => djangoStory(serializePopoverArgs(args));
 /** Plain content in a native disclosure with an enhanced floating panel. */
 export const Default = createPopoverStory(storyDefs.Default);
 
+/** Original rounded panel with extra vertical padding. */
+export const RoundedPanel = createPopoverStory(storyDefs.RoundedPanel);
+
+/** Square panel with equal outer padding on all sides. */
+export const SquarePanel = createPopoverStory(storyDefs.SquarePanel);
+
 /** Caller-authored utility classes style the summary without Popover trigger styles. */
 export const AuthoredTrigger = createPopoverStory(storyDefs.AuthoredTrigger);
 
 /** Summary configuration is grouped and passed directly to the shared Summary component. */
 export const GroupedSummaryProps = createPopoverStory(storyDefs.GroupedSummaryProps);
 
-/** Ordinary links in a labelled navigation landmark. */
-export const Navigation = createPopoverStory(storyDefs.Navigation);
-
 /** Nested flyouts and links use the same item data as the React story. */
 export const MenuItems = createPopoverStory(storyDefs.MenuItems);
+
+/** The same nested menu in a square panel. */
+export const SquareMenuItems = createPopoverStory(storyDefs.SquareMenuItems);
 
 /** The complete Popover composition example, including nested flyouts and close behavior. */
 export const WorstCase = createPopoverStory(storyDefs.WorstCase);
 
 /** Close attributes are handled by the shared USX enhancement. */
-export const Actions = createPopoverStory(storyDefs.Actions);
+export const Links = createPopoverStory(storyDefs.Links);
 
 /** Form controls and headings remain available inside the panel. */
 export const RichForm = createPopoverStory(storyDefs.RichForm);
 
-/** Without `headingLevel`, `panelHeading` renders as an h2. */
-export const HeadingLevelDefault = createPopoverStory(storyDefs.HeadingLevelDefault);
+/** Without `headingAs`, `panelHeading` renders as an h2. */
+export const HeadingAsDefault = createPopoverStory(storyDefs.HeadingAsDefault);
 
-/** Set `headingLevel` so the panel heading fits the outline of the page that contains it. */
-export const HeadingLevelH3 = createPopoverStory(storyDefs.HeadingLevelH3);
+/** Set `headingAs` so the panel heading fits the outline of the page that contains it. */
+export const HeadingAsH3 = createPopoverStory(storyDefs.HeadingAsH3);
 
 /** Heading levels are independent of visual size; use `panelClassName` or utilities to restyle. */
-export const HeadingLevelH5 = createPopoverStory(storyDefs.HeadingLevelH5);
+export const HeadingAsH5 = createPopoverStory(storyDefs.HeadingAsH5);
 
 const DjangoPopover = djangoComponent({ componentName: 'popover' });
 const placements = storyDefs.Placements.map(serializePopoverArgs);
@@ -121,13 +127,7 @@ export const NavigationBar = {
   render: () => (
     <NavigationBarLayout>
       <DjangoPopover
-        {...serializePopoverArgs({
-          ...storyDefs.NavigationBar,
-          summaryProps: {
-            ...storyDefs.NavigationBar.summaryProps,
-            className: 'usa-button usx-button usa-button--unstyled margin-0',
-          },
-        })}
+        {...serializePopoverArgs(storyDefs.NavigationBar)}
       />
     </NavigationBarLayout>
   ),

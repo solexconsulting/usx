@@ -1,7 +1,7 @@
 {
   "name": "accordion",
   "template": "accordion/accordion.django.html",
-  "version": 2,
+  "version": 3,
   "props": {
     "id": {
       "type": "string",
@@ -22,7 +22,7 @@
       "default": false,
       "description": "Whether multiple accordion items can be expanded at the same time."
     },
-    "headingLevel": {
+    "headingAs": {
       "type": "select",
       "options": ["h1", "h2", "h3", "h4", "h5", "h6"],
       "default": "h3",

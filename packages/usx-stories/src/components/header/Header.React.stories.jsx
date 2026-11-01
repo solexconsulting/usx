@@ -272,6 +272,26 @@ const withSearchId = (args) =>
 
 for (const [key, args] of Object.entries(storyDefs)) storyDefs[key] = withSearchId(args);
 
+// ─── Layout variants ─────────────────────────────────────────────────────────
+
+export const Default = { args: storyDefs.Default };
+export const Basic = { args: storyDefs.Basic };
+export const BasicWithMegamenu = { args: storyDefs.BasicWithMegamenu };
+export const Extended = { args: storyDefs.Extended };
+export const borderRoleVars = {
+  '--usx-header-border-top': '3px solid #005ea2',
+  '--usx-header-border-bottom': '4px solid #237a3b',
+  '--usx-header-border-separator': '2px dashed #a72f10',
+  '--usx-header-border-bottom-mobile': '5px solid #8a3575',
+  '--usx-header-nav-border-bottom-mobile': '6px solid #d1980b',
+  '--usx-header-nav-item-border': '3px dashed #e41d3d',
+};
+
+export const ExtendedWithMegamenu = { args: storyDefs.ExtendedWithMegamenu };
+export const WithMenuIcon = { args: storyDefs.WithMenuIcon };
+export const Minimal = { args: storyDefs.Minimal };
+export const Maximal = { args: storyDefs.Maximal };
+
 // ─── Branding variants ───────────────────────────────────────────────────────
 
 export const TextOnly = { args: storyDefs.TextOnly };
@@ -291,21 +311,7 @@ export const ThemeResponsiveLogo = {
   },
 };
 
-// ─── Layout variants ─────────────────────────────────────────────────────────
-
-export const Default = { args: storyDefs.Default };
-export const Basic = { args: storyDefs.Basic };
-export const BasicWithMegamenu = { args: storyDefs.BasicWithMegamenu };
-export const Extended = { args: storyDefs.Extended };
-export const borderRoleVars = {
-  '--usx-header-border-top': '3px solid #005ea2',
-  '--usx-header-border-bottom': '4px solid #237a3b',
-  '--usx-header-border-separator': '2px dashed #a72f10',
-  '--usx-header-border-bottom-mobile': '5px solid #8a3575',
-  '--usx-header-nav-border-bottom-mobile': '6px solid #d1980b',
-  '--usx-header-nav-item-border': '3px dashed #e41d3d',
-};
-
+export const ExternalLinks = { args: storyDefs.ExternalLinks };
 export const BorderRoles = {
   args: withSearchId({ ...storyDefs.Extended, id: 'header-border-roles' }),
   render: (args) => (
@@ -314,11 +320,6 @@ export const BorderRoles = {
     </div>
   ),
 };
-export const ExtendedWithMegamenu = { args: storyDefs.ExtendedWithMegamenu };
-export const WithMenuIcon = { args: storyDefs.WithMenuIcon };
-export const Minimal = { args: storyDefs.Minimal };
-export const Maximal = { args: storyDefs.Maximal };
-export const ExternalLinks = { args: storyDefs.ExternalLinks };
 export const ExtensibilitySlots = {
   args: storyDefs.ExtensibilitySlots,
   parameters: {
@@ -332,16 +333,18 @@ export const ExtensibilitySlots = {
   render: (args) => {
     const [globals, updateGlobals] = useGlobals();
     return (
-      <Header
-        {...args}
-        navEndContent={
-          <ThemePicker
-            themes={LIGHTDARKTHEMES}
-            value={globals.theme}
-            onChange={(theme) => updateGlobals({ theme })}
-          />
-        }
-      />
+      <div>
+        <Header
+          {...args}
+          navEndContent={
+            <ThemePicker
+              themes={LIGHTDARKTHEMES}
+              value={globals.theme}
+              onChange={(theme) => updateGlobals({ theme })}
+            />
+          }
+        />
+      </div>
     );
   },
 };

@@ -52,7 +52,7 @@ function PrimaryNav({
   return (
     <>
       <button type="button" className="usa-nav__close">
-        <Icon name="close" />
+        <Icon name="close" size={3} />
       </button>
       <ul className={navClasses}>
         {navSections.map((section, index) => (

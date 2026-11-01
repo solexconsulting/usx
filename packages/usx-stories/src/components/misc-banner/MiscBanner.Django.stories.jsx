@@ -16,3 +16,4 @@ export const Beta = createStory(storyDefs.Beta);
 export const Dev = createStory(storyDefs.Dev);
 export const TestStaging = createStory(storyDefs.TestStaging);
 export const NoLinks = createStory(storyDefs.NoLinks);
+export const Badgeless = createStory(storyDefs.Badgeless);

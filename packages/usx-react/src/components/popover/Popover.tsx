@@ -6,6 +6,7 @@ import PopoverMenu, { type PopoverMenuItem } from './PopoverMenu';
 
 export type PopoverSide = 'top' | 'right' | 'bottom' | 'left';
 export type PopoverAlign = 'start' | 'center' | 'end';
+export type PopoverPanelShape = 'rounded' | 'square';
 
 export interface PopoverProps extends Omit<
   React.DetailsHTMLAttributes<HTMLDetailsElement>,
@@ -17,6 +18,8 @@ export interface PopoverProps extends Omit<
   side?: PopoverSide;
   /** Alignment along that side; start and end follow reading direction above/below. */
   align?: PopoverAlign;
+  /** Panel corners and outer padding. Rounded preserves the original appearance. */
+  panelShape?: PopoverPanelShape;
   /** Open on the initial render. Native details owns subsequent disclosure state. */
   defaultOpen?: boolean;
   /** Optional native details group. Use a different name at each nesting level. */
@@ -30,7 +33,7 @@ export interface PopoverProps extends Omit<
   /** Optional visible heading for the panel. */
   panelHeading?: string;
   /** Heading element for panelHeading, chosen to fit the surrounding page outline. */
-  headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  headingAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
   /** Adds a bounded, scrollable area around the children. */
   scrollable?: boolean;
@@ -49,12 +52,13 @@ export default function Popover({
   id,
   side = 'bottom',
   align = 'start',
+  panelShape = 'rounded',
   defaultOpen = false,
   menuItems,
   showClose = false,
   closeLabel = 'Close',
   panelHeading,
-  headingLevel = 'h2',
+  headingAs = 'h2',
   scrollable = false,
   className,
   summaryProps,
@@ -65,7 +69,7 @@ export default function Popover({
 }: PopoverProps) {
   const [initiallyOpen] = React.useState(defaultOpen);
   const composedSummaryProps = { ...summaryProps, label: summaryProps?.label ?? 'Open panel' };
-  const Heading = headingLevel;
+  const Heading = headingAs;
 
   return (
     <details
@@ -76,9 +80,14 @@ export default function Popover({
       data-align={align}
     >
       <Summary unstyled {...composedSummaryProps} />
-      <div id={id} className={ClassNames('usx-popover__panel', panelClassName)}>
+      <div
+        id={id}
+        className={ClassNames('usx-popover__panel', {
+          'usx-popover__panel--square': panelShape === 'square',
+        }, panelClassName)}
+      >
         {panelHeading && <Heading className="usx-popover__panel-heading">{panelHeading}</Heading>}
-        {menuItems && <PopoverMenu items={menuItems} prefix={id} />}
+        {menuItems && <PopoverMenu items={menuItems} prefix={id} panelShape={panelShape} />}
         {children && (
           <div
             className={ClassNames(

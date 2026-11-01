@@ -3,7 +3,8 @@ import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 
 export type BackToTopProps = {
-  label?: string;
+  label?: string | null;
+  ariaLabel?: string;
   href?: string | null;
   variant?: 'primary' | null;
   iconPosition?: 'left' | 'right';
@@ -14,6 +15,7 @@ export type BackToTopProps = {
 
 export default function BackToTop({
   label = 'Back to top',
+  ariaLabel = 'Back to top',
   href = undefined,
   variant = null,
   iconPosition = 'right',
@@ -22,6 +24,8 @@ export default function BackToTop({
   onClick = undefined,
   ...props
 }: BackToTopProps) {
+  // An icon-only control has no text, so it is named by ariaLabel instead.
+  const accessibleName = label ? undefined : ariaLabel;
   const icon = (
     <Icon name="arrow_upward" size={iconSize} className={
       ClassNames(
@@ -38,7 +42,7 @@ export default function BackToTop({
       className
     );
     return (
-      <a className={linkClasses} href={href} {...props}>
+      <a className={linkClasses} href={href} aria-label={accessibleName} {...props}>
         {iconPosition === 'left' && icon}
         {label}
         {iconPosition === 'right' && icon}
@@ -58,6 +62,7 @@ export default function BackToTop({
     <button
       type="button"
       className={buttonClasses}
+      aria-label={accessibleName}
       onClick={onClick || (() => window.scrollTo({ top: 0, behavior: 'smooth' }))}
       {...props}
     >

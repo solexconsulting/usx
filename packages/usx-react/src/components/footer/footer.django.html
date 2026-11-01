@@ -22,7 +22,7 @@
 
   {# ── Primary section ────────────────────────────────────────── #}
   <div class="usa-footer__primary-section">
-
+    {% if primaryChildren != None %}{{ primaryChildren|safe }}{% else %}
     {% if variant == 'big' %}
       {# Big footer: nav columns + optional sign-up form #}
       <div class="grid-container">
@@ -138,14 +138,16 @@
       </nav>
       {% endif %}
     {% endif %}
+    {% endif %}
 
   </div>{# /primary-section #}
 
   {# ── Secondary section ──────────────────────────────────────── #}
   {% firstof branding.alt branding.title '' as brandingLabel %}
-  {% if variant == 'slim' %}{% firstof branding "" as showSecondary %}{% else %}{% firstof branding socialLinks contactHeading contactPhone contactEmail contactLinks "" as showSecondary %}{% endif %}
-  {% if showSecondary %}
+  {% if variant == 'slim' %}{% firstof branding secondaryChildren "" as showSecondary %}{% else %}{% firstof branding socialLinks contactHeading contactPhone contactEmail contactLinks secondaryChildren "" as showSecondary %}{% endif %}
+  {% if variant != 'slim' or showSecondary %}
   <div class="usa-footer__secondary-section">
+    {% if secondaryChildren != None %}{{ secondaryChildren|safe }}{% else %}
     <div class="grid-container">
 
       {% if variant == 'slim' %}
@@ -255,6 +257,7 @@
       {% endif %}
 
     </div>
+    {% endif %}
   </div>
   {% endif %}{# /secondary-section #}
 

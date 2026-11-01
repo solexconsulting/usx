@@ -42,9 +42,9 @@ export const storyDefs = {
   },
   HeadingOnly: {
     items: [
-      { heading: 'Start a process.', headingTag: 'p', headingClassName: 'font-sans-xl line-height-sans-1', className: 'padding-bottom-4' },
-      { heading: 'Proceed to the second step.', headingTag: 'p', headingClassName: 'font-sans-xl line-height-sans-1', className: 'padding-bottom-4' },
-      { heading: 'Complete the step-by-step process.', headingTag: 'p', headingClassName: 'font-sans-xl line-height-sans-1' },
+      { heading: 'Start a process.', headingAs: 'p', headingClassName: 'font-sans-xl line-height-sans-1', className: 'padding-bottom-4' },
+      { heading: 'Proceed to the second step.', headingAs: 'p', headingClassName: 'font-sans-xl line-height-sans-1', className: 'padding-bottom-4' },
+      { heading: 'Complete the step-by-step process.', headingAs: 'p', headingClassName: 'font-sans-xl line-height-sans-1' },
     ],
   },
   CustomSizing: {

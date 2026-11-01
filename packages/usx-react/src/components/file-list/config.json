@@ -19,7 +19,7 @@
   "props": {
     "files": {
       "type": "array",
-      "description": "Files to render as rows. Each entry is { key, file?, name?, size?, url?, onRemove? } — key uniquely identifies the row; file is a browser File (name/size read from it); name/size describe entries with no File object (e.g. files already on the server); url renders the name as a download link; onRemove overrides the onRemove prop for just this row. React only."
+      "description": "Files to render as rows. Each entry is { key, file?, name?, size?, url?, onRemove? } — key uniquely identifies the row; file is a browser File (name/size read from it); name/size describe entries with no File object (e.g. files already on the server); url renders the name as a download link; onRemove overrides the list handler for this row. Django accepts a handler name as a presence marker; consumers attach the click behavior."
     },
     "hint": {
       "type": "slot",
@@ -28,7 +28,7 @@
     },
     "onRemove": {
       "type": "function",
-      "description": "Called with the removed entry when its Delete button is clicked. Applies to every row unless that row provides its own onRemove, which takes priority. Omit both to hide every Delete button. React only."
+      "description": "Called with the removed entry when its Delete button is clicked. Applies to every row unless that row provides its own onRemove, which takes priority. Omit both to hide every Delete button. Django accepts a handler name as a presence marker; consumers attach the click behavior."
     },
     "disabled": {
       "type": "boolean",

@@ -1,7 +1,7 @@
 {
   "name": "tree",
   "template": "tree/tree.django.html",
-  "version": 3,
+  "version": 4,
   "required": ["items"],
   "default": {
     "items": [
@@ -53,9 +53,9 @@
     },
     "variant": {
       "type": "select",
-      "options": ["raw", "padded"],
-      "default": "raw",
-      "description": "Raw keeps Details styling; padded adds row spacing, alignment, and an interactive hover surface. The variant applies to every nested list."
+      "options": ["default", "padded"],
+      "default": "default",
+      "description": "Default keeps Details styling without a variant class; padded adds row spacing, alignment, and an interactive hover surface. The variant applies to every nested list."
     },
     "className": {
       "type": "string",

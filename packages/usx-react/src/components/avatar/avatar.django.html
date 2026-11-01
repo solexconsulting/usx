@@ -2,10 +2,7 @@
 
 {% load components %}
 
-{% if tooltip %}
-<span class="usx-tooltip">
-{% endif %}
-
+{% fragment as avatarLink %}
 <a href="{% if href is None %}#{% else %}{{ href }}{% endif %}" class="usx-avatar{% if className %} {{ className }}{% endif %}"{% if variant == 'initials' or variant == 'icon' %}{% if alt %} aria-label="{{ alt }}"{% endif %}{% endif %}>
   {% if variant == 'initials' %}
     <span class="usx-avatar__content{% if shape == 'circle' %} usx-circle{% elif shape == 'rounded-sm' %} usx-rounded-sm{% elif shape == 'rounded-md' %} usx-rounded-md{% elif shape == 'rounded-lg' %} usx-rounded-lg{% elif shape == 'rounded-xl' %} usx-rounded-xl{% else %} usx-circle{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">{{ value }}</span>
@@ -20,8 +17,10 @@
     />
   {% endif %}
 </a>
+{% endfragment %}
 
-{% if tooltip %}
-  <span class="usa-tooltip__body usa-tooltip__body--right" role="tooltip">{{ tooltip }}</span>
-</span>
+{% if tooltipProps %}
+  {% tooltip props=tooltipProps %}{{ avatarLink }}{% endtooltip %}
+{% else %}
+  {{ avatarLink }}
 {% endif %}

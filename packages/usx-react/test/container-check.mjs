@@ -22,7 +22,7 @@ for (const { Container } of [esm, cjs]) {
     tablet: { direction: 'row', wrap: 'wrap', justify: 'space-between', align: 'center' },
   };
   const props = {
-    element: 'nav', id: 'actions', ariaLabel: 'Actions', ariaLabelledby: 'actions-title', role: 'group',
+    as: 'nav', id: 'actions', ariaLabel: 'Actions', ariaLabelledby: 'actions-title', role: 'group',
     display: 'flex', direction: 'column', gap: '2', responsive, className: 'custom',
   };
   const html = render(props, 'Content');
@@ -52,7 +52,7 @@ for (const { Container } of [esm, cjs]) {
 
   // Persisted CMS payloads can bypass TS: don't generate arbitrary classes or tags.
   const invalid = render({
-    element: 'script', gridContainer: 'unknown', gridRow: 'true', display: 'invalid', gap: '2 injected',
+    as: 'script', gridContainer: 'unknown', gridRow: 'true', display: 'invalid', gap: '2 injected',
     responsive: { tablet: { direction: 'invalid', gridRow: true, className: 'injected' }, widescreen: { display: 'none' } },
   });
   assert.equal(invalid, '<div class="usx-container"></div>');

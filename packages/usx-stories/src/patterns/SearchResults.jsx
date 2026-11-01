@@ -182,7 +182,7 @@ export function SearchResultsPattern({
     </>
   );
   const content = (
-    <Page element={sidebar ? 'div' : 'main'} title={title} id="search-results-content" tabIndex={-1}>
+    <Page as={sidebar ? 'div' : 'main'} title={title} id="search-results-content" tabIndex={-1}>
       <Section aria-label="Search and filters">
       <Search
         key={query}

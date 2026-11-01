@@ -11,23 +11,28 @@
   }
 
   &--no-marker {
+    list-style: none;
+
     &::marker {
       content: none;
+    }
+
+    &::-webkit-details-marker {
+      display: none;
     }
   }
 
   .usx-summary-text {
-    display: inline-flex;
-    align-items: center;
-    gap: units(1);
-    width: fit-content;
+    display: inline;
+    overflow-wrap: anywhere;
   }
 
   &:not(.usx-summary--no-underline) > .usx-summary-text {
-    border-color: usx-when($usx-color-primary, $usx-color-primary, currentcolor);
-    border-bottom-style: dotted;
-    border-bottom-width: usx-when($usx-border-width-md, $usx-border-width-md, 2px);
-    text-wrap: nowrap;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: usx-when($usx-color-primary, $usx-color-primary, currentcolor);
+    text-decoration-thickness: 10%;
+    text-underline-offset: 6px;
   }
 
   &:hover {

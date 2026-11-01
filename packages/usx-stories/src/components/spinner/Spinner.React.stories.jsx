@@ -75,8 +75,10 @@ export const DifferentColorsOnInvertedBackground = {
 
 export const WithTooltip = {
   render: () => (
-    <Tooltip label="Loading...">
-      <Spinner size={4} />
-    </Tooltip>
+    <div>
+      <Tooltip label="Loading...">
+        <Spinner size={4} />
+      </Tooltip>
+    </div>
   ),
 };

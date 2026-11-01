@@ -60,6 +60,13 @@ export const storyDefs = {
     ],
     defaultValue: 0,
   },
+  PrimitiveOptions: {
+    id: 'primitive-toggle',
+    ariaLabel: 'Simple choices',
+    name: 'simple-choice',
+    options: ['Small', 0, 5],
+    defaultValue: 0,
+  },
   TotallyDisabled: {
     id: 'disabled-toggle',
     ariaLabel: 'Unavailable choices',
@@ -126,3 +133,4 @@ export const Required = {
   ),
 };
 export const Numeric = { args: storyDefs.Numeric };
+export const PrimitiveOptions = { args: storyDefs.PrimitiveOptions };

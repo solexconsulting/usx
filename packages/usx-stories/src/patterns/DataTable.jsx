@@ -197,11 +197,9 @@ export function DataTablePattern({ state = 'normal' }) {
                     </div>
                 )}
                 {query || status ? (
-                    <Button
-                        children="Clear filters"
-                        variant="outline"
-                        onClick={clear}
-                    />
+                    <Button variant="outline" onClick={clear}>
+                        Clear filters
+                    </Button>
                 ) : null}
             </PageState>
         </Section>

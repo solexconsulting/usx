@@ -8,17 +8,13 @@
   list-style: none;
   border-top: 2px solid #e2e8f0;
   border-bottom: 2px solid #e2e8f0;
-
   border-color: usx-when($usx-task-list-border);
-
   border-width: usx-when($usx-task-list-outer-border-width);
 
   li {
     &:not(:first-child) {
       border-top: 1px solid #e2e8f0;
-
       border-top-color: usx-when($usx-task-list-border);
-
       border-top-width: usx-when($usx-task-list-inner-border-width);
     }
   }
@@ -38,17 +34,14 @@
 
     &:hover {
       background-color: #e2e8f0;
-
       background-color: usx-when($usx-task-list-bg-hover);
     }
   }
 
   .usx-task-list__link {
-    color: #005ea2;
     font-size: $usx-task-list-link-font-size !important;
     line-height: 1;
-
-    color: usx-when($usx-task-list-link-text);
+    color: usx-when($usx-task-list-link-text, $usx-task-list-link-text, #005ea2);
   }
 
   .usa-tag.usx-tag {

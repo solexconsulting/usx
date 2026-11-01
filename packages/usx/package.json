@@ -28,6 +28,9 @@
     "./js": "./src/js/index.mjs",
     "./js/start": "./src/js/start.mjs",
     "./js/carousel": "./src/js/carousel.mjs",
+    "./js/drawer": "./src/js/drawer.mjs",
+    "./js/file-input": "./src/js/file-input.mjs",
+    "./js/layout": "./src/js/layout.mjs",
     "./img/usx-sprite.svg": "./src/img/usx-sprite.svg",
     "./img/usx-icons.json": "./src/img/usx-icons.json",
     "./js/popover": "./src/js/popover.mjs"

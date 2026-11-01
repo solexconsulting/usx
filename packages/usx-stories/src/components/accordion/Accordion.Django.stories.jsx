@@ -19,7 +19,7 @@ export const Default = createStory(toDjangoArgs(storyDefs.Default));
 export const Bordered = createStory(toDjangoArgs(storyDefs.Bordered));
 export const InitiallyExpanded = createStory(toDjangoArgs(storyDefs.InitiallyExpanded));
 export const MultiSelectable = createStory(toDjangoArgs(storyDefs.MultiSelectable));
-export const CustomHeadingLevel = createStory(toDjangoArgs(storyDefs.CustomHeadingLevel));
+export const CustomHeadingAs = createStory(toDjangoArgs(storyDefs.CustomHeadingAs));
 export const BorderedMultiSelectableH4 = createStory(
   toDjangoArgs(storyDefs.BorderedMultiSelectableH4)
 );

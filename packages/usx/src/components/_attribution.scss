@@ -32,7 +32,6 @@
   .usx-attribution__secondary {
     font-size: $usx-attribution-secondary-font-size;
     color: #71767a;
-
     color: usx-when($usx-attribution-secondary-text);
   }
 }

@@ -56,9 +56,7 @@ const testDefault = async ({ canvasElement }) => {
   await expect(trigger).toHaveFocus();
   await userEvent.click(trigger);
   trigger.focus();
-  await userEvent.click(
-    canvas.getByRole('heading', { name: 'Experimental — do not use in production' })
-  );
+  await userEvent.click(canvas.getByText('This content following the popover should be covered when it opens.'));
   await expect(disclosure.open).toBe(false);
 };
 
@@ -89,24 +87,30 @@ const testGroupedSummaryProps = async ({ canvasElement }) => {
   await expect(trigger).toHaveTextContent('Account options');
 };
 
-const testNavigation = async ({ canvasElement }) => {
-  const id = 'popover-navigation';
-  const scope = scopeOf(canvasElement, id);
-  const trigger = summaryFor(canvasElement, id);
-  await userEvent.click(trigger);
-  trigger.focus();
+const testPanelShape = async ({ canvasElement }, id, panelShape) => {
   const panel = canvasElement.querySelector(`[id$="${id}"]`);
+  await expect(panel).toHaveClass('usx-popover__panel');
+  await expect(panel.classList.contains('usx-popover__panel--square')).toBe(
+    panelShape === 'square'
+  );
+  await clickSummary(canvasElement, id);
   await expectVisible(panel);
-  await expect(panel.querySelector('[role="menu"]')).toBeNull();
-  await expect(scope.getByRole('navigation', { name: 'Resource links' })).toBeInTheDocument();
-  scope.getByRole('link', { name: 'Check eligibility' }).focus();
-  await userEvent.keyboard('{Escape}');
-  await expect(panel).not.toBeVisible();
-  await expect(trigger).toHaveFocus();
+  const style = getComputedStyle(panel);
+  await expect(style.paddingTop).toBe(style.paddingBottom);
+  await expect(style.paddingLeft).toBe(style.paddingRight);
+  const content = panel.querySelector('.usx-popover__panel-content');
+  if (panelShape === 'square') {
+    await expect(style.borderTopLeftRadius).toBe('0px');
+    await expect(style.paddingTop).toBe(style.paddingLeft);
+    if (content) await expect(getComputedStyle(content).marginLeft).toBe('0px');
+  } else {
+    await expect(parseFloat(style.borderTopLeftRadius)).toBeGreaterThan(0);
+    await expect(parseFloat(style.paddingTop)).toBeGreaterThan(parseFloat(style.paddingLeft));
+    if (content) await expect(parseFloat(getComputedStyle(content).marginLeft)).toBeGreaterThan(0);
+  }
 };
 
-const testMenuItems = async ({ canvasElement }) => {
-  const id = 'popover-menu-items';
+const testMenuItems = async ({ canvasElement }, id = 'popover-menu-items') => {
   const menu = scopeOf(canvasElement, id);
   const trigger = summaryFor(canvasElement, id);
   await clickSummary(canvasElement, id);
@@ -148,12 +152,16 @@ const testWorstCase = async ({ canvasElement }) => {
   await expect(trigger).toHaveFocus();
 };
 
-const testActions = async ({ canvasElement }) => {
-  const id = 'popover-actions';
+const testLinks = async ({ canvasElement }) => {
+  const id = 'popover-links';
   const scope = scopeOf(canvasElement, id);
   await clickSummary(canvasElement, id);
-  await expectVisible(scope.getByRole('link', { name: 'Save for later' }));
-  await expectVisible(scope.getByRole('link', { name: 'Share record' }));
+  const savedRecords = scope.getByRole('link', { name: 'Saved records' });
+  const sharingOptions = scope.getByRole('link', { name: 'Sharing options' });
+  await expectVisible(savedRecords);
+  await expectVisible(sharingOptions);
+  await expect(savedRecords).toHaveAttribute('href', '#saved-records');
+  await expect(sharingOptions).toHaveAttribute('href', '#sharing-options');
 };
 
 const testRichForm = async ({ canvasElement }) => {
@@ -178,7 +186,7 @@ const testRichForm = async ({ canvasElement }) => {
   await expect(summaryFor(canvasElement, id)).toHaveFocus();
 };
 
-const testHeadingLevel = async ({ canvasElement }, id, level) => {
+const testHeadingAs = async ({ canvasElement }, id, level) => {
   const scope = scopeOf(canvasElement, id);
   await clickSummary(canvasElement, id);
   const heading = scope.getByRole('heading', { level, name: 'Filing deadlines' });
@@ -269,22 +277,38 @@ export const AllVariantsReact = {
   play: async (context) => {
     const step = (name, fn) => context.step(name, fn);
     await step('Default', () => testDefault(context));
+    await step('Rounded Panel', () =>
+      testPanelShape(context, 'popover-panel-rounded', 'rounded')
+    );
+    await step('Square Panel', () => testPanelShape(context, 'popover-panel-square', 'square'));
     await step('Authored Trigger', () => testAuthoredTrigger(context));
     await step('Grouped Summary Props', () => testGroupedSummaryProps(context));
-    await step('Navigation', () => testNavigation(context));
     await step('Menu Items', () => testMenuItems(context));
+    await step('Square Menu Items', async () => {
+      await testMenuItems(context, 'popover-square-menu-items');
+      await testPanelShape(context, 'popover-square-menu-items', 'square');
+      const rounded = getComputedStyle(context.canvasElement.querySelector('[id$="popover-menu-items"]'));
+      const square = getComputedStyle(context.canvasElement.querySelector('[id$="popover-square-menu-items"]'));
+      await expect(square.paddingLeft).toBe(rounded.paddingLeft);
+      await expect(parseFloat(square.paddingTop)).toBeLessThan(parseFloat(rounded.paddingTop));
+      const panels = disclosureFor(context.canvasElement, 'popover-square-menu-items')
+        .querySelectorAll('.usx-popover__panel');
+      await expect([...panels].every((panel) => panel.classList.contains('usx-popover__panel--square')))
+        .toBe(true);
+    });
     await step('Worst Case', () => testWorstCase(context));
-    await step('Actions', () => testActions(context));
+    await step('Links', () => testLinks(context));
     await step('Rich Form', () => testRichForm(context));
     await step('Heading Level Default', () =>
-      testHeadingLevel(context, 'popover-heading-default', 2)
+      testHeadingAs(context, 'popover-heading-default', 2)
     );
-    await step('Heading Level H3', () => testHeadingLevel(context, 'popover-heading-h3', 3));
-    await step('Heading Level H5', () => testHeadingLevel(context, 'popover-heading-h5', 5));
+    await step('Heading Level H3', () => testHeadingAs(context, 'popover-heading-h3', 3));
+    await step('Heading Level H5', () => testHeadingAs(context, 'popover-heading-h5', 5));
     await step('All Placements', () => testAllPlacements(context));
     await step('Rtl Placements', () => testRtlPlacements(context));
     await step('Long Content', () => testLongContent(context));
     await step('Responsive Composition', () => testResponsiveComposition(context));
+    await step('Navigation Bar', () => testPanelShape(context, 'site-nav-services', 'square'));
   },
 };
 

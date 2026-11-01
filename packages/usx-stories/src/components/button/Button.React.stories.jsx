@@ -383,7 +383,7 @@ export const OutlineAriaDisabled = {
 
 export const OutlineInverse = {
   render: () => (
-    <div class="bg-surface-inverse padding-1">
+    <div className="bg-surface-inverse padding-1">
       <Button label="Default" variant="outline" inverse />
     </div>
   )
@@ -391,7 +391,7 @@ export const OutlineInverse = {
 
 export const OutlineInverseHover = {
   render: () => (
-    <div class="bg-surface-inverse padding-1">
+    <div className="bg-surface-inverse padding-1">
       <Button label="Hover" variant="outline" inverse className="usa-button--hover" />
     </div>
   )
@@ -399,7 +399,7 @@ export const OutlineInverseHover = {
 
 export const OutlineInverseActive = {
   render: () => (
-    <div class="bg-surface-inverse padding-1">
+    <div className="bg-surface-inverse padding-1">
       <Button label="Active" variant="outline" inverse className="usa-button--active" />
     </div>
   )
@@ -407,7 +407,7 @@ export const OutlineInverseActive = {
 
 export const OutlineInverseFocus = {
   render: () => (
-    <div class="bg-surface-inverse padding-1">
+    <div className="bg-surface-inverse padding-1">
       <Button label="Focus" variant="outline" inverse className="usa-focus" />
     </div>
   )
@@ -421,7 +421,7 @@ export const OutlineInverseDisabled = {
     disabled: true
   },
   render: (args) => (
-    <div class="bg-surface-inverse padding-1">
+    <div className="bg-surface-inverse padding-1">
       <Button {...args} />
     </div>
   )
@@ -435,7 +435,7 @@ export const OutlineInverseAriaDisabled = {
     'aria-disabled': true
   },
   render: (args) => (
-    <div class="bg-surface-inverse padding-1">
+    <div className="bg-surface-inverse padding-1">
       <Button {...args} />
     </div>
   )

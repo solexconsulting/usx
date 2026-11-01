@@ -23,7 +23,7 @@ const gridMarkup = `<ExampleFrame target="settings-content">
     variant="grid"
     leftSidebar={<SideNav items={settingsNavigation} />}
     content={
-      <Page element="div" id="settings-content" title="Settings" tabIndex={-1}>
+      <Page as="div" id="settings-content" title="Settings" tabIndex={-1}>
         <Section title="Profile settings">
           <ProfileForm />
         </Section>
@@ -53,7 +53,7 @@ export const PageAnatomy = {
             <dd>
               Skipnav, Banner, Header, Footer, and Identifier frame the page. Keep Banner present
               in federal examples. ExampleFrame provides this shell, but does not add Layout or Page.
-              A full-width Hero may sit between Header and Layout. Set its headingLevel to h2
+              A full-width Hero may sit between Header and Layout. Set its headingAs to h2
               when Page supplies the h1.
             </dd>
             <dt>Layout</dt>
@@ -94,7 +94,7 @@ export const PageAnatomy = {
         <Section title="Grid page">
           <p>
             Grid Layout already renders main around its content and aside around each sidebar.
-            Set Page element to div or article inside it. Supply sidebar content directly, not
+            Set Page as to div or article inside it. Supply sidebar content directly, not
             another aside, and do not add a second Page or h1 in a sidebar.
           </p>
           <Code

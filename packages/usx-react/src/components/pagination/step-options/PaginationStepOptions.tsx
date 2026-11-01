@@ -5,7 +5,6 @@ import Select from '../../select/Select';
 export interface PaginationStepOptionsProps {
   pageSize: number;
   pageSizeOptions?: number[];
-  onPageSizeChange: (size: number) => void;
   label?: string;
   id?: string;
   className?: string;
@@ -14,7 +13,6 @@ export interface PaginationStepOptionsProps {
 export default function PaginationStepOptions({
   pageSize,
   pageSizeOptions = [10, 25, 50, 100],
-  onPageSizeChange,
   label = 'Items per page',
   id = 'pagination-step-options',
   className = '',
@@ -24,17 +22,13 @@ export default function PaginationStepOptions({
     className
   );
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onPageSizeChange(Number(e.target.value));
-  };
-
   return (
     <div className={classes}>
       <Select
+        key={pageSize}
         id={id}
         label={label}
-        value={pageSize}
-        onChange={handleChange}
+        defaultValue={String(pageSize)}
         formGroup={false}
         options={pageSizeOptions.map((size) => ({ value: String(size), label: String(size) }))}
       />

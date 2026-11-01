@@ -1,7 +1,7 @@
 {
   "name": "card-group",
   "template": "card-group/card-group.django.html",
-  "version": 1,
+  "version": 2,
   "props": {
     "cardProps": {
       "type": "array",
@@ -10,7 +10,7 @@
         "type": "object",
         "description": "Card item.",
         "component": "card",
-        "omit": ["tag"]
+        "omit": ["as"]
       }
     },
     "className": {

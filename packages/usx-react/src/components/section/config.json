@@ -1,7 +1,7 @@
 {
   "name": "section",
   "template": "section/section.django.html",
-  "version": 3,
+  "version": 4,
   "default": {
     "title": "",
     "content": "Use section to group related page content with consistent spacing."
@@ -11,7 +11,7 @@
       "type": "string",
       "description": "Optional section heading."
     },
-    "headingLevel": {
+    "headingAs": {
       "type": "select",
       "options": [
         "h1",

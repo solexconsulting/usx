@@ -5,7 +5,7 @@ import Icon from '../icon/Icon';
 export interface MiscBannerProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   className?: string;
-  tone?: 'base' | 'primary' | 'beta' | 'dev' | 'test';
+  color?: string;
   badgeText?: string;
   message?: string;
   casualLinkText?: string;
@@ -20,8 +20,8 @@ export interface MiscBannerProps extends HTMLAttributes<HTMLDivElement> {
 export default function MiscBanner({
   children = null,
   className = '',
-  tone = 'beta',
-  badgeText = 'beta',
+  color = 'beta',
+  badgeText,
   message = 'Welcome to the beta website!',
   casualLinkText,
   casualLinkHref,
@@ -35,9 +35,10 @@ export default function MiscBanner({
 }: MiscBannerProps) {
   const instanceId = useId();
   const baseId = id || instanceId;
+  const bannerColor = color || 'beta';
   const toggleId = `${baseId}-dropdown-toggle`;
   const menuId = `${baseId}-dropdown`;
-  const classes = ClassNames('usx-misc-banner', `bg-${tone}`, className);
+  const classes = ClassNames('usx-misc-banner', `bg-${bannerColor}`, className);
   const mobileLinks: { href: string; text: string }[] = [];
   const hasLearnMoreLink = showLearnMore && Boolean(casualLinkText);
   const hasReturnLink = showReturnLink && Boolean(importantLinkText);
@@ -58,7 +59,9 @@ export default function MiscBanner({
 
   const content = children || (
     <>
-      <strong className={`usx-misc-banner__badge text-${tone}`}>{badgeText}</strong>
+      {badgeText ? (
+        <strong className={`usx-misc-banner__badge text-${bannerColor}`}>{badgeText}</strong>
+      ) : null}
       <p className="usx-misc-banner__text">
         {message}
         {hasLearnMoreLink ? (
@@ -90,7 +93,7 @@ export default function MiscBanner({
             aria-controls={menuId}
             aria-label="Toggle banner links"
           >
-            <Icon name="expand_more" size={4} className="usx-icon" />
+            <Icon name="expand_more" size={4} />
           </label>
           <div id={menuId} className="usx-misc-banner__dropdown-content">
             <ul className="usa-list">

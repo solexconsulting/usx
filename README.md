@@ -17,6 +17,7 @@ for setup, asset publishing, SSR, and CSS/font URL requirements.
 ## Repository structure
 
 ### `packages/`
+
 Reusable libraries that power the platform:
 
 - `usx-theme/` (`@solexllc/usx-theme`): source design tokens (color, spacing, radius, typography), compiled outputs (CSS variables, JS exports, theme manifest), and opt-in prebuilt themes (`@solexllc/usx-theme/themes`)
@@ -28,6 +29,7 @@ Reusable libraries that power the platform:
 - `usx-stories/` (`@solexllc/usx-stories`): Storybook stories and story-rendering helpers (dev-infra only, not published)
 
 ### `apps/`
+
 Applications used to develop and document the system:
 
 - `storybook/`: the Storybook host — renders React, static HTML, and Django-rendered stories for every component in `packages/usx-react`. See [apps/storybook/README.md](apps/storybook/README.md)
@@ -35,22 +37,25 @@ Applications used to develop and document the system:
 - `docs/`: platform documentation site (guides, usage, design guidelines) — not yet built out
 
 ### `examples/`
+
 Reference implementations that demonstrate integration patterns (currently stubs, not yet built out):
 
 - `django-demo/`: example Django application using platform packages
 - `react-demo/`: example React application using platform packages
 
 ### `deploy/`
+
 Docker artifacts (Dockerfiles, nginx/gunicorn config, `docker-compose.yml`) for running the Storybook and Django apps in containers.
 
 ### `scripts/`
+
 Repo-wide tooling: component scaffolding (`new-component.js`), the `packages/usx-react` export barrel and CMS contract generators (`generate-exports.js`, `generate-contracts.js`), and the metadata validator (`validate-configs.js`). All share `scripts/lib/component-configs.js`.
 
 ## Run commands from root
 
 ```bash
 pnpm install
-pnpm dev             # tokens watcher + Storybook dev server (http://localhost:6006)
+pnpm dev             # tokens watcher + Storybook dev server (http://olsonhome-macpro:6006)
 pnpm build           # build every package (pnpm -r build)
 pnpm test            # validate component metadata, then run every package's tests
 pnpm lint            # eslint + stylelint across the repo
@@ -70,6 +75,28 @@ pnpm validate:configs       # schema + cross-ref + file-presence + generated-fil
 
 `generate:exports` and `generate:contracts` write committed files; `validate:configs`
 (and therefore `pnpm test`) fails if either is out of date.
+
+Snapshot and play commands (run with Storybook and the Django story server running):
+
+```bash
+pnpm snapshots:refresh --all          # regenerate every snapshot, rerun every play, update report
+pnpm snapshots:refresh drawer         # do all three for one component
+pnpm snapshots:generate --all         # regenerate every React and Django snapshot
+pnpm snapshots:generate drawer        # regenerate one component's snapshots
+pnpm snapshots:plays --all            # rerun every All Variants play and update report
+pnpm snapshots:plays drawer           # rerun one component's plays and update report
+pnpm snapshots:report                 # rebuild report from saved results only
+pnpm snapshots:check                  # compare React and Django snapshots
+```
+
+Pass several component names to any component-scoped command. `STALE` play cells
+mean their saved play results no longer match the current inputs; run
+`snapshots:plays` or `snapshots:refresh` for those components. `snapshots:generate`
+only writes snapshots; `snapshots:report` only rebuilds the report from saved
+results. Neither reruns plays or clears stale play results. `pnpm test:snapshot-tooling`
+tests the scripts themselves; it does not run Storybook plays. The commands use
+`olsonhome-macpro:6006` and `olsonhome-macpro:9090` by default; set `STORYBOOK_URL`,
+`DJANGO_RENDER_URL`, or `PLAYWRIGHT_CHROMIUM_PATH` to override them.
 
 ## Local development
 
@@ -124,4 +151,3 @@ version. Published changelogs are rendered in Storybook under
 **Documentation / Release Notes** — restart the Storybook dev server after
 pulling a release merge, since its `CHANGELOG.md` lookup is resolved at
 server start.
-

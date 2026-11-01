@@ -250,17 +250,17 @@ class ReactParityTests(SimpleTestCase):
                     })
                     elements = RenderedElements(html)
                     sources = [attrs for name, attrs in elements.elements if name == 'source']
-                    self.assertEqual([source['srcset'] for source in sources], ['/linear.svg', '/white-linear.png'])
+                    self.assertEqual([source['srcset'] for source in sources], ['linear.svg', 'white-linear.png'])
                     self.assertTrue(all(source['media'] == '(min-width: 40em)' for source in sources))
                     images = [attrs for name, attrs in elements.elements if name == 'img']
-                    self.assertEqual([image['src'] for image in images], ['/symbol.svg', '/white-symbol.png'])
+                    self.assertEqual([image['src'] for image in images], ['symbol.svg', 'white-symbol.png'])
                     self.assertTrue(all(image['alt'] == 'Agency Name' for image in images))
                     self.assertIn('usx-logo__variant--inverse', html)
                     self.assertIn('class="usx-image usx-logo__image"', html)
 
     def test_card_root_and_children(self):
         html = render_component('card', {
-            'tag': 'li', 'className': 'grid-col-6', 'headerFirst': True,
+            'as': 'li', 'className': 'grid-col-6', 'headerFirst': True,
             'flag': True, 'mediaRight': True, 'title': 'Ignored title',
             'children': 'Custom content',
         })
@@ -287,7 +287,7 @@ class ReactParityTests(SimpleTestCase):
         self.assertIn('usa-card__img', elements.attributes('figure')['class'].split())
         self.assertIn('usx-object-fit-contain', elements.attributes('figure')['class'].split())
         self.assertIn('max-width: 200px', elements.attributes('figure')['style'])
-        self.assertInHTML('<figcaption class="usx-image--caption usa-sr-only" aria-hidden="true">Image caption</figcaption>', html)
+        self.assertInHTML('<figcaption class="usx-image--caption usa-sr-only">Image caption</figcaption>', html)
         self.assertIn('usa-card__media usa-card__media--inset usa-card__media--exdent', html)
         self.assertIn('usx-tag-group', html)
         self.assertInHTML('<h4 class="usa-card__heading">Card title</h4>', html)
@@ -386,7 +386,7 @@ class ReactParityTests(SimpleTestCase):
                     'src': '/image.jpg', 'caption': 'Caption', 'hideCaption': hidden,
                 })
                 caption = RenderedElements(html).attributes('figcaption')
-                self.assertEqual(caption['aria-hidden'], 'true' if hidden else 'false')
+                self.assertNotIn('aria-hidden', caption)
                 self.assertEqual('usa-sr-only' in caption['class'].split(), hidden)
 
     def test_accordion_class_targets(self):
@@ -416,7 +416,10 @@ class ReactParityTests(SimpleTestCase):
                         props['variant'] = variant
                     elements = RenderedElements(render_component('button', props))
                     classes = elements.attributes('a' if href else 'button')['class'].split()
-                    self.assertIn(f'usa-button--{variant or "primary"}', classes)
+                    if variant:
+                        self.assertIn(f'usa-button--{variant}', classes)
+                    else:
+                        self.assertFalse(any(value.startswith('usa-button--') for value in classes))
 
     def test_button_group_item_classes(self):
         html = render_component('button-group', {
@@ -432,7 +435,7 @@ class ReactParityTests(SimpleTestCase):
         ])
         self.assertIn('button-only', elements.attributes('button')['class'].split())
         self.assertNotIn('item-only', elements.attributes('button')['class'].split())
-        self.assertIn('usa-button--primary', elements.attributes('button')['class'].split())
+        self.assertNotIn('usa-button--primary', elements.attributes('button')['class'].split())
 
     def test_checkbox_group_has_no_default_legend(self):
         html = render_component('checkbox-group', {'id': 'choices', 'checkboxProps': []})
@@ -458,7 +461,7 @@ class ReactParityTests(SimpleTestCase):
         self.assertEqual(wrapper['aria-live'], 'polite')
         self.assertNotIn('tabindex', wrapper)
         self.assertEqual(elements.attributes('svg')['class'].split(), [
-            'usa-icon', 'usa-icon--size-3',
+            'usa-icon', 'usx-icon', 'usa-icon--size-3',
         ])
         self.assertNotIn('Loading...', html)
         self.assertNotIn('usa-sr-only', html)
@@ -477,19 +480,27 @@ class ReactParityTests(SimpleTestCase):
                 elements = RenderedElements(html)
                 self.assertEqual(elements.attributes('span')['class'], 'usx-spinner margin-top-2')
                 classes = elements.attributes('svg')['class'].split()
-                self.assertIn('usx-spinner--size-1' if size == 1 else f'usa-icon--size-{size}', classes)
+                self.assertIn('usx-icon--size-1' if size == 1 else f'usa-icon--size-{size}', classes)
                 self.assertIn('text-primary', classes)
                 self.assertNotIn('usx-spinner', classes)
-                self.assertInHTML('<span class="usa-sr-only">Saving your changes</span>', html)
-                self.assertInHTML('<span class="usa-label usx-label">Saving</span>', html)
+                labels = [attrs for tag, attrs in elements.elements if tag == 'label']
+                self.assertEqual(len(labels), 2)
+                self.assertIn('usa-sr-only', labels[0]['class'].split())
+                self.assertNotIn('usa-sr-only', labels[1]['class'].split())
+                self.assertIn('Saving your changes', html)
+                self.assertIn('Saving', html)
 
     def test_spinner_block_tag(self):
         html = Template(
             '{% load components %}'
             '{% spinner label="Saving" screenReaderLabel="Please wait" %}{% endspinner %}'
         ).render(Context())
-        self.assertInHTML('<span class="usa-label usx-label">Saving</span>', html)
-        self.assertInHTML('<span class="usa-sr-only">Please wait</span>', html)
+        labels = [attrs for tag, attrs in RenderedElements(html).elements if tag == 'label']
+        self.assertEqual(len(labels), 2)
+        self.assertIn('usa-sr-only', labels[0]['class'].split())
+        self.assertNotIn('usa-sr-only', labels[1]['class'].split())
+        self.assertIn('Please wait', html)
+        self.assertIn('Saving', html)
 
     def test_loading_button_uses_unlabelled_spinner(self):
         html = render_component('button', {'label': 'Saving', 'loading': True})
@@ -584,7 +595,7 @@ class ChildComponentPropsTests(SimpleTestCase):
 
 class CalloutQuoteTests(SimpleTestCase):
     def test_paragraph_callout(self):
-        html = render_component("callout", {"element": "p", "content": "Supporting information"})
+        html = render_component("callout", {"as": "p", "content": "Supporting information"})
         root = fromstring(html.strip())
         self.assertEqual(root.tag, "p")
         self.assertIn("usx-callout", root.attrib["class"].split())
@@ -595,7 +606,7 @@ class CalloutQuoteTests(SimpleTestCase):
         self.assertIn("Fallback", plain)
         self.assertNotIn("border-", plain)
         html = render_component("callout", {
-            "orientation": "vertical", "element": "aside", "strokeColor": "info",
+            "orientation": "vertical", "as": "aside", "strokeColor": "info",
             "backgroundColor": "base-lightest", "textColor": "primary",
             "indent": "md", "dedent": True, "big": True,
             "children": "Preferred", "content": "Ignored",
@@ -704,6 +715,17 @@ class CalloutQuoteTests(SimpleTestCase):
 
 
 class ToggleTests(SimpleTestCase):
+    def test_primitive_options_match_react_values_and_labels(self):
+        html = render_component("toggle", {
+            "id": "simple", "ariaLabel": "Simple choices", "options": ["Small", 0, 5],
+            "defaultValue": 0,
+        })
+        inputs = [attrs for tag, attrs in RenderedElements(html).elements if tag == "input"]
+        self.assertEqual([attrs["value"] for attrs in inputs], ["Small", "0", "5"])
+        self.assertEqual([attrs["value"] for attrs in inputs if "checked" in attrs], ["0"])
+        for label in ("Small", "0", "5"):
+            self.assertIn(f"<span>{label}</span>", html)
+
     def test_value_precedence_and_falsy_values(self):
         for value in (0, ""):
             html = render_component("toggle", {
@@ -775,16 +797,16 @@ class TreeTests(SimpleTestCase):
         root = fromstring(html.strip())
 
         self.assertEqual(root.tag, "ul")
-        self.assertEqual(root.attrib["class"], "usx-tree usx-tree--raw")
+        self.assertEqual(root.attrib["class"], "usx-tree")
         self.assertEqual(len(root.findall("li")), 5)
         self.assertEqual(root.find("li/span").text, "Applications")
         self.assertEqual(root.find("li/a").attrib["href"], "#status")
 
         branch = root.findall("li/details")[0]
-        self.assertEqual(branch.attrib["class"], "usx-details usx-tree__branch")
+        self.assertEqual(branch.attrib["class"].split(), ["usx-details", "usx-tree__branch"])
         self.assertEqual(branch.find("summary/span").text, "More services")
         nested_tree = branch.find("div/ul")
-        self.assertEqual(nested_tree.attrib["class"], "usx-tree usx-tree--raw")
+        self.assertEqual(nested_tree.attrib["class"], "usx-tree")
         self.assertEqual(nested_tree.findall("li/details")[0].find("summary/span").text, "Benefits")
         self.assertEqual(nested_tree.find("li/details/div/ul/li/a").attrib["href"], "#eligibility")
 
@@ -804,7 +826,7 @@ class PopoverTests(SimpleTestCase):
                 "ariaLabel": "Services menu",
             },
             "panelHeading": "Services heading",
-            "headingLevel": "h3",
+            "headingAs": "h3",
             "children": "<p>Additional information</p>",
             "scrollable": True,
             "contentClassName": "font-sans-xs",
@@ -1047,7 +1069,7 @@ class DetailsTests(SimpleTestCase):
                         no_summary_underline,
                     )
                     span_classes = root.find("summary/span").attrib["class"].split()
-                    self.assertEqual("border-secondary" in span_classes, not no_summary_underline)
+                    self.assertEqual("underline-secondary" in span_classes, not no_summary_underline)
                     content_classes = root.find("div").attrib["class"].split()
                     self.assertIn("font-family-mono", content_classes)
                     self.assertEqual("border-accent-cool" in content_classes, not no_content_border)

@@ -46,7 +46,7 @@
 @each $count, $grid in $grids {
   $sidebars-at: $minimum + $count * $sidebar-width;
 
-  @container usx-layout (width >=#{$sidebars-at}) {
+  @container usx-layout (width >= #{$sidebars-at}) {
     #{$grid} {
       &:where(:has(> .usx-layout__sidebar--left)) {
         --layout-left-width: var(--layout-sidebar-width);
@@ -64,13 +64,11 @@
   }
 }
 
-@if $expanded-max >$content-max {
-
+@if $expanded-max > $content-max {
   @each $active-gutter, $media in (($gutter-mobile, '(width < #{$usx-layout-breakpoint})'),
     ($gutter, '(width >= #{$usx-layout-breakpoint})')) {
     @media #{$media} {
       @container usx-layout (width > calc(#{$content-max} - 2 * #{$active-gutter} + 1px)) {
-
         >.usx-layout__single-column>.usx-layout__expand-button,
         >.usx-layout__grid-container>.usx-layout__content>.usx-layout__expand-button {
           display: flex;
@@ -81,7 +79,7 @@
         $sidebars-at: $minimum + $count * $sidebar-width;
         $expand-at: $content-max + $count * $sidebar-width;
 
-        @container usx-layout (width >=#{$sidebars-at}) and (width <=calc(#{$expand-at} - 2 * #{$active-gutter} + 1px)) {
+        @container usx-layout (width >= #{$sidebars-at}) and (width <= calc(#{$expand-at} - 2 * #{$active-gutter} + 1px)) {
           #{$grid} {
             >.usx-layout__content>.usx-layout__expand-button {
               display: none;

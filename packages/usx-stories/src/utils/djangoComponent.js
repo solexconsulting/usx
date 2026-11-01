@@ -30,9 +30,7 @@ const insertHTMLWithScripts = (element, html) => {
 
   Array.from(element.querySelectorAll('script')).forEach((script) => {
     const newScript = document.createElement('script');
-    Array.from(script.attributes).forEach((attr) =>
-      newScript.setAttribute(attr.name, attr.value),
-    );
+    Array.from(script.attributes).forEach((attr) => newScript.setAttribute(attr.name, attr.value));
 
     newScript.appendChild(document.createTextNode(script.innerHTML));
     if (script.parentNode) {
@@ -55,19 +53,19 @@ const replayGlobalLoadingEvents = () => {
     new Event('DOMContentLoaded', {
       bubbles: true,
       cancelable: true,
-    }),
+    })
   );
   window.dispatchEvent(
     new Event('DOMContentLoaded', {
       bubbles: true,
       cancelable: true,
-    }),
+    })
   );
   window.dispatchEvent(
     new Event('load', {
       bubbles: true,
       cancelable: true,
-    }),
+    })
   );
 };
 
@@ -90,7 +88,6 @@ const simulateLoading = (element, html, renderOptions) => {
   if (renderOptions.replayGlobalEvents) {
     replayGlobalLoadingEvents();
   }
-
 };
 
 /**
@@ -104,9 +101,10 @@ const getDjangoBaseUrl = () => {
   if (typeof window !== 'undefined' && window.USX_DJANGO_URL) {
     return window.USX_DJANGO_URL.replace(/\/$/, '');
   }
-  const hostname = (typeof window !== 'undefined' && window.location && window.location.hostname)
-    ? window.location.hostname
-    : '127.0.0.1';
+  const hostname =
+    typeof window !== 'undefined' && window.location && window.location.hostname
+      ? window.location.hostname
+      : '127.0.0.1';
   return `http://${hostname}:9090`;
 };
 
@@ -123,9 +121,7 @@ export const fetchComponentHtml = async (componentName, props) => {
 
 const renderReactNodeToHtml = (node) => {
   try {
-    return renderToStaticMarkup(
-      React.createElement(React.Fragment, null, node),
-    );
+    return renderToStaticMarkup(React.createElement(React.Fragment, null, node));
   } catch (error) {
     console.error('Error serializing React node for Django story rendering:', error);
     return '';
@@ -137,7 +133,12 @@ export const serializePropsForDjango = (value) => {
     return undefined;
   }
 
-  if (value === null || typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+  if (
+    value === null ||
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    typeof value === 'boolean'
+  ) {
     return value;
   }
 
@@ -150,9 +151,7 @@ export const serializePropsForDjango = (value) => {
   }
 
   if (Array.isArray(value)) {
-    return value
-      .map((item) => serializePropsForDjango(item))
-      .filter((item) => item !== undefined);
+    return value.map((item) => serializePropsForDjango(item)).filter((item) => item !== undefined);
   }
 
   if (typeof value === 'object') {
@@ -237,7 +236,7 @@ export const useDjangoRenderedFields = (fields) => {
     fields.map(({ componentName, args }) => ({
       componentName,
       props: serializePropsForDjango(args),
-    })),
+    }))
   );
 
   useEffect(() => {
@@ -246,7 +245,7 @@ export const useDjangoRenderedFields = (fields) => {
 
     const fetchAll = async () => {
       const results = await Promise.allSettled(
-        parsedFields.map(({ componentName, props }) => fetchComponentHtml(componentName, props)),
+        parsedFields.map(({ componentName, props }) => fetchComponentHtml(componentName, props))
       );
 
       if (!active) {
@@ -306,7 +305,11 @@ const createDjangoRenderedComponent = (componentName, renderOptions) => {
     }, [html]);
 
     if (error) {
-      return React.createElement('div', { className: 'usa-error-message usx-error-message' }, `Error rendering component: ${error}`);
+      return React.createElement(
+        'div',
+        { className: 'usa-error-message usx-error-message' },
+        `Error rendering component: ${error}`
+      );
     }
 
     return React.createElement('div', { ref: containerRef });

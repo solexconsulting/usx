@@ -7,10 +7,15 @@
   align-items: center;
   gap: 0.5rem;
 
-  &.usa-avatar-group--overlap {
-    &:not(.usa-avatar-group--stacked) {
-      .usx-avatar:not(:first-child) {
-        margin-left: -1.5rem;
+  .usx-avatar {
+    margin: 0;
+  }
+
+  &.usx-avatar-group--overlap {
+    &:not(.usx-avatar-group--stacked) {
+      > :not(:first-child) .usx-avatar,
+      > .usx-avatar:not(:first-child) {
+        margin-left: -1rem;
 
         @if $usx-avatar-group-overlap-size {
           margin-left: -$usx-avatar-group-overlap-size;
@@ -18,31 +23,27 @@
       }
     }
 
-    .usx-avatar {
+    > * {
       &:hover {
         z-index: 1;
 
         img {
           box-shadow: 0 0 0 2px #00bde3;
-
           box-shadow: usx-when($usx-avatar-group-overlap-box-shadow);
         }
       }
     }
   }
 
-  &.usa-avatar-group--stacked {
+  &.usx-avatar-group--stacked {
     flex-direction: column;
     align-items: start;
 
-    &.usa-avatar-group--overlap {
-      .usx-avatar:not(:first-child) {
+    &.usx-avatar-group--overlap {
+      > :not(:first-child) .usx-avatar,
+      > .usx-avatar:not(:first-child) {
         margin-top: -1rem;
       }
     }
-  }
-
-  .usx-avatar {
-    margin: 0;
   }
 }

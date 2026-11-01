@@ -19,9 +19,7 @@
   // Each disclosure controls the border on its own content.
   &:not(.usx-details--borderless) > .usx-details__content {
     margin-top: units(1);
-    border-left-color: usx-when($usx-color-primary, $usx-color-primary, currentcolor);
-    border-left-style: solid;
-    border-left-width: usx-when($usx-border-width-md, $usx-border-width-md, 2px);
+    border-left: usx-when($usx-border-width-md, $usx-border-width-md, 2px) solid usx-when($usx-color-primary, $usx-color-primary, currentcolor);
   }
 
   &__text {

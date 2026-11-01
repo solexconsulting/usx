@@ -81,7 +81,7 @@ export const storyDefs = {
         <Container column="12" responsive={{ tablet: { column: '8', offset: '2' }, desktop: { column: '8', offset: 'none' } }} className="margin-bottom-3">
           <Card title="Program overview" description="Explore support for community-led projects and learn how to prepare an application." className="margin-0" />
         </Container>
-        <Container element="aside" column="12" responsive={{ tablet: { column: '8', offset: '2' }, desktop: { column: '4', offset: 'none' } }} className="margin-bottom-3">
+        <Container as="aside" column="12" responsive={{ tablet: { column: '8', offset: '2' }, desktop: { column: '4', offset: 'none' } }} className="margin-bottom-3">
           <SummaryBox id="container-related-resources" heading="Related resources">
             <Link href="#requirements" className="maxw-full">Eligibility and supporting documents</Link>
           </SummaryBox>
@@ -107,7 +107,7 @@ export const storyDefs = {
     ),
   },
   SemanticList: {
-    element: 'ul',
+    as: 'ul',
     display: 'flex',
     direction: 'column',
     gap: '2',
@@ -115,9 +115,9 @@ export const storyDefs = {
     className: 'add-list-reset maxw-tablet margin-x-auto',
     children: (
       <>
-        <Container element="li"><Link href="#eligibility">Eligibility</Link></Container>
-        <Container element="li"><Link href="#documents">Required documents</Link></Container>
-        <Container element="li"><Link href="#deadlines">Deadlines</Link></Container>
+        <Container as="li"><Link href="#eligibility">Eligibility</Link></Container>
+        <Container as="li"><Link href="#documents">Required documents</Link></Container>
+        <Container as="li"><Link href="#deadlines">Deadlines</Link></Container>
       </>
     ),
   },

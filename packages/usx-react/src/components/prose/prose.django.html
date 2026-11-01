@@ -1,4 +1,4 @@
-{% if containerElement == "article" %}
+{% if as == "article" %}
     <article class="usa-prose usx-prose {{ className }}">
         {% if content %}
             {{ content|safe }}
@@ -7,7 +7,7 @@
         {% endif %}
     </article>
 
-{% elif containerElement == "section" %}
+{% elif as == "section" %}
     <section class="usa-prose usx-prose {{ className }}">
         {% if content %}
             {{ content|safe }}
@@ -16,7 +16,7 @@
         {% endif %}
     </section>
 
-{% elif containerElement == "main" %}
+{% elif as == "main" %}
     <main class="usa-prose usx-prose {{ className }}">
         {% if content %}
             {{ content|safe }}

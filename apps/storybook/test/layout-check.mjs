@@ -59,8 +59,15 @@ for (const [desktop, tablet, width, gutter] of [
   assert(!queries.some((query) => /64rem|40rem/.test(query)));
   css.walkAtRules('media', (media) => {
     if (!media.params.includes('40em')) return;
-    assert.equal(media.params, '(width < 40em)');
-    media.walkRules((rule) => assert(rule.selectors.every((selector) => selector.startsWith(':where(.usx-footer)')), 'Fixed 40em compatibility query must be Footer-only'));
+    if (media.params === '(width < 40em)') {
+      media.walkRules((rule) => assert(rule.selectors.every((selector) => selector.startsWith(':where(.usx-footer)')), 'The Footer mobile query must contain only Footer rules'));
+    } else if (media.params === '(width >= 40em)') {
+      assert.equal(media.params, '(width >= 40em)');
+      media.walkRules((rule) => assert(rule.selectors.every((selector) => selector.startsWith('.usx-carousel') || selector.startsWith('.usa-card.usx-card')), 'The Carousel tablet query must contain only Carousel rules'));
+    } else {
+      assert.equal(media.params, '(min-width: 40em)');
+      media.walkRules((rule) => assert(rule.selectors.every((selector) => selector.startsWith('.tablet\\:usx-container--')), 'The Container tablet query must contain only Container utilities'));
+    }
   });
   if (desktop !== 1024) assert(!queries.some((query) => /1024px/.test(query)));
   if (tablet !== 640) assert(!queries.some((query) => /640px/.test(query)));
@@ -71,7 +78,7 @@ for (const [desktop, tablet, width, gutter] of [
     assert(rules.length, `Missing selector: ${selector}`);
     return rules;
   };
-  css.walkRules((rule) => assert(!rule.selectors.some((selector) => /\.(desktop|tablet)\\:/.test(selector)), 'USX must not rebuild vendor responsive utilities'));
+  css.walkRules((rule) => assert(!rule.selectors.some((selector) => /\.(desktop|tablet)\\:/.test(selector) && !/^\.(desktop|tablet)\\:usx-container--/.test(selector)), 'USX must not rebuild vendor responsive utilities'));
   for (const selector of [
     '.usa-nav.usx-nav .usa-nav__inner',
     '.usa-banner.usx-banner .usa-banner__inner',
@@ -157,7 +164,6 @@ for (const [desktop, tablet, width, gutter] of [
   assert(primaryRules.every((rule) => rule.parent.params === '(min-width: 64em)'));
   assert(primaryRules.some((rule) => rule.nodes.some((decl) => decl.prop === 'margin-inline' && decl.value === '-1rem')));
   assert(rulesFor('.usx-nav').some((rule) => rule.parent.params === '(width < 64em)'));
-  assert(rulesFor(':has(> .usa-header--extended) .usx-nav').some((rule) => rule.parent.params === '(min-width: 64em)'));
   assert.equal(result.loadedUrls.filter((url) => /usx-theme\/src\/_variables.scss$/.test(url.pathname)).length, 1);
   process.stdout.write(`PASS: shared layout ${desktop}px / ${tablet}px / ${width}rem / ${gutter}px\n`);
 }

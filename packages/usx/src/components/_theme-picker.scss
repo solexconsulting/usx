@@ -4,7 +4,6 @@
     display: inline-flex;
     max-width: 20rem;
     color: #fff;
-
     color: usx-when($usx-theme-picker-trigger-text);
 
     &__panel {
@@ -47,7 +46,6 @@
 
     &__trigger {
         color: #fff;
-
         color: usx-when($usx-theme-picker-trigger-text);
     }
 

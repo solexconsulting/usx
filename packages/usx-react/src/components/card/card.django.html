@@ -1,5 +1,5 @@
 {% load components %}
-<{% if tag %}{{ tag }}{% else %}div{% endif %}{% if id %} id="{{ id }}"{% endif %} class="usa-card usx-card{% if headerFirst %} usa-card--header-first{% endif %}{% if flag %} usa-card--flag{% endif %}{% if mediaRight %} usa-card--media-right{% endif %}{% if className %} {{ className }}{% endif %}">
+<{% if as == 'li' or as == 'article' %}{{ as }}{% else %}div{% endif %}{% if id %} id="{{ id }}"{% endif %} class="usa-card usx-card{% if headerFirst %} usa-card--header-first{% endif %}{% if flag %} usa-card--flag{% endif %}{% if mediaRight %} usa-card--media-right{% endif %}{% if className %} {{ className }}{% endif %}">
   <div class="usa-card__container{% if containerClassName %} {{ containerClassName }}{% endif %}">
     {% if children %}
       {{ children }}
@@ -41,4 +41,4 @@
       {{ children|default:"Card" }}
     {% endif %}
   </div>
-</{% if tag %}{{ tag }}{% else %}div{% endif %}>
+</{% if as == 'li' or as == 'article' %}{{ as }}{% else %}div{% endif %}>

@@ -227,7 +227,7 @@ export const VerticalSpacing = {
           {
             name: 'page',
             content: (
-              <Page element="section" title="H1 Page heading" className="bg-surface-1">
+              <Page as="section" title="H1 Page heading" className="bg-surface-1">
                 <div className="usa-prose">
                   <h2>H2 Section heading</h2>
                   <p>Page content.</p>
@@ -256,7 +256,7 @@ export const VerticalSpacing = {
 
 const renderComparison = (args) => (
   <div style={args.style}>
-    <Layout expandable className={`${args.className}`}>
+    <Layout expandable className={args.className}>
       <div data-layout-content className="bg-blue height-15">
         <h2>Single column</h2>
         <p>Content with shared responsive gutters.</p>
@@ -267,7 +267,7 @@ const renderComparison = (args) => (
         key={sidebars.join('-') || 'none'}
         variant="grid"
         expandable
-        className={`margin-top-3 ${args.className}`}
+        className={`margin-top-3 ${args.className ?? ''}`}
         leftSidebar={
           sidebars.includes('left') ? (
             <div className="bg-violet height-full">

@@ -19,39 +19,39 @@ export const storyDefs = {
       <p>Optional section titles help organize long pages into meaningful chunks.</p>
     ),
   },
-  WithHeadingLevel: {
+  WithHeadingAs: {
     title: 'Nested program details',
-    headingLevel: 'h3',
+    headingAs: 'h3',
     children: <p>Choose a heading level that fits the surrounding page structure.</p>,
   },
   HeadingH1: {
     title: 'Heading level 1',
-    headingLevel: 'h1',
+    headingAs: 'h1',
     children: <p>This section uses an h1 heading. Choose the level that fits the page hierarchy.</p>,
   },
   HeadingH2: {
     title: 'Heading level 2',
-    headingLevel: 'h2',
+    headingAs: 'h2',
     children: <p>This section uses an h2 heading. Choose the level that fits the page hierarchy.</p>,
   },
   HeadingH3: {
     title: 'Heading level 3',
-    headingLevel: 'h3',
+    headingAs: 'h3',
     children: <p>This section uses an h3 heading. Choose the level that fits the page hierarchy.</p>,
   },
   HeadingH4: {
     title: 'Heading level 4',
-    headingLevel: 'h4',
+    headingAs: 'h4',
     children: <p>This section uses an h4 heading. Choose the level that fits the page hierarchy.</p>,
   },
   HeadingH5: {
     title: 'Heading level 5',
-    headingLevel: 'h5',
+    headingAs: 'h5',
     children: <p>This section uses an h5 heading. Choose the level that fits the page hierarchy.</p>,
   },
   HeadingH6: {
     title: 'Heading level 6',
-    headingLevel: 'h6',
+    headingAs: 'h6',
     children: <p>This section uses an h6 heading. Choose the level that fits the page hierarchy.</p>,
   },
   WithAdditionalClasses: {
@@ -77,7 +77,7 @@ export const Default = { args: storyDefs.Default };
 export const WithTitle = { args: storyDefs.WithTitle };
 export const WithAdditionalClasses = { args: storyDefs.WithAdditionalClasses };
 
-export const WithHeadingLevel = { args: storyDefs.WithHeadingLevel };
+export const WithHeadingAs = { args: storyDefs.WithHeadingAs };
 
 export const HeadingH1 = { name: 'Heading H1', args: storyDefs.HeadingH1 };
 export const HeadingH2 = { name: 'Heading H2', args: storyDefs.HeadingH2 };

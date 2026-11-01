@@ -9,7 +9,6 @@
 
 .usx-sidenav.usa-sidenav {
   border-bottom-color: usx-when($usx-sidenav-border);
-
   border-bottom-width: usx-when($usx-sidenav-border-width);
 
   &.usx-sidenav--sticky {
@@ -19,7 +18,6 @@
 
   .usa-sidenav__item {
     border-top-color: usx-when($usx-sidenav-border);
-
     border-top-width: usx-when($usx-sidenav-border-width);
   }
 
@@ -37,7 +35,6 @@
 
       &:hover {
         color: usx-when($usx-sidenav-link-text-hover);
-
         background-color: usx-when($usx-sidenav-bg-hover);
       }
     }

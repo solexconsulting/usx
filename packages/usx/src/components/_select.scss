@@ -17,9 +17,7 @@
   // so let the box grow past 2.5rem instead of clipping.
   height: auto;
   min-height: 2.5rem;
-
   border-radius: usx-when($usx-input-radius);
-
   padding: usx-when($usx-input-padding);
 }
 
@@ -32,22 +30,16 @@
 .usa-select.usx-select:not(.usa-input--error):not(.usa-input--success) {
   &:not(:disabled, [aria-disabled="true"]) {
     background-color: usx-when($usx-input-bg);
-
     color: usx-when($usx-input-text);
-
     border-color: usx-when($usx-input-border);
   }
 }
 
 .usa-select.usx-select.usa-input--error {
   border-width: usx-when($usx-input-error-border-width);
-
   border-color: usx-when($usx-input-error-border);
-
   border-style: usx-when($usx-input-error-border-style);
-
   padding-top: usx-when($usx-input-error-padding-top);
-
   padding-bottom: usx-when($usx-input-error-padding-bottom);
 }
 
@@ -55,13 +47,9 @@
 // statically-applied success class, so error must win when both are present.
 .usa-select.usx-select.usa-input--success:not(.usa-input--error) {
   border-width: usx-when($usx-input-success-border-width);
-
   border-color: usx-when($usx-input-success-border);
-
   border-style: usx-when($usx-input-success-border-style);
-
   padding-top: usx-when($usx-input-success-padding-top);
-
   padding-bottom: usx-when($usx-input-success-padding-bottom);
 }
 
@@ -73,6 +61,5 @@
 
 .usa-select.usx-select:focus-visible {
   outline: usx-when($usx-input-focus-outline);
-
   outline-offset: usx-when($usx-input-focus-outline-offset);
 }

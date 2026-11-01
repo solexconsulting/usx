@@ -1,80 +1,148 @@
 import React from 'react';
 import Drawer from '../../../../usx-react/src/components/drawer/Drawer.tsx';
-import Popover from '../../../../usx-react/src/components/popover/Popover.tsx';
+import Tree from '../../../../usx-react/src/components/tree/Tree.tsx';
+import Search from '../../../../usx-react/src/components/search/Search.tsx';
+import Avatar from '../../../../usx-react/src/components/avatar/Avatar.tsx';
+import Link from '../../../../usx-react/src/components/link/Link.tsx';
+import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
+import SummaryBox from '../../../../usx-react/src/components/summary-box/SummaryBox.tsx';
+import Tag from '../../../../usx-react/src/components/tag/Tag.tsx';
+import Input from '../../../../usx-react/src/components/input/Input.tsx';
+import Checkbox from '../../../../usx-react/src/components/checkbox/Checkbox.tsx';
+import TaskList from '../../../../usx-react/src/components/task-list/TaskList.tsx';
 import config from '../../../../usx-react/src/components/drawer/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
-const sides = [
-  ['inline-start', 'Start edge'],
-  ['inline-end', 'End edge'],
-  ['top', 'Top edge'],
-  ['bottom', 'Bottom edge'],
-];
+// Native command attributes are not in React's known-property list.
+const closeAction = { commandfor: 'drawer-action-required', command: 'close' };
 
-const sizes = [
-  ['compact', 'Compact'],
-  ['default', 'Default'],
-  ['wide', 'Wide'],
+const navigationItems = [
+  { type: 'link', href: '#services-overview', text: 'Services overview' },
+  {
+    type: 'details',
+    summaryProps: { label: 'Benefits and assistance' },
+    open: true,
+    items: [
+      {
+        type: 'details',
+        summaryProps: { label: 'Housing support' },
+        open: true,
+        items: [
+          {
+            type: 'details',
+            summaryProps: { label: 'Rental assistance' },
+            open: true,
+            items: [
+              { type: 'link', href: '#apply-rental-assistance', text: 'Apply for rental assistance' },
+              { type: 'link', href: '#rental-eligibility', text: 'Check eligibility' },
+            ],
+          },
+          { type: 'link', href: '#find-housing', text: 'Find affordable housing' },
+        ],
+      },
+      {
+        type: 'details',
+        summaryProps: { label: 'Food assistance' },
+        items: [
+          { type: 'link', href: '#food-benefits', text: 'Apply for food benefits' },
+          { type: 'link', href: '#food-programs', text: 'Find local food programs' },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'details',
+    summaryProps: { label: 'Records and permits' },
+    items: [
+      { type: 'link', href: '#public-records', text: 'Request a public record' },
+      { type: 'link', href: '#parking-permit', text: 'Apply for a parking permit' },
+    ],
+  },
+  { type: 'link', href: '#contact-services', text: 'Contact a service center' },
 ];
 
 export const storyDefs = {
   Default: {
     id: 'drawer-default',
     label: 'Open application details',
+    triggerClassName: 'usa-button usx-button usa-button--primary margin-0',
     heading: 'Application details',
-    description: 'Review the information for your current application.',
-    children: <p>Your application was last updated today.</p>,
-  },
-  Modeless: {
-    id: 'drawer-modeless',
-    label: 'Open reference guide',
-    heading: 'Reference guide',
-    modal: false,
+    description: 'Review the status of your housing support application.',
     children: (
-      <nav aria-label="Reference guide sections">
-        <ul className="usa-list usx-list">
-          <li>
-            <a href="#eligibility">Eligibility</a>
-          </li>
-          <li>
-            <a href="#documents">Documents</a>
-          </li>
-        </ul>
+      <>
+        <Tag value="In review" color="info" />
+        <SummaryBox id="drawer-application-summary" heading="Housing support application">
+          <p>Application number: HSG-10482</p>
+          <p>We are checking your eligibility. No action is needed right now.</p>
+        </SummaryBox>
+        <p><Link href="#application-timeline">View application timeline</Link></p>
+      </>
+    ),
+  },
+  MenuIconTrigger: {
+    id: 'drawer-menu-icon-trigger',
+    label: 'Open site menu',
+    triggerAriaLabel: 'Open site menu',
+    triggerClassName: 'usa-button usx-button usa-button--primary display-block margin-0',
+    trigger: (
+      <svg className="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img">
+        <use href="/img/sprite.svg#menu" />
+      </svg>
+    ),
+    heading: 'Site menu',
+    side: 'inline-start',
+    size: 'compact',
+    children: (
+      <nav aria-label="Site menu">
+        <Tree
+          variant="padded"
+          items={[
+            { type: 'link', href: '#home', text: 'Home' },
+            {
+              type: 'details',
+              summaryProps: { label: 'Services' },
+              items: [
+                { type: 'link', href: '#apply', text: 'Apply for a service' },
+                { type: 'link', href: '#track', text: 'Track a request' },
+              ],
+            },
+            { type: 'link', href: '#contact', text: 'Contact us' },
+          ]}
+        />
       </nav>
     ),
   },
   RichForm: {
     id: 'drawer-rich-form',
     label: 'Filter programs',
+    triggerClassName: 'usa-button usx-button usa-button--outline margin-0',
     heading: 'Filter programs',
     description: 'Choose the programs you want to see.',
     focusHeading: false,
     children: (
       <form id="drawer-filter-form" method="dialog">
-        <label className="usa-label usx-label" htmlFor="drawer-search-term">
-          Search term
-        </label>
-        <input className="usa-input usx-input" id="drawer-search-term" name="query" type="search" />
+        <Input
+          id="drawer-search-term"
+          name="query"
+          label="Search term"
+          placeholder="Program name or keyword"
+          autoFocus
+        />
         <fieldset className="usa-fieldset margin-top-2">
           <legend className="usa-legend">Status</legend>
-          <div className="usa-checkbox usx-checkbox">
-            <input
-              className="usa-checkbox__input"
-              id="drawer-status-open"
-              name="status"
-              type="checkbox"
-              value="open"
-            />
-            <label className="usa-checkbox__label" htmlFor="drawer-status-open">
-              Open
-            </label>
-          </div>
+          <Checkbox id="drawer-status-open" name="status" value="open" label="Open" />
+          <Checkbox
+            id="drawer-status-accepting"
+            name="status"
+            value="accepting"
+            label="Accepting applications"
+          />
         </fieldset>
       </form>
     ),
     footer: (
       <button
-        className="usa-button usx-button"
+        className="usa-button usx-button usa-button--primary"
         type="submit"
         form="drawer-filter-form"
         value="apply"
@@ -83,112 +151,226 @@ export const storyDefs = {
       </button>
     ),
   },
-  NestedPopover: {
-    id: 'drawer-nested-popover',
-    label: 'Open service details',
-    heading: 'Service details',
+  ServiceNavigation: {
+    id: 'drawer-service-navigation',
+    label: 'Browse services',
+    triggerClassName: 'usa-button usx-button usa-button--secondary margin-0',
+    heading: 'Services',
+    size: 'wide',
     children: (
       <>
-        <p>Review this service and its related actions.</p>
-        <Popover id="drawer-related-actions" label="Related actions" side="bottom">
-          <nav aria-label="Related actions">
-            <ul className="usa-list usx-list usa-list--unstyled">
-              <li>
-                <a href="#save-service">Save service</a>
-              </li>
-              <li>
-                <a href="#share-service">Share service</a>
-              </li>
-            </ul>
-          </nav>
-          <button
-            className="usa-button usx-button usa-button--unstyled"
-            type="button"
-            data-usx-popover-close="drawer-related-actions"
-          >
-            Close related actions
-          </button>
-        </Popover>
+        <Search
+          id="drawer-service-search"
+          label="Search"
+          big={true}
+          ariaLabel="Search services"
+          placeholder="Find a service"
+          action="/search"
+        />
+        <nav aria-label="Service sections" className="margin-top-3">
+          <Tree items={navigationItems} variant="padded" />
+        </nav>
+      </>
+    ),
+    footer: (
+      <div className="display-flex flex-align-center">
+        <Avatar
+          href="#account"
+          variant="initials"
+          value="ML"
+          alt="Morgan Lee account"
+          contentClassName="bg-primary-lighter text-primary-darker"
+        />
+        <Link className="margin-left-1" href="#account">Morgan Lee</Link>
+      </div>
+    ),
+  },
+  Rounded: {
+    id: 'drawer-rounded',
+    label: 'Get support',
+    triggerClassName: 'usa-button usx-button usa-button--primary margin-0',
+    heading: 'Contact support',
+    rounded: true,
+    children: (
+      <>
+        <Alert
+          variant="info"
+          heading="Talk to a specialist"
+          text="A service representative can help you understand your next steps."
+        />
+        <p>Check the support center for answers before starting a new request.</p>
+        <Link href="#support-center">Visit the support center</Link>
       </>
     ),
   },
-  LongContent: {
-    id: 'drawer-long-content',
-    label: 'Browse all programs',
-    heading: 'All programs',
+  ActionRequired: {
+    id: 'drawer-action-required',
+    label: 'Review terms',
+    triggerClassName: 'usa-button usx-button usa-button--primary margin-0',
+    heading: 'Review the terms',
+    description: 'Choose an option to continue.',
+    actionRequired: true,
     children: (
-      <nav aria-label="Programs">
-        <ol className="usa-list usx-list">
-          {Array.from({ length: 40 }, (_, index) => (
-            <li key={index}>
-              <a href={`#program-${index + 1}`}>Program {index + 1}</a>
-            </li>
-          ))}
-        </ol>
-      </nav>
+      <>
+        <SummaryBox id="drawer-terms-summary" heading="Before you continue">
+          <ul>
+            <li>Your information is used to process this request.</li>
+            <li>You can return to review your submission later.</li>
+          </ul>
+        </SummaryBox>
+        <p><Link href="#privacy-notice">Read the privacy notice</Link></p>
+      </>
+    ),
+    footer: (
+      <>
+        <button
+          className="usa-button usx-button usa-button--outline"
+          type="button"
+          {...closeAction}
+        >
+          Decline
+        </button>
+        <button className="usa-button usx-button usa-button--primary" type="button" {...closeAction}>
+          Accept
+        </button>
+      </>
     ),
   },
   Disabled: {
     id: 'drawer-disabled',
-    label: 'Open unavailable information',
-    heading: 'Unavailable information',
+    label: 'View annual account statement',
+    triggerClassName: 'usa-button usx-button usa-button--primary margin-0',
+    heading: 'Annual account statement',
+    description: 'Available once year-end processing is complete.',
     disabled: true,
-    children: <p>This information is not available yet.</p>,
-  },
-  IconTrigger: {
-    id: 'drawer-icon-trigger',
-    label: 'Account details',
-    heading: 'Account details',
-    triggerAriaLabel: 'Open account details',
-    trigger: (
-      <svg className="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false">
-        <use href="./img/sprite.svg#person" />
-      </svg>
+    children: (
+      <Alert
+        variant="info"
+        heading="Statement being prepared"
+        text="Your statement will be available here after processing is complete."
+      />
     ),
-    children: <p>Manage your account details.</p>,
   },
-  CustomTrigger: {
-    id: 'drawer-custom-trigger',
-    label: 'Edit profile',
-    heading: 'Edit profile',
-    trigger: (
-      <>
-        <svg className="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false">
-          <use href="./img/sprite.svg#edit" />
-        </svg>
-        <span>Edit profile</span>
-      </>
-    ),
-    children: <p>Update your profile information.</p>,
-  },
-  Sides: sides.map(([side, name]) => ({
-    id: `drawer-${side}`,
-    label: `Open ${name.toLowerCase()} drawer`,
-    heading: `${name} drawer`,
-    side,
-    children: <p>This drawer opens from the {name.toLowerCase()}.</p>,
-  })),
-  Sizes: sizes.map(([size, name]) => ({
-    id: `drawer-size-${size}`,
-    label: `Open ${name.toLowerCase()} drawer`,
-    heading: `${name} drawer`,
-    size,
-    children: <p>The {name.toLowerCase()} size allows different amounts of content.</p>,
-  })),
-  Rtl: [
+  Sides: [
     {
-      id: 'drawer-rtl-start',
-      label: 'Open start drawer',
-      heading: 'Start drawer',
+      id: 'drawer-inline-start',
+      label: 'Browse departments',
+      heading: 'Departments',
       side: 'inline-start',
-      children: <p>The start edge is the right edge in this example.</p>,
+      triggerClassName: 'usa-button usx-button usa-button--outline margin-0',
+      children: (
+        <nav aria-label="Departments">
+          <Tree
+            variant="padded"
+            items={[
+              { type: 'link', href: '#housing', text: 'Housing' },
+              { type: 'link', href: '#transportation', text: 'Transportation' },
+              { type: 'link', href: '#public-health', text: 'Public health' },
+            ]}
+          />
+        </nav>
+      ),
     },
     {
-      id: 'drawer-rtl-end',
-      label: 'Open end drawer',
-      heading: 'End drawer',
+      id: 'drawer-inline-end',
+      label: 'Review service request',
+      heading: 'Service request',
       side: 'inline-end',
-      children: <p>The end edge is the left edge in this example.</p>,
+      triggerClassName: 'usa-button usx-button usa-button--outline margin-0',
+      children: (
+        <>
+          <Tag value="Submitted" color="success" />
+          <SummaryBox id="drawer-request-summary" heading="Streetlight repair">
+            <p>Request number: SR-5284</p>
+            <p>The maintenance team has received your report.</p>
+          </SummaryBox>
+          <Link href="#request-history">View request history</Link>
+        </>
+      ),
+    },
+    {
+      id: 'drawer-top',
+      label: 'View service notice',
+      heading: 'Service notice',
+      side: 'top',
+      triggerClassName: 'usa-button usx-button usa-button--outline margin-0',
+      children: (
+        <>
+          <Alert
+            variant="warning"
+            heading="Online payments are temporarily unavailable"
+            text="You can still review balances and save forms while payment service is restored."
+          />
+          <p><Link href="#service-updates">Check service updates</Link></p>
+        </>
+      ),
+    },
+    {
+      id: 'drawer-bottom',
+      label: 'View saved services',
+      heading: 'Saved services',
+      side: 'bottom',
+      triggerClassName: 'usa-button usx-button usa-button--outline margin-0',
+      children: (
+        <TaskList
+          tasks={[
+            { name: 'Renew parking permit', href: '#renew-parking', hint: 'Continue your draft', tagProps: { value: 'In-Progress', color: 'info' } },
+            { name: 'Track streetlight repair', href: '#track-streetlight', hint: 'Request SR-5284', tagProps: { value: 'Not started', outline: true } },
+          ]}
+        />
+      ),
+    },
+  ],
+  Sizes: [
+    {
+      id: 'drawer-size-compact',
+      label: 'Open account shortcuts',
+      heading: 'Account shortcuts',
+      size: 'compact',
+      triggerClassName: 'usa-button usx-button usa-button--outline margin-0',
+      children: (
+        <nav aria-label="Account shortcuts">
+          <Tree
+            variant="padded"
+            items={[
+              { type: 'link', href: '#profile', text: 'Profile' },
+              { type: 'link', href: '#saved-services', text: 'Saved services' },
+              { type: 'link', href: '#notifications', text: 'Notifications' },
+            ]}
+          />
+        </nav>
+      ),
+    },
+    {
+      id: 'drawer-size-default',
+      label: 'Review appointment',
+      heading: 'Appointment details',
+      size: 'default',
+      triggerClassName: 'usa-button usx-button usa-button--outline margin-0',
+      children: (
+        <>
+          <SummaryBox id="drawer-appointment-summary" heading="Service center visit">
+            <p>Bring a photo ID and your confirmation number.</p>
+          </SummaryBox>
+          <p><Link href="#reschedule-appointment">Reschedule appointment</Link></p>
+        </>
+      ),
+    },
+    {
+      id: 'drawer-size-wide',
+      label: 'Review application checklist',
+      heading: 'Application checklist',
+      size: 'wide',
+      triggerClassName: 'usa-button usx-button usa-button--outline margin-0',
+      children: (
+        <TaskList
+          tasks={[
+            { name: 'Confirm your address', href: '#confirm-address', tagProps: { value: 'Completed', color: 'success' } },
+            { name: 'Upload income documents', href: '#upload-income', tagProps: { value: 'Incomplete', color: 'warning' } },
+            { name: 'Review and submit', href: '#review-submit', tagProps: { value: 'In-Progress', color: 'info' } },
+          ]}
+        />
+      ),
     },
   ],
 };
@@ -208,7 +390,7 @@ export default {
     docs: {
       description: {
         component:
-          'A native `<dialog>` drawer for task panels, forms, navigation, and other structured content. The default modal drawer makes the rest of the page inert and keeps keyboard focus inside until it closes. Give each drawer a unique `id`, a descriptive `heading`, and a visible trigger label. The browser handles opening, Escape, focus return, and the Close control through native commands. Set `modal={false}` for a modeless panel that can be dismissed by clicking outside. `side` uses logical inline edges so start and end follow the reading direction. The visible Close button comes last in DOM order and is positioned in the header by CSS. `focusHeading={false}` lets the first control in the content receive initial focus.',
+          'A modal `<dialog>` for tasks, forms, and navigation. Provide a unique `id`, visible `heading`, and trigger label. Native dialog commands open and close it; `@solexllc/usx/js/start` adds backdrop dismissal and support for browsers without those commands. Set `actionRequired` only when the content provides its own close action.',
       },
     },
   },
@@ -217,6 +399,11 @@ export default {
 /** A named modal drawer opens with heading focus and restores focus when closed. */
 export const Default = {
   args: storyDefs.Default,
+};
+
+/** An icon-only menu button uses the trigger slot and an explicit accessible name. */
+export const MenuIconTrigger = {
+  args: storyDefs.MenuIconTrigger,
 };
 
 /** Open each physical edge; inline edges follow the document direction. */
@@ -230,7 +417,7 @@ export const AllSides = {
   ),
 };
 
-/** Compact, default, and wide sizing use the same content structure. */
+/** Account shortcuts, an appointment, and a checklist show useful content at each size. */
 export const AllSizes = {
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
@@ -241,56 +428,27 @@ export const AllSizes = {
   ),
 };
 
-/** A modeless drawer keeps other page tasks focusable and closes declaratively. */
-export const Modeless = {
-  args: storyDefs.Modeless,
-  render: (args) => (
-    <div style={{ display: 'flex', gap: '1rem' }}>
-      <Drawer {...args} />
-      <button className="usa-button usa-button--outline" type="button">
-        Other page task
-      </button>
-    </div>
-  ),
-};
-
 /** A task form can focus its first field and use `method="dialog"` to finish. */
 export const RichForm = {
   args: storyDefs.RichForm,
 };
 
-/** A popover inside a modal drawer closes independently of the dialog. */
-export const NestedPopover = {
-  args: storyDefs.NestedPopover,
+/** Deeply nested navigation, search, and an account footer in a wide drawer. */
+export const ServiceNavigation = {
+  args: storyDefs.ServiceNavigation,
 };
 
-/** A long navigation list exercises the drawer's internal scrolling region. */
-export const LongContent = {
-  args: storyDefs.LongContent,
+/** Rounded corners are opt-in; edges are square by default. */
+export const Rounded = {
+  args: storyDefs.Rounded,
 };
 
-/** Logical start and end are demonstrated in a right-to-left context. */
-export const Rtl = {
-  render: () => (
-    <div dir="rtl" style={{ display: 'flex', gap: '1rem' }}>
-      {storyDefs.Rtl.map((args) => (
-        <Drawer key={args.id} {...args} />
-      ))}
-    </div>
-  ),
+/** With no close button, the drawer closes only through its own actions. */
+export const ActionRequired = {
+  args: storyDefs.ActionRequired,
 };
 
 /** The disabled trigger leaves its drawer closed. */
 export const Disabled = {
   args: storyDefs.Disabled,
-};
-
-/** An icon-only trigger needs a plain-text accessible name. */
-export const IconTrigger = {
-  args: storyDefs.IconTrigger,
-};
-
-/** Visible custom trigger text remains part of its accessible name. */
-export const CustomTrigger = {
-  args: storyDefs.CustomTrigger,
 };

@@ -1,6 +1,8 @@
 {% load components %}
 {# Django template for Search #}
-<section aria-label="{{ ariaLabel|default:'Search' }}">
+{% firstof label 'Search' as searchLabel %}
+{% firstof ariaLabel searchLabel as sectionLabel %}
+<section aria-label="{{ sectionLabel }}">
   <form
     id="{{ id }}-form"
     class="
@@ -12,9 +14,8 @@
     method="get"
     role="search"
     {% if action %}action="{{ action }}"{% endif %}
-    onsubmit="handleSubmit"
   >
-    {% label htmlFor=id screenReaderOnly=True label="Search" %}{% endlabel %}
+    {% label htmlFor=id screenReaderOnly=True label=searchLabel %}{% endlabel %}
     <input
       id="{{ id }}"
       class="usa-input usx-input"
@@ -27,9 +28,9 @@
       {% with buttonVariant=buttonVariant|default:'primary' %}
         {% button variant=buttonVariant type='submit' label="" %}
           {% if iconOnly %}
-            {% icon name=iconName className="usa-search__submit-icon display-inline-block" %}{% endicon %}
+            {% icon name=iconName className="usa-search__submit-icon display-inline-block" alt=searchLabel %}{% endicon %}
           {% elif not iconOnly %}
-            <span class="usa-search__submit-text">{{ label|default:'Search' }}</span>
+            <span class="usa-search__submit-text">{{ searchLabel }}</span>
             {% icon name=iconName className="usa-search__submit-icon" %}{% endicon %}
           {% endif %}
         {% endbutton %}

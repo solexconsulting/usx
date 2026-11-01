@@ -119,9 +119,8 @@ test('content slots preserve the distinction from string-only renderer inputs', 
   assert.equal(manifest.components.prose.props.content.type, 'string');
   assert.equal(manifest.components['in-page-nav'].props.content.type, 'string');
   assert.deepEqual(manifest.components['text-area'].props.error.type, ['string', 'boolean']);
-  for (const name of ['table', 'in-page-nav']) {
-    assert.equal(manifest.components[name].props.children.renderers.django.supported, false);
-  }
+  assert.equal(manifest.components['in-page-nav'].props.children.renderers?.django?.supported, undefined);
+  assert.equal(manifest.components.table.props.children.renderers.django.supported, false);
 });
 
 test('Quote references Attribution without duplicating its contract', () => {
@@ -159,7 +158,7 @@ test('Callout replaces Block and Quote references its styling contract', () => {
   assert.equal(callout.props.content.type, 'slot');
   assert.equal(Object.hasOwn(callout.props.strokeColor, 'default'), false);
   assert.equal(quote.props.calloutProps.component, 'callout');
-  assert.deepEqual(quote.props.calloutProps.omit, ['element', 'children', 'content']);
+  assert.deepEqual(quote.props.calloutProps.omit, ['as', 'children', 'content']);
 });
 
 test('Quote source links reference Link and receive their children from sourceTitle', () => {

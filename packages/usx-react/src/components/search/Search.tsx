@@ -81,7 +81,7 @@ export default function Search({
         />
         <Button variant={buttonVariant} type="submit">
           {!iconOnly && <span className="usa-search__submit-text">{label}</span>}
-          <Icon name={icon} className={iconClasses} />
+          <Icon name={icon} className={iconClasses} alt={iconOnly ? label : undefined} />
         </Button>
       </form>
     </section>

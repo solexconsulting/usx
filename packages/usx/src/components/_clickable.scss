@@ -56,17 +56,13 @@
   &:hover, &:focus {
     .usx-clickable__color-on-hover {
       color: #005ea2;
-
       color: usx-when($usx-clickable-text-hover);
-
       color: usx-when($usx-color-primary);
     }
 
     .usx-clickable__bg-color-on-hover {
       background-color: #005ea2;
-
       background-color: usx-when($usx-clickable-text-hover);
-
       background-color: usx-when($usx-color-primary);
     }
   }

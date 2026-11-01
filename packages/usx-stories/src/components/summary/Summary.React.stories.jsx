@@ -26,6 +26,9 @@ export const storyDefs = {
     className: 'font-family-mono font-mono-sm',
     textClassName: 'text-bold',
   },
+  Wrapping: {
+    label: 'Where can I find my reference number without my confirmation email?',
+  },
 };
 
 export default {
@@ -49,3 +52,12 @@ export const ButtonClasses = { args: storyDefs.ButtonClasses };
 export const Colors = { args: storyDefs.Colors };
 export const MinimalDecoration = { args: storyDefs.MinimalDecoration };
 export const CustomClasses = { args: storyDefs.CustomClasses };
+export const Wrapping = {
+  args: storyDefs.Wrapping,
+  render: (args) => (
+    <details style={{ width: '12rem' }}>
+      <Summary {...args} />
+      <p>Your reference number is also on your letter.</p>
+    </details>
+  ),
+};

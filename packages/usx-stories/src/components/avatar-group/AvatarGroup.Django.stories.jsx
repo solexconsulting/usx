@@ -22,4 +22,5 @@ export const OverlappingAvatars = createStory(toDjangoArgs(storyDefs.Overlapping
 export const StackedAvatars = createStory(toDjangoArgs(storyDefs.StackedAvatars));
 export const OverlappingStackedAvatars = createStory(toDjangoArgs(storyDefs.OverlappingStackedAvatars));
 export const OverlappingRoundedAvatars = createStory(toDjangoArgs(storyDefs.OverlappingRoundedAvatars));
-export const AvatarGroupWithTooltips = createStory(toDjangoArgs(storyDefs.AvatarGroupWithTooltips));
+export const WithTooltips = createStory(toDjangoArgs(storyDefs.WithTooltips));
+export const StackedWithTooltips = createStory(toDjangoArgs(storyDefs.StackedWithTooltips));

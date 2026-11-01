@@ -100,6 +100,8 @@ export type LayoutProps = {
   expandRightSidebar?: boolean;
   /** Adds a toggle button that grows the layout to a wider max-width via the `usx-expanded` class. */
   expandable?: boolean;
+  /** Optional callback fired when the layout is expanded or contracted. */
+  onToggleExpanded?: (expanded: boolean) => void;
   className?: string;
 } & HTMLAttributes<HTMLDivElement>;
 
@@ -112,6 +114,7 @@ export default function Layout({
   expandLeftSidebar,
   expandRightSidebar,
   expandable = false,
+  onToggleExpanded,
   className = '',
   ...props
 }: LayoutProps) {
@@ -123,6 +126,13 @@ export default function Layout({
     className,
   );
 
+  const toggleExpanded = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // Keeps the shared layout script from toggling the same click.
+    event.preventDefault();
+    setExpanded(!expanded);
+    onToggleExpanded?.(!expanded);
+  };
+
   const expandButton = expandable ? (
     <Button
       variant="primary"
@@ -130,8 +140,9 @@ export default function Layout({
       type="button"
       aria-label={expanded ? 'Contract' : 'Expand'}
       aria-expanded={expanded}
+      data-usx-layout-toggle
       className="usx-layout__expand-button"
-      onClick={() => setExpanded((value) => !value)}
+      onClick={toggleExpanded}
     >
       <Icon source="usx" name="expand" size={3} className="usx-layout__expand-icon usx-layout__expand-icon--expand" />
       <Icon source="usx" name="contract" size={3} className="usx-layout__expand-icon usx-layout__expand-icon--contract" />

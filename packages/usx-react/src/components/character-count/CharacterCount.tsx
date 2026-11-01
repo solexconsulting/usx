@@ -1,6 +1,5 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import FormGroup from '../form-group/FormGroup';
 import Input from '../input/Input';
 import TextArea from '../text-area/TextArea';
 

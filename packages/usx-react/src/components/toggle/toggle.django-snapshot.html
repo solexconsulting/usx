@@ -65,7 +65,12 @@
       for="django-transport-mode-option-0"
       class="usa-button usx-button usa-button--primary usx-toggle__button"
       title="Bike"
-      ><svg class="usa-icon usx-toggle__icon" aria-hidden="true" focusable="false" role="img">
+      ><svg
+        class="usa-icon usx-icon usx-toggle__icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
         <use href="img/sprite.svg#directions_bike"></use></svg
       ><span class="usa-sr-only">Bike</span></label
     >
@@ -82,7 +87,12 @@
       for="django-transport-mode-option-1"
       class="usa-button usx-button usa-button--primary usx-toggle__button"
       title="Bus"
-      ><svg class="usa-icon usx-toggle__icon" aria-hidden="true" focusable="false" role="img">
+      ><svg
+        class="usa-icon usx-icon usx-toggle__icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
         <use href="img/sprite.svg#directions_bus"></use></svg
       ><span class="usa-sr-only">Bus</span></label
     >
@@ -98,12 +108,67 @@
       for="django-transport-mode-option-2"
       class="usa-button usx-button usa-button--primary usx-toggle__button"
       title="Flight"
-      ><svg class="usa-icon usx-toggle__icon" aria-hidden="true" focusable="false" role="img">
+      ><svg
+        class="usa-icon usx-icon usx-toggle__icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
         <use href="img/sprite.svg#flight"></use></svg
       ><span class="usa-sr-only">Flight</span></label
     >
   </li>
 </ul>
+
+<h3 class="site-preview-heading">Controlled</h3>
+<ul
+  id="django-controlled-toggle"
+  class="usx-toggle usa-button-group"
+  role="radiogroup"
+  aria-label="Controlled selection"
+>
+  <li class="usa-button-group__item" role="presentation">
+    <input
+      class="usx-toggle__input"
+      id="django-controlled-toggle-option-0"
+      type="radio"
+      name="controlled-toggle"
+      value="option1"
+    /><label
+      for="django-controlled-toggle-option-0"
+      class="usa-button usx-button usa-button--primary usx-toggle__button"
+      ><span>Option 1</span></label
+    >
+  </li>
+  <li class="usa-button-group__item" role="presentation">
+    <input
+      class="usx-toggle__input"
+      id="django-controlled-toggle-option-1"
+      type="radio"
+      name="controlled-toggle"
+      value="option2"
+      checked="checked"
+    /><label
+      for="django-controlled-toggle-option-1"
+      class="usa-button usx-button usa-button--primary usx-toggle__button"
+      ><span>Option 2</span></label
+    >
+  </li>
+  <li class="usa-button-group__item" role="presentation">
+    <input
+      class="usx-toggle__input"
+      id="django-controlled-toggle-option-2"
+      type="radio"
+      name="controlled-toggle"
+      value="option3"
+    /><label
+      for="django-controlled-toggle-option-2"
+      class="usa-button usx-button usa-button--primary usx-toggle__button"
+      ><span>Option 3</span></label
+    >
+  </li>
+</ul>
+<p>Selected: option2</p>
 
 <h3 class="site-preview-heading">Totally Disabled</h3>
 <ul
@@ -300,6 +365,55 @@
       for="django-numeric-toggle-option-2"
       class="usa-button usx-button usa-button--primary usx-toggle__button"
       ><span>25</span></label
+    >
+  </li>
+</ul>
+
+<h3 class="site-preview-heading">Primitive Options</h3>
+<ul
+  id="django-primitive-toggle"
+  class="usx-toggle usa-button-group"
+  role="radiogroup"
+  aria-label="Simple choices"
+>
+  <li class="usa-button-group__item" role="presentation">
+    <input
+      class="usx-toggle__input"
+      id="django-primitive-toggle-option-0"
+      type="radio"
+      name="simple-choice"
+      value="Small"
+    /><label
+      for="django-primitive-toggle-option-0"
+      class="usa-button usx-button usa-button--primary usx-toggle__button"
+      ><span>Small</span></label
+    >
+  </li>
+  <li class="usa-button-group__item" role="presentation">
+    <input
+      class="usx-toggle__input"
+      id="django-primitive-toggle-option-1"
+      type="radio"
+      name="simple-choice"
+      value="0"
+      checked="checked"
+    /><label
+      for="django-primitive-toggle-option-1"
+      class="usa-button usx-button usa-button--primary usx-toggle__button"
+      ><span>0</span></label
+    >
+  </li>
+  <li class="usa-button-group__item" role="presentation">
+    <input
+      class="usx-toggle__input"
+      id="django-primitive-toggle-option-2"
+      type="radio"
+      name="simple-choice"
+      value="5"
+    /><label
+      for="django-primitive-toggle-option-2"
+      class="usa-button usx-button usa-button--primary usx-toggle__button"
+      ><span>5</span></label
     >
   </li>
 </ul>

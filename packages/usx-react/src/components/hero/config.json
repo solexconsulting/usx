@@ -1,7 +1,7 @@
 {
   "name": "hero",
   "template": "hero/hero.django.html",
-  "version": 2,
+  "version": 3,
   "default": {
     "title": "The hero heading",
     "callout": "A callout heading",
@@ -63,7 +63,7 @@
       "type": "string",
       "description": "CSS background position for the image focal point, such as center, right center, or 70% 40%. Defaults to the stylesheet setting."
     },
-    "headingLevel": {
+    "headingAs": {
       "type": "select",
       "options": [
         "h1",

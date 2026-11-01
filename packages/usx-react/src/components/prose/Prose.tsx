@@ -4,19 +4,19 @@ export interface ProseProps extends React.HTMLAttributes<HTMLElement> {
   content?: string;
   children?: React.ReactNode;
   className?: string;
-  containerElement?: 'div' | 'article' | 'section' | 'main';
+  as?: 'div' | 'article' | 'section' | 'main';
 }
 
 const validElements = ['div', 'article', 'section', 'main'] as const;
 
 const Prose: React.FC<ProseProps> = ({
-  containerElement = 'div',
+  as = 'div',
   content,
   children,
   className = '',
   ...props
 }) => {
-  const Element = validElements.includes(containerElement) ? containerElement : 'div';
+  const Element = validElements.includes(as) ? as : 'div';
 
   return (
     <Element

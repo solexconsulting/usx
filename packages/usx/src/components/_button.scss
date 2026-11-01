@@ -59,16 +59,13 @@
   /* Native-radio ghost states must also bypass filled variant colors. */
   .usa-button.usx-button#{$selector}:not(:disabled):not([aria-disabled="true"]):not(.usx-button--ghost) {
     background-color: usx-when($bg);
-
     color: usx-when($color);
-
     box-shadow: usx-when($box-shadow);
 
     /* Hover state */
     &.usa-button--hover,
     &:hover {
       background-color: usx-when($bg-hover);
-
       color: usx-when($color-hover);
     }
 
@@ -76,7 +73,6 @@
     &.usa-button--active,
     &:active {
       background-color: usx-when($bg-active);
-
       color: usx-when($color-active);
     }
 
@@ -168,7 +164,6 @@
 
 // Shared with native-radio Toggle labels; selection is driven by :checked.
 @mixin usx-button-ghost {
-
   &:not([disabled]):not([aria-disabled="true"]) {
     background-color: transparent;
     color: currentcolor;

@@ -1,5 +1,9 @@
-<a
+{% if href %}<a
   class="usx-clickable{% if className %} {{ className }}{% endif %}"
   href="{{ href }}"
   {% if id %}id="{{ id }}"{% endif %}
->{{ children|safe }}</a>
+>{{ children|safe }}</a>{% else %}<button
+  type="button"
+  class="usx-clickable{% if className %} {{ className }}{% endif %}"
+  {% if id %}id="{{ id }}"{% endif %}
+>{{ children|safe }}</button>{% endif %}

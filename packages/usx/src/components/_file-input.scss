@@ -10,6 +10,7 @@
 
 .usa-file-input__target {
   border-radius: usx-when($usx-input-radius);
+  overflow: clip;
 }
 
 /* ---------------------------------- */
@@ -20,7 +21,6 @@
 
 .usa-form-group--error .usa-file-input__target {
     border-color: usx-when($usx-input-error-border);
-
     border-width: usx-when($usx-file-input-border-width);
 }
 
@@ -131,11 +131,8 @@
   justify-content: space-between;
   margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
-
   border-radius: usx-when($usx-input-radius);
-
   border-color: usx-when($usx-file-input-item-border);
-
   border-width: usx-when($usx-file-input-item-border-width);
 }
 

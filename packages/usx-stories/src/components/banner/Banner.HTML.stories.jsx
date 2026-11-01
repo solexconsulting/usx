@@ -1,5 +1,5 @@
 import React from 'react';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import reactSnapshot from '../../../../usx-react/src/components/banner/banner.react-snapshot.html?raw';
 import djangoSnapshot from '../../../../usx-react/src/components/banner/banner.django-snapshot.html?raw';
 import { componentInit } from '../../utils/storyHelpers.jsx';
@@ -65,6 +65,8 @@ export const AllVariantsReact = {
   },
   play: async (context) => {
     const step = (name, fn) => context.step(name, () => fn(context));
+    // Init resets every banner to collapsed, so it must finish before the play clicks anything.
+    await waitFor(() => expect(document.body).toHaveAttribute('data-usx-ready'));
     await step('Default', testDefault);
     await step('Custom Flag', testCustomFlag);
   },

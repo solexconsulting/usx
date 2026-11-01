@@ -17,8 +17,8 @@ export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function AvatarGroup({ avatarProps = [], overlap = false, stacked = false, className = '', ...props }: AvatarGroupProps) {
   const classes = classNames(
     'usx-avatar-group',
-    overlap && 'usa-avatar-group--overlap',
-    stacked && 'usa-avatar-group--stacked',
+    overlap && 'usx-avatar-group--overlap',
+    stacked && 'usx-avatar-group--stacked',
     className,
   );
 
@@ -32,7 +32,7 @@ export default function AvatarGroup({ avatarProps = [], overlap = false, stacked
           alt={avatar.alt}
           value={avatar.initials}
           shape={avatar.shape}
-          tooltip={avatar.tooltip}
+          tooltipProps={avatar.tooltipProps}
           className={avatar.className}
           imageClassName={avatar.imageClassName}
           contentClassName={avatar.initialsClassName}

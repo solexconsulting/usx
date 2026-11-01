@@ -88,28 +88,28 @@
 
 <h3 class="site-preview-heading">Preloaded Single</h3>
 <div class="usa-form-group usx-form-group">
-  <label class="usa-label usx-label" for="react-file-input-single"
+  <label class="usa-label usx-label" for="react-file-input-preloaded-single"
     >Input accepts a single file</label
   ><input
     class="usa-file-input usx-file-input"
-    id="react-file-input-single"
+    id="react-file-input-preloaded-single"
     type="file"
-    name="file-input-single"
+    name="file-input-preloaded-single"
   />
 </div>
 
 <h3 class="site-preview-heading">Preloaded Multiple</h3>
 <div class="usa-form-group usx-form-group">
-  <label class="usa-label usx-label" for="react-file-input-multiple"
+  <label class="usa-label usx-label" for="react-file-input-preloaded-multiple"
     >Input accepts multiple files</label
-  ><span class="usa-hint usx-hint" id="react-file-input-multiple-hint"
+  ><span class="usa-hint usx-hint" id="react-file-input-preloaded-multiple-hint"
     >Select one or more files</span
   ><input
     class="usa-file-input usx-file-input"
-    id="react-file-input-multiple"
+    id="react-file-input-preloaded-multiple"
     type="file"
-    name="file-input-multiple"
-    aria-describedby="react-file-input-multiple-hint"
+    name="file-input-preloaded-multiple"
+    aria-describedby="react-file-input-preloaded-multiple-hint"
     multiple=""
   />
 </div>
@@ -121,7 +121,7 @@
   ><span class="usa-hint usx-hint" id="react-file-input-managed-hint"
     >Select one or more files</span
   >
-  <div class="usx-file-input__add-only">
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="react-file-input-managed"
@@ -140,7 +140,7 @@
   ><span class="usa-hint usx-hint" id="react-file-input-preloaded-downloadable-hint"
     >Select one or more files</span
   >
-  <div class="usx-file-input__add-only">
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="react-file-input-preloaded-downloadable"
@@ -170,7 +170,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -195,7 +195,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -215,7 +215,7 @@
   ><span class="usa-hint usx-hint" id="react-file-input-preloaded-not-downloadable-hint"
     >Select one or more files</span
   >
-  <div class="usx-file-input__add-only">
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="react-file-input-preloaded-not-downloadable"
@@ -240,7 +240,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -260,7 +260,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -280,7 +280,7 @@
   ><span class="usa-hint usx-hint" id="react-file-input-preloaded-disabled-hint"
     >These files were submitted with your application</span
   >
-  <div class="usx-file-input__add-only">
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="react-file-input-preloaded-disabled"
@@ -328,7 +328,7 @@
   ><span class="usa-hint usx-hint" id="react-file-input-preloaded-name-only-hint"
     >Select one or more files</span
   >
-  <div class="usx-file-input__add-only">
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="react-file-input-preloaded-name-only"
@@ -353,7 +353,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -373,7 +373,7 @@
   ><span class="usa-hint usx-hint" id="react-file-input-long-file-name-hint"
     >Select one or more files</span
   >
-  <div class="usx-file-input__add-only">
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="react-file-input-long-file-name"
@@ -401,7 +401,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -426,7 +426,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"

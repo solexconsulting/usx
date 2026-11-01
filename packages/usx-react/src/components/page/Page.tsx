@@ -5,7 +5,7 @@ export interface PageProps extends Omit<React.HTMLAttributes<HTMLElement>, 'titl
   title?: React.ReactNode;
   titleId?: string;
   eyebrow?: React.ReactNode;
-  element?: React.ElementType;
+  as?: 'main' | 'div' | 'section' | 'article';
   content?: React.ReactNode;
   tabIndex?: number;
   ariaLabelledby?: string;
@@ -16,7 +16,7 @@ export default function Page({
   title = 'Page title',
   titleId = undefined,
   eyebrow = null,
-  element = 'main',
+  as: Element = 'main',
   children = null,
   content = null,
   tabIndex = undefined,
@@ -27,7 +27,6 @@ export default function Page({
   const classes = ClassNames('usx-page', className);
   const pageContent = children || content;
 
-  const Element = element;
   const labelledBy = ariaLabelledby || titleId || undefined;
 
   return (

@@ -107,17 +107,51 @@
   />
 </div>
 
+<h3 class="site-preview-heading">Preloaded Single</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-preloaded-single">
+    Input accepts a single file
+  </label>
+
+  <input
+    class="usa-file-input usx-file-input"
+    id="django-file-input-preloaded-single"
+    type="file"
+    name="file-input-preloaded-single"
+  />
+</div>
+
+<h3 class="site-preview-heading">Preloaded Multiple</h3>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-preloaded-multiple">
+    Input accepts multiple files
+  </label>
+
+  <span class="usa-hint usx-hint" id="django-file-input-preloaded-multiple-hint"
+    >Select one or more files</span
+  >
+
+  <input
+    class="usa-file-input usx-file-input"
+    id="django-file-input-preloaded-multiple"
+    type="file"
+    name="file-input-preloaded-multiple"
+    aria-describedby="django-file-input-preloaded-multiple-hint"
+    multiple
+  />
+</div>
+
 <h3 class="site-preview-heading">Managed Multiple</h3>
-<div class="usx-file-input__add-only">
-  <div class="usa-form-group usx-form-group">
-    <label class="usa-label usx-label" for="django-file-input-managed">
-      Upload supporting documents
-    </label>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-managed">
+    Upload supporting documents
+  </label>
 
-    <span class="usa-hint usx-hint" id="django-file-input-managed-hint"
-      >Select one or more files</span
-    >
+  <span class="usa-hint usx-hint" id="django-file-input-managed-hint"
+    >Select one or more files</span
+  >
 
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="django-file-input-managed"
@@ -130,16 +164,16 @@
 </div>
 
 <h3 class="site-preview-heading">Preloaded Downloadable</h3>
-<div class="usx-file-input__add-only">
-  <div class="usa-form-group usx-form-group">
-    <label class="usa-label usx-label" for="django-file-input-preloaded-downloadable">
-      Supporting documents
-    </label>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-preloaded-downloadable">
+    Supporting documents
+  </label>
 
-    <span class="usa-hint usx-hint" id="django-file-input-preloaded-downloadable-hint"
-      >Select one or more files</span
-    >
+  <span class="usa-hint usx-hint" id="django-file-input-preloaded-downloadable-hint"
+    >Select one or more files</span
+  >
 
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="django-file-input-preloaded-downloadable"
@@ -149,8 +183,7 @@
       multiple
     />
   </div>
-</div>
-<div>
+
   <div class="usx-file-input__list margin-top-1">
     <span class="usa-sr-only" aria-live="polite">You have selected the file: pay-stub.pdf.</span>
 
@@ -176,7 +209,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -206,7 +239,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -221,16 +254,16 @@
 </div>
 
 <h3 class="site-preview-heading">Preloaded Not Downloadable</h3>
-<div class="usx-file-input__add-only">
-  <div class="usa-form-group usx-form-group">
-    <label class="usa-label usx-label" for="django-file-input-preloaded-not-downloadable">
-      Supporting documents
-    </label>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-preloaded-not-downloadable">
+    Supporting documents
+  </label>
 
-    <span class="usa-hint usx-hint" id="django-file-input-preloaded-not-downloadable-hint"
-      >Select one or more files</span
-    >
+  <span class="usa-hint usx-hint" id="django-file-input-preloaded-not-downloadable-hint"
+    >Select one or more files</span
+  >
 
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="django-file-input-preloaded-not-downloadable"
@@ -240,8 +273,7 @@
       multiple
     />
   </div>
-</div>
-<div>
+
   <div class="usx-file-input__list margin-top-1">
     <span class="usa-sr-only" aria-live="polite">You have selected the file: pay-stub.pdf.</span>
 
@@ -261,7 +293,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -285,7 +317,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -300,16 +332,16 @@
 </div>
 
 <h3 class="site-preview-heading">Preloaded Disabled</h3>
-<div class="usx-file-input__add-only">
-  <div class="usa-form-group usx-form-group">
-    <label class="usa-label usx-label" for="django-file-input-preloaded-disabled">
-      Supporting documents
-    </label>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-preloaded-disabled">
+    Supporting documents
+  </label>
 
-    <span class="usa-hint usx-hint" id="django-file-input-preloaded-disabled-hint"
-      >These files were submitted with your application</span
-    >
+  <span class="usa-hint usx-hint" id="django-file-input-preloaded-disabled-hint"
+    >These files were submitted with your application</span
+  >
 
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="django-file-input-preloaded-disabled"
@@ -320,8 +352,7 @@
       disabled
     />
   </div>
-</div>
-<div>
+
   <div class="usx-file-input__list margin-top-1">
     <span class="usa-sr-only" aria-live="polite">You have selected the file: pay-stub.pdf.</span>
 
@@ -360,16 +391,16 @@
 </div>
 
 <h3 class="site-preview-heading">Preloaded Name Only</h3>
-<div class="usx-file-input__add-only">
-  <div class="usa-form-group usx-form-group">
-    <label class="usa-label usx-label" for="django-file-input-preloaded-name-only">
-      Supporting documents
-    </label>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-preloaded-name-only">
+    Supporting documents
+  </label>
 
-    <span class="usa-hint usx-hint" id="django-file-input-preloaded-name-only-hint"
-      >Select one or more files</span
-    >
+  <span class="usa-hint usx-hint" id="django-file-input-preloaded-name-only-hint"
+    >Select one or more files</span
+  >
 
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="django-file-input-preloaded-name-only"
@@ -379,8 +410,7 @@
       multiple
     />
   </div>
-</div>
-<div>
+
   <div class="usx-file-input__list margin-top-1">
     <span class="usa-sr-only" aria-live="polite"
       >You have selected the file: government-id.jpg.</span
@@ -400,7 +430,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -415,16 +445,16 @@
 </div>
 
 <h3 class="site-preview-heading">Long File Name</h3>
-<div class="usx-file-input__add-only">
-  <div class="usa-form-group usx-form-group">
-    <label class="usa-label usx-label" for="django-file-input-long-file-name">
-      Upload supporting documents
-    </label>
+<div class="usa-form-group usx-form-group">
+  <label class="usa-label usx-label" for="django-file-input-long-file-name">
+    Upload supporting documents
+  </label>
 
-    <span class="usa-hint usx-hint" id="django-file-input-long-file-name-hint"
-      >Select one or more files</span
-    >
+  <span class="usa-hint usx-hint" id="django-file-input-long-file-name-hint"
+    >Select one or more files</span
+  >
 
+  <div class="usx-file-input__add-only" data-usx-file-list-hint="Selected files">
     <input
       class="usa-file-input usx-file-input"
       id="django-file-input-long-file-name"
@@ -434,8 +464,7 @@
       multiple
     />
   </div>
-</div>
-<div>
+
   <div class="usx-file-input__list margin-top-1">
     <span class="usa-sr-only" aria-live="polite"
       >You have selected the file:
@@ -460,7 +489,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"
@@ -490,7 +519,7 @@
           tooltip="Delete this file"
         >
           <svg
-            class="usa-icon usa-icon--size-3 usx-file-input__delete-icon"
+            class="usa-icon usx-icon usa-icon--size-3 usx-file-input__delete-icon"
             aria-hidden="true"
             focusable="false"
             role="img"

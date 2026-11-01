@@ -35,7 +35,7 @@
     },
     "underlineColor": {
       "type": "string",
-      "description": "USWDS color utility name for the summary underline, such as secondary."
+      "description": "USX color utility name for the summary underline, such as secondary."
     },
     "noUnderline": {
       "type": "boolean",

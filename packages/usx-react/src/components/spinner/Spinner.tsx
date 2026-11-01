@@ -30,6 +30,7 @@ const Spinner: React.FC<SpinnerProps> = ({
         size={size}
         color={color}
         staticBaseUrl={staticBaseUrl}
+        staticUrlPrefix={staticUrlPrefix}
       />
       {screenReaderLabel && <Label screenReaderOnly={true}>{screenReaderLabel}</Label>}
       {label && <Label>{label}</Label>}

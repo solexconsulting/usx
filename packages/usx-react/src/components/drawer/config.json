@@ -1,7 +1,7 @@
 {
   "name": "drawer",
   "template": "drawer/drawer.django.html",
-  "version": 1,
+  "version": 2,
   "required": ["id", "label", "heading", "children"],
   "default": {
     "id": "services-drawer",
@@ -46,11 +46,6 @@
       "default": "default",
       "description": "Preferred width for inline drawers or height for top and bottom drawers."
     },
-    "modal": {
-      "type": "boolean",
-      "default": true,
-      "description": "Modal drawers make the page inert and contain focus; modeless drawers use a native auto popover."
-    },
     "description": {
       "type": "string",
       "description": "Brief text announced with the dialog heading. Omit for complex content."
@@ -59,15 +54,25 @@
       "type": "slot",
       "description": "Optional trusted action markup after the scrollable drawer body."
     },
+    "rounded": {
+      "type": "boolean",
+      "default": false,
+      "description": "Round the corners of the edge facing the page content. Edges are square by default."
+    },
+    "actionRequired": {
+      "type": "boolean",
+      "default": false,
+      "description": "Omit the close button and disable Escape and light dismissal, so the drawer closes only through a control inside it. Provide that control in the content or footer."
+    },
     "closeLabel": {
       "type": "string",
       "default": "Close",
-      "description": "Visible text for the always-present close button."
+      "description": "Accessible name of the icon-only close button."
     },
     "focusHeading": {
       "type": "boolean",
       "default": true,
-      "description": "Focus the heading when opened. Set false to focus the first control in the content."
+      "description": "Focus the heading when opened. Set false to focus the control marked autofocus in the content; without one, the close button receives focus."
     },
     "disabled": {
       "type": "boolean",
@@ -80,7 +85,7 @@
     },
     "triggerClassName": {
       "type": "string",
-      "description": "Additional classes for the trigger button, including USWDS button variants."
+      "description": "Classes for the trigger button, including optional USWDS button variants. No classes are applied by default."
     },
     "panelClassName": {
       "type": "string",

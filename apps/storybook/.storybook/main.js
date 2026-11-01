@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 import { dirname } from "node:path";
 import { NodePackageImporter } from "sass";
 
-// reports/ is gitignored and only exists after `pnpm snapshot:report`; mounting a missing folder fails.
+// reports/ is gitignored and only exists after `pnpm snapshots report`; mounting a missing folder fails.
 const reportsDir = fileURLToPath(new URL('../../../reports', import.meta.url));
 const reportStaticDirs = existsSync(reportsDir) ? [{ from: reportsDir, to: '/reports' }] : [];
 export default {

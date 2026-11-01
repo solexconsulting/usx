@@ -6,7 +6,7 @@ export const storyDefs = {
   Misc: {
     id: 'misc-banner-misc',
     ...(config.default || {}),
-    tone: 'base',
+    color: 'base',
     badgeText: 'misc',
     message: 'This is a miscellaneous banner.',
     casualLinkText: 'Casual Link',
@@ -20,7 +20,7 @@ export const storyDefs = {
   Primary: {
     id: 'misc-banner-primary',
     ...(config.default || {}),
-    tone: 'primary',
+    color: 'primary',
     badgeText: 'prime',
     message: 'This is a primary banner.',
     casualLinkText: 'Casual Link',
@@ -34,7 +34,7 @@ export const storyDefs = {
   Beta: {
     id: 'misc-banner-beta',
     ...(config.default || {}),
-    tone: 'beta',
+    color: 'beta',
     badgeText: 'beta',
     message: 'Welcome to the beta website!',
     casualLinkText: 'Learn more',
@@ -48,7 +48,7 @@ export const storyDefs = {
   Dev: {
     id: 'misc-banner-dev',
     ...(config.default || {}),
-    tone: 'dev',
+    color: 'dev',
     badgeText: 'dev',
     message: 'This is a development environment.',
     showLearnMore: false,
@@ -60,7 +60,7 @@ export const storyDefs = {
   TestStaging: {
     id: 'misc-banner-test-staging',
     ...(config.default || {}),
-    tone: 'test',
+    color: 'test',
     badgeText: 'test',
     message: 'This is a test environment.',
     showLearnMore: false,
@@ -72,11 +72,23 @@ export const storyDefs = {
   NoLinks: {
     id: 'misc-banner-no-links',
     ...(config.default || {}),
-    tone: 'error',
+    color: 'error',
     badgeText: 'oops',
     message: 'This banner has no links.',
     showLearnMore: false,
     showReturnLink: false,
+  },
+  Badgeless: {
+    id: 'misc-banner-no-badge',
+    color: 'accent-cool',
+    message: 'This banner does not need a badge.',
+    casualLinkText: 'Learn more',
+    casualLinkHref: 'https://usx.solex.studio/',
+    importantLinkText: 'Return to the main site',
+    importantLinkHref: 'https://usx.solex.studio/',
+    importantLinkIcon: 'arrow_forward',
+    showLearnMore: true,
+    showReturnLink: true,
   },
 };
 
@@ -94,3 +106,4 @@ export const Beta = { args: storyDefs.Beta };
 export const Dev = { args: storyDefs.Dev };
 export const TestStaging = { args: storyDefs.TestStaging };
 export const NoLinks = { args: storyDefs.NoLinks };
+export const Badgeless = { args: storyDefs.Badgeless };

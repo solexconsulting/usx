@@ -42,6 +42,10 @@
       "type": "boolean",
       "description": "Adds a toggle button that grows the layout to a wider max-width via the usx-expanded class."
     },
+    "onToggleExpanded": {
+      "type": "function",
+      "description": "Optional callback fired when the layout is expanded or contracted."
+    },
     "className": {
       "type": "string",
       "description": "Additional CSS classes"

@@ -17,3 +17,17 @@ export const ButtonClasses = createStory(storyDefs.ButtonClasses);
 export const Colors = createStory(storyDefs.Colors);
 export const MinimalDecoration = createStory(storyDefs.MinimalDecoration);
 export const CustomClasses = createStory(storyDefs.CustomClasses);
+export const Wrapping = createDjangoStory({
+  componentName: 'summary',
+  wrapper: (summary, _args, { mode }) =>
+    mode === 'source' ? (
+      `<details style="width:12rem">${summary}<p>Your reference number is also on your letter.</p></details>`
+    ) : (
+      <details
+        style={{ width: '12rem' }}
+        dangerouslySetInnerHTML={{
+          __html: `${summary}<p>Your reference number is also on your letter.</p>`,
+        }}
+      />
+    ),
+})(storyDefs.Wrapping);

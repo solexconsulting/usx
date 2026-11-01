@@ -1,8 +1,8 @@
 {
   "name": "popover",
   "template": "popover/popover.django.html",
-  "version": 4,
-  "required": ["id", "children"],
+  "version": 6,
+  "required": ["id"],
   "default": {
     "id": "services-popover",
     "summaryProps": { "label": "Services" },
@@ -20,7 +20,7 @@
     },
     "children": {
       "type": "slot",
-      "description": "Trusted semantic content for the positioned panel, including forms, a Tree, lists, or nested Popovers."
+      "description": "Optional semantic panel content, including forms, a Tree, lists, or nested Popovers."
     },
     "menuItems": {
       "type": "array",
@@ -71,6 +71,12 @@
       "default": "start",
       "description": "Alignment along the chosen side. Start and end follow text direction for top and bottom."
     },
+    "panelShape": {
+      "type": "select",
+      "options": ["rounded", "square"],
+      "default": "rounded",
+      "description": "Rounded keeps the original border radius and extra vertical padding; square removes the radius and uses equal outer padding on all sides. Nested menuItems flyouts inherit the shape."
+    },
     "defaultOpen": {
       "type": "boolean",
       "default": false,
@@ -94,7 +100,7 @@
       "type": "string",
       "description": "Optional visible heading for the panel."
     },
-    "headingLevel": {
+    "headingAs": {
       "type": "select",
       "options": ["h1", "h2", "h3", "h4", "h5", "h6"],
       "default": "h2",

@@ -72,11 +72,11 @@ export const WithError = { args: storyDefs.WithError };
 export const Disabled = { args: storyDefs.Disabled };
 
 export const PreloadedSingle = {
-  args: storyDefs.Default,
+  args: { ...storyDefs.Default, id: 'file-input-preloaded-single', name: 'file-input-preloaded-single' },
 };
 
 export const PreloadedMultiple = {
-  args: storyDefs.Multiple,
+  args: { ...storyDefs.Multiple, id: 'file-input-preloaded-multiple', name: 'file-input-preloaded-multiple' },
 };
 
 // VA.gov's file-input-multiple pattern: a single, permanently-enhanced USWDS

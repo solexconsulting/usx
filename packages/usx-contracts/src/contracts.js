@@ -41,7 +41,7 @@ export const componentContracts = {
   "components": {
     "accordion": {
       "component": "accordion",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "id": {
@@ -63,7 +63,7 @@ export const componentContracts = {
           "default": false,
           "description": "Whether multiple accordion items can be expanded at the same time."
         },
-        "headingLevel": {
+        "headingAs": {
           "type": "select",
           "options": [
             "h1",
@@ -299,9 +299,10 @@ export const componentContracts = {
           ],
           "description": "Optional shape utility for avatar image or initials."
         },
-        "tooltip": {
-          "type": "string",
-          "description": "Optional tooltip text displayed on hover."
+        "tooltipProps": {
+          "type": "object",
+          "component": "tooltip",
+          "description": "Optional Tooltip props passed through unchanged. The Avatar supplies the trigger element."
         },
         "className": {
           "type": "string",
@@ -419,6 +420,10 @@ export const componentContracts = {
         "label": {
           "type": "string",
           "description": "The visible text label. Defaults to 'Back to top'. Omit or pass null for icon-only display."
+        },
+        "ariaLabel": {
+          "type": "string",
+          "description": "Accessible name used when there is no visible label (icon-only display). Defaults to 'Back to top'."
         },
         "href": {
           "type": "string",
@@ -840,7 +845,7 @@ export const componentContracts = {
     },
     "callout": {
       "component": "callout",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "className": {
@@ -895,7 +900,7 @@ export const componentContracts = {
           "type": "string",
           "description": "Text utility token: text-{textColor}."
         },
-        "element": {
+        "as": {
           "type": "select",
           "description": "Root HTML element.",
           "options": [
@@ -924,7 +929,7 @@ export const componentContracts = {
     },
     "card": {
       "component": "card",
-      "version": 4,
+      "version": 5,
       "required": [],
       "props": {
         "id": {
@@ -1014,9 +1019,15 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional CSS classes for the card container"
         },
-        "tag": {
-          "type": "string",
-          "description": "HTML tag to use for the card element (div or li)"
+        "as": {
+          "type": "select",
+          "options": [
+            "div",
+            "li",
+            "article"
+          ],
+          "default": "div",
+          "description": "Root HTML element. Use li when the card is a direct child of a list."
         }
       },
       "renderers": {
@@ -1036,7 +1047,7 @@ export const componentContracts = {
     },
     "card-group": {
       "component": "card-group",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "cardProps": {
@@ -1047,7 +1058,7 @@ export const componentContracts = {
             "description": "Card item.",
             "component": "card",
             "omit": [
-              "tag"
+              "as"
             ]
           }
         },
@@ -1403,21 +1414,19 @@ export const componentContracts = {
     "clickable": {
       "component": "clickable",
       "version": 2,
-      "required": [
-        "href"
-      ],
+      "required": [],
       "props": {
         "href": {
           "type": "string",
-          "description": "URL the clickable navigates to."
+          "description": "URL the clickable navigates to. Omit it to render a button instead of a link."
         },
         "className": {
           "type": "string",
-          "description": "Additional layout or utility classes applied to the root anchor (e.g. 'flex-column padding-2')."
+          "description": "Additional layout or utility classes applied to the root anchor or button (e.g. 'flex-column padding-2')."
         },
         "id": {
           "type": "string",
-          "description": "Optional id attribute for the anchor element."
+          "description": "Optional id attribute for the root element."
         },
         "children": {
           "type": "slot",
@@ -1643,11 +1652,11 @@ export const componentContracts = {
         },
         "onSearch": {
           "type": "function",
-          "description": "Called on every keystroke in the text input; receives (value: string)"
+          "description": "Called on every keystroke in the text input; receives (value: string). Django consumers attach an input listener to the USWDS-enhanced control."
         },
         "onSelect": {
           "type": "function",
-          "description": "Called when an option is selected or cleared; receives (value: string, option: object|null)"
+          "description": "Called when an option is selected or cleared; receives (value: string, option: object|null). Django consumers attach a change listener to the select."
         },
         "formGroup": {
           "type": "boolean",
@@ -1676,10 +1685,10 @@ export const componentContracts = {
     },
     "container": {
       "component": "container",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
-        "element": {
+        "as": {
           "type": "select",
           "description": "Root HTML element. Use a heading or accessible label for named sections and navigation; list roots require list-item children.",
           "options": [
@@ -1881,7 +1890,7 @@ export const componentContracts = {
               "description": "Layout overrides at 30em / 480px and wider (pixel equivalent assumes 16px browser default).",
               "component": "container",
               "omit": [
-                "element",
+                "as",
                 "gridContainer",
                 "gridRow",
                 "responsive",
@@ -1899,7 +1908,7 @@ export const componentContracts = {
               "description": "Layout overrides at 40em / 640px and wider (pixel equivalent assumes 16px browser default).",
               "component": "container",
               "omit": [
-                "element",
+                "as",
                 "gridContainer",
                 "gridRow",
                 "responsive",
@@ -1917,7 +1926,7 @@ export const componentContracts = {
               "description": "Layout overrides at 64em / 1024px and wider (pixel equivalent assumes 16px browser default).",
               "component": "container",
               "omit": [
-                "element",
+                "as",
                 "gridContainer",
                 "gridRow",
                 "responsive",
@@ -2297,7 +2306,7 @@ export const componentContracts = {
     },
     "drawer": {
       "component": "drawer",
-      "version": 1,
+      "version": 2,
       "required": [
         "id",
         "label",
@@ -2350,11 +2359,6 @@ export const componentContracts = {
           "default": "default",
           "description": "Preferred width for inline drawers or height for top and bottom drawers."
         },
-        "modal": {
-          "type": "boolean",
-          "default": true,
-          "description": "Modal drawers make the page inert and contain focus; modeless drawers use a native auto popover."
-        },
         "description": {
           "type": "string",
           "description": "Brief text announced with the dialog heading. Omit for complex content."
@@ -2363,15 +2367,25 @@ export const componentContracts = {
           "type": "slot",
           "description": "Optional trusted action markup after the scrollable drawer body."
         },
+        "rounded": {
+          "type": "boolean",
+          "default": false,
+          "description": "Round the corners of the edge facing the page content. Edges are square by default."
+        },
+        "actionRequired": {
+          "type": "boolean",
+          "default": false,
+          "description": "Omit the close button and disable Escape and light dismissal, so the drawer closes only through a control inside it. Provide that control in the content or footer."
+        },
         "closeLabel": {
           "type": "string",
           "default": "Close",
-          "description": "Visible text for the always-present close button."
+          "description": "Accessible name of the icon-only close button."
         },
         "focusHeading": {
           "type": "boolean",
           "default": true,
-          "description": "Focus the heading when opened. Set false to focus the first control in the content."
+          "description": "Focus the heading when opened. Set false to focus the control marked autofocus in the content; without one, the close button receives focus."
         },
         "disabled": {
           "type": "boolean",
@@ -2384,7 +2398,7 @@ export const componentContracts = {
         },
         "triggerClassName": {
           "type": "string",
-          "description": "Additional classes for the trigger button, including USWDS button variants."
+          "description": "Classes for the trigger button, including optional USWDS button variants. No classes are applied by default."
         },
         "panelClassName": {
           "type": "string",
@@ -2738,7 +2752,7 @@ export const componentContracts = {
         "fileListHint": {
           "type": "slot",
           "default": "Selected files",
-          "description": "Heading/hint text shown above the managed file list, passed to FileList's hint prop. React only."
+          "description": "Heading/hint text shown above the managed file list, passed to FileList's hint prop."
         },
         "error": {
           "type": "slot",
@@ -2766,7 +2780,7 @@ export const componentContracts = {
         "manageIndividualFiles": {
           "type": "boolean",
           "default": false,
-          "description": "When multiple is true, selects files one at a time into a managed list where each file has its own Delete action (VA.gov file-input-multiple pattern). React only."
+          "description": "When multiple is true, selects files one at a time into a managed list where each file has its own Delete action (VA.gov file-input-multiple pattern)."
         },
         "invalidFileTypeMessage": {
           "type": "string",
@@ -2784,7 +2798,11 @@ export const componentContracts = {
         },
         "defaultFiles": {
           "type": "array",
-          "description": "When manageIndividualFiles is true, seeds the managed file list with files that already exist on the server (no browser File object). Each entry is { name, size?, url? } — omit size to show no size, provide url to render the name as a download link. React only."
+          "description": "When manageIndividualFiles is true, seeds the managed file list with files that already exist on the server (no browser File object). Each entry is { name, size?, url? } — omit size to show no size, provide url to render the name as a download link."
+        },
+        "onFilesChange": {
+          "type": "function",
+          "description": "Receives the current browser File objects after managed add or delete. React calls this function; Django dispatches a bubbling usx:files-change event from the input with detail.files. Preloaded files are excluded."
         }
       },
       "renderers": {
@@ -2816,7 +2834,7 @@ export const componentContracts = {
       "props": {
         "files": {
           "type": "array",
-          "description": "Files to render as rows. Each entry is { key, file?, name?, size?, url?, onRemove? } — key uniquely identifies the row; file is a browser File (name/size read from it); name/size describe entries with no File object (e.g. files already on the server); url renders the name as a download link; onRemove overrides the onRemove prop for just this row. React only."
+          "description": "Files to render as rows. Each entry is { key, file?, name?, size?, url?, onRemove? } — key uniquely identifies the row; file is a browser File (name/size read from it); name/size describe entries with no File object (e.g. files already on the server); url renders the name as a download link; onRemove overrides the list handler for this row. Django accepts a handler name as a presence marker; consumers attach the click behavior."
         },
         "hint": {
           "type": "slot",
@@ -2825,7 +2843,7 @@ export const componentContracts = {
         },
         "onRemove": {
           "type": "function",
-          "description": "Called with the removed entry when its Delete button is clicked. Applies to every row unless that row provides its own onRemove, which takes priority. Omit both to hide every Delete button. React only."
+          "description": "Called with the removed entry when its Delete button is clicked. Applies to every row unless that row provides its own onRemove, which takes priority. Omit both to hide every Delete button. Django accepts a handler name as a presence marker; consumers attach the click behavior."
         },
         "disabled": {
           "type": "boolean",
@@ -2870,7 +2888,7 @@ export const componentContracts = {
     },
     "footer": {
       "component": "footer",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "staticBaseUrl": {
@@ -2952,6 +2970,14 @@ export const componentContracts = {
           "type": "string",
           "default": "",
           "description": "Additional CSS classes applied to the root footer element."
+        },
+        "primaryChildren": {
+          "type": "slot",
+          "description": "Content for the primary section, replacing the variant's default navigation and sign-up content."
+        },
+        "secondaryChildren": {
+          "type": "slot",
+          "description": "Content for the secondary section, replacing the default branding and contact content."
         }
       },
       "renderers": {
@@ -3091,7 +3117,7 @@ export const componentContracts = {
     },
     "hero": {
       "component": "hero",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "title": {
@@ -3143,7 +3169,7 @@ export const componentContracts = {
           "type": "string",
           "description": "CSS background position for the image focal point, such as center, right center, or 70% 40%. Defaults to the stylesheet setting."
         },
-        "headingLevel": {
+        "headingAs": {
           "type": "select",
           "options": [
             "h1",
@@ -3720,7 +3746,7 @@ export const componentContracts = {
     },
     "in-page-nav": {
       "component": "in-page-nav",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "id": {
@@ -3737,7 +3763,7 @@ export const componentContracts = {
           "type": "string",
           "description": "CSS selector for the element the component pulls headings from. Defaults to this instance's own generated content container (#<id>-content). Sets data-main-content-selector."
         },
-        "titleHeadingLevel": {
+        "titleAs": {
           "type": "string",
           "default": "h4",
           "description": "Heading level of the nav's own title. Sets data-title-heading-level."
@@ -3769,7 +3795,7 @@ export const componentContracts = {
         },
         "content": {
           "type": "string",
-          "description": "HTML content (with headings) to render inside the observed content container. Ignored if children are provided (React only)."
+          "description": "HTML content (with headings) to render inside the observed content container. Ignored if children are provided."
         },
         "className": {
           "type": "string",
@@ -3783,13 +3809,7 @@ export const componentContracts = {
         },
         "children": {
           "type": "slot",
-          "description": "Composed content containing the observed headings; takes precedence over content (React only).",
-          "renderers": {
-            "django": {
-              "supported": false,
-              "description": "The Django template does not consume children."
-            }
-          }
+          "description": "Composed content containing the observed headings; takes precedence over content."
         }
       },
       "renderers": {
@@ -4165,6 +4185,10 @@ export const componentContracts = {
           "type": "boolean",
           "description": "Adds a toggle button that grows the layout to a wider max-width via the usx-expanded class."
         },
+        "onToggleExpanded": {
+          "type": "function",
+          "description": "Optional callback fired when the layout is expanded or contracted."
+        },
         "className": {
           "type": "string",
           "description": "Additional CSS classes"
@@ -4443,7 +4467,7 @@ export const componentContracts = {
     },
     "misc-banner": {
       "component": "misc-banner",
-      "version": 3,
+      "version": 4,
       "required": [],
       "props": {
         "id": {
@@ -4458,13 +4482,14 @@ export const componentContracts = {
           "type": "string",
           "description": "Additional classes for the root banner"
         },
-        "tone": {
+        "color": {
           "type": "string",
-          "description": "Banner tone and style: beta, dev, or test"
+          "default": "beta",
+          "description": "Color utility name for the banner background and optional badge text; accepts any string"
         },
         "badgeText": {
           "type": "string",
-          "description": "Badge label text"
+          "description": "Badge label text; omit or pass an empty string to hide the badge"
         },
         "message": {
           "type": "string",
@@ -4589,14 +4614,25 @@ export const componentContracts = {
     },
     "page": {
       "component": "page",
-      "version": 3,
+      "version": 4,
       "required": [
         "title"
       ],
       "props": {
+        "as": {
+          "type": "select",
+          "options": [
+            "main",
+            "div",
+            "section",
+            "article"
+          ],
+          "default": "main",
+          "description": "Root HTML element. Use div, section, or article when the page sits inside another main landmark."
+        },
         "id": {
           "type": "string",
-          "description": "Optional id attribute applied to the root main element."
+          "description": "Optional id attribute applied to the root element."
         },
         "titleId": {
           "type": "string",
@@ -4651,10 +4687,28 @@ export const componentContracts = {
       "version": 2,
       "required": [],
       "props": {
-        "currentPage": {
+        "initialPage": {
           "type": "number",
           "default": 1,
-          "description": "Current 1-based page number"
+          "description": "Initial page when currentPage is not supplied."
+        },
+        "initialPageSize": {
+          "type": "number",
+          "default": 10,
+          "description": "Initial items per page when pageSize is not supplied."
+        },
+        "renderPart": {
+          "type": "select",
+          "options": [
+            "navigation",
+            "step-options",
+            "summary"
+          ],
+          "description": "Render just one Pagination part for composition; omit for the complete component."
+        },
+        "currentPage": {
+          "type": "number",
+          "description": "Current 1-based page number to render. Consumers supply a new value after loading data."
         },
         "totalPages": {
           "type": "number",
@@ -4715,8 +4769,7 @@ export const componentContracts = {
         },
         "pageUrlPrefix": {
           "type": "string",
-          "default": "?page=",
-          "description": "URL prefix that the page number is appended to, e.g. '?page='"
+          "description": "Optional URL or fragment prefix appended with the page number, e.g. '?page=' or '#page-'. The browser follows these links without Pagination JavaScript; the application must provide the target page or element and render the active page state. Omit for literal '#' placeholders handled by consumer code."
         },
         "showSummary": {
           "type": "boolean",
@@ -4745,8 +4798,7 @@ export const componentContracts = {
         },
         "pageSize": {
           "type": "number",
-          "default": 10,
-          "description": "Currently selected page size"
+          "description": "Current page size to render. Consumers supply a new value after loading data."
         },
         "pageSizeOptions": {
           "type": "array",
@@ -4795,10 +4847,9 @@ export const componentContracts = {
     },
     "popover": {
       "component": "popover",
-      "version": 4,
+      "version": 6,
       "required": [
-        "id",
-        "children"
+        "id"
       ],
       "props": {
         "id": {
@@ -4812,7 +4863,7 @@ export const componentContracts = {
         },
         "children": {
           "type": "slot",
-          "description": "Trusted semantic content for the positioned panel, including forms, a Tree, lists, or nested Popovers."
+          "description": "Optional semantic panel content, including forms, a Tree, lists, or nested Popovers."
         },
         "menuItems": {
           "type": "array",
@@ -4878,6 +4929,15 @@ export const componentContracts = {
           "default": "start",
           "description": "Alignment along the chosen side. Start and end follow text direction for top and bottom."
         },
+        "panelShape": {
+          "type": "select",
+          "options": [
+            "rounded",
+            "square"
+          ],
+          "default": "rounded",
+          "description": "Rounded keeps the original border radius and extra vertical padding; square removes the radius and uses equal outer padding on all sides. Nested menuItems flyouts inherit the shape."
+        },
         "defaultOpen": {
           "type": "boolean",
           "default": false,
@@ -4901,7 +4961,7 @@ export const componentContracts = {
           "type": "string",
           "description": "Optional visible heading for the panel."
         },
-        "headingLevel": {
+        "headingAs": {
           "type": "select",
           "options": [
             "h1",
@@ -4958,12 +5018,12 @@ export const componentContracts = {
     },
     "process-list": {
       "component": "process-list",
-      "version": 3,
+      "version": 4,
       "required": [],
       "props": {
         "items": {
           "type": "object",
-          "description": "Array of process list item objects. Each item supports: heading (required), headingTag (default h4), headingClassName, body (markup, rendered as-is; wrap plain text in a <p>), bodyClassName (wraps the body in a <div> with these classes), and className (applied to the <li>)."
+          "description": "Array of process list item objects. Each item supports: heading (required), headingAs (default h4), headingClassName, body (markup, rendered as-is; wrap plain text in a <p>), bodyClassName (wraps the body in a <div> with these classes), and className (applied to the <li>)."
         },
         "className": {
           "type": "string",
@@ -4987,10 +5047,10 @@ export const componentContracts = {
     },
     "prose": {
       "component": "prose",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
-        "containerElement": {
+        "as": {
           "type": "select",
           "options": [
             "div",
@@ -5033,7 +5093,7 @@ export const componentContracts = {
     },
     "quote": {
       "component": "quote",
-      "version": 3,
+      "version": 4,
       "required": [],
       "props": {
         "className": {
@@ -5045,7 +5105,7 @@ export const componentContracts = {
           "description": "Props passed to the Callout containing the quotation and attribution.",
           "component": "callout",
           "omit": [
-            "element",
+            "as",
             "children",
             "content"
           ]
@@ -5388,14 +5448,14 @@ export const componentContracts = {
     },
     "section": {
       "component": "section",
-      "version": 3,
+      "version": 4,
       "required": [],
       "props": {
         "title": {
           "type": "string",
           "description": "Optional section heading."
         },
-        "headingLevel": {
+        "headingAs": {
           "type": "select",
           "options": [
             "h1",
@@ -5723,6 +5783,10 @@ export const componentContracts = {
           "type": "string",
           "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
         },
+        "staticUrlPrefix": {
+          "type": "string",
+          "description": "Optional sprite URL prefix, including the # separator. Overrides staticBaseUrl for the spinner icon."
+        },
         "size": {
           "type": "select",
           "options": [
@@ -5839,7 +5903,7 @@ export const componentContracts = {
     },
     "step-indicator": {
       "component": "step-indicator",
-      "version": 1,
+      "version": 2,
       "required": [
         "steps"
       ],
@@ -5873,7 +5937,7 @@ export const componentContracts = {
           ],
           "description": "Visual variant modifier"
         },
-        "headingTag": {
+        "headingAs": {
           "type": "select",
           "options": [
             "h2",
@@ -5938,7 +6002,7 @@ export const componentContracts = {
         },
         "underlineColor": {
           "type": "string",
-          "description": "USWDS color utility name for the summary underline, such as secondary."
+          "description": "USX color utility name for the summary underline, such as secondary."
         },
         "noUnderline": {
           "type": "boolean",
@@ -6811,7 +6875,7 @@ export const componentContracts = {
         },
         "hint": {
           "type": "slot",
-          "default": "Select a time from the dropdown. Type into the input to filter options.",
+          "default": "Select a time from the dropdown or type to jump to the first matching time.",
           "description": "Hint text displayed below the label."
         },
         "error": {
@@ -6879,13 +6943,13 @@ export const componentContracts = {
           "id": "appointment-time",
           "name": "appointment-time",
           "label": "Appointment time",
-          "hint": "Select a time from the dropdown. Type into the input to filter options."
+          "hint": "Select a time from the dropdown or type to jump to the first matching time."
         }
       }
     },
     "toggle": {
       "component": "toggle",
-      "version": 2,
+      "version": 3,
       "required": [
         "options"
       ],
@@ -6896,7 +6960,7 @@ export const componentContracts = {
         },
         "options": {
           "type": "array",
-          "description": "Options as strings, numbers, or objects with value, label, icon, and disabled. Django requires option objects with value and label. Use distinct values and a label for every icon option.",
+          "description": "Options as strings, numbers, or objects with value, label, icon, and disabled. Use distinct values and a label for every icon option.",
           "items": {
             "type": [
               "object",
@@ -7051,7 +7115,7 @@ export const componentContracts = {
     },
     "tree": {
       "component": "tree",
-      "version": 3,
+      "version": 4,
       "required": [
         "items"
       ],
@@ -7102,11 +7166,11 @@ export const componentContracts = {
         "variant": {
           "type": "select",
           "options": [
-            "raw",
+            "default",
             "padded"
           ],
-          "default": "raw",
-          "description": "Raw keeps Details styling; padded adds row spacing, alignment, and an interactive hover surface. The variant applies to every nested list."
+          "default": "default",
+          "description": "Default keeps Details styling without a variant class; padded adds row spacing, alignment, and an interactive hover surface. The variant applies to every nested list."
         },
         "className": {
           "type": "string",

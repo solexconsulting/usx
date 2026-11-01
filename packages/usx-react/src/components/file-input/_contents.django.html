@@ -1,0 +1,29 @@
+{% load components %}
+{% if label %}
+{% label htmlFor=id required=required error=error %}{{ label }}{% endlabel %}
+{% endif %}
+{% if hint %}
+{% hint id=id|add:"-hint" %}{{ hint }}{% endhint %}
+{% endif %}
+{% if error %}
+{% error_message id=id|add:"-error" %}{{ error }}{% enderror_message %}
+{% endif %}
+{% if multiple and manageIndividualFiles %}<div class="usx-file-input__add-only" data-usx-file-list-hint="{{ fileListHint|default:'Selected files' }}">{% endif %}
+<input
+  class="usa-file-input usx-file-input{% if className %} {{ className }}{% endif %}"
+  id="{{ id }}"
+  type="file"
+  name="{{ name|default:id }}"
+  {% if hint or error %} aria-describedby="{% if hint %}{{ id }}-hint{% endif %}{% if hint and error %} {% endif %}{% if error %}{{ id }}-error{% endif %}"{% endif %}
+  {% if accept %} accept="{{ accept }}"{% endif %}
+  {% if multiple %} multiple{% endif %}
+  {% if invalidFileTypeMessage %} data-errormessage="{{ invalidFileTypeMessage }}"{% endif %}
+  {% if disabled %} disabled{% endif %}
+  {% if required %}{% if multiple and manageIndividualFiles %}{% if not defaultFiles %} required{% endif %}{% else %} required{% endif %}{% endif %}
+/>
+{% if multiple and manageIndividualFiles %}
+</div>
+{% if defaultFiles %}
+  {% include 'file-list/file-list.django.html' with files=defaultFiles hint=fileListHint|default:'Selected files' disabled=disabled onRemove='managedFileRemove' only %}
+{% endif %}
+{% endif %}

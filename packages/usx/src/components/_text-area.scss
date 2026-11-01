@@ -10,7 +10,6 @@
 
 .usa-textarea.usx-textarea {
   border-radius: usx-when($usx-textarea-radius);
-
   padding: usx-when($usx-textarea-padding);
 }
 
@@ -23,22 +22,16 @@
 .usa-textarea.usx-textarea:not(.usa-input--error):not(.usa-input--success) {
   &:not(:disabled, [aria-disabled="true"]) {
     background-color: usx-when($usx-textarea-bg);
-
     color: usx-when($usx-textarea-text);
-
     border-color: usx-when($usx-textarea-border);
   }
 }
 
 .usa-textarea.usx-textarea.usa-input--error {
   border-width: usx-when($usx-input-error-border-width);
-
   border-color: usx-when($usx-input-error-border);
-
   border-style: usx-when($usx-input-error-border-style);
-
   padding-top: usx-when($usx-input-error-padding-top);
-
   padding-bottom: usx-when($usx-input-error-padding-bottom);
 }
 
@@ -46,12 +39,8 @@
 // statically-applied success class, so error must win when both are present.
 .usa-textarea.usx-textarea.usa-input--success:not(.usa-input--error) {
   border-width: usx-when($usx-input-success-border-width);
-
   border-color: usx-when($usx-input-success-border);
-
   border-style: usx-when($usx-input-success-border-style);
-
   padding-top: usx-when($usx-input-success-padding-top);
-
   padding-bottom: usx-when($usx-input-success-padding-bottom);
 }

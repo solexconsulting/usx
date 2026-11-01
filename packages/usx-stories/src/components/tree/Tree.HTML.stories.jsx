@@ -33,6 +33,16 @@ const textStart = (element) => {
   return range.getBoundingClientRect().left;
 };
 
+const expectDefaultTreeClasses = async (root) => {
+  const lists = root.matches('ul.usx-tree')
+    ? [root, ...root.querySelectorAll('ul.usx-tree')]
+    : [...root.querySelectorAll('ul.usx-tree')];
+  for (const list of lists) {
+    await expect(list).toHaveClass('usx-tree');
+    await expect([...list.classList].filter((name) => name.startsWith('usx-tree--'))).toEqual([]);
+  }
+};
+
 const testDefault = async ({ canvasElement }) => {
   const list = sectionFor(canvasElement, 'Default');
   const canvas = within(list);
@@ -42,7 +52,7 @@ const testDefault = async ({ canvasElement }) => {
   const detailsLeaf = canvas.getByText('About these services').closest('details');
   const emptyBranch = canvas.getByText('Coming soon').closest('details');
 
-  await expect(list).toHaveClass('usx-tree--raw');
+  await expectDefaultTreeClasses(list);
   await expect(canvas.getByText('Applications').tagName).toBe('SPAN');
   await expect(canvas.getByText('Applications')).toHaveClass('usx-tree__label');
   await expect(list.querySelectorAll(':scope > li')).toHaveLength(5);
@@ -66,11 +76,22 @@ const testDefault = async ({ canvasElement }) => {
   await expectVisible(canvas.getByText('Find applications and support here.'));
 };
 
-const testRaw = async ({ canvasElement }) => {
-  const list = sectionFor(canvasElement, 'Raw');
-  await expect(list).toHaveClass('usx-tree--raw');
-  await expect(list).not.toHaveClass('usx-tree--padded');
-  await expect(within(list).getByText('Applications')).toHaveClass('usx-tree__label');
+const testEmptyBranch = async ({ canvasElement }) => {
+  const list = sectionFor(canvasElement, 'Empty Branch');
+  await expectDefaultTreeClasses(list);
+  const branch = within(list).getByText('More services').closest('details');
+  await userEvent.click(summaryOf(branch));
+  await expect(branch.querySelector('ul.usx-tree')).toBeVisible();
+  await expect(branch.querySelector('ul.usx-tree').children).toHaveLength(0);
+};
+
+const testDetailsLeaf = async ({ canvasElement }) => {
+  const list = sectionFor(canvasElement, 'Details Leaf');
+  await expectDefaultTreeClasses(list);
+  const leaf = within(list).getByText('Help finding your application number').closest('details');
+  await userEvent.click(summaryOf(leaf));
+  await expectVisible(within(leaf).getByText('The number is in your confirmation email.'));
+  await expect(leaf.querySelector('ul.usx-tree')).toBeNull();
 };
 
 const testPadded = async ({ canvasElement }) => {
@@ -110,7 +131,9 @@ const testPadded = async ({ canvasElement }) => {
 };
 
 const testNestedGroups = async ({ canvasElement }) => {
-  const canvas = within(sectionFor(canvasElement, 'Nested Groups'));
+  const list = sectionFor(canvasElement, 'Nested Groups');
+  await expectDefaultTreeClasses(list);
+  const canvas = within(list);
   const programs = canvas.getByText('Programs').closest('details');
   const housing = canvas.getByText('Housing').closest('details');
   const benefits = canvas.getByText('Benefits').closest('details');
@@ -155,7 +178,9 @@ const testServiceDirectory = async ({ canvasElement }) => {
 };
 
 const testDocumentLibrary = async ({ canvasElement }) => {
-  const canvas = within(sectionFor(canvasElement, 'Document Library'));
+  const section = sectionFor(canvasElement, 'Document Library');
+  await expectDefaultTreeClasses(section);
+  const canvas = within(section);
   await canvas.findByRole('link', { name: 'Adopted budget (PDF, 2.4 MB)' });
   // The snapshot renders every branch closed, so open the budget years first.
   await userEvent.click(canvas.getByText('Budget and financial reports'));
@@ -169,7 +194,9 @@ const testDocumentLibrary = async ({ canvasElement }) => {
 };
 
 const testApplicationHelp = async ({ canvasElement }) => {
-  const canvas = within(sectionFor(canvasElement, 'Application Help'));
+  const section = sectionFor(canvasElement, 'Application Help');
+  await expectDefaultTreeClasses(section);
+  const canvas = within(section);
   await canvas.findByText(/Your application number is in the confirmation email/);
   await userEvent.click(canvas.getByText('Uploading supporting documents'));
   const summary = canvas.getByText('What if I do not have a scanner?').closest('summary');
@@ -181,7 +208,8 @@ const testApplicationHelp = async ({ canvasElement }) => {
 const play = async (context) => {
   const step = (name, fn) => context.step(name, () => fn(context));
   await step('Default', testDefault);
-  await step('Raw', testRaw);
+  await step('Empty Branch', testEmptyBranch);
+  await step('Details Leaf', testDetailsLeaf);
   await step('Padded', testPadded);
   await step('Nested Groups', testNestedGroups);
   await step('Resident Services', testResidentServices);

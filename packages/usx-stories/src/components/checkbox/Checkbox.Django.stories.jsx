@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import config from '../../../../usx-react/src/components/checkbox/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
-import { fetchComponentHtml } from '../../utils/djangoComponent.js';
 import { storyDefs } from './Checkbox.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});

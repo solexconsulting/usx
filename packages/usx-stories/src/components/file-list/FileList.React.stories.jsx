@@ -27,6 +27,9 @@ export const storyDefs = {
     hint: 'Uploaded documents',
     files: [{ key: 1, name: 'government-id.jpg' }],
   },
+  ZeroSize: {
+    files: [{ key: 1, name: 'empty.txt', size: 0 }],
+  },
   Disabled: {
     disabled: true,
     files: [{ key: 1, name: 'w2-2023.pdf', size: 245800, url: 'https://example.com/files/w2-2023.pdf' }],
@@ -71,6 +74,7 @@ function InteractiveFileList(args) {
 export const Default = { args: storyDefs.Default, render: InteractiveFileList };
 export const WithDownloadLink = { args: storyDefs.WithDownloadLink, render: InteractiveFileList };
 export const CustomHint = { args: storyDefs.CustomHint, render: InteractiveFileList };
+export const ZeroSize = { args: storyDefs.ZeroSize, render: InteractiveFileList };
 export const Disabled = { args: storyDefs.Disabled, render: InteractiveFileList };
 
 // No onRemove at all (component-level or per-file) — every Delete button is

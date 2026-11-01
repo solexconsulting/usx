@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import config from '../../../../usx-react/src/components/spinner/config.json';
-import { buildArgTypes, createDjangoStory, createBulkDjangoStory, getComponentHtml, componentTag } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, createBulkDjangoStory, componentTag } from '../../utils/storyHelpers.jsx';
+import { useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
 import { storyDefs } from './Spinner.React.stories.jsx';
 
 export default {
@@ -56,20 +57,8 @@ export const DifferentColorsOnInvertedBackground = createBulkDjangoStory(
 );
 
 const SpinnerWithTooltip = (args) => {
-  const [spinnerHtml, setSpinnerHtml] = useState('');
-  const [tooltipHtml, setTooltipHtml] = useState('');
-  // Keyed on the serialized args so a new-but-equal args object doesn't refetch.
-  const argsKey = JSON.stringify(args);
-
-  useEffect(() => {
-    getComponentHtml('spinner', storyDefs.OmitLabel).then(setSpinnerHtml);
-  }, []);
-
-  useEffect(() => {
-    if (!spinnerHtml) return;
-    setTooltipHtml('');
-    getComponentHtml('tooltip', { ...JSON.parse(argsKey), children: spinnerHtml }).then(setTooltipHtml);
-  }, [spinnerHtml, argsKey]);
+  const { html: spinnerHtml } = useDjangoRenderedHtml('spinner', { size: 4 });
+  const { html: tooltipHtml } = useDjangoRenderedHtml('tooltip', { ...args, children: spinnerHtml });
 
   if (!tooltipHtml) return null;
   return <div dangerouslySetInnerHTML={{ __html: tooltipHtml }} />;
@@ -83,7 +72,7 @@ export const WithTooltip = {
   parameters: {
     docs: {
       source: {
-        code: componentTag({ name: 'tooltip', props: { label: 'Loading...', position: 'top' }, children: componentTag({ name: 'spinner', props: storyDefs.OmitLabel }) } )
+        code: componentTag({ name: 'tooltip', props: { label: 'Loading...', position: 'top' }, children: componentTag({ name: 'spinner', props: { size: 4 } }) } )
       }
     }
   },

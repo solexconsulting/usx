@@ -19,12 +19,12 @@ export const storyDefs = {
   ReadJohnsStoryCta: {
     href: 'https://google.com',
     className: 'display-flex flex-row flex-align-center margin-1 usx-width-fit',
-    children: '<span class="usx-circle bg-black text-white usx-clickable__bg-color-on-hover display-flex flex-align-center flex-justify-center width-4 height-4"><svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#arrow_forward"></use></svg></span><span class="margin-left-1 usx-clickable__link">Read John\'s Story</span>',
+    children: '<span class="usx-circle bg-black text-white usx-clickable__bg-color-on-hover display-flex flex-align-center flex-justify-center width-4 height-4"><svg class="usa-icon usx-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#arrow_forward"></use></svg></span><span class="margin-left-1 usx-clickable__link">Read John\'s Story</span>',
   },
   ClickableQuote: {
     href: 'https://google.com',
     className: 'display-block maxw-tablet',
-    children: '<div class="usx-quote usx-quote--vertical"><div class="usx-callout usx-callout--vertical border-info usx-callout--big"><figure class="usx-quote__body"><blockquote class="usx-quote__content font-serif-lg">❝We found this wand shop that had the best wands, and we were like, "We have to go here!" So we went there.❞</blockquote><figcaption class="usx-quote__attribution"><div class="usx-attribution"><span class="usx-attribution__content"><span class="usx-attribution__primary">John Doe</span><span class="usx-attribution__secondary">Under Secretary for the Department of Magic and Mystical Affairs</span></span></div></figcaption></figure></div></div><div class="display-flex flex-align-center margin-top-2"><span class="usx-circle bg-black text-white usx-clickable__bg-color-on-hover display-flex flex-align-center flex-justify-center width-4 height-4"><svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#arrow_forward"></use></svg></span><span class="margin-left-1 usx-clickable__link">Read John\'s Story</span></div>',
+    children: '<div class="usx-quote usx-quote--vertical"><div class="usx-callout usx-callout--vertical border-info usx-callout--big"><figure class="usx-quote__body"><blockquote class="usx-quote__content font-serif-lg">❝We found this wand shop that had the best wands, and we were like, "We have to go here!" So we went there.❞</blockquote><figcaption class="usx-quote__attribution"><div class="usx-attribution"><span class="usx-attribution__content"><span class="usx-attribution__primary">John Doe</span><span class="usx-attribution__secondary">Under Secretary for the Department of Magic and Mystical Affairs</span></span></div></figcaption></figure></div></div><div class="display-flex flex-align-center margin-top-2"><span class="usx-circle bg-black text-white usx-clickable__bg-color-on-hover display-flex flex-align-center flex-justify-center width-4 height-4"><svg class="usa-icon usx-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#arrow_forward"></use></svg></span><span class="margin-left-1 usx-clickable__link">Read John\'s Story</span></div>',
   },
   AllClassesSingleElement: {
     href: 'https://google.com',
@@ -40,6 +40,10 @@ export const storyDefs = {
     href: 'https://google.com',
     className: 'text-primary-lightest',
     children: '<span class="usx-clickable__bg-color-on-hover">Background changes color.</span><span class="usx-clickable__color-on-hover"> Text changes color. </span><span class="usx-clickable__link">No change to background or color.</span>',
+  },
+  ButtonSurface: {
+    className: 'usa-button usx-button usx-button--ghost',
+    children: '<span class="usx-clickable__link">Action-style clickable (button mode)</span>',
   },
 };
 
@@ -71,7 +75,7 @@ export const MultipleClickables = {
 };
 
 const colorChangeChildren = (icon, text) =>
-  `<span class="usx-clickable__color-on-hover"><svg class="usa-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#${icon}"></use></svg></span><span class="margin-left-1 usx-clickable__link">${text}</span>`;
+  `<span class="usx-clickable__color-on-hover"><svg class="usa-icon usx-icon usa-icon--size-3" aria-hidden="true" focusable="false" role="img"><use href="./img/sprite.svg#${icon}"></use></svg></span><span class="margin-left-1 usx-clickable__link">${text}</span>`;
 const colorChangeItems = [
   ['tornado', 'Auntie Em!', 'grid-col-12 display-flex flex-justify-center tablet:grid-col-4'],
   ['my_location', "We're not in Kansas anymore", 'grid-col-12 display-flex flex-justify-center margin-top-2 tablet:margin-top-0 tablet:grid-col-4'],
@@ -110,3 +114,4 @@ export const ClickableQuoteManualMarkup = {
 export const AllClassesSingleElement = createStory(storyDefs.AllClassesSingleElement);
 export const ColorClassesWithinLinkClass = createStory(storyDefs.ColorClassesWithinLinkClass);
 export const ColorClassesOutsideLinkClass = createStory(storyDefs.ColorClassesOutsideLinkClass);
+export const ButtonSurface = createStory(storyDefs.ButtonSurface);

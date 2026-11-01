@@ -4,7 +4,7 @@
     id="django-in-page-nav-default"
     class="usa-in-page-nav usx-in-page-nav"
     data-heading-elements="h2 h3"
-    data-main-content-selector="#in-page-nav-default-content"
+    data-main-content-selector="#django-in-page-nav-default-content"
     data-title-heading-level="h4"
     data-title-text="On this page"
     data-scroll-offset="0"
@@ -76,7 +76,7 @@
     id="django-in-page-nav-custom-headings"
     class="usa-in-page-nav usx-in-page-nav"
     data-heading-elements="h2"
-    data-main-content-selector="#in-page-nav-custom-headings-content"
+    data-main-content-selector="#django-in-page-nav-custom-headings-content"
     data-title-heading-level="h4"
     data-title-text="On this page"
     data-scroll-offset="0"
@@ -124,7 +124,7 @@
     id="django-in-page-nav-custom-title"
     class="usa-in-page-nav usx-in-page-nav"
     data-heading-elements="h2 h3"
-    data-main-content-selector="#in-page-nav-custom-title-content"
+    data-main-content-selector="#django-in-page-nav-custom-title-content"
     data-title-heading-level="h3"
     data-title-text="Jump to a section"
     data-scroll-offset="0"
@@ -163,7 +163,7 @@
     id="django-in-page-nav-below-minimum"
     class="usa-in-page-nav usx-in-page-nav"
     data-heading-elements="h2 h3"
-    data-main-content-selector="#in-page-nav-below-minimum-content"
+    data-main-content-selector="#django-in-page-nav-below-minimum-content"
     data-title-heading-level="h4"
     data-title-text="On this page"
     data-scroll-offset="0"
@@ -179,5 +179,50 @@
     </p>
     <h2>Conclusion</h2>
     <p>No &lt;nav&gt; is injected into the aside above.</p>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Custom Content Selector</h3>
+<div class="usa-in-page-nav-container usx-in-page-nav-container">
+  <aside
+    id="django-in-page-nav-custom-selector"
+    class="usa-in-page-nav usx-in-page-nav"
+    data-heading-elements="h2 h3"
+    data-main-content-selector="#django-in-page-nav-custom-selector-region"
+    data-title-heading-level="h4"
+    data-title-text="On this page"
+    data-scroll-offset="0"
+    data-root-margin="0px 0px 0px 0px"
+    data-threshold="1"
+    data-minimum-heading-count="2"
+  ></aside>
+  <div id="django-in-page-nav-custom-selector-content" class="usx-in-page-nav__content usa-prose">
+    <h3>Heading outside the observed region</h3>
+    <p>
+      This heading is not counted because it lives outside the element matched by
+      mainContentSelector.
+    </p>
+    <div id="django-in-page-nav-custom-selector-region">
+      <h2>Introduction</h2>
+      <p>Only headings inside this inner region are observed.</p>
+      <p>
+        The nav on the left is watching
+        <code>#in-page-nav-custom-selector-region</code> specifically, rather than this
+        component&#x27;s own default content container — so any heading outside that div, including
+        the one above, is invisible to it.
+      </p>
+      <h2>Getting started</h2>
+      <p>Before you begin, make sure the prerequisites below are met.</p>
+      <p>
+        Getting started with any new project usually means working through a short checklist before
+        the real work begins.
+      </p>
+      <h3>Prerequisites</h3>
+      <p>A recent browser and a working internet connection.</p>
+      <p>
+        You&#x27;ll also want a modern code editor and enough disk space for the dependencies.
+        Scroll through this section and the two above it to watch the active link update.
+      </p>
+    </div>
   </div>
 </div>
