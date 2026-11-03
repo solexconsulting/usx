@@ -22,7 +22,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: { id: 'gov-banner-default' },
+  Default: config.default,
   Mil: {
     id: 'gov-banner-mil',
     tld: '.mil',

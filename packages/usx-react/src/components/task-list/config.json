@@ -5,6 +5,39 @@
   "required": [
     "tasks"
   ],
+  "default": {
+    "tasks": [
+      {
+        "name": "Task 1",
+        "href": "#",
+        "tagProps": {
+          "value": "Completed",
+          "color": "success-light",
+          "outline": false,
+          "icon": "check"
+        }
+      },
+      {
+        "name": "Task 2",
+        "href": "#",
+        "tagProps": {
+          "value": "In progress",
+          "color": "primary-light",
+          "outline": false
+        }
+      },
+      {
+        "name": "Task 3",
+        "href": "#",
+        "tagProps": {
+          "value": "Not started",
+          "color": "primary-lightest",
+          "outline": false
+        },
+        "hint": "Due tomorrow"
+      }
+    ]
+  },
   "props": {
     "tasks": {
       "type": "array",

@@ -17,13 +17,7 @@ const allTasks = [
 ];
 
 export const storyDefs = {
-  Default: {
-    tasks: [
-      { name: 'Task 1', href: '#', tagProps: taskTags.done },
-      { name: 'Task 2', href: '#', tagProps: taskTags.doing },
-      { name: 'Task 3', href: '#', tagProps: taskTags.todo, hint: 'Due tomorrow' },
-    ]
-  },
+  Default: config.default,
   NoStatus: {
     tasks: [
       { name: 'Task 1', href: '#' },

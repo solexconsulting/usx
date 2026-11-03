@@ -6,15 +6,7 @@ import { buildArgTypes, uswdsInitNote, componentInit } from '../../utils/storyHe
 const generatedArgTypes = buildArgTypes(config.props || {});
 
 export const storyDefs = {
-  Default: {
-    id: 'range-slider-default',
-    label: 'Range slider',
-    hint: 'Move the slider to change the value',
-    min: 0,
-    max: 100,
-    step: 10,
-    defaultValue: 20,
-  },
+  Default: config.default,
   WithUnit: {
     id: 'range-slider-unit',
     label: 'Volume',

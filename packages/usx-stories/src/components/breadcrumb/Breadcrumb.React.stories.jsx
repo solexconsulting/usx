@@ -14,7 +14,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: config.default || {},
+  Default: config.default,
   WithRdfa: { ...(config.default || {}), rdfa: true },
   Wrap: { ...(config.default || {}), wrap: true },
   WithClassName: { ...(config.default || {}), className: 'custom-breadcrumb-class' },

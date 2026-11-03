@@ -14,9 +14,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    children: 'message',
-  },
+  Default: config.default,
   WithIcon: {
     children: 'Success',
     icon: 'campaign',

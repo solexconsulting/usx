@@ -52,13 +52,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    cardProps: [
-      baseCardArgs,
-      { ...baseCardArgs, ...images, title: 'Card with Media' },
-      { ...baseCardArgs, ...images, title: 'Media with header first', headerFirst: true },
-    ],
-  },
+  Default: config.default,
   FlagLayout: {
     cardProps: [
       { ...baseCardArgs, ...images, flag: true, title: 'Default flag', className: 'flex-1' },

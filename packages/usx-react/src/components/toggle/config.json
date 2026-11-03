@@ -5,6 +5,27 @@
   "required": [
     "options"
   ],
+  "default": {
+    "id": "alignment",
+    "ariaLabel": "Text alignment",
+    "options": [
+      {
+        "value": "left",
+        "label": "Left"
+      },
+      {
+        "value": "center",
+        "label": "Center"
+      },
+      {
+        "value": "right",
+        "label": "Right"
+      }
+    ],
+    "defaultValue": "center",
+    "variant": "text",
+    "name": "toggle-example"
+  },
   "props": {
     "id": {
       "type": "string",

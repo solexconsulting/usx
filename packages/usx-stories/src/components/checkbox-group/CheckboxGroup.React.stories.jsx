@@ -34,12 +34,7 @@ const optionsWithDescriptions = [
 ];
 
 export const storyDefs = {
-  Default: {
-    id: 'historical-figures',
-    name: 'historical-figures',
-    legend: 'Select any that apply',
-    checkboxProps: options,
-  },
+  Default: config.default,
   WithDescriptions: {
     id: 'historical-figures-with-descriptions',
     name: 'historical-figures-with-descriptions',

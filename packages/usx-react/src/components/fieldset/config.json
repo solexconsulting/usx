@@ -2,6 +2,10 @@
   "name": "fieldset",
   "template": "fieldset/fieldset.django.html",
   "version": 2,
+  "default": {
+    "legend": "Fieldset Legend",
+    "children": "<label class=\"usa-checkbox__label\">Hello world</label>"
+  },
   "props": {
     "legend": {
       "type": "slot",

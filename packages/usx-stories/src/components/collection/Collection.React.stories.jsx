@@ -27,9 +27,7 @@ const ITEMS_DEFAULT = [
 ];
 
 export const storyDefs = {
-  Default: {
-    items: ITEMS_DEFAULT,
-  },
+  Default: config.default,
   WithThumbnail: {
     items: ITEMS_DEFAULT.map((item, i) => ({
       ...item,

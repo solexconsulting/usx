@@ -1,8 +1,8 @@
 import React from 'react';
 import config from '../../../../usx-react/src/components/spinner/config.json';
-import { buildArgTypes, createDjangoStory, createBulkDjangoStory, componentTag } from '../../utils/storyHelpers.jsx';
-import { useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
+import { buildArgTypes, createDjangoStory, createBulkDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Spinner.React.stories.jsx';
+import { WithTooltip as WithTooltipReact } from './Spinner.React.stories.jsx';
 
 export default {
   title: 'Django/USX/Spinner',
@@ -56,25 +56,7 @@ export const DifferentColorsOnInvertedBackground = createBulkDjangoStory(
   invertedRow(' text-inverse')
 );
 
-const SpinnerWithTooltip = (args) => {
-  const { html: spinnerHtml } = useDjangoRenderedHtml('spinner', { size: 4 });
-  const { html: tooltipHtml } = useDjangoRenderedHtml('tooltip', { ...args, children: spinnerHtml });
-
-  if (!tooltipHtml) return null;
-  return <div dangerouslySetInnerHTML={{ __html: tooltipHtml }} />;
-};
-
-export const WithTooltip = {
-  args: {
-    label: 'Loading...',
-    position: 'top',
-  },
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({ name: 'tooltip', props: { label: 'Loading...', position: 'top' }, children: componentTag({ name: 'spinner', props: { size: 4 } }) } )
-      }
-    }
-  },
-  render: (args) => <SpinnerWithTooltip {...args} />,
-};
+export const WithTooltip = createDjangoStory({
+  componentName: 'spinner',
+  renderTree: WithTooltipReact.render,
+})({});

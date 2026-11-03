@@ -11,9 +11,9 @@ can have up to three story files, one per rendering technology:
 - `<Name>.Django.stories.jsx` — fetches server-rendered HTML from the Django
   app in `apps/storybook-django` (see below) and injects it into the page
 
-React and Django stories share the same `storyDefs` (arg presets) defined in
-the `.React.stories.jsx` file, so most components only need one set of props
-maintained in one place.
+React and Django stories share `storyDefs` (arg presets) from the React story.
+Django renders nested components through its own tags; **Show code** displays
+the Django template used for the current controls.
 
 ## Story hierarchy
 

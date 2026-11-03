@@ -2,7 +2,7 @@ import React from 'react';
 import Code from '../../../usx-react/src/components/code/Code';
 
 export default {
-  title: 'Documentation/Theme/Getting Started',
+  title: 'Documentation/USX Theme/Getting Started',
   tags: ['autodocs']
 };
 

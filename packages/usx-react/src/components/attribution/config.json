@@ -2,6 +2,10 @@
   "name": "attribution",
   "template": "attribution/attribution.django.html",
   "version": 2,
+  "default": {
+    "primary": "George Washington",
+    "secondary": "First President of the United States"
+  },
   "props": {
     "avatarProps": {
       "type": "object",

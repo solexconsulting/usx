@@ -21,7 +21,7 @@ const getArgs = (index) => ({
 });
 
 export const storyDefs = {
-  Default: getArgs(1),
+  Default: config.default,
   Checked: {
     ...getArgs(2),
     checked: true,

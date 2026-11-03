@@ -5,6 +5,15 @@
   "required": [
     "title"
   ],
+  "default": {
+    "title": "The hero heading",
+    "callout": "A callout heading",
+    "paragraph": "A short description of the hero section that provides context for the call to action.",
+    "button": {
+      "href": "#",
+      "text": "Call to action"
+    }
+  },
   "props": {
     "title": {
       "type": "string",

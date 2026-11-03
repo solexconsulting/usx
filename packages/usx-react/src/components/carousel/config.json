@@ -2,6 +2,20 @@
   "name": "carousel",
   "template": "carousel/carousel.django.html",
   "version": 3,
+  "default": {
+    "ariaLabel": "Featured content",
+    "slides": [
+      {
+        "content": "<div class=\"width-full height-card bg-primary-dark text-white padding-8\">Slide 1</div>"
+      },
+      {
+        "content": "<div class=\"width-full height-card bg-primary-light text-black padding-8\">Slide 2</div>"
+      },
+      {
+        "content": "<div class=\"width-full height-card bg-secondary-dark text-white padding-8\">Slide 3</div>"
+      }
+    ]
+  },
   "props": {
     "id": {
       "type": "string",

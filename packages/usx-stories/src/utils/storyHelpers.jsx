@@ -1,47 +1,82 @@
 import PropTypes from 'prop-types';
-/*
-An array of helpers for story rendering.
-*/
-
-import { djangoComponent, fetchComponentHtml, useDjangoRenderedHtml } from './djangoComponent.js';
+import { djangoComponent, fetchStorySource, storyTree, useDjangoRenderedHtml } from './djangoComponent.js';
 import React from 'react';
+import { parseFragment, serialize } from 'parse5';
+
+// Story contracts store rich sample content as HTML; turn it back into React
+// nodes for React Default stories without adding HTML parsing to components.
+export const storyDefaultArgs = (value) => {
+    if (Array.isArray(value)) return value.map(storyDefaultArgs);
+    if (value && typeof value === 'object') {
+        return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, storyDefaultArgs(item)]));
+    }
+    if (typeof value !== 'string' || !/<[a-z][\s\S]*>/i.test(value)) return value;
+    const nodes = parseFragment(value).childNodes.map((node, index) => {
+        if (node.nodeName === '#text') return node.value;
+        if (!node.tagName) return null;
+        const attributes = Object.fromEntries(node.attrs.map(({ name, value: text }) => {
+            if (name === 'style') {
+                const style = Object.fromEntries(text.split(';').filter(Boolean).map((declaration) => {
+                    const [property, ...rest] = declaration.split(':');
+                    return [property.trim().replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()), rest.join(':').trim()];
+                }));
+                return ['style', style];
+            }
+            if (name === 'class') return ['className', text];
+            if (name === 'for') return ['htmlFor', text];
+            if (['checked', 'disabled', 'hidden', 'open', 'required', 'selected', 'multiple', 'autofocus'].includes(name)) {
+                return [name === 'autofocus' ? 'autoFocus' : name, true];
+            }
+            return [name, text];
+        }));
+        const content = serialize(node);
+        return React.createElement(node.tagName, {
+            ...attributes,
+            key: index,
+            ...(content ? { dangerouslySetInnerHTML: { __html: content } } : {}),
+        });
+    });
+    return nodes.length === 1 ? nodes[0] : React.createElement(React.Fragment, null, ...nodes);
+};
 
 const componentLoaders = {
     accordion: () => import('@uswds/uswds/js/usa-accordion'),
     banner: () => import('@uswds/uswds/js/usa-banner'),
-    button: () => import('@uswds/uswds/js/usa-button'),
     carousel: () => import('@solexllc/usx/js/carousel'),
     characterCount: () => import('@uswds/uswds/js/usa-character-count'),
-    comboBox: () => import('@uswds/uswds/js/usa-combo-box'),
     combobox: () => import('@uswds/uswds/js/usa-combo-box'),
     datePicker: () => import('@uswds/uswds/js/usa-date-picker'),
     dateRangePicker: () => import('@uswds/uswds/js/usa-date-range-picker'),
     fileInput: () => import('@uswds/uswds/js/usa-file-input'),
-    footer: () => import('@uswds/uswds/js/usa-footer'),
+    navigation: () => import('@uswds/uswds/js/usa-header'),
     inPageNavigation: () => import('@uswds/uswds/js/usa-in-page-navigation'),
-    inputMask: () => import('@uswds/uswds/js/usa-input-mask'),
     languageSelector: () => import('@uswds/uswds/js/usa-language-selector'),
     modal: () => import('@uswds/uswds/js/usa-modal').then(({ default: modal }) => ({
         init(root) {
             root.querySelectorAll('.usa-modal[id]').forEach((element) => modal.init(element));
         },
     })),
-    navigation: () => import('@uswds/uswds/js/usa-header'),
-    password: () => import('@uswds/uswds/js/_usa-password'),
     range: () => import('@uswds/uswds/js/usa-range'),
-    search: () => import('@uswds/uswds/js/usa-search'),
-    skipnav: () => import('@uswds/uswds/js/usa-skipnav'),
-    table: () => import('@uswds/uswds/js/usa-table'),
+    themePicker: () => import('@solexllc/usx/js/theme-picker'),
     timePicker: () => import('@uswds/uswds/js/usa-time-picker'),
-    tooltip: () => import('@uswds/uswds/js/usa-tooltip'),
-    validator: () => import('@uswds/uswds/js/usa-validation'),
+};
+
+export const loadComponentInitializers = async (...names) => {
+    const modules = await Promise.all(names.map((name) => {
+        if (!componentLoaders[name]) throw new Error(`Unknown component initializer: ${name}`);
+        return componentLoaders[name]();
+    }));
+    const components = modules.map((module) => module.default || module);
+    return (root, withEvents = false) => components.forEach((component) => {
+        if (withEvents && component.on) component.on(root);
+        else component.init(root);
+    });
 };
 
 export const componentInit = (...names) => {
     const options = typeof names[names.length - 1] === 'object' ? names.pop() : {};
-    const loaders = names.map((name) => {
+    names.forEach((name) => {
         if (!componentLoaders[name]) throw new Error(`Unknown component initializer: ${name}`);
-        return componentLoaders[name];
     });
 
     function ComponentInitDecorator(Story) {
@@ -49,19 +84,17 @@ export const componentInit = (...names) => {
             let observer;
             let active = true;
 
-            Promise.all(loaders.map((load) => load())).then((modules) => {
+            loadComponentInitializers(...names).then((init) => {
                 if (!active) return;
-                const components = modules.map((module) => module.default || module);
-                const init = (root) => components.forEach((component) => component.init(root));
 
                 observer = new MutationObserver((records) => {
                     const roots = new Set();
                     records.forEach(({ addedNodes }) => addedNodes.forEach((node) => {
                         if (node.nodeType === Node.ELEMENT_NODE && node.isConnected) {
-                            roots.add(node.parentElement || node);
+                            roots.add(node);
                         }
                     }));
-                    roots.forEach(init);
+                    roots.forEach((root) => init(root));
                 });
                 observer.observe(document.body, { childList: true, subtree: true });
                 init(document.body);
@@ -80,11 +113,9 @@ export const componentInit = (...names) => {
         return <Story />;
     }
 
-    return [ComponentInitDecorator];
-};
+    ComponentInitDecorator.initializers = names;
 
-export const getComponentHtml = async (componentName, props) => {
-    return fetchComponentHtml(componentName, props);
+    return [ComponentInitDecorator];
 };
 
 // Appended to (or used as) a story's docs.description.component for any
@@ -100,187 +131,62 @@ export const uswdsInitNote = (calls) =>
     "is all you need; you only own calling `.on()` yourself if you're not " +
     "using that global setup.";
 
-export const getFormattedProps = (props) => {
-    return Object.entries(props)
-        .filter(([key, value]) =>
-            value !== undefined &&
-            value !== null &&
-            key !== 'children'
-        )
-        .map(([key, value]) => {
-            return `    ${key}=${JSON.stringify(value, null, 4)}`;
-        })
-        .join('\n');
-};
-
-export const componentTag = ({ name, props, children = null }) => {
-    const formattedProps = getFormattedProps(props);
-    const hasProps = formattedProps.length > 0;
-    const content = children || props.children;
-
-    const componentName = getSnakeCase(name);
-
-    let openTag = `{% ${componentName}`;
-
-    if (hasProps) {
-        openTag += `\n${formattedProps}\n%}`;
-    } else {
-        openTag += ` %}`;
-    }
-
-    let finalContent;
-
-    if (content) {
-        finalContent = `${openTag}
-  ${content}
-{% end${componentName} %}`;
-    }
-
-    else {
-        finalContent = `${openTag}{% end${componentName} %}`;
-    }
-
-    return finalContent;
-};
-
 export const buildArgTypes = (props = {}) => {
-    const argTypes = {};
-    Object.entries(props).forEach(([name, meta]) => {
-        const type = (meta && meta.type) || null;
-        if (type === 'select') {
-            argTypes[name] = {
-                type: { name: 'select' },
-                control: { type: 'select' },
-                options: meta.options || []
-            };
-        } else if (type === 'boolean') {
-            argTypes[name] = {
-                type: { name: 'boolean' },
-                control: { type: 'boolean' }
-            };
-        } else if (type === 'array') {
-            argTypes[name] = {
-                type: { name: 'array', value: { name: 'other', value: 'unknown' } },
-                control: { type: 'object' }
-            };
-        } else if (type === 'object') {
-            argTypes[name] = {
-                type: { name: 'object' },
-                control: { type: 'object' }
-            };
-        } else if (type === 'string') {
-            argTypes[name] = {
-                type: { name: 'string' },
-                control: { type: 'text' }
-            };
-        } else {
-            argTypes[name] = {
-                type: { name: 'string' },
-                control: { type: 'text' }
-            };
-        }
-        if (meta && meta.description) {
-            argTypes[name].description = meta.description;
-        }
-    });
-    return argTypes;
+    return Object.fromEntries(Object.entries(props).map(([name, meta]) => {
+        const kind = ['select', 'boolean', 'array', 'object'].includes(meta?.type) ? meta.type : 'string';
+        const argType = {
+            type: kind === 'array'
+                ? { name: 'array', value: { name: 'other', value: 'unknown' } }
+                : { name: kind },
+            control: { type: ['array', 'object'].includes(kind) ? 'object' : kind === 'string' ? 'text' : kind },
+        };
+        if (kind === 'select') argType.options = meta.options || [];
+        if (meta?.description) argType.description = meta.description;
+        return [name, argType];
+    }));
 };
 
-const getSnakeCase = (str) => {
-    return str.replace(/-/g, '_').toLowerCase();
-};
-
-/**
- * Returns a story factory bound to a Django component name.
- * Call once with the component name, then use the returned function per story.
- *
- * Usage:
- *   const createStory = createDjangoStory({ componentName: 'my-component' });
- *   export const Default = createStory(storyDefs.Default);
- *
- * With wrapper context:
- *   const createStory = createDjangoStory(
- *     {
- *       componentName: 'my-component',
- *       wrapper: (payload, args, { mode }) => {
- *         if (mode === 'source') {
- *           return `<section>${payload}</section>`;
- *         }
- *         return <section dangerouslySetInnerHTML={{ __html: payload }} />;
- *       },
- *     }
- *   );
- *
- * Renderer options (optional `renderOptions`):
- *   { executeScripts: boolean, replayGlobalEvents: boolean }
- */
+/** Render a Django story and fetch the same template for its source block. */
 export const createDjangoStory = ({
     componentName,
     wrapper = null,
-    renderOptions = null,
+    renderTree = null,
 }) => {
-    if (!componentName) {
-        throw new Error('createDjangoStory requires an options object with componentName');
-    }
+    if (!componentName) throw new Error('createDjangoStory requires an options object with componentName');
 
-    const baseRender = !wrapper
-        ? djangoComponent({ componentName, renderOptions })
-        : null;
-
-    const applyWrapperForSource = (baseCode, args) => {
-        if (!wrapper) {
-            return baseCode;
-        }
-
-        const wrappedCode = wrapper(baseCode, args, { mode: 'source' });
-        return typeof wrappedCode === 'string' ? wrappedCode : baseCode;
-    };
-
-    const applyWrapperForRender = (html, args) => {
-        return wrapper(html, args, { mode: 'render' });
-    };
+    const treeFor = (args) => storyTree(componentName, args, renderTree);
+    const requestFor = (args) => ({ __usxStoryTree: treeFor(args) });
+    const baseRender = wrapper ? null : djangoComponent({ componentName });
 
     const WrappedDjangoHtml = ({ storyArgs }) => {
-        const { html, error } = useDjangoRenderedHtml(componentName, storyArgs);
+        const { html, error } = useDjangoRenderedHtml(componentName, requestFor(storyArgs));
 
         if (error) {
             return <div className="usa-error-message usx-error-message">Error rendering component: {error}</div>;
         }
 
-        return applyWrapperForRender(html, storyArgs);
+        return wrapper(html, storyArgs, { mode: 'render' });
     };
 
-
-    WrappedDjangoHtml.propTypes = {
-        storyArgs: PropTypes.object,
-        children: PropTypes.node
-    };
-
-    // If you have a component that uses children, add propTypes for it here
-    // Example:
-    // MyComponent.propTypes = {
-    //   children: PropTypes.node
-    // };
+    WrappedDjangoHtml.propTypes = { storyArgs: PropTypes.object };
 
     return (args) => ({
         args,
         parameters: {
             docs: {
                 source: {
-                    code: (() => {
-                        const baseCode = componentTag({ name: componentName, props: args, children: null });
-                        return applyWrapperForSource(baseCode, args);
-                    })(),
+                    transform: async (_code, context) => {
+                        const source = await fetchStorySource(componentName, treeFor(context.args));
+                        if (!wrapper) return source;
+                        const wrapped = wrapper(source, context.args, { mode: 'source' });
+                        return typeof wrapped === 'string' ? wrapped : source;
+                    },
                 },
             },
         },
-        render: (storyArgs) => {
-            if (!wrapper) {
-                return baseRender(storyArgs);
-            }
-
-            return <WrappedDjangoHtml storyArgs={storyArgs} />;
-        },
+        render: (storyArgs) => wrapper
+            ? <WrappedDjangoHtml storyArgs={storyArgs} />
+            : baseRender(requestFor(storyArgs)),
     });
 };
 
@@ -307,9 +213,11 @@ export const createBulkDjangoStory = (componentName, storyDefs, wrapper = null) 
         parameters: {
             docs: {
                 source: {
-                    code: storyDefs?.map((props) => {
-                        return componentTag({ name: componentName, props: props.props || props });
-                    }).join('\n\n'),
+                    transform: async () => (
+                        await Promise.all(storyDefs.map((props) =>
+                            fetchStorySource(componentName, storyTree(componentName, props.props || props))
+                        ))
+                    ).join('\n\n'),
                 },
             },
         },

@@ -43,13 +43,7 @@ const presidentCircleAvatars = presidentAvatars.map((logo) => ({ ...logo, shape:
 const presidentRoundedAvatars = presidentAvatars.map((logo) => ({ ...logo, shape: 'rounded-lg' }));
 
 export const storyDefs = {
-  Default: {
-    ...(config.default || {}),
-    language: 'en',
-    parentAgencies: [{ name: '<Parent agency>', href: '' }],
-    avatarProps: statueAvatars,
-    requiredLinks: linksEn,
-  },
+  Default: config.default,
   DefaultSpanish: {
     ...(config.default || {}),
     language: 'es',

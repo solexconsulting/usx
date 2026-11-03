@@ -1,3 +1,4 @@
+import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 import ErrorPage from '../../../../usx-react/src/components/error-page/ErrorPage.tsx';
@@ -5,17 +6,9 @@ import config from '../../../../usx-react/src/components/error-page/config.json'
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Default: {
-    ...(config.default || {}),
-    children: (
-      <p>
-        If the address is correct and you still can't reach the page, contact support so the broken
-        link can be fixed.
-      </p>
-    ),
-  },
+  Default: storyDefaultArgs(config.default),
   Cats: {
-    ...(config.default || {}),
+    ...storyDefaultArgs(config.default),
     id: 'cats-error',
     cats: true,
   },

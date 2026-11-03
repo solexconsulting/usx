@@ -5,6 +5,11 @@
   "required": [
     "heading"
   ],
+  "default": {
+    "id": "summary-box-executive-summary",
+    "heading": "Program summary: Winter Relief 2026",
+    "content": "This page tracks a 12-week emergency housing initiative serving 4 counties. Use the summaries below to review what happened, what changed, and what decisions remain."
+  },
   "props": {
     "id": {
       "type": "string",

@@ -20,7 +20,7 @@ const replaceOnDismiss = (storyDef) => {
 
 const createStory = createDjangoStory({ componentName: 'site-alert' });
 
-export const StandardInfo = createStory(storyDefs.StandardInfo);
+export const Default = createStory(storyDefs.Default);
 export const StandardEmergency = createStory(storyDefs.StandardEmergency);
 export const NoHeader = createStory(storyDefs.NoHeader);
 export const List = createStory(storyDefs.List);

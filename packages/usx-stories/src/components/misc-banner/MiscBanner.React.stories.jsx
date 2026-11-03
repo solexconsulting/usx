@@ -3,20 +3,7 @@ import config from '../../../../usx-react/src/components/misc-banner/config.json
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Misc: {
-    id: 'misc-banner-misc',
-    ...(config.default || {}),
-    color: 'base',
-    badgeText: 'misc',
-    message: 'This is a miscellaneous banner.',
-    casualLinkText: 'Casual Link',
-    casualLinkHref: 'https://usx.solex.studio/',
-    importantLinkText: 'Important Link',
-    importantLinkHref: 'https://usx.solex.studio/',
-    importantLinkIcon: 'arrow_forward',
-    showLearnMore: true,
-    showReturnLink: true,
-  },
+  Default: config.default,
   Primary: {
     id: 'misc-banner-primary',
     ...(config.default || {}),
@@ -100,7 +87,7 @@ export default {
   excludeStories: ['storyDefs'],
 };
 
-export const Misc = { args: storyDefs.Misc };
+export const Default = { args: storyDefs.Default };
 export const Primary = { args: storyDefs.Primary };
 export const Beta = { args: storyDefs.Beta };
 export const Dev = { args: storyDefs.Dev };

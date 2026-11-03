@@ -1,171 +1,93 @@
-/**
- * Storybook renderer for Django components.
- *
- * This module provides a function to create Storybook stories that fetch rendered HTML
- * from Django endpoints instead of rendering templates in JavaScript.
- */
-
 import React, { useState, useEffect, useRef } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-const DEFAULT_RENDER_OPTIONS = {
-  executeScripts: false,
-  replayGlobalEvents: false,
+const getDjangoBaseUrl = () => {
+  return window.USX_DJANGO_URL?.replace(/\/$/, '') || `http://${window.location.hostname}:9090`;
 };
 
-const normalizeRenderOptions = (renderOptions = {}) => {
+const djangoResponse = async (componentName, props, format = '', errorMessage = 'Failed to fetch component HTML') => {
+  const baseUrl = getDjangoBaseUrl();
+  const query = new URLSearchParams({ props: JSON.stringify(props) });
+  if (format) query.set('format', format);
+  const url = `${baseUrl}/render/${componentName}/?${query}`;
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(errorMessage);
+  return response;
+};
+
+export const fetchComponentHtml = async (componentName, props) =>
+  (await djangoResponse(componentName, prepareDjangoRequest(componentName, props))).text();
+
+export const storyTree = (componentName, props, renderTree) =>
+  renderTree
+    ? serializePropsForDjango(renderTree(props))
+    : { __usxNode: 'component', name: componentName.replace(/-/g, '_'), props: serializePropsForDjango(props) };
+
+export const fetchStorySource = async (componentName, tree) => {
+  const response = await djangoResponse(componentName, { __usxStoryTree: tree }, 'story', 'Failed to fetch Django story source');
+  return (await response.json()).source;
+};
+
+const componentName = (type) => {
+  const name = type.displayName || type.name;
+  if (!name) throw new Error('A nested Django story component needs a name.');
+  if (name === 'SideNav') return 'sidenav';
+  return name.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toLowerCase();
+};
+
+const serializeNode = (value) => {
+  if (Array.isArray(value)) return value.map(serializeNode).filter((item) => item !== null);
+  if (value === null || value === undefined || typeof value === 'boolean') return null;
+  if (!React.isValidElement(value)) return { __usxNode: 'text', value: String(value) };
+
+  const { type, props } = value;
+  if (type === React.Fragment) {
+    return { __usxNode: 'fragment', children: serializeNode(props.children) };
+  }
+  if (typeof type === 'string') {
+    const marker = '__USX_STORY_CHILDREN__';
+    const { children, ...attributes } = props;
+    const markup = renderToStaticMarkup(React.createElement(type, attributes, children == null ? null : marker));
+    const markerIndex = markup.indexOf(marker);
+    if (markerIndex < 0) return { __usxNode: 'html', value: markup };
+    return {
+      __usxNode: 'element',
+      open: markup.slice(0, markerIndex),
+      close: markup.slice(markerIndex + marker.length),
+      children: serializeNode(children),
+    };
+  }
+  const { children, ...attributes } = props;
   return {
-    ...DEFAULT_RENDER_OPTIONS,
-    ...(renderOptions || {}),
+    __usxNode: 'component',
+    name: componentName(type),
+    props: serializePropsForDjango(attributes),
+    children: serializeNode(children),
   };
 };
 
-/**
- * Inserts HTML into an element, executing embedded script tags.
- * @param {HTMLElement} element
- * @param {string} html
- */
-const insertHTMLWithScripts = (element, html) => {
-  element.innerHTML = html;
-
-  Array.from(element.querySelectorAll('script')).forEach((script) => {
-    const newScript = document.createElement('script');
-    Array.from(script.attributes).forEach((attr) => newScript.setAttribute(attr.name, attr.value));
-
-    newScript.appendChild(document.createTextNode(script.innerHTML));
-    if (script.parentNode) {
-      script.parentNode.replaceChild(newScript, script);
-    }
-  });
-};
-
-const insertHTML = (element, html, executeScripts) => {
-  if (executeScripts) {
-    insertHTMLWithScripts(element, html);
-    return;
-  }
-
-  element.innerHTML = html;
-};
-
-const replayGlobalLoadingEvents = () => {
-  window.document.dispatchEvent(
-    new Event('DOMContentLoaded', {
-      bubbles: true,
-      cancelable: true,
-    })
-  );
-  window.dispatchEvent(
-    new Event('DOMContentLoaded', {
-      bubbles: true,
-      cancelable: true,
-    })
-  );
-  window.dispatchEvent(
-    new Event('load', {
-      bubbles: true,
-      cancelable: true,
-    })
-  );
-};
-
-/**
- * Inserts HTML into an element, executing embedded script tags,
- * firing default loading events and custom ones.
- * @param {HTMLElement|null} element
- * @param {string} html
- */
-const simulateLoading = (element, html, renderOptions) => {
-  if (!element) {
-    return;
-  }
-
-  insertHTML(element, html, renderOptions.executeScripts);
-
-  element.dataset.testid = 'storybook-django';
-  element.dataset.state = 'loaded';
-
-  if (renderOptions.replayGlobalEvents) {
-    replayGlobalLoadingEvents();
-  }
-};
-
-/**
- * Base URL for the Django storybook render server.
- *
- * Resolution order (first match wins):
- *  1. window.USX_DJANGO_URL  — injected at container startup via env-config.js
- *  2. http://<current-hostname>:9090  — last-resort default for local dev
- */
-const getDjangoBaseUrl = () => {
-  if (typeof window !== 'undefined' && window.USX_DJANGO_URL) {
-    return window.USX_DJANGO_URL.replace(/\/$/, '');
-  }
-  const hostname =
-    typeof window !== 'undefined' && window.location && window.location.hostname
-      ? window.location.hostname
-      : '127.0.0.1';
-  return `http://${hostname}:9090`;
-};
-
-export const fetchComponentHtml = async (componentName, props) => {
-  const baseUrl = getDjangoBaseUrl();
-  const url = `${baseUrl}/render/${componentName}/?props=${encodeURIComponent(JSON.stringify(props))}`;
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error('Failed to fetch component HTML');
-  }
-  const html = await response.text();
-  return html;
-};
-
-const renderReactNodeToHtml = (node) => {
-  try {
-    return renderToStaticMarkup(React.createElement(React.Fragment, null, node));
-  } catch (error) {
-    console.error('Error serializing React node for Django story rendering:', error);
-    return '';
-  }
-};
-
 export const serializePropsForDjango = (value) => {
-  if (value === undefined) {
-    return undefined;
-  }
+  if (typeof value === 'function' || typeof value === 'symbol') return undefined;
+  if (React.isValidElement(value)) return serializeNode(value);
+  if (Array.isArray(value)) return value.map(serializePropsForDjango).filter((item) => item !== undefined);
+  if (!value || typeof value !== 'object') return value;
+  return Object.fromEntries(
+    Object.entries(value)
+      .map(([key, item]) => [key, serializePropsForDjango(item)])
+      .filter(([, item]) => item !== undefined)
+  );
+};
 
-  if (
-    value === null ||
-    typeof value === 'string' ||
-    typeof value === 'number' ||
-    typeof value === 'boolean'
-  ) {
-    return value;
-  }
+const containsStoryNode = (value) => {
+  if (!value || typeof value !== 'object') return false;
+  if (value.__usxNode) return true;
+  return Object.values(value).some(containsStoryNode);
+};
 
-  if (typeof value === 'function' || typeof value === 'symbol') {
-    return undefined;
-  }
-
-  if (React.isValidElement(value)) {
-    return renderReactNodeToHtml(value);
-  }
-
-  if (Array.isArray(value)) {
-    return value.map((item) => serializePropsForDjango(item)).filter((item) => item !== undefined);
-  }
-
-  if (typeof value === 'object') {
-    const serialized = {};
-    Object.entries(value).forEach(([key, item]) => {
-      const next = serializePropsForDjango(item);
-      if (next !== undefined) {
-        serialized[key] = next;
-      }
-    });
-    return serialized;
-  }
-
-  return value;
+export const prepareDjangoRequest = (componentName, props) => {
+  const serialized = serializePropsForDjango(props);
+  if (serialized?.__usxStoryTree || !containsStoryNode(serialized)) return serialized;
+  return { __usxStoryTree: { __usxNode: 'component', name: componentName.replace(/-/g, '_'), props: serialized } };
 };
 
 const getErrorMessage = (error) => {
@@ -189,7 +111,7 @@ export const useDjangoRenderedHtml = (componentName, props) => {
   const [error, setError] = useState(null);
 
   // Keyed on the serialized props so a new-but-equal props object doesn't refetch.
-  const requestKey = JSON.stringify(serializePropsForDjango(props));
+  const requestKey = JSON.stringify(prepareDjangoRequest(componentName, props));
 
   useEffect(() => {
     let active = true;
@@ -219,14 +141,7 @@ export const useDjangoRenderedHtml = (componentName, props) => {
   return { html, error };
 };
 
-/**
- * Fetches and concatenates the rendered HTML for several Django components into a
- * single string, so callers can insert them all with one `dangerouslySetInnerHTML`
- * instead of wrapping each field in its own extra container element.
- *
- * @param {Array<{componentName: string, args: object}>} fields
- * @return {{ html: string, errors: Array<{componentName: string, error: string}> }}
- */
+/** Render several fields without adding a wrapper around each one. */
 export const useDjangoRenderedFields = (fields) => {
   const [html, setHtml] = useState('');
   const [errors, setErrors] = useState([]);
@@ -235,7 +150,7 @@ export const useDjangoRenderedFields = (fields) => {
   const requestKey = JSON.stringify(
     fields.map(({ componentName, args }) => ({
       componentName,
-      props: serializePropsForDjango(args),
+      props: prepareDjangoRequest(componentName, args),
     }))
   );
 
@@ -278,30 +193,19 @@ export const useDjangoRenderedFields = (fields) => {
   return { html, errors };
 };
 
-/**
- * Create a Storybook render component for a Django component.
- *
- * This function returns a React component that fetches the rendered HTML
- * from the Django endpoint and displays it.
- *
- * @param {string} componentName - The name of the Django component (e.g., 'usx/button').
- * @returns {Function} A React component that takes props and renders the HTML.
- */
-const createDjangoRenderedComponent = (componentName, renderOptions) => {
+export function djangoComponent({ componentName }) {
+  if (!componentName) throw new Error('djangoComponent requires an options object with componentName');
+
   return function DjangoRenderedComponent(props) {
     const { html, error } = useDjangoRenderedHtml(componentName, props);
     const containerRef = useRef(null);
 
     useEffect(() => {
-      let cleanup;
       if (html && containerRef.current) {
-        simulateLoading(containerRef.current, html, renderOptions);
+        containerRef.current.innerHTML = html;
+        containerRef.current.dataset.testid = 'storybook-django';
+        containerRef.current.dataset.state = 'loaded';
       }
-      return () => {
-        if (typeof cleanup === 'function') {
-          cleanup();
-        }
-      };
     }, [html]);
 
     if (error) {
@@ -314,19 +218,4 @@ const createDjangoRenderedComponent = (componentName, renderOptions) => {
 
     return React.createElement('div', { ref: containerRef });
   };
-};
-
-/**
- * @param {{
- *   componentName: string,
- *   renderOptions?: {executeScripts?: boolean, replayGlobalEvents?: boolean}|null
- * }} options
- */
-export function djangoComponent({ componentName, renderOptions = null }) {
-  if (!componentName) {
-    throw new Error('djangoComponent requires an options object with componentName');
-  }
-
-  const normalizedRenderOptions = normalizeRenderOptions(renderOptions);
-  return createDjangoRenderedComponent(componentName, normalizedRenderOptions);
 }

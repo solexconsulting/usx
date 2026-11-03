@@ -20,7 +20,7 @@
     ],
     "requiredLinks": [
       {
-        "href": "",
+        "href": "javascript:void(0)",
         "label": "About <Parent shortname>"
       },
       {

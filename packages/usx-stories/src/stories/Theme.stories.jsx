@@ -67,7 +67,7 @@ import TextArea from '../../../usx-react/src/components/text-area/TextArea.tsx';
 import { componentInit } from '../utils/storyHelpers.jsx';
 
 export default {
-  title: 'Documentation/Theme/Playground',
+  title: 'Documentation/USX Theme/Playground',
   tags: ['USX'],
   parameters: { layout: 'fullscreen' },
   decorators: [...componentInit('datePicker', 'fileInput', 'range', 'inPageNavigation')],

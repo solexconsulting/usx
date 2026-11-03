@@ -1,5 +1,5 @@
 {# Django template for Tag #}
-{% load components %}
+{% load usx_components %}
 
 <span
   {% if id %}id="{{ id }}"{% endif %}
@@ -15,11 +15,11 @@
 >
   {% if big %}
     {% with iconSize=3 %}
-      {% if icon %}{% icon name=icon size=iconSize %}{% endicon %}{% endif %}{{ children | default:value }}
+      {% if icon %}{% icon name=icon size=iconSize %}{% endicon %}{% endif %}{% if children %}{{ children }}{% else %}{{ value }}{% endif %}
     {% endwith %}
   {% else %}
     {% with iconSize=2 %}
-      {% if icon %}{% icon name=icon size=iconSize %}{% endicon %}{% endif %}{{ children | default:value }}
+      {% if icon %}{% icon name=icon size=iconSize %}{% endicon %}{% endif %}{% if children %}{{ children }}{% else %}{{ value }}{% endif %}
     {% endwith %}
   {% endif %}
   {% if dismissible %}

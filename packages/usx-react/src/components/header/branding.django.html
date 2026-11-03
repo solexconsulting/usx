@@ -1,0 +1,14 @@
+{% load usx_components %}{% if branding %}<div class="usa-logo usx-logo{% if className %} {{ className }}{% endif %}">
+  {% if branding.logo %}
+    {% if projectUrl %}<a href="{{ projectUrl }}" class="usx-image usx-logo__image">{% else %}<div class="usx-image usx-logo__image">{% endif %}
+      {% image src=branding.logo alt=branding.alt|default:branding.title staticBaseUrl=staticBaseUrl className="usx-logo__variant" %}{% endimage %}
+      {% if branding.logoInverse %}{% image src=branding.logoInverse alt=branding.alt|default:branding.title staticBaseUrl=staticBaseUrl className="usx-logo__variant usx-logo__variant--inverse" %}{% endimage %}{% endif %}
+    {% if projectUrl %}</a>{% else %}</div>{% endif %}
+  {% else %}
+    <em class="usa-logo__text">
+      {% if branding.symbol %}<img src="{% asset_url branding.symbol staticBaseUrl %}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant" />{% endif %}
+      {% if branding.symbolInverse %}<img src="{% asset_url branding.symbolInverse staticBaseUrl %}" alt="" aria-hidden="true" class="usx-logo__symbol usx-logo__variant usx-logo__variant--inverse" />{% endif %}
+      {% if branding.title %}{% if projectUrl %}<a href="{{ projectUrl }}" class="usx-logo__title">{{ branding.title }}</a>{% else %}<span class="usx-logo__title">{{ branding.title }}</span>{% endif %}{% endif %}
+    </em>
+  {% endif %}
+</div>{% endif %}

@@ -1,3 +1,4 @@
+import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Drawer from '../../../../usx-react/src/components/drawer/Drawer.tsx';
 import Tree from '../../../../usx-react/src/components/tree/Tree.tsx';
@@ -62,23 +63,7 @@ const navigationItems = [
 ];
 
 export const storyDefs = {
-  Default: {
-    id: 'drawer-default',
-    label: 'Open application details',
-    triggerClassName: 'usa-button usx-button usa-button--primary margin-0',
-    heading: 'Application details',
-    description: 'Review the status of your housing support application.',
-    children: (
-      <>
-        <Tag value="In review" color="info" />
-        <SummaryBox id="drawer-application-summary" heading="Housing support application">
-          <p>Application number: HSG-10482</p>
-          <p>We are checking your eligibility. No action is needed right now.</p>
-        </SummaryBox>
-        <p><Link href="#application-timeline">View application timeline</Link></p>
-      </>
-    ),
-  },
+  Default: storyDefaultArgs(config.default),
   MenuIconTrigger: {
     id: 'drawer-menu-icon-trigger',
     label: 'Open site menu',

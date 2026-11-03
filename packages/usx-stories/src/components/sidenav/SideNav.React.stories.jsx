@@ -1,3 +1,4 @@
+import config from '../../../../usx-react/src/components/sidenav/config.json';
 // import React from 'react';
 import SideNav from '../../../../usx-react/src/components/sidenav/SideNav.tsx';
 
@@ -14,13 +15,7 @@ export default {
 };
 
 export const storyDefs = {
-  Simple: {
-    items: [
-      { text: 'Current page', href: 'javascript:void(0);', current: true },
-      { text: 'Parent link', href: 'javascript:void(0);' },
-      { text: 'Parent link', href: 'javascript:void(0);' },
-    ],
-  },
+  Default: config.default,
   WithSublist: {
     items: [
       { text: 'Parent link', href: 'javascript:void(0);' },
@@ -63,6 +58,6 @@ export const storyDefs = {
   },
 };
 
-export const Simple = { args: storyDefs.Simple };
+export const Default = { args: storyDefs.Default };
 export const WithSublist = { args: storyDefs.WithSublist };
 export const Nested = { args: storyDefs.Nested };

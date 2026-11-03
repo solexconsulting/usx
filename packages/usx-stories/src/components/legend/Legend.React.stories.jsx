@@ -13,9 +13,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    text: 'Legend Text',
-  },
+  Default: config.default,
   WithAdditionalClasses: {
     text: 'Legend with Additional Classes',
     className: 'text-primary',

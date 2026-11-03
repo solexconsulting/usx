@@ -10,7 +10,7 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'misc-banner' });
 
-export const Misc = createStory(storyDefs.Misc);
+export const Default = createStory(storyDefs.Default);
 export const Primary = createStory(storyDefs.Primary);
 export const Beta = createStory(storyDefs.Beta);
 export const Dev = createStory(storyDefs.Dev);

@@ -2,6 +2,9 @@
   "name": "form-group",
   "template": "form-group/form-group.django.html",
   "version": 2,
+  "default": {
+    "children": "<div class=\"usa-form-group usx-form-group\"><label class=\"usa-label usx-label\" for=\"form-group-default-input\">Form group label</label><input id=\"form-group-default-input\" class=\"usa-input usx-input\" placeholder=\"Type here\"/></div>"
+  },
   "props": {
     "children": {
       "type": "slot",

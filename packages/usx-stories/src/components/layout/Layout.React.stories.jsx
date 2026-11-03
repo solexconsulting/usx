@@ -1,3 +1,5 @@
+import config from '../../../../usx-react/src/components/layout/config.json';
+import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Layout from '../../../../usx-react/src/components/layout/Layout.tsx';
 import Page from '../../../../usx-react/src/components/page/Page.tsx';
@@ -19,19 +21,7 @@ export default {
 };
 
 export const storyDefs = {
-  SingleColumn: {
-    variant: 'single-column',
-    children: (
-      <div className="bg-blue">
-        <h2>Single Column Layout</h2>
-        <p>This content is centered with responsive gutters.</p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua.
-        </p>
-      </div>
-    ),
-  },
+  Default: storyDefaultArgs(config.default),
   GridFullContent: {
     variant: 'grid',
     content: (
@@ -191,9 +181,9 @@ export const storyDefs = {
   },
 };
 
-export const SingleColumn = { args: storyDefs.SingleColumn };
+export const Default = { args: storyDefs.Default };
 export const GridFullContent = { args: storyDefs.GridFullContent };
-export const GridWithoutSidebars = { args: { ...storyDefs.SingleColumn, variant: 'grid' } };
+export const GridWithoutSidebars = { args: { ...storyDefs.Default, variant: 'grid' } };
 export const GridWithLeftSidebar = { args: storyDefs.GridWithLeftSidebar };
 export const GridWithRightSidebar = { args: storyDefs.GridWithRightSidebar };
 export const Expandable = { args: storyDefs.Expandable };

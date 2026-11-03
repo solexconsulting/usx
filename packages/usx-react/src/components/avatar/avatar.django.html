@@ -1,6 +1,6 @@
 {# Django template for Avatar #}
 
-{% load components %}
+{% load usx_components %}
 
 {% fragment as avatarLink %}
 <a href="{% if href is None %}#{% else %}{{ href }}{% endif %}" class="usx-avatar{% if className %} {{ className }}{% endif %}"{% if variant == 'initials' or variant == 'icon' %}{% if alt %} aria-label="{{ alt }}"{% endif %}{% endif %}>

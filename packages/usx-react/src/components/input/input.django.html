@@ -1,4 +1,4 @@
-{% load components %}
+{% load usx_components %}
 
 {% with id|default:"input" as field_id %}
 {% with formGroup|default_if_none:True as wrap_group %}
@@ -28,6 +28,7 @@
   {% if error %}aria-invalid="true" {% endif %}
   {% if disabled %}disabled {% endif %}
   {% if required %}required{% endif %}
+  {% if autoFocus %}autofocus{% endif %}
 />
 {% endform_group %}
 {% else %}
@@ -54,6 +55,7 @@
   {% if error %}aria-invalid="true" {% endif %}
   {% if disabled %}disabled {% endif %}
   {% if required %}required{% endif %}
+  {% if autoFocus %}autofocus{% endif %}
 />
 {% endif %}
 

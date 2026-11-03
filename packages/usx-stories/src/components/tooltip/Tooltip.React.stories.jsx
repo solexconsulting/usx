@@ -1,3 +1,4 @@
+import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Tooltip from '../../../../usx-react/src/components/tooltip/Tooltip.tsx';
 import Button from '../../../../usx-react/src/components/button/Button.tsx';
@@ -15,10 +16,7 @@ export default {
 };
 
 export const storyDefs = {
-  OnButton: {
-    label: 'Helpful info',
-    position: 'top',
-  },
+  Default: storyDefaultArgs(config.default),
   Top: {
     label: 'Top tooltip',
     position: 'top',
@@ -49,18 +47,15 @@ export const storyDefs = {
   },
 };
 
-export const OnButton = {
-  render: () => (
-    <Tooltip {...storyDefs.OnButton}>
-      <Button>Hover me</Button>
-    </Tooltip>
-  )
+export const Default = {
+  args: storyDefs.Default,
+  render: (args) => <Tooltip {...args} />,
 };
 
 export const Top = {
   render: () => (
     <Tooltip {...storyDefs.Top}>
-      <Button>Top</Button>
+      <Button variant="primary">Top</Button>
     </Tooltip>
   )
 };
@@ -68,7 +63,7 @@ export const Top = {
 export const Bottom = {
   render: () => (
     <Tooltip {...storyDefs.Bottom}>
-      <Button>Bottom</Button>
+      <Button variant="primary">Bottom</Button>
     </Tooltip>
   )
 };
@@ -76,7 +71,7 @@ export const Bottom = {
 export const Left = {
   render: () => (
     <Tooltip {...storyDefs.Left}>
-      <Button>Left</Button>
+      <Button variant="primary">Left</Button>
     </Tooltip>
   )
 };
@@ -84,7 +79,7 @@ export const Left = {
 export const Right = {
   render: () => (
     <Tooltip {...storyDefs.Right}>
-      <Button>Right</Button>
+      <Button variant="primary">Right</Button>
     </Tooltip>
   )
 };

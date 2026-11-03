@@ -2,6 +2,159 @@
   "name": "footer",
   "template": "footer/footer.django.html",
   "version": 2,
+  "default": {
+    "variant": "big",
+    "navColumns": [
+      {
+        "heading": "Programs",
+        "links": [
+          {
+            "text": "Benefits",
+            "href": "/programs/benefits"
+          },
+          {
+            "text": "Health Services",
+            "href": "/programs/health"
+          },
+          {
+            "text": "Education",
+            "href": "/programs/education"
+          },
+          {
+            "text": "Housing",
+            "href": "/programs/housing"
+          }
+        ]
+      },
+      {
+        "heading": "Resources",
+        "links": [
+          {
+            "text": "Forms",
+            "href": "/resources/forms"
+          },
+          {
+            "text": "Publications",
+            "href": "/resources/publications"
+          },
+          {
+            "text": "Data & Research",
+            "href": "/resources/data"
+          },
+          {
+            "text": "Tools",
+            "href": "/resources/tools"
+          }
+        ]
+      },
+      {
+        "heading": "Connect",
+        "links": [
+          {
+            "text": "Newsroom",
+            "href": "/newsroom"
+          },
+          {
+            "text": "Events",
+            "href": "/events"
+          },
+          {
+            "text": "Social Media",
+            "href": "/social"
+          },
+          {
+            "text": "Newsletter",
+            "href": "/newsletter"
+          }
+        ]
+      },
+      {
+        "heading": "About",
+        "links": [
+          {
+            "text": "Mission",
+            "href": "/about/mission"
+          },
+          {
+            "text": "Leadership",
+            "href": "/about/leadership"
+          },
+          {
+            "text": "Careers",
+            "href": "/about/careers"
+          },
+          {
+            "text": "Contact Us",
+            "href": "/contact"
+          }
+        ]
+      }
+    ],
+    "signUp": {
+      "heading": "Stay informed",
+      "emailLabel": "Your email address",
+      "emailId": "footer-email-big",
+      "buttonText": "Subscribe"
+    },
+    "branding": {
+      "logo": {
+        "fallback": "symbol-only.svg",
+        "sources": [
+          {
+            "media": "(min-width: 40em)",
+            "srcSet": "linear-w-symbol_left.svg"
+          }
+        ]
+      },
+      "logoInverse": {
+        "fallback": "white_symbol-only.png",
+        "sources": [
+          {
+            "media": "(min-width: 40em)",
+            "srcSet": "white_linear-w-symbol_left.png"
+          }
+        ]
+      },
+      "title": "Agency Name"
+    },
+    "brandingUrl": "/",
+    "socialLinks": [
+      {
+        "icon": "img/usa-icons/facebook.svg",
+        "href": "/social/facebook",
+        "alt": "Facebook"
+      },
+      {
+        "icon": "img/usa-icons/twitter.svg",
+        "href": "/social/twitter",
+        "alt": "Twitter"
+      },
+      {
+        "icon": "img/usa-icons/youtube.svg",
+        "href": "/social/youtube",
+        "alt": "YouTube"
+      },
+      {
+        "icon": "img/usa-icons/instagram.svg",
+        "href": "/social/instagram",
+        "alt": "Instagram"
+      },
+      {
+        "icon": "img/usa-icons/rss_feed.svg",
+        "href": "/social/rss",
+        "alt": "RSS"
+      }
+    ],
+    "contactHeading": "Agency Contact Center",
+    "contactPhone": {
+      "href": "tel:1-800-555-5555",
+      "text": "(800) 555-GOVT"
+    },
+    "contactEmail": {
+      "href": "mailto:info@agency.gov",
+      "text": "info@agency.gov"
+    }
+  },
   "props": {
     "staticBaseUrl": {
       "type": "string",

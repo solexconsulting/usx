@@ -11,14 +11,7 @@ const defaultImage =
   'https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg';
 
 export const storyDefs = {
-  Default: {
-    title: 'The hero heading',
-    callout: 'A callout heading',
-    paragraph: defaultParagraph,
-    buttonProps: defaultButton,
-    backgroundImage: defaultImage,
-    overlay: true,
-  },
+  Default: config.default,
   NoBackground: {
     title: 'The hero heading',
     callout: 'A callout heading',

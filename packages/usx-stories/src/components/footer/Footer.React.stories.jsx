@@ -55,45 +55,6 @@ const navLinks = [
   { text: 'Contact',       href: '/contact' },
 ];
 
-const navColumns = [
-  {
-    heading: 'Programs',
-    links: [
-      { text: 'Benefits',        href: '/programs/benefits' },
-      { text: 'Health Services', href: '/programs/health' },
-      { text: 'Education',       href: '/programs/education' },
-      { text: 'Housing',         href: '/programs/housing' },
-    ],
-  },
-  {
-    heading: 'Resources',
-    links: [
-      { text: 'Forms',           href: '/resources/forms' },
-      { text: 'Publications',    href: '/resources/publications' },
-      { text: 'Data & Research', href: '/resources/data' },
-      { text: 'Tools',           href: '/resources/tools' },
-    ],
-  },
-  {
-    heading: 'Connect',
-    links: [
-      { text: 'Newsroom',        href: '/newsroom' },
-      { text: 'Events',          href: '/events' },
-      { text: 'Social Media',    href: '/social' },
-      { text: 'Newsletter',      href: '/newsletter' },
-    ],
-  },
-  {
-    heading: 'About',
-    links: [
-      { text: 'Mission',         href: '/about/mission' },
-      { text: 'Leadership',      href: '/about/leadership' },
-      { text: 'Careers',         href: '/about/careers' },
-      { text: 'Contact Us',      href: '/contact' },
-    ],
-  },
-];
-
 const signUp = {
   heading: 'Stay informed',
   emailLabel: 'Your email address',
@@ -104,15 +65,7 @@ const signUp = {
 // ── Exportable story definitions (reused by Django stories) ───────────────
 
 export const storyDefs = {
-  Big: {
-    variant: 'big',
-    navColumns,
-    signUp,
-    branding,
-    brandingUrl,
-    socialLinks,
-    ...contactArgs,
-  },
+  Default: config.default,
   Medium: {
     variant: 'medium',
     navLinks,
@@ -188,9 +141,9 @@ export const storyDefs = {
 
 const Template = (args) => <Footer {...args} />;
 
-export const Big = Template.bind({});
-Big.args = storyDefs.Big;
-Big.storyName = 'Big Footer';
+export const Default = Template.bind({});
+Default.args = storyDefs.Default;
+Default.storyName = 'Big Footer';
 
 export const Medium = Template.bind({});
 Medium.args = storyDefs.Medium;
@@ -224,7 +177,7 @@ export const borderRoleVars = {
 };
 
 export const BorderRoles = {
-  args: { ...storyDefs.Big, signUp: { ...signUp, emailId: 'footer-email-border-roles' }, returnToTop: true },
+  args: { ...storyDefs.Default, signUp: { ...signUp, emailId: 'footer-email-border-roles' }, returnToTop: true },
   render: (args) => (
     <div style={borderRoleVars}>
       <Footer {...args} />

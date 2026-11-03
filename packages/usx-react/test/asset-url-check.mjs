@@ -89,7 +89,7 @@ assert.ok(!renderToStaticMarkup(CopyToClipboard({})).includes('usx-tooltip'));
 const copiedOnly = CopyToClipboard({ tooltipProps: { label: null, bodyClassName: 'custom-body' } });
 assert.equal(copiedOnly.props.bodyClassName, 'custom-body');
 assert.equal(copiedOnly.props.position, undefined);
-assert.ok(renderToStaticMarkup(copiedOnly).includes('usa-tooltip__body--top custom-body'));
+assert.ok(renderToStaticMarkup(copiedOnly).includes('usa-tooltip__body--right custom-body'));
 assert.ok(renderToStaticMarkup(copiedOnly).includes('usx-copy__tooltip--copied">Copied</span>'));
 assert.ok(renderToStaticMarkup(CopyToClipboard({ tooltipProps: { label: 'Copy' } })).includes('usx-copy__tooltip--copied">Copied</span>'));
 assert.ok(!renderToStaticMarkup(React.createElement(Tooltip, { label: 'Plain tooltip' })).includes('usx-copy'));

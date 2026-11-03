@@ -5,6 +5,24 @@
   "required": [
     "options"
   ],
+  "default": {
+    "id": "select-default",
+    "label": "Dropdown label",
+    "options": [
+      {
+        "value": "option1",
+        "label": "Option A"
+      },
+      {
+        "value": "option2",
+        "label": "Option B"
+      },
+      {
+        "value": "option3",
+        "label": "Option C"
+      }
+    ]
+  },
   "props": {
     "id": {
       "type": "string",

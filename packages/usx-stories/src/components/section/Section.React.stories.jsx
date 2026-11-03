@@ -1,22 +1,16 @@
+import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Section from '../../../../usx-react/src/components/section/Section.tsx';
 import config from '../../../../usx-react/src/components/section/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Default: {
+  Default: storyDefaultArgs(config.default),
+  WithoutTitle: {
     ...(config.default || {}),
-    content: undefined,
+    title: '',
     children: (
-      <p>Use section to group related page content with consistent spacing.</p>
-    ),
-  },
-  WithTitle: {
-    ...(config.default || {}),
-    title: 'Program details',
-    content: undefined,
-    children: (
-      <p>Optional section titles help organize long pages into meaningful chunks.</p>
+      <p>A section can group related content without adding a heading.</p>
     ),
   },
   WithHeadingAs: {
@@ -74,7 +68,7 @@ export default {
 };
 
 export const Default = { args: storyDefs.Default };
-export const WithTitle = { args: storyDefs.WithTitle };
+export const WithoutTitle = { args: storyDefs.WithoutTitle };
 export const WithAdditionalClasses = { args: storyDefs.WithAdditionalClasses };
 
 export const WithHeadingAs = { args: storyDefs.WithHeadingAs };

@@ -18,7 +18,7 @@ const sourceLinkProps = { href: 'https://example.com/report', external: true };
 const sourceLinkPropsWMargin = { href: 'https://example.com/report', external: true, className: 'margin-top-1' };
 
 export const storyDefs = {
-  Default: { content },
+  Default: config.default,
   WithAttribution: { content, blockquoteClassName: 'font-serif-lg text-italic', attributionProps, calloutProps: { strokeColor: 'info' } },
   WithAvatar: { content, blockquoteClassName: 'font-serif-lg text-italic', attributionProps: avatarAttribution, calloutProps: { strokeColor: 'info' } },
   Vertical: { content, blockquoteClassName: 'font-serif-lg', calloutProps: { orientation: 'vertical', strokeColor: 'info' }, attributionProps: avatarAttribution },

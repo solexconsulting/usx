@@ -182,7 +182,7 @@ import { Container, Button } from '@solexllc/usx-react';
   gap="2"
   responsive={{ tablet: { direction: 'row', wrap: 'wrap', align: 'center' } }}
 >
-  <Button>Save changes</Button>
+  <Button variant="primary">Save changes</Button>
   <Button variant="secondary">Cancel</Button>
 </Container>
 ```
@@ -239,7 +239,7 @@ match the upstream grid, independently of USX page-layout theme settings.
 Django uses the same props and nesting:
 
 ```django
-{% load components %}
+{% load usx_components %}
 {% container display="flex" direction="column" gap="2" responsive=layout_overrides %}
   {% button %}Save changes{% endbutton %}
   {% button variant="secondary" %}Cancel{% endbutton %}
@@ -251,18 +251,15 @@ Here `layout_overrides` is a context dictionary such as
 all options in `container/config.json`; responsive objects reference the same
 contract with non-layout fields omitted.
 
-Use `element` for semantic roots (`section`, `article`, `aside`, `nav`, `ul`,
+Use `as` for semantic roots (`section`, `article`, `aside`, `nav`, `ul`,
 `ol`, or `li`), with `id`, `role`, `ariaLabel`, or `ariaLabelledby` as needed.
 The ARIA props render as `aria-label` and `aria-labelledby` in both frameworks.
 React and Django use the same explicit prop contract; Container does not forward
 arbitrary HTML props or inline styles. Use `className` for additional styling.
 The Django renderer uses the existing component tags and a reusable template
 fragment for layout classes; it has no Container-specific Python helper.
-Native element styling still applies; for example, lists retain their browser
-spacing unless explicitly reset. Reverse directions affect visual order only,
-so preserve a sensible reading and keyboard order in the source. Responsive
-`display: 'none'` also hides content from assistive technology.
-Use `className` for application-specific decoration, spacing, or other layouts.
+Native element styling still applies. Reverse directions affect visual order
+only, so preserve a sensible reading and keyboard order in the source.
 
 ### Responsive Layout
 

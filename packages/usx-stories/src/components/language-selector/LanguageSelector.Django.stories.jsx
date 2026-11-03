@@ -23,7 +23,7 @@ const toDjangoArgs = (args) => Object.fromEntries(
   Object.entries(args).filter(([key]) => allowedPropNames.has(key))
 );
 
-export const TwoLanguages = createStory(toDjangoArgs(storyDefs.TwoLanguages));
+export const Default = createStory(toDjangoArgs(storyDefs.Default));
 export const ManyLanguages = createStory(toDjangoArgs(storyDefs.ManyLanguages));
 export const Unstyled = createStory(toDjangoArgs(storyDefs.Unstyled));
 export const Small = createStory(toDjangoArgs(storyDefs.Small));

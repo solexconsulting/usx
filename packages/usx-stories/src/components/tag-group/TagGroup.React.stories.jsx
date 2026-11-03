@@ -16,9 +16,7 @@ const defaultTags = [
 const bigTags = defaultTags.map((t) => ({ ...t, big: true }));
 
 export const storyDefs = {
-  Default: {
-    tagProps: defaultTags,
-  },
+  Default: config.default,
   Big: {
     tagProps: bigTags,
   },

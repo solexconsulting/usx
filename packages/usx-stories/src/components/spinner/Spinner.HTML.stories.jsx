@@ -81,7 +81,7 @@ const play = async (context) => {
     await checkSpinner({ size: 4 })(tooltip.querySelector('.usx-spinner'));
     const body = tooltip.querySelector('.usa-tooltip__body');
     await expect(body).toHaveAttribute('role', 'tooltip');
-    await expect(body).toHaveClass('usa-tooltip__body--top');
+    await expect(body).toHaveClass('usa-tooltip__body--right');
     await expect(body).toHaveTextContent('Loading...');
   });
 };

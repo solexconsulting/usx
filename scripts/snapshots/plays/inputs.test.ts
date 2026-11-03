@@ -5,7 +5,7 @@ import path from 'node:path';
 import test from 'node:test';
 import { isPlayResult } from '../model/results.ts';
 import { freshnessOf } from '../results/stores.ts';
-import { generationInputFiles, hashFiles, listFiles, playInputFiles } from './inputs.ts';
+import { hashFiles, listFiles, playInputFiles } from './inputs.ts';
 import { cleanMessage } from './text.ts';
 
 const withDirectory = (run: (directory: string) => void) => () => {
@@ -53,13 +53,6 @@ test('play inputs include the stories, the component and only the source’s own
   assert.ok(files.includes('Carousel.tsx'));
   assert.ok(files.includes('carousel.react-snapshot.html'));
   assert.ok(!files.includes('carousel.django-snapshot.html'));
-});
-
-test('Django snapshot inputs include co-located story templates', () => {
-  const django = generationInputFiles('clickable', 'django').map((file) => path.basename(file));
-  const react = generationInputFiles('clickable', 'react').map((file) => path.basename(file));
-  assert.ok(django.includes('story-single.html'));
-  assert.ok(!react.includes('story-single.html'));
 });
 
 test('freshness compares the stored hash with the current one', () => {

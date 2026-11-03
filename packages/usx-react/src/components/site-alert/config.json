@@ -2,6 +2,11 @@
   "name": "site-alert",
   "template": "site-alert/site-alert.django.html",
   "version": 2,
+  "default": {
+    "variant": "info",
+    "alertHeading": "Short alert message",
+    "alertText": "Additional context and followup information including a link."
+  },
   "props": {
     "className": {
       "type": "string",

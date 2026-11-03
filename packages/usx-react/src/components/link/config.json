@@ -6,6 +6,10 @@
     "href",
     "children"
   ],
+  "default": {
+    "href": "https://google.com/",
+    "children": "Google"
+  },
   "props": {
     "href": {
       "type": "string",

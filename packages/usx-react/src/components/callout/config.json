@@ -2,6 +2,9 @@
   "name": "callout",
   "template": "callout/callout.django.html",
   "version": 2,
+  "default": {
+    "content": "Related information goes here."
+  },
   "props": {
     "className": {
       "type": "string",

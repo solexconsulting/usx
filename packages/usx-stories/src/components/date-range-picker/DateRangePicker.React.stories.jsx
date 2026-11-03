@@ -22,14 +22,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    startId: 'event-date-start',
-    endId: 'event-date-end',
-    startLabel: 'Event start date',
-    endLabel: 'Event end date',
-    startHint: 'mm/dd/yyyy',
-    endHint: 'mm/dd/yyyy',
-  },
+  Default: config.default,
   Disabled: {
     startId: 'event-date-disabled-start',
     endId: 'event-date-disabled-end',

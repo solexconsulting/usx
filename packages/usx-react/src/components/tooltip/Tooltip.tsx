@@ -11,14 +11,14 @@ export interface TooltipProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const Tooltip: React.FC<TooltipProps> = ({
   label,
-  position = 'top',
+  position = 'right',
   children,
   className = '',
   bodyClassName = '',
   ...props
 }) => {
   const validPositions = ['top', 'bottom', 'left', 'right'] as const;
-  const normalizedPosition = validPositions.includes(position) ? position : 'top';
+  const normalizedPosition = validPositions.includes(position) ? position : 'right';
   return (
     <span className={classNames('usx-tooltip', className)} {...props}>
       {children}

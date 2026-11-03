@@ -2,6 +2,14 @@
   "name": "indicator",
   "template": "indicator/indicator.django.html",
   "version": 2,
+  "default": {
+    "items": [
+      {
+        "className": "usx-status text-primary"
+      }
+    ],
+    "children": "<div class=\"bg-base width-10 height-10\"></div>"
+  },
   "props": {
     "items": {
       "type": "object",

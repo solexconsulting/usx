@@ -16,18 +16,9 @@ export interface ThemePickerProps {
   themes?: ThemePickerOption[];
   value?: string;
   defaultValue?: string;
-  // Fired when the trigger button opens the panel — actually applying a
-  // theme (CSS variables, stylesheets, persistence, etc.) is the caller's
-  // responsibility, not this component's.
-  onOpen?: () => void;
   onChange?: (value: string) => void;
   className?: string;
 }
-
-// The panel is shown by CSS from the --open class, so opening and closing need no React state.
-const OPEN_CLASS = 'usx-theme-picker--open';
-const setOpen = (target: HTMLElement, open: boolean) =>
-  target.closest('.usx-theme-picker')?.classList.toggle(OPEN_CLASS, open);
 
 export default function ThemePicker({
   id,
@@ -49,11 +40,12 @@ export default function ThemePicker({
         type="button"
         className="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
         aria-label={label}
-        onClick={(event) => setOpen(event.currentTarget, true)}
+        aria-expanded="false"
+        aria-controls={`${selectId}-panel`}
       >
         <PaletteIcon />
       </button>
-      <div className="usx-theme-picker__panel">
+      <div id={`${selectId}-panel`} className="usx-theme-picker__panel">
         <Label htmlFor={selectId} screenReaderOnly>
           {label}
         </Label>
@@ -74,7 +66,6 @@ export default function ThemePicker({
           type="button"
           className="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
           aria-label="Confirm theme"
-          onClick={(event) => setOpen(event.currentTarget, false)}
         >
           <Icon name="close" className="usx-theme-picker__icon" />
         </button>

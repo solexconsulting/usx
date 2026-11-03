@@ -4,7 +4,7 @@ import { useLiveTokenValues, getLiveValue } from '../utils/useLiveTokenValues.js
 import Code from '../../../usx-react/src/components/code/Code';
 
 export default {
-  title: 'Documentation/Theme/Typography',
+  title: 'Documentation/USX Theme/Typography',
   tags: ['autodocs']
 };
 

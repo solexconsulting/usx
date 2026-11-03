@@ -3,11 +3,13 @@ import reactSnapshot from '../../../../usx-react/src/components/header/header.re
 import djangoSnapshot from '../../../../usx-react/src/components/header/header.django-snapshot.html?raw';
 import { expect, userEvent } from 'storybook/test';
 import { borderRoleVars, storyDefs } from './Header.React.stories.jsx';
+import { componentInit } from '../../utils/storyHelpers.jsx';
 import { createAllVariantsPlay, sectionElements, sectionTitle, snapshotId } from '../../utils/playHelpers.js';
 
 export default {
   title: 'HTML/USWDS/Header',
   tags: ['USWDS', 'autodocs'],
+  decorators: [...componentInit('navigation')],
 };
 
 const checkHeader = (def, key) => async (section, context) => {

@@ -2,6 +2,9 @@
   "name": "skipnav",
   "template": "skipnav/skipnav.django.html",
   "version": 2,
+  "default": {
+    "target": "#custom-target-1"
+  },
   "props": {
     "target": {
       "type": "string",

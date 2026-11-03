@@ -2,6 +2,11 @@
   "name": "text-area",
   "template": "text-area/text-area.django.html",
   "version": 2,
+  "default": {
+    "id": "text-area-default",
+    "label": "Text area label",
+    "placeholder": "Type here"
+  },
   "props": {
     "label": {
       "type": "slot",

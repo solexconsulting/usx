@@ -13,7 +13,7 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'summary-box' });
 
-export const ExecutiveSummary = createStory(storyDefs.ExecutiveSummary);
+export const Default = createStory(storyDefs.Default);
 export const StoryStep1Context = createStory(storyDefs.StoryStep1Context);
 export const StoryStep2Actions = createStory(storyDefs.StoryStep2Actions);
 export const StoryStep3Outcomes = createStory(storyDefs.StoryStep3Outcomes);

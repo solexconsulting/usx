@@ -1,5 +1,5 @@
 {# Django template for MemorableDate #}
-{% load components %}
+{% load usx_components %}
 
 {% with base_id=id|default:"memorable-date" %}
 {% with month_id=base_id|add:"-month" day_id=base_id|add:"-day" year_id=base_id|add:"-year" %}

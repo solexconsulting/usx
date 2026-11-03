@@ -21,7 +21,7 @@ export const Overview = {
       </p>
 
       <h2>Packages</h2>
-      <p>This repository (<code>USX</code>) publishes four scoped packages:</p>
+      <p>This repository (<code>USX</code>) publishes four scoped npm packages and a Django package:</p>
       <table className="usa-table usx-table usa-table--borderless" style={{ width: '100%' }}>
         <thead>
           <tr>
@@ -62,6 +62,10 @@ export const Overview = {
               styles; can be loaded standalone by non-React consumers.
             </td>
           </tr>
+          <tr>
+            <td><code>solex-usx-django</code></td>
+            <td>Django template tags for USX components. See <strong>Documentation/USX Django → Overview</strong>.</td>
+          </tr>
         </tbody>
       </table>
 
@@ -82,6 +86,7 @@ export const Overview = {
         <li><strong>Documentation/Theme → Playground</strong> — a live theme editor that exports a theme ready to paste alongside the prebuilt ones.</li>
         <li><strong>Documentation/USX → Overview</strong> — the architecture and design principles behind the component layer.</li>
         <li><strong>Documentation/USX React → Overview</strong> — using the React wrappers.</li>
+        <li><strong>Documentation/USX Django → Overview</strong> — installing and using the Django tags.</li>
         <li><strong>Components/*</strong> — every component, with React, Django, and HTML story variants.</li>
       </ul>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../../../usx-react/src/components/header/Header.tsx';
 import config from '../../../../usx-react/src/components/header/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit } from '../../utils/storyHelpers.jsx';
 
 import { useGlobals } from 'storybook/preview-api';
 import ThemePicker from '../../../../usx-react/src/components/theme-picker/ThemePicker.tsx';
@@ -18,6 +18,7 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
   excludeStories: ['storyDefs', 'borderRoleVars'],
+  decorators: [...componentInit('navigation')],
 };
 
 const lotsOfLinks = Array.from({ length: 30 }, (_, i) => ({
@@ -211,7 +212,7 @@ export const storyDefs = {
     branding: themeResponsiveBranding,
     extended: true,
   },
-  Default: { ...fullArgs, id: 'header-default', extended: true, megamenu: true, useMenuIcon: true },
+  Default: config.default,
   Basic: { ...fullArgs, id: 'header-basic', extended: false, megamenu: false },
   BasicWithMegamenu: { ...fullArgs, id: 'header-basic-megamenu', extended: false, megamenu: true },
   Extended: { ...fullArgs, id: 'header-extended', extended: true, megamenu: false },

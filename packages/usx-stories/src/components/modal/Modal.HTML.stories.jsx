@@ -48,7 +48,7 @@ const checkModal =
     await expect(trigger).toHaveClass('usa-button', 'usx-button');
     await expect(trigger).toHaveAttribute('href', `#${wrapper.id}`);
     await expect(trigger).toHaveAttribute('aria-controls', wrapper.id);
-    await expect(trigger).toHaveTextContent(def.triggerLabel);
+    await expect(trigger).toHaveTextContent(def.triggerLabel || 'Open modal');
 
     await expect(wrapper).toHaveAttribute('role', 'dialog');
     // The dialog is named and described by its heading and text.

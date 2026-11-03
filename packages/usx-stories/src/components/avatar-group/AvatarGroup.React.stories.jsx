@@ -9,9 +9,7 @@ const circleAvatars = baseAvatars.map((avatar) => ({ ...avatar, shape: 'circle' 
 const tooltipAvatars = circleAvatars.map((avatar) => ({ ...avatar, tooltipProps: { label: avatar.alt, position: 'right' } }));
 
 export const storyDefs = {
-  BasicAvatarGroup: {
-    avatarProps: baseAvatars,
-  },
+  Default: config.default,
   RoundedAvatarGroup: {
     avatarProps: roundedAvatars,
   },
@@ -54,7 +52,7 @@ export default {
   excludeStories: ['storyDefs'],
 };
 
-export const BasicAvatarGroup = { args: storyDefs.BasicAvatarGroup };
+export const Default = { args: storyDefs.Default };
 export const RoundedAvatarGroup = { args: storyDefs.RoundedAvatarGroup };
 export const CircleAvatarGroup = { args: storyDefs.CircleAvatarGroup };
 export const OverlappingAvatars = { args: storyDefs.OverlappingAvatars };

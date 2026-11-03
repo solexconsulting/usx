@@ -23,6 +23,7 @@ class Component:
     name = None
     template = None
     props = {}
+    example_default = {}
     # Example: 'button/config.json'
     props_file = None
 
@@ -73,6 +74,7 @@ class Component:
                         props_config = json.load(f)
                     props = props_config.get('props') or props_config or {}
                     self.props = props
+                    self.example_default = props_config.get('default') or {}
                     return self.props
             except Exception:
                 continue

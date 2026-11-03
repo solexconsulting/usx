@@ -12,7 +12,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {},
+  Default: config.default,
   Primary: { color: 'primary' },
   AccentCool: { color: 'accent-cool' },
   AccentWarm: { color: 'accent-warm' },

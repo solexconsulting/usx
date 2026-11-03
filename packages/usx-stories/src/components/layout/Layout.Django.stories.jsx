@@ -16,9 +16,9 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'layout' });
 
-export const SingleColumn = createStory(storyDefs.SingleColumn);
+export const Default = createStory(storyDefs.Default);
 export const GridFullContent = createStory(storyDefs.GridFullContent);
-export const GridWithoutSidebars = createStory({ ...storyDefs.SingleColumn, variant: 'grid' });
+export const GridWithoutSidebars = createStory({ ...storyDefs.Default, variant: 'grid' });
 export const GridWithLeftSidebar = createStory(storyDefs.GridWithLeftSidebar);
 export const GridWithRightSidebar = createStory(storyDefs.GridWithRightSidebar);
 export const Expandable = createStory(storyDefs.Expandable);

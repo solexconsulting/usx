@@ -43,10 +43,7 @@ const items1 = [
 ];
 
 export const storyDefs = {
-  Default: {
-    id: 'accordion-default',
-    items: items1,
-  },
+  Default: config.default,
   Bordered: {
     id: 'accordion-bordered',
     items: items1,

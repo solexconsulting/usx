@@ -13,9 +13,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    children: 'Label Text',
-  },
+  Default: config.default,
   WithRequired: {
     children: 'Label Text',
     required: true,

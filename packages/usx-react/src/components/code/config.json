@@ -5,6 +5,24 @@
   "required": [
     "lines"
   ],
+  "default": {
+    "lines": [
+      {
+        "code": "npm install @solexllc/usx",
+        "prefix": "$"
+      },
+      {
+        "code": "installing...",
+        "prefix": ">",
+        "className": "text-warning"
+      },
+      {
+        "code": "Done!",
+        "prefix": ">",
+        "className": "text-success"
+      }
+    ]
+  },
   "props": {
     "staticBaseUrl": {
       "type": "string",

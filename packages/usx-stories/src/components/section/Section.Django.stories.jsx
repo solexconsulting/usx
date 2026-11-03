@@ -12,7 +12,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'section' });
 
 export const Default = createStory(storyDefs.Default);
-export const WithTitle = createStory(storyDefs.WithTitle);
+export const WithoutTitle = createStory(storyDefs.WithoutTitle);
 export const WithAdditionalClasses = createStory(storyDefs.WithAdditionalClasses);
 
 export const WithHeadingAs = createStory(storyDefs.WithHeadingAs);

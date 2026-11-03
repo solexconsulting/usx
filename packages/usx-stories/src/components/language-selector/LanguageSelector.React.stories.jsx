@@ -21,21 +21,14 @@ export default {
   }
 };
 
-
-const twoLanguages = [
-  // No href: matches real USWDS's canonical two-language pattern, where the
-  // button has no navigation target and app-level JS/backend swaps content.
-  { code: 'en', label: 'English', current: true },
-  { code: 'es', label: 'Español' }
+const manyLanguages = [
+  ...config.default.languages,
+  { code: 'de', label: 'Deutsch', description: 'German', href: 'https://example.com/de' },
+  { code: 'zh', label: '中文', description: 'Chinese', href: 'https://example.com/zh' },
 ];
 
-const manyLanguages = config.default.languages;
-
 export const storyDefs = {
-  TwoLanguages: {
-    variant: 'two',
-    languages: twoLanguages
-  },
+  Default: config.default,
   ManyLanguages: {
     variant: 'menu',
     languages: manyLanguages,
@@ -58,8 +51,8 @@ export const storyDefs = {
   }
 };
 
-export const TwoLanguages = {
-  args: storyDefs.TwoLanguages,
+export const Default = {
+  args: storyDefs.Default,
 };
 
 export const ManyLanguages = {

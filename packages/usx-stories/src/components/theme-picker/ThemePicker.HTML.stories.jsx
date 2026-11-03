@@ -5,6 +5,7 @@ import { useGlobals } from 'storybook/preview-api';
 import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 import { expect, userEvent, waitFor } from 'storybook/test';
 import { storyDefs } from './ThemePicker.React.stories.jsx';
+import { componentInit } from '../../utils/storyHelpers.jsx';
 import {
   createAllVariantsPlay,
   sectionFor,
@@ -16,6 +17,7 @@ export default {
   title: 'HTML/USX/ThemePicker',
   tags: ['USX', 'autodocs'],
   decorators: [
+    ...componentInit('themePicker'),
     (Story) => {
       // Subscribe to Storybook globals so the toolbar theme decorator re-applies
       // when this story's ThemePicker changes the selection.
@@ -92,6 +94,8 @@ const checkPicker = (def) => async (picker) => {
   // Closed: only the palette button shows.
   await expect(trigger).toHaveAttribute('aria-label', def.label);
   await expect(trigger).toHaveAttribute('type', 'button');
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  await expect(trigger).toHaveAttribute('aria-controls', panel.id);
   await expect(trigger.querySelector('svg')).toHaveAttribute('aria-hidden', 'true');
   await expect(trigger).toBeVisible();
   await expect(panel).not.toBeVisible();
@@ -115,14 +119,12 @@ const play = async (context) => {
   await createAllVariantsPlay(checks)(context);
   const picker = sectionFor(context.canvasElement, sectionTitle(Object.keys(storyDefs)[0]));
   const select = picker.querySelector('select');
-  // Opening is wired by an inline handler that only the Django markup carries; React's lives in its component.
-  if (!select.id.startsWith('django-')) return;
-
   await context.step('Opening and closing', async () => {
     const trigger = picker.querySelector('.usx-theme-picker__trigger');
     const panel = picker.querySelector('.usx-theme-picker__panel');
     await userEvent.click(trigger);
     await waitFor(() => expect(visible(panel)).toBe(true));
+    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
     await expect(trigger).not.toBeVisible();
     await expect(select).toHaveAccessibleName('Theme');
 
@@ -132,6 +134,7 @@ const play = async (context) => {
 
     await userEvent.click(picker.querySelector('.usx-theme-picker__toggle'));
     await waitFor(() => expect(visible(panel)).toBe(false));
+    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
     await expect(trigger).toBeVisible();
   });
 };

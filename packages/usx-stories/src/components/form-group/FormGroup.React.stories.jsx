@@ -1,3 +1,4 @@
+import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import FormGroup from '../../../../usx-react/src/components/form-group/FormGroup.tsx';
 import config from '../../../../usx-react/src/components/form-group/config.json';
@@ -14,10 +15,6 @@ export default {
   excludeStories: ['storyDefs'],
 };
 
-const defaultInput = (
-  <Input id="form-group-default-input" label="Form group label" placeholder="Type here" />
-);
-
 const errorInput = (
   <Input id="form-group-error-input" label="Error state" error="This field is required." />
 );
@@ -27,9 +24,7 @@ const successInput = (
 );
 
 export const storyDefs = {
-  Default: {
-    children: defaultInput,
-  },
+  Default: storyDefaultArgs(config.default),
   ErrorState: {
     error: true,
     children: errorInput,

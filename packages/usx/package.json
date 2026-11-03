@@ -33,7 +33,8 @@
     "./js/layout": "./src/js/layout.mjs",
     "./img/usx-sprite.svg": "./src/img/usx-sprite.svg",
     "./img/usx-icons.json": "./src/img/usx-icons.json",
-    "./js/popover": "./src/js/popover.mjs"
+    "./js/popover": "./src/js/popover.mjs",
+    "./js/theme-picker": "./src/js/theme-picker.mjs"
   },
   "files": [
     "src"

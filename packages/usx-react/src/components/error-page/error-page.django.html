@@ -1,5 +1,5 @@
 {# Django template for ErrorPage #}
-{% load components %}
+{% load usx_components %}
 {% firstof id 'main-content' as pageId %}
 {% firstof title 'We couldn’t complete your request' as pageTitle %}
 {% firstof description 'We’re sorry. Please try again later.' as pageDescription %}
@@ -23,7 +23,7 @@
       {% if guidance or children %}
         <div class="usx-error-page__content">
           {% if guidance %}<p>{{ guidance }}</p>{% endif %}
-          {{ children|safe }}
+          {{ children|default_if_none:''|safe }}
         </div>
       {% endif %}
     {% endprose %}

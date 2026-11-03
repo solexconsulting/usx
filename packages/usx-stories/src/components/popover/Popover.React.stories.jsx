@@ -205,12 +205,7 @@ export const storyDefs = {
       </>
     ),
   },
-  Default: {
-    id: 'popover-default',
-    summaryProps: { label: 'Where is my case number?' },
-    className: 'usx-details',
-    children: 'Your case number is in the confirmation email we sent after you applied.',
-  },
+  Default: config.default,
   RoundedPanel: panelShapeExample('rounded'),
   SquarePanel: panelShapeExample('square'),
   GroupedSummaryProps: {

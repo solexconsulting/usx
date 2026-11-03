@@ -23,7 +23,7 @@ const markupLines = (source) =>
   source.split('\n').map((code, index) => ({ code, prefix: String(index + 1) }));
 
 export const storyDefs = {
-  Default: { lines: defaultLines },
+  Default: config.default,
   WithLineNumbers: {
     lines: [
       { code: 'npm install @solexllc/usx', prefix: '1' },

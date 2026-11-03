@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { storyDefs } from './ThemePicker.React.stories.jsx';
 import config from '../../../../usx-react/src/components/theme-picker/config.json';
-import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { useGlobals } from 'storybook/preview-api';
 import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
@@ -11,10 +11,20 @@ export default {
     tags: ['USX', 'autodocs'],
     argTypes: buildArgTypes(config.props || {}),
     decorators: [
+        ...componentInit('themePicker'),
         (Story) => {
             // Subscribe to Storybook globals so the toolbar theme decorator re-applies
             // when this story's ThemePicker changes the selection.
-            useGlobals();
+            const [, updateGlobals] = useGlobals();
+            useEffect(() => {
+                const change = (event) => {
+                    if (event.target.matches('.usx-theme-picker select')) {
+                        updateGlobals({ theme: event.target.value });
+                    }
+                };
+                document.addEventListener('change', change);
+                return () => document.removeEventListener('change', change);
+            }, [updateGlobals]);
             return (
                 <>
                     <Alert
@@ -44,16 +54,6 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'theme-picker' });
 
-// onChange is a plain JS expression string (not a function) — the Django
-// template inserts it verbatim into the select's onchange attribute.
-// `__STORYBOOK_ADDONS_CHANNEL__` is the same channel `useGlobals` uses under
-// the hood, so this drives the toolbar's global theme without any bundler.
-export const Default = createStory({
-    ...storyDefs.Default,
-    onChange: "window.__STORYBOOK_ADDONS_CHANNEL__.emit('updateGlobals', { globals: { theme: this.value } })",
-});
+export const Default = createStory(storyDefs.Default);
 
-export const LightDark = createStory({
-    ...storyDefs.LightDark,
-    onChange: "window.__STORYBOOK_ADDONS_CHANNEL__.emit('updateGlobals', { globals: { theme: this.value } })",
-});
+export const LightDark = createStory(storyDefs.LightDark);

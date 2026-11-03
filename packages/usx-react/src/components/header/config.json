@@ -2,6 +2,79 @@
   "name": "header",
   "template": "header/header.django.html",
   "version": 1,
+  "default": {
+    "projectUrl": "https://example.com",
+    "useMenuIcon": true,
+    "navSections": [
+      {
+        "title": "Section 1",
+        "links": [
+          {
+            "text": "Link A",
+            "href": "https://example.com/linkA",
+            "ariaLabel": "Link A"
+          },
+          {
+            "text": "Link B",
+            "href": "https://example.com/linkB",
+            "ariaLabel": "Link B"
+          }
+        ]
+      },
+      {
+        "title": "Section 2",
+        "links": [
+          {
+            "text": "Link C",
+            "href": "https://example.com/linkC",
+            "ariaLabel": "Link C"
+          },
+          {
+            "text": "Link D",
+            "href": "https://example.com/linkD",
+            "ariaLabel": "Link D"
+          }
+        ]
+      },
+      {
+        "title": "Section 3",
+        "href": "https://example.com/section3",
+        "ariaLabel": "Section 3"
+      }
+    ],
+    "branding": {
+      "symbol": "symbol-only.svg",
+      "symbolInverse": "white_symbol-only.png",
+      "title": "Agency Name"
+    },
+    "secondaryLinks": [
+      {
+        "text": "Secondary Link 1",
+        "href": "https://example.com/secondary1",
+        "ariaLabel": "Secondary Link 1"
+      },
+      {
+        "text": "Secondary Link 2",
+        "href": "https://example.com/secondary2",
+        "ariaLabel": "Secondary Link 2"
+      }
+    ],
+    "searchProps": {
+      "ariaLabel": "Header search",
+      "searchKey": "q",
+      "label": "Search",
+      "icon": "search",
+      "iconOnly": true,
+      "buttonVariant": "primary",
+      "big": false,
+      "action": "https://www.google.com/search",
+      "placeholder": "Search...",
+      "id": "header-default-search"
+    },
+    "id": "header-default",
+    "extended": true,
+    "megamenu": true
+  },
   "props": {
     "staticBaseUrl": {
       "type": "string",

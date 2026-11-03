@@ -6,12 +6,13 @@
     "title": "The hero heading",
     "callout": "A callout heading",
     "paragraph": "A short description of the hero section that provides context for the call to action.",
-    "backgroundImage": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
-    "overlay": true,
     "buttonProps": {
       "href": "#",
-      "text": "Call to action"
-    }
+      "label": "Call to action",
+      "variant": "primary"
+    },
+    "backgroundImage": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
+    "overlay": true
   },
   "props": {
     "title": {

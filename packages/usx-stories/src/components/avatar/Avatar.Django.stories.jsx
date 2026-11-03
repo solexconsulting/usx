@@ -15,7 +15,7 @@ const toDjangoArgs = (args) => Object.fromEntries(
   Object.entries(args).filter(([key]) => allowedPropNames.has(key))
 );
 
-export const BasicAvatar = createStory(toDjangoArgs(storyDefs.BasicAvatar));
+export const Default = createStory(toDjangoArgs(storyDefs.Default));
 export const CircleAvatar = createStory(toDjangoArgs(storyDefs.CircleAvatar));
 export const MediumRoundedAvatar = createStory(toDjangoArgs(storyDefs.MediumRoundedAvatar));
 export const LargeRoundedAvatar = createStory(toDjangoArgs(storyDefs.LargeRoundedAvatar));

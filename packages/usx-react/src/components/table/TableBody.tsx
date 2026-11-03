@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { useTableContext } from './TableContext';
 import TableRow from './TableRow';
 import TableGroup from './TableGroup';
-import Icon from '../icon/Icon';
+import Button from '../button/Button';
 import Spinner from '../spinner/Spinner';
 import Checkbox from '../checkbox/Checkbox';
 import type { RowKey, TableColumn, TableRowData } from './types';
@@ -121,13 +121,11 @@ function DataRow({ row, rowIndex }: { row: TableRowData; rowIndex: number }) {
 
   const detailToggleCell = hasRowDetails ? (
     <td key="__detail-toggle__" className="usx-table__cell usx-table__cell--detail-toggle" onClick={handleToggleDetail}>
-      <button
-        type="button"
+      <Button
+        variant="inverse"
+        ghost={true}
         className={classnames(
-          'usa-button usa-button--unstyled',
           'usx-table__detail-toggle',
-          'width-full',
-          isExpanded && 'usx-table__detail-toggle--expanded'
         )}
         aria-expanded={isExpanded}
         aria-label={
@@ -137,9 +135,14 @@ function DataRow({ row, rowIndex }: { row: TableRowData; rowIndex: number }) {
               : expandLabel
             : `${isExpanded ? 'Collapse' : 'Expand'} row details`
         }
-      >
-        <Icon name={isExpanded ? 'expand_less' : 'expand_more'} aria-hidden="true" />
-      </button>
+        iconProps={[
+          {
+            name: isExpanded ? 'expand_less' : 'expand_more',
+            'aria-hidden': 'true',
+            size: 3
+          }
+        ]}
+      />
     </td>
   ) : null;
 

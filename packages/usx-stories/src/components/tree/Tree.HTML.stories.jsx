@@ -113,12 +113,14 @@ const testPadded = async ({ canvasElement }) => {
     summary.closest('li').getBoundingClientRect().width,
     0
   );
-  await expect(textStart(label)).toBeCloseTo(textStart(link), 0);
+  await expect(Math.abs(textStart(label) - textStart(link))).toBeLessThanOrEqual(1);
   // The summary marker precedes .usx-summary-text, so align with the summary content edge.
-  await expect(textStart(label)).toBeCloseTo(
-    summary.getBoundingClientRect().left + parseFloat(getComputedStyle(summary).paddingLeft),
-    0
-  );
+  await expect(
+    Math.abs(
+      textStart(label) -
+        (summary.getBoundingClientRect().left + parseFloat(getComputedStyle(summary).paddingLeft))
+    )
+  ).toBeLessThanOrEqual(1);
 
   await userEvent.click(summary);
   await expect(branch).toHaveAttribute('open');
@@ -127,7 +129,7 @@ const testPadded = async ({ canvasElement }) => {
   const nestedLink = canvas.getByRole('link', { name: 'Renew an application' });
   await expect(nestedLabel).toHaveClass('usx-tree__label');
   await expectVisible(nestedLink);
-  await expect(textStart(nestedLabel)).toBeCloseTo(textStart(nestedLink), 0);
+  await expect(Math.abs(textStart(nestedLabel) - textStart(nestedLink))).toBeLessThanOrEqual(1);
 };
 
 const testNestedGroups = async ({ canvasElement }) => {

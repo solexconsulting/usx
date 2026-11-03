@@ -15,10 +15,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    heading: 'Default alert',
-    text: 'System status and notification updates appear here.',
-  },
+  Default: alertConfig.default,
   Info: {
     variant: 'info',
     heading: 'Informative status',

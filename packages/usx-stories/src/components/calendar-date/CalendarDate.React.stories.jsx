@@ -4,9 +4,7 @@ import config from '../../../../usx-react/src/components/calendar-date/config.js
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Default: {
-    datetime: '2020-09-30T12:00:00+01:00',
-  },
+  Default: config.default,
 };
 
 export default {

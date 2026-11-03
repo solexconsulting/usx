@@ -14,7 +14,7 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'footer' });
 
-export const Big      = { ...createStory(storyDefs.Big), name: 'Big Footer' };
+export const Default      = { ...createStory(storyDefs.Default), name: 'Big Footer' };
 export const Medium   = { ...createStory(storyDefs.Medium), name: 'Medium Footer' };
 export const Slim     = createStory(storyDefs.Slim);
 export const LogoOnly = createStory(storyDefs.LogoOnly);

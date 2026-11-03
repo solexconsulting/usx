@@ -2,6 +2,7 @@
   "name": "status",
   "template": "status/status.django.html",
   "version": 1,
+  "default": {},
   "props": {
     "color": {
       "type": "select",

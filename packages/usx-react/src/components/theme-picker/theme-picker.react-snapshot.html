@@ -4,6 +4,8 @@
     type="button"
     class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
     aria-label="Theme"
+    aria-expanded="false"
+    aria-controls="react-theme-picker-1-panel"
   >
     <svg
       class="usa-icon usx-theme-picker__icon"
@@ -17,7 +19,7 @@
       ></path>
     </svg>
   </button>
-  <div class="usx-theme-picker__panel">
+  <div id="react-theme-picker-1-panel" class="usx-theme-picker__panel">
     <label class="usa-label usx-label usa-sr-only" for="react-theme-picker-1">Theme</label
     ><select id="react-theme-picker-1" class="usa-select usx-select">
       <option value="Default" selected="">Default</option>
@@ -54,6 +56,8 @@
     type="button"
     class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
     aria-label="Theme"
+    aria-expanded="false"
+    aria-controls="react-theme-picker-2-panel"
   >
     <svg
       class="usa-icon usx-theme-picker__icon"
@@ -67,7 +71,7 @@
       ></path>
     </svg>
   </button>
-  <div class="usx-theme-picker__panel">
+  <div id="react-theme-picker-2-panel" class="usx-theme-picker__panel">
     <label class="usa-label usx-label usa-sr-only" for="react-theme-picker-2">Theme</label
     ><select id="react-theme-picker-2" class="usa-select usx-select">
       <option value="Aurora" selected="">Light</option>

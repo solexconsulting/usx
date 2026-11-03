@@ -2,6 +2,55 @@
   "name": "collection",
   "template": "collection/collection.django.html",
   "version": 2,
+  "default": {
+    "items": [
+      {
+        "href": "#",
+        "heading": "Gears of Government President's Award winners",
+        "description": "The Administration announces the winners of the Gears of Government President's Award, recognizing federal employees who make a profound difference in the lives of the American people.",
+        "meta": [
+          {
+            "text": "By Sondra Ainsworth and Constance Lu"
+          },
+          {
+            "text": "September 30, 2020",
+            "datetime": "2020-09-30T12:00:00+01:00"
+          }
+        ],
+        "tags": [
+          {
+            "label": "New",
+            "isNew": true
+          },
+          {
+            "label": "PMA"
+          },
+          {
+            "label": "OMB"
+          }
+        ]
+      },
+      {
+        "href": "#",
+        "heading": "Women-owned small business dashboard",
+        "description": "In honor of National Women's Small Business Month, we've partnered with SBA to highlight the Women-Owned Small Businesses (WOSBs) data dashboard.",
+        "meta": [
+          {
+            "text": "By Constance Lu"
+          },
+          {
+            "text": "September 30, 2020",
+            "datetime": "2020-09-30T12:00:00+01:00"
+          }
+        ],
+        "tags": [
+          {
+            "label": "SBA"
+          }
+        ]
+      }
+    ]
+  },
   "props": {
     "items": {
       "type": "array",

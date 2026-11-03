@@ -1,4 +1,4 @@
-{% load components %}{% spaceless %}
+{% load usx_components %}{% spaceless %}
 <ul class="usx-popover__menu">
   {% for item in items %}
   {% with index=forloop.counter0|stringformat:"s" %}
@@ -18,7 +18,7 @@
       {% summary props=item.summaryProps label=item.summaryProps.label|default:'Open panel' className="usx-popover__menu-item" unstyled=True %}{% endsummary %}
       {% endif %}
       <div id="{{ id|force_escape }}" class="usx-popover__panel{% if panelShape == 'square' %} usx-popover__panel--square{% endif %}">
-        {% include "popover/_popover-menu.django.html" with items=item.items prefix=id panelShape=panelShape only %}
+        {% include "popover/popover-menu.django.html" with items=item.items prefix=id panelShape=panelShape only %}
       </div>
     </details>
     {% elif item.type == 'link' %}

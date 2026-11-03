@@ -2,6 +2,10 @@
   "name": "alert",
   "template": "alert/alert.django.html",
   "version": 2,
+  "default": {
+    "heading": "Default alert",
+    "text": "System status and notification updates appear here."
+  },
   "props": {
     "staticBaseUrl": {
       "type": "string",
@@ -42,14 +46,7 @@
     },
     "style": {
       "type": "object",
-      "description": "Inline styles as a React CSSProperties object.",
-      "renderers": {
-        "react": { "type": "object" },
-        "django": {
-          "supported": false,
-          "description": "The Django template does not render this prop."
-        }
-      }
+      "description": "Inline CSS declarations for the alert element."
     },
     "role": {
       "type": "select",

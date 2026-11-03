@@ -603,7 +603,7 @@ export const LoadingDisabled = {
 };
 
 export const storyDefs = {
-  Default: Default.args,
+  Default: buttonConfig.default,
   DefaultHover: DefaultHover.args,
   DefaultActive: DefaultActive.args,
   DefaultFocus: DefaultFocus.args,

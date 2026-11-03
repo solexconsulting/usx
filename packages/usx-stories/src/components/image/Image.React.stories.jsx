@@ -12,7 +12,7 @@ const getArgs = (index) => ({
 });
 
 export const storyDefs = {
-  Default: getArgs(1),
+  Default: config.default,
   Rounded: { ...getArgs(2), rounded: true },
   Circular: { ...getArgs(3), circular: true },
   WithCaption: { ...getArgs(10), caption: shortCaption },
@@ -29,11 +29,11 @@ export const storyDefs = {
   Responsive: {
     alt: 'SOLEX',
     src: {
-      fallback: '/symbol-only.svg',
+      fallback: './symbol-only.svg',
       sources: [
-        { media: '(min-width: 64em)', srcSet: '/linear-w-symbol_left.svg' },
-        { media: '(min-width: 40em)', srcSet: '/linear.svg' },
-        { media: '(min-width: 20em)', srcSet: '/solex-only.svg' },
+        { media: '(min-width: 64em)', srcSet: './linear-w-symbol_left.svg' },
+        { media: '(min-width: 40em)', srcSet: './linear.svg' },
+        { media: '(min-width: 20em)', srcSet: './solex-only.svg' },
       ],
     },
     staticBaseUrl: (typeof window !== 'undefined' && window.usxBaseUrl) || '/',  },

@@ -15,7 +15,7 @@ const toDjangoArgs = (args) => Object.fromEntries(
   Object.entries(args).filter(([key]) => allowedPropNames.has(key))
 );
 
-export const BasicAvatarGroup = createStory(toDjangoArgs(storyDefs.BasicAvatarGroup));
+export const Default = createStory(toDjangoArgs(storyDefs.Default));
 export const RoundedAvatarGroup = createStory(toDjangoArgs(storyDefs.RoundedAvatarGroup));
 export const CircleAvatarGroup = createStory(toDjangoArgs(storyDefs.CircleAvatarGroup));
 export const OverlappingAvatars = createStory(toDjangoArgs(storyDefs.OverlappingAvatars));

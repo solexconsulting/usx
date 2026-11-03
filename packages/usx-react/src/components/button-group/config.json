@@ -2,6 +2,22 @@
   "name": "button-group",
   "template": "button-group/button-group.django.html",
   "version": 1,
+  "default": {
+    "buttonProps": [
+      {
+        "label": "Map",
+        "variant": "primary"
+      },
+      {
+        "label": "Hybrid",
+        "variant": "outline"
+      },
+      {
+        "label": "Satellite",
+        "variant": "outline"
+      }
+    ]
+  },
   "props": {
     "buttonProps": {
       "type": "array",

@@ -4,30 +4,26 @@
   "version": 2,
   "default": {
     "variant": "menu",
+    "id": "language-options-default",
+    "label": "Languages",
     "languages": [
       {
         "code": "en",
         "label": "English",
+        "href": "https://example.com/en",
         "current": true
       },
       {
         "code": "es",
         "label": "Español",
-        "description": "Spanish"
+        "description": "Spanish",
+        "href": "https://example.com/es"
       },
       {
-        "code": "vi",
-        "label": "Tiếng Việt",
-        "description": "Vietnamese"
-      },
-      {
-        "code": "zh",
-        "label": "简体字",
-        "description": "Chinese – Simplified"
-      },
-      {
-        "label": "Selected content in additional languages",
-        "plain": true
+        "code": "fr",
+        "label": "Français",
+        "description": "French",
+        "href": "https://example.com/fr"
       }
     ]
   },

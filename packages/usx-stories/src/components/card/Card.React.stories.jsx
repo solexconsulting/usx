@@ -113,10 +113,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    ...baseArgs,
-    className: 'tablet:grid-col-8 widescreen:grid-col-6',
-  },
+  Default: config.default,
   WithImage: {
     ...baseArgs,
     ...singleImageArgs,

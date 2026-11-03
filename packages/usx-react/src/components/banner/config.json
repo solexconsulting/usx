@@ -2,6 +2,9 @@
   "name": "banner",
   "template": "banner/banner.django.html",
   "version": 2,
+  "default": {
+    "id": "gov-banner-default"
+  },
   "props": {
     "staticBaseUrl": {
       "type": "string",

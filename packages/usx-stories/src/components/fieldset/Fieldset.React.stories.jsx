@@ -1,3 +1,4 @@
+import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Fieldset from '../../../../usx-react/src/components/fieldset/Fieldset.tsx';
 import config from '../../../../usx-react/src/components/fieldset/config.json';
@@ -15,10 +16,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    legend: 'Fieldset Legend',
-    children: <label className="usa-checkbox__label">Hello world</label>,
-  },
+  Default: storyDefaultArgs(config.default),
   NoLegend: {
     children: <label className="usa-checkbox__label">Hello world</label>,
   },

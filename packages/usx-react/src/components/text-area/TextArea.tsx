@@ -64,7 +64,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         className={classes}
         placeholder={placeholder}
         disabled={disabled}
-        defaultValue={defaultValue}
+        defaultValue={props.value === undefined ? defaultValue : undefined}
         {...(required ? { required: true } : {})}
         aria-describedby={describedByParts.length ? describedByParts.join(' ') : undefined}
         aria-invalid={hasError ? 'true' : undefined}

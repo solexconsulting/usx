@@ -14,9 +14,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    target: '#custom-target-1',
-  },
+  Default: config.default,
   CustomContent: {
     target: 'custom-target-2',
     content: <span className="text-accent-cool-dark">Skip to <strong>main content</strong></span>,

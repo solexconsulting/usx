@@ -2,6 +2,45 @@
   "name": "pagination",
   "template": "pagination/pagination.django.html",
   "version": 2,
+  "default": {
+    "totalItems": 240,
+    "initialPage": 10,
+    "initialPageSize": 10,
+    "currentPage": 10,
+    "totalPages": 24,
+    "pageUrlPrefix": "?page=",
+    "stepOptionsId": "pagination-default-step-options",
+    "pages": [
+      {
+        "type": "page",
+        "page": 1
+      },
+      {
+        "type": "ellipsis",
+        "key": "ellipsis-start"
+      },
+      {
+        "type": "page",
+        "page": 9
+      },
+      {
+        "type": "page",
+        "page": 10
+      },
+      {
+        "type": "page",
+        "page": 11
+      },
+      {
+        "type": "ellipsis",
+        "key": "ellipsis-end"
+      },
+      {
+        "type": "page",
+        "page": 24
+      }
+    ]
+  },
   "props": {
     "initialPage": {
       "type": "number",

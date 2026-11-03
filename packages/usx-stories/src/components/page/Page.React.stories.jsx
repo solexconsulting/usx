@@ -1,19 +1,11 @@
+import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Page from '../../../../usx-react/src/components/page/Page.tsx';
 import config from '../../../../usx-react/src/components/page/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Default: {
-    ...(config.default || {}),
-    content: undefined,
-    children: (
-      <>
-        <p>This page wrapper provides consistent spacing between a site header and footer.</p>
-        <p>Use this region for page-specific content.</p>
-      </>
-    ),
-  },
+  Default: storyDefaultArgs(config.default),
   WithLongContent: {
     ...(config.default || {}),
     title: 'Program overview',

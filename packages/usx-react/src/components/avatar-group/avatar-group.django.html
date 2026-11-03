@@ -1,5 +1,5 @@
 {# Django template for AvatarGroup #}
-{% load components %}
+{% load usx_components %}
 
 <div class="usx-avatar-group{% if stacked %} usx-avatar-group--stacked{% endif %}{% if overlap %} usx-avatar-group--overlap{% endif %}{% if className %} {{ className }}{% endif %}">
   {% for avatar in avatarProps %}

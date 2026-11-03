@@ -2,6 +2,10 @@
   "name": "icon",
   "template": "icon/icon.django.html",
   "version": 3,
+  "default": {
+    "name": "accessibility_new",
+    "size": 2
+  },
   "props": {
     "staticBaseUrl": {
       "type": "string",

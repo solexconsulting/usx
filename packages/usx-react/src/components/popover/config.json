@@ -4,9 +4,12 @@
   "version": 6,
   "required": ["id"],
   "default": {
-    "id": "services-popover",
-    "summaryProps": { "label": "Services" },
-    "children": "<nav aria-label=\"Services\"><ul class=\"usa-list usx-list usa-list--unstyled\"><li class=\"padding-y-1\"><a href=\"#benefits\">Benefits</a></li><li class=\"padding-y-1\"><a href=\"#applications\">Applications</a></li></ul></nav>"
+    "id": "popover-default",
+    "summaryProps": {
+      "label": "Where is my case number?"
+    },
+    "className": "usx-details",
+    "children": "Your case number is in the confirmation email we sent after you applied."
   },
   "props": {
     "id": {

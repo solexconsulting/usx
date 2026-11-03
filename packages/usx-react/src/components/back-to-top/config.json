@@ -2,6 +2,11 @@
   "name": "back-to-top",
   "template": "back-to-top/back-to-top.django.html",
   "version": 1,
+  "default": {
+    "label": "Back to top",
+    "iconPosition": "right",
+    "iconSize": 2
+  },
   "props": {
     "label": {
       "type": "string",

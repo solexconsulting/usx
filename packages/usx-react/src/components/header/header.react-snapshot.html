@@ -2633,6 +2633,8 @@
             type="button"
             class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
             aria-label="Theme"
+            aria-expanded="false"
+            aria-controls="react-theme-picker-panel"
           >
             <svg
               class="usa-icon usx-theme-picker__icon"
@@ -2646,7 +2648,7 @@
               ></path>
             </svg>
           </button>
-          <div class="usx-theme-picker__panel">
+          <div id="react-theme-picker-panel" class="usx-theme-picker__panel">
             <label class="usa-label usx-label usa-sr-only" for="react-theme-picker">Theme</label
             ><select id="react-theme-picker" class="usa-select usx-select">
               <option value="Aurora" selected="">Light</option>

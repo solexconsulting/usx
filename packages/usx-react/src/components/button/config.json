@@ -2,6 +2,10 @@
   "name": "button",
   "template": "button/button.django.html",
   "version": 2,
+  "default": {
+    "label": "Default",
+    "variant": "primary"
+  },
   "props": {
     "label": {
       "type": "string",

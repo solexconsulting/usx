@@ -13,10 +13,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    id: 'hint-1',
-    children: 'Enter your full legal name.',
-  },
+  Default: config.default,
   WithCustomClass: {
     id: 'hint-2',
     children: 'Enter your full legal name.',

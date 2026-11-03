@@ -2,6 +2,9 @@
   "name": "search",
   "template": "search/search.django.html",
   "version": 2,
+  "default": {
+    "id": "search-default"
+  },
   "props": {
     "id": {
       "type": "string",

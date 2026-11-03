@@ -1,3 +1,4 @@
+import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Container from '../../../../usx-react/src/components/container/Container.tsx';
 import Button from '../../../../usx-react/src/components/button/Button.tsx';
@@ -6,7 +7,6 @@ import Link from '../../../../usx-react/src/components/link/Link.tsx';
 import Prose from '../../../../usx-react/src/components/prose/Prose.tsx';
 import Section from '../../../../usx-react/src/components/section/Section.tsx';
 import SummaryBox from '../../../../usx-react/src/components/summary-box/SummaryBox.tsx';
-import Tag from '../../../../usx-react/src/components/tag/Tag.tsx';
 import config from '../../../../usx-react/src/components/container/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 import { applicationStoryDefs, applicationStoryDescriptions } from './applicationExamples.jsx';
@@ -31,17 +31,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    className: 'maxw-tablet margin-x-auto',
-    children: (
-      <>
-        <Section title="Application information" style={{ margin: 0 }}>
-          <Prose>Review the program requirements and gather your supporting documents before you begin.</Prose>
-        </Section>
-        <Tag className="margin-top-2">Applications open</Tag>
-      </>
-    ),
-  },
+  Default: storyDefaultArgs(config.default),
   ResponsiveStack: {
     className: 'maxw-tablet margin-x-auto',
     display: 'flex',

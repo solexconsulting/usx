@@ -14,9 +14,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    id: 'search-default',
-  },
+  Default: config.default,
   CustomPlaceholder: {
     id: 'search-custom-placeholder',
     placeholder: 'Custom placeholder...',

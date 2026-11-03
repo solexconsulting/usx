@@ -2,6 +2,11 @@
   "name": "tooltip",
   "template": "tooltip/tooltip.django.html",
   "version": 2,
+  "default": {
+    "label": "Helpful info",
+    "position": "right",
+    "children": "<button type=\"button\" class=\"usa-button usx-button usa-button--primary\">Hover me</button>"
+  },
   "props": {
     "label": {
       "type": "slot",
@@ -16,7 +21,7 @@
         "left",
         "right"
       ],
-      "default": "top",
+      "default": "right",
       "description": "The direction the tooltip appears relative to its trigger."
     },
     "children": {

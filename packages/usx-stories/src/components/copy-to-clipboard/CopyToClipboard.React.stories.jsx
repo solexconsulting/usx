@@ -12,7 +12,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: { copyText: 'Example text to copy', tooltipProps: { label: 'Copy to clipboard', copiedTooltip: 'Copied' } },
+  Default: config.default,
   WithText: { copyText: 'Example text to copy', label: 'Copy' },
   InvertedBackground: { copyText: 'Example text to copy', tooltipProps: { label: 'Copy to clipboard', copiedTooltip: 'Copied' }, className: 'usa-button--inverse' },
   InvertedBackgroundWithText: { copyText: 'Example text to copy', label: 'Copy', className: 'usa-button--inverse' },

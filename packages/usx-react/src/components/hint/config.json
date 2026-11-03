@@ -2,6 +2,10 @@
   "name": "hint",
   "template": "hint/hint.django.html",
   "version": 2,
+  "default": {
+    "id": "hint-1",
+    "children": "Enter your full legal name."
+  },
   "props": {
     "id": {
       "type": "string",

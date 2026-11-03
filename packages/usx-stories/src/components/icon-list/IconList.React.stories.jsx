@@ -6,7 +6,7 @@ import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 const generatedArgTypes = buildArgTypes(config.props || {});
 
 export const storyDefs = {
-  Default: config.default || {},
+  Default: config.default,
   SimpleContent: {
     items: [
       { iconName: 'thumb_up_alt', content: 'No processing lines' },

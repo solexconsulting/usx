@@ -20,7 +20,7 @@ const defaultSteps = [
 ];
 
 export const storyDefs = {
-  Default: { steps: defaultSteps, currentStep: 3 },
+  Default: config.default,
   NoLabels: { steps: defaultSteps, currentStep: 3, variant: 'no-labels' },
   Centered: { steps: defaultSteps, currentStep: 3, variant: 'center' },
   Counters: { steps: defaultSteps, currentStep: 3, variant: 'counters' },

@@ -10,7 +10,7 @@ export default {
   tags: ['USX', 'autodocs'],
 };
 
-const levels = { InH1: 'H1', InH2: 'H2', InH3: 'H3' };
+const levels = { Default: 'H1', InH2: 'H2', InH3: 'H3' };
 
 const checkEyebrow = (key, def) => async (heading) => {
   const eyebrow = heading.querySelector('.usx-eyebrow');

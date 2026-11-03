@@ -14,11 +14,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    id: 'text-area-default',
-    label: 'Text area label',
-    placeholder: 'Type here',
-  },
+  Default: config.default,
   WithHint: {
     id: 'text-area-with-hint',
     label: 'Text area with hint',

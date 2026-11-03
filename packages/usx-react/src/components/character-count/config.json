@@ -2,6 +2,11 @@
   "name": "character-count",
   "template": "character-count/character-count.django.html",
   "version": 2,
+  "default": {
+    "id": "cc-1",
+    "label": "Text input",
+    "max": 25
+  },
   "props": {
     "id": {
       "type": "string",

@@ -10,11 +10,7 @@ const commonArgs = {
 };
 
 export const storyDefs = {
-  Default: {
-    ...commonArgs,
-    onContent: 'ON',
-    offContent: 'OFF',
-  },
+  Default: config.default,
   'Default - Icon': {
     ...commonArgs,
     onContent: <Icon name="visibility" size={4} />,

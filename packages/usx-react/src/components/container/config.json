@@ -2,6 +2,10 @@
   "name": "container",
   "template": "container/container.django.html",
   "version": 2,
+  "default": {
+    "className": "maxw-tablet margin-x-auto",
+    "children": "<section class=\"usx-section\" style=\"margin:0\"><h2 class=\"usx-section__title\">Application information</h2><div class=\"usx-section__content\"><div class=\"usa-prose usx-prose \">Review the program requirements and gather your supporting documents before you begin.</div></div></section><span class=\"usa-tag usx-tag margin-top-2\"> Applications open</span>"
+  },
   "props": {
     "as": {
       "type": "select",

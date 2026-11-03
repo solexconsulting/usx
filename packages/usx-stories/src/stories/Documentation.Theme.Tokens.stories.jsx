@@ -3,7 +3,7 @@ import { themeManifest } from '@solexllc/usx-theme/theme-manifest';
 import { useLiveTokenValues, getRawLiveValue } from '../utils/useLiveTokenValues.js';
 
 export default {
-  title: 'Documentation/Theme/Tokens',
+  title: 'Documentation/USX Theme/Tokens',
   tags: ['autodocs']
 };
 

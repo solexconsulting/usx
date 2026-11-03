@@ -3,7 +3,7 @@ import { themeManifest } from '@solexllc/usx-theme/theme-manifest';
 import { useLiveTokenValues, getLiveValue } from '../utils/useLiveTokenValues.js';
 
 export default {
-  title: 'Documentation/Theme/Spacing',
+  title: 'Documentation/USX Theme/Spacing',
   tags: ['autodocs']
 };
 

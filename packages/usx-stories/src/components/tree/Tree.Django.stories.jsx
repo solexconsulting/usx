@@ -17,16 +17,7 @@ export default {
 };
 
 const djangoStory = createDjangoStory({ componentName: 'tree' });
-const createStory = (args) => ({
-  ...djangoStory(args),
-  parameters: {
-    docs: {
-      source: {
-        code: `{% load components %}\n{% tree items=tree_items${args.variant ? ` variant="${args.variant}"` : ''} %}{% endtree %}`,
-      },
-    },
-  },
-});
+const createStory = djangoStory;
 
 export const Default = createStory(storyDefs.Default);
 

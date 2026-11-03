@@ -1,5 +1,5 @@
 import config from '../../../../usx-react/src/components/header/config.json';
-import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import {
   storyDefs,
   borderRoleVars,
@@ -14,6 +14,7 @@ export default {
   title: 'Django/USWDS/Header',
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
+  decorators: [...componentInit('navigation')],
 };
 
 const createStory = createDjangoStory({ componentName: 'header' });

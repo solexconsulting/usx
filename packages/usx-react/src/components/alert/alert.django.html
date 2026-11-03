@@ -1,4 +1,4 @@
-{% load components %}
+{% load usx_components %}
 <div
     class="
         usa-alert
@@ -6,7 +6,9 @@
         usx-alert
         {% if slim %} usa-alert--slim{% endif %}
         {% if noIcon %} usa-alert--no-icon{% endif %}
+        {% if className %} {{ className }}{% endif %}
     "
+    {% if style %}style="{{ style|css_style }}"{% endif %}
     {% if role %}
     role="{{ role }}"
     {% elif variant == 'error' or variant == 'emergency' %}

@@ -3,8 +3,7 @@
   "template": "memorable-date/memorable-date.django.html",
   "version": 2,
   "default": {
-    "id": "memorable-date",
-    "legend": "Date of Birth"
+    "id": "memorable-date"
   },
   "props": {
     "id": {

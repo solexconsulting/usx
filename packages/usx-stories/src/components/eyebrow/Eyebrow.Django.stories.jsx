@@ -15,7 +15,7 @@ export default {
   },
 };
 
-export const InH1 = createDjangoStory({
+export const Default = createDjangoStory({
   componentName: 'eyebrow',
   wrapper: (payload, _args, { mode }) => {
     if (mode === 'source') {
@@ -24,7 +24,7 @@ export const InH1 = createDjangoStory({
 
     return <h1 dangerouslySetInnerHTML={{ __html: `${payload}Full Page Title` }} />;
   },
-})(storyDefs.InH1);
+})(storyDefs.Default);
 
 export const InH2 = createDjangoStory({
   componentName: 'eyebrow',

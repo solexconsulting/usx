@@ -2,6 +2,9 @@
   "name": "legend",
   "template": "legend/legend.django.html",
   "version": 2,
+  "default": {
+    "text": "Legend Text"
+  },
   "props": {
     "text": {
       "type": "slot",

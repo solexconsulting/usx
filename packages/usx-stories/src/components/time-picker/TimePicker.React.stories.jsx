@@ -22,12 +22,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    id: 'appointment-time',
-    name: 'appointment-time',
-    label: 'Appointment time',
-    hint: 'Select a time from the dropdown or type to jump to the first matching time.',
-  },
+  Default: config.default,
   Disabled: {
     id: 'appointment-time-disabled',
     name: 'appointment-time-disabled',

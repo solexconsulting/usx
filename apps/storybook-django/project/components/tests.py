@@ -6,7 +6,7 @@ from django.template import Context, Template
 from django.test import SimpleTestCase, override_settings
 
 from .core.render import render_component
-from .templatetags.components import asset_url, asset_srcset
+from .templatetags.usx_components import asset_url, asset_srcset
 
 
 class RenderedElements(HTMLParser):
@@ -138,14 +138,14 @@ class ReactParityTests(SimpleTestCase):
                 self.assertNotIn('{{', html)
 
         copied_only = render_component('copy-to-clipboard', {'copyText': 'Example', 'tooltipProps': {'bodyClassName': 'custom-body'}})
-        self.assertIn('usa-tooltip__body--top custom-body', copied_only)
+        self.assertIn('usa-tooltip__body--right custom-body', copied_only)
         self.assertInHTML('<span class="usx-copy__tooltip--copied">Copied</span>', copied_only)
         empty_copied = render_component('copy-to-clipboard', {'copyText': 'Example', 'tooltipProps': {'label': 'Copy', 'copiedTooltip': ''}})
         self.assertInHTML('<span class="usx-copy__tooltip--copied"></span>', empty_copied)
 
     def test_clipboard_tooltip_fragment_and_prop_forwarding(self):
         tooltip_props = {'position': 'bottom', 'className': 'custom-wrapper', 'bodyClassName': 'custom-body', 'label': 'Replaced', 'children': 'Replaced'}
-        html = Template('''{% load components %}
+        html = Template('''{% load usx_components %}
             {% fragment as richLabel %}<strong>{{ text }}</strong>{% endfragment %}
             {% tooltip props=tooltipProps label=richLabel %}<button>Trigger</button>{% endtooltip %}
         ''').render(Context({'tooltipProps': tooltip_props, 'text': '<Copy>'}))
@@ -156,7 +156,7 @@ class ReactParityTests(SimpleTestCase):
         self.assertNotIn('Replaced', html)
         self.assertEqual(tooltip_props['label'], 'Replaced')
 
-        rich_label = Template('{% load components %}{% fragment as label %}<strong>{{ text }}</strong>{% endfragment %}{{ label }}').render(Context({'text': '<Copy>'}))
+        rich_label = Template('{% load usx_components %}{% fragment as label %}<strong>{{ text }}</strong>{% endfragment %}{{ label }}').render(Context({'text': '<Copy>'}))
         html = render_component('copy-to-clipboard', {'copyText': 'Example', 'tooltipProps': {**tooltip_props, 'label': rich_label}})
         self.assertInHTML('<span class="usx-copy__tooltip--copy"><strong>&lt;Copy&gt;</strong></span>', html)
         self.assertIn('usa-tooltip__body--bottom custom-body', html)
@@ -350,7 +350,7 @@ class ReactParityTests(SimpleTestCase):
         props = {'children': children, 'slides': [{'content': 'Ignored slide'}]}
         for html in (
             render_component('carousel', props),
-            Template('{% load components %}{% carousel children=children slides=slides %}{% endcarousel %}')
+            Template('{% load usx_components %}{% carousel children=children slides=slides %}{% endcarousel %}')
                 .render(Context(props)),
         ):
             self.assertEqual(html.count('class="usx-carousel__slide"'), 2)
@@ -493,7 +493,7 @@ class ReactParityTests(SimpleTestCase):
 
     def test_spinner_block_tag(self):
         html = Template(
-            '{% load components %}'
+            '{% load usx_components %}'
             '{% spinner label="Saving" screenReaderLabel="Please wait" %}{% endspinner %}'
         ).render(Context())
         labels = [attrs for tag, attrs in RenderedElements(html).elements if tag == 'label']
@@ -621,10 +621,10 @@ class CalloutQuoteTests(SimpleTestCase):
 
     def test_content_fallback_in_template_tags(self):
         for name in ("callout", "quote"):
-            template = Template("{% load components %}{% " + name + " props=props %}{% end" + name + " %}")
+            template = Template("{% load usx_components %}{% " + name + " props=props %}{% end" + name + " %}")
             self.assertIn("Fallback", template.render(Context({"props": {"content": "Fallback"}})))
             self.assertNotIn("Ignored", template.render(Context({"props": {"children": "", "content": "Ignored"}})))
-            template = Template("{% load components %}{% " + name + " content='Ignored' %}Preferred{% end" + name + " %}")
+            template = Template("{% load usx_components %}{% " + name + " content='Ignored' %}Preferred{% end" + name + " %}")
             self.assertIn("Preferred", template.render(Context({})))
             self.assertNotIn("Ignored", template.render(Context({})))
 
@@ -755,7 +755,7 @@ class ToggleTests(SimpleTestCase):
         self.assertIn("disabled", a[1])
 
     def test_disabled_required_and_template_tag(self):
-        html = Template("{% load components %}{% toggle props=props %}{% endtoggle %}").render(Context({
+        html = Template("{% load usx_components %}{% toggle props=props %}{% endtoggle %}").render(Context({
             "props": {"id": "choices", "ariaLabel": "Choices", "options": [{"value": "one", "label": "One"}, {"value": "two", "label": "Two"}],
                       "disabled": True, "required": True},
         }))
@@ -770,25 +770,59 @@ class ToggleTests(SimpleTestCase):
 
 
 class ClickableCompositionTests(SimpleTestCase):
-    def test_every_clickable_story_renders_its_composed_django_template(self):
-        stories = (
-            'single', 'multiple', 'color', 'read-johns', 'quote', 'quote-manual',
-            'all-classes', 'within-link', 'outside-link', 'button',
-        )
-        for story in stories:
-            with self.subTest(story=story):
-                response = self.client.get('/render/clickable/', {
-                    'props': json.dumps({
-                        '__storybookExample': story,
-                        'href': 'https://example.com',
-                        'className': 'test-clickable',
-                    }),
-                })
-                self.assertEqual(response.status_code, 200)
-                self.assertIn('usx-clickable', response.content.decode())
+    def test_story_tree_returns_the_template_it_renders(self):
+        tree = {
+            '__usxNode': 'component', 'name': 'clickable',
+            'props': {'href': '/services', 'className': 'padding-2'},
+            'children': {
+                '__usxNode': 'component', 'name': 'clickable_link',
+                'props': {}, 'children': {'__usxNode': 'text', 'value': 'Services'},
+            },
+        }
+        response = self.client.get('/render/clickable/', {
+            'format': 'story',
+            'props': json.dumps({'__usxStoryTree': tree}),
+        })
+        self.assertEqual(response.status_code, 200)
+        result = response.json()
+        self.assertIn('{% clickable\n  href="/services"\n  className="padding-2"\n%}', result['source'])
+        self.assertIn('{% clickable_link %}Services{% endclickable_link %}', result['source'])
+        self.assertIn('href="/services"', result['html'])
+        self.assertIn('usx-clickable__link', result['html'])
+
+    def test_story_source_shows_nested_values_and_handles_template_syntax(self):
+        tree = {
+            '__usxNode': 'component', 'name': 'clickable', 'props': {'href': '/services'},
+            'children': {
+                '__usxNode': 'component', 'name': 'clickable_link',
+                'props': {'title': 'A "quote" {{ ignored }} #}'},
+                'children': {'__usxNode': 'text', 'value': 'Services'},
+            },
+        }
+        result = self.client.get('/render/clickable/', {
+            'format': 'story', 'props': json.dumps({'__usxStoryTree': tree}),
+        }).json()
+        self.assertIn('{# clickable_link_title_0 = "A \\"quote\\" {{ ignored }} #\\u007d" #}', result['source'])
+        self.assertIn('\n  {% clickable_link\n    title=clickable_link_title_0\n  %}', result['source'])
+        self.assertNotIn('story_value_', result['source'])
+        self.assertIn('title="A &quot;quote&quot; {{ ignored }} #}"', result['html'])
+
+    def test_nested_html_is_escaped_once_inside_component_children(self):
+        tree = {
+            '__usxNode': 'component', 'name': 'button', 'props': {},
+            'children': {
+                '__usxNode': 'element', 'open': '<strong>', 'close': '</strong>',
+                'children': {'__usxNode': 'text', 'value': 'A & B'},
+            },
+        }
+        result = self.client.get('/render/button/', {
+            'format': 'story', 'props': json.dumps({'__usxStoryTree': tree}),
+        }).json()
+        self.assertIn('<strong>A &amp; B</strong>', result['html'])
+        self.assertNotIn('&amp;amp;', result['html'])
 
     def test_nested_part_tags_render_react_classes_and_escape_attributes(self):
-        html = Template('''{% load components %}
+        html = Template('''{% load usx_components %}
 {% clickable href="/services" className="display-flex flex-align-center padding-2 border" %}
 {% clickable_bg_color_change className="padding-1" %}Featured{% endclickable_bg_color_change %}
 {% clickable_link as="strong" colorChange=True bgColorChange=True className="margin-left-1" title=title %}Explore services{% endclickable_link %}
@@ -999,7 +1033,7 @@ class DetailsTests(SimpleTestCase):
         text = '</p><script>alert("details")</script> &lt;already escaped&gt;'
         summary = '</summary><script>alert("summary")</script> & details'
         template = Template(
-            "{% load components %}"
+            "{% load usx_components %}"
             "{% details text=text summaryProps=summary_props %}{% enddetails %}"
         )
         for safe in (False, True):
@@ -1032,7 +1066,7 @@ class DetailsTests(SimpleTestCase):
 
     def test_rich_children_replace_plain_text(self):
         html = Template(
-            "{% load components %}"
+            "{% load usx_components %}"
             "{% details summaryProps=summary_props text='Hidden fallback' %}"
             '<ul><li><a href="/guidance">Read the guidance</a></li></ul>'
             "{% enddetails %}"
@@ -1113,7 +1147,7 @@ class DetailsTests(SimpleTestCase):
 
     def test_template_tag_can_be_composed_inside_error_page(self):
         html = Template(
-            "{% load components %}"
+            "{% load usx_components %}"
             "{% error_page title='Request failed' %}"
             "{% details summaryProps=summary_props text=diagnostic_text %}{% enddetails %}"
             "{% enderror_page %}"
@@ -1196,7 +1230,7 @@ class ErrorPageTests(SimpleTestCase):
         }.issubset(details["class"].split()))
 
     def test_template_tag_has_the_same_fallbacks(self):
-        html = Template("{% load components %}{% error_page %}{% enderror_page %}").render(Context({}))
+        html = Template("{% load usx_components %}{% error_page %}{% enderror_page %}").render(Context({}))
         self.assertIn('id="main-content"', html)
         self.assertIn("We couldn’t complete your request", html)
         self.assertIn("We’re sorry. Please try again later.", html)
@@ -1253,3 +1287,15 @@ class ErrorPageTests(SimpleTestCase):
         self.assertEqual(main["tabindex"], "-1")
         self.assertEqual(main["aria-labelledby"], "custom-label")
         self.assertIn('<h1 id="account-title" class="usx-page__title">Account</h1>', html)
+
+
+class TableTagTests(SimpleTestCase):
+    def test_table_tag_derives_headers_and_cells_from_columns_and_data(self):
+        html = Template("{% load usx_components %}{% table columns=columns data=data caption='Records' %}{% endtable %}").render(Context({
+            "columns": [{"key": "title", "header": "Title", "primary": True}, {"key": "year", "header": "Year"}],
+            "data": [{"id": 1, "title": "First record", "year": 2024}],
+        }))
+        self.assertIn("<table", html)
+        self.assertIn("Title", html)
+        self.assertIn("First record", html)
+        self.assertIn("2024", html)

@@ -31,13 +31,7 @@ const forceActions = [
 ];
 
 export const storyDefs = {
-  Default: {
-    id: 'example-modal-default',
-    heading: 'Are you sure you want to continue?',
-    description: 'You have unsaved changes that will be lost.',
-    actionProps: defaultActions,
-    triggerLabel: 'Open modal',
-  },
+  Default: config.default,
   Large: {
     id: 'example-modal-lg',
     heading: 'Are you sure you want to continue?',
@@ -76,7 +70,7 @@ export const Default = {
           aria-controls={modalArgs.id}
           data-open-modal
         >
-          {triggerLabel}
+          {triggerLabel || 'Open modal'}
         </Button>
         <Modal {...modalArgs} />
       </>

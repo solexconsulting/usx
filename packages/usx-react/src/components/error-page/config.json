@@ -28,7 +28,8 @@
         "href": "/contact"
       }
     ],
-    "errorCode": "404"
+    "errorCode": "404",
+    "children": "<p>If the address is correct and you still can&#x27;t reach the page, contact support so the broken link can be fixed.</p>"
   },
   "props": {
     "id": {

@@ -1,6 +1,0 @@
-{% load components %}
-<div class="grid-row grid-gap-6 bg-surface-2 padding-2">
-  {% for n in numbers %}<div class="grid-col-12 display-flex flex-justify-center tablet:grid-col-4">
-    {% clickable href=href className=className %}<div class="font-heading-2xl text-secondary text-center">#{{ n }}</div>{% clickable_link %}Choose this door{% endclickable_link %}{% endclickable %}
-  </div>{% endfor %}
-</div>

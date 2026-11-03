@@ -15,7 +15,7 @@ const defaultList = {
 };
 
 export const storyDefs = {
-  Default: defaultList,
+  Default: config.default,
   Ordered: {
     ...defaultList,
     ordered: true,

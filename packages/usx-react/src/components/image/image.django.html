@@ -1,5 +1,5 @@
 {# Django template for Image #}
-{% load components %}
+{% load usx_components %}
 {% if srcSet %}{% asset_srcset srcSet staticBaseUrl as imageSrcSet %}{% endif %}
 {# Props: src, alt, href, rounded, circular, objectFit, maxWidth, maxHeight, caption, hideCaption, className #}
 {# For responsive images, src may be an object: { fallback, sources: [{ srcSet, media?, type?, sizes? }] } #}

@@ -2,6 +2,28 @@
   "name": "modal",
   "template": "modal/modal.django.html",
   "version": 2,
+  "default": {
+    "id": "example-modal-default",
+    "heading": "Are you sure you want to continue?",
+    "description": "You have unsaved changes that will be lost.",
+    "actionProps": [
+      {
+        "children": "Continue without saving",
+        "variant": "primary",
+        "extraAttributes": {
+          "data-close-modal": true
+        }
+      },
+      {
+        "children": "Go back",
+        "variant": "unstyled",
+        "className": "padding-105 text-center",
+        "extraAttributes": {
+          "data-close-modal": true
+        }
+      }
+    ]
+  },
   "props": {
     "id": {
       "type": "string",

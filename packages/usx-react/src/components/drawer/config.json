@@ -4,10 +4,12 @@
   "version": 2,
   "required": ["id", "label", "heading", "children"],
   "default": {
-    "id": "services-drawer",
-    "label": "Browse services",
-    "heading": "Services",
-    "children": "<nav aria-label=\"Services\"><ul><li><a href=\"#benefits\">Benefits</a></li><li><a href=\"#applications\">Applications</a></li></ul></nav>"
+    "id": "drawer-default",
+    "label": "Open application details",
+    "triggerClassName": "usa-button usx-button usa-button--primary margin-0",
+    "heading": "Application details",
+    "description": "Review the status of your housing support application.",
+    "children": "<span class=\"usa-tag usx-tag bg-info\"> In review</span><div class=\"usa-summary-box usx-summary-box\" role=\"region\" aria-labelledby=\"drawer-application-summary\"><div class=\"usa-summary-box__body\"><h4 class=\"usa-summary-box__heading\" id=\"drawer-application-summary\">Housing support application</h4><div class=\"usa-summary-box__text\"><p>Application number: HSG-10482</p><p>We are checking your eligibility. No action is needed right now.</p></div></div></div><p><a href=\"#application-timeline\" class=\"usa-link usx-link\">View application timeline</a></p>"
   },
   "props": {
     "id": {

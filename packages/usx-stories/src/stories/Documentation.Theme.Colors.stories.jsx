@@ -4,7 +4,7 @@ import { useLiveTokenValues, getLiveValue } from '../utils/useLiveTokenValues.js
 import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
 
 export default {
-  title: 'Documentation/Theme/Colors',
+  title: 'Documentation/USX Theme/Colors',
   tags: ['autodocs']
 };
 

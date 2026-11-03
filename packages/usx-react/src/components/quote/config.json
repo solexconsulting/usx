@@ -2,6 +2,9 @@
   "name": "quote",
   "template": "quote/quote.django.html",
   "version": 4,
+  "default": {
+    "content": "The time is always right to do what is right."
+  },
   "props": {
     "className": {
       "type": "string",

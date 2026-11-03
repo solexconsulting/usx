@@ -14,12 +14,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    files: [
-      { key: 1, name: 'test1.jpg', size: 7000 },
-      { key: 2, name: 'test2.jpg', size: 7200 },
-    ],
-  },
+  Default: config.default,
   WithDownloadLink: {
     files: [{ key: 1, name: 'w2-2023.pdf', size: 245800, url: 'https://example.com/files/w2-2023.pdf' }],
   },

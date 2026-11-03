@@ -5,6 +5,23 @@
   "required": [
     "items"
   ],
+  "default": {
+    "items": [
+      {
+        "text": "Current page",
+        "href": "javascript:void(0);",
+        "current": true
+      },
+      {
+        "text": "Parent link",
+        "href": "javascript:void(0);"
+      },
+      {
+        "text": "Parent link",
+        "href": "javascript:void(0);"
+      }
+    ]
+  },
   "props": {
     "items": {
       "type": "array",

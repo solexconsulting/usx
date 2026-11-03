@@ -1,4 +1,4 @@
-{% load components %}
+{% load usx_components %}
 {% with resolvedPage=currentPage|default:initialPage|default:1 resolvedPageSize=pageSize|default:initialPageSize|default:10 %}
 {% if renderPart == 'navigation' %}
   {% pagination_navigation currentPage=resolvedPage totalPages=totalPages pages=pages unbounded=unbounded arrowsOnly=arrowsOnly prevLabel=prevLabel|default:"Previous" nextLabel=nextLabel|default:"Next" hideLinkText=hideLinkText|default_if_none:True ariaLabel=ariaLabel|default:"Pagination" pageUrlPrefix=pageUrlPrefix pageSize=resolvedPageSize totalItems=totalItems %}{% endpagination_navigation %}

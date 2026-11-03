@@ -5,7 +5,7 @@ import Tooltip from '../../../../usx-react/src/components/tooltip/Tooltip.tsx';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Default: { size: 3 },
+  Default: config.default,
   OmitLabel: { size: 3 },
   WithLabel: { size: 3, label: 'Loading...' },
   WithScreenReaderLabel: { size: 3, screenReaderLabel: 'Loading...' },

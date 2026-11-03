@@ -3,10 +3,10 @@
   "template": "swap/swap.django.html",
   "version": 2,
   "default": {
-    "onContent": "ON",
-    "offContent": "OFF",
+    "className": "",
     "variant": "default",
-    "includeInput": true
+    "onContent": "ON",
+    "offContent": "OFF"
   },
   "props": {
     "children": {

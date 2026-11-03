@@ -1,5 +1,5 @@
 {# Django template for CopyToClipboard #}
-{% load components %}
+{% load usx_components %}
 {% with buttonClass=className|default:''|add:' usx-copy' escapedCopyText=copyText|default:''|escapejs %}
 {% dict onclick="navigator.clipboard.writeText('"|add:escapedCopyText|add:"')" as copyAttributes %}
 {% button ghost=True className=buttonClass extraAttributes=copyAttributes as copyButton %}

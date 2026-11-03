@@ -3,8 +3,8 @@
   "template": "section/section.django.html",
   "version": 4,
   "default": {
-    "title": "",
-    "content": "Use section to group related page content with consistent spacing."
+    "title": "Program details",
+    "children": "<p>Review eligibility, required documents, and next steps before applying.</p>"
   },
   "props": {
     "title": {
@@ -35,6 +35,14 @@
     "className": {
       "type": "string",
       "description": "Additional classes"
+    },
+    "id": {
+      "type": "string",
+      "description": "Optional section element ID."
+    },
+    "style": {
+      "type": "object",
+      "description": "Inline CSS declarations for the section element."
     }
   }
 }

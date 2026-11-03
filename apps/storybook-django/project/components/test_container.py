@@ -176,7 +176,7 @@ class ContainerTests(SimpleTestCase):
             "usx-container", "usx-container--display-flex", "tablet:usx-container--direction-row",
         ])
 
-        html = Template('''{% load components %}
+        html = Template('''{% load usx_components %}
             {% container props=layout as="section" %}{% container as="article" column="6" %}<p>{{ text }}</p>{% endcontainer %}{% endcontainer %}
         ''').render(Context({"layout": props, "text": "<Child>"}))
         root = fromstring(html)

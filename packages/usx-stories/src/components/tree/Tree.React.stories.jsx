@@ -4,30 +4,7 @@ import config from '../../../../usx-react/src/components/tree/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Default: {
-    items: [
-      {
-        type: 'details',
-        summaryProps: { label: 'More application services' },
-        items: [
-          { type: 'link', href: '#renew-application', text: 'Renew an application' },
-          { type: 'link', href: '#get-help', text: 'Get help' },
-        ],
-      },
-      {
-        type: 'details',
-        summaryProps: { label: 'About these services' },
-        text: 'Find applications and support here.',
-      },
-      {
-        type: 'details',
-        summaryProps: { label: 'Coming soon' },
-        items: [{ type: 'text', text: 'Feature under development' }],
-      },
-      { type: 'link', href: '#application-status', text: 'Check application status' },
-      { type: 'text', text: 'Applications' },
-    ],
-  },
+  Default: config.default,
   Padded: {
     items: [
       {

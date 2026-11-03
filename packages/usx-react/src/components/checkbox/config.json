@@ -2,6 +2,12 @@
   "name": "checkbox",
   "template": "checkbox/checkbox.django.html",
   "version": 2,
+  "default": {
+    "id": "example-checkbox-1",
+    "name": "example-1",
+    "value": "example-value-1",
+    "label": "Example Checkbox 1"
+  },
   "props": {
     "id": {
       "type": "string",

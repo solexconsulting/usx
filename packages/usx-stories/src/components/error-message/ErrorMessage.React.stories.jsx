@@ -13,10 +13,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    id: 'error-1',
-    children: 'Enter a valid email address.',
-  },
+  Default: config.default,
   WithCustomClass: {
     id: 'error-2',
     children: 'Enter a valid email address.',

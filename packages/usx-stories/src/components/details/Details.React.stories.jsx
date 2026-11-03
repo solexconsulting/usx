@@ -5,7 +5,7 @@ import config from '../../../../usx-react/src/components/details/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Default: config.default || {},
+  Default: config.default,
   Open: {
     summaryProps: { label: 'How we use your contact details' },
     text: 'We use your email address to send updates about your request.\nWe will contact you if we need more information.',

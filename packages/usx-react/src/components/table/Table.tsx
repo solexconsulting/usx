@@ -299,23 +299,39 @@ function Table({
     <TableContext.Provider value={contextValue}>
       {wrapped}
       {isPaginated && (
-        <Pagination
-          key={`${sortState.key}-${sortState.direction}`}
-          initialPage={1}
-          initialPageSize={pageSize}
-          totalItems={totalItems}
-          onPageChange={(page) => {
+        <div
+          onClick={(event) => {
+            const link = (event.target as Element).closest<HTMLAnchorElement>('[data-usx-pagination-page]');
+            if (!link || link.getAttribute('aria-disabled') === 'true') return;
+            event.preventDefault();
+            const page = Number(link.dataset.usxPaginationPage);
+            if (!Number.isInteger(page) || page < 1 || page === currentPage) return;
             setCurrentPage(page);
             if (isServerSide) paginateConfig.onPageChange?.(page, pageSize);
           }}
-          onPageSizeChange={(size, page) => {
+          onChange={(event) => {
+            const target: EventTarget = event.target;
+            if (!(target instanceof HTMLSelectElement)) return;
+            const select = target;
+            if (!select.matches('.usx-pagination__step-options select')) return;
+            const size = Number(select.value);
+            if (!Number.isInteger(size) || size < 1) return;
+            const page = Math.min(currentPage, Math.max(1, Math.ceil(totalItems / size)));
             setPageSize(size);
             setCurrentPage(page);
+            if (isServerSide) paginateConfig.onPageChange?.(page, size);
           }}
-          {...(paginateConfig.pageSizeOptions ? { pageSizeOptions: paginateConfig.pageSizeOptions } : {})}
-          {...(paginateConfig.showStepOptions !== undefined ? { showStepOptions: paginateConfig.showStepOptions } : {})}
-          {...(paginateConfig.showSummary !== undefined ? { showSummary: paginateConfig.showSummary } : {})}
-        />
+        >
+          <Pagination
+            key={`${sortState.key}-${sortState.direction}`}
+            currentPage={currentPage}
+            pageSize={pageSize}
+            totalItems={totalItems}
+            {...(paginateConfig.pageSizeOptions ? { pageSizeOptions: paginateConfig.pageSizeOptions } : {})}
+            {...(paginateConfig.showStepOptions !== undefined ? { showStepOptions: paginateConfig.showStepOptions } : {})}
+            {...(paginateConfig.showSummary !== undefined ? { showSummary: paginateConfig.showSummary } : {})}
+          />
+        </div>
       )}
     </TableContext.Provider>
   );

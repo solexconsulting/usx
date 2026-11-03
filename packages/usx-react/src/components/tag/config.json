@@ -2,6 +2,9 @@
   "name": "tag",
   "template": "tag/tag.django.html",
   "version": 2,
+  "default": {
+    "children": "message"
+  },
   "props": {
     "id": {
       "type": "string",

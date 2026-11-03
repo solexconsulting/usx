@@ -1,3 +1,4 @@
+import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Indicator from '../../../../usx-react/src/components/indicator/Indicator.tsx';
 import config from '../../../../usx-react/src/components/indicator/config.json';
@@ -12,10 +13,7 @@ export default {
 };
 
 export const storyDefs = {
-  StatusIndicator: {
-    items: [{ className: 'usx-status text-primary' }],
-    children: <div className="bg-base width-10 height-10" />,
-  },
+  Default: storyDefaultArgs(config.default),
   TagIndicator: {
     items: [{ className: 'usa-tag usx-tag bg-primary usx-height-min', label: 'New' }],
     children: <div className="bg-base width-10 height-10" />,
@@ -53,7 +51,7 @@ export const storyDefs = {
   },
 };
 
-export const StatusIndicator = { args: storyDefs.StatusIndicator };
+export const Default = { args: storyDefs.Default };
 export const TagIndicator = { args: storyDefs.TagIndicator };
 export const ForButton = { args: storyDefs.ForButton };
 export const Ping = { args: storyDefs.Ping };

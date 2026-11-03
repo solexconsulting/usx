@@ -21,10 +21,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    name: 'accessibility_new',
-    size: 2,
-  },
+  Default: iconConfig.default,
   UsxSource: {
     name: 'spinner',
     source: 'usx',

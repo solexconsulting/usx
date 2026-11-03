@@ -2,6 +2,9 @@
   "name": "eyebrow",
   "template": "eyebrow/eyebrow.django.html",
   "version": 2,
+  "default": {
+    "children": "Page Title"
+  },
   "props": {
     "children": {
       "type": "slot",

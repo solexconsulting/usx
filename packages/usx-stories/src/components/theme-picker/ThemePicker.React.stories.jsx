@@ -2,7 +2,7 @@ import React from 'react';
 import { useGlobals } from 'storybook/preview-api';
 import ThemePicker from '../../../../usx-react/src/components/theme-picker/ThemePicker.tsx';
 import config from '../../../../usx-react/src/components/theme-picker/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit } from '../../utils/storyHelpers.jsx';
 import { PRESETS } from '@solexllc/usx-theme/presets';
 import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
@@ -17,12 +17,7 @@ const LIGHTDARKTHEMES = [
 ]
 
 export const storyDefs = {
-    Default: {
-        id: 'theme-picker-1',
-        label: 'Theme',
-        themes: THEMES,
-        defaultValue: 'Default',
-    },
+    Default: config.default,
     LightDark: {
         id: 'theme-picker-2',
         label: 'Theme',
@@ -38,6 +33,7 @@ export default {
     argTypes: buildArgTypes(config.props || {}),
     excludeStories: ['storyDefs'],
     decorators: [
+        ...componentInit('themePicker'),
         (Story) => {
             // Subscribe to Storybook globals so the toolbar theme decorator re-applies
             // when this story's ThemePicker changes the selection.

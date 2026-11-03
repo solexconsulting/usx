@@ -13,14 +13,6 @@ export default {
   excludeStories: ['storyDefs'],
 };
 
-const story0Args = {
-  buttonProps: [
-    { label: 'Map', variant: 'primary' },
-    { label: 'Hybrid', variant: 'outline' },
-    { label: 'Satellite', variant: 'outline' }
-  ]
-}
-
 const story1Args = {
   buttonProps: [
     { label: '', variant: 'outline', iconProps: [{ name: 'navigate_far_before'}] },
@@ -68,7 +60,7 @@ const story5Args = {
 }
 
 export const storyDefs = {
-  Default: story0Args,
+  Default: config.default,
   Icons: story1Args,
   SegmentedIcons: story2Args,
   SegmentedSecondary: story3Args,

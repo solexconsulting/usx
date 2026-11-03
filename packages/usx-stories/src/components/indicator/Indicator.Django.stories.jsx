@@ -10,7 +10,7 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'indicator' });
 
-export const StatusIndicator = createStory(storyDefs.StatusIndicator);
+export const Default = createStory(storyDefs.Default);
 export const TagIndicator = createStory(storyDefs.TagIndicator);
 export const ForButton = createStory(storyDefs.ForButton);
 export const Ping = createStory(storyDefs.Ping);

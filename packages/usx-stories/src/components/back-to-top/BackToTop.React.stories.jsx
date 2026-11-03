@@ -14,11 +14,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    label: 'Back to top',
-    iconPosition: 'right',
-    iconSize: 2,
-  },
+  Default: config.default,
   Primary: {
     label: 'Back to top',
     variant: 'primary',

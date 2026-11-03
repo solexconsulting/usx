@@ -5,6 +5,14 @@
   "required": [
     "copyText"
   ],
+  "default": {
+    "copyText": "Example text to copy",
+    "tooltipProps": {
+      "label": "Copy to clipboard",
+      "copiedTooltip": "Copied",
+      "position": "right"
+    }
+  },
   "props": {
     "staticBaseUrl": {
       "type": "string",

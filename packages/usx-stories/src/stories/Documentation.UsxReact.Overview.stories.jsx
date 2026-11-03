@@ -39,7 +39,7 @@ export const Overview = {
       </ul>
       <p>Skip it when:</p>
       <ul>
-        <li>You're rendering server-side templates (Django, or any other templating language) — copy the class structure from the component's <code>.html</code>/<code>.django.html</code> reference file instead.</li>
+        <li>You're rendering Django templates — use <code>solex-usx-django</code> component tags. See <strong>Documentation/USX Django → Overview</strong>.</li>
         <li>You only need the CSS and are hand-writing markup, or generating it from another framework entirely.</li>
       </ul>
 

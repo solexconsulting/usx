@@ -9,12 +9,7 @@ const defaultButton = { href: '#', text: 'Call to action' };
 const defaultParagraph = 'A short description of the hero section that provides context for the call to action.';
 
 export const storyDefs = {
-  Default: {
-    title: 'The hero heading',
-    callout: 'A callout heading',
-    paragraph: defaultParagraph,
-    button: defaultButton,
-  },
+  Default: config.default,
   WithoutCallout: {
     title: 'The hero heading',
     paragraph: defaultParagraph,

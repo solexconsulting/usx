@@ -1,3 +1,4 @@
+import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Icon from '../../../../usx-react/src/components/icon/Icon.tsx';
 import Clickable from '../../../../usx-react/src/components/clickable/Clickable.tsx';
@@ -8,10 +9,7 @@ import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 import Attribution from '../../../../usx-react/src/components/attribution/Attribution.tsx';
 
 export const storyDefs = {
-  SingleClickable: {
-    href: 'https://google.com',
-    className: 'display-flex flex-column padding-2 border',
-  },
+  Default: storyDefaultArgs(config.default),
   MultipleClickableCard: {
     href: 'https://google.com',
     className: 'display-flex padding-1 flex-column flex-align-center',
@@ -57,8 +55,8 @@ export default {
   excludeStories: ['storyDefs'],
 };
 
-export const SingleClickable = {
-  args: storyDefs.SingleClickable,
+export const Default = {
+  args: storyDefs.Default,
   render: (args) => (
     <Clickable {...args}>
       Everything taking up space in this box is clickable, but only the text below appears as a link.

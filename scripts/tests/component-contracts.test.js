@@ -54,10 +54,9 @@ test('corrected contracts describe composition and actual renderer differences',
   assert.ok(button.props.variant.options.includes('unstyled'));
   assert.equal(button.props.children.type, 'slot');
   for (const name of ['children', 'content', 'leftSidebar', 'rightSidebar']) assert.equal(layout.props[name].type, 'slot');
-  for (const contract of [button, alert]) {
-    assert.equal(contract.props.style.type, 'object');
-    assert.equal(contract.props.style.renderers.django.supported, false);
-  }
+  for (const contract of [button, alert]) assert.equal(contract.props.style.type, 'object');
+  assert.equal(button.props.style.renderers.django.supported, false);
+  assert.equal(alert.props.style.renderers, undefined);
   assert.deepEqual(icon.props.style.type, ['string', 'object']);
   assert.equal(icon.props.style.renderers.react.type, 'object');
   assert.equal(icon.props.style.renderers.django.type, 'string');

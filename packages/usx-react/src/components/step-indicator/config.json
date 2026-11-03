@@ -5,6 +5,26 @@
   "required": [
     "steps"
   ],
+  "default": {
+    "steps": [
+      {
+        "label": "Personal information"
+      },
+      {
+        "label": "Household status"
+      },
+      {
+        "label": "Supporting documents"
+      },
+      {
+        "label": "Signature"
+      },
+      {
+        "label": "Review and submit"
+      }
+    ],
+    "currentStep": 3
+  },
   "props": {
     "steps": {
       "type": "array",

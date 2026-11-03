@@ -1,4 +1,4 @@
-{% load components %}
+{% load usx_components %}
 {% spaceless %}
 <ul id="{{ id }}" class="usx-toggle usa-button-group{% if variant == 'icon' %} usx-toggle--icon{% endif %}{% if className %} {{ className }}{% endif %}" role="radiogroup" aria-label="{% firstof ariaLabel name 'Choose an option' %}"{% if disabled %} aria-disabled="true"{% endif %}{% if required %} aria-required="true"{% endif %}>
     {% for option in options %}

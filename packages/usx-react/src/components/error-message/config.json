@@ -2,6 +2,10 @@
   "name": "error-message",
   "template": "error-message/error-message.django.html",
   "version": 2,
+  "default": {
+    "id": "error-1",
+    "children": "Enter a valid email address."
+  },
   "props": {
     "id": {
       "type": "string",

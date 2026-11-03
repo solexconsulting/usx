@@ -2,6 +2,10 @@
   "name": "layout",
   "template": "layout/layout.django.html",
   "version": 2,
+  "default": {
+    "variant": "single-column",
+    "children": "<div class=\"bg-blue\"><h2>Single Column Layout</h2><p>This content is centered with responsive gutters.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>"
+  },
   "props": {
     "variant": {
       "type": "select",

@@ -1,7 +1,7 @@
 {# Django template for RangeSlider #}
 {# Plain (unenhanced) usa-range markup — relies on @uswds/uswds/js/usa-range #}
 {# at runtime to build the value display and screen-reader callout. #}
-{% load components %}
+{% load usx_components %}
 {% with formGroup|default_if_none:True as wrap_group %}
 {% if wrap_group %}
 {% form_group error=error %}

@@ -68,11 +68,6 @@ export function generationInputFiles(component: ComponentName, source: Source): 
   const utils = path.join(STORIES_DIR, '..', 'utils');
   return [
     ...stories,
-    ...(source === 'django'
-      ? listFiles(path.join(STORIES_DIR, component)).filter((file) =>
-          /^story-.*\.html$/.test(path.basename(file))
-        )
-      : []),
     ...listFiles(path.join(COMPONENTS_DIR, component)).filter(
       (file) => !file.endsWith('-snapshot.html')
     ),

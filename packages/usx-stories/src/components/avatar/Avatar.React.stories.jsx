@@ -10,9 +10,7 @@ const baseArgs = {
 };
 
 export const storyDefs = {
-  BasicAvatar: {
-    ...baseArgs,
-  },
+  Default: config.default,
   CircleAvatar: {
     ...baseArgs,
     shape: 'circle',
@@ -129,7 +127,7 @@ export default {
   excludeStories: ['storyDefs'],
 };
 
-export const BasicAvatar = { args: storyDefs.BasicAvatar };
+export const Default = { args: storyDefs.Default };
 export const CircleAvatar = { args: storyDefs.CircleAvatar };
 export const MediumRoundedAvatar = { args: storyDefs.MediumRoundedAvatar };
 export const LargeRoundedAvatar = { args: storyDefs.LargeRoundedAvatar };

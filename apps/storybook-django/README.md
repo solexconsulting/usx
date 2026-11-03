@@ -1,56 +1,29 @@
-Django app for server-rendering USX components in Storybook's `Django/*` stories.
+Django server for Storybook's `Django/*` stories. It renders the canonical
+templates in `packages/usx-react/src/components/`.
 
-Components in `packages/usx-react/src/components/**` can ship a Django template
-(e.g. `icon.django.html`) alongside their React implementation. This app
-discovers those templates and renders them on demand, so the
-`<Name>.Django.stories.jsx` files in `packages/usx-stories` can fetch real
-server-rendered HTML instead of just simulating it.
-
-For use in another Django project, install the `solex-usx-django` Python package
-and add `usx_django` to `INSTALLED_APPS`; see
-[the package guide](../../packages/usx-django/README.md). The package build copies
-this app's shared component runtime and the canonical templates/configs, so
-Storybook and the published package use the same source. Run
-`pnpm generate:django` after changing either source before rebuilding the package.
-
-## Structure
-
-- `project/components/` — component registry and renderer (`core/registry.py`,
-  `core/render.py`) that resolve templates from
-  `packages/usx-react/src/components/**`, plus template tags used by those
-  templates
-- `project/storybook/` — HTTP endpoints Storybook calls:
-  - `GET /components/` — JSON metadata (name + props) for every registered component
-  - `GET /render/<component_name>/?props=<json>` — server-rendered HTML for a component with the given props
-  - `GET /test/` — trivial health check ("Hello, Storybook!")
-- `project/settings/` — `base.py` (shared), `development.py` (used by default
-  via `manage.py`), `production.py` (used by the Docker image; reads
-  `DJANGO_SECRET_KEY`, `DJANGO_ALLOWED_HOSTS`, `DJANGO_CORS_ALLOWED_ORIGINS`,
-  etc. from the environment)
-
-## Setup
+## Run
 
 ```bash
 cd apps/storybook-django
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+python manage.py runserver 0.0.0.0:9090
 ```
 
-## Run
+Storybook connects to `http://<current-hostname>:9090` by default. Set
+`window.USX_DJANGO_URL` to use another address.
 
-```bash
-python manage.py runserver 9090
-```
+## Stories
 
-`manage.py` defaults to `project.settings.development` (`DEBUG=True`, all
-hosts/origins allowed) — not safe for production. Storybook's Django stories
-look for this server at `http://<current-hostname>:9090`, or
-`window.USX_DJANGO_URL` if set; see
-[../storybook/README.md](../storybook/README.md).
+Paired stories share React `storyDefs`. Django story children can mix text, HTML,
+and nested components. The same Django template supplies the preview and
+**Show code**, using the current Storybook controls.
 
-## Production
+Use **Documentation / USX Django / Workbench** in Storybook to choose a
+component or write a template, edit props, and preview it in isolation. Component
+tags may span lines, as they do in the Django stories' **Show code** blocks.
 
-`deploy/storybook-django/Dockerfile` builds a Gunicorn image that runs with
-`project.settings.production` (see `deploy/docker-compose.yml` and
-`deploy/storybook-django/gunicorn.conf.py`).
+For use outside Storybook, see the [Django package guide](../../packages/usx-django/README.md).
+After changing templates or shared component code, run `pnpm generate:django`
+before building that package.

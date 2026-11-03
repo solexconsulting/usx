@@ -4,7 +4,7 @@ import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 
 export const storyDefs = {
-  Default: { id: 'switch-1' },
+  Default: config.default,
   XS: { id: 'switch-xs', size: 'xs' },
   SM: { id: 'switch-sm', size: 'sm' },
   MD: { id: 'switch-md', size: 'md' },

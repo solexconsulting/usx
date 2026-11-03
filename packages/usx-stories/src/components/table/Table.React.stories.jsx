@@ -62,12 +62,7 @@ export const STATE_COLUMNS = [
 ];
 
 export const storyDefs = {
-  Standard: {
-    id: "standard",
-    columns: DOC_COLUMNS,
-    data: DOCUMENTS,
-    caption: 'Historic U.S. documents',
-  },
+  Default: config.default,
   Striped: {
     id: "striped",
     columns: DOC_COLUMNS,
@@ -187,7 +182,7 @@ export const storyDefs = {
   },
 };
 
-export const Standard = { args: storyDefs.Standard };
+export const Default = { args: storyDefs.Default };
 export const Striped = { args: storyDefs.Striped };
 export const Borderless = { args: storyDefs.Borderless };
 export const Compact = { args: storyDefs.Compact };

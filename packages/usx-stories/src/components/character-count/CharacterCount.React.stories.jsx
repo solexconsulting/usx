@@ -6,7 +6,7 @@ import { buildArgTypes, uswdsInitNote, componentInit } from '../../utils/storyHe
 import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
 export const storyDefs = {
-  Default: { id: 'cc-1', label: 'Text input', max: 25 },
+  Default: config.default,
   TextArea: { id: 'cc-4', label: 'Text area', max: 50, textArea: true },
   WithPlaceholder: { id: 'cc-17', label: 'Text input with placeholder', max: 25, placeholder: 'Enter text here' },
   TextAreaWithPlaceholder: { id: 'cc-18', label: 'Text area with placeholder', max: 50, textArea: true, placeholder: 'Enter text here' },

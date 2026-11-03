@@ -13,9 +13,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    children: 'This field is required',
-  },
+  Default: config.default,
   WithCustomTitle: {
     children: 'Hover over the asterisk',
     title: 'Custom Title Example'

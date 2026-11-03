@@ -19,11 +19,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    id: 'select-default',
-    label: 'Dropdown label',
-    options: sampleOptions,
-  },
+  Default: config.default,
   ErrorState: {
     id: 'select-error',
     label: 'Dropdown label',

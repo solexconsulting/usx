@@ -2,6 +2,9 @@
   "name": "spinner",
   "template": "spinner/spinner.django.html",
   "version": 1,
+  "default": {
+    "size": 3
+  },
   "props": {
     "staticBaseUrl": {
       "type": "string",

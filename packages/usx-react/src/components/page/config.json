@@ -5,6 +5,9 @@
   "required": [
     "title"
   ],
+  "default": {
+    "children": "<p>This page wrapper provides consistent spacing between a site header and footer.</p><p>Use this region for page-specific content.</p>"
+  },
   "props": {
     "as": {
       "type": "select",

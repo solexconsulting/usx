@@ -1,8 +1,8 @@
 import React from 'react';
 import config from '../../../../usx-react/src/components/popover/config.json';
-import { djangoComponent, serializePropsForDjango } from '../../utils/djangoComponent.js';
-import { buildArgTypes, componentTag, createDjangoStory } from '../../utils/storyHelpers.jsx';
-import ReactMeta, { storyDefs, NavigationBarLayout } from './Popover.React.stories.jsx';
+import Popover from '../../../../usx-react/src/components/popover/Popover.tsx';
+import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import ReactMeta, { storyDefs, NavigationBarLayout, AllPlacements as AllPlacementsReact, RtlPlacements as RtlPlacementsReact } from './Popover.React.stories.jsx';
 
 export default {
   decorators: ReactMeta.decorators,
@@ -21,11 +21,7 @@ export default {
   },
 };
 
-const djangoStory = createDjangoStory({ componentName: 'popover' });
-
-const serializePopoverArgs = serializePropsForDjango;
-
-const createPopoverStory = (args) => djangoStory(serializePopoverArgs(args));
+const createPopoverStory = createDjangoStory({ componentName: 'popover' });
 
 /** Plain content in a native disclosure with an enhanced floating panel. */
 export const Default = createPopoverStory(storyDefs.Default);
@@ -66,56 +62,11 @@ export const HeadingAsH3 = createPopoverStory(storyDefs.HeadingAsH3);
 /** Heading levels are independent of visual size; use `panelClassName` or utilities to restyle. */
 export const HeadingAsH5 = createPopoverStory(storyDefs.HeadingAsH5);
 
-const DjangoPopover = djangoComponent({ componentName: 'popover' });
-const placements = storyDefs.Placements.map(serializePopoverArgs);
-const rtlPlacements = storyDefs.RtlPlacements.map(serializePopoverArgs);
-
 /** All 12 side and alignment combinations use the same template. */
-export const AllPlacements = {
-  parameters: {
-    docs: {
-      source: {
-        code: placements.map((props) => componentTag({ name: 'popover', props })).join('\n\n'),
-      },
-    },
-  },
-  render: () => (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, minmax(12rem, 1fr))',
-        gap: '6rem 3rem',
-      }}
-    >
-      {placements.map((args) => (
-        <div key={args.id}>
-          <DjangoPopover {...args} />
-        </div>
-      ))}
-    </div>
-  ),
-};
+export const AllPlacements = createDjangoStory({ componentName: 'popover', renderTree: AllPlacementsReact.render })({});
 
 /** Start and end alignments follow right-to-left reading order. */
-export const RtlPlacements = {
-  parameters: {
-    docs: {
-      source: {
-        code: `<div dir="rtl">\n${rtlPlacements.map((props) => componentTag({ name: 'popover', props })).join('\n\n')}\n</div>`,
-      },
-    },
-  },
-  render: () => (
-    <div
-      dir="rtl"
-      style={{ display: 'flex', justifyContent: 'center', gap: '8rem', padding: '6rem 3rem' }}
-    >
-      {rtlPlacements.map((args) => (
-        <DjangoPopover key={args.id} {...args} />
-      ))}
-    </div>
-  ),
-};
+export const RtlPlacements = createDjangoStory({ componentName: 'popover', renderTree: RtlPlacementsReact.render })({});
 
 /** The panel keeps a long link list scrollable. */
 export const LongContent = createPopoverStory(storyDefs.LongContent);
@@ -123,12 +74,7 @@ export const LongContent = createPopoverStory(storyDefs.LongContent);
 /** One positioned Popover contains a Tree on small screens and a list with optional nested Popovers on larger screens. */
 export const ResponsiveComposition = createPopoverStory(storyDefs.ResponsiveComposition);
 
-export const NavigationBar = {
-  render: () => (
-    <NavigationBarLayout>
-      <DjangoPopover
-        {...serializePopoverArgs(storyDefs.NavigationBar)}
-      />
-    </NavigationBarLayout>
-  ),
-};
+export const NavigationBar = createDjangoStory({
+  componentName: 'popover',
+  renderTree: () => NavigationBarLayout({ children: <Popover {...storyDefs.NavigationBar} /> }),
+})({});

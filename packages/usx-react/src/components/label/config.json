@@ -2,6 +2,9 @@
   "name": "label",
   "template": "label/label.django.html",
   "version": 2,
+  "default": {
+    "children": "Label Text"
+  },
   "props": {
     "id": {
       "type": "string",

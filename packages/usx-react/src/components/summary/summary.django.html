@@ -1,5 +1,5 @@
 {# Django template for Summary #}
-{% load components %}
+{% load usx_components %}
 {% spaceless %}
 {% if unstyled %}
 <summary{% if className %} class="{{ className|force_escape }}"{% endif %}{% if ariaLabel %} aria-label="{{ ariaLabel|force_escape }}"{% endif %}>{% if children != None %}{{ children|safe }}{% elif label %}{{ label|force_escape }}{% else %}Details{% endif %}</summary>

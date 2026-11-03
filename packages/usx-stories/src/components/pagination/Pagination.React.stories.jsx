@@ -1,3 +1,4 @@
+import config from '../../../../usx-react/src/components/pagination/config.json';
 import React, { useState } from 'react';
 import Pagination from '../../../../usx-react/src/components/pagination/Pagination.tsx';
 import PaginationNavigation, {
@@ -30,14 +31,7 @@ export default {
 // ── Exportable story definitions (reused by Django stories) ───────────────
 
 export const storyDefs = {
-  Default: {
-    totalItems: 240,
-    initialPage: 10,
-    initialPageSize: 10,
-    currentPage: 10,
-    totalPages: 24,
-    pageUrlPrefix: '?page=',
-  },
+  Default: config.default,
   CallbackLinks: {
     totalItems: 100,
     initialPage: 2,

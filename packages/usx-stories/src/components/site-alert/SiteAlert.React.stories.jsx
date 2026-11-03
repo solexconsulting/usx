@@ -15,11 +15,7 @@ export default {
 };
 
 export const storyDefs = {
-  StandardInfo: {
-    variant: 'info',
-    alertHeading: 'Short alert message',
-    alertText: 'Additional context and followup information including a link.',
-  },
+  Default: config.default,
   DismissibleInfo: {
     variant: 'info',
     alertHeading: 'Short alert message',
@@ -163,7 +159,7 @@ export const storyDefs = {
   },
 };
 
-export const StandardInfo = { args: storyDefs.StandardInfo };
+export const Default = { args: storyDefs.Default };
 export const StandardEmergency = { args: storyDefs.StandardEmergency };
 export const NoHeader = { args: storyDefs.NoHeader };
 export const List = { args: storyDefs.List };

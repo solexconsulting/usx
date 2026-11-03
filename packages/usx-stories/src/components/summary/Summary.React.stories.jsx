@@ -4,7 +4,7 @@ import config from '../../../../usx-react/src/components/summary/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Default: config.default || {},
+  Default: config.default,
   ButtonClasses: {
     label: "Click me!",
     className: 'usa-button usx-button usa-button--primary',

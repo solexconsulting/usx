@@ -13,6 +13,8 @@ export default {
 const hasClass = (element, name, expected) =>
   (expected ? expect(element) : expect(element).not).toHaveClass(name);
 const radius = (element) => parseFloat(getComputedStyle(element).borderTopLeftRadius);
+const assetUrl = (path, base) =>
+  base ? `${base.replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}` : path;
 
 const checkImage = (def) => async (wrapper) => {
   await expect(wrapper).toHaveClass('usx-image');
@@ -25,10 +27,10 @@ const checkImage = (def) => async (wrapper) => {
     await expect(img).toHaveAttribute('src', def.src);
   } else {
     // A responsive image offers its sources largest first, with the fallback on the img.
-    await expect(img).toHaveAttribute('src', def.src.fallback);
+    await expect(img).toHaveAttribute('src', assetUrl(def.src.fallback, def.staticBaseUrl));
     const sources = [...wrapper.querySelectorAll('picture > source')];
     await expect(sources.map((source) => [source.media, source.getAttribute('srcset')])).toEqual(
-      def.src.sources.map((source) => [source.media, source.srcSet])
+      def.src.sources.map((source) => [source.media, assetUrl(source.srcSet, def.staticBaseUrl)])
     );
   }
 

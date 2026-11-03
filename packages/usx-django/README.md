@@ -6,22 +6,24 @@ supported. Node.js and a monorepo checkout are not required at runtime.
 
 ## Installation
 
-After the first PyPI release:
-
 ```bash
 pip install solex-usx-django
 ```
 
 Add `"usx_django"` to `INSTALLED_APPS` and enable `APP_DIRS: True` in the
 `DjangoTemplates` backend. No custom template directories or
-`USX_COMPONENT_PATHS` are needed. For an existing template library also named
-`components`, explicitly map `"components": "usx_django.templatetags.components"`
-in the backend's `OPTIONS["libraries"]`.
+`USX_COMPONENT_PATHS` are needed. Existing `{% load components %}` templates
+still work; use `usx_components` in new templates.
 
 ```django
-{% load components %}
-{% label htmlFor="email" required=True %}Email address{% endlabel %}
+{% load usx_components %}
+{% label
+  htmlFor="email"
+  required=True
+%}Email address{% endlabel %}
 ```
+
+Component tags may span lines; the installed USX app enables this syntax.
 
 Tag names use underscores for hyphenated component names, for example
 `{% form_group %}...{% endform_group %}`. Every component tag requires its
@@ -47,11 +49,8 @@ html = render_component("label", {"htmlFor": "email", "label": "Email address"})
 label_contract = get_contracts()["components"]["label"]
 ```
 
-The Python renderer applies contract defaults and rejects unknown prop names;
-it does not enforce required props or validate prop types. Block tags retain
-their existing template behavior. Contract component references remain references,
-not recursively expanded schemas. The complete manifest is also available via
-`importlib.resources.files("usx_django").joinpath("component-contracts.json")`.
+The Python renderer applies contract defaults and rejects unknown props. Block
+tags also apply defaults, but do not validate props.
 
 Ordinary template variables are escaped. Props that intentionally accept HTML
 or JavaScript handlers must contain trusted content, not unsanitized user input.

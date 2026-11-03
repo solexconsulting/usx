@@ -1,5 +1,5 @@
 {# Sub-template: pagination navigation bar #}
-{% load components %}
+{% load usx_components %}
 {# Props: currentPage, totalPages, pages, unbounded, arrowsOnly, #}
 {#        prevLabel, nextLabel, hideLinkText, ariaLabel, pageUrlPrefix #}
 <nav aria-label="{{ ariaLabel }}" class="usa-pagination usx-pagination__nav{% if arrowsOnly %} usx-pagination__arrows-only{% endif %}" data-usx-pagination-current-page="{{ currentPage }}" data-usx-pagination-page-size="{{ pageSize|default:10 }}" data-usx-pagination-total-items="{{ totalItems|default_if_none:'' }}">

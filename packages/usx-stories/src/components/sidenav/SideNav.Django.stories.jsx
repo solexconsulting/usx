@@ -13,6 +13,6 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'sidenav' });
 
-export const Simple = createStory(storyDefs.Simple);
+export const Default = createStory(storyDefs.Default);
 export const WithSublist = createStory(storyDefs.WithSublist);
 export const Nested = createStory(storyDefs.Nested);

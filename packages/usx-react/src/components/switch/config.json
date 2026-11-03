@@ -2,6 +2,9 @@
   "name": "switch",
   "template": "switch/switch.django.html",
   "version": 2,
+  "default": {
+    "id": "switch-1"
+  },
   "props": {
     "id": {
       "type": "string",

@@ -2,6 +2,21 @@
   "name": "card",
   "template": "card/card.django.html",
   "version": 5,
+  "default": {
+    "title": "Card Title",
+    "description": "This is the main content of the card. It can contain text, links, or other elements.",
+    "buttonProps": [
+      {
+        "children": "Learn More",
+        "variant": "primary"
+      },
+      {
+        "children": "View Details",
+        "variant": "secondary"
+      }
+    ],
+    "className": "tablet:grid-col-8 widescreen:grid-col-6"
+  },
   "props": {
     "id": {
       "type": "string",

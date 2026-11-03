@@ -5,11 +5,51 @@
   "required": ["items"],
   "default": {
     "items": [
-      { "type": "link", "href": "https://www.google.com", "text": "Google" },
       {
         "type": "details",
-        "summaryProps": { "label": "Socials" },
-        "items": [{ "type": "link", "href": "https://www.facebook.com", "text": "Facebook" }]
+        "summaryProps": {
+          "label": "More application services"
+        },
+        "items": [
+          {
+            "type": "link",
+            "href": "#renew-application",
+            "text": "Renew an application"
+          },
+          {
+            "type": "link",
+            "href": "#get-help",
+            "text": "Get help"
+          }
+        ]
+      },
+      {
+        "type": "details",
+        "summaryProps": {
+          "label": "About these services"
+        },
+        "text": "Find applications and support here."
+      },
+      {
+        "type": "details",
+        "summaryProps": {
+          "label": "Coming soon"
+        },
+        "items": [
+          {
+            "type": "text",
+            "text": "Feature under development"
+          }
+        ]
+      },
+      {
+        "type": "link",
+        "href": "#application-status",
+        "text": "Check application status"
+      },
+      {
+        "type": "text",
+        "text": "Applications"
       }
     ]
   },

@@ -1,4 +1,4 @@
-{% load components %}
+{% load usx_components %}
 {# Django template for Spinner #}
 <span role="status" aria-live="polite" class="usx-spinner{% if className %} {{ className }}{% endif %}">
   {% icon name="spinner" source="usx" size=size|default:3 color=color staticBaseUrl=staticBaseUrl staticUrlPrefix=staticUrlPrefix %}{% endicon %}

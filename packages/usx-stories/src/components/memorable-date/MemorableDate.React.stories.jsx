@@ -13,9 +13,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    id: 'memorable-date',
-  },
+  Default: config.default,
   Disabled: {
     id: 'memorable-date-disabled',
     disabled: true,

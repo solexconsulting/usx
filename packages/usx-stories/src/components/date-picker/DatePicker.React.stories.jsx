@@ -22,12 +22,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    id: 'appointment-date',
-    name: 'appointment-date',
-    label: 'Appointment date',
-    hint: 'mm/dd/yyyy',
-  },
+  Default: config.default,
   Disabled: {
     id: 'appointment-date-disabled',
     name: 'appointment-date-disabled',

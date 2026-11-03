@@ -22,11 +22,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    id: 'file-input-single',
-    name: 'file-input-single',
-    label: 'Input accepts a single file',
-  },
+  Default: config.default,
   AcceptSpecificTypes: {
     id: 'file-input-specific',
     name: 'file-input-specific',

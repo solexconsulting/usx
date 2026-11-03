@@ -4,7 +4,8 @@
     type="button"
     class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
     aria-label="Theme"
-    onclick="this.closest('.usx-theme-picker').classList.add('usx-theme-picker--open')"
+    aria-expanded="false"
+    aria-controls="django-theme-picker-1-panel"
   >
     <svg
       class="usa-icon usx-theme-picker__icon"
@@ -18,14 +19,10 @@
       />
     </svg>
   </button>
-  <div class="usx-theme-picker__panel">
+  <div id="django-theme-picker-1-panel" class="usx-theme-picker__panel">
     <label class="usa-label usx-label usa-sr-only" for="django-theme-picker-1"> Theme </label>
 
-    <select
-      class="usa-select usx-select"
-      id="django-theme-picker-1"
-      onchange="window.__STORYBOOK_ADDONS_CHANNEL__.emit(&#x27;updateGlobals&#x27;, { globals: { theme: this.value } })"
-    >
+    <select class="usa-select usx-select" id="django-theme-picker-1">
       <option value="Default" selected>Default</option>
 
       <option value="Forest">Forest</option>
@@ -52,7 +49,6 @@
       type="button"
       class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
       aria-label="Confirm theme"
-      onclick="this.closest('.usx-theme-picker').classList.remove('usx-theme-picker--open')"
     >
       <svg
         class="usa-icon usx-icon usx-theme-picker__icon"
@@ -72,7 +68,8 @@
     type="button"
     class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
     aria-label="Theme"
-    onclick="this.closest('.usx-theme-picker').classList.add('usx-theme-picker--open')"
+    aria-expanded="false"
+    aria-controls="django-theme-picker-2-panel"
   >
     <svg
       class="usa-icon usx-theme-picker__icon"
@@ -86,14 +83,10 @@
       />
     </svg>
   </button>
-  <div class="usx-theme-picker__panel">
+  <div id="django-theme-picker-2-panel" class="usx-theme-picker__panel">
     <label class="usa-label usx-label usa-sr-only" for="django-theme-picker-2"> Theme </label>
 
-    <select
-      class="usa-select usx-select"
-      id="django-theme-picker-2"
-      onchange="window.__STORYBOOK_ADDONS_CHANNEL__.emit(&#x27;updateGlobals&#x27;, { globals: { theme: this.value } })"
-    >
+    <select class="usa-select usx-select" id="django-theme-picker-2">
       <option value="Aurora" selected>Light</option>
 
       <option value="Borealis">Dark</option>
@@ -102,7 +95,6 @@
       type="button"
       class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
       aria-label="Confirm theme"
-      onclick="this.closest('.usx-theme-picker').classList.remove('usx-theme-picker--open')"
     >
       <svg
         class="usa-icon usx-icon usx-theme-picker__icon"

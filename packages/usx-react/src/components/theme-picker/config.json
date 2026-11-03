@@ -5,6 +5,57 @@
   "required": [
     "themes"
   ],
+  "default": {
+    "id": "theme-picker-1",
+    "label": "Theme",
+    "themes": [
+      {
+        "value": "Default",
+        "label": "Default"
+      },
+      {
+        "value": "Forest",
+        "label": "Forest"
+      },
+      {
+        "value": "Sunset",
+        "label": "Sunset"
+      },
+      {
+        "value": "Ocean",
+        "label": "Ocean"
+      },
+      {
+        "value": "Aurora",
+        "label": "Aurora"
+      },
+      {
+        "value": "Borealis",
+        "label": "Borealis"
+      },
+      {
+        "value": "Midnight",
+        "label": "Midnight"
+      },
+      {
+        "value": "Carbon",
+        "label": "Carbon"
+      },
+      {
+        "value": "VADS",
+        "label": "VADS"
+      },
+      {
+        "value": "GOV.UK",
+        "label": "GOV.UK"
+      },
+      {
+        "value": "NASA",
+        "label": "NASA"
+      }
+    ],
+    "defaultValue": "Default"
+  },
   "props": {
     "id": {
       "type": "string",
@@ -28,8 +79,9 @@
       "description": "Initial selected value for uncontrolled usage"
     },
     "onChange": {
-      "type": "string",
-      "description": "JavaScript function to call when the selected theme changes — applying the theme is the caller's responsibility. With @solexllc/usx-theme/themes, that's typically `document.documentElement.dataset.theme = value` (plus any persistence)."
+      "type": "function",
+      "description": "React callback for a selected theme. Django consumers can listen for the select's native change event; applying the theme remains the application's responsibility.",
+      "renderers": { "django": { "supported": false } }
     },
     "className": {
       "type": "string",

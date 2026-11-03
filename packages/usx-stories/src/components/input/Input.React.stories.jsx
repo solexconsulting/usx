@@ -13,11 +13,7 @@ export default {
 };
 
 export const storyDefs = {
-  Default: {
-    id: 'example-input-1',
-    label: 'Text input label',
-    placeholder: 'Type here',
-  },
+  Default: inputConfig.default,
   WithHint: {
     id: 'example-input-2',
     label: 'Input with hint',

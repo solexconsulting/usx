@@ -2,6 +2,11 @@
   "name": "clickable",
   "template": "clickable/clickable.django.html",
   "version": 2,
+  "default": {
+    "href": "https://google.com",
+    "className": "display-flex flex-column padding-2 border",
+    "children": "Everything taking up space in this box is clickable, but only the text below appears as a link.<br><span class=\"usx-clickable__link\">I look clickable</span>"
+  },
   "props": {
     "href": {
       "type": "string",

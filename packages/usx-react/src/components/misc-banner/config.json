@@ -2,6 +2,19 @@
   "name": "misc-banner",
   "template": "misc-banner/misc-banner.django.html",
   "version": 4,
+  "default": {
+    "id": "misc-banner-misc",
+    "color": "base",
+    "badgeText": "misc",
+    "message": "This is a miscellaneous banner.",
+    "casualLinkText": "Casual Link",
+    "casualLinkHref": "https://usx.solex.studio/",
+    "importantLinkText": "Important Link",
+    "importantLinkHref": "https://usx.solex.studio/",
+    "importantLinkIcon": "arrow_forward",
+    "showLearnMore": true,
+    "showReturnLink": true
+  },
   "props": {
     "id": {
       "type": "string",

@@ -107,14 +107,14 @@ const checkFooter = (def, key) => async (section) => {
 };
 
 const checks = {
-  'Big Footer': checkFooter(storyDefs.Big, 'Big Footer'),
+  'Big Footer': checkFooter(storyDefs.Default, 'Big Footer'),
   'Medium Footer': checkFooter(storyDefs.Medium, 'Medium Footer'),
   Slim: checkFooter(storyDefs.Slim, 'Slim'),
   'Logo Only': checkFooter(storyDefs.LogoOnly, 'Logo Only'),
   'No Nav': checkFooter(storyDefs.NoNav, 'No Nav'),
   Minimal: checkFooter(storyDefs.Minimal, 'Minimal'),
   'Primary Only': checkFooter(storyDefs.PrimaryOnly, 'Primary Only'),
-  'Border Roles': checkFooter(storyDefs.Big, 'Border Roles'),
+  'Border Roles': checkFooter(storyDefs.Default, 'Border Roles'),
   'Custom Composition': checkFooter(storyDefs.CustomComposition, 'Custom Composition'),
 };
 

@@ -22,7 +22,7 @@ from django.test import SimpleTestCase
 
 from usx_django import get_contracts, render_component
 from usx_django.core.registry import get_all_components
-from usx_django.templatetags.components import register
+from usx_django.templatetags.usx_components import register
 
 
 class InstalledPackageTests(SimpleTestCase):
@@ -45,17 +45,29 @@ class InstalledPackageTests(SimpleTestCase):
 
     def test_label_block_and_nested_required(self):
         html = Template(
-            '{% load components %}{% label htmlFor="email" required=True %}'
+            '{% load usx_components %}{% label htmlFor="email" required=True %}'
             '{{ text }}{% endlabel %}'
         ).render(Context({"text": "Email <address>"}))
         self.assertIn('for="email"', html)
         self.assertIn("Email &lt;address&gt;", html)
         self.assertInHTML('<abbr title="Required" class="usx-required">*</abbr>', html)
 
+    def test_legacy_load_name(self):
+        html = Template('{% load components %}{% label %}Legacy{% endlabel %}').render(Context({}))
+        self.assertIn('Legacy', html)
+
+    def test_multiline_component_tag(self):
+        html = Template(
+            '{% load usx_components %}{% label\n  htmlFor="email"\n  required=True\n%}'
+            'Email address{% endlabel %}'
+        ).render(Context({}))
+        self.assertIn('for="email"', html)
+        self.assertIn('Email address', html)
+
     def test_props_and_assignment(self):
         props = {"htmlFor": "original", "className": "custom"}
         html = Template(
-            '{% load components %}{% label props=props htmlFor="override" as result %}'
+            '{% load usx_components %}{% label props=props htmlFor="override" as result %}'
             '<strong>{{ text }}</strong>{% endlabel %}{{ result }}'
         ).render(Context({"props": props, "text": "<Email>"}))
         self.assertIn('for="override"', html)
@@ -67,7 +79,7 @@ class InstalledPackageTests(SimpleTestCase):
         for name in ("clickable", "clickable_link", "clickable_color_change", "clickable_bg_color_change"):
             self.assertIn(name, register.tags)
         html = Template(
-            '{% load components %}{% clickable href="/services" %}'
+            '{% load usx_components %}{% clickable href="/services" %}'
             '{% clickable_link as="strong" colorChange=True %}Services{% endclickable_link %}'
             '{% endclickable %}'
         ).render(Context({}))
@@ -102,7 +114,7 @@ class InstalledPackageTests(SimpleTestCase):
         self.assertIn('aria-label="Application actions"', html)
         self.assertInHTML("<p>Grouped content</p>", html)
         html = Template(
-            '{% load components %}{% container props=props as="section" %}'
+            '{% load usx_components %}{% container props=props as="section" %}'
             '<p>{{ text }}</p>{% endcontainer %}'
         ).render(Context({"props": props, "text": "<Child>"}))
         self.assertIn('<section class="usx-container ', html)

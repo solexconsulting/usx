@@ -2,6 +2,9 @@
   "name": "required",
   "template": "required/required.django.html",
   "version": 3,
+  "default": {
+    "children": "This field is required"
+  },
   "props": {
     "title": {
       "type": "string",

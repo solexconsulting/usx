@@ -1,5 +1,5 @@
 {# Django template for Hero #}
-{% load components %}
+{% load usx_components %}
 <section
   class="usx-hero{% if overlay != False %} usx-hero--has-overlay{% endif %}{% if overlayOpacity or overlayOpacity == 0 %} usx-hero--custom-overlay{% endif %}{% if contentPosition == 'right' %} usx-hero--content-right{% elif contentPosition == 'center' %} usx-hero--content-center{% endif %}{% if boxed == False %} usx-hero--unboxed{% endif %}{% if secondaryContent %} usx-hero--split{% endif %}{% if className %} {{ className }}{% endif %}"
   aria-label="{% if ariaLabel %}{{ ariaLabel }}{% else %}Introduction{% endif %}"

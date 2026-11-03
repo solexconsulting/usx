@@ -16,12 +16,7 @@ export default {
 };
 
 export const storyDefs = {
-  ExecutiveSummary: {
-    id: 'summary-box-executive-summary',
-    heading: 'Program summary: Winter Relief 2026',
-    content:
-      'This page tracks a 12-week emergency housing initiative serving 4 counties. Use the summaries below to review what happened, what changed, and what decisions remain.',
-  },
+  Default: config.default,
   StoryStep1Context: {
     id: 'summary-box-step-1',
     heading: 'Step 1: Starting conditions',
@@ -94,7 +89,7 @@ export const storyDefs = {
   },
 };
 
-export const ExecutiveSummary = { args: storyDefs.ExecutiveSummary };
+export const Default = { args: storyDefs.Default };
 export const StoryStep1Context = { args: storyDefs.StoryStep1Context };
 export const StoryStep2Actions = { args: storyDefs.StoryStep2Actions };
 export const StoryStep3Outcomes = { args: storyDefs.StoryStep3Outcomes };

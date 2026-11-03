@@ -113,6 +113,28 @@ export const componentContracts = {
           "template": "accordion/accordion.django.html",
           "tag": "accordion"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "accordion-default",
+          "items": [
+            {
+              "id": "accordion-default-item-1",
+              "title": "Accordion Item 1",
+              "content": "Content for accordion item 1."
+            },
+            {
+              "id": "accordion-default-item-2",
+              "title": "Accordion Item 2",
+              "content": "Content for accordion item 2."
+            },
+            {
+              "id": "accordion-default-item-3",
+              "title": "Accordion Item 3",
+              "content": "Content for accordion item 3."
+            }
+          ]
+        }
       }
     },
     "alert": {
@@ -159,16 +181,7 @@ export const componentContracts = {
         },
         "style": {
           "type": "object",
-          "description": "Inline styles as a React CSSProperties object.",
-          "renderers": {
-            "react": {
-              "type": "object"
-            },
-            "django": {
-              "supported": false,
-              "description": "The Django template does not render this prop."
-            }
-          }
+          "description": "Inline CSS declarations for the alert element."
         },
         "role": {
           "type": "select",
@@ -209,6 +222,12 @@ export const componentContracts = {
           "component": "alert",
           "template": "alert/alert.django.html",
           "tag": "alert"
+        }
+      },
+      "examples": {
+        "default": {
+          "heading": "Default alert",
+          "text": "System status and notification updates appear here."
         }
       }
     },
@@ -256,6 +275,12 @@ export const componentContracts = {
           "template": "attribution/attribution.django.html",
           "tag": "attribution"
         }
+      },
+      "examples": {
+        "default": {
+          "primary": "George Washington",
+          "secondary": "First President of the United States"
+        }
       }
     },
     "avatar": {
@@ -302,6 +327,9 @@ export const componentContracts = {
         "tooltipProps": {
           "type": "object",
           "component": "tooltip",
+          "omit": [
+            "children"
+          ],
           "description": "Optional Tooltip props passed through unchanged. The Avatar supplies the trigger element."
         },
         "className": {
@@ -329,6 +357,13 @@ export const componentContracts = {
           "component": "avatar",
           "template": "avatar/avatar.django.html",
           "tag": "avatar"
+        }
+      },
+      "examples": {
+        "default": {
+          "href": "https://google.com/search?q=Statue+of+Liberty",
+          "src": "./lady_liberty.png",
+          "alt": "Statue of Liberty"
         }
       }
     },
@@ -472,6 +507,13 @@ export const componentContracts = {
           "template": "back-to-top/back-to-top.django.html",
           "tag": "back_to_top"
         }
+      },
+      "examples": {
+        "default": {
+          "label": "Back to top",
+          "iconPosition": "right",
+          "iconSize": 2
+        }
       }
     },
     "banner": {
@@ -540,6 +582,11 @@ export const componentContracts = {
           "component": "banner",
           "template": "banner/banner.django.html",
           "tag": "banner"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "gov-banner-default"
         }
       }
     },
@@ -765,6 +812,12 @@ export const componentContracts = {
           "template": "button/button.django.html",
           "tag": "button"
         }
+      },
+      "examples": {
+        "default": {
+          "label": "Default",
+          "variant": "primary"
+        }
       }
     },
     "button-group": {
@@ -810,6 +863,24 @@ export const componentContracts = {
           "template": "button-group/button-group.django.html",
           "tag": "button_group"
         }
+      },
+      "examples": {
+        "default": {
+          "buttonProps": [
+            {
+              "label": "Map",
+              "variant": "primary"
+            },
+            {
+              "label": "Hybrid",
+              "variant": "outline"
+            },
+            {
+              "label": "Satellite",
+              "variant": "outline"
+            }
+          ]
+        }
       }
     },
     "calendar-date": {
@@ -840,6 +911,11 @@ export const componentContracts = {
           "component": "calendar-date",
           "template": "calendar-date/calendar-date.django.html",
           "tag": "calendar_date"
+        }
+      },
+      "examples": {
+        "default": {
+          "datetime": "2020-09-30T12:00:00+01:00"
         }
       }
     },
@@ -924,6 +1000,11 @@ export const componentContracts = {
           "component": "callout",
           "template": "callout/callout.django.html",
           "tag": "callout"
+        }
+      },
+      "examples": {
+        "default": {
+          "content": "Related information goes here."
         }
       }
     },
@@ -1043,6 +1124,23 @@ export const componentContracts = {
           "template": "card/card.django.html",
           "tag": "card"
         }
+      },
+      "examples": {
+        "default": {
+          "title": "Card Title",
+          "description": "This is the main content of the card. It can contain text, links, or other elements.",
+          "buttonProps": [
+            {
+              "children": "Learn More",
+              "variant": "primary"
+            },
+            {
+              "children": "View Details",
+              "variant": "secondary"
+            }
+          ],
+          "className": "tablet:grid-col-8 widescreen:grid-col-6"
+        }
       }
     },
     "card-group": {
@@ -1079,6 +1177,86 @@ export const componentContracts = {
           "component": "card-group",
           "template": "card-group/card-group.django.html",
           "tag": "card_group"
+        }
+      },
+      "examples": {
+        "default": {
+          "cardProps": [
+            {
+              "title": "Card Title",
+              "description": "This is the main content of the card. It can contain text, links, or other elements.",
+              "buttonProps": [
+                {
+                  "children": "Learn More",
+                  "variant": "primary"
+                },
+                {
+                  "children": "View Details",
+                  "variant": "secondary"
+                }
+              ],
+              "className": "tablet:grid-col-6 widescreen:grid-col-4"
+            },
+            {
+              "title": "Card with Media",
+              "description": "This is the main content of the card. It can contain text, links, or other elements.",
+              "buttonProps": [
+                {
+                  "children": "Learn More",
+                  "variant": "primary"
+                },
+                {
+                  "children": "View Details",
+                  "variant": "secondary"
+                }
+              ],
+              "className": "tablet:grid-col-6 widescreen:grid-col-4",
+              "imageProps": [
+                {
+                  "src": "https://picsum.photos/800/300?random=2",
+                  "alt": "Placeholder image for card",
+                  "caption": "This is an image caption.",
+                  "objectFit": "cover"
+                },
+                {
+                  "src": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
+                  "alt": "Placeholder image for card",
+                  "caption": "This is another image caption.",
+                  "objectFit": "cover"
+                }
+              ]
+            },
+            {
+              "title": "Media with header first",
+              "description": "This is the main content of the card. It can contain text, links, or other elements.",
+              "buttonProps": [
+                {
+                  "children": "Learn More",
+                  "variant": "primary"
+                },
+                {
+                  "children": "View Details",
+                  "variant": "secondary"
+                }
+              ],
+              "className": "tablet:grid-col-6 widescreen:grid-col-4",
+              "imageProps": [
+                {
+                  "src": "https://picsum.photos/800/300?random=2",
+                  "alt": "Placeholder image for card",
+                  "caption": "This is an image caption.",
+                  "objectFit": "cover"
+                },
+                {
+                  "src": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
+                  "alt": "Placeholder image for card",
+                  "caption": "This is another image caption.",
+                  "objectFit": "cover"
+                }
+              ],
+              "headerFirst": true
+            }
+          ]
         }
       }
     },
@@ -1157,6 +1335,22 @@ export const componentContracts = {
           "component": "carousel",
           "template": "carousel/carousel.django.html",
           "tag": "carousel"
+        }
+      },
+      "examples": {
+        "default": {
+          "ariaLabel": "Featured content",
+          "slides": [
+            {
+              "content": "<div class=\"width-full height-card bg-primary-dark text-white padding-8\">Slide 1</div>"
+            },
+            {
+              "content": "<div class=\"width-full height-card bg-primary-light text-black padding-8\">Slide 2</div>"
+            },
+            {
+              "content": "<div class=\"width-full height-card bg-secondary-dark text-white padding-8\">Slide 3</div>"
+            }
+          ]
         }
       }
     },
@@ -1250,6 +1444,13 @@ export const componentContracts = {
           "template": "character-count/character-count.django.html",
           "tag": "character_count"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "cc-1",
+          "label": "Text input",
+          "max": 25
+        }
       }
     },
     "checkbox": {
@@ -1340,6 +1541,14 @@ export const componentContracts = {
           "template": "checkbox/checkbox.django.html",
           "tag": "checkbox"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "example-checkbox-1",
+          "name": "example-1",
+          "value": "example-value-1",
+          "label": "Example Checkbox 1"
+        }
       }
     },
     "checkbox-group": {
@@ -1409,6 +1618,32 @@ export const componentContracts = {
           "template": "checkbox-group/checkbox-group.django.html",
           "tag": "checkbox_group"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "historical-figures",
+          "name": "historical-figures",
+          "legend": "Select any that apply",
+          "checkboxProps": [
+            {
+              "value": "sojourner-truth",
+              "label": "Sojourner Truth"
+            },
+            {
+              "value": "frederick-douglass",
+              "label": "Frederick Douglass"
+            },
+            {
+              "value": "booker-t-washington",
+              "label": "Booker T. Washington"
+            },
+            {
+              "value": "george-washington-carver",
+              "label": "George Washington Carver",
+              "disabled": true
+            }
+          ]
+        }
       }
     },
     "clickable": {
@@ -1445,6 +1680,13 @@ export const componentContracts = {
           "component": "clickable",
           "template": "clickable/clickable.django.html",
           "tag": "clickable"
+        }
+      },
+      "examples": {
+        "default": {
+          "href": "https://google.com",
+          "className": "display-flex flex-column padding-2 border",
+          "children": "Everything taking up space in this box is clickable, but only the text below appears as a link.<br><span class=\"usx-clickable__link\">I look clickable</span>"
         }
       }
     },
@@ -1511,6 +1753,26 @@ export const componentContracts = {
           "component": "code",
           "template": "code/code.django.html",
           "tag": "code"
+        }
+      },
+      "examples": {
+        "default": {
+          "lines": [
+            {
+              "code": "npm install @solexllc/usx",
+              "prefix": "$"
+            },
+            {
+              "code": "installing...",
+              "prefix": ">",
+              "className": "text-warning"
+            },
+            {
+              "code": "Done!",
+              "prefix": ">",
+              "className": "text-success"
+            }
+          ]
         }
       }
     },
@@ -1586,6 +1848,57 @@ export const componentContracts = {
           "component": "collection",
           "template": "collection/collection.django.html",
           "tag": "collection"
+        }
+      },
+      "examples": {
+        "default": {
+          "items": [
+            {
+              "href": "#",
+              "heading": "Gears of Government President's Award winners",
+              "description": "The Administration announces the winners of the Gears of Government President's Award, recognizing federal employees who make a profound difference in the lives of the American people.",
+              "meta": [
+                {
+                  "text": "By Sondra Ainsworth and Constance Lu"
+                },
+                {
+                  "text": "September 30, 2020",
+                  "datetime": "2020-09-30T12:00:00+01:00"
+                }
+              ],
+              "tags": [
+                {
+                  "label": "New",
+                  "isNew": true
+                },
+                {
+                  "label": "PMA"
+                },
+                {
+                  "label": "OMB"
+                }
+              ]
+            },
+            {
+              "href": "#",
+              "heading": "Women-owned small business dashboard",
+              "description": "In honor of National Women's Small Business Month, we've partnered with SBA to highlight the Women-Owned Small Businesses (WOSBs) data dashboard.",
+              "meta": [
+                {
+                  "text": "By Constance Lu"
+                },
+                {
+                  "text": "September 30, 2020",
+                  "datetime": "2020-09-30T12:00:00+01:00"
+                }
+              ],
+              "tags": [
+                {
+                  "label": "SBA"
+                }
+              ]
+            }
+          ]
         }
       }
     },
@@ -1680,6 +1993,275 @@ export const componentContracts = {
           "component": "combobox",
           "template": "combobox/combobox.django.html",
           "tag": "combobox"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "fruit",
+          "name": "fruit",
+          "label": "Select a fruit",
+          "options": [
+            {
+              "value": "",
+              "label": "Select a fruit"
+            },
+            {
+              "value": "apple",
+              "label": "Apple"
+            },
+            {
+              "value": "apricot",
+              "label": "Apricot"
+            },
+            {
+              "value": "avocado",
+              "label": "Avocado"
+            },
+            {
+              "value": "banana",
+              "label": "Banana"
+            },
+            {
+              "value": "blackberry",
+              "label": "Blackberry"
+            },
+            {
+              "value": "blood orange",
+              "label": "Blood orange"
+            },
+            {
+              "value": "blueberry",
+              "label": "Blueberry"
+            },
+            {
+              "value": "boysenberry",
+              "label": "Boysenberry"
+            },
+            {
+              "value": "breadfruit",
+              "label": "Breadfruit"
+            },
+            {
+              "value": "buddhas hand citron",
+              "label": "Buddha's hand citron"
+            },
+            {
+              "value": "cantaloupe",
+              "label": "Cantaloupe"
+            },
+            {
+              "value": "clementine",
+              "label": "Clementine"
+            },
+            {
+              "value": "crab apple",
+              "label": "Crab apple"
+            },
+            {
+              "value": "currant",
+              "label": "Currant"
+            },
+            {
+              "value": "cherry",
+              "label": "Cherry"
+            },
+            {
+              "value": "custard apple",
+              "label": "Custard apple"
+            },
+            {
+              "value": "coconut",
+              "label": "Coconut"
+            },
+            {
+              "value": "cranberry",
+              "label": "Cranberry"
+            },
+            {
+              "value": "date",
+              "label": "Date"
+            },
+            {
+              "value": "dragonfruit",
+              "label": "Dragonfruit"
+            },
+            {
+              "value": "durian",
+              "label": "Durian"
+            },
+            {
+              "value": "elderberry",
+              "label": "Elderberry"
+            },
+            {
+              "value": "fig",
+              "label": "Fig"
+            },
+            {
+              "value": "gooseberry",
+              "label": "Gooseberry"
+            },
+            {
+              "value": "grape",
+              "label": "Grape"
+            },
+            {
+              "value": "grapefruit",
+              "label": "Grapefruit"
+            },
+            {
+              "value": "guava",
+              "label": "Guava"
+            },
+            {
+              "value": "honeydew melon",
+              "label": "Honeydew melon"
+            },
+            {
+              "value": "jackfruit",
+              "label": "Jackfruit"
+            },
+            {
+              "value": "kiwifruit",
+              "label": "Kiwifruit"
+            },
+            {
+              "value": "kumquat",
+              "label": "Kumquat"
+            },
+            {
+              "value": "lemon",
+              "label": "Lemon"
+            },
+            {
+              "value": "lime",
+              "label": "Lime"
+            },
+            {
+              "value": "lychee",
+              "label": "Lychee"
+            },
+            {
+              "value": "mandarine",
+              "label": "Mandarine"
+            },
+            {
+              "value": "mango",
+              "label": "Mango"
+            },
+            {
+              "value": "mangosteen",
+              "label": "Mangosteen"
+            },
+            {
+              "value": "marionberry",
+              "label": "Marionberry"
+            },
+            {
+              "value": "nectarine",
+              "label": "Nectarine"
+            },
+            {
+              "value": "orange",
+              "label": "Orange"
+            },
+            {
+              "value": "papaya",
+              "label": "Papaya"
+            },
+            {
+              "value": "passionfruit",
+              "label": "Passionfruit"
+            },
+            {
+              "value": "peach",
+              "label": "Peach"
+            },
+            {
+              "value": "pear",
+              "label": "Pear"
+            },
+            {
+              "value": "persimmon",
+              "label": "Persimmon"
+            },
+            {
+              "value": "plantain",
+              "label": "Plantain"
+            },
+            {
+              "value": "plum",
+              "label": "Plum"
+            },
+            {
+              "value": "pineapple",
+              "label": "Pineapple"
+            },
+            {
+              "value": "pluot",
+              "label": "Pluot"
+            },
+            {
+              "value": "pomegranate",
+              "label": "Pomegranate"
+            },
+            {
+              "value": "pomelo",
+              "label": "Pomelo"
+            },
+            {
+              "value": "quince",
+              "label": "Quince"
+            },
+            {
+              "value": "raspberry",
+              "label": "Raspberry"
+            },
+            {
+              "value": "rambutan",
+              "label": "Rambutan"
+            },
+            {
+              "value": "soursop",
+              "label": "Soursop"
+            },
+            {
+              "value": "starfruit",
+              "label": "Starfruit"
+            },
+            {
+              "value": "strawberry",
+              "label": "Strawberry"
+            },
+            {
+              "value": "tamarind",
+              "label": "Tamarind"
+            },
+            {
+              "value": "tangelo",
+              "label": "Tangelo"
+            },
+            {
+              "value": "tangerine",
+              "label": "Tangerine"
+            },
+            {
+              "value": "ugli fruit",
+              "label": "Ugli fruit"
+            },
+            {
+              "value": "watermelon",
+              "label": "Watermelon"
+            },
+            {
+              "value": "white currant",
+              "label": "White currant"
+            },
+            {
+              "value": "yuzu",
+              "label": "Yuzu"
+            }
+          ]
         }
       }
     },
@@ -1983,6 +2565,12 @@ export const componentContracts = {
           "template": "container/container.django.html",
           "tag": "container"
         }
+      },
+      "examples": {
+        "default": {
+          "className": "maxw-tablet margin-x-auto",
+          "children": "<section class=\"usx-section\" style=\"margin:0\"><h2 class=\"usx-section__title\">Application information</h2><div class=\"usx-section__content\"><div class=\"usa-prose usx-prose \">Review the program requirements and gather your supporting documents before you begin.</div></div></section><span class=\"usa-tag usx-tag margin-top-2\"> Applications open</span>"
+        }
       }
     },
     "copy-to-clipboard": {
@@ -2032,6 +2620,16 @@ export const componentContracts = {
           "component": "copy-to-clipboard",
           "template": "copy-to-clipboard/copy-to-clipboard.django.html",
           "tag": "copy_to_clipboard"
+        }
+      },
+      "examples": {
+        "default": {
+          "copyText": "Example text to copy",
+          "tooltipProps": {
+            "label": "Copy to clipboard",
+            "copiedTooltip": "Copied",
+            "position": "right"
+          }
         }
       }
     },
@@ -2421,10 +3019,12 @@ export const componentContracts = {
       },
       "examples": {
         "default": {
-          "id": "services-drawer",
-          "label": "Browse services",
-          "heading": "Services",
-          "children": "<nav aria-label=\"Services\"><ul><li><a href=\"#benefits\">Benefits</a></li><li><a href=\"#applications\">Applications</a></li></ul></nav>"
+          "id": "drawer-default",
+          "label": "Open application details",
+          "triggerClassName": "usa-button usx-button usa-button--primary margin-0",
+          "heading": "Application details",
+          "description": "Review the status of your housing support application.",
+          "children": "<span class=\"usa-tag usx-tag bg-info\"> In review</span><div class=\"usa-summary-box usx-summary-box\" role=\"region\" aria-labelledby=\"drawer-application-summary\"><div class=\"usa-summary-box__body\"><h4 class=\"usa-summary-box__heading\" id=\"drawer-application-summary\">Housing support application</h4><div class=\"usa-summary-box__text\"><p>Application number: HSG-10482</p><p>We are checking your eligibility. No action is needed right now.</p></div></div></div><p><a href=\"#application-timeline\" class=\"usa-link usx-link\">View application timeline</a></p>"
         }
       }
     },
@@ -2458,6 +3058,12 @@ export const componentContracts = {
           "component": "error-message",
           "template": "error-message/error-message.django.html",
           "tag": "error_message"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "error-1",
+          "children": "Enter a valid email address."
         }
       }
     },
@@ -2633,7 +3239,8 @@ export const componentContracts = {
               "href": "/contact"
             }
           ],
-          "errorCode": "404"
+          "errorCode": "404",
+          "children": "<p>If the address is correct and you still can&#x27;t reach the page, contact support so the broken link can be fixed.</p>"
         }
       }
     },
@@ -2663,6 +3270,11 @@ export const componentContracts = {
           "component": "eyebrow",
           "template": "eyebrow/eyebrow.django.html",
           "tag": "eyebrow"
+        }
+      },
+      "examples": {
+        "default": {
+          "children": "Page Title"
         }
       }
     },
@@ -2724,6 +3336,12 @@ export const componentContracts = {
           "component": "fieldset",
           "template": "fieldset/fieldset.django.html",
           "tag": "fieldset"
+        }
+      },
+      "examples": {
+        "default": {
+          "legend": "Fieldset Legend",
+          "children": "<label class=\"usa-checkbox__label\">Hello world</label>"
         }
       }
     },
@@ -2993,6 +3611,161 @@ export const componentContracts = {
           "template": "footer/footer.django.html",
           "tag": "footer"
         }
+      },
+      "examples": {
+        "default": {
+          "variant": "big",
+          "navColumns": [
+            {
+              "heading": "Programs",
+              "links": [
+                {
+                  "text": "Benefits",
+                  "href": "/programs/benefits"
+                },
+                {
+                  "text": "Health Services",
+                  "href": "/programs/health"
+                },
+                {
+                  "text": "Education",
+                  "href": "/programs/education"
+                },
+                {
+                  "text": "Housing",
+                  "href": "/programs/housing"
+                }
+              ]
+            },
+            {
+              "heading": "Resources",
+              "links": [
+                {
+                  "text": "Forms",
+                  "href": "/resources/forms"
+                },
+                {
+                  "text": "Publications",
+                  "href": "/resources/publications"
+                },
+                {
+                  "text": "Data & Research",
+                  "href": "/resources/data"
+                },
+                {
+                  "text": "Tools",
+                  "href": "/resources/tools"
+                }
+              ]
+            },
+            {
+              "heading": "Connect",
+              "links": [
+                {
+                  "text": "Newsroom",
+                  "href": "/newsroom"
+                },
+                {
+                  "text": "Events",
+                  "href": "/events"
+                },
+                {
+                  "text": "Social Media",
+                  "href": "/social"
+                },
+                {
+                  "text": "Newsletter",
+                  "href": "/newsletter"
+                }
+              ]
+            },
+            {
+              "heading": "About",
+              "links": [
+                {
+                  "text": "Mission",
+                  "href": "/about/mission"
+                },
+                {
+                  "text": "Leadership",
+                  "href": "/about/leadership"
+                },
+                {
+                  "text": "Careers",
+                  "href": "/about/careers"
+                },
+                {
+                  "text": "Contact Us",
+                  "href": "/contact"
+                }
+              ]
+            }
+          ],
+          "signUp": {
+            "heading": "Stay informed",
+            "emailLabel": "Your email address",
+            "emailId": "footer-email-big",
+            "buttonText": "Subscribe"
+          },
+          "branding": {
+            "logo": {
+              "fallback": "symbol-only.svg",
+              "sources": [
+                {
+                  "media": "(min-width: 40em)",
+                  "srcSet": "linear-w-symbol_left.svg"
+                }
+              ]
+            },
+            "logoInverse": {
+              "fallback": "white_symbol-only.png",
+              "sources": [
+                {
+                  "media": "(min-width: 40em)",
+                  "srcSet": "white_linear-w-symbol_left.png"
+                }
+              ]
+            },
+            "title": "Agency Name"
+          },
+          "brandingUrl": "/",
+          "socialLinks": [
+            {
+              "icon": "img/usa-icons/facebook.svg",
+              "href": "/social/facebook",
+              "alt": "Facebook"
+            },
+            {
+              "icon": "img/usa-icons/twitter.svg",
+              "href": "/social/twitter",
+              "alt": "Twitter"
+            },
+            {
+              "icon": "img/usa-icons/youtube.svg",
+              "href": "/social/youtube",
+              "alt": "YouTube"
+            },
+            {
+              "icon": "img/usa-icons/instagram.svg",
+              "href": "/social/instagram",
+              "alt": "Instagram"
+            },
+            {
+              "icon": "img/usa-icons/rss_feed.svg",
+              "href": "/social/rss",
+              "alt": "RSS"
+            }
+          ],
+          "contactHeading": "Agency Contact Center",
+          "contactPhone": {
+            "href": "tel:1-800-555-5555",
+            "text": "(800) 555-GOVT"
+          },
+          "contactEmail": {
+            "href": "mailto:info@agency.gov",
+            "text": "info@agency.gov"
+          }
+        }
       }
     },
     "form-group": {
@@ -3028,6 +3801,11 @@ export const componentContracts = {
           "component": "form-group",
           "template": "form-group/form-group.django.html",
           "tag": "form_group"
+        }
+      },
+      "examples": {
+        "default": {
+          "children": "<div class=\"usa-form-group usx-form-group\"><label class=\"usa-label usx-label\" for=\"form-group-default-input\">Form group label</label><input id=\"form-group-default-input\" class=\"usa-input usx-input\" placeholder=\"Type here\"/></div>"
         }
       }
     },
@@ -3112,6 +3890,81 @@ export const componentContracts = {
           "component": "header",
           "template": "header/header.django.html",
           "tag": "header"
+        }
+      },
+      "examples": {
+        "default": {
+          "projectUrl": "https://example.com",
+          "useMenuIcon": true,
+          "navSections": [
+            {
+              "title": "Section 1",
+              "links": [
+                {
+                  "text": "Link A",
+                  "href": "https://example.com/linkA",
+                  "ariaLabel": "Link A"
+                },
+                {
+                  "text": "Link B",
+                  "href": "https://example.com/linkB",
+                  "ariaLabel": "Link B"
+                }
+              ]
+            },
+            {
+              "title": "Section 2",
+              "links": [
+                {
+                  "text": "Link C",
+                  "href": "https://example.com/linkC",
+                  "ariaLabel": "Link C"
+                },
+                {
+                  "text": "Link D",
+                  "href": "https://example.com/linkD",
+                  "ariaLabel": "Link D"
+                }
+              ]
+            },
+            {
+              "title": "Section 3",
+              "href": "https://example.com/section3",
+              "ariaLabel": "Section 3"
+            }
+          ],
+          "branding": {
+            "symbol": "symbol-only.svg",
+            "symbolInverse": "white_symbol-only.png",
+            "title": "Agency Name"
+          },
+          "secondaryLinks": [
+            {
+              "text": "Secondary Link 1",
+              "href": "https://example.com/secondary1",
+              "ariaLabel": "Secondary Link 1"
+            },
+            {
+              "text": "Secondary Link 2",
+              "href": "https://example.com/secondary2",
+              "ariaLabel": "Secondary Link 2"
+            }
+          ],
+          "searchProps": {
+            "ariaLabel": "Header search",
+            "searchKey": "q",
+            "label": "Search",
+            "icon": "search",
+            "iconOnly": true,
+            "buttonVariant": "primary",
+            "big": false,
+            "action": "https://www.google.com/search",
+            "placeholder": "Search...",
+            "id": "header-default-search"
+          },
+          "id": "header-default",
+          "extended": true,
+          "megamenu": true
         }
       }
     },
@@ -3246,12 +4099,13 @@ export const componentContracts = {
           "title": "The hero heading",
           "callout": "A callout heading",
           "paragraph": "A short description of the hero section that provides context for the call to action.",
-          "backgroundImage": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
-          "overlay": true,
           "buttonProps": {
             "href": "#",
-            "text": "Call to action"
-          }
+            "label": "Call to action",
+            "variant": "primary"
+          },
+          "backgroundImage": "https://designsystem.digital.gov/img/introducing-uswds-2-0/built-to-grow--alt.jpg",
+          "overlay": true
         }
       }
     },
@@ -3285,6 +4139,12 @@ export const componentContracts = {
           "component": "hint",
           "template": "hint/hint.django.html",
           "tag": "hint"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "hint-1",
+          "children": "Enter your full legal name."
         }
       }
     },
@@ -3374,6 +4234,12 @@ export const componentContracts = {
           "component": "icon",
           "template": "icon/icon.django.html",
           "tag": "icon"
+        }
+      },
+      "examples": {
+        "default": {
+          "name": "accessibility_new",
+          "size": 2
         }
       }
     },
@@ -3623,7 +4489,7 @@ export const componentContracts = {
           ],
           "requiredLinks": [
             {
-              "href": "",
+              "href": "javascript:void(0)",
               "label": "About <Parent shortname>"
             },
             {
@@ -3742,6 +4608,12 @@ export const componentContracts = {
           "template": "image/image.django.html",
           "tag": "image"
         }
+      },
+      "examples": {
+        "default": {
+          "src": "https://picsum.photos/600/400?random=1",
+          "alt": "Example image 1"
+        }
       }
     },
     "in-page-nav": {
@@ -3829,7 +4701,7 @@ export const componentContracts = {
       "examples": {
         "default": {
           "id": "in-page-nav-default",
-          "content": "<h2>Introduction</h2><p>This page walks through setting up and using the example project.</p><p>It's also meant to demonstrate how the in-page navigation component tracks scroll position and highlights whichever section is currently in view. Scroll down through each section below to see the link list on the side update automatically.</p><p>None of the copy on this page is meant to be read closely — it exists purely to give the navigation something substantial enough to observe.</p><h2>Getting started</h2><p>Before you begin, make sure the prerequisites below are met.</p><p>Getting started with any new project usually means working through a short checklist before the real work begins. The sections below cover what you'll need and how to get everything installed.</p><h3>Prerequisites</h3><p>A recent browser and a working internet connection.</p><p>You'll also want a modern code editor and enough disk space for the dependencies. Nothing here is unusual — most standard front-end tooling already satisfies these requirements.</p><p>If you already have Node.js and a package manager installed, you can skip ahead to the installation section below.</p><h3>Installation</h3><p>Download the package and follow the setup instructions.</p><p>Installation typically takes just a few minutes. Run the installer, accept the default options, and confirm that the command-line tool reports a successful install before moving on.</p><p>If you run into trouble, double-check that your environment matches the prerequisites listed above before trying again.</p><h2>Advanced usage</h2><p>Once installed, explore the configuration options to fit your workflow.</p><p>Advanced users can customize almost every aspect of the setup, from heading detection to scroll offsets and intersection thresholds — all of which this component exposes as simple data attributes.</p><p>Most projects never need to touch these settings, but they're available for the cases that do.</p><h2>Conclusion</h2><p>You should now be ready to explore the rest of the documentation.</p><p>Thanks for reading through this example. Scroll back up and watch the navigation list highlight each section as it passes by — that's the entire behavior this component provides.</p>"
+          "content": "\n  <h2>Introduction</h2>\n  <p>This page walks through setting up and using the example project.</p>\n  <p>It's also meant to demonstrate how the in-page navigation component tracks scroll\n  position and highlights whichever section is currently in view. Scroll down through\n  each section below to see the link list on the side update automatically.</p>\n  <p>None of the copy on this page is meant to be read closely — it exists purely to give\n  the navigation something substantial enough to observe.</p>\n  <h2>Getting started</h2>\n  <p>Before you begin, make sure the prerequisites below are met.</p>\n  <p>Getting started with any new project usually means working through a short checklist\n  before the real work begins. The sections below cover what you'll need and how to get\n  everything installed.</p>\n  <h3>Prerequisites</h3>\n  <p>A recent browser and a working internet connection.</p>\n  <p>You'll also want a modern code editor and enough disk space for the dependencies.\n  Nothing here is unusual — most standard front-end tooling already satisfies these\n  requirements.</p>\n  <p>If you already have Node.js and a package manager installed, you can skip ahead to\n  the installation section below.</p>\n  <h3>Installation</h3>\n  <p>Download the package and follow the setup instructions.</p>\n  <p>Installation typically takes just a few minutes. Run the installer, accept the\n  default options, and confirm that the command-line tool reports a successful install\n  before moving on.</p>\n  <p>If you run into trouble, double-check that your environment matches the\n  prerequisites listed above before trying again.</p>\n  <h2>Advanced usage</h2>\n  <p>Once installed, explore the configuration options to fit your workflow.</p>\n  <p>Advanced users can customize almost every aspect of the setup, from heading\n  detection to scroll offsets and intersection thresholds — all of which this component\n  exposes as simple data attributes.</p>\n  <p>Most projects never need to touch these settings, but they're available for the\n  cases that do.</p>\n  <h2>Conclusion</h2>\n  <p>You should now be ready to explore the rest of the documentation.</p>\n  <p>Thanks for reading through this example. Scroll back up and watch the navigation\n  list highlight each section as it passes by — that's the entire behavior this\n  component provides.</p>\n"
         }
       }
     },
@@ -3864,6 +4736,16 @@ export const componentContracts = {
           "template": "indicator/indicator.django.html",
           "tag": "indicator"
         }
+      },
+      "examples": {
+        "default": {
+          "items": [
+            {
+              "className": "usx-status text-primary"
+            }
+          ],
+          "children": "<div class=\"bg-base width-10 height-10\"></div>"
+        }
       }
     },
     "input": {
@@ -3893,6 +4775,10 @@ export const componentContracts = {
         "autoComplete": {
           "type": "string",
           "description": "The input's autocomplete attribute, e.g. email."
+        },
+        "autoFocus": {
+          "type": "boolean",
+          "description": "Focus the input when the page loads."
         },
         "placeholder": {
           "type": "string",
@@ -3959,6 +4845,13 @@ export const componentContracts = {
           "template": "input/input.django.html",
           "tag": "input"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "example-input-1",
+          "label": "Text input label",
+          "placeholder": "Type here"
+        }
       }
     },
     "label": {
@@ -4015,6 +4908,11 @@ export const componentContracts = {
           "component": "label",
           "template": "label/label.django.html",
           "tag": "label"
+        }
+      },
+      "examples": {
+        "default": {
+          "children": "Label Text"
         }
       }
     },
@@ -4112,30 +5010,26 @@ export const componentContracts = {
       "examples": {
         "default": {
           "variant": "menu",
+          "id": "language-options-default",
+          "label": "Languages",
           "languages": [
             {
               "code": "en",
               "label": "English",
+              "href": "https://example.com/en",
               "current": true
             },
             {
               "code": "es",
               "label": "Español",
-              "description": "Spanish"
+              "description": "Spanish",
+              "href": "https://example.com/es"
             },
             {
-              "code": "vi",
-              "label": "Tiếng Việt",
-              "description": "Vietnamese"
-            },
-            {
-              "code": "zh",
-              "label": "简体字",
-              "description": "Chinese – Simplified"
-            },
-            {
-              "label": "Selected content in additional languages",
-              "plain": true
+              "code": "fr",
+              "label": "Français",
+              "description": "French",
+              "href": "https://example.com/fr"
             }
           ]
         }
@@ -4207,6 +5101,12 @@ export const componentContracts = {
           "template": "layout/layout.django.html",
           "tag": "layout"
         }
+      },
+      "examples": {
+        "default": {
+          "variant": "single-column",
+          "children": "<div class=\"bg-blue\"><h2>Single Column Layout</h2><p>This content is centered with responsive gutters.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>"
+        }
       }
     },
     "legend": {
@@ -4247,6 +5147,11 @@ export const componentContracts = {
           "component": "legend",
           "template": "legend/legend.django.html",
           "tag": "legend"
+        }
+      },
+      "examples": {
+        "default": {
+          "text": "Legend Text"
         }
       }
     },
@@ -4304,6 +5209,12 @@ export const componentContracts = {
           "template": "link/link.django.html",
           "tag": "link"
         }
+      },
+      "examples": {
+        "default": {
+          "href": "https://google.com/",
+          "children": "Google"
+        }
       }
     },
     "list": {
@@ -4342,6 +5253,15 @@ export const componentContracts = {
           "component": "list",
           "template": "list/list.django.html",
           "tag": "list"
+        }
+      },
+      "examples": {
+        "default": {
+          "items": [
+            "List item",
+            "List item",
+            "List item"
+          ]
         }
       }
     },
@@ -4460,8 +5380,7 @@ export const componentContracts = {
       },
       "examples": {
         "default": {
-          "id": "memorable-date",
-          "legend": "Date of Birth"
+          "id": "memorable-date"
         }
       }
     },
@@ -4539,6 +5458,21 @@ export const componentContracts = {
           "template": "misc-banner/misc-banner.django.html",
           "tag": "misc_banner"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "misc-banner-misc",
+          "color": "base",
+          "badgeText": "misc",
+          "message": "This is a miscellaneous banner.",
+          "casualLinkText": "Casual Link",
+          "casualLinkHref": "https://usx.solex.studio/",
+          "importantLinkText": "Important Link",
+          "importantLinkHref": "https://usx.solex.studio/",
+          "importantLinkIcon": "arrow_forward",
+          "showLearnMore": true,
+          "showReturnLink": true
+        }
       }
     },
     "modal": {
@@ -4610,6 +5544,30 @@ export const componentContracts = {
           "template": "modal/modal.django.html",
           "tag": "modal"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "example-modal-default",
+          "heading": "Are you sure you want to continue?",
+          "description": "You have unsaved changes that will be lost.",
+          "actionProps": [
+            {
+              "children": "Continue without saving",
+              "variant": "primary",
+              "extraAttributes": {
+                "data-close-modal": true
+              }
+            },
+            {
+              "children": "Go back",
+              "variant": "unstyled",
+              "className": "padding-105 text-center",
+              "extraAttributes": {
+                "data-close-modal": true
+              }
+            }
+          ]
+        }
       }
     },
     "page": {
@@ -4679,6 +5637,11 @@ export const componentContracts = {
           "component": "page",
           "template": "page/page.django.html",
           "tag": "page"
+        }
+      },
+      "examples": {
+        "default": {
+          "children": "<p>This page wrapper provides consistent spacing between a site header and footer.</p><p>Use this region for page-specific content.</p>"
         }
       }
     },
@@ -4842,6 +5805,47 @@ export const componentContracts = {
           "component": "pagination",
           "template": "pagination/pagination.django.html",
           "tag": "pagination"
+        }
+      },
+      "examples": {
+        "default": {
+          "totalItems": 240,
+          "initialPage": 10,
+          "initialPageSize": 10,
+          "currentPage": 10,
+          "totalPages": 24,
+          "pageUrlPrefix": "?page=",
+          "stepOptionsId": "pagination-default-step-options",
+          "pages": [
+            {
+              "type": "page",
+              "page": 1
+            },
+            {
+              "type": "ellipsis",
+              "key": "ellipsis-start"
+            },
+            {
+              "type": "page",
+              "page": 9
+            },
+            {
+              "type": "page",
+              "page": 10
+            },
+            {
+              "type": "page",
+              "page": 11
+            },
+            {
+              "type": "ellipsis",
+              "key": "ellipsis-end"
+            },
+            {
+              "type": "page",
+              "page": 24
+            }
+          ]
         }
       }
     },
@@ -5008,11 +6012,12 @@ export const componentContracts = {
       },
       "examples": {
         "default": {
-          "id": "services-popover",
+          "id": "popover-default",
           "summaryProps": {
-            "label": "Services"
+            "label": "Where is my case number?"
           },
-          "children": "<nav aria-label=\"Services\"><ul class=\"usa-list usx-list usa-list--unstyled\"><li class=\"padding-y-1\"><a href=\"#benefits\">Benefits</a></li><li class=\"padding-y-1\"><a href=\"#applications\">Applications</a></li></ul></nav>"
+          "className": "usx-details",
+          "children": "Your case number is in the confirmation email we sent after you applied."
         }
       }
     },
@@ -5042,6 +6047,24 @@ export const componentContracts = {
           "component": "process-list",
           "template": "process-list/process-list.django.html",
           "tag": "process_list"
+        }
+      },
+      "examples": {
+        "default": {
+          "items": [
+            {
+              "heading": "Start a process",
+              "body": "<p class=\"margin-top-05\">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque.</p><ul><li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis.</li><li>Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum.</li><li>Aliquam erat volutpat. Sed quis velit.</li></ul>"
+            },
+            {
+              "heading": "Proceed to the second step",
+              "body": "<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien.</p>"
+            },
+            {
+              "heading": "Complete the step-by-step process",
+              "body": "<p>Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien.</p>"
+            }
+          ]
         }
       }
     },
@@ -5088,6 +6111,12 @@ export const componentContracts = {
           "component": "prose",
           "template": "prose/prose.django.html",
           "tag": "prose"
+        }
+      },
+      "examples": {
+        "default": {
+          "content": "\n    <h1>Page Heading</h1>\n    <p>\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor dui, sed efficitur\n        ligula. Donec a semper <a href=\"#\">dui</a> lorem <a class=\"usx-no-visited\" href=\"#somethingelse\">another link</a>, and <a class=\"usa-link usx-link usa-link--external\" href=\"https://google.com\">a third link</a>.\n    </p>\n    <h2>Section Heading</h2>\n    <h3>Section of the page</h3>\n    <p>\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor dui, sed efficitur\n        ligula. Donec a semper dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor dui, sed efficitur\n        ligula. Donec a semper dui.\n    </p>\n    <h4>Subsection of the page</h4>\n    <p>\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor dui, sed efficitur\n        ligula. Donec a semper dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n    </p>\n    <h5>Subsection of the page</h5>\n    <p>\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor dui, sed efficitur ligula.\n    </p>\n    <ul>\n        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>\n        <li>Donec suscipit auctor dui, sed efficitur ligula.</li>\n        <li>Donec a semper dui:\n            <ol>\n                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>\n                <li>Donec suscipit auctor dui, sed efficitur ligula:\n                    <ul>\n                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>\n                        <li>Donec suscipit auctor dui, sed efficitur ligula.</li>\n                        <li>Donec a semper dui.</li>\n                    </ul>\n                </li>\n                <li>Donec a semper dui.</li>\n            </ol>\n        </li>\n    </ul>\n    <p>\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor dui, sed efficitur\n        ligula. Donec a semper dui.\n    </p>\n    <ol>\n        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>\n        <li>Donec suscipit auctor dui, sed efficitur ligula.</li>\n        <li>Donec a semper dui:\n            <ul>\n                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>\n                <li>Donec suscipit auctor dui, sed efficitur ligula:\n                    <ol>\n                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>\n                        <li>Donec suscipit auctor dui, sed efficitur ligula.</li>\n                        <li>Donec a semper dui.</li>\n                    </ol>\n                </li>\n                <li>Donec a semper dui.</li>\n            </ul>\n        </li>\n    </ol>\n    <table>\n        <caption>\n            Table caption\n        </caption>\n        <thead>\n            <tr>\n                <th>Column 1</th>\n                <th>Column 2</th>\n                <th>Column 3</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr>\n                <td>Row 1, Cell 1</td>\n                <td>Row 1, Cell 2</td>\n                <td>Row 1, Cell 3</td>\n            </tr>\n            <tr>\n                <td>Row 2, Cell 1</td>\n                <td>Row 2, Cell 2</td>\n                <td>Row 2, Cell 3</td>\n            </tr>\n            <tr>\n                <td>Row 3, Cell 1</td>\n                <td>Row 3, Cell 2</td>\n                <td>Row 3, Cell 3</td>\n            </tr>\n        </tbody>\n    </table>\n",
+          "as": "div"
         }
       }
     },
@@ -5152,6 +6181,11 @@ export const componentContracts = {
           "component": "quote",
           "template": "quote/quote.django.html",
           "tag": "quote"
+        }
+      },
+      "examples": {
+        "default": {
+          "content": "The time is always right to do what is right."
         }
       }
     },
@@ -5222,6 +6256,31 @@ export const componentContracts = {
           "component": "radio-buttons",
           "template": "radio-buttons/radio-buttons.django.html",
           "tag": "radio_buttons"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "historical-figures",
+          "name": "historical-figures",
+          "options": [
+            {
+              "value": "sojourner-truth",
+              "label": "Sojourner Truth"
+            },
+            {
+              "value": "frederick-douglass",
+              "label": "Frederick Douglass"
+            },
+            {
+              "value": "booker-t-washington",
+              "label": "Booker T. Washington"
+            },
+            {
+              "value": "george-washington-carver",
+              "label": "George Washington Carver",
+              "disabled": true
+            }
+          ]
         }
       }
     },
@@ -5362,6 +6421,11 @@ export const componentContracts = {
           "template": "required/required.django.html",
           "tag": "required"
         }
+      },
+      "examples": {
+        "default": {
+          "children": "This field is required"
+        }
       }
     },
     "search": {
@@ -5444,6 +6508,11 @@ export const componentContracts = {
           "template": "search/search.django.html",
           "tag": "search"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "search-default"
+        }
       }
     },
     "section": {
@@ -5479,6 +6548,14 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        },
+        "id": {
+          "type": "string",
+          "description": "Optional section element ID."
+        },
+        "style": {
+          "type": "object",
+          "description": "Inline CSS declarations for the section element."
         }
       },
       "renderers": {
@@ -5497,8 +6574,8 @@ export const componentContracts = {
       },
       "examples": {
         "default": {
-          "title": "",
-          "content": "Use section to group related page content with consistent spacing."
+          "title": "Program details",
+          "children": "<p>Review eligibility, required documents, and next steps before applying.</p>"
         }
       }
     },
@@ -5593,6 +6670,26 @@ export const componentContracts = {
           "template": "select/select.django.html",
           "tag": "select"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "select-default",
+          "label": "Dropdown label",
+          "options": [
+            {
+              "value": "option1",
+              "label": "Option A"
+            },
+            {
+              "value": "option2",
+              "label": "Option B"
+            },
+            {
+              "value": "option3",
+              "label": "Option C"
+            }
+          ]
+        }
       }
     },
     "sidenav": {
@@ -5650,6 +6747,25 @@ export const componentContracts = {
           "component": "sidenav",
           "template": "sidenav/sidenav.django.html",
           "tag": "sidenav"
+        }
+      },
+      "examples": {
+        "default": {
+          "items": [
+            {
+              "text": "Current page",
+              "href": "javascript:void(0);",
+              "current": true
+            },
+            {
+              "text": "Parent link",
+              "href": "javascript:void(0);"
+            },
+            {
+              "text": "Parent link",
+              "href": "javascript:void(0);"
+            }
+          ]
         }
       }
     },
@@ -5729,6 +6845,13 @@ export const componentContracts = {
           "template": "site-alert/site-alert.django.html",
           "tag": "site_alert"
         }
+      },
+      "examples": {
+        "default": {
+          "variant": "info",
+          "alertHeading": "Short alert message",
+          "alertText": "Additional context and followup information including a link."
+        }
       }
     },
     "skipnav": {
@@ -5771,6 +6894,11 @@ export const componentContracts = {
           "component": "skipnav",
           "template": "skipnav/skipnav.django.html",
           "tag": "skipnav"
+        }
+      },
+      "examples": {
+        "default": {
+          "target": "#custom-target-1"
         }
       }
     },
@@ -5838,6 +6966,11 @@ export const componentContracts = {
           "template": "spinner/spinner.django.html",
           "tag": "spinner"
         }
+      },
+      "examples": {
+        "default": {
+          "size": 3
+        }
       }
     },
     "status": {
@@ -5899,6 +7032,9 @@ export const componentContracts = {
           "template": "status/status.django.html",
           "tag": "status"
         }
+      },
+      "examples": {
+        "default": {}
       }
     },
     "step-indicator": {
@@ -5965,6 +7101,28 @@ export const componentContracts = {
           "component": "step-indicator",
           "template": "step-indicator/step-indicator.django.html",
           "tag": "step_indicator"
+        }
+      },
+      "examples": {
+        "default": {
+          "steps": [
+            {
+              "label": "Personal information"
+            },
+            {
+              "label": "Household status"
+            },
+            {
+              "label": "Supporting documents"
+            },
+            {
+              "label": "Signature"
+            },
+            {
+              "label": "Review and submit"
+            }
+          ],
+          "currentStep": 3
         }
       }
     },
@@ -6081,6 +7239,13 @@ export const componentContracts = {
           "template": "summary-box/summary-box.django.html",
           "tag": "summary_box"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "summary-box-executive-summary",
+          "heading": "Program summary: Winter Relief 2026",
+          "content": "This page tracks a 12-week emergency housing initiative serving 4 counties. Use the summaries below to review what happened, what changed, and what decisions remain."
+        }
       }
     },
     "swap": {
@@ -6153,10 +7318,10 @@ export const componentContracts = {
       },
       "examples": {
         "default": {
-          "onContent": "ON",
-          "offContent": "OFF",
+          "className": "",
           "variant": "default",
-          "includeInput": true
+          "onContent": "ON",
+          "offContent": "OFF"
         }
       }
     },
@@ -6226,6 +7391,11 @@ export const componentContracts = {
           "component": "switch",
           "template": "switch/switch.django.html",
           "tag": "switch"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "switch-1"
         }
       }
     },
@@ -6548,7 +7718,52 @@ export const componentContracts = {
         }
       },
       "examples": {
-        "default": {}
+        "default": {
+          "id": "standard",
+          "columns": [
+            {
+              "key": "title",
+              "header": "Document title",
+              "primary": true
+            },
+            {
+              "key": "description",
+              "header": "Description"
+            },
+            {
+              "key": "year",
+              "header": "Year",
+              "align": "right"
+            }
+          ],
+          "data": [
+            {
+              "id": 1,
+              "title": "Declaration of Independence",
+              "description": "Statement adopted by the Continental Congress declaring independence from the British Empire.",
+              "year": 1776
+            },
+            {
+              "id": 2,
+              "title": "Bill of Rights",
+              "description": "The first ten amendments of the U.S. Constitution guaranteeing rights and freedoms.",
+              "year": 1791
+            },
+            {
+              "id": 3,
+              "title": "Declaration of Sentiments",
+              "description": "A document written during the Seneca Falls Convention outlining the rights that American women should be entitled to as citizens.",
+              "year": 1848
+            },
+            {
+              "id": 4,
+              "title": "Emancipation Proclamation",
+              "description": "An executive order granting freedom to slaves in designated southern states.",
+              "year": 1863
+            }
+          ],
+          "caption": "Historic U.S. documents"
+        }
       }
     },
     "tag": {
@@ -6617,6 +7832,11 @@ export const componentContracts = {
           "template": "tag/tag.django.html",
           "tag": "tag"
         }
+      },
+      "examples": {
+        "default": {
+          "children": "message"
+        }
       }
     },
     "tag-group": {
@@ -6654,6 +7874,32 @@ export const componentContracts = {
           "component": "tag-group",
           "template": "tag-group/tag-group.django.html",
           "tag": "tag_group"
+        }
+      },
+      "examples": {
+        "default": {
+          "tagProps": [
+            {
+              "value": "Primary",
+              "color": "primary"
+            },
+            {
+              "value": "Secondary",
+              "color": "secondary"
+            },
+            {
+              "value": "Accent Cool",
+              "color": "accent-cool"
+            },
+            {
+              "value": "Blue",
+              "color": "blue"
+            },
+            {
+              "value": "Base",
+              "color": "base"
+            }
+          ]
         }
       }
     },
@@ -6708,6 +7954,41 @@ export const componentContracts = {
           "component": "task-list",
           "template": "task-list/task-list.django.html",
           "tag": "task_list"
+        }
+      },
+      "examples": {
+        "default": {
+          "tasks": [
+            {
+              "name": "Task 1",
+              "href": "#",
+              "tagProps": {
+                "value": "Completed",
+                "color": "success-light",
+                "outline": false,
+                "icon": "check"
+              }
+            },
+            {
+              "name": "Task 2",
+              "href": "#",
+              "tagProps": {
+                "value": "In progress",
+                "color": "primary-light",
+                "outline": false
+              }
+            },
+            {
+              "name": "Task 3",
+              "href": "#",
+              "tagProps": {
+                "value": "Not started",
+                "color": "primary-lightest",
+                "outline": false
+              },
+              "hint": "Due tomorrow"
+            }
+          ]
         }
       }
     },
@@ -6801,6 +8082,13 @@ export const componentContracts = {
           "template": "text-area/text-area.django.html",
           "tag": "text_area"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "text-area-default",
+          "label": "Text area label",
+          "placeholder": "Type here"
+        }
       }
     },
     "theme-picker": {
@@ -6832,8 +8120,13 @@ export const componentContracts = {
           "description": "Initial selected value for uncontrolled usage"
         },
         "onChange": {
-          "type": "string",
-          "description": "JavaScript function to call when the selected theme changes — applying the theme is the caller's responsibility. With @solexllc/usx-theme/themes, that's typically `document.documentElement.dataset.theme = value` (plus any persistence)."
+          "type": "function",
+          "description": "React callback for a selected theme. Django consumers can listen for the select's native change event; applying the theme remains the application's responsibility.",
+          "renderers": {
+            "django": {
+              "supported": false
+            }
+          }
         },
         "className": {
           "type": "string",
@@ -6852,6 +8145,59 @@ export const componentContracts = {
           "component": "theme-picker",
           "template": "theme-picker/theme-picker.django.html",
           "tag": "theme_picker"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "theme-picker-1",
+          "label": "Theme",
+          "themes": [
+            {
+              "value": "Default",
+              "label": "Default"
+            },
+            {
+              "value": "Forest",
+              "label": "Forest"
+            },
+            {
+              "value": "Sunset",
+              "label": "Sunset"
+            },
+            {
+              "value": "Ocean",
+              "label": "Ocean"
+            },
+            {
+              "value": "Aurora",
+              "label": "Aurora"
+            },
+            {
+              "value": "Borealis",
+              "label": "Borealis"
+            },
+            {
+              "value": "Midnight",
+              "label": "Midnight"
+            },
+            {
+              "value": "Carbon",
+              "label": "Carbon"
+            },
+            {
+              "value": "VADS",
+              "label": "VADS"
+            },
+            {
+              "value": "GOV.UK",
+              "label": "GOV.UK"
+            },
+            {
+              "value": "NASA",
+              "label": "NASA"
+            }
+          ],
+          "defaultValue": "Default"
         }
       }
     },
@@ -7059,6 +8405,29 @@ export const componentContracts = {
           "template": "toggle/toggle.django.html",
           "tag": "toggle"
         }
+      },
+      "examples": {
+        "default": {
+          "id": "alignment",
+          "ariaLabel": "Text alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "defaultValue": "center",
+          "variant": "text",
+          "name": "toggle-example"
+        }
       }
     },
     "tooltip": {
@@ -7079,7 +8448,7 @@ export const componentContracts = {
             "left",
             "right"
           ],
-          "default": "top",
+          "default": "right",
           "description": "The direction the tooltip appears relative to its trigger."
         },
         "children": {
@@ -7110,6 +8479,13 @@ export const componentContracts = {
           "component": "tooltip",
           "template": "tooltip/tooltip.django.html",
           "tag": "tooltip"
+        }
+      },
+      "examples": {
+        "default": {
+          "label": "Helpful info",
+          "position": "right",
+          "children": "<button type=\"button\" class=\"usa-button usx-button usa-button--primary\">Hover me</button>"
         }
       }
     },
@@ -7195,22 +8571,50 @@ export const componentContracts = {
         "default": {
           "items": [
             {
-              "type": "link",
-              "href": "https://www.google.com",
-              "text": "Google"
-            },
-            {
               "type": "details",
               "summaryProps": {
-                "label": "Socials"
+                "label": "More application services"
               },
               "items": [
                 {
                   "type": "link",
-                  "href": "https://www.facebook.com",
-                  "text": "Facebook"
+                  "href": "#renew-application",
+                  "text": "Renew an application"
+                },
+                {
+                  "type": "link",
+                  "href": "#get-help",
+                  "text": "Get help"
                 }
               ]
+            },
+            {
+              "type": "details",
+              "summaryProps": {
+                "label": "About these services"
+              },
+              "text": "Find applications and support here."
+            },
+            {
+              "type": "details",
+              "summaryProps": {
+                "label": "Coming soon"
+              },
+              "items": [
+                {
+                  "type": "text",
+                  "text": "Feature under development"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "href": "#application-status",
+              "text": "Check application status"
+            },
+            {
+              "type": "text",
+              "text": "Applications"
             }
           ]
         }
@@ -7270,6 +8674,17 @@ export const componentContracts = {
           "component": "villain",
           "template": "villain/villain.django.html",
           "tag": "villain"
+        }
+      },
+      "examples": {
+        "default": {
+          "title": "The hero heading",
+          "callout": "A callout heading",
+          "paragraph": "A short description of the hero section that provides context for the call to action.",
+          "button": {
+            "href": "#",
+            "text": "Call to action"
+          }
         }
       }
     }

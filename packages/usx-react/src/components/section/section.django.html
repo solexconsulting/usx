@@ -1,5 +1,5 @@
 {# Django template for Section #}
-<section class="usx-section{% if className %} {{ className }}{% endif %}">
+{% load usx_components %}<section class="usx-section{% if className %} {{ className }}{% endif %}"{% if id %} id="{{ id }}"{% endif %}{% if style %} style="{{ style|css_style }}"{% endif %}>
   {% if title %}
     {% if headingAs == 'h1' %}<h1 class="usx-section__title">{{ title }}</h1>
     {% elif headingAs == 'h3' %}<h3 class="usx-section__title">{{ title }}</h3>

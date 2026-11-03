@@ -2,6 +2,13 @@
   "name": "list",
   "template": "list/list.django.html",
   "version": 1,
+  "default": {
+    "items": [
+      "List item",
+      "List item",
+      "List item"
+    ]
+  },
   "props": {
     "items": {
       "type": "object",

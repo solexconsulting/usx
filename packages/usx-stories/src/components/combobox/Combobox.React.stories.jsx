@@ -72,12 +72,7 @@ const fruitOptions = [
 ];
 
 export const storyDefs = {
-  Default: {
-    id: 'fruit',
-    name: 'fruit',
-    label: 'Select a fruit',
-    options: fruitOptions,
-  },
+  Default: config.default,
   Disabled: {
     id: 'fruit-disabled',
     name: 'fruit-disabled',

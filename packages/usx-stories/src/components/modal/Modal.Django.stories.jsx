@@ -1,9 +1,9 @@
 import React from 'react';
-import { djangoComponent } from '../../utils/djangoComponent.js';
 import config from '../../../../usx-react/src/components/modal/config.json';
-import { buildArgTypes, componentTag, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, createDjangoStory, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Modal.React.stories.jsx';
 import Button from '../../../../usx-react/src/components/button/Button.tsx';
+import Modal from '../../../../usx-react/src/components/modal/Modal.tsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -22,38 +22,20 @@ export default {
   decorators: [...componentInit('modal')]
 };
 
-const ModalDjango = djangoComponent({ componentName: 'modal' });
-
-const createStory = (storyDef) => ({
-  args: storyDef,
-  parameters: {
-    docs: {
-      source: {
-        code: componentTag({
-          name: 'modal',
-          props: Object.fromEntries(
-            Object.entries(storyDef).filter(([key]) => key !== 'triggerLabel')
-          )
-        })
-      }
-    }
-  },
-  render: (args) => {
-    const { triggerLabel, ...modalArgs } = args;
-    return (
-      <>
-        <Button
-          href={`#${modalArgs.id}`}
-          variant="outline"
-          aria-controls={modalArgs.id}
-          data-open-modal
-        >
-          {triggerLabel || 'Open modal'}
-        </Button>
-        <ModalDjango {...modalArgs} />
-      </>
-    );
-  }
+const createStory = createDjangoStory({
+  componentName: 'modal',
+  renderTree: ({ triggerLabel, ...modalArgs }) => (
+    <>
+      <Button
+        href={`#${modalArgs.id}`}
+        variant="outline"
+        extraAttributes={{ 'aria-controls': modalArgs.id, 'data-open-modal': true }}
+      >
+        {triggerLabel || 'Open modal'}
+      </Button>
+      <Modal {...modalArgs} />
+    </>
+  ),
 });
 
 export const Default = createStory(storyDefs.Default);

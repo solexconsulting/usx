@@ -4,10 +4,7 @@ import config from '../../../../usx-react/src/components/link/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Default: {
-    href: 'https://google.com/',
-    children: 'Google'
-  },
+  Default: config.default,
   Visited: {
     href: 'javascript:void(0);',
     children: 'a visited link',

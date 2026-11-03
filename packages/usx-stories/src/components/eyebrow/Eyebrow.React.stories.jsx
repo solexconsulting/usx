@@ -4,9 +4,7 @@ import config from '../../../../usx-react/src/components/eyebrow/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  InH1: {
-    children: 'Page Title',
-  },
+  Default: config.default,
   InH2: {
     children: 'Section Heading',
   },
@@ -23,10 +21,11 @@ export default {
   excludeStories: ['storyDefs'],
 };
 
-export const InH1 = {
-  render: () => (
+export const Default = {
+  args: storyDefs.Default,
+  render: (args) => (
     <h1>
-      <Eyebrow {...storyDefs.InH1} />
+      <Eyebrow {...args} />
       Full Page Title
     </h1>
   ),

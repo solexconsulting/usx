@@ -79,7 +79,7 @@ const play = async (context) => {
     );
 
     const img = (key) => linkOf(sectionFor(canvasElement, sectionTitle(key))).querySelector('img');
-    await expect(radiusOf(img('BasicAvatar'))).toBe(0);
+    await expect(radiusOf(img('Default'))).toBe(0);
     await expect(radiusOf(img('MediumRoundedAvatar'))).toBeGreaterThan(0);
     await expect(radiusOf(img('LargeRoundedAvatar'))).toBeGreaterThan(
       radiusOf(img('MediumRoundedAvatar'))

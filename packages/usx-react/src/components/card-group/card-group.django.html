@@ -1,4 +1,4 @@
-{% load components %}
+{% load usx_components %}
 <ul class="usa-card-group usx-card-group{% if className %} {{ className }}{% endif %}">
   {% for card in cardProps %}
     {% card props=card as='li' %}{{ card.children|safe }}{% endcard %}

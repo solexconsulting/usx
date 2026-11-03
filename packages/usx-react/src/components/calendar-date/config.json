@@ -2,6 +2,9 @@
   "name": "calendar-date",
   "template": "calendar-date/calendar-date.django.html",
   "version": 1,
+  "default": {
+    "datetime": "2020-09-30T12:00:00+01:00"
+  },
   "props": {
     "datetime": {
       "type": "string",

@@ -3337,10 +3337,11 @@
 
         <div class="usx-nav__utility">
           <a
-            class="usa-button usx-button usa-button--primary usx-button--ghost margin-right-0"
             href="https://example.com/sign-in"
-            >Sign In</a
+            class="usa-button usx-button usa-button--primary usx-button--ghost margin-right-0"
           >
+            Sign In
+          </a>
         </div>
       </div>
       <div class="usx-nav__end-slot">
@@ -3349,7 +3350,8 @@
             type="button"
             class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
             aria-label="Theme"
-            onclick="this.closest('.usx-theme-picker').classList.add('usx-theme-picker--open')"
+            aria-expanded="false"
+            aria-controls="django-theme-picker-panel"
           >
             <svg
               class="usa-icon usx-theme-picker__icon"
@@ -3363,7 +3365,7 @@
               />
             </svg>
           </button>
-          <div class="usx-theme-picker__panel">
+          <div id="django-theme-picker-panel" class="usx-theme-picker__panel">
             <label class="usa-label usx-label usa-sr-only" for="django-theme-picker"> Theme </label>
 
             <select class="usa-select usx-select" id="django-theme-picker">
@@ -3375,7 +3377,6 @@
               type="button"
               class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
               aria-label="Confirm theme"
-              onclick="this.closest('.usx-theme-picker').classList.remove('usx-theme-picker--open')"
             >
               <svg
                 class="usa-icon usx-icon usx-theme-picker__icon"

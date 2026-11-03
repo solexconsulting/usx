@@ -1,4 +1,4 @@
-import { serializePropsForDjango as serialize } from '../../../../packages/usx-stories/src/utils/djangoComponent.js?real';
+import { serializePropsForDjango as serialize, storyTree as buildTree, prepareDjangoRequest as prepare } from '../../../../packages/usx-stories/src/utils/djangoComponent.js?real';
 import { currentSession } from './session.ts';
 
 /**
@@ -9,12 +9,17 @@ import { currentSession } from './session.ts';
 
 /** Stories use this at module level, so it is the real implementation. */
 export const serializePropsForDjango = serialize;
+export const storyTree = buildTree;
+export const prepareDjangoRequest = prepare;
+export const fetchStorySource = (): never => {
+  throw new Error('Story source is only fetched in the browser.');
+};
 
 export const useDjangoRenderedHtml = (
   componentName: string,
   props: unknown
 ): { html: string; error: null } => ({
-  html: currentSession().htmlFor(componentName, props),
+  html: currentSession().htmlFor(componentName, prepare(componentName, props)),
   error: null,
 });
 
@@ -22,7 +27,7 @@ export const useDjangoRenderedFields = (
   fields: readonly { componentName: string; args: unknown }[]
 ): { html: string; errors: never[] } => ({
   html: fields
-    .map(({ componentName, args }) => currentSession().htmlFor(componentName, args))
+    .map(({ componentName, args }) => currentSession().htmlFor(componentName, prepare(componentName, args)))
     .join('\n'),
   errors: [],
 });
@@ -31,7 +36,7 @@ export const useDjangoRenderedFields = (
 export const djangoComponent =
   ({ componentName }: { componentName: string }) =>
   (props: unknown): string =>
-    currentSession().slotFor(componentName, props);
+    currentSession().slotFor(componentName, prepare(componentName, props));
 
 export const fetchComponentHtml = (): never => {
   throw new Error('fetchComponentHtml is not available while generating snapshots.');

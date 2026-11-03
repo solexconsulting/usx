@@ -4,18 +4,7 @@ import config from '../../../../usx-react/src/components/toggle/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export const storyDefs = {
-  Default: {
-    id: 'alignment',
-    ariaLabel: 'Text alignment',
-    options: [
-      { value: 'left', label: 'Left' },
-      { value: 'center', label: 'Center' },
-      { value: 'right', label: 'Right' },
-    ],
-    defaultValue: 'center',
-    variant: 'text',
-    name: 'toggle-example',
-  },
+  Default: config.default,
   IconVariant: {
     id: 'transport-mode',
     ariaLabel: 'Transport mode',
