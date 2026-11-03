@@ -1,5 +1,53 @@
 # @solexllc/usx-contracts
 
+## 0.8.0
+
+### Minor Changes
+
+- [#21](https://github.com/solexconsulting/usx/pull/21) [`b1befdd`](https://github.com/solexconsulting/usx/commit/b1befddfdc1d8f5d0c3c4b2bb6ef12691d4af1bf) Thanks [@olsonap](https://github.com/olsonap)! - Add a themeable Drawer built on a native modal dialog, with four viewport edges, three sizes, semantic content, and React, HTML, and Django examples.
+
+- [#21](https://github.com/solexconsulting/usx/pull/21) [`b1befdd`](https://github.com/solexconsulting/usx/commit/b1befddfdc1d8f5d0c3c4b2bb6ef12691d4af1bf) Thanks [@olsonap](https://github.com/olsonap)! - Add an experimental positioned Popover built on native `details` and `summary`, with themed panels and CSS placement on four sides and three alignments.
+
+  Authors own the summary and content appearance. Popover adds no summary classes or styles and has no navigation-specific CSS. Use existing USWDS/USX components and utilities for panel contents.
+
+  Use `popover.on/off` for outside dismissal, Escape with focus return, and nested Popover cleanup. Native `name` groups control exclusive opening. A composition story pairs Popover with Tree on small screens and a list with nested Popovers on larger screens. Include React, Django, and HTML stories for evaluation; do not use in production yet.
+
+- [#21](https://github.com/solexconsulting/usx/pull/21) [`b1befdd`](https://github.com/solexconsulting/usx/commit/b1befddfdc1d8f5d0c3c4b2bb6ef12691d4af1bf) Thanks [@olsonap](https://github.com/olsonap)! - Add a semantic Tree driven by recursive `items` data. Each item sets an explicit `type`: `link` uses Link, `details` uses Details with `summaryProps` and either nested `items` or paragraph `text`, and `text` renders a plain label. Nested branches need no authored list markup or JavaScript.
+
+  Add default and padded variants. The default preserves Details styling without a variant class; padded adds row spacing, alignment, and hover surfaces for links and summaries.
+
+- [#21](https://github.com/solexconsulting/usx/pull/21) [`b729455`](https://github.com/solexconsulting/usx/commit/b72945508a5ae10e38f9f6ad5ea3b69950a0f52c) Thanks [@olsonap](https://github.com/olsonap)! - Replace Avatar's `tooltip` string prop with `tooltipProps` and render the shared Tooltip component in React and Django. Nested Avatar consumers forward Tooltip props, including position and CSS classes.
+
+- [`5adbd68`](https://github.com/solexconsulting/usx/commit/5adbd68dfff848d344f0feb710f7996e29296cd1) Thanks [@olsonap](https://github.com/olsonap)! - Provide representative default props in each component config and expose them in generated contracts. Storybook Default stories and the Django template workbench use these shared examples. Also fix controlled React Text Area usage by omitting `defaultValue` when `value` is supplied.
+
+- [#21](https://github.com/solexconsulting/usx/pull/21) [`b729455`](https://github.com/solexconsulting/usx/commit/b72945508a5ae10e38f9f6ad5ea3b69950a0f52c) Thanks [@olsonap](https://github.com/olsonap)! - Align React and Django markup for the updated component stories. Misc Banner replaces `tone` with an open-ended `color` prop and renders its badge only when `badgeText` is provided. Spinner forwards `staticUrlPrefix` to its icon in React and Django.
+
+- [#21](https://github.com/solexconsulting/usx/pull/21) [`b729455`](https://github.com/solexconsulting/usx/commit/b72945508a5ae10e38f9f6ad5ea3b69950a0f52c) Thanks [@olsonap](https://github.com/olsonap)! - Add `fileInput.on(root)` for managed file lists in server-rendered markup. The handler adds and deletes individual files and emits `usx:files-change` with current browser files. React keeps its existing state handler. Django File Input now renders managed and preloaded lists inside the form group.
+
+- [#21](https://github.com/solexconsulting/usx/pull/21) [`b1befdd`](https://github.com/solexconsulting/usx/commit/b1befddfdc1d8f5d0c3c4b2bb6ef12691d4af1bf) Thanks [@olsonap](https://github.com/olsonap)! - Require summary-related options on Details and Popover to be passed through `summaryProps`, which is forwarded to the shared Summary component. Migrate existing story arguments to the grouped API.
+
+- [#21](https://github.com/solexconsulting/usx/pull/21) [`b729455`](https://github.com/solexconsulting/usx/commit/b72945508a5ae10e38f9f6ad5ea3b69950a0f52c) Thanks [@olsonap](https://github.com/olsonap)! - Support URLs and fragments through `pageUrlPrefix`, while preserving literal `#` links for consumer click handlers when it is omitted. Add `renderPart` for standalone navigation, step options, and summary composition, and `stepOptionsId` for distinct controls on pages with multiple paginations.
+
+  Pagination now renders only markup. Consumers can handle page clicks and page-size changes through the rendered `data-usx-pagination-*` attributes and supply the next `currentPage` and `pageSize`; the component has no internal state or event handlers.
+
+- [#21](https://github.com/solexconsulting/usx/pull/21) [`b729455`](https://github.com/solexconsulting/usx/commit/b72945508a5ae10e38f9f6ad5ea3b69950a0f52c) Thanks [@olsonap](https://github.com/olsonap)! - Add `panelShape` to Popover. The default rounded panel keeps its existing radius and extra vertical padding; the square panel uses equal outer padding and no radius. Nested `menuItems` flyouts inherit the shape. Replace the Navigation story with explicit rounded, square, and square menu examples.
+
+- [#21](https://github.com/solexconsulting/usx/pull/21) [`b729455`](https://github.com/solexconsulting/usx/commit/b72945508a5ae10e38f9f6ad5ea3b69950a0f52c) Thanks [@olsonap](https://github.com/olsonap)! - Redesign the Drawer to follow the USWDS mobile navigation: square edges by default, an icon close button styled like `usa-nav__close` (first in DOM order, named by `closeLabel`), a compact size as wide as `usa-nav`, and the same 1rem padding and 0.3s slide-in. Add `rounded` to round the edge facing the page and `actionRequired` to omit the close button and ignore Escape and outside clicks. Replace the text close button. The heading receives initial focus by default; with `focusHeading` off, mark a control in the content with `autofocus`.
+
+  Remove the modeless `modal={false}` option because it relied on the browser Popover API. Drawer panels are modal dialogs. A packaged enhancement supports their native open and close commands in browsers that support `<dialog>` but not invoker commands.
+
+  The packaged enhancement also closes ordinary drawers when the backdrop is clicked; `actionRequired` drawers remain open.
+
+- [#21](https://github.com/solexconsulting/usx/pull/21) [`b729455`](https://github.com/solexconsulting/usx/commit/b72945508a5ae10e38f9f6ad5ea3b69950a0f52c) Thanks [@olsonap](https://github.com/olsonap)! - Standardize element props: `as` chooses a component root and `headingAs` chooses a child heading. Rename `element` to `as` on Callout and Container, `tag` to `as` on Card, `containerElement` to `as` on Prose, `headingLevel` to `headingAs` on Accordion, Hero, Popover, and Section, `headingTag` to `headingAs` on StepIndicator and ProcessList items, and `titleHeadingLevel` to `titleAs` on InPageNav. Page gains a contract-level `as` prop (`main`, `div`, `section`, or `article`; default `main`), so Django pages can render the same root element as React. Card `as` accepts `div`, `li`, or `article`. Update story arguments and templates to the new names.
+
+### Patch Changes
+
+- [`5adbd68`](https://github.com/solexconsulting/usx/commit/5adbd68dfff848d344f0feb710f7996e29296cd1) Thanks [@olsonap](https://github.com/olsonap)! - Add Django block tags for Clickable's Link, ColorChange, and BgColorChange parts. Render every Django Clickable story with those tags, matching the React composition examples.
+
+- [`5adbd68`](https://github.com/solexconsulting/usx/commit/5adbd68dfff848d344f0feb710f7996e29296cd1) Thanks [@olsonap](https://github.com/olsonap)! - Add the optional packaged Theme Picker initializer for opening and closing rendered markup. React and Django now render the same accessible trigger and panel without component-level click handlers or inline scripts. Applications still own theme selection and persistence.
+
+- [`5adbd68`](https://github.com/solexconsulting/usx/commit/5adbd68dfff848d344f0feb710f7996e29296cd1) Thanks [@olsonap](https://github.com/olsonap)! - Set Tooltip's default position to `right` in React, Django, and the shared contract.
+
 ## 0.7.0
 
 ### Minor Changes
