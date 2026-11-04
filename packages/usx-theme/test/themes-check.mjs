@@ -29,6 +29,10 @@ const failures = [];
 const fail = (msg) => failures.push(msg);
 
 const cssVars = new Set(themeManifest.map((t) => t.cssVar));
+const sassVariables = fs.readFileSync(path.join(pkgDir, 'src/_variables.scss'), 'utf8');
+for (const [, name] of sassVariables.matchAll(/\$usx-([\w-]+)-var:\s*null\s*!default/g)) {
+  if (!cssVars.has(`--usx-${name}`)) fail(`${name}: runtime Sass hook is missing from the theme manifest`);
+}
 
 for (const token of themeManifest) {
   if (/^(?:--)?usx-/.test(token.name) || /^(?:--)?usx-/.test(token.derivedFrom ?? '')) fail(`${token.name}: manifest configuration names must omit the namespace`);
@@ -232,6 +236,20 @@ for (const [name, value] of Object.entries(footerBorders)) {
   if (resolveTheme({ [name]: 'none' })[name] !== 'none') fail(`${name}: border could not be disabled`);
   if (!themeManifest.some((token) => token.name === name && token.type === 'string')) fail(`${name}: border must be a string token, not a color`);
 }
+
+const footerBackgrounds = {
+  'footer-bg': '#000000',
+  'footer-primary-bg': '#eeeeee',
+  'footer-secondary-bg': '#111111',
+  'footer-sign-up-button-bg': '#cc0000',
+};
+const footerTheme = resolveTheme(footerBackgrounds);
+const footerCss = themeToCss(footerTheme);
+for (const [name, value] of Object.entries(footerBackgrounds)) {
+  if (footerTheme[name] !== value || !footerCss.includes(`--usx-${name}: ${value};`)) fail(`${name}: footer background override did not reach CSS export`);
+}
+if (resolveTheme({ 'footer-bg': '#000000' })['footer-secondary-bg'] !== 'var(--usx-footer-bg)') fail('footer secondary background must follow the outer footer by default');
+if (PRESETS.NASA['footer-bg'] !== '#000000') fail('NASA footer background must remain black when surface-3 changes');
 
 const generatedFiles = fs.readdirSync(distDir, { recursive: true })
   .map((file) => path.join(distDir, file))

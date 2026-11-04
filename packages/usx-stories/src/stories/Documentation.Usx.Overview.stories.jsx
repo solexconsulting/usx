@@ -10,9 +10,10 @@ export const Overview = {
     <div className="usa-prose usx-prose" style={{ maxWidth: '840px' }}>
       <h1>@solexllc/usx</h1>
       <p>
-        <code>@solexllc/usx</code> is the Sass/CSS layer of USX — a set of{' '}
+        <code>@solexllc/usx</code> provides the Sass/CSS layer of USX — a set of{' '}
         <code>.usx-*</code> classes compiled on top of USWDS, plus a small
-        utility-class library. It is framework-agnostic: the same compiled CSS
+        utility-class library — and JavaScript modules for USX interactions.
+        It is framework-agnostic: the same compiled CSS
         works with plain HTML, Django templates, or the{' '}
         <code>@solexllc/usx-react</code> component wrappers, because none of
         them are required to produce the markup — they're just three ways of
@@ -21,15 +22,15 @@ export const Overview = {
 
       <h2>Design principle: additive, never a fork</h2>
       <p>
-        Every USX component keeps a real USWDS component's original{' '}
-        <code>usa-*</code> class names and DOM structure untouched. USX never
+        Where a USWDS component exists, USX keeps its original{' '}
+        <code>usa-*</code> class names and DOM structure. USX never
         redefines a <code>usa-*</code> selector's own rules — it only adds new,
         separate <code>usx-*</code>-scoped selectors alongside them (e.g.{' '}
         <code>.usx-accordion .usa-accordion__button</code>, not{' '}
         <code>.usa-accordion__button</code> on its own). Concretely, that means:
       </p>
       <ul>
-        <li>Remove USX entirely and every component still renders and behaves as plain USWDS.</li>
+        <li>USWDS-derived components retain their baseline USWDS markup and behavior without USX. USX-original components, such as DataTable, require their own USX styles and JavaScript for their additional features.</li>
         <li>A future USWDS upgrade only has to reconcile the small, additive USX layer — not a divergent fork of USWDS's own CSS.</li>
         <li>Consumers who don't need branding pay no cost: an unthemed build's <code>usx-*</code> rules are either absent or resolve to the exact value USWDS already used.</li>
       </ul>
@@ -100,6 +101,22 @@ export const Overview = {
         </tbody>
       </table>
       <p>See <strong>Documentation/Theme → Getting Started</strong> for the full setup walkthrough.</p>
+
+      <h2>JavaScript enhancement</h2>
+      <p>
+        USWDS components use USWDS JavaScript. The <code>uswds.min.js</code>{' '}
+        bundle enhances markup present when it runs; if your app inserts
+        components later, call each USWDS module&apos;s <code>init(root)</code>{' '}
+        after insertion. USX components with interactions use modules from{' '}
+        <code>@solexllc/usx/js</code>. DataTable, for example, uses the same{' '}
+        <code>dataTable.init(root)</code> for React, Django, and HTML markup.
+        Loading <code>@solexllc/usx/js/start</code> once also connects USX
+        behaviors, including automatic discovery of newly inserted DataTables.
+      </p>
+      <p>
+        See <strong>Documentation/USX React → JavaScript Enhancement</strong>{' '}
+        for setup examples and the differences between USWDS and USX modules.
+      </p>
     </div>
   )
 };

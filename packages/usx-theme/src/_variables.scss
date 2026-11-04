@@ -1113,14 +1113,17 @@ $usx-footer-heading-secondary-text: usx-var($usx-footer-heading-secondary-text-v
 // Primary/secondary sections intentionally use opposite surface tiers from
 // the header/table-grouped-rows/footer-secondary-border grouping — see the
 // surface-1/2/3 mapping note in theme-manifest.js.
-$usx-footer-secondary-bg: $usx-surface-3                                         !default;
-$usx-footer-primary-bg: $usx-surface-2                                         !default;
+$usx-footer-secondary-bg-var: null !default;
+$usx-footer-secondary-bg: usx-var($usx-footer-secondary-bg-var, $usx-footer-bg) !default;
+$usx-footer-primary-bg-var: null !default;
+$usx-footer-primary-bg: usx-var($usx-footer-primary-bg-var, $usx-surface-2) !default;
 
 // USWDS's own social icons carry their own brand colors by default \u2014 no
 // filter needed unless a consumer explicitly wants a monochrome treatment.
 $usx-footer-social-icon-filter-var: null !default;
 $usx-footer-social-icon-filter: usx-var($usx-footer-social-icon-filter-var)        !default;
-$usx-footer-sign-up-button-bg: $usx-color-primary                                    !default;
+$usx-footer-sign-up-button-bg-var: null !default;
+$usx-footer-sign-up-button-bg: usx-var($usx-footer-sign-up-button-bg-var, $usx-color-primary) !default;
 $usx-footer-social-bg-var: null !default;
 $usx-footer-social-bg: usx-var($usx-footer-social-bg-var) !default;
 $usx-footer-social-bg-hover-var: null                                                !default;
@@ -1298,7 +1301,6 @@ $usx-callout-background-var: null !default;
 $usx-callout-background: usx-var($usx-callout-background-var, $usx-surface-2) !default;
 $usx-callout-border-width-var: null !default;
 $usx-callout-border-width: usx-var($usx-callout-border-width-var, $usx-border-width-lg) !default;
-$usx-callout-border-var: null !default;
 
 // ── Component tokens: Clickable (custom; defaults baked in SCSS) ─────────────
 $usx-clickable-focus-var: null !default;

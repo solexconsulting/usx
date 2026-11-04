@@ -30,7 +30,7 @@ $-uswds-desktop: 64em;
   }
 
   .usa-footer__secondary-section {
-    background-color: unset;
+    background-color: usx-when($usx-footer-secondary-bg);
     border-top: usx-when($usx-footer-secondary-section-border-top);
   }
 

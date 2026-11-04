@@ -56,6 +56,12 @@ DataTable renders its headers, rows, groups, spans, and footer as HTML before
 JavaScript loads. Its Django context module only plans that markup from the
 component props. `@solexllc/usx/js/data-table` enhances the rendered table with
 sorting, searching, pagination, selection, and disclosure behavior in the browser.
+Load `@solexllc/usx/js/start` once or call `dataTable.init(root)` after
+inserting table markup. The same initializer enhances React and static HTML
+tables. USWDS components use their own JavaScript: `uswds.min.js` handles
+markup present when it runs, while HTML inserted later needs the relevant
+USWDS module's `init(root)`. See Storybook's **Documentation → USX React →
+JavaScript Enhancement** guide.
 
 Ordinary template variables are escaped. Props that intentionally accept HTML
 or JavaScript handlers must contain trusted content, not unsanitized user input.

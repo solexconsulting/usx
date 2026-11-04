@@ -132,12 +132,11 @@ export const componentInit = (...names) => {
 // story's decorator makes, e.g. '`comboBox.init()`'.
 export const uswdsInitNote = (calls) =>
     `This story's decorator calls ${calls} to enhance the USWDS markup above. ` +
-    "Your application is responsible for doing the same wherever this component's " +
-    "markup mounts or updates. See **Documentation/USX React → USWDS JS " +
-    "Initialization** for the full picture — in most apps (and in this " +
-    "Storybook) something has already called `.on()` globally, so `.init()` " +
-    "is all you need; you only own calling `.on()` yourself if you're not " +
-    "using that global setup.";
+    "If your application inserts or replaces this markup after the bundle runs, " +
+    "call the same `init()`. When `uswds.min.js` is loaded, it has already " +
+    "called `on()` once; do not call `on()` again. " +
+    "See **Documentation/USX React → JavaScript Enhancement** for USWDS " +
+    "and USX setup.";
 
 export const buildArgTypes = (props = {}) => {
     return Object.fromEntries(Object.entries(props).map(([name, meta]) => {

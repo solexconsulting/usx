@@ -48,6 +48,7 @@ export const PRESETS = {
   Default: {},
   Forest: {
     'color-primary': '#2e7d32',
+    'color-primary-lighter': '#DFEACD',
     'color-secondary': '#00695c',
     'color-accent-cool': '#81c784',
     'color-accent-warm': '#ffb300',
@@ -62,7 +63,7 @@ export const PRESETS = {
   },
   Sunset: {
     'color-primary': '#d84315',
-    'color-primary-lighter': '#faeee5',
+    'color-primary-lighter': '#F7BCA2',
     'color-secondary': '#6a1b9a',
     'color-accent-cool': '#ff8a65',
     'color-accent-warm': '#ffd54f',
@@ -194,6 +195,7 @@ export const PRESETS = {
     'summary-box-border-color': '#60a5fa',
     'color-visited': '#b39ddb',
     'banner-button-text': 'var(--usx-text-ink)',
+    'process-list-border': '#A1D3FF',
     // See Borealis's comment above for why this can't just chain to
     // color-base-light.
     'date-picker-button-hover-active-bg': '#565c65',
@@ -240,6 +242,7 @@ export const PRESETS = {
     'alert-radius': 'var(--usx-radius-box)',
     'tag-radius': 'var(--usx-radius-box)',
     'checkable-tile-radius': 'var(--usx-radius-box)',
+    'process-list-border': 'var(--usx-color-primary-vivid)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     // Carbon wants the desktop nav bar one tone lighter than the header
@@ -339,9 +342,9 @@ export const PRESETS = {
     // template) — colors pulled from its actual rendered CSS.
     'color-primary': '#d83933', // real CTA button background (e.g. "Live Mission Coverage")
     'color-secondary': '#1c67e3', // real accent blue (download-link icon)
-    'color-accent-cool': '#959599', // real neutral gray used across icons/labels
+    'color-accent-cool': '#e5eeff', // picked at random because the grey chosen looked boring
     'color-accent-warm': '#f64137', // real "read more" arrow-icon accent
-    'surface-3': '#000000', // real header background — solid black
+    'surface-3': '#f6f6f6',
     // The site's black shell should not become the table's alternating row.
     'table-stripe-bg': '#f0f0f0',
     'table-sorted-header-bg': 'var(--usx-color-primary)',
@@ -368,30 +371,29 @@ export const PRESETS = {
     // verified live.
     'card-text': 'var(--usx-text-inverse)',
     'checkable-tile-radius': '0',
-    // nasa.gov's nav literally renders stock USWDS usa-accordion markup, so
-    // its button background is stock USWDS base-lightest rather than our
-    // slightly darker surface-2 default.
-    'accordion-bg': 'var(--usx-surface-3)',
     'accordion-bg-hover': 'var(--usx-color-primary)',
     'accordion-text': 'var(--usx-text-inverse)',
-    'range-slider-track-bg': 'var(--usx-surface-1)',
-    'range-slider-thumb-bg': 'var(--usx-surface-1)',
-    'range-slider-track-border': '#000000',
-    'range-slider-thumb-border': '#000000',
-    'summary-box-bg': 'var(--usx-surface-3)',
-    'summary-box-border-color': 'var(--usx-color-primary)',
-    'summary-box-text': 'var(--usx-text-inverse)',
     ...headerFooterBorderOverrides(),
     ...headerNavBackgroundOverrides(),
     // Keep the mobile drawer the same black as the desktop header/nav bar.
-    'header-nav-bg-mobile': 'var(--usx-surface-3)',
-    // The footer's secondary section (logo + contact block) chains its
-    // background to surface-3 too, so it's solid black here just like the
-    // header — same text-color/heading-color-secondary fix as above.
-    // Link colors are untouched since color-primary (red) already reads
-    // fine against black.
+    'header-bg': '#000000',
+    'header-nav-bg': '#000000',
+    'header-nav-bg-mobile': '#000000',
+    'accordion-bg': '#000000',
+    'summary-box-bg': '#000000',
+    'summary-box-border-color': '#000000',
+    'summary-box-text': 'var(--usx-text-inverse)',
+    'process-list-border': 'var(--usx-color-primary-vivid)',
+    // Keep the outer footer and its secondary section black independently
+    // of the light surface-3 used elsewhere. The secondary section follows
+    // footer-bg unless overridden separately.
+    'footer-bg': '#000000',
+    'footer-primary-bg': '#000000',
     'footer-text': 'var(--usx-text-inverse)',
     'footer-heading-secondary-text': 'var(--usx-text-inverse)',
+    'footer-link-text': 'var(--usx-text-inverse)',
+    'footer-link-text-hover': 'var(--usx-color-accent-warm)',
+    'table-grouped-row-bg': '#000000',
     'table-grouped-row-text': 'var(--usx-text-inverse)',
     ...inverseLogoOverrides(),
   }
