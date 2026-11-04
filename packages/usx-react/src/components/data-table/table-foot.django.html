@@ -23,7 +23,7 @@
     {# Footer values per leaf column #}
     {% for col in leaf_columns %}
     <td class="usx-data-table__cell{% if col.align %} usx-data-table__cell--align-{{ col.align }}{% endif %}">
-      {% for fk, fv in footerValues.items %}{% if fk == col.key %}{{ fv }}{% endif %}{% endfor %}
+      {{ footerValues|get_item:col.key }}
     </td>
     {% endfor %}
 

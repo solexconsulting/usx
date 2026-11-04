@@ -129,7 +129,6 @@ function DataTable({
   const totalCols = leafColumns(resolvedColumns).length + Number(!!selectionMode) + Number(!!rowDetails);
   const contextValue: TableContextValue = {
     id, columns: resolvedColumns, data, primaryKey,
-    sortState: initialSort || { key: null, direction: null },
     selectionMode, selectionPosition, selectionVerticalAlign,
     selectedKeys: new Set(initialSelection || []), allowSelectAll, disabled, clickableRows,
     groupBy, groupColumns: groupConfig?.columns || [],
@@ -155,6 +154,8 @@ function DataTable({
     <div className="usx-data-table-shell" data-usx-data-table
       data-searchable={searchable || undefined} data-paginate={!!paginate || undefined}
       data-page-size={paginate ? pageSize : undefined}
+      data-initial-sort-key={initialSort?.direction ? initialSort.key || undefined : undefined}
+      data-initial-sort-direction={initialSort?.direction || undefined}
       data-total-count={pageConfig.totalCount} data-infinite={infinite || undefined}>
       {searchable && <div className="usx-data-table__toolbar">
         <Input id={`${id}-search`} label="Search" formGroup={false} placeholder={searchPlaceholder} />

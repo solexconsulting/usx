@@ -39,8 +39,9 @@ export default function TableGroup({
           const value = options ? options.value : rawValue as React.ReactNode;
           const content = column.render ? column.render({ key: groupKey, rows }) : value;
           const Tag = index === 0 ? 'th' : 'td';
+          const span = options?.colSpan || column.colSpan || 1;
           return <Tag key={column.key} scope={index === 0 ? 'row' : undefined}
-            colSpan={options?.colSpan || column.colSpan || 1}
+            colSpan={span > 1 ? span : undefined}
             className={classnames('usx-data-table__group-cell', align && `usx-data-table__cell--align-${align}`,
               verticalAlign && `usx-data-table__cell--valign-${verticalAlign}`, column.className)}
             style={{ backgroundColor: options?.backgroundColor || column.backgroundColor,

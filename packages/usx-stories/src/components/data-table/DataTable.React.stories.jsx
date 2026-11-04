@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from 'react';
 import DataTable from '../../../../usx-react/src/components/data-table/DataTable.tsx';
-import Avatar from '../../../../usx-react/src/components/avatar/Avatar.tsx';
-import Button from '../../../../usx-react/src/components/button/Button.tsx';
 import config from '../../../../usx-react/src/components/data-table/config.json';
 import { buildArgTypes, componentInit } from '../../utils/storyHelpers.jsx';
 import { WIDE_TABLE_COLUMNS, WIDE_TABLE_ROWS } from '../table/wideTableData.js';
@@ -51,17 +48,14 @@ export const STATES = [
 ];
 
 export const STATE_COLUMNS = [
-  { key: 'name', header: 'State', primary: true, sortable: true },
-  { key: 'order', header: 'Order admitted', align: 'right', sortable: true, width: '8rem' },
-  { key: 'region', header: 'Region', sortable: true },
+  { key: 'name', header: 'State', primary: true },
+  { key: 'order', header: 'Order admitted', align: 'right', width: '8rem' },
+  { key: 'region', header: 'Region' },
   {
     key: 'population',
     header: 'Population at admission',
     align: 'right',
-    sortable: true,
-    render: (row) => row.population.toLocaleString(),
     aggregate: 'sum',
-    footer: (data) => data.reduce((s, r) => s + r.population, 0).toLocaleString(),
   },
 ];
 
@@ -143,17 +137,24 @@ export const storyDefs = {
   },
   Sortable: {
     id: "sortable",
-    columns: STATE_COLUMNS.map((column) => ({ ...column, sortable: column.key !== 'region' })),
+    columns: STATE_COLUMNS.map((column, index) => ({ ...column, sortable: index === 0 })),
     data: STATES,
-    caption: 'Sort selected columns; Region has no sort control',
+    caption: 'Sort first column',
     scrollable: true,
   },
   SortableAll: {
     id: "sortable-all",
-    columns: STATE_COLUMNS.map((column) => ({ ...column, sortable: undefined })),
+    columns: STATE_COLUMNS.map((column) => ({ ...column, sortable: true })),
     data: STATES,
-    caption: 'Sort any column, including Region, with sortable=true',
+    caption: 'Sort any column',
     sortable: true,
+  },
+  InitialSortDescending: {
+    id: 'initial-sort-descending',
+    columns: STATE_COLUMNS.map((column) => ({ ...column, sortable: true })),
+    data: STATES,
+    caption: 'States initially sorted by the first column, State, in descending order',
+    sort: { key: 'name', direction: 'desc' },
   },
   CheckboxSelection: {
     id: "checkbox-selection",
@@ -306,13 +307,62 @@ export const storyDefs = {
     columns: STATE_COLUMNS,
     data: STATES,
     caption: 'States with row details',
-    rowDetails: { render: (row) => <p>{row.name} is in the {row.region} region.</p> },
+    rowDetails: { render: (row) => `${row.name} is in the ${row.region} region.` },
   },
   Footer: {
     id: 'footer',
-    columns: STATE_COLUMNS,
+    columns: STATE_COLUMNS.map((column) => column.key === 'name' ? { ...column, footer: 'Total' } : column),
     data: STATES,
     caption: 'States with population total',
+    showFooter: true,
+  },
+  FooterStatic: {
+    id: 'footer-static',
+    columns: [
+      { key: 'program', header: 'Program', primary: true, footer: 'FY 2026 budget' },
+      { key: 'allocation', header: 'Approved allocation', align: 'right', footer: '$8.5M appropriated' },
+    ],
+    data: [
+      { id: 'parks', program: 'Neighborhood parks', allocation: '$2.1M' },
+      { id: 'roads', program: 'Local roads', allocation: '$3.4M' },
+      { id: 'libraries', program: 'Public libraries', allocation: '$3.0M' },
+    ],
+    caption: 'Approved city program allocations with a published budget total',
+    showFooter: true,
+  },
+  FooterStatistics: {
+    id: 'footer-statistics',
+    columns: [
+      { key: 'office', header: 'Service center', primary: true, footer: 'All centers' },
+      { key: 'requests', header: 'Requests', align: 'right', aggregate: 'sum' },
+      { key: 'averageWait', header: 'Average wait (min)', align: 'right', aggregate: 'avg' },
+      { key: 'shortestWait', header: 'Shortest wait (min)', align: 'right', aggregate: 'min' },
+      { key: 'longestWait', header: 'Longest wait (min)', align: 'right', aggregate: 'max' },
+    ],
+    data: [
+      { id: 'north', office: 'North', requests: 120, averageWait: 12.1, shortestWait: 3, longestWait: 23 },
+      { id: 'south', office: 'South', requests: 84, averageWait: 10.2, shortestWait: 4, longestWait: 28 },
+      { id: 'east', office: 'East', requests: 95, averageWait: 11.3, shortestWait: 2, longestWait: 26 },
+      { id: 'west', office: 'West', requests: 101, averageWait: 13.4, shortestWait: 5, longestWait: 30 },
+    ],
+    caption: 'Weekly service center metrics with sum, average, minimum, and maximum footers',
+    showFooter: true,
+    scrollable: true,
+  },
+  FooterCount: {
+    id: 'footer-count',
+    columns: [
+      { key: 'subject', header: 'Request', primary: true, footer: 'Requests in export' },
+      { key: 'number', header: 'Request number', align: 'right', aggregate: 'count' },
+      { key: 'status', header: 'Status', footer: 'All statuses' },
+    ],
+    data: [
+      { id: 1021, subject: 'Streetlight repair', number: 1021, status: 'Open' },
+      { id: 1022, subject: 'Tree trimming', number: 1022, status: 'In progress' },
+      { id: 1023, subject: 'Pothole report', number: 1023, status: 'Closed' },
+      { id: 1024, subject: 'Missed collection', number: 1024, status: 'Open' },
+    ],
+    caption: 'Service requests with a record count in the footer',
     showFooter: true,
   },
 };
@@ -321,78 +371,6 @@ export const Default = { args: storyDefs.Default };
 export const Striped = { args: storyDefs.Striped };
 export const Borderless = { args: storyDefs.Borderless };
 export const Compact = { args: storyDefs.Compact };
-export const ScrollableHorizontal = { name: 'Scrollable (horizontal)', args: storyDefs.ScrollableHorizontal };
-export const ScrollableVertical = { name: 'Scrollable (vertical)', args: storyDefs.ScrollableVertical };
-export const StickyFirstColumn = { args: storyDefs.StickyFirstColumn };
-export const ResponsiveStacked = { args: storyDefs.ResponsiveStacked };
-export const ResponsiveStackedHeader = { args: storyDefs.ResponsiveStackedHeader };
-export const Sortable = { args: storyDefs.Sortable };
-export const SortableAll = { name: 'Sortable (all columns)', args: storyDefs.SortableAll };
-
-export const SortEvents = {
-  name: 'Sort events',
-  render: () => {
-    const [sort, setSort] = useState({ key: 'name', direction: 'asc' });
-    useEffect(() => {
-      const update = (event) => {
-        if (event.target.querySelector('table')?.id === 'sortable-events') setSort(event.detail);
-      };
-      document.addEventListener('usx:data-table:sort', update);
-      return () => document.removeEventListener('usx:data-table:sort', update);
-    }, []);
-    return <div><p>Sort: {sort.key} {sort.direction}</p>
-      <DataTable {...storyDefs.Sortable} id="sortable-events" sort={{ key: 'name', direction: 'asc' }} /></div>;
-  },
-};
-
-export const CheckboxSelection = { args: storyDefs.CheckboxSelection };
-export const CheckboxSelectionRight = { name: 'Checkbox (right)', args: storyDefs.CheckboxSelectionRight };
-
-export const SelectionEvents = {
-  name: 'Selection events',
-  render: () => {
-    const [selected, setSelected] = useState([1, 3]);
-    useEffect(() => {
-      const update = (event) => {
-        if (event.target.querySelector('table')?.id === 'checkbox-events') setSelected(event.detail.selectedKeys);
-      };
-      document.addEventListener('usx:data-table:select', update);
-      return () => document.removeEventListener('usx:data-table:select', update);
-    }, []);
-    return <div><p>Selected: {selected.join(', ')}</p>
-      <DataTable {...storyDefs.CheckboxSelection} id="checkbox-events" select={[1, 3]} /></div>;
-  },
-};
-
-export const RadioSelection = { args: storyDefs.RadioSelection };
-export const DisabledRows = { args: storyDefs.DisabledRows };
-export const TopAlignedSelection = { args: storyDefs.TopAlignedSelection };
-export const AlignedContent = {
-  name: 'Aligned content',
-  args: {
-    id: 'aligned-content',
-    caption: 'Compact controls and avatars aligned inside padded cells',
-    selectionMode: 'checkbox',
-    columns: [
-      { key: 'name', header: 'Person', primary: true },
-      { key: 'description', header: 'Description' },
-      { key: 'avatar', header: 'Avatar', align: 'center', verticalAlign: 'middle',
-        render: (row) => <Avatar variant="initials" value={row.initials} alt={row.name} /> },
-      { key: 'topAction', header: 'Top aligned', align: 'center',
-        render: (row) => <Button variant="unstyled" aria-label={`Delete ${row.name}`} iconProps={[{ name: 'delete' }]} /> },
-      { key: 'middleAction', header: 'Middle aligned', align: 'center', verticalAlign: 'middle',
-        render: (row) => <Button variant="unstyled" aria-label={`Delete ${row.name}`} iconProps={[{ name: 'delete' }]} /> },
-    ],
-    data: [
-      { id: 1, name: 'Ada Lovelace', initials: 'AL', description: 'A long description that makes this row taller than its controls.' },
-      { id: 2, name: 'Grace Hopper', initials: 'GH', description: 'Another longer description to show vertical placement within a table row.' },
-    ],
-  },
-};
-export const GroupedRows = { args: storyDefs.GroupedRows };
-export const GroupedCollapsedByDefault = { name: 'Grouped (collapsed)', args: storyDefs.GroupedCollapsedByDefault };
 export const SpanningCells = { args: storyDefs.SpanningCells };
-export const GroupedMatrix = { args: storyDefs.GroupedMatrix };
 export const SearchablePaginated = { args: storyDefs.SearchablePaginated };
 export const RowDetails = { args: storyDefs.RowDetails };
-export const Footer = { args: storyDefs.Footer };

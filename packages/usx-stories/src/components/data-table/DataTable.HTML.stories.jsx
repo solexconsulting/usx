@@ -93,8 +93,17 @@ const checkMarkup = async ({ canvasElement, step }) => {
     const all = tableFor(canvasElement, 'Sortable (all columns)');
     await expect(selective.querySelector('th[data-column-key="region"] .usx-data-table__sort-button')).toBeNull();
     await expect(all.querySelector('th[data-column-key="region"] .usx-data-table__sort-button')).toBeTruthy();
-    await expect(selective.querySelectorAll('th[data-usx-sortable]')).toHaveLength(3);
+    await expect(selective.querySelectorAll('th[data-usx-sortable]')).toHaveLength(1);
     await expect(all.querySelectorAll('th[data-usx-sortable]')).toHaveLength(4);
+  });
+
+  await step('Initial descending sort is applied to the first column', async () => {
+    const table = tableFor(canvasElement, 'Initial sort (first column descending)');
+    const shell = table.closest('[data-usx-data-table]');
+    await expect(shell).toHaveAttribute('data-initial-sort-key', 'name');
+    await expect(shell).toHaveAttribute('data-initial-sort-direction', 'desc');
+    await expect(table.querySelector('th[data-column-key="name"]')).toHaveAttribute('aria-sort', 'descending');
+    await expect(table.querySelector('tbody .usx-data-table__row:first-child th')).toHaveTextContent('Utah');
   });
 
   await step('Event and alignment examples render in both snapshot flavors', async () => {
@@ -104,6 +113,20 @@ const checkMarkup = async ({ canvasElement, step }) => {
     await expect(sortEvents.querySelector('th[data-column-key="name"]')).toHaveAttribute('aria-sort', 'ascending');
     await expect(selectionEvents.querySelectorAll('tbody input[type="checkbox"]:checked')).toHaveLength(2);
     await expect(aligned.querySelector('tbody .usx-data-table__cell--align-center.usx-data-table__cell--valign-middle')).toBeTruthy();
+    const avatars = aligned.querySelectorAll('tbody .usx-avatar__content');
+    await expect(avatars).toHaveLength(2);
+    for (const avatar of avatars) {
+      await expect(avatar).toHaveClass('bg-primary-lighter', 'text-primary-darker');
+    }
+  });
+
+  await step('Footers show published values and computed summaries', async () => {
+    const footer = (title) => [...tableFor(canvasElement, title).querySelectorAll('tfoot td')]
+      .map((cell) => cell.textContent.trim());
+    await expect(footer('Population total')).toEqual(['Total', '--', '--', '3258528']);
+    await expect(footer('Published total')).toEqual(['FY 2026 budget', '$8.5M appropriated']);
+    await expect(footer('Summary statistics')).toEqual(['All centers', '400', '11.75', '2', '30']);
+    await expect(footer('Record count')).toEqual(['Requests in export', '4', 'All statuses']);
   });
 
   await step('Details, search, and paging markup', async () => {

@@ -23,8 +23,14 @@ function enhance(shell) {
   let query = '';
   let page = 1;
   let pageSize = Math.max(1, Number(shell.dataset.pageSize) || 10);
-  let sortIndex = head.findIndex((header) => header.hasAttribute('aria-sort'));
-  let sortDirection = sortIndex < 0 ? 0 : head[sortIndex].getAttribute('aria-sort') === 'descending' ? -1 : 1;
+  const requestedDirection = shell.dataset.initialSortDirection;
+  const initialSortKey = ['asc', 'desc'].includes(requestedDirection) ? shell.dataset.initialSortKey : null;
+  let sortIndex = initialSortKey
+    ? head.findIndex((header) => header.dataset.columnKey === initialSortKey && header.hasAttribute('data-usx-sortable'))
+    : head.findIndex((header) => header.hasAttribute('aria-sort'));
+  let sortDirection = sortIndex < 0 ? 0 : initialSortKey
+    ? requestedDirection === 'desc' ? -1 : 1
+    : head[sortIndex].getAttribute('aria-sort') === 'descending' ? -1 : 1;
   const originalOrder = new Map(rows.map((row, index) => [row, index]));
   const serverTotal = Number(shell.dataset.totalCount);
   const serverSide = shell.hasAttribute('data-total-count') && Number.isFinite(serverTotal);

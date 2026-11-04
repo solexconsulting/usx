@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
 import type {
   GroupBy, GroupColumn, Responsive, RowDetails, RowKey, SelectionMode,
-  SortState, TableColumn, TableGroupEntry, TableRowData, VerticalAlign,
+  TableColumn, TableGroupEntry, TableRowData, VerticalAlign,
 } from './types';
 
 /** Render-time data shared by the markup components. Interaction state lives in data-table.mjs. */
@@ -11,7 +11,6 @@ export interface TableContextValue {
   columns: TableColumn[];
   data: TableRowData[];
   primaryKey: string;
-  sortState: SortState;
   selectionMode: SelectionMode;
   selectionPosition: 'left' | 'right';
   selectionVerticalAlign: VerticalAlign;
@@ -36,7 +35,7 @@ export interface TableContextValue {
 
 export const TableContext = createContext<TableContextValue>({
   id: '', columns: [], data: [], primaryKey: 'id',
-  sortState: { key: null, direction: null }, selectionMode: null,
+  selectionMode: null,
   selectionPosition: 'left', selectionVerticalAlign: 'middle',
   selectedKeys: new Set(), allowSelectAll: true, disabled: [], clickableRows: false,
   groupBy: null, groupColumns: [], groupHeaders: [], groupValues: {}, groups: null,

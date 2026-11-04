@@ -31,18 +31,18 @@ for (const directory of ['core', 'templatetags']) {
         : source.endsWith('.py'),
   });
 }
-fs.copyFileSync(
-  path.join(runtimeDir, 'data_table_component.py'),
-  path.join(outputDir, 'data_table_component.py')
-);
+for (const entry of fs.readdirSync(runtimeDir, { withFileTypes: true })) {
+  if (entry.isFile() && /_(component|context)\.py$/.test(entry.name)) {
+    fs.copyFileSync(path.join(runtimeDir, entry.name), path.join(outputDir, entry.name));
+  }
+}
 fs.cpSync(COMPONENTS_DIR, path.join(outputDir, 'templates'), {
   recursive: true,
   filter: (source) =>
     fs.statSync(source).isDirectory()
       ? path.basename(source) !== '__pycache__'
       : source.endsWith('.django.html') ||
-        path.basename(source) === 'config.json' ||
-        source.endsWith('.py'),
+        path.basename(source) === 'config.json',
 });
 fs.writeFileSync(
   path.join(outputDir, 'component-contracts.json'),

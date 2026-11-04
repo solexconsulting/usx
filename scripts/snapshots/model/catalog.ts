@@ -29,7 +29,7 @@ export type StoryKind = 'React' | 'Django' | 'HTML';
 /** The one stories file of a kind, named <Pascal>.<Kind>.stories.<ext>. */
 export function storiesFile(component: ComponentName, kind: StoryKind): string {
   const directory = path.join(STORIES_DIR, component);
-  const pattern = new RegExp(`\\.${kind}\\.stories\\.(jsx|tsx|js|ts)$`);
+  const pattern = new RegExp(`^[^.]+\\.${kind}\\.stories\\.(jsx|tsx|js|ts)$`);
   const matches = fs.existsSync(directory)
     ? fs.readdirSync(directory).filter((file) => pattern.test(file))
     : [];
@@ -39,4 +39,19 @@ export function storiesFile(component: ComponentName, kind: StoryKind): string {
       `Expected exactly one ${kind} stories file in ${directory}, found ${matches.length}.`
     );
   return path.join(directory, match);
+}
+
+/** The main stories file followed by companion files that define sidebar groups. */
+export function storiesFiles(component: ComponentName, kind: StoryKind): string[] {
+  const main = storiesFile(component, kind);
+  const directory = path.dirname(main);
+  const pattern = new RegExp(`^[^.]+\\.[^.]+\\.${kind}\\.stories\\.(jsx|tsx|js|ts)$`);
+  return [
+    main,
+    ...fs
+      .readdirSync(directory)
+      .filter((file) => pattern.test(file))
+      .sort()
+      .map((file) => path.join(directory, file)),
+  ];
 }

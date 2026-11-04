@@ -1,45 +1,12 @@
-"""
-table_helper.py — Server-side data utilities for the Django DataTable component.
+"""Prepare the structural context needed to render a Django DataTable.
 
-Views can prepare initial server-rendered data with these helpers before
-passing it to the template. Runtime interaction lives in data-table.mjs.
-Zero Django dependencies — importable and testable anywhere.
+The browser initializer enhances the rendered table. These helpers plan its
+initial headers, cells, groups, and aggregates before JavaScript runs.
 """
 
 from __future__ import annotations
 
-import math
 from typing import Any
-
-
-# ── Sorting ───────────────────────────────────────────────────────────────────
-
-def _sort_key(row: dict, key: str):
-    """
-    Null-safe sort key for initial server rendering:
-    - None / missing values sort last.
-    - Strings compared case-insensitively (localeCompare approximation).
-    - Numbers compared numerically.
-    """
-    val = row.get(key)
-    if val is None:
-        return (1, '')      # nulls last
-    if isinstance(val, str):
-        return (0, val.lower())
-    return (0, val)
-
-
-def sort_data(data: list[dict], key: str, direction: str = 'asc') -> list[dict]:
-    """
-    Return a stable-sorted copy of *data* on *key*.
-
-    direction: 'asc' (default) or 'desc'.
-    Useful when a view needs to render an initially sorted result.
-    """
-    sorted_rows = sorted(data, key=lambda row: _sort_key(row, key))
-    if direction == 'desc':
-        sorted_rows.reverse()
-    return sorted_rows
 
 
 # ── Grouping ──────────────────────────────────────────────────────────────────
@@ -59,36 +26,6 @@ def group_data(data: list[dict], field: str) -> list[dict]:
         key = str(row.get(field, '__ungrouped__'))
         groups.setdefault(key, []).append(row)
     return [{'key': k, 'rows': v} for k, v in groups.items()]
-
-
-# ── Pagination ────────────────────────────────────────────────────────────────
-
-def paginate_table(data: list, page: int = 1, page_size: int = 10) -> dict:
-    """
-    Slice *data* for the requested *page*.
-
-    Returns a dict suitable for spreading into template context:
-    {
-        'rows':         sliced list for this page,
-        'total':        len(data),
-        'current_page': page (clamped),
-        'total_pages':  ceil(total / page_size),
-        'page_size':    page_size,
-    }
-
-    Pass 'rows' as 'data' and the rest into the pagination sub-template.
-    """
-    total = len(data)
-    total_pages = max(1, math.ceil(total / page_size)) if total else 1
-    page = max(1, min(page, total_pages))
-    start = (page - 1) * page_size
-    return {
-        'rows': data[start: start + page_size],
-        'total': total,
-        'current_page': page,
-        'total_pages': total_pages,
-        'page_size': page_size,
-    }
 
 
 # ── Footer aggregation ────────────────────────────────────────────────────────
@@ -146,6 +83,8 @@ def compute_footer(columns: list[dict], data: list[dict]) -> dict:
             result[key] = footer(data) if callable(footer) else footer
         elif col.get('aggregate'):
             result[key] = _aggregate(data, key, col['aggregate'])
+        else:
+            result[key] = '--'
     return result
 
 
@@ -274,13 +213,18 @@ def plan_cells(rows: list[dict], columns: list[dict], primary_key: str = 'id') -
             for r in range(row_index, row_index + row_span):
                 for c in range(column_index, column_index + col_span):
                     occupied[r][c] = True
+            raw_value = row.get(column['key'])
+            sort_value = (raw_value if isinstance(raw_value, (str, int, float))
+                          and column.get('filterable') is not False else None)
             cells.append({'column': column, 'options': options, 'col_span': col_span,
                           'row_span': row_span,
+                          'sort_value': sort_value,
                           'class_name': merge_cell_classes(column.get('className') or '',
                                                            options.get('className') or '')})
         planned.append({**row, 'usxCells': cells,
                         'usxSelectionLabel': f"Select row {row.get(primary_key, row_index + 1)}",
-                        'usxSearchText': ' '.join(str(row.get(column['key'], '')) for column in columns)})
+                        'usxSearchText': ' '.join(str(row.get(column['key'], '')) for column in columns
+                                                  if column.get('filterable') is not False)})
     return planned
 
 
@@ -309,13 +253,9 @@ def build_table_context(
     columns: list[dict],
     data: list[dict],
     *,
-    sort: dict | None = None,
     group_by: str | None = None,
     selection_mode: str | None = None,
     row_details: bool = False,
-    page: int = 1,
-    page_size: int = 10,
-    paginate: bool = False,
 ) -> dict:
     """
     Convenience wrapper: compute all derived context in one call.
@@ -324,10 +264,6 @@ def build_table_context(
     context.update(ctx)).  Individual helpers can still be called separately
     for full control.
     """
-    # Sort
-    if sort and sort.get('key') and sort.get('direction'):
-        data = sort_data(data, sort['key'], sort['direction'])
-
     # Header rows (multi-level)
     header_rows = build_header_rows(columns)
     leaf_cols = get_leaf_cols(columns)
@@ -336,18 +272,6 @@ def build_table_context(
     # Grouping
     groups = group_data(data, group_by) if group_by else None
 
-    # Pagination
-    pagination = None
-    if paginate:
-        pag = paginate_table(data, page=page, page_size=page_size)
-        data = pag['rows']
-        pagination = {
-            'current_page': pag['current_page'],
-            'total_pages': pag['total_pages'],
-            'total': pag['total'],
-            'page_size': pag['page_size'],
-        }
-
     return {
         'header_rows': header_rows,
         'leaf_columns': leaf_cols,
@@ -355,6 +279,4 @@ def build_table_context(
         'total_depth': len(header_rows),
         'data': data,
         'groups': groups,
-        'sort': sort or {},
-        'pagination': pagination,
     }

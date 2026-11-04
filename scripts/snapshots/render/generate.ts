@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { UserError } from '../errors.ts';
 import { collectIds, findDuplicates, namespaceRewrite, rewriteIdentifiers } from '../ids.ts';
-import { storiesFile } from '../model/catalog.ts';
+import { storiesFiles } from '../model/catalog.ts';
 import { snapshotPath } from '../model/paths.ts';
 import type { ComponentName, Section, Source } from '../model/types.ts';
 import { SOURCE_LABELS } from '../model/types.ts';
@@ -25,23 +25,23 @@ async function renderSections(
   source: Source,
   renderPage: PageRenderer
 ): Promise<Section[]> {
-  const file = storiesFile(component, SOURCE_LABELS[source]);
-  const stories = listStories(file);
-  if (stories.length === 0) throw new UserError(`No stories found in ${file}.`);
-  const module = await runtime.load(file);
-
   const sections: Section[] = [];
-  for (const { exportName, name } of stories) {
-    const element = createStoryElement(module, exportName);
-    const render = (): string => renderToStaticMarkup(element);
-    const html = await renderPage(render);
-    // A second render finds output that varies between runs, such as ids made from Math.random().
-    if ((await renderPage(render)) !== html)
-      throw new UserError(
-        `Story "${name}" renders differently each time, so it cannot be snapshotted.`
-      );
-    sections.push({ title: name, html: protectWhitespace(html) });
+  for (const file of storiesFiles(component, SOURCE_LABELS[source])) {
+    const stories = listStories(file);
+    const module = await runtime.load(file);
+    for (const { exportName, name } of stories) {
+      const element = createStoryElement(module, exportName);
+      const render = (): string => renderToStaticMarkup(element);
+      const html = await renderPage(render);
+      // A second render finds output that varies between runs, such as ids made from Math.random().
+      if ((await renderPage(render)) !== html)
+        throw new UserError(
+          `Story "${name}" renders differently each time, so it cannot be snapshotted.`
+        );
+      sections.push({ title: name, html: protectWhitespace(html) });
+    }
   }
+  if (sections.length === 0) throw new UserError(`No stories found for ${component}.`);
   return sections;
 }
 

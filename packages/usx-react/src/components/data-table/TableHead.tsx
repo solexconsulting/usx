@@ -47,7 +47,7 @@ export type TableHeadProps = React.HTMLAttributes<HTMLTableSectionElement>;
  * Data-driven mode: pass no children; renders from the table's columns.
  */
 export default function TableHead({ className = '', children, ...props }: TableHeadProps) {
-  const { id, columns, data, primaryKey, groupHeaders, sortState, selectionMode, selectionPosition, selectionVerticalAlign, selectedKeys, disabled, allowSelectAll, rowDetails } =
+  const { id, columns, data, primaryKey, groupHeaders, selectionMode, selectionPosition, selectionVerticalAlign, selectedKeys, disabled, allowSelectAll, rowDetails } =
     useTableContext();
 
   if (children) {
@@ -65,9 +65,10 @@ export default function TableHead({ className = '', children, ...props }: TableH
   const hasSelection = !!selectionMode;
   const enabled = data.filter((row) => !disabled.includes(row[primaryKey] as string | number));
   const isAllSelected = enabled.length > 0 && enabled.every((row) => selectedKeys.has(row[primaryKey] as string | number));
+  const selectionRowSpan = totalDepth + Number(groupHeaders.length > 0);
 
   const selectAllCell = (
-    <th scope="col" rowSpan={totalDepth + (groupHeaders.length ? 1 : 0)} className={classnames('usx-data-table__cell', 'usx-data-table__cell--selection', `usx-data-table__cell--valign-${selectionVerticalAlign}`)}>
+    <th scope="col" rowSpan={selectionRowSpan > 1 ? selectionRowSpan : undefined} className={classnames('usx-data-table__cell', 'usx-data-table__cell--selection', `usx-data-table__cell--valign-${selectionVerticalAlign}`)}>
       {selectionMode === 'checkbox' && allowSelectAll && (
         <Checkbox id={`${id}-select-all`} label="" ariaLabel="Select all rows" small={true} formGroup={false}
           checked={isAllSelected} />
@@ -89,20 +90,18 @@ export default function TableHead({ className = '', children, ...props }: TableH
       {headerRows.map((row, rowIndex) => (
         <tr key={rowIndex} className="usx-data-table__head-row">
           {hasRowDetails && rowIndex === 0 && !groupHeaders.length && (
-            <th scope="col" rowSpan={totalDepth} className="usx-data-table__cell usx-data-table__cell--detail-toggle" aria-label="Row details" />
+            <th scope="col" rowSpan={totalDepth > 1 ? totalDepth : undefined} className="usx-data-table__cell usx-data-table__cell--detail-toggle" aria-label="Row details" />
           )}
           {hasSelection && selectionPosition === 'left' && rowIndex === 0 && !groupHeaders.length && selectAllCell}
 
           {row.map(({ col, rowSpan, colSpan }) => {
             const isSortable = !col.columns?.length && col.sortable === true;
-            const sortDir = sortState.key === col.key ? sortState.direction : null;
             const cellClasses = classnames(
               'usx-data-table__cell',
               col.headerAlign && `usx-data-table__cell--align-${col.headerAlign}`,
               !col.headerAlign && col.align && `usx-data-table__cell--align-${col.align}`,
               col.headerClassName
             );
-            const ariaSort = !isSortable ? undefined : sortDir === 'asc' ? 'ascending' : sortDir === 'desc' ? 'descending' : undefined;
             return (
               <th
                 key={col.key}
@@ -111,7 +110,6 @@ export default function TableHead({ className = '', children, ...props }: TableH
                 rowSpan={rowSpan > 1 ? rowSpan : undefined}
                 colSpan={colSpan > 1 ? colSpan : undefined}
                 style={{ width: col.width, backgroundColor: col.headerBackgroundColor, color: col.headerColor }}
-                aria-sort={ariaSort}
                 data-usx-sortable={isSortable || undefined}
                 data-column-key={col.key}
               >
