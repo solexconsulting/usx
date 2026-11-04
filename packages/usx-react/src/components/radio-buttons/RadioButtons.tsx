@@ -8,12 +8,13 @@ export interface RadioOption {
   id?: string;
   value: string;
   label: React.ReactNode;
+  ariaLabel?: string;
   description?: React.ReactNode;
   checked?: boolean;
   disabled?: boolean;
 }
 
-export interface RadioButtonsProps extends React.HTMLAttributes<HTMLFieldSetElement> {
+export interface RadioButtonsProps extends Omit<React.HTMLAttributes<HTMLFieldSetElement>, 'onChange'> {
   tile?: boolean;
   small?: boolean;
   legend?: string;
@@ -23,6 +24,10 @@ export interface RadioButtonsProps extends React.HTMLAttributes<HTMLFieldSetElem
   name?: string;
   options: RadioOption[];
   defaultValue?: string;
+  value?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  formGroup?: boolean;
+  fieldset?: boolean;
   className?: string;
 }
 
@@ -37,6 +42,10 @@ const RadioButtons: React.FC<RadioButtonsProps> = ({
   id: groupId,
   options = [],
   defaultValue = undefined,
+  value,
+  onChange,
+  formGroup = true,
+  fieldset = true,
   className = '',
   ...props
 }) => {
@@ -44,8 +53,30 @@ const RadioButtons: React.FC<RadioButtonsProps> = ({
 
   const inputClasses = classNames('usa-radio__input', { 'usa-radio__input--tile': tile });
 
-  return (
-    <FormGroup error={!!error}>
+  const optionsMarkup = options.map((opt, idx) => {
+    const id = opt.id || `${groupId || name}-${idx}`;
+    return (
+      <div className={classes} key={id}>
+        <input
+          className={inputClasses}
+          id={id}
+          type="radio"
+          name={name}
+          value={opt.value}
+          aria-label={opt.ariaLabel}
+          {...(value !== undefined && onChange ? { checked: value === opt.value } : { defaultChecked: defaultValue === opt.value || !!opt.checked })}
+          onChange={onChange}
+          disabled={!!opt.disabled}
+        />
+        <Label className="usa-radio__label" classOverride={true} htmlFor={id}>
+          {opt.label}
+          {opt.description ? <span className="usa-checkbox__label-description">{opt.description}</span> : null}
+        </Label>
+      </div>
+    );
+  });
+
+  const content = fieldset ? (
       <Fieldset
         id={groupId}
         legend={legend}
@@ -54,31 +85,10 @@ const RadioButtons: React.FC<RadioButtonsProps> = ({
         error={error}
         {...props}
       >
-        {options.map((opt, idx) => {
-          const id = opt.id || `${groupId || name}-${idx}`;
-          return (
-            <div className={classes} key={id}>
-              <input
-                className={inputClasses}
-                id={id}
-                type="radio"
-                name={name}
-                value={opt.value}
-                defaultChecked={defaultValue === opt.value || !!opt.checked}
-                disabled={!!opt.disabled}
-              />
-              <Label className="usa-radio__label" classOverride={true} htmlFor={id}>
-                {opt.label}
-                {opt.description ? (
-                  <span className="usa-checkbox__label-description">{opt.description}</span>
-                ) : null}
-              </Label>
-            </div>
-          );
-        })}
+        {optionsMarkup}
       </Fieldset>
-    </FormGroup>
-  );
+  ) : optionsMarkup;
+  return formGroup ? <FormGroup error={!!error}>{content}</FormGroup> : content;
 };
 
 export default RadioButtons;

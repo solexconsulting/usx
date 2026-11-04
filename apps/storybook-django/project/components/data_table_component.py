@@ -1,5 +1,5 @@
 """
-Custom Django component for the USX Table.
+Custom Django component for the USX DataTable.
 
 The table Django template requires several pre-computed variables that are not
 present in the raw JSON props sent by Storybook:
@@ -35,18 +35,18 @@ _table_helper = None
 
 def _load_table_helper():
     """
-    Locate and import table_helper.py from packages/usx-react/src/components/table/.
+    Locate and import table_helper.py from packages/usx-react/src/components/data-table/.
     Walks parent directories looking for the repo root (pnpm-workspace.yaml).
     """
     here = Path(__file__).resolve()
-    bundled_helper = here.parent / "templates" / "table" / "table_helper.py"
+    bundled_helper = here.parent / "templates" / "data-table" / "table_helper.py"
     if bundled_helper.is_file():
         spec = importlib.util.spec_from_file_location("usx_table_helper", str(bundled_helper))
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
         return mod
     for parent in here.parents:
-        candidate = parent / "packages" / "usx-react" / "src" / "components" / "table" / "table_helper.py"
+        candidate = parent / "packages" / "usx-react" / "src" / "components" / "data-table" / "table_helper.py"
         if candidate.exists():
             spec = importlib.util.spec_from_file_location("usx_table_helper", str(candidate))
             mod = importlib.util.module_from_spec(spec)
@@ -54,7 +54,7 @@ def _load_table_helper():
             return mod
     raise ImportError(
         "Could not locate table_helper.py. Expected at "
-        "packages/usx-react/src/components/table/table_helper.py relative to the repo root."
+        "packages/usx-react/src/components/data-table/table_helper.py relative to the repo root."
     )
 
 
@@ -65,12 +65,12 @@ def _get_helper():
     return _table_helper
 
 
-# ── TableComponent ────────────────────────────────────────────────────────────
+# ── DataTableComponent ────────────────────────────────────────────────────────────
 
-class TableComponent(Component):
-    name = "table"
-    template = "table/table.django.html"
-    props_file = "table/config.json"
+class DataTableComponent(Component):
+    name = "data-table"
+    template = "data-table/data-table.django.html"
+    props_file = "data-table/config.json"
 
     def get_context(self, props: dict) -> dict:
         helper = _get_helper()
@@ -78,9 +78,16 @@ class TableComponent(Component):
         columns = list(props.get("columns") or [])
         data = list(props.get("data") or [])
 
-        # sortable: True makes every column sortable (React shorthand prop)
+        # sortable: True makes each leaf column sortable unless it opts out.
         if props.get("sortable"):
-            columns = [{**c, "sortable": True} for c in columns]
+            def enable_sorting(items):
+                return [
+                    {**column, "columns": enable_sorting(column["columns"])}
+                    if column.get("columns") else
+                    {**column, "sortable": column.get("sortable") is not False}
+                    for column in items
+                ]
+            columns = enable_sorting(columns)
 
         # groupBy can be a plain string or {property: str, defaultExpanded: bool}
         group_by_raw = props.get("groupBy")
@@ -118,6 +125,37 @@ class TableComponent(Component):
             }
 
         ctx = {**props, **table_ctx}
+        leaf_columns = table_ctx['leaf_columns']
+        group_columns = group_by_raw.get('columns') or [] if isinstance(group_by_raw, dict) else []
+        group_headers = (group_by_raw.get('headers') or group_columns) if isinstance(group_by_raw, dict) else []
+        group_values = group_by_raw.get('values') or {} if isinstance(group_by_raw, dict) else {}
+        if table_ctx['groups']:
+            groups = []
+            for group in table_ctx['groups']:
+                cells = []
+                for index, column in enumerate(group_columns):
+                    raw = group_values.get(group['key'], {}).get(column['key'], group['key'] if index == 0 else '')
+                    options = raw if isinstance(raw, dict) else {}
+                    cells.append({'column': column, 'value': options.get('value', raw), 'options': options})
+                groups.append({**group, 'rows': helper.plan_cells(group['rows'], leaf_columns, props.get('primaryKey') or 'id'), 'groupCells': cells})
+            ctx['groups'] = groups
+        else:
+            ctx['data'] = helper.plan_cells(table_ctx['data'], leaf_columns, props.get('primaryKey') or 'id')
+        if isinstance(group_by_raw, dict):
+            ctx['groupColumns'] = group_columns
+            ctx['groupHeaders'] = group_headers
+            ctx['groupRowClassName'] = group_by_raw.get('rowClassName') or ''
+        if props.get('paginate'):
+            options = props['paginate'] if isinstance(props['paginate'], dict) else {}
+            ctx['pageSize'] = int(options.get('pageSize') or 10)
+            ctx['pageSizeOptions'] = [{'value': str(size), 'label': str(size)}
+                                      for size in options.get('pageSizeOptions', [10, 25, 50, 100])]
+            ctx['totalItems'] = len(data)
+            ctx['totalPages'] = max(1, (len(data) + ctx['pageSize'] - 1) // ctx['pageSize'])
+            ctx['pages'] = [{'type': 'page', 'page': page}
+                            for page in range(1, ctx['totalPages'] + 1)]
+        if props.get("showFooter"):
+            ctx["footerValues"] = helper.compute_footer(table_ctx["leaf_columns"], data)
 
         # Pass defaultExpanded for grouped stories
         if group_by:
@@ -128,4 +166,4 @@ class TableComponent(Component):
 
 # Register — must happen at module import time so autodiscovery in step 4 can
 # find this instance and overwrite any template-only registration for 'table'.
-_registry["table"] = TableComponent()
+_registry["data-table"] = DataTableComponent()

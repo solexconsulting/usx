@@ -97,7 +97,7 @@ test('renderable children are slots, including nested composition and scaffold m
     }
   }
   for (const [name, contract] of Object.entries(manifest.components)) check(contract.props, name);
-  for (const name of ['page', 'section', 'breadcrumb', 'prose', 'table', 'in-page-nav']) {
+  for (const name of ['page', 'section', 'breadcrumb', 'prose', 'table', 'data-table', 'in-page-nav']) {
     assert.equal(manifest.components[name].props.children.type, 'slot', name);
   }
   const scaffold = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, 'scripts/templates/component/config.json'), 'utf8'));
@@ -111,7 +111,8 @@ test('content slots preserve the distinction from string-only renderer inputs', 
     attribution: ['media', 'primary', 'secondary'],
     fieldset: ['legend', 'hint', 'error'],
     swap: ['onContent', 'offContent'],
-    table: ['caption', 'placeholder'],
+    table: ['caption'],
+    'data-table': ['caption', 'placeholder'],
   })) {
     for (const prop of props) assert.equal(manifest.components[component].props[prop].type, 'slot', `${component}.${prop}`);
   }

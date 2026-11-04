@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createStoryElement, listStories } from './stories.ts';
@@ -29,6 +30,15 @@ export const StoryStep1Context = { args: {} };`
   } finally {
     fs.rmSync(directory, { recursive: true });
   }
+});
+
+test('DataTable React and Django expose the same named stories', () => {
+  const directory = path.resolve(path.dirname(fileURLToPath(import.meta.url)),
+    '../../../packages/usx-stories/src/components/data-table');
+  assert.deepEqual(
+    listStories(path.join(directory, 'DataTable.Django.stories.jsx')),
+    listStories(path.join(directory, 'DataTable.React.stories.jsx'))
+  );
 });
 
 test('a story renders the meta component with meta args under story args', () => {

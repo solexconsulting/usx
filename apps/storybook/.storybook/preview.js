@@ -5,6 +5,7 @@ import "@uswds/uswds/css/uswds.min.css";
 // themed usx build emits bare var(--usx-*) with no fallback.
 import "@solexllc/usx-theme/theme.css";
 import './styles.scss';
+import './controls-responsive.css';
 import solexTheme from "./solexTheme";
 import { resolveTheme, themeToCss } from '@solexllc/usx-theme/derive';
 import { PRESETS } from '@solexllc/usx-theme/presets';

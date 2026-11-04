@@ -40,6 +40,9 @@ export function inverseLogoOverrides() {
   };
 }
 
+// Every non-default preset sets its sorted table header, cell, and stripe
+// colors explicitly. Deriving very light shades from accent-cool can clip to
+// white, and dark tables need highlights that retain light-text contrast.
 export const PRESETS = {
   // Left with no overrides, including the optional Header/Footer shell borders.
   Default: {},
@@ -49,6 +52,9 @@ export const PRESETS = {
     'color-accent-cool': '#81c784',
     'color-accent-warm': '#ffb300',
     'surface-3': '#f4faf4',
+    'table-sorted-header-bg': '#b6deb8',
+    'table-sorted-column-bg': '#e0f1e1',
+    'table-sorted-stripe-bg': '#cbe8ce',
     'summary-box-bg': 'var(--usx-surface-3)',
     'summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
@@ -61,6 +67,9 @@ export const PRESETS = {
     'color-accent-cool': '#ff8a65',
     'color-accent-warm': '#ffd54f',
     'surface-3': '#fdf6f1',
+    'table-sorted-header-bg': '#ffc6a5',
+    'table-sorted-column-bg': '#fff0e7',
+    'table-sorted-stripe-bg': '#ffe0cd',
     'summary-box-bg': 'var(--usx-surface-3)',
     'summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
@@ -72,6 +81,9 @@ export const PRESETS = {
     'color-accent-cool': '#67e8f9',
     'color-accent-warm': '#fb923c',
     'surface-3': '#f0f9fb',
+    'table-sorted-header-bg': '#9edce8',
+    'table-sorted-column-bg': '#e0f5f9',
+    'table-sorted-stripe-bg': '#c6eaf2',
     'summary-box-bg': 'var(--usx-surface-3)',
     'summary-box-border-color': 'var(--usx-color-primary)',
     ...headerFooterBorderOverrides(),
@@ -85,6 +97,9 @@ export const PRESETS = {
     'color-accent-cool': '#00b8d9', // echoes the success teal
     'color-accent-warm': '#ff8f6b', // saturated kin of the warning peach
     'surface-3': '#f5f7fc',
+    'table-sorted-header-bg': '#b6c5ff',
+    'table-sorted-column-bg': '#e6ebff',
+    'table-sorted-stripe-bg': '#d2dcff',
     'color-info': '#58b4ff',
     'color-warning': '#fdb8ae',
     'color-success': '#009ec1',
@@ -118,6 +133,10 @@ export const PRESETS = {
     'text-muted': '#dcddff',
     'text-subtle': '#aeafc9',
     'text-inverse': '#161a2e',
+    'table-sorted-header-bg': '#136f67',
+    'table-sorted-column-bg': '#183b43',
+    'table-sorted-stripe-bg': '#24515a',
+    'table-unsorted-icon-color': 'var(--usx-text-muted)',
     'color-border': '#858ba5',
     'color-border-muted': '#565d7f',
     'color-border-subtle': '#363d5e',
@@ -163,6 +182,10 @@ export const PRESETS = {
     'text-muted': '#c7c9da',
     'text-subtle': '#aeafc9',
     'text-inverse': '#1e293b',
+    'table-sorted-header-bg': '#1d4f8d',
+    'table-sorted-column-bg': '#243b59',
+    'table-sorted-stripe-bg': '#2d4a70',
+    'table-unsorted-icon-color': 'var(--usx-text-muted)',
     'color-border': '#8494aa',
     'color-border-muted': '#64748b',
     'color-border-subtle': '#475569',
@@ -194,6 +217,10 @@ export const PRESETS = {
     'text-muted': '#c0c0c0',
     'text-subtle': '#a3a3a3',
     'text-inverse': '#1c1c1e',
+    'table-sorted-header-bg': '#6b3a16',
+    'table-sorted-column-bg': '#30291f',
+    'table-sorted-stripe-bg': '#3c3024',
+    'table-unsorted-icon-color': 'var(--usx-text-muted)',
     'color-border': '#919191',
     'color-border-muted': '#6b6b70',
     'color-border-subtle': '#505055',
@@ -236,6 +263,9 @@ export const PRESETS = {
     'color-accent-cool': '#97d4ea', // vads-color-primary-alt-light
     'color-accent-warm': '#bd5727', // vads-color-hub-careers (orange-warm-50)
     'surface-3': '#f0f0f0', // vads-color-background-muted
+    'table-sorted-header-bg': '#8fc1e3',
+    'table-sorted-column-bg': '#e4f1f9',
+    'table-sorted-stripe-bg': '#cae3f3',
     'font-family': '"Source Sans Pro Web", "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif', // real va.gov body font
     'font-family-heading': 'Bitter, Georgia, Cambria, "Times New Roman", Times, serif', // real va.gov heading font — a distinct serif face
     ...headerFooterBorderOverrides(),
@@ -250,6 +280,11 @@ export const PRESETS = {
     'color-accent-cool': '#8eb8dc', // govuk-colour('blue', $variant: 'tint-50')
     'color-accent-warm': '#f47738', // govuk-colour('orange')
     'surface-3': '#f4f8fb', // functional template-background
+    'table-sorted-header-bg': 'var(--usx-color-primary)',
+    'table-sorted-column-bg': '#e8f2fa',
+    'table-sorted-stripe-bg': '#d6e8f5',
+    'table-sorted-header-text': 'var(--usx-text-inverse)',
+    'table-sorted-icon-color': 'var(--usx-text-inverse)',
     'color-border-subtle': '#cecece', // section dividers
     'color-focus': '#ffdd00', // functional focus — GOV.UK's signature yellow focus state
     'font-family': '"GDS Transport", arial, sans-serif', // real gov.uk body/heading font
@@ -307,6 +342,13 @@ export const PRESETS = {
     'color-accent-cool': '#959599', // real neutral gray used across icons/labels
     'color-accent-warm': '#f64137', // real "read more" arrow-icon accent
     'surface-3': '#000000', // real header background — solid black
+    // The site's black shell should not become the table's alternating row.
+    'table-stripe-bg': '#f0f0f0',
+    'table-sorted-header-bg': 'var(--usx-color-primary)',
+    'table-sorted-column-bg': '#fce9e7',
+    'table-sorted-stripe-bg': '#f6d4d1',
+    'table-sorted-header-text': 'var(--usx-text-inverse)',
+    'table-sorted-icon-color': 'var(--usx-text-inverse)',
     'color-border-subtle': '#b9b9bb', // divider gray (also visible against the black header)
     'header-text': 'var(--usx-text-inverse)', // real header text is white against the black bar
     // text-subtle/text-muted are tuned for a light/neutral surface — against

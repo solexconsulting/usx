@@ -2,6 +2,7 @@ import React from 'react';
 import { addons } from 'storybook/manager-api';
 import solexTheme from './solexTheme';
 import './technologyToggle.jsx';
+import './controls-responsive.css';
 
 // Classification badges shown in the sidebar, driven by story/meta `tags`.
 // Home tags (USWDS / USWDS-Inspired / USX) are set on component metas; the

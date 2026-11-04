@@ -14,6 +14,7 @@ export interface PaginationNavigationProps {
   arrowsOnly?: boolean;
   pageUrlPrefix?: string;
   className?: string;
+  onPageChange?: (page: number) => void;
 }
 
 export function getPageItems(currentPage: number, totalPages: number) {
@@ -76,6 +77,7 @@ export default function PaginationNavigation({
   arrowsOnly = false,
   pageUrlPrefix,
   className = '',
+  onPageChange,
 }: PaginationNavigationProps) {
   const unbounded = totalPages === undefined || totalPages === null;
   const items = unbounded
@@ -85,6 +87,11 @@ export default function PaginationNavigation({
   const isFirstPage = currentPage === 1;
   const isLastPage = !unbounded && currentPage === totalPages;
   const hrefFor = (page: number) => pageUrlPrefix ? `${pageUrlPrefix}${page}` : '#';
+  const goTo = (event: React.MouseEvent<HTMLAnchorElement>, page: number) => {
+    if (!onPageChange) return;
+    event.preventDefault();
+    if (page >= 1 && (unbounded || page <= totalPages!)) onPageChange(page);
+  };
 
   const navClasses = ClassNames(
     'usa-pagination',
@@ -112,6 +119,7 @@ export default function PaginationNavigation({
           }
         >
           <a
+            onClick={(event) => goTo(event, currentPage - 1)}
             href={isFirstPage ? '#' : hrefFor(currentPage - 1)}
             data-usx-pagination-page={currentPage - 1}
             className={
@@ -153,6 +161,7 @@ export default function PaginationNavigation({
           return (
             <li key={item.page} className="usa-pagination__item usa-pagination__page-no">
               <a
+                onClick={(event) => goTo(event, item.page)}
                 href={hrefFor(item.page)}
                 data-usx-pagination-page={item.page}
                 className={
@@ -179,6 +188,7 @@ export default function PaginationNavigation({
           }
         >
           <a
+            onClick={(event) => goTo(event, currentPage + 1)}
             href={isLastPage ? '#' : hrefFor(currentPage + 1)}
             data-usx-pagination-page={currentPage + 1}
             className={

@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { useTableContext } from './TableContext';
 import type { Aggregate, TableRowData } from './types';
+import { leafColumns } from './columns';
 
 function aggregate(data: TableRowData[], key: string, type: Aggregate): React.ReactNode {
   const vals = data.map((row) => Number(row[key])).filter((v) => !isNaN(v));
@@ -33,21 +34,21 @@ export default function TableFoot({ className = '', children, ...props }: TableF
 
   if (children) {
     return (
-      <tfoot className={classnames('usx-table__foot', className)} {...props}>
+      <tfoot className={classnames('usx-data-table__foot', className)} {...props}>
         {children}
       </tfoot>
     );
   }
 
-  const visibleCols = columns.filter((c) => !c.hidden);
+  const visibleCols = leafColumns(columns);
   const hasFooter = visibleCols.some((c) => c.footer !== undefined || c.aggregate);
   if (!hasFooter) return null;
 
   return (
-    <tfoot className={classnames('usx-table__foot', className)} {...props}>
-      <tr className="usx-table__foot-row">
-        {!!rowDetails && <td className="usx-table__cell" />}
-        {!!selectionMode && <td className="usx-table__cell usx-table__cell--selection" />}
+    <tfoot className={classnames('usx-data-table__foot', className)} {...props}>
+      <tr className="usx-data-table__foot-row">
+        {!!rowDetails && <td className="usx-data-table__cell" />}
+        {!!selectionMode && <td className="usx-data-table__cell usx-data-table__cell--selection" />}
 
         {visibleCols.map((col) => {
           let content: React.ReactNode = '--';
@@ -57,7 +58,7 @@ export default function TableFoot({ className = '', children, ...props }: TableF
             content = aggregate(data, col.key, col.aggregate);
           }
           return (
-            <td key={col.key} className={classnames('usx-table__cell', col.align && `usx-table__cell--align-${col.align}`)}>
+            <td key={col.key} className={classnames('usx-data-table__cell', col.align && `usx-data-table__cell--align-${col.align}`)}>
               {content}
             </td>
           );

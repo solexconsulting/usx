@@ -1,0 +1,34 @@
+<div class="usx-data-table-shell" data-usx-data-table data-searchable data-paginate data-page-size="2">
+  <div class="usx-data-table__toolbar">
+    <label class="usa-label usx-label" for="admissions-search">Search</label>
+    <input class="usa-input usx-input" id="admissions-search" placeholder="Search table">
+  </div>
+  <div class="usx-data-table-container--scrollable" tabindex="0">
+    <table id="admissions" class="usa-table usx-data-table usx-data-table--striped">
+      <caption class="usx-data-table__caption">State admissions</caption>
+      <thead class="usx-data-table__head"><tr class="usx-data-table__head-row">
+        <th scope="col" class="usx-data-table__cell usx-data-table__cell--selection usx-data-table__cell--valign-middle"><div class="usa-checkbox usx-checkbox usx-checkbox--small"><input class="usa-checkbox__input" id="admissions-select-all" type="checkbox" aria-label="Select all rows"><label class="usa-checkbox__label" for="admissions-select-all"></label></div></th>
+        <th scope="col" data-column-key="name" data-usx-sortable>State</th>
+        <th scope="col" data-column-key="order" data-usx-sortable>Order admitted</th>
+        <th scope="col" data-column-key="region" data-usx-sortable>Region</th>
+      </tr></thead>
+      <tbody class="usx-data-table__body">
+        <tr class="usx-data-table__row"><td class="usx-data-table__cell usx-data-table__cell--selection usx-data-table__cell--valign-middle"><div class="usa-checkbox usx-checkbox usx-checkbox--small"><input class="usa-checkbox__input" id="admissions-select-hawaii" type="checkbox" aria-label="Select Hawaii" name="admissions-selection" value="hawaii"><label class="usa-checkbox__label" for="admissions-select-hawaii"></label></div></td><th scope="row" data-column-key="name">Hawaii</th><td data-column-key="order" data-sort-value="50">50</td><td data-column-key="region">Pacific</td></tr>
+        <tr class="usx-data-table__row"><td class="usx-data-table__cell usx-data-table__cell--selection usx-data-table__cell--valign-middle"><div class="usa-checkbox usx-checkbox usx-checkbox--small"><input class="usa-checkbox__input" id="admissions-select-alaska" type="checkbox" aria-label="Select Alaska" name="admissions-selection" value="alaska"><label class="usa-checkbox__label" for="admissions-select-alaska"></label></div></td><th scope="row" data-column-key="name">Alaska</th><td data-column-key="order" data-sort-value="49">49</td><td data-column-key="region">Pacific</td></tr>
+        <tr class="usx-data-table__row"><td class="usx-data-table__cell usx-data-table__cell--selection usx-data-table__cell--valign-middle"><div class="usa-checkbox usx-checkbox usx-checkbox--small"><input class="usa-checkbox__input" id="admissions-select-arizona" type="checkbox" aria-label="Select Arizona" name="admissions-selection" value="arizona"><label class="usa-checkbox__label" for="admissions-select-arizona"></label></div></td><th scope="row" data-column-key="name">Arizona</th><td data-column-key="order" data-sort-value="48">48</td><td data-column-key="region">Southwest</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="usx-pagination usx-data-table__pagination"><div class="usx-pagination__container">
+    <div class="usx-pagination__container-summary"><p class="usa-label usx-label usx-pagination__summary" aria-live="polite" aria-atomic="true">Showing 1–2 of 3 items</p></div>
+    <div class="usx-pagination__container-end">
+      <div class="usx-pagination__step-options"><label class="usa-label usx-label" for="admissions-page-size">Items per page</label><select id="admissions-page-size" class="usa-select usx-select"><option value="">Select an option</option><option value="2" selected>2</option><option value="3">3</option><option value="10">10</option></select></div>
+      <nav aria-label="State admissions pages" class="usa-pagination usx-pagination__nav"><ul class="usa-pagination__list">
+        <li class="usa-pagination__item usa-pagination__arrow"><a href="#" data-usx-pagination-page="0" class="usa-pagination__link usa-pagination__previous-page padding-1 margin-0 display-none" aria-label="Previous page" aria-disabled="true" tabindex="-1"><span class="usa-pagination__link-text usa-sr-only">Previous</span></a></li>
+        <li class="usa-pagination__item usa-pagination__page-no"><a href="#" data-usx-pagination-page="1" class="usa-pagination__button usa-current" aria-label="Page 1" aria-current="page">1</a></li>
+        <li class="usa-pagination__item usa-pagination__page-no"><a href="#" data-usx-pagination-page="2" class="usa-pagination__button" aria-label="Page 2">2</a></li>
+        <li class="usa-pagination__item usa-pagination__arrow"><a href="#" data-usx-pagination-page="2" class="usa-pagination__link usa-pagination__next-page padding-1 margin-0" aria-label="Next page"><span class="usa-pagination__link-text usa-sr-only">Next</span></a></li>
+      </ul></nav>
+    </div>
+  </div></div>
+</div>

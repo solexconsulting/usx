@@ -1,7 +1,7 @@
-import React, { useId, useRef, useState } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import Button from '../../../usx-react/src/components/button/Button.tsx';
 import Select from '../../../usx-react/src/components/select/Select.tsx';
-import Table from '../../../usx-react/src/components/table/Table.tsx';
+import DataTable from '../../../usx-react/src/components/data-table/DataTable.tsx';
 import Tag from '../../../usx-react/src/components/tag/Tag.tsx';
 import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
 import { DestructiveAction } from './BuildingBlocks.jsx';
@@ -24,6 +24,15 @@ export function DataTablePattern({ state = 'normal' }) {
     const [query, setQuery] = useState('');
     const [status, setStatus] = useState('');
     const [selected, setSelected] = useState([]);
+    useEffect(() => {
+        const onSelection = (event) => {
+            if (event.target.querySelector('table')?.id === `${prefix}-table`) {
+                setSelected(event.detail.selectedKeys);
+            }
+        };
+        document.addEventListener('usx:data-table:select', onSelection);
+        return () => document.removeEventListener('usx:data-table:select', onSelection);
+    }, [prefix]);
     const [pendingDelete, setPendingDelete] = useState(null);
     const [message, setMessage] = useState('');
     const [recovered, setRecovered] = useState(false);
@@ -117,7 +126,7 @@ export function DataTablePattern({ state = 'normal' }) {
                 {message && <Alert variant="success" slim text={message} />}
                 <p role="status">{selected.length} selected</p>
                 {filtered.length ? (
-                    <Table
+                    <DataTable
                         key={`${query}-${status}-${records.length}`}
                         id={`${prefix}-table`}
                         aria-label="Applications"
@@ -126,7 +135,6 @@ export function DataTablePattern({ state = 'normal' }) {
                         sortable
                         selectionMode="checkbox"
                         select={selected}
-                        onSelect={setSelected}
                         paginate={{ pageSize: 5, pageSizeOptions: [5, 10], showSummary: true }}
                         data={filtered}
                         columns={[

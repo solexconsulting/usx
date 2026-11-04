@@ -13,7 +13,7 @@ export const UswdsJsInit = {
       <p>
         Several USWDS components (Combobox, Date Picker, Date Range Picker,
         File Input, Time Picker, Modal, Character Count, Range Slider,
-        In-Page Navigation, Language Selector, and more) render <em>static</em>{' '}
+        In-Page Navigation, Language Selector, Table, and more) render <em>static</em>{' '}
         markup — all the interactive behavior (filtering, keyboard navigation,
         opening/closing popovers, building the value display, etc.) comes from
         USWDS's own vanilla-JS bundle (<code>@uswds/uswds/js/usa-*</code>),

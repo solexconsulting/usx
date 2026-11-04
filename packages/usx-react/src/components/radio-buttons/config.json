@@ -68,9 +68,27 @@
       "type": "string",
       "description": "Value of the option to be selected by default"
     },
+    "value": {
+      "type": "string",
+      "description": "Controlled selected value in React."
+    },
+    "onChange": {
+      "type": "function",
+      "description": "React change handler for the selected radio input."
+    },
+    "fieldset": {
+      "type": "boolean",
+      "default": true,
+      "description": "Wrap options in a fieldset; false allows one option inside a table cell."
+    },
+    "formGroup": {
+      "type": "boolean",
+      "default": true,
+      "description": "Wrap the fieldset in a form group."
+    },
     "options": {
       "type": "array",
-      "description": "Array of option objects: {id, value, label, description, checked, disabled}"
+      "description": "Array of option objects: {id, value, label, ariaLabel, description, checked, disabled}"
     },
     "className": {
       "type": "string",

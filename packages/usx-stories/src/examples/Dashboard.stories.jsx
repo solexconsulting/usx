@@ -11,7 +11,7 @@ import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
 import Page from '../../../usx-react/src/components/page/Page.tsx';
 import Section from '../../../usx-react/src/components/section/Section.tsx';
 import Status from '../../../usx-react/src/components/status/Status.tsx';
-import Table from '../../../usx-react/src/components/table/Table.tsx';
+import DataTable from '../../../usx-react/src/components/data-table/DataTable.tsx';
 import Tag from '../../../usx-react/src/components/tag/Tag.tsx';
 import { headerArgs, footerArgs, identifierArgs } from './commonArgs.js';
 
@@ -86,7 +86,7 @@ export const Dashboard = {
             </Section>
 
             <Section title="Recent Activity" className="margin-y-3">
-              <Table
+              <DataTable
                 id="dashboard-activity"
                 tabIndex={-1}
                 aria-label="Recent activity"

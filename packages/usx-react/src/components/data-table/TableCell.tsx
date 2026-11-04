@@ -1,10 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
-import type { Align } from './types';
+import type { Align, VerticalAlign } from './types';
 
 export interface TableCellProps extends React.HTMLAttributes<HTMLTableCellElement> {
   as?: 'td' | 'th';
   align?: Align;
+  verticalAlign?: VerticalAlign;
   headerAlign?: Align;
   colSpan?: number;
   rowSpan?: number;
@@ -17,6 +18,7 @@ export interface TableCellProps extends React.HTMLAttributes<HTMLTableCellElemen
 export default function TableCell({
   as: Tag = 'td',
   align,
+  verticalAlign,
   headerAlign,
   colSpan,
   rowSpan,
@@ -27,11 +29,12 @@ export default function TableCell({
   ...props
 }: TableCellProps) {
   const resolvedAlign = Tag === 'th' ? headerAlign || align : align;
-  const classes = classnames('usx-table__cell', resolvedAlign && `usx-table__cell--align-${resolvedAlign}`, className);
+  const classes = classnames('usx-data-table__cell', resolvedAlign && `usx-data-table__cell--align-${resolvedAlign}`,
+    verticalAlign && `usx-data-table__cell--valign-${verticalAlign}`, className);
 
   return (
     <Tag className={classes} colSpan={colSpan} rowSpan={rowSpan} scope={scope} data-label={dataLabel} {...props}>
-      {children}
+      {resolvedAlign === 'center' ? <div className="usx-data-table__cell-content">{children}</div> : children}
     </Tag>
   );
 }

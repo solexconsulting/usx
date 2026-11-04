@@ -1,9 +1,9 @@
 """
-table_helper.py — Server-side data utilities for the Django Table component.
+table_helper.py — Server-side data utilities for the Django DataTable component.
 
-These functions replace the React hooks (useTableSort, useTableGroups, etc.).
-A view calls the relevant helpers before rendering, then passes the results as
-template context.  Zero Django dependencies — importable and testable anywhere.
+Views can prepare initial server-rendered data with these helpers before
+passing it to the template. Runtime interaction lives in data-table.mjs.
+Zero Django dependencies — importable and testable anywhere.
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ from typing import Any
 
 def _sort_key(row: dict, key: str):
     """
-    Null-safe sort key matching useTableSort's defaultCompareFn:
+    Null-safe sort key for initial server rendering:
     - None / missing values sort last.
     - Strings compared case-insensitively (localeCompare approximation).
     - Numbers compared numerically.
@@ -34,7 +34,7 @@ def sort_data(data: list[dict], key: str, direction: str = 'asc') -> list[dict]:
     Return a stable-sorted copy of *data* on *key*.
 
     direction: 'asc' (default) or 'desc'.
-    Matches the sort + optional .reverse() in useTableSort.js.
+    Useful when a view needs to render an initially sorted result.
     """
     sorted_rows = sorted(data, key=lambda row: _sort_key(row, key))
     if direction == 'desc':
@@ -51,7 +51,7 @@ def group_data(data: list[dict], field: str) -> list[dict]:
     Returns:
         [{'key': group_value, 'rows': [...]}, ...]
 
-    Matches the Map-based grouping in useTableGroups.js.
+    Preserves the same first-seen group order as React markup.
     Pass groupBy['property'] when the React groupBy prop is an object.
     """
     groups: dict[str, list] = {}
@@ -96,7 +96,7 @@ def paginate_table(data: list, page: int = 1, page_size: int = 10) -> dict:
 def _aggregate(data: list[dict], key: str, agg_type: str) -> Any:
     """
     Compute an aggregate value for *key* across *data*.
-    Matches the aggregate() helper in TableFoot.jsx.
+    Matches the render-time aggregate in TableFoot.tsx.
     """
     vals = []
     for row in data:
@@ -134,7 +134,7 @@ def compute_footer(columns: list[dict], data: list[dict]) -> dict:
         col['footer']    — a literal value or callable(data) -> value
         col['aggregate'] — one of 'sum', 'avg', 'min', 'max', 'count'
 
-    Matches the logic in TableFoot.jsx.
+    Matches the render-time footer in TableFoot.tsx.
     """
     result = {}
     for col in columns:
@@ -162,6 +162,20 @@ def _get_depth(columns: list[dict]) -> int:
     return max_d
 
 
+def _visible_columns(columns: list[dict]) -> list[dict]:
+    result = []
+    for column in columns:
+        if column.get('hidden'):
+            continue
+        if column.get('columns'):
+            children = _visible_columns(column['columns'])
+            if children:
+                result.append({**column, 'columns': children})
+        else:
+            result.append(column)
+    return result
+
+
 def _get_leaf_count(col: dict) -> int:
     """Number of leaf columns under *col* (or 1 if it is itself a leaf)."""
     if not col.get('columns'):
@@ -181,7 +195,7 @@ def build_header_rows(columns: list[dict]) -> list[list[dict]]:
 
     Pure Python port of buildHeaderRows() + traverse() in TableHead.jsx.
     """
-    visible = [c for c in columns if not c.get('hidden')]
+    visible = _visible_columns(columns)
     total_depth = _get_depth(visible)
     rows: list[list] = [[] for _ in range(total_depth)]
 
@@ -209,7 +223,7 @@ def get_leaf_cols(columns: list[dict]) -> list[dict]:
     Recursively collect only leaf columns (no 'columns' children).
     Skips hidden columns.
 
-    Matches getLeafCols() in TableBody.jsx.
+    Matches the visible leaf columns rendered by TableBody.tsx.
     """
     result = []
     for col in columns:
@@ -222,6 +236,54 @@ def get_leaf_cols(columns: list[dict]) -> list[dict]:
     return result
 
 
+def merge_cell_classes(column_class: str = '', cell_class: str = '') -> str:
+    """Let a cell's bg-* or text-* utility replace its column's color utility."""
+    cell_tokens = cell_class.split()
+    replaces_background = any(token.startswith('bg-') for token in cell_tokens)
+    replaces_text = any(token.startswith('text-') for token in cell_tokens)
+    column_tokens = [token for token in column_class.split()
+                     if not (replaces_background and token.startswith('bg-'))
+                     and not (replaces_text and token.startswith('text-'))]
+    return ' '.join(column_tokens + cell_tokens)
+
+
+def plan_cells(rows: list[dict], columns: list[dict], primary_key: str = 'id') -> list[dict]:
+    """Return row copies with cell slots occupied by spans removed.
+
+    Call separately for each group or page so row spans stay within that section.
+    """
+    occupied = [[False] * len(columns) for _ in rows]
+    planned = []
+    for row_index, row in enumerate(rows):
+        cells = []
+        cell_props = row.get('cellProps') or {}
+        for column_index, column in enumerate(columns):
+            if occupied[row_index][column_index]:
+                continue
+            options = cell_props.get(column['key']) or {}
+            desired_cols = max(1, int(options.get('colSpan') or 1))
+            desired_rows = max(1, int(options.get('rowSpan') or 1))
+            col_span = 0
+            while (col_span < desired_cols and column_index + col_span < len(columns)
+                   and not occupied[row_index][column_index + col_span]):
+                col_span += 1
+            row_span = 0
+            while (row_span < desired_rows and row_index + row_span < len(rows)
+                   and not any(occupied[row_index + row_span][column_index:column_index + col_span])):
+                row_span += 1
+            for r in range(row_index, row_index + row_span):
+                for c in range(column_index, column_index + col_span):
+                    occupied[r][c] = True
+            cells.append({'column': column, 'options': options, 'col_span': col_span,
+                          'row_span': row_span,
+                          'class_name': merge_cell_classes(column.get('className') or '',
+                                                           options.get('className') or '')})
+        planned.append({**row, 'usxCells': cells,
+                        'usxSelectionLabel': f"Select row {row.get(primary_key, row_index + 1)}",
+                        'usxSearchText': ' '.join(str(row.get(column['key'], '')) for column in columns)})
+    return planned
+
+
 # ── Total column count ────────────────────────────────────────────────────────
 
 def total_col_count(
@@ -231,7 +293,7 @@ def total_col_count(
 ) -> int:
     """
     Return the total <td>/<th> column count including auxiliary columns.
-    Matches the totalCols useMemo in Table.jsx.
+    Matches the render-time total column count in DataTable.tsx.
     """
     count = len(get_leaf_cols(columns))
     if selection_mode:

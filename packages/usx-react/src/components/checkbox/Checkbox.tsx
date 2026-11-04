@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
 import ErrorMessage from '../error-message/ErrorMessage';
@@ -11,6 +11,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
   label?: string;
   ariaLabel?: string;
   checked?: boolean;
+  indeterminate?: boolean;
   disabled?: boolean;
   description?: string;
   tile?: boolean;
@@ -29,9 +30,10 @@ export default function Checkbox({
   value,
   label = '',
   ariaLabel = '',
-  checked = false,
+  checked,
+  indeterminate = false,
   disabled = false,
-  description = null,
+  description = '',
   tile = false,
   small = false,
   error,
@@ -42,6 +44,8 @@ export default function Checkbox({
   formGroup = true,
   ...props
 }: CheckboxProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => { if (inputRef.current) inputRef.current.indeterminate = indeterminate; }, [indeterminate]);
   const hasError = !!error;
   const hasSuccess = !!success;
 
@@ -61,13 +65,14 @@ export default function Checkbox({
     <>
       <div className={divClasses} {...props}>
         <input
+          ref={inputRef}
           className={inputClasses}
           id={id}
           type="checkbox"
           name={name}
           value={value}
           aria-label={ariaLabel || undefined}
-          defaultChecked={checked}
+          {...(checked !== undefined && onChange ? { checked } : { defaultChecked: checked })}
           disabled={disabled}
           required={required}
           {...(onChange ? { onChange } : {})}

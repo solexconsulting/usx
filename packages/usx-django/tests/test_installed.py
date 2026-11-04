@@ -93,13 +93,16 @@ class InstalledPackageTests(SimpleTestCase):
         with self.assertRaises(KeyError):
             render_component("unknown-component", {})
 
-    def test_table_helper_is_bundled(self):
+    def test_table_and_data_table_render(self):
         html = render_component("table", {
             "columns": [{"key": "name", "header": "Name"}],
             "data": [{"name": "Ada"}],
         })
         self.assertIn("Ada", html)
         self.assertIn("Name", html)
+        advanced = render_component("data-table", {"columns": [{"key": "name", "header": "Name", "sortable": True}], "data": [{"id": 1, "name": "Ada"}], "searchable": True})
+        self.assertIn("Ada", advanced)
+        self.assertIn("data-usx-data-table", advanced)
 
     def test_container_renders_without_component_specific_helpers(self):
         self.assertFalse(files("usx_django").joinpath("templatetags", "container.py").is_file())

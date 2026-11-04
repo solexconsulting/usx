@@ -482,10 +482,18 @@ export const themeManifest = [
   component('table-bg', 'var(--usx-surface-1)'),
   component('table-header-bg', 'var(--usx-surface-2)'),
   component('table-stripe-bg', 'var(--usx-surface-3)'),
-  // Table rules follow their text color; a theme may opt into a border role.
-  component('table-border', 'currentColor'),
+  component('table-stripe-text', 'var(--usx-text-ink)'),
+  // Keep grid lines tied to table ink when a sorted header inverts its text.
+  component('table-border', 'var(--usx-text-ink)'),
   component('table-placeholder-text', 'var(--usx-text-subtle)'),
-  component('table-sorted-column-bg', 'var(--usx-color-accent-cool)'),
+  component('table-sorted-header-bg', 'var(--usx-color-accent-cool-light)'),
+  component('table-sorted-column-bg', 'var(--usx-color-accent-cool-lighter)'),
+  component('table-sorted-stripe-bg', '#c3ebfa'),
+  component('table-sorted-header-text', 'var(--usx-text-ink)'),
+  component('table-sorted-column-text', 'var(--usx-text-ink)'),
+  component('table-sorted-stripe-text', 'var(--usx-text-ink)'),
+  component('table-sorted-icon-color', 'var(--usx-text-ink)'),
+  component('table-unsorted-icon-color', 'var(--usx-color-base)'),
   component('table-grouped-row-bg', 'var(--usx-surface-3)'),
   component('table-grouped-row-text', 'var(--usx-text-ink)'),
   // Tooltip body and arrow share the inverse surface; both component

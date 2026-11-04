@@ -1,0 +1,57 @@
+{% load static components usx_components %}
+{% with pk=row|get_item:primaryKey %}
+{% with pk_string=pk|stringformat:'s' %}
+<tr class="usx-data-table__row{% if pk in select %} usx-data-table__row--selected{% endif %}{% if pk in disabled %} usx-data-table__row--disabled{% endif %}{% if onClickRow and not pk in disabled %} usx-data-table__row--clickable{% endif %}{% if row.rowProps.className %} {{ row.rowProps.className }}{% endif %}" data-row-key="{{ pk }}" data-search-value="{{ row.usxSearchText }}"{% if row.rowProps.backgroundColor or row.rowProps.color %} style="{% if row.rowProps.backgroundColor %}--usx-data-table-row-bg: {{ row.rowProps.backgroundColor }};{% endif %}{% if row.rowProps.color %} color: {{ row.rowProps.color }};{% endif %}"{% endif %}>
+  {% if rowDetails and rowDetails != 'null' %}
+  <td class="usx-data-table__cell usx-data-table__cell--detail-toggle">
+    {% with isExpanded=expandedRows|contains:pk %}
+      {% dict aria_expanded=isExpanded aria_controls=tableId|add:'-row-detail-'|add:pk_string|add:'-panel' aria_label=isExpanded|yesno:'Collapse row details,Expand row details' as detailAttributes %}
+      {% button variant='unstyled' className='usx-data-table__detail-toggle' extraAttributes=detailAttributes %}
+        {% icon name='expand_more' size=2 staticBaseUrl=staticBaseUrl %}{% endicon %}
+      {% endbutton %}
+    {% endwith %}
+  </td>
+  {% endif %}
+
+  {% if selectionMode and selectionMode != 'null' and selectionPosition != 'right' %}
+  <td class="usx-data-table__cell usx-data-table__cell--selection usx-data-table__cell--valign-{{ selectionVerticalAlign }}">
+    {% if selectionMode == 'radio' %}
+      {% dict id=tableId|add:'-select-'|add:pk_string value=pk_string label='' ariaLabel=row.usxSelectionLabel checked=select|contains:pk disabled=disabled|contains:pk as option %}
+      {% make_list option as options %}
+      {% radio_buttons name=tableId|add:'-selection' options=options fieldset=False small=True formGroup=False %}{% endradio_buttons %}
+    {% else %}
+      {% checkbox id=tableId|add:'-select-'|add:pk_string name=tableId|add:'-selection' value=pk_string label='' ariaLabel=row.usxSelectionLabel checked=select|contains:pk disabled=disabled|contains:pk small=True formGroup=False %}{% endcheckbox %}
+    {% endif %}
+  </td>
+  {% endif %}
+
+  {% for cell in row.usxCells %}{% with col=cell.column options=cell.options %}
+    {% if col.primary %}<th scope="{% if cell.row_span > 1 %}rowgroup{% else %}row{% endif %}"{% else %}<td{% endif %}
+      class="usx-data-table__cell{% if options.align %} usx-data-table__cell--align-{{ options.align }}{% elif col.align %} usx-data-table__cell--align-{{ col.align }}{% endif %}{% if options.verticalAlign %} usx-data-table__cell--valign-{{ options.verticalAlign }}{% elif col.verticalAlign %} usx-data-table__cell--valign-{{ col.verticalAlign }}{% endif %}{% if cell.class_name %} {{ cell.class_name }}{% endif %}"
+      data-column-key="{{ col.key }}"
+      data-sort-value="{{ row|get_item:col.key }}"
+      {% if cell.col_span > 1 %}colspan="{{ cell.col_span }}"{% endif %}
+      {% if cell.row_span > 1 %}rowspan="{{ cell.row_span }}"{% endif %}
+      {% if responsive == 'stack' or responsive == 'stack-header' %}{% if col.stackLabel or col.header %}data-label="{{ col.stackLabel|default:col.header }}"{% endif %}{% endif %}
+      {% if col.width or options.backgroundColor or col.backgroundColor or options.color or col.color %}style="{% if col.width %}width: {{ col.width }};{% endif %}{% if options.backgroundColor %}background-color: {{ options.backgroundColor }};{% elif col.backgroundColor %}background-color: {{ col.backgroundColor }};{% endif %}{% if options.color %}color: {{ options.color }};{% elif col.color %}color: {{ col.color }};{% endif %}"{% endif %}
+    >{% if options.align == 'center' or not options.align and col.align == 'center' %}<div class="usx-data-table__cell-content">{% endif %}{{ row|get_item:col.key|default_if_none:'--' }}{% if options.align == 'center' or not options.align and col.align == 'center' %}</div>{% endif %}{% if col.primary %}</th>{% else %}</td>{% endif %}
+  {% endwith %}{% endfor %}
+
+  {% if selectionMode and selectionMode != 'null' and selectionPosition == 'right' %}
+  <td class="usx-data-table__cell usx-data-table__cell--selection usx-data-table__cell--valign-{{ selectionVerticalAlign }}">
+    {% if selectionMode == 'radio' %}
+      {% dict id=tableId|add:'-select-'|add:pk_string value=pk_string label='' ariaLabel=row.usxSelectionLabel checked=select|contains:pk disabled=disabled|contains:pk as option %}
+      {% make_list option as options %}
+      {% radio_buttons name=tableId|add:'-selection' options=options fieldset=False small=True formGroup=False %}{% endradio_buttons %}
+    {% else %}
+      {% checkbox id=tableId|add:'-select-'|add:pk_string name=tableId|add:'-selection' value=pk_string label='' ariaLabel=row.usxSelectionLabel checked=select|contains:pk disabled=disabled|contains:pk small=True formGroup=False %}{% endcheckbox %}
+    {% endif %}
+  </td>
+  {% endif %}
+</tr>
+{% if rowDetails and rowDetails != 'null' %}
+<tr id="{{ tableId }}-row-detail-{{ pk }}-panel" class="usx-data-table__detail-row"{% if not pk in expandedRows %} hidden{% endif %}>
+  <td colspan="{{ total_cols|default:1 }}" class="usx-data-table__detail-cell">{% if rowDetailField %}{{ row|get_item:rowDetailField }}{% endif %}</td>
+</tr>
+{% endif %}
+{% endwith %}{% endwith %}

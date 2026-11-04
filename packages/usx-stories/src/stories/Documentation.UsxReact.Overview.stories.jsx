@@ -137,15 +137,15 @@ export const Overview = {
       <h2>Enhanced (JS-driven) USWDS components</h2>
       <p>
         USWDS JavaScript should own standard USWDS interactions. Accordion, Banner,
-        Combobox, Date Picker, the standard File Input, and Time Picker render
+        Combobox, Date Picker, the standard File Input, Table, and Time Picker render
         markup that your application enhances by initializing the corresponding
         <code> @uswds/uswds/js/usa-*</code> module.
       </p>
       <p>
-        Table still manages sorting through React hooks
-        rather than delegating that behavior to USWDS. Optional USX features,
-        such as File Input's individually managed file list, also use React state, but extend
-        rather than replace the underlying USWDS widget. See{' '}
+        The USX DataTable manages sorting, selection, grouping, and pagination
+        through React state or the USX DataTable initializer for Django and HTML.
+        Optional USX features, such as File Input's individually managed file list,
+        also use React state. See{' '}
         <strong>Documentation/USX React → USWDS JS Initialization</strong> for
         how and why your app is responsible for initializing that JS.
       </p>

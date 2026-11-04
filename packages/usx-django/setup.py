@@ -10,7 +10,8 @@ for required in (
     "templatetags/components.py",
     "component-contracts.json",
     "templates/label/label.django.html",
-    "templates/table/table_helper.py",
+    "templates/data-table/table_helper.py",
+    "data_table_component.py",
 ):
     if not (package / required).is_file():
         raise RuntimeError("Missing generated Django package files. Run pnpm generate:django from the repository root first.")

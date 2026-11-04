@@ -1,0 +1,8 @@
+/* Storybook's Controls table has a minimum width wider than a phone screen. */
+@media (width <= 40rem) {
+  #storybook-mobile-addon-panel :has(> .docblock-argstable),
+  .sbdocs-content :has(> .docblock-argstable) {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}

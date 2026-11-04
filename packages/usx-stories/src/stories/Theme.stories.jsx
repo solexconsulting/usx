@@ -61,6 +61,7 @@ import SummaryBox from '../../../usx-react/src/components/summary-box/SummaryBox
 import Swap from '../../../usx-react/src/components/swap/Swap.tsx';
 import Switch from '../../../usx-react/src/components/switch/Switch.tsx';
 import Table from '../../../usx-react/src/components/table/Table.tsx';
+import DataTable from '../../../usx-react/src/components/data-table/DataTable.tsx';
 import Tag from '../../../usx-react/src/components/tag/Tag.tsx';
 import TaskList from '../../../usx-react/src/components/task-list/TaskList.tsx';
 import TextArea from '../../../usx-react/src/components/text-area/TextArea.tsx';
@@ -1360,9 +1361,15 @@ function Showcase({ resolved }) {
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', columnSpan: 'all', marginBottom: '1rem' }}>
-        <h3 style={ui.cardTitle}>Table</h3>
+        <h3 style={ui.cardTitle}>Table and DataTable</h3>
         <div style={{ overflowX: 'auto' }}>
           <Table
+            columns={tableColumns.map(({ key, header }) => ({ key, header }))}
+            data={tableData.slice(0, 2)}
+            caption="Founding documents — USWDS table"
+            compact
+          />
+          <DataTable
             columns={tableColumns}
             data={tableData}
             groupBy="era"

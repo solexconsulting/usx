@@ -43,6 +43,7 @@ const componentLoaders = {
     accordion: () => import('@uswds/uswds/js/usa-accordion'),
     banner: () => import('@uswds/uswds/js/usa-banner'),
     carousel: () => import('@solexllc/usx/js/carousel'),
+    dataTable: () => import('@solexllc/usx/js/data-table'),
     characterCount: () => import('@uswds/uswds/js/usa-character-count'),
     combobox: () => import('@uswds/uswds/js/usa-combo-box'),
     datePicker: () => import('@uswds/uswds/js/usa-date-picker'),
@@ -58,6 +59,13 @@ const componentLoaders = {
     })),
     range: () => import('@uswds/uswds/js/usa-range'),
     themePicker: () => import('@solexllc/usx/js/theme-picker'),
+    table: () => import('@uswds/uswds/js/usa-table').then(({ default: table }) => ({
+        init(root) {
+            [...(root.matches?.('.usa-table') ? [root] : []), ...root.querySelectorAll('.usa-table')].forEach((element) => {
+                if (element.querySelector('th[data-sortable]:not(:has(.usa-table__header__button))')) table.init(element);
+            });
+        },
+    })),
     timePicker: () => import('@uswds/uswds/js/usa-time-picker'),
 };
 

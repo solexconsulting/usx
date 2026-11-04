@@ -35,7 +35,7 @@
     }
   }
 
-  .usa-checkbox__input:checked:not(:disabled, [aria-disabled="true"]) {
+  .usa-checkbox__input:is(:checked, :indeterminate, [data-indeterminate]):not(:disabled, [aria-disabled="true"]) {
     & + .usa-checkbox__label {
       @if $usx-color-primary {
         &::before {

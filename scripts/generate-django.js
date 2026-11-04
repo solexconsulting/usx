@@ -17,6 +17,7 @@ if (errors.size) {
 const packageDir = path.join(REPO_ROOT, 'packages/usx-django');
 const outputDir = path.join(packageDir, 'usx_django');
 const runtimeDir = path.join(REPO_ROOT, 'apps/storybook-django/project/components');
+fs.rmSync(path.join(outputDir, 'table_component.py'), { force: true });
 
 for (const directory of ['core', 'templatetags', 'templates']) {
   fs.rmSync(path.join(outputDir, directory), { recursive: true, force: true });
@@ -31,8 +32,8 @@ for (const directory of ['core', 'templatetags']) {
   });
 }
 fs.copyFileSync(
-  path.join(runtimeDir, 'table_component.py'),
-  path.join(outputDir, 'table_component.py')
+  path.join(runtimeDir, 'data_table_component.py'),
+  path.join(outputDir, 'data_table_component.py')
 );
 fs.cpSync(COMPONENTS_DIR, path.join(outputDir, 'templates'), {
   recursive: true,

@@ -1,0 +1,24 @@
+{% load static components usx_components %}
+{% with expanded=defaultExpanded|default_bool:True %}
+<tbody class="usx-data-table__group usx-data-table__group--header">
+  <tr class="usx-data-table__group-row{% if groupRowClassName %} {{ groupRowClassName }}{% endif %}">
+    {% if groupCells %}
+      {% if rowDetails %}<td class="usx-data-table__group-cell"></td>{% endif %}
+      {% if selectionMode and selectionPosition != 'right' %}<td class="usx-data-table__group-cell"></td>{% endif %}
+      {% for cell in groupCells %}{% with column=cell.column options=cell.options %}
+      {% if forloop.first %}<th scope="row"{% else %}<td{% endif %} class="usx-data-table__group-cell{% if options.align %} usx-data-table__cell--align-{{ options.align }}{% elif column.align %} usx-data-table__cell--align-{{ column.align }}{% endif %}{% if options.verticalAlign %} usx-data-table__cell--valign-{{ options.verticalAlign }}{% elif column.verticalAlign %} usx-data-table__cell--valign-{{ column.verticalAlign }}{% endif %}{% if column.className %} {{ column.className }}{% endif %}"{% if options.colSpan %} colspan="{{ options.colSpan }}"{% elif column.colSpan %} colspan="{{ column.colSpan }}"{% endif %}{% if options.backgroundColor or column.backgroundColor or options.color or column.color %} style="{% if options.backgroundColor %}background-color: {{ options.backgroundColor }};{% elif column.backgroundColor %}background-color: {{ column.backgroundColor }};{% endif %}{% if options.color %}color: {{ options.color }};{% elif column.color %}color: {{ column.color }};{% endif %}"{% endif %}>
+        {% if forloop.first %}<button type="button" class="usx-data-table__group-toggle" aria-expanded="{{ expanded|yesno:'true,false' }}" aria-controls="{{ tableId }}-group-{{ groupKey }}-content">{{ cell.value }}</button>{% else %}{% if options.align == 'center' or not options.align and column.align == 'center' %}<div class="usx-data-table__cell-content">{% endif %}{{ cell.value }}{% if options.align == 'center' or not options.align and column.align == 'center' %}</div>{% endif %}{% endif %}
+      {% if forloop.first %}</th>{% else %}</td>{% endif %}
+      {% endwith %}{% endfor %}
+      {% if selectionMode and selectionPosition == 'right' %}<td class="usx-data-table__group-cell"></td>{% endif %}
+    {% else %}
+      <th scope="row" colspan="{{ total_cols|default:1 }}" class="usx-data-table__group-cell"><button type="button" class="usx-data-table__group-toggle" aria-expanded="{{ expanded|yesno:'true,false' }}" aria-controls="{{ tableId }}-group-{{ groupKey }}-content">{{ label }}</button></th>
+    {% endif %}
+  </tr>
+</tbody>
+<tbody class="usx-data-table__group usx-data-table__group--content" id="{{ tableId }}-group-{{ groupKey }}-content"{% if not expanded %} hidden{% endif %}>
+  {% for row in rows %}
+    {% table_row row=row rowIndex=forloop.counter0 leaf_columns=leaf_columns total_cols=total_cols primaryKey=primaryKey select=select disabled=disabled selectionMode=selectionMode selectionPosition=selectionPosition selectionVerticalAlign=selectionVerticalAlign onClickRow=onClickRow rowUrlField=rowUrlField rowDetails=rowDetails rowDetailTemplate=rowDetailTemplate rowDetailField=rowDetailField expandedRows=expandedRows responsive=responsive tableId=tableId %}{% endtable_row %}
+  {% endfor %}
+</tbody>
+{% endwith %}

@@ -169,6 +169,47 @@ function expectDeclaration(rules, label, selector, property, expected) {
 
 const defaultRules = cssRules(defaultCss);
 const themedRules = cssRules(themedCss);
+for (const selector of [
+  '.usa-table.usx-table.usa-table--striped tbody tr:nth-child(odd) td',
+  '.usa-table.usx-table.usa-table--striped tbody tr:nth-child(odd) th',
+  '.usx-data-table.usx-data-table--striped tbody tr:nth-child(odd of .usx-data-table__row) > *',
+]) {
+  expectDeclaration(defaultRules, 'unthemed stripe text stays native', selector, 'color', undefined);
+  expectDeclaration(themedRules, 'striped cells use the theme ink', selector, 'color', 'var(--usx-table-stripe-text)');
+}
+const sortedStates = [
+  ['header', '.usa-table.usx-table thead th[aria-sort]', '.usx-data-table.usa-table thead th[aria-sort]', '#97d4ea'],
+  ['column', '.usa-table.usx-table td[data-sort-active]', '.usx-data-table.usa-table tbody [data-sort-active]', '#e1f3f8'],
+  ['stripe', '.usa-table.usx-table.usa-table--striped tbody tr:nth-child(odd) > [data-sort-active]', '.usx-data-table.usx-data-table--striped tbody tr:nth-child(odd of .usx-data-table__row) > [data-sort-active]', '#c3ebfa'],
+];
+for (const [state, tableSelector, dataTableSelector, defaultColor] of sortedStates) {
+  const token = `table-sorted-${state}`;
+  expectDeclaration(defaultRules, 'unthemed Table preserves USWDS sorted colors', tableSelector, 'background-color', undefined);
+  expectDeclaration(themedRules, 'themed Table sorted color', tableSelector, 'background-color', `var(--usx-${token}-bg)`);
+  expectDeclaration(defaultRules, 'unthemed DataTable matches USWDS sorted colors', dataTableSelector, 'background', defaultColor);
+  expectDeclaration(themedRules, 'themed DataTable sorted color', dataTableSelector, 'background', `var(--usx-${token}-bg)`);
+  expectDeclaration(defaultRules, 'unthemed Table preserves USWDS sorted text', tableSelector, 'color', undefined);
+  expectDeclaration(themedRules, 'themed Table sorted text', tableSelector, 'color', `var(--usx-${token}-text)`);
+  expectDeclaration(defaultRules, 'unthemed DataTable matches USWDS sorted text', dataTableSelector, 'color', '#1b1b1b');
+  expectDeclaration(themedRules, 'themed DataTable sorted text', dataTableSelector, 'color', `var(--usx-${token}-text)`);
+}
+for (const [state, tableSelector, dataTableSelector, defaultColor] of [
+  ['unsorted', '.usa-table.usx-table th[data-sortable]:not([aria-sort]) .usa-table__header__button .usa-icon > g.unsorted', '.usx-data-table th[data-usx-sortable]:not([aria-sort]) .usx-data-table__sort-icon > .unsorted', '#71767a'],
+  ['sorted', '.usa-table.usx-table th[data-sortable][aria-sort=ascending] .usa-table__header__button .usa-icon > g.ascending', '.usx-data-table th[data-usx-sortable][aria-sort=ascending] .usx-data-table__sort-icon > .ascending', '#1b1b1b'],
+]) {
+  const token = `table-${state}-icon-color`;
+  expectDeclaration(defaultRules, 'unthemed Table preserves USWDS sort icon', tableSelector, 'fill', undefined);
+  expectDeclaration(themedRules, 'themed Table sort icon', tableSelector, 'fill', `var(--usx-${token})`);
+  expectDeclaration(defaultRules, 'unthemed DataTable matches USWDS sort icon', dataTableSelector, 'fill', defaultColor);
+  expectDeclaration(themedRules, 'themed DataTable sort icon', dataTableSelector, 'fill', `var(--usx-${token})`);
+}
+for (const [name, defaultValue] of [
+  ['table-sorted-header-bg', 'var(--usx-color-accent-cool-light)'],
+  ['table-sorted-column-bg', 'var(--usx-color-accent-cool-lighter)'],
+  ['table-sorted-stripe-bg', '#c3ebfa'],
+]) {
+  if (byName.get(name)?.defaultValue !== defaultValue) errors.push(`${name} must default to the USWDS color ${defaultValue}`);
+}
 for (const property of ['background-color', 'color', 'border-color', 'border-width', 'border-radius']) {
   expectDeclaration(defaultRules, 'unconfigured card cosmetics preserve USWDS', '.usa-card.usx-card > .usa-card__container', property, undefined);
 }
@@ -177,8 +218,13 @@ const borderComponents = [
   ['.usa-card.usx-card > .usa-card__container', 'border-color', 'usx-card-border-color', 'subtle'],
   // Ink borders have no shared border role; leave their USWDS defaults alone
   // until a component override or runtime hook is explicitly enabled.
-  ['.usa-table td', 'border-color', 'usx-table-border', null],
-  ['.usx-table.usa-table th', 'border-color', 'usx-table-border', null],
+  ['.usa-table.usx-table td', 'border-color', 'usx-table-border', null],
+  ['.usa-table.usx-table th', 'border-color', 'usx-table-border', null],
+  ['.usx-data-table.usa-table :is(th, td)', 'border-color', 'usx-table-border', null],
+  ['.usa-table.usx-table.usa-table--stacked tr', 'border-color', 'usx-table-border', null],
+  ['.usa-table.usx-table.usa-table--stacked tr:first-child > :first-child', 'border-top-color', 'usx-table-border', null],
+  ['.usa-table.usx-table.usa-table--stacked-header tr', 'border-color', 'usx-table-border', null],
+  ['.usa-table.usx-table.usa-table--stacked-header tr:first-child > :first-child', 'border-top-color', 'usx-table-border', null],
   ['.usx-collection .usa-collection__item', 'border-top-color', 'usx-collection-border', null],
   ['.usa-file-input__target', 'border-color', 'usx-file-input-border', 'muted'],
   ['.usx-file-input__file-item', 'border-color', 'usx-file-input-item-border', 'muted'],
@@ -272,6 +318,14 @@ function expectCheckableOutline(rules, label, expected) {
 expectCheckableOutline(defaultRules, 'unconfigured checkables preserve USWDS ink', undefined);
 expectCheckableOutline(customRules, 'shared border scale does not change checkable ink', undefined);
 expectCheckableOutline(themedRules, 'runtime checkable component hook', 'var(--usx-checkable-border)');
+const activeCheckbox = '.usx-checkbox .usa-checkbox__input:is(:checked, :indeterminate, [data-indeterminate]):not(:disabled, [aria-disabled=true])';
+for (const [selector, property] of [
+  [`${activeCheckbox} + .usa-checkbox__label::before`, 'background-color'],
+  [`${activeCheckbox}.usa-checkbox__input--tile + .usa-checkbox__label`, 'border-color'],
+]) {
+  expectDeclaration(defaultRules, 'unconfigured active checkbox preserves USWDS color', selector, property, undefined);
+  expectDeclaration(themedRules, 'checked and indeterminate checkboxes share the theme primary', selector, property, 'var(--usx-color-primary)');
+}
 for (const [role, value] of Object.entries(customBorders)) {
   const selector = `.border-${role}`;
   const token = `--usx-color-border${role === 'default' ? '' : `-${role}`}`;
@@ -425,7 +479,10 @@ for (const condition of ['null', 'false', '0', 'true']) {
 
 for (const w of sassWarnings) errors.push(`sass warning: ${w}`);
 
-if (themeVarRefs(defaultCss).length) {
+// A DataTable row background is a per-row inline value, not a theme token.
+// Its fallback must remain available in both builds for rows without an override.
+const localInlineVars = new Set(['--usx-data-table-row-bg']);
+if (themeVarRefs(defaultCss).some((ref) => !localInlineVars.has(ref.name))) {
   errors.push('default build contains theme var() references — unconfigured tokens must be omitted, not var()-wrapped');
 }
 for (const [label, css] of [['default', defaultCss], ['themed', themedCss]]) {
@@ -434,6 +491,7 @@ for (const [label, css] of [['default', defaultCss], ['themed', themedCss]]) {
 
 const seen = new Set();
 for (const ref of themeVarRefs(themedCss)) {
+  if (localInlineVars.has(ref.name)) continue;
   if (ref.fallback) errors.push(`themed build uses a fallback: var(${ref.fallback}) — fallbacks are not allowed`);
   if (!byVar.has(ref.name)) errors.push(`no manifest entry for ${ref.name}`);
   seen.add(ref.name);

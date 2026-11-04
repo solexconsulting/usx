@@ -21,7 +21,7 @@ import { execFileSync } from 'node:child_process';
 import * as sass from 'sass';
 import { themeManifest } from '../src/theme-manifest.js';
 import { PRESETS } from '../src/presets.js';
-import { getToken, shadesOf, resolveTheme, themeEntries, themeSlug, themeToCss, themeToCssVars, themeToSass } from '../src/derive.js';
+import { getToken, shadesOf, resolveTheme, themeEntries, themeSlug, themeToCss, themeToCssVars, themeToSass, hexToRgb } from '../src/derive.js';
 
 const pkgDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const distDir = path.join(pkgDir, 'dist');
@@ -87,6 +87,45 @@ const borderParents = {
   'task-list-border': 'color-border-subtle',
 };
 const resolvedDefault = resolveTheme();
+const contrast = (a, b) => {
+  const luminance = (hex) => {
+    const { r, g, b } = hexToRgb(hex);
+    const linear = [r, g, b].map((value) => {
+      const channel = value / 255;
+      return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+    });
+    return linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
+  };
+  const first = luminance(a);
+  const second = luminance(b);
+  return (Math.max(first, second) + 0.05) / (Math.min(first, second) + 0.05);
+};
+const sortedBackgrounds = ['table-sorted-header-bg', 'table-sorted-column-bg', 'table-sorted-stripe-bg'];
+for (const [name, overrides] of Object.entries(PRESETS)) {
+  if (name === 'Default') continue;
+  for (const token of sortedBackgrounds) {
+    if (!Object.hasOwn(overrides, token)) fail(`${name}: ${token} needs a deliberate preset color`);
+  }
+  const theme = resolveTheme(overrides);
+  const color = (key, seen = new Set()) => {
+    if (seen.has(key)) throw new Error(`${name}: cyclic color token ${key}`);
+    seen.add(key);
+    const value = theme[key];
+    const alias = value?.match(/^var\(--usx-([^)]+)\)$/);
+    return alias ? color(alias[1], seen) : value;
+  };
+  for (const [background, text, ordinary] of [
+    ['table-sorted-header-bg', 'table-sorted-header-text', 'table-header-bg'],
+    ['table-sorted-column-bg', 'table-sorted-column-text', 'table-bg'],
+    ['table-sorted-stripe-bg', 'table-sorted-stripe-text', 'table-stripe-bg'],
+  ]) {
+    if (contrast(color(background), color(text)) < 4.5) fail(`${name}: ${text} is hard to read on ${background}`);
+    if (contrast(color(background), color(ordinary)) < 1.1) fail(`${name}: ${background} is too close to ${ordinary}`);
+  }
+  if (contrast(color('table-sorted-header-bg'), color('table-sorted-icon-color')) < 3) fail(`${name}: sorted icon is hard to see`);
+  if (contrast(color('table-header-bg'), color('table-unsorted-icon-color')) < 3) fail(`${name}: unsorted icon is hard to see`);
+  if (contrast(color('table-stripe-bg'), color('table-stripe-text')) < 4.5) fail(`${name}: ordinary striped rows are hard to read`);
+}
 const inverseAliases = {
   'surface-inverse': 'var(--usx-text-ink)',
   'tooltip-bg': 'var(--usx-surface-inverse)',
@@ -109,7 +148,14 @@ if (resolvedDefault['step-indicator-segment-pending-border'] !== 'var(--usx-text
 if (resolvedDefault['process-list-counter-border'] !== 'var(--usx-text-ink)') {
   fail('process counter border must inherit text-ink by default');
 }
-const inkBorders = ['table-border', 'collection-border', 'checkable-border'];
+if (resolvedDefault['table-border'] !== 'var(--usx-text-ink)') {
+  fail('table border must follow table ink independently of sorted header text');
+}
+const govUkTable = resolveTheme(PRESETS['GOV.UK']);
+if (govUkTable['table-sorted-header-text'] !== 'var(--usx-text-inverse)' || govUkTable['table-border'] !== 'var(--usx-text-ink)') {
+  fail('GOV.UK sorted header must keep its table ink border when text is inverted');
+}
+const inkBorders = ['collection-border', 'checkable-border'];
 for (const name of inkBorders) {
   if (resolvedDefault[name] !== 'currentColor') fail(`${name}: default border must retain the component's ink color`);
 }
@@ -135,6 +181,9 @@ if (scaleOnlyTheme['process-list-counter-border'] !== 'var(--usx-text-ink)') {
 }
 for (const name of inkBorders) {
   if (scaleOnlyTheme[name] !== 'currentColor') fail(`${name}: changing shared border roles must not change its ink border`);
+}
+if (scaleOnlyTheme['table-border'] !== 'var(--usx-text-ink)') {
+  fail('changing shared border roles must not change the table ink border');
 }
 const customBorderOverrides = {
   ...customBorderScale,
