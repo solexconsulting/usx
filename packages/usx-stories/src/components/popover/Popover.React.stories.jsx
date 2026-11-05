@@ -5,7 +5,7 @@ import Details from '../../../../usx-react/src/components/details/Details.tsx';
 import Link from '../../../../usx-react/src/components/link/Link.tsx';
 import Tree from '../../../../usx-react/src/components/tree/Tree.tsx';
 import config from '../../../../usx-react/src/components/popover/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit } from '../../utils/storyHelpers.jsx';
 import { storyDefs as treeStoryDefs } from '../tree/Tree.React.stories.jsx';
 
 // One navigation model drives the Tree and the nested Popovers.
@@ -206,6 +206,11 @@ export const storyDefs = {
     ),
   },
   Default: config.default,
+  Unenhanced: {
+    ...config.default, id: 'popover-unenhanced', showClose: true,
+    children: 'Without JavaScript enhancement, clicking outside this popover will not close it. Click the trigger again to close it.',
+    extraAttributes: { 'usx-data-enhanced': 'true' },
+  },
   RoundedPanel: panelShapeExample('rounded'),
   SquarePanel: panelShapeExample('square'),
   GroupedSummaryProps: {
@@ -327,6 +332,7 @@ export const storyDefs = {
 };
 export default {
   decorators: [
+    ...componentInit('popover'),
     (Story) => (
       <div className="height-viewport">
         <Story />
@@ -337,7 +343,7 @@ export default {
   title: 'React/USX/Popover',
   component: Popover,
   tags: ['USX', 'autodocs'],
-  excludeStories: ['storyDefs', 'NavigationBarLayout'],
+  excludeStories: ['storyDefs', 'NavigationBarLayout', 'Unenhanced'],
   argTypes: {
     ...buildArgTypes(config.props || {}),
     children: { control: false },
@@ -356,6 +362,7 @@ export default {
 export const Default = {
   args: storyDefs.Default,
 };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'Native details behavior still opens and closes the panel when its trigger is clicked. Without USX JavaScript, outside clicks, Escape, and the optional Close button do not dismiss it.' } } } };
 
 /** Original rounded panel with extra vertical padding. */
 export const RoundedPanel = {

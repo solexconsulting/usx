@@ -7,6 +7,7 @@ const generatedArgTypes = buildArgTypes(config.props || {});
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'range-slider-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   WithUnit: {
     id: 'range-slider-unit',
     label: 'Volume',
@@ -70,7 +71,7 @@ export default {
   component: RangeSlider,
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -82,6 +83,7 @@ export default {
 };
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The native slider still moves. The USWDS current-value display and screen-reader value announcement are unavailable.' } } } };
 export const WithUnit = { args: storyDefs.WithUnit };
 export const WithPreposition = { args: storyDefs.WithPreposition };
 export const FineStep = { args: storyDefs.FineStep };

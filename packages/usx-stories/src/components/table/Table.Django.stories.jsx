@@ -3,6 +3,7 @@ import { buildArgTypes, componentInit, createDjangoStory } from '../../utils/sto
 import { storyDefs } from './Table.React.stories.jsx';
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/Table',
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props),
@@ -11,6 +12,7 @@ export default {
 
 const story = createDjangoStory({ componentName: 'table' });
 export const Default = story(storyDefs.Default);
+export const Unenhanced = { ...story(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'Every row remains readable in its original order. Column sorting requires the USWDS table script.' } } } };
 export const Striped = story(storyDefs.Striped);
 export const Borderless = story(storyDefs.Borderless);
 export const Compact = story(storyDefs.Compact);

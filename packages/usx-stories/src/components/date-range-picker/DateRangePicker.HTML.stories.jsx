@@ -92,7 +92,7 @@ const checkRange = (def) => async (range) => {
 };
 
 const checks = Object.fromEntries(
-  Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkRange(def)])
+  Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), checkRange(def)])
 );
 
 const play = async (context) => {

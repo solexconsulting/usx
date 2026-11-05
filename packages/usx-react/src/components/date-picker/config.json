@@ -9,6 +9,7 @@
     "hint": "mm/dd/yyyy"
   },
   "props": {
+    "extraAttributes": { "type": "object", "description": "Additional attributes on the USWDS enhancement target." },
     "id": {
       "type": "string",
       "default": "appointment-date",

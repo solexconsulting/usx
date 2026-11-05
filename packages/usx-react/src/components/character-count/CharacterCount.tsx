@@ -4,6 +4,7 @@ import Input from '../input/Input';
 import TextArea from '../text-area/TextArea';
 
 export interface CharacterCountProps {
+  extraAttributes?: Record<string, unknown>;
   id?: string;
   label?: React.ReactNode;
   max: number;
@@ -38,6 +39,7 @@ export default function CharacterCount({
   placeholder = '',
   textArea = false,
   className = '',
+  extraAttributes,
   ...props
 }: CharacterCountProps) {
   const fieldId = id || `character-count-${Math.random().toString(36).substr(2, 9)}`;
@@ -62,6 +64,7 @@ export default function CharacterCount({
     className: 'usa-character-count__field',
     'aria-describedby': [infoId, hintId, errorId].filter(Boolean).join(' '),
     ...props,
+    ...extraAttributes,
   };
 
   return (

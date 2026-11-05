@@ -7,6 +7,7 @@ import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
 
 export default {
+  excludeStories: ['Unenhanced'],
     title: 'Django/USX/ThemePicker',
     tags: ['USX', 'autodocs'],
     argTypes: buildArgTypes(config.props || {}),
@@ -55,5 +56,6 @@ export default {
 const createStory = createDjangoStory({ componentName: 'theme-picker' });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'Without USX JavaScript, the native theme select stays visible and usable. The palette trigger and confirmation control are unavailable.' } } } };
 
 export const LightDark = createStory(storyDefs.LightDark);

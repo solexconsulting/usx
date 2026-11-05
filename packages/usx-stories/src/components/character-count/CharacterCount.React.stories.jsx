@@ -7,6 +7,7 @@ import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'cc-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   TextArea: { id: 'cc-4', label: 'Text area', max: 50, textArea: true },
   WithPlaceholder: { id: 'cc-17', label: 'Text input with placeholder', max: 25, placeholder: 'Enter text here' },
   TextAreaWithPlaceholder: { id: 'cc-18', label: 'Text area with placeholder', max: 50, textArea: true, placeholder: 'Enter text here' },
@@ -43,7 +44,7 @@ export default {
   component: CharacterCount,
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -55,6 +56,7 @@ export default {
 };
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The native maxlength limit still applies, but the remaining-character count and over-limit announcement do not update.' } } } };
 export const TextArea = { args: storyDefs.TextArea };
 export const WithPlaceholder = { args: storyDefs.WithPlaceholder };
 export const TextAreaWithPlaceholder = { args: storyDefs.TextAreaWithPlaceholder };

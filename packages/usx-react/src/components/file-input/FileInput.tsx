@@ -27,6 +27,7 @@ export interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInput
   onFilesChange?: ((files: File[]) => void) | null;
   defaultFiles?: FileInputDefaultFile[];
   formGroup?: boolean;
+  extraAttributes?: Record<string, unknown>;
 }
 
 // Mirrors USWDS's own default aria-label text (see updateVisibleInstructions
@@ -59,6 +60,7 @@ export default function FileInput({
   onFilesChange = null,
   defaultFiles = [],
   formGroup = true,
+  extraAttributes,
   ...props
 }: FileInputProps) {
   const hintId = hint ? `${id}-hint` : undefined;
@@ -71,6 +73,7 @@ export default function FileInput({
   // and always looks ready for the next file. The actual selection lives in
   // the FileList below, which owns its own Delete action.
   const isManagedMultiple = multiple && manageIndividualFiles;
+  const usxManagedDisabled = extraAttributes?.['usx-data-enhanced'] === 'true';
   const nextFileId = useRef(0);
   // defaultFiles seeds rows for files that already exist on the server (no
   // File object) — e.g. previously-submitted uploads. Uncontrolled: only read
@@ -137,6 +140,7 @@ export default function FileInput({
           required={required}
           {...(invalidFileTypeMessage ? { 'data-errormessage': invalidFileTypeMessage } : {})}
           {...props}
+          {...extraAttributes}
         />
       </>
     );
@@ -148,7 +152,7 @@ export default function FileInput({
       {commonLabel}
       {commonHint}
       {commonError}
-      <div className="usx-file-input__add-only" data-usx-file-list-hint={typeof fileListHint === 'string' && fileListHint ? fileListHint : 'Selected files'}>
+      <div className="usx-file-input__add-only" {...(usxManagedDisabled ? { 'usx-data-enhanced': 'true' } : {})} data-usx-file-list-hint={typeof fileListHint === 'string' && fileListHint ? fileListHint : 'Selected files'}>
         <input
           ref={(node) => { if (node) (node as HTMLInputElement & { usxReactManaged?: boolean }).usxReactManaged = true; }}
           className={ClassNames('usa-file-input', 'usx-file-input', className)}
@@ -162,7 +166,8 @@ export default function FileInput({
           required={required && managedFiles.length === 0}
           {...(invalidFileTypeMessage ? { 'data-errormessage': invalidFileTypeMessage } : {})}
           {...props}
-          onChange={addFiles}
+          {...extraAttributes}
+          onChange={usxManagedDisabled ? undefined : addFiles}
         />
       </div>
       <FileList files={managedFiles} hint={fileListHint} onRemove={removeFile} disabled={disabled} />

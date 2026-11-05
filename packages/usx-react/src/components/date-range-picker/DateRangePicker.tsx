@@ -6,6 +6,7 @@ import ErrorMessage from '../error-message/ErrorMessage';
 import FormGroup from '../form-group/FormGroup';
 
 export interface DateRangePickerProps {
+  extraAttributes?: Record<string, unknown>;
   startId?: string;
   endId?: string;
   startName?: string;
@@ -43,6 +44,7 @@ export default function DateRangePicker({
   minDate = null,
   maxDate = null,
   className = '',
+  extraAttributes,
 }: DateRangePickerProps) {
   const startLabelId = `${startId}-label`;
   const startHintId = startHint ? `${startId}-hint` : undefined;
@@ -56,6 +58,7 @@ export default function DateRangePicker({
 
   return (
     <div
+      {...extraAttributes}
       className={classNames('usa-date-range-picker', 'usx-date-range-picker', className)}
       {...(minDate ? { 'data-min-date': minDate } : {})}
       {...(maxDate ? { 'data-max-date': maxDate } : {})}
@@ -69,6 +72,7 @@ export default function DateRangePicker({
         {startHint && <Hint id={startHintId}>{startHint}</Hint>}
         {startError && <ErrorMessage id={startErrorId}>{startError}</ErrorMessage>}
         <div
+          data-enhanced={extraAttributes?.['data-enhanced'] === 'true' ? 'true' : undefined}
           className="usa-date-picker usx-date-picker"
           {...(defaultStartDate ? { 'data-default-value': defaultStartDate } : {})}
         >
@@ -93,6 +97,7 @@ export default function DateRangePicker({
         {endHint && <Hint id={endHintId}>{endHint}</Hint>}
         {endError && <ErrorMessage id={endErrorId}>{endError}</ErrorMessage>}
         <div
+          data-enhanced={extraAttributes?.['data-enhanced'] === 'true' ? 'true' : undefined}
           className="usa-date-picker usx-date-picker"
           {...(defaultEndDate ? { 'data-default-value': defaultEndDate } : {})}
         >

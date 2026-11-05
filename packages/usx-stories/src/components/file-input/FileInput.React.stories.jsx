@@ -10,7 +10,7 @@ export default {
   component: FileInput,
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'UnenhancedUSWDS', 'UnenhancedUSX'],
   parameters: {
     docs: {
       description: {
@@ -18,11 +18,20 @@ export default {
       },
     },
   },
-  decorators: [...componentInit('fileInput')],
+  decorators: [...componentInit('fileInput', 'usxFileInput')],
 };
 
 export const storyDefs = {
   Default: config.default,
+  UnenhancedUSWDS: {
+    ...config.default, id: 'file-input-unenhanced-uswds', name: 'file-input-unenhanced-uswds',
+    extraAttributes: { 'data-enhanced': 'true' },
+  },
+  UnenhancedUSX: {
+    ...config.default, id: 'file-input-unenhanced-usx', name: 'file-input-unenhanced-usx',
+    label: 'Managed files without USX enhancement', multiple: true, manageIndividualFiles: true,
+    extraAttributes: { 'usx-data-enhanced': 'true' },
+  },
   AcceptSpecificTypes: {
     id: 'file-input-specific',
     name: 'file-input-specific',
@@ -61,6 +70,8 @@ export const storyDefs = {
 };
 
 export const Default = { args: storyDefs.Default };
+export const UnenhancedUSWDS = { args: storyDefs.UnenhancedUSWDS, parameters: { docs: { description: { story: 'Without USWDS JavaScript, this remains a native file input. Drag-and-drop styling, file previews, and file type feedback are unavailable.' } } } };
+export const UnenhancedUSX = { args: storyDefs.UnenhancedUSX, parameters: { docs: { description: { story: 'USWDS still enhances the file input, but USX does not manage a separate FileList. The browser keeps the selected files in the input and USWDS shows its normal preview.' } } } };
 export const AcceptSpecificTypes = { args: storyDefs.AcceptSpecificTypes };
 export const AcceptImages = { args: storyDefs.AcceptImages };
 export const Multiple = { args: storyDefs.Multiple };

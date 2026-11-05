@@ -11,6 +11,7 @@ import { useGlobals } from 'storybook/preview-api';
 import React, { useEffect, useRef } from 'react';
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/Header',
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
@@ -20,6 +21,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'header' });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'The desktop links remain in the markup; the mobile menu and expandable navigation need USWDS JavaScript.' } } } };
 export const Basic = createStory(storyDefs.Basic);
 export const BasicWithMegamenu = createStory(storyDefs.BasicWithMegamenu);
 export const Extended = createStory(storyDefs.Extended);

@@ -217,5 +217,13 @@
   .usa-file-input__instructions {
     display: block !important;
   }
+
+  &[usx-data-enhanced='true'] {
+    .usa-file-input__preview,
+    .usa-file-input__preview-heading,
+    .usa-file-input__accepted-files-message {
+      display: block !important;
+    }
+  }
 }
 

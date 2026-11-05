@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 export interface InPageNavProps extends React.HTMLAttributes<HTMLElement> {
+  extraAttributes?: Record<string, unknown>;
   headingElements?: string;
   mainContentSelector?: string | null;
   titleAs?: string;
@@ -35,6 +36,7 @@ export default function InPageNav({
   children = null,
   className = '',
   contentClassName = '',
+  extraAttributes,
   ...props
 }: InPageNavProps) {
   const contentId = `${id}-content`;
@@ -60,6 +62,7 @@ export default function InPageNav({
         data-threshold={threshold}
         data-minimum-heading-count={minimumHeadingCount}
         {...props}
+        {...extraAttributes}
       />
       <div
         id={contentId}

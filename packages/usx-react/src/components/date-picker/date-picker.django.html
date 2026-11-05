@@ -16,7 +16,7 @@
   {% endif %}
 
   <div
-    class="usa-date-picker usx-date-picker{% if className %} {{ className }}{% endif %}"
+    class="usa-date-picker usx-date-picker{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
     {% if defaultValue %} data-default-value="{{ defaultValue }}"{% endif %}
     {% if minDate %} data-min-date="{{ minDate }}"{% endif %}
     {% if maxDate %} data-max-date="{{ maxDate }}"{% endif %}
@@ -47,7 +47,7 @@
   {% endif %}
 
   <div
-    class="usa-date-picker usx-date-picker{% if className %} {{ className }}{% endif %}"
+    class="usa-date-picker usx-date-picker{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
     {% if defaultValue %} data-default-value="{{ defaultValue }}"{% endif %}
     {% if minDate %} data-min-date="{{ minDate }}"{% endif %}
     {% if maxDate %} data-max-date="{{ maxDate }}"{% endif %}

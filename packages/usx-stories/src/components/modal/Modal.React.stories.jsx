@@ -9,7 +9,7 @@ export default {
   component: Modal,
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -32,6 +32,7 @@ const forceActions = [
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'example-modal-unenhanced', triggerLabel: 'Open unenhanced modal', extraAttributes: { 'data-enhanced': 'true' } },
   Large: {
     id: 'example-modal-lg',
     heading: 'Are you sure you want to continue?',
@@ -78,6 +79,7 @@ export const Default = {
   }
 };
 
+export const Unenhanced = { ...Default, args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The trigger and dialog markup remain, but the USWDS modal script is needed to open and close the dialog.' } } } };
 export const Large = {
   args: storyDefs.Large,
   render: (args) => {

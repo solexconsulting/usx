@@ -9,7 +9,7 @@ export default {
   title: 'Django/USWDS/Banner',
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: [],
+  excludeStories: ['Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -23,6 +23,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'banner' });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'The government-site guidance remains collapsed when the USWDS banner script is unavailable.' } } } };
 export const Mil = { name: '.mil TLD', ...createStory(storyDefs.Mil) };
 export const Custom = { name: 'Custom text and TLD', ...createStory(storyDefs.Custom) };
 export const CustomFlag = createStory(storyDefs.CustomFlag);

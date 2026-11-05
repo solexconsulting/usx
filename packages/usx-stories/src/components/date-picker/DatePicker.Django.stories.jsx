@@ -6,6 +6,7 @@ import { storyDefs } from './DatePicker.React.stories.jsx';
 const generatedArgTypes = buildArgTypes(config.props || {});
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/DatePicker',
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
@@ -22,6 +23,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'date-picker' });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'The date remains a plain text field. The calendar button, date validation, and formatted input require USWDS JavaScript.' } } } };
 export const Disabled = createStory(storyDefs.Disabled);
 export const Required = createStory(storyDefs.Required);
 export const WithDefaultValue = createStory(storyDefs.WithDefaultValue);

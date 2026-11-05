@@ -70,7 +70,7 @@ const checkSelector = (def) => async (nav) => {
 };
 
 const checks = Object.fromEntries(
-  Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkSelector(def)])
+  Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), checkSelector(def)])
 );
 
 const play = async (context) => {

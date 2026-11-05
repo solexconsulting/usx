@@ -17,7 +17,7 @@ export default {
   component: Header,
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
-  excludeStories: ['storyDefs', 'borderRoleVars'],
+  excludeStories: ['storyDefs', 'borderRoleVars', 'Unenhanced'],
   decorators: [...componentInit('navigation')],
 };
 
@@ -213,6 +213,7 @@ export const storyDefs = {
     extended: true,
   },
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'header-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   Basic: { ...fullArgs, id: 'header-basic', extended: false, megamenu: false },
   BasicWithMegamenu: { ...fullArgs, id: 'header-basic-megamenu', extended: false, megamenu: true },
   Extended: { ...fullArgs, id: 'header-extended', extended: true, megamenu: false },
@@ -276,6 +277,7 @@ for (const [key, args] of Object.entries(storyDefs)) storyDefs[key] = withSearch
 // ─── Layout variants ─────────────────────────────────────────────────────────
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The desktop links remain in the markup; the mobile menu and expandable navigation need USWDS JavaScript.' } } } };
 export const Basic = { args: storyDefs.Basic };
 export const BasicWithMegamenu = { args: storyDefs.BasicWithMegamenu };
 export const Extended = { args: storyDefs.Extended };

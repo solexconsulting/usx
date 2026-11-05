@@ -1,8 +1,9 @@
 import config from '../../../../usx-react/src/components/drawer/config.json';
-import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import ReactMeta, { storyDefs, AllSides as AllSidesReact, AllSizes as AllSizesReact } from './Drawer.React.stories.jsx';
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USX/Drawer',
   tags: ['USX', 'autodocs'],
   argTypes: {
@@ -11,6 +12,7 @@ export default {
     footer: { control: false },
     trigger: { control: false },
   },
+  decorators: [...componentInit('drawer')],
   parameters: {
     docs: {
       description: {
@@ -25,6 +27,7 @@ const createStory = djangoStory;
 
 /** A named modal drawer opens with heading focus and restores focus when closed. */
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'Native dialog commands still open and close the drawer. USX JavaScript adds dismissal when the backdrop outside the dialog panel is clicked.' } } } };
 
 /** An icon-only menu button uses the trigger slot and an explicit accessible name. */
 export const MenuIconTrigger = createStory(storyDefs.MenuIconTrigger);

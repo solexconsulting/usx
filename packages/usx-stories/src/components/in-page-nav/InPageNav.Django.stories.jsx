@@ -6,6 +6,7 @@ import { storyDefs } from './InPageNav.React.stories.jsx';
 const generatedArgTypes = buildArgTypes(config.props || {});
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/InPageNav',
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
@@ -22,6 +23,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'in-page-nav' });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'The article headings and content remain available, but USWDS JavaScript does not generate the in-page link list.' } } } };
 export const CustomHeadingElements = createStory(storyDefs.CustomHeadingElements);
 export const CustomTitle = createStory(storyDefs.CustomTitle);
 export const BelowMinimumHeadingCount = createStory(storyDefs.BelowMinimumHeadingCount);

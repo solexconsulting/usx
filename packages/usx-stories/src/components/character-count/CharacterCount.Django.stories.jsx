@@ -5,6 +5,7 @@ import { storyDefs } from './CharacterCount.React.stories.jsx';
 import Alert from '../../../../usx-react/src/components/alert/Alert';
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/CharacterCount',
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
@@ -21,6 +22,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'character-count' });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'The native maxlength limit still applies, but the remaining-character count and over-limit announcement do not update.' } } } };
 export const TextArea = createStory(storyDefs.TextArea);
 export const WithPlaceholder = createStory(storyDefs.WithPlaceholder);
 export const TextAreaWithPlaceholder = createStory(storyDefs.TextAreaWithPlaceholder);

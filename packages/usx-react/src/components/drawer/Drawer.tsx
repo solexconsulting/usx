@@ -40,6 +40,7 @@ export interface DrawerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   disabled?: boolean;
   triggerClassName?: string;
   panelClassName?: string;
+  extraAttributes?: Record<string, unknown>;
 }
 
 /** A native dialog drawer with declarative open and close controls. */
@@ -62,6 +63,7 @@ export default function Drawer({
   className,
   triggerClassName,
   panelClassName,
+  extraAttributes,
   ...props
 }: DrawerProps) {
   // Lowercase native attributes work with React 18 and its current DOM typings.
@@ -72,7 +74,7 @@ export default function Drawer({
   };
 
   return (
-    <div {...props} className={ClassNames('usx-drawer', className)}>
+    <div {...props} className={ClassNames('usx-drawer', className)} {...extraAttributes}>
       <button
         type="button"
         className={triggerClassName || undefined}

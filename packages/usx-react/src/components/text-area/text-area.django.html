@@ -16,7 +16,7 @@
 {% endif %}
 <textarea
   class="usa-textarea usx-textarea{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
-  id="{{ field_id }}"
+  id="{{ field_id }}"{% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
   placeholder="{{ placeholder|default:'' }}"
   {% if maxlength %}maxlength="{{ maxlength }}" {% endif %}
   {% if hint or describedBy or error and error != "true" and error != True and error != "false" %}aria-describedby="{% if describedBy %}{{ describedBy }} {% endif %}{% if hint %}{{ field_id }}-hint {% endif %}{% if error and error != "true" and error != True and error != "false" %}{{ field_id }}-error {% endif %}"
@@ -38,7 +38,7 @@
 {% endif %}
 <textarea
   class="usa-textarea usx-textarea{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
-  id="{{ field_id }}"
+  id="{{ field_id }}"{% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
   placeholder="{{ placeholder|default:'' }}"
   {% if maxlength %}maxlength="{{ maxlength }}" {% endif %}
   {% if hint or describedBy or error and error != "true" and error != True and error != "false" %}aria-describedby="{% if describedBy %}{{ describedBy }} {% endif %}{% if hint %}{{ field_id }}-hint {% endif %}{% if error and error != "true" and error != True and error != "false" %}{{ field_id }}-error {% endif %}"

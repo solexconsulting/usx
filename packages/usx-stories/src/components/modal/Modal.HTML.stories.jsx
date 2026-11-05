@@ -84,14 +84,14 @@ const checkModal =
   };
 
 const checks = Object.fromEntries(
-  Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkModal(def)])
+  Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), checkModal(def)])
 );
 
 const play = async (context) => {
   await createAllVariantsPlay(checks)(context);
   const { canvasElement } = context;
 
-  for (const [key, def] of Object.entries(storyDefs)) {
+  for (const [key, def] of Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced'))) {
     await context.step(`Opening and closing: ${sectionTitle(key)}`, async () => {
       const trigger = sectionFor(canvasElement, sectionTitle(key));
       const wrapper = await waitForWrapper(canvasElement, def.id);

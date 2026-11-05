@@ -10,7 +10,7 @@ export default {
   component: DateRangePicker,
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -23,6 +23,7 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, startId: 'event-date-start-unenhanced', endId: 'event-date-end-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   Disabled: {
     startId: 'event-date-disabled-start',
     endId: 'event-date-disabled-end',
@@ -74,6 +75,7 @@ export const storyDefs = {
 };
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'Both dates remain plain text fields. The linked calendars and range constraints require USWDS JavaScript.' } } } };
 export const Disabled = { args: storyDefs.Disabled };
 export const Required = { args: storyDefs.Required };
 export const WithDefaultValues = { args: storyDefs.WithDefaultValues };

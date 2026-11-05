@@ -20,6 +20,20 @@
         display: none;
     }
 
+    // Keep the native selector available until the JavaScript controls it.
+    &:not([data-enhanced='true']) &__panel {
+        display: flex;
+    }
+
+    &:not([data-enhanced='true']) .usx-theme-picker__trigger,
+    &:not([data-enhanced='true']) .usx-theme-picker__toggle {
+        display: none;
+    }
+
+    &:not([data-enhanced='true']) .usa-select.usx-select {
+        border-radius: usx-when($usx-input-radius, $usx-input-radius, 0) !important;
+    }
+
     .usa-select.usx-select {
         margin: 0;
 

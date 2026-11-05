@@ -77,7 +77,7 @@ const checkCarousel = (def) => async (carousel) => {
 };
 
 const checks = Object.fromEntries(
-  Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkCarousel(def)])
+  Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), checkCarousel(def)])
 );
 
 const play = async (context) => {

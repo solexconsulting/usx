@@ -158,6 +158,7 @@ function PrimaryNav({
 }
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
+  extraAttributes?: Record<string, unknown>;
   id?: string;
   branding: BrandingProps;
   staticBaseUrl?: string;
@@ -191,6 +192,7 @@ export default function Header({
   className = '',
   utilityContent = null,
   navEndContent = null,
+  extraAttributes,
   ...props
 }: HeaderProps) {
   const headerClasses = ClassNames(
@@ -220,10 +222,10 @@ export default function Header({
   if (extended) {
     return (
       <>
-        <header id={id} className={headerClasses} {...props}>
+        <header id={id} className={headerClasses} {...props} {...extraAttributes}>
           {navbar}
         </header>
-        <nav aria-label="Primary navigation" className={navClasses}>
+        <nav aria-label="Primary navigation" className={navClasses} {...(extraAttributes?.['data-enhanced'] === 'true' ? { 'data-enhanced': 'true' } : {})}>
           <div className="usa-nav__inner">
             <PrimaryNav
               navSections={navSections}
@@ -260,7 +262,7 @@ export default function Header({
   }
 
   return (
-    <header id={id} className={headerClasses} {...props}>
+    <header id={id} className={headerClasses} {...props} {...extraAttributes}>
       <div className="usa-nav-container">
         {navbar}
         <nav aria-label="Primary navigation" className={navClasses}>

@@ -15,6 +15,7 @@ export interface AccordionItemProps {
 }
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+    extraAttributes?: Record<string, unknown>;
     bordered?: boolean;
     items?: AccordionItemProps[];
     multiselectable?: boolean;
@@ -74,6 +75,7 @@ export function Accordion({
     className = '',
     headingClassName = '',
     contentClassName = '',
+    extraAttributes,
     ...props
 }: AccordionProps) {
     const accordionClasses = classnames(
@@ -91,6 +93,7 @@ export function Accordion({
             className={accordionClasses}
             data-allow-multiple={multiselectable ? true : undefined}
             {...props}
+            {...extraAttributes}
         >
             {items.map((item) => (
                 <AccordionItem

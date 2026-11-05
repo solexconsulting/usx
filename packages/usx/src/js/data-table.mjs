@@ -1,4 +1,5 @@
 // Progressive enhancement shared by React, Django, and static USX data tables.
+import { enhancementDisabled } from './enhancement.mjs';
 const instances = new WeakMap();
 const observers = new WeakMap();
 const selector = '[data-usx-data-table]';
@@ -8,7 +9,7 @@ function roots(root) {
 }
 
 function enhance(shell) {
-  if (instances.has(shell)) return;
+  if (instances.has(shell) || enhancementDisabled(shell)) return;
   const table = shell.querySelector('table.usx-data-table');
   if (!table) return;
   const rows = [...table.querySelectorAll('tbody .usx-data-table__row')];
@@ -321,6 +322,7 @@ function enhance(shell) {
     sentinelObserver.observe(sentinel);
   }
   refresh();
+  shell.dataset.enhanced = 'true';
   instances.set(shell, () => {
     listeners.forEach((remove) => remove()); sentinelObserver?.disconnect(); empty?.remove(); live.remove();
     table.querySelectorAll('.usx-data-table__sort-button').forEach((button) => button.remove());

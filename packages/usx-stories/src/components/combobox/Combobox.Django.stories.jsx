@@ -5,6 +5,7 @@ import React from 'react';
 import { waitFor } from 'storybook/test';
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/Combobox',
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
@@ -21,6 +22,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'combobox' });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'The native select still lists every fruit. Search, filtered suggestions, and combobox keyboard interactions require USWDS JavaScript.' } } } };
 export const Disabled = createStory(storyDefs.Disabled);
 export const Required = createStory(storyDefs.Required);
 export const WithHint = createStory(storyDefs.WithHint);

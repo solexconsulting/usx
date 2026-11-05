@@ -128,6 +128,14 @@ export const UswdsJsInit = {
         must make the corresponding call when it mounts USWDS components
         after the bundle has run.
       </p>
+      <p>
+        The Unenhanced stories pass <code>data-enhanced="true"</code> on the
+        USWDS target and still call its initializer. Some USWDS modules do
+        not check that attribute, so Storybook filters those marked nodes
+        before initialization and prevents their delegated controls from
+        reacting. In an application, leaving out the JavaScript bundle is
+        the way to see the actual no-JavaScript fallback.
+      </p>
 
       <h2>USWDS example: full bundle loaded once</h2>
       <p>

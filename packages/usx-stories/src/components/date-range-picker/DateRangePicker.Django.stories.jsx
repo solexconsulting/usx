@@ -6,6 +6,7 @@ import { storyDefs } from './DateRangePicker.React.stories.jsx';
 const generatedArgTypes = buildArgTypes(config.props || {});
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/DateRangePicker',
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
@@ -22,6 +23,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'date-range-picker' });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'Both dates remain plain text fields. The linked calendars and range constraints require USWDS JavaScript.' } } } };
 export const Disabled = createStory(storyDefs.Disabled);
 export const Required = createStory(storyDefs.Required);
 export const WithDefaultValues = createStory(storyDefs.WithDefaultValues);

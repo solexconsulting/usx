@@ -10,7 +10,7 @@ export default {
   component: Banner,
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -23,6 +23,7 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'gov-banner-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   Mil: {
     id: 'gov-banner-mil',
     tld: '.mil',
@@ -48,6 +49,7 @@ export const Default = {
   args: storyDefs.Default,
 };
 
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The government-site guidance remains collapsed when the USWDS banner script is unavailable.' } } } };
 export const Mil = { name: '.mil TLD', args: storyDefs.Mil };
 export const Custom = { name: 'Custom text and TLD', args: storyDefs.Custom };
 export const CustomFlag = {

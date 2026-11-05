@@ -16,7 +16,7 @@
 {% endif %}
 <input
   class="usa-input usx-input{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
-  id="{{ field_id }}"
+  id="{{ field_id }}"{% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
   {% if name %}name="{{ name }}" {% endif %}
   {% if type %}type="{{ type }}" {% endif %}
   {% if autoComplete %}autocomplete="{{ autoComplete }}" {% endif %}
@@ -43,7 +43,7 @@
 {% endif %}
 <input
   class="usa-input usx-input{% if error %} usa-input--error{% elif success %} usa-input--success{% endif %}{% if className %} {{ className }}{% endif %}"
-  id="{{ field_id }}"
+  id="{{ field_id }}"{% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
   {% if name %}name="{{ name }}" {% endif %}
   {% if type %}type="{{ type }}" {% endif %}
   {% if autoComplete %}autocomplete="{{ autoComplete }}" {% endif %}

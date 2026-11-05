@@ -10,7 +10,7 @@ export default {
   component: DatePicker,
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -23,6 +23,7 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'appointment-date-unenhanced', name: 'appointment-date-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   Disabled: {
     id: 'appointment-date-disabled',
     name: 'appointment-date-disabled',
@@ -62,6 +63,7 @@ export const storyDefs = {
 };
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The date remains a plain text field. The calendar button, date validation, and formatted input require USWDS JavaScript.' } } } };
 export const Disabled = { args: storyDefs.Disabled };
 export const Required = { args: storyDefs.Required };
 export const WithDefaultValue = { args: storyDefs.WithDefaultValue };

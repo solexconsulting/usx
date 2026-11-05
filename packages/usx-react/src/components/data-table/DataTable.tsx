@@ -64,6 +64,7 @@ export interface TableProps extends Omit<React.TableHTMLAttributes<HTMLTableElem
   loading?: boolean;
   placeholder?: React.ReactNode;
   children?: React.ReactNode;
+  extraAttributes?: Record<string, unknown>;
 }
 
 /** Data-driven table with a compound markup escape hatch. */
@@ -101,6 +102,7 @@ function DataTable({
   placeholder = 'No rows to display',
   className = '',
   children,
+  extraAttributes,
   ...props
 }: TableProps) {
   const generatedId = useId();
@@ -156,7 +158,8 @@ function DataTable({
       data-page-size={paginate ? pageSize : undefined}
       data-initial-sort-key={initialSort?.direction ? initialSort.key || undefined : undefined}
       data-initial-sort-direction={initialSort?.direction || undefined}
-      data-total-count={pageConfig.totalCount} data-infinite={infinite || undefined}>
+      data-total-count={pageConfig.totalCount} data-infinite={infinite || undefined}
+      {...extraAttributes}>
       {searchable && <div className="usx-data-table__toolbar">
         <Input id={`${id}-search`} label="Search" formGroup={false} placeholder={searchPlaceholder} />
       </div>}

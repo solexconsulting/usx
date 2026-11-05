@@ -8,7 +8,7 @@
 {% if error %}
 {% error_message id=id|add:"-error" %}{{ error }}{% enderror_message %}
 {% endif %}
-{% if multiple and manageIndividualFiles %}<div class="usx-file-input__add-only" data-usx-file-list-hint="{{ fileListHint|default:'Selected files' }}">{% endif %}
+{% if multiple and manageIndividualFiles %}<div class="usx-file-input__add-only"{% if extraAttributes %}{% for attr, value in extraAttributes.items %}{% if attr == 'usx-data-enhanced' %} usx-data-enhanced="{{ value }}"{% endif %}{% endfor %}{% endif %} data-usx-file-list-hint="{{ fileListHint|default:'Selected files' }}">{% endif %}
 <input
   class="usa-file-input usx-file-input{% if className %} {{ className }}{% endif %}"
   id="{{ id }}"
@@ -20,6 +20,7 @@
   {% if invalidFileTypeMessage %} data-errormessage="{{ invalidFileTypeMessage }}"{% endif %}
   {% if disabled %} disabled{% endif %}
   {% if required %}{% if multiple and manageIndividualFiles %}{% if not defaultFiles %} required{% endif %}{% else %} required{% endif %}{% endif %}
+  {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
 />
 {% if multiple and manageIndividualFiles %}
 </div>

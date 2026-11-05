@@ -23,15 +23,15 @@ export const componentContracts = {
   "packages": {
     "@solexllc/usx-contracts": {
       "registry": "npm",
-      "version": "0.8.0"
+      "version": "0.9.0"
     },
     "@solexllc/usx-react": {
       "registry": "npm",
-      "version": "0.8.0"
+      "version": "0.9.0"
     },
     "@solexllc/usx": {
       "registry": "npm",
-      "version": "0.10.0"
+      "version": "0.11.0"
     },
     "solex-usx-django": {
       "registry": "pypi",
@@ -44,6 +44,10 @@ export const componentContracts = {
       "version": 3,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "id": {
           "type": "string",
           "description": "Base ID for the accordion. Items without their own id get this base plus the item's index."
@@ -521,6 +525,10 @@ export const componentContracts = {
       "version": 2,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "staticBaseUrl": {
           "type": "string",
           "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."
@@ -1359,6 +1367,10 @@ export const componentContracts = {
       "version": 2,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "id": {
           "type": "string",
           "default": null,
@@ -1916,6 +1928,10 @@ export const componentContracts = {
       "version": 2,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "id": {
           "type": "string",
           "description": "id attribute for the select"
@@ -2967,6 +2983,10 @@ export const componentContracts = {
           "type": "boolean",
           "default": false,
           "description": "Make rows keyboard and pointer activatable; the JS initializer emits usx:data-table:row-activate."
+        },
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional HTML attributes on the table shell."
         }
       },
       "renderers": {
@@ -3037,6 +3057,10 @@ export const componentContracts = {
       "version": 2,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "id": {
           "type": "string",
           "default": "appointment-date",
@@ -3124,6 +3148,10 @@ export const componentContracts = {
       "version": 2,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "startId": {
           "type": "string",
           "default": "event-date-start",
@@ -3400,6 +3428,10 @@ export const componentContracts = {
         "panelClassName": {
           "type": "string",
           "description": "Additional classes for the dialog panel."
+        },
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional HTML attributes on the drawer root."
         }
       },
       "renderers": {
@@ -3820,6 +3852,10 @@ export const componentContracts = {
         "onFilesChange": {
           "type": "function",
           "description": "Receives the current browser File objects after managed add or delete. React calls this function; Django dispatches a bubbling usx:files-change event from the input with detail.files. Preloaded files are excluded."
+        },
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional HTML attributes on the file input."
         }
       },
       "renderers": {
@@ -4213,6 +4249,10 @@ export const componentContracts = {
       "version": 1,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "staticBaseUrl": {
           "type": "string",
           "description": "Optional branding image asset base, overriding window.usxBaseUrl in React or STATIC_URL in Django. Defaults to the global base or /."
@@ -5020,6 +5060,10 @@ export const componentContracts = {
       "version": 3,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "id": {
           "type": "string",
           "default": "in-page-nav",
@@ -5320,6 +5364,10 @@ export const componentContracts = {
       "version": 2,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "languages": {
           "type": "array",
           "description": "Array of language options",
@@ -5485,6 +5533,10 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes"
+        },
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional HTML attributes on the layout root."
         }
       },
       "renderers": {
@@ -5879,6 +5931,10 @@ export const componentContracts = {
       "version": 2,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "id": {
           "type": "string",
           "default": "example-modal",
@@ -6401,6 +6457,10 @@ export const componentContracts = {
         "contentClassName": {
           "type": "string",
           "description": "Optional class name for the inner content container."
+        },
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional HTML attributes on the popover root."
         }
       },
       "renderers": {
@@ -6714,6 +6774,10 @@ export const componentContracts = {
       "version": 2,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "id": {
           "type": "string",
           "default": "range-slider",
@@ -7833,6 +7897,10 @@ export const componentContracts = {
         "caption"
       ],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "id": {
           "type": "string",
           "description": "Optional table ID."
@@ -8319,6 +8387,10 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional CSS classes"
+        },
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional HTML attributes on the theme picker root."
         }
       },
       "renderers": {
@@ -8394,6 +8466,10 @@ export const componentContracts = {
       "version": 2,
       "required": [],
       "props": {
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes on the USWDS enhancement target."
+        },
         "id": {
           "type": "string",
           "default": "appointment-time",

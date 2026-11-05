@@ -4,6 +4,7 @@ import { buildArgTypes, createDjangoStory, componentInit } from '../../utils/sto
 import { storyDefs } from './Accordion.React.stories.jsx';
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/Accordion',
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
@@ -16,6 +17,7 @@ const toDjangoArgs = (args) =>
   Object.fromEntries(Object.entries(args).filter(([key]) => allowedPropNames.has(key)));
 
 export const Default = createStory(toDjangoArgs(storyDefs.Default));
+export const Unenhanced = { ...createStory(toDjangoArgs(storyDefs.Unenhanced)), parameters: { docs: { description: { story: 'The first section starts open so its content remains readable. Without JavaScript, the other accordion buttons cannot expand their sections.' } } } };
 export const Bordered = createStory(toDjangoArgs(storyDefs.Bordered));
 export const InitiallyExpanded = createStory(toDjangoArgs(storyDefs.InitiallyExpanded));
 export const MultiSelectable = createStory(toDjangoArgs(storyDefs.MultiSelectable));

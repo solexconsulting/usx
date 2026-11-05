@@ -6,6 +6,7 @@ import ErrorMessage from '../error-message/ErrorMessage';
 import FormGroup from '../form-group/FormGroup';
 
 export interface DatePickerProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'defaultValue'> {
+  extraAttributes?: Record<string, unknown>;
   label?: React.ReactNode;
   hint?: React.ReactNode;
   error?: React.ReactNode;
@@ -30,6 +31,7 @@ export default function DatePicker({
   rangeDate = null,
   formGroup = true,
   className = '',
+  extraAttributes,
   ...props
 }: DatePickerProps) {
   const labelId = `${id}-label`;
@@ -47,6 +49,7 @@ export default function DatePicker({
       {hint && <Hint id={hintId}>{hint}</Hint>}
       {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
       <div
+        {...extraAttributes}
         className={classNames('usa-date-picker', 'usx-date-picker', className)}
         {...(defaultValue ? { 'data-default-value': defaultValue } : {})}
         {...(minDate ? { 'data-min-date': minDate } : {})}

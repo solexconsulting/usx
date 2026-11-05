@@ -7,6 +7,7 @@ import ErrorMessage from '../error-message/ErrorMessage';
 import FormGroup from '../form-group/FormGroup';
 
 export interface TimePickerProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'step'> {
+  extraAttributes?: Record<string, unknown>;
   label?: React.ReactNode;
   hint?: React.ReactNode;
   error?: React.ReactNode;
@@ -33,6 +34,7 @@ export default function TimePicker({
   step = null,
   formGroup = true,
   className = '',
+  extraAttributes,
   ...props
 }: TimePickerProps) {
   const labelId = `${id}-label`;
@@ -63,6 +65,7 @@ export default function TimePicker({
       {hint && <Hint id={hintId}>{hint}</Hint>}
       {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
       <div
+        {...extraAttributes}
         className={containerClasses}
         {...(minTime ? { 'data-min-time': minTime } : {})}
         {...(maxTime ? { 'data-max-time': maxTime } : {})}

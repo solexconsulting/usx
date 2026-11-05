@@ -16,7 +16,7 @@ export default {
       },
     },
   },
-  decorators: [...componentInit('fileInput')],
+  decorators: [...componentInit('fileInput', 'usxFileInput')],
 };
 
 const storyKeys = [

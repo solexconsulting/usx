@@ -1,7 +1,7 @@
 {# Django template for DateRangePicker #}
 {% load usx_components %}
 <div
-  class="usa-date-range-picker usx-date-range-picker{% if className %} {{ className }}{% endif %}"
+  class="usa-date-range-picker usx-date-range-picker{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
   {% if minDate %} data-min-date="{{ minDate }}"{% endif %}
   {% if maxDate %} data-max-date="{{ maxDate }}"{% endif %}
 >
@@ -19,7 +19,7 @@
     {% endif %}
 
     <div
-      class="usa-date-picker usx-date-picker"
+      class="usa-date-picker usx-date-picker"{% if extraAttributes %}{% for attr, value in extraAttributes.items %}{% if attr == "data-enhanced" %} data-enhanced="{{ value }}"{% endif %}{% endfor %}{% endif %}
       {% if defaultStartDate %} data-default-value="{{ defaultStartDate }}"{% endif %}
     >
       <input
@@ -48,7 +48,7 @@
     {% endif %}
 
     <div
-      class="usa-date-picker usx-date-picker"
+      class="usa-date-picker usx-date-picker"{% if extraAttributes %}{% for attr, value in extraAttributes.items %}{% if attr == "data-enhanced" %} data-enhanced="{{ value }}"{% endif %}{% endfor %}{% endif %}
       {% if defaultEndDate %} data-default-value="{{ defaultEndDate }}"{% endif %}
     >
       <input
