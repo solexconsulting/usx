@@ -148,7 +148,7 @@ function cssRules(css) {
       if ('(['.includes(selectorText[i])) depth++;
       if (')]'.includes(selectorText[i])) depth--;
       if (i === selectorText.length || (selectorText[i] === ',' && depth === 0)) {
-        selectors.push(selectorText.slice(start, i).trim());
+        selectors.push(selectorText.slice(start, i).replace(/\s+/g, ' ').trim());
         start = i + 1;
       }
     }
@@ -318,6 +318,13 @@ function expectCheckableOutline(rules, label, expected) {
 expectCheckableOutline(defaultRules, 'unconfigured checkables preserve USWDS ink', undefined);
 expectCheckableOutline(customRules, 'shared border scale does not change checkable ink', undefined);
 expectCheckableOutline(themedRules, 'runtime checkable component hook', 'var(--usx-checkable-border)');
+for (const selector of [
+  '.usx-checkbox .usa-checkbox__label::before',
+  '.usa-radio.usx-radio .usa-radio__label::before',
+]) {
+  expectDeclaration(defaultRules, 'unconfigured checkable background preserves USWDS', selector, 'background-color', undefined);
+  expectDeclaration(themedRules, 'shared checkable background hook', selector, 'background-color', 'var(--usx-checkable-bg)');
+}
 const activeCheckbox = '.usx-checkbox .usa-checkbox__input:is(:checked, :indeterminate, [data-indeterminate]):not(:disabled, [aria-disabled=true])';
 for (const [selector, property] of [
   [`${activeCheckbox} + .usa-checkbox__label::before`, 'background-color'],

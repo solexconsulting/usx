@@ -10,9 +10,10 @@ $switch-thumb-size: $switch-height - 0.25rem;
 $switch-small-thumb-size: $switch-small-height - 0.25rem;
 $switch-checked-color: $usx-color-primary or #005ea2;
 $switch-off-color: $usx-checkable-border or #1b1b1b;
+$switch-disabled-color: #757575;
 
-// Checkbox owns the input, label, focus ring, tile, and message states. Switch
-// changes only the shape and spacing of the control painted on the label.
+// Checkbox supplies the input, label, tile, and shared off colors. Switch
+// draws the track and knob, including their checked and disabled states.
 .usa-checkbox.usx-switch {
   .usa-checkbox__label {
     padding-left: $switch-width + 0.75rem;
@@ -23,7 +24,6 @@ $switch-off-color: $usx-checkable-border or #1b1b1b;
     height: $switch-height;
     margin-left: 0.25rem;
     border-radius: 999px;
-    background-color: usx-when($usx-checkable-bg);
     background-image: radial-gradient(
       circle closest-side,
       #{$switch-off-color} 98%,
@@ -45,13 +45,13 @@ $switch-off-color: $usx-checkable-border or #1b1b1b;
     }
   }
 
-  // The shared checkable token drives the off outline in both components.
+  // before-{color} also colors the off pseudo-element; keep its ink neutral
+  // when the shared border token resolves to currentcolor.
   .usa-checkbox__input:where(
       :not(:checked, :indeterminate, [data-indeterminate], :disabled, [aria-disabled='true'])
     )
     + .usa-checkbox__label::before {
     color: inherit !important;
-    box-shadow: 0 0 0 2px $switch-off-color;
   }
 
   .usa-checkbox__input:is(:checked, :indeterminate, [data-indeterminate]):not(
@@ -75,8 +75,12 @@ $switch-off-color: $usx-checkable-border or #1b1b1b;
 
   .usa-checkbox__input:is(:disabled, [aria-disabled='true']) + .usa-checkbox__label::before {
     background-color: white;
-    background-image: radial-gradient(circle closest-side, #757575 98%, transparent 100%);
-    box-shadow: 0 0 0 2px #757575;
+    background-image: radial-gradient(
+      circle closest-side,
+      #{$switch-disabled-color} 98%,
+      transparent 100%
+    );
+    box-shadow: 0 0 0 2px $switch-disabled-color;
   }
 
   .usa-checkbox__input:is(:checked, :indeterminate, [data-indeterminate]):is(
@@ -84,7 +88,7 @@ $switch-off-color: $usx-checkable-border or #1b1b1b;
       [aria-disabled='true']
     )
     + .usa-checkbox__label::before {
-    background-color: #757575;
+    background-color: $switch-disabled-color;
     background-image: radial-gradient(circle closest-side, white 98%, transparent 100%);
   }
 
