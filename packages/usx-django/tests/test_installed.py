@@ -93,13 +93,39 @@ class InstalledPackageTests(SimpleTestCase):
         with self.assertRaises(KeyError):
             render_component("unknown-component", {})
 
-    def test_table_helper_is_bundled(self):
+    def test_table_and_data_table_render(self):
         html = render_component("table", {
             "columns": [{"key": "name", "header": "Name"}],
             "data": [{"name": "Ada"}],
         })
         self.assertIn("Ada", html)
         self.assertIn("Name", html)
+        advanced = render_component("data-table", {"columns": [{"key": "name", "header": "Name", "sortable": True}], "data": [{"id": 1, "name": "Ada"}], "searchable": True})
+        self.assertIn("Ada", advanced)
+        self.assertIn("data-usx-data-table", advanced)
+
+    def test_data_table_content_is_complete_without_browser_javascript(self):
+        html = render_component("data-table", {
+            "id": "server-table",
+            "columns": [
+                {"key": "service", "header": "Service", "primary": True},
+                {"key": "days", "header": "Schedule", "columns": [
+                    {"key": "monday", "header": "Monday"},
+                    {"key": "tuesday", "header": "Tuesday"},
+                ]},
+            ],
+            "data": [
+                {"id": 1, "service": "Permit desk", "monday": "Closed for training",
+                 "cellProps": {"monday": {"colSpan": 2}}},
+                {"id": 2, "service": "Records desk", "monday": "9–5", "tuesday": "9–5"},
+            ],
+        })
+        self.assertIn("Permit desk", html)
+        self.assertIn("Records desk", html)
+        self.assertIn("Closed for training", html)
+        self.assertIn('colspan="2"', html)
+        self.assertIn('data-column-key="tuesday"', html)
+        self.assertNotIn("data-column-key=\"tuesday\"", html.split("Permit desk", 1)[1].split("Records desk", 1)[0])
 
     def test_container_renders_without_component_specific_helpers(self):
         self.assertFalse(files("usx_django").joinpath("templatetags", "container.py").is_file())

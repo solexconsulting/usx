@@ -23,15 +23,15 @@ export const componentContracts = {
   "packages": {
     "@solexllc/usx-contracts": {
       "registry": "npm",
-      "version": "0.7.0"
+      "version": "0.8.0"
     },
     "@solexllc/usx-react": {
       "registry": "npm",
-      "version": "0.7.0"
+      "version": "0.8.0"
     },
     "@solexllc/usx": {
       "registry": "npm",
-      "version": "0.9.0"
+      "version": "0.10.0"
     },
     "solex-usx-django": {
       "registry": "pypi",
@@ -1479,6 +1479,15 @@ export const componentContracts = {
           "default": false,
           "description": "Whether the checkbox is checked"
         },
+        "indeterminate": {
+          "type": "boolean",
+          "default": false,
+          "description": "React-only mixed state for a select-all checkbox."
+        },
+        "ariaLabel": {
+          "type": "string",
+          "description": "Accessible name when a visible label is unsuitable."
+        },
         "disabled": {
           "type": "boolean",
           "default": false,
@@ -2630,6 +2639,396 @@ export const componentContracts = {
             "copiedTooltip": "Copied",
             "position": "right"
           }
+        }
+      }
+    },
+    "data-table": {
+      "component": "data-table",
+      "version": 1,
+      "required": [
+        "columns",
+        "data"
+      ],
+      "props": {
+        "id": {
+          "type": "string",
+          "description": "ID for the <table> element. Required for accessibility when using sticky headers or scrollable tables."
+        },
+        "columns": {
+          "type": "array",
+          "description": "Ordered column definitions; nested columns form grouped headers. Hidden columns are omitted from rendering.",
+          "items": {
+            "type": "object",
+            "description": "Column definition.",
+            "properties": {
+              "key": {
+                "type": "string",
+                "description": "Row data property to read."
+              },
+              "header": {
+                "type": "string",
+                "description": "Column header text."
+              },
+              "render": {
+                "type": "function",
+                "description": "React cell renderer: (row, rowIndex) => node."
+              },
+              "align": {
+                "type": "select",
+                "options": [
+                  "left",
+                  "center",
+                  "right"
+                ],
+                "description": "Horizontal cell content alignment. Center also centers buttons and avatars."
+              },
+              "verticalAlign": {
+                "type": "select",
+                "options": [
+                  "top",
+                  "middle",
+                  "bottom"
+                ],
+                "description": "Vertical position of cell content; top is the default."
+              },
+              "sortable": {
+                "type": "boolean",
+                "description": "Allow sorting by this column."
+              },
+              "width": {
+                "type": "string",
+                "description": "CSS width for the column."
+              },
+              "primary": {
+                "type": "boolean",
+                "description": "Marks the primary column shown in stacked/responsive mode."
+              },
+              "hidden": {
+                "type": "boolean",
+                "description": "Hide the column."
+              },
+              "aggregate": {
+                "type": "select",
+                "options": [
+                  "sum",
+                  "avg",
+                  "min",
+                  "max",
+                  "count"
+                ],
+                "description": "Built-in footer aggregate."
+              },
+              "footer": {
+                "type": "string",
+                "description": "Static footer content, or a React callback receiving visible rows."
+              },
+              "className": {
+                "type": "string",
+                "description": "Additional data-cell classes, including bg-* and text-* USX color utilities."
+              },
+              "headerClassName": {
+                "type": "string",
+                "description": "Additional header cell classes, including bg-* and text-* USX color utilities."
+              },
+              "backgroundColor": {
+                "type": "string",
+                "description": "Background color for data cells in this column."
+              },
+              "color": {
+                "type": "string",
+                "description": "Text color for data cells in this column."
+              },
+              "headerBackgroundColor": {
+                "type": "string",
+                "description": "Background color for this column header."
+              },
+              "headerColor": {
+                "type": "string",
+                "description": "Text color for this column header."
+              },
+              "filterable": {
+                "type": "boolean",
+                "default": true,
+                "description": "Include this column in client-side search."
+              },
+              "searchValue": {
+                "type": "function",
+                "description": "React-only text source for searching computed values."
+              },
+              "stackLabel": {
+                "type": "string",
+                "description": "Label for this cell in stacked layout."
+              },
+              "headerAlign": {
+                "type": "select",
+                "options": [
+                  "left",
+                  "center",
+                  "right"
+                ],
+                "description": "Header cell alignment."
+              },
+              "minWidth": {
+                "type": "string",
+                "description": "Minimum column width."
+              },
+              "sortValue": {
+                "type": "function",
+                "description": "React-only comparable value serialized for the shared JS sorter."
+              }
+            }
+          }
+        },
+        "data": {
+          "type": "array",
+          "description": "Array of row data objects. Each row may set rowProps {backgroundColor, color, className} and cellProps keyed by column key with {rowSpan, colSpan, align, verticalAlign, backgroundColor, color, className}."
+        },
+        "primaryKey": {
+          "type": "string",
+          "default": "id",
+          "description": "Property name used as the unique row identifier."
+        },
+        "caption": {
+          "type": "slot",
+          "description": "Accessible caption for the data table."
+        },
+        "striped": {
+          "type": "boolean",
+          "default": false,
+          "description": "Apply alternating row shading (usx-data-table--striped)."
+        },
+        "borderless": {
+          "type": "boolean",
+          "default": false,
+          "description": "Remove cell borders (usx-data-table--borderless)."
+        },
+        "compact": {
+          "type": "boolean",
+          "default": false,
+          "description": "Reduce cell padding (usx-data-table--compact)."
+        },
+        "searchable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show a search field. Searches visible column values in React and rendered row text in Django/HTML."
+        },
+        "searchPlaceholder": {
+          "type": "string",
+          "default": "Search table",
+          "description": "Placeholder text for the search input."
+        },
+        "scrollable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Wrap the table in a horizontally-scrollable container."
+        },
+        "height": {
+          "type": "string",
+          "description": "CSS max-height for vertical scrolling (e.g. '400px')."
+        },
+        "responsive": {
+          "type": "select",
+          "options": [
+            false,
+            "stack",
+            "stack-header"
+          ],
+          "default": false,
+          "description": "Below 480px, stack cells with labels; 'stack-header' shades the first data cell as each row's heading."
+        },
+        "stickyHeader": {
+          "type": "boolean",
+          "default": false,
+          "description": "Keep the header row visible while scrolling (usx-data-table--sticky-header)."
+        },
+        "stickyFirstColumn": {
+          "type": "boolean",
+          "default": false,
+          "description": "Sticky-pin the first column on horizontal scroll."
+        },
+        "sortable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable sorting on all columns (individual columns can opt out via column.sortable: false)."
+        },
+        "sort": {
+          "type": "object",
+          "description": "Initial sort state: { key: string, direction: 'asc' | 'desc' | null }. Runtime changes are emitted as usx:data-table:sort events."
+        },
+        "selectionMode": {
+          "type": "select",
+          "options": [
+            null,
+            "checkbox",
+            "radio"
+          ],
+          "default": null,
+          "description": "Row selection mode. 'checkbox' enables multi-select; 'radio' enables single-select."
+        },
+        "selectionPosition": {
+          "type": "select",
+          "options": [
+            "left",
+            "right"
+          ],
+          "default": "left",
+          "description": "Position of the selection column."
+        },
+        "selectionVerticalAlign": {
+          "type": "select",
+          "options": [
+            "top",
+            "middle",
+            "bottom"
+          ],
+          "default": "middle",
+          "description": "Vertical position of selection checkboxes and radios. They are centered horizontally."
+        },
+        "select": {
+          "type": "array",
+          "description": "Initially selected primary key values. Runtime changes are emitted as usx:data-table:select events."
+        },
+        "allowSelectAll": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show 'select all' checkbox in header (checkbox mode only)."
+        },
+        "disabled": {
+          "type": "array",
+          "description": "Array of primary key values for rows that should be non-interactive."
+        },
+        "groupBy": {
+          "type": "object",
+          "description": "Group rows by a property. String shorthand or object: { property, expand, defaultExpanded, headers, columns, rowClassName, values }. headers defines an optional top band; columns defines group-row cells. Both sets of colSpans must cover visible data columns. rowClassName accepts bg-* and text-* USX utilities."
+        },
+        "rowDetails": {
+          "type": "object",
+          "description": "Expandable row details. React accepts a render callback; Django uses rowDetailField with rowDetails enabled."
+        },
+        "showFooter": {
+          "type": "boolean",
+          "default": false,
+          "description": "Render a <tfoot> row using column.footer or column.aggregate values."
+        },
+        "paginate": {
+          "type": "object",
+          "description": "Client-side pagination with pageSize and pageSizeOptions. totalCount enables server-side paging via usx:data-table:page-change events."
+        },
+        "loading": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show a loading state overlay. Does not affect interactivity."
+        },
+        "placeholder": {
+          "type": "slot",
+          "description": "Content shown when the data array is empty."
+        },
+        "className": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes applied to the <table> element."
+        },
+        "expandedRows": {
+          "type": "array",
+          "default": [],
+          "description": "Django only. List of primary-key values whose detail rows are open on initial render. Mirrors the React rowDetails.expand controlled prop."
+        },
+        "rowDetailTemplate": {
+          "type": "string",
+          "default": null,
+          "description": "Django only. Path to a Django partial template rendered as row-detail content (replaces React rowDetails.render)."
+        },
+        "rowDetailField": {
+          "type": "string",
+          "default": null,
+          "description": "Django only. Key in each row dict whose value is used as inline row-detail content (simpler alternative to rowDetailTemplate)."
+        },
+        "rowUrlField": {
+          "type": "string",
+          "default": null,
+          "description": "Django only. Key in each row dict holding the navigation URL for clickable rows (replaces React onClickRow). The block-link CSS pattern is used; no JS required."
+        },
+        "children": {
+          "type": "slot",
+          "description": "Composed table sections, replacing the generated table sections (React only).",
+          "renderers": {
+            "django": {
+              "supported": false,
+              "description": "The Django template does not consume children."
+            }
+          }
+        },
+        "infinite": {
+          "type": "boolean",
+          "default": false,
+          "description": "Render a sentinel that emits usx:data-table:more when it enters the viewport."
+        },
+        "clickableRows": {
+          "type": "boolean",
+          "default": false,
+          "description": "Make rows keyboard and pointer activatable; the JS initializer emits usx:data-table:row-activate."
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "DataTable"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "data-table",
+          "template": "data-table/data-table.django.html",
+          "tag": "data_table"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "standard",
+          "columns": [
+            {
+              "key": "title",
+              "header": "Document title",
+              "primary": true
+            },
+            {
+              "key": "description",
+              "header": "Description"
+            },
+            {
+              "key": "year",
+              "header": "Year",
+              "align": "right"
+            }
+          ],
+          "data": [
+            {
+              "id": 1,
+              "title": "Declaration of Independence",
+              "description": "Statement adopted by the Continental Congress declaring independence from the British Empire.",
+              "year": 1776
+            },
+            {
+              "id": 2,
+              "title": "Bill of Rights",
+              "description": "The first ten amendments of the U.S. Constitution guaranteeing rights and freedoms.",
+              "year": 1791
+            },
+            {
+              "id": 3,
+              "title": "Declaration of Sentiments",
+              "description": "A document written during the Seneca Falls Convention outlining the rights that American women should be entitled to as citizens.",
+              "year": 1848
+            },
+            {
+              "id": 4,
+              "title": "Emancipation Proclamation",
+              "description": "An executive order granting freedom to slaves in designated southern states.",
+              "year": 1863
+            }
+          ],
+          "caption": "Historic U.S. documents"
         }
       }
     },
@@ -5787,6 +6186,14 @@ export const componentContracts = {
           "default": "pagination-step-options",
           "description": "HTML id for the step options select element"
         },
+        "onPageChange": {
+          "type": "function",
+          "description": "React-only callback for client-side page navigation."
+        },
+        "onPageSizeChange": {
+          "type": "function",
+          "description": "React-only callback when the page size changes."
+        },
         "className": {
           "type": "string",
           "default": "",
@@ -6235,9 +6642,27 @@ export const componentContracts = {
           "type": "string",
           "description": "Value of the option to be selected by default"
         },
+        "value": {
+          "type": "string",
+          "description": "Controlled selected value in React."
+        },
+        "onChange": {
+          "type": "function",
+          "description": "React change handler for the selected radio input."
+        },
+        "fieldset": {
+          "type": "boolean",
+          "default": true,
+          "description": "Wrap options in a fieldset; false allows one option inside a table cell."
+        },
+        "formGroup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Wrap the fieldset in a form group."
+        },
         "options": {
           "type": "array",
-          "description": "Array of option objects: {id, value, label, description, checked, disabled}"
+          "description": "Array of option objects: {id, value, label, ariaLabel, description, checked, disabled}"
         },
         "className": {
           "type": "string",
@@ -7401,304 +7826,78 @@ export const componentContracts = {
     },
     "table": {
       "component": "table",
-      "version": 2,
+      "version": 3,
       "required": [
         "columns",
-        "data"
+        "data",
+        "caption"
       ],
       "props": {
         "id": {
           "type": "string",
-          "description": "ID for the <table> element. Required for accessibility when using sticky headers or scrollable tables."
+          "description": "Optional table ID."
         },
         "columns": {
           "type": "array",
-          "description": "Column definitions. Each item: { key, header, render, align, sortable, width, pin, primary, hidden, aggregate, footer, className, headerClassName }.",
-          "items": {
-            "type": "object",
-            "description": "Column definition.",
-            "properties": {
-              "key": {
-                "type": "string",
-                "description": "Row data property to read."
-              },
-              "header": {
-                "type": "string",
-                "description": "Column header text."
-              },
-              "render": {
-                "type": "function",
-                "description": "Custom cell renderer: (value, row) => node."
-              },
-              "align": {
-                "type": "select",
-                "options": [
-                  "left",
-                  "center",
-                  "right"
-                ],
-                "description": "Cell text alignment."
-              },
-              "sortable": {
-                "type": "boolean",
-                "description": "Allow sorting by this column."
-              },
-              "width": {
-                "type": "string",
-                "description": "CSS width for the column."
-              },
-              "pin": {
-                "type": "select",
-                "options": [
-                  "left",
-                  "right"
-                ],
-                "description": "Pin the column on horizontal scroll."
-              },
-              "primary": {
-                "type": "boolean",
-                "description": "Marks the primary column shown in stacked/responsive mode."
-              },
-              "hidden": {
-                "type": "boolean",
-                "description": "Hide the column."
-              },
-              "aggregate": {
-                "type": "function",
-                "description": "Footer aggregate function: (data) => value."
-              },
-              "footer": {
-                "type": "string",
-                "description": "Static footer cell content."
-              },
-              "className": {
-                "type": "string",
-                "description": "Additional cell classes."
-              },
-              "headerClassName": {
-                "type": "string",
-                "description": "Additional header cell classes."
-              }
-            }
-          }
+          "description": "Column definitions: key, header, primary (row header), sortable (USWDS sorting)."
         },
         "data": {
           "type": "array",
-          "description": "Array of row data objects."
-        },
-        "primaryKey": {
-          "type": "string",
-          "default": "id",
-          "description": "Property name used as the unique row identifier."
+          "description": "Array of records displayed in the same order provided."
         },
         "caption": {
           "type": "slot",
-          "description": "Table caption rendered as <caption>."
+          "description": "Accessible table title. Required for sortable tables."
         },
         "striped": {
           "type": "boolean",
           "default": false,
-          "description": "Apply alternating row shading (usa-table--striped)."
+          "description": "Alternating row shading."
         },
         "borderless": {
           "type": "boolean",
           "default": false,
-          "description": "Remove cell borders (usa-table--borderless)."
+          "description": "Remove outer cell borders."
         },
         "compact": {
           "type": "boolean",
           "default": false,
-          "description": "Reduce cell padding (usa-table--compact)."
+          "description": "Reduce cell padding."
         },
         "scrollable": {
           "type": "boolean",
           "default": false,
-          "description": "Wrap the table in a horizontally-scrollable container."
+          "description": "Wrap the table in a horizontal scroll container."
         },
-        "height": {
+        "scrollHeight": {
           "type": "string",
-          "description": "CSS max-height for vertical scrolling (e.g. '400px')."
-        },
-        "responsive": {
-          "type": "select",
-          "options": [
-            "false",
-            "stack",
-            "stack-header"
-          ],
-          "default": "false",
-          "description": "Responsive mode: 'stack' or 'stack-header' for mobile stacking behaviour."
+          "description": "Fixed height for the scroll container when scrollable is true; useful with stickyHeader."
         },
         "stickyHeader": {
           "type": "boolean",
           "default": false,
-          "description": "Keep the header row visible while scrolling (usa-table--sticky-header)."
+          "description": "Keep headings visible during scrolling."
         },
-        "stickyFirstColumn": {
-          "type": "boolean",
-          "default": false,
-          "description": "Sticky-pin the first column on horizontal scroll."
-        },
-        "sortable": {
-          "type": "boolean",
-          "default": false,
-          "description": "Enable sorting on all columns (individual columns can opt out via column.sortable: false)."
-        },
-        "sort": {
-          "type": "object",
-          "description": "Controlled sort state: { key: string, direction: 'asc' | 'desc' | null }."
-        },
-        "onSort": {
-          "type": "function",
-          "description": "Callback fired when a column header is clicked: ({ key, direction }) => void."
-        },
-        "selectionMode": {
+        "responsive": {
           "type": "select",
           "options": [
-            "null",
-            "checkbox",
-            "radio"
+            false,
+            "stack",
+            "stack-header"
           ],
-          "default": "null",
-          "description": "Row selection mode. 'checkbox' enables multi-select; 'radio' enables single-select."
-        },
-        "selectionPosition": {
-          "type": "select",
-          "options": [
-            "left",
-            "right"
-          ],
-          "default": "left",
-          "description": "Position of the selection column."
-        },
-        "select": {
-          "type": "array",
-          "description": "Controlled array of selected primary key values."
-        },
-        "onSelect": {
-          "type": "function",
-          "description": "Callback fired when selection changes: (selectedKeys[]) => void."
-        },
-        "allowSelectAll": {
-          "type": "boolean",
-          "default": true,
-          "description": "Show 'select all' checkbox in header (checkbox mode only)."
-        },
-        "disabled": {
-          "type": "array",
-          "description": "Array of primary key values for rows that should be non-interactive."
-        },
-        "onClickRow": {
-          "type": "function",
-          "description": "Callback fired when a row is clicked: (rowData, event) => void."
-        },
-        "groupBy": {
-          "type": "object",
-          "description": "Group rows by a property. String shorthand or object: { property, expand, onExpand, defaultExpanded }."
-        },
-        "rowDetails": {
-          "type": "object",
-          "description": "Enable expandable row detail panels. Function: (row) => ReactNode. Object: { render, expand, onExpand, expandLabel }."
-        },
-        "showFooter": {
-          "type": "boolean",
           "default": false,
-          "description": "Render a <tfoot> row using column.footer or column.aggregate values."
-        },
-        "paginate": {
-          "type": "object",
-          "description": "Enable pagination. true for client-side; object { pageSize, totalCount, onPageChange } for server-side."
-        },
-        "onMore": {
-          "type": "function",
-          "description": "Infinite scroll callback, called when the last row becomes visible."
-        },
-        "loading": {
-          "type": "boolean",
-          "default": false,
-          "description": "Show a loading state overlay. Does not affect interactivity."
-        },
-        "placeholder": {
-          "type": "slot",
-          "description": "Content shown when the data array is empty."
+          "description": "USWDS mobile stacking variant."
         },
         "className": {
           "type": "string",
-          "default": "",
-          "description": "Additional CSS classes applied to the <table> element."
-        },
-        "header_rows": {
-          "type": "array",
-          "default": null,
-          "description": "Django only. Pre-computed header row structure from table_helper.build_header_rows(columns). Required for rendering; compute in the view and pass as context."
-        },
-        "leaf_columns": {
-          "type": "array",
-          "default": null,
-          "description": "Django only. Flat list of leaf (non-parent) columns from table_helper.get_leaf_cols(columns). Required for body and footer rendering."
-        },
-        "total_cols": {
-          "type": "number",
-          "default": null,
-          "description": "Django only. Total column count including aux columns (selection, detail). From table_helper.total_col_count()."
-        },
-        "total_depth": {
-          "type": "number",
-          "default": 1,
-          "description": "Django only. Number of header levels; len(header_rows). Required for rowspan calculations."
-        },
-        "groups": {
-          "type": "array",
-          "default": null,
-          "description": "Django only. Pre-grouped data from table_helper.group_data(data, field). Required when groupBy is set."
-        },
-        "defaultExpanded": {
-          "type": "boolean",
-          "default": true,
-          "description": "Django only. Whether grouped rows start expanded. Defaults to true. Pass false to render all groups collapsed."
-        },
-        "footerValues": {
-          "type": "object",
-          "default": null,
-          "description": "Django only. Pre-computed footer values dict from table_helper.compute_footer(columns, data). Required when showFooter is True."
-        },
-        "expandedRows": {
-          "type": "array",
-          "default": [],
-          "description": "Django only. List of primary-key values whose detail rows are open on initial render. Mirrors the React rowDetails.expand controlled prop."
-        },
-        "rowDetailTemplate": {
-          "type": "string",
-          "default": null,
-          "description": "Django only. Path to a Django partial template rendered as row-detail content (replaces React rowDetails.render)."
-        },
-        "rowDetailField": {
-          "type": "string",
-          "default": null,
-          "description": "Django only. Key in each row dict whose value is used as inline row-detail content (simpler alternative to rowDetailTemplate)."
-        },
-        "rowUrlField": {
-          "type": "string",
-          "default": null,
-          "description": "Django only. Key in each row dict holding the navigation URL for clickable rows (replaces React onClickRow). The block-link CSS pattern is used; no JS required."
-        },
-        "paginateUrlPrefix": {
-          "type": "string",
-          "default": "?page=",
-          "description": "Django only. URL prefix for pagination page links, forwarded to the pagination sub-template."
-        },
-        "pagination": {
-          "type": "object",
-          "default": null,
-          "description": "Django only. Pagination state dict from table_helper.paginate_table(): {current_page, total_pages, total, page_size}. Required when paginate is True."
+          "description": "Additional table classes."
         },
         "children": {
           "type": "slot",
-          "description": "Composed table sections, replacing the generated table sections (React only).",
+          "description": "Optional hand-authored table markup for React.",
           "renderers": {
             "django": {
-              "supported": false,
-              "description": "The Django template does not consume children."
+              "supported": false
             }
           }
         }
@@ -7719,7 +7918,6 @@ export const componentContracts = {
       },
       "examples": {
         "default": {
-          "id": "standard",
           "columns": [
             {
               "key": "title",
@@ -7732,33 +7930,23 @@ export const componentContracts = {
             },
             {
               "key": "year",
-              "header": "Year",
-              "align": "right"
+              "header": "Year"
             }
           ],
           "data": [
             {
-              "id": 1,
               "title": "Declaration of Independence",
-              "description": "Statement adopted by the Continental Congress declaring independence from the British Empire.",
+              "description": "Statement adopted by the Continental Congress.",
               "year": 1776
             },
             {
-              "id": 2,
               "title": "Bill of Rights",
-              "description": "The first ten amendments of the U.S. Constitution guaranteeing rights and freedoms.",
+              "description": "The first ten amendments to the Constitution.",
               "year": 1791
             },
             {
-              "id": 3,
-              "title": "Declaration of Sentiments",
-              "description": "A document written during the Seneca Falls Convention outlining the rights that American women should be entitled to as citizens.",
-              "year": 1848
-            },
-            {
-              "id": 4,
               "title": "Emancipation Proclamation",
-              "description": "An executive order granting freedom to slaves in designated southern states.",
+              "description": "An executive order ending slavery in designated states.",
               "year": 1863
             }
           ],

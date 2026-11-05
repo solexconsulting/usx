@@ -1,9 +1,10 @@
-import { storyDefs } from './Tooltip.React.stories.jsx';
+import ReactMeta, { storyDefs } from './Tooltip.React.stories.jsx';
 import { createDjangoStory } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'Django/USWDS-Inspired/Tooltip',
   tags: ['USWDS-Inspired', 'autodocs'],
+  argTypes: ReactMeta.argTypes,
   parameters: {
     renderer: 'django',
     docs: {

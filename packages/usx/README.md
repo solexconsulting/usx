@@ -1,9 +1,24 @@
 # @solexllc/usx
 
 Branded USX component styles (`.usx-*`) layered on top of USWDS, compiled with
-Dart Sass. This package ships Sass source only (`exports` → `src/*.scss`);
-consumers compile it with the `pkg:` importer, so there is no Sass build step.
-The only build step is regenerating the icon sprite (see **Icons** below).
+Dart Sass, plus JavaScript modules for USX interactions. Consumers compile the
+Sass source with the `pkg:` importer, so there is no Sass build step. The icon
+sprite is generated separately (see **Icons** below).
+
+## JavaScript Enhancement
+
+USWDS behavior comes from `@uswds/uswds`, not this package. Its
+`uswds.min.js` bundle enhances markup already in the document when it runs.
+After inserting USWDS components on the client, call their module's
+`init(root)`.
+
+USX behavior is exported from `@solexllc/usx/js/*`. Import
+`@solexllc/usx/js/start` once to connect USX modules on document readiness,
+or import the individual module you need. DataTable and Carousel expose
+`init(root)` for newly mounted markup; DataTable's `on()` also observes
+inserted tables. Other USX modules use delegated listeners through `on(root)`.
+The [JavaScript enhancement guide](../usx-stories/src/stories/Documentation.UsxReact.UswdsJsInit.stories.jsx)
+shows the lifecycle for both libraries.
 
 ## Theming
 

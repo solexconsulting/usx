@@ -118,7 +118,8 @@ semantic `theme.css` properties such as `--usx-color-primary` retain their names
 Pagination's numbered `.usa-pagination__button` links inherit
 `--usx-radius-button` through `--usx-pagination-button-radius` by default.
 In the Theme Playground, change the shared value under **Radius → radius-button**
-or customize pagination independently under **Advanced radius → pagination-button-radius**:
+or customize pagination independently under **Advanced radius → pagination-button-radius**
+or **Component controls → Pagination → pagination-button-radius**:
 
 ```css
 :root {
@@ -153,9 +154,10 @@ their respective label/state colors. They are independent of the border scale.
 
 Process-list counter outlines default to `--usx-text-ink` through
 `--usx-process-list-counter-border`, independently of the border scale. The
-Theme Playground's **Component colors → Process List** group exposes heading
+Theme Playground's **Component controls → Process List** group exposes heading
 text, the connecting line, counter text, counter outline, and counter
-background/ring as separate overrides.
+background/ring as separate overrides. Search for `process-list-border` to
+open the connecting-line control directly.
 
 Table rules, collection separators, and checkbox/radio `::before` outlines
 remain ink-colored and independent of this scale. Their Sass overrides
@@ -193,7 +195,7 @@ Tooltips inherit `--usx-surface-inverse` for their background and arrow, and
 `--usx-text-inverse` for their text. The inverse surface follows
 `--usx-text-ink` by default and also powers the `.bg-surface-inverse` utility.
 Change either shared role in the Theme Playground or override the tooltip
-independently through **Component colors → Tooltip**:
+independently through **Component controls → Tooltip**:
 
 ```css
 :root {
@@ -292,6 +294,16 @@ Each boundary is painted once; the mobile navbar's upstream border is removed.
 Apply runtime overrides to a common ancestor of Header and navigation, not only
 the `<header>` element: React and Django render extended navigation as a sibling.
 CSS-only border switching follows the unchanged USWDS Header transition.
+
+### Footer Backgrounds
+
+The Playground's Footer group exposes `footer-bg`, `footer-primary-bg`,
+`footer-secondary-bg`, and `footer-sign-up-button-bg`. Their defaults follow
+`surface-3`, `surface-2`, `footer-bg`, and `color-primary`, respectively.
+The secondary section follows `footer-bg` unless explicitly overridden, so a
+dark outer footer can be configured without changing the shared surface colors.
+Use these unprefixed names in theme configuration maps; runtime CSS uses the
+corresponding `--usx-` custom properties.
 
 ### Footer Borders
 

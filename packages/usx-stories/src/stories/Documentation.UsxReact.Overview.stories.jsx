@@ -35,7 +35,7 @@ export const Overview = {
       <p>Use <code>@solexllc/usx-react</code> when:</p>
       <ul>
         <li>You're building a React application and want props/TypeScript types instead of raw class strings.</li>
-        <li>You want React props and callbacks around USWDS markup, with USWDS JavaScript initialized by your application.</li>
+        <li>You want typed React props for USWDS and USX markup, with the host app loading any required JavaScript behavior.</li>
       </ul>
       <p>Skip it when:</p>
       <ul>
@@ -134,26 +134,29 @@ export const Overview = {
         cross-origin <code>{'<use>'}</code> references, even with CORS enabled.
       </p>
 
-      <h2>Enhanced (JS-driven) USWDS components</h2>
+      <h2>JavaScript enhancement</h2>
       <p>
-        USWDS JavaScript should own standard USWDS interactions. Accordion, Banner,
-        Combobox, Date Picker, the standard File Input, and Time Picker render
-        markup that your application enhances by initializing the corresponding
-        <code> @uswds/uswds/js/usa-*</code> module.
+        React, Django, and HTML components provide markup. USWDS JavaScript owns
+        interactions for components such as Accordion, Combobox, Date Picker,
+        the standard File Input, and Table. The <code>uswds.min.js</code> bundle
+        enhances markup already in the document when it runs. After your app
+        mounts or replaces a component on the client, call that component&apos;s{' '}
+        <code>init()</code> on the new markup.
       </p>
       <p>
-        Table still manages sorting through React hooks
-        rather than delegating that behavior to USWDS. Optional USX features,
-        such as File Input's individually managed file list, also use React state, but extend
-        rather than replace the underlying USWDS widget. See{' '}
-        <strong>Documentation/USX React → USWDS JS Initialization</strong> for
-        how and why your app is responsible for initializing that JS.
+        USX DataTable uses <code>@solexllc/usx/js/data-table</code> for sorting,
+        selection, grouping, and pagination in all three renderers, including
+        React. Load USX behavior once through <code>@solexllc/usx/js/start</code>,
+        or initialize a DataTable directly with <code>dataTable.init(root)</code>{' '}
+        after mounting it. See{' '}
+        <strong>Documentation/USX React → JavaScript Enhancement</strong> for
+        both USWDS and USX setup, including components that use delegated listeners.
       </p>
 
       <h2>Where to go next</h2>
       <ul>
         <li><strong>Components/*</strong> — every implemented component, with its React, Django, and HTML variants.</li>
-        <li><strong>Documentation/USX React → USWDS JS Initialization</strong> — calling <code>.init()</code> for JS-enhanced components.</li>
+        <li><strong>Documentation/USX React → JavaScript Enhancement</strong> — loading USWDS and USX behavior and enhancing new markup.</li>
         <li><strong>Documentation/USX → Overview</strong> — the class/token architecture these components render.</li>
         <li><strong>Documentation/Theme → Getting Started</strong> — wiring up runtime theming.</li>
       </ul>

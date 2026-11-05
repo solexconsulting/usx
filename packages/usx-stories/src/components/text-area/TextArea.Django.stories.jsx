@@ -1,9 +1,10 @@
-import { storyDefs } from './TextArea.React.stories.jsx';
+import ReactMeta, { storyDefs } from './TextArea.React.stories.jsx';
 import { createDjangoStory } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'Django/USWDS/TextArea',
   tags: ['USWDS', 'autodocs'],
+  argTypes: ReactMeta.argTypes,
   parameters: {
     renderer: 'django',
     docs: {

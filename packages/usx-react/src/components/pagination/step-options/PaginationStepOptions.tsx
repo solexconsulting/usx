@@ -8,6 +8,7 @@ export interface PaginationStepOptionsProps {
   label?: string;
   id?: string;
   className?: string;
+  onPageSizeChange?: (size: number) => void;
 }
 
 export default function PaginationStepOptions({
@@ -16,6 +17,7 @@ export default function PaginationStepOptions({
   label = 'Items per page',
   id = 'pagination-step-options',
   className = '',
+  onPageSizeChange,
 }: PaginationStepOptionsProps) {
   const classes = ClassNames(
     'usx-pagination__step-options',
@@ -31,6 +33,7 @@ export default function PaginationStepOptions({
         defaultValue={String(pageSize)}
         formGroup={false}
         options={pageSizeOptions.map((size) => ({ value: String(size), label: String(size) }))}
+        onChange={(event) => onPageSizeChange?.(Number(event.target.value))}
       />
     </div>
   );

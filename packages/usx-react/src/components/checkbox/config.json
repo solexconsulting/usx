@@ -30,6 +30,15 @@
       "default": false,
       "description": "Whether the checkbox is checked"
     },
+    "indeterminate": {
+      "type": "boolean",
+      "default": false,
+      "description": "React-only mixed state for a select-all checkbox."
+    },
+    "ariaLabel": {
+      "type": "string",
+      "description": "Accessible name when a visible label is unsuitable."
+    },
     "disabled": {
       "type": "boolean",
       "default": false,

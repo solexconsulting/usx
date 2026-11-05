@@ -1,36 +1,24 @@
 {# Django template for RadioButtons #}
 {% load usx_components %}
-
-{% with groupName=name|default:"radio-group" %}
-{% form_group error=error %}
-{% fieldset legend=legend|default:"Select one option" required=required hint=hint error=error id=id %}
+{% with groupName=name|default:'radio-group' %}
+{% fragment as radioOptions %}
   {% for opt in options %}
-    {% with index=forloop.counter0|stringformat:"s" %}
+    {% with index=forloop.counter0|stringformat:'s' %}
     {% with baseId=id|default:groupName %}
-    {% with generatedId=baseId|add:"-"|add:index %}
+    {% with generatedId=baseId|add:'-'|add:index %}
     {% with optionId=opt.id|default:generatedId %}
-    <div class="usa-radio usx-radio {% if small %}usx-radio--small{% endif %} {{ className }}">
-      <input
-        class="usa-radio__input{% if tile %} usa-radio__input--tile{% endif %}"
-        id="{{ optionId }}"
-        type="radio"
-        name="{{ groupName }}"
-        value="{{ opt.value }}"
-        {% if defaultValue == opt.value or opt.checked %}checked="checked"{% endif %}
-        {% if opt.disabled %}disabled="disabled"{% endif %}
-      />
-      {% label htmlFor=optionId className="usa-radio__label" classOverride=True %}{{ opt.label }}
-        {% if opt.description %}
-          <span class="usa-checkbox__label-description">{{ opt.description }}</span>
-        {% endif %}
-      {% endlabel %}
+    <div class="usa-radio usx-radio{% if small %} usx-radio--small{% endif %}{% if className %} {{ className }}{% endif %}">
+      <input class="usa-radio__input{% if tile %} usa-radio__input--tile{% endif %}" id="{{ optionId }}" type="radio" name="{{ groupName }}" value="{{ opt.value }}"{% if opt.ariaLabel %} aria-label="{{ opt.ariaLabel }}"{% endif %}{% if defaultValue == opt.value or opt.checked %} checked{% endif %}{% if opt.disabled %} disabled{% endif %}>
+      {% label htmlFor=optionId className='usa-radio__label' classOverride=True %}{{ opt.label }}{% if opt.description %}<span class="usa-checkbox__label-description">{{ opt.description }}</span>{% endif %}{% endlabel %}
     </div>
-    {% endwith %}
-    {% endwith %}
-    {% endwith %}
-    {% endwith %}
+    {% endwith %}{% endwith %}{% endwith %}{% endwith %}
   {% endfor %}
-{% endfieldset %}
-{% endform_group %}
+{% endfragment %}
+{% if fieldset == False %}
+  {{ radioOptions }}
+{% elif formGroup == False %}
+  {% fieldset legend=legend|default:'Select one option' required=required hint=hint error=error id=id %}{{ radioOptions }}{% endfieldset %}
+{% else %}
+  {% form_group error=error %}{% fieldset legend=legend|default:'Select one option' required=required hint=hint error=error id=id %}{{ radioOptions }}{% endfieldset %}{% endform_group %}
+{% endif %}
 {% endwith %}
-

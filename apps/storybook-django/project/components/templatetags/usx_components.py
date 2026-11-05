@@ -25,6 +25,24 @@ from ..core.registry import get_component
 register = template.Library()
 
 
+@register.filter
+def get_item(value: Any, key: str) -> Any:
+    """Read a record field while keeping one table cell per configured column."""
+    return value.get(key, '') if isinstance(value, dict) else ''
+
+
+@register.filter
+def contains(values: Any, value: Any) -> bool:
+    return value in values if isinstance(values, (list, tuple, set)) else False
+
+
+@register.filter()
+def has_sortable(columns: Any) -> bool:
+    return isinstance(columns, (list, tuple)) and any(
+        isinstance(column, dict) and column.get('sortable') for column in columns
+    )
+
+
 @register.simple_tag()
 def asset_url(asset_path: str, static_base_url: Optional[str] = None) -> str:
     parts = urlsplit(asset_path)

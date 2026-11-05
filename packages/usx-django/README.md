@@ -52,6 +52,17 @@ label_contract = get_contracts()["components"]["label"]
 The Python renderer applies contract defaults and rejects unknown props. Block
 tags also apply defaults, but do not validate props.
 
+DataTable renders its headers, rows, groups, spans, and footer as HTML before
+JavaScript loads. Its Django context module only plans that markup from the
+component props. `@solexllc/usx/js/data-table` enhances the rendered table with
+sorting, searching, pagination, selection, and disclosure behavior in the browser.
+Load `@solexllc/usx/js/start` once or call `dataTable.init(root)` after
+inserting table markup. The same initializer enhances React and static HTML
+tables. USWDS components use their own JavaScript: `uswds.min.js` handles
+markup present when it runs, while HTML inserted later needs the relevant
+USWDS module's `init(root)`. See Storybook's **Documentation → USX React →
+JavaScript Enhancement** guide.
+
 Ordinary template variables are escaped. Props that intentionally accept HTML
 or JavaScript handlers must contain trusted content, not unsanitized user input.
 
@@ -77,8 +88,8 @@ python -m twine check packages/usx-django/dist/*
 
 The generator validates the canonical configs, copies the shared Python runtime
 from `apps/storybook-django/project/components`, and bundles every
-`*.django.html`, `config.json`, and Python helper from
-`packages/usx-react/src/components`. Generated package files are ignored by Git;
+`*.django.html` and `config.json` from `packages/usx-react/src/components`.
+Generated package files are ignored by Git;
 edit those source locations and regenerate before every build. The source
 distribution is self-contained and can rebuild a wheel without Node.js or
 the original checkout.

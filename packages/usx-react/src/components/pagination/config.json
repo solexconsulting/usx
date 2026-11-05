@@ -175,6 +175,14 @@
       "default": "pagination-step-options",
       "description": "HTML id for the step options select element"
     },
+    "onPageChange": {
+      "type": "function",
+      "description": "React-only callback for client-side page navigation."
+    },
+    "onPageSizeChange": {
+      "type": "function",
+      "description": "React-only callback when the page size changes."
+    },
     "className": {
       "type": "string",
       "default": "",

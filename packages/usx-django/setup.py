@@ -9,10 +9,10 @@ for required in (
     "templatetags/__init__.py",
     "templatetags/components.py",
     "component-contracts.json",
-    "templates/label/label.django.html",
-    "templates/table/table_helper.py",
 ):
     if not (package / required).is_file():
         raise RuntimeError("Missing generated Django package files. Run pnpm generate:django from the repository root first.")
+if not any((package / "templates").rglob("*.django.html")):
+    raise RuntimeError("Missing generated Django templates. Run pnpm generate:django from the repository root first.")
 
 setup()

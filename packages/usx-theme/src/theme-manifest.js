@@ -279,6 +279,10 @@ export const themeManifest = [
   // ── Advanced border — per-component overrides, defaulting to a shared width ─
   scale('task-list-inner-border-width', '--usx-task-list-inner-border-width', 'var(--usx-border-width-sm)', 'border-advanced'),
   scale('task-list-outer-border-width', '--usx-task-list-outer-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
+  scale('alert-border-width', '--usx-alert-border-width', 'var(--usx-border-width-xl)', 'border-advanced'),
+  scale('checkable-tile-border-width', '--usx-checkable-tile-border-width', 'var(--usx-border-width-sm)', 'border-advanced'),
+  scale('sidenav-border-width', '--usx-sidenav-border-width', 'var(--usx-border-width-sm)', 'border-advanced'),
+  scale('callout-border-width', '--usx-callout-border-width', 'var(--usx-border-width-lg)', 'border-advanced'),
   scale('step-indicator-segment-bar-width', '--usx-step-indicator-segment-bar-width', 'var(--usx-border-width-xl)', 'border-advanced'),
   scale('accordion-border-width', '--usx-accordion-border-width', 'var(--usx-border-width-lg)', 'border-advanced'),
   scale('card-border-width', '--usx-card-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
@@ -335,6 +339,7 @@ export const themeManifest = [
   component('card-heading-text', 'var(--usx-card-text)'),
   component('card-media-bg', 'var(--usx-surface-3)'),
   component('card-border-color', 'var(--usx-color-border-subtle)'),
+  component('hero-text', '#ffffff'),
   component('link-text-visited', 'var(--usx-color-visited)'),
   // USWDS swaps link/visited color to a light neutral on a dark background
   // (`.usa-dark-background`) instead of the illegible blue/purple defaults;
@@ -403,6 +408,9 @@ export const themeManifest = [
   // outline follows the label's ink color unless explicitly overridden.
   component('checkable-bg', 'var(--usx-surface-1)'),
   component('checkable-border', 'currentColor'),
+  component('switch-border-off', 'var(--usx-color-border)'),
+  component('switch-track-bg', 'var(--usx-surface-2)'),
+  component('sidenav-link-text', 'var(--usx-text-muted)'),
   component('sidenav-bg-hover', 'var(--usx-surface-2)'),
   component('sidenav-border', 'var(--usx-color-border-subtle)'),
   // Header shell edges are full border values, independent of item dividers.
@@ -451,6 +459,10 @@ export const themeManifest = [
   setting('footer-secondary-section-border-top', 'none'),
   setting('footer-primary-link-border-top', 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)'),
   setting('footer-nav-border-bottom', 'var(--usx-border-width-sm) solid var(--usx-color-border-subtle)'),
+  component('footer-bg', 'var(--usx-surface-3)'),
+  component('footer-primary-bg', 'var(--usx-surface-2)'),
+  component('footer-secondary-bg', 'var(--usx-footer-bg)'),
+  component('footer-sign-up-button-bg', 'var(--usx-color-primary)'),
   // Independent footer text/link/heading hooks — same rationale as the
   // header text/nav-link hooks above: a theme whose footer secondary
   // section sits on a drastically different surface (e.g. NASA's black
@@ -482,10 +494,18 @@ export const themeManifest = [
   component('table-bg', 'var(--usx-surface-1)'),
   component('table-header-bg', 'var(--usx-surface-2)'),
   component('table-stripe-bg', 'var(--usx-surface-3)'),
-  // Table rules follow their text color; a theme may opt into a border role.
-  component('table-border', 'currentColor'),
+  component('table-stripe-text', 'var(--usx-text-ink)'),
+  // Keep grid lines tied to table ink when a sorted header inverts its text.
+  component('table-border', 'var(--usx-text-ink)'),
   component('table-placeholder-text', 'var(--usx-text-subtle)'),
-  component('table-sorted-column-bg', 'var(--usx-color-accent-cool)'),
+  component('table-sorted-header-bg', 'var(--usx-color-accent-cool-light)'),
+  component('table-sorted-column-bg', 'var(--usx-color-accent-cool-lighter)'),
+  component('table-sorted-stripe-bg', '#c3ebfa'),
+  component('table-sorted-header-text', 'var(--usx-text-ink)'),
+  component('table-sorted-column-text', 'var(--usx-text-ink)'),
+  component('table-sorted-stripe-text', 'var(--usx-text-ink)'),
+  component('table-sorted-icon-color', 'var(--usx-text-ink)'),
+  component('table-unsorted-icon-color', 'var(--usx-color-base)'),
   component('table-grouped-row-bg', 'var(--usx-surface-3)'),
   component('table-grouped-row-text', 'var(--usx-text-ink)'),
   // Tooltip body and arrow share the inverse surface; both component
@@ -555,6 +575,10 @@ export const themeManifest = [
   component('process-list-counter-text', 'var(--usx-text-ink)'),
   component('process-list-counter-border', 'var(--usx-text-ink)'),
   component('process-list-counter-ring', 'var(--usx-surface-1)'),
+
+  component('attribution-secondary-text', 'var(--usx-text-subtle)'),
+  component('callout-background', 'var(--usx-surface-2)'),
+  component('theme-picker-trigger-text', 'var(--usx-text-ink)'),
 
   // Separators follow the collection's text color unless explicitly themed.
   component('collection-border', 'currentColor'),

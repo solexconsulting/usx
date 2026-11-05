@@ -1,10 +1,11 @@
 import React from 'react';
-import { storyDefs } from './Eyebrow.React.stories.jsx';
+import ReactMeta, { storyDefs } from './Eyebrow.React.stories.jsx';
 import { createDjangoStory } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'Django/USX/Eyebrow',
   tags: ['USX', 'autodocs'],
+  argTypes: ReactMeta.argTypes,
   parameters: {
     renderer: 'django',
     docs: {

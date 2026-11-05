@@ -25,6 +25,8 @@ export interface PaginationProps {
   arrowsOnly?: boolean;
   pageUrlPrefix?: string;
   className?: string;
+  onPageChange?: (page: number) => void;
+  onPageSizeChange?: (size: number) => void;
 }
 
 export default function Pagination({
@@ -47,13 +49,15 @@ export default function Pagination({
   arrowsOnly = false,
   pageUrlPrefix,
   className = '',
+  onPageChange,
+  onPageSizeChange,
 }: PaginationProps) {
   const currentPage = page ?? initialPage;
   const pageSize = size ?? initialPageSize;
 
   const totalPages =
     totalItems !== undefined && !unbounded
-      ? Math.ceil(totalItems / pageSize)
+      ? Math.max(1, Math.ceil(totalItems / pageSize))
       : undefined;
 
   // showSummary defaults to true when totalItems is provided
@@ -73,6 +77,7 @@ export default function Pagination({
       hideLinkText={hideLinkText}
       arrowsOnly={arrowsOnly}
       pageUrlPrefix={pageUrlPrefix}
+      onPageChange={onPageChange}
     />
   );
   const stepOptions = (
@@ -80,6 +85,7 @@ export default function Pagination({
       pageSize={pageSize}
       pageSizeOptions={pageSizeOptions}
       id={stepOptionsId}
+      onPageSizeChange={onPageSizeChange}
     />
   );
   const summary = typeof totalItems === 'number' ? (

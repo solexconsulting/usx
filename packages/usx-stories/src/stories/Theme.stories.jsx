@@ -1,5 +1,4 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { useGlobals } from 'storybook/preview-api';
 
 import {
   themeManifest,
@@ -61,6 +60,7 @@ import SummaryBox from '../../../usx-react/src/components/summary-box/SummaryBox
 import Swap from '../../../usx-react/src/components/swap/Swap.tsx';
 import Switch from '../../../usx-react/src/components/switch/Switch.tsx';
 import Table from '../../../usx-react/src/components/table/Table.tsx';
+import DataTable from '../../../usx-react/src/components/data-table/DataTable.tsx';
 import Tag from '../../../usx-react/src/components/tag/Tag.tsx';
 import TaskList from '../../../usx-react/src/components/task-list/TaskList.tsx';
 import TextArea from '../../../usx-react/src/components/text-area/TextArea.tsx';
@@ -69,7 +69,7 @@ import { componentInit } from '../utils/storyHelpers.jsx';
 export default {
   title: 'Documentation/USX Theme/Playground',
   tags: ['USX'],
-  parameters: { layout: 'fullscreen' },
+  parameters: { layout: 'fullscreen', isolateThemePreset: true },
   decorators: [...componentInit('datePicker', 'fileInput', 'range', 'inPageNavigation')],
 };
 
@@ -83,6 +83,10 @@ export default {
 // the neutral surface/border/ink roles that don't fit either theme or state.
 // Each entry gets its own collapsed row (see ColorGroupRow) that expands to
 // reveal the base color's control and all of its derived shades together.
+const compareNames = (a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+const byTokenName = (a, b) => compareNames(a.name, b.name);
+// Keep brand, state, and scale sequences in their intended semantic order.
+// Alphabetical sorting is for component-specific settings and search results.
 const THEME_COLOR_NAMES = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm', 'color-base'];
 const STATE_COLOR_NAMES = ['color-info', 'color-warning', 'color-error', 'color-success', 'color-emergency', 'color-disabled', 'color-focus', 'color-visited'];
 const ENVIRONMENT_COLOR_NAMES = ['color-beta', 'color-test', 'color-dev'];
@@ -108,6 +112,7 @@ const GROUPED_COLOR_NAMES = [
 ];
 
 const RANDOMIZED = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm'];
+const UTILITY_RADIUS_NAMES = new Set(['radius-sm', 'radius-md', 'radius-lg', 'radius-xl', 'radius-full']);
 
 // Export shapes offered by the Playground. `sass` and `data-theme` are the
 // two ways a custom theme plugs in next to the prebuilt ones from
@@ -163,7 +168,7 @@ function buildScaleRow(baseName, resolved) {
 
 // Component-scoped tokens (the "hardcoded-hex promotions" in theme-manifest.js)
 // grouped by the component they belong to, matched by name prefix. Order here
-// is the display order in the "Component colors" section. Any manifest entry
+// is the display order in the "Component controls" section. Any manifest entry
 // with group 'component' that doesn't match one of these prefixes still shows
 // up, bucketed into a trailing "Other" group, so a newly-added token is never
 // silently dropped from the playground.
@@ -181,19 +186,42 @@ const TOKEN_NOTES = {
   'tooltip-text': 'follows text-inverse by default; can be overridden independently'
 };
 
-const COMPONENT_COLOR_GROUPS = [
+const COMPONENT_CONTROL_GROUPS = [
+  { label: 'Layout', prefix: 'layout-' },
   { label: 'Link', prefix: 'link-' },
+  { label: 'Alert', prefix: 'alert-' },
+  { label: 'Button', prefix: 'button-' },
+  { label: 'Card', prefix: 'card-' },
+  { label: 'Hero', prefix: 'hero-' },
+  { label: 'Avatar', prefix: 'avatar-' },
+  { label: 'Calendar Date', prefix: 'calendar-date-' },
+  { label: 'Code', prefix: 'code-' },
+  { label: 'Image', prefix: 'image-' },
+  { label: 'Tag', prefix: 'tag-' },
   { label: 'Summary Box', prefix: 'summary-box-' },
   { label: 'Accordion', prefix: 'accordion-' },
   { label: 'Banner', prefix: 'banner-' },
   { label: 'Misc Banner', prefix: 'misc-banner-' },
   { label: 'Carousel', prefix: 'carousel-' },
+  { label: 'File Input', prefix: 'file-input-' },
+  { label: 'Date Picker', prefix: 'date-picker-' },
+  { label: 'Combo Box', prefix: 'combo-box-' },
+  { label: 'Input', prefix: 'input-' },
+  { label: 'TextArea', prefix: 'textarea-' },
+  { label: 'Switch', prefix: 'switch-' },
   { label: 'Step Indicator', prefix: 'step-indicator-' },
   { label: 'Process List', prefix: 'process-list-' },
   { label: 'Task List', prefix: 'task-list-' },
+  { label: 'Attribution', prefix: 'attribution-' },
+  { label: 'Callout', prefix: 'callout-' },
   { label: 'Clickable', prefix: 'clickable-' },
   { label: 'Checkable (Checkbox/Radio/Tile)', prefix: 'checkable-' },
   { label: 'SideNav', prefix: 'sidenav-' },
+  { label: 'Breadcrumb', prefix: 'breadcrumb-' },
+  { label: 'Pagination', prefix: 'pagination-' },
+  { label: 'Modal', prefix: 'modal-' },
+  { label: 'Language Selector', prefix: 'language-selector-' },
+  { label: 'Theme Picker', prefix: 'theme-picker-' },
   { label: 'Header', prefix: 'header-', extra: ['header-nav-bg', 'header-nav-bg-mobile', 'header-nav-link-bg-hover', 'header-nav-link-text', 'header-nav-link-text-mobile', 'header-nav-link-text-hover', 'header-nav-link-text-hover-mobile'] },
   { label: 'Footer', prefix: 'footer-' },
   { label: 'Table', prefix: 'table-' },
@@ -205,26 +233,26 @@ const COMPONENT_COLOR_GROUPS = [
   { label: 'In-page Navigation', prefix: 'in-page-nav-' }
 ];
 
-// Splits a flat list of component-group tokens into the ordered groups
+// Splits a flat list of component tokens into the ordered groups
 // above. A token whose `derivedFrom` points at another token already in the
 // same group (e.g. carousel-dot-color-hover -> carousel-dot-color)
 // is left out of the group's own list here — renderColor() already surfaces
 // it as a nested "shades" entry under its base, so listing it again at the
 // top level would just show it twice.
-function groupComponentColors(tokens) {
+function groupComponentControls(tokens) {
   const used = new Set();
-  const groups = COMPONENT_COLOR_GROUPS.map(({ label, prefix, extra }) => {
+  const groups = COMPONENT_CONTROL_GROUPS.map(({ label, prefix, extra }) => {
     const members = tokens.filter((t) => t.name.startsWith(prefix) || (extra && extra.includes(t.name)));
     members.forEach((t) => used.add(t.name));
     const names = new Set(members.map((t) => t.name));
-    const topLevel = members.filter((t) => !(t.derivedFrom && names.has(t.derivedFrom)));
+    const topLevel = members.filter((t) => !(t.derivedFrom && names.has(t.derivedFrom))).sort(byTokenName);
     return { label, tokens: topLevel };
-  }).filter((g) => g.tokens.length > 0);
+  }).filter((g) => g.tokens.length > 0).sort((a, b) => compareNames(a.label, b.label));
 
   const leftover = tokens.filter((t) => !used.has(t.name));
   if (leftover.length > 0) {
     const names = new Set(leftover.map((t) => t.name));
-    const topLevel = leftover.filter((t) => !(t.derivedFrom && names.has(t.derivedFrom)));
+    const topLevel = leftover.filter((t) => !(t.derivedFrom && names.has(t.derivedFrom))).sort(byTokenName);
     groups.push({ label: 'Other', tokens: topLevel });
   }
   return groups;
@@ -718,7 +746,7 @@ function AccordionIconPositionControl({ token, value, isOverridden, onChange, on
   const selected = value === ACCORDION_ICON_POSITION_VALUES.end.position ? 'end' : 'start';
   return (
     <div className={`usx-pg-row${isOverridden ? ' is-overridden' : ''}`}>
-      <span className="usx-pg-label" title={token.cssVar}>Accordion icon position</span>
+      <span className="usx-pg-label" title={token.cssVar}>{token.name}</span>
       <select
         aria-label={token.name}
         className="usx-pg-select"
@@ -1336,10 +1364,10 @@ function Showcase({ resolved }) {
 
       <div style={{ columnSpan: 'all', marginBottom: '1rem' }}>
         <Banner tld=".gov" />
-        <MiscBanner tone="test" badgeText="test" message="You are viewing a test site." importantLinkText="Production site" importantLinkHref="https://www.google.com" />
-        <MiscBanner tone="dev" badgeText="dev" message="You are viewing a dev site." importantLinkText="Production site" importantLinkHref="https://www.google.com" />
-        <MiscBanner tone="beta" badgeText="beta" message="You are viewing a beta site." importantLinkText="Production site" importantLinkHref="https://www.google.com" />
-        <MiscBanner tone="error" badgeText="oops" message="This banner has no links." />
+        <MiscBanner color="test" badgeText="test" message="You are viewing a test site." importantLinkText="Production site" importantLinkHref="https://www.google.com" />
+        <MiscBanner color="dev" badgeText="dev" message="You are viewing a dev site." importantLinkText="Production site" importantLinkHref="https://www.google.com" />
+        <MiscBanner color="beta" badgeText="beta" message="You are viewing a beta site." importantLinkText="Production site" importantLinkHref="https://www.google.com" />
+        <MiscBanner color="error" badgeText="oops" message="This banner has no links." />
         <Header
           branding={{ title: 'Project name' }}
           navSections={headerNavSections}
@@ -1360,9 +1388,15 @@ function Showcase({ resolved }) {
       </div>
 
       <div style={{ ...ui.card, breakInside: 'avoid', columnSpan: 'all', marginBottom: '1rem' }}>
-        <h3 style={ui.cardTitle}>Table</h3>
+        <h3 style={ui.cardTitle}>Table and DataTable</h3>
         <div style={{ overflowX: 'auto' }}>
           <Table
+            columns={tableColumns.map(({ key, header }) => ({ key, header }))}
+            data={tableData.slice(0, 2)}
+            caption="Founding documents — USWDS table"
+            compact
+          />
+          <DataTable
             columns={tableColumns}
             data={tableData}
             groupBy="era"
@@ -1589,14 +1623,9 @@ function Showcase({ resolved }) {
 
 // ── Playground ───────────────────────────────────────────────────────────────
 
-function ThemePlayground({ initialTheme } = {}) {
-  // Seeds the editor from whichever theme is currently active in the
-  // Storybook toolbar (see apps/storybook/.storybook/preview.js), so opening
-  // the Playground matches the rest of the site instead of always starting
-  // from Default. One-time seed only — the toolbar and the Playground's own
-  // preset/override controls are independent after that.
-  const initialPreset = PRESETS[initialTheme] ? initialTheme : 'Default';
-  const [overrides, setOverrides] = useState(() => ({ ...PRESETS[initialPreset] }));
+function ThemePlayground() {
+  const [overrides, setOverrides] = useState(() => ({ ...PRESETS.Default }));
+  const [controlQuery, setControlQuery] = useState('');
   // Family/grade/vivid selections applied by "Random (System)", keyed by
   // token name — pushed into FamilyGradeColorControl so its selects reflect
   // the chosen system swatch, not just the resulting hex.
@@ -1604,15 +1633,15 @@ function ThemePlayground({ initialTheme } = {}) {
   const [autoDerive, setAutoDerive] = useState(true);
   const [changedOnly, setChangedOnly] = useState(true);
   const [exportFormat, setExportFormat] = useState('sass');
-  const [themeName, setThemeName] = useState(initialPreset === 'Default' ? '' : initialPreset);
+  const [themeName, setThemeName] = useState('');
   const [copied, setCopied] = useState(false);
-  const [activePreset, setActivePreset] = useState(initialPreset);
+  const [activePreset, setActivePreset] = useState('Default');
   // Which single color group row (Theme/State colors — each a base color
   // with its own derived shades) is currently expanded — only one may be
   // open across the whole panel at a time, so opening a new one collapses
   // whichever was previously open. Environment colors don't use this (no
   // shades to reveal, so they're rendered flat — see renderColor below) and
-  // Surface & text / Component colors use their own group-level state
+  // Surface & text / Component controls use their own group-level state
   // (expandedSurfaceGroup / expandedComponentGroup) since those group
   // several distinct tokens together rather than a base + its shades.
   const [expandedColor, setExpandedColor] = useState(null);
@@ -1787,8 +1816,12 @@ function ThemePlayground({ initialTheme } = {}) {
   };
 
   const colorTokensByName = useMemo(() => new Map(themeManifest.map((t) => [t.name, t])), []);
-  const componentColors = themeManifest.filter((t) => t.group === 'component' && !t.internal);
-  const componentColorGroups = groupComponentColors(componentColors);
+  const componentControls = themeManifest.filter((t) => !t.internal && ['component', 'radius-advanced', 'border-advanced', 'typography-advanced'].includes(t.group));
+  const componentControlGroups = groupComponentControls(componentControls);
+  const normalizedQuery = controlQuery.trim().toLowerCase().replace(/[\s_]+/g, '-');
+  const matchingControls = normalizedQuery
+    ? themeManifest.filter((t) => !t.internal && t.name.includes(normalizedQuery)).sort(byTokenName)
+    : [];
   const surfaceTextGroups = SURFACE_TEXT_GROUPS.map((g) => ({
     label: g.label,
     tokens: g.names.map((n) => colorTokensByName.get(n)).filter(Boolean)
@@ -1828,6 +1861,18 @@ function ThemePlayground({ initialTheme } = {}) {
     if (t.name === 'logo-display') {
       return (
         <LogoVariantControl
+          key={t.name}
+          token={t}
+          value={resolved[t.name]}
+          isOverridden={overrides[t.name] !== undefined}
+          onChange={setToken}
+          onClear={clearToken}
+        />
+      );
+    }
+    if (t.type !== 'color') {
+      return (
+        <TextControl
           key={t.name}
           token={t}
           value={resolved[t.name]}
@@ -1887,14 +1932,14 @@ function ThemePlayground({ initialTheme } = {}) {
     );
   };
 
-  const radiusGroup = themeManifest.filter((t) => t.group === 'radius' && t.name.startsWith('radius-'));
-  const radiusAdvanced = themeManifest.filter((t) => t.group === 'radius-advanced');
-  const radiusUtility = themeManifest.filter((t) => t.group === 'radius' && t.name.startsWith('r-'));
+  const radiusGroup = themeManifest.filter((t) => t.group === 'radius' && !UTILITY_RADIUS_NAMES.has(t.name));
+  const radiusAdvanced = themeManifest.filter((t) => t.group === 'radius-advanced').sort(byTokenName);
+  const radiusUtility = themeManifest.filter((t) => UTILITY_RADIUS_NAMES.has(t.name));
   const spacingTokens = themeManifest.filter((t) => t.group === 'spacing');
   const borderTokens = themeManifest.filter((t) => t.group === 'border');
-  const borderAdvanced = themeManifest.filter((t) => t.group === 'border-advanced');
+  const borderAdvanced = themeManifest.filter((t) => t.group === 'border-advanced').sort(byTokenName);
   const typographyTokens = themeManifest.filter((t) => t.group === 'typography');
-  const typographyAdvanced = themeManifest.filter((t) => t.group === 'typography-advanced');
+  const typographyAdvanced = themeManifest.filter((t) => t.group === 'typography-advanced').sort(byTokenName);
 
   return (
     <div className="usx-pg usx-pg-container">
@@ -1951,6 +1996,21 @@ function ThemePlayground({ initialTheme } = {}) {
         </div>
 
         <div className="usx-pg-sidebar-body" style={ui.sidebarBody}>
+          <input
+            type="search"
+            className="usx-pg-input"
+            aria-label="Find a theme control"
+            placeholder="Find a control by name"
+            value={controlQuery}
+            onChange={(event) => setControlQuery(event.target.value)}
+          />
+          {normalizedQuery ? (
+            <Section title="Matching controls" open count={matchingControls.length}>
+              {matchingControls.length > 0
+                ? matchingControls.map((token) => (token.group === 'color' || token.group === 'component' ? renderColor(token) : renderText(token)))
+                : <p>No matching controls.</p>}
+            </Section>
+          ) : (<>
           <Section title="Theme colors" open count={THEME_COLOR_NAMES.length}>
             {THEME_COLOR_NAMES.map(renderColorGroup)}
           </Section>
@@ -2009,8 +2069,8 @@ function ThemePlayground({ initialTheme } = {}) {
             {typographyAdvanced.map(renderText)}
           </Section>
 
-          <Section title="Component colors" count={componentColors.length}>
-            {componentColorGroups.map((g) => (
+          <Section title="Component controls" count={componentControls.length}>
+            {componentControlGroups.map((g) => (
               <TokenColorGroup
                 key={g.label}
                 label={g.label}
@@ -2022,6 +2082,7 @@ function ThemePlayground({ initialTheme } = {}) {
               />
             ))}
           </Section>
+          </>)}
 
           <Section title="Export" open>
             <div className="usx-pg-row" style={{ padding: '0.25rem 0' }}>
@@ -2097,10 +2158,5 @@ function ThemePlayground({ initialTheme } = {}) {
 }
 
 export const Playground = {
-  render: () => {
-    // useGlobals is a Storybook preview hook — only callable here, in the
-    // story's own render function, not inside a nested component.
-    const [globals] = useGlobals();
-    return <ThemePlayground initialTheme={globals?.theme} />;
-  }
+  render: () => <ThemePlayground />
 };

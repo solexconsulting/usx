@@ -5,6 +5,7 @@ import path from 'node:path';
 import test from 'node:test';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createStoryElement, listStories } from './stories.ts';
+import { storiesFiles } from '../model/catalog.ts';
 
 const html = (module: Record<string, unknown>, exportName: string): string =>
   renderToStaticMarkup(createStoryElement(module, exportName));
@@ -29,6 +30,14 @@ export const StoryStep1Context = { args: {} };`
   } finally {
     fs.rmSync(directory, { recursive: true });
   }
+});
+
+test('DataTable React and Django expose the same named stories', () => {
+  const names = (source: 'React' | 'Django') =>
+    storiesFiles('data-table', source)
+      .flatMap((file) => listStories(file).map((story) => story.name))
+      .sort();
+  assert.deepEqual(names('Django'), names('React'));
 });
 
 test('a story renders the meta component with meta args under story args', () => {

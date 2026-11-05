@@ -1,50 +1,21 @@
+import config from '../../../../usx-react/src/components/table/config.json';
+import { buildArgTypes, componentInit, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Table.React.stories.jsx';
-import { createDjangoStory } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'Django/USWDS/Table',
   tags: ['USWDS', 'autodocs'],
-  parameters: {
-    renderer: 'django',
-    docs: {
-      description: {
-        component: 'Django Table component - consumes React storyDefs',
-      },
-    },
-  },
+  argTypes: buildArgTypes(config.props),
+  decorators: componentInit('table'),
 };
 
-const createStory = createDjangoStory({ componentName: 'table' });
-
-export const Default = createStory(storyDefs.Default);
-export const Striped = createStory(storyDefs.Striped);
-export const Borderless = createStory(storyDefs.Borderless);
-export const Compact = createStory(storyDefs.Compact);
-export const ScrollableHorizontal = {
-  name: 'Scrollable (horizontal)',
-  ...createStory(storyDefs.ScrollableHorizontal),
-};
-export const ScrollableVertical = {
-  name: 'Scrollable (vertical)',
-  ...createStory(storyDefs.ScrollableVertical),
-};
-export const StickyFirstColumn = createStory(storyDefs.StickyFirstColumn);
-export const ResponsiveStacked = createStory(storyDefs.ResponsiveStacked);
-export const ResponsiveStackedHeader = createStory(storyDefs.ResponsiveStackedHeader);
-export const Sortable = createStory(storyDefs.Sortable);
-export const SortableAll = {
-  name: 'Sortable (all columns)',
-  ...createStory(storyDefs.SortableAll),
-};
-export const CheckboxSelection = createStory(storyDefs.CheckboxSelection);
-export const CheckboxSelectionRight = {
-  name: 'Checkbox (right)',
-  ...createStory(storyDefs.CheckboxSelectionRight),
-};
-export const RadioSelection = createStory(storyDefs.RadioSelection);
-export const DisabledRows = createStory(storyDefs.DisabledRows);
-export const GroupedRows = createStory(storyDefs.GroupedRows);
-export const GroupedCollapsedByDefault = {
-  name: 'Grouped (collapsed)',
-  ...createStory(storyDefs.GroupedCollapsedByDefault),
-};
+const story = createDjangoStory({ componentName: 'table' });
+export const Default = story(storyDefs.Default);
+export const Striped = story(storyDefs.Striped);
+export const Borderless = story(storyDefs.Borderless);
+export const Compact = story(storyDefs.Compact);
+export const Scrollable = story(storyDefs.Scrollable);
+export const Stacked = story(storyDefs.Stacked);
+export const StackedHeader = story(storyDefs.StackedHeader);
+export const StickyHeader = story(storyDefs.StickyHeader);
+export const Sortable = story(storyDefs.Sortable);

@@ -1,0 +1,31 @@
+{% load usx_components %}
+{# ─── USX Table Foot ──────────────────────────────────────────────────────────── #}
+{# Props (passed via {% include ... with ... %}):                                 #}
+{#   leaf_columns     list[dict]        visible leaf column definitions           #}
+{#   footerValues     dict              {col_key: value} from compute_footer()    #}
+{#   selectionMode    'checkbox'|'radio'|None                                     #}
+{#   rowDetails       truthy when row-detail column is present                   #}
+{# ──────────────────────────────────────────────────────────────────────────────── #}
+
+<tfoot class="usx-data-table__foot">
+  <tr class="usx-data-table__foot-row">
+
+    {# Empty cell for row-detail column #}
+    {% if rowDetails %}
+    <td class="usx-data-table__cell"></td>
+    {% endif %}
+
+    {# Empty cell for selection column #}
+    {% if selectionMode and selectionMode != "null" %}
+    <td class="usx-data-table__cell usx-data-table__cell--selection"></td>
+    {% endif %}
+
+    {# Footer values per leaf column #}
+    {% for col in leaf_columns %}
+    <td class="usx-data-table__cell{% if col.align %} usx-data-table__cell--align-{{ col.align }}{% endif %}">
+      {{ footerValues|get_item:col.key }}
+    </td>
+    {% endfor %}
+
+  </tr>
+</tfoot>

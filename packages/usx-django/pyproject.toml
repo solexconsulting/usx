@@ -28,4 +28,4 @@ include = ["usx_django*"]
 namespaces = false
 
 [tool.setuptools.package-data]
-usx_django = ["component-contracts.json", "templates/**/*.django.html", "templates/**/config.json", "templates/**/*.py"]
+usx_django = ["component-contracts.json", "templates/**/*.django.html", "templates/**/config.json"]

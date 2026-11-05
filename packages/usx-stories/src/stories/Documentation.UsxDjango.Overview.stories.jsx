@@ -57,6 +57,16 @@ export const Overview = {
         default base for component assets.
       </p>
       <p>
+        <code>uswds.min.js</code> enhances markup already in the document when
+        it runs. If your app inserts Django-rendered HTML later, call the
+        relevant USWDS component&apos;s <code>init(root)</code> after insertion.
+        USX DataTable uses <code>@solexllc/usx/js/data-table</code> instead;
+        call <code>dataTable.init(root)</code> on inserted tables or load{' '}
+        <code>@solexllc/usx/js/start</code> once to discover them. See{' '}
+        <strong>Documentation/USX React → JavaScript Enhancement</strong> for
+        both lifecycles.
+      </p>
+      <p>
         Use <strong>Documentation/USX Django → Workbench</strong> to try tags and props against a
         live preview.
       </p>

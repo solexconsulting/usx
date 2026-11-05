@@ -5,6 +5,7 @@ import "@uswds/uswds/css/uswds.min.css";
 // themed usx build emits bare var(--usx-*) with no fallback.
 import "@solexllc/usx-theme/theme.css";
 import './styles.scss';
+import './controls-responsive.css';
 import solexTheme from "./solexTheme";
 import { resolveTheme, themeToCss } from '@solexllc/usx-theme/derive';
 import { PRESETS } from '@solexllc/usx-theme/presets';
@@ -13,14 +14,11 @@ import { PRESETS } from '@solexllc/usx-theme/presets';
 // story by overriding :root's --usx-* custom properties — the same
 // resolveTheme/themeToCss pipeline the Theme Playground uses for its presets.
 //
-// The Playground has its own preset picker and injects its own :root
-// overrides (see ThemePlayground's `liveThemeCss`) from its independent,
-// in-page state. Since that override only emits *changed* tokens, any token
-// the toolbar's global theme changes but the Playground's own selection
-// doesn't would otherwise leak through from this decorator underneath it —
-// so skip applying the global override entirely while on that story.
+// The Playground has its own preset picker and emits only changed tokens.
+// Skip the toolbar override there so its remaining tokens inherit the base
+// theme, independent of the toolbar selection.
 function withThemePreset(Story, context) {
-  if (context.id === 'documentation-theme-playground--playground') {
+  if (context.parameters.isolateThemePreset) {
     return React.createElement(Story);
   }
   const overrides = PRESETS[context.globals.theme] || {};

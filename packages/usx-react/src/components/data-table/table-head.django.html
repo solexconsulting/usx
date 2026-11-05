@@ -1,0 +1,21 @@
+{% load components %}
+<thead class="usx-data-table__head">
+{% if groupHeaders %}
+  <tr class="usx-data-table__head-row usx-data-table__head-row--groups">
+    {% if rowDetails %}<th scope="col" rowspan="{{ total_depth|add:1 }}" class="usx-data-table__cell usx-data-table__cell--detail-toggle">Details</th>{% endif %}
+    {% if selectionMode and selectionPosition != 'right' %}<th scope="col" rowspan="{{ total_depth|add:1 }}" class="usx-data-table__cell usx-data-table__cell--selection usx-data-table__cell--valign-{{ selectionVerticalAlign }}">{% if selectionMode == 'checkbox' %}{% checkbox id=tableId|add:'-select-all' label='' ariaLabel='Select all rows' small=True formGroup=False %}{% endcheckbox %}{% endif %}</th>{% endif %}
+    {% for column in groupHeaders %}<th scope="col" class="usx-data-table__cell{% if column.align %} usx-data-table__cell--align-{{ column.align }}{% endif %}{% if column.verticalAlign %} usx-data-table__cell--valign-{{ column.verticalAlign }}{% endif %}{% if column.className %} {{ column.className }}{% endif %}"{% if column.colSpan > 1 %} colspan="{{ column.colSpan }}"{% endif %}{% if column.backgroundColor or column.color %} style="{% if column.backgroundColor %}background-color: {{ column.backgroundColor }};{% endif %}{% if column.color %} color: {{ column.color }};{% endif %}"{% endif %}>{{ column.header }}</th>{% endfor %}
+    {% if selectionMode and selectionPosition == 'right' %}<th scope="col" rowspan="{{ total_depth|add:1 }}" class="usx-data-table__cell usx-data-table__cell--selection usx-data-table__cell--valign-{{ selectionVerticalAlign }}">{% if selectionMode == 'checkbox' %}{% checkbox id=tableId|add:'-select-all' label='' ariaLabel='Select all rows' small=True formGroup=False %}{% endcheckbox %}{% endif %}</th>{% endif %}
+  </tr>
+{% endif %}
+{% for header_row in header_rows %}
+  <tr class="usx-data-table__head-row">
+    {% if forloop.first and not groupHeaders and rowDetails %}<th scope="col" class="usx-data-table__cell usx-data-table__cell--detail-toggle" aria-label="Row details"{% if total_depth > 1 %} rowspan="{{ total_depth }}"{% endif %}></th>{% endif %}
+    {% if forloop.first and not groupHeaders and selectionMode and selectionPosition != 'right' %}<th scope="col" class="usx-data-table__cell usx-data-table__cell--selection usx-data-table__cell--valign-{{ selectionVerticalAlign }}"{% if total_depth > 1 %} rowspan="{{ total_depth }}"{% endif %}>{% if selectionMode == 'checkbox' %}{% checkbox id=tableId|add:'-select-all' label='' ariaLabel='Select all rows' small=True formGroup=False %}{% endcheckbox %}{% endif %}</th>{% endif %}
+    {% for cell in header_row %}{% with column=cell.col %}
+      <th scope="col" class="usx-data-table__cell{% if column.headerAlign %} usx-data-table__cell--align-{{ column.headerAlign }}{% elif column.align %} usx-data-table__cell--align-{{ column.align }}{% endif %}{% if column.headerClassName %} {{ column.headerClassName }}{% endif %}"{% if cell.row_span > 1 %} rowspan="{{ cell.row_span }}"{% endif %}{% if cell.col_span > 1 %} colspan="{{ cell.col_span }}"{% endif %}{% if column.sortable and not column.columns %} data-usx-sortable="true"{% endif %} data-column-key="{{ column.key }}"{% if column.headerBackgroundColor or column.headerColor or column.width %} style="{% if column.headerBackgroundColor %}background-color: {{ column.headerBackgroundColor }};{% endif %}{% if column.headerColor %} color: {{ column.headerColor }};{% endif %}{% if column.width %} width: {{ column.width }};{% endif %}"{% endif %}>{{ column.header }}</th>
+    {% endwith %}{% endfor %}
+    {% if forloop.first and not groupHeaders and selectionMode and selectionPosition == 'right' %}<th scope="col" class="usx-data-table__cell usx-data-table__cell--selection usx-data-table__cell--valign-{{ selectionVerticalAlign }}"{% if total_depth > 1 %} rowspan="{{ total_depth }}"{% endif %}>{% if selectionMode == 'checkbox' %}{% checkbox id=tableId|add:'-select-all' label='' ariaLabel='Select all rows' small=True formGroup=False %}{% endcheckbox %}{% endif %}</th>{% endif %}
+  </tr>
+{% endfor %}
+</thead>

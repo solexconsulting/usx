@@ -4,6 +4,21 @@ This package uses a self-contained component structure where each component owns
 
 USWDS is treated as an external foundation. This package does not bundle USWDS assets; consuming applications should load USWDS styles in their own application bundle.
 
+## JavaScript Enhancement
+
+The host application loads behavior separately from React markup. The
+`uswds.min.js` bundle enhances USWDS components present when it runs. Call
+the relevant USWDS module's `init(root)` after a React component mounts or
+is replaced later. Load the bundle once; do not call `on()` again for
+the same behavior.
+
+USX DataTable uses `@solexllc/usx/js/data-table` for interactions in
+React, Django, and HTML. Call `dataTable.init(root)` after a client-side
+mount, or load `@solexllc/usx/js/start` once; its DataTable module observes
+newly inserted tables. Other USX modules may use delegated `on(root)`
+listeners instead of per-component `init()`. See the Storybook
+**Documentation → USX React → JavaScript Enhancement** page for examples.
+
 ## Asset URLs And Subpath Deployment
 
 `usxBaseUrl` means the **static asset root**, not the application's routing

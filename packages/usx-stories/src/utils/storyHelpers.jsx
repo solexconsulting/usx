@@ -43,6 +43,7 @@ const componentLoaders = {
     accordion: () => import('@uswds/uswds/js/usa-accordion'),
     banner: () => import('@uswds/uswds/js/usa-banner'),
     carousel: () => import('@solexllc/usx/js/carousel'),
+    dataTable: () => import('@solexllc/usx/js/data-table'),
     characterCount: () => import('@uswds/uswds/js/usa-character-count'),
     combobox: () => import('@uswds/uswds/js/usa-combo-box'),
     datePicker: () => import('@uswds/uswds/js/usa-date-picker'),
@@ -58,6 +59,13 @@ const componentLoaders = {
     })),
     range: () => import('@uswds/uswds/js/usa-range'),
     themePicker: () => import('@solexllc/usx/js/theme-picker'),
+    table: () => import('@uswds/uswds/js/usa-table').then(({ default: table }) => ({
+        init(root) {
+            [...(root.matches?.('.usa-table') ? [root] : []), ...root.querySelectorAll('.usa-table')].forEach((element) => {
+                if (element.querySelector('th[data-sortable]:not(:has(.usa-table__header__button))')) table.init(element);
+            });
+        },
+    })),
     timePicker: () => import('@uswds/uswds/js/usa-time-picker'),
 };
 
@@ -124,12 +132,11 @@ export const componentInit = (...names) => {
 // story's decorator makes, e.g. '`comboBox.init()`'.
 export const uswdsInitNote = (calls) =>
     `This story's decorator calls ${calls} to enhance the USWDS markup above. ` +
-    "Your application is responsible for doing the same wherever this component's " +
-    "markup mounts or updates. See **Documentation/USX React → USWDS JS " +
-    "Initialization** for the full picture — in most apps (and in this " +
-    "Storybook) something has already called `.on()` globally, so `.init()` " +
-    "is all you need; you only own calling `.on()` yourself if you're not " +
-    "using that global setup.";
+    "If your application inserts or replaces this markup after the bundle runs, " +
+    "call the same `init()`. When `uswds.min.js` is loaded, it has already " +
+    "called `on()` once; do not call `on()` again. " +
+    "See **Documentation/USX React → JavaScript Enhancement** for USWDS " +
+    "and USX setup.";
 
 export const buildArgTypes = (props = {}) => {
     return Object.fromEntries(Object.entries(props).map(([name, meta]) => {

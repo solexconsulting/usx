@@ -1113,14 +1113,17 @@ $usx-footer-heading-secondary-text: usx-var($usx-footer-heading-secondary-text-v
 // Primary/secondary sections intentionally use opposite surface tiers from
 // the header/table-grouped-rows/footer-secondary-border grouping — see the
 // surface-1/2/3 mapping note in theme-manifest.js.
-$usx-footer-secondary-bg: $usx-surface-3                                         !default;
-$usx-footer-primary-bg: $usx-surface-2                                         !default;
+$usx-footer-secondary-bg-var: null !default;
+$usx-footer-secondary-bg: usx-var($usx-footer-secondary-bg-var, $usx-footer-bg) !default;
+$usx-footer-primary-bg-var: null !default;
+$usx-footer-primary-bg: usx-var($usx-footer-primary-bg-var, $usx-surface-2) !default;
 
 // USWDS's own social icons carry their own brand colors by default \u2014 no
 // filter needed unless a consumer explicitly wants a monochrome treatment.
 $usx-footer-social-icon-filter-var: null !default;
 $usx-footer-social-icon-filter: usx-var($usx-footer-social-icon-filter-var)        !default;
-$usx-footer-sign-up-button-bg: $usx-color-primary                                    !default;
+$usx-footer-sign-up-button-bg-var: null !default;
+$usx-footer-sign-up-button-bg: usx-var($usx-footer-sign-up-button-bg-var, $usx-color-primary) !default;
 $usx-footer-social-bg-var: null !default;
 $usx-footer-social-bg: usx-var($usx-footer-social-bg-var) !default;
 $usx-footer-social-bg-hover-var: null                                                !default;
@@ -1228,6 +1231,8 @@ $usx-table-header-bg: usx-var($usx-table-header-bg-var, $usx-surface-2) !default
 
 $usx-table-stripe-bg-var: null !default;
 $usx-table-stripe-bg: usx-var($usx-table-stripe-bg-var, $usx-surface-3) !default;
+$usx-table-stripe-text-var: null !default;
+$usx-table-stripe-text: usx-var($usx-table-stripe-text-var, $usx-text-ink) !default;
 
 $usx-table-grouped-row-bg-var: null !default;
 $usx-table-grouped-row-bg: usx-var($usx-table-grouped-row-bg-var, $usx-color-primary-lighter) !default;
@@ -1246,7 +1251,7 @@ $usx-table-bg-hover-var: null !default;
 $usx-table-bg-hover: usx-var($usx-table-bg-hover-var, $usx-surface-2) !default;
 
 // Leave the ink-colored table grid unchanged unless configured. Runtime
-// themes default to currentColor; a theme can opt into a border role instead.
+// themes use text-ink so inverted cell text cannot recolor the grid.
 $usx-table-border-var: null !default;
 $usx-table-border: usx-var($usx-table-border-var) !default;
 
@@ -1254,11 +1259,25 @@ $usx-table-border: usx-var($usx-table-border-var) !default;
 $usx-table-placeholder-text-var: null !default;
 $usx-table-placeholder-text: usx-var($usx-table-placeholder-text-var, $usx-text-subtle) !default;
 
-// Active sort-button accent (indicates the currently sorted column).
+// Sorted table colors mirror USWDS's separate header, body, and striped-cell
+// settings. Hooks are null in the default build so the USWDS Table keeps its
+// native colors; the USX DataTable supplies the same defaults in its SCSS.
+$usx-table-sorted-header-bg-var: null !default;
+$usx-table-sorted-header-bg: usx-var($usx-table-sorted-header-bg-var) !default;
 $usx-table-sorted-column-bg-var: null !default;
-$usx-table-sorted-column-bg: usx-var($usx-table-sorted-column-bg-var, $usx-color-primary-dark) !default;
+$usx-table-sorted-column-bg: usx-var($usx-table-sorted-column-bg-var) !default;
+$usx-table-sorted-stripe-bg-var: null !default;
+$usx-table-sorted-stripe-bg: usx-var($usx-table-sorted-stripe-bg-var) !default;
+$usx-table-sorted-header-text-var: null !default;
+$usx-table-sorted-header-text: usx-var($usx-table-sorted-header-text-var) !default;
 $usx-table-sorted-column-text-var: null !default;
-$usx-table-sorted-column-text: usx-var($usx-table-sorted-column-text-var, $usx-text-ink) !default;
+$usx-table-sorted-column-text: usx-var($usx-table-sorted-column-text-var) !default;
+$usx-table-sorted-stripe-text-var: null !default;
+$usx-table-sorted-stripe-text: usx-var($usx-table-sorted-stripe-text-var) !default;
+$usx-table-sorted-icon-color-var: null !default;
+$usx-table-sorted-icon-color: usx-var($usx-table-sorted-icon-color-var) !default;
+$usx-table-unsorted-icon-color-var: null !default;
+$usx-table-unsorted-icon-color: usx-var($usx-table-unsorted-icon-color-var) !default;
 
 // ── Component tokens: Task List (custom; defaults baked in _task-list.scss) ──
 $usx-task-list-border-var: null !default;
@@ -1282,7 +1301,6 @@ $usx-callout-background-var: null !default;
 $usx-callout-background: usx-var($usx-callout-background-var, $usx-surface-2) !default;
 $usx-callout-border-width-var: null !default;
 $usx-callout-border-width: usx-var($usx-callout-border-width-var, $usx-border-width-lg) !default;
-$usx-callout-border-var: null !default;
 
 // ── Component tokens: Clickable (custom; defaults baked in SCSS) ─────────────
 $usx-clickable-focus-var: null !default;

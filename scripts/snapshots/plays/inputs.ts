@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import type { ComponentName, Source } from '../model/types.ts';
-import { storiesFile } from '../model/catalog.ts';
+import { storiesFiles } from '../model/catalog.ts';
 import { COMPONENTS_DIR, REPO_ROOT, STORIES_DIR, snapshotPath } from '../model/paths.ts';
 import { SOURCE_LABELS } from '../model/types.ts';
 
@@ -62,12 +62,16 @@ export const playInputHash = (component: ComponentName, source: Source): string 
  */
 export function generationInputFiles(component: ComponentName, source: Source): string[] {
   const stories = [
-    storiesFile(component, 'React'),
-    ...(source === 'django' ? [storiesFile(component, SOURCE_LABELS[source])] : []),
+    ...storiesFiles(component, 'React'),
+    ...(source === 'django' ? storiesFiles(component, SOURCE_LABELS[source]) : []),
   ];
+  const localModules = listFiles(path.join(STORIES_DIR, component)).filter(
+    (file) => !/\.stories\./.test(file) && !file.endsWith('-snapshot.html')
+  );
   const utils = path.join(STORIES_DIR, '..', 'utils');
   return [
     ...stories,
+    ...localModules,
     ...listFiles(path.join(COMPONENTS_DIR, component)).filter(
       (file) => !file.endsWith('-snapshot.html')
     ),
