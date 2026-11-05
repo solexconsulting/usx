@@ -4,6 +4,7 @@ import { buildArgTypes, createDjangoStory, uswdsInitNote, componentInit } from '
 import { storyDefs } from './LanguageSelector.React.stories.jsx';
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/LanguageSelector',
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
@@ -24,6 +25,7 @@ const toDjangoArgs = (args) => Object.fromEntries(
 );
 
 export const Default = createStory(toDjangoArgs(storyDefs.Default));
+export const Unenhanced = { ...createStory(toDjangoArgs(storyDefs.Unenhanced)), parameters: { docs: { description: { story: 'The language choices remain in the markup, but the menu cannot be opened without USWDS JavaScript.' } } } };
 export const ManyLanguages = createStory(toDjangoArgs(storyDefs.ManyLanguages));
 export const Unstyled = createStory(toDjangoArgs(storyDefs.Unstyled));
 export const Small = createStory(toDjangoArgs(storyDefs.Small));

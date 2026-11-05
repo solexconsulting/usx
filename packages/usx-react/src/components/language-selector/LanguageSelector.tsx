@@ -12,6 +12,7 @@ export interface LanguageOption {
 }
 
 export interface LanguageSelectorProps {
+  extraAttributes?: Record<string, unknown>;
   languages?: LanguageOption[];
   variant?: 'two' | 'menu' | null;
   unstyled?: boolean;
@@ -23,7 +24,7 @@ export interface LanguageSelectorProps {
   onSelect?: ((language: LanguageOption, event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void) | null;
 }
 
-interface TwoLanguageSelectorProps extends Pick<LanguageSelectorProps, 'onSelect' | 'className' | 'navAriaLabel'> {
+interface TwoLanguageSelectorProps extends Pick<LanguageSelectorProps, 'onSelect' | 'className' | 'navAriaLabel' | 'extraAttributes'> {
   target: LanguageOption;
 }
 
@@ -51,7 +52,7 @@ function LanguageLabel({ code, label, description }: Pick<LanguageOption, 'code'
   );
 }
 
-function TwoLanguageSelector({ target, onSelect, className, navAriaLabel }: TwoLanguageSelectorProps) {
+function TwoLanguageSelector({ target, onSelect, className, navAriaLabel, extraAttributes }: TwoLanguageSelectorProps) {
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     if (onSelect) onSelect(target, event);
     if (!target.href) event.preventDefault();
@@ -63,7 +64,7 @@ function TwoLanguageSelector({ target, onSelect, className, navAriaLabel }: TwoL
     : { type: 'button' as const };
 
   return (
-    <nav aria-label={navAriaLabel} className={className}>
+    <nav aria-label={navAriaLabel} className={className} {...extraAttributes}>
       <div className="usa-language-container">
         <Tag className="usa-button usx-button usa-button--primary" onClick={handleClick} {...tagProps}>
           <LanguageLabel code={target.code} label={target.label} />
@@ -82,6 +83,7 @@ function MenuLanguageSelector({
   onSelect,
   className,
   navAriaLabel,
+  extraAttributes,
 }: MenuLanguageSelectorProps) {
   // Open/close (aria-expanded, hidden, outside-click, Escape, focusout) is
   // driven by USWDS's own JS, initialized via a decorator in the story/host
@@ -100,7 +102,7 @@ function MenuLanguageSelector({
 
   return (
     <nav aria-label={navAriaLabel} className={className}>
-      <div className={containerClasses}>
+      <div className={containerClasses} {...extraAttributes}>
         <ul className="usa-language__primary usa-accordion">
           <li className="usa-language__primary-item">
             <button
@@ -157,13 +159,14 @@ export default function LanguageSelector({
   navAriaLabel = 'Language selection',
   className = '',
   onSelect = null,
+  extraAttributes,
   ...props
 }: LanguageSelectorProps) {
   const resolvedVariant = variant || (languages.length > 2 ? 'menu' : 'two');
   const classes = classnames('usx-language-selector', className);
 
   if (!languages || languages.length === 0) {
-    return <div className={classes}>{'LanguageSelector'}</div>;
+    return <div className={classes} {...extraAttributes}>{'LanguageSelector'}</div>;
   }
 
   if (resolvedVariant === 'two') {
@@ -174,6 +177,7 @@ export default function LanguageSelector({
         onSelect={onSelect}
         className={classes}
         navAriaLabel={navAriaLabel}
+        extraAttributes={extraAttributes}
         {...props}
       />
     );
@@ -189,6 +193,7 @@ export default function LanguageSelector({
       onSelect={onSelect}
       className={classes}
       navAriaLabel={navAriaLabel}
+      extraAttributes={extraAttributes}
       {...props}
     />
   );

@@ -11,7 +11,7 @@
     {% endbutton %}
   {% endif %}
 {% endfragment %}
-<div class="usx-layout{% if className %} {{ className }}{% endif %}">
+<div class="usx-layout{% if className %} {{ className }}{% endif %}"{% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}>
   {% if variant == 'single-column' %}
     <div class="usx-layout__single-column">
       {{ expandButton }}

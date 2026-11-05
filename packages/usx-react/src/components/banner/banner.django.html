@@ -3,7 +3,7 @@
 {% with effective_tld=tld|default:'.gov' %}
 <section
   id="{{ id|default:'gov-banner' }}"
-  class="usa-banner usx-banner {{ className }}"
+  class="usa-banner usx-banner {{ className }}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
   aria-label="{{ ariaLabel|default:'Official government website' }}"
 >
   <div id="{{ id|default:'gov-banner' }}-accordion" class="usa-accordion">

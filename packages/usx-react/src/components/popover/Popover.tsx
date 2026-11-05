@@ -42,6 +42,7 @@ export interface PopoverProps extends Omit<
   panelClassName?: string;
   /** Optional class name for the inner content container. */
   contentClassName?: string;
+  extraAttributes?: Record<string, unknown>;
 }
 
 /**
@@ -64,6 +65,7 @@ export default function Popover({
   summaryProps,
   panelClassName,
   contentClassName,
+  extraAttributes,
   children,
   ...props
 }: PopoverProps) {
@@ -78,6 +80,7 @@ export default function Popover({
       open={initiallyOpen || undefined}
       data-side={side}
       data-align={align}
+      {...extraAttributes}
     >
       <Summary unstyled {...composedSummaryProps} />
       <div

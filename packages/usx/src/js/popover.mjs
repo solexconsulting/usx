@@ -1,3 +1,5 @@
+import { enhancementDisabled, markEnhanced } from './enhancement.mjs';
+
 const DISCLOSURE = 'details.usx-popover';
 const instances = new WeakMap();
 
@@ -22,7 +24,7 @@ function connect(root) {
   const doc = root.ownerDocument || root;
   const dismissOutside = (node) => {
     disclosures(root)
-      .filter((details) => details.open && !details.contains(node))
+      .filter((details) => details.open && !enhancementDisabled(details) && !details.contains(node))
       .forEach((details) => close(details));
   };
   const click = (event) => {
@@ -30,7 +32,7 @@ function connect(root) {
     const button = event.target.closest?.('[data-usx-popover-close]');
     const panel = button && doc.getElementById(button.dataset.usxPopoverClose);
     const details = panel?.parentElement;
-    if (details?.matches(DISCLOSURE) && root.contains(details) && panelOf(details) === panel) {
+    if (details?.matches(DISCLOSURE) && root.contains(details) && !enhancementDisabled(details) && panelOf(details) === panel) {
       event.preventDefault();
       if (!button.disabled && button.getAttribute('aria-disabled') !== 'true') close(details, true);
       return;
@@ -40,14 +42,14 @@ function connect(root) {
   const keydown = (event) => {
     if (event.defaultPrevented || event.key !== 'Escape') return;
     const details = event.target.closest?.(`${DISCLOSURE}[open]`);
-    if (!details || !root.contains(details)) return;
+    if (!details || !root.contains(details) || enhancementDisabled(details)) return;
     event.preventDefault();
     event.stopPropagation();
     close(details, true);
   };
   const toggle = (event) => {
     const details = event.target;
-    if (!details.matches?.(DISCLOSURE) || !root.contains(details)) return;
+    if (!details.matches?.(DISCLOSURE) || !root.contains(details) || enhancementDisabled(details)) return;
     if (!details.open) close(details);
   };
   const focusin = (event) => dismissOutside(event.target);
@@ -64,8 +66,14 @@ function connect(root) {
 }
 
 const popover = {
+  init(root = document.body) {
+    const eventRoot = root.ownerDocument?.body || root;
+    if (!instances.has(eventRoot)) instances.set(eventRoot, connect(eventRoot));
+    markEnhanced(root, DISCLOSURE);
+  },
   on(root = document.body) {
     if (!instances.has(root)) instances.set(root, connect(root));
+    markEnhanced(root, DISCLOSURE);
   },
   off(root = document.body) {
     instances.get(root)?.();

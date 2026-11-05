@@ -7,7 +7,7 @@ const generatedArgTypes = buildArgTypes(config.props || {});
 
 export default {
   tags: ['USWDS', 'autodocs'],
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   title: 'React/USWDS/LanguageSelector',
   component: LanguageSelector,
   argTypes: generatedArgTypes,
@@ -29,6 +29,7 @@ const manyLanguages = [
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'language-options-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   ManyLanguages: {
     variant: 'menu',
     languages: manyLanguages,
@@ -55,6 +56,7 @@ export const Default = {
   args: storyDefs.Default,
 };
 
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The language choices remain in the markup, but the menu cannot be opened without USWDS JavaScript.' } } } };
 export const ManyLanguages = {
   args: storyDefs.ManyLanguages,
 };

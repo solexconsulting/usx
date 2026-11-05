@@ -8,6 +8,10 @@ $popover-panel-x-padding: 0.25rem;
   position: relative;
   display: inline-block;
 
+  &:not([data-enhanced='true']) .usx-popover__panel-close {
+    display: none;
+  }
+
   > .usx-popover__panel {
     position: absolute;
     z-index: 10;

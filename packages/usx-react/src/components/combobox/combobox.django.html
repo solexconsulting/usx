@@ -13,7 +13,7 @@
 {% error_message id=id|add:"-error" %}{{ error }}{% enderror_message %}
 {% endif %}
 
-<div class="usa-combo-box usx-combo-box{% if error %} usx-combo-box--error{% endif %}{% if className %} {{ className }}{% endif %}"{% if placeholder %} data-placeholder="{{ placeholder }}"{% endif %}{% if defaultValue %} data-default-value="{{ defaultValue }}"{% endif %}>
+<div class="usa-combo-box usx-combo-box{% if error %} usx-combo-box--error{% endif %}{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}{% if placeholder %} data-placeholder="{{ placeholder }}"{% endif %}{% if defaultValue %} data-default-value="{{ defaultValue }}"{% endif %}>
   <select
     id="{{ id }}"
     class="usa-select usx-select"
@@ -40,7 +40,7 @@
 {% error_message id=id|add:"-error" %}{{ error }}{% enderror_message %}
 {% endif %}
 
-<div class="usa-combo-box usx-combo-box{% if error %} usx-combo-box--error{% endif %}{% if className %} {{ className }}{% endif %}"{% if placeholder %} data-placeholder="{{ placeholder }}"{% endif %}{% if defaultValue %} data-default-value="{{ defaultValue }}"{% endif %}>
+<div class="usa-combo-box usx-combo-box{% if error %} usx-combo-box--error{% endif %}{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}{% if placeholder %} data-placeholder="{{ placeholder }}"{% endif %}{% if defaultValue %} data-default-value="{{ defaultValue }}"{% endif %}>
   <select
     id="{{ id }}"
     class="usa-select usx-select"

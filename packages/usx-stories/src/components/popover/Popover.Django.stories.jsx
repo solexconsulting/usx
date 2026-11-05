@@ -5,6 +5,7 @@ import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import ReactMeta, { storyDefs, NavigationBarLayout, AllPlacements as AllPlacementsReact, RtlPlacements as RtlPlacementsReact } from './Popover.React.stories.jsx';
 
 export default {
+  excludeStories: ['Unenhanced'],
   decorators: ReactMeta.decorators,
   title: 'Django/USX/Popover',
   tags: ['USX', 'autodocs'],
@@ -25,6 +26,7 @@ const createPopoverStory = createDjangoStory({ componentName: 'popover' });
 
 /** Plain content in a native disclosure with an enhanced floating panel. */
 export const Default = createPopoverStory(storyDefs.Default);
+export const Unenhanced = { ...createPopoverStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'Native details behavior still opens and closes the panel when its trigger is clicked. Without USX JavaScript, outside clicks, Escape, and the optional Close button do not dismiss it.' } } } };
 
 /** Original rounded panel with extra vertical padding. */
 export const RoundedPanel = createPopoverStory(storyDefs.RoundedPanel);

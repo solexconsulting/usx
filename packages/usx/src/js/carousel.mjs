@@ -1,3 +1,5 @@
+import { enhancementDisabled } from './enhancement.mjs';
+
 const CAROUSEL = '.usx-carousel';
 const TRACK = '.usx-carousel__track';
 const SLIDE = '.usx-carousel__slide';
@@ -212,7 +214,7 @@ function scroll(event) {
 const carousel = {
   init(root = document.body) {
     carousels(root).forEach((element) => {
-      if (element.dataset.enhanced) return;
+      if (element.dataset.enhanced === 'true' || enhancementDisabled(element)) return;
       const track = getTrack(element);
       if (!track) return;
       const count = slides(element).length;

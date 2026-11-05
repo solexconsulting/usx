@@ -1,5 +1,5 @@
 import config from '../../../../usx-react/src/components/layout/config.json';
-import { storyDefaultArgs } from '../../utils/storyHelpers.jsx';
+import { componentInit, storyDefaultArgs } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Layout from '../../../../usx-react/src/components/layout/Layout.tsx';
 import Page from '../../../../usx-react/src/components/page/Page.tsx';
@@ -11,17 +11,23 @@ export default {
   component: Layout,
   tags: ['USX', 'autodocs'],
   parameters: { layout: 'fullscreen' },
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   argTypes: {
     variant: {
       control: { type: 'select' },
       options: ['single-column', 'grid'],
     },
   },
+  decorators: [...componentInit('layout')],
 };
 
 export const storyDefs = {
   Default: storyDefaultArgs(config.default),
+  Unenhanced: {
+    variant: 'single-column', expandable: true,
+    children: <div className="bg-blue text-white padding-3"><h2 className="margin-top-0">Application overview</h2><p className="margin-bottom-0">The blue area is the content width. Without enhancement, the Expand control is unavailable; the page content and side gutters remain.</p></div>,
+    extraAttributes: { 'usx-data-enhanced': 'true' },
+  },
   GridFullContent: {
     variant: 'grid',
     content: (
@@ -182,6 +188,7 @@ export const storyDefs = {
 };
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The blue content block shows the normal content width and surrounding gutters. Without USX JavaScript, the optional Expand control is unavailable; the content itself remains visible.' } } } };
 export const GridFullContent = { args: storyDefs.GridFullContent };
 export const GridWithoutSidebars = { args: { ...storyDefs.Default, variant: 'grid' } };
 export const GridWithLeftSidebar = { args: storyDefs.GridWithLeftSidebar };

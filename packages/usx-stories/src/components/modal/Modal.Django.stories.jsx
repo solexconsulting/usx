@@ -11,7 +11,7 @@ export default {
   title: 'Django/USWDS/Modal',
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: [],
+  excludeStories: ['Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -39,6 +39,7 @@ const createStory = createDjangoStory({
 });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'The trigger and dialog markup remain, but the USWDS modal script is needed to open and close the dialog.' } } } };
 export const Large = createStory(storyDefs.Large);
 export const LargeCollapsed = createStory(storyDefs.LargeCollapsed);
 export const ForceAction = createStory(storyDefs.ForceAction);

@@ -28,6 +28,7 @@
     ]
   },
   "props": {
+    "extraAttributes": { "type": "object", "description": "Additional attributes on the USWDS enhancement target." },
     "languages": {
       "type": "array",
       "description": "Array of language options",

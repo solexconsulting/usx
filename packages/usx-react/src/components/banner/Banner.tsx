@@ -4,6 +4,7 @@ import ClassNames from 'classnames';
 import { getAssetUrl as assetUrl } from '../../assets';
 
 export interface BannerProps extends React.HTMLAttributes<HTMLElement> {
+  extraAttributes?: Record<string, unknown>;
   id?: string;
   ariaLabel?: string;
   flagSrc?: string;
@@ -36,6 +37,7 @@ export default function Banner({
     </>
   ),
   className = '',
+  extraAttributes,
   ...props
 }: BannerProps) {
   const classes = ClassNames(
@@ -44,7 +46,7 @@ export default function Banner({
     className
   );
   return (
-    <section id={id} className={classes} aria-label={ariaLabel} {...props}>
+    <section id={id} className={classes} aria-label={ariaLabel} {...props} {...extraAttributes}>
       <div id={`${id}-accordion`} className="usa-accordion">
         <header className="usa-banner__header">
           <div className="usa-banner__inner">

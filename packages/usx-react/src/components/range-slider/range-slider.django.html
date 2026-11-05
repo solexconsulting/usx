@@ -18,7 +18,7 @@
 {% endif %}
 
 <input
-  class="usa-range usx-range-slider{% if className %} {{ className }}{% endif %}"
+  class="usa-range usx-range-slider{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
   id="{{ id }}"
   type="range"
   name="{{ name|default:id }}"
@@ -47,7 +47,7 @@
 {% endif %}
 
 <input
-  class="usa-range usx-range-slider{% if className %} {{ className }}{% endif %}"
+  class="usa-range usx-range-slider{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
   id="{{ id }}"
   type="range"
   name="{{ name|default:id }}"

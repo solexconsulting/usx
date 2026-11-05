@@ -14,9 +14,13 @@ After inserting USWDS components on the client, call their module's
 
 USX behavior is exported from `@solexllc/usx/js/*`. Import
 `@solexllc/usx/js/start` once to connect USX modules on document readiness,
-or import the individual module you need. DataTable and Carousel expose
-`init(root)` for newly mounted markup; DataTable's `on()` also observes
-inserted tables. Other USX modules use delegated listeners through `on(root)`.
+or import the individual module you need. Call the component's `init(root)`
+after inserting client-rendered markup. Each enhanced component receives
+`data-enhanced="true"`. DataTable's `on()` also observes inserted tables;
+other modules use delegated listeners through `on(root)`.
+Without JavaScript, the components retain their native content and controls.
+Pass `extraAttributes={{ 'usx-data-enhanced': 'true' }}` to a component to
+preview that fallback in a JavaScript-enabled environment.
 The [JavaScript enhancement guide](../usx-stories/src/stories/Documentation.UsxReact.UswdsJsInit.stories.jsx)
 shows the lifecycle for both libraries.
 

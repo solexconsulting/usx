@@ -17,6 +17,13 @@
   max-width: 100%;
 }
 
+.usx-data-table-shell:not([data-enhanced='true']) {
+  .usx-data-table__toolbar,
+  .usx-data-table__pagination {
+    display: none;
+  }
+}
+
 .usx-data-table {
   width: 100%;
 

@@ -1,7 +1,7 @@
 {# Django template for Modal #}
 {% load usx_components %}
 <div
-    class="usa-modal usx-modal{% if size == 'lg' %} usa-modal--lg{% elif size == 'lg-collapsed' %} usx-modal--lg-collapsed{% endif %}{% if className %} {{ className }}{% endif %}"
+    class="usa-modal usx-modal{% if size == 'lg' %} usa-modal--lg{% elif size == 'lg-collapsed' %} usx-modal--lg-collapsed{% endif %}{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
     id="{{ id }}"
     aria-labelledby="{{ id }}-heading"
     aria-describedby="{{ id }}-description"

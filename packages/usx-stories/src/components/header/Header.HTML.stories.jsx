@@ -91,7 +91,7 @@ const checkHeader = (def, key) => async (section, context) => {
   }
 };
 
-const checks = Object.fromEntries(Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkHeader(def, key)]));
+const checks = Object.fromEntries(Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), checkHeader(def, key)]));
 checks['Border Roles'] = checkHeader({ ...storyDefs.Extended, id: 'header-border-roles', searchProps: { ...storyDefs.Extended.searchProps, id: 'header-border-roles-search' } }, 'BorderRoles');
 const play = createAllVariantsPlay(checks);
 

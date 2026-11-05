@@ -11,7 +11,7 @@ export default {
   component: Accordion,
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -44,6 +44,7 @@ const items1 = [
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'accordion-unenhanced', items: config.default.items.map((item, index) => ({ ...item, id: `accordion-unenhanced-${index}`, expanded: index === 0 })), extraAttributes: { 'data-enhanced': 'true' } },
   Bordered: {
     id: 'accordion-bordered',
     items: items1,
@@ -92,6 +93,7 @@ for (const args of Object.values(storyDefs)) {
 }
 
 export const Default = {args: storyDefs.Default};
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The first section starts open so its content remains readable. Without JavaScript, the other accordion buttons cannot expand their sections.' } } } };
 export const Bordered = {args: storyDefs.Bordered};
 export const InitiallyExpanded = {args: storyDefs.InitiallyExpanded};
 export const MultiSelectable = {args: storyDefs.MultiSelectable};

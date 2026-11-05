@@ -11,6 +11,7 @@
     "endHint": "mm/dd/yyyy"
   },
   "props": {
+    "extraAttributes": { "type": "object", "description": "Additional attributes on the USWDS enhancement target." },
     "startId": {
       "type": "string",
       "default": "event-date-start",

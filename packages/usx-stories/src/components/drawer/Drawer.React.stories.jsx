@@ -12,7 +12,7 @@ import Input from '../../../../usx-react/src/components/input/Input.tsx';
 import Checkbox from '../../../../usx-react/src/components/checkbox/Checkbox.tsx';
 import TaskList from '../../../../usx-react/src/components/task-list/TaskList.tsx';
 import config from '../../../../usx-react/src/components/drawer/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit } from '../../utils/storyHelpers.jsx';
 
 // Native command attributes are not in React's known-property list.
 const closeAction = { commandfor: 'drawer-action-required', command: 'close' };
@@ -64,6 +64,15 @@ const navigationItems = [
 
 export const storyDefs = {
   Default: storyDefaultArgs(config.default),
+  Unenhanced: {
+    ...storyDefaultArgs({
+      ...config.default,
+      id: 'drawer-unenhanced',
+      label: 'Open application details without JavaScript',
+      children: config.default.children.replaceAll('drawer-application-summary', 'drawer-unenhanced-summary'),
+    }),
+    extraAttributes: { 'usx-data-enhanced': 'true' },
+  },
   MenuIconTrigger: {
     id: 'drawer-menu-icon-trigger',
     label: 'Open site menu',
@@ -364,13 +373,14 @@ export default {
   title: 'React/USX/Drawer',
   component: Drawer,
   tags: ['USX', 'autodocs'],
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   argTypes: {
     ...buildArgTypes(config.props || {}),
     children: { control: false },
     footer: { control: false },
     trigger: { control: false },
   },
+  decorators: [...componentInit('drawer')],
   parameters: {
     docs: {
       description: {
@@ -385,6 +395,7 @@ export default {
 export const Default = {
   args: storyDefs.Default,
 };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'Native dialog commands still open and close the drawer. USX JavaScript adds dismissal when the backdrop outside the dialog panel is clicked.' } } } };
 
 /** An icon-only menu button uses the trigger slot and an explicit accessible name. */
 export const MenuIconTrigger = {

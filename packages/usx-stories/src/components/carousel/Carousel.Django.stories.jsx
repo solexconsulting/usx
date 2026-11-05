@@ -4,6 +4,7 @@ import { buildArgTypes, createDjangoStory, componentInit } from '../../utils/sto
 import { storyDefs } from './Carousel.React.stories.jsx';
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USX/Carousel',
   tags: ['USX', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
@@ -13,7 +14,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'carousel' });
 
 export const Default = createStory(storyDefs.Default);
-export const Unenhanced = createStory(storyDefs.Unenhanced);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced) , parameters: { docs: { description: { story: 'Without USX JavaScript, slides remain in a horizontally scrollable track; previous/next buttons, dots, and automatic slide status are unavailable.' } } } };
 export const WithoutDots = createStory(storyDefs.WithoutDots);
 export const HiddenStatus = createStory(storyDefs.HiddenStatus);
 export const CustomId = createStory(storyDefs.CustomId);

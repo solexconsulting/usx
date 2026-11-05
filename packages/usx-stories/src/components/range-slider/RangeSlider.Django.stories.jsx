@@ -6,6 +6,7 @@ import { storyDefs } from './RangeSlider.React.stories.jsx';
 const generatedArgTypes = buildArgTypes(config.props || {});
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/RangeSlider',
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
@@ -22,6 +23,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'range-slider' });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'The native slider still moves. The USWDS current-value display and screen-reader value announcement are unavailable.' } } } };
 export const WithUnit = createStory(storyDefs.WithUnit);
 export const WithPreposition = createStory(storyDefs.WithPreposition);
 export const FineStep = createStory(storyDefs.FineStep);

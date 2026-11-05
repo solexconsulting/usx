@@ -11,6 +11,7 @@ export interface ComboboxOption {
 }
 
 export interface ComboboxProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'onSelect' | 'defaultValue'> {
+  extraAttributes?: Record<string, unknown>;
   id: string;
   name: string;
   label: React.ReactNode;
@@ -50,6 +51,7 @@ export default function Combobox({
   onSelect,
   formGroup = true,
   className = '',
+  extraAttributes,
   ...props
 }: ComboboxProps) {
   const labelId = `${id}-label`;
@@ -81,6 +83,7 @@ export default function Combobox({
       {error && <ErrorMessage id={errorId}>{error}</ErrorMessage>}
 
       <div
+        {...extraAttributes}
         className={
           classNames(
             'usa-combo-box',

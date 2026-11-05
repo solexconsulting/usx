@@ -11,7 +11,7 @@ export default {
   component: Carousel,
   tags: ['USX', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   decorators: [...componentInit('carousel')],
 };
 
@@ -27,7 +27,7 @@ const baseSlides = [
 
 export const storyDefs = {
   Default: storyDefaultArgs(config.default),
-  Unenhanced: { ariaLabel: 'Carousel without JS enhancement', slides: baseSlides, extraAttributes: { 'data-enhanced': 'true' } },
+  Unenhanced: { ariaLabel: 'Carousel without JS enhancement', slides: baseSlides, extraAttributes: { 'usx-data-enhanced': 'true' } },
   WithoutDots: { ariaLabel: 'Featured content', slides: baseSlides, showDots: false },
   HiddenStatus: { ariaLabel: 'Featured content', slides: baseSlides, statusClassName: 'display-none' },
   CustomId: { id: 'custom-carousel', ariaLabel: 'Featured content', slides: baseSlides },
@@ -127,7 +127,7 @@ export const storyDefs = {
 };
 
 export const Default = { args: storyDefs.Default };
-export const Unenhanced = { args: storyDefs.Unenhanced };
+export const Unenhanced = { args: storyDefs.Unenhanced , parameters: { docs: { description: { story: 'Without USX JavaScript, slides remain in a horizontally scrollable track; previous/next buttons, dots, and automatic slide status are unavailable.' } } } };
 export const WithoutDots = { args: storyDefs.WithoutDots };
 export const HiddenStatus = { args: storyDefs.HiddenStatus };
 export const CustomId = { args: storyDefs.CustomId };

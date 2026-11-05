@@ -11,6 +11,7 @@ export interface TableColumn {
 }
 
 export interface TableProps extends Omit<React.TableHTMLAttributes<HTMLTableElement>, 'children'> {
+  extraAttributes?: Record<string, unknown>;
   columns?: TableColumn[];
   data?: Record<string, React.ReactNode>[];
   caption?: React.ReactNode;
@@ -30,13 +31,14 @@ export interface TableProps extends Omit<React.TableHTMLAttributes<HTMLTableElem
 export default function Table({
   columns = [], data = [], caption, striped = false, borderless = false,
   compact = false, scrollable = false, scrollHeight, stickyHeader = false, responsive = false,
-  className, children, ...props
+  className, children, extraAttributes, ...props
 }: TableProps) {
   const hasSorting = !children && columns.some((column) => column.sortable);
   const table = (
     <>
       <table
         {...props}
+        {...extraAttributes}
         className={classnames(
           'usa-table', 'usx-table',
           striped && 'usa-table--striped',

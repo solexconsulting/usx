@@ -370,6 +370,10 @@
       "type": "boolean",
       "default": false,
       "description": "Make rows keyboard and pointer activatable; the JS initializer emits usx:data-table:row-activate."
+    },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional HTML attributes on the table shell."
     }
   }
 }

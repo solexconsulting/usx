@@ -3,15 +3,17 @@ import { expect, userEvent, waitFor, within } from 'storybook/test';
 import reactSnapshot from '../../../../usx-react/src/components/drawer/drawer.react-snapshot.html?raw';
 import djangoSnapshot from '../../../../usx-react/src/components/drawer/drawer.django-snapshot.html?raw';
 import { storyDefs } from './Drawer.React.stories.jsx';
+import { componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'HTML/USX/Drawer',
   tags: ['USX', 'autodocs'],
+  decorators: [...componentInit('drawer')],
   parameters: {
     docs: {
       description: {
         component:
-          'These static HTML examples use the browser’s native dialog commands, `command="show-modal"` and `command="close"`. Load `@solexllc/usx/js/start` for backdrop dismissal and support in browsers without those commands. Keep a visible heading for the dialog name, and choose initial focus to suit the task.',
+          'These static HTML examples use the browser’s native dialog commands, `command="show-modal"` and `command="close"`. Load `@solexllc/usx/js/start` for backdrop dismissal. Keep a visible heading for the dialog name, and choose initial focus to suit the task.',
       },
     },
   },

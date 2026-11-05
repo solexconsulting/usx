@@ -7,9 +7,9 @@
 {% with id|default:"character-count" as field_id %}
 <div class="usa-character-count usx-character-count{% if className %} {{ className }}{% endif %}">
   {% if textArea %}
-    {% text_area id=field_id formGroup=True label=label hint=hint error=error success=success disabled=disabled required=required screenReaderOnlyLabel=screenReaderOnlyLabel placeholder=placeholder defaultValue=defaultValue maxlength=max describedBy=field_id|add:"-info" className="usa-character-count__field" %}{% endtext_area %}
+    {% text_area id=field_id formGroup=True label=label hint=hint error=error success=success disabled=disabled required=required screenReaderOnlyLabel=screenReaderOnlyLabel placeholder=placeholder defaultValue=defaultValue maxlength=max describedBy=field_id|add:"-info" className="usa-character-count__field" extraAttributes=extraAttributes %}{% endtext_area %}
   {% else %}
-    {% input id=field_id formGroup=True label=label hint=hint error=error success=success disabled=disabled required=required screenReaderOnlyLabel=screenReaderOnlyLabel placeholder=placeholder value=defaultValue maxlength=max describedBy=field_id|add:"-info" className="usa-character-count__field" %}{% endinput %}
+    {% input id=field_id formGroup=True label=label hint=hint error=error success=success disabled=disabled required=required screenReaderOnlyLabel=screenReaderOnlyLabel placeholder=placeholder value=defaultValue maxlength=max describedBy=field_id|add:"-info" className="usa-character-count__field" extraAttributes=extraAttributes %}{% endinput %}
   {% endif %}
   <span id="{{ field_id }}-info" class="usa-character-count__message">
     You can enter up to {{ max }} characters

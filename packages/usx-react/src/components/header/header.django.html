@@ -7,7 +7,7 @@
   {% if megamenu and not extended %}usa-header--megamenu{% endif %}
   {% if extended %}usa-header--extended{% endif %}
   {{ className }}
-" {% if id %}id="{{ id }}"{% endif %} {% if styles %}style="{{ styles|safe }}"{% endif %}>
+" {% if id %}id="{{ id }}"{% endif %} {% if styles %}style="{{ styles|safe }}"{% endif %}{% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}>
   {% if not extended %}
     <div class="usa-nav-container">
   {% endif %}
@@ -111,7 +111,7 @@
   {% if not extended %}</div>{% endif %}
 </header>
 {% if extended %}
-  <nav aria-label="Primary navigation" class="usa-nav usx-nav{% if stickyNav %} usx-nav--sticky{% endif %}">
+  <nav aria-label="Primary navigation" class="usa-nav usx-nav{% if stickyNav %} usx-nav--sticky{% endif %}"{% if extraAttributes %}{% for attr, value in extraAttributes.items %}{% if attr == 'data-enhanced' %} data-enhanced="{{ value }}"{% endif %}{% endfor %}{% endif %}>
     <div class="usa-nav__inner">
       <button type="button" class="usa-nav__close">
         {% icon name='close' size=3 %}{% endicon %}

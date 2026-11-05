@@ -5,6 +5,7 @@
   class="usx-popover{% if className %} {{ className }}{% endif %}"{% if defaultOpen %} open{% endif %}
   data-side="{{ side|default:'bottom'|force_escape }}"
   data-align="{{ align|default:'start'|force_escape }}"
+  {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
   >{% summary props=summaryProps label=summaryProps.label|default:'Open panel' unstyled=True %}{% endsummary %}<div
     id="{{ id|force_escape }}"
     class="usx-popover__panel{% if panelShape == 'square' %} usx-popover__panel--square{% endif %}{% if panelClassName %} {{ panelClassName }}{% endif %}"

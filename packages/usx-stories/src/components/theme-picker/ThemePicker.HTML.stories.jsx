@@ -91,14 +91,15 @@ const checkPicker = (def) => async (picker) => {
   const select = panel.querySelector('select');
   const confirm = panel.querySelector('.usx-theme-picker__toggle');
 
-  // Closed: only the palette button shows.
+  await waitFor(() => expect(picker).toHaveAttribute('data-enhanced', 'true'));
+  await expect(trigger).toBeVisible();
+  await expect(panel).not.toBeVisible();
+
   await expect(trigger).toHaveAttribute('aria-label', def.label);
   await expect(trigger).toHaveAttribute('type', 'button');
   await expect(trigger).toHaveAttribute('aria-expanded', 'false');
   await expect(trigger).toHaveAttribute('aria-controls', panel.id);
   await expect(trigger.querySelector('svg')).toHaveAttribute('aria-hidden', 'true');
-  await expect(trigger).toBeVisible();
-  await expect(panel).not.toBeVisible();
 
   await expect(select.id).toMatch(snapshotId(def.id));
   await expect(panel.querySelector('label')).toHaveAttribute('for', select.id);
@@ -112,7 +113,7 @@ const checkPicker = (def) => async (picker) => {
 };
 
 const checks = Object.fromEntries(
-  Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkPicker(def)])
+  Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), checkPicker(def)])
 );
 
 const play = async (context) => {

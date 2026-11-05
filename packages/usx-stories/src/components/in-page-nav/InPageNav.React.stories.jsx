@@ -56,6 +56,7 @@ const belowMinimumContent = `
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'in-page-nav-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   CustomHeadingElements: {
     id: 'in-page-nav-custom-headings',
     headingElements: 'h2',
@@ -104,7 +105,7 @@ export default {
   component: InPageNav,
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -116,6 +117,7 @@ export default {
 };
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The article headings and content remain available, but USWDS JavaScript does not generate the in-page link list.' } } } };
 export const CustomHeadingElements = { args: storyDefs.CustomHeadingElements };
 export const CustomTitle = { args: storyDefs.CustomTitle };
 export const BelowMinimumHeadingCount = { args: storyDefs.BelowMinimumHeadingCount };

@@ -7,6 +7,7 @@ import Hint from '../hint/Hint';
 import ErrorMessage from '../error-message/ErrorMessage';
 
 export interface RangeSliderProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue'> {
+  extraAttributes?: Record<string, unknown>;
   label?: React.ReactNode;
   hint?: React.ReactNode;
   error?: React.ReactNode;
@@ -38,6 +39,7 @@ export default function RangeSlider({
   textPreposition = 'of',
   formGroup = true,
   className = '',
+  extraAttributes,
   ...props
 }: RangeSliderProps) {
   const hintId = hint ? `${id}-hint` : undefined;
@@ -69,6 +71,7 @@ export default function RangeSlider({
         {...(textUnit ? { 'data-text-unit': textUnit } : {})}
         {...(textPreposition ? { 'data-text-preposition': textPreposition } : {})}
         {...props}
+        {...extraAttributes}
       />
     </>
   );

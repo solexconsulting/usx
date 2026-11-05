@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '../../../../usx-react/src/components/layout/config.json';
-import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { djangoComponent, useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
 import { storyDefs } from './Layout.React.stories.jsx';
 
@@ -11,12 +11,14 @@ export default {
   tags: ['USX', 'autodocs'],
   parameters: { layout: 'fullscreen' },
   argTypes: generatedArgTypes,
-  excludeStories: [],
+  excludeStories: ['Unenhanced'],
+  decorators: [...componentInit('layout')],
 };
 
 const createStory = createDjangoStory({ componentName: 'layout' });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'The blue content block shows the normal content width and surrounding gutters. Without USX JavaScript, the optional Expand control is unavailable; the content itself remains visible.' } } } };
 export const GridFullContent = createStory(storyDefs.GridFullContent);
 export const GridWithoutSidebars = createStory({ ...storyDefs.Default, variant: 'grid' });
 export const GridWithLeftSidebar = createStory(storyDefs.GridWithLeftSidebar);

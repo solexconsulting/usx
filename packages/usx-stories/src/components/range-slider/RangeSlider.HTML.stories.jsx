@@ -42,6 +42,7 @@ const checkSlider = (def) => async (group) => {
   await expect(slider.value).toBe(String(def.defaultValue));
   await (def.disabled ? expect(slider) : expect(slider).not).toBeDisabled();
 
+
   // The script keeps a spoken value and a visible value up to date.
   await expect(slider).toHaveAttribute('aria-valuetext', spoken(def, def.defaultValue));
   await expect(group.querySelector('.usa-range__value')).toHaveTextContent(
@@ -61,7 +62,7 @@ const checkSlider = (def) => async (group) => {
 };
 
 const checks = Object.fromEntries(
-  Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkSlider(def)])
+  Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), checkSlider(def)])
 );
 
 const play = async (context) => {

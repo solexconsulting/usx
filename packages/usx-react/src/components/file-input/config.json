@@ -79,6 +79,10 @@
     "onFilesChange": {
       "type": "function",
       "description": "Receives the current browser File objects after managed add or delete. React calls this function; Django dispatches a bubbling usx:files-change event from the input with detail.files. Preloaded files are excluded."
+    },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional HTML attributes on the file input."
     }
   }
 }

@@ -73,6 +73,7 @@ const fruitOptions = [
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'fruit-unenhanced', name: 'fruit-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   Disabled: {
     id: 'fruit-disabled',
     name: 'fruit-disabled',
@@ -136,7 +137,7 @@ export default {
   component: Combobox,
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -148,6 +149,7 @@ export default {
 };
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The native select still lists every fruit. Search, filtered suggestions, and combobox keyboard interactions require USWDS JavaScript.' } } } };
 export const Disabled = { args: storyDefs.Disabled };
 export const Required = { args: storyDefs.Required };
 export const WithHint = { args: storyDefs.WithHint };

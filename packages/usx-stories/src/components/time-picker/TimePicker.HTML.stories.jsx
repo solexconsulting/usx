@@ -83,7 +83,7 @@ const checkTimePicker = (def) => async (group) => {
 };
 
 const checks = Object.fromEntries(
-  Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkTimePicker(def)])
+  Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), checkTimePicker(def)])
 );
 
 const play = async (context) => {

@@ -92,6 +92,10 @@
     "panelClassName": {
       "type": "string",
       "description": "Additional classes for the dialog panel."
+    },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional HTML attributes on the drawer root."
     }
   }
 }

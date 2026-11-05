@@ -10,7 +10,7 @@ export default {
   component: TimePicker,
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   parameters: {
     docs: {
       description: {
@@ -23,6 +23,7 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'appointment-time-unenhanced', name: 'appointment-time-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   Disabled: {
     id: 'appointment-time-disabled',
     name: 'appointment-time-disabled',
@@ -70,6 +71,7 @@ export const storyDefs = {
 };
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The native text field remains available. Suggested times, filtering, and time formatting require USWDS JavaScript.' } } } };
 export const Disabled = { args: storyDefs.Disabled };
 export const AriaDisabled = { args: storyDefs.AriaDisabled };
 export const Required = { args: storyDefs.Required };

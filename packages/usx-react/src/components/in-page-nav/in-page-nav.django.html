@@ -11,7 +11,7 @@
 <div class="usa-in-page-nav-container usx-in-page-nav-container">
   <aside
     id="{{ id|default:'in-page-nav' }}"
-    class="usa-in-page-nav usx-in-page-nav{% if className %} {{ className }}{% endif %}"
+    class="usa-in-page-nav usx-in-page-nav{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
     data-heading-elements="{{ headingElements|default:'h2 h3' }}"
     data-main-content-selector="{% if mainContentSelector %}{{ mainContentSelector }}{% else %}#{{ content_id }}{% endif %}"
     data-title-heading-level="{{ titleAs|default:'h4' }}"

@@ -6,6 +6,7 @@
     "id": "gov-banner-default"
   },
   "props": {
+    "extraAttributes": { "type": "object", "description": "Additional attributes on the USWDS enhancement target." },
     "staticBaseUrl": {
       "type": "string",
       "description": "Optional asset base for this component. A non-empty value overrides window.usxBaseUrl in React or STATIC_URL in Django; otherwise the global base or / is used. Asset filenames remain separate."

@@ -103,6 +103,7 @@ export type LayoutProps = {
   /** Optional callback fired when the layout is expanded or contracted. */
   onToggleExpanded?: (expanded: boolean) => void;
   className?: string;
+  extraAttributes?: Record<string, unknown>;
 } & HTMLAttributes<HTMLDivElement>;
 
 export default function Layout({
@@ -116,6 +117,7 @@ export default function Layout({
   expandable = false,
   onToggleExpanded,
   className = '',
+  extraAttributes,
   ...props
 }: LayoutProps) {
   const [expanded, setExpanded] = useState(false);
@@ -150,7 +152,7 @@ export default function Layout({
   ) : null;
 
   return (
-    <div className={classes} {...props}>
+    <div className={classes} {...props} {...extraAttributes}>
       {variant === 'single-column' ? (
         <SingleColumnLayout expandButton={expandButton}>
           {children || content}

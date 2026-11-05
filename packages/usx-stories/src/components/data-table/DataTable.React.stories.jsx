@@ -11,7 +11,7 @@ export default {
   tags: ['USX', 'autodocs'],
   argTypes: generatedArgTypes,
   decorators: componentInit('dataTable'),
-  excludeStories: ['storyDefs', 'DOCUMENTS', 'STATES', 'DOC_COLUMNS', 'STATE_COLUMNS'],
+  excludeStories: ['storyDefs', 'DOCUMENTS', 'STATES', 'DOC_COLUMNS', 'STATE_COLUMNS', 'Unenhanced'],
   parameters: {
     actions: { argTypesRegex: null },
     docs: {
@@ -77,6 +77,11 @@ const OFFICE_COLUMNS = [
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: {
+    id: 'data-table-unenhanced', columns: DOC_COLUMNS, data: DOCUMENTS,
+    caption: 'Records without JavaScript', searchable: true, sortable: true,
+    extraAttributes: { 'usx-data-enhanced': 'true' },
+  },
   Striped: {
     id: "striped",
     columns: DOC_COLUMNS,
@@ -368,6 +373,7 @@ export const storyDefs = {
 };
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'Every row and header is rendered before JavaScript runs. Without USX enhancement, search is hidden, sorting and pagination are unavailable, and the rows remain readable in source order.' } } } };
 export const Striped = { args: storyDefs.Striped };
 export const Borderless = { args: storyDefs.Borderless };
 export const Compact = { args: storyDefs.Compact };

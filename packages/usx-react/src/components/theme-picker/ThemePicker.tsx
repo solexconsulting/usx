@@ -18,6 +18,7 @@ export interface ThemePickerProps {
   defaultValue?: string;
   onChange?: (value: string) => void;
   className?: string;
+  extraAttributes?: Record<string, unknown>;
 }
 
 export default function ThemePicker({
@@ -29,13 +30,14 @@ export default function ThemePicker({
   defaultValue,
   onChange,
   className = '',
+  extraAttributes,
 }: ThemePickerProps) {
   const selectId = id || 'theme-picker';
   const selection =
     value !== undefined ? { value } : { defaultValue: defaultValue ?? themes[0]?.value };
 
   return (
-    <div className={ClassNames('usx-theme-picker', className)}>
+    <div className={ClassNames('usx-theme-picker', className)} {...extraAttributes}>
       <button
         type="button"
         className="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"

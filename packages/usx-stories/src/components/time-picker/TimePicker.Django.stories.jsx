@@ -6,6 +6,7 @@ import { storyDefs } from './TimePicker.React.stories.jsx';
 const generatedArgTypes = buildArgTypes(config.props || {});
 
 export default {
+  excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/TimePicker',
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
@@ -22,6 +23,7 @@ export default {
 const createStory = createDjangoStory({ componentName: 'time-picker' });
 
 export const Default = createStory(storyDefs.Default);
+export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'The native text field remains available. Suggested times, filtering, and time formatting require USWDS JavaScript.' } } } };
 export const Disabled = createStory(storyDefs.Disabled);
 export const AriaDisabled = createStory(storyDefs.AriaDisabled);
 export const Required = createStory(storyDefs.Required);

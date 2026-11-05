@@ -80,7 +80,7 @@ const readyParts = async (context, title) => {
 };
 
 const checks = Object.fromEntries(
-  Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkPicker(def)])
+  Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), checkPicker(def)])
 );
 
 const play = async (context) => {

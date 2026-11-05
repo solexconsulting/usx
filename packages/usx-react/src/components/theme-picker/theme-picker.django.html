@@ -1,6 +1,6 @@
 {% load usx_components %}
 {% firstof id "theme-picker" as field_id %}
-<div class="usx-theme-picker{% if className %} {{ className }}{% endif %}">
+<div class="usx-theme-picker{% if className %} {{ className }}{% endif %}"{% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}>
   <button
     type="button"
     class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"

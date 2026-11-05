@@ -1,6 +1,6 @@
 <div
     id="{{ id }}"
-    class="usa-accordion usx-accordion {% if bordered %}usa-accordion--bordered{% endif %}{% if iconPosition == 'start' %} usa-accordion--icon-start{% elif iconPosition == 'end' %} usa-accordion--icon-end{% endif %}{% if className %} {{ className }}{% endif %}"
+    class="usa-accordion usx-accordion {% if bordered %}usa-accordion--bordered{% endif %}{% if iconPosition == 'start' %} usa-accordion--icon-start{% elif iconPosition == 'end' %} usa-accordion--icon-end{% endif %}{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
     {% if multiselectable %}
     data-allow-multiple="true"
     {% endif %}

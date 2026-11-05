@@ -2,10 +2,12 @@ import React from 'react';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import reactSnapshot from '../../../../usx-react/src/components/layout/layout.react-snapshot.html?raw';
 import djangoSnapshot from '../../../../usx-react/src/components/layout/layout.django-snapshot.html?raw';
+import { componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'HTML/USX/Layout',
   tags: ['USX', 'autodocs'],
+  decorators: [...componentInit('layout')],
   parameters: { layout: 'fullscreen' },
 };
 

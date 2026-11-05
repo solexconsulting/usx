@@ -5,6 +5,7 @@ import Prose from '../prose/Prose';
 import ButtonGroup, { ButtonGroupProps } from '../button-group/ButtonGroup';
 
 export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
+  extraAttributes?: Record<string, unknown>;
   id?: string;
   heading?: string;
   description?: string;
@@ -27,6 +28,7 @@ export default function Modal({
   forceAction = false,
   className = '',
   children,
+  extraAttributes,
   ...props
 }: ModalProps) {
   const classes = classNames('usa-modal', 'usx-modal', {
@@ -42,6 +44,7 @@ export default function Modal({
       aria-describedby={`${id}-description`}
       {...(forceAction ? { 'data-force-action': true } : {})}
       {...props}
+      {...extraAttributes}
     >
       <div className="usa-modal__content">
         <div className="usa-modal__main">

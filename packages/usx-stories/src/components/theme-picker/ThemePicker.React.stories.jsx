@@ -18,6 +18,10 @@ const LIGHTDARKTHEMES = [
 
 export const storyDefs = {
     Default: config.default,
+    Unenhanced: {
+        ...config.default, id: 'theme-picker-unenhanced',
+        extraAttributes: { 'usx-data-enhanced': 'true' },
+    },
     LightDark: {
         id: 'theme-picker-2',
         label: 'Theme',
@@ -31,7 +35,7 @@ export default {
     component: ThemePicker,
     tags: ['USX', 'autodocs'],
     argTypes: buildArgTypes(config.props || {}),
-    excludeStories: ['storyDefs'],
+    excludeStories: ['storyDefs', 'Unenhanced'],
     decorators: [
         ...componentInit('themePicker'),
         (Story) => {
@@ -79,6 +83,7 @@ export const Default = {
         );
     },
 };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'Without USX JavaScript, the native theme select stays visible and usable. The palette trigger and confirmation control are unavailable.' } } } };
 
 export const LightDark = {
     args: storyDefs.LightDark,

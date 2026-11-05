@@ -98,6 +98,10 @@
   padding-inline: var(--layout-gutter);
   background-color: usx-when($usx-surface-1);
 
+  &:not([data-enhanced='true']) .usx-layout__expand-button {
+    display: none !important;
+  }
+
   &__single-column,
   &__grid-container {
     --layout-width: max(0px, calc(var(--layout-collapsed-width) - 2 * var(--layout-gutter)));

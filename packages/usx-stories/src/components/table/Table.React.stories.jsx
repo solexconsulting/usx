@@ -14,6 +14,7 @@ const STICKY_ROWS = Array.from({ length: 36 }, (_, index) => ({
 
 export const storyDefs = {
   Default: config.default,
+  Unenhanced: { ...config.default, id: 'table-unenhanced', columns: config.default.columns.map((column) => ({ ...column, sortable: true })), extraAttributes: { 'data-enhanced': 'true' } },
   Striped: { ...config.default, caption: 'Striped table', striped: true },
   Borderless: { ...config.default, caption: 'Borderless table', borderless: true },
   Compact: { ...config.default, caption: 'Compact table', compact: true },
@@ -41,12 +42,13 @@ export default {
   component: Table,
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props),
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'Unenhanced'],
   decorators: componentInit('table'),
   parameters: { docs: { description: { component: `USWDS table variants with USX theme colors. ${uswdsInitNote('table.init()')}` } } },
 };
 
 export const Default = { args: storyDefs.Default };
+export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'Every row remains readable in its original order. Column sorting requires the USWDS table script.' } } } };
 export const Striped = { args: storyDefs.Striped };
 export const Borderless = { args: storyDefs.Borderless };
 export const Compact = { args: storyDefs.Compact };

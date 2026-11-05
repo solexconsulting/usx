@@ -12,11 +12,12 @@ the relevant USWDS module's `init(root)` after a React component mounts or
 is replaced later. Load the bundle once; do not call `on()` again for
 the same behavior.
 
-USX DataTable uses `@solexllc/usx/js/data-table` for interactions in
-React, Django, and HTML. Call `dataTable.init(root)` after a client-side
-mount, or load `@solexllc/usx/js/start` once; its DataTable module observes
-newly inserted tables. Other USX modules may use delegated `on(root)`
-listeners instead of per-component `init()`. See the Storybook
+USX components with JavaScript behavior use the matching module from
+`@solexllc/usx/js/*`. Call its `init(root)` after a client-side mount, or
+load `@solexllc/usx/js/start` once for server-rendered markup. DataTable's
+module also observes newly inserted tables. Enhanced components receive
+`data-enhanced="true"`. Use `extraAttributes={{ 'usx-data-enhanced': 'true' }}`
+to preview their no-JavaScript fallback. See the Storybook
 **Documentation → USX React → JavaScript Enhancement** page for examples.
 
 ## Asset URLs And Subpath Deployment

@@ -19,7 +19,7 @@ export default {
   decorators: [...componentInit('combobox')],
 };
 
-const checks = Object.fromEntries(Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), async (section) => {
+const checks = Object.fromEntries(Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), async (section) => {
   await expect(section).toHaveClass('usa-form-group', 'usx-form-group');
   await expect(Boolean(section.classList.contains('usa-form-group--error'))).toBe(Boolean(def.error));
   const box = section.querySelector('.usa-combo-box.usx-combo-box');

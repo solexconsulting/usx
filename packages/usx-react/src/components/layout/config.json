@@ -53,6 +53,10 @@
     "className": {
       "type": "string",
       "description": "Additional CSS classes"
+    },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional HTML attributes on the layout root."
     }
   }
 }

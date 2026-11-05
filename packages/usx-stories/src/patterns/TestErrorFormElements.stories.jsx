@@ -63,8 +63,7 @@ export default {
   ]
 };
 
-export const FormComponents = {
-  name: 'Form Components (React)',
+export const ReactComponents = {
   render: ({ error_state }) => {
     const error = error_state ? ERROR_MESSAGE : undefined;
 
@@ -359,7 +358,6 @@ DjangoFormComponents.propTypes = {
   error_state: PropTypes.bool,
 };
 
-export const FormComponentsDjango = {
-  name: 'Form Components (Django)',
+export const DjangoComponents = {
   render: ({ error_state }) => <DjangoFormComponents error_state={error_state} />,
 };

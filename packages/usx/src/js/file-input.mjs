@@ -1,5 +1,7 @@
 // Adds managed-file behavior to server-rendered FileInput markup. React owns
 // its own file array and marks its input so the delegated handler leaves it alone.
+import { enhancementDisabled, markEnhanced } from './enhancement.mjs';
+
 const instances = new WeakMap();
 const managedFiles = new WeakMap();
 
@@ -84,7 +86,7 @@ function resetInput(input) {
 function connect(root) {
   const change = (event) => {
     const input = event.target;
-    if (!input.matches?.('input[type="file"]') || input.usxReactManaged) return;
+    if (!input.matches?.('input[type="file"]') || input.usxReactManaged || enhancementDisabled(input)) return;
     const addOnly = addOnlyFor(input);
     if (!addOnly || !root.contains(addOnly)) return;
     const files = [...(input.files || [])];
@@ -108,7 +110,7 @@ function connect(root) {
     const list = button.closest('.usx-file-input__list');
     const addOnly = list && [...list.parentElement.children].find((child) => child.classList.contains('usx-file-input__add-only'));
     const input = addOnly?.querySelector('input[type="file"]');
-    if (!input || input.usxReactManaged || input.disabled) return;
+    if (!input || input.usxReactManaged || input.disabled || enhancementDisabled(input)) return;
     const row = button.closest('.usx-file-input__file-item');
     managedFiles.set(input, (managedFiles.get(input) || []).filter((entry) => entry.row !== row));
     row.remove();
@@ -126,8 +128,14 @@ function connect(root) {
 }
 
 const fileInput = {
+  init(root = document.body) {
+    const eventRoot = root.ownerDocument?.body || root;
+    if (!instances.has(eventRoot)) instances.set(eventRoot, connect(eventRoot));
+    markEnhanced(root, '.usx-file-input__add-only input.usx-file-input');
+  },
   on(root = document.body) {
     if (!instances.has(root)) instances.set(root, connect(root));
+    markEnhanced(root, '.usx-file-input__add-only input.usx-file-input');
   },
   off(root = document.body) {
     instances.get(root)?.();

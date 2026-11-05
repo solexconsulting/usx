@@ -76,7 +76,7 @@ const checkNav = (key) => async (section) => {
 };
 
 const checks = Object.fromEntries(
-  Object.keys(storyDefs).map((key) => [sectionTitle(key), checkNav(key)])
+  Object.keys(storyDefs).filter((key) => !key.startsWith('Unenhanced')).map((key) => [sectionTitle(key), checkNav(key)])
 );
 
 const play = async (context) => {
