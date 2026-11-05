@@ -870,15 +870,6 @@ $usx-file-input-preview-bg: usx-var($usx-file-input-preview-bg-var, $usx-surface
 $usx-file-input-preview-text-var: null !default;
 $usx-file-input-preview-text: usx-var($usx-file-input-preview-text-var, $usx-text-ink) !default;
 
-// ── Component tokens: Switch ──────────────────────────────────────────────
-// Default border width matches the width of checkboxes and radio buttons
-$usx-switch-border-width-var: null !default;
-$usx-switch-border-width: usx-var($usx-switch-border-width-var, 2px) !default;
-$usx-switch-border-off-var: null !default;
-$usx-switch-border-off: usx-var($usx-switch-border-off-var, $usx-color-border) !default;
-$usx-switch-track-bg-var: null !default;
-$usx-switch-track-bg: usx-var($usx-switch-track-bg-var, $usx-surface-2) !default;
-
 // ── Component tokens: Form group ─────────────────────────────────────────────
 $usx-form-group-error-text: $usx-color-error        !default;
 $usx-form-group-error-border-width: $usx-border-width-lg !default;

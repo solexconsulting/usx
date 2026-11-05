@@ -192,7 +192,7 @@ export const themeManifest = [
   // Independent border roles, ordered by contrast like the text roles:
   // default > muted > subtle. Consolidate USWDS's neutral border colors
   // without tying borders to text colors or palette shade derivation.
-  //   border         — input, switch, and range outlines
+  //   border         — input and range outlines
   //   border-muted   — file targets, tiles, pagination, and in-page nav rails
   //   border-subtle  — cards and layout/navigation dividers
   //   border-inverse — available for opposite-polarity surfaces; unused by default
@@ -287,7 +287,6 @@ export const themeManifest = [
   scale('accordion-border-width', '--usx-accordion-border-width', 'var(--usx-border-width-lg)', 'border-advanced'),
   scale('card-border-width', '--usx-card-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
   scale('button-outline-border-width', '--usx-button-outline-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
-  scale('switch-border-width', '--usx-switch-border-width', '2px', 'border-advanced'),
   scale('file-input-border-width', '--usx-file-input-border-width', 'var(--usx-border-width-inputs)', 'border-advanced'),
   scale('file-input-item-border-width', '--usx-file-input-item-border-width', 'var(--usx-border-width-sm)', 'border-advanced'),
   scale('range-slider-border-width', '--usx-range-slider-border-width', 'var(--usx-border-width-md)', 'border-advanced'),
@@ -404,12 +403,10 @@ export const themeManifest = [
   component('file-input-preview-bg', '#d9e8f6', 'surface-2'),
   component('file-input-preview-text', '#1b1b1b', 'text-ink'),
   component('task-list-bg-hover', 'var(--usx-surface-2)'),
-  // Shared by both checkbox and radio unchecked ::before styling. The
-  // outline follows the label's ink color unless explicitly overridden.
+  // Shared by checkbox, radio, and switch unchecked controls. The outline
+  // follows the label's ink color unless explicitly overridden.
   component('checkable-bg', 'var(--usx-surface-1)'),
   component('checkable-border', 'currentColor'),
-  component('switch-border-off', 'var(--usx-color-border)'),
-  component('switch-track-bg', 'var(--usx-surface-2)'),
   component('sidenav-link-text', 'var(--usx-text-muted)'),
   component('sidenav-bg-hover', 'var(--usx-surface-2)'),
   component('sidenav-border', 'var(--usx-color-border-subtle)'),

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import ClassNames from 'classnames';
 import Label from '../label/Label';
 import ErrorMessage from '../error-message/ErrorMessage';
@@ -11,7 +11,6 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
   label?: string;
   ariaLabel?: string;
   checked?: boolean;
-  indeterminate?: boolean;
   disabled?: boolean;
   description?: string;
   tile?: boolean;
@@ -19,6 +18,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
   error?: string;
   success?: string;
   className?: string;
+  labelClassName?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   required?: boolean;
   formGroup?: boolean;
@@ -31,7 +31,6 @@ export default function Checkbox({
   label = '',
   ariaLabel = '',
   checked,
-  indeterminate = false,
   disabled = false,
   description = '',
   tile = false,
@@ -39,13 +38,12 @@ export default function Checkbox({
   error,
   success,
   className = '',
+  labelClassName = '',
   onChange,
   required = false,
   formGroup = true,
   ...props
 }: CheckboxProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  useEffect(() => { if (inputRef.current) inputRef.current.indeterminate = indeterminate; }, [indeterminate]);
   const hasError = !!error;
   const hasSuccess = !!success;
 
@@ -56,16 +54,12 @@ export default function Checkbox({
     className
   );
 
-  const inputClasses = ClassNames(
-    'usa-checkbox__input',
-    { 'usa-checkbox__input--tile': tile }
-  );
+  const inputClasses = ClassNames('usa-checkbox__input', { 'usa-checkbox__input--tile': tile });
 
   const content = (
     <>
       <div className={divClasses} {...props}>
         <input
-          ref={inputRef}
           className={inputClasses}
           id={id}
           type="checkbox"
@@ -77,13 +71,14 @@ export default function Checkbox({
           required={required}
           {...(onChange ? { onChange } : {})}
         />
-        <Label className="usa-checkbox__label" classOverride={true} htmlFor={id} required={required}>
+        <Label
+          className={ClassNames('usa-checkbox__label', labelClassName)}
+          classOverride={true}
+          htmlFor={id}
+          required={required}
+        >
           {label}
-          {description && (
-            <span className="usa-checkbox__label-description">
-              {description}
-            </span>
-          )}
+          {description && <span className="usa-checkbox__label-description">{description}</span>}
         </Label>
       </div>
       {hasError ? (

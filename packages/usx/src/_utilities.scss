@@ -26,6 +26,10 @@
       background-color: $color-value !important;
     }
 
+    .before-#{$color-name}::before {
+      color: $color-value !important;
+    }
+
     .marker-#{$color-name}::marker {
       color: $color-value !important;
     }
@@ -46,6 +50,10 @@
       background-color: $color-value !important;
     }
 
+    .before-#{$color-name}::before {
+      color: $color-value !important;
+    }
+
     .marker-#{$color-name}::marker {
       color: $color-value !important;
     }
@@ -64,6 +72,10 @@
 
     .after-bg-#{$color-name}::after {
       background-color: $color-value !important;
+    }
+
+    .before-#{$color-name}::before {
+      color: $color-value !important;
     }
 
     .marker-#{$color-name}::marker {
@@ -109,7 +121,7 @@
     inset: 0;
     border-radius: inherit;
     background-color: currentcolor;
-    animation: ping 2s cubic-bezier(0, 0, .2, 1) infinite;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
 }
 
@@ -151,7 +163,7 @@
 $usx-sizes: (
   min: min-content,
   max: max-content,
-  fit: fit-content
+  fit: fit-content,
 );
 
 @each $key, $value in $usx-sizes {
@@ -168,7 +180,7 @@ $usx-overflow: (
   auto: auto,
   hidden: hidden,
   scroll: scroll,
-  clip: clip
+  clip: clip,
 );
 
 @each $key, $value in $usx-overflow {

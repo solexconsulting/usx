@@ -138,7 +138,7 @@ than `subtle`. Each role has a CSS custom property, a matching Sass variable
 
 | CSS token | Default | Component use | Color utility |
 | --- | --- | --- | --- |
-| `--usx-color-border` | `#565c65` | Inputs, switches, range controls | `.border-default` |
+| `--usx-color-border` | `#565c65` | Inputs and range controls | `.border-default` |
 | `--usx-color-border-muted` | `#a9aeb1` | File targets/items, checkbox/radio tiles, pagination buttons, in-page navigation rails | `.border-muted` |
 | `--usx-color-border-subtle` | `#dfe1e2` | Cards, header/footer/navigation dividers, task-list dividers, combo-box option dividers | `.border-subtle` |
 | `--usx-color-border-inverse` | `#ffffff` | Reserved for opposite-polarity surfaces; no default component assignments | `.border-inverse` |

@@ -1,26 +1,22 @@
-{# Django template for Switch #}
-{% if label %}
-<label class="usa-label usx-switch__label">
-  <input
-    type="checkbox"
-    class="usx-switch usx-toggle-{{ size|default:"md" }}{% if variant %} text-{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}"
-    {% if id %}id="{{ id }}"{% endif %}
-    {% if name %}name="{{ name }}"{% endif %}
-    {% if checked %}checked{% endif %}
-    {% if defaultChecked %}checked{% endif %}
-    {% if indeterminate %}aria-checked="mixed"{% elif ariaChecked is not none %}aria-checked="{{ ariaChecked }}"{% endif %}
-    {% if disabled %}disabled{% endif %}
-  />
-  {{ label }}
-</label>
-{% else %}
-<input
-  type="checkbox"
-  class="usx-switch usx-toggle-{{ size|default:"md" }}{% if variant %} text-{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}"
-  {% if id %}id="{{ id }}"{% endif %}
-  {% if name %}name="{{ name }}"{% endif %}
-  {% if checked %}checked{% endif %}
-  {% if defaultChecked %}checked{% endif %}
-  {% if indeterminate %}aria-checked="mixed"{% elif ariaChecked is not none %}aria-checked="{{ ariaChecked }}"{% endif %}
-  {% if disabled %}disabled{% endif %}
-/>{% endif %}
+{% load usx_components %}
+{% fragment as switchClass %}usx-switch{% if className %} {{ className }}{% endif %}{% endfragment %}
+{% fragment as switchLabelClass %}{% if color %}before-{{ color }}{% endif %}{% endfragment %}
+{% checkbox
+  id=id
+  name=name
+  value=value
+  label=label
+  ariaLabel=ariaLabel
+  checked=checked
+  disabled=disabled
+  description=description
+  tile=tile
+  small=small
+  error=error
+  success=success
+  formGroup=formGroup
+  onChange=onChange
+  required=required
+  className=switchClass
+  labelClassName=switchLabelClass
+%}{% endcheckbox %}

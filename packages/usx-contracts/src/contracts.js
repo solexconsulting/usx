@@ -1491,11 +1491,6 @@ export const componentContracts = {
           "default": false,
           "description": "Whether the checkbox is checked"
         },
-        "indeterminate": {
-          "type": "boolean",
-          "default": false,
-          "description": "React-only mixed state for a select-all checkbox."
-        },
         "ariaLabel": {
           "type": "string",
           "description": "Accessible name when a visible label is unsuitable."
@@ -7816,56 +7811,85 @@ export const componentContracts = {
     },
     "switch": {
       "component": "switch",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "id": {
           "type": "string",
-          "description": "Element id"
+          "description": "Unique identifier for the switch input"
         },
         "name": {
           "type": "string",
-          "description": "Form input name"
+          "description": "Name attribute for the switch input, used for form submission"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value attribute for the switch input"
+        },
+        "label": {
+          "type": "string",
+          "description": "Visible label for the switch"
         },
         "checked": {
           "type": "boolean",
-          "description": "Controlled checked state",
-          "default": false
+          "default": false,
+          "description": "Whether the switch is checked"
         },
-        "defaultChecked": {
-          "type": "boolean",
-          "description": "Initial checked state for uncontrolled usage",
-          "default": false
+        "ariaLabel": {
+          "type": "string",
+          "description": "Accessible name when a visible label is unsuitable."
         },
         "disabled": {
           "type": "boolean",
-          "description": "Disable the control",
-          "default": false
+          "default": false,
+          "description": "Whether the switch is disabled"
         },
-        "size": {
+        "description": {
           "type": "string",
-          "description": "Size variant: xs, sm, md, lg, xl"
+          "default": null,
+          "description": "Optional description text that provides additional information about the switch"
         },
-        "variant": {
-          "type": "string",
-          "description": "Color variant (primary, success, warning, etc.)"
-        },
-        "label": {
-          "type": "slot",
-          "description": "Optional label text to display next to the switch"
-        },
-        "indeterminate": {
+        "tile": {
           "type": "boolean",
-          "description": "Set the switch to an indeterminate state (visual only)",
-          "default": false
+          "default": false,
+          "description": "Whether to use the tile switch style"
         },
-        "ariaChecked": {
+        "small": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to use the compact switch style"
+        },
+        "error": {
           "type": "string",
-          "description": "ARIA attribute to indicate the checked state (true, false, mixed)"
+          "default": null,
+          "description": "Error message to display when the switch is in an error state"
+        },
+        "success": {
+          "type": "string",
+          "default": null,
+          "description": "Success message to display when the switch is in a success state"
+        },
+        "formGroup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Wrap the switch and its message in a form group. Set false inside another form group."
+        },
+        "color": {
+          "type": "string",
+          "description": "Color of the checked track, applied as before-{color} on the label. Defaults to primary."
         },
         "className": {
           "type": "string",
-          "description": "Additional CSS classes"
+          "description": "Additional classes on the switch container."
+        },
+        "onChange": {
+          "type": "function",
+          "description": "Function called when the switch value changes (React) or JavaScript code string for onchange attribute (Django)"
+        },
+        "required": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the switch is required, adds asterisk to label and required attribute to input"
         }
       },
       "renderers": {
@@ -7884,7 +7908,10 @@ export const componentContracts = {
       },
       "examples": {
         "default": {
-          "id": "switch-1"
+          "id": "example-switch-1",
+          "name": "example-1",
+          "value": "example-value-1",
+          "label": "Example Switch 1"
         }
       }
     },

@@ -1,24 +1,8 @@
+import React from 'react';
 import Switch from '../../../../usx-react/src/components/switch/Switch.tsx';
 import config from '../../../../usx-react/src/components/switch/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
-
-
-export const storyDefs = {
-  Default: config.default,
-  XS: { id: 'switch-xs', size: 'xs' },
-  SM: { id: 'switch-sm', size: 'sm' },
-  MD: { id: 'switch-md', size: 'md' },
-  LG: { id: 'switch-lg', size: 'lg' },
-  XL: { id: 'switch-xl', size: 'xl' },
-  Primary: { id: 'switch-primary', variant: 'primary', defaultChecked: true },
-  Success: { id: 'switch-success', variant: 'success', defaultChecked: true },
-  Warning: { id: 'switch-warning', variant: 'warning', defaultChecked: true },
-  Error: { id: 'switch-error', variant: 'error', defaultChecked: true },
-  PreChecked: { id: 'switch-prechecked', defaultChecked: true },
-  Disabled: { id: 'switch-disabled', disabled: true },
-  DisabledChecked: { id: 'switch-disabled-checked', disabled: true, defaultChecked: true },
-  WithLabel: { id: 'switch-with-label', label: 'Switch Label' },
-};
+import IndeterminateHost from './IndeterminateHost.jsx';
 
 export default {
   title: 'React/USX/Switch',
@@ -28,19 +12,126 @@ export default {
   excludeStories: ['storyDefs'],
 };
 
+const getArgs = (index) => ({
+  id: `example-switch-${index}`,
+  name: `example-${index}`,
+  value: `example-value-${index}`,
+  label: `Example Switch ${index}`,
+});
+
+export const storyDefs = {
+  Default: config.default,
+  Checked: { ...getArgs(2), checked: true },
+  Tile: { ...getArgs(3), tile: true },
+  Description: { ...getArgs(4), description: 'Additional details about this setting.' },
+  TileWithDescription: {
+    ...getArgs(5),
+    tile: true,
+    description: 'Additional details about this setting.',
+  },
+  Disabled: { ...getArgs(6), disabled: true },
+  DisabledChecked: { ...getArgs(7), checked: true, disabled: true },
+  DisabledTile: { ...getArgs(8), tile: true, disabled: true },
+  DisabledCheckedTile: { ...getArgs(9), checked: true, tile: true, disabled: true },
+  Small: { ...getArgs(10), small: true },
+  SmallTile: { ...getArgs(11), small: true, tile: true },
+  SmallDisabled: { ...getArgs(12), small: true, disabled: true },
+  SmallCheckedDisabled: { ...getArgs(13), small: true, checked: true, disabled: true },
+  SmallTileDisabled: {
+    ...getArgs(14),
+    small: true,
+    tile: true,
+    disabled: true,
+    description: 'Additional details about this setting.',
+  },
+  SmallCheckedTileDisabled: {
+    ...getArgs(15),
+    small: true,
+    checked: true,
+    tile: true,
+    disabled: true,
+    description: 'Additional details about this setting.',
+  },
+  WithOnChange: { ...getArgs(16), onChange: () => {} },
+  Required: {
+    ...getArgs(17),
+    required: true,
+    tile: true,
+    description: 'This setting is required.',
+  },
+  Error: {
+    ...getArgs(18),
+    error: 'Choose a setting before continuing.',
+    tile: true,
+    description: 'Please review this setting.',
+  },
+  ErrorWithoutFormGroup: {
+    ...getArgs(19),
+    error: 'Choose a setting before continuing.',
+    tile: true,
+    formGroup: false,
+    description: 'Please review this setting.',
+  },
+  Success: {
+    ...getArgs(20),
+    success: 'Setting saved.',
+    tile: true,
+    description: 'Your choice has been recorded.',
+  },
+  AriaLabel: { ...getArgs(21), label: '', ariaLabel: 'Email notifications' },
+  CustomClass: { ...getArgs(22), className: 'custom-switch' },
+  Indeterminate: getArgs(23),
+  ColorSuccess: { ...getArgs(24), checked: true, color: 'success' },
+  ColorWarning: { ...getArgs(25), checked: true, color: 'warning' },
+  ColorError: { ...getArgs(26), checked: true, color: 'error' },
+  ColorSecondaryTile: {
+    ...getArgs(27),
+    checked: true,
+    tile: true,
+    color: 'secondary',
+  },
+  ColorAccentCool: { ...getArgs(28), checked: true, color: 'accent-cool' },
+  ColorDisabledChecked: {
+    ...getArgs(30),
+    checked: true,
+    disabled: true,
+    color: 'error',
+  },
+};
+
 export const Default = { args: storyDefs.Default };
-export const XS = { args: storyDefs.XS };
-export const SM = { args: storyDefs.SM };
-export const MD = { args: storyDefs.MD };
-export const LG = { args: storyDefs.LG };
-export const XL = { args: storyDefs.XL };
-export const Primary = { args: storyDefs.Primary };
-export const Success = { args: storyDefs.Success };
-export const Warning = { args: storyDefs.Warning };
-export const Error = { args: storyDefs.Error };
-export const PreChecked = { args: storyDefs.PreChecked };
+export const Checked = { args: storyDefs.Checked };
+export const Tile = { args: storyDefs.Tile };
+export const Description = { args: storyDefs.Description };
+export const TileWithDescription = { args: storyDefs.TileWithDescription };
 export const Disabled = { args: storyDefs.Disabled };
 export const DisabledChecked = { args: storyDefs.DisabledChecked };
-export const WithLabel = { args: storyDefs.WithLabel };
-
-export const Indeterminate = { args: { indeterminate: true } };
+export const DisabledTile = { args: storyDefs.DisabledTile };
+export const DisabledCheckedTile = { args: storyDefs.DisabledCheckedTile };
+export const Small = { args: storyDefs.Small };
+export const SmallTile = { args: storyDefs.SmallTile };
+export const SmallDisabled = { args: storyDefs.SmallDisabled };
+export const SmallCheckedDisabled = { args: storyDefs.SmallCheckedDisabled };
+export const SmallTileDisabled = { args: storyDefs.SmallTileDisabled };
+export const SmallCheckedTileDisabled = { args: storyDefs.SmallCheckedTileDisabled };
+export const WithOnChange = { args: storyDefs.WithOnChange };
+export const Required = { args: storyDefs.Required };
+export const Error = { args: storyDefs.Error };
+export const ErrorWithoutFormGroup = { args: storyDefs.ErrorWithoutFormGroup };
+export const Success = { args: storyDefs.Success };
+export const AriaLabel = { args: storyDefs.AriaLabel };
+export const CustomClass = { args: storyDefs.CustomClass };
+export const Indeterminate = {
+  args: storyDefs.Indeterminate,
+  render: (args) => (
+    <IndeterminateHost idSuffix={args.id}>
+      <Switch {...args} />
+    </IndeterminateHost>
+  ),
+};
+export const ColorSuccess = { args: storyDefs.ColorSuccess };
+export const ColorWarning = { args: storyDefs.ColorWarning };
+export const ColorError = { args: storyDefs.ColorError };
+export const ColorSecondaryTile = { args: storyDefs.ColorSecondaryTile };
+export const ColorAccentCool = { args: storyDefs.ColorAccentCool };
+export const ColorDisabledChecked = { args: storyDefs.ColorDisabledChecked };

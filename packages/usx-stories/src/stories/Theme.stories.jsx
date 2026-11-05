@@ -208,14 +208,13 @@ const COMPONENT_CONTROL_GROUPS = [
   { label: 'Combo Box', prefix: 'combo-box-' },
   { label: 'Input', prefix: 'input-' },
   { label: 'TextArea', prefix: 'textarea-' },
-  { label: 'Switch', prefix: 'switch-' },
   { label: 'Step Indicator', prefix: 'step-indicator-' },
   { label: 'Process List', prefix: 'process-list-' },
   { label: 'Task List', prefix: 'task-list-' },
   { label: 'Attribution', prefix: 'attribution-' },
   { label: 'Callout', prefix: 'callout-' },
   { label: 'Clickable', prefix: 'clickable-' },
-  { label: 'Checkable (Checkbox/Radio/Tile)', prefix: 'checkable-' },
+  { label: 'Checkable (Checkbox/Radio/Switch/Tile)', prefix: 'checkable-' },
   { label: 'SideNav', prefix: 'sidenav-' },
   { label: 'Breadcrumb', prefix: 'breadcrumb-' },
   { label: 'Pagination', prefix: 'pagination-' },
@@ -1446,17 +1445,27 @@ function Showcase({ resolved }) {
           id="theme-check-1"
           name="theme-check-1"
           value="1"
-          label="Normal checkbox option"
+          label="Normal checkbox option (checked)"
           checked={true}
+          formGroup={false}
         />
         <Checkbox
           id="theme-check-2"
           name="theme-check-2"
           value="1"
+          label="Normal checkbox option (unchecked)"
+          checked={false}
+          formGroup={false}
+        />
+        <Checkbox
+          id="theme-check-3"
+          name="theme-check-3"
+          value="1"
           label="Tile checkbox option"
           checked={true}
           tile={true}
           description="A checkbox with a description and tile styling."
+          formGroup={false}
         />
         <RadioButtons
           name="theme-radios"
@@ -1465,6 +1474,7 @@ function Showcase({ resolved }) {
             { value: 'r2', label: 'Radio B' }
           ]}
           defaultValue='r1'
+          formGroup={false}
         />
         <RadioButtons
           name="theme-radios-tile"
@@ -1474,6 +1484,32 @@ function Showcase({ resolved }) {
             { value: 'r2', label: 'Radio B', description: 'This radio button\'s description is appended with "B".' }
           ]}
           defaultValue='r1'
+          formGroup={false}
+        />
+        <Switch
+          id="theme-switch-off"
+          name="theme-switch-off"
+          value="off"
+          label="Switch off"
+          formGroup={false}
+        />
+        <Switch
+          id="theme-switch-on"
+          name="theme-switch-on"
+          value="on"
+          label="Switch on"
+          checked
+          formGroup={false}
+        />
+        <Switch
+          id="theme-switch-tile"
+          name="theme-switch-tile"
+          value="tile"
+          label="Tile switch"
+          checked
+          tile
+          description="Switches use the same tile and color tokens as checkboxes."
+          formGroup={false}
         />
         <Search id="theme-search" placeholder="Search…" />
         <DatePicker id="theme-date-picker" label="Date picker" hint="mm/dd/yyyy" />
@@ -1504,8 +1540,6 @@ function Showcase({ resolved }) {
           <Status color="warning" size="md" />
           <Status color="error" size="md" />
           <Spinner size={3} label="Loading…" />
-          <Switch id="theme-switch" variant="primary" defaultChecked />
-          <Switch id="theme-switch-off" variant="primary" />
         </div>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <Swap onContent="ON" offContent="OFF" />
