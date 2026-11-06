@@ -9,7 +9,10 @@
     "hint": "Select a time from the dropdown or type to jump to the first matching time."
   },
   "props": {
-    "extraAttributes": { "type": "object", "description": "Additional attributes on the USWDS enhancement target." },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional attributes on the USWDS enhancement target."
+    },
     "id": {
       "type": "string",
       "default": "appointment-time",
@@ -50,6 +53,11 @@
     "defaultValue": {
       "type": "string",
       "description": "Initial value shown in the time picker (e.g. \"1:00pm\"). Sets the value attribute on the input."
+    },
+    "value": {
+      "type": "string",
+      "default": null,
+      "description": "Current time field value. Takes precedence over defaultValue."
     },
     "minTime": {
       "type": "string",

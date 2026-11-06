@@ -20,18 +20,18 @@
         {% if required %}required{% endif %}
       >
         <option value="">- Select -</option>
-        <option value="1" {% if defaultMonth == "1" %}selected{% endif %}>January</option>
-        <option value="2" {% if defaultMonth == "2" %}selected{% endif %}>February</option>
-        <option value="3" {% if defaultMonth == "3" %}selected{% endif %}>March</option>
-        <option value="4" {% if defaultMonth == "4" %}selected{% endif %}>April</option>
-        <option value="5" {% if defaultMonth == "5" %}selected{% endif %}>May</option>
-        <option value="6" {% if defaultMonth == "6" %}selected{% endif %}>June</option>
-        <option value="7" {% if defaultMonth == "7" %}selected{% endif %}>July</option>
-        <option value="8" {% if defaultMonth == "8" %}selected{% endif %}>August</option>
-        <option value="9" {% if defaultMonth == "9" %}selected{% endif %}>September</option>
-        <option value="10" {% if defaultMonth == "10" %}selected{% endif %}>October</option>
-        <option value="11" {% if defaultMonth == "11" %}selected{% endif %}>November</option>
-        <option value="12" {% if defaultMonth == "12" %}selected{% endif %}>December</option>
+        <option value="1" {% if month is not None and month == "1" or month is None and defaultMonth == "1" %}selected{% endif %}>January</option>
+        <option value="2" {% if month is not None and month == "2" or month is None and defaultMonth == "2" %}selected{% endif %}>February</option>
+        <option value="3" {% if month is not None and month == "3" or month is None and defaultMonth == "3" %}selected{% endif %}>March</option>
+        <option value="4" {% if month is not None and month == "4" or month is None and defaultMonth == "4" %}selected{% endif %}>April</option>
+        <option value="5" {% if month is not None and month == "5" or month is None and defaultMonth == "5" %}selected{% endif %}>May</option>
+        <option value="6" {% if month is not None and month == "6" or month is None and defaultMonth == "6" %}selected{% endif %}>June</option>
+        <option value="7" {% if month is not None and month == "7" or month is None and defaultMonth == "7" %}selected{% endif %}>July</option>
+        <option value="8" {% if month is not None and month == "8" or month is None and defaultMonth == "8" %}selected{% endif %}>August</option>
+        <option value="9" {% if month is not None and month == "9" or month is None and defaultMonth == "9" %}selected{% endif %}>September</option>
+        <option value="10" {% if month is not None and month == "10" or month is None and defaultMonth == "10" %}selected{% endif %}>October</option>
+        <option value="11" {% if month is not None and month == "11" or month is None and defaultMonth == "11" %}selected{% endif %}>November</option>
+        <option value="12" {% if month is not None and month == "12" or month is None and defaultMonth == "12" %}selected{% endif %}>December</option>
       </select>
       {% if monthHint %}
       <span class="usa-hint usa-sr-only" id="{{ month_hint_id }}">{{ monthHint|default:"Select a month from the dropdown." }}</span>
@@ -44,7 +44,7 @@
         class="usa-input usx-input{% if error %} usa-input--error{% endif %}"
         id="{{ day_id }}"
         name="{{ dayName|default:day_id }}"
-        value="{{ defaultDay|default:'' }}"
+        value="{% if day is not None %}{{ day }}{% else %}{{ defaultDay|default:'' }}{% endif %}"
         maxlength="2"
         pattern="[0-9]*"
         placeholder=""
@@ -65,7 +65,7 @@
         class="usa-input usx-input{% if error %} usa-input--error{% endif %}"
         id="{{ year_id }}"
         name="{{ yearName|default:year_id }}"
-        value="{{ defaultYear|default:'' }}"
+        value="{% if year is not None %}{{ year }}{% else %}{{ defaultYear|default:'' }}{% endif %}"
         minlength="4"
         maxlength="4"
         pattern="[0-9]*"

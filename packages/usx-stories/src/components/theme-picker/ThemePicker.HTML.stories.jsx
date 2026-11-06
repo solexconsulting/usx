@@ -109,7 +109,7 @@ const checkPicker = (def) => async (picker) => {
   await expect(options.map((option) => [option.value, option.textContent])).toEqual(
     def.themes.map((theme) => [theme.value, theme.label])
   );
-  await expect(select).toHaveValue(def.defaultValue);
+  await expect(select).toHaveValue(def.value ?? def.defaultValue);
 };
 
 const checks = Object.fromEntries(

@@ -30,3 +30,5 @@ export const Required = createStory(storyDefs.Required);
 export const WithDefaultValue = createStory(storyDefs.WithDefaultValue);
 export const WithError = createStory(storyDefs.WithError);
 export const MinMaxStep = createStory(storyDefs.MinMaxStep);
+
+export const WithValue = createStory(storyDefs.WithValue);

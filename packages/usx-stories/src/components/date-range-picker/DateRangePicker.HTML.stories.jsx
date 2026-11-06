@@ -54,8 +54,8 @@ const checkRange = (def) => async (range) => {
   await expect(range.querySelector('.usa-date-range-picker__range-end')).toBeTruthy();
 
   const sides = [
-    [start, def.startId, def.startLabel, def.startHint, def.startError, def.defaultStartDate],
-    [end, def.endId, def.endLabel, def.endHint, def.endError, def.defaultEndDate],
+    [start, def.startId, def.startLabel, def.startHint, def.startError, def.startDate ?? def.defaultStartDate],
+    [end, def.endId, def.endLabel, def.endHint, def.endError, def.endDate ?? def.defaultEndDate],
   ];
   for (const [side, id, label, hint, error, defaultValue] of sides) {
     await expect(side.external.id).toMatch(snapshotId(id));

@@ -22,3 +22,6 @@ export const ErrorStateNoMessage = createStory(storyDefs.ErrorStateNoMessage);
 export const SuccessState = createStory(storyDefs.SuccessState);
 export const SuccessStateNoMessage = createStory(storyDefs.SuccessStateNoMessage);
 export const Disabled = createStory(storyDefs.Disabled);
+
+export const Value = createStory(storyDefs.Value);
+export const DefaultValue = createStory(storyDefs.DefaultValue);

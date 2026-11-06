@@ -12,6 +12,7 @@ export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextArea
   disabled?: boolean;
   required?: boolean;
   defaultValue?: string;
+  value?: string;
   hint?: string;
   screenReaderOnlyLabel?: boolean;
   error?: React.ReactNode;
@@ -27,6 +28,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   disabled = false,
   required = false,
   defaultValue = '',
+  value,
   hint = null,
   screenReaderOnlyLabel = false,
   error = null,
@@ -64,7 +66,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         className={classes}
         placeholder={placeholder}
         disabled={disabled}
-        defaultValue={props.value === undefined ? defaultValue : undefined}
+        {...(value !== undefined ? { value } : { defaultValue })}
         {...(required ? { required: true } : {})}
         aria-describedby={describedByParts.length ? describedByParts.join(' ') : undefined}
         aria-invalid={hasError ? 'true' : undefined}

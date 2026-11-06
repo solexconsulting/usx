@@ -50,3 +50,5 @@ const withConsumerCallback = (story, eventName, message) => ({
 
 export const WithOnSearch = withConsumerCallback(createStory({ ...storyDefs.WithOnSearch, onSearch: 'consumer' }), 'input', 'Your search');
 export const WithOnSelect = withConsumerCallback(createStory({ ...storyDefs.WithOnSelect, onSelect: 'consumer' }), 'change', 'You selected');
+
+export const WithValue = createStory(storyDefs.WithValue);

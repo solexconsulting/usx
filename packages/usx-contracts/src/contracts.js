@@ -1432,6 +1432,11 @@ export const componentContracts = {
           "default": "",
           "description": "Initial value of the field."
         },
+        "value": {
+          "type": "string",
+          "default": null,
+          "description": "Current field value. Takes precedence over defaultValue."
+        },
         "textArea": {
           "type": "boolean",
           "default": false,
@@ -1488,8 +1493,13 @@ export const componentContracts = {
         },
         "checked": {
           "type": "boolean",
-          "default": false,
+          "default": null,
           "description": "Whether the checkbox is checked"
+        },
+        "defaultChecked": {
+          "type": "boolean",
+          "default": null,
+          "description": "Initial checked state when checked is not supplied."
         },
         "ariaLabel": {
           "type": "string",
@@ -1960,6 +1970,11 @@ export const componentContracts = {
         "defaultValue": {
           "type": "string",
           "description": "Default selected value"
+        },
+        "value": {
+          "type": "string",
+          "default": null,
+          "description": "Option used to initialize the USWDS combo box, taking precedence over defaultValue."
         },
         "error": {
           "type": "slot",
@@ -3092,6 +3107,11 @@ export const componentContracts = {
           "type": "string",
           "description": "Initial date (yyyy-mm-dd). Sets data-default-value on the usa-date-picker wrapper."
         },
+        "value": {
+          "type": "string",
+          "default": null,
+          "description": "Date used to initialize the USWDS date picker, taking precedence over defaultValue."
+        },
         "minDate": {
           "type": "string",
           "description": "Earliest selectable date (yyyy-mm-dd). Sets data-min-date on the wrapper."
@@ -3207,9 +3227,19 @@ export const componentContracts = {
           "type": "string",
           "description": "Initial start date (yyyy-mm-dd). Sets data-default-value on the start usa-date-picker wrapper."
         },
+        "startDate": {
+          "type": "string",
+          "default": null,
+          "description": "Start date used to initialize the USWDS date picker, taking precedence over defaultStartDate."
+        },
         "defaultEndDate": {
           "type": "string",
           "description": "Initial end date (yyyy-mm-dd). Sets data-default-value on the end usa-date-picker wrapper."
+        },
+        "endDate": {
+          "type": "string",
+          "default": null,
+          "description": "End date used to initialize the USWDS date picker, taking precedence over defaultEndDate."
         },
         "minDate": {
           "type": "string",
@@ -5268,6 +5298,16 @@ export const componentContracts = {
           "type": "string",
           "default": "",
           "description": "Additional CSS classes to apply to the input field."
+        },
+        "defaultValue": {
+          "type": "string",
+          "default": null,
+          "description": "Initial input value; editable by the user."
+        },
+        "value": {
+          "type": "string",
+          "default": null,
+          "description": "Current input value. Takes precedence over defaultValue."
         }
       },
       "renderers": {
@@ -5777,13 +5817,28 @@ export const componentContracts = {
           "type": "string",
           "description": "Initial selected month value (\"1\"-\"12\")."
         },
+        "month": {
+          "type": "string",
+          "default": null,
+          "description": "Current month selection. Takes precedence over defaultMonth."
+        },
         "defaultDay": {
           "type": "string",
           "description": "Initial day value."
         },
+        "day": {
+          "type": "string",
+          "default": null,
+          "description": "Current day value. Takes precedence over defaultDay."
+        },
         "defaultYear": {
           "type": "string",
           "description": "Initial year value."
+        },
+        "year": {
+          "type": "string",
+          "default": null,
+          "description": "Current year value. Takes precedence over defaultYear."
         },
         "disabled": {
           "type": "boolean",
@@ -6968,6 +7023,11 @@ export const componentContracts = {
           "type": "string",
           "description": "Default value for the search input"
         },
+        "value": {
+          "type": "string",
+          "default": null,
+          "description": "Current search query. Takes precedence over defaultValue."
+        },
         "onSubmit": {
           "type": "string",
           "default": "",
@@ -7090,6 +7150,11 @@ export const componentContracts = {
           "type": "string",
           "default": null,
           "description": "Default selected value for the select input"
+        },
+        "value": {
+          "type": "string",
+          "default": null,
+          "description": "Current selected option. Takes precedence over defaultValue."
         },
         "placeholder": {
           "type": "string",
@@ -7832,8 +7897,13 @@ export const componentContracts = {
         },
         "checked": {
           "type": "boolean",
-          "default": false,
+          "default": null,
           "description": "Whether the switch is checked"
+        },
+        "defaultChecked": {
+          "type": "boolean",
+          "default": null,
+          "description": "Initial checked state when checked is not supplied."
         },
         "ariaLabel": {
           "type": "string",
@@ -8305,6 +8375,11 @@ export const componentContracts = {
           "default": "",
           "description": "Initial value of the textarea."
         },
+        "value": {
+          "type": "string",
+          "default": null,
+          "description": "Current textarea value. Takes precedence over defaultValue."
+        },
         "error": {
           "type": [
             "string",
@@ -8401,6 +8476,11 @@ export const componentContracts = {
         "defaultValue": {
           "type": "string",
           "description": "Initial selected value for uncontrolled usage"
+        },
+        "value": {
+          "type": "string",
+          "default": null,
+          "description": "Current theme selection. Takes precedence over defaultValue."
         },
         "onChange": {
           "type": "function",
@@ -8537,6 +8617,11 @@ export const componentContracts = {
         "defaultValue": {
           "type": "string",
           "description": "Initial value shown in the time picker (e.g. \"1:00pm\"). Sets the value attribute on the input."
+        },
+        "value": {
+          "type": "string",
+          "default": null,
+          "description": "Current time field value. Takes precedence over defaultValue."
         },
         "minTime": {
           "type": "string",

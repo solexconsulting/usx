@@ -21,6 +21,8 @@ export interface DateRangePickerProps {
   required?: boolean;
   defaultStartDate?: string | null;
   defaultEndDate?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
   minDate?: string | null;
   maxDate?: string | null;
   className?: string;
@@ -41,6 +43,8 @@ export default function DateRangePicker({
   required = false,
   defaultStartDate = null,
   defaultEndDate = null,
+  startDate,
+  endDate,
   minDate = null,
   maxDate = null,
   className = '',
@@ -74,7 +78,7 @@ export default function DateRangePicker({
         <div
           data-enhanced={extraAttributes?.['data-enhanced'] === 'true' ? 'true' : undefined}
           className="usa-date-picker usx-date-picker"
-          {...(defaultStartDate ? { 'data-default-value': defaultStartDate } : {})}
+          {...((startDate ?? defaultStartDate) ? { 'data-default-value': startDate ?? defaultStartDate } : {})}
         >
           <input
             className="usa-input usx-input"
@@ -99,7 +103,7 @@ export default function DateRangePicker({
         <div
           data-enhanced={extraAttributes?.['data-enhanced'] === 'true' ? 'true' : undefined}
           className="usa-date-picker usx-date-picker"
-          {...(defaultEndDate ? { 'data-default-value': defaultEndDate } : {})}
+          {...((endDate ?? defaultEndDate) ? { 'data-default-value': endDate ?? defaultEndDate } : {})}
         >
           <input
             className="usa-input usx-input"

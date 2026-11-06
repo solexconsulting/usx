@@ -20,7 +20,7 @@
       id="{{ id }}"
       class="usa-input usx-input"
       placeholder="{{ placeholder }}"
-      value="{{ defaultValue }}"
+      value="{% if value is not None %}{{ value }}{% else %}{{ defaultValue }}{% endif %}"
       type="search"
       name="{{ searchKey|default:'q' }}"
     />

@@ -29,3 +29,5 @@ export const Required = createStory(storyDefs.Required);
 export const WithDefaultValues = createStory(storyDefs.WithDefaultValues);
 export const WithError = createStory(storyDefs.WithError);
 export const MinMaxDate = createStory(storyDefs.MinMaxDate);
+
+export const WithValues = createStory(storyDefs.WithValues);

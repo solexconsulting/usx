@@ -17,7 +17,7 @@
 
   <div
     class="usa-date-picker usx-date-picker{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
-    {% if defaultValue %} data-default-value="{{ defaultValue }}"{% endif %}
+    {% if value is not None and value or value is None and defaultValue %} data-default-value="{% if value is not None %}{{ value }}{% else %}{{ defaultValue }}{% endif %}"{% endif %}
     {% if minDate %} data-min-date="{{ minDate }}"{% endif %}
     {% if maxDate %} data-max-date="{{ maxDate }}"{% endif %}
     {% if rangeDate %} data-range-date="{{ rangeDate }}"{% endif %}
@@ -48,7 +48,7 @@
 
   <div
     class="usa-date-picker usx-date-picker{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
-    {% if defaultValue %} data-default-value="{{ defaultValue }}"{% endif %}
+    {% if value is not None and value or value is None and defaultValue %} data-default-value="{% if value is not None %}{{ value }}{% else %}{{ defaultValue }}{% endif %}"{% endif %}
     {% if minDate %} data-min-date="{{ minDate }}"{% endif %}
     {% if maxDate %} data-max-date="{{ maxDate }}"{% endif %}
     {% if rangeDate %} data-range-date="{{ rangeDate }}"{% endif %}

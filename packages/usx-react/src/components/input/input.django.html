@@ -21,7 +21,7 @@
   {% if type %}type="{{ type }}" {% endif %}
   {% if autoComplete %}autocomplete="{{ autoComplete }}" {% endif %}
   placeholder="{% if placeholder is None %}Type here{% else %}{{ placeholder }}{% endif %}"
-  value="{{ value|default:'' }}"
+  value="{% if value is not None %}{{ value }}{% else %}{{ defaultValue|default:'' }}{% endif %}"
   {% if maxlength %}maxlength="{{ maxlength }}" {% endif %}
   {% if hint or describedBy or error and error != "true" and error != True and error != "false" %}aria-describedby="{% if describedBy %}{{ describedBy }} {% endif %}{% if hint %}{{ field_id }}-hint {% endif %}{% if error and error != "true" and error != True and error != "false" %}{{ field_id }}-error {% endif %}"
   {% endif %}
@@ -48,7 +48,7 @@
   {% if type %}type="{{ type }}" {% endif %}
   {% if autoComplete %}autocomplete="{{ autoComplete }}" {% endif %}
   placeholder="{% if placeholder is None %}Type here{% else %}{{ placeholder }}{% endif %}"
-  value="{{ value|default:'' }}"
+  value="{% if value is not None %}{{ value }}{% else %}{{ defaultValue|default:'' }}{% endif %}"
   {% if maxlength %}maxlength="{{ maxlength }}" {% endif %}
   {% if hint or describedBy or error and error != "true" and error != True and error != "false" %}aria-describedby="{% if describedBy %}{{ describedBy }} {% endif %}{% if hint %}{{ field_id }}-hint {% endif %}{% if error and error != "true" and error != True and error != "false" %}{{ field_id }}-error {% endif %}"
   {% endif %}

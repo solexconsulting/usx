@@ -79,9 +79,9 @@ const checkDate = (def) => async (group) => {
     await hasClass(field, 'usa-input--error', Boolean(def.error));
   }
 
-  await expect(month.value).toBe(def.defaultMonth ?? '');
-  await expect(day.value).toBe(def.defaultDay ?? '');
-  await expect(year.value).toBe(def.defaultYear ?? '');
+  await expect(month.value).toBe(def.month ?? def.defaultMonth ?? '');
+  await expect(day.value).toBe(def.day ?? def.defaultDay ?? '');
+  await expect(year.value).toBe(def.year ?? def.defaultYear ?? '');
 
   const message = group.querySelector('.usa-error-message');
   if (def.error) {

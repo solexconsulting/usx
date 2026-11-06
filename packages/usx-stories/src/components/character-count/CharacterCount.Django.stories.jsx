@@ -75,3 +75,6 @@ export const TextAreaDefaultValueOverLimit = {
     );
   }
 };
+
+export const Value = createStory(storyDefs.Value);
+export const TextAreaValue = createStory(storyDefs.TextAreaValue);

@@ -30,3 +30,5 @@ export const FineStep = createStory(storyDefs.FineStep);
 export const CustomRange = createStory(storyDefs.CustomRange);
 export const WithError = createStory(storyDefs.WithError);
 export const Disabled = createStory(storyDefs.Disabled);
+
+export const WithValue = createStory(storyDefs.WithValue);

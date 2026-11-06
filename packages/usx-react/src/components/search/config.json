@@ -57,6 +57,11 @@
       "type": "string",
       "description": "Default value for the search input"
     },
+    "value": {
+      "type": "string",
+      "default": null,
+      "description": "Current search query. Takes precedence over defaultValue."
+    },
     "onSubmit": {
       "type": "string",
       "default": "",

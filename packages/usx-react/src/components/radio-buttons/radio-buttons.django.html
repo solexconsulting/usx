@@ -8,7 +8,7 @@
     {% with generatedId=baseId|add:'-'|add:index %}
     {% with optionId=opt.id|default:generatedId %}
     <div class="usa-radio usx-radio{% if small %} usx-radio--small{% endif %}{% if className %} {{ className }}{% endif %}">
-      <input class="usa-radio__input{% if tile %} usa-radio__input--tile{% endif %}" id="{{ optionId }}" type="radio" name="{{ groupName }}" value="{{ opt.value }}"{% if opt.ariaLabel %} aria-label="{{ opt.ariaLabel }}"{% endif %}{% if defaultValue == opt.value or opt.checked %} checked{% endif %}{% if opt.disabled %} disabled{% endif %}>
+      <input class="usa-radio__input{% if tile %} usa-radio__input--tile{% endif %}" id="{{ optionId }}" type="radio" name="{{ groupName }}" value="{{ opt.value }}"{% if opt.ariaLabel %} aria-label="{{ opt.ariaLabel }}"{% endif %}{% if value is not None and value == opt.value or value is None and defaultValue is not None and defaultValue == opt.value or value is None and defaultValue is None and opt.checked %} checked{% endif %}{% if opt.disabled %} disabled{% endif %}>
       {% label htmlFor=optionId className='usa-radio__label' classOverride=True %}{{ opt.label }}{% if opt.description %}<span class="usa-checkbox__label-description">{{ opt.description }}</span>{% endif %}{% endlabel %}
     </div>
     {% endwith %}{% endwith %}{% endwith %}{% endwith %}

@@ -22,6 +22,12 @@ export interface MemorableDateProps {
   defaultMonth?: string;
   defaultDay?: string;
   defaultYear?: string;
+  month?: string;
+  day?: string;
+  year?: string;
+  onMonthChange?: React.ChangeEventHandler<HTMLSelectElement>;
+  onDayChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onYearChange?: React.ChangeEventHandler<HTMLInputElement>;
   disabled?: boolean;
   ariaDisabled?: boolean;
   required?: boolean;
@@ -60,6 +66,12 @@ export default function MemorableDate({
   defaultMonth,
   defaultDay,
   defaultYear,
+  month,
+  day,
+  year,
+  onMonthChange,
+  onDayChange,
+  onYearChange,
   disabled = false,
   ariaDisabled = false,
   required = false,
@@ -101,7 +113,8 @@ export default function MemorableDate({
               label={monthLabel}
               options={MONTH_OPTIONS}
               placeholder="- Select -"
-              defaultValue={defaultMonth}
+              {...(month !== undefined ? { value: month } : { defaultValue: defaultMonth })}
+              onChange={onMonthChange}
               required={required}
               aria-describedby={describedBy(monthHintId)}
               aria-invalid={hasError || undefined}
@@ -121,7 +134,8 @@ export default function MemorableDate({
               name={dayName || dayId}
               label={dayLabel}
               placeholder=""
-              defaultValue={defaultDay}
+              {...(day !== undefined ? { value: day } : { defaultValue: defaultDay })}
+              onChange={onDayChange}
               maxLength={2}
               pattern="[0-9]*"
               inputMode="numeric"
@@ -143,7 +157,8 @@ export default function MemorableDate({
               name={yearName || yearId}
               label={yearLabel}
               placeholder=""
-              defaultValue={defaultYear}
+              {...(year !== undefined ? { value: year } : { defaultValue: defaultYear })}
+              onChange={onYearChange}
               minLength={4}
               maxLength={4}
               pattern="[0-9]*"

@@ -18,7 +18,7 @@
       {% if name %}name="{{ name }}"{% endif %}
     >
       {% for theme in themes %}
-      <option value="{{ theme.value }}" {% if theme.value == defaultValue %}selected{% endif %}>{{ theme.label }}</option>
+      <option value="{{ theme.value }}" {% if value is not None and theme.value == value or value is None and theme.value == defaultValue %}selected{% endif %}>{{ theme.label }}</option>
       {% endfor %}
     </select>
     <button

@@ -31,6 +31,8 @@ export default function Input({
   screenReaderOnlyLabel = false,
   formGroup = true,
   className = '',
+  value,
+  defaultValue,
   ...props
 }: InputProps) {
   const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
@@ -61,6 +63,7 @@ export default function Input({
     required,
     'aria-describedby': describedByParts.length ? describedByParts.join(' ') : undefined,
     'aria-invalid': hasError ? true : undefined,
+    ...(value !== undefined ? { value } : { defaultValue }),
     ...props,
   };
 

@@ -11,6 +11,7 @@ export interface DatePickerProps extends Omit<React.InputHTMLAttributes<HTMLInpu
   hint?: React.ReactNode;
   error?: React.ReactNode;
   defaultValue?: string | null;
+  value?: string;
   minDate?: string | null;
   maxDate?: string | null;
   rangeDate?: string | null;
@@ -26,6 +27,7 @@ export default function DatePicker({
   disabled = false,
   required = false,
   defaultValue = null,
+  value,
   minDate = null,
   maxDate = null,
   rangeDate = null,
@@ -51,7 +53,7 @@ export default function DatePicker({
       <div
         {...extraAttributes}
         className={classNames('usa-date-picker', 'usx-date-picker', className)}
-        {...(defaultValue ? { 'data-default-value': defaultValue } : {})}
+        {...((value ?? defaultValue) ? { 'data-default-value': value ?? defaultValue } : {})}
         {...(minDate ? { 'data-min-date': minDate } : {})}
         {...(maxDate ? { 'data-max-date': maxDate } : {})}
         {...(rangeDate ? { 'data-range-date': rangeDate } : {})}

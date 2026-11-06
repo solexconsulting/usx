@@ -49,3 +49,5 @@ export const ColorError = createStory(storyDefs.ColorError);
 export const ColorSecondaryTile = createStory(storyDefs.ColorSecondaryTile);
 export const ColorAccentCool = createStory(storyDefs.ColorAccentCool);
 export const ColorDisabledChecked = createStory(storyDefs.ColorDisabledChecked);
+
+export const DefaultChecked = createStory(storyDefs.DefaultChecked);

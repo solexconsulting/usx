@@ -23,6 +23,7 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  WithValues: { startId: 'event-date-value-start', endId: 'event-date-value-end', startLabel: 'Event start date', endLabel: 'Event end date', startHint: 'mm/dd/yyyy', endHint: 'mm/dd/yyyy', startDate: '2021-06-20', endDate: '2021-06-27', defaultStartDate: '2020-05-22', defaultEndDate: '2020-05-29' },
   Unenhanced: { ...config.default, startId: 'event-date-start-unenhanced', endId: 'event-date-end-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   Disabled: {
     startId: 'event-date-disabled-start',
@@ -81,3 +82,5 @@ export const Required = { args: storyDefs.Required };
 export const WithDefaultValues = { args: storyDefs.WithDefaultValues };
 export const WithError = { args: storyDefs.WithError };
 export const MinMaxDate = { args: storyDefs.MinMaxDate };
+
+export const WithValues = { args: storyDefs.WithValues };

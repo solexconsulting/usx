@@ -1,3 +1,4 @@
+import { controlledStory } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import { useGlobals } from 'storybook/preview-api';
 import ThemePicker from '../../../../usx-react/src/components/theme-picker/ThemePicker.tsx';
@@ -18,6 +19,7 @@ const LIGHTDARKTHEMES = [
 
 export const storyDefs = {
     Default: config.default,
+    WithValue: { ...config.default, id: 'theme-picker-value', value: 'Forest', defaultValue: 'Default' },
     Unenhanced: {
         ...config.default, id: 'theme-picker-unenhanced',
         extraAttributes: { 'usx-data-enhanced': 'true' },
@@ -99,3 +101,5 @@ export const LightDark = {
         );
     },
 };
+
+export const WithValue = controlledStory(ThemePicker, storyDefs.WithValue, { read: (value) => value });

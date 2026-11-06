@@ -1,3 +1,4 @@
+import { controlledStory } from '../../utils/storyHelpers.jsx';
 import Input from '../../../../usx-react/src/components/input/Input.tsx';
 import inputConfig from '../../../../usx-react/src/components/input/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
@@ -14,6 +15,8 @@ export default {
 
 export const storyDefs = {
   Default: inputConfig.default,
+  Value: { id: 'input-value', label: 'Current value', value: 'Current value', defaultValue: 'Ignored default' },
+  DefaultValue: { id: 'input-default-value', label: 'Initial value', defaultValue: 'Editable initial value' },
   WithHint: {
     id: 'example-input-2',
     label: 'Input with hint',
@@ -66,3 +69,6 @@ export const ErrorStateNoMessage = { args: storyDefs.ErrorStateNoMessage };
 export const SuccessState = { args: storyDefs.SuccessState };
 export const SuccessStateNoMessage = { args: storyDefs.SuccessStateNoMessage };
 export const Disabled = { args: storyDefs.Disabled };
+
+export const Value = controlledStory(Input, storyDefs.Value);
+export const DefaultValue = { args: storyDefs.DefaultValue };

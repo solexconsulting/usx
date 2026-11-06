@@ -11,6 +11,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
   label?: string;
   ariaLabel?: string;
   checked?: boolean;
+  defaultChecked?: boolean;
   disabled?: boolean;
   description?: string;
   tile?: boolean;
@@ -31,6 +32,7 @@ export default function Checkbox({
   label = '',
   ariaLabel = '',
   checked,
+  defaultChecked,
   disabled = false,
   description = '',
   tile = false,
@@ -66,7 +68,9 @@ export default function Checkbox({
           name={name}
           value={value}
           aria-label={ariaLabel || undefined}
-          {...(checked !== undefined && onChange ? { checked } : { defaultChecked: checked })}
+          {...(checked !== undefined && onChange
+            ? { checked }
+            : { defaultChecked: checked ?? defaultChecked })}
           disabled={disabled}
           required={required}
           {...(onChange ? { onChange } : {})}

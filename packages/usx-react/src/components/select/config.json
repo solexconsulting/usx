@@ -45,6 +45,11 @@
       "default": null,
       "description": "Default selected value for the select input"
     },
+    "value": {
+      "type": "string",
+      "default": null,
+      "description": "Current selected option. Takes precedence over defaultValue."
+    },
     "placeholder": {
       "type": "string",
       "default": "Select an option",

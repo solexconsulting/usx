@@ -20,7 +20,7 @@
 
     <div
       class="usa-date-picker usx-date-picker"{% if extraAttributes %}{% for attr, value in extraAttributes.items %}{% if attr == "data-enhanced" %} data-enhanced="{{ value }}"{% endif %}{% endfor %}{% endif %}
-      {% if defaultStartDate %} data-default-value="{{ defaultStartDate }}"{% endif %}
+      {% if startDate is not None and startDate or startDate is None and defaultStartDate %} data-default-value="{% if startDate is not None %}{{ startDate }}{% else %}{{ defaultStartDate }}{% endif %}"{% endif %}
     >
       <input
         class="usa-input usx-input"
@@ -49,7 +49,7 @@
 
     <div
       class="usa-date-picker usx-date-picker"{% if extraAttributes %}{% for attr, value in extraAttributes.items %}{% if attr == "data-enhanced" %} data-enhanced="{{ value }}"{% endif %}{% endfor %}{% endif %}
-      {% if defaultEndDate %} data-default-value="{{ defaultEndDate }}"{% endif %}
+      {% if endDate is not None and endDate or endDate is None and defaultEndDate %} data-default-value="{% if endDate is not None %}{{ endDate }}{% else %}{{ defaultEndDate }}{% endif %}"{% endif %}
     >
       <input
         class="usa-input usx-input"

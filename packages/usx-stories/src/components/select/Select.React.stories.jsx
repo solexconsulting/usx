@@ -1,3 +1,4 @@
+import { controlledStory } from '../../utils/storyHelpers.jsx';
 import Select from '../../../../usx-react/src/components/select/Select.tsx';
 import config from '../../../../usx-react/src/components/select/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
@@ -20,6 +21,7 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  Value: { id: 'select-value', label: 'Current selection', options: sampleOptions, value: 'option3', defaultValue: 'option2' },
   ErrorState: {
     id: 'select-error',
     label: 'Dropdown label',
@@ -67,3 +69,5 @@ export const Disabled = { args: storyDefs.Disabled };
 export const DisabledWithError = { args: storyDefs.DisabledWithError };
 export const DefaultValue = { args: storyDefs.DefaultValue };
 export const WithHint = { args: storyDefs.WithHint };
+
+export const Value = controlledStory(Select, storyDefs.Value);

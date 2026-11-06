@@ -49,7 +49,7 @@ const checkRadios = (def) => async (formGroup) => {
     await expect(input).toHaveAttribute('value', option.value);
     await expect(input).toHaveAccessibleName(new RegExp(option.label));
     await (option.disabled ? expect(input) : expect(input).not).toBeDisabled();
-    await (def.defaultValue === option.value ? expect(input) : expect(input).not).toBeChecked();
+    await ((def.value ?? def.defaultValue) === option.value ? expect(input) : expect(input).not).toBeChecked();
     await hasClass(input, 'usa-radio__input--tile', Boolean(def.tile));
     await hasClass(radios[index], 'usx-radio--small', Boolean(def.small));
     // A custom class goes on each radio item.

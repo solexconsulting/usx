@@ -62,7 +62,7 @@ const checkField = (def) => async (section) => {
   await expect(field).toHaveAccessibleName(new RegExp(def.label));
   await expect(root).toHaveAttribute('data-maxlength', String(def.max));
   await expect(field).toHaveAttribute('placeholder', def.placeholder ?? '');
-  await expect(field.value).toBe(def.defaultValue ?? '');
+  await expect(field.value).toBe(def.value ?? def.defaultValue ?? '');
   await (def.disabled ? expect(field) : expect(field).not).toBeDisabled();
   await (def.required ? expect(field) : expect(field).not).toBeRequired();
   await expect(root.querySelector('abbr.usx-required') !== null).toBe(Boolean(def.required));
@@ -90,9 +90,9 @@ const checkField = (def) => async (section) => {
   }
 
   // USWDS does not handle a default value that is already over the limit (see the known-issue note).
-  if (!def.defaultValue || def.defaultValue.length <= def.max) {
+  if (!(def.value ?? def.defaultValue) || (def.value ?? def.defaultValue).length <= def.max) {
     await expect(statusOf(root)).toHaveTextContent(
-      statusText(def.max, (def.defaultValue ?? '').length)
+      statusText(def.max, (def.value ?? def.defaultValue ?? '').length)
     );
   }
 };

@@ -20,6 +20,7 @@ export interface ComboboxProps extends Omit<React.SelectHTMLAttributes<HTMLSelec
   hint?: React.ReactNode;
   placeholder?: string;
   defaultValue?: string | null;
+  value?: string;
   error?: React.ReactNode;
   options?: ComboboxOption[];
   onSearch?: (value: string) => void;
@@ -45,6 +46,7 @@ export default function Combobox({
   hint = null,
   placeholder,
   defaultValue = null,
+  value,
   error = null,
   options = [],
   onSearch,
@@ -93,7 +95,7 @@ export default function Combobox({
           )
         }
         {...(placeholder ? { 'data-placeholder': placeholder } : {})}
-        {...(defaultValue ? { 'data-default-value': defaultValue } : {})}
+        {...((value ?? defaultValue) ? { 'data-default-value': value ?? defaultValue } : {})}
         {...(onSearch ? { onInput: handleInput } : {})}
       >
         <select

@@ -9,7 +9,10 @@
     "hint": "mm/dd/yyyy"
   },
   "props": {
-    "extraAttributes": { "type": "object", "description": "Additional attributes on the USWDS enhancement target." },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional attributes on the USWDS enhancement target."
+    },
     "id": {
       "type": "string",
       "default": "appointment-date",
@@ -45,6 +48,11 @@
     "defaultValue": {
       "type": "string",
       "description": "Initial date (yyyy-mm-dd). Sets data-default-value on the usa-date-picker wrapper."
+    },
+    "value": {
+      "type": "string",
+      "default": null,
+      "description": "Date used to initialize the USWDS date picker, taking precedence over defaultValue."
     },
     "minDate": {
       "type": "string",

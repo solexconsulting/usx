@@ -8,7 +8,10 @@
     "max": 25
   },
   "props": {
-    "extraAttributes": { "type": "object", "description": "Additional attributes on the USWDS enhancement target." },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional attributes on the USWDS enhancement target."
+    },
     "id": {
       "type": "string",
       "default": null,
@@ -69,6 +72,11 @@
       "type": "string",
       "default": "",
       "description": "Initial value of the field."
+    },
+    "value": {
+      "type": "string",
+      "default": null,
+      "description": "Current field value. Takes precedence over defaultValue."
     },
     "textArea": {
       "type": "boolean",

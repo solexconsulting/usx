@@ -24,7 +24,7 @@
   {% if error and error != "false" %}aria-invalid="true" {% endif %}
   {% if disabled %}disabled {% endif %}
   {% if required %}required{% endif %}
->{{ defaultValue|default:'' }}</textarea>
+>{% if value is not None %}{{ value }}{% else %}{{ defaultValue|default:'' }}{% endif %}</textarea>
 {% endform_group %}
 {% else %}
 {% if label %}
@@ -46,7 +46,7 @@
   {% if error and error != "false" %}aria-invalid="true" {% endif %}
   {% if disabled %}disabled {% endif %}
   {% if required %}required{% endif %}
->{{ defaultValue|default:'' }}</textarea>
+>{% if value is not None %}{{ value }}{% else %}{{ defaultValue|default:'' }}{% endif %}</textarea>
 {% endif %}
 
 {% endwith %}

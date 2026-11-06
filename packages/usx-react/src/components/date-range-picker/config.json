@@ -11,7 +11,10 @@
     "endHint": "mm/dd/yyyy"
   },
   "props": {
-    "extraAttributes": { "type": "object", "description": "Additional attributes on the USWDS enhancement target." },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional attributes on the USWDS enhancement target."
+    },
     "startId": {
       "type": "string",
       "default": "event-date-start",
@@ -72,9 +75,19 @@
       "type": "string",
       "description": "Initial start date (yyyy-mm-dd). Sets data-default-value on the start usa-date-picker wrapper."
     },
+    "startDate": {
+      "type": "string",
+      "default": null,
+      "description": "Start date used to initialize the USWDS date picker, taking precedence over defaultStartDate."
+    },
     "defaultEndDate": {
       "type": "string",
       "description": "Initial end date (yyyy-mm-dd). Sets data-default-value on the end usa-date-picker wrapper."
+    },
+    "endDate": {
+      "type": "string",
+      "default": null,
+      "description": "End date used to initialize the USWDS date picker, taking precedence over defaultEndDate."
     },
     "minDate": {
       "type": "string",

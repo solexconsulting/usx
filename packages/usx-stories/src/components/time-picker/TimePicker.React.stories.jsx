@@ -23,6 +23,7 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  WithValue: { ...config.default, id: 'appointment-time-value', name: 'appointment-time-value', label: 'Current time', value: '2:30pm', defaultValue: '1:00pm' },
   Unenhanced: { ...config.default, id: 'appointment-time-unenhanced', name: 'appointment-time-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   Disabled: {
     id: 'appointment-time-disabled',
@@ -78,3 +79,5 @@ export const Required = { args: storyDefs.Required };
 export const WithDefaultValue = { args: storyDefs.WithDefaultValue };
 export const WithError = { args: storyDefs.WithError };
 export const MinMaxStep = { args: storyDefs.MinMaxStep };
+
+export const WithValue = { args: storyDefs.WithValue };

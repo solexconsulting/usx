@@ -3,6 +3,20 @@ import { djangoComponent, fetchStorySource, storyTree, useDjangoRenderedHtml } f
 import React from 'react';
 import { parseFragment, serialize } from 'parse5';
 
+// Keep a value story interactive by letting Storybook act as the host that owns
+// the current value. The component itself remains a plain form renderer.
+export const controlledStory = (Component, args, { prop = 'value', read = (event) => event.target.value } = {}) => ({
+    args,
+    render: (currentArgs) => <ControlledStory Component={Component} args={currentArgs} prop={prop} read={read} />,
+});
+
+function ControlledStory({ Component, args, prop, read }) {
+    const initial = args[prop];
+    const [current, setCurrent] = React.useState(initial);
+    React.useEffect(() => setCurrent(initial), [initial]);
+    return <Component {...args} {...{ [prop]: current }} onChange={(event) => setCurrent(read(event))} />;
+}
+
 // Story contracts store rich sample content as HTML; turn it back into React
 // nodes for React Default stories without adding HTML parsing to components.
 export const storyDefaultArgs = (value) => {

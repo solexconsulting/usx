@@ -59,3 +59,5 @@ export const Default = createStory(storyDefs.Default);
 export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'Without USX JavaScript, the native theme select stays visible and usable. The palette trigger and confirmation control are unavailable.' } } } };
 
 export const LightDark = createStory(storyDefs.LightDark);
+
+export const WithValue = createStory(storyDefs.WithValue);

@@ -1,3 +1,4 @@
+import { controlledStory } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Search from '../../../../usx-react/src/components/search/Search.tsx';
 import config from '../../../../usx-react/src/components/search/config.json';
@@ -15,6 +16,7 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  WithValue: { id: 'search-value', value: 'Current search', defaultValue: 'Ignored default' },
   CustomPlaceholder: {
     id: 'search-custom-placeholder',
     placeholder: 'Custom placeholder...',
@@ -100,3 +102,5 @@ export const WithOnSubmit = {
     return <Search {...args} onSubmit={onSubmit} />;
   },
 };
+
+export const WithValue = controlledStory(Search, storyDefs.WithValue);

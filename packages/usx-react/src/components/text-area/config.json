@@ -33,6 +33,11 @@
       "default": "",
       "description": "Initial value of the textarea."
     },
+    "value": {
+      "type": "string",
+      "default": null,
+      "description": "Current textarea value. Takes precedence over defaultValue."
+    },
     "error": {
       "type": [
         "string",

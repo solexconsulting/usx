@@ -1,3 +1,4 @@
+import { controlledStory } from '../../utils/storyHelpers.jsx';
 // import React from 'react';
 import TextArea from '../../../../usx-react/src/components/text-area/TextArea.tsx';
 import config from '../../../../usx-react/src/components/text-area/config.json';
@@ -15,6 +16,8 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  Value: { id: 'text-area-value', label: 'Current value', value: 'Current text', defaultValue: 'Ignored default' },
+  DefaultValue: { id: 'text-area-default-value', label: 'Initial value', defaultValue: 'Editable initial text' },
   WithHint: {
     id: 'text-area-with-hint',
     label: 'Text area with hint',
@@ -67,3 +70,6 @@ export const ErrorStateNoMessage = { args: storyDefs.ErrorStateNoMessage };
 export const SuccessState = { args: storyDefs.SuccessState };
 export const SuccessStateNoMessage = { args: storyDefs.SuccessStateNoMessage };
 export const Disabled = { args: storyDefs.Disabled };
+
+export const Value = controlledStory(TextArea, storyDefs.Value);
+export const DefaultValue = { args: storyDefs.DefaultValue };

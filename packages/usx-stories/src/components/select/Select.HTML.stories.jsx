@@ -28,7 +28,7 @@ const checks = Object.fromEntries(
       await expect(options.slice(1).map((option) => option.value)).toEqual(
         def.options.map((option) => option.value)
       );
-      await expect(select.value).toBe(def.defaultValue ?? '');
+      await expect(select.value).toBe(def.value ?? def.defaultValue ?? '');
     },
   ])
 );

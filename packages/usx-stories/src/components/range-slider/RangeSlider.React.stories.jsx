@@ -1,3 +1,4 @@
+import { controlledStory } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import RangeSlider from '../../../../usx-react/src/components/range-slider/RangeSlider.tsx';
 import config from '../../../../usx-react/src/components/range-slider/config.json';
@@ -7,6 +8,7 @@ const generatedArgTypes = buildArgTypes(config.props || {});
 
 export const storyDefs = {
   Default: config.default,
+  WithValue: { id: 'range-value', label: 'Current range value', min: 0, max: 100, step: 1, value: 75, defaultValue: 20 },
   Unenhanced: { ...config.default, id: 'range-slider-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   WithUnit: {
     id: 'range-slider-unit',
@@ -90,3 +92,5 @@ export const FineStep = { args: storyDefs.FineStep };
 export const CustomRange = { args: storyDefs.CustomRange };
 export const WithError = { args: storyDefs.WithError };
 export const Disabled = { args: storyDefs.Disabled };
+
+export const WithValue = controlledStory(RangeSlider, storyDefs.WithValue);

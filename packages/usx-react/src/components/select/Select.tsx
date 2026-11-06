@@ -17,6 +17,7 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
   name?: string;
   options?: SelectOption[];
   defaultValue?: string;
+  value?: string;
   placeholder?: string;
   error?: string;
   success?: string;
@@ -33,6 +34,7 @@ export default function Select({
   name,
   options = [],
   defaultValue,
+  value,
   placeholder = 'Select an option',
   error,
   success,
@@ -71,7 +73,7 @@ export default function Select({
     className: combinedSelectClasses,
     disabled,
     required: required || undefined,
-    defaultValue,
+    ...(value !== undefined ? { value } : { defaultValue }),
     'aria-describedby': describedByParts.length ? describedByParts.join(' ') : undefined,
     'aria-invalid': hasError ? true : undefined,
     ...props,

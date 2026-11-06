@@ -64,7 +64,11 @@ const RadioButtons: React.FC<RadioButtonsProps> = ({
           name={name}
           value={opt.value}
           aria-label={opt.ariaLabel}
-          {...(value !== undefined && onChange ? { checked: value === opt.value } : { defaultChecked: defaultValue === opt.value || !!opt.checked })}
+          {...(value !== undefined && onChange
+            ? { checked: value === opt.value }
+            : { defaultChecked: (value ?? defaultValue) !== undefined
+                ? (value ?? defaultValue) === opt.value
+                : !!opt.checked })}
           onChange={onChange}
           disabled={!!opt.disabled}
         />

@@ -1,3 +1,4 @@
+import { controlledStory } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Switch from '../../../../usx-react/src/components/switch/Switch.tsx';
 import config from '../../../../usx-react/src/components/switch/config.json';
@@ -21,6 +22,7 @@ const getArgs = (index) => ({
 
 export const storyDefs = {
   Default: config.default,
+  DefaultChecked: { ...getArgs(31), defaultChecked: true },
   Checked: { ...getArgs(2), checked: true },
   Tile: { ...getArgs(3), tile: true },
   Description: { ...getArgs(4), description: 'Additional details about this setting.' },
@@ -100,7 +102,7 @@ export const storyDefs = {
 };
 
 export const Default = { args: storyDefs.Default };
-export const Checked = { args: storyDefs.Checked };
+export const Checked = controlledStory(Switch, storyDefs.Checked, { prop: 'checked', read: (event) => event.target.checked });
 export const Tile = { args: storyDefs.Tile };
 export const Description = { args: storyDefs.Description };
 export const TileWithDescription = { args: storyDefs.TileWithDescription };
@@ -135,3 +137,5 @@ export const ColorError = { args: storyDefs.ColorError };
 export const ColorSecondaryTile = { args: storyDefs.ColorSecondaryTile };
 export const ColorAccentCool = { args: storyDefs.ColorAccentCool };
 export const ColorDisabledChecked = { args: storyDefs.ColorDisabledChecked };
+
+export const DefaultChecked = { args: storyDefs.DefaultChecked };

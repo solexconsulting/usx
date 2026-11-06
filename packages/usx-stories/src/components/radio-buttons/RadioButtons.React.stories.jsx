@@ -1,3 +1,4 @@
+import { controlledStory } from '../../utils/storyHelpers.jsx';
 import RadioButtons from '../../../../usx-react/src/components/radio-buttons/RadioButtons.tsx';
 import config from '../../../../usx-react/src/components/radio-buttons/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
@@ -45,6 +46,7 @@ const optionsWithDescriptions = [
 
 export const storyDefs = {
   Default: config.default,
+  WithValue: { id: 'historical-figures-value', name: 'historical-figures-value', value: 'booker-t-washington', defaultValue: 'frederick-douglass', options },
   WithDescriptions: {
     id: 'historical-figures-with-descriptions',
     name: 'historical-figures-with-descriptions',
@@ -153,3 +155,4 @@ export const WithHint = {
 export const WithError = {
   args: storyDefs.WithError,
 };
+export const WithValue = controlledStory(RadioButtons, storyDefs.WithValue);

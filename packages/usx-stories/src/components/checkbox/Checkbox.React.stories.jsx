@@ -1,3 +1,4 @@
+import { controlledStory } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Checkbox from '../../../../usx-react/src/components/checkbox/Checkbox.tsx';
 import config from '../../../../usx-react/src/components/checkbox/config.json';
@@ -22,6 +23,7 @@ const getArgs = (index) => ({
 
 export const storyDefs = {
   Default: config.default,
+  DefaultChecked: { ...getArgs(21), defaultChecked: true },
   Checked: {
     ...getArgs(2),
     checked: true,
@@ -126,7 +128,7 @@ export const storyDefs = {
 };
 
 export const Default = { args: storyDefs.Default };
-export const Checked = { args: storyDefs.Checked };
+export const Checked = controlledStory(Checkbox, storyDefs.Checked, { prop: 'checked', read: (event) => event.target.checked });
 export const Tile = { args: storyDefs.Tile };
 export const Description = { args: storyDefs.Description };
 export const TileWithDescription = { args: storyDefs.TileWithDescription };
@@ -145,3 +147,5 @@ export const Required = { args: storyDefs.Required };
 export const Error = { args: storyDefs.Error };
 export const ErrorWithoutFormGroup = { args: storyDefs.ErrorWithoutFormGroup };
 export const Success = { args: storyDefs.Success };
+
+export const DefaultChecked = { args: storyDefs.DefaultChecked };

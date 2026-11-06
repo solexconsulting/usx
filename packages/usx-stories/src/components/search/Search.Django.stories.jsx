@@ -28,3 +28,5 @@ export const CustomSearchKey = createStory(storyDefs.CustomSearchKey);
 export const GoogleAction = createStory(storyDefs.GoogleAction);
 export const PathAction = createStory(storyDefs.PathAction);
 export const WithOnSubmit = createStory(storyDefs.WithOnSubmit);
+
+export const WithValue = createStory(storyDefs.WithValue);

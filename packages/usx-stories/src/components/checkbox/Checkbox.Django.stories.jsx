@@ -34,3 +34,5 @@ export const Required = createStory(storyDefs.Required);
 export const Error = createStory(storyDefs.Error);
 export const Success = createStory(storyDefs.Success);
 export const ErrorWithoutFormGroup = createStory(storyDefs.ErrorWithoutFormGroup);
+
+export const DefaultChecked = createStory(storyDefs.DefaultChecked);

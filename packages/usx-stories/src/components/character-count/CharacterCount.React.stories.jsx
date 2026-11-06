@@ -1,3 +1,4 @@
+import { controlledStory } from '../../utils/storyHelpers.jsx';
 
 import React from 'react';
 import CharacterCount from '../../../../usx-react/src/components/character-count/CharacterCount.tsx';
@@ -7,6 +8,8 @@ import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
 export const storyDefs = {
   Default: config.default,
+  Value: { id: 'cc-value', label: 'Current value', max: 25, value: 'Current text', defaultValue: 'Ignored default' },
+  TextAreaValue: { id: 'cc-text-area-value', label: 'Current text area value', max: 50, textArea: true, value: 'Current text', defaultValue: 'Ignored default' },
   Unenhanced: { ...config.default, id: 'cc-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   TextArea: { id: 'cc-4', label: 'Text area', max: 50, textArea: true },
   WithPlaceholder: { id: 'cc-17', label: 'Text input with placeholder', max: 25, placeholder: 'Enter text here' },
@@ -102,3 +105,6 @@ export const TextAreaDefaultValueOverLimit = {
   ),
 };
 
+
+export const Value = controlledStory(CharacterCount, storyDefs.Value);
+export const TextAreaValue = controlledStory(CharacterCount, storyDefs.TextAreaValue);

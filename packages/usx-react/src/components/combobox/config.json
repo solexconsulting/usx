@@ -270,7 +270,10 @@
     ]
   },
   "props": {
-    "extraAttributes": { "type": "object", "description": "Additional attributes on the USWDS enhancement target." },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional attributes on the USWDS enhancement target."
+    },
     "id": {
       "type": "string",
       "description": "id attribute for the select"
@@ -304,6 +307,11 @@
     "defaultValue": {
       "type": "string",
       "description": "Default selected value"
+    },
+    "value": {
+      "type": "string",
+      "default": null,
+      "description": "Option used to initialize the USWDS combo box, taking precedence over defaultValue."
     },
     "error": {
       "type": "slot",

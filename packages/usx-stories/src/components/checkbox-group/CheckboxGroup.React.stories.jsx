@@ -35,6 +35,16 @@ const optionsWithDescriptions = [
 
 export const storyDefs = {
   Default: config.default,
+  WithInitialChecks: {
+    id: 'historical-figures-initial-checks',
+    name: 'historical-figures-initial-checks',
+    legend: 'Initial and current checks',
+    checkboxProps: [
+      { ...options[0], defaultChecked: true },
+      { ...options[1], checked: true },
+      options[2],
+    ],
+  },
   WithDescriptions: {
     id: 'historical-figures-with-descriptions',
     name: 'historical-figures-with-descriptions',
@@ -94,3 +104,5 @@ export const Tile = {
 export const Small = {
   args: storyDefs.Small,
 };
+
+export const WithInitialChecks = { args: storyDefs.WithInitialChecks };

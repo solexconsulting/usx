@@ -23,6 +23,7 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  WithValue: { ...config.default, id: 'date-picker-value', name: 'date-picker-value', label: 'Current date', value: '2021-06-20', defaultValue: '2020-05-22' },
   Unenhanced: { ...config.default, id: 'appointment-date-unenhanced', name: 'appointment-date-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   Disabled: {
     id: 'appointment-date-disabled',
@@ -69,3 +70,5 @@ export const Required = { args: storyDefs.Required };
 export const WithDefaultValue = { args: storyDefs.WithDefaultValue };
 export const WithError = { args: storyDefs.WithError };
 export const MinMaxDate = { args: storyDefs.MinMaxDate };
+
+export const WithValue = { args: storyDefs.WithValue };

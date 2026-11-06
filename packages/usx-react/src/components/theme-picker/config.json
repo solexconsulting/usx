@@ -78,10 +78,19 @@
       "type": "string",
       "description": "Initial selected value for uncontrolled usage"
     },
+    "value": {
+      "type": "string",
+      "default": null,
+      "description": "Current theme selection. Takes precedence over defaultValue."
+    },
     "onChange": {
       "type": "function",
       "description": "React callback for a selected theme. Django consumers can listen for the select's native change event; applying the theme remains the application's responsibility.",
-      "renderers": { "django": { "supported": false } }
+      "renderers": {
+        "django": {
+          "supported": false
+        }
+      }
     },
     "className": {
       "type": "string",

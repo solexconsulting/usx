@@ -17,6 +17,7 @@ const checks = Object.fromEntries(
     async (group) => {
       await checkField(group, def, { tag: 'INPUT' });
       await expect(group.querySelector('input').type).toBe('text');
+      await expect(group.querySelector('input')).toHaveValue(def.value ?? def.defaultValue ?? '');
     },
   ])
 );

@@ -73,6 +73,7 @@ const fruitOptions = [
 
 export const storyDefs = {
   Default: config.default,
+  WithValue: { id: 'fruit-value', name: 'fruit-value', label: 'Current fruit', value: 'peach', defaultValue: 'mango', options: fruitOptions },
   Unenhanced: { ...config.default, id: 'fruit-unenhanced', name: 'fruit-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
   Disabled: {
     id: 'fruit-disabled',
@@ -158,3 +159,5 @@ export const WithDefaultValue = { args: storyDefs.WithDefaultValue };
 export const WithError = { args: storyDefs.WithError };
 export const WithOnSearch = { args: storyDefs.WithOnSearch };
 export const WithOnSelect = { args: storyDefs.WithOnSelect };
+
+export const WithValue = { args: storyDefs.WithValue };

@@ -19,3 +19,4 @@ export const WithHint = createStory(toDjangoArgs(storyDefs.WithHint));
 export const WithError = createStory(toDjangoArgs(storyDefs.WithError));
 export const Tile = createStory(toDjangoArgs(storyDefs.Tile));
 export const Small = createStory(toDjangoArgs(storyDefs.Small));
+export const WithInitialChecks = createStory(toDjangoArgs(storyDefs.WithInitialChecks));

@@ -13,6 +13,7 @@ export interface TimePickerProps extends Omit<React.InputHTMLAttributes<HTMLInpu
   error?: React.ReactNode;
   ariaDisabled?: boolean;
   defaultValue?: string | null;
+  value?: string;
   minTime?: string | null;
   maxTime?: string | null;
   step?: string | number | null;
@@ -29,6 +30,7 @@ export default function TimePicker({
   ariaDisabled = false,
   required = false,
   defaultValue = null,
+  value,
   minTime = null,
   maxTime = null,
   step = null,
@@ -77,7 +79,7 @@ export default function TimePicker({
           name={name || id}
           type="text"
           aria-describedby={describedBy}
-          defaultValue={defaultValue || undefined}
+          {...(value !== undefined ? { value } : { defaultValue: defaultValue || undefined })}
           disabled={disabled}
           aria-disabled={!disabled && ariaDisabled ? 'true' : undefined}
           required={required}

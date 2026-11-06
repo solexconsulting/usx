@@ -23,7 +23,7 @@
     <option value="">{{ placeholder|default:'Select an option' }}</option>
     {% for option in options %}
     {% with optionValue=option.value|default:option optionLabel=option.label|default:option %}
-    <option value="{{ optionValue }}" {% if optionValue == defaultValue %}selected{% endif %}>{{ optionLabel }}</option>
+    <option value="{{ optionValue }}" {% if value is not None and optionValue == value or value is None and optionValue == defaultValue %}selected{% endif %}>{{ optionLabel }}</option>
     {% endwith %}
     {% endfor %}
   </select>
@@ -54,7 +54,7 @@
     <option value="">{{ placeholder|default:'Select an option' }}</option>
     {% for option in options %}
     {% with optionValue=option.value|default:option optionLabel=option.label|default:option %}
-    <option value="{{ optionValue }}" {% if optionValue == defaultValue %}selected{% endif %}>{{ optionLabel }}</option>
+    <option value="{{ optionValue }}" {% if value is not None and optionValue == value or value is None and optionValue == defaultValue %}selected{% endif %}>{{ optionLabel }}</option>
     {% endwith %}
     {% endfor %}
   </select>

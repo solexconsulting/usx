@@ -19,7 +19,7 @@ export const checkCheckbox = async (box, def, { id, name, tile, small } = {}) =>
   await expect(text.textContent.trim()).toBe(def.label);
   await expect(label.querySelector('abbr.usx-required') !== null).toBe(Boolean(def.required));
 
-  await (def.checked ? expect(input) : expect(input).not).toBeChecked();
+  await ((def.checked ?? def.defaultChecked) ? expect(input) : expect(input).not).toBeChecked();
   await (def.disabled ? expect(input) : expect(input).not).toBeDisabled();
   await (def.required ? expect(input) : expect(input).not).toBeRequired();
   await hasClass(input, 'usa-checkbox__input--tile', Boolean(tile ?? def.tile));

@@ -20,3 +20,4 @@ export const Disabled = createStory(storyDefs.Disabled);
 export const DisabledWithError = createStory(storyDefs.DisabledWithError);
 export const DefaultValue = createStory(storyDefs.DefaultValue);
 export const WithHint = createStory(storyDefs.WithHint);
+export const Value = createStory(storyDefs.Value);

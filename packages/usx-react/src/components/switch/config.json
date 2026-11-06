@@ -27,8 +27,13 @@
     },
     "checked": {
       "type": "boolean",
-      "default": false,
+      "default": null,
       "description": "Whether the switch is checked"
+    },
+    "defaultChecked": {
+      "type": "boolean",
+      "default": null,
+      "description": "Initial checked state when checked is not supplied."
     },
     "ariaLabel": {
       "type": "string",

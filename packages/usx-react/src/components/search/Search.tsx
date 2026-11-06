@@ -18,6 +18,8 @@ export interface SearchProps {
   action?: string;
   placeholder?: string;
   defaultValue?: string;
+  value?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onSubmit?: (query: FormDataEntryValue | null) => void;
   className?: string;
 }
@@ -34,6 +36,8 @@ export default function Search({
   placeholder,
   action,
   defaultValue,
+  value,
+  onChange,
   onSubmit,
   className = '',
 }: SearchProps) {
@@ -74,7 +78,8 @@ export default function Search({
           label={label}
           screenReaderOnlyLabel={true}
           placeholder={placeholder ?? ''}
-          defaultValue={defaultValue}
+          {...(value !== undefined ? { value } : { defaultValue })}
+          onChange={onChange}
           type="search"
           name={searchKey}
           formGroup={false}

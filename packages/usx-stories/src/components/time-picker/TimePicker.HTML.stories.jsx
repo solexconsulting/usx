@@ -74,9 +74,10 @@ const checkTimePicker = (def) => async (group) => {
   await expect(values.at(-1)).toBe(def.maxTime ?? '23:30');
   await expect([...select.options][0].textContent).toBe(toTime(values[0]));
 
-  if (def.defaultValue) {
-    await expect(input).toHaveValue(def.defaultValue);
-    await expect(select).toHaveValue('13:00');
+  const selectedTime = def.value ?? def.defaultValue;
+  if (selectedTime) {
+    await expect(input).toHaveValue(selectedTime);
+    await expect(select).toHaveValue(selectedTime === '2:30pm' ? '14:30' : '13:00');
   } else {
     await expect(input).toHaveValue('');
   }

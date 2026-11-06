@@ -25,3 +25,5 @@ export const SmallTileWithDescriptions = createStory(toDjangoArgs(storyDefs.Smal
 export const WithAdditionalClass = createStory(toDjangoArgs(storyDefs.WithAdditionalClass));
 export const WithHint = createStory(toDjangoArgs(storyDefs.WithHint));
 export const WithError = createStory(toDjangoArgs(storyDefs.WithError));
+
+export const WithValue = createStory(storyDefs.WithValue);

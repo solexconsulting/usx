@@ -67,13 +67,28 @@
       "type": "string",
       "description": "Initial selected month value (\"1\"-\"12\")."
     },
+    "month": {
+      "type": "string",
+      "default": null,
+      "description": "Current month selection. Takes precedence over defaultMonth."
+    },
     "defaultDay": {
       "type": "string",
       "description": "Initial day value."
     },
+    "day": {
+      "type": "string",
+      "default": null,
+      "description": "Current day value. Takes precedence over defaultDay."
+    },
     "defaultYear": {
       "type": "string",
       "description": "Initial year value."
+    },
+    "year": {
+      "type": "string",
+      "default": null,
+      "description": "Current year value. Takes precedence over defaultYear."
     },
     "disabled": {
       "type": "boolean",

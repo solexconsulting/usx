@@ -16,6 +16,7 @@ const checks = Object.fromEntries(
     sectionTitle(key),
     async (group) => {
       await checkField(group, def, { tag: 'TEXTAREA' });
+      await expect(group.querySelector('textarea')).toHaveValue(def.value ?? def.defaultValue ?? '');
       await expect(group.querySelector('textarea')).toHaveClass('usa-textarea', 'usx-textarea');
     },
   ])

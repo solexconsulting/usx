@@ -39,14 +39,14 @@ const checkSlider = (def) => async (group) => {
   await expect(slider).toHaveAccessibleName(def.label);
   for (const attribute of ['min', 'max', 'step'])
     await expect(slider).toHaveAttribute(attribute, String(def[attribute]));
-  await expect(slider.value).toBe(String(def.defaultValue));
+  await expect(slider.value).toBe(String((def.value ?? def.defaultValue)));
   await (def.disabled ? expect(slider) : expect(slider).not).toBeDisabled();
 
 
   // The script keeps a spoken value and a visible value up to date.
-  await expect(slider).toHaveAttribute('aria-valuetext', spoken(def, def.defaultValue));
+  await expect(slider).toHaveAttribute('aria-valuetext', spoken(def, (def.value ?? def.defaultValue)));
   await expect(group.querySelector('.usa-range__value')).toHaveTextContent(
-    String(def.defaultValue)
+    String((def.value ?? def.defaultValue))
   );
 
   const hint = group.querySelector('.usa-hint');
@@ -72,7 +72,7 @@ const play = async (context) => {
     const group = sectionFor(context.canvasElement, 'Default');
     const slider = sliderOf(group);
     // Moving to any value updates both the spoken and the visible value.
-    for (const value of [def.defaultValue + def.step, def.min, def.max]) {
+    for (const value of [(def.value ?? def.defaultValue) + def.step, def.min, def.max]) {
       fireEvent.change(slider, { target: { value: String(value) } });
       await waitFor(() => expect(slider).toHaveAttribute('aria-valuetext', spoken(def, value)));
       await expect(group.querySelector('.usa-range__value')).toHaveTextContent(String(value));

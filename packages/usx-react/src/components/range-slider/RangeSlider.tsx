@@ -63,8 +63,7 @@ export default function RangeSlider({
         min={min}
         max={max}
         step={step}
-        value={typeof value !== 'undefined' ? value : undefined}
-        defaultValue={defaultValue}
+        {...(value !== undefined ? { value } : { defaultValue })}
         disabled={disabled}
         required={required}
         aria-describedby={describedBy}

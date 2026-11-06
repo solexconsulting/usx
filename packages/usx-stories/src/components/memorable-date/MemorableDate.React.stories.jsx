@@ -1,3 +1,4 @@
+import React from 'react';
 import MemorableDate from '../../../../usx-react/src/components/memorable-date/MemorableDate.tsx';
 import config from '../../../../usx-react/src/components/memorable-date/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
@@ -14,6 +15,7 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  WithValues: { id: 'memorable-date-values', month: '6', day: '20', year: '1990', defaultMonth: '5', defaultDay: '19', defaultYear: '1989' },
   Disabled: {
     id: 'memorable-date-disabled',
     disabled: true,
@@ -46,3 +48,25 @@ export const AriaDisabled = { args: storyDefs.AriaDisabled };
 export const Required = { args: storyDefs.Required };
 export const WithDefaultValues = { args: storyDefs.WithDefaultValues };
 export const WithError = { args: storyDefs.WithError };
+
+export const WithValues = {
+  args: storyDefs.WithValues,
+  render: (args) => <CurrentDate {...args} />,
+};
+
+function CurrentDate(args) {
+  const [month, setMonth] = React.useState(args.month);
+  const [day, setDay] = React.useState(args.day);
+  const [year, setYear] = React.useState(args.year);
+  return (
+    <MemorableDate
+      {...args}
+      month={month}
+      day={day}
+      year={year}
+      onMonthChange={(event) => setMonth(event.target.value)}
+      onDayChange={(event) => setDay(event.target.value)}
+      onYearChange={(event) => setYear(event.target.value)}
+    />
+  );
+}

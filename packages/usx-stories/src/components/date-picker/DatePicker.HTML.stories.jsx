@@ -57,9 +57,9 @@ const checkPicker = (def) => async (group) => {
   await expect(calendar).toBeEmptyDOMElement();
   await expect(calendar.hidden).toBe(true);
 
-  if (def.defaultValue) {
-    await expect(internal.value).toBe(def.defaultValue);
-    await expect(external.value).toBe(toDisplay(def.defaultValue));
+  if (def.value ?? def.defaultValue) {
+    await expect(internal.value).toBe(def.value ?? def.defaultValue);
+    await expect(external.value).toBe(toDisplay(def.value ?? def.defaultValue));
   } else {
     await expect(external.value).toBe('');
   }

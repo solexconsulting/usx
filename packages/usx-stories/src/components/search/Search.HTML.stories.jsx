@@ -36,7 +36,7 @@ const checkSearch = (def) => async (section) => {
   await expect(input).toHaveAttribute('name', def.searchKey ?? 'q');
   await expect(input).toHaveAccessibleName(label);
   if (def.placeholder) await expect(input).toHaveAttribute('placeholder', def.placeholder);
-  await expect(input).toHaveValue(def.defaultValue ?? '');
+  await expect(input).toHaveValue(def.value ?? def.defaultValue ?? '');
 
   await expect(button).toHaveAttribute('type', 'submit');
   await expect(button).toHaveClass(`usa-button--${def.buttonVariant ?? 'primary'}`);
