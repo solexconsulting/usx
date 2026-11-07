@@ -16,6 +16,9 @@ import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './common
 
 export default {
   title: 'Examples/Data Display',
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export const FAQPage = {

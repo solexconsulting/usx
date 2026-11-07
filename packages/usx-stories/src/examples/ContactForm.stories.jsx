@@ -18,6 +18,9 @@ import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './common
 
 export default {
   title: 'Examples/Data Collection',
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export const ContactForm = {
