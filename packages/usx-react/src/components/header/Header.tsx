@@ -209,13 +209,17 @@ export default function Header({
     'usx-nav',
     { 'usx-nav--sticky': stickyNav },
   );
+  const hasNavigation = navSections.length > 0 || Boolean(searchProps || utilityContent ||
+    (extended && (secondaryLinks.length > 0 || navEndContent)));
 
   const navbar = (
     <div className="usa-navbar">
       <Branding branding={branding} projectUrl={projectUrl} staticBaseUrl={staticBaseUrl} />
-      <button type="button" className="usa-menu-btn align-center">
-        {useMenuIcon ? <Icon name="menu" size={3} /> : 'Menu'}
-      </button>
+      {hasNavigation && (
+        <button type="button" className="usa-menu-btn align-center">
+          {useMenuIcon ? <Icon name="menu" size={3} /> : 'Menu'}
+        </button>
+      )}
     </div>
   );
 
@@ -225,7 +229,7 @@ export default function Header({
         <header id={id} className={headerClasses} {...props} {...extraAttributes}>
           {navbar}
         </header>
-        <nav aria-label="Primary navigation" className={navClasses} {...(extraAttributes?.['data-enhanced'] === 'true' ? { 'data-enhanced': 'true' } : {})}>
+        {hasNavigation && <nav aria-label="Primary navigation" className={navClasses} {...(extraAttributes?.['data-enhanced'] === 'true' ? { 'data-enhanced': 'true' } : {})}>
           <div className="usa-nav__inner">
             <PrimaryNav
               navSections={navSections}
@@ -256,7 +260,7 @@ export default function Header({
             </div>
             {navEndContent && <div className="usx-nav__end-slot">{navEndContent}</div>}
           </div>
-        </nav>
+        </nav>}
       </>
     );
   }
@@ -265,7 +269,7 @@ export default function Header({
     <header id={id} className={headerClasses} {...props} {...extraAttributes}>
       <div className="usa-nav-container">
         {navbar}
-        <nav aria-label="Primary navigation" className={navClasses}>
+        {hasNavigation && <nav aria-label="Primary navigation" className={navClasses}>
           <PrimaryNav
             navSections={navSections}
             megamenu={megamenu}
@@ -276,7 +280,7 @@ export default function Header({
             headerId={id}
             renderSearchDirectly={true}
           />
-        </nav>
+        </nav>}
       </div>
     </header>
   );

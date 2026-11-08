@@ -224,6 +224,8 @@ export const storyDefs = {
     megamenu: true,
   },
   WithMenuIcon: { ...fullArgs, id: 'header-menu-icon', useMenuIcon: true },
+  BrandOnly: { id: 'header-brand-only', branding: { title: 'Simple Site' } },
+  BrandOnlyExtended: { id: 'header-brand-only-extended', branding: { title: 'Simple Site' }, extended: true },
   Minimal: {
     id: 'header-minimal',
     branding: { title: 'Simple Site' },
@@ -292,6 +294,8 @@ export const borderRoleVars = {
 
 export const ExtendedWithMegamenu = { args: storyDefs.ExtendedWithMegamenu };
 export const WithMenuIcon = { args: storyDefs.WithMenuIcon };
+export const BrandOnly = { args: storyDefs.BrandOnly };
+export const BrandOnlyExtended = { args: storyDefs.BrandOnlyExtended };
 export const Minimal = { args: storyDefs.Minimal };
 export const Maximal = { args: storyDefs.Maximal };
 

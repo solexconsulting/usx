@@ -18,10 +18,6 @@ const checkHeader = (def, key) => async (section, context) => {
   const nav = header.querySelector('nav.usa-nav') ?? elements.find((el) => el.matches('nav.usa-nav')) ?? section.querySelector('nav.usa-nav');
   await expect(header.getAttribute('id')).toMatch(snapshotId(def.id));
   await expect(header).toHaveClass('usa-header', 'usx-header', `usa-header--${def.extended ? 'extended' : 'basic'}`);
-  await expect(nav).toHaveAccessibleName('Primary navigation');
-  if (!def.extended && window.matchMedia('(min-width: 64em)').matches) {
-    await expect(getComputedStyle(nav).backgroundColor).toBe('rgba(0, 0, 0, 0)');
-  }
 
   const brand = header.querySelector('.usa-logo');
   if (def.branding?.logo) {
@@ -35,7 +31,17 @@ const checkHeader = (def, key) => async (section, context) => {
   await expect(brand.querySelectorAll('.usx-logo__symbol')).toHaveLength(def.branding?.symbol ? 2 : 0);
 
   const menu = header.querySelector('.usa-menu-btn');
+  if (key === 'BrandOnly' || key === 'BrandOnlyExtended') {
+    await expect(menu).toBeNull();
+    await expect(nav).toBeNull();
+    return;
+  }
+
   await expect(menu).not.toBeNull();
+  await expect(nav).toHaveAccessibleName('Primary navigation');
+  if (!def.extended && window.matchMedia('(min-width: 64em)').matches) {
+    await expect(getComputedStyle(nav).backgroundColor).toBe('rgba(0, 0, 0, 0)');
+  }
   await expect(Boolean(menu.querySelector('use[href$="#menu"]'))).toBe(Boolean(def.useMenuIcon));
   const items = [...nav.querySelectorAll('.usa-nav__primary > .usa-nav__primary-item')];
   await expect(items).toHaveLength(def.navSections.length);

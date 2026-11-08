@@ -35,16 +35,17 @@
         </em>
       {% endif %}
     </div>
-    <button type="button" class="usa-menu-btn align-center">
+    {% if navSections or searchProps or utilityContent or extended and secondaryLinks or extended and navEndContent %}<button type="button" class="usa-menu-btn align-center">
       {% if useMenuIcon %}
         {% icon name='menu' size=3 %}{% endicon %}
       {% else %}
         Menu
       {% endif %}
-    </button>
+    </button>{% endif %}
   </div>
 
   {% if not extended %}
+    {% if navSections or searchProps or utilityContent %}
     <nav aria-label="Primary navigation" class="usa-nav usx-nav{% if stickyNav %} usx-nav--sticky{% endif %}">
       <button type="button" class="usa-nav__close">
         {% icon name='close' size=3 %}{% endicon %}
@@ -107,10 +108,12 @@
         </div>
       {% endif %}
     </nav>
+    {% endif %}
   {% endif %}
   {% if not extended %}</div>{% endif %}
 </header>
 {% if extended %}
+  {% if navSections or secondaryLinks or searchProps or utilityContent or navEndContent %}
   <nav aria-label="Primary navigation" class="usa-nav usx-nav{% if stickyNav %} usx-nav--sticky{% endif %}"{% if extraAttributes %}{% for attr, value in extraAttributes.items %}{% if attr == 'data-enhanced' %} data-enhanced="{{ value }}"{% endif %}{% endfor %}{% endif %}>
     <div class="usa-nav__inner">
       <button type="button" class="usa-nav__close">
@@ -188,4 +191,5 @@
       {% if navEndContent %}<div class="usx-nav__end-slot">{{ navEndContent|safe }}</div>{% endif %}
     </div>
   </nav>
+  {% endif %}
 {% endif %}
