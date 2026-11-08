@@ -1,5 +1,11 @@
 # @solexllc/usx-contracts
 
+## 0.10.0
+
+### Minor Changes
+
+- [#25](https://github.com/solexconsulting/usx/pull/25) [`8ac6a60`](https://github.com/solexconsulting/usx/commit/8ac6a6085e213b7d1f041309d2748db95acaeaef) Thanks [@olsonap](https://github.com/olsonap)! - Add consistent enhancement markers and no-JavaScript fallbacks for USX components. Expose enhancement-target attributes in React components and component contracts, and document the fallback states in Storybook.
+
 ## 0.9.0
 
 ### Minor Changes
