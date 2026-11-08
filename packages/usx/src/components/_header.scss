@@ -129,15 +129,15 @@
     }
 
     .usa-nav__submenu-item > a {
-      color: usx-when($usx-header-nav-link-text);
+      color: usx-when($usx-header-nav-link-text-mobile);
 
       &:hover {
-        color: usx-when($usx-header-nav-link-text-hover);
+        color: usx-when($usx-header-nav-link-text-hover-mobile);
         background-color: usx-when($usx-header-nav-link-bg-hover);
       }
 
       &.usa-current {
-        color: usx-when($usx-header-nav-link-text-hover);
+        color: usx-when($usx-header-nav-link-text-hover-mobile);
         font-weight: 700;
       }
     }
