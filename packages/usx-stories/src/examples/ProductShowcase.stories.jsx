@@ -33,17 +33,12 @@ const productShowcaseCardArgs = [
     mediaInset: true,
     buttonProps: [
       {
-        children: 'Explore Suite',
+        children: 'Request a demo',
         variant: 'primary',
-        onClick: () => alert('Explore Suite clicked'),
-      },
-      {
-        children: 'Request Demo',
-        variant: 'secondary',
-        onClick: () => alert('Request Demo clicked'),
+        href: '?id=examples-data-collection--contact-form&viewMode=story',
       },
     ],
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-6',
   },
   {
     title: 'Essential Platform',
@@ -57,17 +52,12 @@ const productShowcaseCardArgs = [
     mediaInset: true,
     buttonProps: [
       {
-        children: 'Get Started',
+        children: 'Talk to our team',
         variant: 'primary',
-        onClick: () => alert('Get Started clicked'),
-      },
-      {
-        children: 'View Pricing',
-        variant: 'secondary',
-        onClick: () => alert('View Pricing clicked'),
+        href: '?id=examples-data-collection--contact-form&viewMode=story',
       },
     ],
-    className: 'tablet:grid-col-6 widescreen:grid-col-4',
+    className: 'tablet:grid-col-6',
   },
 ];
 
@@ -86,10 +76,11 @@ export const ProductShowcase = {
       />
       <Hero
         headingAs="h2"
+        backgroundImage="./product-showcase-hero.webp"
         callout="Next-Gen Design Platform"
         title="Modern, Themeable Components for Federal Systems"
         paragraph="Build accessible, responsive digital services faster with SOLEX USX's tokenized component library."
-        buttonProps={{ label: 'Explore Packages', href: '#packages' }}
+        buttonProps={{ variant: 'primary', label: 'Explore Packages', href: '#packages' }}
       />
       <Layout
         variant="single-column"
@@ -106,7 +97,7 @@ export const ProductShowcase = {
                     <h3 className="margin-top-0 display-flex flex-align-center text-primary">
                       <Icon name="check_circle" size="lg" className="text-success margin-right-1" /> Reliable Uptime
                     </h3>
-                    <p className="margin-bottom-0 text-base usx-text-muted">
+                    <p className="margin-bottom-0 text-subtle usx-text-muted">
                       Battle-tested architecture powering mission-critical government portals with 99.99% availability.
                     </p>
                   </div>
@@ -117,7 +108,7 @@ export const ProductShowcase = {
                     <h3 className="margin-top-0 display-flex flex-align-center text-primary">
                       <Icon name="security" size="lg" className="text-primary margin-right-1" /> Security Compliant
                     </h3>
-                    <p className="margin-bottom-0 text-base usx-text-muted">
+                    <p className="margin-bottom-0 text-subtle usx-text-muted">
                       Section 508 accessible out of the box with zero third-party tracking or unsafe dependencies.
                     </p>
                   </div>
@@ -128,7 +119,7 @@ export const ProductShowcase = {
                     <h3 className="margin-top-0 display-flex flex-align-center text-primary">
                       <Icon name="support" size="lg" className="text-accent-cool margin-right-1" /> Dedicated Support
                     </h3>
-                    <p className="margin-bottom-0 text-base usx-text-muted">
+                    <p className="margin-bottom-0 text-subtle usx-text-muted">
                       Direct engineering support and comprehensive documentation for seamless integration.
                     </p>
                   </div>
