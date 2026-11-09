@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Skipnav from '../../../usx-react/src/components/skipnav/Skipnav.tsx';
 import Banner from '../../../usx-react/src/components/banner/Banner.tsx';
 import MiscBanner from '../../../usx-react/src/components/misc-banner/MiscBanner.tsx';
@@ -6,7 +6,7 @@ import Header from '../../../usx-react/src/components/header/Header.tsx';
 import Footer from '../../../usx-react/src/components/footer/Footer.tsx';
 import Alert from '../../../usx-react/src/components/alert/Alert.tsx';
 import ButtonGroup from '../../../usx-react/src/components/button-group/ButtonGroup.tsx';
-import Checkbox from '../../../usx-react/src/components/checkbox/Checkbox.tsx';
+import CheckboxGroup from '../../../usx-react/src/components/checkbox-group/CheckboxGroup.tsx';
 import Fieldset from '../../../usx-react/src/components/fieldset/Fieldset.tsx';
 import Identifier from '../../../usx-react/src/components/identifier/Identifier.tsx';
 import Input from '../../../usx-react/src/components/input/Input.tsx';
@@ -24,33 +24,39 @@ export default {
     },
 };
 
-export const SettingsPage = {
-    render: () => (
+function SettingsExample() {
+    const [saved, setSaved] = useState(false);
+
+    return (
         <>
             <Skipnav target="settings-page-example" />
-            <Banner
-                id="example-1-banner"
-                ariaLabel="Example banner"
-            />
+            <Banner id="example-1-banner" ariaLabel="Example banner" />
             <MiscBanner {...miscBannerArgs} />
-            <Header
-                id="settings-header"
-                {...headerArgs}
-            />
+            <Header id="settings-header" {...headerArgs} />
             <Layout
                 variant="grid"
                 content={
-                    <Page as="div" id="settings-page-example" title="Settings" tabIndex={-1}>
+                    <Page as="div" id="settings-page-example" title="Settings">
                         <Section title="Profile Settings">
-                            <Alert
-                                variant="success"
-                                heading="Settings Updated"
-                                text="Your profile settings have been successfully updated."
-                                className="margin-bottom-4"
-                            />
+                            {saved && (
+                                <Alert
+                                    variant="success"
+                                    heading="Settings Updated"
+                                    text="Your profile settings have been successfully updated."
+                                    className="margin-bottom-4"
+                                />
+                            )}
 
-                            <form className="usa-form maxw-full">
-                                <Fieldset legend="Personal Information" largeLegend={true}>
+                            <form
+                                className="usa-form maxw-tablet"
+                                onChange={() => setSaved(false)}
+                                onSubmit={(event) => {
+                                    event.preventDefault();
+                                    setSaved(true);
+                                }}
+                                onReset={() => setSaved(false)}
+                            >
+                                <Fieldset id="personal-information" legend="Personal Information" largeLegend={true}>
                                     <Input
                                         id="display-name"
                                         name="displayName"
@@ -100,38 +106,40 @@ export const SettingsPage = {
                                         />
                                     </div>
 
-                                    <Fieldset legend="Notification Preferences">
-                                        <Checkbox
-                                            id="email-notifications"
-                                            name="emailNotifications"
-                                            label="Email notifications"
-                                            tile={true}
-                                            description="Receive important updates via email"
-                                            checked
-                                        />
-                                        <Checkbox
-                                            id="marketing-emails"
-                                            name="marketingEmails"
-                                            label="Marketing emails"
-                                            tile={true}
-                                            description="Receive promotional content and newsletters"
-                                        />
-                                        <Checkbox
-                                            id="security-alerts"
-                                            name="securityAlerts"
-                                            label="Security alerts"
-                                            tile={true}
-                                            description="Get notified about security-related events"
-                                            checked
-                                        />
-                                    </Fieldset>
+                                    <CheckboxGroup
+                                        id="notification-preferences"
+                                        name="notifications"
+                                        legend="Notification Preferences"
+                                        tile
+                                        checkboxProps={[
+                                            {
+                                                id: 'email-notifications',
+                                                value: 'email',
+                                                label: 'Email notifications',
+                                                description: 'Receive important updates via email',
+                                                defaultChecked: true,
+                                            },
+                                            {
+                                                id: 'marketing-emails',
+                                                value: 'marketing',
+                                                label: 'Marketing emails',
+                                                description: 'Receive promotional content and newsletters',
+                                            },
+                                            {
+                                                id: 'security-alerts',
+                                                value: 'security',
+                                                label: 'Security alerts',
+                                                description: 'Get notified about security-related events',
+                                                defaultChecked: true,
+                                            },
+                                        ]}
+                                    />
 
                                     <div className="margin-top-4">
                                         <ButtonGroup
                                             buttonProps={[
-                                                { children: 'Save Changes', variant: 'primary' },
-                                                { children: 'Cancel', variant: 'secondary' },
-                                                { children: 'Reset to Defaults', variant: 'secondary' },
+                                                { children: 'Save Changes', variant: 'primary', type: 'submit' },
+                                                { children: 'Reset to Defaults', variant: 'secondary', type: 'reset' },
                                             ]}
                                         />
                                     </div>
@@ -143,10 +151,8 @@ export const SettingsPage = {
                 leftSidebar={
                     <SideNav
                         items={[
-                            { text: 'Profile', href: '#profile', current: true },
-                            { text: 'Security', href: '#security' },
-                            { text: 'Notifications', href: '#notifications' },
-                            { text: 'Billing', href: '#billing' },
+                            { text: 'Personal Information', href: '#personal-information' },
+                            { text: 'Notification Preferences', href: '#notification-preferences' },
                         ]}
                         sticky={true}
                     />
@@ -155,5 +161,9 @@ export const SettingsPage = {
             <Footer {...footerArgs} signUp={{ ...footerArgs.signUp, emailId: 'footer-email-settings' }} />
             <Identifier {...identifierArgs} />
         </>
-    ),
+    );
+}
+
+export const SettingsPage = {
+    render: () => <SettingsExample />,
 };

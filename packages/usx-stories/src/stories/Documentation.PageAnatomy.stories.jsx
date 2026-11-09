@@ -6,7 +6,7 @@ import Code from '../../../usx-react/src/components/code/Code.tsx';
 
 const singleColumnMarkup = `<ExampleFrame target="account-content">
   <Layout>
-    <Page id="account-content" title="Account" tabIndex={-1}>
+    <Page id="account-content" title="Account">
       <p>Manage your account information.</p>
       <Section title="Contact information">
         <ContactDetails />
@@ -23,7 +23,7 @@ const gridMarkup = `<ExampleFrame target="settings-content">
     variant="grid"
     leftSidebar={<SideNav items={settingsNavigation} />}
     content={
-      <Page as="div" id="settings-content" title="Settings" tabIndex={-1}>
+      <Page as="div" id="settings-content" title="Settings">
         <Section title="Profile settings">
           <ProfileForm />
         </Section>
@@ -155,7 +155,7 @@ export const PageAnatomy = {
           <ul>
             <li>Does the complete page contain Layout, one Page, and logical Sections?</li>
             <li>Is there exactly one main and h1, with no nested main or aside landmarks?</li>
-            <li>Does the skip link resolve to a unique target with tabIndex=-1?</li>
+            <li>Does the skip link resolve to a unique target and move focus there?</li>
             <li>Are sidebar actions still available on narrow containers?</li>
             <li>Do all data and workflow states preserve the same outer structure?</li>
             <li>Are Banner, navigation, actions, and existing interactions preserved?</li>

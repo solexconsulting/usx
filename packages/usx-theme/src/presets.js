@@ -369,6 +369,7 @@ export const PRESETS = {
     'radius-button': '4px',
     // nasa.gov's content cards (hds-content-card) render perfectly square —
     // verified live.
+    'card-bg': '#000000',
     'card-text': 'var(--usx-text-inverse)',
     'checkable-tile-radius': '0',
     'accordion-bg-hover': 'var(--usx-color-primary)',

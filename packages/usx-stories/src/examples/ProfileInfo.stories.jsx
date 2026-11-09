@@ -32,31 +32,32 @@ export const ProfileInfo = {
       <Layout
         variant="single-column"
         content={
-          <Page id="profile-info-example" title="User Profile" tabIndex={-1}>
+          <Page id="profile-info-example" title="User Profile">
             <Section>
               <div className="padding-3 border usx-rounded-box bg-surface-2 margin-bottom-3">
-                <div className="display-flex flex-wrap flex-align-start gap-3">
-                  <Indicator className="usx-indicator-top usx-indicator-end margin-right-3">
-                    <Avatar
-                      src="benjamin_franklin.png"
-                      href="#profile-info-example"
-                      className="usx-avatar--size-xl usx-rounded-sm"
-                      contentClassName="bg-surface-3"
-                      alt="Alex Morgan"
-                    />
-                    <Status
-                      color="success"
-                      size="md"
-                      className="usx-indicator-item"
-                      animation="ping"
-                    />
-                  </Indicator>
-                  <div className="flex-fill">
-                    <div className="display-flex flex-align-center gap-2 flex-wrap">
-                      <h2 className="margin-0 margin-right-2">Alex Morgan</h2>
-                    </div>
+                <div className="grid-row grid-gap-3 flex-align-start">
+                  <div className="grid-col-12 mobile-lg:grid-col-auto">
+                    <Indicator className="usx-indicator-top usx-indicator-end">
+                      <Avatar
+                        src="benjamin_franklin.png"
+                        href="#profile-info-example"
+                        className="usx-avatar--size-xl usx-rounded-sm"
+                        contentClassName="bg-surface-3"
+                        alt="Alex Morgan"
+                      />
+                      <Status
+                        color="success"
+                        size="md"
+                        className="usx-indicator-item"
+                        animation="ping"
+                      />
+                    </Indicator>
+                  </div>
+                  <div className="grid-col-12 mobile-lg:grid-col-fill">
+                    <h2 className="margin-0">Alex Morgan</h2>
                     <p className="text-base usx-text-muted margin-y-1">Senior Digital Systems Architect &bull; Office of Technology</p>
                     <TagGroup
+                      className="margin-top-2"
                       tagProps={[
                         { value: 'Administrator', color: 'primary' },
                         { value: 'Security Lead', color: 'info' },
@@ -64,12 +65,27 @@ export const ProfileInfo = {
                       ]}
                     />
                   </div>
-                  <ButtonGroup
-                    buttonProps={[
-                      { children: 'Edit Profile', variant: 'primary', iconProps: [{ name: 'edit' }] },
-                      { children: 'Message', variant: 'secondary', iconProps: [{ name: 'mail' }] },
-                    ]}
-                  />
+                  <div className="grid-col-12 desktop:grid-col-auto border-top desktop:border-top-0 margin-top-2 desktop:margin-top-0 padding-top-2 desktop:padding-top-0">
+                    <ButtonGroup
+                      className="mobile-lg:flex-justify-end"
+                      buttonProps={[
+                        {
+                          children: 'Edit Profile',
+                          variant: 'primary',
+                          iconProps: [{ name: 'edit' }],
+                          className: 'width-full mobile-lg:width-auto',
+                          itemClassName: 'width-full mobile-lg:width-auto',
+                        },
+                        {
+                          children: 'Message',
+                          variant: 'secondary',
+                          iconProps: [{ name: 'mail' }],
+                          className: 'width-full mobile-lg:width-auto',
+                          itemClassName: 'width-full mobile-lg:width-auto',
+                        },
+                      ]}
+                    />
+                  </div>
                 </div>
               </div>
             </Section>
@@ -130,7 +146,7 @@ export const ProfileInfo = {
               <dt className="text-bold">Primary Location</dt>
               <dd className="margin-left-0 margin-bottom-3">HQ Building - East Wing</dd>
               <dt className="text-bold">Time Zone</dt>
-              <dd className="margin-left-0">Eastern Time (America/New_York)</dd>
+              <dd className="margin-left-0">Eastern Time (America/New York)</dd>
             </dl>
           </Section>
           </Page>

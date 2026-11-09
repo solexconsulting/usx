@@ -11,6 +11,7 @@ import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
 import Page from '../../../usx-react/src/components/page/Page.tsx';
 import Section from '../../../usx-react/src/components/section/Section.tsx';
 import Prose from '../../../usx-react/src/components/prose/Prose.tsx';
+import Link from '../../../usx-react/src/components/link/Link.tsx';
 import SideNav from '../../../usx-react/src/components/sidenav/SideNav.tsx';
 import TagGroup from '../../../usx-react/src/components/tag-group/TagGroup.tsx';
 import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './commonArgs.js';
@@ -37,24 +38,24 @@ export const BlogPost = {
         variant="grid"
         expandable={true}
         content={
-          <Page as="article" id="blog-post-example" title="The Future of Digital Transformation" tabIndex={-1}>
+          <Page as="article" id="blog-post-example" title="The Future of Digital Transformation">
             <Section aria-label="Article">
-              <div className="margin-bottom-3">
-                <p className="text-base color-base-dark font-sans-xs">
-                  <span>By John Doe</span>
-                  <span className="margin-left-2">Published March 15, 2024</span>
-                  <span className="margin-left-2">5 min read</span>
-                </p>
+              <div className="display-flex flex-wrap margin-bottom-3 text-subtle font-sans-xs">
+                <span className="margin-right-2">By John Doe</span>
+                <span className="margin-right-2">Published <time dateTime="2024-03-15">March 15, 2024</time></span>
+                <span>5 min read</span>
               </div>
 
               <Image
                 src="https://picsum.photos/800/400?random=3"
-                alt="Digital transformation concept"
+                alt=""
+                width={800}
+                height={400}
                 rounded
-                className="margin-bottom-3"
+                className="maxw-tablet margin-bottom-4"
               />
 
-              <Prose>
+              <Prose className="maxw-tablet">
                 <p>In today&apos;s rapidly evolving digital landscape, organizations face unprecedented challenges and opportunities. Digital transformation has become not just a competitive advantage, but a necessity for survival in an increasingly connected world.</p>
 
                 <h2>The Current State</h2>
@@ -86,7 +87,7 @@ export const BlogPost = {
                       shape: 'circle'
                     },
                     primary: 'John Doe',
-                    secondary: 'CTO Somewhere Probably',
+                    secondary: 'Digital services lead',
                   }}
                 >
                   <p className="font-serif-md maxw-tablet margin-0">Digital transformation is not about technology—it's about people and processes.</p>
@@ -99,26 +100,39 @@ export const BlogPost = {
         }
         leftSidebar={
           <SideNav
+            ariaLabel="Blog navigation"
             items={[
-              { text: 'Home', href: '#', current: true },
-              { text: 'About', href: '#' },
-              { text: 'Blog', href: '#' },
-              { text: 'Contact', href: '#' },
+              { text: 'Home', href: '/' },
+              {
+                text: 'Blog',
+                href: '/blog',
+                children: [
+                  { text: 'Digital transformation', href: '/blog/digital-transformation', current: true },
+                  { text: 'News', href: '/blog/news' },
+                  { text: 'Archive', href: '/blog/archive' },
+                ],
+              },
+              { text: 'About', href: '/about' },
+              { text: 'Contact', href: '/contact' },
             ]}
             sticky={true}
           />
         }
         rightSidebar={
-          <div className="display-flex flex-column margin-top-3 margin-right-1 gap-2">
-            <h3 className="text-ink margin-bottom-1">Related Articles</h3>
-            <ul className="usa-list usa-list--unstyled">
-              <li className="margin-bottom-1"><a className="usa-link usx-link" href="#">Cloud Migration Strategies</a></li>
-              <li className="margin-bottom-1"><a className="usa-link usx-link" href="#">AI in Modern Business</a></li>
-              <li className="margin-bottom-1"><a className="usa-link usx-link" href="#">Cybersecurity Best Practices</a></li>
-              <li><a className="usa-link usx-link" href="#">Agile Development Methods</a></li>
+          <div className="margin-top-3 margin-right-1">
+            <h2 className="font-sans-md margin-top-0 margin-bottom-2">Explore examples</h2>
+            <ul className="usa-list usa-list--unstyled margin-top-0 margin-bottom-4">
+              <li className="margin-bottom-1">
+                <Link href="?id=examples-data-display--dashboard&viewMode=story">Dashboard overview</Link>
+              </li>
+              <li className="margin-bottom-1">
+                <Link href="?id=examples-data-display--product-showcase&viewMode=story">Component showcase</Link>
+              </li>
+              <li>
+                <Link href="?id=examples-data-display--search-results&viewMode=story">Search documentation</Link>
+              </li>
             </ul>
-
-            <h3 className="text-ink margin-bottom-1">Tags</h3>
+            <h2 className="font-sans-md margin-top-0 margin-bottom-2">Topics</h2>
             <TagGroup
               tagProps={[
                 { value: 'Digital Transformation', color: 'primary' },

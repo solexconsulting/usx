@@ -54,9 +54,9 @@ export const Dashboard = {
       <Layout
         variant="single-column"
         content={
-          <Page id="dashboard-example" title="Dashboard" tabIndex={-1}>
+          <Page id="dashboard-example" title="Dashboard">
             <div className="padding-bottom-2 border-bottom display-flex flex-wrap flex-align-center flex-justify">
-              <p className="margin-y-1 margin-right-3 font-sans-sm">September 2026 <span className="text-base"> / Monthly overview</span></p>
+              <p className="margin-y-1 margin-right-3 font-sans-sm">September 2026 <span className="text-subtle"> / Monthly overview</span></p>
               <ButtonGroup
                 className="margin-y-1"
                 buttonProps={[
@@ -88,7 +88,6 @@ export const Dashboard = {
             <Section title="Recent Activity" className="margin-y-3">
               <DataTable
                 id="dashboard-activity"
-                tabIndex={-1}
                 aria-label="Recent activity"
                 borderless
                 responsive="stack"
@@ -129,7 +128,7 @@ export const Dashboard = {
                       />
                       <h3 className="margin-top-0 margin-bottom-1 font-sans-sm">{system.name}</h3>
                       <p className="margin-y-1 font-sans-sm">{system.status}</p>
-                      <p className="margin-top-1 margin-bottom-0 font-sans-xs text-base">{system.detail}</p>
+                      <p className="margin-top-1 margin-bottom-0 font-sans-xs text-subtle">{system.detail}</p>
                     </Indicator>
                   </div>
                 ))}

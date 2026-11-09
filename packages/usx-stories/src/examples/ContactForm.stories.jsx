@@ -8,12 +8,14 @@ import Identifier from '../../../usx-react/src/components/identifier/Identifier.
 import Button from '../../../usx-react/src/components/button/Button.tsx';
 import Card from '../../../usx-react/src/components/card/Card.tsx';
 import Checkbox from '../../../usx-react/src/components/checkbox/Checkbox.tsx';
+import CheckboxGroup from '../../../usx-react/src/components/checkbox-group/CheckboxGroup.tsx';
 import Fieldset from '../../../usx-react/src/components/fieldset/Fieldset.tsx';
 import Input from '../../../usx-react/src/components/input/Input.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
 import Page from '../../../usx-react/src/components/page/Page.tsx';
 import Prose from '../../../usx-react/src/components/prose/Prose.tsx';
 import Section from '../../../usx-react/src/components/section/Section.tsx';
+import TextArea from '../../../usx-react/src/components/text-area/TextArea.tsx';
 import { headerArgs, footerArgs, identifierArgs, miscBannerArgs } from './commonArgs.js';
 
 export default {
@@ -55,32 +57,40 @@ export const ContactForm = {
         }
         content={
           <Page id="contact-form-example" title="Contact Us">
-            <p className="text-intro margin-bottom-3">Get in touch with our team for any questions or support.</p>
+            <p className="text-intro maxw-tablet margin-bottom-3">Get in touch with our team for any questions or support.</p>
 
             <Section>
-              <form className="usa-form maxw-full">
+              <form className="usa-form maxw-tablet">
                 <Fieldset legend="Contact Information" largeLegend={true}>
-                  <Input
-                    id="first-name"
-                    name="firstName"
-                    label="First name"
-                    type="text"
-                    required
-                  />
-
-                  <Input
-                    id="last-name"
-                    name="lastName"
-                    label="Last name"
-                    type="text"
-                    required
-                  />
+                  <div className="grid-row grid-gap">
+                    <div className="tablet:grid-col-6">
+                      <Input
+                        id="first-name"
+                        name="firstName"
+                        label="First name"
+                        type="text"
+                        autoComplete="given-name"
+                        required
+                      />
+                    </div>
+                    <div className="tablet:grid-col-6">
+                      <Input
+                        id="last-name"
+                        name="lastName"
+                        label="Last name"
+                        type="text"
+                        autoComplete="family-name"
+                        required
+                      />
+                    </div>
+                  </div>
 
                   <Input
                     id="email"
                     name="email"
                     label="Email address"
                     type="email"
+                    autoComplete="email"
                     required
                   />
 
@@ -89,6 +99,7 @@ export const ContactForm = {
                     name="phone"
                     label="Phone number"
                     type="tel"
+                    autoComplete="tel"
                   />
 
                   <Input
@@ -99,40 +110,25 @@ export const ContactForm = {
                     required
                   />
 
-                  <Input
+                  <TextArea
                     id="message"
                     name="message"
                     label="Message"
-                    textArea={true}
+                    rows={6}
                     required
                   />
 
-                  <Fieldset legend="How did you hear about us?">
-                    <Checkbox
-                      id="referral-website"
-                      name="referral"
-                      value="website"
-                      label="Website"
-                    />
-                    <Checkbox
-                      id="referral-social"
-                      name="referral"
-                      value="social"
-                      label="Social media"
-                    />
-                    <Checkbox
-                      id="referral-friend"
-                      name="referral"
-                      value="friend"
-                      label="Friend or colleague"
-                    />
-                    <Checkbox
-                      id="referral-other"
-                      name="referral"
-                      value="other"
-                      label="Other"
-                    />
-                  </Fieldset>
+                  <CheckboxGroup
+                    id="referral-sources"
+                    name="referral"
+                    legend="How did you hear about us?"
+                    checkboxProps={[
+                      { id: 'referral-website', value: 'website', label: 'Website' },
+                      { id: 'referral-social', value: 'social', label: 'Social media' },
+                      { id: 'referral-friend', value: 'friend', label: 'Friend or colleague' },
+                      { id: 'referral-other', value: 'other', label: 'Other' },
+                    ]}
+                  />
 
                   <Checkbox
                     id="newsletter"

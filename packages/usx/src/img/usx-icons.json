@@ -2,6 +2,9 @@
   "items": [
     { "name": "spinner", "meta": "loading spin progress busy wait" },
     { "name": "expand", "meta": "expand enlarge widen maximize" },
-    { "name": "contract", "meta": "contract shrink narrow minimize collapse" }
+    { "name": "contract", "meta": "contract shrink narrow minimize collapse" },
+    { "name": "color_palette", "meta": "palette theme_picker theme color colour colors colours appearance paint painter" },
+    { "name": "sun", "meta": "light light_mode day daylight sunny brightness theme" },
+    { "name": "moon", "meta": "dark dark_mode night nighttime lunar theme" }
   ]
 }

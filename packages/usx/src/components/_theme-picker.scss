@@ -1,70 +1,158 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
 .usx-theme-picker {
+  display: inline-flex;
+  max-width: 20rem;
+  color: #fff;
+  color: usx-when($usx-theme-picker-trigger-text);
+
+  &__panel {
+    display: none;
+    align-items: center;
+    gap: 0;
+  }
+
+  &--open &__panel {
+    display: flex;
+  }
+
+  &--open &__trigger {
+    display: none;
+  }
+
+  // Keep the native selector available until the JavaScript controls it.
+  &:not([data-enhanced='true']) &__panel {
+    display: flex;
+  }
+
+  &:not([data-enhanced='true']) .usx-theme-picker__trigger,
+  &:not([data-enhanced='true']) .usx-theme-picker__toggle {
+    display: none;
+  }
+
+  &:not([data-enhanced='true']) .usa-select.usx-select {
+    border-radius: usx-when($usx-input-radius, $usx-input-radius, 0) !important;
+  }
+
+  .usa-select.usx-select {
+    margin: 0;
+
+    // Place focus outline above the toggle button
+    z-index: 1;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  &__toggle,
+  &__trigger {
     display: inline-flex;
-    max-width: 20rem;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 2.5rem;
+    padding: 0.5rem;
+  }
+
+  &__toggle {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+
+  &__trigger {
     color: #fff;
     color: usx-when($usx-theme-picker-trigger-text);
+  }
 
-    &__panel {
-        display: none;
-        align-items: center;
-        gap: 0;
+  &__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  &--swap,
+  &--ghost-select {
+    color: usx-when($usx-theme-picker-trigger-text);
+  }
+
+  // Keep the inline picker’s line box independent of the swapped icon.
+  &--swap {
+    vertical-align: top;
+  }
+
+  &__fallback {
+    display: none;
+  }
+
+  &--swap:not([data-enhanced='true']) &__swap {
+    display: none;
+  }
+
+  &--swap:not([data-enhanced='true']) &__fallback {
+    display: block;
+  }
+
+  &__swap {
+    display: inline-grid;
+    min-height: 2.5rem;
+    margin: 0;
+    padding: 0.5rem;
+    color: usx-when($usx-theme-picker-trigger-text);
+
+    input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      cursor: pointer;
     }
 
-    &--open &__panel {
-        display: flex;
+    input:not([disabled]):focus {
+      outline: none;
     }
 
-    &--open &__trigger {
-        display: none;
+    &:focus-within {
+      outline: 0.25rem solid usx-when($usx-color-focus, $usx-color-focus, #2491ff);
+      outline-offset: 0.25rem;
+    }
+  }
+
+  &__ghost {
+    position: relative;
+    display: inline-flex;
+    min-height: 2.5rem;
+    align-items: center;
+    max-width: 20rem;
+
+    &:hover .usx-theme-picker__ghost-face {
+      background-color: color-mix(in srgb, currentcolor 20%, transparent);
     }
 
-    // Keep the native selector available until the JavaScript controls it.
-    &:not([data-enhanced='true']) &__panel {
-        display: flex;
+    &:focus-within .usx-theme-picker__ghost-face {
+      outline: 0.25rem solid usx-when($usx-color-focus, $usx-color-focus, #2491ff);
+      outline-offset: 0.25rem;
     }
 
-    &:not([data-enhanced='true']) .usx-theme-picker__trigger,
-    &:not([data-enhanced='true']) .usx-theme-picker__toggle {
-        display: none;
+    .usx-theme-picker__select--hidden {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: pointer;
     }
+  }
 
-    &:not([data-enhanced='true']) .usa-select.usx-select {
-        border-radius: usx-when($usx-input-radius, $usx-input-radius, 0) !important;
-    }
-
-    .usa-select.usx-select {
-        margin: 0;
-
-        // Place focus outline above the toggle button
-        z-index: 1;
-        border-top-right-radius: 0 !important;
-        border-bottom-right-radius: 0 !important;
-    }
-
-    &__toggle,
-    &__trigger {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        min-height: 2.5rem;
-        padding: 0.5rem;
-    }
-
-    &__toggle {
-        border-top-left-radius: 0 !important;
-        border-bottom-left-radius: 0 !important;
-    }
-
-    &__trigger {
-        color: #fff;
-        color: usx-when($usx-theme-picker-trigger-text);
-    }
-
-    &__icon {
-        width: 1.25rem;
-        height: 1.25rem;
-    }
+  &__ghost-face {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.5rem;
+    margin: 0;
+    padding: 0.5rem;
+    color: usx-when($usx-theme-picker-trigger-text);
+    pointer-events: none;
+  }
 }

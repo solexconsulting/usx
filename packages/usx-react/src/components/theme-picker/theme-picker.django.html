@@ -1,32 +1,30 @@
 {% load usx_components %}
 {% firstof id "theme-picker" as field_id %}
-<div class="usx-theme-picker{% if className %} {{ className }}{% endif %}"{% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}>
-  <button
-    type="button"
-    class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
-    aria-label="{{ label|default:'Theme' }}"
-    aria-expanded="false"
-    aria-controls="{{ field_id }}-panel"
-  >
-    <svg class="usa-icon usx-theme-picker__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+{% firstof value defaultValue themes.0.value as selected_value %}
+<div class="usx-theme-picker{% if variant and variant != 'default' %} usx-theme-picker--{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}"{% if extraAttributes %}{% for attr, attr_value in extraAttributes.items %} {{ attr }}="{% if attr_value is True %}true{% elif attr_value is False %}false{% else %}{{ attr_value }}{% endif %}"{% endfor %}{% endif %}>
+{% if variant == 'swap' %}
+  <label class="usx-swap usx-swap--rotate usx-theme-picker__swap usa-button usx-button usx-button--ghost">
+    <input type="checkbox" autocomplete="off" aria-label="{{ label|default:'Theme' }}: {% for theme in themes %}{% if theme.value == selected_value %}{{ theme.label }}{% endif %}{% endfor %}. Switch to {% if themes.1.value == selected_value %}{{ themes.0.label }}{% else %}{{ themes.1.label }}{% endif %}"{% if themes.1.value == selected_value %} checked{% endif %}>
+    <span class="usx-swap-on">{% icon name="moon" source="usx" className="usx-theme-picker__icon" %}{% endicon %}</span>
+    <span class="usx-swap-off">{% icon name="sun" source="usx" className="usx-theme-picker__icon" %}{% endicon %}</span>
+  </label>
+  <div class="usx-theme-picker__fallback">{% include "theme-picker/theme-picker-select.django.html" %}</div>
+{% elif variant == 'ghost-select' %}
+  <div class="usx-theme-picker__ghost">
+    <span class="usa-button usx-button usx-button--ghost usx-theme-picker__ghost-face" aria-hidden="true">
+      {% icon name="color_palette" source="usx" className="usx-theme-picker__icon" %}{% endicon %}
+    </span>
+    {% include "theme-picker/theme-picker-select.django.html" with hidden=True %}
+  </div>
+{% else %}
+  <button type="button" class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger" aria-label="{{ label|default:'Theme' }}" aria-expanded="false" aria-controls="{{ field_id }}-panel">
+    {% icon name="color_palette" source="usx" className="usx-theme-picker__icon" %}{% endicon %}
   </button>
   <div id="{{ field_id }}-panel" class="usx-theme-picker__panel">
-    {% label htmlFor=field_id screenReaderOnly=True only %}{{ label|default:'Theme' }}{% endlabel %}
-    <select
-      class="usa-select usx-select"
-      id="{{ field_id }}"
-      {% if name %}name="{{ name }}"{% endif %}
-    >
-      {% for theme in themes %}
-      <option value="{{ theme.value }}" {% if value is not None and theme.value == value or value is None and theme.value == defaultValue %}selected{% endif %}>{{ theme.label }}</option>
-      {% endfor %}
-    </select>
-    <button
-      type="button"
-      class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
-      aria-label="Confirm theme"
-    >
+    {% include "theme-picker/theme-picker-select.django.html" %}
+    <button type="button" class="usa-button usx-button usa-button--primary usx-theme-picker__toggle" aria-label="Confirm theme">
       {% icon name="close" className="usx-theme-picker__icon" %}{% endicon %}
     </button>
   </div>
+{% endif %}
 </div>

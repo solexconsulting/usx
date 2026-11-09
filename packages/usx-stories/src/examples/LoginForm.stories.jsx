@@ -44,7 +44,7 @@ function LoginExample() {
       />
 
       <Layout className="flex-fill">
-        <Page id="login-pattern-example" className="maxw-mobile margin-x-auto" title="Sign in" tabIndex={-1}>
+        <Page id="login-pattern-example" className="maxw-mobile margin-x-auto" title="Sign in">
           <Section aria-label="Sign-in options">
           <form className="usa-form maxw-full" onSubmit={handleSubmit}>
             <Input
@@ -73,12 +73,13 @@ function LoginExample() {
                 label="Show password"
                 checked={showPassword}
                 onChange={(event) => setShowPassword(event.target.checked)}
+                formGroup={false}
               />
               <Link className="margin-top-105" href="#login-status" onClick={(event) => handleAccountAction(event, 'Password recovery')}>
                 Forgot password?
               </Link>
             </div>
-            <Button type="submit" className="width-full margin-right-0">Sign in</Button>
+            <Button variant="primary" type="submit" className="width-full margin-right-0">Sign in</Button>
           </form>
 
           <div className="display-flex flex-align-center gap-2 margin-y-3">
@@ -88,25 +89,18 @@ function LoginExample() {
           </div>
           <div className="display-flex flex-column gap-2" role="group" aria-label="Other sign-in options">
             <Button
-              variant="secondary"
+              variant="outline"
               className="width-full margin-top-0 margin-x-0 margin-bottom-2"
-              onClick={(event) => handleAccountAction(event, 'Social sign-in')}
+              onClick={(event) => handleAccountAction(event, 'Login.gov sign-in')}
             >
-              {"Login with <placeholder>"}
+              Continue with Login.gov
             </Button>
             <Button
-              variant="accent-cool"
-              className="width-full margin-top-0 margin-x-0 margin-bottom-2"
-              onClick={(event) => handleAccountAction(event, 'Social sign-in')}
-            >
-              {"Login with <placeholder>"}
-            </Button>
-            <Button
-              variant="accent-warm"
+              variant="outline"
               className="width-full margin-0"
-              onClick={(event) => handleAccountAction(event, 'Social sign-in')}
+              onClick={(event) => handleAccountAction(event, 'Organization sign-in')}
             >
-              {"Login with <placeholder>"}
+              Use your organization&apos;s sign-in
             </Button>
           </div>
           <p className="text-center margin-top-3">

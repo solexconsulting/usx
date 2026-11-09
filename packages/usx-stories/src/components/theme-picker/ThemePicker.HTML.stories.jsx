@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import reactSnapshot from '../../../../usx-react/src/components/theme-picker/theme-picker.react-snapshot.html?raw';
 import djangoSnapshot from '../../../../usx-react/src/components/theme-picker/theme-picker.django-snapshot.html?raw';
-import { useGlobals } from 'storybook/preview-api';
+import { applyStoryTheme } from '../../utils/storyTheme.js';
 import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 import { expect, userEvent, waitFor } from 'storybook/test';
 import { storyDefs } from './ThemePicker.React.stories.jsx';
@@ -19,9 +19,15 @@ export default {
   decorators: [
     ...componentInit('themePicker'),
     (Story) => {
-      // Subscribe to Storybook globals so the toolbar theme decorator re-applies
-      // when this story's ThemePicker changes the selection.
-      useGlobals();
+      useEffect(() => {
+        const change = (event) => {
+          if (event.target.matches('.usx-theme-picker select')) {
+            applyStoryTheme(event.target.value);
+          }
+        };
+        document.addEventListener('change', change);
+        return () => document.removeEventListener('change', change);
+      }, []);
       return (
         <>
           <Alert
@@ -86,34 +92,47 @@ export default {
 const visible = (element) => getComputedStyle(element).display !== 'none';
 
 const checkPicker = (def) => async (picker) => {
-  const trigger = picker.querySelector('.usx-theme-picker__trigger');
-  const panel = picker.querySelector('.usx-theme-picker__panel');
-  const select = panel.querySelector('select');
-  const confirm = panel.querySelector('.usx-theme-picker__toggle');
-
+  const select = picker.querySelector('select');
   await waitFor(() => expect(picker).toHaveAttribute('data-enhanced', 'true'));
-  await expect(trigger).toBeVisible();
-  await expect(panel).not.toBeVisible();
-
-  await expect(trigger).toHaveAttribute('aria-label', def.label);
-  await expect(trigger).toHaveAttribute('type', 'button');
-  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-  await expect(trigger).toHaveAttribute('aria-controls', panel.id);
-  await expect(trigger.querySelector('svg')).toHaveAttribute('aria-hidden', 'true');
-
   await expect(select.id).toMatch(snapshotId(def.id));
-  await expect(panel.querySelector('label')).toHaveAttribute('for', select.id);
-  await expect(panel.querySelector('label')).toHaveTextContent(def.label);
-  await expect(confirm).toHaveAttribute('aria-label', 'Confirm theme');
+  await expect(select.labels[0]).toHaveTextContent(def.label);
   const options = [...select.options];
   await expect(options.map((option) => [option.value, option.textContent])).toEqual(
     def.themes.map((theme) => [theme.value, theme.label])
   );
   await expect(select).toHaveValue(def.value ?? def.defaultValue);
-};
 
+  if (def.variant === 'swap') {
+    const input = picker.querySelector('.usx-theme-picker__swap input');
+    await expect(input).not.toBeChecked();
+    await expect(input).toHaveAccessibleName(/Switch to Dark/);
+    await expect(picker.querySelector('.usx-theme-picker__fallback')).not.toBeVisible();
+    return;
+  }
+  if (def.variant === 'ghost-select') {
+    const face = picker.querySelector('.usx-theme-picker__ghost-face');
+    await expect(face.querySelector('svg')).toHaveAttribute('aria-hidden', 'true');
+    await expect(face).toHaveTextContent('');
+    await expect(select).toHaveAccessibleName(def.label);
+    return;
+  }
+
+  const trigger = picker.querySelector('.usx-theme-picker__trigger');
+  const panel = picker.querySelector('.usx-theme-picker__panel');
+  const confirm = panel.querySelector('.usx-theme-picker__toggle');
+  await expect(trigger).toBeVisible();
+  await expect(panel).not.toBeVisible();
+  await expect(trigger).toHaveAttribute('aria-label', def.label);
+  await expect(trigger).toHaveAttribute('type', 'button');
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  await expect(trigger).toHaveAttribute('aria-controls', panel.id);
+  await expect(trigger.querySelector('svg')).toHaveAttribute('aria-hidden', 'true');
+  await expect(confirm).toHaveAttribute('aria-label', 'Confirm theme');
+};
 const checks = Object.fromEntries(
-  Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), checkPicker(def)])
+  Object.entries(storyDefs)
+    .filter(([key]) => !key.startsWith('Unenhanced'))
+    .map(([key, def]) => [sectionTitle(key), checkPicker(def)])
 );
 
 const play = async (context) => {
@@ -137,6 +156,18 @@ const play = async (context) => {
     await waitFor(() => expect(visible(panel)).toBe(false));
     await expect(trigger).toHaveAttribute('aria-expanded', 'false');
     await expect(trigger).toBeVisible();
+  });
+  const section = (key) => sectionFor(context.canvasElement, sectionTitle(key));
+  await context.step('Swap picks the other theme', async () => {
+    const swap = section('Swap');
+    await userEvent.click(swap.querySelector('.usx-theme-picker__swap'));
+    await expect(swap.querySelector('select')).toHaveValue('Borealis');
+  });
+  await context.step('Ghost select accepts a native change', async () => {
+    const ghost = section('GhostSelect');
+    await userEvent.selectOptions(ghost.querySelector('select'), 'Forest');
+    await expect(ghost.querySelector('select')).toHaveValue('Forest');
+    await expect(ghost.querySelector('.usx-theme-picker__ghost-face')).toHaveTextContent('');
   });
 };
 
