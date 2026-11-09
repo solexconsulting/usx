@@ -169,7 +169,8 @@ export function DataTablePattern({ state = 'normal' }) {
                                         onClick={(event) => {
                                             returnFocus.current = event.currentTarget;
                                             setPendingDelete(row);
-                                            requestAnimationFrame(() => confirmation.current?.focus());
+                                            // DestructiveAction renders Cancel before Delete.
+                                            requestAnimationFrame(() => confirmation.current?.querySelector('button')?.focus());
                                         }}
                                     />
                                 ),
@@ -188,7 +189,7 @@ export function DataTablePattern({ state = 'normal' }) {
                     />
                 )}
                 {pendingDelete && (
-                    <div ref={confirmation} tabIndex={-1}>
+                    <div ref={confirmation}>
                         <DestructiveAction
                             name={pendingDelete.name}
                             onCancel={() => {

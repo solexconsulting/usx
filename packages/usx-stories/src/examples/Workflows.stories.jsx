@@ -78,7 +78,13 @@ function ApplicationWorkflow({ ordered = true, state = 'normal', allowDrafts = f
       firstRender.current = false;
       return;
     }
-    focusTarget.current?.focus();
+    const currentStep =
+      !submitted && active !== null && active < 3
+        ? focusTarget.current?.querySelector(`[id="application-task-${active}"]`)
+        : focusTarget.current;
+    currentStep
+      ?.querySelector('input:not(:disabled), select:not(:disabled), textarea:not(:disabled), button:not(:disabled), a[href]')
+      ?.focus();
   }, [active, submitted]);
   const reviewItems = [
     { label: 'Applicant', value: `${values.firstName || ''} ${values.lastName || ''}`.trim() },
@@ -94,11 +100,11 @@ function ApplicationWorkflow({ ordered = true, state = 'normal', allowDrafts = f
               { label: submitted ? 'Confirmation' : 'New application', current: true },
             ]}
           />
-        <Page id="application-workflow" title="Request data access" tabIndex={-1}>
+        <Page id="application-workflow" title="Request data access">
           <p>Application for controlled research data.</p>
           <Section aria-label="Application">
           <PageState state={state === 'error' ? 'normal' : state}>
-            <div ref={focusTarget} tabIndex={-1}>
+            <div ref={focusTarget}>
               {submitted ? (
                 <>
                   <Alert

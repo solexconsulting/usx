@@ -108,7 +108,8 @@ export const Icons = {
         <p>
           Every icon available to USX components: USWDS's own icon set, plus a
           small number of custom <strong>USX</strong> icons for things USWDS
-          doesn't ship (currently just <code>spinner</code>). Click an icon to
+          doesn't ship, including <code>color_palette</code>, <code>sun</code>, and
+          <code>moon</code>. Search by name or keyword, then click an icon to
           copy its <code>&lt;svg&gt;</code> snippet.
         </p>
 

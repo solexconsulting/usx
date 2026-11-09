@@ -13,7 +13,7 @@ const htmlMarkup = `<section aria-label="Account & settings">
   <p>Use &lt;Page&gt; to define the page.</p>
 </section>`;
 const reactMarkup = `<Layout>
-  <Page title="Account" tabIndex={-1}>
+  <Page title="Account">
     <Section title="Contact information">
       <ContactDetails user={currentUser} />
     </Section>
@@ -72,7 +72,7 @@ export const storyDefs = {
   ReactMarkupWithHTMLFragment: {
     allowHtml: true,
     lines: markupLines(`&lt;Layout&gt;
-  &lt;Page title="<strong>Account</strong>" tabIndex={-1}&gt;
+  &lt;Page title="<strong>Account</strong>"&gt;
     &lt;Section title="Contact information"&gt;
       &lt;ContactDetails user={currentUser} /&gt;
     &lt;/Section&gt;

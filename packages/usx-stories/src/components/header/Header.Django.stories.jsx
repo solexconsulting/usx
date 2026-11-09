@@ -7,7 +7,7 @@ import {
 } from './Header.React.stories.jsx';
 import { storyDefs as themePickerStoryDefs } from '../theme-picker/ThemePicker.React.stories.jsx';
 import { useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
-import { useGlobals } from 'storybook/preview-api';
+import { applyStoryTheme } from '../../utils/storyTheme.js';
 import React, { useEffect, useRef } from 'react';
 
 export default {
@@ -21,7 +21,17 @@ export default {
 const createStory = createDjangoStory({ componentName: 'header' });
 
 export const Default = createStory(storyDefs.Default);
-export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { docs: { description: { story: 'The desktop links remain in the markup; the mobile menu and expandable navigation need USWDS JavaScript.' } } } };
+export const Unenhanced = {
+  ...createStory(storyDefs.Unenhanced),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The desktop links remain in the markup; the mobile menu and expandable navigation need USWDS JavaScript.',
+      },
+    },
+  },
+};
 export const Basic = createStory(storyDefs.Basic);
 export const BasicWithMegamenu = createStory(storyDefs.BasicWithMegamenu);
 export const Extended = createStory(storyDefs.Extended);
@@ -47,7 +57,7 @@ export const BorderRoles = {
 
 // Both requests are visible to the snapshot renderer. The live story also
 // receives Django's rendered ThemePicker HTML for its interactive end slot.
-const ExtensibilitySlotsStory = ({ updateGlobals, ...args }) => {
+const ExtensibilitySlotsStory = (args) => {
   const storyRoot = useRef(null);
   const { html: navEndContent } = useDjangoRenderedHtml('theme-picker', {
     ...themePickerStoryDefs.LightDark,
@@ -57,11 +67,11 @@ const ExtensibilitySlotsStory = ({ updateGlobals, ...args }) => {
   useEffect(() => {
     const root = storyRoot.current;
     const onChange = (event) => {
-      if (event.target.matches('.usx-theme-picker select')) updateGlobals({ theme: event.target.value });
+      if (event.target.matches('.usx-theme-picker select')) applyStoryTheme(event.target.value);
     };
     root?.addEventListener('change', onChange);
     return () => root?.removeEventListener('change', onChange);
-  }, [updateGlobals]);
+  }, []);
 
   if (error) {
     return (
@@ -78,12 +88,9 @@ export const ExtensibilitySlots = {
     docs: {
       description: {
         story:
-          "`navEndContent` embeds Django's own `theme-picker` component (fetched and rendered server-side), so it drives the toolbar theme global the same way the React story's live `ThemePicker` does.",
+          "`navEndContent` embeds Django's own `theme-picker` component (fetched and rendered server-side), so it changes the preview theme without rerendering the story.",
       },
     },
   },
-  render: (args) => {
-    const [, updateGlobals] = useGlobals();
-    return <ExtensibilitySlotsStory {...args} updateGlobals={updateGlobals} />;
-  },
+  render: (args) => <ExtensibilitySlotsStory {...args} />,
 };

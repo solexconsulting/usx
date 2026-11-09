@@ -94,7 +94,7 @@ export const ProductShowcase = {
       <Layout
         variant="single-column"
         content={
-          <Page id="product-showcase-example" title="Featured Packages" tabIndex={-1}>
+          <Page id="product-showcase-example" title="Featured Packages">
             <Section id="packages">
               <CardGroup cardProps={productShowcaseCardArgs} />
             </Section>

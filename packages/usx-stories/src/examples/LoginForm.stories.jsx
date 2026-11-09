@@ -44,7 +44,7 @@ function LoginExample() {
       />
 
       <Layout className="flex-fill">
-        <Page id="login-pattern-example" className="maxw-mobile margin-x-auto" title="Sign in" tabIndex={-1}>
+        <Page id="login-pattern-example" className="maxw-mobile margin-x-auto" title="Sign in">
           <Section aria-label="Sign-in options">
           <form className="usa-form maxw-full" onSubmit={handleSubmit}>
             <Input

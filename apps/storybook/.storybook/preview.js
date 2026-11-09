@@ -9,6 +9,7 @@ import './controls-responsive.css';
 import solexTheme from "./solexTheme";
 import { resolveTheme, themeToCss } from '@solexllc/usx-theme/derive';
 import { PRESETS } from '@solexllc/usx-theme/presets';
+import { resetStoryTheme } from '../../../packages/usx-stories/src/utils/storyTheme.js';
 
 // Applies the toolbar-selected preset (see globalTypes.theme below) to every
 // story by overriding :root's --usx-* custom properties — the same
@@ -17,11 +18,15 @@ import { PRESETS } from '@solexllc/usx-theme/presets';
 // The Playground has its own preset picker and emits only changed tokens.
 // Skip the toolbar override there so its remaining tokens inherit the base
 // theme, independent of the toolbar selection.
-function withThemePreset(Story, context) {
+function ThemePreset({ Story, context }) {
+  const theme = context.globals.theme;
+  // A picker selection is local to the current story. A toolbar change or
+  // story navigation restores the toolbar preset.
+  React.useLayoutEffect(() => resetStoryTheme(), [context.id, theme]);
   if (context.parameters.isolateThemePreset) {
     return React.createElement(Story);
   }
-  const overrides = PRESETS[context.globals.theme] || {};
+  const overrides = PRESETS[theme] || {};
   const css = themeToCss(resolveTheme(overrides), { changedOnly: true });
   return React.createElement(
     React.Fragment,
@@ -31,6 +36,9 @@ function withThemePreset(Story, context) {
   );
 }
 
+function withThemePreset(Story, context) {
+  return React.createElement(ThemePreset, { Story, context });
+}
 
 const preview = {
   decorators: [withThemePreset],

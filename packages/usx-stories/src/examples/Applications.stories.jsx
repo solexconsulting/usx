@@ -10,7 +10,7 @@ export default {
   render: (args) => (
     <ExampleFrame>
       <Layout>
-        <Page id="example-content" title="Applications" tabIndex={-1}>
+        <Page id="example-content" title="Applications">
           <DataTablePattern key={args.state} {...args} />
         </Page>
       </Layout>

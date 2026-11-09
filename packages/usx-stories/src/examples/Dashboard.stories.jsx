@@ -54,7 +54,7 @@ export const Dashboard = {
       <Layout
         variant="single-column"
         content={
-          <Page id="dashboard-example" title="Dashboard" tabIndex={-1}>
+          <Page id="dashboard-example" title="Dashboard">
             <div className="padding-bottom-2 border-bottom display-flex flex-wrap flex-align-center flex-justify">
               <p className="margin-y-1 margin-right-3 font-sans-sm">September 2026 <span className="text-base"> / Monthly overview</span></p>
               <ButtonGroup
@@ -88,7 +88,6 @@ export const Dashboard = {
             <Section title="Recent Activity" className="margin-y-3">
               <DataTable
                 id="dashboard-activity"
-                tabIndex={-1}
                 aria-label="Recent activity"
                 borderless
                 responsive="stack"

@@ -8451,7 +8451,7 @@ export const componentContracts = {
     },
     "theme-picker": {
       "component": "theme-picker",
-      "version": 1,
+      "version": 2,
       "required": [
         "themes"
       ],
@@ -8498,6 +8498,11 @@ export const componentContracts = {
         "extraAttributes": {
           "type": "object",
           "description": "Additional HTML attributes on the theme picker root."
+        },
+        "variant": {
+          "type": "string",
+          "default": "default",
+          "description": "Picker presentation: default, ghost-select, or swap. Swap uses two themes: first light, second dark."
         }
       },
       "renderers": {

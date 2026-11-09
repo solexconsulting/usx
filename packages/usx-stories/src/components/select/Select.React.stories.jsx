@@ -6,7 +6,7 @@ import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 const generatedArgTypes = buildArgTypes(config.props || {});
 
 const sampleOptions = [
-  { value: 'option1', label: 'Option A' },
+  { value: 'option1', label: 'Option A&nbsp;' },
   { value: 'option2', label: 'Option B' },
   { value: 'option3', label: 'Option C' },
 ];

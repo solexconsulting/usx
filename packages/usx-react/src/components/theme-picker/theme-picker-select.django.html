@@ -1,0 +1,7 @@
+{% load usx_components %}
+{% label htmlFor=field_id screenReaderOnly=True only %}{{ label|default:'Theme' }}{% endlabel %}
+<select id="{{ field_id }}" class="usa-select usx-select{% if hidden %} usx-theme-picker__select--hidden{% endif %}"{% if name %} name="{{ name }}"{% endif %}>
+  {% for theme in themes %}
+  <option value="{{ theme.value }}"{% if theme.value == selected_value %} selected{% endif %}>{{ theme.label }}</option>
+  {% endfor %}
+</select>

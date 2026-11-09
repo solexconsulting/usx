@@ -35,9 +35,9 @@ See `packages/usx-theme/README.md` for the full theming guide, and the Storybook
 
 ## Icons
 
-`src/img/usx-sprite.svg` is a small sprite of custom icons USWDS doesn't ship
-(currently just `spinner`, used by `@solexllc/usx-react`'s `Spinner`). It's
-also exported as `@solexllc/usx/img/usx-sprite.svg` for direct resolution.
+`src/img/usx-sprite.svg` is a small sprite of custom icons USWDS doesn't ship,
+including `spinner`, `expand`, `contract`, `color_palette`, `sun`, and
+`moon`. It is also exported as `@solexllc/usx/img/usx-sprite.svg` for direct resolution.
 Like USWDS's own `dist/img/sprite.svg`, consuming apps must copy this file
 into wherever they serve static assets from (e.g. Storybook mounts it at
 `/img/usx-sprite.svg` via `staticDirs` in `.storybook/main.js`; a Django app
@@ -55,8 +55,9 @@ editor or browser), and `pnpm build` (or `pnpm --filter @solexllc/usx build`)
 runs `scripts/build-sprite.mjs`, which reads every file in `src/icons/` and
 writes the combined `<symbol>` sprite to `src/img/usx-sprite.svg`. To add an
 icon: create `src/icons/<name>.svg`, add a matching `{ name, meta }` entry to
-`src/img/usx-icons.json` (used by the Documentation/Icons page's search),
-then rebuild. `pnpm --filter @solexllc/usx dev` rebuilds on every save.
+`src/img/usx-icons.json`, then rebuild. Put alternate search terms in
+`meta`; the Documentation/Icons page searches them.
+`pnpm --filter @solexllc/usx dev` rebuilds when icon SVGs change.
 
 ## Tests
 

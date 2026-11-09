@@ -1,19 +1,23 @@
 import React from 'react';
 import ClassNames from 'classnames';
-
 import Icon from '../icon/Icon';
 import Label from '../label/Label';
+import Swap from '../swap/Swap';
 
 export interface ThemePickerOption {
   value: string;
   label: string;
 }
 
+export type ThemePickerVariant = 'default' | 'swap' | 'ghost-select';
+
 export interface ThemePickerProps {
   id?: string;
   name?: string;
   label?: string;
   themes?: ThemePickerOption[];
+  /** Swap uses the first option for light and the second for dark. */
+  variant?: ThemePickerVariant;
   value?: string;
   defaultValue?: string;
   onChange?: (value: string) => void;
@@ -26,6 +30,7 @@ export default function ThemePicker({
   name,
   label = 'Theme',
   themes = [],
+  variant = 'default',
   value,
   defaultValue,
   onChange,
@@ -33,61 +38,99 @@ export default function ThemePicker({
   extraAttributes,
 }: ThemePickerProps) {
   const selectId = id || 'theme-picker';
-  const selection =
-    value !== undefined ? { value } : { defaultValue: defaultValue ?? themes[0]?.value };
-
-  return (
-    <div className={ClassNames('usx-theme-picker', className)} {...extraAttributes}>
-      <button
-        type="button"
-        className="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
-        aria-label={label}
-        aria-expanded="false"
-        aria-controls={`${selectId}-panel`}
+  const [localValue, setLocalValue] = React.useState(defaultValue ?? themes[0]?.value ?? '');
+  const selectedValue = value ?? localValue;
+  const selectedLabel = themes.find((option) => option.value === selectedValue)?.label ?? label;
+  const choose = (next: string) => {
+    if (value === undefined) setLocalValue(next);
+    onChange?.(next);
+  };
+  const select = (hidden = false) => (
+    <>
+      <Label htmlFor={selectId} screenReaderOnly>
+        {label}
+      </Label>
+      <select
+        id={selectId}
+        name={name}
+        className={ClassNames(
+          'usa-select usx-select',
+          hidden && 'usx-theme-picker__select--hidden'
+        )}
+        value={selectedValue}
+        onChange={(event) => choose(event.target.value)}
       >
-        <PaletteIcon />
-      </button>
-      <div id={`${selectId}-panel`} className="usx-theme-picker__panel">
-        <Label htmlFor={selectId} screenReaderOnly>
-          {label}
-        </Label>
-        <select
-          id={selectId}
-          name={name}
-          className="usa-select usx-select"
-          {...selection}
-          onChange={(event) => onChange?.(event.target.value)}
-        >
-          {themes.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        <button
-          type="button"
-          className="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
-          aria-label="Confirm theme"
-        >
-          <Icon name="close" className="usx-theme-picker__icon" />
-        </button>
-      </div>
-    </div>
+        {themes.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </>
   );
-}
 
-function PaletteIcon() {
   return (
-    <svg
-      className="usa-icon usx-theme-picker__icon"
-      aria-hidden="true"
-      focusable="false"
-      viewBox="0 0 24 24"
+    <div
+      className={ClassNames(
+        'usx-theme-picker',
+        variant !== 'default' && `usx-theme-picker--${variant}`,
+        className
+      )}
+      {...extraAttributes}
     >
-      <path
-        fill="currentColor"
-        d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
-      />
-    </svg>
+      {variant === 'default' && (
+        <>
+          <button
+            type="button"
+            className="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
+            aria-label={label}
+            aria-expanded="false"
+            aria-controls={`${selectId}-panel`}
+          >
+            <Icon name="color_palette" source="usx" className="usx-theme-picker__icon" />
+          </button>
+          <div id={`${selectId}-panel`} className="usx-theme-picker__panel">
+            {select()}
+            <button
+              type="button"
+              className="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
+              aria-label="Confirm theme"
+            >
+              <Icon name="close" className="usx-theme-picker__icon" />
+            </button>
+          </div>
+        </>
+      )}
+      {variant === 'swap' && (
+        <>
+          <Swap
+            className="usx-theme-picker__swap usa-button usx-button usx-button--ghost"
+            variant="rotate"
+            inputProps={{
+              checked: selectedValue === themes[1]?.value,
+              'aria-label': `${label}: ${selectedLabel}. Switch to ${selectedValue === themes[1]?.value ? themes[0]?.label : themes[1]?.label}`,
+              onChange: (event) => {
+                event.stopPropagation();
+                choose(themes[event.target.checked ? 1 : 0]?.value ?? '');
+              },
+            }}
+            offContent={<Icon name="sun" source="usx" className="usx-theme-picker__icon" />}
+            onContent={<Icon name="moon" source="usx" className="usx-theme-picker__icon" />}
+          />
+          <div className="usx-theme-picker__fallback">{select()}</div>
+        </>
+      )}
+      {variant === 'ghost-select' && (
+        <div className="usx-theme-picker__ghost">
+          <span
+            className="usa-button usx-button usx-button--ghost usx-theme-picker__ghost-face"
+            aria-hidden="true"
+          >
+            <Icon name="color_palette" source="usx" className="usx-theme-picker__icon" />
+          </span>
+          {select(true)}
+        </div>
+      )}
+    </div>
   );
 }

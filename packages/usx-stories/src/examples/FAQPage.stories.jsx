@@ -37,7 +37,7 @@ export const FAQPage = {
             <Layout
                 variant="single-column"
                 content={
-                    <Page id="faq-page-example" title="Frequently Asked Questions" tabIndex={-1}>
+                    <Page id="faq-page-example" title="Frequently Asked Questions">
                         <p className="text-intro margin-bottom-2">Find answers to common questions about our products and services.</p>
 
                         <div className="margin-y-3">

@@ -1,10 +1,8 @@
 {
   "name": "theme-picker",
   "template": "theme-picker/theme-picker.django.html",
-  "version": 1,
-  "required": [
-    "themes"
-  ],
+  "version": 2,
+  "required": ["themes"],
   "default": {
     "id": "theme-picker-1",
     "label": "Theme",
@@ -99,6 +97,11 @@
     "extraAttributes": {
       "type": "object",
       "description": "Additional HTML attributes on the theme picker root."
+    },
+    "variant": {
+      "type": "string",
+      "default": "default",
+      "description": "Picker presentation: default, ghost-select, or swap. Swap uses two themes: first light, second dark."
     }
   }
 }

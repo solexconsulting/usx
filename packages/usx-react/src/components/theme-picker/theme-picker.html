@@ -1,85 +1,115 @@
-<h3 class="site-preview-heading text-ink">Default theme picker</h3>
-<div class="usx-theme-picker" id="theme-picker-example">
+<h3 class="site-preview-heading">Default</h3>
+<div class="usx-theme-picker">
   <button
     type="button"
     class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
     aria-label="Theme"
-    onclick="this.closest('.usx-theme-picker').classList.add('usx-theme-picker--open')"
+    aria-expanded="false"
+    aria-controls="theme-picker-example-1-panel"
   >
     <svg
-      class="usa-icon usx-theme-picker__icon"
+      class="usa-icon usx-icon usx-theme-picker__icon"
       aria-hidden="true"
       focusable="false"
-      viewBox="0 0 24 24"
+      role="img"
     >
-      <path
-        fill="currentColor"
-        d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
-      />
+      <use href="./img/usx-sprite.svg#color_palette"></use>
     </svg>
   </button>
-  <div class="usx-theme-picker__panel">
-    <select
-      class="usa-select usx-select"
-      id="theme-picker-1"
-      onchange="window.usxThemePickerDemo.onChange(this.value)"
-    >
-      <option value="Default" selected>Default</option>
+  <div id="theme-picker-example-1-panel" class="usx-theme-picker__panel">
+    <label class="usa-label usx-label usa-sr-only" for="theme-picker-example-1">Theme</label
+    ><select id="theme-picker-example-1" class="usa-select usx-select">
+      <option value="Default" selected="">Default</option>
+      <option value="Forest">Forest</option>
+      <option value="Sunset">Sunset</option>
+      <option value="Ocean">Ocean</option>
+      <option value="Aurora">Aurora</option>
+      <option value="Borealis">Borealis</option>
       <option value="Midnight">Midnight</option>
       <option value="Carbon">Carbon</option>
-    </select>
-    <button
+      <option value="VADS">VADS</option>
+      <option value="GOV.UK">GOV.UK</option>
+      <option value="NASA">NASA</option></select
+    ><button
       type="button"
       class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
       aria-label="Confirm theme"
-      onclick="this.closest('.usx-theme-picker').classList.remove('usx-theme-picker--open')"
     >
-      <svg class="usa-icon usx-theme-picker__icon" aria-hidden="true" focusable="false" role="img">
-        <use href="img/sprite.svg#close"></use>
+      <svg
+        class="usa-icon usx-icon usx-theme-picker__icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#close"></use>
       </svg>
     </button>
   </div>
 </div>
 
-<h3 class="site-preview-heading text-ink">Light/Dark Theme Picker</h3>
 
-<div class="usx-theme-picker" id="theme-picker-light-dark">
-  <button
-    type="button"
-    class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
-    aria-label="Theme"
-    onclick="this.closest('.usx-theme-picker').classList.add('usx-theme-picker--open')"
-  >
-    <svg
-      class="usa-icon usx-theme-picker__icon"
+<h3 class="site-preview-heading">Ghost Select</h3>
+<div class="usx-theme-picker usx-theme-picker--ghost-select">
+  <div class="usx-theme-picker__ghost">
+    <span
+      class="usa-button usx-button usx-button--ghost usx-theme-picker__ghost-face"
       aria-hidden="true"
-      focusable="false"
-      viewBox="0 0 24 24"
+      ><svg
+        class="usa-icon usx-icon usx-theme-picker__icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="./img/usx-sprite.svg#color_palette"></use></svg></span
+    ><label class="usa-label usx-label usa-sr-only" for="theme-picker-example-ghost-select"
+      >Theme</label
+    ><select
+      id="theme-picker-example-ghost-select"
+      class="usa-select usx-select usx-theme-picker__select--hidden"
     >
-      <path
-        fill="currentColor"
-        d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
-      />
-    </svg>
-  </button>
-  <div class="usx-theme-picker__panel">
-    <select
-      class="usa-select usx-select"
-      id="theme-picker-light-dark-select"
-      onchange="window.usxThemePickerDemo.onChange(this.value)"
-    >
-      <option value="Aurora" selected>Light</option>
+      <option value="Default" selected="">Default</option>
+      <option value="Forest">Forest</option>
+      <option value="Sunset">Sunset</option>
+      <option value="Ocean">Ocean</option>
+      <option value="Aurora">Aurora</option>
+      <option value="Borealis">Borealis</option>
+      <option value="Midnight">Midnight</option>
+      <option value="Carbon">Carbon</option>
+      <option value="VADS">VADS</option>
+      <option value="GOV.UK">GOV.UK</option>
+      <option value="NASA">NASA</option>
+    </select>
+  </div>
+</div>
+
+
+<h3 class="site-preview-heading">Swap</h3>
+<div class="usx-theme-picker usx-theme-picker--swap">
+  <label
+    class="usx-swap usx-swap--rotate usx-theme-picker__swap usa-button usx-button usx-button--ghost"
+    ><input type="checkbox" autocomplete="off" aria-label="Theme: Light. Switch to Dark" /><span
+      class="usx-swap-on"
+      ><svg
+        class="usa-icon usx-icon usx-theme-picker__icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="./img/usx-sprite.svg#moon"></use></svg></span
+    ><span class="usx-swap-off"
+      ><svg
+        class="usa-icon usx-icon usx-theme-picker__icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="./img/usx-sprite.svg#sun"></use></svg></span
+  ></label>
+  <div class="usx-theme-picker__fallback">
+    <label class="usa-label usx-label usa-sr-only" for="theme-picker-example-swap">Theme</label
+    ><select id="theme-picker-example-swap" class="usa-select usx-select">
+      <option value="Aurora" selected="">Light</option>
       <option value="Borealis">Dark</option>
     </select>
-    <button
-      type="button"
-      class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
-      aria-label="Confirm theme"
-      onclick="this.closest('.usx-theme-picker').classList.remove('usx-theme-picker--open')"
-    >
-      <svg class="usa-icon usx-theme-picker__icon" aria-hidden="true" focusable="false" role="img">
-        <use href="img/sprite.svg#close"></use>
-      </svg>
-    </button>
   </div>
 </div>

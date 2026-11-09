@@ -37,7 +37,7 @@ export const BlogPost = {
         variant="grid"
         expandable={true}
         content={
-          <Page as="article" id="blog-post-example" title="The Future of Digital Transformation" tabIndex={-1}>
+          <Page as="article" id="blog-post-example" title="The Future of Digital Transformation">
             <Section aria-label="Article">
               <div className="margin-bottom-3">
                 <p className="text-base color-base-dark font-sans-xs">

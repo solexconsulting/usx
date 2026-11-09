@@ -5,6 +5,7 @@ import { buildArgTypes, componentInit } from '../../utils/storyHelpers.jsx';
 
 import { useGlobals } from 'storybook/preview-api';
 import ThemePicker from '../../../../usx-react/src/components/theme-picker/ThemePicker.tsx';
+import { applyStoryTheme } from '../../utils/storyTheme.js';
 import Button from '../../../../usx-react/src/components/button/Button.tsx';
 
 const LIGHTDARKTHEMES = [
@@ -213,7 +214,11 @@ export const storyDefs = {
     extended: true,
   },
   Default: config.default,
-  Unenhanced: { ...config.default, id: 'header-unenhanced', extraAttributes: { 'data-enhanced': 'true' } },
+  Unenhanced: {
+    ...config.default,
+    id: 'header-unenhanced',
+    extraAttributes: { 'data-enhanced': 'true' },
+  },
   Basic: { ...fullArgs, id: 'header-basic', extended: false, megamenu: false },
   BasicWithMegamenu: { ...fullArgs, id: 'header-basic-megamenu', extended: false, megamenu: true },
   Extended: { ...fullArgs, id: 'header-extended', extended: true, megamenu: false },
@@ -225,7 +230,11 @@ export const storyDefs = {
   },
   WithMenuIcon: { ...fullArgs, id: 'header-menu-icon', useMenuIcon: true },
   BrandOnly: { id: 'header-brand-only', branding: { title: 'Simple Site' } },
-  BrandOnlyExtended: { id: 'header-brand-only-extended', branding: { title: 'Simple Site' }, extended: true },
+  BrandOnlyExtended: {
+    id: 'header-brand-only-extended',
+    branding: { title: 'Simple Site' },
+    extended: true,
+  },
   Minimal: {
     id: 'header-minimal',
     branding: { title: 'Simple Site' },
@@ -279,7 +288,17 @@ for (const [key, args] of Object.entries(storyDefs)) storyDefs[key] = withSearch
 // ─── Layout variants ─────────────────────────────────────────────────────────
 
 export const Default = { args: storyDefs.Default };
-export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'The desktop links remain in the markup; the mobile menu and expandable navigation need USWDS JavaScript.' } } } };
+export const Unenhanced = {
+  args: storyDefs.Unenhanced,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'The desktop links remain in the markup; the mobile menu and expandable navigation need USWDS JavaScript.',
+      },
+    },
+  },
+};
 export const Basic = { args: storyDefs.Basic };
 export const BasicWithMegamenu = { args: storyDefs.BasicWithMegamenu };
 export const Extended = { args: storyDefs.Extended };
@@ -333,21 +352,26 @@ export const ExtensibilitySlots = {
     docs: {
       description: {
         story:
-          '`utilityContent` renders inline to the left of search; `navEndContent` renders right-justified in line with the primary nav links (extended header only). Here `utilityContent` is a live `ThemePicker` wired to the toolbar theme global.',
+          '`utilityContent` renders inline to the left of search; `navEndContent` renders right-justified in line with the primary nav links (extended header only). Here `utilityContent` is a live `ThemePicker` that updates the preview theme without rerendering the story.',
       },
     },
   },
   render: (args) => {
-    const [globals, updateGlobals] = useGlobals();
+    const [globals] = useGlobals();
     return (
       <div>
         <Header
           {...args}
           navEndContent={
             <ThemePicker
+              key={globals.theme}
               themes={LIGHTDARKTHEMES}
-              value={globals.theme}
-              onChange={(theme) => updateGlobals({ theme })}
+              defaultValue={
+                LIGHTDARKTHEMES.some((theme) => theme.value === globals.theme)
+                  ? globals.theme
+                  : 'Aurora'
+              }
+              onChange={applyStoryTheme}
             />
           }
         />

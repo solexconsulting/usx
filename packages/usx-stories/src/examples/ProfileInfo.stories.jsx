@@ -32,7 +32,7 @@ export const ProfileInfo = {
       <Layout
         variant="single-column"
         content={
-          <Page id="profile-info-example" title="User Profile" tabIndex={-1}>
+          <Page id="profile-info-example" title="User Profile">
             <Section>
               <div className="padding-3 border usx-rounded-box bg-surface-2 margin-bottom-3">
                 <div className="display-flex flex-wrap flex-align-start gap-3">
@@ -130,7 +130,7 @@ export const ProfileInfo = {
               <dt className="text-bold">Primary Location</dt>
               <dd className="margin-left-0 margin-bottom-3">HQ Building - East Wing</dd>
               <dt className="text-bold">Time Zone</dt>
-              <dd className="margin-left-0">Eastern Time (America/New_York)</dd>
+              <dd className="margin-left-0">Eastern Time (America/New York)</dd>
             </dl>
           </Section>
           </Page>
