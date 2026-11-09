@@ -1,5 +1,17 @@
 # @solexllc/usx
 
+## 0.12.0
+
+### Minor Changes
+
+- [#25](https://github.com/solexconsulting/usx/pull/25) [`8ac6a60`](https://github.com/solexconsulting/usx/commit/8ac6a6085e213b7d1f041309d2748db95acaeaef) Thanks [@olsonap](https://github.com/olsonap)! - Add consistent enhancement markers and no-JavaScript fallbacks for USX components. Expose enhancement-target attributes in React components and component contracts, and document the fallback states in Storybook.
+
+### Patch Changes
+
+- [`93ab033`](https://github.com/solexconsulting/usx/commit/93ab03347ec9c573b477f9748e170ada03f154d0) Thanks [@olsonap](https://github.com/olsonap)! - Use mobile theme colors for nested drawer links and footer text for sign-up labels and section content. Make NASA footer headings and links readable on its black background.
+- Updated dependencies [[`93ab033`](https://github.com/solexconsulting/usx/commit/93ab03347ec9c573b477f9748e170ada03f154d0)]:
+  - @solexllc/usx-theme@0.11.1
+
 ## 0.11.0
 
 ### Minor Changes

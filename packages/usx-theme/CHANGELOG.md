@@ -1,5 +1,11 @@
 # @solexllc/usx-theme
 
+## 0.11.1
+
+### Patch Changes
+
+- [`93ab033`](https://github.com/solexconsulting/usx/commit/93ab03347ec9c573b477f9748e170ada03f154d0) Thanks [@olsonap](https://github.com/olsonap)! - Use mobile theme colors for nested drawer links and footer text for sign-up labels and section content. Make NASA footer headings and links readable on its black background.
+
 ## 0.11.0
 
 ### Minor Changes

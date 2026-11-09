@@ -1,5 +1,19 @@
 # @solexllc/usx-react
 
+## 0.10.0
+
+### Minor Changes
+
+- [#25](https://github.com/solexconsulting/usx/pull/25) [`8ac6a60`](https://github.com/solexconsulting/usx/commit/8ac6a6085e213b7d1f041309d2748db95acaeaef) Thanks [@olsonap](https://github.com/olsonap)! - Add consistent enhancement markers and no-JavaScript fallbacks for USX components. Expose enhancement-target attributes in React components and component contracts, and document the fallback states in Storybook.
+
+### Patch Changes
+
+- [`880c0a5`](https://github.com/solexconsulting/usx/commit/880c0a53f7e15a1ba9cc34f7d997b8ca4fa0ba55) Thanks [@olsonap](https://github.com/olsonap)! - Omit the mobile menu and navigation drawer when a Header has no navigation content.
+- Updated dependencies [[`93ab033`](https://github.com/solexconsulting/usx/commit/93ab03347ec9c573b477f9748e170ada03f154d0), [`8ac6a60`](https://github.com/solexconsulting/usx/commit/8ac6a6085e213b7d1f041309d2748db95acaeaef)]:
+  - @solexllc/usx@0.12.0
+  - @solexllc/usx-theme@0.11.1
+  - @solexllc/usx-uswds-fixes@0.1.16
+
 ## 0.9.0
 
 ### Minor Changes
