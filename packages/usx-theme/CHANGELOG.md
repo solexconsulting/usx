@@ -1,5 +1,11 @@
 # @solexllc/usx-theme
 
+## 0.11.2
+
+### Patch Changes
+
+- [#27](https://github.com/solexconsulting/usx/pull/27) [`9cc3999`](https://github.com/solexconsulting/usx/commit/9cc399994a261c8b2d0de32787ed2d37840ad7bc) Thanks [@olsonap](https://github.com/olsonap)! - Set NASA content cards to a black background so their inverse text remains readable.
+
 ## 0.11.1
 
 ### Patch Changes

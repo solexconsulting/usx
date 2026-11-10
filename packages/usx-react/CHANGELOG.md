@@ -1,5 +1,23 @@
 # @solexllc/usx-react
 
+## 0.11.0
+
+### Minor Changes
+
+- [`b54a5e7`](https://github.com/solexconsulting/usx/commit/b54a5e70366a8202a82eae3d7e0a06ec0f475dce) Thanks [@olsonap](https://github.com/olsonap)! - Add optional figure captions to List and IconList across React, Django, and HTML stories.
+
+- [`b54a5e7`](https://github.com/solexconsulting/usx/commit/b54a5e70366a8202a82eae3d7e0a06ec0f475dce) Thanks [@olsonap](https://github.com/olsonap)! - Add optional subtitle, description, and tag group fields to Page across React, Django, and HTML stories.
+
+- [#27](https://github.com/solexconsulting/usx/pull/27) [`7cd7778`](https://github.com/solexconsulting/usx/commit/7cd7778b8a136db87b7ffbd891207928d6394e14) Thanks [@olsonap](https://github.com/olsonap)! - Add two-theme Swap and native ghost-select presentations for ThemePicker across React, Django, and static HTML.
+
+### Patch Changes
+
+- [#27](https://github.com/solexconsulting/usx/pull/27) [`7cd7778`](https://github.com/solexconsulting/usx/commit/7cd7778b8a136db87b7ffbd891207928d6394e14) Thanks [@olsonap](https://github.com/olsonap)! - Add `color_palette`, `sun`, and `moon` USX sprite icons and use them in ThemePicker. Include alternate search terms in the icon catalog metadata.
+- Updated dependencies [[`7cd7778`](https://github.com/solexconsulting/usx/commit/7cd7778b8a136db87b7ffbd891207928d6394e14), [`7cd7778`](https://github.com/solexconsulting/usx/commit/7cd7778b8a136db87b7ffbd891207928d6394e14), [`b54a5e7`](https://github.com/solexconsulting/usx/commit/b54a5e70366a8202a82eae3d7e0a06ec0f475dce), [`9cc3999`](https://github.com/solexconsulting/usx/commit/9cc399994a261c8b2d0de32787ed2d37840ad7bc), [`b54a5e7`](https://github.com/solexconsulting/usx/commit/b54a5e70366a8202a82eae3d7e0a06ec0f475dce), [`7cd7778`](https://github.com/solexconsulting/usx/commit/7cd7778b8a136db87b7ffbd891207928d6394e14)]:
+  - @solexllc/usx@0.13.0
+  - @solexllc/usx-theme@0.11.2
+  - @solexllc/usx-uswds-fixes@0.1.17
+
 ## 0.10.0
 
 ### Minor Changes
