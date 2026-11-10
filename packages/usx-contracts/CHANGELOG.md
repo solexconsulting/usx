@@ -1,5 +1,15 @@
 # @solexllc/usx-contracts
 
+## 0.11.0
+
+### Minor Changes
+
+- [`b54a5e7`](https://github.com/solexconsulting/usx/commit/b54a5e70366a8202a82eae3d7e0a06ec0f475dce) Thanks [@olsonap](https://github.com/olsonap)! - Add optional figure captions to List and IconList across React, Django, and HTML stories.
+
+- [`b54a5e7`](https://github.com/solexconsulting/usx/commit/b54a5e70366a8202a82eae3d7e0a06ec0f475dce) Thanks [@olsonap](https://github.com/olsonap)! - Add optional subtitle, description, and tag group fields to Page across React, Django, and HTML stories.
+
+- [#27](https://github.com/solexconsulting/usx/pull/27) [`7cd7778`](https://github.com/solexconsulting/usx/commit/7cd7778b8a136db87b7ffbd891207928d6394e14) Thanks [@olsonap](https://github.com/olsonap)! - Add two-theme Swap and native ghost-select presentations for ThemePicker across React, Django, and static HTML.
+
 ## 0.10.0
 
 ### Minor Changes
