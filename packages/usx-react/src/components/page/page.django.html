@@ -1,7 +1,15 @@
 {# Django template for Page #}
+{% load usx_components %}
 {% with pageTag=as|default:'main' %}
 <{% if pageTag == 'div' or pageTag == 'section' or pageTag == 'article' %}{{ pageTag }}{% else %}main{% endif %}{% if id %} id="{{ id }}"{% endif %} class="usx-page{% if className %} {{ className }}{% endif %}"{% if tabIndex or tabIndex == 0 %} tabindex="{{ tabIndex }}"{% endif %}{% if ariaLabelledby or titleId %} aria-labelledby="{% firstof ariaLabelledby titleId %}"{% endif %}>
   <h1{% if titleId %} id="{{ titleId }}"{% endif %} class="usx-page__title">{% if eyebrow %}<span class="usx-eyebrow">{{ eyebrow }}</span>{% endif %}{{ title|default:'Page title' }}</h1>
+  {% if subtitle or description or tagProps %}
+  <div class="usx-page__summary">
+    {% if subtitle %}<p class="usx-page__subtitle">{{ subtitle }}</p>{% endif %}
+    {% if tagProps %}<div class="usx-tag-group usx-page__tags">{% for tag in tagProps %}{% tag props=tag %}{{ tag.children|safe }}{% endtag %}{% endfor %}</div>{% endif %}
+    {% if description %}<p class="usx-page__description">{{ description }}</p>{% endif %}
+  </div>
+  {% endif %}
   <div class="usx-page__content">{% if children %}{{ children|safe }}{% elif content %}{{ content|safe }}{% endif %}</div>
 </{% if pageTag == 'div' or pageTag == 'section' or pageTag == 'article' %}{{ pageTag }}{% else %}main{% endif %}>
 {% endwith %}

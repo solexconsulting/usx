@@ -14,7 +14,16 @@ const hasClass = (element, name, expected) =>
   (expected ? expect(element) : expect(element).not).toHaveClass(name);
 
 // Items are text or `{ content, children, ordered }` for a nested list inside the item.
-const checkList = async (list, { items, ordered, unstyled }) => {
+const checkList = async (root, { items, caption, ordered, unstyled }) => {
+  const list = caption ? root.lastElementChild : root;
+  if (caption) {
+    await expect(root.tagName).toBe('FIGURE');
+    await expect(root).toHaveClass('usx-list-figure');
+    await expect(root.children).toHaveLength(2);
+    await expect(root.firstElementChild.tagName).toBe('FIGCAPTION');
+    await expect(root.firstElementChild).toHaveClass('usx-list-figure__caption');
+    await expect(root.firstElementChild).toHaveTextContent(caption);
+  }
   await expect(list.tagName).toBe(ordered ? 'OL' : 'UL');
   await expect(list).toHaveClass('usa-list', 'usx-list');
   await hasClass(list, 'usa-list--unstyled', Boolean(unstyled));
@@ -44,6 +53,7 @@ const play = createAllVariantsPlay(
 
 export const AllVariantsReact = {
   name: 'All Variants (React)',
+  tags: ['USX'],
   parameters: {
     docs: {
       source: {
@@ -59,6 +69,7 @@ export const AllVariantsReact = {
 
 export const AllVariantsDjango = {
   name: 'All Variants (Django)',
+  tags: ['USX'],
   parameters: {
     docs: {
       source: {

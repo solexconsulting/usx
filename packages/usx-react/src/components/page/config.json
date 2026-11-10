@@ -1,7 +1,7 @@
 {
   "name": "page",
   "template": "page/page.django.html",
-  "version": 4,
+  "version": 5,
   "required": [
     "title"
   ],
@@ -38,6 +38,23 @@
     "eyebrow": {
       "type": "slot",
       "description": "Optional eyebrow text rendered above the page title inside the h1."
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Short subtitle displayed beneath the page title."
+    },
+    "tagProps": {
+      "type": "array",
+      "description": "Props for tags displayed beneath the subtitle.",
+      "items": {
+        "type": "object",
+        "component": "tag",
+        "description": "Props passed to each tag."
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief page description displayed beneath the tags."
     },
     "content": {
       "type": "slot",

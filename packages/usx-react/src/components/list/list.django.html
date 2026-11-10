@@ -1,5 +1,6 @@
 {% load usx_components %}
 
+{% if caption %}<figure class="usx-list-figure"><figcaption class="usx-list-figure__caption">{{ caption }}</figcaption>{% endif %}
 {% if ordered %}
 <ol class="usa-list usx-list{% if unstyled %} usa-list--unstyled{% endif %}{% if className %} {{ className }}{% endif %}">
   {% include "list/_list-items.django.html" with items=items ordered=ordered unstyled=unstyled only %}
@@ -9,3 +10,4 @@
   {% include "list/_list-items.django.html" with items=items ordered=ordered unstyled=unstyled only %}
 </ul>
 {% endif %}
+{% if caption %}</figure>{% endif %}

@@ -1,5 +1,6 @@
 {% load usx_components %}
 
+{% if caption %}<figure class="usx-list-figure"><figcaption class="usx-list-figure__caption">{{ caption }}</figcaption>{% endif %}
 <ul class="usa-icon-list usx-icon-list{% if primary %} usa-icon-list--primary{% endif %}{% if size == 'lg' %} usa-icon-list--size-lg{% endif %}{% if className %} {{ className }}{% endif %}">
   {% for item in items %}
     <li class="usa-icon-list__item{% if item.itemClassName %} {{ item.itemClassName }}{% endif %}">
@@ -15,3 +16,4 @@
     </li>
   {% endfor %}
 </ul>
+{% if caption %}</figure>{% endif %}

@@ -1,4 +1,20 @@
+@use 'pkg:@solexllc/usx-theme/variables' as *;
+
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 .usx-list {
   display: block;
+}
+
+figure.usx-list-figure {
+  margin: 0;
+
+  > .usx-list-figure__caption {
+    margin-bottom: 0.5rem;
+    font-weight: $usx-font-weight-bold;
+  }
+
+  > .usx-list,
+  > .usx-icon-list {
+    margin-top: 0;
+  }
 }

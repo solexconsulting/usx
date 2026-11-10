@@ -28,9 +28,37 @@ const checkPage = (def) => async (page) => {
   }
   await expect(title.textContent).toContain(def.title ?? 'Page title');
 
+  const summary = page.querySelector(':scope > .usx-page__summary');
+  const hasSummary = Boolean(def.subtitle || def.description || def.tagProps?.length);
+  if (hasSummary) {
+    await expect(summary).not.toBeNull();
+    for (const field of ['subtitle', 'description']) {
+      const item = summary.querySelector(`.usx-page__${field}`);
+      if (def[field]) await expect(item).toHaveTextContent(def[field]);
+      else await expect(item).toBeNull();
+    }
+    const tags = summary.querySelectorAll('.usx-page__tags .usx-tag');
+    await expect(tags).toHaveLength(def.tagProps?.length || 0);
+    def.tagProps?.forEach((tag, index) => expect(tags[index]).toHaveTextContent(tag.value));
+    const actualOrder = [...summary.children].map((item) =>
+      item.classList.contains('usx-page__tags') ? 'tags' : item.className.replace('usx-page__', '')
+    );
+    const expectedOrder = [
+      def.subtitle && 'subtitle',
+      def.tagProps?.length && 'tags',
+      def.description && 'description',
+    ].filter(Boolean);
+    await expect(actualOrder).toEqual(expectedOrder);
+    await expect(title.getBoundingClientRect().bottom).toBeLessThanOrEqual(
+      summary.getBoundingClientRect().top + 1
+    );
+  } else {
+    await expect(summary).toBeNull();
+  }
+
   const content = page.querySelector(':scope > .usx-page__content');
   await expect(content.querySelectorAll('p').length).toBeGreaterThan(0);
-  await expect(title.getBoundingClientRect().bottom).toBeLessThanOrEqual(
+  await expect((summary || title).getBoundingClientRect().bottom).toBeLessThanOrEqual(
     content.getBoundingClientRect().top + 1
   );
 };

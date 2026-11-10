@@ -60,12 +60,13 @@ function renderItems(items: ListItem[] = [], parentOptions: { ordered?: boolean;
 
 export interface ListProps extends HTMLAttributes<HTMLUListElement | HTMLOListElement> {
   items?: ListItem[];
+  caption?: string;
   ordered?: boolean;
   unstyled?: boolean;
   className?: string;
 }
 
-export default function List({ items = [], ordered = false, unstyled = false, className = '', ...props }: ListProps) {
+export default function List({ items = [], caption, ordered = false, unstyled = false, className = '', ...props }: ListProps) {
   const classes = ClassNames(
     'usa-list',
     'usx-list',
@@ -74,9 +75,16 @@ export default function List({ items = [], ordered = false, unstyled = false, cl
   );
   const Tag = ordered ? 'ol' : 'ul';
 
-  return (
+  const list = (
     <Tag className={classes} {...props}>
       {renderItems(items, { ordered, unstyled })}
     </Tag>
   );
+
+  return caption ? (
+    <figure className="usx-list-figure">
+      <figcaption className="usx-list-figure__caption">{caption}</figcaption>
+      {list}
+    </figure>
+  ) : list;
 }

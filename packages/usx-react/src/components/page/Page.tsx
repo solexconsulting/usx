@@ -1,10 +1,15 @@
 import React from 'react';
 import ClassNames from 'classnames';
+import TagGroup from '../tag-group/TagGroup';
+import type { TagProps } from '../tag/Tag';
 
 export interface PageProps extends Omit<React.HTMLAttributes<HTMLElement>, 'title' | 'content'> {
   title?: React.ReactNode;
   titleId?: string;
   eyebrow?: React.ReactNode;
+  subtitle?: string;
+  description?: string;
+  tagProps?: TagProps[];
   as?: 'main' | 'div' | 'section' | 'article';
   content?: React.ReactNode;
   tabIndex?: number;
@@ -16,6 +21,9 @@ export default function Page({
   title = 'Page title',
   titleId = undefined,
   eyebrow = null,
+  subtitle = undefined,
+  description = undefined,
+  tagProps = undefined,
   as: Element = 'main',
   children = null,
   content = null,
@@ -24,6 +32,7 @@ export default function Page({
   className = '',
   ...props
 }: PageProps) {
+  const hasSummary = Boolean(subtitle || description || tagProps?.length);
   const classes = ClassNames('usx-page', className);
   const pageContent = children || content;
 
@@ -41,6 +50,13 @@ export default function Page({
         {eyebrow ? <span className="usx-eyebrow">{eyebrow}</span> : null}
         {title}
       </h1>
+      {hasSummary && (
+        <div className="usx-page__summary">
+          {subtitle && <p className="usx-page__subtitle">{subtitle}</p>}
+          {tagProps?.length ? <TagGroup className="usx-page__tags" tagProps={tagProps} /> : null}
+          {description && <p className="usx-page__description">{description}</p>}
+        </div>
+      )}
       <div className="usx-page__content">{pageContent}</div>
     </Element>
   );

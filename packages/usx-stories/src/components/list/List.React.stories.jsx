@@ -24,6 +24,15 @@ export const storyDefs = {
     ...defaultList,
     unstyled: true,
   },
+  Captioned: {
+    caption: 'Fruit',
+    items: ['Apple', 'Pear', 'Orange'],
+  },
+  CaptionedOrdered: {
+    caption: 'Application steps',
+    ordered: true,
+    items: ['Create an account', 'Complete the form', 'Submit your application'],
+  },
   Nested: {
     items: [
       'Main point',
@@ -68,6 +77,14 @@ Ordered.args = storyDefs.Ordered;
 
 export const Unstyled = Template.bind({});
 Unstyled.args = storyDefs.Unstyled;
+
+export const Captioned = Template.bind({});
+Captioned.args = storyDefs.Captioned;
+Captioned.tags = ['USX'];
+
+export const CaptionedOrdered = Template.bind({});
+CaptionedOrdered.args = storyDefs.CaptionedOrdered;
+CaptionedOrdered.tags = ['USX'];
 
 export const Nested = Template.bind({});
 Nested.args = storyDefs.Nested;

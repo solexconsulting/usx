@@ -13,7 +13,16 @@ export default {
 const textOf = (html) =>
   new DOMParser().parseFromString(html, 'text/html').body.textContent.replace(/\s+/g, ' ').trim();
 
-const checkList = (def) => async (list) => {
+const checkList = (def) => async (root) => {
+  const list = def.caption ? root.lastElementChild : root;
+  if (def.caption) {
+    await expect(root.tagName).toBe('FIGURE');
+    await expect(root).toHaveClass('usx-list-figure');
+    await expect(root.children).toHaveLength(2);
+    await expect(root.firstElementChild.tagName).toBe('FIGCAPTION');
+    await expect(root.firstElementChild).toHaveClass('usx-list-figure__caption');
+    await expect(root.firstElementChild).toHaveTextContent(def.caption);
+  }
   await expect(list.tagName).toBe('UL');
   await expect(list).toHaveClass('usa-icon-list', 'usx-icon-list');
   await (def.primary ? expect(list) : expect(list).not).toHaveClass('usa-icon-list--primary');
@@ -55,6 +64,7 @@ const play = createAllVariantsPlay(
 
 export const AllVariantsReact = {
   name: 'All Variants (React)',
+  tags: ['USX'],
   parameters: {
     docs: {
       source: {
@@ -70,6 +80,7 @@ export const AllVariantsReact = {
 
 export const AllVariantsDjango = {
   name: 'All Variants (Django)',
+  tags: ['USX'],
   parameters: {
     docs: {
       source: {

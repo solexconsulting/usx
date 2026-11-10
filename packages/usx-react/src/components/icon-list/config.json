@@ -1,7 +1,7 @@
 {
   "name": "icon-list",
   "template": "icon-list/icon-list.django.html",
-  "version": 1,
+  "version": 2,
   "default": {
     "items": [
       {
@@ -63,6 +63,10 @@
           }
         }
       }
+    },
+    "caption": {
+      "type": "string",
+      "description": "Optional label rendered in a figcaption before the icon list. Wraps the list in a figure when provided."
     },
     "primary": {
       "type": "boolean",

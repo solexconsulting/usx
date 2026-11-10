@@ -15,6 +15,7 @@ export interface IconListItem {
 
 export interface IconListProps extends React.HTMLAttributes<HTMLUListElement> {
   items?: IconListItem[];
+  caption?: string;
   primary?: boolean;
   size?: null | 'lg';
   className?: string;
@@ -27,7 +28,7 @@ function renderContent(content: string | React.ReactNode) {
   return content;
 }
 
-export default function IconList({ items = [], primary = false, size = null, className = '', ...props }: IconListProps) {
+export default function IconList({ items = [], caption, primary = false, size = null, className = '', ...props }: IconListProps) {
   const classes = ClassNames(
     'usa-icon-list',
     'usx-icon-list',
@@ -36,7 +37,7 @@ export default function IconList({ items = [], primary = false, size = null, cla
     className,
   );
 
-  return (
+  const list = (
     <ul className={classes} {...props}>
       {items.map((item, index) => (
         <li key={index} className={ClassNames('usa-icon-list__item', item.itemClassName)}>
@@ -56,4 +57,11 @@ export default function IconList({ items = [], primary = false, size = null, cla
       ))}
     </ul>
   );
+
+  return caption ? (
+    <figure className="usx-list-figure">
+      <figcaption className="usx-list-figure__caption">{caption}</figcaption>
+      {list}
+    </figure>
+  ) : list;
 }

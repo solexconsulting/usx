@@ -16,6 +16,10 @@ export const storyDefs = {
     ],
     primary: true,
   },
+  Captioned: {
+    caption: 'Health and safety guidance',
+    items: config.default.items,
+  },
   RichContent: {
     items: [
       {
@@ -86,6 +90,10 @@ Default.args = storyDefs.Default;
 
 export const SimpleContent = Template.bind({});
 SimpleContent.args = storyDefs.SimpleContent;
+
+export const Captioned = Template.bind({});
+Captioned.args = storyDefs.Captioned;
+Captioned.tags = ['USX'];
 
 export const RichContent = Template.bind({});
 RichContent.args = storyDefs.RichContent;

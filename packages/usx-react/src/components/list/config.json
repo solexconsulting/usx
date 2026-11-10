@@ -1,7 +1,7 @@
 {
   "name": "list",
   "template": "list/list.django.html",
-  "version": 1,
+  "version": 2,
   "default": {
     "items": [
       "List item",
@@ -13,6 +13,10 @@
     "items": {
       "type": "object",
       "description": "Array of list items. A string renders a simple item. Objects can include content and children for nested lists of any depth; optional ordered/unstyled/className customize nested lists."
+    },
+    "caption": {
+      "type": "string",
+      "description": "Optional label rendered in a figcaption before the list. Wraps the list in a figure when provided."
     },
     "ordered": {
       "type": "boolean",

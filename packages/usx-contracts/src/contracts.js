@@ -23,15 +23,15 @@ export const componentContracts = {
   "packages": {
     "@solexllc/usx-contracts": {
       "registry": "npm",
-      "version": "0.9.0"
+      "version": "0.10.0"
     },
     "@solexllc/usx-react": {
       "registry": "npm",
-      "version": "0.9.0"
+      "version": "0.10.0"
     },
     "@solexllc/usx": {
       "registry": "npm",
-      "version": "0.11.0"
+      "version": "0.12.0"
     },
     "solex-usx-django": {
       "registry": "pypi",
@@ -4709,7 +4709,7 @@ export const componentContracts = {
     },
     "icon-list": {
       "component": "icon-list",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "items": {
@@ -4756,6 +4756,10 @@ export const componentContracts = {
               }
             }
           }
+        },
+        "caption": {
+          "type": "string",
+          "description": "Optional label rendered in a figcaption before the icon list. Wraps the list in a figure when provided."
         },
         "primary": {
           "type": "boolean",
@@ -5705,12 +5709,16 @@ export const componentContracts = {
     },
     "list": {
       "component": "list",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "items": {
           "type": "object",
           "description": "Array of list items. A string renders a simple item. Objects can include content and children for nested lists of any depth; optional ordered/unstyled/className customize nested lists."
+        },
+        "caption": {
+          "type": "string",
+          "description": "Optional label rendered in a figcaption before the list. Wraps the list in a figure when provided."
         },
         "ordered": {
           "type": "boolean",
@@ -6077,7 +6085,7 @@ export const componentContracts = {
     },
     "page": {
       "component": "page",
-      "version": 4,
+      "version": 5,
       "required": [
         "title"
       ],
@@ -6116,6 +6124,23 @@ export const componentContracts = {
         "eyebrow": {
           "type": "slot",
           "description": "Optional eyebrow text rendered above the page title inside the h1."
+        },
+        "subtitle": {
+          "type": "string",
+          "description": "Short subtitle displayed beneath the page title."
+        },
+        "tagProps": {
+          "type": "array",
+          "description": "Props for tags displayed beneath the subtitle.",
+          "items": {
+            "type": "object",
+            "component": "tag",
+            "description": "Props passed to each tag."
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief page description displayed beneath the tags."
         },
         "content": {
           "type": "slot",

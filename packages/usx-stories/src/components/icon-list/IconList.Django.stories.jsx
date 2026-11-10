@@ -15,6 +15,8 @@ const createStory = createDjangoStory({ componentName: 'icon-list' });
 
 export const Default = createStory(storyDefs.Default);
 export const SimpleContent = createStory(storyDefs.SimpleContent);
+export const Captioned = createStory(storyDefs.Captioned);
+Captioned.tags = ['USX'];
 export const RichContent = createStory(storyDefs.RichContent);
 export const CustomSizeWithRichContent = createStory(storyDefs.CustomSizeWithRichContent);
 export const CustomSize = createStory(storyDefs.CustomSize);
