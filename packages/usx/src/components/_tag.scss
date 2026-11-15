@@ -14,6 +14,22 @@
     border: 1px solid currentcolor;
   }
 
+  &.usx-tag--interactive {
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      text-decoration: none;
+    }
+  }
+
   > .usa-icon {
     margin: .25rem .25rem .25rem 0;
   }
@@ -43,5 +59,10 @@
       outline-offset: .25rem;
     }
   }
+}
+
+button.usx-tag {
+  cursor: pointer;
+  font-weight: normal;
 }
 /* stylelint-enable selector-class-pattern */

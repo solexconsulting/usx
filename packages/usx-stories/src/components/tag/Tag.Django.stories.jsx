@@ -17,15 +17,36 @@ export const WithIcon = { ...createStory(storyDefs.WithIcon), name: 'With icon' 
 export const Big = { ...createStory(storyDefs.Big), name: 'Big tag' };
 export const BigWithIcon = { ...createStory(storyDefs.BigWithIcon), name: 'Big with icon' };
 export const Dismissible = createStory(storyDefs.Dismissible);
-export const DismissibleWithCallback = createStory(storyDefs.DismissibleWithCallback);
+export const DismissibleWithCallback = {
+  ...createStory(storyDefs.DismissibleWithCallback),
+  name: 'Dismissible with callback',
+};
+export const ClickableLink = { ...createStory(storyDefs.ClickableLink), name: 'Clickable link' };
+export const LinkAsTag = {
+  ...createDjangoStory({ componentName: 'link' })({
+    href: '#related-topics',
+    children: 'Browse related topics',
+    className: 'usa-tag usx-tag usx-tag--outline usx-tag--interactive usx-no-visited',
+  }),
+  name: 'Link styled as a tag',
+};
 export const Primary = { ...createStory(storyDefs.Primary), name: 'Primary color' };
 export const Secondary = { ...createStory(storyDefs.Secondary), name: 'Secondary color' };
 export const AccentCool = { ...createStory(storyDefs.AccentCool), name: 'Accent Cool color' };
 export const Blue = { ...createStory(storyDefs.Blue), name: 'Blue color' };
 export const Base = { ...createStory(storyDefs.Base), name: 'Base color' };
-export const OutlinePrimary = { ...createStory(storyDefs.OutlinePrimary), name: 'Outline style: Primary' };
-export const OutlineSecondary = { ...createStory(storyDefs.OutlineSecondary), name: 'Outline style: Secondary' };
-export const OutlineAccentCool = { ...createStory(storyDefs.OutlineAccentCool), name: 'Outline style: Accent Cool' };
+export const OutlinePrimary = {
+  ...createStory(storyDefs.OutlinePrimary),
+  name: 'Outline style: Primary',
+};
+export const OutlineSecondary = {
+  ...createStory(storyDefs.OutlineSecondary),
+  name: 'Outline style: Secondary',
+};
+export const OutlineAccentCool = {
+  ...createStory(storyDefs.OutlineAccentCool),
+  name: 'Outline style: Accent Cool',
+};
 export const OutlineBlue = { ...createStory(storyDefs.OutlineBlue), name: 'Outline style: Blue' };
 export const OutlineBase = { ...createStory(storyDefs.OutlineBase), name: 'Outline style: Base' };
 export const Info = createStory(storyDefs.Info);

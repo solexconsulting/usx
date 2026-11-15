@@ -43,6 +43,10 @@
     "className": {
       "type": "string",
       "description": "Additional classes"
+    },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional HTML attributes on the group container, such as role and aria-label."
     }
   }
 }

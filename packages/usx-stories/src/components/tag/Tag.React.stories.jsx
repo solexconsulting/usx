@@ -1,5 +1,6 @@
-// import React from 'react';
+import React from 'react';
 import Tag from '../../../../usx-react/src/components/tag/Tag.tsx';
+import Link from '../../../../usx-react/src/components/link/Link.tsx';
 import config from '../../../../usx-react/src/components/tag/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
@@ -36,6 +37,10 @@ export const storyDefs = {
     children: 'Dismissible',
     dismissible: true,
     onDismiss: () => alert('Dismissed!'),
+  },
+  ClickableLink: {
+    children: 'Browse related topics',
+    href: '#related-topics',
   },
   Primary: {
     children: 'Primary',
@@ -128,7 +133,25 @@ export const Dismissible = {
 };
 
 export const DismissibleWithCallback = {
+  name: 'Dismissible with callback',
   args: storyDefs.DismissibleWithCallback,
+};
+
+export const ClickableLink = {
+  name: 'Clickable link',
+  args: storyDefs.ClickableLink,
+};
+
+export const LinkAsTag = {
+  name: 'Link styled as a tag',
+  render: () => (
+    <Link
+      href="#related-topics"
+      className="usa-tag usx-tag usx-tag--outline usx-tag--interactive usx-no-visited"
+    >
+      Browse related topics
+    </Link>
+  ),
 };
 
 export const Primary = {

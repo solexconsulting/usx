@@ -6,27 +6,24 @@ export interface TagGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   tagProps?: TagProps[] | null;
   children?: React.ReactNode;
   className?: string;
+  extraAttributes?: Record<string, unknown>;
 }
 
 const TagGroup: React.FC<TagGroupProps> = ({
   tagProps = null,
   children = null,
   className = '',
+  extraAttributes = {},
   ...props
 }) => {
-  const classes = classNames(
-    'usx-tag-group',
-    className
-  );
+  const classes = classNames('usx-tag-group', className);
   const content = children
     ? children
     : Array.isArray(tagProps)
-    ? tagProps.map((t, i) => (
-        <Tag key={t.id || t.value || i} {...t} />
-      ))
-    : null;
+      ? tagProps.map((t, i) => <Tag key={t.id || t.value || i} {...t} />)
+      : null;
   return (
-    <div className={classes} {...props}>
+    <div {...props} {...extraAttributes} className={classes}>
       {content}
     </div>
   );

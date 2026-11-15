@@ -23,12 +23,12 @@
     "color": {
       "type": "string",
       "default": null,
-      "description": "Color variant for the tag (e.g., null, 'primary', 'accent-cool', 'blue', 'base', etc.)"
+      "description": "Color variant for a noninteractive tag. Linked tags use theme link color."
     },
     "outline": {
       "type": "boolean",
       "default": false,
-      "description": "Whether to use the outline style (transparent background with border)"
+      "description": "Use a transparent background with border. Linked tags always use the outline style."
     },
     "icon": {
       "type": "string",
@@ -44,6 +44,22 @@
       "type": "string",
       "default": null,
       "description": "Optional inline JavaScript to run when the dismiss button is clicked. If omitted, the tag removes itself from the DOM."
+    },
+    "href": {
+      "type": "string",
+      "description": "Optional destination. When supplied, Tag renders a link; otherwise it renders a span."
+    },
+    "target": {
+      "type": "string",
+      "description": "Anchor target when href is set."
+    },
+    "rel": {
+      "type": "string",
+      "description": "Anchor relationship when href is set."
+    },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional HTML attributes, including data attributes, applied to the rendered tag element."
     },
     "className": {
       "type": "string",

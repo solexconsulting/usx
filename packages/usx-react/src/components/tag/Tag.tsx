@@ -12,9 +12,13 @@ export type TagProps = {
   dismissible?: boolean;
   isDismissed?: boolean;
   onDismiss?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  href?: string;
+  target?: string;
+  rel?: string;
+  extraAttributes?: Record<string, unknown>;
   className?: string;
   children?: React.ReactNode;
-} & React.HTMLAttributes<HTMLSpanElement>;
+} & Omit<React.HTMLAttributes<HTMLElement>, 'onClick' | 'children'>;
 
 const Tag: React.FC<TagProps> = ({
   id,
@@ -28,17 +32,24 @@ const Tag: React.FC<TagProps> = ({
   onDismiss = () => {},
   className = '',
   children,
+  href,
+  target,
+  rel,
+  extraAttributes = {},
   ...props
 }) => {
   const [isVisible, setIsVisible] = useState(!isDismissed);
+
+  const interactive = Boolean(href);
 
   const classes = ClassNames(
     'usa-tag',
     'usx-tag',
     { 'usa-tag--big': big },
-    { [`bg-${color}`]: color && !outline },
-    { [`text-${color}`]: color && outline },
-    { 'usx-tag--outline': outline },
+    { [`bg-${color}`]: color && !outline && !interactive },
+    { [`text-${color}`]: color && outline && !interactive },
+    { 'usx-tag--outline': outline || interactive },
+    { 'usa-link usx-link usx-no-visited usx-tag--interactive': interactive },
     className
   );
 
@@ -55,10 +66,10 @@ const Tag: React.FC<TagProps> = ({
     return null;
   }
 
-  return (
-    <span id={id} className={classes} {...props}>
+  const content = (
+    <>
       {icon && <Icon name={icon} size={big ? 3 : 2} />} {children || value}
-      {dismissible && (
+      {dismissible && !interactive && (
         <button
           type="button"
           className="usx-tag__dismiss"
@@ -68,6 +79,28 @@ const Tag: React.FC<TagProps> = ({
           <Icon name="close" size={2} />
         </button>
       )}
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        id={id}
+        href={href}
+        target={target}
+        rel={rel}
+        className={classes}
+        {...props}
+        {...extraAttributes}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <span id={id} className={classes} {...props} {...extraAttributes}>
+      {content}
     </span>
   );
 };

@@ -1,6 +1,6 @@
 {% load usx_components %}
 
-<div class="usx-tag-group{% if className %} {{ className }}{% endif %}">
+<div class="usx-tag-group{% if className %} {{ className }}{% endif %}"{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}>
   {% if children %}
     {{ children|safe }}
   {% elif tagProps %}

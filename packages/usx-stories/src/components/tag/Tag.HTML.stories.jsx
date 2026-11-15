@@ -15,11 +15,21 @@ const hasClass = (element, name, expected) =>
   (expected ? expect(element) : expect(element).not).toHaveClass(name);
 
 const checkTag = (def) => async (tag) => {
+  const interactive = Boolean(def.href);
   await expect(tag).toHaveClass('usa-tag', 'usx-tag');
   await hasClass(tag, 'usa-tag--big', Boolean(def.big));
-  await hasClass(tag, 'usx-tag--outline', Boolean(def.outline));
+  await hasClass(tag, 'usx-tag--outline', Boolean(def.outline || interactive));
+  await expect(tag.tagName).toBe(def.href ? 'A' : 'SPAN');
+  await hasClass(tag, 'usx-tag--interactive', interactive);
+  if (interactive) {
+    await expect(tag).toHaveClass('usa-link', 'usx-link');
+    await expect(tag).not.toHaveClass('text-secondary');
+    await expect(tag).not.toHaveClass('bg-secondary');
+    await expect(getComputedStyle(tag).textTransform).toBe('none');
+    await expect(tag).toHaveAttribute('href', def.href);
+  }
   // Solid tags fill with the colour; outline tags colour their text instead.
-  if (def.color)
+  if (def.color && !interactive)
     await expect(tag).toHaveClass(def.outline ? `text-${def.color}` : `bg-${def.color}`);
 
   const icon = tag.querySelector(':scope > svg');
@@ -56,6 +66,13 @@ const checks = Object.fromEntries(
 
 const play = async (context) => {
   await createAllVariantsPlay(checks)(context);
+  await context.step('Link styled as a tag', async () => {
+    const link = sectionFor(context.canvasElement, 'Link styled as a tag');
+    await expect(link.tagName).toBe('A');
+    await expect(link).toHaveClass('usa-link', 'usx-link', 'usa-tag', 'usx-tag');
+    await expect(link).toHaveAttribute('href', '#related-topics');
+    await expect(getComputedStyle(link).textTransform).toBe('none');
+  });
   await context.step('Big is bigger', async () => {
     const height = (title) =>
       sectionFor(context.canvasElement, title).getBoundingClientRect().height;

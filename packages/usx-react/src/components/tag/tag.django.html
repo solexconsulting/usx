@@ -1,15 +1,21 @@
 {# Django template for Tag #}
 {% load usx_components %}
 
-<span
+<{% if href %}a{% else %}span{% endif %}
   {% if id %}id="{{ id }}"{% endif %}
+  {% if href %}href="{{ href }}"{% if target %} target="{{ target }}"{% endif %}{% if rel %} rel="{{ rel }}"{% endif %}{% endif %}
+  {% if extraAttributes %}{% for attr, attrValue in extraAttributes.items %} {{ attr }}="{% if attrValue is True %}true{% elif attrValue is False %}false{% else %}{{ attrValue }}{% endif %}"{% endfor %}{% endif %}
   class=
   "
   usa-tag usx-tag
   {% if big %}usa-tag--big{% endif %}
-  {% if color and not outline %}bg-{{ color }}{% endif %}
-  {% if color and outline %}text-{{ color }}{% endif %}
-  {% if outline %}usx-tag--outline{% endif %}
+  {% if href %}
+    usa-link usx-link usx-no-visited usx-tag--interactive usx-tag--outline
+  {% else %}
+    {% if color and not outline %}bg-{{ color }}{% endif %}
+    {% if color and outline %}text-{{ color }}{% endif %}
+    {% if outline %}usx-tag--outline{% endif %}
+  {% endif %}
   {{ className }}
   "
 >
@@ -22,7 +28,7 @@
       {% if icon %}{% icon name=icon size=iconSize %}{% endicon %}{% endif %}{% if children %}{{ children }}{% else %}{{ value }}{% endif %}
     {% endwith %}
   {% endif %}
-  {% if dismissible %}
+  {% if dismissible and not href %}
     <button
       type="button"
       class="usx-tag__dismiss"
@@ -36,4 +42,4 @@
       {% icon name="close" size="2" %}{% endicon %}
     </button>
   {% endif %}
-</span>
+</{% if href %}a{% else %}span{% endif %}>
