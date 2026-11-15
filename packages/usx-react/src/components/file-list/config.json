@@ -35,6 +35,11 @@
       "default": false,
       "description": "Hides every row's Delete button."
     },
+    "slim": {
+      "type": "boolean",
+      "default": false,
+      "description": "Uses compact row padding, text, and Delete button sizing, with file type and size inline after the name. The list width and element structure stay the same."
+    },
     "className": {
       "type": "string",
       "description": "Additional classes for the outer wrapper."

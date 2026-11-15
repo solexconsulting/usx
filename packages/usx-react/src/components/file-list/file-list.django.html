@@ -2,7 +2,7 @@
 {% load usx_components %}
 
 {% if files %}
-<div class="usx-file-input__list margin-top-1{% if className %} {{ className }}{% endif %}">
+<div class="usx-file-input__list margin-top-1{% if slim %} usx-file-list--slim{% endif %}{% if className %} {{ className }}{% endif %}">
   {% with lastFile=files|last %}<span class="usa-sr-only" aria-live="polite">You have selected the file: {{ lastFile.name }}.</span>{% endwith %}
   {% if hint %}
   <span class="usa-hint usx-hint usx-file-input__list-heading">{{ hint }}</span>

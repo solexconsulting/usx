@@ -45,6 +45,7 @@ const toDjangoArgs = (args) => ({
 });
 
 export const Default = withRemovalDemo(createStory(toDjangoArgs(storyDefs.Default)));
+export const Slim = withRemovalDemo(createStory(toDjangoArgs(storyDefs.Slim)));
 export const WithDownloadLink = withRemovalDemo(createStory(toDjangoArgs(storyDefs.WithDownloadLink)));
 export const CustomHint = withRemovalDemo(createStory(toDjangoArgs(storyDefs.CustomHint)));
 export const ZeroSize = withRemovalDemo(createStory(toDjangoArgs(storyDefs.ZeroSize)));

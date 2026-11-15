@@ -19,6 +19,7 @@ export interface FileListProps {
   hint?: React.ReactNode;
   onRemove?: ((entry: FileListEntry) => void) | null;
   disabled?: boolean;
+  slim?: boolean;
   className?: string;
 }
 
@@ -47,13 +48,13 @@ function getEntryDisplay(entry: FileListEntry) {
 // A standalone list of files with a per-row Delete action — used by
 // FileInput's managed-multiple mode (see FileInput.tsx), but reusable
 // anywhere a parent already owns the file array.
-export default function FileList({ files, hint = 'Selected files', onRemove = null, disabled = false, className = '' }: FileListProps) {
+export default function FileList({ files, hint = 'Selected files', onRemove = null, disabled = false, slim = false, className = '' }: FileListProps) {
   if (!files || files.length === 0) return null;
 
   const lastEntry = getEntryDisplay(files[files.length - 1]);
 
   return (
-    <div className={ClassNames('usx-file-input__list', 'margin-top-1', className)}>
+    <div className={ClassNames('usx-file-input__list', 'margin-top-1', slim && 'usx-file-list--slim', className)}>
       <span className="usa-sr-only" aria-live="polite">
         {`You have selected the file: ${lastEntry.name}.`}
       </span>

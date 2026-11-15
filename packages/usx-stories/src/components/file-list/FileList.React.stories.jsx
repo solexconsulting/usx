@@ -15,6 +15,18 @@ export default {
 
 export const storyDefs = {
   Default: config.default,
+  Slim: {
+    slim: true,
+    files: [
+      {
+        key: 1,
+        name: 'project-plan-and-supporting-information-for-review.pdf',
+        size: 245800,
+        url: 'https://example.com/files/project-plan.pdf',
+      },
+      { key: 2, name: 'notes.txt', size: 7200 },
+    ],
+  },
   WithDownloadLink: {
     files: [{ key: 1, name: 'w2-2023.pdf', size: 245800, url: 'https://example.com/files/w2-2023.pdf' }],
   },
@@ -67,6 +79,7 @@ function InteractiveFileList(args) {
 }
 
 export const Default = { args: storyDefs.Default, render: InteractiveFileList };
+export const Slim = { args: storyDefs.Slim, render: InteractiveFileList };
 export const WithDownloadLink = { args: storyDefs.WithDownloadLink, render: InteractiveFileList };
 export const CustomHint = { args: storyDefs.CustomHint, render: InteractiveFileList };
 export const ZeroSize = { args: storyDefs.ZeroSize, render: InteractiveFileList };

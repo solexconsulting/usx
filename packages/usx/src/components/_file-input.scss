@@ -203,6 +203,36 @@
   }
 }
 
+.usx-file-list--slim {
+  .usx-file-input__file-item {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .usx-file-input__file-info {
+    display: block;
+  }
+
+  .usx-file-input__file-name.usx-link {
+    display: inline;
+  }
+
+  .usx-file-input__file-size {
+    margin-inline-start: 0.25rem;
+    white-space: nowrap;
+  }
+
+  .usx-file-input__delete-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .usx-file-input__delete-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
 // The managed-multiple input is reset after every selection so it always
 // looks empty/ready — but USWDS still builds its own preview UI (filename,
 // thumbnail, "N files selected" heading) asynchronously, so it's suppressed
