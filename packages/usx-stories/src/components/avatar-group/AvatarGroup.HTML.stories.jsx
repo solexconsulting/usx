@@ -3,7 +3,7 @@ import reactSnapshot from '../../../../usx-react/src/components/avatar-group/ava
 import djangoSnapshot from '../../../../usx-react/src/components/avatar-group/avatar-group.django-snapshot.html?raw';
 import { expect } from 'storybook/test';
 import { storyDefs } from './AvatarGroup.React.stories.jsx';
-import { createAllVariantsPlay, sectionTitle } from '../../utils/playHelpers.js';
+import { createAllVariantsPlay, sectionFor, sectionTitle } from '../../utils/playHelpers.js';
 
 export default {
   title: 'HTML/USX/AvatarGroup',
@@ -39,11 +39,27 @@ const checkGroup = (def) => async (group) => {
   }
 };
 
-const play = createAllVariantsPlay(
-  Object.fromEntries(
-    Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkGroup(def)])
-  )
-);
+const play = async (context) => {
+  await createAllVariantsPlay(
+    Object.fromEntries(
+      Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkGroup(def)])
+    )
+  )(context);
+  await context.step('Mixed avatars', async () => {
+    const group = sectionFor(context.canvasElement, 'Mixed avatars');
+    await expect(group).toHaveClass('usx-avatar-group', 'usx-avatar-group--overlap');
+    const avatars = group.querySelectorAll('.usx-avatar');
+    await expect(avatars).toHaveLength(3);
+    await expect(avatars[0].tagName).toBe('SPAN');
+    await expect(avatars[0]).toHaveAccessibleName('Morgan');
+    await expect(avatars[1].querySelector('img')).toHaveAttribute('src', '/chat-avatar-avery.webp');
+    await expect(avatars[2]).toHaveAccessibleName('Support bot, Automated assistant');
+    await expect(avatars[2].querySelector('use')).toHaveAttribute(
+      'href',
+      expect.stringMatching(/#support_agent$/)
+    );
+  });
+};
 
 export const AllVariantsReact = {
   name: 'All Variants (React)',

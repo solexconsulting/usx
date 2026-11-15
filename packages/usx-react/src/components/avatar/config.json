@@ -1,7 +1,7 @@
 {
   "name": "avatar",
   "template": "avatar/avatar.django.html",
-  "version": 1,
+  "version": 2,
   "default": {
     "href": "https://google.com/search?q=Statue+of+Liberty",
     "src": "./lady_liberty.png",
@@ -10,7 +10,7 @@
   "props": {
     "href": {
       "type": "string",
-      "description": "Link target for the avatar image."
+      "description": "Optional link target. When absent, Avatar renders a noninteractive span."
     },
     "src": {
       "type": "string",
@@ -22,11 +22,7 @@
     },
     "variant": {
       "type": "select",
-      "options": [
-        "image",
-        "initials",
-        "icon"
-      ],
+      "options": ["image", "initials", "icon"],
       "description": "Avatar content mode."
     },
     "value": {
@@ -35,14 +31,16 @@
     },
     "shape": {
       "type": "select",
-      "options": [
-        "circle",
-        "rounded-sm",
-        "rounded-md",
-        "rounded-lg",
-        "rounded-xl"
-      ],
+      "options": ["circle", "rounded-sm", "rounded-md", "rounded-lg", "rounded-xl"],
       "description": "Optional shape utility for avatar image or initials."
+    },
+    "statusRingColor": {
+      "type": "string",
+      "description": "Existing border utility color name for the 4px ring, such as success, warning, error, info, primary, or accent-cool. Omit to hide the ring."
+    },
+    "statusLabel": {
+      "type": "string",
+      "description": "Host-supplied status text appended to the accessible name. Supply it whenever the ring conveys a meaningful state; pass the same text to tooltipProps to show it visually on hover."
     },
     "tooltipProps": {
       "type": "object",
@@ -52,7 +50,7 @@
     },
     "className": {
       "type": "string",
-      "description": "Additional classes for the avatar link element."
+      "description": "Additional classes for the avatar wrapper."
     },
     "imageClassName": {
       "type": "string",

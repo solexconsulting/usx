@@ -4,9 +4,9 @@ import config from '../../../../usx-react/src/components/avatar/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 const baseArgs = {
-  href: "https://google.com/search?q=Statue+of+Liberty",
-  src: "./lady_liberty.png",
-  alt: "Statue of Liberty"
+  href: 'https://google.com/search?q=Statue+of+Liberty',
+  src: './lady_liberty.png',
+  alt: 'Statue of Liberty',
 };
 
 export const storyDefs = {
@@ -42,6 +42,12 @@ export const storyDefs = {
     variant: 'initials',
     value: 'AB',
     alt: 'Alex Brown',
+    contentClassName: 'bg-primary-lighter text-primary-darker',
+  },
+  NonInteractive: {
+    variant: 'initials',
+    value: 'MO',
+    alt: 'Morgan',
     contentClassName: 'bg-primary-lighter text-primary-darker',
   },
   InitialsAvatarSmall: {
@@ -117,6 +123,71 @@ export const storyDefs = {
     className: 'usx-avatar--size-lg',
     contentClassName: 'bg-primary-lighter text-base-darkest',
   },
+  StatusSuccess: {
+    ...baseArgs,
+    shape: 'circle',
+    statusRingColor: 'success',
+    statusLabel: 'Online',
+    tooltipProps: { label: 'Online', position: 'right' },
+  },
+  StatusCaution: {
+    variant: 'initials',
+    value: 'AB',
+    alt: 'Alex Brown',
+    contentClassName: 'bg-primary-lighter text-primary-darker',
+    statusRingColor: 'warning',
+    statusLabel: 'Pending review',
+  },
+  StatusDanger: {
+    variant: 'icon',
+    value: 'person',
+    alt: 'Account owner',
+    contentClassName: 'bg-primary-lighter text-base-darkest',
+    statusRingColor: 'error',
+    statusLabel: 'Do not disturb',
+  },
+  StatusNeutral: {
+    ...baseArgs,
+    shape: 'rounded-md',
+    statusRingColor: 'base',
+    statusLabel: 'Offline',
+  },
+  StatusInfo: {
+    ...baseArgs,
+    shape: 'circle',
+    statusRingColor: 'info',
+    statusLabel: 'Verified',
+  },
+  StatusSpecial: {
+    variant: 'icon',
+    value: 'person',
+    alt: 'Site administrator',
+    contentClassName: 'bg-primary-lighter text-base-darkest',
+    statusRingColor: 'accent-cool',
+    statusLabel: 'Elevated privileges',
+  },
+  StatusWarning: {
+    variant: 'initials',
+    value: 'AB',
+    alt: 'Alex Brown',
+    className: 'usx-avatar--size-sm',
+    contentClassName: 'bg-primary-lighter text-primary-darker',
+    statusRingColor: 'accent-warm',
+    statusLabel: 'Requires action',
+  },
+  StatusSecondaryColor: {
+    ...baseArgs,
+    shape: 'circle',
+    statusRingColor: 'secondary',
+    statusLabel: 'Premium member',
+  },
+  StatusLabelOnly: {
+    variant: 'initials',
+    value: 'AB',
+    alt: 'Alex Brown',
+    contentClassName: 'bg-primary-lighter text-primary-darker',
+    statusLabel: 'Available by appointment',
+  },
 };
 
 export default {
@@ -125,6 +196,14 @@ export default {
   tags: ['USX', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
   excludeStories: ['storyDefs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Set `statusRingColor` to an existing border utility color name, such as success, warning, error, info, accent-cool, or secondary. Set `statusLabel` to the host’s exact state; Avatar includes it in the accessible name even when no ring is shown. Pass the label in `tooltipProps` to display it on hover. Provide visible status text nearby when the state matters to sighted users.',
+      },
+    },
+  },
 };
 
 export const Default = { args: storyDefs.Default };
@@ -134,6 +213,7 @@ export const LargeRoundedAvatar = { args: storyDefs.LargeRoundedAvatar };
 export const AvatarWithTooltip = { args: storyDefs.AvatarWithTooltip };
 export const AvatarWithCustomTooltip = { args: storyDefs.AvatarWithCustomTooltip };
 export const InitialsAvatar = { args: storyDefs.InitialsAvatar };
+export const NonInteractive = { args: storyDefs.NonInteractive };
 export const InitialsAvatarSmall = { args: storyDefs.InitialsAvatarSmall };
 export const ImageAvatarMedium = { args: storyDefs.ImageAvatarMedium };
 export const ImageAvatarLarge = { args: storyDefs.ImageAvatarLarge };
@@ -145,3 +225,12 @@ export const IconAvatarPerson = { args: storyDefs.IconAvatarPerson };
 export const IconAvatarSupportAgent = { args: storyDefs.IconAvatarSupportAgent };
 export const IconAvatarSentiment = { args: storyDefs.IconAvatarSentiment };
 export const IconAvatarLarge = { args: storyDefs.IconAvatarLarge };
+export const StatusSuccess = { args: storyDefs.StatusSuccess };
+export const StatusCaution = { args: storyDefs.StatusCaution };
+export const StatusDanger = { args: storyDefs.StatusDanger };
+export const StatusNeutral = { args: storyDefs.StatusNeutral };
+export const StatusInfo = { args: storyDefs.StatusInfo };
+export const StatusSpecial = { args: storyDefs.StatusSpecial };
+export const StatusWarning = { args: storyDefs.StatusWarning };
+export const StatusSecondaryColor = { args: storyDefs.StatusSecondaryColor };
+export const StatusLabelOnly = { args: storyDefs.StatusLabelOnly };

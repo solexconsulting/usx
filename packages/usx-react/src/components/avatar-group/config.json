@@ -27,9 +27,9 @@
       "description": "Array of avatars rendered by the group.",
       "items": {
         "type": "object",
-        "description": "Avatar item. Mirrors the avatar component's props, using initials/initialsClassName in place of value/contentClassName, with no variant (auto-detected).",
+        "description": "Avatar item. Accepts Avatar props, including variant, value, and status. The initials and initialsClassName aliases remain available; variant defaults to image when src is present and initials otherwise.",
         "component": "avatar",
-        "omit": ["variant", "value", "contentClassName"],
+        "omit": [],
         "properties": {
           "initials": {
             "type": "string",

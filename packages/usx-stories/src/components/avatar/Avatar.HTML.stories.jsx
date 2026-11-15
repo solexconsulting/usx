@@ -8,18 +8,36 @@ import { createAllVariantsPlay, sectionFor, sectionTitle } from '../../utils/pla
 export default {
   title: 'HTML/USX/Avatar',
   tags: ['USX', 'autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'Use `border-05` and `border-{color}` utility classes for a status ring. Include the host-supplied `statusLabel` in `aria-label`; use the Tooltip component to display it on hover.',
+      },
+    },
+  },
 };
 
 const linkOf = (section) => (section.matches('a') ? section : section.querySelector('a'));
 const radiusOf = (el) => parseFloat(getComputedStyle(el).borderTopLeftRadius);
 
 const checkAvatar = (def) => async (section) => {
-  const link = linkOf(section);
-  await expect(link).toHaveAttribute('href', def.href);
+  const statusLabel = def.statusLabel?.trim();
+  const statusRingColor = def.statusRingColor?.trim();
+  const accessibleName = statusLabel ? `${def.alt ? `${def.alt}, ` : ''}${statusLabel}` : def.alt;
+  const link = !def.href
+    ? section.matches('.usx-avatar')
+      ? section
+      : section.querySelector('.usx-avatar')
+    : linkOf(section);
+  if (!def.href) {
+    await expect(link.tagName).toBe('SPAN');
+    await expect(link).not.toHaveAttribute('href');
+  } else await expect(link).toHaveAttribute('href', def.href);
 
   if (def.variant === 'initials' || def.variant === 'icon') {
     const content = link.querySelector('.usx-avatar__content');
-    await expect(link).toHaveAccessibleName(def.alt);
+    await expect(link).toHaveAccessibleName(accessibleName);
     await expect(content).toHaveClass(...def.contentClassName.split(' '));
     if (def.variant === 'initials') await expect(content).toHaveTextContent(def.value);
     else
@@ -31,7 +49,7 @@ const checkAvatar = (def) => async (section) => {
   } else {
     const img = link.querySelector('img.usx-avatar__img');
     await expect(img).toHaveAttribute('src', def.src);
-    await expect(link).toHaveAccessibleName(def.alt);
+    await expect(link).toHaveAccessibleName(accessibleName);
     const shapes = ['circle', 'rounded-md', 'rounded-lg'];
     for (const shape of shapes) {
       const expectation = expect(img);
@@ -40,16 +58,32 @@ const checkAvatar = (def) => async (section) => {
   }
 
   if (def.className) await expect(link).toHaveClass(def.className);
+  if (statusRingColor) {
+    await expect(link).toHaveClass('border-05', `border-${statusRingColor}`);
+    await expect(getComputedStyle(link).borderTopWidth).toBe('4px');
+    await expect(getComputedStyle(link).borderTopStyle).toBe('solid');
+  } else {
+    await expect(link).not.toHaveClass('border-05');
+  }
+  if (statusLabel && !def.href) await expect(link).toHaveAttribute('role', 'img');
+  if (statusLabel) await expect(link).not.toHaveAttribute('title');
   // Avatars stay square whatever the size or shape.
   const { width, height } = link.getBoundingClientRect();
   await expect(Math.abs(width - height)).toBeLessThan(1);
 
   if (def.tooltipProps) {
     await expect(section).toHaveClass('usx-tooltip');
-    await expect(section.querySelector('[role="tooltip"]')).toHaveTextContent(def.tooltipProps.label);
-    await expect(section.querySelector('[role="tooltip"]')).toHaveClass(`usa-tooltip__body--${def.tooltipProps.position ?? 'top'}`);
+    await expect(section.querySelector('[role="tooltip"]')).toHaveTextContent(
+      def.tooltipProps.label
+    );
+    await expect(section.querySelector('[role="tooltip"]')).toHaveClass(
+      `usa-tooltip__body--${def.tooltipProps.position ?? 'top'}`
+    );
     if (def.tooltipProps.className) await expect(section).toHaveClass(def.tooltipProps.className);
-    if (def.tooltipProps.bodyClassName) await expect(section.querySelector('[role="tooltip"]')).toHaveClass(def.tooltipProps.bodyClassName);
+    if (def.tooltipProps.bodyClassName)
+      await expect(section.querySelector('[role="tooltip"]')).toHaveClass(
+        def.tooltipProps.bodyClassName
+      );
   }
 };
 
@@ -87,6 +121,16 @@ const play = async (context) => {
     await expect(radiusOf(img('CircleAvatar'))).toBeGreaterThanOrEqual(
       widthOf(canvasElement, 'CircleAvatar') / 2
     );
+    const avatarFor = (title) => {
+      const section = sectionFor(canvasElement, title);
+      return section.matches('.usx-avatar') ? section : section.querySelector('.usx-avatar');
+    };
+    const statusCircle = avatarFor('Status Success');
+    const statusRounded = avatarFor('Status Neutral');
+    await expect(radiusOf(statusCircle)).toBeGreaterThanOrEqual(
+      statusCircle.getBoundingClientRect().width / 2
+    );
+    await expect(radiusOf(statusRounded)).toBeGreaterThan(0);
   });
 };
 

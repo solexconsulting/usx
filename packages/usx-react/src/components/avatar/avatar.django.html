@@ -3,7 +3,7 @@
 {% load usx_components %}
 
 {% fragment as avatarLink %}
-<a href="{% if href is None %}#{% else %}{{ href }}{% endif %}" class="usx-avatar{% if className %} {{ className }}{% endif %}"{% if variant == 'initials' or variant == 'icon' %}{% if alt %} aria-label="{{ alt }}"{% endif %}{% endif %}>
+<{% if href %}a href="{{ href }}"{% else %}span{% endif %} class="usx-avatar{% if statusRingColor %} border-05 border-{{ statusRingColor }}{% if shape == 'circle' %} usx-circle{% elif shape == 'rounded-sm' %} usx-rounded-sm{% elif shape == 'rounded-md' %} usx-rounded-md{% elif shape == 'rounded-lg' %} usx-rounded-lg{% elif shape == 'rounded-xl' %} usx-rounded-xl{% elif variant == 'initials' or variant == 'icon' %} usx-circle{% endif %}{% endif %}{% if className %} {{ className }}{% endif %}"{% if not href and statusLabel %} role="img"{% endif %}{% if statusLabel %} aria-label="{% if alt %}{{ alt }}, {% endif %}{{ statusLabel }}"{% elif variant == 'initials' or variant == 'icon' %}{% if alt %} aria-label="{{ alt }}"{% endif %}{% endif %}>
   {% if variant == 'initials' %}
     <span class="usx-avatar__content{% if shape == 'circle' %} usx-circle{% elif shape == 'rounded-sm' %} usx-rounded-sm{% elif shape == 'rounded-md' %} usx-rounded-md{% elif shape == 'rounded-lg' %} usx-rounded-lg{% elif shape == 'rounded-xl' %} usx-rounded-xl{% else %} usx-circle{% endif %}{% if contentClassName %} {{ contentClassName }}{% endif %}">{{ value }}</span>
   {% elif variant == 'icon' %}
@@ -16,7 +16,7 @@
       role="img"
     />
   {% endif %}
-</a>
+{% if href %}</a>{% else %}</span>{% endif %}
 {% endfragment %}
 
 {% if tooltipProps %}

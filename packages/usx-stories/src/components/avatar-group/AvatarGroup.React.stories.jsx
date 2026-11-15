@@ -1,4 +1,3 @@
-// import React from 'react';
 import AvatarGroup from '../../../../usx-react/src/components/avatar-group/AvatarGroup.tsx';
 import config from '../../../../usx-react/src/components/avatar-group/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
@@ -6,7 +5,10 @@ import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 const baseAvatars = (config.default && config.default.avatarProps) || [];
 const roundedAvatars = baseAvatars.map((avatar) => ({ ...avatar, shape: 'rounded-md' }));
 const circleAvatars = baseAvatars.map((avatar) => ({ ...avatar, shape: 'circle' }));
-const tooltipAvatars = circleAvatars.map((avatar) => ({ ...avatar, tooltipProps: { label: avatar.alt, position: 'right' } }));
+const tooltipAvatars = circleAvatars.map((avatar) => ({
+  ...avatar,
+  tooltipProps: { label: avatar.alt, position: 'right' },
+}));
 
 export const storyDefs = {
   Default: config.default,
@@ -61,3 +63,23 @@ export const OverlappingStackedAvatars = { args: storyDefs.OverlappingStackedAva
 export const OverlappingRoundedAvatars = { args: storyDefs.OverlappingRoundedAvatars };
 export const WithTooltips = { args: storyDefs.WithTooltips };
 export const StackedWithTooltips = { args: storyDefs.StackedWithTooltips };
+
+export const MixedAvatars = {
+  name: 'Mixed avatars',
+  args: {
+    overlap: true,
+    avatarProps: [
+      { variant: 'initials', value: 'MO', alt: 'Morgan', shape: 'circle', contentClassName: 'bg-primary text-inverse' },
+      { variant: 'image', src: '/chat-avatar-avery.webp', alt: 'Avery', shape: 'circle' },
+      {
+        variant: 'icon',
+        value: 'support_agent',
+        alt: 'Support bot',
+        shape: 'circle',
+        statusRingColor: 'info',
+        statusLabel: 'Automated assistant',
+        contentClassName: 'bg-info-lighter',
+      },
+    ],
+  },
+};

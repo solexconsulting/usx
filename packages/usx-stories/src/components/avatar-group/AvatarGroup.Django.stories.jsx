@@ -1,4 +1,4 @@
-// import React from 'react';
+import { MixedAvatars as MixedAvatarsReact } from './AvatarGroup.React.stories.jsx';
 import config from '../../../../usx-react/src/components/avatar-group/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './AvatarGroup.React.stories.jsx';
@@ -11,16 +11,23 @@ export default {
 
 const createStory = createDjangoStory({ componentName: 'avatar-group' });
 const allowedPropNames = new Set(Object.keys(config.props || {}));
-const toDjangoArgs = (args) => Object.fromEntries(
-  Object.entries(args).filter(([key]) => allowedPropNames.has(key))
-);
+const toDjangoArgs = (args) =>
+  Object.fromEntries(Object.entries(args).filter(([key]) => allowedPropNames.has(key)));
 
 export const Default = createStory(toDjangoArgs(storyDefs.Default));
 export const RoundedAvatarGroup = createStory(toDjangoArgs(storyDefs.RoundedAvatarGroup));
 export const CircleAvatarGroup = createStory(toDjangoArgs(storyDefs.CircleAvatarGroup));
 export const OverlappingAvatars = createStory(toDjangoArgs(storyDefs.OverlappingAvatars));
 export const StackedAvatars = createStory(toDjangoArgs(storyDefs.StackedAvatars));
-export const OverlappingStackedAvatars = createStory(toDjangoArgs(storyDefs.OverlappingStackedAvatars));
-export const OverlappingRoundedAvatars = createStory(toDjangoArgs(storyDefs.OverlappingRoundedAvatars));
+export const OverlappingStackedAvatars = createStory(
+  toDjangoArgs(storyDefs.OverlappingStackedAvatars)
+);
+export const OverlappingRoundedAvatars = createStory(
+  toDjangoArgs(storyDefs.OverlappingRoundedAvatars)
+);
 export const WithTooltips = createStory(toDjangoArgs(storyDefs.WithTooltips));
 export const StackedWithTooltips = createStory(toDjangoArgs(storyDefs.StackedWithTooltips));
+export const MixedAvatars = {
+  ...createStory(toDjangoArgs(MixedAvatarsReact.args)),
+  name: 'Mixed avatars',
+};
