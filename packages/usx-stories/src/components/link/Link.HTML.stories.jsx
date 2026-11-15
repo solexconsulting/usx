@@ -2,8 +2,14 @@ import React from 'react';
 import reactSnapshot from '../../../../usx-react/src/components/link/link.react-snapshot.html?raw';
 import djangoSnapshot from '../../../../usx-react/src/components/link/link.django-snapshot.html?raw';
 import { expect } from 'storybook/test';
+import * as linkStories from './Link.React.stories.jsx';
 import { storyDefs } from './Link.React.stories.jsx';
-import { contrastRatio, createAllVariantsPlay, sectionTitle } from '../../utils/playHelpers.js';
+import {
+  contrastRatio,
+  createAllVariantsPlay,
+  sectionFor,
+  sectionTitle,
+} from '../../utils/playHelpers.js';
 
 export default {
   title: 'HTML/USWDS/Link',
@@ -39,11 +45,23 @@ const checkLink = (key, def) => async (section) => {
   }
 };
 
-const play = createAllVariantsPlay(
-  Object.fromEntries(
-    Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkLink(key, def)])
-  )
-);
+const play = async (context) => {
+  await createAllVariantsPlay(
+    Object.fromEntries(
+      Object.entries(storyDefs).map(([key, def]) => [
+        linkStories[key]?.name ?? sectionTitle(key),
+        checkLink(key, def),
+      ])
+    )
+  )(context);
+  await context.step('Tag used as a link', async () => {
+    const tag = sectionFor(context.canvasElement, 'Tag used as a link');
+    await expect(tag.tagName).toBe('A');
+    await expect(tag).toHaveClass('usa-tag', 'usx-tag', 'usa-link', 'usx-link');
+    await expect(tag).toHaveAttribute('href', '#related-topics');
+    await expect(getComputedStyle(tag).textTransform).toBe('none');
+  });
+};
 
 export const AllVariantsReact = {
   name: 'All Variants (React)',

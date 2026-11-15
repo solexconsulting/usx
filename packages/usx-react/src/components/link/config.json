@@ -3,8 +3,7 @@
   "template": "link/link.django.html",
   "version": 2,
   "required": [
-    "href",
-    "children"
+    "href"
   ],
   "default": {
     "href": "https://google.com/",
@@ -13,7 +12,7 @@
   "props": {
     "href": {
       "type": "string",
-      "description": "Link destination URL."
+      "description": "Link destination URL. Link always renders an anchor."
     },
     "text": {
       "type": "string",

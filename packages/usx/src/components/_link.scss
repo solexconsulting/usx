@@ -33,6 +33,7 @@
 // On a dark background, USWDS swaps link/visited color to a light neutral
 // (matching the surrounding light text) instead of the blue/purple defaults.
 .usa-dark-background .usx-link,
+.usx-link.usx-link--inverse,
 .usa-dark-background .usx-prose a {
   &:not([class^="text-"]):not([class*=" text-"]) {
     color: usx-when($usx-link-text-dark);
@@ -43,5 +44,20 @@
     &.usx-link--visited {
       color: usx-when($usx-link-text-visited-dark);
     }
+  }
+}
+
+button.usx-link:not(.usx-tag) {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: start;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: .6;
+    cursor: not-allowed;
   }
 }

@@ -1,8 +1,11 @@
 import React, { AnchorHTMLAttributes, ReactNode } from 'react';
 import classNames from 'classnames';
 
-export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  href?: string;
+export interface LinkProps extends Omit<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  'download' | 'type' | 'onClick'
+> {
+  href: string;
   text?: string;
   children?: ReactNode;
   visited?: boolean;
@@ -14,7 +17,7 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 export default function Link({
-  href = 'javascript:void(0);',
+  href,
   text,
   children,
   visited = false,
@@ -30,7 +33,7 @@ export default function Link({
     visited && 'usx-link--visited',
     external && 'usa-link--external',
     alt && 'usa-link--alt',
-    className,
+    className
   );
 
   return (

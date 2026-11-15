@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from '../../../../usx-react/src/components/link/Link.tsx';
+import Tag from '../../../../usx-react/src/components/tag/Tag.tsx';
 import config from '../../../../usx-react/src/components/link/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
@@ -42,6 +43,10 @@ export default {
 };
 
 export const Default = { args: storyDefs.Default };
+export const TagAsLink = {
+  name: 'Tag used as a link',
+  render: () => <Tag href="#related-topics">Browse related topics</Tag>,
+};
 export const Visited = { args: storyDefs.Visited };
 export const ExternalCurrentTab = { args: storyDefs.ExternalCurrentTab };
 export const ExternalNewTab = { args: storyDefs.ExternalNewTab };

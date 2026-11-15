@@ -37,15 +37,28 @@ const createDarkAltStory = createDjangoStory({
 
     return (
       <div className="usa-dark-background padding-1 display-inline-block">
-        <p dangerouslySetInnerHTML={{ __html: `${normalizedPayload} is an alternate external text link on a dark background.` }} />
+        <p
+          dangerouslySetInnerHTML={{
+            __html: `${normalizedPayload} is an alternate external text link on a dark background.`,
+          }}
+        />
       </div>
     );
   },
 });
 
 export const Default = createStory(storyDefs.Default);
+export const TagAsLink = {
+  ...createDjangoStory({ componentName: 'tag' })({
+    href: '#related-topics',
+    children: 'Browse related topics',
+  }),
+  name: 'Tag used as a link',
+};
 export const Visited = createStory(storyDefs.Visited);
 export const ExternalCurrentTab = createStory(storyDefs.ExternalCurrentTab);
 export const ExternalNewTab = createStory(storyDefs.ExternalNewTab);
 export const DarkBackground = createDarkStory(storyDefs.DarkBackground);
-export const DarkBackgroundAlternateExternal = createDarkAltStory(storyDefs.DarkBackgroundAlternateExternal);
+export const DarkBackgroundAlternateExternal = createDarkAltStory(
+  storyDefs.DarkBackgroundAlternateExternal
+);
