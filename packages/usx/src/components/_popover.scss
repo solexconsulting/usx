@@ -17,7 +17,9 @@ $popover-panel-x-padding: 0.25rem;
     z-index: 10;
     top: calc(100% + 0.25rem);
     inset-inline-start: 0;
-    box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%), 0 0.5rem 1.5rem rgb(0 0 0 / 14%);
+    box-shadow:
+      0 0.125rem 0.25rem rgb(0 0 0 / 8%),
+      0 0.5rem 1.5rem rgb(0 0 0 / 14%);
   }
 
   /* BEGIN Panel Positioning */
@@ -84,8 +86,7 @@ $popover-panel-x-padding: 0.25rem;
   color: usx-when($usx-text-ink, $usx-text-ink, #1b1b1b);
 
   .usx-popover__panel-heading,
-  .usx-popover__panel-content
-  {
+  .usx-popover__panel-content {
     &:not([class^='margin-'], [class*=' margin-']) {
       margin: 0 1rem;
     }
@@ -110,6 +111,38 @@ $popover-panel-x-padding: 0.25rem;
       margin: 0;
     }
   }
+}
+
+.usx-popover__header,
+.usx-popover__header-left-actions,
+.usx-popover__header-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.usx-popover__header {
+  justify-content: space-between;
+  padding-inline: 1rem;
+}
+
+.usx-popover__header-content {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}
+
+.usx-popover__header-left-actions,
+.usx-popover__header-right-actions {
+  flex: none;
+}
+
+.usx-popover__header-close.usa-button.usx-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  margin: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -193,9 +226,41 @@ $popover-panel-x-padding: 0.25rem;
   &:not(span) {
     cursor: pointer;
 
-    &:is(:hover, :focus-visible) {
+    &:is(:hover, :focus-visible):not(:disabled) {
       background: usx-when($usx-surface-3, $usx-surface-3, #f0f0f0);
     }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &[aria-pressed='true'] {
+    background: usx-when($usx-surface-3, $usx-surface-3, #f0f0f0);
+  }
+}
+
+button.usx-popover__menu-item {
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+  line-height: 1.2;
+  margin: 0;
+  text-align: start;
+  text-decoration: none;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  color: usx-when($usx-link-text, $usx-link-text, #005ea2);
+
+  &:hover {
+    color: usx-when($usx-link-text-hover, $usx-link-text-hover, #004080);
+  }
+
+  > .usa-icon {
+    flex: none;
   }
 }
 

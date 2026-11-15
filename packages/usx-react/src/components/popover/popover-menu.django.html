@@ -21,9 +21,20 @@
         {% include "popover/popover-menu.django.html" with items=item.items prefix=id panelShape=panelShape only %}
       </div>
     </details>
-    {% elif item.type == 'link' %}
+    {% elif item.type == 'button' or item.onClick %}
+    <button
+      type="button"
+      class="usx-popover__menu-item"
+      {% if item.disabled %}disabled{% endif %}
+      {% if item.onClick and item.onClick is not True %}onclick="{{ item.onClick }}"{% endif %}
+      {% for attr, value in item.extraAttributes.items %}{{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}
+    >
+      {% if item.icon %}{% icon props=item.icon %}{% endicon %}{% endif %}
+      {{ item.text|force_escape }}
+    </button>
+    {% elif item.href %}
     {% link href=item.href text=item.text className="usx-no-visited usx-popover__menu-item" %}{{ item.text|force_escape }}{% endlink %}
-    {% elif item.type == 'text' %}
+    {% else %}
     <span class="usx-popover__menu-item">{{ item.text|force_escape }}</span>
     {% endif %}
   </li>

@@ -10,6 +10,11 @@ import { storyDefs as treeStoryDefs } from '../tree/Tree.React.stories.jsx';
 
 // One navigation model drives the Tree and the nested Popovers.
 const serviceNavigation = treeStoryDefs.ResidentServices.items;
+const asPopoverItems = (items) =>
+  items.map(({ type, items: children, ...item }) =>
+    type === 'details' ? { ...item, type, items: asPopoverItems(children ?? []) } : item
+  );
+const popoverNavigation = asPopoverItems(serviceNavigation);
 
 // Sibling details share a native group name; each nesting level gets its own.
 const withGroupNames = (items, group) =>
@@ -23,14 +28,23 @@ const withGroupNames = (items, group) =>
 export function NavigationBarLayout({ children }) {
   return (
     <nav aria-label="City website" className="grid-row">
-      <a href="#home" className="padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled">
+      <a
+        href="#home"
+        className="padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled"
+      >
         Home
       </a>
       {children}
-      <a href="#permits" className="padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled">
+      <a
+        href="#permits"
+        className="padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled"
+      >
         Permits and licenses
       </a>
-      <a href="#contact" className="padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled">
+      <a
+        href="#contact"
+        className="padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled"
+      >
         Contact us
       </a>
     </nav>
@@ -89,7 +103,10 @@ const rtlPlacementExamples = ['start', 'end'].map((align) => ({
 
 const headingAsExample = (id, panelHeading, headingAs) => ({
   id,
-  summaryProps: { label: 'Important dates', className: 'usa-button usx-button usa-button--primary margin-0' },
+  summaryProps: {
+    label: 'Important dates',
+    className: 'usa-button usx-button usa-button--primary margin-0',
+  },
   panelHeading,
   ...(headingAs ? { headingAs } : {}),
   showClose: true,
@@ -108,8 +125,11 @@ const panelShapeExample = (panelShape) => ({
 
 const menuItemsExample = {
   id: 'popover-menu-items',
-  summaryProps: { label: 'Resident services', className: 'usa-button usx-button usa-button--primary margin-0' },
-  menuItems: serviceNavigation,
+  summaryProps: {
+    label: 'Resident services',
+    className: 'usa-button usx-button usa-button--primary margin-0',
+  },
+  menuItems: popoverNavigation,
 };
 
 export const storyDefs = {
@@ -141,7 +161,7 @@ export const storyDefs = {
           className="display-none tablet:display-block"
           data-testid="desktop-flyouts"
         >
-          <PopoverMenu items={serviceNavigation} prefix="site-menu-flyouts" />
+          <PopoverMenu items={popoverNavigation} prefix="site-menu-flyouts" />
         </nav>
       </>
     ),
@@ -150,12 +170,28 @@ export const storyDefs = {
     id: 'site-nav-services',
     summaryProps: {
       label: 'Resident services',
-      className: 'padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled margin-0',
+      className:
+        'padding-2 bg-surface-2 border-left-1px border-right-1px usa-button usx-button usa-button--unstyled margin-0',
     },
     panelShape: 'square',
-    menuItems: serviceNavigation,
+    menuItems: popoverNavigation,
   },
   MenuItems: menuItemsExample,
+  MixedMenuItems: {
+    id: 'popover-mixed-menu-items',
+    summaryProps: { label: 'Record actions', className: 'usa-button usx-button margin-0' },
+    menuItems: [
+      {
+        text: 'Copy record',
+        icon: { name: 'content_copy' },
+        onClick: () => navigator.clipboard.writeText('Record 10482'),
+      },
+      { text: 'View record', href: '#record-10482' },
+      { text: 'Record actions require an account' },
+      { text: 'Archive record', onClick: () => {}, disabled: true },
+    ],
+    children: <p id="record-10482">Record 10482</p>,
+  },
   SquareMenuItems: {
     ...menuItemsExample,
     id: 'popover-square-menu-items',
@@ -184,13 +220,12 @@ export const storyDefs = {
     showClose: true,
     closeLabel: 'Close account menu',
     menuItems: [
-      ...serviceNavigation,
+      ...popoverNavigation,
       {
-        type: 'link',
         href: '#sign-out',
         text: 'Sign out of your account and return to the city home page',
       },
-      { type: 'text', text: 'Offices are closed on public holidays' },
+      { text: 'Offices are closed on public holidays' },
     ],
     children: (
       <>
@@ -206,9 +241,19 @@ export const storyDefs = {
     ),
   },
   Default: config.default,
+  Persistent: {
+    id: 'popover-persistent',
+    summaryProps: { label: 'Keep this panel open', className: 'usa-button usx-button' },
+    children: 'This panel stays open when you interact with the page.',
+    dismissOnOutside: false,
+    showClose: true,
+  },
   Unenhanced: {
-    ...config.default, id: 'popover-unenhanced', showClose: true,
-    children: 'Without JavaScript enhancement, clicking outside this popover will not close it. Click the trigger again to close it.',
+    ...config.default,
+    id: 'popover-unenhanced',
+    showClose: true,
+    children:
+      'Without JavaScript enhancement, clicking outside this popover will not close it. Click the trigger again to close it.',
     extraAttributes: { 'usx-data-enhanced': 'true' },
   },
   RoundedPanel: panelShapeExample('rounded'),
@@ -221,6 +266,32 @@ export const storyDefs = {
       className: 'usa-button usx-button usa-button--primary margin-0',
     },
     children: 'Manage your account settings.',
+  },
+  HeaderActions: {
+    id: 'popover-header-actions',
+    summaryProps: { label: 'Open record', className: 'usa-button usx-button margin-0' },
+    panelHeading: 'Record 10482',
+    headerLeftActions: (
+      <button
+        type="button"
+        className="usa-button usx-button usa-button--unstyled"
+        aria-label="Back to records"
+      >
+        ←
+      </button>
+    ),
+    headerRightActions: (
+      <Popover
+        id="popover-header-actions-menu"
+        side="bottom"
+        align="end"
+        summaryProps={{ label: 'Actions', className: 'usa-button usx-button usa-button--unstyled' }}
+        menuItems={[{ text: 'Copy record', icon: { name: 'content_copy' }, onClick: () => {} }]}
+      />
+    ),
+    showCloseIcon: true,
+    closeIconLabel: 'Close record',
+    children: 'Review the record before taking action.',
   },
   AuthoredTrigger: {
     id: 'popover-authored-trigger',
@@ -251,15 +322,16 @@ export const storyDefs = {
   },
   Links: {
     id: 'popover-links',
-    summaryProps: { label: 'Record links', className: 'usa-button usx-button usa-button--primary margin-0' },
+    summaryProps: {
+      label: 'Record links',
+      className: 'usa-button usx-button usa-button--primary margin-0',
+    },
     menuItems: [
       {
-        type: 'link',
         href: '#saved-records',
         text: 'Saved records',
       },
       {
-        type: 'link',
         href: '#sharing-options',
         text: 'Sharing options',
       },
@@ -267,7 +339,10 @@ export const storyDefs = {
   },
   RichForm: {
     id: 'popover-rich-form',
-    summaryProps: { label: 'Filter results', className: 'usa-button usx-button usa-button--primary margin-0' },
+    summaryProps: {
+      label: 'Filter results',
+      className: 'usa-button usx-button usa-button--primary margin-0',
+    },
     showClose: true,
     children: (
       <form method="get" action="#results">
@@ -306,7 +381,10 @@ export const storyDefs = {
   },
   LongContent: {
     id: 'popover-long-content',
-    summaryProps: { label: 'City departments', className: 'usa-button usx-button usa-button--primary margin-0' },
+    summaryProps: {
+      label: 'City departments',
+      className: 'usa-button usx-button usa-button--primary margin-0',
+    },
     scrollable: true,
     children: (
       <nav aria-label="City departments">
@@ -352,7 +430,7 @@ export default {
     docs: {
       description: {
         component:
-          'A native `<details>` disclosure with a positioned panel. Use `summaryProps` for its trigger and `children` or `menuItems` for panel content. The summary toggles without JavaScript; `@solexllc/usx/js/start` adds outside dismissal, Escape, and the optional close button.',
+          'A native `<details>` disclosure with a positioned panel. Use `summaryProps` for its trigger and `children` or `menuItems` for panel content. The summary toggles without JavaScript; `@solexllc/usx/js/start` adds Escape, the optional close button, and outside dismissal unless `dismissOnOutside` is false.',
       },
     },
   },
@@ -362,7 +440,18 @@ export default {
 export const Default = {
   args: storyDefs.Default,
 };
-export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'Native details behavior still opens and closes the panel when its trigger is clicked. Without USX JavaScript, outside clicks, Escape, and the optional Close button do not dismiss it.' } } } };
+export const Persistent = { args: storyDefs.Persistent };
+export const Unenhanced = {
+  args: storyDefs.Unenhanced,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Native details behavior still opens and closes the panel when its trigger is clicked. Without USX JavaScript, outside clicks, Escape, and the optional Close button do not dismiss it.',
+      },
+    },
+  },
+};
 
 /** Original rounded panel with extra vertical padding. */
 export const RoundedPanel = {
@@ -392,6 +481,9 @@ export const GroupedSummaryProps = {
   args: storyDefs.GroupedSummaryProps,
 };
 
+/** A nested action menu and accessible close icon share the panel header. */
+export const HeaderActions = { args: storyDefs.HeaderActions };
+
 /** Pass `menuItems` to render a stacked menu in the panel; `details` rows open flyouts to the right. */
 export const MenuItems = {
   args: storyDefs.MenuItems,
@@ -405,6 +497,9 @@ export const MenuItems = {
   },
 };
 
+/** One menu combines a native action button, a link, plain text, and a disabled action. */
+export const MixedMenuItems = { name: 'Mixed Menu Items', args: storyDefs.MixedMenuItems };
+
 /** The same nested menu in a square panel. */
 export const SquareMenuItems = {
   args: storyDefs.SquareMenuItems,
@@ -416,8 +511,7 @@ export const WorstCase = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Combines nested menu items, rich content, a close button, and a custom trigger.',
+        story: 'Combines nested menu items, rich content, a close button, and a custom trigger.',
       },
     },
   },

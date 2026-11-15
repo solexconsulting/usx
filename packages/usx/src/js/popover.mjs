@@ -22,9 +22,10 @@ function close(details, restoreFocus = false) {
 
 function connect(root) {
   const doc = root.ownerDocument || root;
+  let keyboardNavigation = false;
   const dismissOutside = (node) => {
     disclosures(root)
-      .filter((details) => details.open && !enhancementDisabled(details) && !details.contains(node))
+      .filter((details) => details.open && details.dataset.usxPopoverDismissOnOutside !== 'false' && !enhancementDisabled(details) && !details.contains(node))
       .forEach((details) => close(details));
   };
   const click = (event) => {
@@ -40,6 +41,7 @@ function connect(root) {
     dismissOutside(event.target);
   };
   const keydown = (event) => {
+    if (event.key === 'Tab') keyboardNavigation = true;
     if (event.defaultPrevented || event.key !== 'Escape') return;
     const details = event.target.closest?.(`${DISCLOSURE}[open]`);
     if (!details || !root.contains(details) || enhancementDisabled(details)) return;
@@ -52,13 +54,20 @@ function connect(root) {
     if (!details.matches?.(DISCLOSURE) || !root.contains(details) || enhancementDisabled(details)) return;
     if (!details.open) close(details);
   };
-  const focusin = (event) => dismissOutside(event.target);
+  const pointerdown = () => {
+    keyboardNavigation = false;
+  };
+  const focusin = (event) => {
+    if (keyboardNavigation) dismissOutside(event.target);
+  };
   doc.addEventListener('click', click);
+  doc.addEventListener('pointerdown', pointerdown);
   doc.addEventListener('focusin', focusin);
   root.addEventListener('keydown', keydown);
   root.addEventListener('toggle', toggle, true);
   return () => {
     doc.removeEventListener('click', click);
+    doc.removeEventListener('pointerdown', pointerdown);
     doc.removeEventListener('focusin', focusin);
     root.removeEventListener('keydown', keydown);
     root.removeEventListener('toggle', toggle, true);

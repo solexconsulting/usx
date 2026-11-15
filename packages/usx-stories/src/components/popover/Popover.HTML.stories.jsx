@@ -56,8 +56,27 @@ const testDefault = async ({ canvasElement }) => {
   await expect(trigger).toHaveFocus();
   await userEvent.click(trigger);
   trigger.focus();
-  await userEvent.click(canvas.getByText('This content following the popover should be covered when it opens.'));
+  await userEvent.click(
+    canvas.getByText('This content following the popover should be covered when it opens.')
+  );
   await expect(disclosure.open).toBe(false);
+};
+
+const testPersistent = async ({ canvasElement }) => {
+  const id = 'popover-persistent';
+  const disclosure = disclosureFor(canvasElement, id);
+  const trigger = summaryFor(canvasElement, id);
+  await expect(disclosure.dataset.usxPopoverDismissOnOutside).toBe('false');
+  await userEvent.click(trigger);
+  await expect(disclosure.open).toBe(true);
+  canvasElement.ownerDocument.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+  await expect(disclosure.open).toBe(true);
+  summaryFor(canvasElement, 'popover-default').focus();
+  await expect(disclosure.open).toBe(true);
+  disclosure.querySelector('[data-usx-popover-close]').focus();
+  await userEvent.keyboard('{Escape}');
+  await expect(disclosure.open).toBe(false);
+  await expect(trigger).toHaveFocus();
 };
 
 const testAuthoredTrigger = async ({ canvasElement }) => {
@@ -129,6 +148,39 @@ const testMenuItems = async ({ canvasElement }, id = 'popover-menu-items') => {
   await expect(trigger).toHaveFocus();
 };
 
+const testMixedMenuItems = async ({ canvasElement }) => {
+  const id = 'popover-mixed-menu-items';
+  const trigger = summaryFor(canvasElement, id);
+  await clickSummary(canvasElement, id);
+  const menu = disclosureFor(canvasElement, id).querySelector('.usx-popover__menu');
+  const rows = menu.querySelectorAll(':scope > li > .usx-popover__menu-item');
+  await expect(rows).toHaveLength(4);
+  await expect(rows[0].tagName).toBe('BUTTON');
+  await expect(rows[0]).toHaveAttribute('type', 'button');
+  await expect(rows[0]).not.toHaveClass('usa-button', 'usx-button');
+  await expect(rows[0]).toHaveTextContent('Copy record');
+  await expect(rows[0].querySelector('use')).toHaveAttribute(
+    'href',
+    expect.stringMatching(/#content_copy$/)
+  );
+  await expect(rows[1].tagName).toBe('A');
+  await expect(rows[1]).toHaveAttribute(
+    'href',
+    expect.stringMatching(/#(?:react-|django-)?record-10482$/)
+  );
+  await expect(rows[2].tagName).toBe('SPAN');
+  await expect(rows[3].tagName).toBe('BUTTON');
+  await expect(rows[3]).toBeDisabled();
+  rows[0].dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, pointerType: 'touch' }));
+  const outside = summaryFor(canvasElement, 'popover-default');
+  outside.focus();
+  await expect(disclosureFor(canvasElement, id).open).toBe(true);
+  trigger.focus();
+  trigger.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, key: 'Tab' }));
+  outside.focus();
+  await expect(disclosureFor(canvasElement, id).open).toBe(false);
+};
+
 const testWorstCase = async ({ canvasElement }) => {
   const id = 'popover-worst-case';
   const scope = scopeOf(canvasElement, id);
@@ -192,7 +244,36 @@ const testHeadingAs = async ({ canvasElement }, id, level) => {
   const heading = scope.getByRole('heading', { level, name: 'Filing deadlines' });
   await expectVisible(heading);
   await expect(heading).toHaveClass('usx-popover__panel-heading');
-  await expect(heading.parentElement.id.endsWith(id)).toBe(true);
+  await expect(heading.closest('.usx-popover__header').parentElement.id.endsWith(id)).toBe(true);
+};
+
+const testHeaderActions = async ({ canvasElement }) => {
+  const id = 'popover-header-actions';
+  const root = disclosureFor(canvasElement, id);
+  const trigger = summaryFor(canvasElement, id);
+  await clickSummary(canvasElement, id);
+  const panel = canvasElement.querySelector(`[id$="${id}"]`);
+  const header = panel.querySelector(':scope > .usx-popover__header');
+  await expect(header).not.toBeNull();
+  await expect(header.querySelector('h2')).toHaveTextContent('Record 10482');
+  const back = header.querySelector('.usx-popover__header-left-actions > button');
+  await expect(back).toHaveAccessibleName('Back to records');
+  await expect(
+    back.compareDocumentPosition(header.querySelector('h2')) & Node.DOCUMENT_POSITION_FOLLOWING
+  ).toBeTruthy();
+  const actions = header.querySelector('.usx-popover__header-right-actions > .usx-popover');
+  await expect(actions).not.toBeNull();
+  await userEvent.click(actions.querySelector('summary'));
+  await expect(actions.open).toBe(true);
+  await expect(actions.querySelector('button.usx-popover__menu-item')).toHaveTextContent(
+    'Copy record'
+  );
+  const close = header.querySelector('[data-usx-popover-close]');
+  await expect(close).toHaveAccessibleName('Close record');
+  await expect(close.getAttribute('data-usx-popover-close')).toBe(panel.id);
+  await userEvent.click(close);
+  await expect(root.open).toBe(false);
+  await expect(trigger).toHaveFocus();
 };
 
 const testAllPlacements = async ({ canvasElement }) => {
@@ -277,31 +358,37 @@ export const AllVariantsReact = {
   play: async (context) => {
     const step = (name, fn) => context.step(name, fn);
     await step('Default', () => testDefault(context));
-    await step('Rounded Panel', () =>
-      testPanelShape(context, 'popover-panel-rounded', 'rounded')
-    );
+    await step('Persistent', () => testPersistent(context));
+    await step('Rounded Panel', () => testPanelShape(context, 'popover-panel-rounded', 'rounded'));
     await step('Square Panel', () => testPanelShape(context, 'popover-panel-square', 'square'));
     await step('Authored Trigger', () => testAuthoredTrigger(context));
     await step('Grouped Summary Props', () => testGroupedSummaryProps(context));
+    await step('Header Actions', () => testHeaderActions(context));
     await step('Menu Items', () => testMenuItems(context));
+    await step('Mixed Menu Items', () => testMixedMenuItems(context));
     await step('Square Menu Items', async () => {
       await testMenuItems(context, 'popover-square-menu-items');
       await testPanelShape(context, 'popover-square-menu-items', 'square');
-      const rounded = getComputedStyle(context.canvasElement.querySelector('[id$="popover-menu-items"]'));
-      const square = getComputedStyle(context.canvasElement.querySelector('[id$="popover-square-menu-items"]'));
+      const rounded = getComputedStyle(
+        context.canvasElement.querySelector('[id$="popover-menu-items"]')
+      );
+      const square = getComputedStyle(
+        context.canvasElement.querySelector('[id$="popover-square-menu-items"]')
+      );
       await expect(square.paddingLeft).toBe(rounded.paddingLeft);
       await expect(parseFloat(square.paddingTop)).toBeLessThan(parseFloat(rounded.paddingTop));
-      const panels = disclosureFor(context.canvasElement, 'popover-square-menu-items')
-        .querySelectorAll('.usx-popover__panel');
-      await expect([...panels].every((panel) => panel.classList.contains('usx-popover__panel--square')))
-        .toBe(true);
+      const panels = disclosureFor(
+        context.canvasElement,
+        'popover-square-menu-items'
+      ).querySelectorAll('.usx-popover__panel');
+      await expect(
+        [...panels].every((panel) => panel.classList.contains('usx-popover__panel--square'))
+      ).toBe(true);
     });
     await step('Worst Case', () => testWorstCase(context));
     await step('Links', () => testLinks(context));
     await step('Rich Form', () => testRichForm(context));
-    await step('Heading Level Default', () =>
-      testHeadingAs(context, 'popover-heading-default', 2)
-    );
+    await step('Heading Level Default', () => testHeadingAs(context, 'popover-heading-default', 2));
     await step('Heading Level H3', () => testHeadingAs(context, 'popover-heading-h3', 3));
     await step('Heading Level H5', () => testHeadingAs(context, 'popover-heading-h5', 5));
     await step('All Placements', () => testAllPlacements(context));

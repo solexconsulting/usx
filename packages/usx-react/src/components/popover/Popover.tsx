@@ -22,16 +22,27 @@ export interface PopoverProps extends Omit<
   panelShape?: PopoverPanelShape;
   /** Open on the initial render. Native details owns subsequent disclosure state. */
   defaultOpen?: boolean;
+  /** Keep the panel open when focus or pointer moves outside it. Escape and close controls still close it. */
+  dismissOnOutside?: boolean;
   /** Optional native details group. Use a different name at each nesting level. */
   name?: string;
   /** Arbitrary semantic content. Use native links, buttons, lists, or form controls. */
   children?: React.ReactNode;
-  /** Renders a PopoverMenu of links and nested flyouts in the panel, before any children. */
+  /** Renders a PopoverMenu of links, actions, and nested flyouts before any children. */
   menuItems?: PopoverMenuItem[];
   showClose?: boolean;
   closeLabel?: string;
+  /** Controls before the panel heading, such as a back button. */
+  headerLeftActions?: React.ReactNode;
+  /** Controls after the panel heading, before the close icon. */
+  headerRightActions?: React.ReactNode;
+  showCloseIcon?: boolean;
+  closeIconLabel?: string;
+  headerClassName?: string;
   /** Optional visible heading for the panel. */
   panelHeading?: string;
+  /** Optional ID for a heading that labels panel content and can receive programmatic focus. */
+  panelHeadingId?: string;
   /** Heading element for panelHeading, chosen to fit the surrounding page outline. */
   headingAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
@@ -55,10 +66,17 @@ export default function Popover({
   align = 'start',
   panelShape = 'rounded',
   defaultOpen = false,
+  dismissOnOutside = true,
   menuItems,
   showClose = false,
   closeLabel = 'Close',
+  headerLeftActions,
+  headerRightActions,
+  showCloseIcon = false,
+  closeIconLabel = 'Close',
+  headerClassName,
   panelHeading,
+  panelHeadingId,
   headingAs = 'h2',
   scrollable = false,
   className,
@@ -80,16 +98,59 @@ export default function Popover({
       open={initiallyOpen || undefined}
       data-side={side}
       data-align={align}
+      data-usx-popover-dismiss-on-outside={dismissOnOutside ? undefined : 'false'}
       {...extraAttributes}
     >
       <Summary unstyled {...composedSummaryProps} />
       <div
         id={id}
-        className={ClassNames('usx-popover__panel', {
-          'usx-popover__panel--square': panelShape === 'square',
-        }, panelClassName)}
+        className={ClassNames(
+          'usx-popover__panel',
+          {
+            'usx-popover__panel--square': panelShape === 'square',
+          },
+          panelClassName
+        )}
       >
-        {panelHeading && <Heading className="usx-popover__panel-heading">{panelHeading}</Heading>}
+        {(headerLeftActions || panelHeading || headerRightActions || showCloseIcon) && (
+          <header className={ClassNames('usx-popover__header', headerClassName)}>
+            {headerLeftActions && (
+              <div className="usx-popover__header-left-actions">{headerLeftActions}</div>
+            )}
+            <div className="usx-popover__header-content">
+              {panelHeading && (
+                <Heading
+                  id={panelHeadingId}
+                  className="usx-popover__panel-heading"
+                  tabIndex={-1}
+                >
+                  {panelHeading}
+                </Heading>
+              )}
+            </div>
+            {(headerRightActions || showCloseIcon) && (
+              <div className="usx-popover__header-right-actions">
+                {headerRightActions}
+                {showCloseIcon && (
+                  <Button
+                    variant="unstyled"
+                    className="usx-popover__header-close"
+                    aria-label={closeIconLabel}
+                    iconProps={[{ name: 'close' }]}
+                    extraAttributes={{ 'data-usx-popover-close': id }}
+                    onClick={(event) => {
+                      const details = event.currentTarget.closest(
+                        'details.usx-popover'
+                      ) as HTMLDetailsElement;
+                      details.open = false;
+                      details.querySelector<HTMLElement>(':scope > summary')?.focus();
+                    }}
+                  />
+                )}
+              </div>
+            )}
+          </header>
+        )}
         {menuItems && <PopoverMenu items={menuItems} prefix={id} panelShape={panelShape} />}
         {children && (
           <div

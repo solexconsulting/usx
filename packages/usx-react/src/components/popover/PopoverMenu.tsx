@@ -1,6 +1,7 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import Link from '../link/Link';
+import Icon, { type IconProps } from '../icon/Icon';
 import type { SummaryProps } from '../summary/Summary';
 import Popover, { type PopoverPanelShape } from './Popover';
 
@@ -9,10 +10,15 @@ interface PopoverMenuItemBase {
   id?: string;
 }
 
-export interface PopoverMenuLinkItem extends PopoverMenuItemBase {
-  type: 'link';
-  href: string;
+export interface PopoverMenuRowItem extends PopoverMenuItemBase {
+  type?: 'button';
   text: string;
+  href?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
+  /** Optional icon before the label of an action row. */
+  icon?: IconProps;
+  extraAttributes?: Record<string, unknown>;
 }
 
 export interface PopoverMenuDetailsItem extends PopoverMenuItemBase {
@@ -22,15 +28,10 @@ export interface PopoverMenuDetailsItem extends PopoverMenuItemBase {
   items: PopoverMenuItem[];
 }
 
-export interface PopoverMenuTextItem extends PopoverMenuItemBase {
-  type: 'text';
-  text: string;
-}
-
-export type PopoverMenuItem = PopoverMenuLinkItem | PopoverMenuDetailsItem | PopoverMenuTextItem;
+export type PopoverMenuItem = PopoverMenuDetailsItem | PopoverMenuRowItem;
 
 export interface PopoverMenuProps extends Omit<React.HTMLAttributes<HTMLUListElement>, 'children'> {
-  /** Links, nested menus, or plain text. */
+  /** Links, actions, nested menus, or plain text. */
   items: PopoverMenuItem[];
   /** Prefix for generated panel IDs and the native details group name. Generated if omitted. */
   prefix?: string;
@@ -40,7 +41,13 @@ export interface PopoverMenuProps extends Omit<React.HTMLAttributes<HTMLUListEle
 }
 
 /** A stacked list of rows; `details` items open nested PopoverMenus beside their row. */
-export default function PopoverMenu({ items, prefix, panelShape, className, ...props }: PopoverMenuProps) {
+export default function PopoverMenu({
+  items,
+  prefix,
+  panelShape,
+  className,
+  ...props
+}: PopoverMenuProps) {
   const generatedPrefix = React.useId();
   const base = prefix ?? generatedPrefix;
 
@@ -51,7 +58,7 @@ export default function PopoverMenu({ items, prefix, panelShape, className, ...p
 
         return (
           <li key={id}>
-            {item.type === 'details' && (
+            {item.type === 'details' ? (
               <Popover
                 id={id}
                 summaryProps={{
@@ -63,15 +70,26 @@ export default function PopoverMenu({ items, prefix, panelShape, className, ...p
                 panelShape={panelShape}
                 menuItems={item.items}
               />
-            )}
-            {item.type === 'link' && (
+            ) : item.type === 'button' || item.onClick ? (
+              <button
+                {...item.extraAttributes}
+                type="button"
+                className="usx-popover__menu-item"
+                onClick={item.onClick}
+                disabled={item.disabled}
+              >
+                {item.icon && <Icon {...item.icon} />}
+                {item.text}
+              </button>
+            ) : item.href ? (
               <Link
                 href={item.href}
                 text={item.text}
                 className="usx-no-visited usx-popover__menu-item"
               />
+            ) : (
+              <span className="usx-popover__menu-item">{item.text}</span>
             )}
-            {item.type === 'text' && <span className="usx-popover__menu-item">{item.text}</span>}
           </li>
         );
       })}

@@ -8,6 +8,28 @@
   </div>
 </details>
 
+<h3 class="site-preview-heading">Persistent</h3>
+<details
+  class="usx-popover"
+  data-side="bottom"
+  data-align="start"
+  data-usx-popover-dismiss-on-outside="false"
+>
+  <summary class="usa-button usx-button">Keep this panel open</summary>
+  <div id="react-popover-persistent" class="usx-popover__panel">
+    <div class="usx-popover__panel-content">
+      This panel stays open when you interact with the page.
+    </div>
+    <button
+      type="button"
+      class="usa-button usx-button usa-button--unstyled usx-popover__panel-close"
+      data-usx-popover-close="react-popover-persistent"
+    >
+      Close
+    </button>
+  </div>
+</details>
+
 <h3 class="site-preview-heading">Rounded Panel</h3>
 <details class="usx-popover" data-side="bottom" data-align="start">
   <summary class="usa-button usx-button usa-button--primary margin-0">Rounded panel</summary>
@@ -56,6 +78,54 @@
   </summary>
   <div id="react-popover-summary-props" class="usx-popover__panel">
     <div class="usx-popover__panel-content">Manage your account settings.</div>
+  </div>
+</details>
+
+<h3 class="site-preview-heading">Header Actions</h3>
+<details class="usx-popover" data-side="bottom" data-align="start">
+  <summary class="usa-button usx-button margin-0">Open record</summary>
+  <div id="react-popover-header-actions" class="usx-popover__panel">
+    <header class="usx-popover__header">
+      <div class="usx-popover__header-left-actions">
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--unstyled"
+          aria-label="Back to records"
+        >
+          ←
+        </button>
+      </div>
+      <div class="usx-popover__header-content">
+        <h2 class="usx-popover__panel-heading" tabindex="-1">Record 10482</h2>
+      </div>
+      <div class="usx-popover__header-right-actions">
+        <details class="usx-popover" data-side="bottom" data-align="end">
+          <summary class="usa-button usx-button usa-button--unstyled">Actions</summary>
+          <div id="react-popover-header-actions-menu" class="usx-popover__panel">
+            <ul class="usx-popover__menu">
+              <li>
+                <button type="button" class="usx-popover__menu-item">
+                  <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                    <use href="/img/sprite.svg#content_copy"></use></svg
+                  >Copy record
+                </button>
+              </li>
+            </ul>
+          </div>
+        </details>
+        <button
+          type="button"
+          class="usa-button usx-button usa-button--unstyled usx-popover__header-close"
+          aria-label="Close record"
+          data-usx-popover-close="react-popover-header-actions"
+        >
+          <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+            <use href="/img/sprite.svg#close"></use>
+          </svg>
+        </button>
+      </div>
+    </header>
+    <div class="usx-popover__panel-content">Review the record before taking action.</div>
   </div>
 </details>
 
@@ -166,6 +236,34 @@
         >
       </li>
     </ul>
+  </div>
+</details>
+
+<h3 class="site-preview-heading">Mixed Menu Items</h3>
+<details class="usx-popover" data-side="bottom" data-align="start">
+  <summary class="usa-button usx-button margin-0">Record actions</summary>
+  <div id="react-popover-mixed-menu-items" class="usx-popover__panel">
+    <ul class="usx-popover__menu">
+      <li>
+        <button type="button" class="usx-popover__menu-item">
+          <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+            <use href="/img/sprite.svg#content_copy"></use></svg
+          >Copy record
+        </button>
+      </li>
+      <li>
+        <a
+          href="#react-record-10482"
+          class="usa-link usx-link usx-no-visited usx-popover__menu-item"
+          >View record</a
+        >
+      </li>
+      <li><span class="usx-popover__menu-item">Record actions require an account</span></li>
+      <li>
+        <button type="button" class="usx-popover__menu-item" disabled="">Archive record</button>
+      </li>
+    </ul>
+    <div class="usx-popover__panel-content"><p id="react-record-10482">Record 10482</p></div>
   </div>
 </details>
 
@@ -299,7 +397,11 @@
     ><span>Account and services</span><span class="usa-tag margin-left-1">3</span>
   </summary>
   <div id="react-popover-worst-case" class="usx-popover__panel font-sans-sm">
-    <h2 class="usx-popover__panel-heading">Account and services</h2>
+    <header class="usx-popover__header">
+      <div class="usx-popover__header-content">
+        <h2 class="usx-popover__panel-heading" tabindex="-1">Account and services</h2>
+      </div>
+    </header>
     <ul class="usx-popover__menu">
       <li>
         <details
@@ -502,7 +604,11 @@
 <details class="usx-popover" data-side="bottom" data-align="start">
   <summary class="usa-button usx-button usa-button--primary margin-0">Important dates</summary>
   <div id="react-popover-heading-default" class="usx-popover__panel">
-    <h2 class="usx-popover__panel-heading">Filing deadlines</h2>
+    <header class="usx-popover__header">
+      <div class="usx-popover__header-content">
+        <h2 class="usx-popover__panel-heading" tabindex="-1">Filing deadlines</h2>
+      </div>
+    </header>
     <div class="usx-popover__panel-content">
       <p class="margin-0">Applications are due by the last business day of the month.</p>
     </div>
@@ -520,7 +626,11 @@
 <details class="usx-popover" data-side="bottom" data-align="start">
   <summary class="usa-button usx-button usa-button--primary margin-0">Important dates</summary>
   <div id="react-popover-heading-h3" class="usx-popover__panel">
-    <h3 class="usx-popover__panel-heading">Filing deadlines</h3>
+    <header class="usx-popover__header">
+      <div class="usx-popover__header-content">
+        <h3 class="usx-popover__panel-heading" tabindex="-1">Filing deadlines</h3>
+      </div>
+    </header>
     <div class="usx-popover__panel-content">
       <p class="margin-0">Applications are due by the last business day of the month.</p>
     </div>
@@ -538,7 +648,11 @@
 <details class="usx-popover" data-side="bottom" data-align="start">
   <summary class="usa-button usx-button usa-button--primary margin-0">Important dates</summary>
   <div id="react-popover-heading-h5" class="usx-popover__panel">
-    <h5 class="usx-popover__panel-heading">Filing deadlines</h5>
+    <header class="usx-popover__header">
+      <div class="usx-popover__header-content">
+        <h5 class="usx-popover__panel-heading" tabindex="-1">Filing deadlines</h5>
+      </div>
+    </header>
     <div class="usx-popover__panel-content">
       <p class="margin-0">Applications are due by the last business day of the month.</p>
     </div>
