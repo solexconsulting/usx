@@ -81,7 +81,10 @@
         "properties": {
           "position": {
             "type": "select",
-            "options": ["left", "right"],
+            "options": [
+              "left",
+              "right"
+            ],
             "default": "left",
             "description": "Which side of the button label to render this icon on."
           }
@@ -96,7 +99,9 @@
       "type": "object",
       "description": "Inline styles as a React CSSProperties object.",
       "renderers": {
-        "react": { "type": "object" },
+        "react": {
+          "type": "object"
+        },
         "django": {
           "supported": false,
           "description": "The Django template does not render this prop."
@@ -110,6 +115,10 @@
     "extraAttributes": {
       "type": "object",
       "description": "An object containing any additional HTML attributes to be spread onto the button element, providing flexibility for custom use cases or integrations."
+    },
+    "download": {
+      "type": "string",
+      "description": "Optional suggested filename for an anchor Button with href. Has no effect on native buttons."
     }
   }
 }

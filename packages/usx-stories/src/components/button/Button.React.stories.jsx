@@ -22,6 +22,28 @@ export const Default = {
   }
 };
 
+
+export const Download = {
+  name: 'Download action',
+  args: {
+    href: '/liberty-island-notes.txt',
+    download: 'Liberty Island notes.txt',
+    label: 'Download island notes',
+    variant: 'unstyled',
+  },
+};
+
+export const TagStyledAction = {
+  name: 'Button styled as a tag',
+  args: {
+    label: 'Choose topic',
+    variant: 'unstyled',
+    className: 'usa-tag usx-tag usx-tag--outline usx-tag--interactive',
+    onClick: () => alert('Topic selected'),
+  },
+  tags: ['USX'],
+};
+
 const stateButtons = (variant, extra = {}) => [
   { label: 'Default', variant, ...extra },
   { label: 'Hover', variant, className: 'usa-button--hover', ...extra },

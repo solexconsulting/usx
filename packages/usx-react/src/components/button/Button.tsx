@@ -10,7 +10,14 @@ export interface ButtonIcon extends IconProps {
 
 type ButtonBaseProps = {
   label?: string;
-  variant?: 'primary' | 'secondary' | 'accent-cool' | 'accent-warm' | 'base' | 'outline' | 'unstyled';
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'accent-cool'
+    | 'accent-warm'
+    | 'base'
+    | 'outline'
+    | 'unstyled';
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -27,8 +34,10 @@ type ButtonBaseProps = {
   extraAttributes?: Record<string, unknown>;
 };
 
-type AnchorButtonProps = ButtonBaseProps & React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
-type NativeButtonProps = ButtonBaseProps & React.ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined };
+type AnchorButtonProps = ButtonBaseProps &
+  React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
+export type NativeButtonProps = ButtonBaseProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined };
 export type ButtonProps = AnchorButtonProps | NativeButtonProps;
 
 export default function Button({

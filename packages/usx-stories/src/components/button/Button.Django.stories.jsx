@@ -25,6 +25,26 @@ const toDjangoArgs = ({ 'aria-disabled': ariaDisabled, ...args }) => ({
 });
 
 export const Default = createStory(toDjangoArgs(storyDefs.Default));
+export const Download = {
+  ...createStory({
+    href: '/liberty-island-notes.txt',
+    download: 'Liberty Island notes.txt',
+    label: 'Download island notes',
+    variant: 'unstyled',
+    className: 'usa-link usx-link',
+  }),
+  name: 'Download action',
+};
+export const TagStyledAction = {
+  ...createStory({
+    label: 'Choose topic',
+    variant: 'unstyled',
+    className: 'usa-tag usx-tag usx-tag--outline usx-tag--interactive usa-link usx-link usx-no-visited',
+    extraAttributes: { onclick: "window.alert('Topic selected')" },
+  }),
+  name: 'Button styled as a tag',
+};
+
 export const DefaultHover = createStory(toDjangoArgs(storyDefs.DefaultHover));
 export const DefaultActive = createStory(toDjangoArgs(storyDefs.DefaultActive));
 export const DefaultFocus = createStory(toDjangoArgs(storyDefs.DefaultFocus));

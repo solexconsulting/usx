@@ -3,6 +3,7 @@
 {% if href %}
     <a
         href="{{ href }}"
+        {% if download %}{% if download is True %}download{% else %}download="{{ download }}"{% endif %}{% endif %}
         class="
             usa-button usx-button
             {% if variant %} usa-button--{{ variant }}{% endif %}
@@ -28,7 +29,7 @@
             {% if ghost == True %} usx-button--ghost{% endif %}
             {% if className %} {{ className }}{% endif %}
         "
-        {% if disabled == True %} disabled aria-disabled="true" {% endif %}
+        {% if disabled == True %} disabled aria-disabled="true"{% endif %}
         {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
     >
 {% endif %}
