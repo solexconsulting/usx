@@ -10,26 +10,74 @@
       { "key": "year", "header": "Year" }
     ],
     "data": [
-      { "title": "Declaration of Independence", "description": "Statement adopted by the Continental Congress.", "year": 1776 },
-      { "title": "Bill of Rights", "description": "The first ten amendments to the Constitution.", "year": 1791 },
-      { "title": "Emancipation Proclamation", "description": "An executive order ending slavery in designated states.", "year": 1863 }
+      {
+        "title": "Declaration of Independence",
+        "description": "Statement adopted by the Continental Congress.",
+        "year": 1776
+      },
+      {
+        "title": "Bill of Rights",
+        "description": "The first ten amendments to the Constitution.",
+        "year": 1791
+      },
+      {
+        "title": "Emancipation Proclamation",
+        "description": "An executive order ending slavery in designated states.",
+        "year": 1863
+      }
     ],
     "caption": "Historic U.S. documents"
   },
   "props": {
-    "extraAttributes": { "type": "object", "description": "Additional attributes on the USWDS enhancement target." },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional attributes on the USWDS enhancement target."
+    },
     "id": { "type": "string", "description": "Optional table ID." },
-    "columns": { "type": "array", "description": "Column definitions: key, header, primary (row header), sortable (USWDS sorting)." },
-    "data": { "type": "array", "description": "Array of records displayed in the same order provided." },
-    "caption": { "type": "slot", "description": "Accessible table title. Required for sortable tables." },
+    "columns": {
+      "type": "array",
+      "description": "Column definitions: key, header, primary (row header), sortable (USWDS sorting)."
+    },
+    "data": {
+      "type": "array",
+      "description": "Array of records displayed in the same order provided."
+    },
+    "caption": {
+      "type": "slot",
+      "description": "Accessible table title. Required for sortable tables."
+    },
     "striped": { "type": "boolean", "default": false, "description": "Alternating row shading." },
-    "borderless": { "type": "boolean", "default": false, "description": "Remove outer cell borders." },
+    "borderless": {
+      "type": "boolean",
+      "default": false,
+      "description": "Remove outer cell borders."
+    },
     "compact": { "type": "boolean", "default": false, "description": "Reduce cell padding." },
-    "scrollable": { "type": "boolean", "default": false, "description": "Wrap the table in a horizontal scroll container." },
-    "scrollHeight": { "type": "string", "description": "Fixed height for the scroll container when scrollable is true; useful with stickyHeader." },
-    "stickyHeader": { "type": "boolean", "default": false, "description": "Keep headings visible during scrolling." },
-    "responsive": { "type": "select", "options": [false, "stack", "stack-header"], "default": false, "description": "USWDS mobile stacking variant." },
+    "scrollable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Wrap the table in a horizontal scroll container."
+    },
+    "scrollHeight": {
+      "type": "string",
+      "description": "Fixed height for the scroll container when scrollable is true; useful with stickyHeader."
+    },
+    "stickyHeader": {
+      "type": "boolean",
+      "default": false,
+      "description": "Keep headings visible during scrolling."
+    },
+    "responsive": {
+      "type": "select",
+      "options": [false, "stack", "stack-header"],
+      "default": false,
+      "description": "USWDS mobile stacking variant."
+    },
     "className": { "type": "string", "description": "Additional table classes." },
-    "children": { "type": "slot", "description": "Optional hand-authored table markup for React.", "renderers": { "django": { "supported": false } } }
+    "children": {
+      "type": "slot",
+      "description": "Optional hand-authored table markup for React.",
+      "renderers": { "django": { "supported": false } }
+    }
   }
 }

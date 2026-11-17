@@ -29,9 +29,20 @@ export interface TableProps extends Omit<React.TableHTMLAttributes<HTMLTableElem
 
 /** A themeable USWDS table. Sorting is supplied by USWDS's table script. */
 export default function Table({
-  columns = [], data = [], caption, striped = false, borderless = false,
-  compact = false, scrollable = false, scrollHeight, stickyHeader = false, responsive = false,
-  className, children, extraAttributes, ...props
+  columns = [],
+  data = [],
+  caption,
+  striped = false,
+  borderless = false,
+  compact = false,
+  scrollable = false,
+  scrollHeight,
+  stickyHeader = false,
+  responsive = false,
+  className,
+  children,
+  extraAttributes,
+  ...props
 }: TableProps) {
   const hasSorting = !children && columns.some((column) => column.sortable);
   const table = (
@@ -40,7 +51,8 @@ export default function Table({
         {...props}
         {...extraAttributes}
         className={classnames(
-          'usa-table', 'usx-table',
+          'usa-table',
+          'usx-table',
           striped && 'usa-table--striped',
           borderless && 'usa-table--borderless',
           compact && 'usa-table--compact',
@@ -53,30 +65,51 @@ export default function Table({
         {children ?? (
           <>
             <caption className="usx-table__caption">{caption || 'Data table'}</caption>
-            <thead><tr>{columns.map((column) => (
-              <th key={column.key} scope="col" data-sortable={column.sortable ? '' : undefined}>
-                {column.header}
-              </th>
-            ))}</tr></thead>
-            <tbody>{data.map((row, index) => (
-              <tr key={index}>{columns.map((column) => {
-                const Cell = column.primary ? 'th' : 'td';
-                const value = row[column.key];
-                return <Cell
-                  key={column.key}
-                  scope={column.primary ? 'row' : undefined}
-                  data-label={responsive ? String(column.header) : undefined}
-                >{value ?? ''}</Cell>;
-              })}</tr>
-            ))}</tbody>
+            <thead>
+              <tr>
+                {columns.map((column) => (
+                  <th key={column.key} scope="col" data-sortable={column.sortable ? '' : undefined}>
+                    {column.header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((row, index) => (
+                <tr key={index}>
+                  {columns.map((column) => {
+                    const Cell = column.primary ? 'th' : 'td';
+                    const value = row[column.key];
+                    return (
+                      <Cell
+                        key={column.key}
+                        scope={column.primary ? 'row' : undefined}
+                        data-label={responsive ? String(column.header) : undefined}
+                      >
+                        {value ?? ''}
+                      </Cell>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
           </>
         )}
       </table>
-      {hasSorting && <div className="usa-sr-only usa-table__announcement-region" aria-live="polite" />}
+      {hasSorting && (
+        <div className="usa-sr-only usa-table__announcement-region" aria-live="polite" />
+      )}
     </>
   );
-  return scrollable
-    ? <div className="usa-table-container--scrollable" tabIndex={0}
-      style={scrollHeight ? { height: scrollHeight, overflow: 'auto' } : undefined}>{table}</div>
-    : table;
+  return scrollable ? (
+    <div
+      className="usa-table-container--scrollable"
+      tabIndex={0}
+      style={scrollHeight ? { height: scrollHeight, overflow: 'auto' } : undefined}
+    >
+      {table}
+    </div>
+  ) : (
+    table
+  );
 }

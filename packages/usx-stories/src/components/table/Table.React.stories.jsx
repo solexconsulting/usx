@@ -9,17 +9,26 @@ const REQUEST_OFFICES = ['Seattle', 'Portland', 'Phoenix', 'Albuquerque', 'Atlan
 const STICKY_ROWS = Array.from({ length: 36 }, (_, index) => ({
   request: `${REQUEST_TYPES[index % REQUEST_TYPES.length]} #${1201 + index}`,
   office: REQUEST_OFFICES[index % REQUEST_OFFICES.length],
-  received: `2025-${String(1 + Math.floor(index / 3)).padStart(2, '0')}-${String(1 + index % 28).padStart(2, '0')}`,
+  received: `2025-${String(1 + Math.floor(index / 3)).padStart(2, '0')}-${String(1 + (index % 28)).padStart(2, '0')}`,
 }));
 
 export const storyDefs = {
   Default: config.default,
-  Unenhanced: { ...config.default, id: 'table-unenhanced', columns: config.default.columns.map((column) => ({ ...column, sortable: true })), extraAttributes: { 'data-enhanced': 'true' } },
+  Unenhanced: {
+    ...config.default,
+    id: 'table-unenhanced',
+    columns: config.default.columns.map((column) => ({ ...column, sortable: true })),
+    extraAttributes: { 'data-enhanced': 'true' },
+  },
   Striped: { ...config.default, caption: 'Striped table', striped: true },
   Borderless: { ...config.default, caption: 'Borderless table', borderless: true },
   Compact: { ...config.default, caption: 'Compact table', compact: true },
-  Scrollable: { columns: WIDE_TABLE_COLUMNS, data: WIDE_TABLE_ROWS,
-    caption: 'Monthly case closures by service office, 2023–2026', scrollable: true },
+  Scrollable: {
+    columns: WIDE_TABLE_COLUMNS,
+    data: WIDE_TABLE_ROWS,
+    caption: 'Monthly case closures by service office, 2023–2026',
+    scrollable: true,
+  },
   Stacked: { ...config.default, caption: 'Stacked table', responsive: 'stack' },
   StackedHeader: { ...config.default, caption: 'Stacked header table', responsive: 'stack-header' },
   StickyHeader: {
@@ -34,7 +43,11 @@ export const storyDefs = {
     scrollable: true,
     scrollHeight: '18rem',
   },
-  Sortable: { ...config.default, caption: 'Sortable table', columns: config.default.columns.map((column) => ({ ...column, sortable: true })) },
+  Sortable: {
+    ...config.default,
+    caption: 'Sortable table',
+    columns: config.default.columns.map((column) => ({ ...column, sortable: true })),
+  },
 };
 
 export default {
@@ -44,11 +57,27 @@ export default {
   argTypes: buildArgTypes(config.props),
   excludeStories: ['storyDefs', 'Unenhanced'],
   decorators: componentInit('table'),
-  parameters: { docs: { description: { component: `USWDS table variants with USX theme colors. ${uswdsInitNote('table.init()')}` } } },
+  parameters: {
+    docs: {
+      description: {
+        component: `USWDS table variants with USX theme colors. ${uswdsInitNote('table.init()')}`,
+      },
+    },
+  },
 };
 
 export const Default = { args: storyDefs.Default };
-export const Unenhanced = { args: storyDefs.Unenhanced, parameters: { docs: { description: { story: 'Every row remains readable in its original order. Column sorting requires the USWDS table script.' } } } };
+export const Unenhanced = {
+  args: storyDefs.Unenhanced,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Every row remains readable in its original order. Column sorting requires the USWDS table script.',
+      },
+    },
+  },
+};
 export const Striped = { args: storyDefs.Striped };
 export const Borderless = { args: storyDefs.Borderless };
 export const Compact = { args: storyDefs.Compact };

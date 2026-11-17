@@ -10,7 +10,9 @@ export default {
   title: 'HTML/USWDS/Table',
   tags: ['USWDS', 'autodocs'],
   decorators: componentInit('table'),
-  parameters: { docs: { description: { component: 'Canonical USWDS table markup with USX theme colors.' } } },
+  parameters: {
+    docs: { description: { component: 'Canonical USWDS table markup with USX theme colors.' } },
+  },
 };
 
 export const Default = {
@@ -42,7 +44,9 @@ const play = async ({ canvasElement, step }) => {
       await expect(sectionFor(canvasElement, title)).toHaveClass('usa-table-container--scrollable');
     }
     const wide = sectionFor(canvasElement, 'Scrollable');
-    await expect(tableFor(canvasElement, 'Scrollable').querySelectorAll('thead th')).toHaveLength(50);
+    await expect(tableFor(canvasElement, 'Scrollable').querySelectorAll('thead th')).toHaveLength(
+      50
+    );
     await expect(wide.scrollWidth).toBeGreaterThan(wide.clientWidth);
 
     const sticky = sectionFor(canvasElement, 'Sticky Header');
@@ -52,20 +56,30 @@ const play = async ({ canvasElement, step }) => {
     await expect(stickyTable.querySelectorAll('tbody tr')).toHaveLength(36);
     await expect(sticky.scrollHeight).toBeGreaterThan(sticky.clientHeight);
     sticky.scrollTop = 120;
-    await waitFor(() => expect(Math.abs(stickyTable.tHead.getBoundingClientRect().top - sticky.getBoundingClientRect().top)).toBeLessThan(4));
+    await waitFor(() =>
+      expect(
+        Math.abs(stickyTable.tHead.getBoundingClientRect().top - sticky.getBoundingClientRect().top)
+      ).toBeLessThan(4)
+    );
   });
 
   await step('USWDS sorting', async () => {
     const table = tableFor(canvasElement, 'Sortable');
     const titleHeader = table.querySelector('thead th[data-sortable]');
-    await waitFor(() => expect(titleHeader.querySelector('.usa-table__header__button')).toBeTruthy());
+    await waitFor(() =>
+      expect(titleHeader.querySelector('.usa-table__header__button')).toBeTruthy()
+    );
     const button = titleHeader.querySelector('.usa-table__header__button');
     await userEvent.click(button);
     await expect(titleHeader).toHaveAttribute('aria-sort', 'ascending');
-    await expect(table.querySelector('tbody tr:first-child th')).toHaveTextContent('Bill of Rights');
+    await expect(table.querySelector('tbody tr:first-child th')).toHaveTextContent(
+      'Bill of Rights'
+    );
     await userEvent.click(button);
     await expect(titleHeader).toHaveAttribute('aria-sort', 'descending');
-    await expect(table.querySelector('tbody tr:first-child th')).toHaveTextContent('Emancipation Proclamation');
+    await expect(table.querySelector('tbody tr:first-child th')).toHaveTextContent(
+      'Emancipation Proclamation'
+    );
   });
 };
 
