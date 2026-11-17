@@ -17,15 +17,29 @@ for (const library of [esm, cjs]) {
       avatarProps: { variant: 'initials', value: 'AB' },
       'data-credit': 'passed-through',
     };
-    const html = renderToStaticMarkup(React.createElement(library.Quote, { ...layout, attributionProps }, 'Body'));
-    for (const value of ['id="block-credit"', 'custom-credit', 'Author', 'Role', 'AB', 'data-credit="passed-through"']) {
+    const html = renderToStaticMarkup(
+      React.createElement(library.Quote, { ...layout, attributionProps }, 'Body')
+    );
+    for (const value of [
+      'id="block-credit"',
+      'custom-credit',
+      'Author',
+      'Role',
+      'AB',
+      'data-credit="passed-through"',
+    ]) {
       assert.ok(html.includes(value), value);
     }
     assert.ok(!html.includes('attributionProps='));
-    const custom = renderToStaticMarkup(React.createElement(library.Quote, {
-      ...layout,
-      attributionProps: { ...attributionProps, children: React.createElement('strong', null, 'Custom credit') },
-    }));
+    const custom = renderToStaticMarkup(
+      React.createElement(library.Quote, {
+        ...layout,
+        attributionProps: {
+          ...attributionProps,
+          children: React.createElement('strong', null, 'Custom credit'),
+        },
+      })
+    );
     assert.ok(custom.includes('<strong>Custom credit</strong>'));
     assert.ok(!custom.includes('Author'));
   }
@@ -42,19 +56,40 @@ for (const library of [esm, cjs]) {
   assert.ok(plain.includes('Fallback'));
   assert.ok(!plain.includes('border-'));
   const styled = render(library.Callout, {
-    orientation: 'vertical', strokeColor: 'info', backgroundColor: 'base-lightest',
-    textColor: 'primary', indent: 'md', dedent: true, big: true, className: 'custom',
-    content: 'Ignored', children: 'Preferred', as: 'aside',
+    orientation: 'vertical',
+    strokeColor: 'info',
+    backgroundColor: 'base-lightest',
+    textColor: 'primary',
+    indent: 'md',
+    dedent: true,
+    big: true,
+    className: 'custom',
+    content: 'Ignored',
+    children: 'Preferred',
+    as: 'aside',
   });
-  for (const value of ['<aside', 'usx-callout--vertical', 'border-info', 'bg-base-lightest',
-    'text-primary', 'usx-callout--indent-md', 'usx-callout--dedent', 'usx-callout--big', 'custom', 'Preferred']) {
+  for (const value of [
+    '<aside',
+    'usx-callout--vertical',
+    'border-info',
+    'bg-base-lightest',
+    'text-primary',
+    'usx-callout--indent-md',
+    'usx-callout--dedent',
+    'usx-callout--big',
+    'custom',
+    'Preferred',
+  ]) {
     assert.ok(styled.includes(value), value);
   }
   assert.ok(!styled.includes('Ignored'));
   assert.ok(!render(library.Callout, { children: '', content: 'Ignored' }).includes('Ignored'));
   const quote = render(library.Quote, {
-    content: 'Quoted words', sourceLinkProps: { href: 'https://example.com/work' }, sourceTitle: 'Published work',
-    attributionProps: { primary: 'Author' }, calloutProps: { strokeColor: 'info' },
+    content: 'Quoted words',
+    sourceLinkProps: { href: 'https://example.com/work' },
+    sourceTitle: 'Published work',
+    attributionProps: { primary: 'Author' },
+    calloutProps: { strokeColor: 'info' },
   });
   assert.ok(quote.startsWith('<div'));
   assert.ok(quote.startsWith('<div class="usx-quote'));
@@ -62,10 +97,16 @@ for (const library of [esm, cjs]) {
   assert.ok(quote.includes('<blockquote'));
   assert.ok(quote.includes('cite="https://example.com/work"'));
   assert.ok(quote.indexOf('</blockquote>') < quote.indexOf('<figcaption'));
-  assert.ok(quote.includes('<cite><a href="https://example.com/work" class="usa-link usx-link">Published work</a></cite>'));
+  assert.ok(
+    quote.includes(
+      '<cite><a href="https://example.com/work" class="usa-link usx-link">Published work</a></cite>'
+    )
+  );
   assert.ok(!quote.includes('<cite>Author'));
   const classes = render(library.Quote, {
-    className: 'outer-class', calloutProps: { className: 'inner-class' }, content: 'Words',
+    className: 'outer-class',
+    calloutProps: { className: 'inner-class' },
+    content: 'Words',
   });
   assert.ok(classes.startsWith('<div class="usx-quote outer-class"'));
   assert.ok(classes.includes('inner-class'));
@@ -73,8 +114,13 @@ for (const library of [esm, cjs]) {
 console.log('PASS: Callout composition and Quote semantics');
 
 for (const library of [esm, cjs]) {
-  for (const body of [{ content: 'Quoted words' }, { children: 'Quoted words', content: 'Ignored' }]) {
-    const vertical = renderToStaticMarkup(React.createElement(library.Quote, { ...body, calloutProps: { orientation: 'vertical' } }));
+  for (const body of [
+    { content: 'Quoted words' },
+    { children: 'Quoted words', content: 'Ignored' },
+  ]) {
+    const vertical = renderToStaticMarkup(
+      React.createElement(library.Quote, { ...body, calloutProps: { orientation: 'vertical' } })
+    );
     assert.ok(vertical.includes('❝Quoted words❞'));
     assert.ok(!vertical.includes('usx-quote__icon'));
     assert.ok(!vertical.includes('Ignored'));
@@ -87,7 +133,11 @@ console.log('PASS: Vertical quotes wrap content in fancy quotation marks');
 
 for (const library of [esm, cjs]) {
   for (const orientation of ['horizontal', 'vertical']) {
-    const tree = library.Quote({ calloutProps: { orientation }, content: 'Words', attributionProps: { primary: 'Author' } });
+    const tree = library.Quote({
+      calloutProps: { orientation },
+      content: 'Words',
+      attributionProps: { primary: 'Author' },
+    });
     assert.equal(tree.type, 'div');
     assert.ok(tree.props.className.includes('usx-quote'));
     const [icon, callout] = tree.props.children;
@@ -103,20 +153,36 @@ for (const library of [esm, cjs]) {
 console.log('PASS: Icon sits outside Callout; quotation and attribution sit inside');
 
 for (const library of [esm, cjs]) {
-  const render = (props) => renderToStaticMarkup(React.createElement(library.Quote, { content: 'Words', ...props }));
+  const render = (props) =>
+    renderToStaticMarkup(React.createElement(library.Quote, { content: 'Words', ...props }));
   const onClick = () => {};
-  const sourceLinkProps = { href: '/source', external: true, className: 'custom-source', onClick, children: 'Ignored' };
+  const sourceLinkProps = {
+    href: '/source',
+    external: true,
+    className: 'custom-source',
+    onClick,
+    children: 'Ignored',
+  };
   const html = render({ sourceTitle: 'Source title', sourceLinkProps });
-  for (const value of ['href="/source"', 'cite="/source"', 'usa-link--external', 'custom-source', 'target="_blank"', 'Source title']) assert.ok(html.includes(value), value);
+  for (const value of [
+    'href="/source"',
+    'cite="/source"',
+    'usa-link--external',
+    'custom-source',
+    'target="_blank"',
+    'Source title',
+  ])
+    assert.ok(html.includes(value), value);
   assert.ok(!html.includes('Ignored'));
   assert.ok(!html.includes('usx-quote__source'));
   const plain = render({ sourceTitle: 'Unlinked title' });
   assert.ok(plain.includes('<cite>Unlinked title</cite>'));
   assert.ok(!plain.includes('<a '));
-  assert.ok(render({ sourceTitle: 'Title', sourceLinkProps: {} }).includes('<cite><a '));
+  assert.ok(render({ sourceTitle: 'Title', sourceLinkProps: {} }).includes('<cite>Title</cite>'));
   assert.ok(!render({ sourceLinkProps: { href: '/source' } }).includes('<cite>'));
   const tree = library.Quote({ sourceTitle: 'Title', sourceLinkProps });
-  const link = tree.props.children[1].props.children.props.children[1].props.children[1].props.children;
+  const link =
+    tree.props.children[1].props.children.props.children[1].props.children[1].props.children;
   assert.equal(link.type, library.Link);
   assert.equal(link.props.onClick, onClick);
   assert.equal(link.props.children, 'Title');

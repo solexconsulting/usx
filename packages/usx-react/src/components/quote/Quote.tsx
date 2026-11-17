@@ -29,7 +29,10 @@ export default function Quote({
 }: QuoteProps) {
   const isVertical = calloutProps?.orientation === 'vertical';
   return (
-    <div className={ClassNames('usx-quote', isVertical && 'usx-quote--vertical', className)} {...props}>
+    <div
+      className={ClassNames('usx-quote', isVertical && 'usx-quote--vertical', className)}
+      {...props}
+    >
       {!isVertical && <Icon name="format_quote" size={4} className="usx-quote__icon" />}
       <Callout {...calloutProps} as="div">
         <figure className="usx-quote__body">
@@ -46,7 +49,11 @@ export default function Quote({
               {attributionProps && <Attribution {...attributionProps} />}
               {sourceTitle && (
                 <cite>
-                  {sourceLinkProps ? <Link {...sourceLinkProps}>{sourceTitle}</Link> : sourceTitle}
+                  {sourceLinkProps?.href ? (
+                    <Link {...sourceLinkProps}>{sourceTitle}</Link>
+                  ) : (
+                    sourceTitle
+                  )}
                 </cite>
               )}
             </figcaption>
