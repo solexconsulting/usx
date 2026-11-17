@@ -17,12 +17,7 @@
     "indent": {
       "type": "select",
       "description": "Left indentation.",
-      "options": [
-        "sm",
-        "md",
-        "lg",
-        "xl"
-      ]
+      "options": ["sm", "md", "lg", "xl"]
     },
     "dedent": {
       "type": "boolean",
@@ -36,10 +31,7 @@
     "orientation": {
       "type": "select",
       "description": "Horizontal uses a left border; vertical uses a top border.",
-      "options": [
-        "horizontal",
-        "vertical"
-      ],
+      "options": ["horizontal", "vertical"],
       "default": "horizontal"
     },
     "children": {
@@ -61,13 +53,12 @@
     "as": {
       "type": "select",
       "description": "Root HTML element.",
-      "options": [
-        "div",
-        "section",
-        "aside",
-        "p"
-      ],
+      "options": ["div", "section", "aside", "p"],
       "default": "div"
+    },
+    "extraAttributes": {
+      "type": "object",
+      "description": "Additional HTML attributes on the root element, including ARIA attributes."
     }
   }
 }
