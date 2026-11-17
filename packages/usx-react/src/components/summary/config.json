@@ -19,6 +19,10 @@
       "type": "string",
       "description": "Accessible name for the summary control."
     },
+    "title": {
+      "type": "string",
+      "description": "Optional native tooltip text for an icon-only summary."
+    },
     "className": {
       "type": "string",
       "default": "",

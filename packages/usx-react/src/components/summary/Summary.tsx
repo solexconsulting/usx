@@ -5,6 +5,7 @@ export interface SummaryProps {
   label?: React.ReactNode;
   children?: React.ReactNode;
   ariaLabel?: string;
+  title?: string;
   className?: string;
   textClassName?: string;
   markerColor?: string;
@@ -18,6 +19,7 @@ export default function Summary({
   label = 'Details',
   children,
   ariaLabel,
+  title,
   className = '',
   textClassName = '',
   markerColor = undefined,
@@ -28,7 +30,7 @@ export default function Summary({
 }: SummaryProps) {
   if (unstyled) {
     return (
-      <summary className={className || undefined} aria-label={ariaLabel}>
+      <summary className={className || undefined} aria-label={ariaLabel} title={title}>
         {children ?? label}
       </summary>
     );
@@ -47,7 +49,7 @@ export default function Summary({
     textClassName
   );
   return (
-    <summary className={summaryClassNames} aria-label={ariaLabel}>
+    <summary className={summaryClassNames} aria-label={ariaLabel} title={title}>
       <span className={summaryTextClassNames}>{children ?? (label || 'Details')}</span>
     </summary>
   );
