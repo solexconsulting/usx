@@ -74,11 +74,11 @@
     <button
       type="button"
       class="usa-button usx-button usx-button--ghost usx-copy"
-      onclick="
-        navigator.clipboard.writeText(
-          '\u003Csection aria\u002Dlabel\u003D\u0022Account \u0026 settings\u0022\u003E\u000A  \u003Ch2\u003EContact information\u003C/h2\u003E\u000A  \u003Cp\u003EUse \u0026lt\u003BPage\u0026gt\u003B to define the page.\u003C/p\u003E\u000A\u003C/section\u003E'
-        )
-      "
+      data-usx-copy='&lt;section aria-label="Account &amp; settings"&gt;
+  &lt;h2&gt;Contact information&lt;/h2&gt;
+  &lt;p&gt;Use &amp;lt;Page&amp;gt; to define the page.&lt;/p&gt;
+&lt;/section&gt;'
+      aria-label="Copy to clipboard"
     >
       <svg class="usa-icon usx-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
         <use href="img/sprite.svg#content_copy"></use>
@@ -125,11 +125,14 @@
     <button
       type="button"
       class="usa-button usx-button usx-button--ghost usx-copy"
-      onclick="
-        navigator.clipboard.writeText(
-          '\u003CLayout\u003E\u000A  \u003CPage title\u003D\u0022Account\u0022\u003E\u000A    \u003CSection title\u003D\u0022Contact information\u0022\u003E\u000A      \u003CContactDetails user\u003D{currentUser} /\u003E\u000A    \u003C/Section\u003E\u000A  \u003C/Page\u003E\u000A\u003C/Layout\u003E'
-        )
-      "
+      data-usx-copy='&lt;Layout&gt;
+  &lt;Page title="Account"&gt;
+    &lt;Section title="Contact information"&gt;
+      &lt;ContactDetails user={currentUser} /&gt;
+    &lt;/Section&gt;
+  &lt;/Page&gt;
+&lt;/Layout&gt;'
+      aria-label="Copy to clipboard"
     >
       <svg class="usa-icon usx-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
         <use href="img/sprite.svg#content_copy"></use>
@@ -174,11 +177,14 @@
     <button
       type="button"
       class="usa-button usx-button usx-button--ghost usx-copy"
-      onclick="
-        navigator.clipboard.writeText(
-          '\u003CLayout\u003E\u000A  \u003CPage title\u003D\u0022Account\u0022\u003E\u000A    \u003CSection title\u003D\u0022Contact information\u0022\u003E\u000A      \u003CContactDetails user\u003D{currentUser} /\u003E\u000A    \u003C/Section\u003E\u000A  \u003C/Page\u003E\u000A\u003C/Layout\u003E'
-        )
-      "
+      data-usx-copy='&lt;Layout&gt;
+  &lt;Page title="Account"&gt;
+    &lt;Section title="Contact information"&gt;
+      &lt;ContactDetails user={currentUser} /&gt;
+    &lt;/Section&gt;
+  &lt;/Page&gt;
+&lt;/Layout&gt;'
+      aria-label="Copy to clipboard"
     >
       <svg class="usa-icon usx-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
         <use href="img/sprite.svg#content_copy"></use>
@@ -233,9 +239,10 @@
     <button
       type="button"
       class="usa-button usx-button usx-button--ghost usx-copy"
-      onclick="
-        navigator.clipboard.writeText('npm install @solexllc/usx\u000Ainstalling...\u000ADone!')
-      "
+      data-usx-copy="npm install @solexllc/usx
+installing...
+Done!"
+      aria-label="Copy to clipboard"
     >
       <svg class="usa-icon usx-icon usx-copy__copy" aria-hidden="true" focusable="false" role="img">
         <use href="img/sprite.svg#content_copy"></use>

@@ -24,6 +24,20 @@ preview that fallback in a JavaScript-enabled environment.
 The [JavaScript enhancement guide](../usx-stories/src/stories/Documentation.UsxReact.UswdsJsInit.stories.jsx)
 shows the lifecycle for both libraries.
 
+CopyToClipboard uses this same enhancement lifecycle in React, Django, and HTML.
+It is included in `js/start`; for selective imports:
+
+```js
+import copyToClipboard from '@solexllc/usx/js/copy-to-clipboard';
+
+copyToClipboard.init(document.body);
+```
+
+CopyToClipboard reports success only after the clipboard accepts the text and emits
+a bubbling `usx:copy-error` event on failure (`event.detail.error`). Hosts can provide
+their own error feedback. When the Clipboard API is unavailable, such as in a network
+HTTP preview, it falls back to the browser's copy command.
+
 ## Theming
 
 All design tokens come from `@solexllc/usx-theme` and are runtime-themeable via

@@ -76,6 +76,7 @@ const delegatedFallbackSelectors = {
 };
 
 const componentLoaders = {
+    copyToClipboard: () => import('@solexllc/usx/js/copy-to-clipboard'),
     accordion: () => import('@uswds/uswds/js/usa-accordion').then(({ default: component }) => unmarkedInitializer(component, '.usa-accordion')),
     banner: () => import('@uswds/uswds/js/usa-banner').then(({ default: component }) => unmarkedInitializer(component, '.usa-banner')),
     carousel: () => import('@solexllc/usx/js/carousel'),

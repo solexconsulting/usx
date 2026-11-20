@@ -123,16 +123,11 @@ for (const [Component, props, expected] of [
 
 globalThis.window = {};
 try {
-  let copiedText;
-  window.navigator = { clipboard: { writeText: (text) => { copiedText = text; return Promise.resolve(); } } };
-  await clipboardButton.props.onClick();
-  assert.equal(copiedText, clipboardProps.copyText);
+  assert.equal(clipboardButton.props.onClick, undefined);
+  assert.equal(clipboardButton.props.extraAttributes['data-usx-copy'], clipboardProps.copyText);
   const codeCopy = CopyToClipboard(codeClipboard.props);
   const codeCopyButton = codeCopy.type === Tooltip ? codeCopy.props.children : codeCopy;
-  await codeCopyButton.props.onClick();
-  assert.equal(copiedText, 'Code text');
-  window.navigator = {};
-  assert.doesNotThrow(() => clipboardButton.props.onClick());
+  assert.equal(codeCopyButton.props.extraAttributes['data-usx-copy'], 'Code text');
   for (const [base, prefix] of [
     [undefined, '/'],
     ['/', '/'],

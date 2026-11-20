@@ -1,9 +1,11 @@
+import { componentInit } from '../../utils/storyHelpers.jsx';
 
 import config from '../../../../usx-react/src/components/code/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Code.React.stories.jsx';
 
 export default {
+  decorators: [...componentInit('copyToClipboard')],
   title: 'Django/USX/Code',
   tags: ['USX', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),

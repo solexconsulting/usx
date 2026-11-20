@@ -1,10 +1,12 @@
+import { componentInit } from '../../utils/storyHelpers.jsx';
 import React from 'react';
-import { expect } from 'storybook/test';
+import { expect, userEvent, waitFor } from 'storybook/test';
 import reactSnapshot from '../../../../usx-react/src/components/code/code.react-snapshot.html?raw';
 import djangoSnapshot from '../../../../usx-react/src/components/code/code.django-snapshot.html?raw';
 import { storyDefs } from './Code.React.stories.jsx';
 
 export default {
+  decorators: [...componentInit('copyToClipboard')],
   title: 'HTML/USX/Code',
   tags: ['USX', 'autodocs'],
 };
@@ -57,6 +59,30 @@ export const AllVariantsReact = {
       checkLiteralMarkup(context, 'With React Markup', storyDefs.WithReactMarkup)
     );
     await step('React Markup With HTML Fragment', () => testReactMarkupWithHTMLFragment(context));
+    await step('Copy the complete code source', async () => {
+      const block = sectionFor(context.canvasElement, 'React Markup With HTML Fragment');
+      const button = block.querySelector('[data-usx-copy]');
+      await waitFor(() => expect(button).toHaveAttribute('data-enhanced', 'true'));
+      const descriptor = Object.getOwnPropertyDescriptor(navigator, 'clipboard');
+      let copied;
+      Object.defineProperty(navigator, 'clipboard', {
+        configurable: true,
+        value: {
+          writeText: async (text) => {
+            copied = text;
+          },
+        },
+      });
+      try {
+        await userEvent.click(button);
+        await expect(copied).toBe(storyDefs.ReactMarkupWithHTMLFragment.copyText);
+        await expect(button.querySelector('.usx-copy__check')).toBeVisible();
+      } finally {
+        button.blur();
+        if (descriptor) Object.defineProperty(navigator, 'clipboard', descriptor);
+        else delete navigator.clipboard;
+      }
+    });
   },
 };
 

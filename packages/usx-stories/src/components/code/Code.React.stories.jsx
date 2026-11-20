@@ -1,3 +1,4 @@
+import { componentInit } from '../../utils/storyHelpers.jsx';
 import Code from '../../../../usx-react/src/components/code/Code.tsx';
 import config from '../../../../usx-react/src/components/code/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
@@ -103,6 +104,7 @@ export const storyDefs = {
 };
 
 export default {
+  decorators: [...componentInit('copyToClipboard')],
   title: 'React/USX/Code',
   component: Code,
   tags: ['USX', 'autodocs'],

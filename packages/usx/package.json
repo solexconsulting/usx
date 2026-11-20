@@ -35,7 +35,8 @@
     "./img/usx-sprite.svg": "./src/img/usx-sprite.svg",
     "./img/usx-icons.json": "./src/img/usx-icons.json",
     "./js/popover": "./src/js/popover.mjs",
-    "./js/theme-picker": "./src/js/theme-picker.mjs"
+    "./js/theme-picker": "./src/js/theme-picker.mjs",
+    "./js/copy-to-clipboard": "./src/js/copy-to-clipboard.mjs"
   },
   "files": [
     "src"
