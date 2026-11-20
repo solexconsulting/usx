@@ -1,11 +1,13 @@
+import { componentInit } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import reactSnapshot from '../../../../usx-react/src/components/copy-to-clipboard/copy-to-clipboard.react-snapshot.html?raw';
 import djangoSnapshot from '../../../../usx-react/src/components/copy-to-clipboard/copy-to-clipboard.django-snapshot.html?raw';
-import { expect } from 'storybook/test';
+import { expect, userEvent, waitFor } from 'storybook/test';
 import { storyDefs } from './CopyToClipboard.React.stories.jsx';
 import { createAllVariantsPlay, sectionTitle } from '../../utils/playHelpers.js';
 
 export default {
+  decorators: [...componentInit('copyToClipboard')],
   title: 'HTML/USX/CopyToClipboard',
   tags: ['USX', 'autodocs'],
 };
@@ -32,7 +34,8 @@ const checkCopy = (def) => async (section) => {
     await expect(button).toHaveAccessibleName(def.label);
     await expect(section.querySelector('[role="tooltip"]')).toBeNull();
   } else {
-    // An icon-only button is described by its tooltip; the text swaps once copied.
+    await expect(button).toHaveAccessibleName('Copy to clipboard');
+    // The tooltip text swaps once copied.
     const tooltip =
       section.querySelector('[role="tooltip"]') ??
       section.parentElement.querySelector('[role="tooltip"]');
@@ -58,7 +61,75 @@ const checks = Object.fromEntries(
   ])
 );
 
-const play = createAllVariantsPlay(checks);
+const play = async (context) => {
+  await createAllVariantsPlay(checks)(context);
+  await context.step('Copy succeeds only after the clipboard accepts the text', async () => {
+    const button = context.canvasElement.querySelector('[data-usx-copy]');
+    const descriptor = Object.getOwnPropertyDescriptor(navigator, 'clipboard');
+    const commandDescriptor = Object.getOwnPropertyDescriptor(document, 'execCommand');
+    let copied;
+    let reject = false;
+    let errors = 0;
+    const writeText = async (text) => {
+      if (reject) throw new Error('Clipboard unavailable');
+      copied = text;
+    };
+    const failed = () => {
+      errors++;
+    };
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText } });
+    button.addEventListener('usx:copy-error', failed);
+    try {
+      button.focus();
+      await expect(button.querySelector('.usx-copy__copy')).toBeVisible();
+      await userEvent.keyboard('{Enter}');
+      await expect(copied).toBe(button.dataset.usxCopy);
+      await waitFor(() => expect(button).toHaveAttribute('data-usx-copy-state', 'copied'));
+      await expect(button.querySelector('.usx-copy__check')).toBeVisible();
+      button.blur();
+      await expect(button).not.toHaveAttribute('data-usx-copy-state');
+
+      reject = true;
+      await userEvent.click(button);
+      await waitFor(() => expect(errors).toBe(1));
+      await expect(button).not.toHaveAttribute('data-usx-copy-state');
+      await expect(button.querySelector('.usx-copy__copy')).toBeVisible();
+
+      // A network HTTP preview has no Clipboard API. Exercise the fallback and cleanup.
+      Object.defineProperty(navigator, 'clipboard', { configurable: true, value: undefined });
+      let temporaryInput;
+      document.execCommand = (command) => {
+        expect(command).toBe('copy');
+        temporaryInput = document.activeElement;
+        copied = temporaryInput.value;
+        return !reject;
+      };
+      reject = false;
+      copied = undefined;
+      await userEvent.click(button);
+      await expect(copied).toBe(button.dataset.usxCopy);
+      await expect(button).toHaveAttribute('data-usx-copy-state', 'copied');
+      await expect(button.querySelector('.usx-copy__check')).toBeVisible();
+      await expect(button).toHaveFocus();
+      await expect(temporaryInput.isConnected).toBe(false);
+
+      reject = true;
+      await userEvent.click(button);
+      await expect(errors).toBe(2);
+      await expect(button).not.toHaveAttribute('data-usx-copy-state');
+      await expect(button.querySelector('.usx-copy__copy')).toBeVisible();
+      await expect(button).toHaveFocus();
+      await expect(temporaryInput.isConnected).toBe(false);
+    } finally {
+      button.blur();
+      button.removeEventListener('usx:copy-error', failed);
+      if (descriptor) Object.defineProperty(navigator, 'clipboard', descriptor);
+      else delete navigator.clipboard;
+      if (commandDescriptor) Object.defineProperty(document, 'execCommand', commandDescriptor);
+      else delete document.execCommand;
+    }
+  });
+};
 
 export const AllVariantsReact = {
   name: 'All Variants (React)',

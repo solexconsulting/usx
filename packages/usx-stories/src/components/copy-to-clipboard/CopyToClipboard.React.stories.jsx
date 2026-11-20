@@ -1,9 +1,11 @@
+import { componentInit } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import CopyToClipboard from '../../../../usx-react/src/components/copy-to-clipboard/CopyToClipboard.tsx';
 import config from '../../../../usx-react/src/components/copy-to-clipboard/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
 export default {
+  decorators: [...componentInit('copyToClipboard')],
   title: 'React/USX/CopyToClipboard',
   component: CopyToClipboard,
   tags: ['USX', 'autodocs'],

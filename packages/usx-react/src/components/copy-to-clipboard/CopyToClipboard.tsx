@@ -5,12 +5,6 @@ import Icon from '../icon/Icon';
 import Tooltip from '../tooltip/Tooltip';
 import type { TooltipProps } from '../tooltip/Tooltip';
 
-function copyTextToClipboard(text: string) {
-  if (window.navigator.clipboard) {
-    return window.navigator.clipboard.writeText(text);
-  }
-}
-
 export interface CopyToClipboardProps {
   copyText?: string;
   label?: string | null;
@@ -30,7 +24,8 @@ export default function CopyToClipboard({
     <Button
       ghost={true}
       className={ClassNames('usx-copy', className)}
-      onClick={() => copyTextToClipboard(copyText)}
+      extraAttributes={{ 'data-usx-copy': copyText }}
+      aria-label={label ? undefined : 'Copy to clipboard'}
       type="button"
     >
       <Icon name="content_copy" className="usx-copy__copy" staticBaseUrl={staticBaseUrl} />

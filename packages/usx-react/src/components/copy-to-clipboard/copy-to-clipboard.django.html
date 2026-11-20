@@ -1,7 +1,8 @@
 {# Django template for CopyToClipboard #}
 {% load usx_components %}
-{% with buttonClass=className|default:''|add:' usx-copy' escapedCopyText=copyText|default:''|escapejs %}
-{% dict onclick="navigator.clipboard.writeText('"|add:escapedCopyText|add:"')" as copyAttributes %}
+{% with buttonClass=className|default:''|add:' usx-copy' %}
+{% if label %}{% dict data_usx_copy=copyText|default:'' as copyAttributes %}
+{% else %}{% dict data_usx_copy=copyText|default:'' aria_label='Copy to clipboard' as copyAttributes %}{% endif %}
 {% button ghost=True className=buttonClass extraAttributes=copyAttributes as copyButton %}
   {% icon name='content_copy' className="usx-copy__copy" staticBaseUrl=staticBaseUrl %}{% endicon %}
   {% icon name='check' className="usx-copy__check" staticBaseUrl=staticBaseUrl %}{% endicon %}

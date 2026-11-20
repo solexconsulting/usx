@@ -18,7 +18,7 @@
     display: none;
   }
 
-  &:focus:not(:focus-visible) {
+  &[data-usx-copy-state="copied"] {
     .usx-copy__copy {
       display: none;
     }
@@ -34,7 +34,7 @@
     display: none !important;
   }
 
-  &:has(.usx-copy:focus:not(:focus-visible)) {
+  &:has(.usx-copy[data-usx-copy-state="copied"]) {
     .usx-copy__tooltip--copy {
       display: none !important;
     }
