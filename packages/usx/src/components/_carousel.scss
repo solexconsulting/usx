@@ -50,12 +50,6 @@
       display: none;
     }
   }
-
-  &:focus-visible {
-    outline: 0.25rem solid usx-when($usx-carousel-focus, $usx-carousel-focus, #2491ff);
-    outline-offset: -0.25rem;
-  }
-
 }
 
 .usx-carousel__slide {

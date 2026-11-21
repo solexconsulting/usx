@@ -77,7 +77,9 @@ const checkCarousel = (def) => async (carousel) => {
 };
 
 const checks = Object.fromEntries(
-  Object.entries(storyDefs).filter(([key]) => !key.startsWith('Unenhanced')).map(([key, def]) => [sectionTitle(key), checkCarousel(def)])
+  Object.entries(storyDefs)
+    .filter(([key]) => !key.startsWith('Unenhanced'))
+    .map(([key, def]) => [sectionTitle(key), checkCarousel(def)])
 );
 
 const play = async (context) => {
@@ -105,7 +107,15 @@ const play = async (context) => {
     await userEvent.click(dotsOf(carousel)[0]);
     await expectOnly(0);
     // Arrow keys move between slides from the track and from the dots.
-    own(carousel, '.usx-carousel__viewport > .usx-carousel__track')[0].focus();
+    const track = own(carousel, '.usx-carousel__viewport > .usx-carousel__track')[0];
+    track.focus();
+    carousel.style.setProperty('--usx-carousel-focus', '#123456');
+    try {
+      await expect(getComputedStyle(track).outlineColor).toBe('rgb(18, 52, 86)');
+      await expect(getComputedStyle(track).outlineOffset).toBe('-4px');
+    } finally {
+      carousel.style.removeProperty('--usx-carousel-focus');
+    }
     await userEvent.keyboard('{ArrowRight}');
     await expectOnly(1);
     dotsOf(carousel)[1].focus();

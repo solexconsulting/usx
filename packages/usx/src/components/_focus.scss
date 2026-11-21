@@ -10,7 +10,8 @@
   textarea:not([disabled]):focus,
   .usa-footer__return-to-top a:focus,
   [contentEditable='true']:focus,
-  [href]:focus, [tabindex]:focus,
+  [href]:focus,
+  [tabindex]:focus,
   iframe:focus,
   .usx-summary:focus,
   .usx-popover > summary:focus {
@@ -25,4 +26,9 @@
     outline: 0.25rem solid usx-when($usx-color-focus, $usx-color-focus, #2491ff);
     outline-offset: 0.25rem;
   }
+}
+
+.usx-carousel .usx-carousel__track:focus {
+  outline: 0.25rem solid usx-when($usx-carousel-focus, $usx-carousel-focus, #2491ff);
+  outline-offset: -0.25rem;
 }
