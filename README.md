@@ -122,16 +122,14 @@ app's `requirements.txt` for setup) — React and HTML stories work without it.
 
 ## Releasing packages
 
-The Python package has a separate build and release process documented in
-[packages/usx-django/README.md](packages/usx-django/README.md#building-and-publishing).
-Its version is managed in `pyproject.toml`, independently of npm Changesets.
-
-Publishing to npm is automated with [Changesets](https://github.com/changesets/changesets)
-(`.github/workflows/release.yml`) and is a two-step, PR-gated process — a plain
-commit or push never publishes anything on its own.
+Publishing to npm and PyPI uses the same [Changesets](https://github.com/changesets/changesets)
+release PR and `.github/workflows/release.yml`. Django has its own version tracked
+by the private `@solexllc/usx-django` workspace entry; that entry is never published
+to npm. See [Django release setup](packages/usx-django/README.md#building-and-publishing)
+for the one-time PyPI Trusted Publisher configuration.
 
 1. **Describe your change.** After making a change to a publishable package
-   (`usx`, `usx-contracts`, `usx-react`, `usx-theme`, or `usx-uswds-fixes`), run:
+   (`usx`, `usx-contracts`, `usx-react`, `usx-theme`, `usx-uswds-fixes`, or `usx-django`), run:
 
    ```bash
    pnpm changeset
@@ -139,24 +137,29 @@ commit or push never publishes anything on its own.
 
    Select the affected package(s), pick a semver bump (patch/minor/major), and
    write a short summary. Commit the generated `.changeset/*.md` file along
-   with your code change and push to `main`.
+   with your code change and push to `main`. Include `@solexllc/usx-django` for
+   changes to Django templates, component configs, or the shared Python runtime;
+   also include `@solexllc/usx-contracts` to publish the updated Django version in
+   its manifest. CSS/JS-only changes do not need a Django release.
 
 2. **CI opens a "Version Packages" PR.** Seeing a pending changeset file, the
    release workflow bumps the affected `package.json` versions, writes/updates
    each package's `CHANGELOG.md`, deletes the consumed changeset file, and
    opens (or updates) a PR titled **Version Packages** on the
-   `changeset-release/main` branch. This step makes no npm changes yet.
+   `changeset-release/main` branch. The version command also synchronizes Django's
+   `pyproject.toml` and regenerates the contract manifest. Nothing is published yet.
 
 3. **Merge that PR when you're ready to release.** Merging it is itself a push
    to `main`. With no changesets left pending, the workflow instead runs
    `changeset publish`, which publishes only the packages whose version isn't
    already on the npm registry (via OIDC trusted publishing — no npm token
-   needed) and creates matching GitHub Releases.
+   needed) and creates matching GitHub Releases. Django then checks PyPI for its
+   version. An unpublished or incomplete version is built, installed in an isolated
+   environment, tested, and published using PyPI Trusted Publishing.
 
-Because publishing only happens for versions that don't already exist on the
-registry, and ordinary pushes without a changeset file are a no-op for both
-steps, this pipeline can't accidentally re-publish or overwrite a released
-version. Published changelogs are rendered in Storybook under
+Already published versions are skipped. A push with no pending changesets can
+also retry an interrupted release; re-running the workflow does not overwrite
+existing distributions. Published changelogs are rendered in Storybook under
 **Documentation / Release Notes** — restart the Storybook dev server after
 pulling a release merge, since its `CHANGELOG.md` lookup is resolved at
 server start.

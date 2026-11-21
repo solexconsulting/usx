@@ -11,6 +11,8 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    outputs:
+      has-changesets: ${{ steps.changesets.outputs.hasChangesets }}
     permissions:
       contents: write
       pull-requests: write
@@ -47,3 +49,71 @@ jobs:
           createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  build-django:
+    name: Build Django release
+    needs: release
+    if: needs.release.outputs.has-changesets == 'false'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      publish: ${{ steps.pypi.outputs.publish }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check whether this Django version needs publishing
+        id: pypi
+        run: python scripts/check-django-release.py
+
+      - uses: pnpm/action-setup@v4
+        if: steps.pypi.outputs.publish == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.pypi.outputs.publish == 'true'
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Build and test Python distributions
+        if: steps.pypi.outputs.publish == 'true'
+        run: |
+          pnpm install --frozen-lockfile
+          python -m pip install build
+          pnpm generate:django
+          python -m build packages/usx-django
+          python -m venv "$RUNNER_TEMP/usx-wheel-test"
+          "$RUNNER_TEMP/usx-wheel-test/bin/pip" install packages/usx-django/dist/*.whl
+          "$RUNNER_TEMP/usx-wheel-test/bin/python" -I packages/usx-django/tests/test_installed.py
+
+      - uses: actions/upload-artifact@v4
+        if: steps.pypi.outputs.publish == 'true'
+        with:
+          name: django-distributions
+          path: packages/usx-django/dist/*
+          if-no-files-found: error
+
+  publish-django:
+    name: Publish Django to PyPI
+    needs: build-django
+    if: needs.build-django.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/solex-usx-django
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: django-distributions
+          path: dist
+
+      - name: Publish Python distributions
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true

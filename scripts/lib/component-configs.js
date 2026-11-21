@@ -170,6 +170,9 @@ function readDjangoIdentity() {
   const name = read('name');
   const version = read('version');
   if (!name || !version) throw new Error('Django package must declare literal project.name and project.version');
+  const tracked = readPackageIdentity('packages/usx-django/package.json');
+  if (tracked.version !== version)
+    throw new Error('Django versions differ — run node scripts/version-django.mjs');
   return { name, version };
 }
 

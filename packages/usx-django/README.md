@@ -81,7 +81,48 @@ not style components or initialize interactive behaviors.
 
 ## Building And Publishing
 
-From the repository root, in an activated Python virtual environment:
+Releases use the same **Version Packages** PR and GitHub Actions workflow as npm.
+Run `pnpm changeset` and select `@solexllc/usx-django` for changes to Django
+templates, component configs, the shared Python runtime, or Python packaging.
+Also select `@solexllc/usx-contracts` for the updated Django version in its
+manifest, plus other affected packages as usual. CSS/JS-only changes do not
+require a Django changeset.
+
+The private `package.json` exists only so Changesets can manage Django's version
+and changelog; it is never published to npm. `pnpm version-packages` copies its
+version into `pyproject.toml` and regenerates the shared contract manifest.
+Do not bump these versions manually. Releases currently use stable
+`major.minor.patch` versions.
+
+After the release PR is merged, CI skips complete versions already on PyPI.
+Otherwise it builds the distributions, tests the installed wheel, and publishes
+through the PyPI publishing action, which validates metadata before uploading.
+Re-run a failed workflow to retry incomplete uploads; existing files are skipped.
+
+### One-time registry setup
+
+Create a GitHub environment named `pypi` in `solexconsulting/usx` and restrict its
+deployment branches to `main`. On PyPI, configure the project's
+[Trusted Publisher](https://docs.pypi.org/trusted-publishers/adding-a-publisher/)
+with these exact values:
+
+| Field | Value |
+| --- | --- |
+| PyPI project | `solex-usx-django` |
+| GitHub owner | `solexconsulting` |
+| Repository | `usx` |
+| Workflow filename | `release.yml` |
+| Environment | `pypi` |
+
+If the project does not exist yet, add a
+[pending publisher](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/)
+in your PyPI account's Publishing settings. This authorization must be configured
+before the first release. No PyPI API token or password is stored in GitHub.
+
+### Local build verification
+
+From the repository root, in an activated Python virtual environment, remove old
+artifacts from `packages/usx-django/dist/` and run:
 
 ```bash
 pnpm install
@@ -89,32 +130,15 @@ python -m pip install build twine
 pnpm generate:django
 python -m build packages/usx-django
 python -m twine check packages/usx-django/dist/*
-```
-
-The generator validates the canonical configs, copies the shared Python runtime
-from `apps/storybook-django/project/components`, and bundles every
-`*.django.html` and `config.json` from `packages/usx-react/src/components`.
-Generated package files are ignored by Git;
-edit those source locations and regenerate before every build. The source
-distribution is self-contained and can rebuild a wheel without Node.js or
-the original checkout.
-
-Test the wheel in a separate environment before upload:
-
-```bash
 python -m venv /tmp/usx-wheel-test
 /tmp/usx-wheel-test/bin/pip install packages/usx-django/dist/*.whl
 /tmp/usx-wheel-test/bin/python -I packages/usx-django/tests/test_installed.py
 ```
 
-Set a new version in `pyproject.toml` for each release and remove old artifacts
-from the package's `dist/` before rebuilding. Python releases are independent
-of npm Changesets. With your own PyPI credentials or trusted publishing setup:
-
-```bash
-python -m twine upload --repository testpypi packages/usx-django/dist/*
-python -m twine upload packages/usx-django/dist/*
-```
-
-Confirm ownership/availability of `solex-usx-django` on PyPI before the first
-upload. Never commit registry credentials. Building does not publish anything.
+The generator validates the canonical configs, copies the shared Python runtime
+from `apps/storybook-django/project/components`, and bundles every
+`*.django.html` and `config.json` from `packages/usx-react/src/components`.
+Generated package files are ignored by Git; edit those source locations and
+regenerate before every build. The source distribution is self-contained and can
+rebuild a wheel without Node.js or the original checkout. Local builds do not
+publish anything.
