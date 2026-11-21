@@ -282,6 +282,8 @@ importers:
 
   packages/usx-contracts: {}
 
+  packages/usx-django: {}
+
   packages/usx-react:
     dependencies:
       '@solexllc/usx':
