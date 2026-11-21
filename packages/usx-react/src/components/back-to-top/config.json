@@ -1,32 +1,44 @@
 {
   "name": "back-to-top",
   "template": "back-to-top/back-to-top.django.html",
-  "version": 1,
+  "version": 3,
   "default": {
     "label": "Back to top",
     "iconPosition": "right",
-    "iconSize": 2
+    "iconSize": 2,
+    "href": "#top",
+    "variant": "primary",
+    "ghost": true
   },
   "props": {
     "label": {
       "type": "string",
-      "description": "The visible text label. Defaults to 'Back to top'. Omit or pass null for icon-only display."
+      "description": "The visible text label. Defaults to 'Back to top'. Pass null or an empty string for icon-only display.",
+      "default": "Back to top"
     },
     "ariaLabel": {
       "type": "string",
-      "description": "Accessible name used when there is no visible label (icon-only display). Defaults to 'Back to top'."
+      "description": "Accessible name used when there is no visible label (icon-only display). Defaults to 'Back to top'.",
+      "default": "Back to top"
     },
     "href": {
       "type": "string",
-      "description": "If provided, renders as an anchor link (<a>) targeting the given href. Otherwise renders as a <button>."
+      "description": "Destination of the anchor. Defaults to #top when omitted or empty. Ignored when onClick selects a button.",
+      "default": "#top"
     },
     "variant": {
       "type": "select",
       "options": [
-        "",
-        "primary"
+        "primary",
+        "secondary",
+        "accent-cool",
+        "accent-warm",
+        "base",
+        "outline",
+        "unstyled"
       ],
-      "description": "Visual style for the button variant. Use 'primary' to add the primary color scheme."
+      "description": "Shared Button visual variant. Defaults to primary for both anchors and host-controlled buttons.",
+      "default": "primary"
     },
     "iconPosition": {
       "type": "select",
@@ -34,7 +46,8 @@
         "right",
         "left"
       ],
-      "description": "Position of the arrow icon relative to the label text. Defaults to 'right'."
+      "description": "Position of the arrow icon relative to the label text. Defaults to 'right'.",
+      "default": "right"
     },
     "iconSize": {
       "type": "select",
@@ -43,11 +56,29 @@
         "3",
         "4"
       ],
-      "description": "Size of the arrow icon. Corresponds to USWDS icon size utilities. Defaults to '2'."
+      "description": "Size of the arrow icon. Corresponds to USWDS icon size utilities. Defaults to '2'.",
+      "default": "2"
     },
     "className": {
       "type": "string",
       "description": "Additional CSS classes to apply to the component."
+    },
+    "onClick": {
+      "type": [
+        "function",
+        "boolean"
+      ],
+      "description": "A host-provided React click handler renders a button instead of an anchor. Pass true to render the same button markup and attach a listener from the host (including Django). No scrolling behavior or inline JavaScript is supplied. Takes precedence over href."
+    },
+    "inverse": {
+      "type": "boolean",
+      "description": "A boolean that determines whether the button should be displayed with an inverse color scheme, which can be used to create contrast against a darker background.",
+      "default": false
+    },
+    "ghost": {
+      "type": "boolean",
+      "default": true,
+      "description": "Shared Button ghost styling. Enabled by default; set false for a filled or unstyled Button."
     }
   }
 }

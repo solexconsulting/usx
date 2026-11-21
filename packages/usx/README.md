@@ -38,6 +38,13 @@ a bubbling `usx:copy-error` event on failure (`event.detail.error`). Hosts can p
 their own error feedback. When the Clipboard API is unavailable, such as in a network
 HTTP preview, it falls back to the browser's copy command.
 
+BackToTop composes Button with `variant="primary"` and `ghost=true` by default,
+with both available as props. It defaults to a native
+`href="#top"` anchor. It accepts a custom `href` and a subset of Button props.
+Providing `onClick` selects a button instead. React hosts can pass their callback;
+Django hosts pass `onClick=True` and attach their own click listener. No USX
+enhancement is needed.
+
 ## Theming
 
 All design tokens come from `@solexllc/usx-theme` and are runtime-themeable via
