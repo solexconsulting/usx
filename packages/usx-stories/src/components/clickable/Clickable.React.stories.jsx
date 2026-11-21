@@ -9,7 +9,7 @@ import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 import Attribution from '../../../../usx-react/src/components/attribution/Attribution.tsx';
 
 export const storyDefs = {
-  Default: storyDefaultArgs(config.default),
+  Default: { ...storyDefaultArgs(config.default), extraAttributes: { 'data-example': 'link' } },
   MultipleClickableCard: {
     href: 'https://google.com',
     className: 'display-flex padding-1 flex-column flex-align-center',
@@ -43,6 +43,7 @@ export const storyDefs = {
     className: 'text-primary-lightest',
   },
   ButtonSurface: {
+    extraAttributes: { 'data-example': 'button', 'data-active': false },
     className: 'usa-button usx-button usx-button--ghost',
   },
 };
@@ -59,7 +60,8 @@ export const Default = {
   args: storyDefs.Default,
   render: (args) => (
     <Clickable {...args}>
-      Everything taking up space in this box is clickable, but only the text below appears as a link.
+      Everything taking up space in this box is clickable, but only the text below appears as a
+      link.
       <br />
       <Clickable.Link>I look clickable</Clickable.Link>
     </Clickable>
@@ -134,8 +136,13 @@ export const ClickableQuote = {
       <Quote
         calloutProps={{ orientation: 'vertical', strokeColor: 'info', big: true }}
         blockquoteClassName="font-serif-lg"
-        attributionProps={{ primary: 'John Doe', secondary: 'Under Secretary for the Department of Magic and Mystical Affairs' }}
-        content={'We found this wand shop that had the best wands, and we were like, "We have to go here!" So we went there.'}
+        attributionProps={{
+          primary: 'John Doe',
+          secondary: 'Under Secretary for the Department of Magic and Mystical Affairs',
+        }}
+        content={
+          'We found this wand shop that had the best wands, and we were like, "We have to go here!" So we went there.'
+        }
       />
       <div className="display-flex flex-align-center margin-top-2">
         <Clickable.BgColorChange className="usx-circle bg-black text-white display-flex flex-align-center flex-justify-center width-4 height-4">
@@ -148,18 +155,16 @@ export const ClickableQuote = {
 };
 
 export const ClickableQuoteManualMarkup = {
-  name: "Clickable Quote v2 (Manual Markup)",
+  name: 'Clickable Quote v2 (Manual Markup)',
   args: storyDefs.ClickableQuote,
   render: (args) => (
     <Clickable {...args}>
-      <Callout
-        orientation="vertical"
-        strokeColor="info"
-        big={true}
-        className="usx-quote"
-      >
+      <Callout orientation="vertical" strokeColor="info" big={true} className="usx-quote">
         <figure className="usx-quote__body">
-          <blockquote className="usx-quote__content font-serif-lg">❝We found this wand shop that had the best wands, and we were like, "We have to go here!" So we went there.❞</blockquote>
+          <blockquote className="usx-quote__content font-serif-lg">
+            ❝We found this wand shop that had the best wands, and we were like, "We have to go
+            here!" So we went there.❞
+          </blockquote>
           <figcaption className="usx-quote__attribution">
             <Attribution
               primary="John Doe"
@@ -195,8 +200,8 @@ export const ColorClassesWithinLinkClass = {
     <Clickable {...args}>
       <Clickable.Link>
         <Clickable.BgColorChange>Background changes color.</Clickable.BgColorChange>
-        <Clickable.ColorChange> Text changes color.</Clickable.ColorChange>
-        {' '}No change to background or color.
+        <Clickable.ColorChange> Text changes color.</Clickable.ColorChange> No change to background
+        or color.
       </Clickable.Link>
     </Clickable>
   ),

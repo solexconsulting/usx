@@ -34,6 +34,8 @@ const checkClickable = (def) => async (section) => {
       await expect(surface).toHaveAttribute('type', 'button');
     }
     await expect(surface).toHaveAccessibleName();
+    for (const [name, value] of Object.entries(def.extraAttributes ?? {}))
+      await expect(surface).toHaveAttribute(name, String(value));
     // The whole surface is the one interactive element; nothing clickable nests inside it.
     await expect(surface.querySelectorAll('a, button')).toHaveLength(0);
 

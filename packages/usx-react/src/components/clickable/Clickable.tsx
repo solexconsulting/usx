@@ -22,9 +22,13 @@ function ClickableLink({
     'usx-clickable__link',
     colorChange && 'usx-clickable__color-on-hover',
     bgColorChange && 'usx-clickable__bg-color-on-hover',
-    className,
+    className
   );
-  return <Tag className={classes} {...rest}>{children}</Tag>;
+  return (
+    <Tag className={classes} {...rest}>
+      {children}
+    </Tag>
+  );
 }
 
 function ClickableColorChange({ children, className, as: Tag = 'span', ...rest }: SubProps) {
@@ -51,21 +55,31 @@ type ButtonProps = { href?: undefined } & ButtonHTMLAttributes<HTMLButtonElement
 export type ClickableProps = (AnchorProps | ButtonProps) & {
   className?: string;
   children?: ReactNode;
+  extraAttributes?: Record<string, unknown>;
 };
 
-function Clickable({ className, children, ...rest }: ClickableProps) {
+function Clickable({ className, children, extraAttributes = {}, ...rest }: ClickableProps) {
   const classes = classNames('usx-clickable', className);
 
   if ('href' in rest && rest.href !== undefined) {
     return (
-      <a className={classes} {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}>
+      <a
+        className={classes}
+        {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}
+        {...extraAttributes}
+      >
         {children}
       </a>
     );
   }
 
   return (
-    <button type="button" className={classes} {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}>
+    <button
+      type="button"
+      className={classes}
+      {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
+      {...extraAttributes}
+    >
       {children}
     </button>
   );

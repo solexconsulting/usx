@@ -2,8 +2,10 @@
   class="usx-clickable{% if className %} {{ className }}{% endif %}"
   href="{{ href }}"
   {% if id %}id="{{ id }}"{% endif %}
+  {% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}
 >{{ children|safe }}</a>{% else %}<button
   type="button"
   class="usx-clickable{% if className %} {{ className }}{% endif %}"
   {% if id %}id="{{ id }}"{% endif %}
+  {% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}
 >{{ children|safe }}</button>{% endif %}

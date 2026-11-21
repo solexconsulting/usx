@@ -1723,6 +1723,10 @@ export const componentContracts = {
         "children": {
           "type": "slot",
           "description": "Composed content. React provides Clickable.Link, Clickable.ColorChange, and Clickable.BgColorChange; Django provides clickable_link, clickable_color_change, and clickable_bg_color_change block tags."
+        },
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional attributes for the root button or link, including data and ARIA attributes."
         }
       },
       "renderers": {
