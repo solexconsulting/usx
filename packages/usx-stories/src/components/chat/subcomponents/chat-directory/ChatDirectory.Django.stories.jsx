@@ -1,0 +1,11 @@
+import { componentInit } from '../../../../utils/storyHelpers.jsx';
+import { djangoPartStory } from '../../ChatPartStory.jsx';
+import * as stories from './ChatDirectory.React.stories.jsx';
+export default { title: 'Django/USX/Chat/Directory', decorators: componentInit('popover', 'chat') };
+export const Default = djangoPartStory('chat-directory', stories.Default);
+export const People = djangoPartStory('chat-directory', stories.People);
+export const Inbox = djangoPartStory('chat-directory', stories.Inbox);
+export const WithActions = djangoPartStory('chat-directory', stories.WithActions);
+export const ContactActions = djangoPartStory('chat-directory', stories.ContactActions);
+export const RecipientPicker = djangoPartStory('chat-directory', stories.RecipientPicker);
+export const ContextualInbox = djangoPartStory('chat-directory', stories.ContextualInbox);

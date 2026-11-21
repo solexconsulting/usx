@@ -20,6 +20,13 @@ export const Index = {
                 from research conducted by various organizations and individuals in the field.
             </p>
 
+            <h2>Chat window case study (2026)</h2>
+            <p>
+                A dated review of 2016–2024 chat research and explicit USX decisions for
+                navigation, threads, message appearance, long histories, accessibility, and integration.
+            </p>
+            <a href="?path=/story/documentation-research-chat--case-study">Read the chat case study</a>
+
             {/* Switch to a table someday */}
             <h2>Disabled States Research Findings (2023)</h2>
             <p>

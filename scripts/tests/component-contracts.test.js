@@ -12,10 +12,12 @@ const manifest = componentContracts;
 
 test('the existing manifest describes every component and each real renderer binding', () => {
   assert.deepEqual(Object.keys(manifest.components).sort(), [...configs.keys()].sort());
-  const exports = fs.readFileSync(path.join(REPO_ROOT, 'packages/usx-react/src/index.js'), 'utf8');
   for (const [name, contract] of Object.entries(manifest.components)) {
+    const entry = contract.renderers.react.subpath?.slice(2) || 'index';
+    const exports = fs.readFileSync(path.join(REPO_ROOT, `packages/usx-react/src/${entry}.js`), 'utf8');
     assert.ok(exports.includes(`export { default as ${contract.renderers.react.export} }`), name);
     assert.equal(contract.renderers.react.package, '@solexllc/usx-react');
+    assert.equal(contract.renderers.react.subpath, name === 'chat' || name.startsWith('chat-') ? './chat' : undefined);
     assert.equal(contract.renderers.django.component, name);
     assert.equal(contract.renderers.django.module, 'usx_django');
     assert.equal(contract.renderers.django.function, 'render_component');

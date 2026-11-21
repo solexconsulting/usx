@@ -1,0 +1,1241 @@
+{
+  "name": "chat",
+  "template": "chat/chat.django.html",
+  "version": 2,
+  "required": ["id"],
+  "default": {
+    "id": "chat-default",
+    "title": "Support chat",
+    "currentUserId": "visitor",
+    "participants": [
+      {
+        "id": "visitor",
+        "name": "You",
+        "avatarProps": {
+          "variant": "initials",
+          "value": "YO",
+          "alt": "You"
+        }
+      },
+      {
+        "id": "agent",
+        "name": "Morgan",
+        "avatarProps": {
+          "variant": "initials",
+          "value": "MO",
+          "alt": "Morgan"
+        }
+      }
+    ],
+    "messages": [
+      {
+        "id": "welcome",
+        "senderId": "agent",
+        "text": "Hi! How can I help today?",
+        "sentAt": "2026-01-01T12:00:00Z",
+        "timeLabel": "12:00 PM"
+      }
+    ],
+    "reactionOptions": [],
+    "emojiPack": []
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "description": "Unique Popover panel ID and prefix for chat controls."
+    },
+    "title": {
+      "type": "string",
+      "description": "Conversation heading inside the chat panel.",
+      "default": "Chat"
+    },
+    "status": {
+      "type": "string",
+      "description": "Optional status line below the heading."
+    },
+    "context": {
+      "type": "object",
+      "description": "Optional subject of a standalone conversation; a selected conversation context overrides it. Keep sensitive record details host-controlled.",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Short subject category, such as Marketplace listing or Access request."
+        },
+        "title": {
+          "type": "string",
+          "description": "Name of the item or record being discussed."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional price, status, or other concise detail."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Optional subject thumbnail rendered through Image."
+        },
+        "imageAlt": {
+          "type": "string",
+          "description": "Thumbnail description; empty when decorative."
+        },
+        "href": {
+          "type": "string",
+          "description": "Optional link to the underlying item or record."
+        }
+      }
+    },
+    "participants": {
+      "type": "array",
+      "description": "Participants, including the current user, agents, and bots. Message sender IDs should match participant IDs.",
+      "items": {
+        "type": "object",
+        "description": "One chat participant.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable participant ID."
+          },
+          "name": {
+            "type": "string",
+            "description": "Visible sender name and transcript label."
+          },
+          "avatarProps": {
+            "type": "object",
+            "component": "avatar",
+            "description": "Avatar props. Chat renders avatars without links."
+          },
+          "presence": {
+            "type": "select",
+            "options": ["online", "away"],
+            "description": "Optional current presence in inbox and contact lists. The host must keep it current; it is not a response-time promise."
+          },
+          "messageActions": {
+            "type": "array",
+            "description": "Host-defined message actions. An explicit empty array disables inherited host actions.",
+            "items": {
+              "type": "object",
+              "description": "One message action.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Action identifier."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Visible action label."
+                },
+                "disabled": {
+                  "type": "boolean",
+                  "description": "Disable this action."
+                }
+              }
+            }
+          }
+        }
+      },
+      "default": []
+    },
+    "currentUserId": {
+      "type": "string",
+      "description": "Participant ID whose messages align to the outgoing side.",
+      "default": "user"
+    },
+    "messages": {
+      "type": "array",
+      "description": "Conversation messages in display order. Chat does not fetch or append messages.",
+      "items": {
+        "type": "object",
+        "description": "One message in the transcript.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable message ID."
+          },
+          "senderId": {
+            "type": "string",
+            "description": "ID of the sender in participants."
+          },
+          "text": {
+            "type": "string",
+            "description": "Message text. Chat safely renders **bold**, *italic*, <u>underline</u>, ~~strike~~, numbered and bulleted lines, > quotes, and fenced code blocks. Use content for other rich content."
+          },
+          "content": {
+            "type": "slot",
+            "description": "Optional rich message content. Sanitize HTML before passing it to Django; supply exportText for copied transcripts."
+          },
+          "exportText": {
+            "type": "string",
+            "description": "Plain text or Markdown used by Copy conversation for rich messages."
+          },
+          "sentAt": {
+            "type": "string",
+            "description": "ISO calendar timestamp (YYYY-MM-DDTHH:mm[:ss[.fraction]], optionally followed by Z or ±HH:mm). Grouping treats a missing timezone as UTC and truncates fractions to milliseconds; invalid dates remain ungrouped. Rendered datetime attributes and timeLabel strings are unchanged."
+          },
+          "timeLabel": {
+            "type": "string",
+            "description": "Localized timestamp label. Visible on the last message in a close group; retained for screen readers on earlier messages."
+          },
+          "groupPosition": {
+            "type": "select",
+            "options": ["single", "first", "middle", "last"],
+            "description": "Optional explicit grouping position. Both renderers derive it from adjacent sender IDs and sentAt values when omitted."
+          },
+          "attachments": {
+            "type": "array",
+            "description": "Files and images included with the message.",
+            "items": {
+              "type": "object",
+              "description": "One file or image attachment.",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Accessible file name."
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Download URL, if available."
+                },
+                "imageUrl": {
+                  "type": "string",
+                  "description": "Optional image preview URL rendered through Image."
+                },
+                "alt": {
+                  "type": "string",
+                  "description": "Description of the preview image. Defaults to the file name."
+                }
+              }
+            }
+          },
+          "replies": {
+            "type": "array",
+            "description": "Messages displayed in this message's thread.",
+            "items": {
+              "type": "object",
+              "description": "One thread reply."
+            }
+          },
+          "olderReplies": {
+            "type": "object",
+            "description": "Optional older-page state for this message's thread, using the same fields as olderHistory."
+          },
+          "replyCount": {
+            "type": "number",
+            "description": "Visible count of replies to this message; a positive count adds a persistent thread link beside message metadata."
+          },
+          "edited": {
+            "type": "boolean",
+            "description": "Show an Edited marker."
+          },
+          "layout": {
+            "type": "select",
+            "options": ["bubble", "panel"],
+            "description": "Use panel for host-supplied editing or confirmation content. It expands to the available row width and uses a neutral surface instead of the sender's bubble color."
+          },
+          "deliveryStatus": {
+            "type": "string",
+            "description": "Delivery or read status supplied by the application."
+          },
+          "actions": {
+            "type": "array",
+            "description": "Overflow menu items, such as Edit or Delete. The application handles the action.",
+            "items": {
+              "type": "object",
+              "description": "One message action.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Action identifier."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Visible action label."
+                },
+                "disabled": {
+                  "type": "boolean",
+                  "description": "Disable this action."
+                }
+              }
+            }
+          },
+          "reactions": {
+            "type": "array",
+            "description": "Current reactions, rendered as toggle buttons in supplied order. Keep an entry in place while its count remains positive.",
+            "items": {
+              "type": "object",
+              "description": "One reaction.",
+              "properties": {
+                "emoji": {
+                  "type": "string",
+                  "description": "Visible emoji."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Accessible reaction name and event value."
+                },
+                "count": {
+                  "type": "number",
+                  "description": "Number of reactions."
+                },
+                "selected": {
+                  "type": "boolean",
+                  "description": "Whether the current user selected this reaction."
+                }
+              }
+            }
+          },
+          "reactionOptions": {
+            "type": "array",
+            "description": "Emoji choices for adding a reaction to this message; overrides the Chat-level list. An empty array disables new reactions.",
+            "items": {
+              "type": "object",
+              "description": "A reaction choice.",
+              "properties": {
+                "emoji": {
+                  "type": "string",
+                  "description": "Visible emoji."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Accessible choice name and event value."
+                }
+              }
+            }
+          },
+          "clientMessageId": {
+            "type": "string",
+            "description": "Host-supplied correlation ID for a submitted message."
+          },
+          "deliveryState": {
+            "type": "select",
+            "options": ["sending", "failed"],
+            "description": "Host-supplied sending or failed state. Failed messages expose a Retry control that emits usx:chat-retry."
+          }
+        }
+      },
+      "default": []
+    },
+    "firstUnreadMessageId": {
+      "type": "string",
+      "description": "First unread message ID for a standalone conversation. Show the unread divider before this message. A selected conversation overrides it."
+    },
+    "olderHistory": {
+      "type": "object",
+      "description": "Optional older-page state for a standalone conversation. Supplying it enables a top load control; selected conversations use their own state.",
+      "properties": {
+        "hasMore": {
+          "type": "boolean",
+          "description": "Whether earlier messages can be requested."
+        },
+        "cursor": {
+          "type": "string",
+          "description": "Opaque host-owned cursor for the next earlier page. Advance it even if a page is empty."
+        },
+        "loading": {
+          "type": "boolean",
+          "description": "Show a loading state and suppress duplicate requests."
+        },
+        "error": {
+          "type": "string",
+          "description": "Optional load failure text; the control becomes Try again."
+        }
+      }
+    },
+    "conversations": {
+      "type": "array",
+      "description": "Optional inbox rows. A row may supply messages for client-side selection or href for server navigation.",
+      "items": {
+        "type": "object",
+        "description": "One conversation.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable conversation ID."
+          },
+          "title": {
+            "type": "string",
+            "description": "Conversation title."
+          },
+          "participantIds": {
+            "type": "array",
+            "description": "Member IDs for this conversation. The current user is omitted from the inbox avatar cluster when present.",
+            "items": {
+              "type": "string",
+              "description": "Participant ID."
+            }
+          },
+          "isGroup": {
+            "type": "boolean",
+            "description": "Keep group inbox treatment even when only one other member remains. Multiple other members also imply a group."
+          },
+          "avatarProps": {
+            "type": "object",
+            "component": "avatar",
+            "description": "Optional group Avatar, such as an icon or image, in place of member avatars."
+          },
+          "preview": {
+            "type": "string",
+            "description": "Last message preview."
+          },
+          "previewSenderId": {
+            "type": "string",
+            "description": "Optional sender ID prefixed to a group conversation preview. Useful when only inbox summaries are loaded."
+          },
+          "timeLabel": {
+            "type": "string",
+            "description": "Last activity label."
+          },
+          "unreadCount": {
+            "type": "number",
+            "description": "Unread message count shown with Tag."
+          },
+          "firstUnreadMessageId": {
+            "type": "string",
+            "description": "Stable ID of the first unread message in this conversation's supplied history. Required for an accurate unread divider."
+          },
+          "href": {
+            "type": "string",
+            "description": "Optional server-rendered conversation URL."
+          },
+          "context": {
+            "type": "object",
+            "description": "Optional subject of this conversation, using the same fields as Chat.context. Its title appears in the inbox and its details above the transcript."
+          },
+          "messages": {
+            "type": "array",
+            "description": "History to show when this conversation is selected.",
+            "items": {
+              "type": "object",
+              "description": "One message."
+            }
+          },
+          "olderHistory": {
+            "type": "object",
+            "description": "Optional older-page state for this conversation, using the same fields as Chat.olderHistory."
+          },
+          "allowAttachments": {
+            "type": "boolean",
+            "description": "Override whether this conversation accepts new file uploads."
+          },
+          "actions": {
+            "type": "array",
+            "description": "Host-defined conversation actions shared by the directory row and the open conversation or thread header. Both dispatch usx:chat-directory-action with the same actionId and conversationId. Omit or pass [] for no host actions.",
+            "items": {
+              "type": "object",
+              "description": "One conversation action.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Action identifier."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Visible action label."
+                },
+                "disabled": {
+                  "type": "boolean",
+                  "description": "Disable this action."
+                }
+              }
+            }
+          },
+          "messageActions": {
+            "type": "object",
+            "description": "Default host actions for sent and received messages. Precedence: message.actions, sender.messageActions, conversation.messageActions side, Chat.messageActions side. Missing sides inherit; [] disables that side. Copy, reply, and reaction controls remain separately configured.",
+            "properties": {
+              "sent": {
+                "type": "array",
+                "description": "Actions on the active user\u2019s messages.",
+                "items": {
+                  "type": "object",
+                  "description": "One message action.",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Action identifier."
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Visible action label."
+                    },
+                    "disabled": {
+                      "type": "boolean",
+                      "description": "Disable this action."
+                    }
+                  }
+                }
+              },
+              "received": {
+                "type": "array",
+                "description": "Actions on other users\u2019 messages.",
+                "items": {
+                  "type": "object",
+                  "description": "One message action.",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Action identifier."
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Visible action label."
+                    },
+                    "disabled": {
+                      "type": "boolean",
+                      "description": "Disable this action."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "allowThreads": {
+            "type": "boolean",
+            "description": "Override the Chat-level thread setting for every message in this conversation."
+          }
+        }
+      },
+      "default": []
+    },
+    "contacts": {
+      "type": "array",
+      "description": "Optional people available for a new conversation.",
+      "items": {
+        "type": "object",
+        "description": "One contact.",
+        "properties": {
+          "participantId": {
+            "type": "string",
+            "description": "ID from participants."
+          },
+          "description": {
+            "type": "string",
+            "description": "Supporting text."
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Existing conversation ID, if any."
+          },
+          "href": {
+            "type": "string",
+            "description": "Optional server-rendered contact URL in a non-selectable ChatDirectory. The new-message picker selects recipients instead of following contact links."
+          },
+          "allowAttachments": {
+            "type": "boolean",
+            "description": "Override whether a new conversation with this contact accepts uploads."
+          },
+          "actions": {
+            "type": "array",
+            "description": "Optional host-defined directory actions. Omit or pass [] to hide the menu. Actions dispatch usx:chat-directory-action; the host controls availability and effects.",
+            "items": {
+              "type": "object",
+              "description": "One message action.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Action identifier."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Visible action label."
+                },
+                "disabled": {
+                  "type": "boolean",
+                  "description": "Disable this action."
+                }
+              }
+            }
+          }
+        }
+      },
+      "default": []
+    },
+    "view": {
+      "type": "select",
+      "options": ["inbox", "contacts", "conversation", "thread"],
+      "description": "View to render. Defaults to defaultView, then inbox when conversations exist, otherwise conversation."
+    },
+    "defaultView": {
+      "type": "select",
+      "options": ["inbox", "contacts", "conversation", "thread"],
+      "description": "Initial view. Defaults to inbox when conversations are supplied, otherwise conversation."
+    },
+    "activeConversationId": {
+      "type": "string",
+      "description": "Controlled selected conversation ID."
+    },
+    "defaultConversationId": {
+      "type": "string",
+      "description": "Initially selected conversation ID."
+    },
+    "activeThreadId": {
+      "type": "string",
+      "description": "Thread root message ID when rendering the thread view."
+    },
+    "recipientId": {
+      "type": "string",
+      "description": "Participant ID for a new conversation that has no conversation ID yet."
+    },
+    "emptyText": {
+      "type": "string",
+      "description": "Text displayed when there are no messages.",
+      "default": "No messages yet. Start the conversation."
+    },
+    "typingIds": {
+      "type": "array",
+      "description": "Participant IDs currently typing.",
+      "items": {
+        "type": "string",
+        "description": "ID of a participant who is typing."
+      },
+      "default": []
+    },
+    "suggestedQuestions": {
+      "type": "array",
+      "description": "Suggested questions shown above the composer.",
+      "items": {
+        "type": "object",
+        "description": "A suggested question button.",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Visible question."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value sent to the selection callback."
+          }
+        }
+      },
+      "default": []
+    },
+    "choices": {
+      "type": "array",
+      "description": "Answer choices offered by a bot.",
+      "items": {
+        "type": "object",
+        "description": "A bot answer choice button.",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Visible answer."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value sent to the selection callback."
+          }
+        }
+      },
+      "default": []
+    },
+    "choicePrompt": {
+      "type": "string",
+      "description": "Accessible heading for answer choices.",
+      "default": "Choose an answer"
+    },
+    "actions": {
+      "type": "slot",
+      "description": "Additional controls inside the optional actions menu."
+    },
+    "showCopyAction": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show Copy conversation in the actions menu. Rich messages should provide exportText."
+    },
+    "showCopyMessageAction": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show Copy message in each message's More menu when the message has exportable content."
+    },
+    "reactionOptions": {
+      "type": "array",
+      "description": "Emoji choices in each message\u2019s Add reaction Popover. Defaults to emojiPack. Pass an empty array to disable adding reactions.",
+      "items": {
+        "type": "object",
+        "description": "A reaction choice.",
+        "properties": {
+          "emoji": {
+            "type": "string",
+            "description": "Visible emoji."
+          },
+          "label": {
+            "type": "string",
+            "description": "Accessible choice name and event value."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional shortcode name; used for the reaction menu tooltip."
+          },
+          "aliases": {
+            "type": "array",
+            "description": "Optional additional shortcodes.",
+            "items": {
+              "type": "string",
+              "description": "Shortcode alias."
+            }
+          }
+        }
+      },
+      "default": null
+    },
+    "children": {
+      "type": "slot",
+      "description": "Optional custom controls above the composer."
+    },
+    "side": {
+      "type": "select",
+      "options": ["top", "right", "bottom", "left"],
+      "description": "Popover panel side relative to the host launcher.",
+      "default": "bottom"
+    },
+    "align": {
+      "type": "select",
+      "options": ["start", "center", "end"],
+      "description": "Popover panel alignment relative to the host launcher.",
+      "default": "start"
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show the panel on initial render."
+    },
+    "groupWindowMinutes": {
+      "type": "number",
+      "default": 5,
+      "description": "Maximum gap between adjacent messages from the same sender for automatic bubble grouping."
+    },
+    "allowAttachments": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable file uploads in the composer. Conversations and contacts may override this setting."
+    },
+    "allowFormatting": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show the composer formatting controls and enable formatting shortcuts."
+    },
+    "accept": {
+      "type": "string",
+      "description": "File input accept attribute when uploads are enabled. Omit to allow files and images."
+    },
+    "formAction": {
+      "type": "string",
+      "description": "Optional native form endpoint. The host may cancel the shared usx:chat-send event to handle submission."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable composing and response controls."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional classes for the Popover root."
+    },
+    "emojiPack": {
+      "type": "array",
+      "default": [
+        {
+          "emoji": "\ud83d\ude02",
+          "name": "joy",
+          "label": "Face with tears of joy"
+        },
+        {
+          "emoji": "\u2764\ufe0f",
+          "name": "heart",
+          "label": "Red heart"
+        },
+        {
+          "emoji": "\ud83d\ude0d",
+          "name": "heart_eyes",
+          "label": "Smiling face with heart eyes"
+        },
+        {
+          "emoji": "\ud83e\udd23",
+          "name": "rofl",
+          "label": "Rolling on the floor laughing"
+        },
+        {
+          "emoji": "\ud83d\ude0a",
+          "name": "blush",
+          "label": "Smiling face"
+        },
+        {
+          "emoji": "\ud83d\ude4f",
+          "name": "pray",
+          "label": "Folded hands"
+        },
+        {
+          "emoji": "\ud83d\ude2d",
+          "name": "sob",
+          "label": "Loudly crying face"
+        },
+        {
+          "emoji": "\ud83d\udc4d",
+          "name": "thumbsup",
+          "label": "Thumbs up",
+          "aliases": ["thumbs_up", "+1"]
+        },
+        {
+          "emoji": "\ud83d\udc4e",
+          "name": "thumbsdown",
+          "label": "Thumbs down",
+          "aliases": ["thumbs_down", "-1"]
+        },
+        {
+          "emoji": "\ud83d\ude05",
+          "name": "sweat_smile",
+          "label": "Grinning face with sweat"
+        },
+        {
+          "emoji": "\ud83d\udc4f",
+          "name": "clap",
+          "label": "Clapping hands"
+        },
+        {
+          "emoji": "\ud83d\ude01",
+          "name": "grin",
+          "label": "Beaming face"
+        },
+        {
+          "emoji": "\ud83d\udd25",
+          "name": "fire",
+          "label": "Fire"
+        },
+        {
+          "emoji": "\ud83d\udc94",
+          "name": "broken_heart",
+          "label": "Broken heart"
+        },
+        {
+          "emoji": "\ud83d\ude22",
+          "name": "cry",
+          "label": "Crying face"
+        },
+        {
+          "emoji": "\ud83e\udd14",
+          "name": "thinking",
+          "label": "Thinking face",
+          "aliases": ["thinking_face"]
+        },
+        {
+          "emoji": "\ud83d\ude06",
+          "name": "laughing",
+          "label": "Laughing face",
+          "aliases": ["laugh"]
+        },
+        {
+          "emoji": "\ud83d\ude44",
+          "name": "rolling_eyes",
+          "label": "Face with rolling eyes"
+        },
+        {
+          "emoji": "\ud83d\udcaa",
+          "name": "muscle",
+          "label": "Flexed biceps"
+        },
+        {
+          "emoji": "\ud83d\ude09",
+          "name": "wink",
+          "label": "Winking face"
+        },
+        {
+          "emoji": "\ud83d\udc4c",
+          "name": "ok_hand",
+          "label": "OK hand"
+        },
+        {
+          "emoji": "\ud83e\udd17",
+          "name": "hug",
+          "label": "Hugging face"
+        },
+        {
+          "emoji": "\ud83d\ude0e",
+          "name": "sunglasses",
+          "label": "Smiling face with sunglasses"
+        },
+        {
+          "emoji": "\ud83d\ude07",
+          "name": "innocent",
+          "label": "Smiling face with halo"
+        },
+        {
+          "emoji": "\ud83c\udf89",
+          "name": "tada",
+          "label": "Party popper",
+          "aliases": ["party"]
+        },
+        {
+          "emoji": "\u270c\ufe0f",
+          "name": "v",
+          "label": "Victory hand"
+        },
+        {
+          "emoji": "\u2728",
+          "name": "sparkles",
+          "label": "Sparkles"
+        },
+        {
+          "emoji": "\ud83d\ude31",
+          "name": "scream",
+          "label": "Face screaming in fear"
+        },
+        {
+          "emoji": "\ud83d\ude0c",
+          "name": "relieved",
+          "label": "Relieved face"
+        },
+        {
+          "emoji": "\ud83d\ude4c",
+          "name": "raised_hands",
+          "label": "Raising hands"
+        },
+        {
+          "emoji": "\ud83d\ude0b",
+          "name": "yum",
+          "label": "Face savoring food"
+        },
+        {
+          "emoji": "\ud83d\ude42",
+          "name": "slightly_smiling_face",
+          "label": "Slightly smiling face"
+        },
+        {
+          "emoji": "\ud83e\udd29",
+          "name": "star_struck",
+          "label": "Star-struck"
+        },
+        {
+          "emoji": "\ud83d\ude00",
+          "name": "grinning",
+          "label": "Grinning face"
+        },
+        {
+          "emoji": "\ud83d\udcaf",
+          "name": "100",
+          "label": "Hundred points"
+        },
+        {
+          "emoji": "\ud83d\udc40",
+          "name": "eyes",
+          "label": "Eyes"
+        },
+        {
+          "emoji": "\ud83e\udd2d",
+          "name": "hand_over_mouth",
+          "label": "Face with hand over mouth"
+        },
+        {
+          "emoji": "\ud83d\ude2e",
+          "name": "open_mouth",
+          "label": "Face with open mouth"
+        },
+        {
+          "emoji": "\ud83d\ude10",
+          "name": "neutral_face",
+          "label": "Neutral face"
+        },
+        {
+          "emoji": "\ud83d\ude21",
+          "name": "rage",
+          "label": "Enraged face"
+        },
+        {
+          "emoji": "\ud83d\ude34",
+          "name": "sleeping",
+          "label": "Sleeping face"
+        },
+        {
+          "emoji": "\ud83e\udd37",
+          "name": "shrug",
+          "label": "Person shrugging"
+        },
+        {
+          "emoji": "\ud83e\udd26",
+          "name": "facepalm",
+          "label": "Person facepalming"
+        },
+        {
+          "emoji": "\ud83d\udc4b",
+          "name": "wave",
+          "label": "Waving hand"
+        },
+        {
+          "emoji": "\ud83e\udd1d",
+          "name": "handshake",
+          "label": "Handshake"
+        },
+        {
+          "emoji": "\u2705",
+          "name": "check",
+          "label": "Check mark",
+          "aliases": ["white_check_mark"]
+        },
+        {
+          "emoji": "\u274c",
+          "name": "x",
+          "label": "Cross mark"
+        },
+        {
+          "emoji": "\u2b50",
+          "name": "star",
+          "label": "Star"
+        },
+        {
+          "emoji": "\u26a0\ufe0f",
+          "name": "warning",
+          "label": "Warning"
+        },
+        {
+          "emoji": "\ud83d\udca1",
+          "name": "bulb",
+          "label": "Light bulb"
+        },
+        {
+          "emoji": "\ud83d\udccc",
+          "name": "pushpin",
+          "label": "Pushpin"
+        },
+        {
+          "emoji": "\ud83d\udcdd",
+          "name": "memo",
+          "label": "Memo"
+        },
+        {
+          "emoji": "\ud83d\udcc5",
+          "name": "calendar",
+          "label": "Calendar"
+        },
+        {
+          "emoji": "\u23f0",
+          "name": "alarm_clock",
+          "label": "Alarm clock"
+        },
+        {
+          "emoji": "\ud83d\udcce",
+          "name": "paperclip",
+          "label": "Paperclip"
+        },
+        {
+          "emoji": "\ud83d\udcc1",
+          "name": "file_folder",
+          "label": "File folder"
+        },
+        {
+          "emoji": "\ud83d\udd17",
+          "name": "link",
+          "label": "Link"
+        },
+        {
+          "emoji": "\ud83d\udd12",
+          "name": "lock",
+          "label": "Lock"
+        },
+        {
+          "emoji": "\ud83d\udd11",
+          "name": "key",
+          "label": "Key"
+        },
+        {
+          "emoji": "\ud83d\ude80",
+          "name": "rocket",
+          "label": "Rocket"
+        },
+        {
+          "emoji": "\ud83d\udcac",
+          "name": "speech_balloon",
+          "label": "Speech balloon"
+        },
+        {
+          "emoji": "\u2753",
+          "name": "question",
+          "label": "Question mark"
+        },
+        {
+          "emoji": "\u2757",
+          "name": "exclamation",
+          "label": "Exclamation mark"
+        },
+        {
+          "emoji": "\ud83d\ude04",
+          "name": "smile",
+          "label": "Smiling face with open mouth"
+        },
+        {
+          "emoji": "\ud83d\udc99",
+          "name": "blue_heart",
+          "label": "Blue heart"
+        },
+        {
+          "emoji": "\ud83d\udc9a",
+          "name": "green_heart",
+          "label": "Green heart"
+        },
+        {
+          "emoji": "\ud83d\udc9b",
+          "name": "yellow_heart",
+          "label": "Yellow heart"
+        },
+        {
+          "emoji": "\ud83e\udd73",
+          "name": "partying_face",
+          "label": "Partying face"
+        },
+        {
+          "emoji": "\ud83e\udd16",
+          "name": "robot",
+          "label": "Robot"
+        },
+        {
+          "emoji": "\ud83d\udc31",
+          "name": "cat",
+          "label": "Cat"
+        },
+        {
+          "emoji": "\ud83d\udc36",
+          "name": "dog",
+          "label": "Dog"
+        },
+        {
+          "emoji": "\ud83c\udf08",
+          "name": "rainbow",
+          "label": "Rainbow"
+        },
+        {
+          "emoji": "\u2600\ufe0f",
+          "name": "sunny",
+          "label": "Sun"
+        },
+        {
+          "emoji": "\ud83c\udf19",
+          "name": "crescent_moon",
+          "label": "Crescent moon"
+        },
+        {
+          "emoji": "\u2615",
+          "name": "coffee",
+          "label": "Hot beverage"
+        },
+        {
+          "emoji": "\ud83c\udf55",
+          "name": "pizza",
+          "label": "Pizza"
+        },
+        {
+          "emoji": "\ud83c\udf70",
+          "name": "cake",
+          "label": "Cake"
+        },
+        {
+          "emoji": "\ud83c\udf82",
+          "name": "birthday",
+          "label": "Birthday cake"
+        },
+        {
+          "emoji": "\ud83c\udfb5",
+          "name": "musical_note",
+          "label": "Musical note"
+        },
+        {
+          "emoji": "\ud83c\udfc6",
+          "name": "trophy",
+          "label": "Trophy"
+        }
+      ],
+      "description": "Emoji choices in the composer Popover beside attachment and formatting controls, and in :name: shortcodes. Defaults to the included 80-emoji pack. Supply up to 100 entries, or [] to disable emoji input. Reaction choices use this pack unless reactionOptions overrides them.",
+      "items": {
+        "type": "object",
+        "description": "One emoji choice.",
+        "properties": {
+          "emoji": {
+            "type": "string",
+            "description": "Unicode emoji glyph."
+          },
+          "name": {
+            "type": "string",
+            "description": "Lowercase shortcode without colons."
+          },
+          "label": {
+            "type": "string",
+            "description": "Accessible emoji name."
+          },
+          "aliases": {
+            "type": "array",
+            "description": "Optional additional shortcodes.",
+            "items": {
+              "type": "string",
+              "description": "Shortcode alias."
+            }
+          }
+        }
+      }
+    },
+    "recipientIds": {
+      "type": "array",
+      "description": "Initially selected participant IDs in the new-message recipient picker.",
+      "default": [],
+      "items": {
+        "type": "string",
+        "description": "Recipient participant ID."
+      }
+    },
+    "messageActions": {
+      "type": "object",
+      "description": "Default host actions for sent and received messages. Precedence: message.actions, sender.messageActions, conversation.messageActions side, Chat.messageActions side. Missing sides inherit; [] disables that side. Copy, reply, and reaction controls remain separately configured.",
+      "properties": {
+        "sent": {
+          "type": "array",
+          "description": "Actions on the active user\u2019s messages.",
+          "items": {
+            "type": "object",
+            "description": "One message action.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Action identifier."
+              },
+              "label": {
+                "type": "string",
+                "description": "Visible action label."
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Disable this action."
+              }
+            }
+          }
+        },
+        "received": {
+          "type": "array",
+          "description": "Actions on other users\u2019 messages.",
+          "items": {
+            "type": "object",
+            "description": "One message action.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Action identifier."
+              },
+              "label": {
+                "type": "string",
+                "description": "Visible action label."
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Disable this action."
+              }
+            }
+          }
+        }
+      }
+    },
+    "summaryProps": {
+      "type": "object",
+      "component": "summary",
+      "description": "Host-supplied launcher content, classes, accessible label, and title. Chat adds no launcher styling or positioning. The default label is Open chat."
+    },
+    "allowThreads": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable thread entry points for every message in the conversation."
+    }
+  }
+}

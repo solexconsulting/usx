@@ -1,11 +1,12 @@
 // theme-check.mjs — the single theme guardrail test for the USX styles.
 //
-// Compiles both Sass entry points once and asserts the "static by default,
+// Compiles core and optional Chat Sass entry points and asserts the "static by default,
 // no fallback" architecture plus manifest parity:
-//   1. default build (src/index.scss, hooks null) has zero theme var() refs —
-//      unconfigured tokens are dropped so USWDS defaults show through.
-//   2. themed build (src/themed.scss, hooks on) uses only bare theme var()
-//      refs — no compiled-in fallbacks; runtime values come from theme.css.
+//   1. default build (src/index.scss, hooks null) has zero global theme var()
+//      refs — unconfigured tokens are dropped so USWDS defaults show through.
+//   2. themed build (src/themed.scss, hooks on) uses only bare global theme
+//      var() refs — runtime values come from theme.css. Component-local
+//      properties may retain fallbacks for per-instance overrides.
 //   3. neither build leaks a literal "null" (an unguarded composite value).
 //   4. every theme var() in the themed build has a manifest entry.
 //   5. every manifest entry is consumed by the themed build, unless listed in
@@ -23,14 +24,20 @@ import { themeManifest } from '@solexllc/usx-theme/theme-manifest';
 const pkgDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 // Sass warnings (deprecations, @warn) are collected and reported as failures.
 const sassWarnings = [];
-const compile = (entry) =>
-  sass.compile(path.join(pkgDir, entry), {
-    importers: [new sass.NodePackageImporter()],
-    logger: { warn: (message, { span }) => sassWarnings.push(`${span ? path.relative(pkgDir, fileURLToPath(span.url)) + ': ' : ''}${message.split('\n')[0]}`) },
-  }).css;
-
-const defaultCss = compile('src/index.scss');
-const themedCss = compile('src/themed.scss');
+// Resolve from the React consumer: Sass's package importer does not support
+// self-references. This checks the public export paths through a real install.
+const compilePackage = (...entries) => sass.compileString(entries.map((entry, index) =>
+  `@use 'pkg:@solexllc/usx${entry}' as entry${index};`
+).join('\n'), {
+  importers: [new sass.NodePackageImporter(path.resolve(pkgDir, '../usx-react'))],
+  logger: { warn: (message) => sassWarnings.push(message) },
+}).css;
+const coreCss = compilePackage('');
+const coreThemedCss = compilePackage('/themed');
+const chatCss = compilePackage('/chat');
+const chatThemedCss = compilePackage('/chat/themed');
+const defaultCss = coreCss + '\n' + chatCss;
+const themedCss = coreThemedCss + '\n' + chatThemedCss;
 
 // Tokens published by the theme layer but never referenced directly in
 // compiled component CSS — either unused so far, or consumed only through
@@ -105,6 +112,20 @@ function themeVarRefs(css) {
 }
 
 const errors = [];
+const normalizeCss = (css) => css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim();
+for (const [entries, separate] of [[['', '/chat'], defaultCss], [['/themed', '/chat/themed'], themedCss]]) {
+  const together = compilePackage(...entries);
+  if (normalizeCss(together) !== normalizeCss(separate)) {
+    errors.push(`${entries.join(' + ')} differs when compiled together`);
+  }
+}
+for (const css of [coreCss, coreThemedCss]) {
+  if (css.includes('.usx-chat')) errors.push('core styles must not include Chat');
+}
+for (const css of [chatCss, chatThemedCss]) {
+  if (!css.includes('.usx-chat__panel') || !css.includes('.usx-chat-composer')) errors.push('Chat styles must include the window and composer');
+  if (/^\.usx-popover[\s.{:]/m.test(css)) errors.push('Chat styles must not duplicate core Popover styles');
+}
 const byVar = new Map(themeManifest.map((t) => [t.cssVar, t]));
 const byName = new Map(themeManifest.map((t) => [t.name, t]));
 
@@ -486,9 +507,15 @@ for (const condition of ['null', 'false', '0', 'true']) {
 
 for (const w of sassWarnings) errors.push(`sass warning: ${w}`);
 
-// A DataTable row background is a per-row inline value, not a theme token.
-// Its fallback must remain available in both builds for rows without an override.
-const localInlineVars = new Set(['--usx-data-table-row-bg']);
+// Component-scoped custom properties are per-instance values rather than
+// global theme tokens. They need CSS fallbacks in both builds so hosts can
+// override them without adding entries to the theme manifest.
+const localInlineVars = new Set([
+  '--usx-data-table-row-bg',
+  '--usx-chat-width',
+  '--usx-chat-height',
+  '--usx-chat-menu-max-height',
+]);
 if (themeVarRefs(defaultCss).some((ref) => !localInlineVars.has(ref.name))) {
   errors.push('default build contains theme var() references — unconfigured tokens must be omitted, not var()-wrapped');
 }
@@ -515,5 +542,5 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(
-  `PASS: theme check — default build fully static; themed build has ${seen.size} bare var(--usx-*) refs covering ${themeManifest.length} manifest entries; no fallbacks or null leaks.`
+  `PASS: theme check — default build has no global theme refs; themed build has ${seen.size} bare global theme refs covering ${themeManifest.length} manifest entries; no global theme fallbacks or null leaks.`
 );

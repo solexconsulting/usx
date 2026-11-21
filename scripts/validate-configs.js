@@ -11,7 +11,7 @@ import { pathToFileURL } from 'node:url';
 import {
   COMPONENTS_DIR,
   CONTRACTS_PATH,
-  INDEX_PATH,
+  REACT_ENTRY_POINTS,
   buildContractManifest,
   buildIndexSource,
   findComponentFile,
@@ -45,9 +45,10 @@ if (!errors.size) {
   }
 }
 
-const indexPath = INDEX_PATH;
-if (fs.readFileSync(indexPath, 'utf8') !== buildIndexSource()) {
-  problems.push(`${rel(indexPath)} is stale — run \`pnpm generate:exports\``);
+for (const [entryPoint, file] of Object.entries(REACT_ENTRY_POINTS)) {
+  if (!fs.existsSync(file) || fs.readFileSync(file, 'utf8') !== buildIndexSource(entryPoint)) {
+    problems.push(`${rel(file)} is stale — run \`pnpm generate:exports\``);
+  }
 }
 
 // ── Report ───────────────────────────────────────────────────────────────────

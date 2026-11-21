@@ -1,0 +1,123 @@
+{
+  "name": "chat-window",
+  "template": "chat-window/chat-window.django.html",
+  "version": 1,
+  "default": {
+    "id": "chat-window-example",
+    "title": "Support",
+    "defaultOpen": true,
+    "status": "Usually replies within a day."
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "description": "Unique Popover panel ID and prefix for chat controls."
+    },
+    "title": {
+      "type": "string",
+      "description": "Conversation heading inside the chat panel.",
+      "default": "Chat"
+    },
+    "status": {
+      "type": "string",
+      "description": "Optional status line below the heading."
+    },
+    "showCopyAction": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show Copy conversation in the actions menu. Rich messages should provide exportText."
+    },
+    "actions": {
+      "type": "slot",
+      "description": "Additional controls inside the optional actions menu."
+    },
+    "children": {
+      "type": "slot",
+      "description": "Window body: compose a directory, transcript, composer, or custom content."
+    },
+    "side": {
+      "type": "select",
+      "options": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "description": "Popover panel side relative to the host launcher.",
+      "default": "bottom"
+    },
+    "align": {
+      "type": "select",
+      "options": [
+        "start",
+        "center",
+        "end"
+      ],
+      "description": "Popover panel alignment relative to the host launcher.",
+      "default": "start"
+    },
+    "defaultOpen": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show the panel on initial render."
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional classes for the Popover root."
+    },
+    "view": {
+      "type": "select",
+      "description": "Current view for enhancement and header labels.",
+      "options": [
+        "inbox",
+        "contacts",
+        "conversation",
+        "thread"
+      ],
+      "default": "conversation"
+    },
+    "showBack": {
+      "type": "boolean",
+      "description": "Show the back navigation control.",
+      "default": false
+    },
+    "showNewMessage": {
+      "type": "boolean",
+      "description": "Show the new message control.",
+      "default": false
+    },
+    "conversationId": {
+      "type": "string",
+      "description": "Conversation identifier included in host action events."
+    },
+    "conversationActions": {
+      "type": "array",
+      "description": "Actions for the selected conversation, using the same list as its directory row. Dispatches usx:chat-directory-action with actionId and conversationId.",
+      "items": {
+        "type": "object",
+        "description": "One conversation action.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Action identifier."
+          },
+          "label": {
+            "type": "string",
+            "description": "Visible action label."
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Disable this action."
+          }
+        }
+      },
+      "default": []
+    },
+    "summaryProps": {
+      "type": "object",
+      "component": "summary",
+      "description": "Host-supplied launcher content, classes, accessible label, and title. Chat adds no launcher styling or positioning. The default label is Open chat."
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "chat-attachment",
+  "template": "chat-attachment/chat-attachment.django.html",
+  "version": 1,
+  "default": {
+    "name": "Notes.txt",
+    "url": "/notes.txt"
+  },
+  "props": {
+    "name": {
+      "type": "string",
+      "description": "File name."
+    },
+    "url": {
+      "type": "string",
+      "description": "Download URL."
+    },
+    "imageUrl": {
+      "type": "string",
+      "description": "Optional preview image."
+    },
+    "alt": {
+      "type": "string",
+      "description": "Preview alternative text; defaults to name."
+    }
+  }
+}

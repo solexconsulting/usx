@@ -1301,3 +1301,81 @@ class TableTagTests(SimpleTestCase):
         self.assertIn("Title", html)
         self.assertIn("First record", html)
         self.assertIn("2024", html)
+
+
+class ChatCompositionTests(SimpleTestCase):
+    def test_summary_props_control_the_launcher_and_children_stay_in_the_panel(self):
+        html = Template(
+            "{% load usx_components %}"
+            "{% fragment as launcher %}<span>{{ label }}</span> <strong>now</strong>{% endfragment %}"
+            "{% dict children=launcher className='host-launcher' ariaLabel='Contact support' as launcherProps %}"
+            "{% chat id='support' summaryProps=launcherProps %}"
+            "<button type='button' data-host-control='callback'>Request a callback</button>"
+            "{% endchat %}"
+        ).render(Context({'label': 'Help & support'}))
+        summary = RenderedElements(html).attributes('summary')
+        self.assertEqual(summary['class'], 'host-launcher')
+        self.assertEqual(summary['aria-label'], 'Contact support')
+        self.assertEqual(html.count('<span>Help &amp; support</span> <strong>now</strong>'), 1)
+        self.assertLess(html.index('<span>Help &amp; support</span>'), html.index('id="support"'))
+        self.assertGreater(html.index("data-host-control='callback'"), html.index('usx-chat__controls'))
+        self.assertNotIn('Open chat', html)
+
+
+class ChatThreadSettingTests(SimpleTestCase):
+    def test_thread_setting_applies_to_every_sender_and_existing_threads(self):
+        messages = [
+            {'id': 'mine', 'senderId': 'user', 'text': 'My message'},
+            {'id': 'theirs', 'senderId': 'other', 'text': 'Their message'},
+            {'id': 'existing', 'senderId': 'other', 'text': 'Existing thread',
+             'replies': [{'id': 'reply', 'senderId': 'user', 'text': 'Reply'}]},
+        ]
+        for enabled in (False, True):
+            for override in (None, False, True):
+                with self.subTest(enabled=enabled, override=override):
+                    conversation = {'id': 'c', 'title': 'Conversation', 'messages': messages}
+                    if override is not None:
+                        conversation['allowThreads'] = override
+                    html = render_component('chat', {
+                        'id': 'thread-test', 'allowThreads': enabled,
+                        'view': 'conversation', 'activeConversationId': 'c',
+                        'conversations': [conversation],
+                    })
+                    entry_points = {
+                        attrs['data-usx-chat-thread']
+                        for _, attrs in RenderedElements(html).elements
+                        if 'data-usx-chat-thread' in attrs
+                    }
+                    self.assertEqual(entry_points, {'mine', 'theirs', 'existing'}
+                                     if (enabled if override is None else override) else set())
+
+
+class ChatTimestampTests(SimpleTestCase):
+    def test_grouping_uses_utc_milliseconds_and_preserves_display_strings(self):
+        cases = [
+            ('2026-01-01T12:00:00', '2026-01-01T12:00:00Z', True),
+            ('2026-01-01T12:00', '2026-01-01T07:00:00-05:00', True),
+            ('2026-01-01T12:00:00.0001Z', '2026-01-01T12:00:00.0002Z', True),
+            ('1969-12-31T23:59:59.9991Z', '1969-12-31T23:59:59.9999Z', True),
+            ('2026-01-01T12:00:00.001Z', '2026-01-01T12:00:00.002Z', False),
+            ('2026-02-30T12:00:00Z', '2026-03-02T12:00:00Z', False),
+            ('2026-01-01T24:00:00Z', '2026-01-02T00:00:00Z', False),
+            ('2026-01-01T12:00:00+01:60', '2026-01-01T10:00:00Z', False),
+        ]
+        for first, second, grouped in cases:
+            with self.subTest(first=first, second=second):
+                html = render_component('chat', {
+                    'id': 'timestamps', 'groupWindowMinutes': 0, 'emojiPack': [],
+                    'messages': [
+                        {'id': str(index), 'senderId': 'user', 'text': 'Message',
+                         'sentAt': stamp, 'timeLabel': 'No timezone conversion'}
+                        for index, stamp in enumerate((first, second))
+                    ],
+                })
+                elements = RenderedElements(html).elements
+                classes = [attrs['class'] for tag, attrs in elements if 'data-message-id' in attrs]
+                self.assertEqual(['usx-chat__message--first' in classes[0],
+                                  'usx-chat__message--last' in classes[1]], [grouped, grouped])
+                self.assertEqual([attrs['datetime'] for tag, attrs in elements if tag == 'time'],
+                                 [first, second])
+                self.assertEqual(html.count('No timezone conversion'), 2)

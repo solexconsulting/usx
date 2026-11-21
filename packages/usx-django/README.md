@@ -6,6 +6,11 @@ supported. Node.js and a monorepo checkout are not required at runtime.
 
 ## Installation
 
+Chat templates and tags are included with the other components, but their
+browser assets are opt-in. Pages using Chat must include its
+[separate stylesheet and enhancement](../usx/README.md#optional-chat);
+the default USX styles and `js/start` exclude Chat.
+
 ```bash
 pip install solex-usx-django
 ```

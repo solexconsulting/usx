@@ -1,0 +1,56 @@
+{% load usx_components %}
+  <li class="usx-chat__message usx-chat__message--{{ state.position }}{% if own %} usx-chat__message--own{% endif %}{% if message.layout == 'panel' %} usx-chat__message--panel{% endif %}{% if message.deliveryState == 'failed' %} usx-chat__message--failed{% endif %}" data-message-id="{{ message.id }}" {% if message.clientMessageId != None %}data-usx-chat-client-message-id="{{ message.clientMessageId }}"{% endif %} {% if message.deliveryState != None %}data-usx-chat-delivery-state="{{ message.deliveryState }}"{% endif %} data-sender-name="{{ state.senderName }}" {% if state.exportText != None %} data-export-text="{{ state.exportText }}" {% endif %} >
+    {% if state.showIdentity %}
+      {% avatar props=state.avatarProps %}{% endavatar %}
+    {% else %}
+      <span class="usx-chat__avatar-space" aria-hidden="true"></span>
+    {% endif %}
+    <div class="usx-chat__message-body">
+      {% if state.showIdentity %}
+        <span class="usx-chat__sender" >{{ state.senderName }}</span
+        >
+      {% endif %}
+      {% if message.layout != 'panel' and not message.deliveryState %}
+        {% chat_bubble text=message.text content=message|get_optional:'content' attachments=message.attachments reactions=message.reactions %}{% endchat_bubble %}
+      {% else %}
+        {% chat_bubble text=message.text content=message|get_optional:'content' attachments=message.attachments %}{% endchat_bubble %}
+      {% endif %}
+      {% if message.deliveryState == 'failed' %}
+        {% alert variant='error' slim=True noIcon=True className='usx-chat__delivery-error' %}
+          <span>Message not sent.</span>
+          {% dict data_usx_chat_retry=message.id aria_label='Retry sending message' as retryAttributes %}
+          {% button variant='unstyled' className='usx-chat__retry' disabled=disabled extraAttributes=retryAttributes %}
+            Retry
+          {% endbutton %}
+        {% endalert %}
+      {% endif %}
+      {% if message.layout != 'panel' %}
+        {% if message.timeLabel and not state.showTime %}
+          <time class="usx-chat__time usa-sr-only" {% if message.sentAt != None %} datetime="{{ message.sentAt }}" {% endif %} >
+            {{ message.timeLabel }}
+          </time >
+        {% endif %}
+        {% if message.timeLabel and state.showTime or message.edited or state.deliveryStatus or state.canOpenThread and replyCount > 0 %}
+          <div class="usx-chat__message-footer">
+            {% if message.timeLabel and state.showTime %}
+              <time class="usx-chat__time" {% if message.sentAt != None %} datetime="{{ message.sentAt }}" {% endif %} >
+                {{ message.timeLabel }}
+              </time >
+            {% endif %}
+            {% if message.edited or state.deliveryStatus %}
+              <span class="usx-chat__message-meta" >{% if message.edited %}Edited{% endif %}{% if message.edited and state.deliveryStatus %} · {% endif %}{{ state.deliveryStatus }}</span
+          >
+            {% endif %}
+            {% if state.canOpenThread and replyCount > 0 %}
+              <button type="button" class="usa-button usx-button usa-button--unstyled usx-chat__thread-link" data-usx-chat-thread="{{ message.id }}" >
+                {{ replyCount }} {% if replyCount == 1 %}reply{% else %}replies{% endif %}
+              </button >
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endif %}
+      {% if message.layout != 'panel' and not message.deliveryState %}
+        {% chat_message_actions id=id messageId=message.id senderName=state.senderName reactions=message.reactions reactionOptions=availableReactions actions=message.actions canCopy=canCopyMessage canReply=state.canOpenThread canForward=state.canForward %}{% endchat_message_actions %}
+      {% endif %}
+    </div>
+  </li>

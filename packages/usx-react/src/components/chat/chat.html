@@ -1,0 +1,116 @@
+<!-- Initialize @solexllc/usx/js/popover and @solexllc/usx/js/chat for dismiss and composer events. -->
+<details
+  class="usx-popover usx-chat"
+  data-side="bottom"
+  data-align="start"
+  data-usx-popover-dismiss-on-outside="false"
+>
+  <summary class="usa-button usx-button">Chat with us</summary>
+  <div id="chat-example" class="usx-popover__panel usx-popover__panel--square usx-chat__panel">
+    <div class="usx-popover__panel-content usx-chat__popover-content">
+      <section class="usx-chat__window" aria-labelledby="chat-example-title">
+        <header class="usx-chat__header">
+          <div>
+            <h2 id="chat-example-title" class="usx-chat__title">Support chat</h2>
+            <p class="usx-chat__status">Here to help</p>
+          </div>
+          <div class="usx-chat__header-actions">
+            <details class="usx-chat__actions">
+              <summary aria-label="Conversation actions">
+                <svg class="usa-icon usx-icon" aria-hidden="true">
+                  <use href="img/sprite.svg#more_vert"></use>
+                </svg>
+              </summary>
+              <div class="usx-chat__actions-menu">
+                <button type="button" data-usx-chat-copy>Copy conversation</button>
+                <span class="usa-sr-only" role="status" aria-live="polite"></span>
+              </div>
+            </details>
+            <button
+              type="button"
+              class="usx-chat__close"
+              data-usx-popover-close="chat-example"
+              aria-label="Close chat"
+            >
+              <svg class="usa-icon usx-icon" aria-hidden="true">
+                <use href="img/sprite.svg#close"></use>
+              </svg>
+            </button>
+          </div>
+        </header>
+        <ol
+          class="usx-chat__messages"
+          role="log"
+          aria-label="Conversation"
+          aria-live="polite"
+          aria-relevant="additions text"
+          tabindex="0"
+        >
+          <li
+            class="usx-chat__message usx-chat__message--single"
+            data-sender-name="Morgan"
+            data-export-text="Hi! How can I help today?"
+          >
+            <span class="usx-avatar usx-chat__avatar" aria-label="Morgan"
+              ><span class="usx-avatar__content usx-circle">MO</span></span
+            >
+            <div class="usx-chat__message-body">
+              <span class="usx-chat__sender">Morgan</span>
+              <div class="usx-chat__bubble"><p>Hi! How can I help today?</p></div>
+              <time class="usx-chat__time" datetime="2026-01-01T12:00:00Z">12:00 PM</time>
+            </div>
+          </li>
+        </ol>
+        <div class="usx-chat__controls">
+          <div class="usx-chat__quick-replies" aria-label="Suggested questions">
+            <p>Suggested questions</p>
+            <button type="button" data-usx-chat-suggestion="apply">How do I apply?</button>
+          </div>
+        </div>
+        <form class="usx-chat-composer usx-chat__composer" method="post" enctype="multipart/form-data">
+          <div id="chat-example-formatting" class="usx-chat__formatting" aria-label="Message formatting" hidden>
+            <ul class="usa-button-group usx-button-group usa-button-group--segmented usx-chat__format-buttons">
+              <li class="usa-button-group__item"><button type="button" class="usa-button usx-button usa-button--outline usx-chat__format-button" data-usx-chat-format="bold" aria-label="Bold" title="Bold (Ctrl/⌘+B)"><strong>B</strong></button></li>
+              <li class="usa-button-group__item"><button type="button" class="usa-button usx-button usa-button--outline usx-chat__format-button" data-usx-chat-format="italic" aria-label="Italic" title="Italic (Ctrl/⌘+I)"><em>I</em></button></li>
+              <li class="usa-button-group__item"><button type="button" class="usa-button usx-button usa-button--outline usx-chat__format-button" data-usx-chat-format="underline" aria-label="Underline" title="Underline (Ctrl/⌘+U)"><u>U</u></button></li>
+              <li class="usa-button-group__item"><button type="button" class="usa-button usx-button usa-button--outline usx-chat__format-button" data-usx-chat-format="strike" aria-label="Strikethrough" title="Strikethrough (Ctrl/⌘+Shift+X)"><s>S</s></button></li>
+              <li class="usa-button-group__item"><button type="button" class="usa-button usx-button usa-button--outline usx-chat__format-button" data-usx-chat-format="ordered" aria-label="Numbered list" title="Numbered list (Ctrl/⌘+Shift+7)">1.</button></li>
+              <li class="usa-button-group__item"><button type="button" class="usa-button usx-button usa-button--outline usx-chat__format-button" data-usx-chat-format="unordered" aria-label="Bulleted list" title="Bulleted list (Ctrl/⌘+Shift+8)"><svg class="usa-icon usx-icon" aria-hidden="true"><use href="img/sprite.svg#list"></use></svg></button></li>
+              <li class="usa-button-group__item"><button type="button" class="usa-button usx-button usa-button--outline usx-chat__format-button" data-usx-chat-format="quote" aria-label="Block quote" title="Block quote (Ctrl/⌘+Shift+9)"><svg class="usa-icon usx-icon" aria-hidden="true"><use href="img/sprite.svg#format_quote"></use></svg></button></li>
+              <li class="usa-button-group__item"><button type="button" class="usa-button usx-button usa-button--outline usx-chat__format-button" data-usx-chat-format="code" aria-label="Code block" title="Code block (Ctrl/⌘+Alt+Shift+C)"><svg class="usa-icon usx-icon" aria-hidden="true"><use href="img/sprite.svg#code"></use></svg></button></li>
+            </ul>
+          </div>
+          <label class="usa-sr-only" for="chat-example-message">Message</label>
+          <textarea
+            class="usa-textarea usx-textarea"
+            id="chat-example-message"
+            name="message"
+            placeholder="Write a message"
+            rows="2"
+          ></textarea>
+          <div class="usx-chat__composer-actions">
+            <div class="usx-chat__attach usx-chat__attach--with-emoji">
+              <ul class="usa-button-group usx-button-group usa-button-group--segmented usx-chat__composer-tools">
+                <li class="usa-button-group__item"><button type="button" class="usa-button usx-button usa-button--outline" data-usx-chat-attach aria-label="Attach files" title="Attach files"><svg class="usa-icon usx-icon" aria-hidden="true"><use href="img/sprite.svg#attach_file"></use></svg></button></li>
+                <li class="usa-button-group__item"><button type="button" class="usa-button usx-button usa-button--outline" data-usx-chat-toggle-formatting aria-label="Show formatting" aria-controls="chat-example-formatting" aria-expanded="false" title="Show formatting"><svg class="usa-icon usx-icon" aria-hidden="true"><use href="img/sprite.svg#text_fields"></use></svg></button></li>
+              </ul>
+              <details class="usx-popover usx-chat__emoji-picker" data-side="top" data-align="start">
+                <summary class="usa-button usx-button usa-button--outline" aria-label="Choose emoji" title="Choose emoji"><svg class="usa-icon usx-icon" aria-hidden="true"><use href="img/sprite.svg#sentiment_satisfied"></use></svg></summary>
+                <div id="chat-example-emoji-picker" class="usx-popover__panel usx-popover__panel--square">
+                  <ul class="usx-popover__menu"><li><button type="button" class="usx-popover__menu-item" data-usx-chat-emoji="🙂" data-usx-chat-emoji-name="slight_smile" aria-label="Slight smile" title=":slight_smile:">🙂</button></li></ul>
+                </div>
+              </details>
+              <input type="file" name="attachments" multiple aria-label="Attach files" hidden />
+            </div>
+            <button type="submit" class="usa-button usx-button usa-button--primary usx-chat__send" disabled>
+              <svg class="usa-icon usx-icon" aria-hidden="true">
+                <use href="img/sprite.svg#send"></use>
+              </svg>
+              Send
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</details>

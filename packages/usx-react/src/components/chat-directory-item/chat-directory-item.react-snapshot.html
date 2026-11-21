@@ -1,0 +1,249 @@
+<h3 class="site-preview-heading">Default</h3>
+<div>
+  <section id="react-example-directory-item-default" class="usx-chat" style="max-width: 20rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <div class="usx-chat__directory">
+        <ul class="usx-chat__directory-list">
+          <li class="usx-chat__directory-row">
+            <button
+              type="button"
+              class="usx-clickable usx-chat__directory-item"
+              data-usx-chat-conversation="books"
+            >
+              <span class="usx-avatar usx-chat__avatar" aria-label="Jordan Lee"
+                ><span class="usx-avatar__content usx-circle">JL</span></span
+              ><span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Jordan Lee</span
+                ><span class="usx-chat__directory-subtitle">Three design books</span
+                ><span class="usx-chat__directory-preview">I can bundle all three.</span></span
+              ><span class="usx-chat__directory-meta"
+                ><small>Yesterday</small
+                ><span aria-hidden="true"
+                  ><span class="usa-tag usx-tag bg-info usx-rounded-md"> 2</span></span
+                ><span class="usa-sr-only">2 unread messages</span></span
+              >
+            </button>
+            <details
+              class="usx-popover usx-chat__directory-actions"
+              data-side="bottom"
+              data-align="end"
+            >
+              <summary
+                class="usa-button usx-button usa-button--unstyled"
+                aria-label="Actions for Jordan Lee"
+              >
+                <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                  <use href="/img/sprite.svg#more_vert"></use>
+                </svg>
+              </summary>
+              <div
+                id="react-directory-item-actions"
+                class="usx-popover__panel usx-popover__panel--square"
+              >
+                <ul class="usx-popover__menu">
+                  <li>
+                    <button
+                      data-usx-chat-directory-action="delete-history"
+                      data-usx-chat-conversation-id="books"
+                      type="button"
+                      class="usx-popover__menu-item"
+                    >
+                      Delete chat history
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Contact</h3>
+<div>
+  <section id="react-example-directory-item-contact" class="usx-chat" style="max-width: 20rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <div class="usx-chat__directory">
+        <ul class="usx-chat__directory-list">
+          <li>
+            <button
+              type="button"
+              class="usx-clickable usx-chat__directory-item"
+              data-usx-chat-contact="avery"
+            >
+              <span class="usx-avatar usx-chat__avatar" aria-label="Avery Patel"
+                ><span class="usx-avatar__content usx-circle">AP</span></span
+              ><span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Avery Patel</span
+                ><span class="usx-chat__directory-subtitle">Application support</span></span
+              >
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Linked Contact</h3>
+<div>
+  <section
+    id="react-example-directory-item-linkedcontact"
+    class="usx-chat"
+    style="max-width: 20rem"
+  >
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <div class="usx-chat__directory">
+        <ul class="usx-chat__directory-list">
+          <li>
+            <a class="usx-clickable usx-chat__directory-item" href="#morgan"
+              ><span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Morgan Chen</span
+                ><span class="usx-chat__directory-subtitle">Eligibility specialist</span></span
+              ></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Recipient</h3>
+<div>
+  <section id="react-example-directory-item-recipient" class="usx-chat" style="max-width: 20rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <div class="usx-chat__directory">
+        <ul class="usx-chat__directory-list">
+          <li>
+            <div class="usa-checkbox usx-checkbox usx-chat__directory-item usx-chat__recipient">
+              <input
+                id="react-recipient-avery"
+                class="usa-checkbox__input"
+                type="checkbox"
+                name="recipientIds"
+                form="react-example-directory-item-recipient-composer"
+                aria-label="Avery Patel"
+                aria-describedby="react-recipient-avery-description"
+                data-usx-chat-recipient=""
+                checked=""
+                value="avery"
+              /><label
+                class="usa-checkbox__label usx-chat__recipient-label"
+                for="react-recipient-avery"
+                ><span class="usx-avatar usx-chat__avatar" aria-label="Avery Patel"
+                  ><span class="usx-avatar__content usx-circle">AP</span></span
+                ><span class="usx-chat__directory-copy"
+                  ><span class="usx-chat__directory-title">Avery Patel</span
+                  ><span class="usx-chat__directory-subtitle" id="react-recipient-avery-description"
+                    >Application support</span
+                  ></span
+                ></label
+              >
+            </div>
+          </li>
+        </ul>
+        <form
+          id="react-example-directory-item-recipient-composer"
+          data-usx-chat-require-recipients="true"
+          class="usx-chat-composer usx-chat__composer"
+          method="post"
+        >
+          <label
+            class="usa-label usx-label usa-sr-only"
+            for="react-example-directory-item-recipient-message"
+            >Message</label
+          ><textarea
+            id="react-example-directory-item-recipient-message"
+            class="usa-textarea usx-textarea"
+            placeholder="Write a message"
+            name="message"
+            rows="2"
+          ></textarea>
+          <div class="usx-chat__composer-actions">
+            <div class="usx-chat__attach"></div>
+            <button
+              type="submit"
+              class="usa-button usx-button usa-button--primary usx-chat__send"
+              disabled=""
+              aria-disabled="true"
+            >
+              <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                <use href="/img/sprite.svg#send"></use></svg
+              >Send
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Group</h3>
+<div>
+  <section id="react-example-directory-item-group" class="usx-chat" style="max-width: 20rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <div class="usx-chat__directory">
+        <ul class="usx-chat__directory-list">
+          <li>
+            <button
+              type="button"
+              class="usx-clickable usx-chat__directory-item"
+              data-usx-chat-conversation="review"
+            >
+              <div class="usx-avatar-group usx-avatar-group--overlap usx-chat__directory-avatars">
+                <span class="usx-avatar usx-chat__avatar" aria-label="Avery Patel"
+                  ><span class="usx-avatar__content usx-circle">AP</span></span
+                ><span class="usx-avatar usx-chat__avatar" aria-label="Morgan Chen"
+                  ><span class="usx-avatar__content usx-circle">MC</span></span
+                >
+              </div>
+              <span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Review team</span
+                ><span class="usx-chat__directory-preview">Morgan: Ready for review.</span></span
+              >
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Long Text</h3>
+<div>
+  <section id="react-example-directory-item-longtext" class="usx-chat" style="max-width: 20rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <div class="usx-chat__directory">
+        <ul class="usx-chat__directory-list">
+          <li>
+            <button
+              type="button"
+              class="usx-clickable usx-chat__directory-item"
+              data-usx-chat-conversation="accessibility"
+            >
+              <span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title"
+                  >Neighborhood accessibility improvement working group</span
+                ><span class="usx-chat__directory-subtitle"
+                  >The application for accessible entrances at the community center</span
+                ><span class="usx-chat__directory-preview"
+                  >We have finished reviewing the plans and are ready to discuss the next steps
+                  together.</span
+                ></span
+              >
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,38 @@
+{% load usx_components %}
+{% fragment as itemContent %}
+  {% if avatars|length > 1 %}
+    {% avatar_group avatarProps=avatars overlap=True className='usx-chat__directory-avatars' %}{% endavatar_group %}
+  {% elif avatars %}
+    {% avatar props=avatars.0 %}{% endavatar %}
+  {% endif %}
+  <span class="usx-chat__directory-copy">
+    <span class="usx-chat__directory-title">{{ title }}</span>
+    {% if subtitle %}<span class="usx-chat__directory-subtitle"{% if selectable %} id="{{ id }}-description"{% endif %}>{{ subtitle }}</span>{% endif %}
+    {% if preview %}<span class="usx-chat__directory-preview">{{ preview }}</span>{% endif %}
+  </span>
+  {% if timeLabel or unreadCount %}
+    <span class="usx-chat__directory-meta">
+      {% if timeLabel %}<small>{{ timeLabel }}</small>{% endif %}
+      {% if unreadCount %}
+        <span aria-hidden="true">{% tag value=unreadCount color='info' className='usx-rounded-md' %}{% endtag %}</span>
+        <span class="usa-sr-only">{{ unreadCount }} unread messages</span>
+      {% endif %}
+    </span>
+  {% endif %}
+{% endfragment %}
+<li{% if actions %} class="usx-chat__directory-row"{% endif %}>
+  {% if selectable %}
+    <div class="usa-checkbox usx-checkbox usx-chat__directory-item usx-chat__recipient">
+      <input id="{{ id }}" class="usa-checkbox__input" type="checkbox" name="recipientIds" value="{{ participantId|default_if_none:'' }}"{% if formId != None %} form="{{ formId }}"{% endif %}{% if selected %} checked{% endif %}{% if disabled %} disabled{% endif %} aria-label="{{ title }}"{% if subtitle %} aria-describedby="{{ id }}-description"{% endif %} data-usx-chat-recipient="" />
+      <label class="usa-checkbox__label usx-chat__recipient-label" for="{{ id }}">{{ itemContent }}</label>
+    </div>
+  {% else %}
+    {% if href %}{% dict as rowAttrs %}{% elif participantId != None %}{% dict data_usx_chat_contact=participantId as rowAttrs %}{% elif conversationId != None %}{% dict data_usx_chat_conversation=conversationId as rowAttrs %}{% else %}{% dict as rowAttrs %}{% endif %}
+    {% clickable href=href className='usx-chat__directory-item' extraAttributes=rowAttrs %}{{ itemContent }}{% endclickable %}
+  {% endif %}
+  {% if actions %}
+    {% icon name='more_vert' as actionsIcon %}{% endicon %}
+    {% dict children=actionsIcon ariaLabel='Actions for '|add:title className='usa-button usx-button usa-button--unstyled' as actionsSummary %}
+    {% popover id=id|add:'-actions' side='bottom' align='end' panelShape='square' className='usx-chat__directory-actions' summaryProps=actionsSummary menuItems=menuItems %}{% endpopover %}
+  {% endif %}
+</li>

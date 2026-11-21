@@ -1,0 +1,24 @@
+{% load usx_components %}
+{% fragment as content %}
+  {% if imageUrl %}
+    {% if alt == None %}
+      {% image src=imageUrl alt=name className='usx-chat__attachment-image maxw-card' objectFit='cover' rounded=True %}{% endimage %}
+    {% else %}
+      {% image src=imageUrl alt=alt className='usx-chat__attachment-image maxw-card' objectFit='cover' rounded=True %}{% endimage %}
+    {% endif %}
+  {% else %}
+    {% icon name='attach_file' %}{% endicon %}
+  {% endif %}
+  <span>{{ name }}</span>
+{% endfragment %}
+<li>
+  {% if url %}
+    {% button href=url download=name variant='unstyled' %}
+      {{ content }}
+    {% endbutton %}
+  {% else %}
+    <div>
+      {{ content }}
+    </div>
+  {% endif %}
+</li>

@@ -1,0 +1,121 @@
+{
+  "name": "chat-message-actions",
+  "template": "chat-message-actions/chat-message-actions.django.html",
+  "version": 1,
+  "default": {
+    "id": "message-tools",
+    "messageId": "message-1",
+    "senderName": "Avery",
+    "canCopy": true,
+    "canReply": true
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "description": "Chat instance ID, used to namespace menu IDs."
+    },
+    "messageId": {
+      "type": "string",
+      "description": "Message acted on."
+    },
+    "senderName": {
+      "type": "string",
+      "description": "Sender name for accessible action labels."
+    },
+    "reactions": {
+      "type": "array",
+      "description": "Current reactions, rendered as toggle buttons in supplied order. Keep an entry in place while its count remains positive.",
+      "items": {
+        "type": "object",
+        "description": "One reaction.",
+        "properties": {
+          "emoji": {
+            "type": "string",
+            "description": "Visible emoji."
+          },
+          "label": {
+            "type": "string",
+            "description": "Accessible reaction name and event value."
+          },
+          "count": {
+            "type": "number",
+            "description": "Number of reactions."
+          },
+          "selected": {
+            "type": "boolean",
+            "description": "Whether the current user selected this reaction."
+          }
+        }
+      }
+    },
+    "reactionOptions": {
+      "type": "array",
+      "description": "Emoji choices in each message’s Add reaction Popover. Defaults to emojiPack. Pass an empty array to disable adding reactions.",
+      "items": {
+        "type": "object",
+        "description": "A reaction choice.",
+        "properties": {
+          "emoji": {
+            "type": "string",
+            "description": "Visible emoji."
+          },
+          "label": {
+            "type": "string",
+            "description": "Accessible choice name and event value."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional shortcode name; used for the reaction menu tooltip."
+          },
+          "aliases": {
+            "type": "array",
+            "description": "Optional additional shortcodes.",
+            "items": {
+              "type": "string",
+              "description": "Shortcode alias."
+            }
+          }
+        }
+      },
+      "default": []
+    },
+    "actions": {
+      "type": "array",
+      "description": "Overflow menu items, such as Edit or Delete. The application handles the action.",
+      "items": {
+        "type": "object",
+        "description": "One message action.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Action identifier."
+          },
+          "label": {
+            "type": "string",
+            "description": "Visible action label."
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Disable this action."
+          }
+        }
+      },
+      "default": []
+    },
+    "canCopy": {
+      "type": "boolean",
+      "description": "Offer Copy message.",
+      "default": false
+    },
+    "canReply": {
+      "type": "boolean",
+      "description": "Offer Reply in thread.",
+      "default": false
+    },
+    "canForward": {
+      "type": "boolean",
+      "description": "Offer Forward message.",
+      "default": false
+    }
+  }
+}

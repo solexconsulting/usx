@@ -1,0 +1,29 @@
+{% load usx_components %}
+{% if reactionOptions or canReply or canForward or canCopy or actions %}
+  <div class="usx-chat__message-tools" role="group" aria-label="Actions for message from {{ senderName }}" >
+    {% if reactionOptions %}
+      {% icon name='sentiment_satisfied' as reactionIcon %}{% endicon %}
+      {% with reactionLabel='React to message from '|add:senderName %}
+        {% dict children=reactionIcon ariaLabel=reactionLabel title='Add reaction' className='usa-button usx-button usa-button--unstyled' as reactionSummary %}
+        {% popover id=id|add:'-reactions-'|add:messageId side='top' align='end' panelShape='square' className='usx-chat__message-actions usx-chat__reaction-actions' summaryProps=reactionSummary menuItems=reactionMenuItems %}{% endpopover %}
+      {% endwith %}
+    {% endif %}
+    {% if canReply %}
+      <button type="button" class="usa-button usx-button usa-button--unstyled usx-chat__tool-button" title="Reply in thread" aria-label="Reply in thread to message from {{ senderName }}" data-usx-chat-thread="{{ messageId }}" >
+        {% icon name='comment' %}{% endicon %}
+      </button >
+    {% endif %}
+    {% if canForward %}
+      <button type="button" class="usa-button usx-button usa-button--unstyled usx-chat__tool-button" title="Forward message" aria-label="Forward message from {{ senderName }}" data-usx-chat-forward="{{ messageId }}" >
+        {% icon name='arrow_forward' %}{% endicon %}
+      </button >
+    {% endif %}
+    {% if canCopy or actions %}
+      {% icon name='more_horiz' as moreIcon %}{% endicon %}
+      {% with menuLabel='More actions for message from '|add:senderName %}
+        {% dict children=moreIcon ariaLabel=menuLabel title='More actions' className='usa-button usx-button usa-button--unstyled' as menuSummary %}
+        {% popover id=id|add:'-actions-'|add:messageId side='top' align='end' panelShape='square' className='usx-chat__message-actions usx-chat__overflow-actions' summaryProps=menuSummary menuItems=messageMenuItems %}{% endpopover %}
+      {% endwith %}
+    {% endif %}
+  </div>
+{% endif %}

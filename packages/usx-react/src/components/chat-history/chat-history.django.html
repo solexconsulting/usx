@@ -1,0 +1,20 @@
+{% load usx_components %}
+<li class="usx-chat__older-history">
+  {% if hasMore %}
+    {% dict data_usx_chat_load_older='' as olderAttributes %}
+    {% button variant='unstyled' className='usx-chat__load-older' disabled=loading extraAttributes=olderAttributes %}
+      {% if loading %}
+        Loading earlier messages…
+      {% elif error %}
+        Try again
+      {% else %}
+        Load earlier messages
+      {% endif %}
+    {% endbutton %}
+  {% else %}
+    <span class="usx-chat__history-start">Beginning of conversation</span>
+  {% endif %}
+  {% if error and not loading %}
+    <span class="usx-chat__history-error" role="alert">{{ error }}</span>
+  {% endif %}
+</li>

@@ -1,0 +1,75 @@
+{% load usx_components %}
+{% chat_window id=id title=chatTitle view=currentView status=windowState.status showBack=windowState.showBack showNewMessage=windowState.showNewMessage showCopyAction=windowState.showCopyAction conversationId=selectedConversation.id conversationActions=windowState.conversationActions actions=actions summaryProps=summaryProps side=side align=align defaultOpen=defaultOpen className=className %}
+  {% if currentView == 'conversation' or currentView == 'thread' %}
+    {% if subject != None %}
+      {% chat_context label=subject.label title=subject.title description=subject.description imageUrl=subject.imageUrl imageAlt=subject.imageAlt href=subject.href %}{% endchat_context %}
+    {% endif %}
+  {% endif %}
+  {% if currentView == 'thread' and visibleMessages.0 %}
+    {% dict aria_label='Thread context' as threadContextAttrs %}
+    {% callout as='aside' big=False strokeColor='primary' backgroundColor='surface-2' textColor='ink' className='usx-chat__context' extraAttributes=threadContextAttrs %}
+      <div class="usx-chat__context-copy">
+        <strong>Replying to {{ threadSender }}</strong>
+        {% if threadPreview %}<span>{{ threadPreview }}</span>{% endif %}
+      </div>
+    {% endcallout %}
+  {% endif %}
+  {% chat_directory id=id|add:'-directory' view=currentView conversations=conversations contacts=contacts participants=participants currentUserId=currentUserId selectable=isContacts recipientIds=recipientIds formId=id|add:'-composer' disabled=disabled %}{% endchat_directory %}
+  {% if currentView == 'contacts' %}
+    {% chat_composer id=id formAction=formAction requireRecipients=True disabled=disabled allowAttachments=allowAttachments allowFormatting=allowFormatting accept=accept emojiPack=emojiPack %}{% endchat_composer %}
+  {% endif %}
+  {% if currentView == 'conversation' or currentView == 'thread' %}
+    <ol class="usx-chat__messages" role="log" aria-label="{% if currentView == 'thread' %}Thread messages{% else %}Conversation{% endif %}" aria-live="polite" aria-relevant="additions text" aria-busy="{{ activeOlder.loading|yesno:'true,false' }}" tabindex="0" {% if activeOlder.cursor != None %} data-usx-chat-older-cursor="{{ activeOlder.cursor }}" {% endif %}{% if selectedId != None %} data-usx-chat-conversation-id="{{ selectedId }}" {% endif %}{% if currentView == 'thread' and threadId != None %} data-usx-chat-thread-id="{{ threadId }}" {% endif %} >
+      {% if activeOlder and currentView != 'thread' %}
+        {% chat_history hasMore=activeOlder.hasMore loading=activeOlder.loading error=activeOlder.error %}{% endchat_history %}
+      {% endif %}
+      {% if not visibleMessages %}
+        <li class="usx-chat__empty">
+          {% if currentView == 'thread' %}
+            Thread unavailable.
+          {% else %}
+            {{ emptyText }}
+          {% endif %}
+        </li>
+      {% endif %}
+      {% if currentView == 'thread' and visibleMessages.0 %}
+        <li class="usx-chat__thread-label" role="separator">
+          Original message
+        </li>
+      {% endif %}
+      {% for row in messageRows %}
+        {% with message=row.message %}
+          {% if currentView == 'conversation' and message.id == unreadBoundary %}
+            <li class="usx-chat__unread-divider" role="separator">
+              <span>Unread messages</span>
+            </li>
+          {% endif %}
+          {% chat_message id=id message=message participant=row.participant own=row.own isThread=isThread allowThreads=canThread allowForward=contacts|length showCopyMessageAction=showCopyMessageAction reactionOptions=row.reactionOptions disabled=disabled %}{% endchat_message %}
+          {% if currentView == 'thread' and forloop.first %}
+            {% if activeOlder %}
+              {% chat_history hasMore=activeOlder.hasMore loading=activeOlder.loading error=activeOlder.error %}{% endchat_history %}
+            {% endif %}
+            <li class="usx-chat__thread-divider" role="separator">
+              <span>{% if message.olderReplies.hasMore and message.replyCount == None %}Replies{% else %}{{ replyCount }} {% if replyCount == 1 %}reply{% else %}replies{% endif %}{% endif %}</span>
+            </li>
+          {% endif %}
+        {% endwith %}
+      {% endfor %}
+      {% if typingIds %}
+        <li class="usx-chat__typing" role="status" aria-live="polite">
+          {% avatar_group avatarProps=typingAvatarProps overlap=True %}{% endavatar_group %}
+          <span>{{ typingNames|join:', ' }} {% if typingIds|length == 1 %}is{% else %}are{% endif %} typing</span>
+          <span class="usx-chat__typing-dots" aria-hidden="true">
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+        </li>
+      {% endif %}
+      {% chat_controls suggestedQuestions=suggestedQuestions choices=choices choicePrompt=choicePrompt disabled=disabled children=children %}{% endchat_controls %}
+    </ol>
+    {% if currentView != 'thread' or visibleMessages.0 %}
+      {% chat_composer id=id formAction=formAction allowAttachments=canAttach allowFormatting=allowFormatting conversationId=selectedId recipientId=recipientId isThread=isThread threadRootId=threadId disabled=disabled emojiPack=emojiPack accept=accept %}{% endchat_composer %}
+    {% endif %}
+  {% endif %}
+{% endchat_window %}

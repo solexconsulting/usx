@@ -1,0 +1,14 @@
+{% load usx_components %}
+{% if view == 'inbox' or view == 'contacts' %}
+  {% if view == 'contacts' and selectable %}
+    <div class="usx-chat__directory" role="group" aria-label="Recipients">
+    <p class="usx-chat__recipient-hint">To: Choose one or more people.</p>
+  {% else %}
+    <nav class="usx-chat__directory" aria-label="{% if view == 'inbox' %}Conversations{% else %}People{% endif %}">
+  {% endif %}
+    <ul class="usx-chat__directory-list">
+      {% for item in items %}{% chat_directory_item props=item %}{% endchat_directory_item %}{% endfor %}
+    </ul>
+    {% if view == 'inbox' and not items %}<p class="usx-chat__empty">No conversations yet.</p>{% endif %}
+  {% if view == 'contacts' and selectable %}</div>{% else %}</nav>{% endif %}
+{% endif %}

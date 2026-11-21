@@ -1,0 +1,575 @@
+<h3 class="site-preview-heading">Default</h3>
+<div>
+  <section id="django-example-composer-default" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <ol class="usx-chat__messages"></ol>
+      <form
+        id="django-composer-default-composer"
+        class="usx-chat-composer usx-chat__composer"
+        method="post"
+      >
+        <label class="usa-label usx-label usa-sr-only" for="django-composer-default-message">
+          Message
+        </label>
+
+        <textarea
+          class="usa-textarea usx-textarea"
+          id="django-composer-default-message"
+          name="message"
+          rows="2"
+          placeholder="Write a message"
+        ></textarea>
+
+        <div class="usx-chat__composer-actions">
+          <div class="usx-chat__attach">
+            <!-- prettier-ignore -->
+            <details
+
+  class="usx-popover usx-chat__emoji-picker"
+  data-side="top"
+  data-align="start"
+
+
+  >
+
+
+<summary class="usa-button usx-button usa-button--outline" aria-label="Choose emoji" title="Choose emoji">
+
+<svg
+    class="
+        usa-icon usx-icon
+
+
+
+    "
+
+    aria-hidden="true"
+    focusable="false"
+    role="img"
+>
+
+    <use href="img/sprite.svg#sentiment_satisfied"></use>
+
+</svg></summary>
+
+<div
+    id="django-composer-default-emoji-picker"
+    class="usx-popover__panel usx-popover__panel--square"
+  ><ul class="usx-popover__menu"><li><button
+      type="button"
+      class="usx-popover__menu-item"
+
+
+      aria-label="Thumbs up"title=":thumbs_up:"data-usx-chat-emoji="👍"data-usx-chat-emoji-name="thumbs_up"data-usx-chat-emoji-aliases=""
+    >
+
+      👍
+    </button></li><li><button
+      type="button"
+      class="usx-popover__menu-item"
+
+
+      aria-label="Smile"title=":smile:"data-usx-chat-emoji="😊"data-usx-chat-emoji-name="smile"data-usx-chat-emoji-aliases=""
+    >
+
+      😊
+    </button></li><li><button
+      type="button"
+      class="usx-popover__menu-item"
+
+
+      aria-label="Celebrate"title=":celebrate:"data-usx-chat-emoji="🎉"data-usx-chat-emoji-name="celebrate"data-usx-chat-emoji-aliases=""
+    >
+
+      🎉
+    </button></li></ul>
+</div></details>
+          </div>
+
+          <button
+            type="submit"
+            class="usa-button usx-button usa-button--primary usx-chat__send"
+            disabled
+            aria-disabled="true"
+          >
+            <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+              <use href="img/sprite.svg#send"></use>
+            </svg>
+
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">With Formatting</h3>
+<div>
+  <section id="django-example-composer-withformatting" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <ol class="usx-chat__messages"></ol>
+      <form
+        id="django-composer-formatting-composer"
+        class="usx-chat-composer usx-chat__composer"
+        method="post"
+      >
+        <div
+          id="django-composer-formatting-formatting"
+          class="usx-chat__formatting"
+          aria-label="Message formatting"
+          hidden
+        >
+          <ul
+            class="usa-button-group usx-button-group usa-button-group--segmented usx-chat__format-buttons"
+          >
+            <li class="usa-button-group__item">
+              <button
+                type="button"
+                class="usa-button usx-button usa-button--outline usx-chat__format-button"
+                data-usx-chat-format="bold"
+                aria-label="Bold"
+                title="Bold (Ctrl/⌘+B)"
+              >
+                <strong>B</strong>
+              </button>
+            </li>
+
+            <li class="usa-button-group__item">
+              <button
+                type="button"
+                class="usa-button usx-button usa-button--outline usx-chat__format-button"
+                data-usx-chat-format="italic"
+                aria-label="Italic"
+                title="Italic (Ctrl/⌘+I)"
+              >
+                <em> I </em>
+              </button>
+            </li>
+
+            <li class="usa-button-group__item">
+              <button
+                type="button"
+                class="usa-button usx-button usa-button--outline usx-chat__format-button"
+                data-usx-chat-format="underline"
+                aria-label="Underline"
+                title="Underline (Ctrl/⌘+U)"
+              >
+                <u> U </u>
+              </button>
+            </li>
+
+            <li class="usa-button-group__item">
+              <button
+                type="button"
+                class="usa-button usx-button usa-button--outline usx-chat__format-button"
+                data-usx-chat-format="strike"
+                aria-label="Strikethrough"
+                title="Strikethrough (Ctrl/⌘+Shift+X)"
+              >
+                <s> S </s>
+              </button>
+            </li>
+
+            <li class="usa-button-group__item">
+              <button
+                type="button"
+                class="usa-button usx-button usa-button--outline usx-chat__format-button"
+                data-usx-chat-format="ordered"
+                aria-label="Numbered list"
+                title="Numbered list (Ctrl/⌘+Shift+7)"
+              >
+                1.
+              </button>
+            </li>
+
+            <li class="usa-button-group__item">
+              <button
+                type="button"
+                class="usa-button usx-button usa-button--outline usx-chat__format-button"
+                data-usx-chat-format="unordered"
+                aria-label="Bulleted list"
+                title="Bulleted list (Ctrl/⌘+Shift+8)"
+              >
+                <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                  <use href="img/sprite.svg#list"></use>
+                </svg>
+              </button>
+            </li>
+
+            <li class="usa-button-group__item">
+              <button
+                type="button"
+                class="usa-button usx-button usa-button--outline usx-chat__format-button"
+                data-usx-chat-format="quote"
+                aria-label="Block quote"
+                title="Block quote (Ctrl/⌘+Shift+9)"
+              >
+                <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                  <use href="img/sprite.svg#format_quote"></use>
+                </svg>
+              </button>
+            </li>
+
+            <li class="usa-button-group__item">
+              <button
+                type="button"
+                class="usa-button usx-button usa-button--outline usx-chat__format-button"
+                data-usx-chat-format="code"
+                aria-label="Code block"
+                title="Code block (Ctrl/⌘+Alt+Shift+C)"
+              >
+                <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                  <use href="img/sprite.svg#code"></use>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <label class="usa-label usx-label usa-sr-only" for="django-composer-formatting-message">
+          Message
+        </label>
+
+        <textarea
+          class="usa-textarea usx-textarea"
+          id="django-composer-formatting-message"
+          name="message"
+          rows="2"
+          placeholder="Write a message"
+        ></textarea>
+
+        <div class="usx-chat__composer-actions">
+          <div class="usx-chat__attach">
+            <ul class="usa-button-group usx-button-group usx-chat__composer-tools">
+              <li class="usa-button-group__item">
+                <button
+                  type="button"
+                  class="usa-button usx-button usa-button--outline"
+                  data-usx-chat-toggle-formatting=""
+                  aria-label="Show formatting"
+                  title="Show formatting"
+                  aria-expanded="false"
+                  aria-controls="django-composer-formatting-formatting"
+                >
+                  <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                    <use href="img/sprite.svg#text_fields"></use>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+
+            <!-- prettier-ignore -->
+            <details
+
+  class="usx-popover usx-chat__emoji-picker"
+  data-side="top"
+  data-align="start"
+
+
+  >
+
+
+<summary class="usa-button usx-button usa-button--outline" aria-label="Choose emoji" title="Choose emoji">
+
+<svg
+    class="
+        usa-icon usx-icon
+
+
+
+    "
+
+    aria-hidden="true"
+    focusable="false"
+    role="img"
+>
+
+    <use href="img/sprite.svg#sentiment_satisfied"></use>
+
+</svg></summary>
+
+<div
+    id="django-composer-formatting-emoji-picker"
+    class="usx-popover__panel usx-popover__panel--square"
+  ><ul class="usx-popover__menu"><li><button
+      type="button"
+      class="usx-popover__menu-item"
+
+
+      aria-label="Thumbs up"title=":thumbs_up:"data-usx-chat-emoji="👍"data-usx-chat-emoji-name="thumbs_up"data-usx-chat-emoji-aliases=""
+    >
+
+      👍
+    </button></li><li><button
+      type="button"
+      class="usx-popover__menu-item"
+
+
+      aria-label="Smile"title=":smile:"data-usx-chat-emoji="😊"data-usx-chat-emoji-name="smile"data-usx-chat-emoji-aliases=""
+    >
+
+      😊
+    </button></li><li><button
+      type="button"
+      class="usx-popover__menu-item"
+
+
+      aria-label="Celebrate"title=":celebrate:"data-usx-chat-emoji="🎉"data-usx-chat-emoji-name="celebrate"data-usx-chat-emoji-aliases=""
+    >
+
+      🎉
+    </button></li></ul>
+</div></details>
+          </div>
+
+          <button
+            type="submit"
+            class="usa-button usx-button usa-button--primary usx-chat__send"
+            disabled
+            aria-disabled="true"
+          >
+            <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+              <use href="img/sprite.svg#send"></use>
+            </svg>
+
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">With Attachments And Emoji</h3>
+<div>
+  <section
+    id="django-example-composer-withattachmentsandemoji"
+    class="usx-chat"
+    style="max-width: 28rem"
+  >
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <ol class="usx-chat__messages"></ol>
+      <form
+        id="django-composer-attachments-composer"
+        class="usx-chat-composer usx-chat__composer"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <label class="usa-label usx-label usa-sr-only" for="django-composer-attachments-message">
+          Message
+        </label>
+
+        <textarea
+          class="usa-textarea usx-textarea"
+          id="django-composer-attachments-message"
+          name="message"
+          rows="2"
+          placeholder="Write a message"
+        ></textarea>
+
+        <div class="usx-chat__composer-actions">
+          <div class="usx-chat__attach">
+            <ul class="usa-button-group usx-button-group usx-chat__composer-tools">
+              <li class="usa-button-group__item">
+                <button
+                  type="button"
+                  class="usa-button usx-button usa-button--outline"
+                  data-usx-chat-attach=""
+                  aria-label="Attach files"
+                  title="Attach files"
+                >
+                  <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                    <use href="img/sprite.svg#attach_file"></use>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+
+            <!-- prettier-ignore -->
+            <details
+
+  class="usx-popover usx-chat__emoji-picker"
+  data-side="top"
+  data-align="start"
+
+
+  >
+
+
+<summary class="usa-button usx-button usa-button--outline" aria-label="Choose emoji" title="Choose emoji">
+
+<svg
+    class="
+        usa-icon usx-icon
+
+
+
+    "
+
+    aria-hidden="true"
+    focusable="false"
+    role="img"
+>
+
+    <use href="img/sprite.svg#sentiment_satisfied"></use>
+
+</svg></summary>
+
+<div
+    id="django-composer-attachments-emoji-picker"
+    class="usx-popover__panel usx-popover__panel--square"
+  ><ul class="usx-popover__menu"><li><button
+      type="button"
+      class="usx-popover__menu-item"
+
+
+      aria-label="Thumbs up"title=":thumbs_up:"data-usx-chat-emoji="👍"data-usx-chat-emoji-name="thumbs_up"data-usx-chat-emoji-aliases=""
+    >
+
+      👍
+    </button></li><li><button
+      type="button"
+      class="usx-popover__menu-item"
+
+
+      aria-label="Smile"title=":smile:"data-usx-chat-emoji="😊"data-usx-chat-emoji-name="smile"data-usx-chat-emoji-aliases=""
+    >
+
+      😊
+    </button></li><li><button
+      type="button"
+      class="usx-popover__menu-item"
+
+
+      aria-label="Celebrate"title=":celebrate:"data-usx-chat-emoji="🎉"data-usx-chat-emoji-name="celebrate"data-usx-chat-emoji-aliases=""
+    >
+
+      🎉
+    </button></li></ul>
+</div></details>
+
+            <input
+              type="file"
+              hidden
+              name="attachments"
+              multiple
+              aria-label="Attach files"
+              accept="image/*,.pdf"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="usa-button usx-button usa-button--primary usx-chat__send"
+            disabled
+            aria-disabled="true"
+          >
+            <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+              <use href="img/sprite.svg#send"></use>
+            </svg>
+
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Thread Reply</h3>
+<div>
+  <section id="django-example-composer-threadreply" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="thread" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <ol class="usx-chat__messages"></ol>
+      <form
+        id="django-composer-thread-composer"
+        class="usx-chat-composer usx-chat__composer"
+        method="post"
+      >
+        <input type="hidden" name="conversationId" value="conversation-42" />
+
+        <input type="hidden" name="threadRootId" value="message-7" />
+
+        <label class="usa-label usx-label usa-sr-only" for="django-composer-thread-message">
+          Reply in thread
+        </label>
+
+        <textarea
+          class="usa-textarea usx-textarea"
+          id="django-composer-thread-message"
+          name="message"
+          rows="2"
+          placeholder="Reply in thread"
+        ></textarea>
+
+        <div class="usx-chat__composer-actions">
+          <div class="usx-chat__attach"></div>
+
+          <button
+            type="submit"
+            class="usa-button usx-button usa-button--primary usx-chat__send"
+            disabled
+            aria-disabled="true"
+          >
+            <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+              <use href="img/sprite.svg#send"></use>
+            </svg>
+
+            Send reply
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Group Message</h3>
+<div>
+  <section id="django-example-composer-groupmessage" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <ol class="usx-chat__messages"></ol>
+      <form
+        id="django-composer-group-composer"
+        data-usx-chat-require-recipients="true"
+        class="usx-chat-composer usx-chat__composer"
+        method="post"
+      >
+        <input type="hidden" name="recipientIds" value="agent" />
+
+        <input type="hidden" name="recipientIds" value="specialist" />
+
+        <label class="usa-label usx-label usa-sr-only" for="django-composer-group-message">
+          Message
+        </label>
+
+        <textarea
+          class="usa-textarea usx-textarea"
+          id="django-composer-group-message"
+          name="message"
+          rows="2"
+          placeholder="Write a message"
+        >
+Can we review the application together?</textarea
+        >
+
+        <div class="usx-chat__composer-actions">
+          <div class="usx-chat__attach"></div>
+
+          <button type="submit" class="usa-button usx-button usa-button--primary usx-chat__send">
+            <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+              <use href="img/sprite.svg#send"></use>
+            </svg>
+
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

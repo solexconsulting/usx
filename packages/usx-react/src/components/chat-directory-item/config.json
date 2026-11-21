@@ -1,0 +1,103 @@
+{
+  "name": "chat-directory-item",
+  "template": "chat-directory-item/chat-directory-item.django.html",
+  "version": 1,
+  "default": {
+    "id": "directory-item",
+    "title": "Jordan Lee",
+    "subtitle": "Three design books",
+    "preview": "I can bundle all three.",
+    "conversationId": "books"
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "description": "Unique row ID, used for the recipient checkbox and action menu."
+    },
+    "title": {
+      "type": "string",
+      "description": "Visible conversation or contact name."
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Supporting context or contact description. Wraps rather than truncating."
+    },
+    "preview": {
+      "type": "string",
+      "description": "Optional last-message preview. Truncated visually to one line."
+    },
+    "timeLabel": {
+      "type": "string",
+      "description": "Last activity label."
+    },
+    "href": {
+      "type": "string",
+      "description": "Navigation URL. Omit for an enhancement-driven button."
+    },
+    "conversationId": {
+      "type": "string",
+      "description": "Conversation ID for navigation and action events."
+    },
+    "participantId": {
+      "type": "string",
+      "description": "Contact ID for navigation, recipient selection, and action events."
+    },
+    "formId": {
+      "type": "string",
+      "description": "Form associated with the recipient checkbox."
+    },
+    "avatarProps": {
+      "type": "array",
+      "default": [],
+      "description": "Avatars to display; multiple entries use AvatarGroup. Omit href on avatars inside the row control.",
+      "items": {
+        "type": "object",
+        "component": "avatar",
+        "description": "One avatar."
+      }
+    },
+    "unreadCount": {
+      "type": "number",
+      "default": 0,
+      "description": "Unread message count."
+    },
+    "actions": {
+      "type": "array",
+      "description": "Optional host-defined directory actions. Omit or pass [] to hide the menu. Actions dispatch usx:chat-directory-action; the host controls availability and effects.",
+      "items": {
+        "type": "object",
+        "description": "One message action.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Action identifier."
+          },
+          "label": {
+            "type": "string",
+            "description": "Visible action label."
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Disable this action."
+          }
+        }
+      },
+      "default": []
+    },
+    "selectable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Render a recipient checkbox instead of a Clickable. Supply participantId for its value."
+    },
+    "selected": {
+      "type": "boolean",
+      "default": false,
+      "description": "Initial checkbox selection."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable recipient selection."
+    }
+  }
+}

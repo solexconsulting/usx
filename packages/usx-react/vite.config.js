@@ -14,19 +14,16 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.js'),
-      name: 'UsxCore',
-      fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
+      entry: {
+        index: resolve(__dirname, 'src/index.js'),
+        chat: resolve(__dirname, 'src/chat.js'),
+      },
+      formats: ['es', 'cjs'],
+      fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rollupOptions: {
       // Exclude peer dependencies from the bundle.
       external: ['react', 'react-dom', 'react/jsx-runtime'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
-      },
     },
     // Don't minify the library build so consumers can inspect it.
     minify: false,

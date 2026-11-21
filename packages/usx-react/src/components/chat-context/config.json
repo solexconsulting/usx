@@ -1,0 +1,36 @@
+{
+  "name": "chat-context",
+  "template": "chat-context/chat-context.django.html",
+  "version": 1,
+  "default": {
+    "label": "Listing",
+    "title": "Bicycle",
+    "description": "Available for pickup"
+  },
+  "props": {
+    "label": {
+      "type": "string",
+      "description": "Short subject category, such as Marketplace listing or Access request."
+    },
+    "title": {
+      "type": "string",
+      "description": "Name of the item or record being discussed."
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional price, status, or other concise detail."
+    },
+    "imageUrl": {
+      "type": "string",
+      "description": "Optional subject thumbnail rendered through Image."
+    },
+    "imageAlt": {
+      "type": "string",
+      "description": "Thumbnail description; empty when decorative."
+    },
+    "href": {
+      "type": "string",
+      "description": "Optional link to the underlying item or record."
+    }
+  }
+}

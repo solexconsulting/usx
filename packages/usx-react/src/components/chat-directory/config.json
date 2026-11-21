@@ -1,0 +1,242 @@
+{
+  "name": "chat-directory",
+  "template": "chat-directory/chat-directory.django.html",
+  "version": 1,
+  "default": {
+    "view": "inbox",
+    "conversations": []
+  },
+  "props": {
+    "conversations": {
+      "type": "array",
+      "description": "Optional inbox rows. A row may supply messages for client-side selection or href for server navigation.",
+      "items": {
+        "type": "object",
+        "description": "One conversation.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable conversation ID."
+          },
+          "title": {
+            "type": "string",
+            "description": "Conversation title."
+          },
+          "participantIds": {
+            "type": "array",
+            "description": "Member IDs for this conversation. The current user is omitted from the inbox avatar cluster when present.",
+            "items": {
+              "type": "string",
+              "description": "Participant ID."
+            }
+          },
+          "isGroup": {
+            "type": "boolean",
+            "description": "Keep group inbox treatment even when only one other member remains. Multiple other members also imply a group."
+          },
+          "avatarProps": {
+            "type": "object",
+            "component": "avatar",
+            "description": "Optional group Avatar, such as an icon or image, in place of member avatars."
+          },
+          "preview": {
+            "type": "string",
+            "description": "Last message preview."
+          },
+          "previewSenderId": {
+            "type": "string",
+            "description": "Optional sender ID prefixed to a group conversation preview. Useful when only inbox summaries are loaded."
+          },
+          "timeLabel": {
+            "type": "string",
+            "description": "Last activity label."
+          },
+          "unreadCount": {
+            "type": "number",
+            "description": "Unread message count shown with Tag."
+          },
+          "firstUnreadMessageId": {
+            "type": "string",
+            "description": "Stable ID of the first unread message in this conversation's supplied history. Required for an accurate unread divider."
+          },
+          "href": {
+            "type": "string",
+            "description": "Optional server-rendered conversation URL."
+          },
+          "context": {
+            "type": "object",
+            "description": "Optional subject of this conversation, using the same fields as Chat.context. Its title appears in the inbox and its details above the transcript."
+          },
+          "messages": {
+            "type": "array",
+            "description": "History to show when this conversation is selected.",
+            "items": {
+              "type": "object",
+              "description": "One message."
+            }
+          },
+          "olderHistory": {
+            "type": "object",
+            "description": "Optional older-page state for this conversation, using the same fields as Chat.olderHistory."
+          },
+          "allowAttachments": {
+            "type": "boolean",
+            "description": "Override whether this conversation accepts new file uploads."
+          },
+          "actions": {
+            "type": "array",
+            "description": "Optional host-defined directory actions. Omit or pass [] to hide the menu. Actions dispatch usx:chat-directory-action; the host controls availability and effects.",
+            "items": {
+              "type": "object",
+              "description": "One message action.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Action identifier."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Visible action label."
+                },
+                "disabled": {
+                  "type": "boolean",
+                  "description": "Disable this action."
+                }
+              }
+            }
+          }
+        }
+      },
+      "default": []
+    },
+    "contacts": {
+      "type": "array",
+      "description": "Optional people available for a new conversation.",
+      "items": {
+        "type": "object",
+        "description": "One contact.",
+        "properties": {
+          "participantId": {
+            "type": "string",
+            "description": "ID from participants."
+          },
+          "description": {
+            "type": "string",
+            "description": "Supporting text."
+          },
+          "conversationId": {
+            "type": "string",
+            "description": "Existing conversation ID, if any."
+          },
+          "href": {
+            "type": "string",
+            "description": "Optional server-rendered contact URL in a non-selectable ChatDirectory. The new-message picker selects recipients instead of following contact links."
+          },
+          "allowAttachments": {
+            "type": "boolean",
+            "description": "Override whether a new conversation with this contact accepts uploads."
+          },
+          "actions": {
+            "type": "array",
+            "description": "Optional host-defined directory actions. Omit or pass [] to hide the menu. Actions dispatch usx:chat-directory-action; the host controls availability and effects.",
+            "items": {
+              "type": "object",
+              "description": "One message action.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Action identifier."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Visible action label."
+                },
+                "disabled": {
+                  "type": "boolean",
+                  "description": "Disable this action."
+                }
+              }
+            }
+          }
+        }
+      },
+      "default": []
+    },
+    "participants": {
+      "type": "array",
+      "description": "Participants, including the current user, agents, and bots. Message sender IDs should match participant IDs.",
+      "items": {
+        "type": "object",
+        "description": "One chat participant.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable participant ID."
+          },
+          "name": {
+            "type": "string",
+            "description": "Visible sender name and transcript label."
+          },
+          "avatarProps": {
+            "type": "object",
+            "component": "avatar",
+            "description": "Avatar props. Chat renders avatars without links."
+          },
+          "presence": {
+            "type": "select",
+            "options": [
+              "online",
+              "away"
+            ],
+            "description": "Optional current presence in inbox and contact lists. The host must keep it current; it is not a response-time promise."
+          }
+        }
+      },
+      "default": []
+    },
+    "currentUserId": {
+      "type": "string",
+      "description": "Participant ID whose messages align to the outgoing side.",
+      "default": "user"
+    },
+    "view": {
+      "type": "select",
+      "description": "Directory to render.",
+      "options": [
+        "inbox",
+        "contacts",
+        "conversation",
+        "thread"
+      ],
+      "default": "inbox"
+    },
+    "recipientIds": {
+      "type": "array",
+      "description": "Initially selected participant IDs in the new-message recipient picker.",
+      "default": [],
+      "items": {
+        "type": "string",
+        "description": "Recipient participant ID."
+      }
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique prefix for directory action menus. Supply a distinct value for each directory on a page.",
+      "default": "chat-directory"
+    },
+    "selectable": {
+      "type": "boolean",
+      "description": "Render contacts as multi-select recipient rows using USX/USWDS Checkbox classes, with an Avatar inside each label, instead of navigation links or buttons.",
+      "default": false
+    },
+    "formId": {
+      "type": "string",
+      "description": "Composer form ID associated with the recipient checkboxes, usually <chat-id>-composer."
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Disable recipient selection.",
+      "default": false
+    }
+  }
+}

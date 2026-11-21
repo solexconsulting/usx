@@ -68,6 +68,12 @@ test('play freshness includes shared component stylesheets', () => {
     assert.ok(files.includes(stylesheet), `${stylesheet} must invalidate saved play results`);
 });
 
+test('play freshness includes shared styles and parent component stylesheets', () => {
+  const files = playInputFiles('chat-composer', 'react').map((file) => path.basename(file));
+  for (const stylesheet of ['_chat.scss', '_button.scss', '_focus.scss', 'chat-themed.scss'])
+    assert.ok(files.includes(stylesheet), `${stylesheet} must invalidate saved play results`);
+});
+
 test('freshness compares the stored hash with the current one', () => {
   const stored = {
     inputHash: 'a',

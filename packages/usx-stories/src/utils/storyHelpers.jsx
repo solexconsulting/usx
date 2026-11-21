@@ -80,6 +80,7 @@ const componentLoaders = {
     accordion: () => import('@uswds/uswds/js/usa-accordion').then(({ default: component }) => unmarkedInitializer(component, '.usa-accordion')),
     banner: () => import('@uswds/uswds/js/usa-banner').then(({ default: component }) => unmarkedInitializer(component, '.usa-banner')),
     carousel: () => import('@solexllc/usx/js/carousel'),
+    chat: () => import('@solexllc/usx/js/chat'),
     dataTable: () => import('@solexllc/usx/js/data-table'),
     drawer: () => import('@solexllc/usx/js/drawer'),
     characterCount: () => import('@uswds/uswds/js/usa-character-count'),

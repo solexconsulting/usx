@@ -1,0 +1,24 @@
+{
+  "name": "chat-history",
+  "template": "chat-history/chat-history.django.html",
+  "version": 1,
+  "default": {
+    "hasMore": true
+  },
+  "props": {
+    "hasMore": {
+      "type": "boolean",
+      "description": "Whether earlier messages are available.",
+      "default": false
+    },
+    "loading": {
+      "type": "boolean",
+      "description": "Whether earlier messages are loading.",
+      "default": false
+    },
+    "error": {
+      "type": "string",
+      "description": "History loading error."
+    }
+  }
+}

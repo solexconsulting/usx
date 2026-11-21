@@ -1,0 +1,471 @@
+<h3 class="site-preview-heading">Default</h3>
+<div>
+  <section id="react-example-directory-default" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="inbox" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <nav class="usx-chat__directory" aria-label="Conversations">
+        <ul class="usx-chat__directory-list"></ul>
+        <p class="usx-chat__empty">No conversations yet.</p>
+      </nav>
+      <button type="button" class="usa-button usx-button" data-usx-chat-new="">New message</button>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">People</h3>
+<div>
+  <section id="react-example-directory-people" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="contacts" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <nav class="usx-chat__directory" aria-label="People">
+        <ul class="usx-chat__directory-list">
+          <li>
+            <button
+              type="button"
+              class="usx-clickable usx-chat__directory-item"
+              data-usx-chat-contact="a"
+            >
+              <span class="usx-avatar usx-chat__avatar" aria-label="Avery"
+                ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                  >A</span
+                ></span
+              ><span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Avery</span
+                ><span class="usx-chat__directory-subtitle">Support</span></span
+              >
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <button type="button" class="usa-button usx-button" data-usx-chat-new="">New message</button>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Inbox</h3>
+<div>
+  <section id="react-example-directory-inbox" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="inbox" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <nav class="usx-chat__directory" aria-label="Conversations">
+        <ul class="usx-chat__directory-list">
+          <li>
+            <button
+              type="button"
+              class="usx-clickable usx-chat__directory-item"
+              data-usx-chat-conversation="c"
+            >
+              <span class="usx-avatar usx-chat__avatar" aria-label="Avery"
+                ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                  >A</span
+                ></span
+              ><span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Support</span
+                ><span class="usx-chat__directory-preview">Hello</span></span
+              ><span class="usx-chat__directory-meta"
+                ><span aria-hidden="true"
+                  ><span class="usa-tag usx-tag bg-info usx-rounded-md"> 2</span></span
+                ><span class="usa-sr-only">2 unread messages</span></span
+              >
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <button type="button" class="usa-button usx-button" data-usx-chat-new="">New message</button>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">With Actions</h3>
+<div>
+  <section id="react-example-directory-withactions" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="inbox" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <nav class="usx-chat__directory" aria-label="Conversations">
+        <ul class="usx-chat__directory-list">
+          <li class="usx-chat__directory-row">
+            <button
+              type="button"
+              class="usx-clickable usx-chat__directory-item"
+              data-usx-chat-conversation="review-team"
+            >
+              <div class="usx-avatar-group usx-avatar-group--overlap usx-chat__directory-avatars">
+                <span class="usx-avatar usx-chat__avatar" aria-label="Morgan"
+                  ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                    >M</span
+                  ></span
+                ><span class="usx-avatar usx-chat__avatar" aria-label="Taylor"
+                  ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                    >T</span
+                  ></span
+                >
+              </div>
+              <span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Application review team</span
+                ><span class="usx-chat__directory-preview">Ready for the review?</span></span
+              >
+            </button>
+            <details
+              class="usx-popover usx-chat__directory-actions"
+              data-side="bottom"
+              data-align="end"
+            >
+              <summary
+                class="usa-button usx-button usa-button--unstyled"
+                aria-label="Actions for Application review team"
+              >
+                <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                  <use href="/img/sprite.svg#more_vert"></use>
+                </svg>
+              </summary>
+              <div
+                id="react-directory-actions-conversation-review-team-actions"
+                class="usx-popover__panel usx-popover__panel--square"
+              >
+                <ul class="usx-popover__menu">
+                  <li>
+                    <button
+                      data-usx-chat-directory-action="leave-group"
+                      data-usx-chat-conversation-id="review-team"
+                      type="button"
+                      class="usx-popover__menu-item"
+                    >
+                      Leave group
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      data-usx-chat-directory-action="delete-history"
+                      data-usx-chat-conversation-id="review-team"
+                      type="button"
+                      class="usx-popover__menu-item"
+                    >
+                      Delete chat history
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li class="usx-chat__directory-row">
+            <a class="usx-clickable usx-chat__directory-item" href="#support"
+              ><span class="usx-avatar usx-chat__avatar" aria-label="Morgan"
+                ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                  >M</span
+                ></span
+              ><span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Support</span></span
+              ></a
+            >
+            <details
+              class="usx-popover usx-chat__directory-actions"
+              data-side="bottom"
+              data-align="end"
+            >
+              <summary
+                class="usa-button usx-button usa-button--unstyled"
+                aria-label="Actions for Support"
+              >
+                <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                  <use href="/img/sprite.svg#more_vert"></use>
+                </svg>
+              </summary>
+              <div
+                id="react-directory-actions-conversation-support-actions"
+                class="usx-popover__panel usx-popover__panel--square"
+              >
+                <ul class="usx-popover__menu">
+                  <li>
+                    <button
+                      data-usx-chat-directory-action="delete-history"
+                      data-usx-chat-conversation-id="support"
+                      type="button"
+                      class="usx-popover__menu-item"
+                      disabled=""
+                    >
+                      Delete chat history
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="usx-clickable usx-chat__directory-item"
+              data-usx-chat-conversation="announcements"
+            >
+              <span class="usx-avatar usx-chat__avatar" aria-label="Morgan"
+                ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                  >M</span
+                ></span
+              ><span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Announcements</span></span
+              >
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <button type="button" class="usa-button usx-button" data-usx-chat-new="">New message</button>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Contact Actions</h3>
+<div>
+  <section id="react-example-directory-contactactions" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="contacts" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <nav class="usx-chat__directory" aria-label="People">
+        <ul class="usx-chat__directory-list">
+          <li class="usx-chat__directory-row">
+            <button
+              type="button"
+              class="usx-clickable usx-chat__directory-item"
+              data-usx-chat-contact="agent"
+            >
+              <span class="usx-avatar usx-chat__avatar" aria-label="Morgan"
+                ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                  >M</span
+                ></span
+              ><span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Morgan</span></span
+              >
+            </button>
+            <details
+              class="usx-popover usx-chat__directory-actions"
+              data-side="bottom"
+              data-align="end"
+            >
+              <summary
+                class="usa-button usx-button usa-button--unstyled"
+                aria-label="Actions for Morgan"
+              >
+                <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                  <use href="/img/sprite.svg#more_vert"></use>
+                </svg>
+              </summary>
+              <div
+                id="react-directory-contact-actions-recipient-agent-actions"
+                class="usx-popover__panel usx-popover__panel--square"
+              >
+                <ul class="usx-popover__menu">
+                  <li>
+                    <button
+                      data-usx-chat-directory-action="delete-history"
+                      data-usx-chat-conversation-id="support"
+                      data-usx-chat-participant-id="agent"
+                      type="button"
+                      class="usx-popover__menu-item"
+                    >
+                      Delete chat history
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+        </ul>
+      </nav>
+      <button type="button" class="usa-button usx-button" data-usx-chat-new="">New message</button>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Recipient Picker</h3>
+<div>
+  <section id="react-example-directory-recipientpicker" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="contacts" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <div class="usx-chat__directory" role="group" aria-label="Recipients">
+        <p class="usx-chat__recipient-hint">To: Choose one or more people.</p>
+        <ul class="usx-chat__directory-list">
+          <li>
+            <div class="usa-checkbox usx-checkbox usx-chat__directory-item usx-chat__recipient">
+              <input
+                id="react-directory-recipients-recipient-agent"
+                class="usa-checkbox__input"
+                type="checkbox"
+                name="recipientIds"
+                form="react-example-directory-recipientpicker-composer"
+                aria-label="Morgan"
+                aria-describedby="react-directory-recipients-recipient-agent-description"
+                data-usx-chat-recipient=""
+                checked=""
+                value="agent"
+              /><label
+                class="usa-checkbox__label usx-chat__recipient-label"
+                for="react-directory-recipients-recipient-agent"
+                ><span class="usx-avatar usx-chat__avatar" aria-label="Morgan"
+                  ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                    >M</span
+                  ></span
+                ><span class="usx-chat__directory-copy"
+                  ><span class="usx-chat__directory-title">Morgan</span
+                  ><span
+                    class="usx-chat__directory-subtitle"
+                    id="react-directory-recipients-recipient-agent-description"
+                    >Application support</span
+                  ></span
+                ></label
+              >
+            </div>
+          </li>
+          <li>
+            <div class="usa-checkbox usx-checkbox usx-chat__directory-item usx-chat__recipient">
+              <input
+                id="react-directory-recipients-recipient-specialist"
+                class="usa-checkbox__input"
+                type="checkbox"
+                name="recipientIds"
+                form="react-example-directory-recipientpicker-composer"
+                aria-label="Taylor"
+                aria-describedby="react-directory-recipients-recipient-specialist-description"
+                data-usx-chat-recipient=""
+                value="specialist"
+              /><label
+                class="usa-checkbox__label usx-chat__recipient-label"
+                for="react-directory-recipients-recipient-specialist"
+                ><span class="usx-avatar usx-chat__avatar" aria-label="Taylor"
+                  ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                    >T</span
+                  ></span
+                ><span class="usx-chat__directory-copy"
+                  ><span class="usx-chat__directory-title">Taylor</span
+                  ><span
+                    class="usx-chat__directory-subtitle"
+                    id="react-directory-recipients-recipient-specialist-description"
+                    >Eligibility specialist</span
+                  ></span
+                ></label
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+      <form
+        id="react-example-directory-recipientpicker-composer"
+        data-usx-chat-require-recipients="true"
+        class="usx-chat-composer usx-chat__composer"
+        method="post"
+      >
+        <label
+          class="usa-label usx-label usa-sr-only"
+          for="react-example-directory-recipientpicker-message"
+          >Message</label
+        ><textarea
+          id="react-example-directory-recipientpicker-message"
+          class="usa-textarea usx-textarea"
+          placeholder="Write a message"
+          name="message"
+          rows="2"
+        ></textarea>
+        <div class="usx-chat__composer-actions">
+          <div class="usx-chat__attach"></div>
+          <button
+            type="submit"
+            class="usa-button usx-button usa-button--primary usx-chat__send"
+            disabled=""
+            aria-disabled="true"
+          >
+            <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+              <use href="/img/sprite.svg#send"></use></svg
+            >Send
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Contextual Inbox</h3>
+<div>
+  <section id="react-example-directory-contextualinbox" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="inbox" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <nav class="usx-chat__directory" aria-label="Conversations">
+        <ul class="usx-chat__directory-list">
+          <li class="usx-chat__directory-row">
+            <button
+              type="button"
+              class="usx-clickable usx-chat__directory-item"
+              data-usx-chat-conversation="request"
+            >
+              <span class="usx-avatar usx-chat__avatar" aria-label="Support"
+                ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                  >S</span
+                ></span
+              ><span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Support</span
+                ><span class="usx-chat__directory-subtitle">Access request</span
+                ><span class="usx-chat__directory-preview">Your request is ready.</span></span
+              >
+            </button>
+            <details
+              class="usx-popover usx-chat__directory-actions"
+              data-side="bottom"
+              data-align="end"
+            >
+              <summary
+                class="usa-button usx-button usa-button--unstyled"
+                aria-label="Actions for Support"
+              >
+                <svg class="usa-icon usx-icon" aria-hidden="true" focusable="false" role="img">
+                  <use href="/img/sprite.svg#more_vert"></use>
+                </svg>
+              </summary>
+              <div
+                id="react-directory-contextual-conversation-request-actions"
+                class="usx-popover__panel usx-popover__panel--square"
+              >
+                <ul class="usx-popover__menu">
+                  <li>
+                    <button
+                      data-usx-chat-directory-action="delete-history"
+                      data-usx-chat-conversation-id="request"
+                      type="button"
+                      class="usx-popover__menu-item"
+                    >
+                      Delete history
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </li>
+          <li>
+            <a class="usx-clickable usx-chat__directory-item" href="#conversation-listing"
+              ><span class="usx-avatar usx-chat__avatar" aria-label="Jordan"
+                ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                  >J</span
+                ></span
+              ><span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Jordan</span
+                ><span class="usx-chat__directory-subtitle">Blue commuter bicycle</span
+                ><span class="usx-chat__directory-preview">Available this weekend.</span></span
+              ></a
+            >
+          </li>
+          <li>
+            <button
+              type="button"
+              class="usx-clickable usx-chat__directory-item"
+              data-usx-chat-conversation="note"
+            >
+              <span class="usx-avatar usx-chat__avatar" aria-label="Updates"
+                ><span class="usx-avatar__content usx-circle bg-primary-light text-inverse"
+                  >U</span
+                ></span
+              ><span class="usx-chat__directory-copy"
+                ><span class="usx-chat__directory-title">Updates</span
+                ><span class="usx-chat__directory-subtitle">General questions</span></span
+              >
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <button type="button" class="usa-button usx-button" data-usx-chat-new="">New message</button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,25 @@
+{
+  "name": "chat-attachments",
+  "template": "chat-attachments/chat-attachments.django.html",
+  "version": 1,
+  "default": {
+    "items": [
+      {
+        "name": "Notes.txt",
+        "url": "/liberty-island-notes.txt"
+      }
+    ]
+  },
+  "props": {
+    "items": {
+      "type": "array",
+      "description": "Files and image previews rendered as ChatAttachment items inside ul.usx-chat__attachments. An empty array renders nothing.",
+      "default": [],
+      "items": {
+        "type": "object",
+        "component": "chat-attachment",
+        "description": "Props for one ChatAttachment list item."
+      }
+    }
+  }
+}

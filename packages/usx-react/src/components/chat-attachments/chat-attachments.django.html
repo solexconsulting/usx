@@ -1,0 +1,10 @@
+{% load usx_components %}
+{% if items %}
+  <ul class="usx-chat__attachments">
+    {% for item in items %}
+      {% chat_attachment name=item.name url=item.url imageUrl=item.imageUrl
+        alt=item|get_optional:'alt' %}
+      {% endchat_attachment %}
+    {% endfor %}
+  </ul>
+{% endif %}

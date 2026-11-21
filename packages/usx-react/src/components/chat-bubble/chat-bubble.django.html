@@ -1,0 +1,19 @@
+{% load usx_components %}
+<div class="usx-chat__bubble">
+  {% if content != None %}
+    {% if content is not True and content is not False %}{{ content|safe }}{% endif %}
+  {% elif text %}
+    {{ formattedText }}
+  {% endif %}
+  {% chat_attachments items=attachments %}{% endchat_attachments %}
+  {% if reactions %}
+    {% dict role='group' aria_label='Reactions' as reactionGroupAttrs %}
+    {% tag_group className='usx-chat__reactions' extraAttributes=reactionGroupAttrs %}
+      {% for reaction in reactionButtons %}
+        {% button variant='unstyled' className='usa-tag usx-tag usx-tag--outline usx-tag--interactive usa-link usx-link usx-no-visited usx-chat__reaction' extraAttributes=reaction.attributes %}
+          {{ reaction.emoji }} {{ reaction.count }}
+        {% endbutton %}
+      {% endfor %}
+    {% endtag_group %}
+  {% endif %}
+</div>

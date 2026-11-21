@@ -1,0 +1,278 @@
+{
+  "name": "chat-message",
+  "template": "chat-message/chat-message.django.html",
+  "version": 1,
+  "default": {
+    "id": "message-example",
+    "message": {
+      "id": "m1",
+      "senderId": "avery",
+      "text": "Your appointment is confirmed.",
+      "timeLabel": "10:30 AM"
+    },
+    "participant": {
+      "id": "avery",
+      "name": "Avery"
+    }
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "description": "Chat instance ID for action menus."
+    },
+    "message": {
+      "type": "object",
+      "description": "One message in the transcript.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable message ID."
+        },
+        "senderId": {
+          "type": "string",
+          "description": "ID of the sender in participants."
+        },
+        "text": {
+          "type": "string",
+          "description": "Message text. Chat safely renders **bold**, *italic*, <u>underline</u>, ~~strike~~, numbered and bulleted lines, > quotes, and fenced code blocks. Use content for other rich content."
+        },
+        "content": {
+          "type": "slot",
+          "description": "Optional rich message content. Sanitize HTML before passing it to Django; supply exportText for copied transcripts."
+        },
+        "exportText": {
+          "type": "string",
+          "description": "Plain text or Markdown used by Copy conversation for rich messages."
+        },
+        "sentAt": {
+          "type": "string",
+          "description": "ISO calendar timestamp (YYYY-MM-DDTHH:mm[:ss[.fraction]], optionally followed by Z or ±HH:mm). Grouping treats a missing timezone as UTC and truncates fractions to milliseconds; invalid dates remain ungrouped. Rendered datetime attributes and timeLabel strings are unchanged."
+        },
+        "timeLabel": {
+          "type": "string",
+          "description": "Localized timestamp label. Visible on the last message in a close group; retained for screen readers on earlier messages."
+        },
+        "groupPosition": {
+          "type": "select",
+          "options": ["single", "first", "middle", "last"],
+          "description": "Optional explicit grouping position. Both renderers derive it from adjacent sender IDs and sentAt values when omitted."
+        },
+        "attachments": {
+          "type": "array",
+          "description": "Files and images included with the message.",
+          "items": {
+            "type": "object",
+            "description": "One file or image attachment.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Accessible file name."
+              },
+              "url": {
+                "type": "string",
+                "description": "Download URL, if available."
+              },
+              "imageUrl": {
+                "type": "string",
+                "description": "Optional image preview URL rendered through Image."
+              },
+              "alt": {
+                "type": "string",
+                "description": "Description of the preview image. Defaults to the file name."
+              }
+            }
+          }
+        },
+        "replies": {
+          "type": "array",
+          "description": "Messages displayed in this message's thread.",
+          "items": {
+            "type": "object",
+            "description": "One thread reply."
+          }
+        },
+        "olderReplies": {
+          "type": "object",
+          "description": "Optional older-page state for this message's thread, using the same fields as olderHistory."
+        },
+        "replyCount": {
+          "type": "number",
+          "description": "Visible count of replies to this message; a positive count adds a persistent thread link beside message metadata."
+        },
+        "edited": {
+          "type": "boolean",
+          "description": "Show an Edited marker."
+        },
+        "layout": {
+          "type": "select",
+          "options": ["bubble", "panel"],
+          "description": "Use panel for host-supplied editing or confirmation content. It expands to the available row width and uses a neutral surface instead of the sender's bubble color."
+        },
+        "deliveryStatus": {
+          "type": "string",
+          "description": "Delivery or read status supplied by the application."
+        },
+        "actions": {
+          "type": "array",
+          "description": "Overflow menu items, such as Edit or Delete. The application handles the action.",
+          "items": {
+            "type": "object",
+            "description": "One message action.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Action identifier."
+              },
+              "label": {
+                "type": "string",
+                "description": "Visible action label."
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Disable this action."
+              }
+            }
+          }
+        },
+        "reactions": {
+          "type": "array",
+          "description": "Current reactions, rendered as toggle buttons in supplied order. Keep an entry in place while its count remains positive.",
+          "items": {
+            "type": "object",
+            "description": "One reaction.",
+            "properties": {
+              "emoji": {
+                "type": "string",
+                "description": "Visible emoji."
+              },
+              "label": {
+                "type": "string",
+                "description": "Accessible reaction name and event value."
+              },
+              "count": {
+                "type": "number",
+                "description": "Number of reactions."
+              },
+              "selected": {
+                "type": "boolean",
+                "description": "Whether the current user selected this reaction."
+              }
+            }
+          }
+        },
+        "reactionOptions": {
+          "type": "array",
+          "description": "Emoji choices for adding a reaction to this message; overrides the Chat-level list. An empty array disables new reactions.",
+          "items": {
+            "type": "object",
+            "description": "A reaction choice.",
+            "properties": {
+              "emoji": {
+                "type": "string",
+                "description": "Visible emoji."
+              },
+              "label": {
+                "type": "string",
+                "description": "Accessible choice name and event value."
+              }
+            }
+          }
+        },
+        "clientMessageId": {
+          "type": "string",
+          "description": "Host-supplied correlation ID for a submitted message."
+        },
+        "deliveryState": {
+          "type": "select",
+          "options": ["sending", "failed"],
+          "description": "Host-supplied sending or failed state. Failed messages expose a Retry control that emits usx:chat-retry."
+        }
+      }
+    },
+    "participant": {
+      "type": "object",
+      "description": "One chat participant.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable participant ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Visible sender name and transcript label."
+        },
+        "avatarProps": {
+          "type": "object",
+          "component": "avatar",
+          "description": "Avatar props. Chat renders avatars without links."
+        },
+        "presence": {
+          "type": "select",
+          "options": ["online", "away"],
+          "description": "Optional current presence in inbox and contact lists. The host must keep it current; it is not a response-time promise."
+        }
+      }
+    },
+    "own": {
+      "type": "boolean",
+      "description": "Align as an outgoing message.",
+      "default": false
+    },
+    "isThread": {
+      "type": "boolean",
+      "description": "Suppress navigation into another thread.",
+      "default": false
+    },
+    "allowForward": {
+      "type": "boolean",
+      "description": "Offer forwarding to contacts.",
+      "default": false
+    },
+    "showCopyMessageAction": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show Copy message in each message's More menu when the message has exportable content."
+    },
+    "reactionOptions": {
+      "type": "array",
+      "description": "Emoji choices in each message\u2019s Add reaction Popover. Defaults to emojiPack. Pass an empty array to disable adding reactions.",
+      "items": {
+        "type": "object",
+        "description": "A reaction choice.",
+        "properties": {
+          "emoji": {
+            "type": "string",
+            "description": "Visible emoji."
+          },
+          "label": {
+            "type": "string",
+            "description": "Accessible choice name and event value."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional shortcode name; used for the reaction menu tooltip."
+          },
+          "aliases": {
+            "type": "array",
+            "description": "Optional additional shortcodes.",
+            "items": {
+              "type": "string",
+              "description": "Shortcode alias."
+            }
+          }
+        }
+      },
+      "default": []
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable composing and response controls."
+    },
+    "allowThreads": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the containing conversation enables threads. Thread views do not offer nested threads."
+    }
+  }
+}

@@ -13,7 +13,7 @@ After inserting USWDS components on the client, call their module's
 `init(root)`.
 
 USX behavior is exported from `@solexllc/usx/js/*`. Import
-`@solexllc/usx/js/start` once to connect USX modules on document readiness,
+`@solexllc/usx/js/start` once to connect core USX modules on document readiness,
 or import the individual module you need. Call the component's `init(root)`
 after inserting client-rendered markup. Each enhanced component receives
 `data-enhanced="true"`. DataTable's `on()` also observes inserted tables;
@@ -57,6 +57,36 @@ pair it with `pkg:@solexllc/usx-theme/themes` for opt-in prebuilt themes.
 See `packages/usx-theme/README.md` for the full theming guide, and the Storybook
 **Documentation → Theme → Playground** to generate a theme visually.
 
+## Optional Chat
+
+Chat and its parts are excluded from the core styles, `@solexllc/usx/js`, and
+`@solexllc/usx/js/start`. Include the Chat styles alongside your existing USWDS
+and core USX styles only where Chat is used:
+
+```scss
+@use 'pkg:@solexllc/usx/themed';
+@use 'pkg:@solexllc/usx/chat/themed' as chat;
+```
+
+For static Sass tokens, use `pkg:@solexllc/usx` and `pkg:@solexllc/usx/chat`
+instead. The Chat entry includes its composer and all other Chat parts; shared
+components such as Popover and Button remain in the core styles.
+
+After rendering React or Django markup, initialize the enhancements:
+
+```js
+import popover from '@solexllc/usx/js/popover';
+import chat from '@solexllc/usx/js/chat';
+
+popover.init(document.body);
+chat.init(document.body);
+```
+
+If the host already initializes Popover, retain that setup and add Chat's
+initialization. React markup is available from `@solexllc/usx-react/chat`.
+The [Chat integration guide](../usx-react/src/components/chat/README.md)
+describes the events and state owned by the host.
+
 ## Icons
 
 `src/img/usx-sprite.svg` is a small sprite of custom icons USWDS doesn't ship,
@@ -89,7 +119,8 @@ icon: create `src/icons/<name>.svg`, add a matching `{ name, meta }` entry to
 pnpm test   # node test/theme-check.mjs
 ```
 
-`test/theme-check.mjs` compiles both entry points and asserts: the default
+`test/theme-check.mjs` compiles the core and optional Chat entry points and asserts:
+core styles exclude Chat; Chat includes its parts; the default
 build has zero `var(--usx-*)` references; the themed build uses only bare
 `var(--usx-*)` references (no fallbacks) that all exist in the theme manifest;
 every manifest entry is consumed (or explicitly listed as unconsumed); no

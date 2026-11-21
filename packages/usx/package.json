@@ -19,6 +19,12 @@
     "./themed": {
       "sass": "./src/themed.scss"
     },
+    "./chat": {
+      "sass": "./src/chat.scss"
+    },
+    "./chat/themed": {
+      "sass": "./src/chat-themed.scss"
+    },
     "./utilities": {
       "sass": "./src/_utilities.scss"
     },
@@ -28,6 +34,7 @@
     "./js": "./src/js/index.mjs",
     "./js/start": "./src/js/start.mjs",
     "./js/carousel": "./src/js/carousel.mjs",
+    "./js/chat": "./src/js/chat.mjs",
     "./js/drawer": "./src/js/drawer.mjs",
     "./js/data-table": "./src/js/data-table.mjs",
     "./js/file-input": "./src/js/file-input.mjs",

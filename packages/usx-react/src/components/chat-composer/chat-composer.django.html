@@ -1,0 +1,77 @@
+{% load usx_components %}
+<form id="{{ id }}-composer" {% if requireRecipients %}data-usx-chat-require-recipients="true"{% endif %} class="usx-chat-composer usx-chat__composer" method="post" {% if allowAttachments %} enctype="multipart/form-data" {% endif %}{% if formAction != None %} action="{{ formAction }}" {% endif %} >
+  {% if conversationId %}
+    <input type="hidden" name="conversationId" value="{{ conversationId }}" />
+  {% endif %}
+  {% if recipientId and not conversationId %}
+    <input type="hidden" name="recipientId" value="{{ recipientId }}" />
+  {% endif %}
+  {% if not conversationId %}
+    {% for recipient in recipientIds %}
+      <input type="hidden" name="recipientIds" value="{{ recipient }}" />
+    {% endfor %}
+  {% endif %}
+  {% if isThread and threadRootId %}
+    <input type="hidden" name="threadRootId" value="{{ threadRootId }}" />
+  {% endif %}
+  {% if allowFormatting %}
+    {% include 'chat-composer/chat-formatting.django.html' %}
+  {% endif %}
+  {% dict name='message' rows='2' as composerAttributes %}
+  {% if isThread %}
+    {% text_area id=id|add:'-message' label='Reply in thread' screenReaderOnlyLabel=True formGroup=False value=value placeholder='Reply in thread' disabled=disabled extraAttributes=composerAttributes %}{% endtext_area %}
+  {% else %}
+    {% text_area id=id|add:'-message' label='Message' screenReaderOnlyLabel=True formGroup=False value=value placeholder='Write a message' disabled=disabled extraAttributes=composerAttributes %}{% endtext_area %}
+  {% endif %}
+  <div class="usx-chat__composer-actions">
+    <div class="usx-chat__attach">
+      {% if allowAttachments or allowFormatting %}
+        <ul class="usa-button-group usx-button-group usx-chat__composer-tools">
+          {% if allowAttachments %}
+            {% dict data_usx_chat_attach='' aria_label='Attach files' title='Attach files' as attachAttrs %}
+            <li class="usa-button-group__item">
+              {% button variant='outline' disabled=disabled extraAttributes=attachAttrs %}
+                {% icon name='attach_file' %}{% endicon %}
+              {% endbutton %}
+            </li>
+          {% endif %}
+          {% if allowFormatting %}
+            {% dict data_usx_chat_toggle_formatting='' aria_label='Show formatting' title='Show formatting' aria_expanded='false' aria_controls=id|add:'-formatting' as formatAttrs %}
+            <li class="usa-button-group__item">
+              {% button variant='outline' disabled=disabled extraAttributes=formatAttrs %}
+                {% icon name='text_fields' %}{% endicon %}
+              {% endbutton %}
+            </li>
+          {% endif %}
+        </ul>
+      {% endif %}
+      {% if emojiPack and not disabled %}
+        {% icon name='sentiment_satisfied' as emojiIcon %}{% endicon %}
+        {% dict children=emojiIcon ariaLabel='Choose emoji' title='Choose emoji' className='usa-button usx-button usa-button--outline' as emojiSummary %}
+        {% popover id=id|add:'-emoji-picker' side='top' align='start' panelShape='square' className='usx-chat__emoji-picker' summaryProps=emojiSummary menuItems=emojiMenuItems %}{% endpopover %}
+      {% endif %}
+      {% if allowAttachments %}
+        <input type="file" hidden name="attachments" multiple aria-label="Attach files" {% if accept != None %} accept="{{ accept }}" {% endif %}{% if disabled %} disabled{% endif %} />
+      {% endif %}
+    </div>
+    {% if disabled or not hasText or requireRecipients and not recipientIds and not recipientId %}
+      {% button type='submit' variant='primary' className='usx-chat__send' disabled=True %}
+        {% icon name='send' %}{% endicon %}
+        {% if isThread %}
+          Send reply
+        {% else %}
+          Send
+        {% endif %}
+      {% endbutton %}
+    {% else %}
+      {% button type='submit' variant='primary' className='usx-chat__send' %}
+        {% icon name='send' %}{% endicon %}
+        {% if isThread %}
+          Send reply
+        {% else %}
+          Send
+        {% endif %}
+      {% endbutton %}
+    {% endif %}
+  </div>
+</form>

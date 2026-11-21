@@ -1,0 +1,114 @@
+<h3 class="site-preview-heading">Default</h3>
+<div>
+  <section id="django-example-controls-default" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <ol class="usx-chat__messages">
+        <li class="usx-chat__controls" role="presentation">
+          <div
+            class="usx-tag-group usx-chat__quick-replies"
+            role="group"
+            aria-label="Suggested questions"
+          >
+            <p>Suggested questions</p>
+
+            <button
+              type="button"
+              class="usa-button usx-button usa-button--unstyled usa-tag usx-tag usx-tag--outline usx-tag--interactive usa-link usx-link usx-no-visited"
+              data-usx-chat-suggestion="next"
+            >
+              What happens next?
+            </button>
+
+            <button
+              type="button"
+              class="usa-button usx-button usa-button--unstyled usa-tag usx-tag usx-tag--outline usx-tag--interactive usa-link usx-link usx-no-visited"
+              data-usx-chat-suggestion="documents"
+            >
+              Which documents do I need?
+            </button>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Custom Controls</h3>
+<div>
+  <section id="django-example-controls-custom" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <ol class="usx-chat__messages">
+        <li class="usx-chat__controls" role="presentation">
+          <a class="usa-link usx-link" href="/liberty-island-notes.txt" download=""
+            >Download example notes</a
+          >
+        </li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Choices</h3>
+<div>
+  <section id="django-example-controls-choices" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <ol class="usx-chat__messages">
+        <li class="usx-chat__controls" role="presentation">
+          <div
+            class="usx-tag-group usx-chat__choices"
+            role="group"
+            aria-label="Which appointment works for you?"
+          >
+            <p>Which appointment works for you?</p>
+
+            <button
+              type="button"
+              class="usa-button usx-button usa-button--unstyled usa-tag usx-tag usx-tag--outline usx-tag--interactive usa-link usx-link usx-no-visited"
+              data-usx-chat-choice="tuesday"
+            >
+              Tuesday morning
+            </button>
+
+            <button
+              type="button"
+              class="usa-button usx-button usa-button--unstyled usa-tag usx-tag usx-tag--outline usx-tag--interactive usa-link usx-link usx-no-visited"
+              data-usx-chat-choice="thursday"
+            >
+              Thursday afternoon
+            </button>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+</div>
+
+<h3 class="site-preview-heading">Disabled</h3>
+<div>
+  <section id="django-example-controls-disabled" class="usx-chat" style="max-width: 28rem">
+    <div data-chat-view="conversation" class="usx-chat__window" style="height: auto">
+      <span class="usx-chat__copy-status usa-sr-only" role="status"></span>
+      <ol class="usx-chat__messages">
+        <li class="usx-chat__controls" role="presentation">
+          <div class="usx-tag-group usx-chat__choices" role="group" aria-label="Choose an answer">
+            <p>Choose an answer</p>
+
+            <button
+              type="button"
+              class="usa-button usx-button usa-button--unstyled usa-tag usx-tag usx-tag--outline usx-tag--interactive usa-link usx-link usx-no-visited"
+              disabled
+              aria-disabled="true"
+              data-usx-chat-choice="confirm"
+            >
+              Confirm appointment
+            </button>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <button type="button" class="usa-button usx-button margin-top-2">Enable choices</button>
+</div>

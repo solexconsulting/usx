@@ -1,0 +1,67 @@
+{
+  "name": "chat-controls",
+  "template": "chat-controls/chat-controls.django.html",
+  "version": 1,
+  "default": {
+    "suggestedQuestions": [
+      {
+        "label": "What happens next?",
+        "value": "next"
+      }
+    ]
+  },
+  "props": {
+    "suggestedQuestions": {
+      "type": "array",
+      "description": "Suggested questions shown above the composer.",
+      "items": {
+        "type": "object",
+        "description": "A suggested question button.",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Visible question."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value sent to the selection callback."
+          }
+        }
+      },
+      "default": []
+    },
+    "choices": {
+      "type": "array",
+      "description": "Answer choices offered by a bot.",
+      "items": {
+        "type": "object",
+        "description": "A bot answer choice button.",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Visible answer."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value sent to the selection callback."
+          }
+        }
+      },
+      "default": []
+    },
+    "choicePrompt": {
+      "type": "string",
+      "description": "Accessible heading for answer choices.",
+      "default": "Choose an answer"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disable composing and response controls."
+    },
+    "children": {
+      "type": "slot",
+      "description": "Optional custom controls above the composer."
+    }
+  }
+}

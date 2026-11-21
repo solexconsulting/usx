@@ -18,6 +18,10 @@
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./chat": {
+      "import": "./dist/chat.js",
+      "require": "./dist/chat.cjs"
     }
   },
   "files": [
@@ -26,7 +30,7 @@
   ],
   "scripts": {
     "build": "vite build",
-    "test": "pnpm build && node test/toggle-check.mjs && node test/quote-check.mjs && node test/composition-check.mjs && node test/asset-url-check.mjs && node test/container-check.mjs && node test/error-page-check.mjs"
+    "test": "pnpm build && node test/entry-points-check.mjs && node test/toggle-check.mjs && node test/quote-check.mjs && node test/composition-check.mjs && node test/asset-url-check.mjs && node test/container-check.mjs && node test/error-page-check.mjs && node test/chat-contract-check.mjs"
   },
   "dependencies": {
     "@solexllc/usx": "workspace:*",

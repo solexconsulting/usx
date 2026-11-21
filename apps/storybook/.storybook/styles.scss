@@ -1,4 +1,5 @@
 @forward "../../../packages/usx-react/src/styles/core";
+@use "pkg:@solexllc/usx/chat/themed";
 @use "../../../packages/usx/src/components/layout";
 
 .usx-layout.usx-layout--compact {

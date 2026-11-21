@@ -1,0 +1,36 @@
+{% load usx_components %}
+{% if suggestedQuestions or choices or children %}
+  <li class="usx-chat__controls" role="presentation">
+    {% if suggestedQuestions %}
+      {% dict role='group' aria_label='Suggested questions' as suggestionGroupAttrs %}
+      {% tag_group className='usx-chat__quick-replies' extraAttributes=suggestionGroupAttrs %}
+        <p>
+          Suggested questions
+        </p>
+        {% for option in suggestedQuestions %}
+          {% dict data_usx_chat_suggestion=option.value as optionAttrs %}
+          {% button variant='unstyled' disabled=disabled className='usa-tag usx-tag usx-tag--outline usx-tag--interactive usa-link usx-link usx-no-visited' extraAttributes=optionAttrs %}
+            {{ option.label }}
+          {% endbutton %}
+        {% endfor %}
+      {% endtag_group %}
+    {% endif %}
+    {% if choices %}
+      {% dict role='group' aria_label=choicePrompt as choiceGroupAttrs %}
+      {% tag_group className='usx-chat__choices' extraAttributes=choiceGroupAttrs %}
+        <p>
+          {{ choicePrompt }}
+        </p>
+        {% for option in choices %}
+          {% dict data_usx_chat_choice=option.value as optionAttrs %}
+          {% button variant='unstyled' disabled=disabled className='usa-tag usx-tag usx-tag--outline usx-tag--interactive usa-link usx-link usx-no-visited' extraAttributes=optionAttrs %}
+            {{ option.label }}
+          {% endbutton %}
+        {% endfor %}
+      {% endtag_group %}
+    {% endif %}
+    {% if children != None and children is not True and children is not False %}
+      {{ children|safe }}
+    {% endif %}
+  </li>
+{% endif %}

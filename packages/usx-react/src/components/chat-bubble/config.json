@@ -1,0 +1,70 @@
+{
+  "name": "chat-bubble",
+  "template": "chat-bubble/chat-bubble.django.html",
+  "version": 1,
+  "default": {
+    "text": "Your appointment is confirmed."
+  },
+  "props": {
+    "text": {
+      "type": "string",
+      "description": "Message text. Chat safely renders **bold**, *italic*, <u>underline</u>, ~~strike~~, numbered and bulleted lines, > quotes, and fenced code blocks. Use content for other rich content."
+    },
+    "content": {
+      "type": "slot",
+      "description": "Optional rich message content. Sanitize HTML before passing it to Django; supply exportText for copied transcripts."
+    },
+    "attachments": {
+      "type": "array",
+      "description": "Files and images included with the message.",
+      "items": {
+        "type": "object",
+        "description": "One file or image attachment.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Accessible file name."
+          },
+          "url": {
+            "type": "string",
+            "description": "Download URL, if available."
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "Optional image preview URL rendered through Image."
+          },
+          "alt": {
+            "type": "string",
+            "description": "Description of the preview image. Defaults to the file name."
+          }
+        }
+      }
+    },
+    "reactions": {
+      "type": "array",
+      "description": "Current reactions, rendered as toggle buttons in supplied order. Keep an entry in place while its count remains positive.",
+      "items": {
+        "type": "object",
+        "description": "One reaction.",
+        "properties": {
+          "emoji": {
+            "type": "string",
+            "description": "Visible emoji."
+          },
+          "label": {
+            "type": "string",
+            "description": "Accessible reaction name and event value."
+          },
+          "count": {
+            "type": "number",
+            "description": "Number of reactions."
+          },
+          "selected": {
+            "type": "boolean",
+            "description": "Whether the current user selected this reaction."
+          }
+        }
+      }
+    }
+  }
+}

@@ -13,7 +13,10 @@ export const COMPONENTS_DIR = path.join(CORE_DIR, 'src', 'components');
 export const SCHEMA_PATH = path.join(CORE_DIR, 'config.schema.json');
 export const CONTRACTS_DIR = path.join(REPO_ROOT, 'packages', 'usx-contracts');
 export const CONTRACTS_PATH = path.join(CONTRACTS_DIR, 'src', 'contracts.js');
-export const INDEX_PATH = path.join(CORE_DIR, 'src', 'index.js');
+export const REACT_ENTRY_POINTS = {
+  index: path.join(CORE_DIR, 'src', 'index.js'),
+  chat: path.join(CORE_DIR, 'src', 'chat.js'),
+};
 export const USX_SCSS_DIR = path.join(REPO_ROOT, 'packages', 'usx', 'src', 'components');
 export const STORIES_DIR = path.join(REPO_ROOT, 'packages', 'usx-stories', 'src', 'components');
 
@@ -61,11 +64,15 @@ export function findComponentFile(dir) {
   return { file: loose, exportName: loose.replace(/\.(tsx|jsx)$/, '') };
 }
 
-// Source text of packages/usx-react/src/index.js: one export per component dir
-// that has a React entry file.
-export function buildIndexSource() {
+export function reactEntryPoint(name) {
+  return name === 'chat' || name.startsWith('chat-') ? 'chat' : 'index';
+}
+
+// One export per component, grouped by its public package entry point.
+export function buildIndexSource(entryPoint = 'index') {
   const lines = [];
   for (const dir of listComponentDirs()) {
+    if (reactEntryPoint(dir) !== entryPoint) continue;
     const entry = findComponentFile(dir);
     if (entry) lines.push(`export { default as ${entry.exportName} } from './components/${dir}/${entry.file}';`);
   }
@@ -194,7 +201,11 @@ export function buildContractManifest(configs) {
       required: config.required || [],
       props: config.props || {},
       renderers: {
-        react: { package: reactPackage.name, export: reactEntry.exportName },
+        react: {
+          package: reactPackage.name,
+          ...(reactEntryPoint(name) !== 'index' ? { subpath: `./${reactEntryPoint(name)}` } : {}),
+          export: reactEntry.exportName,
+        },
         django: {
           package: djangoPackage.name,
           module: 'usx_django',

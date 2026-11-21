@@ -1,0 +1,20 @@
+{% load usx_components %}
+{% dict aria_label=label as attrs %}
+{% callout as='aside' big=False strokeColor='primary' backgroundColor='surface-2' textColor='ink' className='usx-chat__context' extraAttributes=attrs %}
+  {% if imageUrl %}
+    {% image src=imageUrl alt=imageAlt|default:'' objectFit='cover' className='usx-chat__context-image' %}{% endimage %}
+  {% endif %}
+  <div class="usx-chat__context-copy">
+    <span class="usx-chat__context-label">{{ label }}</span>
+    {% if href %}
+      {% link href=href %}
+        {{ title }}
+      {% endlink %}
+    {% else %}
+      <strong>{{ title }}</strong>
+    {% endif %}
+    {% if description %}
+      <span>{{ description }}</span>
+    {% endif %}
+  </div>
+{% endcallout %}

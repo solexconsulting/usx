@@ -71,6 +71,10 @@ rendering matters.
 
 `renderers.react` identifies the npm `package` and named `export` for a component.
 For example, the `sidenav` component's export is `SideNav`.
+An optional `subpath` identifies a package export other than the root. Chat and
+its parts use `"subpath": "./chat"`, so import their named exports from
+`@solexllc/usx-react/chat`. The `package` field still identifies the installable
+package and its release identity.
 
 `renderers.django` identifies the Python `package`, `module`, rendering `function`,
 `component` argument, `template`, and template `tag`. These bindings describe the

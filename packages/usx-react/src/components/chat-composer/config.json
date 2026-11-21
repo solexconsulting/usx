@@ -1,0 +1,137 @@
+{
+  "name": "chat-composer",
+  "template": "chat-composer/chat-composer.django.html",
+  "version": 1,
+  "required": [
+    "id"
+  ],
+  "default": {
+    "id": "chat-composer-default",
+    "value": "",
+    "emojiPack": [
+      {
+        "emoji": "👍",
+        "name": "thumbs_up",
+        "label": "Thumbs up"
+      },
+      {
+        "emoji": "😊",
+        "name": "smile",
+        "label": "Smile"
+      },
+      {
+        "emoji": "🎉",
+        "name": "celebrate",
+        "label": "Celebrate"
+      }
+    ]
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "description": "Unique prefix for the textarea, formatting panel, and emoji picker IDs."
+    },
+    "value": {
+      "type": "string",
+      "default": "",
+      "description": "Initial message text."
+    },
+    "formAction": {
+      "type": "string",
+      "description": "Native form submission URL for HTML and Django."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disables text entry and composer actions."
+    },
+    "allowAttachments": {
+      "type": "boolean",
+      "default": false,
+      "description": "Shows the attachment button, file input, and slim FileList for files staged to send. Each picker selection adds files until the user removes them."
+    },
+    "allowFormatting": {
+      "type": "boolean",
+      "default": false,
+      "description": "Shows the formatting toggle and panel and enables formatting shortcuts."
+    },
+    "accept": {
+      "type": "string",
+      "description": "Accepted file types for the attachment input."
+    },
+    "emojiPack": {
+      "type": "array",
+      "description": "Emoji choices for the picker and typed shortcodes. An empty array hides the picker.",
+      "items": {
+        "type": "object",
+        "description": "One emoji choice.",
+        "properties": {
+          "emoji": {
+            "type": "string",
+            "description": "Visible emoji character."
+          },
+          "name": {
+            "type": "string",
+            "description": "Shortcode name."
+          },
+          "label": {
+            "type": "string",
+            "description": "Accessible emoji name."
+          },
+          "aliases": {
+            "type": "array",
+            "description": "Additional shortcode names."
+          }
+        }
+      },
+      "default": [
+        {
+          "emoji": "👍",
+          "name": "thumbs_up",
+          "label": "Thumbs up"
+        },
+        {
+          "emoji": "😊",
+          "name": "smile",
+          "label": "Smile"
+        },
+        {
+          "emoji": "🎉",
+          "name": "celebrate",
+          "label": "Celebrate"
+        }
+      ]
+    },
+    "isThread": {
+      "type": "boolean",
+      "default": false,
+      "description": "Uses reply labels and includes threadRootId when supplied."
+    },
+    "conversationId": {
+      "type": "string",
+      "description": "Hidden conversation ID sent with the form."
+    },
+    "recipientId": {
+      "type": "string",
+      "description": "Hidden recipient ID when no conversation exists."
+    },
+    "threadRootId": {
+      "type": "string",
+      "description": "Hidden thread root ID for replies."
+    },
+    "recipientIds": {
+      "type": "array",
+      "description": "Recipient IDs submitted as repeated recipientIds fields for a new conversation. Existing conversationId takes precedence.",
+      "default": [],
+      "items": {
+        "type": "string",
+        "description": "Recipient participant ID."
+      }
+    },
+    "requireRecipients": {
+      "type": "boolean",
+      "description": "Require at least one recipient before sending, including associated external recipient checkboxes. Enable in a new-message flow.",
+      "default": false
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{% load usx_components %}
+{% with extraClass=className|default:'' %}
+  {% fragment as chatLeftActions %}{% if showBack %}
+      {% if view == 'thread' %}
+        {% dict data_usx_chat_back='' aria_label='Back to conversation' as backAttributes %}
+      {% else %}
+        {% dict data_usx_chat_back='' aria_label='Back' as backAttributes %}
+      {% endif %}
+      {% button variant='unstyled' className='usx-popover__header-action' extraAttributes=backAttributes %}
+        {% icon name='arrow_back' %}{% endicon %}
+      {% endbutton %}
+    {% endif %}{% endfragment %}
+  {% fragment as chatRightActions %}
+    {% if showNewMessage %}
+      {% dict data_usx_chat_new='' aria_label='New message' as newAttributes %}
+      {% button variant='unstyled' className='usx-popover__header-action' extraAttributes=newAttributes %}
+        {% icon name='add' %}{% endicon %}
+      {% endbutton %}
+    {% endif %}
+    {% if showCopyAction or conversationActions or actions %}
+      {% icon name='more_vert' as actionsIcon %}{% endicon %}
+      {% dict children=actionsIcon ariaLabel='Conversation actions' className='usa-button usx-button usa-button--unstyled usx-popover__header-action' as actionsSummary %}
+      {% popover id=id|add:'-conversation-actions' className='usx-chat__actions' side='bottom' align='end' panelShape='square' panelClassName='usx-chat__actions-menu' summaryProps=actionsSummary menuItems=conversationMenuItems children=actions %}{% endpopover %}
+    {% endif %}
+  {% endfragment %}
+  {% popover id=id side=side align=align panelShape='square' defaultOpen=defaultOpen dismissOnOutside=False summaryProps=summaryProps className='usx-chat '|add:extraClass panelClassName='usx-chat__panel' contentClassName='usx-chat__popover-content' panelHeading=title headingAs='h2' panelHeadingId=id|add:'-title' headerLeftActions=chatLeftActions headerRightActions=chatRightActions showCloseIcon=True closeIconLabel='Close chat' headerClassName='usx-chat__header' %}
+    <section class="usx-chat__window" aria-labelledby="{{ id }}-title" data-chat-view="{{ view }}" >
+      <span class="usx-chat__copy-status usa-sr-only" role="status" aria-live="polite"></span>
+      {% if status %}
+        <p class='usx-chat__status'>
+          {{ status }}
+        </p>
+      {% endif %}
+      {% if children != None and children is not True and children is not False %}
+        {{ children|safe }}
+      {% endif %}
+    </section>
+  {% endpopover %}
+{% endwith %}

@@ -20,6 +20,22 @@ module also observes newly inserted tables. Enhanced components receive
 to preview their no-JavaScript fallback. See the Storybook
 **Documentation → USX React → JavaScript Enhancement** page for examples.
 
+## Optional Chat
+
+Chat and all its parts are available through a separate entry point in this
+package. They are excluded from the root import:
+
+```jsx
+import { Button } from '@solexllc/usx-react';
+import { Chat, ChatComposer } from '@solexllc/usx-react/chat';
+```
+
+Include the optional Chat stylesheet and initialize its enhancement explicitly;
+the default USX styles and `js/start` omit Chat. See
+[Chat asset setup](../usx/README.md#optional-chat) and the
+[Chat integration guide](src/components/chat/README.md). Both entry points
+support ESM and CommonJS. The React components remain markup-only.
+
 ## Asset URLs And Subpath Deployment
 
 `usxBaseUrl` means the **static asset root**, not the application's routing
