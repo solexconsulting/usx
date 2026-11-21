@@ -63,7 +63,7 @@ export default function Input({
     required,
     'aria-describedby': describedByParts.length ? describedByParts.join(' ') : undefined,
     'aria-invalid': hasError ? true : undefined,
-    ...(value !== undefined ? { value } : { defaultValue }),
+    ...(value != null ? { value } : { defaultValue }),
     ...props,
   };
 

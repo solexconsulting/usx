@@ -1,7 +1,7 @@
 {
   "name": "search",
   "template": "search/search.django.html",
-  "version": 2,
+  "version": 3,
   "default": {
     "id": "search-default"
   },
@@ -63,9 +63,8 @@
       "description": "Current search query. Takes precedence over defaultValue."
     },
     "onSubmit": {
-      "type": "string",
-      "default": "",
-      "description": "JavaScript function to call on search submit, receives the search query as an argument"
+      "type": "function",
+      "description": "Host-provided React submit callback receiving the query. Django hosts attach a submit listener to the rendered form; templates never execute JavaScript strings."
     },
     "className": {
       "type": "string",

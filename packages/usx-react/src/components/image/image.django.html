@@ -17,11 +17,11 @@
           {% if source.sizes %}sizes="{{ source.sizes }}"{% endif %}
         />
       {% endfor %}
-      <img src="{% asset_url src.fallback staticBaseUrl %}"{% if imageSrcSet %} srcset="{{ imageSrcSet }}"{% endif %}{% if alt %} alt="{{ alt }}"{% endif %}
+      <img src="{% asset_url src.fallback staticBaseUrl %}"{% if imageSrcSet %} srcset="{{ imageSrcSet }}"{% endif %}{% if alt != None %} alt="{{ alt }}"{% endif %}
         {% if maxWidth or maxHeight %}style="{% if maxWidth %}max-width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %} />
     </picture>
   {% elif src %}
-    <img src="{% asset_url src staticBaseUrl %}"{% if imageSrcSet %} srcset="{{ imageSrcSet }}"{% endif %}{% if alt %} alt="{{ alt }}"{% endif %}
+    <img src="{% asset_url src staticBaseUrl %}"{% if imageSrcSet %} srcset="{{ imageSrcSet }}"{% endif %}{% if alt != None %} alt="{{ alt }}"{% endif %}
       {% if maxWidth or maxHeight %}style="{% if maxWidth %}max-width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %} />
   {% else %}
     Image
@@ -45,11 +45,11 @@
             {% if source.sizes %}sizes="{{ source.sizes }}"{% endif %}
           />
         {% endfor %}
-        <img src="{% asset_url src.fallback staticBaseUrl %}"{% if imageSrcSet %} srcset="{{ imageSrcSet }}"{% endif %}{% if alt %} alt="{{ alt }}"{% endif %}
+        <img src="{% asset_url src.fallback staticBaseUrl %}"{% if imageSrcSet %} srcset="{{ imageSrcSet }}"{% endif %}{% if alt != None %} alt="{{ alt }}"{% endif %}
           {% if maxWidth or maxHeight %}style="{% if maxWidth %}max-width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %} />
       </picture>
     {% elif src %}
-      <img src="{% asset_url src staticBaseUrl %}"{% if imageSrcSet %} srcset="{{ imageSrcSet }}"{% endif %}{% if alt %} alt="{{ alt }}"{% endif %}
+      <img src="{% asset_url src staticBaseUrl %}"{% if imageSrcSet %} srcset="{{ imageSrcSet }}"{% endif %}{% if alt != None %} alt="{{ alt }}"{% endif %}
         {% if maxWidth or maxHeight %}style="{% if maxWidth %}max-width: {{ maxWidth }};{% if not maxHeight %} height: auto;{% endif %}{% endif %}{% if maxHeight %} max-height: {{ maxHeight }};{% if not maxWidth %} width: auto;{% endif %}{% endif %}"{% endif %} />
     {% else %}
       Image

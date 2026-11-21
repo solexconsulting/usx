@@ -20,7 +20,7 @@
       id="{{ id }}"
       class="usa-input usx-input"
       placeholder="{{ placeholder }}"
-      value="{% if value is not None %}{{ value }}{% else %}{{ defaultValue }}{% endif %}"
+      {% if value != None %}value="{{ value }}"{% elif defaultValue != None %}value="{{ defaultValue }}"{% endif %}
       type="search"
       name="{{ searchKey|default:'q' }}"
     />
@@ -37,24 +37,5 @@
       {% endwith %}
     {% endwith %}
   </form>
-  <script data-id="{{ id }}" data-on-submit="{{ onSubmit }}" data-search-key="{{ searchKey|default:'q' }}">
-    const data = document.currentScript.dataset;
-    const onSubmit = data.onSubmit;
 
-    if (!!onSubmit) {
-      const id = data.id;
-      const searchKey = data.searchKey;
-      document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById(`${id}-form`).onsubmit = function(e) {
-          e.preventDefault();
-          const formData = new FormData(e.target);
-          const query = formData.get(searchKey);
-          const func = eval(onSubmit);
-          func(query);
-          return false;
-        };
-      });
-    }
-
-  </script>
 </section>

@@ -8,7 +8,7 @@ import PaginationNavigation, {
 import PaginationStepOptions from '../../../../usx-react/src/components/pagination/step-options/PaginationStepOptions.tsx';
 import PaginationSummary from '../../../../usx-react/src/components/pagination/summary/PaginationSummary.tsx';
 import { demoRows, fetchDemoRows, pageFromClick, sizeFromChange } from './asyncDemo.js';
-import { waitFor } from 'storybook/test';
+import { consumerSetup } from '../../utils/consumerSetup.jsx';
 
 export default {
   title: 'React/USWDS/Pagination',
@@ -182,24 +182,24 @@ export const Default = {
   args: storyDefs.Default,
 };
 
-const connectedCallbackNavs = new WeakSet();
 export const CallbackLinks = {
   args: storyDefs.CallbackLinks,
-  play: async ({ canvasElement }) => {
-    const nav = await waitFor(() => {
-      const node = canvasElement.querySelector('nav.usx-pagination__nav');
-      if (!node) throw new Error('Pagination has not rendered');
-      return node;
-    });
-    if (connectedCallbackNavs.has(nav)) return;
-    connectedCallbackNavs.add(nav);
-    nav.addEventListener('click', (event) => {
-      const request = pageFromClick(event, nav);
-      if (!request) return;
-      event.preventDefault();
-      window.exampleEventTrigger?.(event.target.closest('[data-usx-pagination-page]').getAttribute('aria-label'));
-    });
-  },
+  decorators: [
+    consumerSetup((root) => {
+      const click = (event) => {
+        const nav = event.target.closest('nav.usx-pagination__nav');
+        if (!nav) return;
+        const request = pageFromClick(event, nav);
+        if (!request) return;
+        event.preventDefault();
+        window.exampleEventTrigger?.(
+          event.target.closest('[data-usx-pagination-page]').getAttribute('aria-label')
+        );
+      };
+      root.addEventListener('click', click);
+      return () => root.removeEventListener('click', click);
+    }),
+  ],
 };
 
 export const HashLinks = {

@@ -1,6 +1,6 @@
 import { parseArgs } from 'node:util';
 import { UserError } from '../errors.ts';
-import { listComponents, requireComponents } from '../model/catalog.ts';
+import { listStoryComponents, requireComponents } from '../model/catalog.ts';
 import type { PlayResult } from '../model/results.ts';
 import { SOURCES, SOURCE_LABELS, type ComponentName, type Source } from '../model/types.ts';
 import { mapConcurrent } from '../pool.ts';
@@ -81,7 +81,7 @@ export const plays: Command = {
 
     if (values.all && positionals.length)
       throw new UserError('Pass component names or --all, not both.');
-    const components = positionals.length ? requireComponents(positionals) : listComponents();
+    const components = positionals.length ? requireComponents(positionals) : listStoryComponents();
     const tasks = selectTasks(components, await loadStoryIndex(storybookUrl), {
       changed: values.changed === true,
       failed: values.failed === true,

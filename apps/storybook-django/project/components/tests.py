@@ -123,7 +123,8 @@ class ReactParityTests(SimpleTestCase):
                 self.assertTrue({'usa-button', 'usx-button', 'usx-button--ghost', 'usx-copy'}.issubset(button['class'].split()))
                 self.assertEqual('custom-copy' in button['class'].split(), bool(extra_props))
                 self.assertEqual(button['type'], 'button')
-                self.assertEqual(button['onclick'], r"navigator.clipboard.writeText('Agency\u0027s \u0022copy\u0022\u000A\u003Ctag\u003E')")
+                self.assertEqual(button['data-usx-copy'], 'Agency\'s "copy"\n<tag>')
+                self.assertNotIn('onclick', button)
                 self.assertEqual([attrs['href'] for tag, attrs in elements.elements if tag == 'use'], [
                     '/assets/img/sprite.svg#content_copy', '/assets/img/sprite.svg#check',
                 ])
@@ -189,7 +190,8 @@ class ReactParityTests(SimpleTestCase):
         self.assertIn('usa-tooltip__body--left', html)
         self.assertInHTML('<span class="usx-copy__tooltip--copy">Copy</span>', html)
         self.assertInHTML('<span class="usx-copy__tooltip--copied">Copied</span>', html)
-        self.assertEqual(button['onclick'], r"navigator.clipboard.writeText('Agency\u0027s example')")
+        self.assertEqual(button['data-usx-copy'], "Agency's example")
+        self.assertNotIn('onclick', button)
         self.assertEqual([attrs['href'] for tag, attrs in elements.elements if tag == 'use'], [
             '/assets/img/sprite.svg#content_copy', '/assets/img/sprite.svg#check',
         ])
@@ -918,8 +920,8 @@ class PopoverTests(SimpleTestCase):
         self.assertEqual(panel.attrib["class"], "usx-popover__panel font-sans-sm")
         self.assertNotIn("role", panel.attrib)
         self.assertNotIn("aria-label", panel.attrib)
-        self.assertEqual(panel.find("h3").attrib["class"], "usx-popover__panel-heading")
-        self.assertEqual(panel.find("h3").text, "Services heading")
+        self.assertEqual(panel.find("header/div/h3").attrib["class"], "usx-popover__panel-heading")
+        self.assertEqual(panel.find("header/div/h3").text, "Services heading")
         self.assertEqual(
             panel.find("div").attrib["class"],
             "usx-popover__panel-content usx-popover__scroll font-sans-xs",

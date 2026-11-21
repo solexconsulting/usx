@@ -2,7 +2,7 @@ import { parseArgs } from 'node:util';
 import { compareComponent, type ComponentComparison } from '../compare/compare.ts';
 import type { DiffGap, DiffLine } from '../compare/diff.ts';
 import { loadExpectations } from '../compare/expectations.ts';
-import { listComponents, requireComponents } from '../model/catalog.ts';
+import { listStoryComponents, requireComponents } from '../model/catalog.ts';
 import type { ComponentName } from '../model/types.ts';
 import { readSnapshot } from '../snapshotStore.ts';
 import type { Command } from './command.ts';
@@ -49,7 +49,7 @@ export const check: Command = {
     const { positionals } = parseArgs({ args: [...argv], allowPositionals: true });
     const components: ComponentName[] = positionals.length
       ? requireComponents(positionals)
-      : listComponents();
+      : listStoryComponents();
     const expectations = loadExpectations();
 
     let failing = 0;

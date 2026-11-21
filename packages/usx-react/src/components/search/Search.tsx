@@ -78,7 +78,7 @@ export default function Search({
           label={label}
           screenReaderOnlyLabel={true}
           placeholder={placeholder ?? ''}
-          {...(value !== undefined ? { value } : { defaultValue })}
+          {...(value != null ? { value } : { defaultValue })}
           onChange={onChange}
           type="search"
           name={searchKey}

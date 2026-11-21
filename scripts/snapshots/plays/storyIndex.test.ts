@@ -12,6 +12,21 @@ const story = (importPath: string, exportName: string, tags: string[] = []): Ind
 
 const HTML = '../../packages/usx-stories/src/components/carousel/Carousel.HTML.stories.jsx';
 
+test('nested subcomponent plays do not match the parent component', () => {
+  const index = [
+    story(
+      '../../packages/usx-stories/src/components/chat/subcomponents/chat-composer/ChatComposer.HTML.stories.jsx',
+      'AllVariantsReact',
+      ['play-fn']
+    ),
+  ];
+  assert.deepEqual(findPlayTarget(index, 'chat-composer', 'react'), {
+    kind: 'play',
+    storyId: 'id-AllVariantsReact',
+  });
+  assert.deepEqual(findPlayTarget(index, 'chat', 'react'), { kind: 'no-story' });
+});
+
 test('finds the All Variants story of each source and whether it has a play', () => {
   const index = [
     story(HTML, 'AllVariantsReact', ['play-fn']),

@@ -1,6 +1,6 @@
 import { parseArgs } from 'node:util';
 import { UserError } from '../errors.ts';
-import { listComponents, requireComponents } from '../model/catalog.ts';
+import { listStoryComponents, requireComponents } from '../model/catalog.ts';
 import { SOURCES, SOURCE_LABELS, type ComponentName, type Source } from '../model/types.ts';
 import { createDjangoClient } from '../render/django/client.ts';
 import { createDjangoRenderer, type PageRenderer } from '../render/django/renderer.ts';
@@ -40,7 +40,7 @@ export const generate: Command = {
     if (values.all && positionals.length)
       throw new UserError('Pass component names or --all, not both.');
     const components: ComponentName[] = values.all
-      ? listComponents()
+      ? listStoryComponents()
       : requireComponents(positionals);
     const sources = chooseSources(values.source);
 

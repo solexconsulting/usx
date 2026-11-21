@@ -1,7 +1,7 @@
 {
   "name": "process-list",
   "template": "process-list/process-list.django.html",
-  "version": 4,
+  "version": 5,
   "default": {
     "items": [
       {
@@ -20,8 +20,46 @@
   },
   "props": {
     "items": {
-      "type": "object",
-      "description": "Array of process list item objects. Each item supports: heading (required), headingAs (default h4), headingClassName, body (markup, rendered as-is; wrap plain text in a <p>), bodyClassName (wraps the body in a <div> with these classes), and className (applied to the <li>)."
+      "type": "array",
+      "description": "Array of process list item objects. Each item supports: heading (required), headingAs (default h4), headingClassName, body (markup, rendered as-is; wrap plain text in a <p>), bodyClassName (wraps the body in a <div> with these classes), and className (applied to the <li>).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "type": "string",
+            "description": "Step heading text."
+          },
+          "headingAs": {
+            "type": "select",
+            "options": [
+              "h2",
+              "h3",
+              "h4",
+              "h5",
+              "h6",
+              "p"
+            ],
+            "description": "Heading element; defaults to h4."
+          },
+          "headingClassName": {
+            "type": "string",
+            "description": "Additional heading classes."
+          },
+          "body": {
+            "type": "slot",
+            "description": "Step content, supplied as a React node or Django HTML."
+          },
+          "bodyClassName": {
+            "type": "string",
+            "description": "Optional classes for a div around the body."
+          },
+          "className": {
+            "type": "string",
+            "description": "Additional classes for the list item."
+          }
+        },
+        "description": "A step in the process."
+      }
     },
     "className": {
       "type": "string",

@@ -31,7 +31,6 @@ export const Download = {
     download: 'Liberty Island notes.txt',
     label: 'Download island notes',
     variant: 'unstyled',
-    className: 'usa-link usx-link',
   }),
   name: 'Download action',
 };
@@ -39,7 +38,7 @@ export const TagStyledAction = {
   ...createStory({
     label: 'Choose topic',
     variant: 'unstyled',
-    className: 'usa-tag usx-tag usx-tag--outline usx-tag--interactive usa-link usx-link usx-no-visited',
+    className: 'usa-tag usx-tag usx-tag--outline usx-tag--interactive',
     extraAttributes: { onclick: "window.alert('Topic selected')" },
   }),
   name: 'Button styled as a tag',

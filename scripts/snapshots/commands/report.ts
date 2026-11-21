@@ -1,13 +1,14 @@
 import { parseArgs } from 'node:util';
 import { loadExpectations } from '../compare/expectations.ts';
 import { writeFileAtomic } from '../fs.ts';
-import { listComponents } from '../model/catalog.ts';
+import { listComponents, listStoryComponents } from '../model/catalog.ts';
+import { parityInputHash } from '../parity/inputs.ts';
 import { REPORT_PATH } from '../model/paths.ts';
 import { generationInputHash, playInputHash } from '../plays/inputs.ts';
 import { loadStoryIndex, type IndexEntry } from '../plays/storyIndex.ts';
 import { buildReport } from '../report/build.ts';
 import type { Report } from '../report/schema.ts';
-import { generationStore, playStore, resultKey } from '../results/stores.ts';
+import { generationStore, playStore, parityStore, resultKey } from '../results/stores.ts';
 import { readSnapshot } from '../snapshotStore.ts';
 import type { Command } from './command.ts';
 
@@ -18,14 +19,20 @@ export async function writeReport(storybookUrl: string | undefined): Promise<Rep
     : undefined;
   const plays = playStore();
   const generations = generationStore();
+  const parity = parityStore();
+  const storyComponents = new Set(listStoryComponents());
   const report = buildReport({
     components: listComponents(),
     expectations: loadExpectations(),
     readSnapshot,
-    readPlay: (component, source) => plays.read(resultKey(component, source)),
-    readGeneration: (component, source) => generations.read(resultKey(component, source)),
+    readPlay: (component, source) =>
+      storyComponents.has(component) ? plays.read(resultKey(component, source)) : undefined,
+    readGeneration: (component, source) =>
+      storyComponents.has(component) ? generations.read(resultKey(component, source)) : undefined,
     playInputHash,
     generationInputHash,
+    readParity: (component) => parity.read(component),
+    parityInputHash: parityInputHash(),
     index,
     now: new Date(),
   });

@@ -1,6 +1,6 @@
 import config from '../../../../usx-react/src/components/search/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
-import { storyDefs } from './Search.React.stories.jsx';
+import { storyDefs, submissionDemo } from './Search.React.stories.jsx';
 
 const generatedArgTypes = buildArgTypes(config.props || {});
 
@@ -27,6 +27,6 @@ export const CustomAriaLabel = createStory(storyDefs.CustomAriaLabel);
 export const CustomSearchKey = createStory(storyDefs.CustomSearchKey);
 export const GoogleAction = createStory(storyDefs.GoogleAction);
 export const PathAction = createStory(storyDefs.PathAction);
-export const WithOnSubmit = createStory(storyDefs.WithOnSubmit);
+export const WithOnSubmit = { ...createStory(storyDefs.WithOnSubmit), decorators: [submissionDemo] };
 
 export const WithValue = createStory(storyDefs.WithValue);

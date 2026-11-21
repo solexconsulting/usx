@@ -7,7 +7,6 @@ import Footer from '../../../usx-react/src/components/footer/Footer.tsx';
 import Header from '../../../usx-react/src/components/header/Header.tsx';
 import Input from '../../../usx-react/src/components/input/Input.tsx';
 import Layout from '../../../usx-react/src/components/layout/Layout.tsx';
-import Link from '../../../usx-react/src/components/link/Link.tsx';
 import Page from '../../../usx-react/src/components/page/Page.tsx';
 import Section from '../../../usx-react/src/components/section/Section.tsx';
 import { headerArgs, footerArgs } from './commonArgs.js';
@@ -75,9 +74,9 @@ function LoginExample() {
                 onChange={(event) => setShowPassword(event.target.checked)}
                 formGroup={false}
               />
-              <Link className="margin-top-105" href="#login-status" onClick={(event) => handleAccountAction(event, 'Password recovery')}>
+              <Button variant="unstyled" className="usa-link usx-link margin-top-105" onClick={(event) => handleAccountAction(event, 'Password recovery')}>
                 Forgot password?
-              </Link>
+              </Button>
             </div>
             <Button variant="primary" type="submit" className="width-full margin-right-0">Sign in</Button>
           </form>
@@ -105,9 +104,9 @@ function LoginExample() {
           </div>
           <p className="text-center margin-top-3">
             New to SOLEX?{' '}
-            <Link href="#login-status" onClick={(event) => handleAccountAction(event, 'Account creation')}>
+            <Button variant="unstyled" className="usa-link usx-link" onClick={(event) => handleAccountAction(event, 'Account creation')}>
               Create an account
-            </Link>
+            </Button>
           </p>
           <div id="login-status" role="status" className="margin-top-2">
             {status}

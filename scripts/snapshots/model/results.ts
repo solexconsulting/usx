@@ -1,5 +1,41 @@
 export type PlayStatus = 'pass' | 'flaky' | 'fail' | 'error';
 
+/** Fresh renders with identical inputs, without snapshot comparison exceptions. */
+export interface ParityResult {
+  readonly status: 'pass' | 'fail' | 'error';
+  readonly caseCount: number;
+  readonly failures: readonly {
+    readonly label: string;
+    readonly message: string;
+    readonly props: unknown;
+    readonly react: readonly string[];
+    readonly django: readonly string[];
+  }[];
+}
+
+export function isParityResult(value: unknown): value is ParityResult {
+  return (
+    isRecord(value) &&
+    ['pass', 'fail', 'error'].includes(String(value.status)) &&
+    Number.isInteger(value.caseCount) &&
+    Number(value.caseCount) > 0 &&
+    Array.isArray(value.failures) &&
+    value.failures.every(
+      (failure) =>
+        isRecord(failure) &&
+        typeof failure.label === 'string' &&
+        typeof failure.message === 'string' &&
+        Object.hasOwn(failure, 'props') &&
+        Array.isArray(failure.react) &&
+        failure.react.every((line) => typeof line === 'string') &&
+        Array.isArray(failure.django) &&
+        failure.django.every((line) => typeof line === 'string')
+    ) &&
+    value.failures.length <= Number(value.caseCount) &&
+    (value.status === 'pass' ? value.failures.length === 0 : value.failures.length > 0)
+  );
+}
+
 const PLAY_STATUSES: readonly PlayStatus[] = ['pass', 'flaky', 'fail', 'error'];
 
 /** An error the page logged while its play ran, with how often. */

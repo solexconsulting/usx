@@ -58,6 +58,7 @@ pnpm install
 pnpm dev             # tokens watcher + Storybook dev server (http://olsonhome-macpro:6006)
 pnpm build           # build every package (pnpm -r build)
 pnpm test            # validate component metadata, then run every package's tests
+pnpm test:parity     # run direct parity, update Snapshot report, compare renderer snapshots
 pnpm lint            # eslint + stylelint across the repo
 pnpm format          # prettier --write .
 pnpm storybook:build # static Storybook build (used by deploy/storybook/Dockerfile)
@@ -75,6 +76,14 @@ pnpm validate:configs       # schema + cross-ref + file-presence + generated-fil
 
 `generate:exports` and `generate:contracts` write committed files; `validate:configs`
 (and therefore `pnpm test`) fails if either is out of date.
+
+The [shared parity tests](scripts/tests/fixtures/renderer-parity/README.md) run
+without servers and are included in `pnpm test`. They compare the committed
+renderer snapshots and render every contract example plus direct-input regression
+cases. Results persist in the Snapshot report with case counts, failure details,
+timestamps, and source freshness. Failed runs also update the report; rebuilding
+the report does not rerun checks. Add component-specific cases as fixtures rather
+than separate package scripts.
 
 Snapshot and play commands (run with Storybook and the Django story server running):
 

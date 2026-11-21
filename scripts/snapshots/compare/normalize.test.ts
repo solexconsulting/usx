@@ -101,3 +101,23 @@ test('template contents are included', () => {
     '</template>',
   ]);
 });
+
+test('strict parity retains URLs, empty values, scripts, and event attributes', () => {
+  const strict = (html: string) =>
+    normalizeMarkup(html, {
+      source: 'react',
+      ignoreAttributes: new Set(),
+      strict: true,
+    });
+  for (const [left, right] of [
+    ['<a href="/page">Go</a>', '<a href="page">Go</a>'],
+    ['<input value="">', '<input>'],
+    ['<div id="react-panel"></div>', '<div id="panel"></div>'],
+    ['<div id="id"></div>', '<div id=""></div>'],
+    ['<button onclick="run()">Run</button>', '<button>Run</button>'],
+    ['<script>run()</script>', ''],
+    ['<pre><code>  code\n</code></pre>', '<pre><code>code</code></pre>'],
+    ['<textarea> text </textarea>', '<textarea>text</textarea>'],
+  ] as const)
+    assert.notDeepEqual(strict(left), strict(right));
+});

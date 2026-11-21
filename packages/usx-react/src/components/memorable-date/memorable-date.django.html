@@ -44,7 +44,7 @@
         class="usa-input usx-input{% if error %} usa-input--error{% endif %}"
         id="{{ day_id }}"
         name="{{ dayName|default:day_id }}"
-        value="{% if day is not None %}{{ day }}{% else %}{{ defaultDay|default:'' }}{% endif %}"
+        {% if day != None %}value="{{ day }}"{% elif defaultDay != None %}value="{{ defaultDay }}"{% endif %}
         maxlength="2"
         pattern="[0-9]*"
         placeholder=""
@@ -65,7 +65,7 @@
         class="usa-input usx-input{% if error %} usa-input--error{% endif %}"
         id="{{ year_id }}"
         name="{{ yearName|default:year_id }}"
-        value="{% if year is not None %}{{ year }}{% else %}{{ defaultYear|default:'' }}{% endif %}"
+        {% if year != None %}value="{{ year }}"{% elif defaultYear != None %}value="{{ defaultYear }}"{% endif %}
         minlength="4"
         maxlength="4"
         pattern="[0-9]*"

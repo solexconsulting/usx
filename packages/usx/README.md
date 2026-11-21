@@ -45,6 +45,9 @@ Providing `onClick` selects a button instead. React hosts can pass their callbac
 Django hosts pass `onClick=True` and attach their own click listener. No USX
 enhancement is needed.
 
+Search uses a native GET form; Django hosts wanting custom submission should
+listen for `submit` rather than passing JavaScript strings in `onSubmit`.
+
 ## Theming
 
 All design tokens come from `@solexllc/usx-theme` and are runtime-themeable via

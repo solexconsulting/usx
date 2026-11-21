@@ -2,7 +2,7 @@ import config from '../../../../usx-react/src/components/combobox/config.json';
 import { buildArgTypes, createDjangoStory, uswdsInitNote, componentInit } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Combobox.React.stories.jsx';
 import React from 'react';
-import { waitFor } from 'storybook/test';
+import { consumerSetup } from '../../utils/consumerSetup.jsx';
 
 export default {
   excludeStories: ['Unenhanced'],
@@ -29,23 +29,20 @@ export const WithHint = createStory(storyDefs.WithHint);
 export const WithPlaceholder = createStory(storyDefs.WithPlaceholder);
 export const WithDefaultValue = createStory(storyDefs.WithDefaultValue);
 export const WithError = createStory(storyDefs.WithError);
-const connected = new WeakSet();
 const withConsumerCallback = (story, eventName, message) => ({
   ...story,
-  play: async ({ canvasElement }) => {
-    const box = await waitFor(() => {
-      const node = canvasElement.querySelector('.usa-combo-box[data-enhanced="true"]');
-      if (!node) throw new Error('Combo box has not been enhanced');
-      return node;
-    });
-    if (connected.has(box)) return;
-    connected.add(box);
-    box.addEventListener(eventName, (event) => {
-      if (eventName === 'input' && !event.target.matches('.usa-combo-box__input')) return;
-      if (eventName === 'change' && !event.target.matches('select')) return;
-      window.alert(`${message}: ${event.target.value}`);
-    });
-  },
+  decorators: [
+    consumerSetup((root) => {
+      const listener = (event) => {
+        if (!event.target.closest('.usa-combo-box[data-enhanced="true"]')) return;
+        if (eventName === 'input' && !event.target.matches('.usa-combo-box__input')) return;
+        if (eventName === 'change' && !event.target.matches('select')) return;
+        window.alert(`${message}: ${event.target.value}`);
+      };
+      root.addEventListener(eventName, listener);
+      return () => root.removeEventListener(eventName, listener);
+    }),
+  ],
 });
 
 export const WithOnSearch = withConsumerCallback(createStory({ ...storyDefs.WithOnSearch, onSearch: 'consumer' }), 'input', 'Your search');

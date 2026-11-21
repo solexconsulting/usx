@@ -1,3 +1,4 @@
+import { consumerSetup } from '../../utils/consumerSetup.jsx';
 import { controlledStory } from '../../utils/storyHelpers.jsx';
 import React from 'react';
 import Search from '../../../../usx-react/src/components/search/Search.tsx';
@@ -11,7 +12,7 @@ export default {
   component: Search,
   tags: ['USWDS', 'autodocs'],
   argTypes: generatedArgTypes,
-  excludeStories: ['storyDefs'],
+  excludeStories: ['storyDefs', 'submissionDemo'],
 };
 
 export const storyDefs = {
@@ -77,9 +78,22 @@ export const storyDefs = {
   WithOnSubmit: {
     id: 'search-with-onsubmit',
     placeholder: 'Type something and submit...',
-    onSubmit: '(query) => alert("Search submitted: " + query)',
   },
 };
+
+// The same host listener works with either renderer's native form.
+export const submissionDemo = consumerSetup((root) => {
+  const output = document.createElement('p');
+  output.setAttribute('role', 'status');
+  root.append(output);
+  const submit = (event) => {
+    if (!event.target.matches('form[role="search"]')) return;
+    event.preventDefault();
+    output.textContent = `Search submitted: ${new FormData(event.target).get('q')}`;
+  };
+  root.addEventListener('submit', submit);
+  return () => { root.removeEventListener('submit', submit); output.remove(); };
+});
 
 export const Default = { args: storyDefs.Default };
 export const CustomPlaceholder = { args: storyDefs.CustomPlaceholder };
@@ -97,10 +111,7 @@ export const GoogleAction = { args: storyDefs.GoogleAction };
 export const PathAction = { args: storyDefs.PathAction };
 export const WithOnSubmit = {
   args: storyDefs.WithOnSubmit,
-  render: (args) => {
-    const onSubmit = typeof args.onSubmit === 'string' ? eval(args.onSubmit) : args.onSubmit;
-    return <Search {...args} onSubmit={onSubmit} />;
-  },
+  decorators: [submissionDemo],
 };
 
 export const WithValue = controlledStory(Search, storyDefs.WithValue);

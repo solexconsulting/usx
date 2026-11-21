@@ -4,6 +4,9 @@ import { SOURCES } from './labels.js';
 export const playStatus = (play) => (play.state === 'ran' ? play.result.status : play.state);
 
 export const isPlayStale = (play) => play.state === 'ran' && play.freshness === 'stale';
+export const parityStatus = (parity) =>
+  parity.state === 'ran' ? parity.result.status : parity.state;
+export const isParityStale = (parity) => parity.state === 'ran' && parity.freshness === 'stale';
 
 const isGenerationStale = (generation) =>
   generation.state === 'recorded' && generation.freshness === 'stale';
@@ -16,6 +19,21 @@ const anySource = (component, test) => SOURCES.some((source) => test(component, 
 
 /** Each entry of the "Show" menu: what it is called and which components it keeps. */
 export const FILTERS = [
+  {
+    value: 'parity-fail',
+    label: 'Direct parity failed',
+    keeps: (c) => ['fail', 'error'].includes(parityStatus(c.parity)),
+  },
+  {
+    value: 'parity-not-run',
+    label: 'Direct parity not run',
+    keeps: (c) => c.parity.state === 'not-run',
+  },
+  {
+    value: 'parity-stale',
+    label: 'Direct parity stale',
+    keeps: (c) => isParityStale(c.parity),
+  },
   { value: 'differs', label: 'Differs', keeps: (c) => c.comparison.status === 'differs' },
   { value: 'incomplete', label: 'Incomplete', keeps: (c) => c.comparison.status === 'incomplete' },
   { value: 'match', label: 'Match', keeps: (c) => c.comparison.status === 'match' },
@@ -38,13 +56,17 @@ export const FILTERS = [
     value: 'stale',
     label: 'Stale (sources changed since)',
     keeps: (c) =>
+      isParityStale(c.parity) ||
       anySource(c, (x, s) => isPlayStale(x.plays[s]) || isGenerationStale(x.generation[s])),
   },
   {
     value: 'console-errors',
     label: 'Console errors',
     keeps: (c) =>
-      anySource(c, (x, s) => x.plays[s].state === 'ran' && x.plays[s].result.consoleErrors.length > 0),
+      anySource(
+        c,
+        (x, s) => x.plays[s].state === 'ran' && x.plays[s].result.consoleErrors.length > 0
+      ),
   },
   {
     value: 'generation',
@@ -68,6 +90,7 @@ export const toRow = (component) => ({
   id: component.name,
   component: component.name,
   comparisonStatus: component.comparison.status,
+  parityStatus: parityStatus(component.parity),
   reactPlay: playStatus(component.plays.react),
   djangoPlay: playStatus(component.plays.django),
   playedAt: lastPlayed(component),

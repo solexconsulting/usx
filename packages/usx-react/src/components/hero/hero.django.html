@@ -3,17 +3,17 @@
 <section
   class="usx-hero{% if overlay != False %} usx-hero--has-overlay{% endif %}{% if overlayOpacity or overlayOpacity == 0 %} usx-hero--custom-overlay{% endif %}{% if contentPosition == 'right' %} usx-hero--content-right{% elif contentPosition == 'center' %} usx-hero--content-center{% endif %}{% if boxed == False %} usx-hero--unboxed{% endif %}{% if secondaryContent %} usx-hero--split{% endif %}{% if className %} {{ className }}{% endif %}"
   aria-label="{% if ariaLabel %}{{ ariaLabel }}{% else %}Introduction{% endif %}"
-  {% if backgroundImage or backgroundPosition or overlayOpacity or overlayOpacity == 0 %}style="{% if backgroundImage %}background-image: url('{{ backgroundImage }}');{% endif %}{% if backgroundPosition %}background-position: {{ backgroundPosition }};{% endif %}{% if overlayOpacity or overlayOpacity == 0 %}--hero-overlay-opacity: {{ overlayOpacity }};{% endif %}"{% endif %}
+  {% if backgroundImage or backgroundPosition or overlayOpacity or overlayOpacity == 0 %}style="{% if backgroundImage %}background-image:url('{{ backgroundImage }}'){% if backgroundPosition or overlayOpacity or overlayOpacity == 0 %};{% endif %}{% endif %}{% if backgroundPosition %}background-position:{{ backgroundPosition }}{% if overlayOpacity or overlayOpacity == 0 %};{% endif %}{% endif %}{% if overlayOpacity or overlayOpacity == 0 %}--hero-overlay-opacity:{{ overlayOpacity }}{% endif %}"{% endif %}
 >
   <div class="usx-hero__inner">
-    <div class="usx-hero__callout"{% if calloutMaxWidth %} style="max-width: {{ calloutMaxWidth }};"{% endif %}>
+    <div class="usx-hero__callout"{% if calloutMaxWidth %} style="max-width:{{ calloutMaxWidth }}"{% endif %}>
       {% if headingAs == 'h2' %}<h2 class="usx-hero__heading">{% elif headingAs == 'h3' %}<h3 class="usx-hero__heading">{% elif headingAs == 'h4' %}<h4 class="usx-hero__heading">{% elif headingAs == 'h5' %}<h5 class="usx-hero__heading">{% else %}<h1 class="usx-hero__heading">{% endif %}
         {% if callout %}<span class="usx-hero__heading--alt">{{ callout }}</span>{% endif %}
         {{ title }}
       {% if headingAs == 'h2' %}</h2>{% elif headingAs == 'h3' %}</h3>{% elif headingAs == 'h4' %}</h4>{% elif headingAs == 'h5' %}</h5>{% else %}</h1>{% endif %}
       {% if paragraph %}<p class="usx-hero__paragraph">{{ paragraph }}</p>{% endif %}
       {% if searchProps %}
-        {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps.defaultValue onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
+        {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps|get_optional:'defaultValue' onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
       {% elif buttonProps %}
         {% button props=buttonProps %}{{ buttonProps.children|safe }}{% endbutton %}
       {% endif %}

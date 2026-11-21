@@ -9,9 +9,16 @@ import SnapshotsCell from './snapshotReport/SnapshotsCell.jsx';
 import StatusTag from './snapshotReport/StatusTag.jsx';
 import { formatTime, sectionSummary, tally } from './snapshotReport/format.js';
 import { SOURCES } from './snapshotReport/labels.js';
-import { FILTERS, isPlayStale, playStatus, toRow, visibleComponents } from './snapshotReport/rows.js';
+import {
+  FILTERS,
+  isPlayStale,
+  playStatus,
+  parityStatus,
+  isParityStale,
+  toRow,
+  visibleComponents,
+} from './snapshotReport/rows.js';
 import useReport from './snapshotReport/useReport.js';
-
 
 const FILTER_OPTIONS = FILTERS.map(({ value, label }) => ({ value, label }));
 
@@ -30,12 +37,39 @@ const columns = [
   { key: 'snapshots', header: 'Snapshots', render: (row) => <SnapshotsCell component={row} /> },
   {
     key: 'comparisonStatus',
-    header: 'React vs Django',
+    header: 'Snapshot comparison',
     sortable: true,
     render: (row) => (
       <>
-        <StatusTag status={row.comparison.status} /><br/>
+        <StatusTag status={row.comparison.status} />
+        <br />
         <small>{sectionSummary(row.comparison)}</small>
+      </>
+    ),
+  },
+  {
+    key: 'parityStatus',
+    header: 'Direct parity',
+    sortable: true,
+    render: ({ parity }) => (
+      <>
+        <StatusTag status={parityStatus(parity)} />
+        {parity.state === 'ran' && (
+          <>
+            {isParityStale(parity) && (
+              <>
+                {' '}
+                <StatusTag status="stale" />
+              </>
+            )}
+            <br />
+            <small>
+              {parity.result.caseCount} cases · {parity.result.failures.length} failing
+              <br />
+              {formatTime(parity.recordedAt)}
+            </small>
+          </>
+        )}
       </>
     ),
   },
@@ -51,7 +85,12 @@ const columns = [
     sortable: true,
     render: (row) => <PlayCell play={row.plays.django} component={row.name} source="django" />,
   },
-  { key: 'playedAt', header: 'Last played', sortable: true, render: (row) => <small>{formatTime(row.playedAt)}</small> },
+  {
+    key: 'playedAt',
+    header: 'Last played',
+    sortable: true,
+    render: (row) => <small>{formatTime(row.playedAt)}</small>,
+  },
 ];
 
 export default function SnapshotReport() {
@@ -78,25 +117,55 @@ export default function SnapshotReport() {
       </div>
     );
 
-  const plays = components.flatMap((component) => SOURCES.map((source) => playStatus(component.plays[source])));
-  const stalePlays = components.flatMap((component) => SOURCES.filter((source) => isPlayStale(component.plays[source])));
+  const plays = components.flatMap((component) =>
+    SOURCES.map((source) => playStatus(component.plays[source]))
+  );
+  const stalePlays = components.flatMap((component) =>
+    SOURCES.filter((source) => isPlayStale(component.plays[source]))
+  );
+  const staleParity = components.filter((component) => isParityStale(component.parity)).length;
   return (
     <div className="padding-3">
       <h1 className="margin-top-0">Snapshot report</h1>
       <p>
-        Built {formatTime(state.report.generatedAt)}. Refresh it with <code>pnpm snapshots report</code>; run plays with{' '}
+        Built {formatTime(state.report.generatedAt)}. Refresh it with{' '}
+        <code>pnpm snapshots report</code>; run plays with{' '}
         <code>pnpm snapshots plays [--changed] [--failed]</code>.
       </p>
       <p>
-        <strong>React vs Django:</strong> <Tallies counts={tally(components.map((component) => component.comparison.status))} />
+        <strong>Snapshot comparison:</strong>{' '}
+        <Tallies counts={tally(components.map((component) => component.comparison.status))} />
+      </p>
+      <p>
+        <strong>Direct parity:</strong>{' '}
+        <Tallies counts={tally(components.map((component) => parityStatus(component.parity)))} />{' '}
+        {staleParity > 0 && <small>({staleParity} stale; rerun checks) </small>}
+        Fresh React/Django renders from identical inputs, without snapshot exceptions. Run{' '}
+        <code>pnpm test:parity</code> to update. Passes apply to the tested cases; stale results
+        need rerunning.
       </p>
       <p>
         <strong>Play tests:</strong> <Tallies counts={tally(plays)} />
-        {stalePlays.length > 0 && <small> ({stalePlays.length} recorded before the sources last changed)</small>}
+        {stalePlays.length > 0 && (
+          <small> ({stalePlays.length} recorded before the sources last changed)</small>
+        )}
       </p>
       <div className="display-flex flex-wrap flex-align-end" style={{ gap: '1rem' }}>
-        <Select label="Show" id="report-filter" placeholder="All components" options={FILTER_OPTIONS} value={filter} onChange={(event) => setFilter(event.target.value)} />
-        <Input label="Component name" id="report-search" placeholder="Filter by name" value={search} onChange={(event) => setSearch(event.target.value)} />
+        <Select
+          label="Show"
+          id="report-filter"
+          placeholder="All components"
+          options={FILTER_OPTIONS}
+          value={filter}
+          onChange={(event) => setFilter(event.target.value)}
+        />
+        <Input
+          label="Component name"
+          id="report-search"
+          placeholder="Filter by name"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
       </div>
       <DataTable
         columns={columns}

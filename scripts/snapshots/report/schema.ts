@@ -3,11 +3,16 @@
  * Storybook report page, which reads it. Both sides import this file.
  */
 import type { ComponentComparison, ComponentStatus, SectionStatus } from '../compare/compare.ts';
-import type { GenerationResult, PlayResult } from '../model/results.ts';
+import {
+  isParityResult,
+  type GenerationResult,
+  type PlayResult,
+  type ParityResult,
+} from '../model/results.ts';
 import type { ComponentName, Source } from '../model/types.ts';
 
 /** Bump when the shape changes; the page refuses a report of another version. */
-export const REPORT_VERSION = 1;
+export const REPORT_VERSION = 2;
 
 /** current: recorded against the inputs as they are now; stale: the inputs have changed since. */
 export type ReportFreshness = 'current' | 'stale';
@@ -41,7 +46,17 @@ export interface ComponentReport {
   readonly comparison: ComponentComparison;
   readonly plays: Readonly<Record<Source, PlayReport>>;
   readonly generation: Readonly<Record<Source, GenerationReport>>;
+  readonly parity: ParityReport;
 }
+
+export type ParityReport =
+  | { readonly state: 'not-run' }
+  | {
+      readonly state: 'ran';
+      readonly freshness: ReportFreshness;
+      readonly recordedAt: string;
+      readonly result: ParityResult;
+    };
 
 export interface Report {
   readonly version: typeof REPORT_VERSION;
@@ -96,6 +111,12 @@ const hasPerSource = (
 const isComponent = (value: unknown): value is ComponentReport =>
   isRecord(value) &&
   typeof value.name === 'string' &&
+  isRecord(value.parity) &&
+  (value.parity.state === 'not-run' ||
+    (value.parity.state === 'ran' &&
+      ['current', 'stale'].includes(String(value.parity.freshness)) &&
+      typeof value.parity.recordedAt === 'string' &&
+      isParityResult(value.parity.result))) &&
   isComparison(value.comparison) &&
   hasPerSource(
     value.plays,

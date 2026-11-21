@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import type { ComponentName, Source } from '../model/types.ts';
-import { storiesFiles } from '../model/catalog.ts';
+import { storiesDirectory, storiesFiles } from '../model/catalog.ts';
 import { COMPONENTS_DIR, REPO_ROOT, STORIES_DIR, snapshotPath } from '../model/paths.ts';
 import { SOURCE_LABELS } from '../model/types.ts';
 
@@ -34,16 +34,19 @@ export function hashFiles(files: readonly string[]): string {
 
 /**
  * Everything that can change what a play does or finds: the stories and helpers that define it, the
- * component under test, the shared scripts the preview starts, and the snapshot it runs against.
+ * component under test, shared scripts and styles, and the snapshot it runs against.
  * Snapshots are outputs of the component, so only the source's own one counts.
  */
 export function playInputFiles(component: ComponentName, source: Source): string[] {
   const roots = [
-    path.join(STORIES_DIR, component),
+    storiesDirectory(component),
     path.join(COMPONENTS_DIR, component),
     path.join(STORIES_DIR, '..', 'utils'),
     path.join(REPO_ROOT, 'packages', 'usx', 'src', 'js'),
-    path.join(REPO_ROOT, 'packages', 'usx', 'src', 'components', `_${component}.scss`),
+    // Shared rules and parent stylesheets also affect subcomponent stories.
+    ...listFiles(path.join(REPO_ROOT, 'packages', 'usx', 'src')).filter((file) =>
+      file.endsWith('.scss')
+    ),
     path.join(REPO_ROOT, 'apps', 'storybook', '.storybook'),
   ];
   const own = snapshotPath(component, source);
@@ -65,7 +68,7 @@ export function generationInputFiles(component: ComponentName, source: Source): 
     ...storiesFiles(component, 'React'),
     ...(source === 'django' ? storiesFiles(component, SOURCE_LABELS[source]) : []),
   ];
-  const localModules = listFiles(path.join(STORIES_DIR, component)).filter(
+  const localModules = listFiles(storiesDirectory(component)).filter(
     (file) => !/\.stories\./.test(file) && !file.endsWith('-snapshot.html')
   );
   const utils = path.join(STORIES_DIR, '..', 'utils');

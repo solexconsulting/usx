@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { listComponents, requireComponents, storiesFile, storiesFiles } from './catalog.ts';
+import { listComponents, listStoryComponents, requireComponents, storiesFile, storiesFiles } from './catalog.ts';
 
 test('listComponents returns sorted, unique component directories', () => {
   const components = listComponents();
@@ -11,6 +11,15 @@ test('listComponents returns sorted, unique component directories', () => {
 test('requireComponents rejects unknown names and keeps known ones in order', () => {
   assert.deepEqual(requireComponents(['tag', 'hint']), ['tag', 'hint']);
   assert.throws(() => requireComponents(['hint', 'nope', 'also-nope']), /nope, also-nope/);
+});
+
+test('story discovery returns known components with renderer stories', () => {
+  const names = listStoryComponents();
+  assert.ok(names.includes('time-picker'));
+  for (const name of names) {
+    assert.ok(listComponents().includes(name));
+    assert.ok(storiesFiles(name, 'React').length > 0);
+  }
 });
 
 test('storiesFile finds the single stories file of each kind', () => {

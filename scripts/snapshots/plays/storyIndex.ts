@@ -53,11 +53,11 @@ export function findPlayTarget(
   component: ComponentName,
   source: Source
 ): PlayTarget {
-  const folder = `/components/${component}/`;
   const story = index.find(
     (entry) =>
       entry.type === 'story' &&
-      entry.importPath.includes(folder) &&
+      entry.importPath.includes('/components/') &&
+      entry.importPath.split('/').at(-2) === component &&
       /\.HTML\.stories\.[jt]sx?$/.test(entry.importPath) &&
       entry.exportName === `AllVariants${SOURCE_LABELS[source]}`
   );

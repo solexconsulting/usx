@@ -16,6 +16,19 @@ export function listComponents(): ComponentName[] {
     .sort();
 }
 
+/** Item renderers can be covered by their containing component's stories. */
+export function listStoryComponents(): ComponentName[] {
+  return listComponents().filter((component) => {
+    const directory = storiesDirectory(component);
+    return (
+      fs.existsSync(directory) &&
+      fs
+        .readdirSync(directory)
+        .some((file) => /\.(React|Django|HTML)\.stories\.(jsx|tsx|js|ts)$/.test(file))
+    );
+  });
+}
+
 /** Returns the requested names after checking each is a real component. */
 export function requireComponents(requested: readonly string[]): ComponentName[] {
   const known = new Set(listComponents());
@@ -26,9 +39,26 @@ export function requireComponents(requested: readonly string[]): ComponentName[]
 
 export type StoryKind = 'React' | 'Django' | 'HTML';
 
+/** Stories may live beside their component or under a parent's subcomponents folder. */
+export function storiesDirectory(component: ComponentName): string {
+  const direct = path.join(STORIES_DIR, component);
+  const candidates = [
+    direct,
+    ...fs
+      .readdirSync(STORIES_DIR, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => path.join(STORIES_DIR, entry.name, 'subcomponents', component)),
+  ].filter((directory) => fs.existsSync(directory));
+  if (candidates.length > 1)
+    throw new UserError(
+      `Multiple story directories found for ${component}: ${candidates.join(', ')}`
+    );
+  return candidates[0] ?? direct;
+}
+
 /** The one stories file of a kind, named <Pascal>.<Kind>.stories.<ext>. */
 export function storiesFile(component: ComponentName, kind: StoryKind): string {
-  const directory = path.join(STORIES_DIR, component);
+  const directory = storiesDirectory(component);
   const pattern = new RegExp(`^[^.]+\\.${kind}\\.stories\\.(jsx|tsx|js|ts)$`);
   const matches = fs.existsSync(directory)
     ? fs.readdirSync(directory).filter((file) => pattern.test(file))

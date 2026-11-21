@@ -103,7 +103,7 @@
         <div class="usx-nav__utility">
           {% if utilityContent %}{{ utilityContent|safe }}{% endif %}
           {% if searchProps %}
-            {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps.defaultValue onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
+            {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps|get_optional:'defaultValue' onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
           {% endif %}
         </div>
       {% endif %}
@@ -183,7 +183,7 @@
           <div class="usx-nav__utility">
             {% if utilityContent %}{{ utilityContent|safe }}{% endif %}
             {% if searchProps %}
-              {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps.defaultValue onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
+              {% search id=searchProps.id ariaLabel=searchProps.ariaLabel searchKey=searchProps.searchKey label=searchProps.label icon=searchProps.icon iconOnly=searchProps.iconOnly buttonVariant=searchProps.buttonVariant big=searchProps.big action=searchProps.action placeholder=searchProps.placeholder defaultValue=searchProps|get_optional:'defaultValue' onSubmit=searchProps.onSubmit className=searchProps.className|default:'' %}{% endsearch %}
             {% endif %}
           </div>
         {% endif %}

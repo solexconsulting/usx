@@ -62,6 +62,12 @@ test('snapshot inputs include local modules shared by React and Django stories',
   }
 });
 
+test('play freshness includes shared component stylesheets', () => {
+  const files = playInputFiles('popover', 'react').map((file) => path.basename(file));
+  for (const stylesheet of ['_popover.scss', '_button.scss', '_focus.scss'])
+    assert.ok(files.includes(stylesheet), `${stylesheet} must invalidate saved play results`);
+});
+
 test('freshness compares the stored hash with the current one', () => {
   const stored = {
     inputHash: 'a',

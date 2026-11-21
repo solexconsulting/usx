@@ -1,6 +1,6 @@
 import { compareComponent } from '../compare/compare.ts';
 import type { Expectations } from '../compare/expectations.ts';
-import type { GenerationResult, PlayResult } from '../model/results.ts';
+import type { GenerationResult, PlayResult, ParityResult } from '../model/results.ts';
 import type { ComponentName, Section, Source } from '../model/types.ts';
 import { findPlayTarget, type IndexEntry } from '../plays/storyIndex.ts';
 import { freshnessOf } from '../results/stores.ts';
@@ -28,6 +28,8 @@ export interface ReportSources {
   ) => StoredResult<GenerationResult> | undefined;
   readonly playInputHash: (component: ComponentName, source: Source) => string;
   readonly generationInputHash: (component: ComponentName, source: Source) => string;
+  readonly readParity: (component: ComponentName) => StoredResult<ParityResult> | undefined;
+  readonly parityInputHash: string;
   /** Storybook's story index; absent when Storybook was not consulted. */
   readonly index: readonly IndexEntry[] | undefined;
   readonly now: Date;
@@ -87,6 +89,18 @@ export function buildReport(sources: ReportSources): Report {
     ),
     plays: perSource((source) => playReport(sources, name, source)),
     generation: perSource((source) => generationReport(sources, name, source)),
+    parity: parityReport(sources, name),
   }));
   return { version: REPORT_VERSION, generatedAt: sources.now.toISOString(), components };
+}
+
+function parityReport(sources: ReportSources, name: ComponentName): ComponentReport['parity'] {
+  const stored = sources.readParity(name);
+  if (!stored) return { state: 'not-run' };
+  return {
+    state: 'ran',
+    recordedAt: stored.recordedAt,
+    result: stored.result,
+    freshness: freshnessOf(stored, sources.parityInputHash) === 'current' ? 'current' : 'stale',
+  };
 }

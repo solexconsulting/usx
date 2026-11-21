@@ -289,12 +289,12 @@ export const componentContracts = {
     },
     "avatar": {
       "component": "avatar",
-      "version": 1,
+      "version": 2,
       "required": [],
       "props": {
         "href": {
           "type": "string",
-          "description": "Link target for the avatar image."
+          "description": "Optional link target. When absent, Avatar renders a noninteractive span."
         },
         "src": {
           "type": "string",
@@ -328,6 +328,14 @@ export const componentContracts = {
           ],
           "description": "Optional shape utility for avatar image or initials."
         },
+        "statusRingColor": {
+          "type": "string",
+          "description": "Existing border utility color name for the 4px ring, such as success, warning, error, info, primary, or accent-cool. Omit to hide the ring."
+        },
+        "statusLabel": {
+          "type": "string",
+          "description": "Host-supplied status text appended to the accessible name. Supply it whenever the ring conveys a meaningful state; pass the same text to tooltipProps to show it visually on hover."
+        },
         "tooltipProps": {
           "type": "object",
           "component": "tooltip",
@@ -338,7 +346,7 @@ export const componentContracts = {
         },
         "className": {
           "type": "string",
-          "description": "Additional classes for the avatar link element."
+          "description": "Additional classes for the avatar wrapper."
         },
         "imageClassName": {
           "type": "string",
@@ -381,13 +389,9 @@ export const componentContracts = {
           "description": "Array of avatars rendered by the group.",
           "items": {
             "type": "object",
-            "description": "Avatar item. Mirrors the avatar component's props, using initials/initialsClassName in place of value/contentClassName, with no variant (auto-detected).",
+            "description": "Avatar item. Accepts Avatar props, including variant, value, and status. The initials and initialsClassName aliases remain available; variant defaults to image when src is present and initials otherwise.",
             "component": "avatar",
-            "omit": [
-              "variant",
-              "value",
-              "contentClassName"
-            ],
+            "omit": [],
             "properties": {
               "initials": {
                 "type": "string",
@@ -836,6 +840,10 @@ export const componentContracts = {
         "extraAttributes": {
           "type": "object",
           "description": "An object containing any additional HTML attributes to be spread onto the button element, providing flexibility for custom use cases or integrations."
+        },
+        "download": {
+          "type": "string",
+          "description": "Optional suggested filename for an anchor Button with href. Has no effect on native buttons."
         }
       },
       "renderers": {
@@ -1025,6 +1033,10 @@ export const componentContracts = {
             "p"
           ],
           "default": "div"
+        },
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional HTML attributes on the root element, including ARIA attributes."
         }
       },
       "renderers": {
@@ -3963,6 +3975,11 @@ export const componentContracts = {
           "default": false,
           "description": "Hides every row's Delete button."
         },
+        "slim": {
+          "type": "boolean",
+          "default": false,
+          "description": "Uses compact row padding, text, and Delete button sizing, with file type and size inline after the name. The list width and element structure stay the same."
+        },
         "className": {
           "type": "string",
           "description": "Additional classes for the outer wrapper."
@@ -5257,7 +5274,7 @@ export const componentContracts = {
     },
     "input": {
       "component": "input",
-      "version": 3,
+      "version": 4,
       "required": [],
       "props": {
         "label": {
@@ -5340,8 +5357,7 @@ export const componentContracts = {
         },
         "defaultValue": {
           "type": "string",
-          "default": null,
-          "description": "Initial input value; editable by the user."
+          "description": "Initial input value when value is omitted or null. Empty strings remain explicit values."
         },
         "value": {
           "type": "string",
@@ -5684,13 +5700,12 @@ export const componentContracts = {
       "component": "link",
       "version": 2,
       "required": [
-        "href",
-        "children"
+        "href"
       ],
       "props": {
         "href": {
           "type": "string",
-          "description": "Link destination URL."
+          "description": "Link destination URL. Link always renders an anchor."
         },
         "text": {
           "type": "string",
@@ -6424,7 +6439,7 @@ export const componentContracts = {
     },
     "popover": {
       "component": "popover",
-      "version": 6,
+      "version": 7,
       "required": [
         "id"
       ],
@@ -6444,19 +6459,18 @@ export const componentContracts = {
         },
         "menuItems": {
           "type": "array",
-          "description": "Rows for a stacked menu rendered in the panel before children. Each item sets `type`: \"link\" ({href, text}), \"details\" ({summaryProps, items}) which opens a nested Popover to the right, or \"text\" ({text}).",
+          "description": "Menu rows use onClick for a native button, href for a link, or neither for text. Button rows may include icon. Nested rows use type: \"details\" with summaryProps and items.",
           "items": {
             "type": "object",
-            "description": "A link, details, or text row, chosen by `type`.",
+            "description": "A button, link, text, or nested details row.",
             "properties": {
               "type": {
                 "type": "select",
                 "options": [
-                  "link",
                   "details",
-                  "text"
+                  "button"
                 ],
-                "description": "Required. Selects how the row renders."
+                "description": "Use button for a native action row with delegated behavior, or details for a nested row."
               },
               "id": {
                 "type": "string",
@@ -6464,11 +6478,11 @@ export const componentContracts = {
               },
               "text": {
                 "type": "string",
-                "description": "Link or plain text."
+                "description": "Link, action, or plain text."
               },
               "href": {
                 "type": "string",
-                "description": "Link destination. Only for type \"link\"."
+                "description": "Link destination. Used when onClick is absent."
               },
               "summaryProps": {
                 "type": "object",
@@ -6481,6 +6495,23 @@ export const componentContracts = {
               "items": {
                 "type": "array",
                 "description": "Nested menu rows with the same shape. Only for type \"details\"."
+              },
+              "onClick": {
+                "type": "function",
+                "description": "Click handler for a native button row. Takes precedence over href. Django accepts an inline JavaScript string; use a truthy marker when behavior is delegated through data attributes."
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "Disable a button row."
+              },
+              "extraAttributes": {
+                "type": "object",
+                "description": "Additional attributes for a button row, including data attributes."
+              },
+              "icon": {
+                "type": "object",
+                "component": "icon",
+                "description": "Optional Icon props rendered before a button row label. Only for rows with onClick."
               }
             }
           }
@@ -6520,6 +6551,11 @@ export const componentContracts = {
           "default": false,
           "description": "Open initially. Native details owns subsequent disclosure state."
         },
+        "dismissOnOutside": {
+          "type": "boolean",
+          "default": true,
+          "description": "When false, keep the disclosure open as users interact with the rest of the page. Escape and close controls still close it."
+        },
         "name": {
           "type": "string",
           "description": "Optional native details group: opening one closes another with the same name. Use unique group names for unrelated groups and each nesting level."
@@ -6527,16 +6563,42 @@ export const componentContracts = {
         "showClose": {
           "type": "boolean",
           "default": false,
-          "description": "Add a visible close button after panel content. The shared enhancement enables it, outside dismissal, and Escape with focus return. The summary toggles natively without JavaScript."
+          "description": "Add a visible close button after panel content. The shared enhancement enables it and Escape with focus return. Outside dismissal is controlled by dismissOnOutside. The summary toggles natively without JavaScript."
         },
         "closeLabel": {
           "type": "string",
           "default": "Close",
           "description": "Visible text for the optional close button."
         },
+        "headerLeftActions": {
+          "type": "slot",
+          "description": "Optional controls before the panel heading, such as a back button."
+        },
+        "headerRightActions": {
+          "type": "slot",
+          "description": "Optional controls on the right side of the panel header, before the close icon. Can contain another Popover for an action menu."
+        },
+        "showCloseIcon": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show a close icon in the panel header. React handles closing directly; HTML and Django require the Popover enhancement for dismissal and focus return."
+        },
+        "closeIconLabel": {
+          "type": "string",
+          "default": "Close",
+          "description": "Accessible name for the header close icon."
+        },
+        "headerClassName": {
+          "type": "string",
+          "description": "Additional class names for the panel header."
+        },
         "panelHeading": {
           "type": "string",
           "description": "Optional visible heading for the panel."
+        },
+        "panelHeadingId": {
+          "type": "string",
+          "description": "Optional heading ID for labeling panel content and restoring focus after a view change. Makes the heading programmatically focusable."
         },
         "headingAs": {
           "type": "select",
@@ -6600,12 +6662,50 @@ export const componentContracts = {
     },
     "process-list": {
       "component": "process-list",
-      "version": 4,
+      "version": 5,
       "required": [],
       "props": {
         "items": {
-          "type": "object",
-          "description": "Array of process list item objects. Each item supports: heading (required), headingAs (default h4), headingClassName, body (markup, rendered as-is; wrap plain text in a <p>), bodyClassName (wraps the body in a <div> with these classes), and className (applied to the <li>)."
+          "type": "array",
+          "description": "Array of process list item objects. Each item supports: heading (required), headingAs (default h4), headingClassName, body (markup, rendered as-is; wrap plain text in a <p>), bodyClassName (wraps the body in a <div> with these classes), and className (applied to the <li>).",
+          "items": {
+            "type": "object",
+            "properties": {
+              "heading": {
+                "type": "string",
+                "description": "Step heading text."
+              },
+              "headingAs": {
+                "type": "select",
+                "options": [
+                  "h2",
+                  "h3",
+                  "h4",
+                  "h5",
+                  "h6",
+                  "p"
+                ],
+                "description": "Heading element; defaults to h4."
+              },
+              "headingClassName": {
+                "type": "string",
+                "description": "Additional heading classes."
+              },
+              "body": {
+                "type": "slot",
+                "description": "Step content, supplied as a React node or Django HTML."
+              },
+              "bodyClassName": {
+                "type": "string",
+                "description": "Optional classes for a div around the body."
+              },
+              "className": {
+                "type": "string",
+                "description": "Additional classes for the list item."
+              }
+            },
+            "description": "A step in the process."
+          }
         },
         "className": {
           "type": "string",
@@ -7029,7 +7129,7 @@ export const componentContracts = {
     },
     "search": {
       "component": "search",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "id": {
@@ -7089,9 +7189,8 @@ export const componentContracts = {
           "description": "Current search query. Takes precedence over defaultValue."
         },
         "onSubmit": {
-          "type": "string",
-          "default": "",
-          "description": "JavaScript function to call on search submit, receives the search query as an argument"
+          "type": "function",
+          "description": "Host-provided React submit callback receiving the query. Django hosts attach a submit listener to the rendered form; templates never execute JavaScript strings."
         },
         "className": {
           "type": "string",
@@ -7753,6 +7852,10 @@ export const componentContracts = {
           "type": "string",
           "description": "Accessible name for the summary control."
         },
+        "title": {
+          "type": "string",
+          "description": "Optional native tooltip text for an icon-only summary."
+        },
         "className": {
           "type": "string",
           "default": "",
@@ -8201,12 +8304,12 @@ export const componentContracts = {
         "color": {
           "type": "string",
           "default": null,
-          "description": "Color variant for the tag (e.g., null, 'primary', 'accent-cool', 'blue', 'base', etc.)"
+          "description": "Color variant for a noninteractive tag. Linked tags use theme link color."
         },
         "outline": {
           "type": "boolean",
           "default": false,
-          "description": "Whether to use the outline style (transparent background with border)"
+          "description": "Use a transparent background with border. Linked tags always use the outline style."
         },
         "icon": {
           "type": "string",
@@ -8222,6 +8325,22 @@ export const componentContracts = {
           "type": "string",
           "default": null,
           "description": "Optional inline JavaScript to run when the dismiss button is clicked. If omitted, the tag removes itself from the DOM."
+        },
+        "href": {
+          "type": "string",
+          "description": "Optional destination. When supplied, Tag renders a link; otherwise it renders a span."
+        },
+        "target": {
+          "type": "string",
+          "description": "Anchor target when href is set."
+        },
+        "rel": {
+          "type": "string",
+          "description": "Anchor relationship when href is set."
+        },
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional HTML attributes, including data attributes, applied to the rendered tag element."
         },
         "className": {
           "type": "string",
@@ -8273,6 +8392,10 @@ export const componentContracts = {
         "className": {
           "type": "string",
           "description": "Additional classes"
+        },
+        "extraAttributes": {
+          "type": "object",
+          "description": "Additional HTML attributes on the group container, such as role and aria-label."
         }
       },
       "renderers": {

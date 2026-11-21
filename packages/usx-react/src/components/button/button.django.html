@@ -3,7 +3,7 @@
 {% if href %}
     <a
         href="{{ href }}"
-        {% if download %}{% if download is True %}download{% else %}download="{{ download }}"{% endif %}{% endif %}
+        {% if download != None and download is not False %}{% if download is True %}download{% else %}download="{{ download }}"{% endif %}{% endif %}
         class="
             usa-button usx-button
             {% if variant %} usa-button--{{ variant }}{% endif %}

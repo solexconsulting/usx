@@ -40,6 +40,7 @@ export default function CharacterCount({
   textArea = false,
   className = '',
   extraAttributes,
+  defaultValue = '',
   ...props
 }: CharacterCountProps) {
   const fieldId = id || `character-count-${Math.random().toString(36).substr(2, 9)}`;
@@ -63,6 +64,7 @@ export default function CharacterCount({
     formGroup: true,
     className: 'usa-character-count__field',
     'aria-describedby': [infoId, hintId, errorId].filter(Boolean).join(' '),
+    defaultValue,
     ...props,
     ...extraAttributes,
   };

@@ -1,7 +1,7 @@
 {
   "name": "input",
   "template": "input/input.django.html",
-  "version": 3,
+  "version": 4,
   "default": {
     "id": "example-input-1",
     "label": "Text input label",
@@ -88,8 +88,7 @@
     },
     "defaultValue": {
       "type": "string",
-      "default": null,
-      "description": "Initial input value; editable by the user."
+      "description": "Initial input value when value is omitted or null. Empty strings remain explicit values."
     },
     "value": {
       "type": "string",

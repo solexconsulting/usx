@@ -108,6 +108,12 @@ def chat_formatted_text(value: Any) -> str:
     return mark_safe(''.join(blocks))
 
 
+@register.filter()
+def get_optional(value: Any, key: str) -> Any:
+    """Read an optional mapping field, preserving empty values and returning None if absent."""
+    return value.get(key) if isinstance(value, dict) else None
+
+
 @register.filter
 def get_item(value: Any, key: str) -> Any:
     """Read a record field while keeping one table cell per configured column."""

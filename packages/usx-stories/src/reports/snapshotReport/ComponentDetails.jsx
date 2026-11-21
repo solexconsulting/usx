@@ -4,9 +4,45 @@ import RenderedStories from './RenderedStories.jsx';
 import SideBySideDiff from './SideBySideDiff.jsx';
 import { SOURCES, SOURCE_LABELS } from './labels.js';
 import StatusTag from './StatusTag.jsx';
+import { formatTime } from './format.js';
+
+function ParityDetails({ parity }) {
+  if (parity.state !== 'ran')
+    return (
+      <p>
+        Direct parity has not been run. Run <code>pnpm test:parity</code>.
+      </p>
+    );
+  return (
+    <section className="margin-bottom-3">
+      <h4>Direct renderer parity</h4>
+      <p>
+        {parity.result.caseCount} cases checked {formatTime(parity.recordedAt)}.
+        {parity.freshness === 'stale' && ' Sources have changed; rerun parity checks.'}
+      </p>
+      {parity.result.failures.map((failure, index) => (
+        <details key={index} className="margin-bottom-2">
+          <summary>
+            {failure.label}: {failure.message}
+          </summary>
+          <h5>Props</h5>
+          <pre className="overflow-auto">{JSON.stringify(failure.props, null, 2)}</pre>
+          <h5>React</h5>
+          <pre className="overflow-auto">{failure.react.join('\n')}</pre>
+          <h5>Django</h5>
+          <pre className="overflow-auto">{failure.django.join('\n')}</pre>
+        </details>
+      ))}
+    </section>
+  );
+}
 
 const ranPlays = (component) =>
-  SOURCES.flatMap((source) => (component.plays[source].state === 'ran' ? [{ source, result: component.plays[source].result }] : []));
+  SOURCES.flatMap((source) =>
+    component.plays[source].state === 'ran'
+      ? [{ source, result: component.plays[source].result }]
+      : []
+  );
 
 function GenerationAlerts({ component }) {
   return SOURCES.map((source) => {
@@ -17,13 +53,25 @@ function GenerationAlerts({ component }) {
     return (
       <React.Fragment key={source}>
         {status === 'failed' && (
-          <Alert variant="error" heading={`${label} snapshot was not generated`} className="margin-bottom-2">
+          <Alert
+            variant="error"
+            heading={`${label} snapshot was not generated`}
+            className="margin-bottom-2"
+          >
             {message}
           </Alert>
         )}
         {warnings.length > 0 && (
-          <Alert variant="warning" heading={`${label} snapshot warnings`} className="margin-bottom-2">
-            <ul className="margin-0">{warnings.map((warning) => <li key={warning}>{warning}</li>)}</ul>
+          <Alert
+            variant="warning"
+            heading={`${label} snapshot warnings`}
+            className="margin-bottom-2"
+          >
+            <ul className="margin-0">
+              {warnings.map((warning) => (
+                <li key={warning}>{warning}</li>
+              ))}
+            </ul>
           </Alert>
         )}
       </React.Fragment>
@@ -44,7 +92,11 @@ function PlayAlerts({ component }) {
         </Alert>
       )}
       {result.consoleErrors.length > 0 && (
-        <Alert variant="warning" heading={`Console errors (${SOURCE_LABELS[source]})`} className="margin-bottom-2">
+        <Alert
+          variant="warning"
+          heading={`Console errors (${SOURCE_LABELS[source]})`}
+          className="margin-bottom-2"
+        >
           <ul className="margin-0">
             {result.consoleErrors.map((error) => (
               <li key={`${error.message}${error.url}`} style={{ overflowWrap: 'anywhere' }}>
@@ -75,7 +127,10 @@ function Section({ section, storyIds }) {
       {section.diff ? (
         <SideBySideDiff diff={section.diff} />
       ) : (
-        <p>This section exists only in the {section.status === 'react-only' ? 'React' : 'Django'} snapshot.</p>
+        <p>
+          This section exists only in the {section.status === 'react-only' ? 'React' : 'Django'}{' '}
+          snapshot.
+        </p>
       )}
       <RenderedStories title={section.title} storyIds={storyIds} />
     </section>
@@ -84,21 +139,21 @@ function Section({ section, storyIds }) {
 
 /** Everything wrong with a component, shown when its row is expanded. */
 export default function ComponentDetails({ component, storyIds }) {
-  const differing = component.comparison.sections.filter((section) => section.status !== 'identical');
+  const differing = component.comparison.sections.filter(
+    (section) => section.status !== 'identical'
+  );
   const stale = component.comparison.staleExpectations;
-  const generationNotes = SOURCES.some((source) => {
-    const generation = component.generation[source];
-    return generation.state === 'recorded' && (generation.result.status === 'failed' || generation.result.warnings.length > 0);
-  });
-  const playNotes = ranPlays(component).some(({ result }) => result.message || result.consoleErrors.length > 0);
-  if (!differing.length && !stale.length && !generationNotes && !playNotes)
-    return <p className="margin-0">Nothing to report.</p>;
   return (
     <div className="padding-2">
+      <ParityDetails parity={component.parity} />
       <GenerationAlerts component={component} />
       <PlayAlerts component={component} />
       {stale.length > 0 && (
-        <Alert variant="warning" heading="Expectations no longer needed" className="margin-bottom-2">
+        <Alert
+          variant="warning"
+          heading="Expectations no longer needed"
+          className="margin-bottom-2"
+        >
           {stale.join(', ')}
         </Alert>
       )}

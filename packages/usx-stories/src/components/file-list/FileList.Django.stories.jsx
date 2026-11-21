@@ -1,5 +1,5 @@
 import config from '../../../../usx-react/src/components/file-list/config.json';
-import { waitFor } from 'storybook/test';
+import { consumerSetup } from '../../utils/consumerSetup.jsx';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './FileList.React.stories.jsx';
 
@@ -10,32 +10,35 @@ export default {
 };
 
 const createStory = createDjangoStory({ componentName: 'file-list' });
-const connected = new WeakSet();
 const withRemovalDemo = (story, override = false) => ({
   ...story,
   // This is consumer code in the story, equivalent to supplying React's onRemove callback.
-  play: async ({ canvasElement }) => {
-    const list = await waitFor(() => {
-      const node = canvasElement.querySelector('.usx-file-input__list');
-      if (!node) throw new Error('File list has not rendered');
-      return node;
-    });
-    if (connected.has(list)) return;
-    connected.add(list);
-    list.addEventListener('click', (event) => {
-      const button = event.target.closest?.('.usx-file-input__delete-button');
-      if (!button || !list.contains(button)) return;
-      const row = button.closest('.usx-file-input__file-item');
-      if (override && row.querySelector('.usx-file-input__file-name')?.textContent === 'w2-2023.pdf') {
-        // eslint-disable-next-line no-console
-        console.log('Custom delete for "w2-2023.pdf"');
-      }
-      row.remove();
-      const remaining = list.querySelectorAll('.usx-file-input__file-item');
-      if (!remaining.length) list.remove();
-      else list.querySelector('[aria-live="polite"]').textContent = `You have selected the file: ${remaining[remaining.length - 1].querySelector('.usx-file-input__file-name').textContent}.`;
-    });
-  },
+  decorators: [
+    consumerSetup((root) => {
+      const remove = (event) => {
+        const list = event.target.closest('.usx-file-input__list');
+        if (!list) return;
+        const button = event.target.closest?.('.usx-file-input__delete-button');
+        if (!button || !list.contains(button)) return;
+        const row = button.closest('.usx-file-input__file-item');
+        if (
+          override &&
+          row.querySelector('.usx-file-input__file-name')?.textContent === 'w2-2023.pdf'
+        ) {
+          // eslint-disable-next-line no-console
+          console.log('Custom delete for "w2-2023.pdf"');
+        }
+        row.remove();
+        const remaining = list.querySelectorAll('.usx-file-input__file-item');
+        if (!remaining.length) list.remove();
+        else
+          list.querySelector('[aria-live="polite"]').textContent =
+            `You have selected the file: ${remaining[remaining.length - 1].querySelector('.usx-file-input__file-name').textContent}.`;
+      };
+      root.addEventListener('click', remove);
+      return () => root.removeEventListener('click', remove);
+    }),
+  ],
 });
 const allowedPropNames = new Set(Object.keys(config.props || {}));
 const toDjangoArgs = (args) => ({

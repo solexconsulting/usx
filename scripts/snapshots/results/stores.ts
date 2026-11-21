@@ -2,6 +2,8 @@ import path from 'node:path';
 import { RESULTS_DIR } from '../model/paths.ts';
 import {
   isGenerationResult,
+  isParityResult,
+  type ParityResult,
   isPlayResult,
   type GenerationResult,
   type PlayResult,
@@ -14,6 +16,9 @@ export const playStore = (): ResultStore<PlayResult> =>
 
 export const generationStore = (): ResultStore<GenerationResult> =>
   new ResultStore(path.join(RESULTS_DIR, 'generation'), isGenerationResult);
+
+export const parityStore = (): ResultStore<ParityResult> =>
+  new ResultStore(path.join(RESULTS_DIR, 'parity'), isParityResult);
 
 /** The key a component's result for one source is stored under, in either store. */
 export const resultKey = (component: ComponentName, source: Source): string =>

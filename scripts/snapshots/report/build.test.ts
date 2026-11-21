@@ -33,6 +33,8 @@ const sources = (overrides: Partial<ReportSources> = {}): ReportSources => ({
   readPlay: (component, source) =>
     component === 'tag' && source === 'react' ? stored(playResult, 'h1') : undefined,
   readGeneration: () => undefined,
+  readParity: () => undefined,
+  parityInputHash: 'p1',
   playInputHash: () => 'h1',
   generationInputHash: () => 'g1',
   index,
@@ -107,10 +109,60 @@ test('a built report passes validation after a JSON round trip', () => {
 });
 
 test('validation rejects other versions and malformed reports with a helpful message', () => {
-  assert.throws(() => parseReport({ rows: [] }), /expected version 1/);
+  assert.throws(() => parseReport({ rows: [] }), /expected version 2/);
   assert.throws(
-    () => parseReport({ version: 1, generatedAt: 't', components: [{ name: 'x' }] }),
+    () => parseReport({ version: 2, generatedAt: 't', components: [{ name: 'x' }] }),
     /malformed/
   );
-  assert.throws(() => parseReport(null), /expected version 1/);
+  assert.throws(() => parseReport(null), /expected version 2/);
+});
+
+test('direct parity reports retain failures, cases and freshness independently of matching snapshots', () => {
+  const failure = {
+    label: 'empty value',
+    message: 'Rendered markup differs',
+    props: { value: '' },
+    react: ['<input>'],
+    django: ['<input value>'],
+  };
+  const result = { status: 'fail' as const, caseCount: 3, failures: [failure] };
+  const readParity = () => stored(result, 'p1');
+  const report = buildReport(sources({ readParity }));
+  assert.equal(report.components[0]?.comparison.status, 'match');
+  assert.deepEqual(report.components[0]?.parity, {
+    state: 'ran',
+    freshness: 'current',
+    recordedAt: '2026-01-02T00:00:00.000Z',
+    result,
+  });
+  assert.deepEqual(parseReport(JSON.parse(JSON.stringify(report))), report);
+  const stale = buildReport(sources({ readParity, parityInputHash: 'p2' })).components[0]?.parity;
+  assert.equal(stale?.state === 'ran' && stale.freshness, 'stale');
+  assert.deepEqual(buildReport(sources()).components[0]?.parity, { state: 'not-run' });
+});
+
+test('direct parity validation rejects malformed failures and false passes', () => {
+  const report = buildReport(sources());
+  for (const result of [
+    { status: 'pass', caseCount: 0, failures: [] },
+    { status: 'pass', caseCount: 1, failures: [{}] },
+    { status: 'fail', caseCount: 1, failures: [] },
+    { status: 'error', caseCount: 1, failures: [{ label: 'A' }] },
+  ]) {
+    const malformed = {
+      ...report,
+      components: [
+        {
+          ...report.components[0],
+          parity: {
+            state: 'ran',
+            freshness: 'current',
+            recordedAt: '2026-01-02T00:00:00.000Z',
+            result,
+          },
+        },
+      ],
+    };
+    assert.throws(() => parseReport(malformed), /malformed/);
+  }
 });
