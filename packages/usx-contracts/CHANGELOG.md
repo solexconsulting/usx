@@ -1,5 +1,48 @@
 # @solexllc/usx-contracts
 
+## 0.12.0
+
+### Minor Changes
+
+- [`b1831b7`](https://github.com/solexconsulting/usx/commit/b1831b74bacd3692f74e81f17161626d073632b4) Thanks [@olsonap](https://github.com/olsonap)! - Add `statusRingColor` and `statusLabel` Avatar props. Rings use the existing `border-05` and `border-{color}` utilities; labels are included in accessible names and can be shown through Avatar's Tooltip props. Update Chat presence, documentation, examples, and snapshots to use the new props.
+
+- [`272a170`](https://github.com/solexconsulting/usx/commit/272a17020d26f94e33e1eba969c14e03c9b0d3c3) Thanks [@olsonap](https://github.com/olsonap)! - Compose BackToTop with Button, rendering an anchor with href="#top" by default
+  and accepting a custom href. Share Button styling and icon rendering across both
+  React and Django, defaulting to a primary ghost button, with variant and ghost
+  configurable. Expose a focused subset of Button props alongside the arrow and
+  accessible-label options.
+  A host-provided onClick selects a button and takes precedence over href. React
+  accepts a callback; both renderers accept onClick=true for host-bound listeners.
+  Remove built-in scrolling behavior; BackToTop needs no USX enhancement.
+
+- [`5053631`](https://github.com/solexconsulting/usx/commit/5053631a1f21154f50185ec076b018321a09f8d3) Thanks [@olsonap](https://github.com/olsonap)! - Add Chat and its composable React and Django parts, including directories, threads,
+  message actions, attachments, and a composer with optional formatting and emoji.
+  Renderers provide markup; shared enhancement handles interactions, while hosts own
+  conversation state, sending, permissions, and persistence. Include component stories,
+  HTML snapshot play tests, and renderer parity fixtures.
+
+  Chat is opt-in: import `@solexllc/usx-react/chat`, include `pkg:@solexllc/usx/chat`
+  (or `/chat/themed`) styles, and initialize `@solexllc/usx/js/chat` alongside Popover.
+  Core imports and automatic startup exclude Chat. Hosts control the launcher through
+  `summaryProps` and their own layout.
+
+- [`3ba9f29`](https://github.com/solexconsulting/usx/commit/3ba9f2994332ec7d08fa2b9ac53eed5dd1a90bae) Thanks [@olsonap](https://github.com/olsonap)! - Add extraAttributes to Clickable in React and Django so hosts can attach data and
+  ARIA attributes to its root anchor or button. Update the contract, snapshots,
+  and HTML play assertions for both renderers.
+
+- [`b43c124`](https://github.com/solexconsulting/usx/commit/b43c124a4360ef1ee1a248e6069c8db010a0ed39) Thanks [@olsonap](https://github.com/olsonap)! - Add linked Tags with outlined styling, theme-aware link colors, and original label casing. Keep action and download semantics on Button; Link always renders an anchor, and Avatar renders a link only when given an href. Popover menu rows use onClick, href, or neither to select button, link, or text markup. Update React and Django stories and HTML snapshots.
+
+- [`7d6500b`](https://github.com/solexconsulting/usx/commit/7d6500b0319dd1e3516ce33f76e96623e516c417) Thanks [@olsonap](https://github.com/olsonap)! - Add a `slim` FileList option that reduces row padding, text size, and Delete button size, and places file type and size inline after the name. It preserves the list width and element structure.
+
+### Patch Changes
+
+- [`71bc181`](https://github.com/solexconsulting/usx/commit/71bc18166a2c9078d6ddda79b1da2e38c05d8c12) Thanks [@olsonap](https://github.com/olsonap)! - Align React and Django form values, default props, asset paths, and Hero style markup.
+  Describe Input defaultValue and ProcessList items in their contracts. Search no longer
+  embeds JavaScript in Django output; attach a host submit listener for custom submission.
+
+  Persist direct renderer parity results in the Snapshot report, covering every
+  contract example and regression fixtures with failure details and freshness tracking.
+
 ## 0.11.0
 
 ### Minor Changes
