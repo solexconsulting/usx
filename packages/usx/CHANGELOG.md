@@ -1,5 +1,51 @@
 # @solexllc/usx
 
+## 0.14.0
+
+### Minor Changes
+
+- [`b1831b7`](https://github.com/solexconsulting/usx/commit/b1831b74bacd3692f74e81f17161626d073632b4) Thanks [@olsonap](https://github.com/olsonap)! - Add `statusRingColor` and `statusLabel` Avatar props. Rings use the existing `border-05` and `border-{color}` utilities; labels are included in accessible names and can be shown through Avatar's Tooltip props. Update Chat presence, documentation, examples, and snapshots to use the new props.
+
+- [`5053631`](https://github.com/solexconsulting/usx/commit/5053631a1f21154f50185ec076b018321a09f8d3) Thanks [@olsonap](https://github.com/olsonap)! - Add Chat and its composable React and Django parts, including directories, threads,
+  message actions, attachments, and a composer with optional formatting and emoji.
+  Renderers provide markup; shared enhancement handles interactions, while hosts own
+  conversation state, sending, permissions, and persistence. Include component stories,
+  HTML snapshot play tests, and renderer parity fixtures.
+
+  Chat is opt-in: import `@solexllc/usx-react/chat`, include `pkg:@solexllc/usx/chat`
+  (or `/chat/themed`) styles, and initialize `@solexllc/usx/js/chat` alongside Popover.
+  Core imports and automatic startup exclude Chat. Hosts control the launcher through
+  `summaryProps` and their own layout.
+
+- [`b43c124`](https://github.com/solexconsulting/usx/commit/b43c124a4360ef1ee1a248e6069c8db010a0ed39) Thanks [@olsonap](https://github.com/olsonap)! - Add linked Tags with outlined styling, theme-aware link colors, and original label casing. Keep action and download semantics on Button; Link always renders an anchor, and Avatar renders a link only when given an href. Popover menu rows use onClick, href, or neither to select button, link, or text markup. Update React and Django stories and HTML snapshots.
+
+- [`7d6500b`](https://github.com/solexconsulting/usx/commit/7d6500b0319dd1e3516ce33f76e96623e516c417) Thanks [@olsonap](https://github.com/olsonap)! - Add a `slim` FileList option that reduces row padding, text size, and Delete button size, and places file type and size inline after the name. It preserves the list width and element structure.
+
+### Patch Changes
+
+- [`668d9b7`](https://github.com/solexconsulting/usx/commit/668d9b7aa4c7c447db36dc896fbbf54094e21d97) Thanks [@olsonap](https://github.com/olsonap)! - Preserve Carousel's inset track focus outline when shared focus styles apply.
+  Keep the carousel focus-color theme override and verify the color and offset in
+  both HTML snapshot stories.
+
+- [`09bc0f0`](https://github.com/solexconsulting/usx/commit/09bc0f0845300746a046e78628fa577a6b26e5d8) Thanks [@olsonap](https://github.com/olsonap)! - Move CopyToClipboard behavior into shared USX enhancement for React, Django, and
+  HTML. Initialize `@solexllc/usx/js/copy-to-clipboard` or use `@solexllc/usx/js/start`.
+  Keep Code's copy buttons and stories connected to the same enhancement.
+
+  Support network HTTP previews using the browser's copy command when the Clipboard
+  API is unavailable. Show copied feedback only after success, including keyboard
+  activation, and emit `usx:copy-error` when copying fails.
+
+- [`d2078e5`](https://github.com/solexconsulting/usx/commit/d2078e55403a507c1bf949a7a6841831b63abbd9) Thanks [@olsonap](https://github.com/olsonap)! - Give Popover header actions consistent spacing and hover styling. Keep the React
+  renderer markup-only by using the shared Popover enhancement for closing and
+  focus restoration. Update both renderer snapshots and HTML play assertions.
+
+- [`71bc181`](https://github.com/solexconsulting/usx/commit/71bc18166a2c9078d6ddda79b1da2e38c05d8c12) Thanks [@olsonap](https://github.com/olsonap)! - Align React and Django form values, default props, asset paths, and Hero style markup.
+  Describe Input defaultValue and ProcessList items in their contracts. Search no longer
+  embeds JavaScript in Django output; attach a host submit listener for custom submission.
+
+  Persist direct renderer parity results in the Snapshot report, covering every
+  contract example and regression fixtures with failure details and freshness tracking.
+
 ## 0.13.0
 
 ### Minor Changes
