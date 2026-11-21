@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '../../../../usx-react/src/components/button/Button';
+import Icon from '../../../../usx-react/src/components/icon/Icon';
 import Popover from '../../../../usx-react/src/components/popover/Popover.tsx';
 import PopoverMenu from '../../../../usx-react/src/components/popover/PopoverMenu.tsx';
 import Details from '../../../../usx-react/src/components/details/Details.tsx';
@@ -272,20 +274,23 @@ export const storyDefs = {
     summaryProps: { label: 'Open record', className: 'usa-button usx-button margin-0' },
     panelHeading: 'Record 10482',
     headerLeftActions: (
-      <button
-        type="button"
-        className="usa-button usx-button usa-button--unstyled"
+      <Button
+        variant="unstyled"
+        className="usx-popover__header-action"
         aria-label="Back to records"
-      >
-        ←
-      </button>
+        iconProps={[{ name: 'arrow_back' }]}
+      />
     ),
     headerRightActions: (
       <Popover
         id="popover-header-actions-menu"
         side="bottom"
         align="end"
-        summaryProps={{ label: 'Actions', className: 'usa-button usx-button usa-button--unstyled' }}
+        summaryProps={{
+          ariaLabel: 'Record actions',
+          children: <Icon name="more_vert" />,
+          className: 'usa-button usx-button usa-button--unstyled usx-popover__header-action',
+        }}
         menuItems={[{ text: 'Copy record', icon: { name: 'content_copy' }, onClick: () => {} }]}
       />
     ),

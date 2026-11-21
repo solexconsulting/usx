@@ -136,13 +136,18 @@ $popover-panel-x-padding: 0.25rem;
   flex: none;
 }
 
-.usx-popover__header-close.usa-button.usx-button {
-  display: inline-flex;
-  align-items: center;
+// Shared layout and hover surface for unstyled header actions.
+.usx-popover__header-action.usa-button {
+  box-sizing: border-box;
+  flex: none;
   justify-content: center;
   min-inline-size: 2.75rem;
   min-block-size: 2.75rem;
-  margin: 0;
+  padding: 0.75rem;
+
+  &:hover {
+    background: usx-when($usx-surface-2);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

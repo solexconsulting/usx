@@ -2,7 +2,9 @@
   "name": "popover",
   "template": "popover/popover.django.html",
   "version": 7,
-  "required": ["id"],
+  "required": [
+    "id"
+  ],
   "default": {
     "id": "popover-default",
     "summaryProps": {
@@ -34,7 +36,10 @@
         "properties": {
           "type": {
             "type": "select",
-            "options": ["details", "button"],
+            "options": [
+              "details",
+              "button"
+            ],
             "description": "Use button for a native action row with delegated behavior, or details for a nested row."
           },
           "id": {
@@ -52,7 +57,9 @@
           "summaryProps": {
             "type": "object",
             "component": "summary",
-            "omit": ["unstyled"],
+            "omit": [
+              "unstyled"
+            ],
             "description": "Props passed to the details row summary. Only for type \"details\"."
           },
           "items": {
@@ -81,19 +88,31 @@
     },
     "side": {
       "type": "select",
-      "options": ["top", "right", "bottom", "left"],
+      "options": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
       "default": "bottom",
       "description": "Physical side of the trigger where CSS places the floating panel. Choose a side and alignment with enough space for the panel."
     },
     "align": {
       "type": "select",
-      "options": ["start", "center", "end"],
+      "options": [
+        "start",
+        "center",
+        "end"
+      ],
       "default": "start",
       "description": "Alignment along the chosen side. Start and end follow text direction for top and bottom."
     },
     "panelShape": {
       "type": "select",
-      "options": ["rounded", "square"],
+      "options": [
+        "rounded",
+        "square"
+      ],
       "default": "rounded",
       "description": "Rounded keeps the original border radius and extra vertical padding; square removes the radius and uses equal outer padding on all sides. Nested menuItems flyouts inherit the shape."
     },
@@ -153,7 +172,14 @@
     },
     "headingAs": {
       "type": "select",
-      "options": ["h1", "h2", "h3", "h4", "h5", "h6"],
+      "options": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6"
+      ],
       "default": "h2",
       "description": "Heading element used for panelHeading. Choose the level that fits the surrounding page outline."
     },

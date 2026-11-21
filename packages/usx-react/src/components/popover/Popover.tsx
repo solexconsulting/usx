@@ -87,7 +87,6 @@ export default function Popover({
   children,
   ...props
 }: PopoverProps) {
-  const [initiallyOpen] = React.useState(defaultOpen);
   const composedSummaryProps = { ...summaryProps, label: summaryProps?.label ?? 'Open panel' };
   const Heading = headingAs;
 
@@ -95,7 +94,7 @@ export default function Popover({
     <details
       {...props}
       className={ClassNames('usx-popover', className)}
-      open={initiallyOpen || undefined}
+      open={defaultOpen || undefined}
       data-side={side}
       data-align={align}
       data-usx-popover-dismiss-on-outside={dismissOnOutside ? undefined : 'false'}
@@ -119,11 +118,7 @@ export default function Popover({
             )}
             <div className="usx-popover__header-content">
               {panelHeading && (
-                <Heading
-                  id={panelHeadingId}
-                  className="usx-popover__panel-heading"
-                  tabIndex={-1}
-                >
+                <Heading id={panelHeadingId} className="usx-popover__panel-heading" tabIndex={-1}>
                   {panelHeading}
                 </Heading>
               )}
@@ -134,25 +129,20 @@ export default function Popover({
                 {showCloseIcon && (
                   <Button
                     variant="unstyled"
-                    className="usx-popover__header-close"
+                    className="usx-popover__header-action usx-popover__header-close"
                     aria-label={closeIconLabel}
                     iconProps={[{ name: 'close' }]}
                     extraAttributes={{ 'data-usx-popover-close': id }}
-                    onClick={(event) => {
-                      const details = event.currentTarget.closest(
-                        'details.usx-popover'
-                      ) as HTMLDetailsElement;
-                      details.open = false;
-                      details.querySelector<HTMLElement>(':scope > summary')?.focus();
-                    }}
                   />
                 )}
               </div>
             )}
           </header>
         )}
-        {menuItems && <PopoverMenu items={menuItems} prefix={id} panelShape={panelShape} />}
-        {children && (
+        {menuItems && menuItems.length > 0 && (
+          <PopoverMenu items={menuItems} prefix={id} panelShape={panelShape} />
+        )}
+        {Boolean(children) && (
           <div
             className={ClassNames(
               'usx-popover__panel-content',

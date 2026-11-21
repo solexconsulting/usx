@@ -269,6 +269,10 @@ const testHeaderActions = async ({ canvasElement }) => {
     'Copy record'
   );
   const close = header.querySelector('[data-usx-popover-close]');
+  for (const action of [back, actions.querySelector('summary'), close]) {
+    await expect(action).toHaveClass('usa-button--unstyled', 'usx-popover__header-action');
+    await expect(action).not.toHaveClass('usx-button--ghost');
+  }
   await expect(close).toHaveAccessibleName('Close record');
   await expect(close.getAttribute('data-usx-popover-close')).toBe(panel.id);
   await userEvent.click(close);
