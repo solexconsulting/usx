@@ -18,11 +18,11 @@ const checkGroup = (def) => async (group) => {
   const links = [...group.querySelectorAll('a.usx-avatar')];
   await expect(links).toHaveLength(def.avatarProps.length);
   for (const [index, avatar] of def.avatarProps.entries()) {
-    const img = links[index].querySelector('img');
+    const content = links[index].querySelector('.usx-avatar__content');
     await expect(links[index]).toHaveAttribute('href', avatar.href);
-    await expect(img).toHaveAttribute('src', avatar.src);
+    await expect(content).toHaveTextContent(avatar.value);
     await expect(links[index]).toHaveAccessibleName(avatar.alt);
-    if (avatar.shape) await expect(img).toHaveClass(`usx-${avatar.shape}`);
+    if (avatar.shape) await expect(content).toHaveClass(`usx-${avatar.shape}`);
     const tooltip = links[index].parentElement.querySelector('[role="tooltip"]');
     if (avatar.tooltipProps) await expect(tooltip).toHaveTextContent(avatar.tooltipProps.label);
     else await expect(tooltip).toBeNull();

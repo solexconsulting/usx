@@ -467,8 +467,10 @@ export const componentContracts = {
       "examples": {
         "default": {
           "href": "https://google.com/search?q=Statue+of+Liberty",
-          "src": "./lady_liberty.png",
-          "alt": "Statue of Liberty"
+          "variant": "initials",
+          "value": "SL",
+          "alt": "Statue of Liberty",
+          "contentClassName": "bg-primary-lighter text-primary-darker"
         }
       }
     },
@@ -531,18 +533,24 @@ export const componentContracts = {
           "avatarProps": [
             {
               "href": "https://google.com/search?q=George+Washington",
-              "src": "./george_washington.png",
-              "alt": "George Washington"
+              "variant": "initials",
+              "value": "GW",
+              "alt": "George Washington",
+              "contentClassName": "bg-primary-lighter text-primary-darker"
             },
             {
               "href": "https://google.com/search?q=Thomas+Jefferson",
-              "src": "./thomas_jefferson.png",
-              "alt": "Thomas Jefferson"
+              "variant": "initials",
+              "value": "TJ",
+              "alt": "Thomas Jefferson",
+              "contentClassName": "bg-primary-lighter text-primary-darker"
             },
             {
               "href": "https://google.com/search?q=Benjamin+Franklin",
-              "src": "./benjamin_franklin.png",
-              "alt": "Benjamin Franklin"
+              "variant": "initials",
+              "value": "BF",
+              "alt": "Benjamin Franklin",
+              "contentClassName": "bg-primary-lighter text-primary-darker"
             }
           ]
         }
@@ -7877,8 +7885,10 @@ export const componentContracts = {
           "avatarProps": [
             {
               "href": "",
-              "src": "./lady_liberty.png",
-              "alt": "Statue of Liberty"
+              "variant": "initials",
+              "value": "SL",
+              "alt": "Statue of Liberty",
+              "contentClassName": "bg-primary-lighter text-primary-darker"
             }
           ],
           "requiredLinks": [

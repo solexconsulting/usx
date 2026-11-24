@@ -49,6 +49,20 @@ test('example content is preserved separately and never merged into prop default
   assert.equal(slider.props.step.default, 1);
 });
 
+test('avatar contract examples do not depend on demo image files', () => {
+  const { avatar, 'avatar-group': group, identifier } = manifest.components;
+  const examples = [
+    avatar.examples.default,
+    ...group.examples.default.avatarProps,
+    ...identifier.examples.default.avatarProps,
+  ];
+  for (const example of examples) {
+    assert.equal(example.variant, 'initials');
+    assert.ok(example.value);
+    assert.equal(example.src, undefined);
+  }
+});
+
 test('corrected contracts describe composition and actual renderer differences', () => {
   const { button, layout, alert, icon } = manifest.components;
   assert.equal(button.version, 3);

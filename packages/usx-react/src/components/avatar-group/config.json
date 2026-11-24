@@ -6,18 +6,24 @@
     "avatarProps": [
       {
         "href": "https://google.com/search?q=George+Washington",
-        "src": "./george_washington.png",
-        "alt": "George Washington"
+        "variant": "initials",
+        "value": "GW",
+        "alt": "George Washington",
+        "contentClassName": "bg-primary-lighter text-primary-darker"
       },
       {
         "href": "https://google.com/search?q=Thomas+Jefferson",
-        "src": "./thomas_jefferson.png",
-        "alt": "Thomas Jefferson"
+        "variant": "initials",
+        "value": "TJ",
+        "alt": "Thomas Jefferson",
+        "contentClassName": "bg-primary-lighter text-primary-darker"
       },
       {
         "href": "https://google.com/search?q=Benjamin+Franklin",
-        "src": "./benjamin_franklin.png",
-        "alt": "Benjamin Franklin"
+        "variant": "initials",
+        "value": "BF",
+        "alt": "Benjamin Franklin",
+        "contentClassName": "bg-primary-lighter text-primary-darker"
       }
     ]
   },

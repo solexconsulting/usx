@@ -14,8 +14,10 @@
     "avatarProps": [
       {
         "href": "",
-        "src": "./lady_liberty.png",
-        "alt": "Statue of Liberty"
+        "variant": "initials",
+        "value": "SL",
+        "alt": "Statue of Liberty",
+        "contentClassName": "bg-primary-lighter text-primary-darker"
       }
     ],
     "requiredLinks": [
