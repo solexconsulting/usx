@@ -16,6 +16,7 @@ const createStory = createDjangoStory({ componentName: 'card' });
 
 export const Default = createStory(storyDefs.Default);
 export const WithImage = createStory(storyDefs.WithImage);
+export const TallImageWithMaxHeight = createStory(storyDefs.TallImageWithMaxHeight);
 export const WithTags = createStory(storyDefs.WithTags);
 export const WithImageAndTags = createStory(storyDefs.WithImageAndTags);
 export const FlagLayout = createStory(storyDefs.FlagLayout);

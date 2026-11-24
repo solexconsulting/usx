@@ -17,6 +17,10 @@
 
 	.usa-card__img {
 		background-color: usx-when($usx-card-media-bg);
+
+		img {
+			margin-inline: auto;
+		}
 	}
 
 	.usa-card__media > .usx-card__carousel {

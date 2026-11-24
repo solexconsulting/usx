@@ -119,6 +119,18 @@ export const storyDefs = {
     ...singleImageArgs,
     className: 'tablet:grid-col-8 widescreen:grid-col-6',
   },
+  TallImageWithMaxHeight: {
+    ...baseArgs,
+    imageProps: [
+      {
+        src: 'https://picsum.photos/400/600?random=19',
+        alt: 'Tall placeholder image for card',
+        caption: 'Tall image with a 150px maximum height.',
+        maxHeight: '150px',
+      }
+    ],
+    className: 'tablet:grid-col-8 widescreen:grid-col-6',
+  },
   WithTags: {
     ...baseArgs,
     ...singleImageArgs,
@@ -227,6 +239,7 @@ export const storyDefs = {
 
 export const Default = { args: storyDefs.Default };
 export const WithImage = { args: storyDefs.WithImage };
+export const TallImageWithMaxHeight = { args: storyDefs.TallImageWithMaxHeight };
 export const WithTags = { args: storyDefs.WithTags };
 export const WithImageAndTags = { args: storyDefs.WithImageAndTags };
 export const FlagLayout = { args: storyDefs.FlagLayout };
