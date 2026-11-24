@@ -77,6 +77,24 @@ class TemplateWorkbenchTests(SimpleTestCase):
         self.assertIn('{% avatar\n  href="/profile"\n  src="/person.png"\n  alt="Person"\n%}', source)
         self.assertIn('alt="Person"', html)
 
+    def test_page_story_preserves_text_and_rich_heading_slots(self):
+        rich = lambda tag, text: {
+            '__usxNode': 'element', 'open': f'<{tag}>', 'close': f'</{tag}>',
+            'children': {'__usxNode': 'text', 'value': text},
+        }
+        html, _ = render_story_tree({
+            '__usxNode': 'component', 'name': 'page',
+            'props': {'title': rich('em', 'Services & support'), 'eyebrow': rich('strong', 'Category <one>')},
+        })
+        self.assertIn('<strong>Category &lt;one&gt;</strong>', html)
+        self.assertIn('<em>Services &amp; support</em>', html)
+        html, _ = render_story_tree({
+            '__usxNode': 'component', 'name': 'page',
+            'props': {'title': '<em>Services</em> & more', 'eyebrow': '<b>Category</b>'},
+        })
+        self.assertIn('&lt;em&gt;Services&lt;/em&gt; &amp; more', html)
+        self.assertIn('&lt;b&gt;Category&lt;/b&gt;', html)
+
     def test_unsafe_template_tags_and_large_input_are_rejected(self):
         for source in ('{% include "secrets.txt" %}', '{% load static %}',
                        '{% for item in items %}{{ item }}{% endfor %}'):

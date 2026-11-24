@@ -1,69 +1,20 @@
 import React from 'react';
 import classnames from 'classnames';
+import AccordionItem from '../accordion-item/AccordionItem';
+import type { AccordionHeadingAs, AccordionItemProps } from '../accordion-item/AccordionItem';
 
-export type AccordionHeadingAs = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-
-export interface AccordionItemProps {
-    title: React.ReactNode;
-    id: string;
-    content: React.ReactNode;
-    expanded?: boolean;
-    headingClassName?: string;
-    contentClassName?: string;
-    headingAs?: AccordionHeadingAs;
-    handleToggle?: React.MouseEventHandler<HTMLButtonElement>;
-}
+export type { AccordionHeadingAs, AccordionItemProps } from '../accordion-item/AccordionItem';
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
     extraAttributes?: Record<string, unknown>;
     bordered?: boolean;
-    items?: AccordionItemProps[];
+    items?: (Omit<AccordionItemProps, 'id'> & { id?: string })[];
     multiselectable?: boolean;
     headingAs?: AccordionHeadingAs;
     iconPosition?: 'start' | 'end';
+    headingClassName?: string;
+    contentClassName?: string;
 }
-
-function AccordionItem({
-    title,
-    id,
-    content,
-    expanded = false,
-    headingClassName,
-    contentClassName,
-    headingAs = 'h3',
-    handleToggle,
-}: AccordionItemProps) {
-    const headingClasses = classnames('usa-accordion__heading', headingClassName)
-    const contentClasses = classnames(
-        'usa-accordion__content',
-        'usa-prose',
-        contentClassName
-    )
-
-    const Heading = headingAs
-
-    return (
-        <>
-            <Heading id={`${id}-heading`} className={headingClasses}>
-                <button
-                    type="button"
-                    className="usa-accordion__button"
-                    aria-expanded={expanded}
-                    aria-controls={`${id}-content`}
-                    onClick={handleToggle}>
-                    {title}
-                </button>
-            </Heading>
-            <div
-                id={`${id}-content`}
-                aria-labelledby={`${id}-heading`}
-                className={contentClasses}
-                hidden={!expanded}>
-                {content}
-            </div>
-        </>
-    )
-};
 
 export function Accordion({
     id,
@@ -95,10 +46,11 @@ export function Accordion({
             {...props}
             {...extraAttributes}
         >
-            {items.map((item) => (
+            {items.map((item, index) => (
                 <AccordionItem
-                    key={item.id}
+                    key={item.id || `${id ?? ''}-${index}`}
                     {...item}
+                    id={item.id || `${id ?? ''}-${index}`}
                     headingAs={headingAs}
                     headingClassName={headingClassName}
                     contentClassName={contentClassName}

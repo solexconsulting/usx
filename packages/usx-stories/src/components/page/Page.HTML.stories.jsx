@@ -26,7 +26,7 @@ const checkPage = (def) => async (page) => {
   } else {
     await expect(eyebrow).toBeNull();
   }
-  await expect(title.textContent).toContain(def.title ?? 'Page title');
+  await expect(title.textContent).toContain(def.title);
 
   const summary = page.querySelector(':scope > .usx-page__summary');
   const hasSummary = Boolean(def.subtitle || def.description || def.tagProps?.length);

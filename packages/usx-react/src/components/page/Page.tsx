@@ -4,7 +4,7 @@ import TagGroup from '../tag-group/TagGroup';
 import type { TagProps } from '../tag/Tag';
 
 export interface PageProps extends Omit<React.HTMLAttributes<HTMLElement>, 'title' | 'content'> {
-  title?: React.ReactNode;
+  title: Exclude<React.ReactNode, null | undefined | boolean>;
   titleId?: string;
   eyebrow?: React.ReactNode;
   subtitle?: string;
@@ -18,7 +18,7 @@ export interface PageProps extends Omit<React.HTMLAttributes<HTMLElement>, 'titl
 
 export default function Page({
   id = undefined,
-  title = 'Page title',
+  title,
   titleId = undefined,
   eyebrow = null,
   subtitle = undefined,
@@ -35,8 +35,9 @@ export default function Page({
   const hasSummary = Boolean(subtitle || description || tagProps?.length);
   const classes = ClassNames('usx-page', className);
   const pageContent = children || content;
+  const hasTitle = (Boolean(title) && typeof title !== 'boolean') || title === 0;
 
-  const labelledBy = ariaLabelledby || titleId || undefined;
+  const labelledBy = ariaLabelledby || (hasTitle ? titleId : undefined);
 
   return (
     <Element
@@ -46,10 +47,12 @@ export default function Page({
       aria-labelledby={labelledBy}
       {...props}
     >
-      <h1 id={titleId} className="usx-page__title">
-        {eyebrow ? <span className="usx-eyebrow">{eyebrow}</span> : null}
-        {title}
-      </h1>
+      {hasTitle && (
+        <h1 id={titleId} className="usx-page__title">
+          {eyebrow && typeof eyebrow !== 'boolean' ? <span className="usx-eyebrow">{eyebrow}</span> : null}
+          {title}
+        </h1>
+      )}
       {hasSummary && (
         <div className="usx-page__summary">
           {subtitle && <p className="usx-page__subtitle">{subtitle}</p>}

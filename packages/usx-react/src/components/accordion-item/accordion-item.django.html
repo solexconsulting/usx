@@ -1,0 +1,19 @@
+<{% if headingAs == 'h1' %}h1{% elif headingAs == 'h2' %}h2{% elif headingAs == 'h4' %}h4{% elif headingAs == 'h5' %}h5{% elif headingAs == 'h6' %}h6{% else %}h3{% endif %} id="{{ id }}-heading" class="usa-accordion__heading{% if headingClassName %} {{ headingClassName }}{% endif %}">
+    <button
+        class="usa-accordion__button"
+        aria-expanded="{% if expanded %}true{% else %}false{% endif %}"
+        aria-controls="{{ id }}-content"
+        type="button"
+    >
+        {% if title is not None and title is not True and title is not False %}{{ title }}{% endif %}
+    </button>
+</{% if headingAs == 'h1' %}h1{% elif headingAs == 'h2' %}h2{% elif headingAs == 'h4' %}h4{% elif headingAs == 'h5' %}h5{% elif headingAs == 'h6' %}h6{% else %}h3{% endif %}>
+
+<div
+    id="{{ id }}-content"
+    class="usa-accordion__content usa-prose{% if contentClassName %} {{ contentClassName }}{% endif %}"
+    aria-labelledby="{{ id }}-heading"
+    {% if not expanded %}hidden{% endif %}
+>
+    {% if children is not None %}{% if children is not True and children is not False %}{{ children }}{% endif %}{% elif content is not None and content is not True and content is not False %}{{ content }}{% endif %}
+</div>

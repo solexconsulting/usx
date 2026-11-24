@@ -19,6 +19,7 @@ django.setup()
 from django.template import Context, Template
 from django.template.loader import get_template
 from django.test import SimpleTestCase
+from django.utils.html import format_html
 
 from usx_django import get_contracts, render_component
 from usx_django.core.registry import get_all_components
@@ -92,6 +93,124 @@ class InstalledPackageTests(SimpleTestCase):
             render_component("label", {"unknownProp": True})
         with self.assertRaises(KeyError):
             render_component("unknown-component", {})
+
+    def test_accordion_item_contract_and_renderers(self):
+        manifest = get_contracts()["components"]
+        self.assertEqual(manifest["accordion"]["props"]["items"]["items"]["component"], "accordion-item")
+        self.assertIn("accordion_item", register.tags)
+        html = render_component("accordion-item", {
+            "id": "item", "title": "Title", "content": "Content", "expanded": True, "headingAs": "h2",
+        })
+        self.assertIn('<h2 id="item-heading"', html)
+        self.assertIn('aria-controls="item-content"', html)
+        self.assertIn('aria-expanded="true"', html)
+        self.assertNotIn("hidden", html)
+        html = render_component("accordion", {
+            "id": "group", "headingAs": "h4", "headingClassName": "group-heading",
+            "contentClassName": "group-content",
+            "items": [{"title": "Title", "content": "Content", "headingAs": "h2",
+                       "headingClassName": "item-heading", "contentClassName": "item-content"}],
+        })
+        self.assertIn('<h4 id="group-0-heading" class="usa-accordion__heading group-heading">', html)
+        self.assertIn('id="group-0-content"', html)
+        self.assertIn("usa-accordion__content usa-prose group-content", html)
+        self.assertNotIn("item-heading", html)
+        self.assertNotIn("item-content", html)
+        html = Template(
+            '{% load usx_components %}{% accordion_item id="tag-item" title="Title" content=content %}'
+            '{% endaccordion_item %}'
+        ).render(Context({"content": "<unsafe> & text"}))
+        self.assertIn('id="tag-item-heading"', html)
+        self.assertIn("&lt;unsafe&gt; &amp; text", html)
+        html = Template(
+            '{% load usx_components %}{% accordion_item id="tag-item" title="Title" content="Fallback" %}'
+            '<p>{{ value }}</p>{% endaccordion_item %}'
+        ).render(Context({"value": "<safe> & text"}))
+        self.assertInHTML("<p>&lt;safe&gt; &amp; text</p>", html)
+        self.assertNotIn("Fallback", html)
+        html = render_component("accordion", {
+            "id": "group", "items": [{"title": "Title", "content": "Fallback", "children": "Child"}],
+        })
+        self.assertIn("Child", html)
+        self.assertNotIn("Fallback", html)
+
+    def test_page_title_and_eyebrow(self):
+        html = render_component("page", {
+            "title": "Services", "titleId": "page-title", "eyebrow": "Programs", "content": "Content",
+        })
+        self.assertIn('aria-labelledby="page-title"', html)
+        self.assertInHTML(
+            '<h1 id="page-title" class="usx-page__title"><span class="usx-eyebrow">Programs</span>Services</h1>',
+            html,
+        )
+        for title in (None, "", False, True):
+            html = render_component("page", {
+                "title": title, "titleId": "missing-title", "eyebrow": "Orphan", "content": "Content",
+            })
+            self.assertNotIn("<h1", html)
+            self.assertNotIn("Orphan", html)
+            self.assertNotIn("aria-labelledby", html)
+            self.assertIn("Content", html)
+        self.assertIn('aria-labelledby="external"', render_component(
+            "page", {"title": "Services", "titleId": "page-title", "ariaLabelledby": "external"},
+        ))
+        self.assertIn('aria-labelledby="external"', render_component("page", {"ariaLabelledby": "external"}))
+        html = render_component("page", {"title": 0, "titleId": "count"})
+        self.assertIn('aria-labelledby="count"', html)
+        self.assertInHTML('<h1 id="count" class="usx-page__title">0</h1>', html)
+
+    def test_page_heading_slots_escape_text_and_render_safe_fragments(self):
+        html = render_component("page", {
+            "title": "<em>Services</em> & more", "eyebrow": "<b>Category</b>",
+        })
+        self.assertIn("&lt;em&gt;Services&lt;/em&gt; &amp; more", html)
+        self.assertIn("&lt;b&gt;Category&lt;/b&gt;", html)
+        html = render_component("page", {
+            "title": format_html("<em>{}</em>", "Services & support"),
+            "eyebrow": format_html("<strong>{}</strong>", "Category <one>"),
+        })
+        self.assertInHTML(
+            '<h1 class="usx-page__title"><span class="usx-eyebrow">'
+            '<strong>Category &lt;one&gt;</strong></span><em>Services &amp; support</em></h1>',
+            html,
+        )
+
+    def test_modal_renders_complex_children_without_paragraph_nesting(self):
+        html = render_component("modal", {
+            "id": "modal", "heading": "Review", "description": "Fallback",
+            "children": "<p>Details</p><ul><li>Item</li></ul>",
+        })
+        self.assertIn('aria-describedby="modal-description"', html)
+        self.assertInHTML(
+            '<div class="usa-prose usx-prose" id="modal-description">'
+            '<p>Details</p><ul><li>Item</li></ul></div>', html,
+        )
+        self.assertNotIn("Fallback", html)
+        for props in ({}, {"children": None}):
+            html = render_component("modal", {"id": "modal", "description": "Simple description", **props})
+            self.assertIn('aria-describedby="modal-description"', html)
+            self.assertInHTML(
+                '<div class="usa-prose usx-prose"><p id="modal-description">Simple description</p></div>',
+                html,
+            )
+        for children in ("", False, True, 0):
+            html = render_component("modal", {"id": "modal", "description": "Fallback", "children": children})
+            self.assertNotIn("Fallback", html)
+            self.assertIn('<div class="usa-prose usx-prose" id="modal-description">', html)
+            if children is True:
+                self.assertNotIn(">True", html)
+            if children is not False and children is not True and children == 0:
+                self.assertInHTML('<div class="usa-prose usx-prose" id="modal-description">0</div>', html)
+        html = Template(
+            '{% load usx_components %}{% modal id="modal" description="Fallback" %}'
+            '<p>Details</p><ul><li>{{ item }}</li></ul>{% endmodal %}'
+        ).render(Context({"item": "Item & more"}))
+        self.assertInHTML('<ul><li>Item &amp; more</li></ul>', html)
+        self.assertNotIn("Fallback", html)
+        html = Template(
+            '{% load usx_components %}{% modal id="modal" description="Simple description" %}{% endmodal %}'
+        ).render(Context({}))
+        self.assertInHTML('<p id="modal-description">Simple description</p>', html)
 
     def test_table_and_data_table_render(self):
         html = render_component("table", {

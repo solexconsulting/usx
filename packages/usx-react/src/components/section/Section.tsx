@@ -1,12 +1,14 @@
 import React from 'react';
 import ClassNames from 'classnames';
 
-export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface SectionProps extends Omit<React.HTMLAttributes<HTMLElement>, 'content'> {
   title?: string;
   headingAs?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   children?: React.ReactNode;
   content?: React.ReactNode;
   className?: string;
+  id?: string;
+  style?: React.CSSProperties;
 }
 
 const Section: React.FC<SectionProps> = ({

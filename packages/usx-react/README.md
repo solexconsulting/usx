@@ -20,6 +20,21 @@ module also observes newly inserted tables. Enhanced components receive
 to preview their no-JavaScript fallback. See the Storybook
 **Documentation → USX React → JavaScript Enhancement** page for examples.
 
+## Accordion items
+
+`Accordion` renders its `items` using the exported `AccordionItem`
+subcomponent. Each item accepts `id`, `title`, `content` or `children`, `expanded`, and a
+React `handleToggle` callback. When an item has no `id`, Accordion derives one
+from its own `id` and the item index; provide a unique Accordion ID. The
+Accordion's `headingAs`, `headingClassName`, and `contentClassName` apply to
+all items and override those item-level values.
+When both `children` and `content` are supplied, `children` takes precedence.
+
+`AccordionItem` can also be rendered independently inside an
+`usa-accordion` container. In that case its ID is required and its own heading
+level and classes apply. Load or initialize the USWDS accordion enhancement
+on the container as described above.
+
 ## Optional Chat
 
 Chat and all its parts are available through a separate entry point in this

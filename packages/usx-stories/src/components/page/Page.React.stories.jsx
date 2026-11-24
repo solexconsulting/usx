@@ -4,7 +4,7 @@ import Page from '../../../../usx-react/src/components/page/Page.tsx';
 import config from '../../../../usx-react/src/components/page/config.json';
 import { buildArgTypes } from '../../utils/storyHelpers.jsx';
 
-const defaultArgs = storyDefaultArgs(config.default);
+const defaultArgs = { ...storyDefaultArgs(config.default), title: 'Page title' };
 
 export const storyDefs = {
   Default: defaultArgs,
@@ -16,7 +16,7 @@ export const storyDefs = {
       <>
         <p>This section demonstrates how the page component handles longer content while preserving top and bottom spacing.</p>
         <p>Teams can compose this with Header and Footer components to keep page layout and heading semantics consistent.</p>
-        <p>Because the title is always rendered as an h1, each page has a clear top-level heading by default.</p>
+        <p>Provide a descriptive title to give the page a clear top-level heading.</p>
       </>
     ),
   },

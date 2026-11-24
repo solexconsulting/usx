@@ -40,6 +40,9 @@ strings/arrays, and scalar slots. Edges extend the first base. Named cases use
 their supplied props directly; optional `reactProps` supports equivalent React
 nodes and Django HTML in composition slots. Component-specific setup belongs in
 fixtures, not branches in the runner.
+Use `safeProps: ['title']` on a named case to pass explicitly trusted Django
+markup for a slot. Without it, Django receives an ordinary string, which may be
+escaped by the component.
 
 Every component has a direct contract-example check; regression fixtures add
 coverage for Chat and other components. Neither finite test suite proves parity for every possible prop

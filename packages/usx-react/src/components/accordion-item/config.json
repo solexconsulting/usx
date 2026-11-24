@@ -1,0 +1,55 @@
+{
+  "name": "accordion-item",
+  "template": "accordion-item/accordion-item.django.html",
+  "version": 1,
+  "required": ["id", "title"],
+  "default": {
+    "id": "accordion-item-example",
+    "title": "Accordion item",
+    "content": "Accordion item content."
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "description": "Unique base ID for the heading and content."
+    },
+    "title": {
+      "type": "slot",
+      "description": "Content of the accordion heading button."
+    },
+    "content": {
+      "type": "slot",
+      "description": "Content of the accordion panel. Ignored when children is provided."
+    },
+    "children": {
+      "type": "slot",
+      "description": "Content of the accordion panel. Takes precedence over content when provided."
+    },
+    "expanded": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the panel starts expanded."
+    },
+    "headingAs": {
+      "type": "select",
+      "options": ["h1", "h2", "h3", "h4", "h5", "h6"],
+      "default": "h3",
+      "description": "Heading element wrapping the button. In Accordion, the parent controls this value."
+    },
+    "headingClassName": {
+      "type": "string",
+      "description": "Additional heading classes. In Accordion, the parent controls this value."
+    },
+    "contentClassName": {
+      "type": "string",
+      "description": "Additional panel classes. In Accordion, the parent controls this value."
+    },
+    "handleToggle": {
+      "type": "function",
+      "description": "React click handler for the heading button.",
+      "renderers": {
+        "django": { "supported": false, "description": "Callbacks cannot be rendered by Django." }
+      }
+    }
+  }
+}

@@ -57,6 +57,25 @@ label_contract = get_contracts()["components"]["label"]
 The Python renderer applies contract defaults and rejects unknown props. Block
 tags also apply defaults, but do not validate props.
 
+Accordion renders each entry in `items` with the `accordion-item` component.
+The parent supplies the heading level and heading/content classes for all
+items; an item without an ID uses the accordion ID and its index. The
+`accordion_item` tag is also available for custom composition inside a
+`usa-accordion` container:
+
+```django
+{% load usx_components %}
+<div class="usa-accordion usx-accordion">
+  {% accordion_item id="eligibility" title="Eligibility" %}<p>Check the requirements.</p>{% endaccordion_item %}
+</div>
+```
+
+Give each item a unique ID and load or initialize the USWDS accordion
+enhancement for interactive behavior. Django escapes ordinary `title` and
+`content` and `children` strings; use safely constructed markup when rich
+content is needed. A provided `children` value or tag body takes precedence
+over `content`.
+
 DataTable renders its headers, rows, groups, spans, and footer as HTML before
 JavaScript loads. Its Django context module only plans that markup from the
 component props. `@solexllc/usx/js/data-table` enhances the rendered table with
@@ -70,6 +89,30 @@ JavaScript Enhancement** guide.
 
 Ordinary template variables are escaped. Props that intentionally accept HTML
 or JavaScript handlers must contain trusted content, not unsanitized user input.
+
+### Page heading slots
+
+Page requires a descriptive `title`; `eyebrow` is optional and appears inside
+the heading. Both accept plain text or inline markup. Plain strings are escaped
+in Django and React. For rich content, pass React nodes in React and use Django
+safe markup, such as a rendered template fragment or `format_html`, in Django:
+
+```python
+from django.utils.html import format_html
+from usx_django import render_component
+
+html = render_component("page", {
+    "title": format_html("<em>{}</em>", "Services & support"),
+    "eyebrow": format_html("<strong>{}</strong>", "Programs"),
+})
+```
+
+`format_html` escapes interpolated values; never mark untrusted input as safe.
+Use appropriate inline content inside the heading, not nested headings or
+interactive elements.
+In Django templates, quoted literals are trusted by Django; use variables for
+untrusted text and `{% fragment as heading %}...{% endfragment %}` for markup
+whose interpolated values should be escaped.
 
 ## Styles And Assets
 

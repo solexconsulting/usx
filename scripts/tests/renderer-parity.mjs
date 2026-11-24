@@ -25,12 +25,16 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'project.settings.development'
 import django
 django.setup()
 from django.test import override_settings
+from django.utils.safestring import mark_safe
 from project.components.core.render import render_component
 results = []
 with override_settings(STATIC_URL='/', MEDIA_URL='/media/', DEBUG=False):
     for item in json.load(sys.stdin):
         try:
-            results.append({'html': render_component(item['component'], item['props'])})
+            props = item['props']
+            for name in item.get('safeProps', []):
+                props[name] = mark_safe(props[name])
+            results.append({'html': render_component(item['component'], props)})
         except Exception as error:
             results.append({'error': str(error)})
 print(json.dumps(results))
@@ -40,7 +44,7 @@ const runtime = await createStoryRuntime();
 const cases = [];
 const components = new Map();
 const { configs } = loadComponentConfigs();
-async function add(component, label, props, reactProps = props) {
+async function add(component, label, props, reactProps = props, safeProps = []) {
   try {
     if (!components.has(component)) {
       const entry = findComponentFile(component);
@@ -53,6 +57,7 @@ async function add(component, label, props, reactProps = props) {
       component,
       label,
       props,
+      safeProps,
       react: renderToStaticMarkup(React.createElement(components.get(component), reactProps)),
     });
   } catch (error) {
@@ -120,8 +125,8 @@ try {
       }
       for (const [index, props] of edges.entries())
         await add(component, `edge ${index}`, { ...bases[0], ...props });
-      for (const { label, props, reactProps } of extraCases)
-        await add(component, label, props, reactProps);
+      for (const { label, props, reactProps, safeProps } of extraCases)
+        await add(component, label, props, reactProps, safeProps);
     }
   }
 } finally {
@@ -134,7 +139,7 @@ const result = spawnSync(
   ['-c', djangoProgram],
   {
     cwd: djangoRoot,
-    input: JSON.stringify(cases.map(({ component, props }) => ({ component, props }))),
+    input: JSON.stringify(cases.map(({ component, props, safeProps }) => ({ component, props, safeProps }))),
     encoding: 'utf8',
     maxBuffer: 64 * 1024 * 1024,
   }

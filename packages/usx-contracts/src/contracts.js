@@ -23,15 +23,15 @@ export const componentContracts = {
   "packages": {
     "@solexllc/usx-contracts": {
       "registry": "npm",
-      "version": "0.11.0"
+      "version": "0.12.0"
     },
     "@solexllc/usx-react": {
       "registry": "npm",
-      "version": "0.11.0"
+      "version": "0.12.0"
     },
     "@solexllc/usx": {
       "registry": "npm",
-      "version": "0.13.0"
+      "version": "0.14.0"
     },
     "solex-usx-django": {
       "registry": "pypi",
@@ -41,7 +41,7 @@ export const componentContracts = {
   "components": {
     "accordion": {
       "component": "accordion",
-      "version": 3,
+      "version": 4,
       "required": [],
       "props": {
         "extraAttributes": {
@@ -60,7 +60,17 @@ export const componentContracts = {
         "items": {
           "type": "array",
           "default": [],
-          "description": "An array of accordion items. Each item sets title and content, and may set id (used for the heading and content ids) and expanded (start open)."
+          "description": "Accordion items. The parent supplies the heading element and heading/content classes for every item.",
+          "items": {
+            "type": "object",
+            "description": "Props for one accordion item. If id is omitted, the accordion id and item index are used.",
+            "component": "accordion-item",
+            "omit": [
+              "headingAs",
+              "headingClassName",
+              "contentClassName"
+            ]
+          }
         },
         "multiselectable": {
           "type": "boolean",
@@ -138,6 +148,89 @@ export const componentContracts = {
               "content": "Content for accordion item 3."
             }
           ]
+        }
+      }
+    },
+    "accordion-item": {
+      "component": "accordion-item",
+      "version": 1,
+      "required": [
+        "id",
+        "title"
+      ],
+      "props": {
+        "id": {
+          "type": "string",
+          "description": "Unique base ID for the heading and content."
+        },
+        "title": {
+          "type": "slot",
+          "description": "Content of the accordion heading button."
+        },
+        "content": {
+          "type": "slot",
+          "description": "Content of the accordion panel. Ignored when children is provided."
+        },
+        "children": {
+          "type": "slot",
+          "description": "Content of the accordion panel. Takes precedence over content when provided."
+        },
+        "expanded": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the panel starts expanded."
+        },
+        "headingAs": {
+          "type": "select",
+          "options": [
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6"
+          ],
+          "default": "h3",
+          "description": "Heading element wrapping the button. In Accordion, the parent controls this value."
+        },
+        "headingClassName": {
+          "type": "string",
+          "description": "Additional heading classes. In Accordion, the parent controls this value."
+        },
+        "contentClassName": {
+          "type": "string",
+          "description": "Additional panel classes. In Accordion, the parent controls this value."
+        },
+        "handleToggle": {
+          "type": "function",
+          "description": "React click handler for the heading button.",
+          "renderers": {
+            "django": {
+              "supported": false,
+              "description": "Callbacks cannot be rendered by Django."
+            }
+          }
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "AccordionItem"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "accordion-item",
+          "template": "accordion-item/accordion-item.django.html",
+          "tag": "accordion_item"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "accordion-item-example",
+          "title": "Accordion item",
+          "content": "Accordion item content."
         }
       }
     },
@@ -8862,7 +8955,7 @@ export const componentContracts = {
         "children": {
           "type": "slot",
           "default": null,
-          "description": "Inner HTML to render as the modal body, replacing the description text."
+          "description": "Content rendered directly inside the prose container, replacing the description paragraph. Include paragraphs or other block elements as needed; assistive technology may announce the body as a single description."
         },
         "className": {
           "type": "string",

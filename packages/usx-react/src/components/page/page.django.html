@@ -1,8 +1,8 @@
 {# Django template for Page #}
 {% load usx_components %}
 {% with pageTag=as|default:'main' %}
-<{% if pageTag == 'div' or pageTag == 'section' or pageTag == 'article' %}{{ pageTag }}{% else %}main{% endif %}{% if id %} id="{{ id }}"{% endif %} class="usx-page{% if className %} {{ className }}{% endif %}"{% if tabIndex or tabIndex == 0 %} tabindex="{{ tabIndex }}"{% endif %}{% if ariaLabelledby or titleId %} aria-labelledby="{% firstof ariaLabelledby titleId %}"{% endif %}>
-  <h1{% if titleId %} id="{{ titleId }}"{% endif %} class="usx-page__title">{% if eyebrow %}<span class="usx-eyebrow">{{ eyebrow }}</span>{% endif %}{{ title|default:'Page title' }}</h1>
+<{% if pageTag == 'div' or pageTag == 'section' or pageTag == 'article' %}{{ pageTag }}{% else %}main{% endif %}{% if id %} id="{{ id }}"{% endif %} class="usx-page{% if className %} {{ className }}{% endif %}"{% if tabIndex or tabIndex == 0 %} tabindex="{{ tabIndex }}"{% endif %}{% if ariaLabelledby %} aria-labelledby="{{ ariaLabelledby }}"{% elif titleId and title and title is not True or titleId and title == 0 and title is not False %} aria-labelledby="{{ titleId }}"{% endif %}>
+  {% if title and title is not True or title == 0 and title is not False %}<h1{% if titleId %} id="{{ titleId }}"{% endif %} class="usx-page__title">{% if eyebrow and eyebrow is not True %}<span class="usx-eyebrow">{{ eyebrow }}</span>{% endif %}{{ title }}</h1>{% endif %}
   {% if subtitle or description or tagProps %}
   <div class="usx-page__summary">
     {% if subtitle %}<p class="usx-page__subtitle">{{ subtitle }}</p>{% endif %}

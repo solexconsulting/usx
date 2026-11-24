@@ -70,5 +70,100 @@ for (const lib of [esm, cjs]) {
     assert.ok(popover.includes(text), text);
   }
   assert.ok(render(lib.Popover, { id: 'default-summary' }).includes('Open panel'));
+
+  const page = render(lib.Page, { title: 'Services', titleId: 'page-title', eyebrow: 'Programs', children: 'Content' });
+  assert.ok(page.includes('aria-labelledby="page-title"'));
+  assert.ok(page.includes('<h1 id="page-title" class="usx-page__title"><span class="usx-eyebrow">Programs</span>Services</h1>'));
+  for (const title of [undefined, null, '', false, true]) {
+    const untitled = render(lib.Page, { title, titleId: 'missing-title', eyebrow: 'Orphan', children: 'Content' });
+    assert.ok(!untitled.includes('<h1'));
+    assert.ok(!untitled.includes('Orphan'));
+    assert.ok(!untitled.includes('aria-labelledby'));
+    assert.ok(untitled.includes('Content'));
+  }
+  assert.ok(render(lib.Page, { title: 'Services', titleId: 'page-title', ariaLabelledby: 'external' }).includes('aria-labelledby="external"'));
+  assert.ok(render(lib.Page, { ariaLabelledby: 'external' }).includes('aria-labelledby="external"'));
+  assert.ok(render(lib.Page, { title: 0 }).includes('>0</h1>'));
+  const richPage = render(lib.Page, {
+    title: React.createElement('em', null, 'Services & support'),
+    eyebrow: React.createElement('strong', null, 'Category <one>'),
+  });
+  assert.ok(richPage.includes('<span class="usx-eyebrow"><strong>Category &lt;one&gt;</strong></span><em>Services &amp; support</em>'));
+  const textPage = render(lib.Page, { title: '<em>Services</em> & more', eyebrow: '<b>Category</b>' });
+  assert.ok(textPage.includes('&lt;em&gt;Services&lt;/em&gt; &amp; more'));
+  assert.ok(textPage.includes('&lt;b&gt;Category&lt;/b&gt;'));
+
+  const modal = render(lib.Modal, {
+    id: 'modal', heading: 'Review', description: 'Fallback',
+    children: React.createElement(React.Fragment, null,
+      React.createElement('p', null, 'Details'),
+      React.createElement('ul', null, React.createElement('li', null, 'Item'))),
+  });
+  assert.ok(modal.includes('aria-describedby="modal-description"'));
+  assert.ok(modal.includes('<div class="usa-prose usx-prose " id="modal-description"><p>Details</p><ul><li>Item</li></ul></div>'));
+  assert.ok(!modal.includes('Fallback'));
+  for (const children of [undefined, null]) {
+    const body = render(lib.Modal, { id: 'modal', description: 'Simple description', children });
+    assert.ok(body.includes(
+      '<div class="usa-prose usx-prose "><p id="modal-description">Simple description</p></div>'
+    ));
+    assert.ok(body.includes('aria-describedby="modal-description"'));
+  }
+  for (const children of ['', false, true, 0]) {
+    const body = render(lib.Modal, { id: 'modal', description: 'Fallback', children });
+    assert.ok(!body.includes('Fallback'));
+    assert.ok(body.includes('<div class="usa-prose usx-prose " id="modal-description">'));
+    if (children === 0) assert.ok(body.includes('id="modal-description">0</div>'));
+  }
+
+  const itemProps = {
+    id: 'item', title: 'Details', content: 'Item content', expanded: true, headingAs: 'h2',
+    headingClassName: 'custom-heading', contentClassName: 'custom-content', handleToggle: onClick,
+  };
+  const item = render(lib.AccordionItem, itemProps);
+  assert.ok(item.includes('<h2 id="item-heading" class="usa-accordion__heading custom-heading">'));
+  assert.ok(item.includes('aria-expanded="true" aria-controls="item-content"'));
+  assert.ok(item.includes('id="item-content" aria-labelledby="item-heading" class="usa-accordion__content usa-prose custom-content"'));
+  assert.ok(!item.includes('hidden=""'));
+  const itemTree = lib.AccordionItem(itemProps);
+  assert.equal(itemTree.props.children[0].props.children.props.onClick, onClick);
+  const accordion = render(lib.Accordion, {
+    id: 'group', headingAs: 'h4', headingClassName: 'group-heading', contentClassName: 'group-content',
+    items: [{ title: 'First', content: 'First body' }, itemProps],
+  });
+  assert.ok(accordion.includes('id="group-0-heading"'));
+  assert.ok(accordion.includes('aria-controls="group-0-content"'));
+  assert.ok(accordion.includes('<h4 id="item-heading" class="usa-accordion__heading group-heading">'));
+  assert.ok(accordion.includes('class="usa-accordion__content usa-prose group-content"'));
+  assert.ok(!accordion.includes('custom-heading'));
+  assert.ok(!accordion.includes('custom-content'));
+  for (const children of ['Child', '', false, 0]) {
+    const body = render(lib.AccordionItem, { id: 'item', title: 'Title', content: 'Fallback', children });
+    assert.ok(!body.includes('Fallback'));
+    if (children === 0) assert.ok(body.includes('>0</div>'));
+    if (children === 'Child') assert.ok(body.includes('>Child</div>'));
+  }
+  assert.ok(render(lib.AccordionItem, { id: 'item', title: 'Title', content: 'Fallback', children: null }).includes('Fallback'));
+  const nestedChildren = render(lib.Accordion, {
+    id: 'group', items: [{ id: 'nested', title: 'Title', content: 'Fallback', children: React.createElement('p', null, 'Child') }],
+  });
+  assert.ok(nestedChildren.includes('<p>Child</p>'));
+  assert.ok(!nestedChildren.includes('Fallback'));
+
+  const section = render(lib.Section, {
+    id: 'program-details',
+    style: { marginTop: '1rem', color: 'red' },
+    title: 'Details',
+    headingAs: 'h3',
+    content: 'Fallback',
+    children: 'Section content',
+    'aria-label': 'Program details',
+  });
+  assert.ok(section.includes('id="program-details"'));
+  assert.ok(section.includes('style="margin-top:1rem;color:red"'));
+  assert.ok(section.includes('aria-label="Program details"'));
+  assert.ok(section.includes('<h3 class="usx-section__title">Details</h3>'));
+  assert.ok(section.includes('Section content'));
+  assert.ok(!section.includes('Fallback'));
 }
-console.log('PASS: Card, Hero, Collection, CheckboxGroup, Details, and Popover composition in ESM and CommonJS');
+console.log('PASS: Card, Hero, Collection, CheckboxGroup, Details, Popover, Page, Modal, Accordion, and Section composition in ESM and CommonJS');

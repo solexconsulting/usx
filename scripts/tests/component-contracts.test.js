@@ -148,6 +148,23 @@ test('composed children reference their component contracts', () => {
   assert.equal(Object.hasOwn(checkboxGroup.props, 'options'), false);
 });
 
+test('Accordion items reference the standalone AccordionItem contract', () => {
+  const accordion = manifest.components.accordion;
+  const item = manifest.components['accordion-item'];
+  assert.equal(accordion.props.items.items.component, 'accordion-item');
+  assert.deepEqual(accordion.props.items.items.omit, ['headingAs', 'headingClassName', 'contentClassName']);
+  assert.deepEqual(item.required, ['id', 'title']);
+  for (const prop of ['id', 'title', 'content', 'children', 'expanded', 'headingAs', 'headingClassName', 'contentClassName', 'handleToggle']) {
+    assert.ok(item.props[prop], prop);
+  }
+  assert.equal(item.props.title.type, 'slot');
+  assert.equal(item.props.content.type, 'slot');
+  assert.equal(item.props.children.type, 'slot');
+  assert.equal(item.props.handleToggle.renderers.django.supported, false);
+  assert.equal(item.renderers.react.export, 'AccordionItem');
+  assert.equal(item.renderers.django.tag, 'accordion_item');
+});
+
 test('Callout replaces Block and Quote references its styling contract', () => {
   assert.equal(manifest.components.block, undefined);
   const { callout, quote } = manifest.components;

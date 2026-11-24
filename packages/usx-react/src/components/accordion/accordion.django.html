@@ -1,3 +1,4 @@
+{% load usx_components %}
 <div
     id="{{ id }}"
     class="usa-accordion usx-accordion {% if bordered %}usa-accordion--bordered{% endif %}{% if iconPosition == 'start' %} usa-accordion--icon-start{% elif iconPosition == 'end' %} usa-accordion--icon-end{% endif %}{% if className %} {{ className }}{% endif %}" {% if extraAttributes %}{% for attr, value in extraAttributes.items %} {{ attr }}="{% if value is True %}true{% elif value is False %}false{% else %}{{ value }}{% endif %}"{% endfor %}{% endif %}
@@ -6,26 +7,15 @@
     {% endif %}
 >
 {% for item in items %}
-    <{% if headingAs == 'h1' %}h1{% elif headingAs == 'h2' %}h2{% elif headingAs == 'h4' %}h4{% elif headingAs == 'h5' %}h5{% elif headingAs == 'h6' %}h6{% else %}h3{% endif %} id="{% if item.id %}{{ item.id }}{% else %}{{ id }}-{{ forloop.counter0 }}{% endif %}-heading" class="usa-accordion__heading{% if headingClassName %} {{ headingClassName }}{% endif %}">
-        <button
-            class="usa-accordion__button"
-            aria-expanded="{% if item.expanded %}true{% else %}false{% endif %}"
-            aria-controls="{% if item.id %}{{ item.id }}{% else %}{{ id }}-{{ forloop.counter0 }}{% endif %}-content"
-            type="button"
-        >
-            {{ item.title }}
-        </button>
-    </{% if headingAs == 'h1' %}h1{% elif headingAs == 'h2' %}h2{% elif headingAs == 'h4' %}h4{% elif headingAs == 'h5' %}h5{% elif headingAs == 'h6' %}h6{% else %}h3{% endif %}>
-
-    <div
-        id="{% if item.id %}{{ item.id }}{% else %}{{ id }}-{{ forloop.counter0 }}{% endif %}-content"
-        class="usa-accordion__content usa-prose{% if contentClassName %} {{ contentClassName }}{% endif %}"
-        aria-labelledby="{% if item.id %}{{ item.id }}{% else %}{{ id }}-{{ forloop.counter0 }}{% endif %}-heading"
-        {% if not item.expanded %}hidden{% endif %}
-    >
-        {{ item.content }}
-    </div>
-
+    {% if item.id %}
+        {% accordion_item props=item id=item.id headingAs=headingAs headingClassName=headingClassName contentClassName=contentClassName %}{% endaccordion_item %}
+    {% else %}
+        {% with index=forloop.counter0|stringformat:"s" %}
+            {% with baseId=id|default:""|add:"-"|add:index %}
+                {% accordion_item props=item id=baseId headingAs=headingAs headingClassName=headingClassName contentClassName=contentClassName %}{% endaccordion_item %}
+            {% endwith %}
+        {% endwith %}
+    {% endif %}
 {% endfor %}
 
 </div>

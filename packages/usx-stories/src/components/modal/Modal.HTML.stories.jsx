@@ -55,9 +55,16 @@ const checkModal =
     await expect(
       wrapper.querySelector(`[id="${wrapper.getAttribute('aria-labelledby')}"]`)
     ).toHaveTextContent(def.heading);
-    await expect(
-      wrapper.querySelector(`[id="${wrapper.getAttribute('aria-describedby')}"]`)
-    ).toHaveTextContent(def.description);
+    const body = wrapper.querySelector(`[id="${wrapper.getAttribute('aria-describedby')}"]`);
+    if (def.children) {
+      await expect(body.tagName).toBe('DIV');
+      await expect(body.querySelector(':scope > p')).not.toBeNull();
+      await expect(body.querySelector(':scope > ul > li')).not.toBeNull();
+      await expect(body.querySelector('p ul')).toBeNull();
+    } else {
+      await expect(body.tagName).toBe('P');
+      await expect(body).toHaveTextContent(def.description);
+    }
     await hasClass(modal, 'usa-modal--lg', def.size === 'lg');
     await hasClass(modal, 'usx-modal--lg-collapsed', def.size === 'lg-collapsed');
     await expect(
@@ -102,7 +109,11 @@ const play = async (context) => {
         await expect(wrapper).toHaveAttribute('aria-modal', 'true');
         // Hidden dialogs have no accessible name, so it is checked while open.
         await expect(wrapper).toHaveAccessibleName(def.heading);
-        await expect(wrapper).toHaveAccessibleDescription(def.description);
+        await expect(wrapper).toHaveAccessibleDescription(
+          def.children
+            ? 'Check the following items before continuing. Contact information Supporting documents'
+            : def.description
+        );
         await expect(wrapper).toContainElement(wrapper.ownerDocument.activeElement);
         await expect(wrapper.ownerDocument.body).toHaveClass('usa-js-modal--active');
       };

@@ -12,15 +12,13 @@
         <h2 class="usa-modal__heading" id="{{ id }}-heading">
           {{ heading|default:"Are you sure you want to continue?" }}
         </h2>
-        {% prose %}
-          <p id="{{ id }}-description">
-            {% if children %}
-              {{ children|safe }}
-            {% else %}
-              {{ description|default:"You have unsaved changes that will be lost." }}
-            {% endif %}
-          </p>
-        {% endprose %}
+        <div class="usa-prose usx-prose"{% if children is not None %} id="{{ id }}-description"{% endif %}>
+          {% if children is not None %}
+            {% if children and children is not True or children == 0 and children is not False %}{{ children|safe }}{% endif %}
+          {% else %}
+            <p id="{{ id }}-description">{{ description|default:"You have unsaved changes that will be lost." }}</p>
+          {% endif %}
+        </div>
         <div class="usa-modal__footer">
           {% button_group buttonProps=actionProps %}{% endbutton_group %}
         </div>

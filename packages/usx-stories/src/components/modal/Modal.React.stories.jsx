@@ -57,6 +57,19 @@ export const storyDefs = {
     actionProps: forceActions,
     triggerLabel: 'Open modal with forced action',
   },
+  RichContent: {
+    id: 'example-modal-rich',
+    heading: 'Review your request',
+    description: 'This fallback is replaced by the content below.',
+    children: (
+      <>
+        <p>Check the following items before continuing.</p>
+        <ul><li>Contact information</li><li>Supporting documents</li></ul>
+      </>
+    ),
+    actionProps: defaultActions,
+    triggerLabel: 'Open modal with rich content',
+  },
 };
 
 export const Default = {
@@ -140,3 +153,5 @@ export const ForceAction = {
     );
   }
 };
+
+export const RichContent = { ...Default, args: storyDefs.RichContent };

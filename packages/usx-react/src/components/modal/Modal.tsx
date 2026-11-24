@@ -35,6 +35,7 @@ export default function Modal({
     'usa-modal--lg': size === 'lg',
     'usx-modal--lg-collapsed': size === 'lg-collapsed',
   }, className);
+  const hasChildren = children != null;
 
   return (
     <div
@@ -51,8 +52,8 @@ export default function Modal({
           <h2 className="usa-modal__heading" id={`${id}-heading`}>
             {heading}
           </h2>
-          <Prose>
-            <p id={`${id}-description`}>{children ?? description}</p>
+          <Prose id={hasChildren ? `${id}-description` : undefined}>
+            {hasChildren ? <>{children}</> : <p id={`${id}-description`}>{description}</p>}
           </Prose>
           <div className="usa-modal__footer">
             <ButtonGroup buttonProps={actionProps} />

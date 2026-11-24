@@ -32,10 +32,10 @@ class StoryTemplate:
         if isinstance(value, (int, float)):
             return str(value)
         if isinstance(value, str):
-            if not any(token in value for token in ('\\', '"', '\n', '{%', '{{', '{#')):
+            # Django treats quoted template literals as safe, unlike ordinary
+            # React strings; use context variables when escaping matters.
+            if not any(token in value for token in ('\\', '"', '\n', '{%', '{{', '{#', '&', '<', '>', "'")):
                 return f'"{value}"'
-            if not any(token in value for token in ('\\', "'", '\n', '{%', '{{', '{#')):
-                return f"'{value}'"
         return self.variable(value, hint, document=True)
 
     @staticmethod

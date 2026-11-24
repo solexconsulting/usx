@@ -43,4 +43,4 @@ export const Unenhanced = { ...createStory(storyDefs.Unenhanced), parameters: { 
 export const Large = createStory(storyDefs.Large);
 export const LargeCollapsed = createStory(storyDefs.LargeCollapsed);
 export const ForceAction = createStory(storyDefs.ForceAction);
-
+export const RichContent = createStory(storyDefs.RichContent);

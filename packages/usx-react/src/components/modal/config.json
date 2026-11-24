@@ -69,7 +69,7 @@
     "children": {
       "type": "slot",
       "default": null,
-      "description": "Inner HTML to render as the modal body, replacing the description text."
+      "description": "Content rendered directly inside the prose container, replacing the description paragraph. Include paragraphs or other block elements as needed; assistive technology may announce the body as a single description."
     },
     "className": {
       "type": "string",
