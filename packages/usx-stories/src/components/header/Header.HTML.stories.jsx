@@ -9,7 +9,7 @@ import { createAllVariantsPlay, sectionElements, sectionTitle, snapshotId } from
 export default {
   title: 'HTML/USWDS/Header',
   tags: ['USWDS', 'autodocs'],
-  decorators: [...componentInit('navigation')],
+  decorators: [...componentInit('navigation', 'themePicker')],
 };
 
 const checkHeader = (def, key) => async (section, context) => {

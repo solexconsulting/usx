@@ -1,27 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { storyDefs } from './ThemePicker.React.stories.jsx';
 import config from '../../../../usx-react/src/components/theme-picker/config.json';
 import { buildArgTypes, componentInit, createDjangoStory } from '../../utils/storyHelpers.jsx';
-import { applyStoryTheme } from '../../utils/storyTheme.js';
 import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 
 export default {
-  excludeStories: ['Unenhanced'],
   title: 'Django/USX/ThemePicker',
   tags: ['USX', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
   decorators: [
-    ...componentInit('themePicker'),
+    ...componentInit('themePicker', 'popover'),
     (Story) => {
-      useEffect(() => {
-        const change = (event) => {
-          if (event.target.matches('.usx-theme-picker select')) {
-            applyStoryTheme(event.target.value);
-          }
-        };
-        document.addEventListener('change', change);
-        return () => document.removeEventListener('change', change);
-      }, []);
       return (
         <>
           <Alert
@@ -86,20 +75,11 @@ export default {
 const createStory = createDjangoStory({ componentName: 'theme-picker' });
 
 export const Default = createStory(storyDefs.Default);
-export const Unenhanced = {
-  ...createStory(storyDefs.Unenhanced),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Without USX JavaScript, the native theme select stays visible and usable. The palette trigger and confirmation control are unavailable.',
-      },
-    },
-  },
-};
+export const Unenhanced = createStory(storyDefs.Unenhanced);
 
 export const LightDark = createStory(storyDefs.LightDark);
-export const GhostSelect = createStory(storyDefs.GhostSelect);
+export const Popover = createStory(storyDefs.Popover);
+export const PopoverEnd = createStory(storyDefs.PopoverEnd);
 export const Swap = createStory(storyDefs.Swap);
 
 export const WithValue = createStory(storyDefs.WithValue);

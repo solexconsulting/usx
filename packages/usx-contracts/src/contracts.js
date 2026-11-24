@@ -11539,14 +11539,14 @@ export const componentContracts = {
     },
     "theme-picker": {
       "component": "theme-picker",
-      "version": 2,
+      "version": 6,
       "required": [
         "themes"
       ],
       "props": {
         "id": {
           "type": "string",
-          "description": "Element id for the select"
+          "description": "Element id for the value field"
         },
         "name": {
           "type": "string",
@@ -11555,29 +11555,20 @@ export const componentContracts = {
         "label": {
           "type": "string",
           "default": "Theme",
-          "description": "Label displayed above the select"
+          "description": "Accessible picker label"
         },
         "themes": {
           "type": "array",
-          "description": "Array of { value, label } theme options."
+          "description": "Theme choices with a label and a value written verbatim to <html data-usx-theme>."
         },
         "defaultValue": {
           "type": "string",
-          "description": "Initial selected value for uncontrolled usage"
+          "description": "Initial theme value when value is omitted"
         },
         "value": {
           "type": "string",
           "default": null,
-          "description": "Current theme selection. Takes precedence over defaultValue."
-        },
-        "onChange": {
-          "type": "function",
-          "description": "React callback for a selected theme. Django consumers can listen for the select's native change event; applying the theme remains the application's responsibility.",
-          "renderers": {
-            "django": {
-              "supported": false
-            }
-          }
+          "description": "Initial selected theme. Takes precedence over defaultValue."
         },
         "className": {
           "type": "string",
@@ -11588,9 +11579,24 @@ export const componentContracts = {
           "description": "Additional HTML attributes on the theme picker root."
         },
         "variant": {
-          "type": "string",
+          "type": "select",
+          "options": [
+            "default",
+            "popover",
+            "swap"
+          ],
           "default": "default",
-          "description": "Picker presentation: default, ghost-select, or swap. Swap uses two themes: first light, second dark."
+          "description": "Picker presentation: default, popover, or swap. All variants stay hidden until enhanced. ThemePicker enhancement applies the selected theme and connects Swap's button behavior. Swap uses two themes."
+        },
+        "popoverAlign": {
+          "type": "select",
+          "options": [
+            "start",
+            "center",
+            "end"
+          ],
+          "default": "start",
+          "description": "Alignment of the popover panel relative to its trigger. Only used by the popover variant."
         }
       },
       "renderers": {
@@ -11613,51 +11619,51 @@ export const componentContracts = {
           "label": "Theme",
           "themes": [
             {
-              "value": "Default",
+              "value": "default",
               "label": "Default"
             },
             {
-              "value": "Forest",
+              "value": "forest",
               "label": "Forest"
             },
             {
-              "value": "Sunset",
+              "value": "sunset",
               "label": "Sunset"
             },
             {
-              "value": "Ocean",
+              "value": "ocean",
               "label": "Ocean"
             },
             {
-              "value": "Aurora",
+              "value": "aurora",
               "label": "Aurora"
             },
             {
-              "value": "Borealis",
+              "value": "borealis",
               "label": "Borealis"
             },
             {
-              "value": "Midnight",
+              "value": "midnight",
               "label": "Midnight"
             },
             {
-              "value": "Carbon",
+              "value": "carbon",
               "label": "Carbon"
             },
             {
-              "value": "VADS",
+              "value": "vads",
               "label": "VADS"
             },
             {
-              "value": "GOV.UK",
+              "value": "gov-uk",
               "label": "GOV.UK"
             },
             {
-              "value": "NASA",
+              "value": "nasa",
               "label": "NASA"
             }
           ],
-          "defaultValue": "Default"
+          "defaultValue": "default"
         }
       }
     },

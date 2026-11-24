@@ -1,25 +1,37 @@
-import { enhancementDisabled, markEnhanced } from './enhancement.mjs';
+import { components, enhancementDisabled } from './enhancement.mjs';
+import swap from './swap.mjs';
 
 const instances = new WeakMap();
 const PICKER = '.usx-theme-picker';
 const OPEN = 'usx-theme-picker--open';
 
-function sync(picker) {
-  const select = picker.querySelector('select');
-  if (!select) return;
-  const label = select.selectedOptions[0]?.textContent || '';
-  const title = select.labels?.[0]?.textContent?.trim() || 'Theme';
-  const input = picker.querySelector('.usx-theme-picker__swap input');
-  if (input) {
-    input.checked = select.selectedIndex === 1;
-    const other = select.options[input.checked ? 0 : 1]?.textContent || '';
-    input.setAttribute('aria-label', `${title}: ${label}. Switch to ${other}`);
-  }
+function selectTheme(picker, value) {
+  const field = picker.querySelector('select, input[type="hidden"]');
+  if (!field || !value) return;
+  field.value = value;
+  picker.ownerDocument.documentElement.dataset.usxTheme = value;
+  picker.querySelectorAll('[data-usx-theme-value]').forEach((button) => {
+    button.setAttribute('aria-pressed', String(button.dataset.usxThemeValue === value));
+  });
+  const swap = picker.querySelector('.usx-theme-picker__swap');
+  if (swap) swap.setAttribute('aria-pressed', String(swap.dataset.usxThemeOn === value));
 }
 
 function connect(root) {
   const click = (event) => {
     if (event.defaultPrevented) return;
+    const option = event.target.closest?.('.usx-theme-picker__popover [data-usx-theme-value]');
+    const picker = option?.closest(PICKER);
+    if (picker && root.contains(picker) && !enhancementDisabled(picker)) {
+      const field = picker.querySelector('input[type="hidden"]');
+      if (!field) return;
+      field.value = option.dataset.usxThemeValue;
+      field.dispatchEvent(new Event('change', { bubbles: true }));
+      const popover = option.closest('details.usx-popover');
+      if (popover) popover.open = false;
+      popover?.querySelector('summary')?.focus();
+      return;
+    }
     const button = event.target.closest?.(
       'button.usx-theme-picker__trigger, button.usx-theme-picker__toggle'
     );
@@ -36,13 +48,11 @@ function connect(root) {
   const change = (event) => {
     const picker = event.target.closest?.(PICKER);
     if (!picker || !root.contains(picker) || enhancementDisabled(picker)) return;
-    if (event.target.matches('.usx-theme-picker__swap input')) {
-      const select = picker.querySelector('select');
-      if (!select) return;
-      select.selectedIndex = event.target.checked ? 1 : 0;
-      select.dispatchEvent(new Event('change', { bubbles: true }));
-    } else if (event.target.matches('select')) {
-      sync(picker);
+    if (event.target.matches('button.usx-theme-picker__swap')) {
+      const pressed = event.target.getAttribute('aria-pressed') === 'true';
+      selectTheme(picker, event.target.dataset[pressed ? 'usxThemeOn' : 'usxThemeOff']);
+    } else if (event.target.matches('select, input[type="hidden"]')) {
+      selectTheme(picker, event.target.value);
     }
   };
   root.addEventListener('click', click);
@@ -53,15 +63,32 @@ function connect(root) {
   };
 }
 
+function initialize(root) {
+  const pickers = components(root, PICKER).filter(
+    (element) =>
+      !enhancementDisabled(element) && element.querySelector('select, input[type="hidden"]')?.value
+  );
+  const picker = pickers[0];
+  if (picker && !picker.ownerDocument.documentElement.hasAttribute('data-usx-theme')) {
+    selectTheme(picker, picker.querySelector('select, input[type="hidden"]')?.value);
+  }
+  pickers.forEach((element) => {
+    element.dataset.enhanced = 'true';
+    element.hidden = false;
+  });
+}
+
 const themePicker = {
   init(root = document.body) {
     const eventRoot = root.ownerDocument?.body || root;
     if (!instances.has(eventRoot)) instances.set(eventRoot, connect(eventRoot));
-    markEnhanced(root, PICKER);
+    swap.init(root);
+    initialize(root);
   },
   on(root = document.body) {
     if (!instances.has(root)) instances.set(root, connect(root));
-    markEnhanced(root, PICKER);
+    swap.on(root);
+    initialize(root);
   },
   off(root = document.body) {
     instances.get(root)?.();

@@ -1,7 +1,7 @@
 // _themes.scss — opt-in prebuilt (and custom) themes for the themed USX build.
 //
 // Only the themes you list are emitted, so unused presets never reach your
-// bundle. Themes apply via a `data-theme` attribute (`<html data-theme="forest">`);
+// bundle. Themes apply via a `data-usx-theme` attribute (`<html data-usx-theme="forest">`);
 // `$default` also applies on `:root` with no attribute, and `$prefersdark`
 // applies on `:root` under `prefers-color-scheme: dark`. Pair with
 // `@solexllc/usx-theme/theme.css` (the :root defaults) as usual.
@@ -25,7 +25,7 @@
 //   )
 //
 // Every emitted theme sets the union of tokens across all emitted themes
-// (falling back to the :root default), so switching `data-theme` never leaks
+// (falling back to the :root default), so switching `data-usx-theme` never leaks
 // a value from the previous theme — even for nested per-section theming.
 @use 'sass:list';
 @use 'sass:map';
@@ -147,7 +147,7 @@ $-keys: -token-union($-resolved);
 }
 
 @each $name, $tokens in $-resolved {
-  [data-theme='#{$name}'] {
+  [data-usx-theme='#{$name}'] {
     @include -declarations($tokens, $-keys);
   }
 }

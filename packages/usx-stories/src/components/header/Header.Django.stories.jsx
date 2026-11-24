@@ -7,15 +7,14 @@ import {
 } from './Header.React.stories.jsx';
 import { storyDefs as themePickerStoryDefs } from '../theme-picker/ThemePicker.React.stories.jsx';
 import { useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
-import { applyStoryTheme } from '../../utils/storyTheme.js';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 export default {
   excludeStories: ['Unenhanced'],
   title: 'Django/USWDS/Header',
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
-  decorators: [...componentInit('navigation')],
+  decorators: [...componentInit('navigation', 'themePicker')],
 };
 
 const createStory = createDjangoStory({ componentName: 'header' });
@@ -58,28 +57,18 @@ export const BorderRoles = {
 // Both requests are visible to the snapshot renderer. The live story also
 // receives Django's rendered ThemePicker HTML for its interactive end slot.
 const ExtensibilitySlotsStory = (args) => {
-  const storyRoot = useRef(null);
   const { html: navEndContent } = useDjangoRenderedHtml('theme-picker', {
     ...themePickerStoryDefs.LightDark,
     id: 'theme-picker',
   });
   const { html, error } = useDjangoRenderedHtml('header', { ...args, navEndContent });
-  useEffect(() => {
-    const root = storyRoot.current;
-    const onChange = (event) => {
-      if (event.target.matches('.usx-theme-picker select')) applyStoryTheme(event.target.value);
-    };
-    root?.addEventListener('change', onChange);
-    return () => root?.removeEventListener('change', onChange);
-  }, []);
-
   if (error) {
     return (
       <div className="usa-error-message usx-error-message">Error rendering component: {error}</div>
     );
   }
 
-  return <div ref={storyRoot} dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
 };
 
 export const ExtensibilitySlots = {

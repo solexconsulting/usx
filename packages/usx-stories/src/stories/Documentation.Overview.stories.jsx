@@ -77,7 +77,7 @@ export const Overview = {
           Optionally add <code>@solexllc/usx-react</code> if you're building in React;
           otherwise use plain HTML/Django markup with the same <code>usx-*</code> classes.
         </li>
-        <li>Configure branding by listing prebuilt themes from <code>@solexllc/usx-theme/themes</code> (switched with <code>data-theme</code>), setting <code>--usx-*</code> CSS custom properties yourself, or leaving everything at its USWDS-matching default.</li>
+        <li>Configure branding by listing prebuilt themes from <code>@solexllc/usx-theme/themes</code> (switched with <code>data-usx-theme</code>), setting <code>--usx-*</code> CSS custom properties yourself, or leaving everything at its USWDS-matching default.</li>
       </ol>
 
       <h2>Where to go next</h2>

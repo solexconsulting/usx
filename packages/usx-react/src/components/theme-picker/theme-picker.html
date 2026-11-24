@@ -1,5 +1,5 @@
 <h3 class="site-preview-heading">Default</h3>
-<div class="usx-theme-picker">
+<div class="usx-theme-picker" hidden>
   <button
     type="button"
     class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
@@ -19,17 +19,17 @@
   <div id="theme-picker-example-1-panel" class="usx-theme-picker__panel">
     <label class="usa-label usx-label usa-sr-only" for="theme-picker-example-1">Theme</label
     ><select id="theme-picker-example-1" class="usa-select usx-select">
-      <option value="Default" selected="">Default</option>
-      <option value="Forest">Forest</option>
-      <option value="Sunset">Sunset</option>
-      <option value="Ocean">Ocean</option>
-      <option value="Aurora">Aurora</option>
-      <option value="Borealis">Borealis</option>
-      <option value="Midnight">Midnight</option>
-      <option value="Carbon">Carbon</option>
-      <option value="VADS">VADS</option>
-      <option value="GOV.UK">GOV.UK</option>
-      <option value="NASA">NASA</option></select
+      <option value="default" selected="">Default</option>
+      <option value="forest">Forest</option>
+      <option value="sunset">Sunset</option>
+      <option value="ocean">Ocean</option>
+      <option value="aurora">Aurora</option>
+      <option value="borealis">Borealis</option>
+      <option value="midnight">Midnight</option>
+      <option value="carbon">Carbon</option>
+      <option value="vads">VADS</option>
+      <option value="gov-uk">GOV.UK</option>
+      <option value="nasa">NASA</option></select
     ><button
       type="button"
       class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
@@ -47,48 +47,154 @@
   </div>
 </div>
 
-
-<h3 class="site-preview-heading">Ghost Select</h3>
-<div class="usx-theme-picker usx-theme-picker--ghost-select">
-  <div class="usx-theme-picker__ghost">
-    <span
-      class="usa-button usx-button usx-button--ghost usx-theme-picker__ghost-face"
-      aria-hidden="true"
-      ><svg
+<h3 class="site-preview-heading">Popover</h3>
+<div class="usx-theme-picker usx-theme-picker--popover" hidden>
+  <details class="usx-popover usx-theme-picker__popover" data-side="bottom" data-align="start">
+    <summary
+      class="usa-button usx-button usx-button--ghost usx-button--tight margin-0"
+      aria-label="Theme"
+    >
+      <svg
         class="usa-icon usx-icon usx-theme-picker__icon"
         aria-hidden="true"
         focusable="false"
         role="img"
       >
-        <use href="./img/usx-sprite.svg#color_palette"></use></svg></span
-    ><label class="usa-label usx-label usa-sr-only" for="theme-picker-example-ghost-select"
-      >Theme</label
-    ><select
-      id="theme-picker-example-ghost-select"
-      class="usa-select usx-select usx-theme-picker__select--hidden"
+        <use href="./img/usx-sprite.svg#color_palette"></use>
+      </svg>
+    </summary>
+    <div
+      id="theme-picker-example-popover-panel"
+      class="usx-popover__panel usx-popover__panel--square"
     >
-      <option value="Default" selected="">Default</option>
-      <option value="Forest">Forest</option>
-      <option value="Sunset">Sunset</option>
-      <option value="Ocean">Ocean</option>
-      <option value="Aurora">Aurora</option>
-      <option value="Borealis">Borealis</option>
-      <option value="Midnight">Midnight</option>
-      <option value="Carbon">Carbon</option>
-      <option value="VADS">VADS</option>
-      <option value="GOV.UK">GOV.UK</option>
-      <option value="NASA">NASA</option>
-    </select>
-  </div>
+      <ul class="usx-popover__menu">
+        <li>
+          <button
+            type="button"
+            class="usx-popover__menu-item"
+            data-usx-theme-value="default"
+            aria-pressed="true"
+          >
+            Default
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="usx-popover__menu-item"
+            data-usx-theme-value="forest"
+            aria-pressed="false"
+          >
+            Forest
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="usx-popover__menu-item"
+            data-usx-theme-value="sunset"
+            aria-pressed="false"
+          >
+            Sunset
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="usx-popover__menu-item"
+            data-usx-theme-value="ocean"
+            aria-pressed="false"
+          >
+            Ocean
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="usx-popover__menu-item"
+            data-usx-theme-value="aurora"
+            aria-pressed="false"
+          >
+            Aurora
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="usx-popover__menu-item"
+            data-usx-theme-value="borealis"
+            aria-pressed="false"
+          >
+            Borealis
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="usx-popover__menu-item"
+            data-usx-theme-value="midnight"
+            aria-pressed="false"
+          >
+            Midnight
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="usx-popover__menu-item"
+            data-usx-theme-value="carbon"
+            aria-pressed="false"
+          >
+            Carbon
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="usx-popover__menu-item"
+            data-usx-theme-value="vads"
+            aria-pressed="false"
+          >
+            VADS
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="usx-popover__menu-item"
+            data-usx-theme-value="gov-uk"
+            aria-pressed="false"
+          >
+            GOV.UK
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="usx-popover__menu-item"
+            data-usx-theme-value="nasa"
+            aria-pressed="false"
+          >
+            NASA
+          </button>
+        </li>
+      </ul>
+    </div>
+  </details>
+  <input id="theme-picker-example-popover" type="hidden" value="default" />
 </div>
 
-
 <h3 class="site-preview-heading">Swap</h3>
-<div class="usx-theme-picker usx-theme-picker--swap">
-  <label
-    class="usx-swap usx-swap--rotate usx-theme-picker__swap usa-button usx-button usx-button--ghost"
-    ><input type="checkbox" autocomplete="off" aria-label="Theme: Light. Switch to Dark" /><span
-      class="usx-swap-on"
+<div class="usx-theme-picker usx-theme-picker--swap" hidden>
+  <button
+    type="button"
+    class="usx-swap usx-swap--rotate usa-button usx-button usx-swap--button usx-theme-picker__swap usx-button--ghost usx-button--tight"
+    aria-pressed="false"
+    aria-label="Dark Theme"
+    data-usx-theme-off="aurora"
+    data-usx-theme-on="borealis"
+  >
+    <span class="usx-swap-on"
       ><svg
         class="usa-icon usx-icon usx-theme-picker__icon"
         aria-hidden="true"
@@ -103,13 +209,8 @@
         focusable="false"
         role="img"
       >
-        <use href="./img/usx-sprite.svg#sun"></use></svg></span
-  ></label>
-  <div class="usx-theme-picker__fallback">
-    <label class="usa-label usx-label usa-sr-only" for="theme-picker-example-swap">Theme</label
-    ><select id="theme-picker-example-swap" class="usa-select usx-select">
-      <option value="Aurora" selected="">Light</option>
-      <option value="Borealis">Dark</option>
-    </select>
-  </div>
+        <use href="./img/usx-sprite.svg#sun"></use></svg
+    ></span>
+  </button>
+  <input id="theme-picker-example-swap" type="hidden" value="aurora" />
 </div>

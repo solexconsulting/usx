@@ -17,7 +17,7 @@ This package stores platform-agnostic tokens in JSON source files and compiles t
 - `dist/tokens.js`: generated JS export of the raw JSON primitives
 - `dist/theme-manifest.json`: generated theme manifest
 - `dist/theme.css`: every `--usx-*` token at its default, on `:root`
-- `dist/themes/<slug>.css`, `dist/themes/all.css`: each prebuilt theme as a `[data-theme="<slug>"]` block (and all of them together)
+- `dist/themes/<slug>.css`, `dist/themes/all.css`: each prebuilt theme as a `[data-usx-theme="<slug>"]` block (and all of them together)
 - `dist/_themes-registry.scss`: generated data behind `src/_themes.scss`
 
 ## Build
@@ -211,7 +211,7 @@ tokens, tooltip color declarations are omitted and USWDS defaults remain.
 ### Prebuilt themes
 
 The Playground's presets ship prebuilt. List the ones you want; nothing else
-reaches your bundle. Themes apply via `data-theme`; `$default` also applies
+reaches your bundle. Themes apply via `data-usx-theme`; `$default` also applies
 with no attribute, `$prefersdark` under `prefers-color-scheme: dark`.
 
 ```scss
@@ -224,7 +224,7 @@ with no attribute, `$prefersdark` under `prefers-color-scheme: dark`.
 ```
 
 ```html
-<html data-theme="gov-uk">
+<html data-usx-theme="gov-uk">
 ```
 
 `$themes` can also be a map, to tweak a prebuilt theme or add your own — the
@@ -248,7 +248,7 @@ Playground's **Sass theme entry** export pastes straight in:
 ```
 
 Every emitted theme declares the union of tokens across all emitted themes
-(falling back to the `:root` default), so switching `data-theme` — even on a
+(falling back to the `:root` default), so switching `data-usx-theme` — even on a
 nested element — never leaks a value from the previous theme.
 `themes.theme($tokens, $selector)` emits a one-off block outside that union,
 and `themes.$available` lists the prebuilt names.
@@ -363,5 +363,5 @@ names followed by `-var`.
 
 The Storybook page **Documentation → Theme → Playground** renders the component showcase with
 live controls for every manifest token, auto-derives shades when a base color
-changes, and exports the result as a Sass `$themes` entry, a `[data-theme]`
+changes, and exports the result as a Sass `$themes` entry, a `[data-usx-theme]`
 stylesheet, or a plain `:root { --usx-*: ... }` block (copy/download).

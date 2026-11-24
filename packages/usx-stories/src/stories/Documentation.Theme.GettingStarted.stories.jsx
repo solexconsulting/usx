@@ -124,7 +124,7 @@ export const GettingStarted = {
       <p>
         The Playground's presets (Forest, Ocean, Carbon, GOV.UK, …) ship prebuilt.
         List the ones you want in your Sass entry point — anything you don't list
-        stays out of your bundle. Themes apply via a <code>data-theme</code>{' '}
+        stays out of your bundle. Themes apply via a <code>data-usx-theme</code>{' '}
         attribute; <code>$default</code> also applies with no attribute at all, and{' '}
         <code>$prefersdark</code> under <code>prefers-color-scheme: dark</code>.
       </p>
@@ -141,20 +141,20 @@ export const GettingStarted = {
       />
       <Code
         lines={[
-          { code: '<html data-theme="gov-uk">' },
+          { code: '<html data-usx-theme="gov-uk">' },
         ]}
       />
       <p>
         Every theme block emits the union of tokens across the themes you
         included (falling back to the <code>:root</code> default), so switching{' '}
-        <code>data-theme</code> — even on a nested element — never leaks a value
+        <code>data-usx-theme</code> — even on a nested element — never leaks a value
         from the previous theme.
       </p>
       <p>
         Not using Sass for this? Each theme is also a plain stylesheet you can
         import individually (or all at once via{' '}
         <code>@solexllc/usx-theme/themes/all.css</code>) and switch with{' '}
-        <code>data-theme</code>; there's no default/prefers-dark wiring in that form.
+        <code>data-usx-theme</code>; there's no default/prefers-dark wiring in that form.
       </p>
       <Code
         lines={[
@@ -193,7 +193,7 @@ export const GettingStarted = {
       <p>
         A prebuilt theme can be tweaked the same way — give it a map of the tokens
         to change instead of <code>()</code>. The Playground's{' '}
-        <strong>CSS ([data-theme])</strong> export is the equivalent for the
+        <strong>CSS ([data-usx-theme])</strong> export is the equivalent for the
         plain-stylesheet route.
       </p>
       <p>

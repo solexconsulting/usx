@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import reactSnapshot from '../../../../usx-react/src/components/theme-picker/theme-picker.react-snapshot.html?raw';
 import djangoSnapshot from '../../../../usx-react/src/components/theme-picker/theme-picker.django-snapshot.html?raw';
-import { applyStoryTheme } from '../../utils/storyTheme.js';
 import Alert from '../../../../usx-react/src/components/alert/Alert.tsx';
 import { expect, userEvent, waitFor } from 'storybook/test';
 import { storyDefs } from './ThemePicker.React.stories.jsx';
@@ -17,17 +16,8 @@ export default {
   title: 'HTML/USX/ThemePicker',
   tags: ['USX', 'autodocs'],
   decorators: [
-    ...componentInit('themePicker'),
+    ...componentInit('themePicker', 'popover'),
     (Story) => {
-      useEffect(() => {
-        const change = (event) => {
-          if (event.target.matches('.usx-theme-picker select')) {
-            applyStoryTheme(event.target.value);
-          }
-        };
-        document.addEventListener('change', change);
-        return () => document.removeEventListener('change', change);
-      }, []);
       return (
         <>
           <Alert
@@ -92,28 +82,53 @@ export default {
 const visible = (element) => getComputedStyle(element).display !== 'none';
 
 const checkPicker = (def) => async (picker) => {
-  const select = picker.querySelector('select');
-  await waitFor(() => expect(picker).toHaveAttribute('data-enhanced', 'true'));
-  await expect(select.id).toMatch(snapshotId(def.id));
-  await expect(select.labels[0]).toHaveTextContent(def.label);
-  const options = [...select.options];
-  await expect(options.map((option) => [option.value, option.textContent])).toEqual(
-    def.themes.map((theme) => [theme.value, theme.label])
-  );
-  await expect(select).toHaveValue(def.value ?? def.defaultValue);
-
-  if (def.variant === 'swap') {
-    const input = picker.querySelector('.usx-theme-picker__swap input');
-    await expect(input).not.toBeChecked();
-    await expect(input).toHaveAccessibleName(/Switch to Dark/);
-    await expect(picker.querySelector('.usx-theme-picker__fallback')).not.toBeVisible();
+  const field = picker.querySelector('select, input[type="hidden"]');
+  if (def.extraAttributes?.['usx-data-enhanced'] === 'true') {
+    await expect(picker).not.toHaveAttribute('data-enhanced');
+    await expect(picker).toHaveAttribute('hidden');
+    await expect(picker).not.toBeVisible();
     return;
   }
-  if (def.variant === 'ghost-select') {
-    const face = picker.querySelector('.usx-theme-picker__ghost-face');
-    await expect(face.querySelector('svg')).toHaveAttribute('aria-hidden', 'true');
-    await expect(face).toHaveTextContent('');
-    await expect(select).toHaveAccessibleName(def.label);
+  await waitFor(() => expect(picker).toHaveAttribute('data-enhanced', 'true'));
+  await expect(picker).not.toHaveAttribute('hidden');
+  await expect(picker).toBeVisible();
+  await expect(field.id).toMatch(snapshotId(def.id));
+  if (def.name) await expect(field).toHaveAttribute('name', def.name);
+  await expect(field).toHaveValue(def.value ?? def.defaultValue);
+  if (def.variant === undefined || def.variant === 'default') {
+    await expect(field.labels[0]).toHaveTextContent(def.label);
+    await expect([...field.options].map((option) => [option.value, option.textContent])).toEqual(
+      def.themes.map((theme) => [theme.value, theme.label])
+    );
+  }
+
+  if (def.variant === 'swap') {
+    const swap = picker.querySelector('.usx-theme-picker__swap');
+    await expect(swap).toHaveAttribute('aria-pressed', 'false');
+    await expect(swap).toHaveAccessibleName('Dark Theme');
+    await expect(swap).toHaveAttribute('data-usx-theme-off', def.themes[0].value);
+    await expect(swap).toHaveAttribute('data-usx-theme-on', def.themes[1].value);
+    await expect(field).toHaveAttribute('type', 'hidden');
+    await expect(picker.querySelector('select')).toBeNull();
+    return;
+  }
+  if (def.variant === 'popover') {
+    const popover = picker.querySelector('.usx-theme-picker__popover');
+    await expect(popover).toHaveAttribute('data-align', def.popoverAlign ?? 'start');
+    const trigger = popover.querySelector('summary');
+    await expect(trigger).toHaveClass('usx-button--ghost');
+    await expect(trigger).toHaveAccessibleName(def.label);
+    await expect(trigger.querySelector('svg')).toHaveAttribute('aria-hidden', 'true');
+    await expect(popover.querySelector('.usx-popover__panel')).not.toBeVisible();
+    await expect(picker.querySelector('select')).toBeNull();
+    await expect(field).toHaveAttribute('type', 'hidden');
+    const items = [...popover.querySelectorAll('.usx-popover__menu-item')];
+    await expect(items.map((item) => item.textContent.trim())).toEqual(
+      def.themes.map((theme) => theme.label)
+    );
+    await expect(items.filter((item) => item.getAttribute('aria-pressed') === 'true')).toHaveLength(
+      1
+    );
     return;
   }
 
@@ -130,9 +145,7 @@ const checkPicker = (def) => async (picker) => {
   await expect(confirm).toHaveAttribute('aria-label', 'Confirm theme');
 };
 const checks = Object.fromEntries(
-  Object.entries(storyDefs)
-    .filter(([key]) => !key.startsWith('Unenhanced'))
-    .map(([key, def]) => [sectionTitle(key), checkPicker(def)])
+  Object.entries(storyDefs).map(([key, def]) => [sectionTitle(key), checkPicker(def)])
 );
 
 const play = async (context) => {
@@ -151,6 +164,7 @@ const play = async (context) => {
     const other = [...select.options].find((option) => option.value !== select.value);
     await userEvent.selectOptions(select, other.value);
     await expect(select).toHaveValue(other.value);
+    await expect(document.documentElement).toHaveAttribute('data-usx-theme', other.value);
 
     await userEvent.click(picker.querySelector('.usx-theme-picker__toggle'));
     await waitFor(() => expect(visible(panel)).toBe(false));
@@ -161,13 +175,33 @@ const play = async (context) => {
   await context.step('Swap picks the other theme', async () => {
     const swap = section('Swap');
     await userEvent.click(swap.querySelector('.usx-theme-picker__swap'));
-    await expect(swap.querySelector('select')).toHaveValue('Borealis');
+    await expect(swap.querySelector('.usx-theme-picker__swap')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await expect(swap.querySelector('.usx-theme-picker__swap')).toHaveAccessibleName('Dark Theme');
+    await expect(swap.querySelector('input[type="hidden"]')).toHaveValue('borealis');
+    await expect(document.documentElement).toHaveAttribute('data-usx-theme', 'borealis');
   });
-  await context.step('Ghost select accepts a native change', async () => {
-    const ghost = section('GhostSelect');
-    await userEvent.selectOptions(ghost.querySelector('select'), 'Forest');
-    await expect(ghost.querySelector('select')).toHaveValue('Forest');
-    await expect(ghost.querySelector('.usx-theme-picker__ghost-face')).toHaveTextContent('');
+  await context.step('Popover chooses a theme', async () => {
+    const popover = section('Popover').querySelector('.usx-theme-picker__popover');
+    await userEvent.click(popover.querySelector('summary'));
+    await expect(popover).toHaveAttribute('open');
+    await userEvent.click(popover.querySelector('[data-usx-theme-value="forest"]'));
+    await expect(popover).not.toHaveAttribute('open');
+    await expect(section('Popover').querySelector('input[type="hidden"]')).toHaveValue('forest');
+    await expect(document.documentElement).toHaveAttribute('data-usx-theme', 'forest');
+    await expect(popover.querySelector('[data-usx-theme-value="forest"]')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+  });
+  await context.step('Popover aligns its panel to the end', async () => {
+    const popover = section('PopoverEnd').querySelector('.usx-theme-picker__popover');
+    await userEvent.click(popover.querySelector('summary'));
+    const right = popover.querySelector('summary').getBoundingClientRect().right;
+    const panelRight = popover.querySelector('.usx-popover__panel').getBoundingClientRect().right;
+    await expect(Math.abs(panelRight - right)).toBeLessThan(2);
   });
 };
 

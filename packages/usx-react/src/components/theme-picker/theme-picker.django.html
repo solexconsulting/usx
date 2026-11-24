@@ -1,21 +1,34 @@
 {% load usx_components %}
 {% firstof id "theme-picker" as field_id %}
 {% firstof value defaultValue themes.0.value as selected_value %}
-<div class="usx-theme-picker{% if variant and variant != 'default' %} usx-theme-picker--{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}"{% if extraAttributes %}{% for attr, attr_value in extraAttributes.items %} {{ attr }}="{% if attr_value is True %}true{% elif attr_value is False %}false{% else %}{{ attr_value }}{% endif %}"{% endfor %}{% endif %}>
+<div class="usx-theme-picker{% if variant and variant != 'default' %} usx-theme-picker--{{ variant }}{% endif %}{% if className %} {{ className }}{% endif %}"{% if extraAttributes %}{% for attr, attr_value in extraAttributes.items %} {{ attr }}="{% if attr_value is True %}true{% elif attr_value is False %}false{% else %}{{ attr_value }}{% endif %}"{% endfor %}{% endif %} hidden>
 {% if variant == 'swap' %}
-  <label class="usx-swap usx-swap--rotate usx-theme-picker__swap usa-button usx-button usx-button--ghost">
-    <input type="checkbox" autocomplete="off" aria-label="{{ label|default:'Theme' }}: {% for theme in themes %}{% if theme.value == selected_value %}{{ theme.label }}{% endif %}{% endfor %}. Switch to {% if themes.1.value == selected_value %}{{ themes.0.label }}{% else %}{{ themes.1.label }}{% endif %}"{% if themes.1.value == selected_value %} checked{% endif %}>
+  <button
+    type="button"
+    class="usx-swap usx-swap--rotate usa-button usx-button usx-swap--button usx-theme-picker__swap usx-button--ghost usx-button--tight"
+    aria-pressed="{% if themes.1.value == selected_value %}true{% else %}false{% endif %}"
+    aria-label="{{ themes.1.label }} {{ label|default:'Theme' }}"
+    data-usx-theme-off="{{ themes.0.value }}"
+    data-usx-theme-on="{{ themes.1.value }}"
+  >
     <span class="usx-swap-on">{% icon name="moon" source="usx" className="usx-theme-picker__icon" %}{% endicon %}</span>
     <span class="usx-swap-off">{% icon name="sun" source="usx" className="usx-theme-picker__icon" %}{% endicon %}</span>
-  </label>
-  <div class="usx-theme-picker__fallback">{% include "theme-picker/theme-picker-select.django.html" %}</div>
-{% elif variant == 'ghost-select' %}
-  <div class="usx-theme-picker__ghost">
-    <span class="usa-button usx-button usx-button--ghost usx-theme-picker__ghost-face" aria-hidden="true">
+  </button>
+  <input id="{{ field_id }}" type="hidden" value="{{ selected_value }}"{% if name %} name="{{ name }}"{% endif %}>
+{% elif variant == 'popover' %}
+  <details class="usx-popover usx-theme-picker__popover" data-side="bottom" data-align="{{ popoverAlign|default:'start' }}">
+    <summary class="usa-button usx-button usx-button--ghost usx-button--tight margin-0" aria-label="{{ label|default:'Theme' }}">
       {% icon name="color_palette" source="usx" className="usx-theme-picker__icon" %}{% endicon %}
-    </span>
-    {% include "theme-picker/theme-picker-select.django.html" with hidden=True %}
-  </div>
+    </summary>
+    <div id="{{ field_id }}-panel" class="usx-popover__panel usx-popover__panel--square">
+      <ul class="usx-popover__menu">
+        {% for theme in themes %}
+          <li><button type="button" class="usx-popover__menu-item" data-usx-theme-value="{{ theme.value }}" aria-pressed="{% if theme.value == selected_value %}true{% else %}false{% endif %}">{{ theme.label|force_escape }}</button></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </details>
+  <input id="{{ field_id }}" type="hidden" value="{{ selected_value }}"{% if name %} name="{{ name }}"{% endif %}>
 {% else %}
   <button type="button" class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger" aria-label="{{ label|default:'Theme' }}" aria-expanded="false" aria-controls="{{ field_id }}-panel">
     {% icon name="color_palette" source="usx" className="usx-theme-picker__icon" %}{% endicon %}

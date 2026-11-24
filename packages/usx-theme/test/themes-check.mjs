@@ -5,7 +5,7 @@
 //      values match a fresh resolveTheme() of the preset.
 //   2. the Sass module (src/_themes.scss) compiles from a config fixture and
 //      emits: :root for $default, a prefers-color-scheme block for
-//      $prefersdark, one [data-theme] block per listed theme, user overrides
+//      $prefersdark, one [data-usx-theme] block per listed theme, user overrides
 //      applied, and the union fill (every block declares the same tokens).
 //   3. the Playground's Sass export round-trips through the module.
 //   4. `pkg:@solexllc/usx-theme/themes` resolves unambiguously through Sass's
@@ -343,7 +343,7 @@ for (const [name, overrides] of Object.entries(PRESETS)) {
     continue;
   }
   const [block] = parseBlocks(fs.readFileSync(file, 'utf8'));
-  if (block.selector !== `[data-theme="${slug}"]`) fail(`${slug}: selector is ${block.selector}`);
+  if (block.selector !== `[data-usx-theme="${slug}"]`) fail(`${slug}: selector is ${block.selector}`);
   if (!['light', 'dark'].includes(block.decls.get('color-scheme'))) fail(`${slug}: missing color-scheme`);
   block.decls.delete('color-scheme');
   for (const [cssVar, value] of block.decls) {
@@ -353,7 +353,7 @@ for (const [name, overrides] of Object.entries(PRESETS)) {
   for (const cssVar of expected.keys()) {
     if (!block.decls.has(cssVar)) fail(`${slug}: ${cssVar} missing from dist/themes/${slug}.css`);
   }
-  if (!allThemesCss.includes(`[data-theme="${slug}"]`)) fail(`${slug}: missing from dist/themes/all.css`);
+  if (!allThemesCss.includes(`[data-usx-theme="${slug}"]`)) fail(`${slug}: missing from dist/themes/all.css`);
 }
 
 // ── 2. Sass module ──────────────────────────────────────────────────────────
@@ -387,9 +387,9 @@ const bySelector = (sel) => blocks.find((b) => b.selector === sel || b.selector.
 
 const root = blocks.find((b) => b.selector === ':root');
 const dark = blocks.find((b) => b.selector === '@dark');
-const forest = bySelector('[data-theme=forest]');
-const carbon = bySelector('[data-theme=carbon]');
-const acme = bySelector('[data-theme=acme]');
+const forest = bySelector('[data-usx-theme=forest]');
+const carbon = bySelector('[data-usx-theme=carbon]');
+const acme = bySelector('[data-usx-theme=acme]');
 const tenant = bySelector('.tenant-x');
 
 if (!root) fail('sass: no :root block for $default');
@@ -422,14 +422,14 @@ try {
 
 // ── 3. Playground Sass export round-trip ────────────────────────────────────
 const canonicalRoundTrip = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${canonicalSass}));`));
-const canonicalCopy = canonicalRoundTrip.find((block) => block.selector.endsWith('[data-theme=canonical-config]'));
+const canonicalCopy = canonicalRoundTrip.find((block) => block.selector.endsWith('[data-usx-theme=canonical-config]'));
 for (const [cssVar, value] of themeEntries(canonicalTheme)) {
   if (canonicalCopy?.decls.get(cssVar) !== value) fail(`sass: canonical configuration round-trip lost ${cssVar}`);
 }
 const exported = themeToSass(resolveTheme(PRESETS.Forest), { name: 'Forest Copy' });
 const roundTrip = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${exported}));`));
-const copy = roundTrip.find((b) => b.selector.endsWith('[data-theme=forest-copy]'));
-if (!copy) fail('sass: Playground export did not produce a [data-theme=forest-copy] block');
+const copy = roundTrip.find((b) => b.selector.endsWith('[data-usx-theme=forest-copy]'));
+if (!copy) fail('sass: Playground export did not produce a [data-usx-theme=forest-copy] block');
 else {
   for (const [cssVar, value] of themeEntries(resolveTheme(PRESETS.Forest))) {
     if (copy.decls.get(cssVar) !== value) fail(`sass export: ${cssVar} is ${copy.decls.get(cssVar)}, expected ${value}`);
@@ -438,7 +438,7 @@ else {
 
 const borderExport = themeToSass(customBorderTheme, { name: 'Custom Borders' });
 const borderRoundTrip = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${borderExport}));`));
-const customBorders = borderRoundTrip.find((block) => block.selector.endsWith('[data-theme=custom-borders]'));
+const customBorders = borderRoundTrip.find((block) => block.selector.endsWith('[data-usx-theme=custom-borders]'));
 if (!customBorders) fail('sass: border scale export did not produce a theme block');
 else {
   for (const [name, value] of Object.entries(customBorderOverrides)) {
@@ -456,7 +456,7 @@ const visitedCases = [
 const visitedExport = visitedCases.map(({ name, overrides }) => themeToSass(resolveTheme(overrides), { name })).join('\n');
 const visitedBlocks = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${visitedExport}));`));
 for (const { name, linkColor } of visitedCases) {
-  const block = visitedBlocks.find((entry) => entry.selector.endsWith(`[data-theme=${themeSlug(name)}]`));
+  const block = visitedBlocks.find((entry) => entry.selector.endsWith(`[data-usx-theme=${themeSlug(name)}]`));
   if (!block) fail(`sass: ${name} export did not produce a theme block`);
   else {
     if (block.decls.get('--usx-color-visited') !== editedVisitedState) fail(`sass: ${name} lost the shared visited-state edit`);
@@ -476,7 +476,7 @@ const tooltipExport = tooltipCases.map(({ name, overrides, background, text }) =
 }).join('\n');
 const tooltipBlocks = parseBlocks(compile(`@use '../../src/themes' with ($themes: (\n${tooltipExport}));`));
 for (const { name, background, text } of tooltipCases) {
-  const block = tooltipBlocks.find((entry) => entry.selector.endsWith(`[data-theme=${themeSlug(name)}]`));
+  const block = tooltipBlocks.find((entry) => entry.selector.endsWith(`[data-usx-theme=${themeSlug(name)}]`));
   if (!block) fail(`sass: ${name} export did not produce a theme block`);
   else {
     if (block.decls.get('--usx-surface-inverse') !== '#bcd123' || block.decls.get('--usx-text-inverse') !== '#234bcd') fail(`sass: ${name} lost its inverse palette`);
@@ -494,7 +494,7 @@ try {
     importers: [new sass.NodePackageImporter(consumerDir)],
     logger: { warn: (message) => sassWarnings.push(message.split('\n')[0]) }
   }).css;
-  if (!css.includes('[data-theme=forest]')) fail('pkg: import of themes compiled but emitted no forest block');
+  if (!css.includes('[data-usx-theme=forest]')) fail('pkg: import of themes compiled but emitted no forest block');
 } catch (e) {
   fail(`pkg:@solexllc/usx-theme/themes failed to resolve: ${String(e.message).split('\n')[0]}`);
 }

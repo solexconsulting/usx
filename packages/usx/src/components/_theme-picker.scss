@@ -1,10 +1,14 @@
 @use 'pkg:@solexllc/usx-theme/variables' as *;
 
 .usx-theme-picker {
-  display: inline-flex;
+  display: none;
   max-width: 20rem;
   color: #fff;
   color: usx-when($usx-theme-picker-trigger-text);
+
+  &[data-enhanced='true']:not([hidden]) {
+    display: inline-flex;
+  }
 
   &__panel {
     display: none;
@@ -18,20 +22,6 @@
 
   &--open &__trigger {
     display: none;
-  }
-
-  // Keep the native selector available until the JavaScript controls it.
-  &:not([data-enhanced='true']) &__panel {
-    display: flex;
-  }
-
-  &:not([data-enhanced='true']) .usx-theme-picker__trigger,
-  &:not([data-enhanced='true']) .usx-theme-picker__toggle {
-    display: none;
-  }
-
-  &:not([data-enhanced='true']) .usa-select.usx-select {
-    border-radius: usx-when($usx-input-radius, $usx-input-radius, 0) !important;
   }
 
   .usa-select.usx-select {
@@ -69,7 +59,7 @@
   }
 
   &--swap,
-  &--ghost-select {
+  &--popover {
     color: usx-when($usx-theme-picker-trigger-text);
   }
 
@@ -78,81 +68,18 @@
     vertical-align: top;
   }
 
-  &__fallback {
-    display: none;
-  }
-
-  &--swap:not([data-enhanced='true']) &__swap {
-    display: none;
-  }
-
-  &--swap:not([data-enhanced='true']) &__fallback {
-    display: block;
-  }
-
   &__swap {
-    display: inline-grid;
     min-height: 2.5rem;
     margin: 0;
-    padding: 0.5rem;
     color: usx-when($usx-theme-picker-trigger-text);
-
-    input {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      cursor: pointer;
-    }
-
-    input:not([disabled]):focus {
-      outline: none;
-    }
-
-    &:focus-within {
-      outline: 0.25rem solid usx-when($usx-color-focus, $usx-color-focus, #2491ff);
-      outline-offset: 0.25rem;
-    }
   }
 
-  &__ghost {
-    position: relative;
-    display: inline-flex;
-    min-height: 2.5rem;
-    align-items: center;
-    max-width: 20rem;
-
-    &:hover .usx-theme-picker__ghost-face {
-      background-color: color-mix(in srgb, currentcolor 20%, transparent);
-    }
-
-    &:focus-within .usx-theme-picker__ghost-face {
-      outline: 0.25rem solid usx-when($usx-color-focus, $usx-color-focus, #2491ff);
-      outline-offset: 0.25rem;
-    }
-
-    .usx-theme-picker__select--hidden {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      opacity: 0;
-      cursor: pointer;
-    }
+  &__popover > .usx-popover__panel {
+    min-inline-size: 12rem;
   }
 
-  &__ghost-face {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 2.75rem;
-    min-height: 2.5rem;
-    margin: 0;
-    padding: 0.5rem;
-    color: usx-when($usx-theme-picker-trigger-text);
-    pointer-events: none;
+  &__popover .usx-popover__menu {
+    max-block-size: min(20rem, 60vh);
+    overflow-y: auto;
   }
 }

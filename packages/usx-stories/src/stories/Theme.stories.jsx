@@ -114,7 +114,7 @@ const GROUPED_COLOR_NAMES = [
 const RANDOMIZED = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm'];
 const UTILITY_RADIUS_NAMES = new Set(['radius-sm', 'radius-md', 'radius-lg', 'radius-xl', 'radius-full']);
 
-// Export shapes offered by the Playground. `sass` and `data-theme` are the
+// Export shapes offered by the Playground. `sass` and `data-usx-theme` are the
 // two ways a custom theme plugs in next to the prebuilt ones from
 // @solexllc/usx-theme (see Documentation/Theme → Getting Started).
 const EXPORT_FORMATS = [
@@ -124,9 +124,9 @@ const EXPORT_FORMATS = [
     hint: 'Paste into the $themes map of @use \'pkg:@solexllc/usx-theme/themes\' with (…), next to any prebuilt themes.'
   },
   {
-    value: 'data-theme',
-    label: 'CSS ([data-theme])',
-    hint: 'A standalone stylesheet in the same shape as @solexllc/usx-theme/themes/<name>.css; apply with <html data-theme="…">.'
+    value: 'data-usx-theme',
+    label: 'CSS ([data-usx-theme])',
+    hint: 'A standalone stylesheet in the same shape as @solexllc/usx-theme/themes/<name>.css; apply with <html data-usx-theme="…">.'
   },
   {
     value: 'root',
@@ -1767,12 +1767,12 @@ function ThemePlayground() {
   // element, so overriding a base token from a descendant element would
   // never reach dependents declared on `:root` in theme.css.
   const liveThemeCss = useMemo(() => themeToCss(resolved, { changedOnly: true }), [resolved]);
-  // Named exports (`data-theme` CSS, Sass entry) slot in alongside the
+  // Named exports (`data-usx-theme` CSS, Sass entry) slot in alongside the
   // prebuilt themes from @solexllc/usx-theme — see EXPORT_FORMATS.
   const exportName = themeSlug(themeName) || 'custom';
   const exportText = useMemo(() => {
     if (exportFormat === 'sass') return themeToSass(resolved, { name: exportName, changedOnly });
-    if (exportFormat === 'data-theme') return themeToCss(resolved, { name: exportName, changedOnly, colorScheme: colorSchemeOf(resolved) });
+    if (exportFormat === 'data-usx-theme') return themeToCss(resolved, { name: exportName, changedOnly, colorScheme: colorSchemeOf(resolved) });
     return themeToCss(resolved, { changedOnly });
   }, [resolved, changedOnly, exportFormat, exportName]);
 
@@ -1844,7 +1844,7 @@ function ThemePlayground() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = isSass ? `_${exportName}.scss` : `${exportFormat === 'data-theme' ? exportName : 'usx-theme'}.css`;
+    a.download = isSass ? `_${exportName}.scss` : `${exportFormat === 'data-usx-theme' ? exportName : 'usx-theme'}.css`;
     a.click();
     URL.revokeObjectURL(url);
   };

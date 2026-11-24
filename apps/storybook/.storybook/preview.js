@@ -4,16 +4,14 @@ import "@uswds/uswds/css/uswds.min.css";
 // Runtime theme values (:root custom properties) — required because the
 // themed usx build emits bare var(--usx-*) with no fallback.
 import "@solexllc/usx-theme/theme.css";
+import '@solexllc/usx-theme/themes/all.css';
 import './styles.scss';
 import './controls-responsive.css';
 import solexTheme from "./solexTheme";
 import { resolveTheme, themeToCss } from '@solexllc/usx-theme/derive';
 import { PRESETS } from '@solexllc/usx-theme/presets';
-import { resetStoryTheme } from '../../../packages/usx-stories/src/utils/storyTheme.js';
 
-// Applies the toolbar-selected preset (see globalTypes.theme below) to every
-// story by overriding :root's --usx-* custom properties — the same
-// resolveTheme/themeToCss pipeline the Theme Playground uses for its presets.
+// Apply the toolbar preset until a ThemePicker selects data-usx-theme.
 //
 // The Playground has its own preset picker and emits only changed tokens.
 // Skip the toolbar override there so its remaining tokens inherit the base
@@ -22,12 +20,18 @@ function ThemePreset({ Story, context }) {
   const theme = context.globals.theme;
   // A picker selection is local to the current story. A toolbar change or
   // story navigation restores the toolbar preset.
-  React.useLayoutEffect(() => resetStoryTheme(), [context.id, theme]);
+  React.useLayoutEffect(
+    () => document.documentElement.removeAttribute('data-usx-theme'),
+    [context.id, theme]
+  );
   if (context.parameters.isolateThemePreset) {
     return React.createElement(Story);
   }
   const overrides = PRESETS[theme] || {};
-  const css = themeToCss(resolveTheme(overrides), { changedOnly: true });
+  const css = themeToCss(resolveTheme(overrides), {
+    changedOnly: true,
+    selector: ':root:not([data-usx-theme])',
+  });
   return React.createElement(
     React.Fragment,
     null,

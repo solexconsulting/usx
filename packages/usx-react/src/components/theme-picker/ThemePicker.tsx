@@ -2,14 +2,16 @@ import React from 'react';
 import ClassNames from 'classnames';
 import Icon from '../icon/Icon';
 import Label from '../label/Label';
+import Popover, { type PopoverAlign } from '../popover/Popover';
 import Swap from '../swap/Swap';
 
 export interface ThemePickerOption {
+  /** Value written to <html data-usx-theme>. */
   value: string;
   label: string;
 }
 
-export type ThemePickerVariant = 'default' | 'swap' | 'ghost-select';
+export type ThemePickerVariant = 'default' | 'swap' | 'popover';
 
 export interface ThemePickerProps {
   id?: string;
@@ -18,9 +20,10 @@ export interface ThemePickerProps {
   themes?: ThemePickerOption[];
   /** Swap uses the first option for light and the second for dark. */
   variant?: ThemePickerVariant;
+  /** Alignment of the panel when variant is popover. */
+  popoverAlign?: PopoverAlign;
   value?: string;
   defaultValue?: string;
-  onChange?: (value: string) => void;
   className?: string;
   extraAttributes?: Record<string, unknown>;
 }
@@ -31,34 +34,24 @@ export default function ThemePicker({
   label = 'Theme',
   themes = [],
   variant = 'default',
+  popoverAlign = 'start',
   value,
   defaultValue,
-  onChange,
   className = '',
   extraAttributes,
 }: ThemePickerProps) {
-  const selectId = id || 'theme-picker';
-  const [localValue, setLocalValue] = React.useState(defaultValue ?? themes[0]?.value ?? '');
-  const selectedValue = value ?? localValue;
-  const selectedLabel = themes.find((option) => option.value === selectedValue)?.label ?? label;
-  const choose = (next: string) => {
-    if (value === undefined) setLocalValue(next);
-    onChange?.(next);
-  };
-  const select = (hidden = false) => (
+  const fieldId = id || 'theme-picker';
+  const selectedValue = value ?? defaultValue ?? themes[0]?.value ?? '';
+  const select = () => (
     <>
-      <Label htmlFor={selectId} screenReaderOnly>
+      <Label htmlFor={fieldId} screenReaderOnly>
         {label}
       </Label>
       <select
-        id={selectId}
+        id={fieldId}
         name={name}
-        className={ClassNames(
-          'usa-select usx-select',
-          hidden && 'usx-theme-picker__select--hidden'
-        )}
-        value={selectedValue}
-        onChange={(event) => choose(event.target.value)}
+        className="usa-select usx-select"
+        defaultValue={selectedValue}
       >
         {themes.map((option) => (
           <option key={option.value} value={option.value}>
@@ -77,6 +70,7 @@ export default function ThemePicker({
         className
       )}
       {...extraAttributes}
+      hidden
     >
       {variant === 'default' && (
         <>
@@ -85,11 +79,11 @@ export default function ThemePicker({
             className="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
             aria-label={label}
             aria-expanded="false"
-            aria-controls={`${selectId}-panel`}
+            aria-controls={`${fieldId}-panel`}
           >
             <Icon name="color_palette" source="usx" className="usx-theme-picker__icon" />
           </button>
-          <div id={`${selectId}-panel`} className="usx-theme-picker__panel">
+          <div id={`${fieldId}-panel`} className="usx-theme-picker__panel">
             {select()}
             <button
               type="button"
@@ -104,32 +98,44 @@ export default function ThemePicker({
       {variant === 'swap' && (
         <>
           <Swap
-            className="usx-theme-picker__swap usa-button usx-button usx-button--ghost"
+            as="button"
+            className="usx-theme-picker__swap usx-button--ghost usx-button--tight"
             variant="rotate"
-            inputProps={{
-              checked: selectedValue === themes[1]?.value,
-              'aria-label': `${label}: ${selectedLabel}. Switch to ${selectedValue === themes[1]?.value ? themes[0]?.label : themes[1]?.label}`,
-              onChange: (event) => {
-                event.stopPropagation();
-                choose(themes[event.target.checked ? 1 : 0]?.value ?? '');
-              },
-            }}
+            defaultPressed={selectedValue === themes[1]?.value}
+            ariaLabel={`${themes[1]?.label ?? ''} ${label}`.trim()}
+            data-usx-theme-off={themes[0]?.value}
+            data-usx-theme-on={themes[1]?.value}
             offContent={<Icon name="sun" source="usx" className="usx-theme-picker__icon" />}
             onContent={<Icon name="moon" source="usx" className="usx-theme-picker__icon" />}
           />
-          <div className="usx-theme-picker__fallback">{select()}</div>
+          <input id={fieldId} type="hidden" name={name} defaultValue={selectedValue} />
         </>
       )}
-      {variant === 'ghost-select' && (
-        <div className="usx-theme-picker__ghost">
-          <span
-            className="usa-button usx-button usx-button--ghost usx-theme-picker__ghost-face"
-            aria-hidden="true"
-          >
-            <Icon name="color_palette" source="usx" className="usx-theme-picker__icon" />
-          </span>
-          {select(true)}
-        </div>
+      {variant === 'popover' && (
+        <>
+          <Popover
+            id={`${fieldId}-panel`}
+            className="usx-theme-picker__popover"
+            align={popoverAlign}
+            panelShape="square"
+            summaryProps={{
+              className: 'usa-button usx-button usx-button--ghost usx-button--tight margin-0',
+              ariaLabel: label,
+              children: (
+                <Icon name="color_palette" source="usx" className="usx-theme-picker__icon" />
+              ),
+            }}
+            menuItems={themes.map((theme) => ({
+              type: 'button',
+              text: theme.label,
+              extraAttributes: {
+                'data-usx-theme-value': theme.value,
+                'aria-pressed': theme.value === selectedValue,
+              },
+            }))}
+          />
+          <input id={fieldId} type="hidden" name={name} defaultValue={selectedValue} />
+        </>
       )}
     </div>
   );

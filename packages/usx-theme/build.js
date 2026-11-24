@@ -97,7 +97,7 @@ function resolvePresets(themeManifest, derive, PRESETS) {
   });
 }
 
-// themes/<slug>.css — one `[data-theme="<slug>"]` block per prebuilt theme,
+// themes/<slug>.css — one `[data-usx-theme="<slug>"]` block per prebuilt theme,
 // changed tokens only (theme.css's :root supplies the rest). "Default" has
 // nothing to change and is skipped. The bundle of all of them lives at
 // themes/all.css rather than themes.css: Sass's pkg: importer tries
@@ -105,7 +105,7 @@ function resolvePresets(themeManifest, derive, PRESETS) {
 // Sass module, then fail as ambiguous.
 function buildThemeFileCss(theme) {
   const lines = [`  color-scheme: ${theme.colorScheme};`, ...theme.entries.map(([cssVar, value]) => `  ${cssVar}: ${value};`)];
-  return `${GENERATED_CSS}[data-theme="${theme.slug}"] {\n${lines.join('\n')}\n}\n`;
+  return `${GENERATED_CSS}[data-usx-theme="${theme.slug}"] {\n${lines.join('\n')}\n}\n`;
 }
 
 // _themes-registry.scss — data behind src/_themes.scss: every prebuilt theme

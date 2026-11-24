@@ -29,7 +29,7 @@ function readRawValues() {
         for (let r = rules.length - 1; r >= 0; r--) {
           const rule = rules[r];
           const sel = rule.selectorText;
-          if (sel && (sel === ':root' || sel === '[data-theme]' || sel.includes(':root'))) {
+          if (sel && (sel === ':root' || sel === '[data-usx-theme]' || sel.includes(':root'))) {
             for (let i = 0; i < rule.style.length; i++) {
               const name = rule.style[i];
               if (THEME_VARS.has(name) && !declared.has(name)) {

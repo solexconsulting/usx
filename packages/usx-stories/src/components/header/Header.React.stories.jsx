@@ -3,14 +3,12 @@ import Header from '../../../../usx-react/src/components/header/Header.tsx';
 import config from '../../../../usx-react/src/components/header/config.json';
 import { buildArgTypes, componentInit } from '../../utils/storyHelpers.jsx';
 
-import { useGlobals } from 'storybook/preview-api';
 import ThemePicker from '../../../../usx-react/src/components/theme-picker/ThemePicker.tsx';
-import { applyStoryTheme } from '../../utils/storyTheme.js';
 import Button from '../../../../usx-react/src/components/button/Button.tsx';
 
 const LIGHTDARKTHEMES = [
-  { value: 'Aurora', label: 'Light' },
-  { value: 'Borealis', label: 'Dark' },
+  { value: 'aurora', label: 'Light' },
+  { value: 'borealis', label: 'Dark' },
 ];
 
 export default {
@@ -19,7 +17,7 @@ export default {
   tags: ['USWDS', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
   excludeStories: ['storyDefs', 'borderRoleVars', 'Unenhanced'],
-  decorators: [...componentInit('navigation')],
+  decorators: [...componentInit('navigation', 'themePicker')],
 };
 
 const lotsOfLinks = Array.from({ length: 30 }, (_, i) => ({
@@ -356,26 +354,12 @@ export const ExtensibilitySlots = {
       },
     },
   },
-  render: (args) => {
-    const [globals] = useGlobals();
-    return (
-      <div>
-        <Header
-          {...args}
-          navEndContent={
-            <ThemePicker
-              key={globals.theme}
-              themes={LIGHTDARKTHEMES}
-              defaultValue={
-                LIGHTDARKTHEMES.some((theme) => theme.value === globals.theme)
-                  ? globals.theme
-                  : 'Aurora'
-              }
-              onChange={applyStoryTheme}
-            />
-          }
-        />
-      </div>
-    );
-  },
+  render: (args) => (
+    <div>
+      <Header
+        {...args}
+        navEndContent={<ThemePicker themes={LIGHTDARKTHEMES} defaultValue="aurora" />}
+      />
+    </div>
+  ),
 };

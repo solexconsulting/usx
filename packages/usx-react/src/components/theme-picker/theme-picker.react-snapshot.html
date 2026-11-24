@@ -1,5 +1,5 @@
 <h3 class="site-preview-heading">Default</h3>
-<div class="usx-theme-picker">
+<div class="usx-theme-picker" hidden="">
   <button
     type="button"
     class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
@@ -19,17 +19,66 @@
   <div id="react-theme-picker-1-panel" class="usx-theme-picker__panel">
     <label class="usa-label usx-label usa-sr-only" for="react-theme-picker-1">Theme</label
     ><select id="react-theme-picker-1" class="usa-select usx-select">
-      <option value="Default" selected="">Default</option>
-      <option value="Forest">Forest</option>
-      <option value="Sunset">Sunset</option>
-      <option value="Ocean">Ocean</option>
-      <option value="Aurora">Aurora</option>
-      <option value="Borealis">Borealis</option>
-      <option value="Midnight">Midnight</option>
-      <option value="Carbon">Carbon</option>
-      <option value="VADS">VADS</option>
-      <option value="GOV.UK">GOV.UK</option>
-      <option value="NASA">NASA</option></select
+      <option value="default" selected="">Default</option>
+      <option value="forest">Forest</option>
+      <option value="sunset">Sunset</option>
+      <option value="ocean">Ocean</option>
+      <option value="aurora">Aurora</option>
+      <option value="borealis">Borealis</option>
+      <option value="midnight">Midnight</option>
+      <option value="carbon">Carbon</option>
+      <option value="vads">VADS</option>
+      <option value="gov-uk">GOV.UK</option>
+      <option value="nasa">NASA</option></select
+    ><button
+      type="button"
+      class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
+      aria-label="Confirm theme"
+    >
+      <svg
+        class="usa-icon usx-icon usx-theme-picker__icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/sprite.svg#close"></use>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<h3 class="site-preview-heading">Unenhanced</h3>
+<div class="usx-theme-picker" usx-data-enhanced="true" hidden="">
+  <button
+    type="button"
+    class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
+    aria-label="Theme"
+    aria-expanded="false"
+    aria-controls="react-theme-picker-unenhanced-panel"
+  >
+    <svg
+      class="usa-icon usx-icon usx-theme-picker__icon"
+      aria-hidden="true"
+      focusable="false"
+      role="img"
+    >
+      <use href="/img/usx-sprite.svg#color_palette"></use>
+    </svg>
+  </button>
+  <div id="react-theme-picker-unenhanced-panel" class="usx-theme-picker__panel">
+    <label class="usa-label usx-label usa-sr-only" for="react-theme-picker-unenhanced">Theme</label
+    ><select id="react-theme-picker-unenhanced" class="usa-select usx-select">
+      <option value="default" selected="">Default</option>
+      <option value="forest">Forest</option>
+      <option value="sunset">Sunset</option>
+      <option value="ocean">Ocean</option>
+      <option value="aurora">Aurora</option>
+      <option value="borealis">Borealis</option>
+      <option value="midnight">Midnight</option>
+      <option value="carbon">Carbon</option>
+      <option value="vads">VADS</option>
+      <option value="gov-uk">GOV.UK</option>
+      <option value="nasa">NASA</option></select
     ><button
       type="button"
       class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
@@ -48,7 +97,7 @@
 </div>
 
 <h3 class="site-preview-heading">Light Dark</h3>
-<div class="usx-theme-picker">
+<div class="usx-theme-picker" hidden="">
   <button
     type="button"
     class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
@@ -68,8 +117,8 @@
   <div id="react-theme-picker-2-panel" class="usx-theme-picker__panel">
     <label class="usa-label usx-label usa-sr-only" for="react-theme-picker-2">Theme</label
     ><select id="react-theme-picker-2" class="usa-select usx-select">
-      <option value="Aurora" selected="">Light</option>
-      <option value="Borealis">Dark</option></select
+      <option value="aurora" selected="">Light</option>
+      <option value="borealis">Dark</option></select
     ><button
       type="button"
       class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"
@@ -87,46 +136,201 @@
   </div>
 </div>
 
-<h3 class="site-preview-heading">Ghost Select</h3>
-<div class="usx-theme-picker usx-theme-picker--ghost-select">
-  <div class="usx-theme-picker__ghost">
-    <span
-      class="usa-button usx-button usx-button--ghost usx-theme-picker__ghost-face"
-      aria-hidden="true"
-      ><svg
+<h3 class="site-preview-heading">Popover</h3>
+<div class="usx-theme-picker usx-theme-picker--popover" hidden="">
+  <details class="usx-popover usx-theme-picker__popover" data-side="bottom" data-align="start">
+    <summary
+      class="usa-button usx-button usx-button--ghost usx-button--tight margin-0"
+      aria-label="Theme"
+    >
+      <svg
         class="usa-icon usx-icon usx-theme-picker__icon"
         aria-hidden="true"
         focusable="false"
         role="img"
       >
-        <use href="/img/usx-sprite.svg#color_palette"></use></svg></span
-    ><label class="usa-label usx-label usa-sr-only" for="react-theme-picker-ghost-select"
-      >Theme</label
-    ><select
-      id="react-theme-picker-ghost-select"
-      class="usa-select usx-select usx-theme-picker__select--hidden"
+        <use href="/img/usx-sprite.svg#color_palette"></use>
+      </svg>
+    </summary>
+    <div
+      id="react-theme-picker-popover-panel"
+      class="usx-popover__panel usx-popover__panel--square"
     >
-      <option value="Default" selected="">Default</option>
-      <option value="Forest">Forest</option>
-      <option value="Sunset">Sunset</option>
-      <option value="Ocean">Ocean</option>
-      <option value="Aurora">Aurora</option>
-      <option value="Borealis">Borealis</option>
-      <option value="Midnight">Midnight</option>
-      <option value="Carbon">Carbon</option>
-      <option value="VADS">VADS</option>
-      <option value="GOV.UK">GOV.UK</option>
-      <option value="NASA">NASA</option>
-    </select>
-  </div>
+      <ul class="usx-popover__menu">
+        <li>
+          <button
+            data-usx-theme-value="default"
+            aria-pressed="true"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            Default
+          </button>
+        </li>
+        <li>
+          <button
+            data-usx-theme-value="forest"
+            aria-pressed="false"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            Forest
+          </button>
+        </li>
+        <li>
+          <button
+            data-usx-theme-value="sunset"
+            aria-pressed="false"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            Sunset
+          </button>
+        </li>
+        <li>
+          <button
+            data-usx-theme-value="ocean"
+            aria-pressed="false"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            Ocean
+          </button>
+        </li>
+        <li>
+          <button
+            data-usx-theme-value="aurora"
+            aria-pressed="false"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            Aurora
+          </button>
+        </li>
+        <li>
+          <button
+            data-usx-theme-value="borealis"
+            aria-pressed="false"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            Borealis
+          </button>
+        </li>
+        <li>
+          <button
+            data-usx-theme-value="midnight"
+            aria-pressed="false"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            Midnight
+          </button>
+        </li>
+        <li>
+          <button
+            data-usx-theme-value="carbon"
+            aria-pressed="false"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            Carbon
+          </button>
+        </li>
+        <li>
+          <button
+            data-usx-theme-value="vads"
+            aria-pressed="false"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            VADS
+          </button>
+        </li>
+        <li>
+          <button
+            data-usx-theme-value="gov-uk"
+            aria-pressed="false"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            GOV.UK
+          </button>
+        </li>
+        <li>
+          <button
+            data-usx-theme-value="nasa"
+            aria-pressed="false"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            NASA
+          </button>
+        </li>
+      </ul>
+    </div>
+  </details>
+  <input id="react-theme-picker-popover" type="hidden" name="theme" value="default" />
+</div>
+
+<h3 class="site-preview-heading">Popover End</h3>
+<div class="usx-theme-picker usx-theme-picker--popover margin-left-15" hidden="">
+  <details class="usx-popover usx-theme-picker__popover" data-side="bottom" data-align="end">
+    <summary
+      class="usa-button usx-button usx-button--ghost usx-button--tight margin-0"
+      aria-label="Theme"
+    >
+      <svg
+        class="usa-icon usx-icon usx-theme-picker__icon"
+        aria-hidden="true"
+        focusable="false"
+        role="img"
+      >
+        <use href="/img/usx-sprite.svg#color_palette"></use>
+      </svg>
+    </summary>
+    <div
+      id="react-theme-picker-popover-end-panel"
+      class="usx-popover__panel usx-popover__panel--square"
+    >
+      <ul class="usx-popover__menu">
+        <li>
+          <button
+            data-usx-theme-value="aurora"
+            aria-pressed="true"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            Light
+          </button>
+        </li>
+        <li>
+          <button
+            data-usx-theme-value="borealis"
+            aria-pressed="false"
+            type="button"
+            class="usx-popover__menu-item"
+          >
+            Dark
+          </button>
+        </li>
+      </ul>
+    </div>
+  </details>
+  <input id="react-theme-picker-popover-end" type="hidden" name="theme" value="aurora" />
 </div>
 
 <h3 class="site-preview-heading">Swap</h3>
-<div class="usx-theme-picker usx-theme-picker--swap">
-  <label
-    class="usx-swap usx-swap--rotate usx-theme-picker__swap usa-button usx-button usx-button--ghost"
-    ><input type="checkbox" autocomplete="off" aria-label="Theme: Light. Switch to Dark" /><span
-      class="usx-swap-on"
+<div class="usx-theme-picker usx-theme-picker--swap" hidden="">
+  <button
+    type="button"
+    class="usx-swap usx-swap--rotate usa-button usx-button usx-swap--button usx-theme-picker__swap usx-button--ghost usx-button--tight"
+    aria-pressed="false"
+    aria-label="Dark Theme"
+    data-usx-theme-off="aurora"
+    data-usx-theme-on="borealis"
+  >
+    <span class="usx-swap-on"
       ><svg
         class="usa-icon usx-icon usx-theme-picker__icon"
         aria-hidden="true"
@@ -141,19 +345,13 @@
         focusable="false"
         role="img"
       >
-        <use href="/img/usx-sprite.svg#sun"></use></svg></span
-  ></label>
-  <div class="usx-theme-picker__fallback">
-    <label class="usa-label usx-label usa-sr-only" for="react-theme-picker-swap">Theme</label
-    ><select id="react-theme-picker-swap" class="usa-select usx-select">
-      <option value="Aurora" selected="">Light</option>
-      <option value="Borealis">Dark</option>
-    </select>
-  </div>
+        <use href="/img/usx-sprite.svg#sun"></use></svg
+    ></span></button
+  ><input id="react-theme-picker-swap" type="hidden" value="aurora" />
 </div>
 
 <h3 class="site-preview-heading">With Value</h3>
-<div class="usx-theme-picker">
+<div class="usx-theme-picker" hidden="">
   <button
     type="button"
     class="usa-button usx-button usx-button--ghost usx-theme-picker__trigger"
@@ -173,17 +371,17 @@
   <div id="react-theme-picker-value-panel" class="usx-theme-picker__panel">
     <label class="usa-label usx-label usa-sr-only" for="react-theme-picker-value">Theme</label
     ><select id="react-theme-picker-value" class="usa-select usx-select">
-      <option value="Default">Default</option>
-      <option value="Forest" selected="">Forest</option>
-      <option value="Sunset">Sunset</option>
-      <option value="Ocean">Ocean</option>
-      <option value="Aurora">Aurora</option>
-      <option value="Borealis">Borealis</option>
-      <option value="Midnight">Midnight</option>
-      <option value="Carbon">Carbon</option>
-      <option value="VADS">VADS</option>
-      <option value="GOV.UK">GOV.UK</option>
-      <option value="NASA">NASA</option></select
+      <option value="default">Default</option>
+      <option value="forest" selected="">Forest</option>
+      <option value="sunset">Sunset</option>
+      <option value="ocean">Ocean</option>
+      <option value="aurora">Aurora</option>
+      <option value="borealis">Borealis</option>
+      <option value="midnight">Midnight</option>
+      <option value="carbon">Carbon</option>
+      <option value="vads">VADS</option>
+      <option value="gov-uk">GOV.UK</option>
+      <option value="nasa">NASA</option></select
     ><button
       type="button"
       class="usa-button usx-button usa-button--primary usx-theme-picker__toggle"

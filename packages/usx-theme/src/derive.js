@@ -192,7 +192,7 @@ export function themeEntries(resolved, { changedOnly = true, manifest = themeMan
   return entries;
 }
 
-// `data-theme` attribute value for a display name: "GOV.UK" → "gov-uk".
+// `data-usx-theme` attribute value for a display name: "GOV.UK" → "gov-uk".
 export function themeSlug(name) {
   return String(name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
@@ -206,11 +206,11 @@ export function colorSchemeOf(resolved) {
 }
 
 export function themeSelector(name) {
-  return `[data-theme="${themeSlug(name)}"]`;
+  return `[data-usx-theme="${themeSlug(name)}"]`;
 }
 
 // Generate an exportable CSS block. `selector` defaults to `:root`; pass a
-// theme name via `name` to target `[data-theme="<slug>"]` instead.
+// theme name via `name` to target `[data-usx-theme="<slug>"]` instead.
 export function themeToCss(resolved, { changedOnly = true, name, selector, colorScheme, manifest = themeManifest } = {}) {
   const lines = themeEntries(resolved, { changedOnly, manifest }).map(([cssVar, value]) => `  ${cssVar}: ${value};`);
   if (!lines.length && !name) return '/* No changes from the default theme. */\n';
