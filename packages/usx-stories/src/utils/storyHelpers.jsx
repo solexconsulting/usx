@@ -96,6 +96,7 @@ const componentLoaders = {
     modal: () => import('@uswds/uswds/js/usa-modal').then(({ default: modal }) => unmarkedInitializer(modal, '.usa-modal[id]')),
     range: () => import('@uswds/uswds/js/usa-range').then(({ default: component }) => unmarkedInitializer(component, '.usa-range')),
     popover: () => import('@solexllc/usx/js/popover'),
+    swap: () => import('@solexllc/usx/js/swap'),
     themePicker: () => import('@solexllc/usx/js/theme-picker'),
     table: () => import('@uswds/uswds/js/usa-table').then(({ default: table }) => unmarkedInitializer({
         init(root) {

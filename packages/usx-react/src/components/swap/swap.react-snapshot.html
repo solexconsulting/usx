@@ -93,8 +93,38 @@
   ><span class="usx-swap-off">Custom OFF</span></label
 >
 
-<h3 class="site-preview-heading">Trigger Alert On Swap</h3>
-<label class="usx-swap"
-  ><input type="checkbox" autocomplete="off" /><span class="usx-swap-on">ON</span
-  ><span class="usx-swap-off">OFF</span></label
+<h3 class="site-preview-heading">Button Text</h3>
+<button
+  type="button"
+  class="usx-swap usa-button usx-button usx-swap--button"
+  aria-pressed="false"
+  aria-label="Details"
 >
+  <span class="usx-swap-on">Hide details</span><span class="usx-swap-off">Show details</span>
+</button>
+
+<h3 class="site-preview-heading">Button Icon</h3>
+<button
+  type="button"
+  class="usx-swap usx-swap--rotate usa-button usx-button usx-swap--button"
+  aria-pressed="true"
+  aria-label="Notifications"
+>
+  <span class="usx-swap-on"
+    ><svg
+      class="usa-icon usx-icon usa-icon--size-4"
+      aria-hidden="true"
+      focusable="false"
+      role="img"
+    >
+      <use href="/img/sprite.svg#notifications_active"></use></svg></span
+  ><span class="usx-swap-off"
+    ><svg
+      class="usa-icon usx-icon usa-icon--size-4"
+      aria-hidden="true"
+      focusable="false"
+      role="img"
+    >
+      <use href="/img/sprite.svg#notifications"></use></svg
+  ></span>
+</button>

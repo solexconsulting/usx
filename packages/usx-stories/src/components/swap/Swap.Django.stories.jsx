@@ -1,5 +1,5 @@
 import config from '../../../../usx-react/src/components/swap/config.json';
-import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Swap.React.stories.jsx';
 
 export default {
@@ -7,6 +7,7 @@ export default {
   tags: ['USX', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
   excludeStories: [],
+  decorators: componentInit('swap'),
 };
 
 const createStory = createDjangoStory({ componentName: 'swap' });
@@ -20,9 +21,5 @@ export const FlipText = createStory(storyDefs['Flip - Text']);
 export const FlipEmoji = createStory(storyDefs['Flip - Emoji']);
 export const ColorChangeIcon = createStory(storyDefs['Color Change - Icon']);
 export const AdvancedCustomChildren = createStory(storyDefs['Advanced - Custom Children']);
-export const TriggerAlertOnSwap = createStory({
-  ...storyDefs['Trigger Alert On Swap'],
-  inputProps: {
-    onChange: "alert('Swap triggered!')",
-  }
-});
+export const ButtonText = createStory(storyDefs['Button - Text']);
+export const ButtonIcon = createStory(storyDefs['Button - Icon']);

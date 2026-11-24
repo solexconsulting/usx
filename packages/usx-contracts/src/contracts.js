@@ -10837,7 +10837,7 @@ export const componentContracts = {
     },
     "swap": {
       "component": "swap",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "children": {
@@ -10855,6 +10855,36 @@ export const componentContracts = {
         "includeInput": {
           "type": "boolean",
           "description": "Render default checkbox input control"
+        },
+        "as": {
+          "type": "select",
+          "options": [
+            "label",
+            "button"
+          ],
+          "default": "label",
+          "description": "Render a checkbox label or an enhanced toggle button. Button mode swaps content on click and emits change after updating aria-pressed."
+        },
+        "defaultPressed": {
+          "type": "boolean",
+          "description": "Initial pressed state in button mode"
+        },
+        "onClick": {
+          "type": "function",
+          "description": "React button click handler. In Django or HTML, listen for the native click event on the button.",
+          "renderers": {
+            "django": {
+              "supported": false
+            }
+          }
+        },
+        "ariaLabel": {
+          "type": "string",
+          "description": "Stable accessible name for button mode"
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Disable the button in button mode"
         },
         "inputId": {
           "type": "string",

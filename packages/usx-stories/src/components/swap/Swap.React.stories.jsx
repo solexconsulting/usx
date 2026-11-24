@@ -1,8 +1,9 @@
 import React from 'react';
 import Swap from '../../../../usx-react/src/components/swap/Swap.tsx';
 import config from '../../../../usx-react/src/components/swap/config.json';
-import { buildArgTypes } from '../../utils/storyHelpers.jsx';
+import { buildArgTypes, componentInit } from '../../utils/storyHelpers.jsx';
 import Icon from '../../../../usx-react/src/components/icon/Icon.tsx';
+import { expect, fn, userEvent, waitFor } from 'storybook/test';
 
 const commonArgs = {
   className: '',
@@ -62,13 +63,21 @@ export const storyDefs = {
       </>
     ),
   },
-  'Trigger Alert On Swap': {
+  'Button - Text': {
     ...commonArgs,
-    onContent: 'ON',
-    offContent: 'OFF',
-    inputProps: {
-      onChange: () => alert('Swap triggered!'),
-    },
+    as: 'button',
+    ariaLabel: 'Details',
+    onContent: 'Hide details',
+    offContent: 'Show details',
+  },
+  'Button - Icon': {
+    ...commonArgs,
+    as: 'button',
+    variant: 'rotate',
+    ariaLabel: 'Notifications',
+    defaultPressed: true,
+    onContent: <Icon name="notifications_active" size={4} />,
+    offContent: <Icon name="notifications" size={4} />,
   },
 };
 
@@ -78,6 +87,7 @@ export default {
   tags: ['USX', 'autodocs'],
   argTypes: buildArgTypes(config.props || {}),
   excludeStories: ['storyDefs'],
+  decorators: componentInit('swap'),
 };
 
 export const Default = {
@@ -116,6 +126,24 @@ export const AdvancedCustomChildren = {
   args: storyDefs['Advanced - Custom Children'],
 };
 
-export const TriggerAlertOnSwap = {
-  args: storyDefs['Trigger Alert On Swap'],
+export const ButtonText = {
+  args: { ...storyDefs['Button - Text'], onClick: fn() },
+  play: async ({ args, canvasElement }) => {
+    await waitFor(() =>
+      expect(canvasElement.querySelector('button.usx-swap')).toHaveAttribute(
+        'data-enhanced',
+        'true'
+      )
+    );
+    await userEvent.click(canvasElement.querySelector('button.usx-swap'));
+    await expect(args.onClick).toHaveBeenCalledTimes(1);
+    await expect(canvasElement.querySelector('button.usx-swap')).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+  },
+};
+
+export const ButtonIcon = {
+  args: storyDefs['Button - Icon'],
 };

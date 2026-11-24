@@ -42,7 +42,8 @@ $usx-swap-transition-time: 0.25s !default;
 
     // Checked (on shown, off hidden): higher specificity than the rules
     // above, so these win once the checkbox is checked.
-    input:is(:checked, :indeterminate) ~ .usx-swap-off {
+    input:is(:checked, :indeterminate) ~ .usx-swap-off,
+    &[aria-pressed="true"] .usx-swap-off {
       transition: opacity $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
                   transform $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
                   max-height $usx-swap-transition-time step-end,
@@ -50,6 +51,7 @@ $usx-swap-transition-time: 0.25s !default;
     }
 
     input:checked ~ .usx-swap-on,
+    &[aria-pressed="true"] .usx-swap-on,
     input:indeterminate ~ .usx-swap-indeterminate {
       transition: opacity $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
                   transform $usx-swap-transition-time cubic-bezier(0, 0, .25, 1),
@@ -82,7 +84,8 @@ $usx-swap-transition-time: 0.25s !default;
     max-width: 100%;
   }
 
-  input:is(:checked, :indeterminate) ~ .usx-swap-off {
+  input:is(:checked, :indeterminate) ~ .usx-swap-off,
+  &[aria-pressed="true"] .usx-swap-off {
     opacity: 0;
     max-height: 0;
     max-width: 0;
@@ -90,6 +93,7 @@ $usx-swap-transition-time: 0.25s !default;
   }
 
   input:checked ~ .usx-swap-on,
+  &[aria-pressed="true"] .usx-swap-on,
   input:indeterminate ~ .usx-swap-indeterminate {
     opacity: 1;
     max-height: 100%;
@@ -115,11 +119,13 @@ $usx-swap-transition-time: 0.25s !default;
   }
 
   input:is(:checked, :indeterminate) ~ .usx-swap-on,
+  &[aria-pressed="true"] .usx-swap-on,
   &.usx-swap--active .usx-swap-on {
     transform: rotate(0deg);
   }
 
   input:is(:checked, :indeterminate) ~ .usx-swap-off,
+  &[aria-pressed="true"] .usx-swap-off,
   &.usx-swap--active .usx-swap-off {
     transform: rotate(45deg);
   }
@@ -137,11 +143,13 @@ $usx-swap-transition-time: 0.25s !default;
   }
 
   input:is(:checked, :indeterminate) ~ .usx-swap-on,
+  &[aria-pressed="true"] .usx-swap-on,
   &.usx-swap--active .usx-swap-on {
     transform: rotateY(0deg);
   }
 
   input:is(:checked, :indeterminate) ~ .usx-swap-off,
+  &[aria-pressed="true"] .usx-swap-off,
   &.usx-swap--active .usx-swap-off {
     transform: rotateY(-180deg);
     backface-visibility: hidden;

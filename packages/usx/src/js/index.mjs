@@ -5,7 +5,8 @@ import dataTable from './data-table.mjs';
 import fileInput from './file-input.mjs';
 import layout from './layout.mjs';
 import popover from './popover.mjs';
+import swap from './swap.mjs';
 import themePicker from './theme-picker.mjs';
 
-export { copyToClipboard, carousel, dataTable, drawer, fileInput, layout, popover, themePicker };
-export default { copyToClipboard, carousel, dataTable, drawer, fileInput, layout, popover, themePicker };
+export { copyToClipboard, carousel, dataTable, drawer, fileInput, layout, popover, swap, themePicker };
+export default { copyToClipboard, carousel, dataTable, drawer, fileInput, layout, popover, swap, themePicker };

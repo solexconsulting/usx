@@ -4,10 +4,12 @@ import djangoSnapshot from '../../../../usx-react/src/components/swap/swap.djang
 import { expect, userEvent, waitFor } from 'storybook/test';
 import { storyDefs } from './Swap.React.stories.jsx';
 import { createAllVariantsPlay } from '../../utils/playHelpers.js';
+import { componentInit } from '../../utils/storyHelpers.jsx';
 
 export default {
   title: 'HTML/USX/Swap',
   tags: ['USX', 'autodocs'],
+  decorators: componentInit('swap'),
 };
 
 // Story keys read "Default - Icon"; the section title drops the dash.
@@ -18,7 +20,7 @@ const visible = (element) => {
 };
 
 const checkSwap = (def) => async (swap) => {
-  await expect(swap.tagName).toBe('LABEL');
+  await expect(swap.tagName).toBe(def.as === 'button' ? 'BUTTON' : 'LABEL');
   await expect(swap).toHaveClass('usx-swap');
   for (const variant of ['active', 'rotate', 'flip']) {
     await (variant === def.variant ? expect(swap) : expect(swap).not).toHaveClass(
@@ -28,7 +30,7 @@ const checkSwap = (def) => async (swap) => {
   const input = swap.querySelector('input[type="checkbox"]');
   const on = swap.querySelector('.usx-swap-on');
   const off = swap.querySelector('.usx-swap-off');
-  await expect(input !== null).toBe(def.includeInput !== false);
+  await expect(input !== null).toBe(def.as !== 'button' && def.includeInput !== false);
   await expect(on).toBeTruthy();
   await expect(off).toBeTruthy();
   if (typeof def.onContent === 'string') {
@@ -37,6 +39,27 @@ const checkSwap = (def) => async (swap) => {
   } else if (def.onContent) {
     // Icon content: the two states show different icons or colours.
     await expect(on.innerHTML).not.toBe(off.innerHTML);
+  }
+
+  if (def.as === 'button') {
+    await waitFor(() => expect(swap).toHaveAttribute('data-enhanced', 'true'));
+    await expect(swap).toHaveAttribute('aria-pressed', String(!!def.defaultPressed));
+    await waitFor(() =>
+      expect([visible(on), visible(off)]).toEqual([!!def.defaultPressed, !def.defaultPressed])
+    );
+    let clicks = 0;
+    swap.addEventListener('click', () => {
+      clicks += 1;
+    });
+    await userEvent.click(swap);
+    await expect(swap).toHaveAttribute('aria-pressed', String(!def.defaultPressed));
+    await waitFor(() =>
+      expect([visible(on), visible(off)]).toEqual([!def.defaultPressed, !!def.defaultPressed])
+    );
+    await userEvent.click(swap);
+    await expect(swap).toHaveAttribute('aria-pressed', String(!!def.defaultPressed));
+    await expect(clicks).toBe(2);
+    return;
   }
 
   if (!input) {
