@@ -822,7 +822,7 @@ export const componentContracts = {
     },
     "button": {
       "component": "button",
-      "version": 2,
+      "version": 3,
       "required": [],
       "props": {
         "label": {
@@ -872,6 +872,11 @@ export const componentContracts = {
         "big": {
           "type": "boolean",
           "description": "A boolean that determines whether the button should be displayed in a larger size, making it more prominent and easier to interact with.",
+          "default": false
+        },
+        "tighten": {
+          "type": "boolean",
+          "description": "Use 0.75rem padding, or 1rem when big is true.",
           "default": false
         },
         "inverse": {
@@ -8993,7 +8998,8 @@ export const componentContracts = {
             {
               "children": "Go back",
               "variant": "unstyled",
-              "className": "padding-105 text-center",
+              "tighten": true,
+              "className": "text-center",
               "extraAttributes": {
                 "data-close-modal": true
               }

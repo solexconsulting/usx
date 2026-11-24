@@ -95,6 +95,7 @@ export default function ChatComposer({
             ).map(([format, label, shortcut, icon]) => ({
               type: 'button' as const,
               variant: 'outline' as const,
+              tighten: true,
               className: 'usx-chat__format-button',
               disabled,
               'aria-label': label,
@@ -127,6 +128,7 @@ export default function ChatComposer({
                       {
                         type: 'button' as const,
                         variant: 'outline' as const,
+                        tighten: true,
                         'aria-label': 'Attach files',
                         title: 'Attach files',
                         extraAttributes: { 'data-usx-chat-attach': '' },
@@ -140,6 +142,7 @@ export default function ChatComposer({
                       {
                         type: 'button' as const,
                         variant: 'outline' as const,
+                        tighten: true,
                         'aria-label': 'Show formatting',
                         title: 'Show formatting',
                         'aria-expanded': false,

@@ -495,6 +495,31 @@ export const BigUnstyled = {
   }
 };
 
+export const Tight = {
+  args: { label: 'Tight', variant: 'primary', tighten: true },
+  tags: ['USX'],
+};
+
+export const BigTight = {
+  args: { ...Tight.args, label: 'Big tight', big: true },
+  tags: ['USX'],
+};
+
+const iconOnlyArgs = {
+  variant: 'primary',
+  iconProps: [{ name: 'search' }],
+  extraAttributes: { 'aria-label': 'Search' },
+};
+
+export const IconOnly = { args: iconOnlyArgs };
+export const IconOnlyTight = { args: { ...iconOnlyArgs, tighten: true }, tags: ['USX'] };
+export const IconOnlyBig = { args: { ...iconOnlyArgs, big: true } };
+export const IconOnlyBigTight = {
+  args: { ...iconOnlyArgs, big: true, tighten: true },
+  tags: ['USX'],
+};
+export const IconOnlyGhost = { args: { ...iconOnlyArgs, ghost: true }, tags: ['USX'] };
+
 export const MultipleIcons = {
   args: {
     label: 'Multiple icons',
@@ -678,6 +703,13 @@ export const storyDefs = {
   BigDisabled: BigDisabled.args,
   BigAriaDisabled: BigAriaDisabled.args,
   BigUnstyled: BigUnstyled.args,
+  Tight: Tight.args,
+  BigTight: BigTight.args,
+  IconOnly: IconOnly.args,
+  IconOnlyTight: IconOnlyTight.args,
+  IconOnlyBig: IconOnlyBig.args,
+  IconOnlyBigTight: IconOnlyBigTight.args,
+  IconOnlyGhost: IconOnlyGhost.args,
 
   Ghost: Ghost.args,
   GhostPrimary: GhostPrimary.args,

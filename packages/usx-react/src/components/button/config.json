@@ -1,7 +1,7 @@
 {
   "name": "button",
   "template": "button/button.django.html",
-  "version": 2,
+  "version": 3,
   "default": {
     "label": "Default",
     "variant": "primary"
@@ -54,6 +54,11 @@
     "big": {
       "type": "boolean",
       "description": "A boolean that determines whether the button should be displayed in a larger size, making it more prominent and easier to interact with.",
+      "default": false
+    },
+    "tighten": {
+      "type": "boolean",
+      "description": "Use 0.75rem padding, or 1rem when big is true.",
       "default": false
     },
     "inverse": {

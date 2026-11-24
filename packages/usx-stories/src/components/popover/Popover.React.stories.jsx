@@ -269,6 +269,17 @@ export const storyDefs = {
     },
     children: 'Manage your account settings.',
   },
+  ShowCloseIcon: {
+    id: 'popover-close-icon',
+    summaryProps: {
+      label: 'Open panel with close icon',
+      className: 'usa-button usx-button usa-button--primary margin-0',
+    },
+    panelHeading: 'Panel with close icon',
+    showCloseIcon: true,
+    closeIconLabel: 'Close panel',
+    children: 'Use the icon in the header to close this panel.',
+  },
   HeaderActions: {
     id: 'popover-header-actions',
     summaryProps: { label: 'Open record', className: 'usa-button usx-button margin-0' },
@@ -276,6 +287,7 @@ export const storyDefs = {
     headerLeftActions: (
       <Button
         variant="unstyled"
+        tighten
         className="usx-popover__header-action"
         aria-label="Back to records"
         iconProps={[{ name: 'arrow_back' }]}
@@ -289,7 +301,7 @@ export const storyDefs = {
         summaryProps={{
           ariaLabel: 'Record actions',
           children: <Icon name="more_vert" />,
-          className: 'usa-button usx-button usa-button--unstyled usx-popover__header-action',
+          className: 'usa-button usx-button usa-button--unstyled usx-button--tight usx-popover__header-action',
         }}
         menuItems={[{ text: 'Copy record', icon: { name: 'content_copy' }, onClick: () => {} }]}
       />
@@ -485,6 +497,9 @@ export const AuthoredTrigger = {
 export const GroupedSummaryProps = {
   args: storyDefs.GroupedSummaryProps,
 };
+
+/** A close icon in the panel header dismisses the Popover and restores trigger focus. */
+export const ShowCloseIcon = { args: storyDefs.ShowCloseIcon };
 
 /** A nested action menu and accessible close icon share the panel header. */
 export const HeaderActions = { args: storyDefs.HeaderActions };

@@ -3,13 +3,13 @@
   <ul class="usa-button-group usx-button-group usa-button-group--segmented usx-chat__format-buttons">
     {% dict data_usx_chat_format='bold' aria_label='Bold' title='Bold (Ctrl/⌘+B)' as attrs %}
     <li class="usa-button-group__item">
-      {% button variant='outline' className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
+      {% button variant='outline' tighten=True className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
         <strong>B</strong>
       {% endbutton %}
     </li>
     {% dict data_usx_chat_format='italic' aria_label='Italic' title='Italic (Ctrl/⌘+I)' as attrs %}
     <li class="usa-button-group__item">
-      {% button variant='outline' className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
+      {% button variant='outline' tighten=True className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
         <em>
           I
         </em>
@@ -17,7 +17,7 @@
     </li>
     {% dict data_usx_chat_format='underline' aria_label='Underline' title='Underline (Ctrl/⌘+U)' as attrs %}
     <li class="usa-button-group__item">
-      {% button variant='outline' className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
+      {% button variant='outline' tighten=True className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
         <u>
           U
         </u>
@@ -25,7 +25,7 @@
     </li>
     {% dict data_usx_chat_format='strike' aria_label='Strikethrough' title='Strikethrough (Ctrl/⌘+Shift+X)' as attrs %}
     <li class="usa-button-group__item">
-      {% button variant='outline' className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
+      {% button variant='outline' tighten=True className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
         <s>
           S
         </s>
@@ -33,25 +33,25 @@
     </li>
     {% dict data_usx_chat_format='ordered' aria_label='Numbered list' title='Numbered list (Ctrl/⌘+Shift+7)' as attrs %}
     <li class="usa-button-group__item">
-      {% button variant='outline' className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
+      {% button variant='outline' tighten=True className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
         1.
       {% endbutton %}
     </li>
     {% dict data_usx_chat_format='unordered' aria_label='Bulleted list' title='Bulleted list (Ctrl/⌘+Shift+8)' as attrs %}
     <li class="usa-button-group__item">
-      {% button variant='outline' className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
+      {% button variant='outline' tighten=True className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
         {% icon name='list' %}{% endicon %}
       {% endbutton %}
     </li>
     {% dict data_usx_chat_format='quote' aria_label='Block quote' title='Block quote (Ctrl/⌘+Shift+9)' as attrs %}
     <li class="usa-button-group__item">
-      {% button variant='outline' className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
+      {% button variant='outline' tighten=True className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
         {% icon name='format_quote' %}{% endicon %}
       {% endbutton %}
     </li>
     {% dict data_usx_chat_format='code' aria_label='Code block' title='Code block (Ctrl/⌘+Alt+Shift+C)' as attrs %}
     <li class="usa-button-group__item">
-      {% button variant='outline' className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
+      {% button variant='outline' tighten=True className='usx-chat__format-button' disabled=disabled extraAttributes=attrs %}
         {% icon name='code' %}{% endicon %}
       {% endbutton %}
     </li>

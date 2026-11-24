@@ -106,6 +106,23 @@ const testGroupedSummaryProps = async ({ canvasElement }) => {
   await expect(trigger).toHaveTextContent('Account options');
 };
 
+const testShowCloseIcon = async ({ canvasElement }) => {
+  const id = 'popover-close-icon';
+  const disclosure = disclosureFor(canvasElement, id);
+  const trigger = summaryFor(canvasElement, id);
+  const panel = canvasElement.querySelector(`[id$="${id}"]`);
+  const header = panel.querySelector(':scope > .usx-popover__header');
+  await expect(header.querySelector('h2')).toHaveTextContent('Panel with close icon');
+  const close = header.querySelector('.usx-popover__header-close');
+  await expect(close).toHaveAccessibleName('Close panel');
+  await expect(close.querySelector('use')).toHaveAttribute('href', expect.stringMatching(/#close$/));
+  await clickSummary(canvasElement, id);
+  await expectVisible(panel);
+  await userEvent.click(close);
+  await expect(disclosure.open).toBe(false);
+  await expect(trigger).toHaveFocus();
+};
+
 const testPanelShape = async ({ canvasElement }, id, panelShape) => {
   const panel = canvasElement.querySelector(`[id$="${id}"]`);
   await expect(panel).toHaveClass('usx-popover__panel');
@@ -367,6 +384,7 @@ export const AllVariantsReact = {
     await step('Square Panel', () => testPanelShape(context, 'popover-panel-square', 'square'));
     await step('Authored Trigger', () => testAuthoredTrigger(context));
     await step('Grouped Summary Props', () => testGroupedSummaryProps(context));
+    await step('Show Close Icon', () => testShowCloseIcon(context));
     await step('Header Actions', () => testHeaderActions(context));
     await step('Menu Items', () => testMenuItems(context));
     await step('Mixed Menu Items', () => testMixedMenuItems(context));

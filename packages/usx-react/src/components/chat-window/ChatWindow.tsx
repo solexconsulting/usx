@@ -60,6 +60,7 @@ export default function ChatWindow({
         showBack && (
           <Button
             variant="unstyled"
+            tighten
             className="usx-popover__header-action"
             aria-label={view === 'thread' ? 'Back to conversation' : 'Back'}
             iconProps={[{ name: 'arrow_back' }]}
@@ -72,6 +73,7 @@ export default function ChatWindow({
           {showNewMessage && (
             <Button
               variant="unstyled"
+              tighten
               className="usx-popover__header-action"
               aria-label="New message"
               iconProps={[{ name: 'add' }]}
@@ -110,7 +112,7 @@ export default function ChatWindow({
               ]}
               summaryProps={{
                 ariaLabel: 'Conversation actions',
-                className: 'usa-button usx-button usa-button--unstyled usx-popover__header-action',
+                className: 'usa-button usx-button usa-button--unstyled usx-button--tight usx-popover__header-action',
                 children: <Icon name="more_vert" />,
               }}
             >

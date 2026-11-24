@@ -22,7 +22,7 @@ export default function Modal({
   description,
   actionProps = [
     { children: 'Continue', variant: 'primary', extraAttributes: { 'data-close-modal': true } },
-    { children: 'Go back', variant: 'unstyled', className: 'padding-105 text-center', extraAttributes: { 'data-close-modal': true } },
+    { children: 'Go back', variant: 'unstyled', tighten: true, className: 'text-center', extraAttributes: { 'data-close-modal': true } },
   ],
   size = 'default',
   forceAction = false,

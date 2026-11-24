@@ -129,6 +129,7 @@ export default function Popover({
                 {showCloseIcon && (
                   <Button
                     variant="unstyled"
+                    tighten
                     className="usx-popover__header-action usx-popover__header-close"
                     aria-label={closeIconLabel}
                     iconProps={[{ name: 'close' }]}

@@ -30,7 +30,7 @@
           {% if allowAttachments %}
             {% dict data_usx_chat_attach='' aria_label='Attach files' title='Attach files' as attachAttrs %}
             <li class="usa-button-group__item">
-              {% button variant='outline' disabled=disabled extraAttributes=attachAttrs %}
+              {% button variant='outline' tighten=True disabled=disabled extraAttributes=attachAttrs %}
                 {% icon name='attach_file' %}{% endicon %}
               {% endbutton %}
             </li>
@@ -38,7 +38,7 @@
           {% if allowFormatting %}
             {% dict data_usx_chat_toggle_formatting='' aria_label='Show formatting' title='Show formatting' aria_expanded='false' aria_controls=id|add:'-formatting' as formatAttrs %}
             <li class="usa-button-group__item">
-              {% button variant='outline' disabled=disabled extraAttributes=formatAttrs %}
+              {% button variant='outline' tighten=True disabled=disabled extraAttributes=formatAttrs %}
                 {% icon name='text_fields' %}{% endicon %}
               {% endbutton %}
             </li>

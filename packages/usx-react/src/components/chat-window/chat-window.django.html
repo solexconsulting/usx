@@ -6,20 +6,20 @@
       {% else %}
         {% dict data_usx_chat_back='' aria_label='Back' as backAttributes %}
       {% endif %}
-      {% button variant='unstyled' className='usx-popover__header-action' extraAttributes=backAttributes %}
+      {% button variant='unstyled' tighten=True className='usx-popover__header-action' extraAttributes=backAttributes %}
         {% icon name='arrow_back' %}{% endicon %}
       {% endbutton %}
     {% endif %}{% endfragment %}
   {% fragment as chatRightActions %}
     {% if showNewMessage %}
       {% dict data_usx_chat_new='' aria_label='New message' as newAttributes %}
-      {% button variant='unstyled' className='usx-popover__header-action' extraAttributes=newAttributes %}
+      {% button variant='unstyled' tighten=True className='usx-popover__header-action' extraAttributes=newAttributes %}
         {% icon name='add' %}{% endicon %}
       {% endbutton %}
     {% endif %}
     {% if showCopyAction or conversationActions or actions %}
       {% icon name='more_vert' as actionsIcon %}{% endicon %}
-      {% dict children=actionsIcon ariaLabel='Conversation actions' className='usa-button usx-button usa-button--unstyled usx-popover__header-action' as actionsSummary %}
+      {% dict children=actionsIcon ariaLabel='Conversation actions' className='usa-button usx-button usa-button--unstyled usx-button--tight usx-popover__header-action' as actionsSummary %}
       {% popover id=id|add:'-conversation-actions' className='usx-chat__actions' side='bottom' align='end' panelShape='square' panelClassName='usx-chat__actions-menu' summaryProps=actionsSummary menuItems=conversationMenuItems children=actions %}{% endpopover %}
     {% endif %}
   {% endfragment %}

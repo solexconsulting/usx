@@ -31,9 +31,18 @@ const checkButton = async (button, def) => {
   for (const variant of variants)
     await hasClass(button, `usa-button--${variant}`, def.variant === variant);
   await hasClass(button, 'usa-button--big', def.big);
+  await hasClass(button, 'usx-button--tight', def.tighten);
   await hasClass(button, 'usa-button--inverse', def.inverse);
   await hasClass(button, 'usx-button--ghost', def.ghost);
   if (def.className) await expect(button).toHaveClass(def.className);
+  if (!def.label) await expect(button).toHaveAccessibleName(def.extraAttributes['aria-label']);
+  if (def.tighten) {
+    const padding =
+      parseFloat(getComputedStyle(document.documentElement).fontSize) * (def.big ? 1 : 0.75);
+    const style = getComputedStyle(button);
+    for (const side of ['Top', 'Right', 'Bottom', 'Left'])
+      await expect(parseFloat(style[`padding${side}`])).toBe(padding);
+  }
 
   // Native `disabled` removes the button from the tab order; aria-disabled keeps it focusable.
   const ariaDisabled = Boolean(def['aria-disabled']);
@@ -56,7 +65,7 @@ const checkButton = async (button, def) => {
     ...icons
       .filter((icon) => (icon.position ?? 'left') === 'left')
       .map((icon) => `icon:${icon.name}`),
-    `text:${def.label}`,
+    ...(def.label ? [`text:${def.label}`] : []),
     ...icons.filter((icon) => icon.position === 'right').map((icon) => `icon:${icon.name}`),
   ];
   const actual = [...button.childNodes]

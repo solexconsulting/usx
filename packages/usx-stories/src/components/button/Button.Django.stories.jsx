@@ -96,6 +96,13 @@ export const Big = createStory(toDjangoArgs(storyDefs.Big));
 export const BigDisabled = createStory(toDjangoArgs(storyDefs.BigDisabled));
 export const BigAriaDisabled = createStory(toDjangoArgs(storyDefs.BigAriaDisabled));
 export const BigUnstyled = createStory(toDjangoArgs(storyDefs.BigUnstyled));
+export const Tight = createStory(toDjangoArgs(storyDefs.Tight));
+export const BigTight = createStory(toDjangoArgs(storyDefs.BigTight));
+export const IconOnly = createStory(toDjangoArgs(storyDefs.IconOnly));
+export const IconOnlyTight = createStory(toDjangoArgs(storyDefs.IconOnlyTight));
+export const IconOnlyBig = createStory(toDjangoArgs(storyDefs.IconOnlyBig));
+export const IconOnlyBigTight = createStory(toDjangoArgs(storyDefs.IconOnlyBigTight));
+export const IconOnlyGhost = createStory(toDjangoArgs(storyDefs.IconOnlyGhost));
 
 export const Ghost = createStory(toDjangoArgs(storyDefs.Ghost));
 export const GhostPrimary = createStory(toDjangoArgs(storyDefs.GhostPrimary));

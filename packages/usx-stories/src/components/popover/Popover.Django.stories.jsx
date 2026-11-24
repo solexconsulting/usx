@@ -57,6 +57,9 @@ export const AuthoredTrigger = createPopoverStory(storyDefs.AuthoredTrigger);
 /** Summary configuration is grouped and passed directly to the shared Summary component. */
 export const GroupedSummaryProps = createPopoverStory(storyDefs.GroupedSummaryProps);
 
+/** A close icon in the panel header dismisses the Popover and restores trigger focus. */
+export const ShowCloseIcon = createPopoverStory(storyDefs.ShowCloseIcon);
+
 /** A nested action menu and accessible close icon share the panel header. */
 export const HeaderActions = createPopoverStory({
   ...storyDefs.HeaderActions,

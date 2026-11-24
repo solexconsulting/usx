@@ -17,7 +17,8 @@
       {
         "children": "Go back",
         "variant": "unstyled",
-        "className": "padding-105 text-center",
+        "tighten": true,
+        "className": "text-center",
         "extraAttributes": {
           "data-close-modal": true
         }

@@ -24,6 +24,7 @@ type ButtonBaseProps = {
   href?: string;
   isExternal?: boolean;
   big?: boolean;
+  tighten?: boolean;
   inverse?: boolean;
   ghost?: boolean;
   loading?: boolean;
@@ -49,6 +50,7 @@ export default function Button({
   href,
   isExternal = false,
   big = false,
+  tighten = false,
   inverse = false,
   ghost = false,
   loading = false,
@@ -81,6 +83,7 @@ export default function Button({
     'usx-button',
     variant && variantClasses[variant],
     big && 'usa-button--big',
+    tighten && 'usx-button--tight',
     inverse && 'usa-button--inverse',
     ghost && 'usx-button--ghost',
     className

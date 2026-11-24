@@ -22,12 +22,12 @@ export default {
 
 const defaultActions = [
   { children: 'Continue without saving', variant: 'primary', extraAttributes: { 'data-close-modal': true } },
-  { children: 'Go back', variant: 'unstyled', className: 'padding-105 text-center', extraAttributes: { 'data-close-modal': true } },
+  { children: 'Go back', variant: 'unstyled', tighten: true, className: 'text-center', extraAttributes: { 'data-close-modal': true } },
 ];
 
 const forceActions = [
   { children: 'Yes, stay signed in', variant: 'primary', extraAttributes: { 'data-close-modal': true } },
-  { children: 'Sign out', variant: 'unstyled', className: 'padding-105 text-center', extraAttributes: { 'data-close-modal': true } },
+  { children: 'Sign out', variant: 'unstyled', tighten: true, className: 'text-center', extraAttributes: { 'data-close-modal': true } },
 ];
 
 export const storyDefs = {

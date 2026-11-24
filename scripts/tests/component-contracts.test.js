@@ -51,9 +51,11 @@ test('example content is preserved separately and never merged into prop default
 
 test('corrected contracts describe composition and actual renderer differences', () => {
   const { button, layout, alert, icon } = manifest.components;
-  for (const contract of [button, layout, alert]) assert.equal(contract.version, 2);
+  assert.equal(button.version, 3);
+  for (const contract of [layout, alert]) assert.equal(contract.version, 2);
   assert.equal(icon.version, 3);
   assert.ok(button.props.variant.options.includes('unstyled'));
+  assert.equal(button.props.tighten.default, false);
   assert.equal(button.props.children.type, 'slot');
   for (const name of ['children', 'content', 'leftSidebar', 'rightSidebar']) assert.equal(layout.props[name].type, 'slot');
   for (const contract of [button, alert]) assert.equal(contract.props.style.type, 'object');
