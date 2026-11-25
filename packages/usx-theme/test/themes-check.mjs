@@ -285,10 +285,13 @@ for (const [name, preset] of Object.entries(PRESETS)) {
   if (resolved['footer-social-bg'] !== 'var(--usx-surface-2)') fail(`${name}: footer social background must follow surface-2`);
   if (resolved['footer-social-bg-hover'] !== 'var(--usx-surface-1)') fail(`${name}: footer social hover must follow surface-1`);
   if (['Borealis', 'Midnight', 'Carbon'].includes(name)) {
+    if (resolved['input-bg'] !== 'var(--usx-surface-3)') fail(`${name}: input background must follow surface-3`);
     for (const token of Object.keys(borderDefaults)) {
       if (!preset[token]) fail(`${name}: dark preset must define ${token}`);
     }
     if (new Set(['color-border', 'color-border-subtle', 'color-border-muted'].map((token) => resolved[token])).size !== 3) fail(`${name}: dark border roles must remain distinct`);
+  } else if (resolved['input-bg'] !== 'var(--usx-surface-1)') {
+    fail(`${name}: input background must follow surface-1`);
   }
 }
 

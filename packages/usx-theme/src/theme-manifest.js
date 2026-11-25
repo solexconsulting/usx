@@ -522,6 +522,11 @@ export const themeManifest = [
   // hardcoded value here instead of just chaining to color-base-light).
   component('date-picker-button-hover-active-bg', '#a9aeb1', 'color-base-light'),
 
+  // Field colors follow the surface and text roles unless overridden.
+  component('input-bg', 'var(--usx-surface-1)'),
+  component('input-text', 'var(--usx-text-ink)'),
+  component('input-placeholder', 'var(--usx-text-subtle)'),
+
   // Real USWDS's compiled CSS hardcodes the combo-box list's selected-option
   // highlight to a literal `color("primary")` (never a runtime var), so it
   // stayed USWDS default blue under every preset. Unlike the range

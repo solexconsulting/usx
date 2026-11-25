@@ -90,19 +90,17 @@ const byTokenName = (a, b) => compareNames(a.name, b.name);
 const THEME_COLOR_NAMES = ['color-primary', 'color-secondary', 'color-accent-cool', 'color-accent-warm', 'color-base'];
 const STATE_COLOR_NAMES = ['color-info', 'color-warning', 'color-error', 'color-success', 'color-emergency', 'color-disabled', 'color-focus', 'color-visited'];
 const ENVIRONMENT_COLOR_NAMES = ['color-beta', 'color-test', 'color-dev'];
-// The former single "Surface & text colors" flat list, split into 3
-// component-style groups (see SURFACE_TEXT_GROUPS below) — surfaces,
-// borders and text
-// — since these are sibling tokens rather than a base-color-plus-shades
-// relationship.
+// Related surface, border, text, and input colors are sibling roles, not shades.
 const SURFACE_COLOR_NAMES = ['surface-1', 'surface-2', 'surface-3', 'surface-inverse'];
 const BORDER_COLOR_NAMES = ['color-border', 'color-border-muted', 'color-border-subtle', 'color-border-inverse'];
 const TEXT_COLOR_NAMES = ['text-ink', 'text-muted', 'text-subtle', 'text-inverse'];
-const SURFACE_TEXT_COLOR_NAMES = [...SURFACE_COLOR_NAMES, ...BORDER_COLOR_NAMES, ...TEXT_COLOR_NAMES];
+const INPUT_COLOR_NAMES = ['input-bg', 'input-text', 'input-placeholder'];
+const SURFACE_TEXT_COLOR_NAMES = [...SURFACE_COLOR_NAMES, ...BORDER_COLOR_NAMES, ...TEXT_COLOR_NAMES, ...INPUT_COLOR_NAMES];
 const SURFACE_TEXT_GROUPS = [
   { label: 'Surfaces', names: SURFACE_COLOR_NAMES },
   { label: 'Borders', names: BORDER_COLOR_NAMES },
-  { label: 'Text', names: TEXT_COLOR_NAMES }
+  { label: 'Text', names: TEXT_COLOR_NAMES },
+  { label: 'Input', names: INPUT_COLOR_NAMES }
 ];
 const GROUPED_COLOR_NAMES = [
   ...THEME_COLOR_NAMES,
@@ -335,6 +333,7 @@ function randomPalette() {
   // surface follows text-ink; tooltips inherit surface-inverse/text-inverse
   // through their default aliases.
   if (isDark) {
+    overrides['input-bg'] = 'var(--usx-surface-3)';
     overrides['text-ink'] = '#ffffff';
     overrides['text-muted'] = '#d1d1d6';
     overrides['text-subtle'] = '#b9b9bb';
@@ -407,6 +406,7 @@ function randomSystemPalette() {
   // See randomPalette() above for why text-inverse flips opposite of text.
   // Inverse surfaces and tooltips inherit through their default aliases.
   if (isDark) {
+    overrides['input-bg'] = 'var(--usx-surface-3)';
     overrides['text-ink'] = '#ffffff';
     overrides['text-muted'] = lookupHex('gray-cool', '20') || '#d1d1d6';
     overrides['text-subtle'] = lookupHex('gray-cool', '30') || '#b9b9bb';
@@ -1688,7 +1688,7 @@ function ThemePlayground() {
   const [expandedComponentGroup, setExpandedComponentGroup] = useState(null);
   const toggleComponentGroupExpand = (label) =>
     setExpandedComponentGroup((prev) => (prev === label ? null : label));
-  // Same pattern again, scoped to the Surfaces/Borders/Text groups under
+  // Same pattern again, scoped to the Surfaces/Borders/Text/Input groups under
   // "Surface & text colors" — its own independent single-open axis.
   const [expandedSurfaceGroup, setExpandedSurfaceGroup] = useState(null);
   const toggleSurfaceGroupExpand = (label) =>
@@ -1850,7 +1850,11 @@ function ThemePlayground() {
   };
 
   const colorTokensByName = useMemo(() => new Map(themeManifest.map((t) => [t.name, t])), []);
-  const componentControls = themeManifest.filter((t) => !t.internal && ['component', 'radius-advanced', 'border-advanced', 'typography-advanced'].includes(t.group));
+  const componentControls = themeManifest.filter((t) =>
+    !t.internal &&
+    !INPUT_COLOR_NAMES.includes(t.name) &&
+    ['component', 'radius-advanced', 'border-advanced', 'typography-advanced'].includes(t.group)
+  );
   const componentControlGroups = groupComponentControls(componentControls);
   const normalizedQuery = controlQuery.trim().toLowerCase().replace(/[\s_]+/g, '-');
   const matchingControls = normalizedQuery

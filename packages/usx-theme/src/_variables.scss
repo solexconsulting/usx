@@ -819,11 +819,17 @@ $usx-border-width-inputs: usx-var($usx-border-width-inputs-var, $usx-border-widt
 $usx-combo-box-selected-bg-var: null !default;
 $usx-combo-box-selected-bg: usx-var($usx-combo-box-selected-bg-var, $usx-color-primary) !default;
 
-// ── Component tokens: Input / Textarea ───────────────────────────────────────
+// ── Component tokens: Text-entry fields ──────────────────────────────────────
+// Shared by inputs, selects, and enhanced combo boxes; textarea aliases below
+// retain their existing Sass override points.
 $usx-input-radius-var: null !default;
 $usx-input-radius: usx-var($usx-input-radius-var, $usx-radius-field) !default;
-$usx-input-bg: null !default;
-$usx-input-text: null !default;
+$usx-input-bg-var: null !default;
+$usx-input-bg: usx-var($usx-input-bg-var) !default;
+$usx-input-text-var: null !default;
+$usx-input-text: usx-var($usx-input-text-var) !default;
+$usx-input-placeholder-var: null !default;
+$usx-input-placeholder: usx-var($usx-input-placeholder-var) !default;
 $usx-input-border: $usx-color-border !default;
 $usx-input-padding: null !default;
 $usx-input-error-border-width: $usx-border-width-lg !default;
@@ -840,8 +846,9 @@ $usx-input-focus-outline: null !default;
 $usx-input-focus-outline-offset: null !default;
 $usx-textarea-radius-var: null !default;
 $usx-textarea-radius: usx-var($usx-textarea-radius-var, $usx-radius-field) !default;
-$usx-textarea-bg: null !default;
-$usx-textarea-text: null !default;
+$usx-textarea-bg: $usx-input-bg !default;
+$usx-textarea-text: $usx-input-text !default;
+$usx-textarea-placeholder: $usx-input-placeholder !default;
 $usx-textarea-border: $usx-input-border !default;
 $usx-textarea-padding: null !default;
 
