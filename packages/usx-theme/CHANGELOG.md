@@ -1,5 +1,15 @@
 # @solexllc/usx-theme
 
+## 1.0.0
+
+### Major Changes
+
+- [`be053b2`](https://github.com/solexconsulting/usx/commit/be053b2204d15dc91a3488fbd44c032f04a57ee9) Thanks [@olsonap](https://github.com/olsonap)! - Use `data-usx-theme` for named theme CSS and make ThemePicker's JavaScript apply every variant's selected value to the document. React and Django render matching selection markup; the React `onChange` prop is removed. Replace the ghost-select variant with an aligned Popover and use the Swap button mode for the two-theme variant. Hide every variant until JavaScript enhancement and remove the inactive fallback select.
+
+### Minor Changes
+
+- [`41e5224`](https://github.com/solexconsulting/usx/commit/41e5224719f6e9a6cb07a4aff58aa2d29e64831b) Thanks [@olsonap](https://github.com/olsonap)! - Add shared background, text, and placeholder theme tokens for text-entry fields, selects, and the visible inputs and option lists of composite form controls. Their defaults follow the surface and text roles; prebuilt and random dark themes use the deeper surface for field backgrounds. The Theme Playground groups them under Input. ComboBox and TimePicker icons follow the input text color. The exact USWDS Select icon contrasts with its field surface through CSS.
+
 ## 0.11.2
 
 ### Patch Changes
