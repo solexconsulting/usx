@@ -1,5 +1,11 @@
 # @solexllc/usx-react
 
+## 1.1.0
+
+### Minor Changes
+
+- [`2ef9d88`](https://github.com/solexconsulting/usx/commit/2ef9d885db1a00085c71fe81a98fd6ace9f64ea7) Thanks [@olsonap](https://github.com/olsonap)! - Identify components and parent-dependent subcomponents in the contract. Subcomponents declare their parents, and the generated manifest lists each parent's subcomponents separately from ordinary component composition. Pagination Navigation, Step Options, and Summary now have their own contracts, exports, and stories.
+
 ## 1.0.0
 
 ### Major Changes

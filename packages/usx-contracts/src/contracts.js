@@ -25,11 +25,11 @@ export const componentContracts = {
   "packages": {
     "@solexllc/usx-contracts": {
       "registry": "npm",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "@solexllc/usx-react": {
       "registry": "npm",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     "@solexllc/usx": {
       "registry": "npm",
@@ -37,7 +37,7 @@ export const componentContracts = {
     },
     "solex-usx-django": {
       "registry": "pypi",
-      "version": "1.0.0"
+      "version": "1.1.0"
     }
   },
   "components": {
