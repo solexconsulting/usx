@@ -21,6 +21,8 @@ const pageSequences = {
   NavigationOnly: [1, ellipsis, 4, 5, 6, ellipsis, 10],
   SpanishLocale: [1, ellipsis, 9, 10, 11, ellipsis, 24],
   FewPages: [1, 2, 3],
+  SinglePage: [],
+  NoResults: [],
   FirstPage: [1, 2, 3, 4, 5, ellipsis, 24],
   LastPage: [1, ellipsis, 6, 7, 8, 9, 10],
   ArrowsOnly: [],
@@ -35,6 +37,10 @@ const pageSequences = {
 
 const checkNavigation = (section, def, key) => async () => {
   const nav = section.matches('nav') ? section : section.querySelector('nav.usa-pagination');
+  if (def.totalPages !== undefined && def.totalPages <= 1) {
+    await expect(nav).toBeNull();
+    return;
+  }
   await expect(nav).toHaveAccessibleName(def.ariaLabel ?? 'Pagination');
   await expect(nav).toHaveClass('usa-pagination', 'usx-pagination__nav');
   await expect(Boolean(nav.classList.contains('usx-pagination__arrows-only'))).toBe(Boolean(def.arrowsOnly));
@@ -94,7 +100,7 @@ const checkSummary = async (section, def) => {
   const size = def.pageSize ?? def.initialPageSize ?? 10;
   await expect(summary).toHaveAttribute('aria-live', 'polite');
   await expect(summary).toHaveAttribute('aria-atomic', 'true');
-  await expect(summary).toHaveTextContent(`Showing ${((page - 1) * size) + 1}–${Math.min(page * size, def.totalItems)} of ${def.totalItems} ${def.itemLabel ?? 'items'}`);
+  await expect(summary).toHaveTextContent(`Showing ${def.totalItems === 0 ? 0 : ((page - 1) * size) + 1}–${Math.min(page * size, def.totalItems)} of ${def.totalItems} ${def.itemLabel ?? 'items'}`);
 };
 
 const checks = Object.fromEntries(Object.entries(storyDefs).map(([key, def]) => [

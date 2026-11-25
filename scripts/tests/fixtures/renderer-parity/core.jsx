@@ -3,6 +3,19 @@ import React from 'react';
 // Focused regressions supplement every component's contract example.
 export default [
   {
+    component: 'pagination',
+    cases: [
+      {
+        label: 'one page keeps summary and page size without navigation',
+        props: { currentPage: 1, pageSize: 10, totalItems: 8, totalPages: 1, pages: [] },
+      },
+      {
+        label: 'zero results keeps summary and page size without navigation',
+        props: { currentPage: 1, pageSize: 10, totalItems: 0, totalPages: 0, pages: [] },
+      },
+    ],
+  },
+  {
     component: 'accordion-item',
     cases: [
       {

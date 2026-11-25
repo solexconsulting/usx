@@ -21,6 +21,7 @@ export function getPageItems(currentPage: number, totalPages: number) {
   const page = (p: number) => ({ type: 'page' as const, page: p });
   const ellipsis = (key: string) => ({ type: 'ellipsis' as const, key });
 
+  if (totalPages <= 1) return [];
   if (totalPages <= 7) {
     return Array.from({ length: totalPages }, (_, i) => page(i + 1));
   }
@@ -80,6 +81,7 @@ export default function PaginationNavigation({
   onPageChange,
 }: PaginationNavigationProps) {
   const unbounded = totalPages === undefined || totalPages === null;
+  if (!unbounded && totalPages <= 1) return null;
   const items = unbounded
     ? getUnboundedPageItems(currentPage)
     : getPageItems(currentPage, totalPages!);

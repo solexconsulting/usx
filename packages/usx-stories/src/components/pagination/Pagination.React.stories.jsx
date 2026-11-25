@@ -105,6 +105,18 @@ export const storyDefs = {
     totalPages: 3,
     pageUrlPrefix: '?page=',
   },
+  SinglePage: {
+    totalItems: 8,
+    currentPage: 1,
+    pageSize: 10,
+    totalPages: 1,
+  },
+  NoResults: {
+    totalItems: 0,
+    currentPage: 1,
+    pageSize: 10,
+    totalPages: 0,
+  },
   FirstPage: {
     totalItems: 240,
     initialPage: 1,
@@ -170,7 +182,7 @@ export const storyDefs = {
 for (const [key, def] of Object.entries(storyDefs)) {
   def.stepOptionsId = `pagination-${key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}-step-options`;
   if (def.currentPage) {
-    def.pages = def.totalPages
+    def.pages = def.totalPages != null
       ? getPageItems(def.currentPage, def.totalPages)
       : getUnboundedPageItems(def.currentPage);
   }
@@ -277,6 +289,14 @@ export const SpanishLocale = {
 
 export const FewPages = {
   args: storyDefs.FewPages,
+};
+
+export const SinglePage = {
+  args: storyDefs.SinglePage,
+};
+
+export const NoResults = {
+  args: storyDefs.NoResults,
 };
 
 export const FirstPage = {

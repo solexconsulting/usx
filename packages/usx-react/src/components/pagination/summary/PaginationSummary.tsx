@@ -16,7 +16,7 @@ export default function PaginationSummary({
   itemLabel = 'items',
   className = '',
 }: PaginationSummaryProps) {
-  const firstItem = (currentPage - 1) * pageSize + 1;
+  const firstItem = totalItems === 0 ? 0 : (currentPage - 1) * pageSize + 1;
   const lastItem = Math.min(currentPage * pageSize, totalItems);
   const classes = ClassNames(
     'usa-label',

@@ -33,7 +33,7 @@
   <div class="usx-pagination__container">
 
     {# ── Summary (left slot) ───────────────────────────────── #}
-    {% if totalItems %}
+    {% if totalItems is not None %}
       {% if showSummary != False and showSummary != "false" %}
       <div class="usx-pagination__container-summary">
         {% pagination_summary firstItem=firstItem lastItem=lastItem currentPage=resolvedPage pageSize=resolvedPageSize totalItems=totalItems itemLabel=itemLabel|default:"items" %}{% endpagination_summary %}
@@ -42,6 +42,7 @@
     {% endif %}
 
     {# ── Nav + step options (right slot) ─────────────────── #}
+    {% if showStepOptions != False or unbounded or totalPages > 1 %}
     <div class="usx-pagination__container-end">
 
       {% if showStepOptions != False %}
@@ -51,6 +52,7 @@
       {% pagination_navigation currentPage=resolvedPage totalPages=totalPages pages=pages unbounded=unbounded arrowsOnly=arrowsOnly prevLabel=prevLabel|default:"Previous" nextLabel=nextLabel|default:"Next" hideLinkText=hideLinkText|default_if_none:True ariaLabel=ariaLabel|default:"Pagination" pageUrlPrefix=pageUrlPrefix pageSize=resolvedPageSize totalItems=totalItems %}{% endpagination_navigation %}
 
     </div>
+    {% endif %}
 
   </div>
 </div>

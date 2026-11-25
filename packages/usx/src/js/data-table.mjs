@@ -126,6 +126,7 @@ function enhance(shell) {
       : 'No rows';
     const nav = pager?.querySelector('.usx-pagination__nav');
     if (nav) {
+      nav.classList.toggle('display-none', totalPages <= 1);
       nav.dataset.usxPaginationCurrentPage = String(page);
       nav.dataset.usxPaginationPageSize = String(pageSize);
       nav.dataset.usxPaginationTotalItems = String(total);
