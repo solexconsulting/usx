@@ -16,6 +16,7 @@
 //
 // Usage: node test/theme-check.mjs   (from packages/usx; also `pnpm test`)
 
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as sass from 'sass';
@@ -190,6 +191,50 @@ function expectDeclaration(rules, label, selector, property, expected) {
 
 const defaultRules = cssRules(defaultCss);
 const themedRules = cssRules(themedCss);
+for (const [name, value] of [['input-bg', 'var(--usx-surface-1)'], ['input-text', 'var(--usx-text-ink)'], ['input-placeholder', 'var(--usx-text-subtle)']]) {
+  if (byName.get(name)?.defaultValue !== value) errors.push(`${name} must follow its surface or text role`);
+}
+for (const selector of [
+  '.usa-input.usx-input:not(:disabled, [aria-disabled=true])::placeholder',
+  '.usa-combo-box__input:not(:disabled, [aria-disabled=true])::placeholder',
+  '.usa-textarea.usx-textarea:not(:disabled, [aria-disabled=true])::placeholder',
+  '.usa-select.usx-select:has(> option:first-child:checked):not(:disabled, [aria-disabled=true])',
+]) {
+  expectDeclaration(defaultRules, 'unconfigured placeholder color', selector, 'color', undefined);
+  expectDeclaration(themedRules, 'runtime placeholder color', selector, 'color', 'var(--usx-input-placeholder)');
+}
+const selectIconSource = fs.readFileSync(path.join(pkgDir, 'src/components/_select.scss'), 'utf8');
+const uswdsSelectIcon = fs.readFileSync(path.resolve(pkgDir, '../../node_modules/@uswds/uswds/dist/img/usa-icons/unfold_more.svg'), 'utf8');
+const uswdsSelectPath = uswdsSelectIcon.match(/<path d="([^"]+)"/)?.[1];
+if (!uswdsSelectPath || !selectIconSource.includes(uswdsSelectPath)) {
+  errors.push('Select icon must use the exact USWDS unfold_more path');
+}
+const selectIconSelector = '.usa-select.usx-select:not(:disabled, [aria-disabled=true], [multiple])';
+expectDeclaration(defaultRules, 'unconfigured select icon', selectIconSelector, 'background-image', undefined);
+expectDeclaration(themedRules, 'themed select icon blend', selectIconSelector, 'background-blend-mode', 'difference, normal');
+for (const name of ['clear-input', 'toggle-list']) {
+  const selector = `.usa-combo-box__${name}:not(:disabled, [aria-disabled=true])`;
+  expectDeclaration(defaultRules, 'unconfigured combo icon', selector, 'background-image', undefined);
+  expectDeclaration(themedRules, 'themed combo icon', selector, 'background-image', 'none');
+  expectDeclaration(defaultRules, 'unconfigured combo icon color', `${selector}::before`, 'background-color', undefined);
+  expectDeclaration(themedRules, 'runtime combo icon color', `${selector}::before`, 'background-color', 'var(--usx-input-text)');
+  if (!themedRules.some((rule) => rule.selector === `${selector}::before` && rule.declarations.get('mask')?.includes('data:image/svg+xml'))) {
+    errors.push(`${name} must use a themeable icon mask`);
+  }
+}
+for (const selector of [
+  '.usa-input.usx-input:not(:disabled, [aria-disabled=true])',
+  '.usa-select.usx-select:not(:disabled, [aria-disabled=true])',
+  '.usa-textarea.usx-textarea:not(:disabled, [aria-disabled=true])',
+  '.usa-combo-box__input:not(:disabled, [aria-disabled=true])',
+  '.usa-combo-box__list',
+]) {
+  for (const [property, token] of [['background-color', 'input-bg'], ['color', 'input-text']]) {
+    expectDeclaration(defaultRules, 'unconfigured field color', selector, property,
+      selector === '.usa-combo-box__list' && property === 'color' ? '#1b1b1b' : undefined);
+    expectDeclaration(themedRules, 'runtime field color', selector, property, `var(--usx-${token})`);
+  }
+}
 for (const selector of [
   '.usa-table.usx-table.usa-table--striped tbody tr:nth-child(odd) td',
   '.usa-table.usx-table.usa-table--striped tbody tr:nth-child(odd) th',

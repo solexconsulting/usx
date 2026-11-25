@@ -130,6 +130,22 @@ or **Component controls → Pagination → pagination-button-radius**:
 Reset the pagination override to restore its shared button radius. The matching
 Sass variable is `$usx-pagination-button-radius`, with an optional `-var` hook.
 
+### Text-entry field colors
+
+`input-bg`, `input-text`, and `input-placeholder` control the field surface,
+value text, and placeholder text in Input, TextArea, Select, Search, and the
+input portions of ComboBox, TimePicker, and DatePicker. The ComboBox and
+TimePicker option lists use the same surface and text colors. These tokens
+follow `surface-1`, `text-ink`, and `text-subtle` by default, respectively.
+Prebuilt and randomly generated dark themes use `surface-3` for `input-bg`.
+The tokens appear together under Input in the Theme Playground's Surface & text
+colors section. Disabled fields keep their USWDS colors. Override a token in
+a Sass `$themes` map or set its CSS custom property (`--usx-input-bg`,
+`--usx-input-text`, or `--usx-input-placeholder`).
+Select's empty option uses `input-placeholder`. The ComboBox and TimePicker
+clear and dropdown icons follow `input-text`. Select's USWDS dropdown icon
+contrasts with the field background using CSS alone.
+
 ### Border colors
 
 Neutral borders use four independent roles. As with text, `muted` is stronger

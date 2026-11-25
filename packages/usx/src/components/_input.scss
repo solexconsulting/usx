@@ -13,6 +13,18 @@
 .usa-input.usx-input, .usa-select.usx-select, .usa-combo-box__input {
   border-radius: usx-when($usx-input-radius);
   padding: usx-when($usx-input-padding);
+
+  // DatePicker keeps .usx-input; USWDS creates .usa-combo-box__input for combo/time pickers.
+  &:not(:disabled, [aria-disabled="true"]) {
+    background-color: usx-when($usx-input-bg);
+    color: usx-when($usx-input-text);
+  }
+}
+
+.usa-input.usx-input, .usa-combo-box__input {
+  &:not(:disabled, [aria-disabled="true"])::placeholder {
+    color: usx-when($usx-input-placeholder);
+  }
 }
 
 /* ---------------------------------- */
@@ -24,8 +36,6 @@
 .usa-input.usx-input, .usa-select.usx-select {
   &:not(.usa-input--error):not(.usa-input--success) {
     &:not(:disabled, [aria-disabled="true"]) {
-      background-color: usx-when($usx-input-bg);
-      color: usx-when($usx-input-text);
       border-color: usx-when($usx-input-border);
     }
   }

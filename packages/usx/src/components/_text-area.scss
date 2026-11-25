@@ -19,10 +19,15 @@
 
 /* ---------------------------------- */
 
-.usa-textarea.usx-textarea:not(.usa-input--error):not(.usa-input--success) {
-  &:not(:disabled, [aria-disabled="true"]) {
-    background-color: usx-when($usx-textarea-bg);
-    color: usx-when($usx-textarea-text);
+.usa-textarea.usx-textarea:not(:disabled, [aria-disabled="true"]) {
+  background-color: usx-when($usx-textarea-bg);
+  color: usx-when($usx-textarea-text);
+
+  &::placeholder {
+    color: usx-when($usx-textarea-placeholder);
+  }
+
+  &:not(.usa-input--error, .usa-input--success) {
     border-color: usx-when($usx-textarea-border);
   }
 }

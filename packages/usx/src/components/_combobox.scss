@@ -2,18 +2,11 @@
 
 /* stylelint-disable selector-class-pattern -- Public USX classes use BEM naming. */
 
-// Real USWDS's compiled CSS only pins a hardcoded ink color on
-// `.usa-combo-box__input` (via the shared %block-input-styles placeholder);
-// the dropdown list/options never get their own `color`, relying on the
-// assumption that inherited/ambient text color is always dark. That holds in
-// real USWDS (no runtime theme switching) but breaks under our dark presets,
-// which flip ambient text to a light color while the list keeps its
-// permanently-white background (same "form controls don't flip surfaces"
-// convention as $usx-input-bg/-text, both always null) — making
-// options illegible. Pin the same ink color the input already gets so list
-// text stays legible under every preset.
+// The USWDS option list inherits ambient text color while keeping a white
+// background. Match it to the input field, including its unthemed ink color.
 .usa-combo-box__list {
-  color: #1b1b1b;
+  background-color: usx-when($usx-input-bg);
+  color: usx-when($usx-input-text, $usx-input-text, #1b1b1b);
   border-color: usx-when($usx-input-border);
 }
 
@@ -28,6 +21,38 @@
 .usa-combo-box__list-option--selected {
   background-color: usx-when($usx-combo-box-selected-bg);
   border-color: usx-when($usx-combo-box-selected-bg);
+}
+
+@if $usx-input-text {
+  $clear-icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/%3E%3C/svg%3E';
+  $toggle-icon: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"/%3E%3C/svg%3E';
+
+  @media (forced-colors: none) {
+    .usa-combo-box__clear-input,
+    .usa-combo-box__toggle-list {
+      &:not(:disabled, [aria-disabled="true"]) {
+        background-image: none;
+
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background-color: $usx-input-text;
+          pointer-events: none;
+        }
+      }
+    }
+
+    .usa-combo-box__clear-input:not(:disabled, [aria-disabled="true"])::before {
+      mask: url("#{$clear-icon}") center / auto 1.5rem no-repeat;
+      -webkit-mask: url("#{$clear-icon}") center / auto 1.5rem no-repeat;
+    }
+
+    .usa-combo-box__toggle-list:not(:disabled, [aria-disabled="true"])::before {
+      mask: url("#{$toggle-icon}") center / auto 2rem no-repeat;
+      -webkit-mask: url("#{$toggle-icon}") center / auto 2rem no-repeat;
+    }
+  }
 }
 
 .usx-combo-box,
