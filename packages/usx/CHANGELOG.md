@@ -1,5 +1,27 @@
 # @solexllc/usx
 
+## 1.0.0
+
+### Major Changes
+
+- [`be053b2`](https://github.com/solexconsulting/usx/commit/be053b2204d15dc91a3488fbd44c032f04a57ee9) Thanks [@olsonap](https://github.com/olsonap)! - Use `data-usx-theme` for named theme CSS and make ThemePicker's JavaScript apply every variant's selected value to the document. React and Django render matching selection markup; the React `onChange` prop is removed. Replace the ghost-select variant with an aligned Popover and use the Swap button mode for the two-theme variant. Hide every variant until JavaScript enhancement and remove the inactive fallback select.
+
+### Minor Changes
+
+- [`1dc6927`](https://github.com/solexconsulting/usx/commit/1dc6927a1807b02d52ec5b1ae0922a6c60b695d2) Thanks [@olsonap](https://github.com/olsonap)! - Add tight padding to Button, with regular, big, and icon-only examples. Use it for compact actions in Modal, Popover, and Chat, and add a story for Popover's close icon.
+
+- [`46cacb5`](https://github.com/solexconsulting/usx/commit/46cacb5da2fe528c7fe8363193f8d89c46072652) Thanks [@olsonap](https://github.com/olsonap)! - Add a Swap button mode that switches text or icons on click and exposes the native button click event. React and Django render the same accessible toggle button markup, and USX JavaScript enhances its pressed state.
+
+- [`41e5224`](https://github.com/solexconsulting/usx/commit/41e5224719f6e9a6cb07a4aff58aa2d29e64831b) Thanks [@olsonap](https://github.com/olsonap)! - Add shared background, text, and placeholder theme tokens for text-entry fields, selects, and the visible inputs and option lists of composite form controls. Their defaults follow the surface and text roles; prebuilt and random dark themes use the deeper surface for field backgrounds. The Theme Playground groups them under Input. ComboBox and TimePicker icons follow the input text color. The exact USWDS Select icon contrasts with its field surface through CSS.
+
+### Patch Changes
+
+- [`33df42c`](https://github.com/solexconsulting/usx/commit/33df42c05b2e5c970a4496e1dca0a5f7a3a72c4c) Thanks [@olsonap](https://github.com/olsonap)! - Center card images when a height limit makes them narrower than the card media area.
+
+- [`42ca44c`](https://github.com/solexconsulting/usx/commit/42ca44c47adc0b5a129b2c5ed9f1876a1d93c6e0) Thanks [@olsonap](https://github.com/olsonap)! - Hide pagination navigation when a bounded result has at most one page. Keep the item summary and page-size selector visible, including for zero results.
+- Updated dependencies [[`41e5224`](https://github.com/solexconsulting/usx/commit/41e5224719f6e9a6cb07a4aff58aa2d29e64831b), [`be053b2`](https://github.com/solexconsulting/usx/commit/be053b2204d15dc91a3488fbd44c032f04a57ee9)]:
+  - @solexllc/usx-theme@1.0.0
+
 ## 0.14.0
 
 ### Minor Changes
