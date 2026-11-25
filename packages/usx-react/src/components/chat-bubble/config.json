@@ -2,6 +2,8 @@
   "name": "chat-bubble",
   "template": "chat-bubble/chat-bubble.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat-message"],
   "default": {
     "text": "Your appointment is confirmed."
   },

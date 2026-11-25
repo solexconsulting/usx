@@ -4,7 +4,7 @@
 {% with previousPages=resolvedPage|add:"-1" %}
 {% widthratio previousPages 1 resolvedPageSize as computedOffset %}
 {% widthratio resolvedPage 1 resolvedPageSize as computedLast %}
-<p class="usa-label usx-label usx-pagination__summary" aria-live="polite" aria-atomic="true">
+<p class="usa-label usx-label usx-pagination__summary{% if className %} {{ className }}{% endif %}" aria-live="polite" aria-atomic="true">
   Showing <strong>{% if totalItems == 0 %}0–0{% else %}{% if firstItem %}{{ firstItem }}{% else %}{{ computedOffset|add:"1" }}{% endif %}–{% if lastItem %}{{ lastItem }}{% elif totalItems and computedLast|add:"0" > totalItems %}{{ totalItems }}{% else %}{{ computedLast }}{% endif %}{% endif %}</strong>
   of <strong>{{ totalItems }}</strong> {{ itemLabel }}
 </p>

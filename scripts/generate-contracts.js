@@ -33,6 +33,8 @@ contract's "version" (that component's config.json version).
 Each contract includes exact renderer bindings. "examples.default" is sample
 content from config.default, NOT a runtime default; declared defaults remain
 on props. Optional prop.renderers records implementation-specific differences.
+"kind" identifies a component or subcomponent. Subcomponents list their
+"parents"; parent contracts list their derived "subcomponents".
 
 A prop with a "component" field (optionally with "omit"/"properties") is a
 REFERENCE to another entry in "components", not an inlined copy — look up that

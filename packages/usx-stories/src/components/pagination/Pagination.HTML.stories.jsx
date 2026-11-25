@@ -29,10 +29,6 @@ const pageSequences = {
   ArrowsOnlyNoExtras: [],
   IconOnlyArrows: [1, ellipsis, 9, 10, 11, ellipsis, 24],
   WithSummaryAndStepOptions: [1, ellipsis, 9, 10, 11, ellipsis, 24],
-  NavigationBounded: [1, ellipsis, 9, 10, 11, ellipsis, 24],
-  NavigationUnbounded: [1, ellipsis, 9, 10, 11, ellipsis],
-  NavigationIconOnly: [1, ellipsis, 4, 5, 6, ellipsis, 20],
-  NavigationUnboundedIconOnly: [1, ellipsis, 4, 5, 6, ellipsis],
 };
 
 const checkNavigation = (section, def, key) => async () => {
@@ -131,15 +127,6 @@ const checks = Object.fromEntries(Object.entries(storyDefs).map(([key, def]) => 
   },
 ]));
 
-const subNavigation = {
-  'Sub: Navigation (bounded)': ['NavigationBounded', { currentPage: 10, totalPages: 24 }],
-  'Sub: Navigation (unbounded)': ['NavigationUnbounded', { currentPage: 10 }],
-  'Sub: Navigation (icon-only prev/next)': ['NavigationIconOnly', { currentPage: 5, totalPages: 20, hideLinkText: true }],
-  'Sub: Navigation (unbounded, icon-only)': ['NavigationUnboundedIconOnly', { currentPage: 5, hideLinkText: true }],
-};
-for (const [title, [key, def]] of Object.entries(subNavigation)) checks[title] = (section) => checkNavigation(section, def, key)();
-checks['Sub: Step Options'] = (section) => checkStepOptions(section, { stepOptionsId: 'pagination-sub-step-options', pageSize: 10 });
-checks['Sub: Summary'] = (section) => checkSummary(section, { currentPage: 3, pageSize: 10, totalItems: 100 });
 const play = createAllVariantsPlay(checks);
 
 export const AllVariantsReact = {

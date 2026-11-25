@@ -2,6 +2,8 @@
   "name": "chat-directory-item",
   "template": "chat-directory-item/chat-directory-item.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat-directory"],
   "default": {
     "id": "directory-item",
     "title": "Jordan Lee",

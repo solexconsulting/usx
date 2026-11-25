@@ -2,6 +2,8 @@
   "name": "accordion-item",
   "template": "accordion-item/accordion-item.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["accordion"],
   "required": ["id", "title"],
   "default": {
     "id": "accordion-item-example",

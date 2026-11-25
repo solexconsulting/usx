@@ -2,6 +2,8 @@
   "name": "chat-attachment",
   "template": "chat-attachment/chat-attachment.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat-attachments"],
   "default": {
     "name": "Notes.txt",
     "url": "/notes.txt"

@@ -3,7 +3,7 @@
 {# Props: currentPage, totalPages, pages, unbounded, arrowsOnly, #}
 {#        prevLabel, nextLabel, hideLinkText, ariaLabel, pageUrlPrefix #}
 {% if unbounded or totalPages > 1 %}
-<nav aria-label="{{ ariaLabel }}" class="usa-pagination usx-pagination__nav{% if arrowsOnly %} usx-pagination__arrows-only{% endif %}" data-usx-pagination-current-page="{{ currentPage }}" data-usx-pagination-page-size="{{ pageSize|default:10 }}" data-usx-pagination-total-items="{{ totalItems|default_if_none:'' }}">
+<nav aria-label="{{ ariaLabel }}" class="usa-pagination usx-pagination__nav{% if arrowsOnly %} usx-pagination__arrows-only{% endif %}{% if className %} {{ className }}{% endif %}" data-usx-pagination-current-page="{{ currentPage }}" data-usx-pagination-page-size="{{ pageSize|default:10 }}" data-usx-pagination-total-items="{{ totalItems|default_if_none:'' }}">
   <ul class="usa-pagination__list">
 
     {# ── Previous arrow ──────────────────────────────────────────────── #}

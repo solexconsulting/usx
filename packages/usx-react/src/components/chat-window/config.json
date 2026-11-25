@@ -2,6 +2,8 @@
   "name": "chat-window",
   "template": "chat-window/chat-window.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat"],
   "default": {
     "id": "chat-window-example",
     "title": "Support",

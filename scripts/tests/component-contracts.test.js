@@ -34,7 +34,55 @@ test('release identities are explicit and separate from component versions', () 
   }
   assert.equal(manifest.packages['solex-usx-django'].registry, 'pypi');
   assert.ok(manifest.packages['solex-usx-django'].version);
-  assert.equal(manifest.schemaVersion, 1);
+  assert.equal(manifest.schemaVersion, 2);
+});
+
+test('subcomponent relationships are explicit and distinct from composition', () => {
+  for (const [name, contract] of Object.entries(manifest.components)) {
+    assert.ok(['component', 'subcomponent'].includes(contract.kind), name);
+    if (contract.kind === 'subcomponent') {
+      assert.ok(contract.parents.length > 0, name);
+      for (const parent of contract.parents) {
+        assert.ok(manifest.components[parent].subcomponents.includes(name), `${parent} -> ${name}`);
+      }
+    } else {
+      assert.equal(contract.parents, undefined, name);
+    }
+    for (const child of contract.subcomponents || []) {
+      assert.ok(manifest.components[child].parents.includes(name), `${name} -> ${child}`);
+    }
+  }
+  assert.deepEqual(manifest.components.accordion.subcomponents, ['accordion-item']);
+  assert.deepEqual(manifest.components['accordion-item'].parents, ['accordion']);
+  const paginationParts = ['pagination-navigation', 'pagination-step-options', 'pagination-summary'];
+  assert.deepEqual(manifest.components.pagination.subcomponents, paginationParts);
+  for (const name of paginationParts) {
+    assert.equal(manifest.components[name].kind, 'subcomponent');
+    assert.deepEqual(manifest.components[name].parents, ['pagination']);
+  }
+  const chatParents = {
+    'chat-attachment': 'chat-attachments',
+    'chat-attachments': 'chat-bubble',
+    'chat-bubble': 'chat-message',
+    'chat-composer': 'chat',
+    'chat-context': 'chat',
+    'chat-controls': 'chat',
+    'chat-directory': 'chat',
+    'chat-directory-item': 'chat-directory',
+    'chat-history': 'chat',
+    'chat-message': 'chat',
+    'chat-message-actions': 'chat-message',
+    'chat-window': 'chat',
+  };
+  assert.deepEqual(Object.keys(manifest.components).filter((name) => name.startsWith('chat-')).sort(), Object.keys(chatParents).sort());
+  for (const [name, parent] of Object.entries(chatParents)) {
+    assert.equal(manifest.components[name].kind, 'subcomponent', name);
+    assert.deepEqual(manifest.components[name].parents, [parent], name);
+  }
+  for (const name of ['label', 'tag', 'button', 'avatar']) {
+    assert.equal(manifest.components[name].kind, 'component');
+  }
+  assert.equal(manifest.components['tag-group'].subcomponents, undefined);
 });
 
 test('example content is preserved separately and never merged into prop defaults', () => {
@@ -94,11 +142,30 @@ test('source metadata validation rejects malformed renderer annotations', () => 
   assert.equal(validate(config), false);
 });
 
+test('subcomponent configs require parents and ordinary components reject them', () => {
+  const schema = JSON.parse(fs.readFileSync(SCHEMA_PATH, 'utf8'));
+  const validate = new Ajv({ allowUnionTypes: true }).compile(schema);
+  const item = structuredClone(configs.get('accordion-item'));
+  delete item.parents;
+  assert.equal(validate(item), false);
+  const tag = structuredClone(configs.get('tag'));
+  tag.parents = ['tag-group'];
+  assert.equal(validate(tag), false);
+});
+
 test('generation rejects a missing or external template instead of publishing a broken binding', () => {
   for (const template of ['missing/template.django.html', '../../package.json']) {
     const changed = new Map(configs);
     changed.set('button', { ...configs.get('button'), template });
     assert.throws(() => buildContractManifest(changed), /Missing or invalid Django template/);
+  }
+});
+
+test('generation rejects invalid subcomponent parents', () => {
+  for (const parent of ['missing', 'accordion-item']) {
+    const changed = new Map(configs);
+    changed.set('accordion-item', { ...configs.get('accordion-item'), parents: [parent] });
+    assert.throws(() => buildContractManifest(changed), /Invalid parent/);
   }
 });
 
@@ -164,7 +231,7 @@ test('composed children reference their component contracts', () => {
   assert.equal(Object.hasOwn(checkboxGroup.props, 'options'), false);
 });
 
-test('Accordion items reference the standalone AccordionItem contract', () => {
+test('Accordion items reference the AccordionItem contract', () => {
   const accordion = manifest.components.accordion;
   const item = manifest.components['accordion-item'];
   assert.equal(accordion.props.items.items.component, 'accordion-item');

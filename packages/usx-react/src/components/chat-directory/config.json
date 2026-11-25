@@ -2,6 +2,8 @@
   "name": "chat-directory",
   "template": "chat-directory/chat-directory.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat"],
   "default": {
     "view": "inbox",
     "conversations": []

@@ -30,10 +30,18 @@ Accordion's `headingAs`, `headingClassName`, and `contentClassName` apply to
 all items and override those item-level values.
 When both `children` and `content` are supplied, `children` takes precedence.
 
-`AccordionItem` can also be rendered independently inside an
-`usa-accordion` container. In that case its ID is required and its own heading
+`AccordionItem` still needs an Accordion or an `usa-accordion` container.
+When used directly inside that container, its ID is required and its own heading
 level and classes apply. Load or initialize the USWDS accordion enhancement
 on the container as described above.
+
+## Pagination parts
+
+`PaginationNavigation`, `PaginationStepOptions`, and `PaginationSummary` are
+exported subcomponents of `Pagination`. They can be rendered directly when an
+application needs to arrange the parts itself. Django exposes the matching
+`pagination_navigation`, `pagination_step_options`, and `pagination_summary`
+template tags.
 
 ## Optional Chat
 

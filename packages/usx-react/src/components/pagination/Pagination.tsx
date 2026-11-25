@@ -1,8 +1,8 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import PaginationNavigation from './navigation/PaginationNavigation';
-import PaginationStepOptions from './step-options/PaginationStepOptions';
-import PaginationSummary from './summary/PaginationSummary';
+import PaginationNavigation from '../pagination-navigation/PaginationNavigation';
+import PaginationStepOptions from '../pagination-step-options/PaginationStepOptions';
+import PaginationSummary from '../pagination-summary/PaginationSummary';
 import PaginationContainer from './container/PaginationContainer';
 
 export interface PaginationProps {
@@ -12,6 +12,7 @@ export interface PaginationProps {
   currentPage?: number;
   pageSize?: number;
   pageSizeOptions?: number[];
+  stepOptionsLabel?: string;
   stepOptionsId?: string;
   totalItems?: number;
   unbounded?: boolean;
@@ -36,6 +37,7 @@ export default function Pagination({
   currentPage: page,
   pageSize: size,
   pageSizeOptions = [10, 25, 50, 100],
+  stepOptionsLabel = 'Items per page',
   stepOptionsId,
   totalItems,
   unbounded = false,
@@ -84,6 +86,7 @@ export default function Pagination({
     <PaginationStepOptions
       pageSize={pageSize}
       pageSizeOptions={pageSizeOptions}
+      label={stepOptionsLabel}
       id={stepOptionsId}
       onPageSizeChange={onPageSizeChange}
     />

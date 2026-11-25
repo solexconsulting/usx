@@ -1,0 +1,61 @@
+{
+  "name": "pagination-step-options",
+  "template": "pagination-step-options/pagination-step-options.django.html",
+  "version": 1,
+  "kind": "subcomponent",
+  "parents": [
+    "pagination"
+  ],
+  "required": [
+    "pageSize"
+  ],
+  "default": {
+    "id": "pagination-step-options-example",
+    "pageSize": 10
+  },
+  "props": {
+    "id": {
+      "type": "string",
+      "default": "pagination-step-options",
+      "description": "ID of the page-size select."
+    },
+    "label": {
+      "type": "string",
+      "default": "Items per page",
+      "description": "Label for the page-size select."
+    },
+    "pageSize": {
+      "type": "number",
+      "description": "Current page size to render. Consumers supply a new value after loading data."
+    },
+    "pageSizeOptions": {
+      "type": "array",
+      "default": [
+        10,
+        25,
+        50,
+        100
+      ],
+      "description": "Available page size choices",
+      "items": {
+        "type": "number",
+        "description": "Selectable page size."
+      }
+    },
+    "onPageSizeChange": {
+      "type": "function",
+      "description": "React-only callback when the page size changes.",
+      "renderers": {
+        "django": {
+          "supported": false,
+          "description": "Django renders the select; the host handles changes."
+        }
+      }
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes on the outer wrapper"
+    }
+  }
+}

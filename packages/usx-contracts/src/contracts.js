@@ -11,6 +11,8 @@ contract's "version" (that component's config.json version).
 Each contract includes exact renderer bindings. "examples.default" is sample
 content from config.default, NOT a runtime default; declared defaults remain
 on props. Optional prop.renderers records implementation-specific differences.
+"kind" identifies a component or subcomponent. Subcomponents list their
+"parents"; parent contracts list their derived "subcomponents".
 
 A prop with a "component" field (optionally with "omit"/"properties") is a
 REFERENCE to another entry in "components", not an inlined copy — look up that
@@ -19,7 +21,7 @@ merge this node's own "properties" as overrides/additions.
 */
 export const componentContracts = {
   "library": "usx",
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "packages": {
     "@solexllc/usx-contracts": {
       "registry": "npm",
@@ -42,6 +44,10 @@ export const componentContracts = {
     "accordion": {
       "component": "accordion",
       "version": 4,
+      "kind": "component",
+      "subcomponents": [
+        "accordion-item"
+      ],
       "required": [],
       "props": {
         "extraAttributes": {
@@ -154,6 +160,10 @@ export const componentContracts = {
     "accordion-item": {
       "component": "accordion-item",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "accordion"
+      ],
       "required": [
         "id",
         "title"
@@ -237,6 +247,7 @@ export const componentContracts = {
     "alert": {
       "component": "alert",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "staticBaseUrl": {
@@ -331,6 +342,7 @@ export const componentContracts = {
     "attribution": {
       "component": "attribution",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "avatarProps": {
@@ -383,6 +395,7 @@ export const componentContracts = {
     "avatar": {
       "component": "avatar",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "href": {
@@ -477,6 +490,7 @@ export const componentContracts = {
     "avatar-group": {
       "component": "avatar-group",
       "version": 1,
+      "kind": "component",
       "required": [],
       "props": {
         "avatarProps": {
@@ -559,6 +573,7 @@ export const componentContracts = {
     "back-to-top": {
       "component": "back-to-top",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "label": {
@@ -659,6 +674,7 @@ export const componentContracts = {
     "banner": {
       "component": "banner",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "extraAttributes": {
@@ -737,6 +753,7 @@ export const componentContracts = {
     "breadcrumb": {
       "component": "breadcrumb",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "items": {
@@ -831,6 +848,7 @@ export const componentContracts = {
     "button": {
       "component": "button",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "label": {
@@ -976,6 +994,7 @@ export const componentContracts = {
     "button-group": {
       "component": "button-group",
       "version": 1,
+      "kind": "component",
       "required": [],
       "props": {
         "buttonProps": {
@@ -1039,6 +1058,7 @@ export const componentContracts = {
     "calendar-date": {
       "component": "calendar-date",
       "version": 1,
+      "kind": "component",
       "required": [],
       "props": {
         "datetime": {
@@ -1075,6 +1095,7 @@ export const componentContracts = {
     "callout": {
       "component": "callout",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "className": {
@@ -1168,6 +1189,7 @@ export const componentContracts = {
     "card": {
       "component": "card",
       "version": 5,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -1303,6 +1325,7 @@ export const componentContracts = {
     "card-group": {
       "component": "card-group",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "cardProps": {
@@ -1420,6 +1443,7 @@ export const componentContracts = {
     "carousel": {
       "component": "carousel",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -1514,6 +1538,7 @@ export const componentContracts = {
     "character-count": {
       "component": "character-count",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "extraAttributes": {
@@ -1622,6 +1647,16 @@ export const componentContracts = {
     "chat": {
       "component": "chat",
       "version": 2,
+      "kind": "component",
+      "subcomponents": [
+        "chat-composer",
+        "chat-context",
+        "chat-controls",
+        "chat-directory",
+        "chat-history",
+        "chat-message",
+        "chat-window"
+      ],
       "required": [
         "id"
       ],
@@ -2928,6 +2963,10 @@ export const componentContracts = {
     "chat-attachment": {
       "component": "chat-attachment",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat-attachments"
+      ],
       "required": [],
       "props": {
         "name": {
@@ -2972,6 +3011,13 @@ export const componentContracts = {
     "chat-attachments": {
       "component": "chat-attachments",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat-bubble"
+      ],
+      "subcomponents": [
+        "chat-attachment"
+      ],
       "required": [],
       "props": {
         "items": {
@@ -3014,6 +3060,13 @@ export const componentContracts = {
     "chat-bubble": {
       "component": "chat-bubble",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat-message"
+      ],
+      "subcomponents": [
+        "chat-attachments"
+      ],
       "required": [],
       "props": {
         "text": {
@@ -3101,6 +3154,10 @@ export const componentContracts = {
     "chat-composer": {
       "component": "chat-composer",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat"
+      ],
       "required": [
         "id"
       ],
@@ -3254,6 +3311,10 @@ export const componentContracts = {
     "chat-context": {
       "component": "chat-context",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat"
+      ],
       "required": [],
       "props": {
         "label": {
@@ -3307,6 +3368,10 @@ export const componentContracts = {
     "chat-controls": {
       "component": "chat-controls",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat"
+      ],
       "required": [],
       "props": {
         "suggestedQuestions": {
@@ -3391,6 +3456,13 @@ export const componentContracts = {
     "chat-directory": {
       "component": "chat-directory",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat"
+      ],
+      "subcomponents": [
+        "chat-directory-item"
+      ],
       "required": [],
       "props": {
         "conversations": {
@@ -3650,6 +3722,10 @@ export const componentContracts = {
     "chat-directory-item": {
       "component": "chat-directory-item",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat-directory"
+      ],
       "required": [],
       "props": {
         "id": {
@@ -3770,6 +3846,10 @@ export const componentContracts = {
     "chat-history": {
       "component": "chat-history",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat"
+      ],
       "required": [],
       "props": {
         "hasMore": {
@@ -3811,6 +3891,14 @@ export const componentContracts = {
     "chat-message": {
       "component": "chat-message",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat"
+      ],
+      "subcomponents": [
+        "chat-bubble",
+        "chat-message-actions"
+      ],
       "required": [],
       "props": {
         "id": {
@@ -4120,6 +4208,10 @@ export const componentContracts = {
     "chat-message-actions": {
       "component": "chat-message-actions",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat-message"
+      ],
       "required": [],
       "props": {
         "id": {
@@ -4258,6 +4350,10 @@ export const componentContracts = {
     "chat-window": {
       "component": "chat-window",
       "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "chat"
+      ],
       "required": [],
       "props": {
         "id": {
@@ -4398,6 +4494,7 @@ export const componentContracts = {
     "checkbox": {
       "component": "checkbox",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -4505,6 +4602,7 @@ export const componentContracts = {
     "checkbox-group": {
       "component": "checkbox-group",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -4600,6 +4698,7 @@ export const componentContracts = {
     "clickable": {
       "component": "clickable",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "href": {
@@ -4648,6 +4747,7 @@ export const componentContracts = {
     "code": {
       "component": "code",
       "version": 1,
+      "kind": "component",
       "required": [
         "lines"
       ],
@@ -4734,6 +4834,7 @@ export const componentContracts = {
     "collection": {
       "component": "collection",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "items": {
@@ -4860,6 +4961,7 @@ export const componentContracts = {
     "combobox": {
       "component": "combobox",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "extraAttributes": {
@@ -5232,6 +5334,7 @@ export const componentContracts = {
     "container": {
       "component": "container",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "as": {
@@ -5540,6 +5643,7 @@ export const componentContracts = {
     "copy-to-clipboard": {
       "component": "copy-to-clipboard",
       "version": 1,
+      "kind": "component",
       "required": [
         "copyText"
       ],
@@ -5600,6 +5704,7 @@ export const componentContracts = {
     "data-table": {
       "component": "data-table",
       "version": 1,
+      "kind": "component",
       "required": [
         "columns",
         "data"
@@ -5994,6 +6099,7 @@ export const componentContracts = {
     "date-picker": {
       "component": "date-picker",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "extraAttributes": {
@@ -6090,6 +6196,7 @@ export const componentContracts = {
     "date-range-picker": {
       "component": "date-range-picker",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "extraAttributes": {
@@ -6212,6 +6319,7 @@ export const componentContracts = {
     "details": {
       "component": "details",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "summaryProps": {
@@ -6286,6 +6394,7 @@ export const componentContracts = {
     "drawer": {
       "component": "drawer",
       "version": 2,
+      "kind": "component",
       "required": [
         "id",
         "label",
@@ -6416,6 +6525,7 @@ export const componentContracts = {
     "error-message": {
       "component": "error-message",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -6455,6 +6565,7 @@ export const componentContracts = {
     "error-page": {
       "component": "error-page",
       "version": 3,
+      "kind": "component",
       "required": [
         "title"
       ],
@@ -6632,6 +6743,7 @@ export const componentContracts = {
     "eyebrow": {
       "component": "eyebrow",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "children": {
@@ -6666,6 +6778,7 @@ export const componentContracts = {
     "fieldset": {
       "component": "fieldset",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "legend": {
@@ -6733,6 +6846,7 @@ export const componentContracts = {
     "file-input": {
       "component": "file-input",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -6837,6 +6951,7 @@ export const componentContracts = {
     "file-list": {
       "component": "file-list",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "files": {
@@ -6901,6 +7016,7 @@ export const componentContracts = {
     "footer": {
       "component": "footer",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "staticBaseUrl": {
@@ -7165,6 +7281,7 @@ export const componentContracts = {
     "form-group": {
       "component": "form-group",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "children": {
@@ -7206,6 +7323,7 @@ export const componentContracts = {
     "header": {
       "component": "header",
       "version": 1,
+      "kind": "component",
       "required": [],
       "props": {
         "extraAttributes": {
@@ -7369,6 +7487,7 @@ export const componentContracts = {
     "hero": {
       "component": "hero",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "title": {
@@ -7510,6 +7629,7 @@ export const componentContracts = {
     "hint": {
       "component": "hint",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -7549,6 +7669,7 @@ export const componentContracts = {
     "icon": {
       "component": "icon",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "staticBaseUrl": {
@@ -7644,6 +7765,7 @@ export const componentContracts = {
     "icon-list": {
       "component": "icon-list",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "items": {
@@ -7753,6 +7875,7 @@ export const componentContracts = {
     "identifier": {
       "component": "identifier",
       "version": 1,
+      "kind": "component",
       "required": [],
       "props": {
         "domain": {
@@ -7929,6 +8052,7 @@ export const componentContracts = {
     "image": {
       "component": "image",
       "version": 1,
+      "kind": "component",
       "required": [
         "src"
       ],
@@ -8023,6 +8147,7 @@ export const componentContracts = {
     "in-page-nav": {
       "component": "in-page-nav",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "extraAttributes": {
@@ -8116,6 +8241,7 @@ export const componentContracts = {
     "indicator": {
       "component": "indicator",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "items": {
@@ -8159,6 +8285,7 @@ export const componentContracts = {
     "input": {
       "component": "input",
       "version": 4,
+      "kind": "component",
       "required": [],
       "props": {
         "label": {
@@ -8274,6 +8401,7 @@ export const componentContracts = {
     "label": {
       "component": "label",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -8336,6 +8464,7 @@ export const componentContracts = {
     "language-selector": {
       "component": "language-selector",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "extraAttributes": {
@@ -8459,6 +8588,7 @@ export const componentContracts = {
     "layout": {
       "component": "layout",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "variant": {
@@ -8537,6 +8667,7 @@ export const componentContracts = {
     "legend": {
       "component": "legend",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "text": {
@@ -8583,6 +8714,7 @@ export const componentContracts = {
     "link": {
       "component": "link",
       "version": 2,
+      "kind": "component",
       "required": [
         "href"
       ],
@@ -8644,6 +8776,7 @@ export const componentContracts = {
     "list": {
       "component": "list",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "items": {
@@ -8696,6 +8829,7 @@ export const componentContracts = {
     "memorable-date": {
       "component": "memorable-date",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -8830,6 +8964,7 @@ export const componentContracts = {
     "misc-banner": {
       "component": "misc-banner",
       "version": 4,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -8921,6 +9056,7 @@ export const componentContracts = {
     "modal": {
       "component": "modal",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "extraAttributes": {
@@ -9021,6 +9157,7 @@ export const componentContracts = {
     "page": {
       "component": "page",
       "version": 5,
+      "kind": "component",
       "required": [
         "title"
       ],
@@ -9113,6 +9250,12 @@ export const componentContracts = {
     "pagination": {
       "component": "pagination",
       "version": 2,
+      "kind": "component",
+      "subcomponents": [
+        "pagination-navigation",
+        "pagination-step-options",
+        "pagination-summary"
+      ],
       "required": [],
       "props": {
         "initialPage": {
@@ -9322,9 +9465,313 @@ export const componentContracts = {
         }
       }
     },
+    "pagination-navigation": {
+      "component": "pagination-navigation",
+      "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "pagination"
+      ],
+      "required": [
+        "currentPage"
+      ],
+      "props": {
+        "currentPage": {
+          "type": "number",
+          "description": "Current 1-based page number to render. Consumers supply a new value after loading data."
+        },
+        "totalPages": {
+          "type": "number",
+          "description": "Total page count — omit for unbounded mode"
+        },
+        "pages": {
+          "type": "array",
+          "default": [],
+          "description": "Pre-computed list of page items: [{type: 'page', page: N} | {type: 'ellipsis'}]. Compute server-side with Django's Paginator.",
+          "items": {
+            "type": "object",
+            "description": "Page item — { type: 'page', page } or { type: 'ellipsis' }.",
+            "properties": {
+              "type": {
+                "type": "select",
+                "options": [
+                  "page",
+                  "ellipsis"
+                ],
+                "description": "Item kind."
+              },
+              "page": {
+                "type": "number",
+                "description": "Page number (present when type is \"page\")."
+              }
+            }
+          },
+          "renderers": {
+            "react": {
+              "supported": false,
+              "description": "React computes page items from currentPage and totalPages."
+            }
+          }
+        },
+        "unbounded": {
+          "type": "boolean",
+          "default": false,
+          "description": "True when total pages is unknown — hides the disabled state on Next",
+          "renderers": {
+            "react": {
+              "supported": false,
+              "description": "React infers this from the absence of totalPages."
+            }
+          }
+        },
+        "arrowsOnly": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show only the prev/next arrows, no page number buttons"
+        },
+        "prevLabel": {
+          "type": "string",
+          "default": "Previous",
+          "description": "Label for the previous arrow link"
+        },
+        "nextLabel": {
+          "type": "string",
+          "default": "Next",
+          "description": "Label for the next arrow link"
+        },
+        "hideLinkText": {
+          "type": "boolean",
+          "default": false,
+          "description": "Visually hide prev/next labels (still readable by screen readers)"
+        },
+        "ariaLabel": {
+          "type": "string",
+          "default": "Pagination",
+          "description": "aria-label for the nav element"
+        },
+        "pageUrlPrefix": {
+          "type": "string",
+          "description": "Optional URL or fragment prefix appended with the page number, e.g. '?page=' or '#page-'. The browser follows these links without Pagination JavaScript; the application must provide the target page or element and render the active page state. Omit for literal '#' placeholders handled by consumer code."
+        },
+        "pageSize": {
+          "type": "number",
+          "description": "Current page size to render. Consumers supply a new value after loading data."
+        },
+        "totalItems": {
+          "type": "number",
+          "description": "Total number of items (for summary)"
+        },
+        "onPageChange": {
+          "type": "function",
+          "description": "React-only callback for client-side page navigation.",
+          "renderers": {
+            "django": {
+              "supported": false,
+              "description": "Django renders links; the host handles navigation."
+            }
+          }
+        },
+        "className": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes on the navigation element"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "PaginationNavigation"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "pagination-navigation",
+          "template": "pagination-navigation/pagination-navigation.django.html",
+          "tag": "pagination_navigation"
+        }
+      },
+      "examples": {
+        "default": {
+          "currentPage": 2,
+          "totalPages": 3,
+          "pageSize": 10,
+          "totalItems": 30,
+          "pages": [
+            {
+              "type": "page",
+              "page": 1
+            },
+            {
+              "type": "page",
+              "page": 2
+            },
+            {
+              "type": "page",
+              "page": 3
+            }
+          ]
+        }
+      }
+    },
+    "pagination-step-options": {
+      "component": "pagination-step-options",
+      "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "pagination"
+      ],
+      "required": [
+        "pageSize"
+      ],
+      "props": {
+        "id": {
+          "type": "string",
+          "default": "pagination-step-options",
+          "description": "ID of the page-size select."
+        },
+        "label": {
+          "type": "string",
+          "default": "Items per page",
+          "description": "Label for the page-size select."
+        },
+        "pageSize": {
+          "type": "number",
+          "description": "Current page size to render. Consumers supply a new value after loading data."
+        },
+        "pageSizeOptions": {
+          "type": "array",
+          "default": [
+            10,
+            25,
+            50,
+            100
+          ],
+          "description": "Available page size choices",
+          "items": {
+            "type": "number",
+            "description": "Selectable page size."
+          }
+        },
+        "onPageSizeChange": {
+          "type": "function",
+          "description": "React-only callback when the page size changes.",
+          "renderers": {
+            "django": {
+              "supported": false,
+              "description": "Django renders the select; the host handles changes."
+            }
+          }
+        },
+        "className": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes on the outer wrapper"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "PaginationStepOptions"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "pagination-step-options",
+          "template": "pagination-step-options/pagination-step-options.django.html",
+          "tag": "pagination_step_options"
+        }
+      },
+      "examples": {
+        "default": {
+          "id": "pagination-step-options-example",
+          "pageSize": 10
+        }
+      }
+    },
+    "pagination-summary": {
+      "component": "pagination-summary",
+      "version": 1,
+      "kind": "subcomponent",
+      "parents": [
+        "pagination"
+      ],
+      "required": [
+        "currentPage",
+        "pageSize",
+        "totalItems"
+      ],
+      "props": {
+        "currentPage": {
+          "type": "number",
+          "description": "Current 1-based page number to render. Consumers supply a new value after loading data."
+        },
+        "pageSize": {
+          "type": "number",
+          "description": "Current page size to render. Consumers supply a new value after loading data."
+        },
+        "totalItems": {
+          "type": "number",
+          "description": "Total number of items (for summary)"
+        },
+        "firstItem": {
+          "type": "number",
+          "description": "First item number on the current page (for summary)",
+          "renderers": {
+            "react": {
+              "supported": false,
+              "description": "React calculates this value from currentPage, pageSize, and totalItems."
+            }
+          }
+        },
+        "lastItem": {
+          "type": "number",
+          "description": "Last item number on the current page (for summary)",
+          "renderers": {
+            "react": {
+              "supported": false,
+              "description": "React calculates this value from currentPage, pageSize, and totalItems."
+            }
+          }
+        },
+        "itemLabel": {
+          "type": "string",
+          "default": "items",
+          "description": "Noun for items in the summary (e.g. 'results', 'records')"
+        },
+        "className": {
+          "type": "string",
+          "default": "",
+          "description": "Additional CSS classes on the outer wrapper"
+        }
+      },
+      "renderers": {
+        "react": {
+          "package": "@solexllc/usx-react",
+          "export": "PaginationSummary"
+        },
+        "django": {
+          "package": "solex-usx-django",
+          "module": "usx_django",
+          "function": "render_component",
+          "component": "pagination-summary",
+          "template": "pagination-summary/pagination-summary.django.html",
+          "tag": "pagination_summary"
+        }
+      },
+      "examples": {
+        "default": {
+          "currentPage": 3,
+          "pageSize": 10,
+          "totalItems": 100
+        }
+      }
+    },
     "popover": {
       "component": "popover",
       "version": 7,
+      "kind": "component",
       "required": [
         "id"
       ],
@@ -9548,6 +9995,7 @@ export const componentContracts = {
     "process-list": {
       "component": "process-list",
       "version": 5,
+      "kind": "component",
       "required": [],
       "props": {
         "items": {
@@ -9633,6 +10081,7 @@ export const componentContracts = {
     "prose": {
       "component": "prose",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "as": {
@@ -9685,6 +10134,7 @@ export const componentContracts = {
     "quote": {
       "component": "quote",
       "version": 4,
+      "kind": "component",
       "required": [],
       "props": {
         "className": {
@@ -9754,6 +10204,7 @@ export const componentContracts = {
     "radio-buttons": {
       "component": "radio-buttons",
       "version": 2,
+      "kind": "component",
       "required": [
         "options"
       ],
@@ -9867,6 +10318,7 @@ export const componentContracts = {
     "range-slider": {
       "component": "range-slider",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "extraAttributes": {
@@ -9976,6 +10428,7 @@ export const componentContracts = {
     "required": {
       "component": "required",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "title": {
@@ -10015,6 +10468,7 @@ export const componentContracts = {
     "search": {
       "component": "search",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -10106,6 +10560,7 @@ export const componentContracts = {
     "section": {
       "component": "section",
       "version": 4,
+      "kind": "component",
       "required": [],
       "props": {
         "title": {
@@ -10170,6 +10625,7 @@ export const componentContracts = {
     "select": {
       "component": "select",
       "version": 2,
+      "kind": "component",
       "required": [
         "options"
       ],
@@ -10288,6 +10744,7 @@ export const componentContracts = {
     "sidenav": {
       "component": "sidenav",
       "version": 1,
+      "kind": "component",
       "required": [
         "items"
       ],
@@ -10365,6 +10822,7 @@ export const componentContracts = {
     "site-alert": {
       "component": "site-alert",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "className": {
@@ -10450,6 +10908,7 @@ export const componentContracts = {
     "skipnav": {
       "component": "skipnav",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "target": {
@@ -10498,6 +10957,7 @@ export const componentContracts = {
     "spinner": {
       "component": "spinner",
       "version": 1,
+      "kind": "component",
       "required": [],
       "props": {
         "staticBaseUrl": {
@@ -10569,6 +11029,7 @@ export const componentContracts = {
     "status": {
       "component": "status",
       "version": 1,
+      "kind": "component",
       "required": [],
       "props": {
         "color": {
@@ -10633,6 +11094,7 @@ export const componentContracts = {
     "step-indicator": {
       "component": "step-indicator",
       "version": 2,
+      "kind": "component",
       "required": [
         "steps"
       ],
@@ -10722,6 +11184,7 @@ export const componentContracts = {
     "summary": {
       "component": "summary",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "label": {
@@ -10798,6 +11261,7 @@ export const componentContracts = {
     "summary-box": {
       "component": "summary-box",
       "version": 2,
+      "kind": "component",
       "required": [
         "heading"
       ],
@@ -10848,6 +11312,7 @@ export const componentContracts = {
     "swap": {
       "component": "swap",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "children": {
@@ -10955,6 +11420,7 @@ export const componentContracts = {
     "switch": {
       "component": "switch",
       "version": 3,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -11066,6 +11532,7 @@ export const componentContracts = {
     "table": {
       "component": "table",
       "version": 3,
+      "kind": "component",
       "required": [
         "columns",
         "data",
@@ -11200,6 +11667,7 @@ export const componentContracts = {
     "tag": {
       "component": "tag",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "id": {
@@ -11289,6 +11757,7 @@ export const componentContracts = {
     "tag-group": {
       "component": "tag-group",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "tagProps": {
@@ -11357,6 +11826,7 @@ export const componentContracts = {
     "task-list": {
       "component": "task-list",
       "version": 1,
+      "kind": "component",
       "required": [
         "tasks"
       ],
@@ -11446,6 +11916,7 @@ export const componentContracts = {
     "text-area": {
       "component": "text-area",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "label": {
@@ -11550,6 +12021,7 @@ export const componentContracts = {
     "theme-picker": {
       "component": "theme-picker",
       "version": 6,
+      "kind": "component",
       "required": [
         "themes"
       ],
@@ -11680,6 +12152,7 @@ export const componentContracts = {
     "time-picker": {
       "component": "time-picker",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "extraAttributes": {
@@ -11781,6 +12254,7 @@ export const componentContracts = {
     "toggle": {
       "component": "toggle",
       "version": 3,
+      "kind": "component",
       "required": [
         "options"
       ],
@@ -11918,6 +12392,7 @@ export const componentContracts = {
     "tooltip": {
       "component": "tooltip",
       "version": 2,
+      "kind": "component",
       "required": [],
       "props": {
         "label": {
@@ -11977,6 +12452,7 @@ export const componentContracts = {
     "tree": {
       "component": "tree",
       "version": 4,
+      "kind": "component",
       "required": [
         "items"
       ],
@@ -12108,6 +12584,7 @@ export const componentContracts = {
     "villain": {
       "component": "villain",
       "version": 1,
+      "kind": "component",
       "required": [
         "title"
       ],

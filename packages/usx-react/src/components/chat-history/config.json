@@ -2,6 +2,8 @@
   "name": "chat-history",
   "template": "chat-history/chat-history.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat"],
   "default": {
     "hasMore": true
   },

@@ -1,12 +1,7 @@
 import config from '../../../../usx-react/src/components/pagination/config.json';
 import React, { useState } from 'react';
 import Pagination from '../../../../usx-react/src/components/pagination/Pagination.tsx';
-import PaginationNavigation, {
-  getPageItems,
-  getUnboundedPageItems,
-} from '../../../../usx-react/src/components/pagination/navigation/PaginationNavigation.tsx';
-import PaginationStepOptions from '../../../../usx-react/src/components/pagination/step-options/PaginationStepOptions.tsx';
-import PaginationSummary from '../../../../usx-react/src/components/pagination/summary/PaginationSummary.tsx';
+import { getPageItems, getUnboundedPageItems } from '../../../../usx-react/src/components/pagination-navigation/PaginationNavigation.tsx';
 import { demoRows, fetchDemoRows, pageFromClick, sizeFromChange } from './asyncDemo.js';
 import { consumerSetup } from '../../utils/consumerSetup.jsx';
 
@@ -322,38 +317,4 @@ export const IconOnlyArrows = {
 
 export const WithSummaryAndStepOptions = {
   args: storyDefs.WithSummaryAndStepOptions,
-};
-
-// ── Subcomponent stories ───────────────────────────────────────────────────
-
-export const NavigationBounded = {
-  name: 'Sub: Navigation (bounded)',
-  render: () => <PaginationNavigation currentPage={10} totalPages={24} />,
-};
-
-export const NavigationUnbounded = {
-  name: 'Sub: Navigation (unbounded)',
-  render: () => <PaginationNavigation currentPage={10} />,
-};
-
-export const NavigationIconOnly = {
-  name: 'Sub: Navigation (icon-only prev/next)',
-  render: () => <PaginationNavigation currentPage={5} totalPages={20} hideLinkText />,
-};
-
-export const NavigationUnboundedIconOnly = {
-  name: 'Sub: Navigation (unbounded, icon-only)',
-  render: () => <PaginationNavigation currentPage={5} hideLinkText />,
-};
-
-export const StepOptionsSubcomponent = {
-  name: 'Sub: Step Options',
-  render: () => <PaginationStepOptions id="pagination-sub-step-options" pageSize={10} pageSizeOptions={[10, 25, 50, 100]} />,
-};
-
-export const SummarySubcomponent = {
-  name: 'Sub: Summary',
-  render: () => (
-    <PaginationSummary currentPage={3} pageSize={10} totalItems={100} />
-  ),
 };

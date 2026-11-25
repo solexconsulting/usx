@@ -1,6 +1,6 @@
 import React from 'react';
 import ClassNames from 'classnames';
-import Select from '../../select/Select';
+import Select from '../select/Select';
 
 export interface PaginationStepOptionsProps {
   pageSize: number;

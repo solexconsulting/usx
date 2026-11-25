@@ -1,7 +1,7 @@
 import config from '../../../../usx-react/src/components/pagination/config.json';
 import { buildArgTypes, createDjangoStory } from '../../utils/storyHelpers.jsx';
 import { storyDefs } from './Pagination.React.stories.jsx';
-import { getPageItems, getUnboundedPageItems } from '../../../../usx-react/src/components/pagination/navigation/PaginationNavigation.tsx';
+import { getPageItems } from '../../../../usx-react/src/components/pagination-navigation/PaginationNavigation.tsx';
 import { consumerSetup } from '../../utils/consumerSetup.jsx';
 import { fetchComponentHtml, useDjangoRenderedHtml } from '../../utils/djangoComponent.js';
 import { demoRows, fetchDemoRows, pageFromClick, sizeFromChange } from './asyncDemo.js';
@@ -182,24 +182,3 @@ export const ArrowsOnlyNoExtras = {
 };
 export const IconOnlyArrows = createStory(toDjangoArgs(storyDefs.IconOnlyArrows));
 export const WithSummaryAndStepOptions = createStory(toDjangoArgs(storyDefs.WithSummaryAndStepOptions));
-
-const navigationArgs = (page, totalPages, hideLinkText = false) => ({
-  renderPart: 'navigation',
-  currentPage: page,
-  ...(totalPages == null
-    ? { unbounded: true, pages: getUnboundedPageItems(page) }
-    : { totalPages, pages: getPageItems(page, totalPages) }),
-  hideLinkText,
-});
-export const NavigationBounded = { ...createStory(navigationArgs(10, 24)), name: 'Sub: Navigation (bounded)' };
-export const NavigationUnbounded = { ...createStory(navigationArgs(10)), name: 'Sub: Navigation (unbounded)' };
-export const NavigationIconOnly = { ...createStory(navigationArgs(5, 20, true)), name: 'Sub: Navigation (icon-only prev/next)' };
-export const NavigationUnboundedIconOnly = { ...createStory(navigationArgs(5, null, true)), name: 'Sub: Navigation (unbounded, icon-only)' };
-export const StepOptionsSubcomponent = {
-  ...createStory({ renderPart: 'step-options', pageSize: 10, pageSizeOptions: [10, 25, 50, 100], stepOptionsId: 'pagination-sub-step-options' }),
-  name: 'Sub: Step Options',
-};
-export const SummarySubcomponent = {
-  ...createStory({ renderPart: 'summary', currentPage: 3, pageSize: 10, totalItems: 100 }),
-  name: 'Sub: Summary',
-};

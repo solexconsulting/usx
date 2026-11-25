@@ -18,7 +18,7 @@ Import the manifest in JavaScript:
 import { componentContracts } from '@solexllc/usx-contracts';
 
 const button = componentContracts.components.button;
-const { version, props, required, renderers } = button;
+const { kind, version, props, required, renderers } = button;
 ```
 
 The same manifest is available as plain JSON through the package export
@@ -44,6 +44,9 @@ Each component contract contains:
 | --- | --- |
 | `component` | Component name, matching its key in `components`. |
 | `version` | Version of this component's contract. |
+| `kind` | `component` or `subcomponent`. |
+| `parents` | Parent component names; present on subcomponents. |
+| `subcomponents` | Child subcomponent names; present on parents. |
 | `required` | Names of props consumers must supply for meaningful rendering. |
 | `props` | Prop definitions, including types, descriptions, and optional defaults or nested shapes. |
 | `renderers` | Bindings to the React and Django implementations. |
@@ -61,6 +64,19 @@ that entry's props, exclude names listed in `omit`, and apply the referencing
 node's `properties` as overrides or additions. On an array prop, the reference
 describes each item's shape. References are kept by name; consumers should account
 for cycles when traversing them.
+
+Subcomponent relationships are separate from prop references. For example,
+`AccordionItem` is a subcomponent of `Accordion`, while `Tag` remains a reusable
+component even when `TagGroup` references it. `Label` remains a component when
+used inside other controls. Every contract has a `kind`; `parents` and
+`subcomponents` appear only where those relationships exist.
+Pagination's Navigation, Step Options, and Summary each have their own
+subcomponent contract and renderer binding.
+`parents` names the components that compose a subcomponent, rather than every
+DOM ancestor. Rendering a part separately for a story or host integration does
+not change its contract kind.
+Only parts with their own component contract appear in these lists; internal
+renderer pieces are implementation details.
 
 `examples.default` contains sample content from the source `config.default`.
 Declared prop defaults are recorded at `props[name].default`. Renderer behavior
@@ -118,6 +134,9 @@ applications manage historical package resolution and content migrations.
 Component contracts are authored in each component's `config.json` under
 `packages/usx-react/src/components/`. Package identities and renderer bindings are
 added during generation. Do not edit generated manifest files by hand.
+Config authors omit `kind` for reusable components. A true subcomponent declares
+`"kind": "subcomponent"` and a nonempty `parents` array; generation derives each
+parent's `subcomponents` list from those declarations.
 
 Run these commands from the repository root:
 

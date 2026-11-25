@@ -2,6 +2,8 @@
   "name": "chat-controls",
   "template": "chat-controls/chat-controls.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat"],
   "default": {
     "suggestedQuestions": [
       {

@@ -2,6 +2,8 @@
   "name": "chat-composer",
   "template": "chat-composer/chat-composer.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat"],
   "required": [
     "id"
   ],

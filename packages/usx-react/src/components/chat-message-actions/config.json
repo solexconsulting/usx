@@ -2,6 +2,8 @@
   "name": "chat-message-actions",
   "template": "chat-message-actions/chat-message-actions.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat-message"],
   "default": {
     "id": "message-tools",
     "messageId": "message-1",

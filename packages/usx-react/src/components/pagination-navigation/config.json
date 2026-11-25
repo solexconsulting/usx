@@ -1,0 +1,134 @@
+{
+  "name": "pagination-navigation",
+  "template": "pagination-navigation/pagination-navigation.django.html",
+  "version": 1,
+  "kind": "subcomponent",
+  "parents": [
+    "pagination"
+  ],
+  "required": [
+    "currentPage"
+  ],
+  "default": {
+    "currentPage": 2,
+    "totalPages": 3,
+    "pageSize": 10,
+    "totalItems": 30,
+    "pages": [
+      {
+        "type": "page",
+        "page": 1
+      },
+      {
+        "type": "page",
+        "page": 2
+      },
+      {
+        "type": "page",
+        "page": 3
+      }
+    ]
+  },
+  "props": {
+    "currentPage": {
+      "type": "number",
+      "description": "Current 1-based page number to render. Consumers supply a new value after loading data."
+    },
+    "totalPages": {
+      "type": "number",
+      "description": "Total page count — omit for unbounded mode"
+    },
+    "pages": {
+      "type": "array",
+      "default": [],
+      "description": "Pre-computed list of page items: [{type: 'page', page: N} | {type: 'ellipsis'}]. Compute server-side with Django's Paginator.",
+      "items": {
+        "type": "object",
+        "description": "Page item — { type: 'page', page } or { type: 'ellipsis' }.",
+        "properties": {
+          "type": {
+            "type": "select",
+            "options": [
+              "page",
+              "ellipsis"
+            ],
+            "description": "Item kind."
+          },
+          "page": {
+            "type": "number",
+            "description": "Page number (present when type is \"page\")."
+          }
+        }
+      },
+      "renderers": {
+        "react": {
+          "supported": false,
+          "description": "React computes page items from currentPage and totalPages."
+        }
+      }
+    },
+    "unbounded": {
+      "type": "boolean",
+      "default": false,
+      "description": "True when total pages is unknown — hides the disabled state on Next",
+      "renderers": {
+        "react": {
+          "supported": false,
+          "description": "React infers this from the absence of totalPages."
+        }
+      }
+    },
+    "arrowsOnly": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show only the prev/next arrows, no page number buttons"
+    },
+    "prevLabel": {
+      "type": "string",
+      "default": "Previous",
+      "description": "Label for the previous arrow link"
+    },
+    "nextLabel": {
+      "type": "string",
+      "default": "Next",
+      "description": "Label for the next arrow link"
+    },
+    "hideLinkText": {
+      "type": "boolean",
+      "default": false,
+      "description": "Visually hide prev/next labels (still readable by screen readers)"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "default": "Pagination",
+      "description": "aria-label for the nav element"
+    },
+    "pageUrlPrefix": {
+      "type": "string",
+      "description": "Optional URL or fragment prefix appended with the page number, e.g. '?page=' or '#page-'. The browser follows these links without Pagination JavaScript; the application must provide the target page or element and render the active page state. Omit for literal '#' placeholders handled by consumer code."
+    },
+    "pageSize": {
+      "type": "number",
+      "description": "Current page size to render. Consumers supply a new value after loading data."
+    },
+    "totalItems": {
+      "type": "number",
+      "description": "Total number of items (for summary)"
+    },
+    "onPageChange": {
+      "type": "function",
+      "description": "React-only callback for client-side page navigation.",
+      "renderers": {
+        "django": {
+          "supported": false,
+          "description": "Django renders links; the host handles navigation."
+        }
+      }
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes on the navigation element"
+    }
+  }
+}

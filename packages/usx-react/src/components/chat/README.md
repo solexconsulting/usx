@@ -32,6 +32,13 @@ For a viewport-corner launcher, place Chat inside a host-owned fixed container a
 
 Chat composes the following parts. Each has its own `config.json`, markup-only React renderer, matching Django template, and stories under `Chat/<part>`. Story files live in `chat/subcomponents/<component-name>/`.
 
+All twelve named Chat parts are subcomponents in the contract. Their parent
+links follow the rendering hierarchy: Chat owns the window, directory,
+context, composer, history, messages, and controls; the directory owns its
+items, messages own bubbles and actions, bubbles own attachment lists, and
+attachment lists own items. A part can still be rendered by itself in a story
+or host integration without becoming a general-purpose component.
+
 On viewports at or below 35rem, the open Chat window fills the viewport. Its header and composer stay visible while the conversation history or directory scrolls.
 
 Conversations and threads open at the latest message. An appended message keeps the transcript at the bottom only when the reader was already there; reading older messages leaves the scroll position intact. The unread divider remains in the transcript to identify the first unread message.
@@ -153,7 +160,7 @@ Each top-level story has a distinct purpose:
 
 Customer/bot action states, an already-read inbox, unread message actions, and directory actions are reached within these journeys rather than duplicated as separate stories. The all-unread fixture was redundant with the unread-boundary example.
 
-The subcomponent stories isolate their own contracts:
+The part stories isolate their own contracts:
 
 | Part | Distinct examples |
 | --- | --- |

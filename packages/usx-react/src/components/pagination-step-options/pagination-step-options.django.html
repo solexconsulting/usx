@@ -1,0 +1,7 @@
+{% load usx_components %}
+
+{# Sub-template: pagination step options (items-per-page selector) #}
+{# Props: pageSize, pageSizeOptions (list of ints or {value,label}), id, label #}
+<div class="usx-pagination__step-options{% if className %} {{ className }}{% endif %}">
+  {% select id=id|default:'pagination-step-options' formGroup=False label=label|default:'Items per page' options=pageSizeOptions defaultValue=pageSize %}{% endselect %}
+</div>

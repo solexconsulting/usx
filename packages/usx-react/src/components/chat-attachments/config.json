@@ -2,6 +2,8 @@
   "name": "chat-attachments",
   "template": "chat-attachments/chat-attachments.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat-bubble"],
   "default": {
     "items": [
       {

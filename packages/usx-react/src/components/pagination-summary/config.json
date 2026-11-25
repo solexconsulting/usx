@@ -1,0 +1,63 @@
+{
+  "name": "pagination-summary",
+  "template": "pagination-summary/pagination-summary.django.html",
+  "version": 1,
+  "kind": "subcomponent",
+  "parents": [
+    "pagination"
+  ],
+  "required": [
+    "currentPage",
+    "pageSize",
+    "totalItems"
+  ],
+  "default": {
+    "currentPage": 3,
+    "pageSize": 10,
+    "totalItems": 100
+  },
+  "props": {
+    "currentPage": {
+      "type": "number",
+      "description": "Current 1-based page number to render. Consumers supply a new value after loading data."
+    },
+    "pageSize": {
+      "type": "number",
+      "description": "Current page size to render. Consumers supply a new value after loading data."
+    },
+    "totalItems": {
+      "type": "number",
+      "description": "Total number of items (for summary)"
+    },
+    "firstItem": {
+      "type": "number",
+      "description": "First item number on the current page (for summary)",
+      "renderers": {
+        "react": {
+          "supported": false,
+          "description": "React calculates this value from currentPage, pageSize, and totalItems."
+        }
+      }
+    },
+    "lastItem": {
+      "type": "number",
+      "description": "Last item number on the current page (for summary)",
+      "renderers": {
+        "react": {
+          "supported": false,
+          "description": "React calculates this value from currentPage, pageSize, and totalItems."
+        }
+      }
+    },
+    "itemLabel": {
+      "type": "string",
+      "default": "items",
+      "description": "Noun for items in the summary (e.g. 'results', 'records')"
+    },
+    "className": {
+      "type": "string",
+      "default": "",
+      "description": "Additional CSS classes on the outer wrapper"
+    }
+  }
+}

@@ -22,7 +22,7 @@ export const STORIES_DIR = path.join(REPO_ROOT, 'packages', 'usx-stories', 'src'
 
 // Format version of the contract manifest itself (its wrapper shape), distinct
 // from each component's own config.json "version".
-export const CONTRACT_SCHEMA_VERSION = 1;
+export const CONTRACT_SCHEMA_VERSION = 2;
 
 export function toPascal(name) {
   return name
@@ -149,6 +149,10 @@ export function loadComponentConfigs() {
       checkComponentRefs(prop, propName, configs, refErrors);
     }
     for (const e of refErrors) addError(label, e);
+    for (const parent of config.parents || []) {
+      if (!configs.has(parent)) addError(label, `parents references unknown component "${parent}"`);
+      if (parent === config.name) addError(label, 'a component cannot be its own parent');
+    }
   }
 
   return { configs, errors };
@@ -189,6 +193,14 @@ export function buildContractManifest(configs) {
     ...[contractsPackage, reactPackage, stylesPackage].map(({ name, version }) => [name, { registry: 'npm', version }]),
     [djangoPackage.name, { registry: 'pypi', version: djangoPackage.version }],
   ]);
+  const childrenByParent = new Map([...configs.keys()].map((name) => [name, []]));
+  for (const [name, config] of configs) {
+    for (const parent of config.parents || []) {
+      const children = childrenByParent.get(parent);
+      if (!children || parent === name) throw new Error(`Invalid parent "${parent}" for ${name}`);
+      children.push(name);
+    }
+  }
   const components = {};
   for (const name of [...configs.keys()].sort()) {
     const config = configs.get(name);
@@ -201,6 +213,9 @@ export function buildContractManifest(configs) {
     components[name] = {
       component: name,
       version: config.version,
+      kind: config.kind || 'component',
+      ...(config.parents ? { parents: config.parents } : {}),
+      ...(childrenByParent.get(name)?.length ? { subcomponents: childrenByParent.get(name).sort() } : {}),
       required: config.required || [],
       props: config.props || {},
       renderers: {

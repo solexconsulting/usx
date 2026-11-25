@@ -2,6 +2,8 @@
   "name": "chat-message",
   "template": "chat-message/chat-message.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat"],
   "default": {
     "id": "message-example",
     "message": {

@@ -2,6 +2,8 @@
   "name": "chat-context",
   "template": "chat-context/chat-context.django.html",
   "version": 1,
+  "kind": "subcomponent",
+  "parents": ["chat"],
   "default": {
     "label": "Listing",
     "title": "Bicycle",
